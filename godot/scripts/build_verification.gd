@@ -20,6 +20,91 @@ func ticks(count: int) -> void:
 	for _i in count: game.advance_one()
 	game._process(0.0)
 
+func release_hitstop() -> void:
+	while game.model.state().hitstop > 0: ticks(1)
+
+func timing_fixture() -> Dictionary:
+	var data: Dictionary = game.model.data().duplicate(true)
+	for character in data.characters:
+		for definition in character.moves:
+			definition.damage = 0
+			definition.pushback = 0
+		for slot in [0, 4]:
+			character.moves[slot].startup = 1
+			character.moves[slot].reach = 50000
+	data.characters[1].moves[3].reach = 100 # Dummy Hs whiffs so its recovery can be punished.
+	data.characters[0].moves[13].advance = 10000 # Authored crossing move for the side-switch check.
+	return data
+
+func combo_inputs(hits: int = 2) -> void:
+	for hit in hits:
+		if hit > 0: release_hitstop()
+		key(KEY_S, hit % 2 == 1)
+		key(KEY_J, true)
+		ticks(1)
+		key(KEY_J, false)
+		key(KEY_S, false)
+
+func verify_timing_feedback() -> void:
+	var original: Dictionary = game.model.data()
+	game.fields.counterHitstun.control.value = 9
+	game.fields.counterHitstop.control.value = 5
+	game.fields.reversalEligible.control.button_pressed = true
+	game.apply_move()
+	check(game.model.move(0, 0).counterHitstun == 9 and game.model.move(0, 0).counterHitstop == 5 and game.model.move(0, 0).reversalEligible == 1, "Timing editor fields did not apply")
+	game.lock_online(true)
+	check(not game.fields.counterHitstun.control.editable and game.fields.reversalEligible.control.disabled, "Timing editor remains editable online")
+	game.lock_online(false)
+	game.model.load_data(original)
+	check(game.model.load_data(timing_fixture()).is_empty(), "Timing fixture rejected")
+	game.populate_editor()
+	game.dummy.select(5)
+	game.reset_round()
+	combo_inputs()
+	var cards: Array = game.arena.feedback.cards.duplicate(true)
+	check(game.model.state().players[0].combo == 2 and cards[0].number == 2 and cards[1].number == 0, "Background counter is not owned by the combo attacker")
+	check(cards[0].left and cards[0].hit == 3 and cards[0].font_size >= 125, "Counter hit / large left-side combo feedback missing")
+	var snapshot: PackedByteArray = game.model.core.snapshot()
+	ticks(90)
+	check(game.model.core.restore(snapshot), "Feedback snapshot rejected")
+	game._process(0.0)
+	check(game.arena.feedback.cards == cards, "Rollback did not restore visible feedback clocks/layout")
+	game.reset_round()
+	ticks(18)
+	key(KEY_J, true)
+	ticks(1)
+	key(KEY_J, false)
+	check(game.model.state().players[0].event == 4 and game.arena.feedback.cards[0].hit == 4, "Recovery contact did not show PUNISH")
+	game.dummy.select(6)
+	game.reset_round()
+	key(KEY_J, true)
+	ticks(1)
+	key(KEY_J, false)
+	check(game.model.state().players[1].guarding == 1, "Reversal dummy did not begin by guarding")
+	ticks(19)
+	check(game.model.state().players[1].move == 14 and game.arena.feedback.cards[1].reversal and game.arena.feedback.cards[1].input_age == 1, "Guard dummy did not execute/display a buffered reversal")
+	# Cross behind the opponent using an authored advance, then perform a real right-side combo.
+	game.dummy.select(0)
+	game.reset_round()
+	key(KEY_D, true)
+	ticks(32)
+	key(KEY_D, false)
+	key(KEY_O, true)
+	ticks(1)
+	key(KEY_O, false)
+	var crossing: Dictionary = game.model.move(0, 13)
+	ticks(crossing.startup + crossing.active + crossing.recovery)
+	check(game.model.state().players[0].x > game.model.state().players[1].x, "Side-switch fixture did not cross")
+	check(game.model.state().players[0].move == -1, "Crossing move did not finish recovery")
+	combo_inputs()
+	check(game.arena.feedback.cards[0].number == 2 and not game.arena.feedback.cards[0].left, "Combo stayed on a fixed player side after crossing")
+	ticks(120)
+	check(game.arena.feedback.cards[0].number == 0, "Completed combo did not expire")
+	game.model.load_data(original)
+	game.populate_editor()
+	game.dummy.select(0)
+	game.reset_round()
+
 func run(runtime: SceneTree, existing: Control = null) -> void:
 	tree = runtime
 	game = existing
@@ -162,12 +247,20 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	game.selection_characters[0].select(0)
 	game.selection_dialog.confirmed.emit()
 	game.reset_round()
+	verify_timing_feedback()
 	game.show_controls()
 	check(game.has_open_dialog(), "Controls dialog did not open")
 	for child in game.get_children():
 		if child is AcceptDialog and child != game.selection_dialog and child != game.file_dialog: child.queue_free()
 	await tree.process_frame
 	var args := OS.get_cmdline_user_args()
+	if args.has("--combo"):
+		game.model.load_data(timing_fixture())
+		game.populate_editor()
+		game.dummy.select(5)
+		game.reset_round()
+		game.show_boxes = false
+		combo_inputs(6)
 	if args.has("--defense"):
 		game.training_momentum.select(1)
 		game.dummy.select(4)
@@ -186,5 +279,5 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 		await RenderingServer.frame_post_draw
 		var path: String = args[args.find("--screenshot") + 1]
 		check(tree.root.get_texture().get_image().save_png(path) == OK, "Could not save native screenshot")
-	print("Godot playable scene: ", failures, " failures; combat, editing, keyboard, Momentum, FD, 18 block clips, rollback, dialogs")
+	print("Godot playable scene: ", failures, " failures; combat, counter/punish/reversal, combo display/side-switch, editing, FD, block clips, rollback")
 	tree.quit(1 if failures else 0)

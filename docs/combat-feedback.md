@@ -35,6 +35,16 @@ A chain continues only if the defender was still in hitstun at the beginning of 
 
 The live `combo` count is separate from `comboDisplay`: the latter appears from the second connected hit onward, holds while the chain is active and remains for 60 unfrozen ticks afterward. Starting a new one-hit sequence clears the previous display immediately. `comboAge` tracks time since the latest hit for presentation. All feedback clocks freeze during hitstop, pause and round end, and reset with the round.
 
+## Display and practice
+
+From two hits onward, a large slanted, outlined number sits in the stage background on the attacker's current side. It follows side switches rather than a fixed player slot; player colors remain consistent. It briefly expands on each hit and fades through its final 18 ticks after the combo ends. Fighters and the main HUD render over it. Counter and punish callouts share that side. Reversal feedback is independent, so a reversal can also score a counter hit without losing either notification.
+
+The move editor exposes **Counter +stun**, **Counter +stop** and **Eligible for reversal timing**. All values are saved/exported and locked online. The existing **Buttons** buffer adjusts reversal input leniency.
+
+Select the **Attack loop** dummy to practice interrupting startup or catching Hs recovery. **Guard → reversal** holds down-back, then enters a traditional 236P during the last three blockstun ticks outside hitstop. It is a training aid, not an invulnerable response; pressure can interrupt it. Timing, hitstop and notice clocks can all be inspected with Pause / +1 frame.
+
+The display bundles the unchanged DejaVu Sans Condensed Bold Oblique font with its license to keep numeral shapes consistent across PC platforms.
+
 ## Persistence and verification
 
 Schema/core version **4** adds the three per-move timing fields and snapshot feedback state. Schema-1/2/3 JSON imports preserve prior move, Momentum, FD and guard-break settings, then add default timing fields; reversal eligibility follows the saved move category. Fingerprints prevent mixed builds/data from playing together. The native input protocol remains 2 because no input bit changed.

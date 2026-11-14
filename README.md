@@ -1,6 +1,6 @@
 # Fight Guild
 
-A native **Godot 4.6.3** fighting-game lab for iterating toward a PC/PS5 game. The PC build includes **Anvil, Hammer, Smoke, Tapper, Shark and Fillet**, generated sprites, all five basic **P / K / S / Hs / D** buttons, unified gatlings, a move editor, Momentum/Faultless Defense and experimental direct rollback multiplayer.
+A native **Godot 4.6.3** fighting-game lab for iterating toward a PC/PS5 game. The PC build includes **Anvil, Hammer, Smoke, Tapper, Shark and Fillet**, generated sprites, all five basic **P / K / S / Hs / D** buttons, unified gatlings, a move editor, Momentum/Faultless Defense, counter/punish/reversal feedback and experimental direct rollback multiplayer.
 
 Each fighter has matching **windup and active** pose studies plus movement poses and three two-frame block reactions. Open **Sprite review** to compare actions at the same scale. These are provisional kits and images. The [sprite production contract](docs/sprite-production.md) and [backlog](docs/backlog.md) cover consistent palettes, silhouettes, smear shapes, future characters and eventual windup → active → impact → follow-through → recovery sequences.
 
@@ -11,10 +11,12 @@ Download the Windows/Linux ZIP from this branch's successful GitHub Actions arti
 - **Player 1:** WASD; J/K/L/I/O = P/K/S/Hs/D; Space = dash; left Shift = simple modifier; back + Q = Faultless Defense.
 - **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = dash; numpad + = modifier; back + numpad Enter = Faultless Defense.
 - Choose simplified inputs independently at fighter select. Traditional motions stay available.
-- Edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1/2 saves preserve edits during migration.
+- Edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1/2/3 saves preserve edits during migration.
 - Online: direct ENet/UDP host and join, default port 7000. Both players use Player 1 controls locally. Matching move data is required.
 
 Try **Start Momentum: 50%** and the **Faultless guard** dummy in training. The move editor exposes chip damage and **Guard break on block**; Sprite review includes negative/even, positive and guard-break clips. [Momentum and defense rules](docs/momentum-defense.md) describe the provisional tuning. Negative Penalty is deferred; FD is the only meter spend.
+
+Combos now appear as large background numerals on the attacker's current side. **Attack loop** and **Guard → reversal** training dummies help test counter hits, recovery punishes and first-frame reversals. Counter-hit bonuses and reversal eligibility are editable per move. See [combo and timing rules](docs/combat-feedback.md).
 
 ## Develop on Linux
 

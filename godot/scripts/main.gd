@@ -136,7 +136,7 @@ func build_interface() -> void:
 	var header := row(root)
 	var brand := label(header, "FG   FIGHT GUILD", 23, ACCENT)
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label(header, "NATIVE COMBAT LAB / 003", 11, MUTED)
+	label(header, "NATIVE COMBAT LAB / 004", 11, MUTED)
 	button(header, "Fighter select", func(): selection_dialog.popup_centered(Vector2i(660,600)), true)
 	button(header, "Sprite review", show_sprite_review)
 	button(header, "Controls", show_controls)
@@ -151,7 +151,8 @@ func build_interface() -> void:
 	var toolbar := row(left)
 	mode = option(toolbar, "", ["Training", "Local versus"])
 	mode.item_selected.connect(func(_i: int): reset_round(); dummy.disabled = mode.selected == 1; training_momentum.disabled = mode.selected == 1)
-	dummy = option(toolbar, "", ["Stand", "Guard all", "Crouch guard", "Practice sequence", "Faultless guard"])
+	dummy = option(toolbar, "", ["Stand", "Guard all", "Crouch guard", "Practice sequence", "Faultless guard", "Attack loop", "Guard → reversal"])
+	dummy.tooltip_text = "Attack loop repeats Hs for counter/punish practice. Guard → reversal buffers 236P as blockstun ends."
 	button(toolbar, "Hitboxes", func(): show_boxes = not show_boxes)
 	pause_button = button(toolbar, "Pause", func(): paused = not paused; pause_button.text = "Resume" if paused else "Pause", true)
 	button(toolbar, "+1 frame", advance_one, true)
@@ -222,13 +223,18 @@ func build_interface() -> void:
 	grid.add_theme_constant_override("h_separation", 10)
 	grid.add_theme_constant_override("v_separation", 8)
 	editor.add_child(grid)
-	for spec in [["startup","Startup",1,120,1],["active","Active",1,120,1],["recovery","Recovery",0,180,1],["damage","Damage",0,1000,1],["hitstun","Hitstun",0,180,1],["blockstun","Blockstun",0,180,1],["hitstop","Hitstop",0,30,1],["pushback","Push (px)",0,200,100],["advance","Advance (px)",-100,100,100],["reach","Reach (px)",1,500,100],["bottom","Bottom (px)",-500,500,100],["height","Height (px)",1,500,100],["chipDamage","Chip damage",0,1000,1]]:
+	for spec in [["startup","Startup",1,120,1],["active","Active",1,120,1],["recovery","Recovery",0,180,1],["damage","Damage",0,1000,1],["hitstun","Hitstun",0,180,1],["blockstun","Blockstun",0,180,1],["hitstop","Hitstop",0,30,1],["pushback","Push (px)",0,200,100],["advance","Advance (px)",-100,100,100],["reach","Reach (px)",1,500,100],["bottom","Bottom (px)",-500,500,100],["height","Height (px)",1,500,100],["chipDamage","Chip damage",0,1000,1],["counterHitstun","Counter +stun",0,60,1],["counterHitstop","Counter +stop",0,30,1]]:
 		add_field(grid, spec)
 	var guard_break := CheckBox.new()
 	guard_break.text = "Guard break on block"
 	guard_break.tooltip_text = "Uses this move's blockstun. Defender cannot backdash or retain blockstun throw immunity."
 	editor.add_child(guard_break)
 	fields.guardBreak = {"control": guard_break, "scale": 1}
+	var reversal := CheckBox.new()
+	reversal.text = "Eligible for reversal timing"
+	reversal.tooltip_text = "Starting this move on the first actionable frame after stun earns REVERSAL. Uses the button buffer; grants no invulnerability."
+	editor.add_child(reversal)
+	fields.reversalEligible = {"control": reversal, "scale": 1}
 	label(editor, "CANCEL BEHAVIOR", 11, MUTED)
 	var checks := GridContainer.new()
 	checks.columns = 2
@@ -517,7 +523,18 @@ func simulate_local() -> void:
 	if mode.selected == 0:
 		var state := model.state()
 		var away := 2 if state.players[1].x > state.players[0].x else 1
-		b = [0, away, away | 4, RollbackSession.scripted_input(model.frame(), 1), away | 4 | 2048][dummy.selected]
+		if dummy.selected == 5:
+			b = 128 if state.players[1].move < 0 and state.players[1].stun == 0 else 0
+		elif dummy.selected == 6:
+			b = away | 4
+			var toward := 1 if away == 2 else 2
+			if state.hitstop == 0:
+				match int(state.players[1].stun):
+					3: b = 4
+					2: b = 4 | toward
+					1: b = toward | 16
+		else:
+			b = [0, away, away | 4, RollbackSession.scripted_input(model.frame(), 1), away | 4 | 2048][dummy.selected]
 	model.step(a, b)
 	record_input(a)
 

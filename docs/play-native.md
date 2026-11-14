@@ -6,7 +6,7 @@ For the editable project ZIP, import `godot/project.godot` into **Godot 4.6.3**,
 
 ## First match
 
-Choose Anvil, Hammer, Smoke, Tapper, Shark or Fillet. Each player independently chooses simplified controls. Enter training, walk toward the opponent and try the five buttons. The dummy can stand, guard, crouch guard run a practice sequence or use Faultless Defense. Switch to Local versus for a second player.
+Choose Anvil, Hammer, Smoke, Tapper, Shark or Fillet. Each player independently chooses simplified controls. Enter training, walk toward the opponent and try the five buttons. The dummy can stand, guard, crouch guard run a practice sequence, use Faultless Defense, repeat Hs attacks or attempt reversals after guarding. Switch to Local versus for a second player.
 
 | Action | Player 1 keyboard | Player 2 keyboard | Gamepad |
 | --- | --- | --- | --- |
@@ -26,10 +26,12 @@ Hold back + any two of P/K/S/Hs as an alternative FD chord. Momentum builds thro
 
 Block animations distinguish negative/even attacks, plus-on-block pressure and guard break. Enable **Guard break on block** for a move to test its exposed stance: backdash inputs during the stun are discarded and blockstun grab protection is absent. Throws themselves are future work. See [Momentum and defense](momentum-defense.md).
 
+Combos show a large number behind the fighters on the attacker's current side. **COUNTER** means startup/active interruption; **PUNISH** means a hit during recovery; **REVERSAL** means an eligible move started on the first actionable frame after stun. Try **Attack loop** or **Guard → reversal** for practice. [Combo and timing rules](combat-feedback.md) cover the editable +4 hitstun/+3 hitstop counter defaults and five-frame reversal input buffer. Reversal timing does not grant invulnerability.
+
 ## Iterate
 
 - **Pause / +1 frame:** inspect startup, active frames, hitstop and recovery. Generated windup and active images follow simulation timing.
-- **Move editor:** choose a fighter/move, adjust values, then Apply & reset. Save locally writes the complete six-fighter set. Export/import JSON for a portable backup. Old schema-1/2 saves retain edits and supply defaults for new fields/fighters.
+- **Move editor:** choose a fighter/move, adjust values, then Apply & reset. Save locally writes the complete six-fighter set. Export/import JSON for a portable backup. Old schema-1/2/3 saves retain edits and supply defaults for new fields/fighters.
 - **Sprite review:** compare windup/active or any of the three defensive contact/settle pairs at the same body scale. Some details/effects still need consistency cleanup; complete animation sequences are not present.
 - **Hitboxes:** overlays show authoritative collision shapes. Sprite weapons and smears do not decide hits.
 

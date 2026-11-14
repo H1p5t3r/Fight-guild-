@@ -23,6 +23,15 @@ Requested scope: make repeatable character images performing directed actions, w
 - [ ] Add standing/crouching/air variants and smooth intermediate defensive frames under the same shape/palette rules.
 - [ ] Connect the future throw resolver to `throwInvulnerable`; retain normal blockstun protection and the guard-break exception.
 
+## Combo feedback and hit timing
+
+- [x] Add a large styled combo counter behind fighters, following the attacker's current side with deterministic pop/hold/fade timing.
+- [x] Distinguish startup/active counter hits from recovery punishes, including symmetric trades.
+- [x] Expose per-move counter-hit hitstun/hitstop bonuses and reversal eligibility; preserve old saved move sets.
+- [x] Detect first-actionable-frame reversals through the existing input buffer and add attack-loop / guard-to-reversal practice dummies.
+- [ ] Playtest the provisional +4 hitstun/+3 hitstop counter defaults across the six kits before choosing distinct move-specific values.
+- [ ] Design knockdown/wakeup and invulnerable reversal moves separately; route wakeup completion through the same reversal timing opportunity.
+
 ## Combat and delivery
 
 - [ ] Playtest the basic P/K/S/Hs/D buttons and unified gatlings, then replace provisional move data and Drive behaviors character by character.

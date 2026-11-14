@@ -5,6 +5,7 @@ var view := {}
 var show_boxes := true
 var paused := false
 var sprites: Array[Sprite2D] = []
+var feedback := CombatFeedback.new()
 var font := ThemeDB.fallback_font
 const ACCENT := Color("f4b45e")
 const TEXT := Color("f0ede5")
@@ -25,6 +26,7 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	view = state
 	show_boxes = boxes
 	paused = frozen
+	feedback.refresh(view, size)
 	var scale_x := size.x / 1000.0
 	var floor_y := size.y - 76.0
 	for p in 2:
@@ -78,9 +80,10 @@ func _draw() -> void:
 		draw_line(Vector2(0, y), Vector2(size.x, y), Color("293b47"))
 	draw_line(Vector2(0, floor_y), Vector2(size.x, floor_y), Color("7d939e"), 2)
 	label("F G", Vector2(size.x * 0.43, size.y * 0.49), 64, Color("2d404b"))
-	label("TRAINING FLOOR / SPRITE STUDY", Vector2(20, 118), 11, MUTED)
 	if view.is_empty():
 		return
+	# Draw in the stage background before the HUD and before child fighter sprites.
+	feedback.draw(self)
 	for p in 2:
 		var fighter: Dictionary = view.players[p]
 		var left := p == 0
@@ -125,8 +128,6 @@ func _draw() -> void:
 			var angle := 0.0 if fighter.facing == 1 else PI
 			var guard_color := Color("75dcbc") if fighter.faultless else Color("89c3e0")
 			draw_arc(Vector2(px, py - 70 * sx), 58 * sx, angle - 1.4, angle + 1.4, 24, guard_color, 5 if fighter.faultless else 2)
-		if fighter.combo > 1 and view.players[1 - p].stun:
-			label("%d HITS" % fighter.combo, Vector2(x, 170), 28, tint)
 	label("%02d" % ceili(view.remaining / 60.0), Vector2(size.x / 2 - 24, 67), 42)
 	if paused:
 		label("PAUSED", Vector2(size.x / 2 - 28, 117), 12, ACCENT)
