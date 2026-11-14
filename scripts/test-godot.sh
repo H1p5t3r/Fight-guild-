@@ -8,5 +8,6 @@ mkdir -p build
 bash scripts/godot.sh --headless --editor --import
 bash scripts/godot.sh --headless --script tests/core_bridge.gd -- "$PWD/build/native.trace"
 bash scripts/godot.sh --headless --script tests/model_test.gd
+bash scripts/godot.sh --headless --script tests/art_test.gd
 bash scripts/godot.sh --headless --script tests/ui_smoke.gd -- --test
 python tests/godot_network.py

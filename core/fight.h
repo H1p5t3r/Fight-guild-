@@ -3,7 +3,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 1, HISTORY = 64, MOVE_COUNT = 22, FIELD_COUNT = 27;
+constexpr int VERSION = 2, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 22, FIELD_COUNT = 27;
 enum Input { Left=1, Right=2, Down=4, Up=8, P=16, K=32, S=64, Hs=128, D=256,
              Dash=512, Simple=1024 };
 enum Kind { Normal, Command, Special, Drive };
@@ -26,7 +26,7 @@ struct Rules { int buffer=5, motion_window=20, motion_gap=8; };
 class Simulation {
 public:
     State world{};
-    Move moves[2][MOVE_COUNT]{};
+    Move moves[CHARACTER_COUNT][MOVE_COUNT]{};
     Rules rules{};
     void defaults();
     void reset(int character0, int character1, int simple0, int simple1);
@@ -50,7 +50,7 @@ private:
 // Compatibility instance for the original C ABI and native test runner.
 extern Simulation default_simulation;
 extern State& world;
-extern Move (&moves)[2][MOVE_COUNT];
+extern Move (&moves)[CHARACTER_COUNT][MOVE_COUNT];
 extern Rules& rules;
 void defaults();
 void reset(int character0, int character1, int simple0, int simple1);

@@ -17,7 +17,7 @@ static void test_routes() {
     CHECK(!fg_can_cancel(0,1,2,1));
     CHECK(fg_can_cancel(0,2,3,1));
     CHECK(!fg_can_cancel(0,3,0,1));
-    for(int c=0;c<2;++c) for(int from=0;from<MOVE_COUNT;++from) {
+    for(int c=0;c<CHARACTER_COUNT;++c) for(int from=0;from<MOVE_COUNT;++from) {
         const auto& source=moves[c][from];
         int command=8+source.v[Button];
         if(from!=command) CHECK(fg_can_cancel(c,from,command,1));
@@ -101,6 +101,23 @@ static void test_combat() {
     fresh(); world.remaining=1; step(0,0); CHECK(world.winner==2);
 }
 static unsigned next(unsigned& s) { s^=s<<13; s^=s>>17; s^=s<<5; return s; }
+static void test_roster() {
+    const int slots[5]={0,1,2,3,13};
+    for(int c=0;c<CHARACTER_COUNT;++c) for(int button=0;button<5;++button) {
+        defaults(); reset(c,(c+1)%CHARACTER_COUNT,0,0); near();
+        CHECK(world.players[0].character==c);
+        step(P<<button,0);
+        const auto& move=moves[c][slots[button]];
+        CHECK(world.players[0].move==slots[button]);
+        ticks(move.v[Startup]-1);
+        CHECK(world.players[1].health==1000-move.v[Damage]);
+        CHECK(world.players[0].contact==1);
+        thaw(); ticks(1,Right|(P<<button));
+        CHECK(world.players[0].move==8+button); // Same-button command route for every fighter/button.
+    }
+    CHECK(fg_move_get(CHARACTER_COUNT,0,Damage)==-999);
+    CHECK(!fg_move_set(-1,0,Damage,1));
+}
 static int random_input(unsigned& s) {
     unsigned n=next(s);
     return ((n%3)==0?Left:(n%3)==1?Right:0)
@@ -131,7 +148,7 @@ int main(int argc,char** argv) {
         }
         return 0;
     }
-    test_routes(); test_motion(); test_combat(); test_replay();
+    test_routes(); test_motion(); test_combat(); test_replay(); test_roster();
     std::printf("%d checks, %d failures\n",checks,failures);
     return failures?1:0;
 }

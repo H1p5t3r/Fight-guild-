@@ -44,7 +44,7 @@ public:
         std::memcpy(&candidate,bytes.ptr(),sizeof(candidate));
         if(candidate.frame<0||candidate.winner< -1||candidate.winner>2||candidate.hitstop<0||candidate.hitstop>30) return false;
         for(const auto& f:candidate.players) {
-            if(f.character<0||f.character>1||f.move< -1||f.move>=fight::MOVE_COUNT
+            if(f.character<0||f.character>=fight::CHARACTER_COUNT||f.move< -1||f.move>=fight::MOVE_COUNT
                 ||f.simple<0||f.simple>1||(f.facing!=1&&f.facing!= -1)
                 ||f.age<0||f.age>420||f.stun<0||f.stun>180) return false;
         }
@@ -53,16 +53,16 @@ public:
     }
     PackedInt32Array configuration() const {
         PackedInt32Array data;
-        for(int c=0;c<2;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
+        for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
             for(int f=0;f<fight::FIELD_COUNT;++f) data.push_back(simulation.move_get(c,m,f));
         for(int f=0;f<3;++f) data.push_back(simulation.rule_get(f));
         return data;
     }
     bool configure(const PackedInt32Array& data) {
-        if(data.size()!=2*fight::MOVE_COUNT*fight::FIELD_COUNT+3) return false;
+        if(data.size()!=fight::CHARACTER_COUNT*fight::MOVE_COUNT*fight::FIELD_COUNT+3) return false;
         auto candidate=simulation;
         int at=0;
-        for(int c=0;c<2;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
+        for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
             for(int f=0;f<fight::FIELD_COUNT;++f) if(!candidate.move_set(c,m,f,data[at++])) return false;
         for(int f=0;f<3;++f) if(!candidate.rule_set(f,data[at++])) return false;
         simulation=candidate;

@@ -1,6 +1,6 @@
 export const BUTTONS = ['P', 'K', 'S', 'Hs', 'D'];
 export const MOVE_IDS = ['5P','5K','5S','5Hs','2P','2K','2S','2Hs','6P','6K','6S','6Hs','6D','5D','236P','236S','623Hs','j.P','j.K','j.S','j.Hs','j.D'];
-export const CHARACTERS = ['Anvil', 'Hammer'];
+export const CHARACTERS = ['Anvil', 'Hammer', 'Smoke', 'Tapper', 'Shark', 'Fillet'];
 export const FIELDS = ['button','category','direction','motion','air','startup','active','recovery','damage','hitstun','blockstun','hitstop','pushback','reach','bottom','height','specialCancel','jumpCancel','whiffCancel','selfCancel','advance','simpleDirection','simpleButton','normalRoutes','commandRoutes','hitLevel','reserved'];
 export const INPUT = { left:1,right:2,down:4,up:8,P:16,K:32,S:64,Hs:128,D:256,dash:512,simple:1024 };
 const RULES = ['buttonBuffer','motionWindow','motionGap'];
@@ -45,12 +45,12 @@ export class Engine {
     if(!Number.isInteger(value)||!this.api.fg_move_set(c,m,FIELDS.indexOf(key),value)) throw new Error(`Invalid ${key}: ${value}`);
   }
   data() {
-    return { schema:1, coreVersion:this.api.fg_version(),
+    return { schema:2, coreVersion:this.api.fg_version(),
       inputRules:Object.fromEntries(RULES.map((r,i)=>[r,this.api.fg_rule_get(i)])),
       characters:CHARACTERS.map((name,c)=>({name,moves:MOVE_IDS.map((id,m)=>({id,...this.move(c,m)}))})) };
   }
   loadData(data) {
-    if(data?.schema!==1||data.coreVersion!==this.api.fg_version()||data.characters?.length!==2) throw new Error('Unsupported move-data format');
+    if(data?.schema!==2||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
     const previous=this.data();
     const apply=d=>{
       RULES.forEach((r,i)=>{ if(!Number.isInteger(d.inputRules?.[r])||!this.api.fg_rule_set(i,d.inputRules[r])) throw new Error(`Invalid ${r}`); });

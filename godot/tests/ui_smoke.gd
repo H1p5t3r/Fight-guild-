@@ -17,6 +17,7 @@ func key(code: int, pressed: bool) -> void:
 
 func ticks(count: int) -> void:
 	for _i in count: game.advance_one()
+	game._process(0.0)
 
 func _initialize() -> void:
 	call_deferred("run")
@@ -85,6 +86,27 @@ func run() -> void:
 	game.lock_online(true)
 	check(not game.fields.damage.control.editable, "Editor remains editable during network play")
 	game.lock_online(false)
+	# Exercise actual keyboard -> selected fighter -> windup/active artwork for all 30 basic buttons.
+	var button_keys := [KEY_J, KEY_K, KEY_L, KEY_I, KEY_O]
+	var slots := [0, 1, 2, 3, 13]
+	for character in CombatModel.CHARACTERS.size():
+		game.selection_characters[0].select(character)
+		game.selection_simple[0].button_pressed = false
+		game.selection_dialog.confirmed.emit()
+		for b in button_keys.size():
+			game.reset_round()
+			key(button_keys[b], true)
+			ticks(1)
+			key(button_keys[b], false)
+			var fighter: Dictionary = game.model.state().players[0]
+			check(fighter.character == character and fighter.move == slots[b], "Missing basic button for " + CombatModel.CHARACTERS[character])
+			var visual: Sprite2D = game.arena.sprites[0]
+			check(visual.get_meta("phase") == "windup" and visual.get_meta("pose") == b + 1, "Attack has no windup pose")
+			var anticipation: Texture2D = visual.texture
+			ticks(game.model.move(character, slots[b]).startup - 1)
+			check(visual.get_meta("phase") == "active" and visual.get_meta("pose") == b + 1 and visual.texture != anticipation, "Attack did not change to its active image")
+	game.selection_characters[0].select(0)
+	game.selection_dialog.confirmed.emit()
 	game.reset_round()
 	game.show_controls()
 	check(game.has_open_dialog(), "Controls dialog did not open")
@@ -92,6 +114,9 @@ func run() -> void:
 		if child is AcceptDialog and child != game.selection_dialog and child != game.file_dialog: child.queue_free()
 	await process_frame
 	var args := OS.get_cmdline_user_args()
+	if args.has("--review"):
+		game.show_sprite_review()
+		check(game.has_open_dialog(), "Sprite review did not open")
 	if args.has("--screenshot"):
 		await process_frame
 		await RenderingServer.frame_post_draw

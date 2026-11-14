@@ -16,7 +16,7 @@ func start() -> void:
 	if args.size() < 2:
 		quit(1)
 		return
-	var result := connection.begin(model, args[0] == "host", "127.0.0.1", int(args[1]), 0 if args[0] == "host" else 1, false)
+	var result := connection.begin(model, args[0] == "host", "127.0.0.1", int(args[1]), 4 if args[0] == "host" else 5, false)
 	if result != OK:
 		printerr("Cannot start network test: ", error_string(result))
 		quit(1)
@@ -29,6 +29,10 @@ func _physics_process(delta: float) -> bool:
 	if connection.active:
 		connection.tick(RollbackSession.scripted_input(model.frame(), connection.player))
 	if connection.verified_through >= 180 and not succeeded:
+		if model.state().players[0].character != 4 or model.state().players[1].character != 5:
+			printerr("Network fighter selections were not retained")
+			quit(1)
+			return false
 		succeeded = true
 		print("PASS native ENet peer ", connection.player, " verified frame ", connection.verified_through, " / rollbacks ", connection.session.rollbacks)
 	if succeeded:

@@ -112,7 +112,7 @@ func handle_message(message: Dictionary) -> void:
 			if session != null or message.get("protocol") != 1 or message.get("fingerprint") != model.fingerprint():
 				fail("Build or move data differs. Import the same move set or restore defaults on both clients.")
 				return
-			if not CombatModel.valid_integer(message.get("character")) or int(message.character) not in [0, 1] or not message.get("simple") is bool:
+			if not CombatModel.valid_integer(message.get("character")) or int(message.character) not in range(CombatModel.CHARACTERS.size()) or not message.get("simple") is bool:
 				fail("Invalid fighter selection.")
 				return
 			hello_received = true
@@ -127,7 +127,7 @@ func handle_message(message: Dictionary) -> void:
 				return
 			var characters: Array = message.characters
 			var simplified: Array = message.simple
-			if characters.size() != 2 or simplified.size() != 2 or not CombatModel.valid_integer(characters[0]) or int(characters[0]) not in [0, 1] or characters[1] != local_character or not simplified[0] is bool or not simplified[1] is bool or simplified[1] != local_simple:
+			if characters.size() != 2 or simplified.size() != 2 or not CombatModel.valid_integer(characters[0]) or int(characters[0]) not in range(CombatModel.CHARACTERS.size()) or characters[1] != local_character or not simplified[0] is bool or not simplified[1] is bool or simplified[1] != local_simple:
 				fail("Match selection does not match the handshake.")
 				return
 			start_match(characters, simplified)

@@ -52,7 +52,7 @@ func _ready() -> void:
 		editor_status.text = "Loaded your saved move set." if error.is_empty() else error
 	populate_editor()
 	if not OS.get_cmdline_user_args().has("--test"):
-		selection_dialog.popup_centered(Vector2i(660, 340))
+		selection_dialog.popup_centered(Vector2i(660, 600))
 
 func box(color: Color, border: Color = Color("39444d")) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
@@ -129,7 +129,8 @@ func build_interface() -> void:
 	var brand := label(header, "FG   FIGHT GUILD", 23, ACCENT)
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label(header, "NATIVE COMBAT LAB / 002", 11, MUTED)
-	button(header, "Fighter select", func(): selection_dialog.popup_centered(Vector2i(660,340)), true)
+	button(header, "Fighter select", func(): selection_dialog.popup_centered(Vector2i(660,600)), true)
+	button(header, "Sprite review", show_sprite_review)
 	button(header, "Controls", show_controls)
 	var content := HBoxContainer.new()
 	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -286,6 +287,11 @@ func build_dialogs() -> void:
 		columns.add_child(column)
 		label(column, "PLAYER " + str(p + 1), 16, ACCENT)
 		selection_characters.append(option(column, "Fighter", CombatModel.CHARACTERS, p))
+		var portrait := FighterPreview.new()
+		portrait.custom_minimum_size = Vector2(280, 260)
+		column.add_child(portrait)
+		portrait.present(p, "active", 0)
+		selection_characters[p].item_selected.connect(func(index: int): portrait.present(index, "active", 0))
 		var check := CheckBox.new()
 		check.text = "Enable simplified inputs"
 		column.add_child(check)
@@ -305,6 +311,39 @@ func build_dialogs() -> void:
 		var error := model.load_file(path) if importing else model.save_file(path)
 		editor_status.text = error if not error.is_empty() else "Move set imported." if importing else "Move set exported."
 		if importing and error.is_empty(): populate_editor(); reset_round())
+
+func show_sprite_review() -> void:
+	var dialog := AcceptDialog.new()
+	dialog.title = "Sprite review · windup / active"
+	dialog.ok_button_text = "Back to training"
+	add_child(dialog)
+	var layout := VBoxContainer.new()
+	dialog.add_child(layout)
+	var pickers := HBoxContainer.new()
+	layout.add_child(pickers)
+	var fighter_picker := option(pickers, "Fighter", CombatModel.CHARACTERS)
+	var button_picker := option(pickers, "Button", CombatModel.BUTTONS)
+	var pair := HBoxContainer.new()
+	layout.add_child(pair)
+	var previews: Array[FighterPreview] = []
+	for phase in ["WINDUP", "ACTIVE"]:
+		var column := VBoxContainer.new()
+		pair.add_child(column)
+		label(column, phase, 16, ACCENT)
+		var preview := FighterPreview.new()
+		preview.custom_minimum_size = Vector2(330, 360)
+		column.add_child(preview)
+		previews.append(preview)
+	var update := func(_index: int = 0):
+		for i in 2:
+			previews[i].present(fighter_picker.selected, ["windup", "active"][i], button_picker.selected + 1)
+	fighter_picker.item_selected.connect(update)
+	button_picker.item_selected.connect(update)
+	update.call()
+	label(layout, "First pose studies. Compare silhouette, colors, weapon shape and attack direction.\nImpact, follow-through and recovery animation are planned.", 12, MUTED)
+	dialog.close_requested.connect(dialog.queue_free)
+	dialog.confirmed.connect(dialog.queue_free)
+	dialog.popup_centered(Vector2i(720, 540))
 
 func show_controls() -> void:
 	var dialog := AcceptDialog.new()

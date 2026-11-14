@@ -14,10 +14,9 @@ func _ready() -> void:
 	custom_minimum_size = Vector2(720, 430)
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
 	clip_contents = true
-	for c in 2:
+	for _p in 2:
 		var sprite := Sprite2D.new()
-		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-		sprite.texture = make_sprite(c)
+		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		add_child(sprite)
 		sprites.append(sprite)
 
@@ -32,17 +31,31 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 		var fighter: Dictionary = view.players[p]
 		var sprite := sprites[p]
 		var crouched: bool = fighter.y == 0 and (int(fighter.raw) & 4) != 0
-		var height := 100.0 if crouched else 150.0
 		var character := int(fighter.character)
-		if sprite.get_meta("character", -1) != character:
-			sprite.texture = make_sprite(character)
-			sprite.set_meta("character", character)
-		sprite.position = Vector2(fighter.x / 100.0 * scale_x, floor_y - (fighter.y / 100.0 + height * 0.5) * scale_x)
-		sprite.scale = Vector2(1.6 * scale_x * fighter.facing, height / 96.0 * scale_x)
-		sprite.rotation = -0.08 * fighter.facing if fighter.stun and not fighter.guarding else 0.0
-		if fighter.move >= 0:
+		var phase := "active"
+		var pose := 0
+		if fighter.stun:
+			pose = 10 if fighter.guarding else 9
+		elif fighter.move >= 0:
 			var move := model.move(character, fighter.move)
-			sprite.rotation = fighter.facing * (-0.04 if fighter.age < move.startup else 0.1)
+			if fighter.age < move.startup:
+				phase = "windup"
+				pose = 1 + int(move.button)
+			elif fighter.age < move.startup + move.active:
+				pose = 1 + int(move.button)
+			# No fabricated recovery animation: hold ready pose while recovery runs.
+			elif fighter.y > 0:
+				pose = 8
+			elif crouched:
+				pose = 11
+		elif fighter.y > 0:
+			pose = 8
+		elif crouched:
+			pose = 11
+		elif (int(fighter.raw) & 3) in [1, 2] or (int(fighter.raw) & 512) != 0:
+			pose = 6 + (int(view.frame) / 8) % 2
+		FighterArt.apply(sprite, character, phase, pose, scale_x, fighter.facing)
+		sprite.position = Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x)
 		sprite.modulate = Color("ffa69a") if fighter.stun and not fighter.guarding else Color.WHITE
 	queue_redraw()
 
@@ -59,7 +72,7 @@ func _draw() -> void:
 		draw_line(Vector2(0, y), Vector2(size.x, y), Color("293b47"))
 	draw_line(Vector2(0, floor_y), Vector2(size.x, floor_y), Color("7d939e"), 2)
 	label("F G", Vector2(size.x * 0.43, size.y * 0.49), 64, Color("2d404b"))
-	label("TRAINING FLOOR / PLACEHOLDER SPRITES", Vector2(20, 118), 11, MUTED)
+	label("TRAINING FLOOR / SPRITE STUDY", Vector2(20, 118), 11, MUTED)
 	if view.is_empty():
 		return
 	for p in 2:
@@ -103,13 +116,3 @@ func _draw() -> void:
 		var title: String = "DRAW" if view.winner == 2 else CombatModel.CHARACTERS[view.players[view.winner].character].to_upper() + " TAKES THE ROUND"
 		label(title, Vector2(size.x * 0.23, size.y * 0.37 + 46), 25, ACCENT)
 		label("Reset to run it back. Online: leave and reconnect to rematch.", Vector2(size.x * 0.18, size.y * 0.37 + 80), 12, MUTED)
-
-static func make_sprite(character: int) -> ImageTexture:
-	var image := Image.create(64, 96, false, Image.FORMAT_RGBA8)
-	var coat := "a37a58" if character else "708b9c"
-	var light := "d9ae79" if character else "b1c3cb"
-	var shapes := [[18,77,11,16,"26353f"],[39,76,10,17,"26353f"],[14,88,17,7,"17232c"],[37,88,18,7,"17232c"],[16,33,34,46,"26353f"],[20,34,26,39,coat],[20,35,7,29,light],[16,65,34,8,"332f2a"],[29,65,9,7,"dfad59"],[23,9,24,26,"252c30"],[26,14,20,17,"d8b18e"],[25,10,23,8,"bd9f78" if character else "a1adb1"],[34,21,11,3,"303943"],[25,29,20,8,light],[10,39,10,29,coat],[46,38,10,28,light],[48,60,9,9,"d8b18e"]]
-	shapes.append_array([[52,16,4,58,"674a35"],[43,5,21,21,"394b58"],[44,7,20,7,"a2b5bf"],[49,6,4,21,"d1b674"]] if character else [[6,47,23,34,"1c3544"],[7,48,21,4,"c2d0d2"],[9,53,17,24,"738f9e"],[15,58,6,13,"dbb16a"],[53,45,3,27,"765c43"],[48,41,14,9,"c1c7c3"]])
-	for shape in shapes:
-		image.fill_rect(Rect2i(shape[0], shape[1], shape[2], shape[3]), Color(shape[4]))
-	return ImageTexture.create_from_image(image)

@@ -18,6 +18,8 @@ The generated images are visual concepts. They do not establish a working 3D sha
 
 The current six sheets remain candidates for review. Do not treat the latest generation as user approval.
 
+The native Godot sprite studies now use the [sprite production contract](sprite-production.md). It defines shared palettes, silhouette rules, smear shapes, directed-action briefs and the initial windup/active scope. Building a repeatable pipeline for these six fighters and future characters is tracked in [the backlog](backlog.md).
+
 ## Working visual rules
 
 - Strong silhouettes and distinct body types across the roster.

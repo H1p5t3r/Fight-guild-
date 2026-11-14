@@ -4,7 +4,7 @@ namespace fight {
 static_assert(sizeof(int)==4, "The snapshot ABI requires 32-bit int");
 Simulation default_simulation{};
 State& world=default_simulation.world;
-Move (&moves)[2][MOVE_COUNT]=default_simulation.moves;
+Move (&moves)[CHARACTER_COUNT][MOVE_COUNT]=default_simulation.moves;
 Rules& rules=default_simulation.rules;
 static int min(int a,int b) { return a<b?a:b; }
 static int max(int a,int b) { return a>b?a:b; }
@@ -14,7 +14,7 @@ static int button_bit(int b) { return P<<b; }
 
 void Simulation::defaults() {
     rules=Rules{};
-    for(int c=0;c<2;++c) for(int i=0;i<MOVE_COUNT;++i) {
+    for(int c=0;c<CHARACTER_COUNT;++c) for(int i=0;i<MOVE_COUNT;++i) {
         Move m{};
         const bool crouch=i>=4&&i<8, command=i>=8&&i<13;
         const bool special=i>=14&&i<17, air=i>=17;
@@ -43,11 +43,18 @@ void Simulation::defaults() {
         m.v[NormalRoutes]=-1; // -1 = unified rule, otherwise a P/K/S/Hs/D bitmask.
         m.v[CommandRoutes]=-1;
         if(c==0) { m.v[Damage]+=5; m.v[Reach]+=600; }
+        // Starter tuning only: Anvil, Hammer, Smoke, Tapper, Shark, Fillet.
+        if(c==3) m.v[Reach]+=1000;
+        if(c==4) m.v[Reach]+=800;
+        if(c==5) m.v[Reach]-=400;
         if(i==13) { // Provisional character-specific Drive starters.
-            m.v[Startup]=c==0?18:15;
-            m.v[Reach]=c==0?12500:16000;
-            m.v[Advance]=c==0?0:2600;
-            m.v[SpecialCancel]=c==1;
+            const int startup[CHARACTER_COUNT]={18,15,18,17,13,14};
+            const int reach[CHARACTER_COUNT]={12500,16000,14500,17500,14500,15000};
+            const int advance[CHARACTER_COUNT]={0,2600,0,800,3000,2200};
+            m.v[Startup]=startup[c];
+            m.v[Reach]=reach[c];
+            m.v[Advance]=advance[c];
+            m.v[SpecialCancel]=c==1||c==4||c==5;
         }
         moves[c][i]=m;
     }
@@ -59,7 +66,7 @@ void Simulation::reset(int c0,int c1,int s0,int s1) {
     world.winner=-1;
     for(int p=0;p<2;++p) {
         Fighter& f=world.players[p];
-        f.character=clamp(p?c1:c0,0,1);
+        f.character=clamp(p?c1:c0,0,CHARACTER_COUNT-1);
         f.simple=(p?s1:s0)!=0;
         f.x=p?58000:42000;
         f.facing=p?-1:1;
@@ -201,7 +208,10 @@ void Simulation::control(Fighter& f) {
         if(f.dash>0) {
             f.x+=(horizontal?horizontal:f.facing)*850;
             --f.dash;
-        } else if(!(f.raw&Down)||f.y>0) f.x+=horizontal*(f.character?360:300);
+        } else if(!(f.raw&Down)||f.y>0) {
+            const int speed[CHARACTER_COUNT]={300,360,340,320,390,380};
+            f.x+=horizontal*speed[f.character];
+        }
     }
 }
 bool Simulation::overlaps(const Fighter& a,const Fighter& b) const {
@@ -314,12 +324,12 @@ int Simulation::get(int player,int field) const {
     }
 }
 int Simulation::move_get(int c,int m,int f) const {
-    if(c<0||c>1||m<0||m>=MOVE_COUNT||f<0||f>=FIELD_COUNT) return -999;
+    if(c<0||c>=CHARACTER_COUNT||m<0||m>=MOVE_COUNT||f<0||f>=FIELD_COUNT) return -999;
     return moves[c][m].v[f];
 }
 int Simulation::move_set(int c,int m,int f,int v) {
     using namespace fight;
-    if(c<0||c>1||m<0||m>=MOVE_COUNT||f<0||f>=FIELD_COUNT) return 0;
+    if(c<0||c>=CHARACTER_COUNT||m<0||m>=MOVE_COUNT||f<0||f>=FIELD_COUNT) return 0;
     int low=0,high=0;
     switch(f) {
         case Button:case SimpleButton: high=4; break;
@@ -357,7 +367,7 @@ int Simulation::rule_set(int f,int v) {
 }
 int Simulation::can_cancel(int c,int from,int to,int contact) const {
     using namespace fight;
-    if(c<0||c>1||from<0||from>=MOVE_COUNT||to<0||to>=MOVE_COUNT) return 0;
+    if(c<0||c>=CHARACTER_COUNT||from<0||from>=MOVE_COUNT||to<0||to>=MOVE_COUNT) return 0;
     return cancel_allowed(moves[c][from],moves[c][to],from==to,contact!=0);
 }
 

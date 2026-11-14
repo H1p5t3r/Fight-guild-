@@ -25,6 +25,21 @@ func _initialize() -> void:
 	check(model.load_file(saved).is_empty() and model.move(0, 0).damage == 177, "Save/load failed")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(saved))
 	check(model.load_data(original).is_empty() and model.fingerprint() == fingerprint, "Round trip changed default data")
+	check(original.characters.size() == 6, "Six-fighter data missing")
+	var legacy := edited.duplicate(true)
+	legacy.schema = 1
+	legacy.coreVersion = 1
+	legacy.characters.resize(2)
+	check(model.load_data(legacy).is_empty() and model.move(0, 0).damage == 177, "Legacy edits lost during migration")
+	var expected_new_move: Dictionary = original.characters[5].moves[0].duplicate()
+	expected_new_move.erase("id")
+	check(model.move(5, 0) == expected_new_move, "New fighters missing migration defaults")
+	for c in CombatModel.CHARACTERS.size():
+		model.reset([c, (c + 1) % 6])
+		var snapshot: PackedByteArray = model.core.snapshot()
+		model.step(16, 0)
+		check(model.core.restore(snapshot) and model.state().players[0].character == c, "Roster snapshot restore failed")
+	check(model.load_data(original).is_empty(), "Could not restore full roster")
 	for latency in [0, 1, 4, 8, 12]:
 		var result := RollbackSession.trial(original, latency, 4, 1200)
 		check(result.get("pass", false), "Rollback divergence: " + str(result))
