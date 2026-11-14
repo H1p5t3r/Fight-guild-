@@ -2,3 +2,7 @@
 Thumbs.db
 *.tmp
 *.zip
+build/
+web/generated/
+node_modules/
+test-results/

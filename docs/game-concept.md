@@ -32,11 +32,21 @@ Proposed loop: earn a knockdown → place clouds → threaten a wake-up mixup th
 
 Her neutral and defense, teleport restrictions, cloud activation timing, and defensive counterplay are still to be designed. Avoid treating fullscreen fog or generic keep-away zoning as her core identity.
 
+## Implementation decisions
+
+- Target platforms: PC and PS5. The first executable prototype runs in a PC browser.
+- Start with 2D sprites; later use 3D models on a 2D gameplay plane.
+- Five attack buttons: P, K, S, Hs, D, plus a dash macro and a simplified-input modifier.
+- Traditional motions are the original control design. Simple input mappings are per move, enabled independently at character select.
+- Unified gatlings and the universal same-button command-normal cancel rule are specified in [combat-rules.md](combat-rules.md).
+- Rollback is an architectural requirement. The initial core includes complete snapshots and is exercised with delayed inputs and a room relay.
+- A move editor inside the playable training interface supports direct tuning and JSON import/export.
+
 ## Still open
 
-- Universal movement, buttons, cancel rules, meter, defense, round format, and damage model.
+- Final movement tuning, meter, defensive mechanics, round format, damage scaling, and combo restrictions.
 - Exact character moves, resources, matchups, and frame data.
-- Engine, platform, networking, asset pipeline, and implementation plan.
+- Unreal integration, console access, production online infrastructure, and the art/animation pipeline.
 - Final visual approval, orthographic model sheets, and animation specifications.
 
-No game implementation has been commissioned or saved here yet; the work to date is planning and visual development.
+The first combat lab uses portable C++ with a browser presentation layer. This enables immediate iteration while preserving the core for a future Unreal integration. Placeholder sprites and provisional Anvil/Hammer kits do not represent finished character designs.

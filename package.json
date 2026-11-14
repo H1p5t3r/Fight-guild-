@@ -1,0 +1,22 @@
+{
+  "name": "fight-guild-combat-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "bash scripts/build.sh && node scripts/bundle.mjs",
+    "start": "node scripts/server.mjs",
+    "test": "bash scripts/build.sh && ./build/core-tests && node --test tests/*.test.mjs",
+    "test:browser": "node tests/browser-smoke.mjs"
+  },
+  "dependencies": {
+    "ws": "8.18.3"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "playwright": "1.56.1"
+  }
+}
