@@ -21,7 +21,7 @@ func _init(simulation: CombatModel) -> void:
 func submit(player: int, frame: int, input: int) -> bool:
 	if not error.is_empty():
 		return false
-	if player < 0 or player > 1 or frame < 0 or frame > model.frame() + 120 or input < 0 or input > 2047:
+	if player < 0 or player > 1 or frame < 0 or frame > model.frame() + 120 or input < 0 or input > CombatModel.INPUT_MASK:
 		error = "Invalid remote input."
 		return false
 	if frame < maxi(0, model.frame() - history_size):
@@ -84,7 +84,7 @@ static func scripted_input(frame: int, player: int) -> int:
 	if cycle == 43: return toward | 64
 	if cycle == 75: return 8
 	if cycle == 80: return 128
-	return away if cycle > 92 else 0
+	return away | 2048 if cycle > 92 else 0
 
 static func trial(data: Dictionary, latency: int = 6, jitter: int = 3, frame_count: int = 600) -> Dictionary:
 	var reference := CombatModel.new()

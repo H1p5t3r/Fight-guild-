@@ -69,7 +69,7 @@ func _connected(id: int) -> void:
 	if opponent != 0:
 		return
 	opponent = id
-	send({"type": "hello", "protocol": 1, "fingerprint": model.fingerprint(), "character": local_character, "simple": local_simple})
+	send({"type": "hello", "protocol": 2, "fingerprint": model.fingerprint(), "character": local_character, "simple": local_simple})
 
 func send(message: Dictionary) -> void:
 	if peer != null and opponent != 0:
@@ -109,7 +109,7 @@ func _process(delta: float) -> void:
 func handle_message(message: Dictionary) -> void:
 	match message.get("type", ""):
 		"hello":
-			if session != null or message.get("protocol") != 1 or message.get("fingerprint") != model.fingerprint():
+			if session != null or message.get("protocol") != 2 or message.get("fingerprint") != model.fingerprint():
 				fail("Build or move data differs. Import the same move set or restore defaults on both clients.")
 				return
 			if not CombatModel.valid_integer(message.get("character")) or int(message.character) not in range(CombatModel.CHARACTERS.size()) or not message.get("simple") is bool:

@@ -8,7 +8,7 @@ export class RollbackSession {
   }
   submit(player,frame,input) {
     if(![0,1].includes(player)||!Number.isInteger(frame)||frame<0||frame>this.engine.frame+120
-       ||!Number.isInteger(input)||input<0||input>2047) throw new Error('Invalid remote input');
+       ||!Number.isInteger(input)||input<0||input>4095) throw new Error('Invalid remote input');
     if(frame<Math.max(0,this.engine.frame-this.history)) throw new Error('Input arrived outside the rollback history; restart the match');
     const actual=this.actual.get(frame)??[null,null];
     if(actual[player]!==null&&actual[player]!==input) throw new Error('A peer changed an already submitted input');

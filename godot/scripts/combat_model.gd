@@ -2,12 +2,16 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 2
+const DATA_VERSION := 3
+const MOMENTUM_MAX := 10000
+const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
 const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D"]
-const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "reserved"]
+const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak"]
 const RULES := ["buttonBuffer", "motionWindow", "motionGap"]
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple"]
+const MOMENTUM_RULES := ["movementGain", "attackGain", "blockedAttackGain", "damageTakenGain", "guardGain", "specialGain", "fdDrain", "fdBlockCost", "fdDamageCost", "fdPushPercent"]
+const RULE_COUNT := 13 # 3 input rules + 10 Momentum rules, matching fight::RULE_COUNT.
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable"]
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
 
@@ -39,9 +43,11 @@ func move(character: int, slot: int) -> Dictionary:
 	return result
 
 func data() -> Dictionary:
-	var result := {"schema": DATA_VERSION, "coreVersion": DATA_VERSION, "inputRules": {}, "characters": []}
+	var result := {"schema": DATA_VERSION, "coreVersion": DATA_VERSION, "inputRules": {}, "momentumRules": {}, "characters": []}
 	for i in RULES.size():
-		result.inputRules[RULES[i]] = config[config.size() - 3 + i]
+		result.inputRules[RULES[i]] = config[config.size() - RULE_COUNT + i]
+	for i in MOMENTUM_RULES.size():
+		result.momentumRules[MOMENTUM_RULES[i]] = config[config.size() - MOMENTUM_RULES.size() + i]
 	for c in CHARACTERS.size():
 		var character := {"name": CHARACTERS[c], "moves": []}
 		for m in MOVE_IDS.size():
@@ -57,11 +63,11 @@ static func valid_integer(value: Variant) -> bool:
 func load_data(value: Variant) -> String:
 	if not value is Dictionary:
 		return "Unsupported move data version."
-	var legacy: bool = value.get("schema") == 1 and value.get("coreVersion") == 1
+	var legacy: bool = valid_integer(value.get("schema")) and int(value.schema) in [1, 2] and value.schema == value.get("coreVersion")
 	if not legacy and (value.get("schema") != DATA_VERSION or value.get("coreVersion") != DATA_VERSION):
 		return "Unsupported move data version."
 	var characters: Variant = value.get("characters")
-	var expected := 2 if legacy else CHARACTERS.size()
+	var expected := 2 if value.get("schema") == 1 else CHARACTERS.size()
 	if not characters is Array or characters.size() != expected or not value.get("inputRules") is Dictionary:
 		return "Missing characters or input rules."
 	var candidate := PackedInt32Array()
@@ -75,17 +81,35 @@ func load_data(value: Variant) -> String:
 			if not definitions[m] is Dictionary or definitions[m].get("id") != MOVE_IDS[m]:
 				return "Move slot IDs must match this build."
 			for field in FIELDS:
+				if legacy and field == "guardBreak":
+					candidate.append(0)
+					continue
+				if legacy and field == "chipDamage":
+					if not valid_integer(definitions[m].get("reserved")) or definitions[m].reserved != 0:
+						return "Invalid legacy reserved field."
+					var chip: int = maxi(1, int(definitions[m].damage) / 10) if int(definitions[m].category) in [2, 3] else 0
+					candidate.append(chip)
+					continue
 				if not valid_integer(definitions[m].get(field)):
 					return "Invalid integer for %s / %s." % [MOVE_IDS[m], field]
 				candidate.append(int(definitions[m][field]))
 	# Old two-fighter saves keep their edits; newly added fighters start from defaults.
-	if legacy:
-		var defaults := FightCore.new().configuration()
-		candidate.append_array(defaults.slice(candidate.size(), defaults.size() - RULES.size()))
+	var defaults := FightCore.new().configuration()
+	if expected < CHARACTERS.size():
+		candidate.append_array(defaults.slice(candidate.size(), defaults.size() - RULE_COUNT))
 	for rule in RULES:
 		if not valid_integer(value.inputRules.get(rule)):
 			return "Invalid input rule: " + rule
 		candidate.append(int(value.inputRules[rule]))
+	if legacy:
+		candidate.append_array(defaults.slice(defaults.size() - MOMENTUM_RULES.size()))
+	else:
+		if not value.get("momentumRules") is Dictionary:
+			return "Missing Momentum rules."
+		for rule in MOMENTUM_RULES:
+			if not valid_integer(value.momentumRules.get(rule)):
+				return "Invalid Momentum rule: " + rule
+			candidate.append(int(value.momentumRules[rule]))
 	if not core.configure(candidate):
 		return "A move value or input rule is outside the supported range."
 	config = core.configuration()

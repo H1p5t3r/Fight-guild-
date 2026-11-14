@@ -11,7 +11,7 @@ func _initialize() -> void:
 	check(fighters.size() == CombatModel.CHARACTERS.size(), "Roster artwork is incomplete")
 	for c in fighters.size():
 		check(fighters[c].name == CombatModel.CHARACTERS[c], "Artwork belongs to a different roster slot")
-		for phase in ["active", "windup"]:
+		for phase in ["active", "windup", "block"]:
 			var sheet := FighterArt.sheet(c, phase)
 			var path: String = FighterArt.DIRECTORY + sheet.file
 			check(FileAccess.get_sha256(path) == sheet.sha256, "Artwork checksum changed without metadata update: " + path)
@@ -30,5 +30,5 @@ func _initialize() -> void:
 				check(bounds[2] - bounds[0] > 30 and bounds[3] - bounds[1] > 80, "Empty/tiny pose: " + path)
 				check(texture.region.position.x >= 0 and texture.region.end.x <= source.get_width(), "Atlas region outside image")
 				check(sheet.frames[pose].pivot[1] > 0 and sheet.frames[pose].pivot[1] <= 512, "Invalid foot pivot")
-	print("Godot sprite catalog: ", failures, " failures; six fighters, 108 source poses, alpha, regions, provenance")
+	print("Godot sprite catalog: ", failures, " failures; six fighters, 144 source poses, alpha, regions, provenance")
 	quit(1 if failures else 0)

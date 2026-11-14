@@ -2,7 +2,7 @@
   "schema": 1,
   "style_rules": "docs/sprite-production.md",
   "generator": "OpenAI image_gen",
-  "status": "iteration study; active and windup only; not approved production animation",
+  "status": "iteration studies; attack windup/active and two-frame block reactions; not approved production animation",
   "fighters": [
     {
       "id": "anvil",
@@ -350,6 +350,131 @@
               121,
               451,
               471
+            ]
+          }
+        ]
+      },
+      "block": {
+        "file": "anvil-block.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 374,
+        "pivot_x": 250,
+        "sha256": "ac3dee35a5468cb052710b83732d638dfec8ae9d92a3f1a399a6735682a2b153",
+        "generation_file": "exec-5ea20053-7b7f-4fd5-a7f8-02ec0801793c.png",
+        "frames": [
+          {
+            "name": "stable-contact",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              473
+            ],
+            "bounds": [
+              110,
+              33,
+              443,
+              472
+            ]
+          },
+          {
+            "name": "stable-settle",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              473
+            ],
+            "bounds": [
+              78,
+              29,
+              419,
+              473
+            ]
+          },
+          {
+            "name": "pressure-contact",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              473
+            ],
+            "bounds": [
+              73,
+              72,
+              462,
+              472
+            ]
+          },
+          {
+            "name": "pressure-hold",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              473
+            ],
+            "bounds": [
+              101,
+              72,
+              479,
+              472
+            ]
+          },
+          {
+            "name": "break-contact",
+            "region": [
+              512,
+              512,
+              496,
+              512
+            ],
+            "pivot": [
+              250,
+              473
+            ],
+            "bounds": [
+              13,
+              12,
+              489,
+              473
+            ]
+          },
+          {
+            "name": "break-stagger",
+            "region": [
+              1008,
+              512,
+              528,
+              512
+            ],
+            "pivot": [
+              266,
+              473
+            ],
+            "bounds": [
+              9,
+              142,
+              518,
+              473
             ]
           }
         ]
@@ -704,6 +829,131 @@
             ]
           }
         ]
+      },
+      "block": {
+        "file": "hammer-block.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 416,
+        "pivot_x": 250,
+        "sha256": "d9415699348b55bc0ea9455e58f2647213c4c83480da72e631359061608a7d47",
+        "generation_file": "exec-3c27d0a6-3020-46b3-af5b-e7cf2a618ca4.png",
+        "frames": [
+          {
+            "name": "stable-contact",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              456
+            ],
+            "bounds": [
+              125,
+              36,
+              449,
+              456
+            ]
+          },
+          {
+            "name": "stable-settle",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              456
+            ],
+            "bounds": [
+              122,
+              39,
+              441,
+              456
+            ]
+          },
+          {
+            "name": "pressure-contact",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              456
+            ],
+            "bounds": [
+              83,
+              88,
+              413,
+              455
+            ]
+          },
+          {
+            "name": "pressure-hold",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              473
+            ],
+            "bounds": [
+              117,
+              99,
+              447,
+              473
+            ]
+          },
+          {
+            "name": "break-contact",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              473
+            ],
+            "bounds": [
+              59,
+              1,
+              424,
+              473
+            ]
+          },
+          {
+            "name": "break-stagger",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              473
+            ],
+            "bounds": [
+              54,
+              125,
+              469,
+              473
+            ]
+          }
+        ]
       }
     },
     {
@@ -1052,6 +1302,131 @@
               121,
               383,
               459
+            ]
+          }
+        ]
+      },
+      "block": {
+        "file": "smoke-block.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 476,
+        "pivot_x": 250,
+        "sha256": "5bcbefe97fa437e282bbc16a0c3da3d16ec1c1416a62214b35f16032be33b423",
+        "generation_file": "exec-5a5b7db8-4998-4662-84a4-e88869301ddf.png",
+        "frames": [
+          {
+            "name": "stable-contact",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              497
+            ],
+            "bounds": [
+              119,
+              20,
+              401,
+              497
+            ]
+          },
+          {
+            "name": "stable-settle",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              497
+            ],
+            "bounds": [
+              107,
+              20,
+              391,
+              497
+            ]
+          },
+          {
+            "name": "pressure-contact",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              497
+            ],
+            "bounds": [
+              86,
+              65,
+              388,
+              497
+            ]
+          },
+          {
+            "name": "pressure-hold",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              498
+            ],
+            "bounds": [
+              119,
+              66,
+              422,
+              498
+            ]
+          },
+          {
+            "name": "break-contact",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              498
+            ],
+            "bounds": [
+              67,
+              28,
+              424,
+              498
+            ]
+          },
+          {
+            "name": "break-stagger",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              498
+            ],
+            "bounds": [
+              53,
+              81,
+              414,
+              498
             ]
           }
         ]
@@ -1406,6 +1781,131 @@
             ]
           }
         ]
+      },
+      "block": {
+        "file": "tapper-block.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 425,
+        "pivot_x": 250,
+        "sha256": "c4c192cebc70f4693768925ed0939cc12fb31cfacb5d665a90a402a67b7228f2",
+        "generation_file": "exec-865de7e2-cae6-4749-90f8-d8ad810e7b7a.png",
+        "frames": [
+          {
+            "name": "stable-contact",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              482
+            ],
+            "bounds": [
+              128,
+              18,
+              414,
+              482
+            ]
+          },
+          {
+            "name": "stable-settle",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              482
+            ],
+            "bounds": [
+              108,
+              14,
+              393,
+              482
+            ]
+          },
+          {
+            "name": "pressure-contact",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              482
+            ],
+            "bounds": [
+              82,
+              43,
+              387,
+              482
+            ]
+          },
+          {
+            "name": "pressure-hold",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              482
+            ],
+            "bounds": [
+              116,
+              41,
+              418,
+              482
+            ]
+          },
+          {
+            "name": "break-contact",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              482
+            ],
+            "bounds": [
+              76,
+              16,
+              463,
+              482
+            ]
+          },
+          {
+            "name": "break-stagger",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              482
+            ],
+            "bounds": [
+              52,
+              92,
+              461,
+              482
+            ]
+          }
+        ]
       }
     },
     {
@@ -1757,6 +2257,131 @@
             ]
           }
         ]
+      },
+      "block": {
+        "file": "shark-block.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 460,
+        "pivot_x": 250,
+        "sha256": "269661d958086649557a203de78d01337d865e7d84c15be2f4907b1750541b26",
+        "generation_file": "exec-adf36e20-2878-4f48-8594-1b5cee2afa34.png",
+        "frames": [
+          {
+            "name": "stable-contact",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              485
+            ],
+            "bounds": [
+              62,
+              18,
+              404,
+              485
+            ]
+          },
+          {
+            "name": "stable-settle",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              485
+            ],
+            "bounds": [
+              60,
+              15,
+              404,
+              484
+            ]
+          },
+          {
+            "name": "pressure-contact",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              485
+            ],
+            "bounds": [
+              63,
+              94,
+              364,
+              484
+            ]
+          },
+          {
+            "name": "pressure-hold",
+            "region": [
+              0,
+              512,
+              451,
+              512
+            ],
+            "pivot": [
+              250,
+              486
+            ],
+            "bounds": [
+              99,
+              87,
+              404,
+              484
+            ]
+          },
+          {
+            "name": "break-contact",
+            "region": [
+              451,
+              512,
+              538,
+              512
+            ],
+            "pivot": [
+              311,
+              486
+            ],
+            "bounds": [
+              30,
+              21,
+              525,
+              486
+            ]
+          },
+          {
+            "name": "break-stagger",
+            "region": [
+              989,
+              512,
+              547,
+              512
+            ],
+            "pivot": [
+              285,
+              486
+            ],
+            "bounds": [
+              15,
+              85,
+              496,
+              486
+            ]
+          }
+        ]
       }
     },
     {
@@ -2105,6 +2730,131 @@
               138,
               389,
               481
+            ]
+          }
+        ]
+      },
+      "block": {
+        "file": "fillet-block.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 460,
+        "pivot_x": 250,
+        "sha256": "4709a94a5fb2da57e27f0c97fc1f8ee33c91859ae906a3a5ad1dbdb69c5d422a",
+        "generation_file": "exec-51a2ef8c-bdb9-4e4c-ae18-3d2b48b75130.png",
+        "frames": [
+          {
+            "name": "stable-contact",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              493
+            ],
+            "bounds": [
+              115,
+              27,
+              392,
+              493
+            ]
+          },
+          {
+            "name": "stable-settle",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              493
+            ],
+            "bounds": [
+              117,
+              23,
+              393,
+              493
+            ]
+          },
+          {
+            "name": "pressure-contact",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              493
+            ],
+            "bounds": [
+              114,
+              67,
+              393,
+              493
+            ]
+          },
+          {
+            "name": "pressure-hold",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              493
+            ],
+            "bounds": [
+              150,
+              65,
+              425,
+              493
+            ]
+          },
+          {
+            "name": "break-contact",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              493
+            ],
+            "bounds": [
+              71,
+              23,
+              411,
+              493
+            ]
+          },
+          {
+            "name": "break-stagger",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              493
+            ],
+            "bounds": [
+              38,
+              89,
+              429,
+              492
             ]
           }
         ]

@@ -87,6 +87,59 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	game.lock_online(true)
 	check(not game.fields.damage.control.editable, "Editor remains editable during network play")
 	game.lock_online(false)
+	game.training_momentum.select(1)
+	game.reset_round()
+	check(game.model.state().players[0].momentum == 5000, "Training Momentum did not reset to 50%")
+	key(KEY_A, true)
+	key(KEY_Q, true)
+	ticks(1)
+	for code in [KEY_A, KEY_Q]: key(code, false)
+	check(game.model.state().players[0].faultless == 1 and game.model.state().players[0].momentum == 4990, "Keyboard FD macro failed")
+	check(game.arena.sprites[0].get_meta("phase") == "block", "FD has no guard pose")
+	game.mode.select(1)
+	game.reset_round()
+	check(game.model.state().players[0].momentum == 0, "Training meter leaked into local versus")
+	game.mode.select(0)
+	game.lock_online(true)
+	check(game.training_momentum.disabled and not game.momentum_fields.fdDrain.control.editable and game.fields.guardBreak.control.disabled, "Defense settings remain editable online")
+	game.lock_online(false)
+	game.momentum_fields.fdDrain.control.value = 0.2
+	game.apply_momentum()
+	check(game.model.data().momentumRules.fdDrain == 20, "Momentum editor failed to apply rate")
+	game.momentum_fields.fdDrain.control.value = 0.1
+	game.apply_momentum()
+	# Real contacts drive both poses of all three reaction clips for every defender.
+	game.fields.reach.control.value = 500
+	game.dummy.select(2)
+	for character in CombatModel.CHARACTERS.size():
+		game.selection_characters[1].select(character)
+		game.selection_dialog.confirmed.emit()
+		for reaction in range(1, 4):
+			game.fields.blockstun.control.value = 10 if reaction == 1 else 16
+			game.fields.guardBreak.control.button_pressed = reaction == 3
+			game.apply_move()
+			key(KEY_J, true)
+			ticks(5)
+			key(KEY_J, false)
+			var defender: Dictionary = game.model.state().players[1]
+			check(defender.blockReaction == reaction and defender.throwInvulnerable == int(reaction != 3), "Incorrect block reaction / throw eligibility")
+			var block_visual: Sprite2D = game.arena.sprites[1]
+			check(block_visual.get_meta("phase") == "block" and block_visual.get_meta("pose") == (reaction - 1) * 2, "Missing block contact frame")
+			ticks(10)
+			check(block_visual.get_meta("pose") == (reaction - 1) * 2 + 1, "Block clip did not settle after hitstop")
+	game.fields.chipDamage.control.value = 12
+	game.apply_move()
+	game.dummy.select(4)
+	key(KEY_J, true)
+	ticks(5)
+	key(KEY_J, false)
+	check(game.model.state().players[1].health == 1000 and game.model.state().players[1].faultless == 1, "FD dummy did not prevent chip")
+	game.model.restore_defaults()
+	game.populate_editor()
+	game.training_momentum.select(0)
+	game.dummy.select(0)
+	game.selection_characters[1].select(1)
+	game.selection_dialog.confirmed.emit()
 	# Exercise actual keyboard -> selected fighter -> windup/active artwork for all 30 basic buttons.
 	var button_keys := [KEY_J, KEY_K, KEY_L, KEY_I, KEY_O]
 	var slots := [0, 1, 2, 3, 13]
@@ -115,13 +168,23 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 		if child is AcceptDialog and child != game.selection_dialog and child != game.file_dialog: child.queue_free()
 	await tree.process_frame
 	var args := OS.get_cmdline_user_args()
+	if args.has("--defense"):
+		game.training_momentum.select(1)
+		game.dummy.select(4)
+		game.fields.reach.control.value = 500
+		game.fields.blockstun.control.value = 16
+		game.fields.guardBreak.control.button_pressed = true
+		game.apply_move()
+		key(KEY_J, true)
+		ticks(5)
+		key(KEY_J, false)
 	if args.has("--review"):
-		game.show_sprite_review()
+		game.show_sprite_review(3 if args.has("--block-review") else 0)
 		check(game.has_open_dialog(), "Sprite review did not open")
 	if args.has("--screenshot"):
 		await tree.process_frame
 		await RenderingServer.frame_post_draw
 		var path: String = args[args.find("--screenshot") + 1]
 		check(tree.root.get_texture().get_image().save_png(path) == OK, "Could not save native screenshot")
-	print("Godot playable scene: ", failures, " failures; combat, editing, keyboard, motions, simple controls, rollback, dialogs")
+	print("Godot playable scene: ", failures, " failures; combat, editing, keyboard, Momentum, FD, 18 block clips, rollback, dialogs")
 	tree.quit(1 if failures else 0)

@@ -4,7 +4,7 @@ const Arena = preload("res://scripts/arena.gd")
 const SAVE_PATH := "user://moves.json"
 const ACCENT := Color("f4b45e")
 const MUTED := Color("a3adb4")
-const KEY_MAPS := [{KEY_A:1, KEY_D:2, KEY_S:4, KEY_W:8, KEY_J:16, KEY_K:32, KEY_L:64, KEY_I:128, KEY_O:256, KEY_SPACE:512, KEY_SHIFT:1024}, {KEY_LEFT:1, KEY_RIGHT:2, KEY_DOWN:4, KEY_UP:8, KEY_KP_1:16, KEY_KP_2:32, KEY_KP_3:64, KEY_KP_5:128, KEY_KP_6:256, KEY_KP_0:512, KEY_KP_ADD:1024}]
+const KEY_MAPS := [{KEY_A:1, KEY_D:2, KEY_S:4, KEY_W:8, KEY_J:16, KEY_K:32, KEY_L:64, KEY_I:128, KEY_O:256, KEY_SPACE:512, KEY_SHIFT:1024, KEY_Q:2048}, {KEY_LEFT:1, KEY_RIGHT:2, KEY_DOWN:4, KEY_UP:8, KEY_KP_1:16, KEY_KP_2:32, KEY_KP_3:64, KEY_KP_5:128, KEY_KP_6:256, KEY_KP_0:512, KEY_KP_ADD:1024, KEY_KP_ENTER:2048}]
 var model := CombatModel.new()
 var connection := NativePeer.new()
 var characters := [0, 1]
@@ -26,6 +26,8 @@ var edit_character: OptionButton
 var edit_move: OptionButton
 var fields := {}
 var buffer_fields: Array[SpinBox] = []
+var momentum_fields := {}
+var training_momentum: OptionButton
 var editor_title: Label
 var routes: Label
 var pause_button: Button
@@ -134,7 +136,7 @@ func build_interface() -> void:
 	var header := row(root)
 	var brand := label(header, "FG   FIGHT GUILD", 23, ACCENT)
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label(header, "NATIVE COMBAT LAB / 002", 11, MUTED)
+	label(header, "NATIVE COMBAT LAB / 003", 11, MUTED)
 	button(header, "Fighter select", func(): selection_dialog.popup_centered(Vector2i(660,600)), true)
 	button(header, "Sprite review", show_sprite_review)
 	button(header, "Controls", show_controls)
@@ -148,12 +150,16 @@ func build_interface() -> void:
 	label(left, "Play a route. Tune a move. Run it back.", 13, MUTED)
 	var toolbar := row(left)
 	mode = option(toolbar, "", ["Training", "Local versus"])
-	mode.item_selected.connect(func(_i: int): reset_round(); dummy.disabled = mode.selected == 1)
-	dummy = option(toolbar, "", ["Stand", "Guard all", "Crouch guard", "Practice sequence"])
+	mode.item_selected.connect(func(_i: int): reset_round(); dummy.disabled = mode.selected == 1; training_momentum.disabled = mode.selected == 1)
+	dummy = option(toolbar, "", ["Stand", "Guard all", "Crouch guard", "Practice sequence", "Faultless guard"])
 	button(toolbar, "Hitboxes", func(): show_boxes = not show_boxes)
 	pause_button = button(toolbar, "Pause", func(): paused = not paused; pause_button.text = "Resume" if paused else "Pause", true)
 	button(toolbar, "+1 frame", advance_one, true)
 	button(toolbar, "Reset", reset_round, true)
+	var practice := row(left)
+	training_momentum = option(practice, "", ["Start Momentum: 0%", "Start Momentum: 50%", "Start Momentum: 100%"])
+	training_momentum.item_selected.connect(func(_i: int): reset_round())
+	label(practice, "Training reset only · hold back + Q for Faultless Defense", 11, MUTED)
 	arena = Arena.new()
 	left.add_child(arena)
 	arena.gui_input.connect(func(event: InputEvent):
@@ -162,7 +168,7 @@ func build_interface() -> void:
 	input_label = label(inputs, "INPUT HISTORY   —", 12, ACCENT)
 	input_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	action_label = label(inputs, "READY", 12, MUTED)
-	label(left, "WASD move  ·  J / K / L / I / O attack  ·  Space dash  ·  Shift simple modifier", 12, MUTED)
+	label(left, "WASD move  ·  J / K / L / I / O attack  ·  Space dash  ·  Shift simple  ·  Back + Q FD", 11, MUTED)
 	var lower := row(left)
 	var network := panel(lower)
 	network.get_parent().size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -216,8 +222,13 @@ func build_interface() -> void:
 	grid.add_theme_constant_override("h_separation", 10)
 	grid.add_theme_constant_override("v_separation", 8)
 	editor.add_child(grid)
-	for spec in [["startup","Startup",1,120,1],["active","Active",1,120,1],["recovery","Recovery",0,180,1],["damage","Damage",0,1000,1],["hitstun","Hitstun",0,180,1],["blockstun","Blockstun",0,180,1],["hitstop","Hitstop",0,30,1],["pushback","Push (px)",0,200,100],["advance","Advance (px)",-100,100,100],["reach","Reach (px)",1,500,100],["bottom","Bottom (px)",-500,500,100],["height","Height (px)",1,500,100]]:
+	for spec in [["startup","Startup",1,120,1],["active","Active",1,120,1],["recovery","Recovery",0,180,1],["damage","Damage",0,1000,1],["hitstun","Hitstun",0,180,1],["blockstun","Blockstun",0,180,1],["hitstop","Hitstop",0,30,1],["pushback","Push (px)",0,200,100],["advance","Advance (px)",-100,100,100],["reach","Reach (px)",1,500,100],["bottom","Bottom (px)",-500,500,100],["height","Height (px)",1,500,100],["chipDamage","Chip damage",0,1000,1]]:
 		add_field(grid, spec)
+	var guard_break := CheckBox.new()
+	guard_break.text = "Guard break on block"
+	guard_break.tooltip_text = "Uses this move's blockstun. Defender cannot backdash or retain blockstun throw immunity."
+	editor.add_child(guard_break)
+	fields.guardBreak = {"control": guard_break, "scale": 1}
 	label(editor, "CANCEL BEHAVIOR", 11, MUTED)
 	var checks := GridContainer.new()
 	checks.columns = 2
@@ -264,7 +275,26 @@ func build_interface() -> void:
 		buffer_fields.append(spin)
 	button(editor, "Apply buffer & reset", apply_buffer, true)
 	label(editor, "Strive parity is still to be measured.", 10, MUTED)
-	label(root, "FIGHT GUILD / GODOT 4.6  ·  Native C++ simulation  ·  60 fixed ticks per second", 11, MUTED)
+	var momentum_panel := VBoxContainer.new()
+	editor.add_child(momentum_panel)
+	momentum_panel.visible = false
+	button(editor, "Momentum & Faultless Defense ▾", func(): momentum_panel.visible = not momentum_panel.visible)
+	var meter_grid := GridContainer.new()
+	meter_grid.columns = 2
+	momentum_panel.add_child(meter_grid)
+	for spec in [["movementGain", "Approach % / px", 0, 1, 100], ["attackGain", "Hit % / damage", 0, 1, 100], ["blockedAttackGain", "Attack blocked % / dmg", 0, 1, 100], ["damageTakenGain", "Damage taken % / dmg", 0, 1, 100], ["guardGain", "Guard % / damage", 0, 1, 100], ["specialGain", "Special / Drive %", 0, 100, 100], ["fdDrain", "FD % / frame", 0.01, 10, 100], ["fdBlockCost", "FD % / contact", 0, 100, 100], ["fdDamageCost", "FD % / damage", 0, 1, 100], ["fdPushPercent", "FD pushback %", 100, 1000, 1]]:
+		var column := VBoxContainer.new()
+		meter_grid.add_child(column)
+		label(column, spec[1], 10, MUTED)
+		var spin := SpinBox.new()
+		spin.min_value = spec[2]
+		spin.max_value = spec[3]
+		spin.step = 0.01 if spec[4] == 100 else 1
+		column.add_child(spin)
+		momentum_fields[spec[0]] = {"control": spin, "scale": spec[4]}
+	button(momentum_panel, "Apply Momentum & reset", apply_momentum, true)
+	var meter_note := label(momentum_panel, "Provisional rates. FD prevents chip and increases pushback. Negative Penalty is deferred.", 11, MUTED)
+	meter_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	build_dialogs()
 
 func add_field(parent: Node, spec: Array) -> void:
@@ -318,9 +348,9 @@ func build_dialogs() -> void:
 		editor_status.text = error if not error.is_empty() else "Move set imported." if importing else "Move set exported."
 		if importing and error.is_empty(): populate_editor(); reset_round())
 
-func show_sprite_review() -> void:
+func show_sprite_review(clip: int = 0) -> void:
 	var dialog := AcceptDialog.new()
-	dialog.title = "Sprite review · windup / active"
+	dialog.title = "Sprite review · attacks and defense"
 	dialog.ok_button_text = "Back to training"
 	add_child(dialog)
 	var layout := VBoxContainer.new()
@@ -329,24 +359,34 @@ func show_sprite_review() -> void:
 	layout.add_child(pickers)
 	var fighter_picker := option(pickers, "Fighter", CombatModel.CHARACTERS)
 	var button_picker := option(pickers, "Button", CombatModel.BUTTONS)
+	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break"])
+	clip_picker.select(clampi(clip, 0, 3))
 	var pair := HBoxContainer.new()
 	layout.add_child(pair)
 	var previews: Array[FighterPreview] = []
+	var captions: Array[Label] = []
 	for phase in ["WINDUP", "ACTIVE"]:
 		var column := VBoxContainer.new()
 		pair.add_child(column)
-		label(column, phase, 16, ACCENT)
+		captions.append(label(column, phase, 16, ACCENT))
 		var preview := FighterPreview.new()
 		preview.custom_minimum_size = Vector2(330, 360)
 		column.add_child(preview)
 		previews.append(preview)
 	var update := func(_index: int = 0):
+		button_picker.disabled = clip_picker.selected != 0
 		for i in 2:
-			previews[i].present(fighter_picker.selected, ["windup", "active"][i], button_picker.selected + 1)
+			if clip_picker.selected == 0:
+				captions[i].text = ["WINDUP", "ACTIVE"][i]
+				previews[i].present(fighter_picker.selected, ["windup", "active"][i], button_picker.selected + 1)
+			else:
+				captions[i].text = ["CONTACT", "SETTLE / HOLD"][i]
+				previews[i].present(fighter_picker.selected, "block", (clip_picker.selected - 1) * 2 + i)
 	fighter_picker.item_selected.connect(update)
 	button_picker.item_selected.connect(update)
+	clip_picker.item_selected.connect(update)
 	update.call()
-	label(layout, "First pose studies. Compare silhouette, colors, weapon shape and attack direction.\nImpact, follow-through and recovery animation are planned.", 12, MUTED)
+	label(layout, "First pose studies. Compare silhouette, colors, weapon shape and attack direction.\nBlock clips settle after four unfrozen frames. Full attack animation is planned.", 12, MUTED)
 	dialog.close_requested.connect(dialog.queue_free)
 	dialog.confirmed.connect(dialog.queue_free)
 	dialog.popup_centered(Vector2i(720, 540))
@@ -354,7 +394,7 @@ func show_sprite_review() -> void:
 func show_controls() -> void:
 	var dialog := AcceptDialog.new()
 	dialog.title = "Know your buttons"
-	dialog.dialog_text = "Player 1: WASD move; J K L I O = P K S Hs D\nSpace dash; Shift simple modifier\n\nPlayer 2: arrows move; numpad 1 2 3 5 6 attacks\nNumpad 0 dash; numpad + modifier\n\nGamepad: bottom / left / top / right / RB = P K S Hs D\nD-pad or left stick moves; LB dash; LT modifier\n\nHold away to block. 6 + button: command normal.\nSpecials: 236P, 236S, 623Hs; directions follow facing.\nClick the arena after editing to return to gameplay.\nOnline: each client uses Player 1 controls."
+	dialog.dialog_text = "Player 1: WASD move; J K L I O = P K S Hs D\nSpace dash; Shift simple modifier; back + Q Faultless Defense\n\nPlayer 2: arrows move; numpad 1 2 3 5 6 attacks\nNumpad 0 dash; numpad + modifier; back + numpad Enter FD\n\nGamepad: bottom / left / top / right / RB = P K S Hs D\nD-pad or left stick moves; LB dash; LT modifier; back + RT FD\n\nHold away to block. Back + any two of P/K/S/Hs also activates FD.\nFD spends Momentum to prevent chip and push attackers away.\nGuard break: no backdash or blockstun grab protection.\n6 + button: command normal.\nSpecials: 236P, 236S, 623Hs; directions follow facing.\nClick the arena after editing to return to gameplay.\nOnline: each client uses Player 1 controls."
 	add_child(dialog)
 	dialog.popup_centered(Vector2i(580, 420))
 	dialog.confirmed.connect(dialog.queue_free)
@@ -380,6 +420,8 @@ func populate_editor() -> void:
 	routes.text = "On contact → " + ", ".join(destinations) + (" / jump" if definition.jumpCancel else "")
 	var data := model.data()
 	for i in 3: buffer_fields[i].value = data.inputRules[CombatModel.RULES[i]]
+	for rule in momentum_fields:
+		momentum_fields[rule].control.value = float(data.momentumRules[rule]) / momentum_fields[rule].scale
 
 func apply_move() -> void:
 	if connection.active: return
@@ -401,6 +443,15 @@ func apply_buffer() -> void:
 	var error := model.load_data(data)
 	if error.is_empty(): reset_round()
 	editor_status.text = "Input settings applied." if error.is_empty() else error
+
+func apply_momentum() -> void:
+	if connection.active: return
+	var data := model.data()
+	for rule in momentum_fields:
+		data.momentumRules[rule] = roundi(momentum_fields[rule].control.value * momentum_fields[rule].scale)
+	var error := model.load_data(data)
+	if error.is_empty(): reset_round()
+	editor_status.text = "Momentum settings applied." if error.is_empty() else error
 
 func release_focus_from_ui() -> void:
 	var focus := get_viewport().gui_get_focus_owner()
@@ -438,11 +489,14 @@ func read_input(player: int) -> int:
 	for b in buttons.size():
 		if Input.is_joy_button_pressed(pad, buttons[b]): raw |= 16 << b
 	if Input.get_joy_axis(pad, JOY_AXIS_TRIGGER_LEFT) > 0.5: raw |= 1024
+	if Input.get_joy_axis(pad, JOY_AXIS_TRIGGER_RIGHT) > 0.5: raw |= 2048
 	return raw
 
 func reset_round() -> void:
 	if connection.active: return
 	model.reset(characters, simple)
+	if mode.selected == 0:
+		for p in 2: model.core.set_training_momentum(p, [0, 5000, 10000][training_momentum.selected])
 	held.clear()
 	history.clear()
 	last_raw = 0
@@ -463,7 +517,7 @@ func simulate_local() -> void:
 	if mode.selected == 0:
 		var state := model.state()
 		var away := 2 if state.players[1].x > state.players[0].x else 1
-		b = [0, away, away | 4, RollbackSession.scripted_input(model.frame(), 1)][dummy.selected]
+		b = [0, away, away | 4, RollbackSession.scripted_input(model.frame(), 1), away | 4 | 2048][dummy.selected]
 	model.step(a, b)
 	record_input(a)
 
@@ -477,6 +531,7 @@ func record_input(raw: int) -> void:
 			if raw & (16 << b): notation += CombatModel.BUTTONS[b]
 		if raw & 512: notation += " Dash"
 		if raw & 1024: notation += " *"
+		if raw & 2048: notation += " FD"
 		history.append(notation)
 		if history.size() > 8: history.pop_front()
 	last_raw = raw
@@ -514,7 +569,9 @@ func lock_online(locked: bool) -> void:
 		if field.control is SpinBox: field.control.editable = not locked
 		else: field.control.disabled = locked
 	for spin in buffer_fields: spin.editable = not locked
+	for field in momentum_fields.values(): field.control.editable = not locked
 	mode.disabled = locked
+	training_momentum.disabled = locked or mode.selected == 1
 	dummy.disabled = locked or mode.selected == 1
 	leave_button.disabled = not locked
 	address.editable = not locked

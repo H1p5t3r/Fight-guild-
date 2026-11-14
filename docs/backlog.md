@@ -14,6 +14,15 @@ Requested scope: make repeatable character images performing directed actions, w
 - [ ] Extend each attack to **windup, active, impact, follow-through and recovery** animations after the first two stages are approved. Support multiple drawings per phase and explicit whiff/hit/block paths without changing authoritative combat timing accidentally.
 - [ ] Trial the complete workflow on one fighter and a second fighter with a different silhouette; measure drift and revision cost before using it for the rest of the roster or a new character.
 
+## Momentum and defense
+
+- [x] Add Momentum gain, 0–100% HUD and Faultless Defense as the only spend; expose training and editor controls.
+- [x] Add three two-frame blocking clips for all six fighters, selected by actual contact advantage or authored guard break.
+- [x] Prevent backdash buffering during guard break and expose the removal of blockstun throw protection.
+- [ ] Measure/tune the provisional gain and FD formulas against a chosen GGST version. **Negative Penalty is deferred by user decision.** No additional meter spending is authorized in this pass.
+- [ ] Add standing/crouching/air variants and smooth intermediate defensive frames under the same shape/palette rules.
+- [ ] Connect the future throw resolver to `throwInvulnerable`; retain normal blockstun protection and the guard-break exception.
+
 ## Combat and delivery
 
 - [ ] Playtest the basic P/K/S/Hs/D buttons and unified gatlings, then replace provisional move data and Drive behaviors character by character.

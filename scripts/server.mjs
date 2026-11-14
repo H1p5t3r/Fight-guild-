@@ -61,7 +61,7 @@ export function createServer() {
         const room=rooms.get(socket.room);
         if(!room||room.peers.length!==2) throw new Error('Match has not started');
         if(msg.type==='input') {
-          if(!Number.isInteger(msg.frame)||msg.frame<0||msg.frame>3600000||!Number.isInteger(msg.input)||msg.input<0||msg.input>2047) throw new Error('Invalid input packet');
+          if(!Number.isInteger(msg.frame)||msg.frame<0||msg.frame>3600000||!Number.isInteger(msg.input)||msg.input<0||msg.input>4095) throw new Error('Invalid input packet');
           send(room.peers[1-socket.player],{type:'input',frame:msg.frame,input:msg.input});
         } else if(msg.type==='hash') {
           if(!Number.isInteger(msg.frame)||msg.frame<0||!Number.isInteger(msg.hash)||msg.hash<0||msg.hash>0xffffffff) throw new Error('Invalid checksum');

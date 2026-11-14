@@ -23,6 +23,7 @@ protected:
         ClassDB::bind_method(D_METHOD("configure", "values"), &FightCore::configure);
         ClassDB::bind_method(D_METHOD("restore_defaults"), &FightCore::restore_defaults);
         ClassDB::bind_method(D_METHOD("can_cancel", "character", "from", "to", "contact"), &FightCore::can_cancel);
+        ClassDB::bind_method(D_METHOD("set_training_momentum", "player", "value"), &FightCore::set_training_momentum);
     }
 public:
     FightCore() { simulation.defaults(); simulation.reset(0,1,0,0); }
@@ -32,6 +33,11 @@ public:
     int64_t checksum() const { return simulation.checksum(); }
     bool can_cancel(int c,int from,int to,bool contact) const { return simulation.can_cancel(c,from,to,contact)!=0; }
     void restore_defaults() { simulation.defaults(); }
+    bool set_training_momentum(int player,int value) {
+        if(player<0||player>1||value<0||value>fight::MOMENTUM_MAX) return false;
+        simulation.world.players[player].momentum=value;
+        return true;
+    }
     PackedByteArray snapshot() const {
         PackedByteArray bytes;
         bytes.resize(sizeof(fight::State));
@@ -46,7 +52,12 @@ public:
         for(const auto& f:candidate.players) {
             if(f.character<0||f.character>=fight::CHARACTER_COUNT||f.move< -1||f.move>=fight::MOVE_COUNT
                 ||f.simple<0||f.simple>1||(f.facing!=1&&f.facing!= -1)
-                ||f.age<0||f.age>420||f.stun<0||f.stun>180) return false;
+                ||f.age<0||f.age>420||f.stun<0||f.stun>180
+                ||f.momentum<0||f.momentum>fight::MOMENTUM_MAX||f.faultless<0||f.faultless>1
+                ||f.movement_remainder<0||f.movement_remainder>=100
+                ||f.block_reaction<0||f.block_reaction>fight::BrokenGuard
+                ||f.block_age<0||f.block_age>180||f.block_advantage< -300||f.block_advantage>180
+                ||f.guard_break<0||f.guard_break>1) return false;
         }
         simulation.world=candidate;
         return true;
@@ -55,16 +66,16 @@ public:
         PackedInt32Array data;
         for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
             for(int f=0;f<fight::FIELD_COUNT;++f) data.push_back(simulation.move_get(c,m,f));
-        for(int f=0;f<3;++f) data.push_back(simulation.rule_get(f));
+        for(int f=0;f<fight::RULE_COUNT;++f) data.push_back(simulation.rule_get(f));
         return data;
     }
     bool configure(const PackedInt32Array& data) {
-        if(data.size()!=fight::CHARACTER_COUNT*fight::MOVE_COUNT*fight::FIELD_COUNT+3) return false;
+        if(data.size()!=fight::CHARACTER_COUNT*fight::MOVE_COUNT*fight::FIELD_COUNT+fight::RULE_COUNT) return false;
         auto candidate=simulation;
         int at=0;
         for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
             for(int f=0;f<fight::FIELD_COUNT;++f) if(!candidate.move_set(c,m,f,data[at++])) return false;
-        for(int f=0;f<3;++f) if(!candidate.rule_set(f,data[at++])) return false;
+        for(int f=0;f<fight::RULE_COUNT;++f) if(!candidate.rule_set(f,data[at++])) return false;
         simulation=candidate;
         return true;
     }

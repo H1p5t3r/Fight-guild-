@@ -34,8 +34,14 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 		var character := int(fighter.character)
 		var phase := "active"
 		var pose := 0
-		if fighter.stun:
-			pose = 10 if fighter.guarding else 9
+		if fighter.guarding and fighter.blockReaction > 0:
+			phase = "block"
+			pose = (int(fighter.blockReaction) - 1) * 2 + (1 if fighter.blockAge >= 4 else 0)
+		elif fighter.stun:
+			pose = 9
+		elif fighter.faultless:
+			phase = "block"
+			pose = 1
 		elif fighter.move >= 0:
 			var move := model.move(character, fighter.move)
 			if fighter.age < move.startup:
@@ -86,6 +92,14 @@ func _draw() -> void:
 		draw_rect(Rect2(x, 64, width, 12), Color("111c23"))
 		draw_rect(Rect2(x, 64, width * fighter.health / 1000.0, 12), tint)
 		label(str(fighter.health), Vector2(x, 94), 11, MUTED)
+		var meter_width: float = width * fighter.momentum / CombatModel.MOMENTUM_MAX
+		var meter_y := size.y - 30.0
+		var meter_color := Color("75dcbc") if fighter.faultless else ACCENT
+		label("MOMENTUM  %05.1f%%" % (fighter.momentum / 100.0), Vector2(x, meter_y - 7), 12, meter_color)
+		draw_rect(Rect2(x, meter_y, width, 10), Color("111c23"))
+		draw_rect(Rect2(x if left else x + width - meter_width, meter_y, meter_width, 10), meter_color)
+		draw_line(Vector2(x + width / 2, meter_y - 1), Vector2(x + width / 2, meter_y + 11), TEXT, 1)
+		draw_rect(Rect2(x, meter_y, width, 10), Color("62777e"), false)
 		var px: float = fighter.x / 100.0 * sx
 		var py: float = floor_y - fighter.y / 100.0 * sx
 		var crouched: bool = fighter.y == 0 and (int(fighter.raw) & 4) != 0
@@ -102,15 +116,21 @@ func _draw() -> void:
 				draw_rect(hitbox, ACCENT, false, 2)
 			label("%s · %df" % [CombatModel.MOVE_IDS[fighter.move], fighter.age], Vector2(px - 25, py + 24), 12)
 		else:
-			label("BLOCK" if fighter.guarding else "HITSTUN" if fighter.stun else "READY", Vector2(px - 22, py + 24), 11, MUTED)
-		if fighter.guarding:
-			draw_arc(Vector2(px, py - 70 * sx), 58 * sx, -1.4, 1.4, 16, Color("89c3e0"), 3)
+			var status := "HITSTUN" if fighter.stun else "READY"
+			if fighter.guarding:
+				status = "GUARD BREAK" if fighter.guardBreak else "BLOCK · attacker %+df" % fighter.blockAdvantage
+			elif fighter.faultless: status = "FAULTLESS"
+			label(status, Vector2(clampf(px - 45, 12, size.x - 165), py + 20), 11, Color("f68b79") if fighter.guardBreak else MUTED)
+		if fighter.faultless or (fighter.guarding and not fighter.guardBreak):
+			var angle := 0.0 if fighter.facing == 1 else PI
+			var guard_color := Color("75dcbc") if fighter.faultless else Color("89c3e0")
+			draw_arc(Vector2(px, py - 70 * sx), 58 * sx, angle - 1.4, angle + 1.4, 24, guard_color, 5 if fighter.faultless else 2)
 		if fighter.combo > 1 and view.players[1 - p].stun:
 			label("%d HITS" % fighter.combo, Vector2(x, 170), 28, tint)
 	label("%02d" % ceili(view.remaining / 60.0), Vector2(size.x / 2 - 24, 67), 42)
 	if paused:
 		label("PAUSED", Vector2(size.x / 2 - 28, 117), 12, ACCENT)
-	label("FRAME %05d   |   %s" % [view.frame, "HITSTOP" if view.hitstop else "60 HZ"], Vector2(18, size.y - 20), 11, MUTED)
+	label("%05d · %s" % [view.frame, "STOP" if view.hitstop else "60HZ"], Vector2(size.x / 2 - 41, size.y - 19), 10, MUTED)
 	if view.winner >= 0:
 		draw_rect(Rect2(0, size.y * 0.37, size.x, 112), Color("111b23"))
 		var title: String = "DRAW" if view.winner == 2 else CombatModel.CHARACTERS[view.players[view.winner].character].to_upper() + " TAKES THE ROUND"

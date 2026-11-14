@@ -56,6 +56,7 @@ void Simulation::defaults() {
             m.v[Advance]=advance[c];
             m.v[SpecialCancel]=c==1||c==4||c==5;
         }
+        m.v[ChipDamage]=(m.v[Category]==Special||m.v[Category]==Drive)?max(1,m.v[Damage]/10):0;
         moves[c][i]=m;
     }
 }
@@ -97,6 +98,24 @@ static int direction(int raw,int facing) {
     int x=((raw&Right)!=0)-((raw&Left)!=0);
     int y=((raw&Up)!=0)-((raw&Down)!=0);
     return 5+x*facing+y*3; // SOCD: opposite directions neutralize.
+}
+static bool faultless_requested(const Fighter& f) {
+    int horizontal=((f.raw&Right)!=0)-((f.raw&Left)!=0);
+    if(horizontal*f.facing!=-1) return false;
+    int buttons=f.raw&(P|K|S|Hs);
+    return (f.raw&Faultless)||(buttons&&(buttons&(buttons-1)));
+}
+void Simulation::gain_momentum(Fighter& f,int amount) {
+    if(f.faultless||amount<=0) return;
+    f.momentum=min(MOMENTUM_MAX,f.momentum+amount);
+}
+void Simulation::update_faultless(Fighter& f) {
+    bool request=faultless_requested(f);
+    f.faultless=request&&f.momentum>0&&f.move<0&&(f.stun==0||f.guarding);
+    // Reserve the chord even with an empty meter: it falls back to ordinary guard.
+    // It cannot become a buffered attack, dash or jump when the shield is released.
+    if(request) f.history[world.frame%HISTORY].consumed|=P|K|S|Hs|D|Dash|Up;
+    if(f.faultless) f.momentum=max(0,f.momentum-rules.fd_drain);
 }
 static Sample* sample(Fighter& f,int frame) {
     if(frame<0) return nullptr;
@@ -164,6 +183,8 @@ void Simulation::begin(Fighter& f,int move) {
     f.move=f.last_move=move;
     f.age=f.contact=f.hit_done=f.dash=0;
     f.x+=moves[f.character][move].v[Advance]*f.facing;
+    int kind=moves[f.character][move].v[Category];
+    if(kind==Special||kind==Drive) gain_momentum(f,rules.special_gain);
 }
 bool Simulation::active(const Fighter& f) const {
     if(f.move<0) return false;
@@ -171,8 +192,18 @@ bool Simulation::active(const Fighter& f) const {
     return f.age+1>=m.v[Startup]&&f.age+1<m.v[Startup]+m.v[Active];
 }
 void Simulation::control(Fighter& f) {
-    if(f.stun>0) { --f.stun; return; }
-    f.guarding=0;
+    if(f.stun>0) {
+        if(f.guarding) ++f.block_age;
+        --f.stun;
+        return;
+    }
+    f.guarding=f.block_reaction=f.block_age=f.block_advantage=f.guard_break=0;
+    if(faultless_requested(f)&&f.move<0) {
+        f.dash=0;
+        // Air guard retains the prototype's directional air movement; grounded FD stops walking.
+        if(f.y>0) f.x+=(((f.raw&Right)!=0)-((f.raw&Left)!=0))*300;
+        return;
+    }
     for(int n=world.frame;n>=max(0,world.frame-rules.buffer+1);--n) {
         Sample* h=sample(f,n);
         if(!h) continue;
@@ -224,31 +255,39 @@ bool Simulation::overlaps(const Fighter& a,const Fighter& b) const {
         &&bottom+m.v[Height]>b.y;
 }
 bool Simulation::blocks(const Fighter& attacker,const Fighter& defender,bool was_stunned) const {
-    if(defender.y||defender.move>=0||((defender.stun||was_stunned)&&!defender.guarding)) return false;
+    if(defender.move>=0||((defender.stun||was_stunned)&&!defender.guarding)) return false;
     int away=attacker.x<defender.x?Right:Left;
     int toward=away==Left?Right:Left;
     if(!(defender.raw&away)||(defender.raw&toward)) return false;
+    if(defender.y>0) return true; // Air guard has no high/low distinction.
     int level=moves[attacker.character][attacker.move].v[HitLevel];
     bool crouch=(defender.raw&Down)!=0;
     return level==0||(level==1?crouch:!crouch);
 }
 
 void Simulation::step(int raw0,int raw1) {
-    int raw[2]={raw0&2047,raw1&2047};
+    int raw[2]={raw0&INPUT_MASK,raw1&INPUT_MASK};
     for(int p=0;p<2;++p) {
         Fighter& f=world.players[p];
         if(f.move<0) f.facing=f.x<=world.players[1-p].x?1:-1;
         f.raw=raw[p];
         Sample& h=f.history[world.frame%HISTORY];
         h={world.frame,direction(raw[p],f.facing),raw[p]&~f.previous,raw[p],0};
+        // A backdash pressed during guard break cannot escape through the input buffer.
+        if(f.guard_break&&f.stun>0&&h.direction%3==1) h.consumed|=Dash;
         f.previous=raw[p];
     }
     if(world.winner>=0) { ++world.frame; return; }
+    for(auto& f:world.players) update_faultless(f);
     if(world.hitstop>0) { --world.hitstop; ++world.frame; return; }
     const int prior_stun[2]={world.players[0].stun,world.players[1].stun};
     const int prior_guard[2]={world.players[0].guarding,world.players[1].guarding};
-    for(auto& f:world.players) {
+    const int prior_x[2]={world.players[0].x,world.players[1].x};
+    int moved[2]={0,0};
+    for(int p=0;p<2;++p) {
+        auto& f=world.players[p];
         control(f);
+        if(f.move<0&&!prior_stun[p]&&!faultless_requested(f)) moved[p]=max(0,(f.x-prior_x[p])*f.facing);
         if(f.y>0) {
             f.y+=f.vy; f.vy-=85;
             if(f.y<=0) { f.y=f.vy=0; f.move=-1; f.contact=f.hit_done=0; }
@@ -268,6 +307,16 @@ void Simulation::step(int raw0,int raw1) {
             else a.x=clamp(a.x-sign*overlap,2800,97200);
         }
     }
+    // Only actual voluntary approach earns movement meter: no wall/pushbox or knockback farming.
+    for(int p=0;p<2;++p) {
+        auto& f=world.players[p];
+        int distance=min(moved[p],max(0,(f.x-prior_x[p])*f.facing));
+        if(distance>0) {
+            int amount=distance*rules.move_gain+f.movement_remainder;
+            gain_momentum(f,amount/100);
+            f.movement_remainder=amount%100;
+        }
+    }
     int hits[2]={-1,-1}; bool blocked[2]={false,false};
     for(int p=0;p<2;++p) {
         Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
@@ -282,11 +331,28 @@ void Simulation::step(int raw0,int raw1) {
         f.hit_done=f.contact=1;
         f.event=blocked[p]?2:1;
         f.combo=blocked[p]?0:((prior_stun[1-p]&&!prior_guard[1-p])?f.combo+1:1);
-        other.health=max(0,other.health-(blocked[p]?0:m.v[Damage]));
+        bool fd=blocked[p]&&other.faultless;
+        int damage=blocked[p]?(fd?0:m.v[ChipDamage]):m.v[Damage];
+        other.health=max(0,other.health-damage);
+        if(!blocked[p]) other.faultless=0;
+        gain_momentum(f,m.v[Damage]*(blocked[p]?rules.block_attack_gain:rules.attack_gain));
+        if(!fd) gain_momentum(other,m.v[Damage]*(blocked[p]?rules.guard_gain:rules.damage_gain));
+        if(fd) other.momentum=max(0,other.momentum-rules.fd_block_cost-m.v[Damage]*rules.fd_damage_cost);
         other.stun=m.v[blocked[p]?Blockstun:Hitstun];
         other.guarding=blocked[p];
+        other.block_age=0;
+        other.guard_break=blocked[p]&&m.v[GuardBreak]&&other.stun>0;
+        // Count the remaining active/recovery ticks AFTER this contact tick.
+        int remaining=m.v[Startup]-1+m.v[Active]+m.v[Recovery]-(f.age+1);
+        other.block_advantage=blocked[p]?m.v[Blockstun]-remaining:0;
+        other.block_reaction=!blocked[p]?NoBlock:other.guard_break?BrokenGuard:
+            other.block_advantage>0?PressureBlock:StableBlock;
         other.move=-1; other.dash=0;
-        other.x=clamp(other.x+f.facing*m.v[Pushback],2800,97200);
+        int push=m.v[Pushback]*(fd?rules.fd_push_percent:100)/100;
+        int old_x=other.x;
+        other.x=clamp(other.x+f.facing*push,2800,97200);
+        // FD still creates space at the corner by transferring blocked displacement to the attacker.
+        if(fd) f.x=clamp(f.x-f.facing*(push-abs(other.x-old_x)),2800,97200);
         world.hitstop=max(world.hitstop,m.v[Hitstop]);
     }
     for(auto& f:world.players) if(f.move>=0) {
@@ -320,6 +386,12 @@ int Simulation::get(int player,int field) const {
         case 6:return f.stun; case 7:return f.guarding; case 8:return f.contact;
         case 9:return f.combo; case 10:return f.event; case 11:return f.last_move;
         case 12:return f.raw; case 13:return f.character; case 14:return f.simple;
+        case 15:return f.momentum; case 16:return f.faultless;
+        case 17:return f.block_reaction; case 18:return f.block_age;
+        case 19:return f.block_advantage; case 20:return f.guard_break;
+        // Eligibility contract for the future throw system. Ordinary blockstun
+        // protects against grabs; guard break deliberately does not.
+        case 21:return (f.guarding&&!f.guard_break)||(f.stun>0&&!f.guarding);
         default:return 0;
     }
 }
@@ -337,7 +409,7 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case Direction: low=1; high=9; break;
         case SimpleDirection: high=9; break;
         case Motion: if(v!=0&&v!=236&&v!=214&&v!=623) return 0; high=623; break;
-        case Air:case SpecialCancel:case JumpCancel:case WhiffCancel:case SelfCancel: high=1; break;
+        case Air:case SpecialCancel:case JumpCancel:case WhiffCancel:case SelfCancel:case GuardBreak: high=1; break;
         case Startup:case Active: low=1; high=120; break;
         case Recovery:case Hitstun:case Blockstun: high=180; break;
         case Damage: high=1000; break;
@@ -348,7 +420,7 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case Advance: low=-10000; high=10000; break;
         case NormalRoutes:case CommandRoutes: low=-1; high=31; break;
         case HitLevel: high=2; break;
-        case Reserved: high=0; break;
+        case ChipDamage: high=1000; break;
         default:return 0;
     }
     if(v<low||v>high) return 0;
@@ -356,13 +428,19 @@ int Simulation::move_set(int c,int m,int f,int v) {
     return 1;
 }
 int Simulation::rule_get(int f) const {
-    return f==0?rules.buffer:f==1?rules.motion_window:f==2?rules.motion_gap:-1;
+    const int values[RULE_COUNT]={rules.buffer,rules.motion_window,rules.motion_gap,
+        rules.move_gain,rules.attack_gain,rules.block_attack_gain,rules.damage_gain,rules.guard_gain,
+        rules.special_gain,rules.fd_drain,rules.fd_block_cost,rules.fd_damage_cost,rules.fd_push_percent};
+    return f>=0&&f<RULE_COUNT?values[f]:-1;
 }
 int Simulation::rule_set(int f,int v) {
-    if(f==0&&v>=1&&v<=12) rules.buffer=v;
-    else if(f==1&&v>=3&&v<=30) rules.motion_window=v;
-    else if(f==2&&v>=1&&v<=12) rules.motion_gap=v;
-    else return 0;
+    const int low[RULE_COUNT]={1,3,1,0,0,0,0,0,0,1,0,0,100};
+    const int high[RULE_COUNT]={12,30,12,100,100,100,100,100,10000,1000,10000,100,1000};
+    if(f<0||f>=RULE_COUNT||v<low[f]||v>high[f]) return 0;
+    int* values[RULE_COUNT]={&rules.buffer,&rules.motion_window,&rules.motion_gap,
+        &rules.move_gain,&rules.attack_gain,&rules.block_attack_gain,&rules.damage_gain,&rules.guard_gain,
+        &rules.special_gain,&rules.fd_drain,&rules.fd_block_cost,&rules.fd_damage_cost,&rules.fd_push_percent};
+    *values[f]=v;
     return 1;
 }
 int Simulation::can_cancel(int c,int from,int to,int contact) const {

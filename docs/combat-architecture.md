@@ -2,13 +2,13 @@
 
 ## Native Godot runtime
 
-`core/fight.h` and `core/fight.cpp` implement an engine-independent C++17 simulation. Each `fight::Simulation` owns its state, six fighters' move definitions and input rules. Each step advances one 60 Hz tick using fixed-size structures and integer arithmetic. The core does not use engine objects, heap allocation, clocks, physics, rendering or network calls.
+`core/fight.h` and `core/fight.cpp` implement an engine-independent C++17 simulation. Each `fight::Simulation` owns its state, six fighters' move definitions and input/Momentum rules. Each step advances one 60 Hz tick using fixed-size structures and integer arithmetic. The core does not use engine objects, heap allocation, clocks, physics, rendering or network calls.
 
 `native/fight_extension.cpp` exposes independent simulations as Godot `FightCore` objects through GDExtension. The minimal godot-cpp build is pinned to the 4.5 stable revision `e83fd0904c13356ed1d4c3d09f8bb9132bdc6b77` and verified with Godot 4.6.3. Linux and Windows x86-64 libraries compile the same core. Editor/debug builds use template-debug extensions; release exports use separately compiled template-release extensions. Matching targets matters: these godot-cpp bindings use different allocator padding in debug and release engines.
 
 Godot's `CombatModel` wraps data validation and persistence. `main.gd` handles input, training, selection, move editing and scheduling. `arena.gd`, `FighterArt` and `FighterPreview` present generated PNG regions. They do not decide hits or movement. Physics processing schedules fixed ticks; Godot collision physics is not authoritative.
 
-State includes position, velocity, facing, health, move age, contact/hit flags, dash/stun state, previous input and 64 history samples per player. Snapshots copy all of `State`, including consumed presses. Configuration stays immutable during a network match. The local 32-bit integer snapshot ABI is not a network serialization format. Configuration schema/core version is 2; version-1 files migrate the first two fighters into the six-character configuration. The C ABI/default instance remains for native tests and the archived WebAssembly harness.
+State includes position, velocity, facing, health, move age, contact/hit flags, dash/stun state, Momentum, FD status, movement gain remainder, block reaction/age/advantage, guard break, previous input and 64 history samples per player. Snapshots copy all of `State`, including consumed presses. Configuration stays immutable during a network match. The local 32-bit integer snapshot ABI is not a network serialization format. Configuration schema/core version is 3; version-1/2 files preserve edits while adding defensive fields/Momentum rates and any missing fighters. The C ABI/default instance remains for native tests and the archived WebAssembly harness.
 
 ## Rollback and direct connections
 
@@ -20,11 +20,11 @@ No browser relay is involved. Direct host/join requires a reachable address/UDP 
 
 ## Move data and art
 
-Each of six fighters has 22 stable provisional move slots. Fields describe buttons/categories, motions/directions, ground/air eligibility, timing, damage, stun, hitstop, advance, rectangular hitboxes, cancels, guard levels and simple mappings. Slot IDs such as `236P` do not change when inputs are remapped. Slot-layout changes need a schema change. Imports validate a complete candidate configuration before committing it atomically.
+Each of six fighters has 22 stable provisional move slots. Fields describe buttons/categories, motions/directions, ground/air eligibility, timing, damage, stun, hitstop, advance, rectangular hitboxes, cancels, guard levels, chip damage, guard break and simple mappings. Slot IDs such as `236P` do not change when inputs are remapped. Slot-layout changes need a schema change. Imports validate a complete candidate configuration before committing it atomically.
 
 Unified gatlings live in one C++ predicate. `normalRoutes` and `commandRoutes` use -1 for shared defaults or a five-button override mask. Every attack's same-button command-normal route precedes those overrides; self/whiff restrictions still apply. Special and jump cancels have explicit flags.
 
-Art regions, foot pivots and body scale are recorded in `godot/assets/fighters/manifest.json`. Windups display before the first active tick; active poses display during active ticks and their hitstop. Recovery currently returns to a ready pose while gameplay recovery continues. Crouching, command, special and air slots temporarily reuse button artwork. Pose changes derive from current state, so rollback corrects them automatically. Art never enters simulation hashes. [Sprite production](sprite-production.md) defines the planned consistency pipeline and five-stage animation contract.
+Art regions, foot pivots and body scale are recorded in `godot/assets/fighters/manifest.json`. Windups display before the first active tick; active poses display during active ticks and their hitstop. Recovery currently returns to a ready pose while gameplay recovery continues. Crouching, command, special and air slots temporarily reuse button artwork. Pose changes derive from current state, so rollback corrects them automatically. Block clips select stable/pressure/broken poses from actual contact advantage and the guard-break flag. Their two frames advance after four unfrozen blockstun ticks; all selection state is restored with rollback. The `throwInvulnerable` getter exposes eligibility for the future grab system. Art never enters simulation hashes. [Sprite production](sprite-production.md) defines the planned consistency pipeline and five-stage animation contract.
 
 ## PC, PS5 and future 3D
 
@@ -34,6 +34,6 @@ PS5 requires Sony approval/SDK access and compatible console port tooling, typic
 
 ## Verification
 
-`bash scripts/test-godot.sh` checks combat rules, all six fighters' basic buttons, exact 1,200-frame native/Godot parity, save migration and atomic imports, delayed/jittered rollback, artwork metadata/alpha, actual keyboard UI paths, windup-to-active switching for 30 basic buttons, sprite review and two separate ENet processes selecting Shark/Fillet. Script errors fail the runner even if Godot exits zero. Native screenshots validate rendering and layout.
+`bash scripts/test-godot.sh` checks combat rules, all six fighters' basic buttons, Momentum/FD/guard-break rules, exact 1,200-frame native/Godot parity, save migration and atomic imports, delayed/jittered rollback, artwork metadata/alpha, actual keyboard UI paths, windup-to-active switching for 30 basic buttons, both frames of all 18 defensive clips, sprite review and two separate ENet processes selecting Shark/Fillet. Script errors fail the runner even if Godot exits zero. Native screenshots validate rendering and layout.
 
 The archived browser harness remains useful for native/WebAssembly determinism and relay regression tests via `npm test`. It is no longer the primary gameplay client. Windows export validation does not replace Windows hardware playtesting.

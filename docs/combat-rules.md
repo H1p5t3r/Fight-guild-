@@ -25,11 +25,15 @@ These are useful prototype defaults, not additional approved design requirements
 - A move cannot cancel into itself unless its self-cancel setting is enabled. Different command normals can form cycles when authored to do so; no hidden once-per-combo restriction has been added.
 - Command normals use the unified normal rules for their outgoing routes. The editor can override normal/command route masks, special cancelability, and jump cancelability.
 - Jump cancels require a grounded fighter. Air moves are separate definitions. Attack routes still require the target's ground/air condition.
-- Walking, a single jump, grounded dash, ground blocking, simple pushboxes, hitstop, hitstun, blockstun, health, one 99-count round, and reset are present. There is no air blocking, throw, dash invulnerability, meter, damage scaling, or juggle system yet.
+- Walking, a single jump, grounded dash, ground/air blocking, simple pushboxes, hitstop, hitstun, blockstun, health, one 99-count round, and reset are present. Momentum and Faultless Defense are present. There is no throw, dash invulnerability, damage scaling or juggle system yet.
 - All starter attacks are mid attacks. The editor can assign low/overhead guard levels for later experiments; no universal overhead or anti-air kit has been selected.
 - Simplified execution has no damage penalty, and traditional inputs remain available when enabled. Holding the modifier reserves mapped inputs; unmapped modifier chords do not become ordinary attacks. Up with the modifier is a special input direction, not a jump request.
 - Default motions: 236P, 236S, 623Hs. Default command normals: 6P, 6K, 6S, 6Hs, 6D. There are standing and crouching P/K/S/Hs, a grounded Drive starter, and five provisional air attacks.
 - All six fighters have 22 playable slots. Anvil is slower and slightly stronger; Hammer advances on specials/Drive. Tapper/Shark have slightly longer reach; Shark/Fillet move faster and their Drive starters advance. Smoke uses the shared baseline with a stationary Drive attack. These are testing values: no shield armor, smoke status, hook pull or bleed mechanic is implied by the art.
+
+## Momentum and defense
+
+Momentum follows the requested Strive-inspired resource direction with FD as its only spending option. Negative Penalty is explicitly deferred. The editor controls chip damage, guard break and provisional meter rates. Block reactions distinguish negative/even and positive attacker advantage; guard break overrides them and removes backward dash buffering and blockstun grab immunity. See [Momentum and defense](momentum-defense.md) for exact implemented behavior and remaining parity/throw work.
 
 ## Input recognition
 
@@ -49,4 +53,4 @@ Startup includes the first active frame: startup 5 means the attack becomes acti
 
 Positions use hundredths of a pixel. The editor displays hitbox, pushback, and advance values in pixels and converts them to integers. The hitbox is a rectangle from 12 pixels in front of the fighter to its authored reach, with a bottom offset and height. A single hit per move instance is supported.
 
-Move-data changes reset the local simulation. Save locally persists the complete set in Godot's user data directory; JSON export/import is portable. Invalid imports leave the prior set unchanged. Schema-1 saves migrate old edits and add defaults for the other four fighters. Restore defaults changes the working set; saving afterward replaces the saved set. Online peers require matching data and lock editing during play.
+Move-data changes reset the local simulation. Save locally persists the complete set in Godot's user data directory; JSON export/import is portable. Invalid imports leave the prior set unchanged. Schema-1/2 saves migrate old edits, supply new defensive/meter defaults and add any missing fighters. Restore defaults changes the working set; saving afterward replaces the saved set. Online peers require matching data and lock editing during play.

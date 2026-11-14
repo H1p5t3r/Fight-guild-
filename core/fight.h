@@ -3,25 +3,37 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 2, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 22, FIELD_COUNT = 27;
+constexpr int VERSION = 3, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 22, FIELD_COUNT = 28;
+constexpr int MOMENTUM_MAX = 10000, INPUT_MASK = 4095;
 enum Input { Left=1, Right=2, Down=4, Up=8, P=16, K=32, S=64, Hs=128, D=256,
-             Dash=512, Simple=1024 };
+             Dash=512, Simple=1024, Faultless=2048 };
 enum Kind { Normal, Command, Special, Drive };
 enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery,
              Damage, Hitstun, Blockstun, Hitstop, Pushback, Reach, Bottom, Height,
              SpecialCancel, JumpCancel, WhiffCancel, SelfCancel, Advance,
              SimpleDirection, SimpleButton, NormalRoutes, CommandRoutes,
-             HitLevel, Reserved };
+             HitLevel, ChipDamage, GuardBreak };
+enum BlockReaction { NoBlock, StableBlock, PressureBlock, BrokenGuard };
+enum Rule { ButtonBuffer, MotionWindow, MotionGap, MoveGain, AttackGain,
+            BlockAttackGain, DamageGain, GuardGain, SpecialGain, FDDrain,
+            FDBlockCost, FDDamageCost, FDPushPercent, RULE_COUNT };
 struct Move { int v[FIELD_COUNT]; };
 struct Sample { int frame, direction, pressed, held, consumed; };
 struct Fighter {
     int character, simple, x, y, vy, facing, health;
     int move, age, stun, guarding, contact, hit_done, dash, previous, raw;
     int combo, event, last_move;
+    int momentum, faultless, movement_remainder;
+    int block_reaction, block_age, block_advantage, guard_break;
     Sample history[HISTORY];
 };
 struct State { int frame, remaining, hitstop, winner; Fighter players[2]; };
-struct Rules { int buffer=5, motion_window=20, motion_gap=8; };
+struct Rules {
+    int buffer=5, motion_window=20, motion_gap=8;
+    // Meter is hundredths of one percent. Rates are provisional, editable tuning.
+    int move_gain=2, attack_gain=8, block_attack_gain=4, damage_gain=4, guard_gain=3;
+    int special_gain=100, fd_drain=10, fd_block_cost=100, fd_damage_cost=4, fd_push_percent=300;
+};
 // Each engine adapter owns a simulation; multiple matches never share state.
 class Simulation {
 public:
@@ -46,6 +58,8 @@ private:
     void control(Fighter& f);
     bool overlaps(const Fighter& a, const Fighter& b) const;
     bool blocks(const Fighter& attacker, const Fighter& defender, bool was_stunned) const;
+    void gain_momentum(Fighter& fighter, int amount);
+    void update_faultless(Fighter& fighter);
 };
 // Compatibility instance for the original C ABI and native test runner.
 extern Simulation default_simulation;

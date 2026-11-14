@@ -6,7 +6,7 @@ For the editable project ZIP, import `godot/project.godot` into **Godot 4.6.3**,
 
 ## First match
 
-Choose Anvil, Hammer, Smoke, Tapper, Shark or Fillet. Each player independently chooses simplified controls. Enter training, walk toward the opponent and try the five buttons. The dummy can stand, guard, crouch guard or run a practice sequence. Switch to Local versus for a second player.
+Choose Anvil, Hammer, Smoke, Tapper, Shark or Fillet. Each player independently chooses simplified controls. Enter training, walk toward the opponent and try the five buttons. The dummy can stand, guard, crouch guard run a practice sequence or use Faultless Defense. Switch to Local versus for a second player.
 
 | Action | Player 1 keyboard | Player 2 keyboard | Gamepad |
 | --- | --- | --- | --- |
@@ -18,14 +18,19 @@ Choose Anvil, Hammer, Smoke, Tapper, Shark or Fillet. Each player independently 
 | D | O | Numpad 6 | Right shoulder |
 | Dash macro | Space | Numpad 0 | Left shoulder |
 | Simple modifier | Left Shift | Numpad + | Left trigger |
+| Faultless Defense (hold away too) | Q | Numpad Enter | Right trigger |
 
 With simple controls enabled, hold the modifier and use forward+P, down+S or up+Hs. Directions are relative to facing. Traditional 236P, 236S and 623Hs still work. Buttons also have crouching, forward command-normal and air variants. These kits are provisional.
+
+Hold back + any two of P/K/S/Hs as an alternative FD chord. Momentum builds through approaching, attacking and defending; FD is its only spend. Select **Start Momentum: 50%** in training to try it immediately. FD prevents chip damage and adds pushback. Empty meter falls back to ordinary guard. Negative Penalty is deferred.
+
+Block animations distinguish negative/even attacks, plus-on-block pressure and guard break. Enable **Guard break on block** for a move to test its exposed stance: backdash inputs during the stun are discarded and blockstun grab protection is absent. Throws themselves are future work. See [Momentum and defense](momentum-defense.md).
 
 ## Iterate
 
 - **Pause / +1 frame:** inspect startup, active frames, hitstop and recovery. Generated windup and active images follow simulation timing.
-- **Move editor:** choose a fighter/move, adjust values, then Apply & reset. Save locally writes the complete six-fighter set. Export/import JSON for a portable backup. Old two-fighter schema-1 saves retain Anvil/Hammer edits and supply defaults for the others.
-- **Sprite review:** compare windup and active poses at the same body scale. Some details/effects still need consistency cleanup; complete animation sequences are not present.
+- **Move editor:** choose a fighter/move, adjust values, then Apply & reset. Save locally writes the complete six-fighter set. Export/import JSON for a portable backup. Old schema-1/2 saves retain edits and supply defaults for new fields/fighters.
+- **Sprite review:** compare windup/active or any of the three defensive contact/settle pairs at the same body scale. Some details/effects still need consistency cleanup; complete animation sequences are not present.
 - **Hitboxes:** overlays show authoritative collision shapes. Sprite weapons and smears do not decide hits.
 
 Saves use Godot's `user://` directory: normally `%APPDATA%/Godot/app_userdata/Fight Guild` on Windows and `~/.local/share/godot/app_userdata/Fight Guild` on Linux. The cloud launcher uses writable directories under `FIGHT_TOOLS`. Export move JSON before moving between machines.
@@ -40,4 +45,4 @@ This direct ENet connection uses rollback, two frames of input delay, bounded pr
 
 Linux native rendering, keyboard input, all 30 basic buttons, editing, sprite loading, rollback and two independent UDP peers are tested. Windows is cross-compiled/exported; Windows gameplay and physical controllers need hardware playtesting. PS5 requires approved console access and a compatible Godot port provider; no PS5 build is included.
 
-The buffer is an original configurable implementation, not verified Strive parity. Character mechanics, distinct move animations, meter, throws, universal overheads and dedicated anti-air rules remain future work. See the source project's `docs/backlog.md` and `docs/sprite-production.md`.
+The buffer is an original configurable implementation, not verified Strive parity. Character mechanics, distinct move animations, throws, universal overheads and dedicated anti-air rules remain future work. See the source project's `docs/backlog.md` and `docs/sprite-production.md`.
