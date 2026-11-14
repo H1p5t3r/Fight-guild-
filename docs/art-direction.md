@@ -1,0 +1,47 @@
+# Art direction
+
+## Target
+
+Faithful Guild Ball character identities translated into an Arc System Works / Guilty Gear Strive-inspired fighting-game visual language. The intended eventual presentation is stylized 3D with carefully authored anime shading.
+
+The generated images are visual concepts. They do not establish a working 3D shader, consistent model geometry, a rig, or finished game assets.
+
+## Feedback history
+
+1. Three initial directions explored painterly fantasy, graphic ink, and living miniatures.
+2. The user chose the graphic ink direction as closest, but asked for a stronger ArcSys influence.
+3. A more saturated cel-shaded fight scene was judged very close stylistically. Missing 3D form and inaccurate characters remained problems.
+4. The user supplied six custom character reference sheets from another project to ground identity and costume.
+5. A subsequent volumetric Smoke/Hammer render study drifted toward conventional detailed fantasy rendering and was rejected as too far from ArcSys.
+6. The user requested remaking all six complete reference guides in the game's new style.
+7. The user required original miniature weapons. The current guides incorporate a reference-based equipment correction pass.
+
+The current six sheets remain candidates for review. Do not treat the latest generation as user approval.
+
+## Working visual rules
+
+- Strong silhouettes and distinct body types across the roster.
+- Sharp, expressive faces; graphic grouped hair; exaggerated hands, boots, poses, and perspective where useful.
+- Coherent volume with crisp two- or three-tone shadow shapes and selective outlines.
+- Broad readable clothing and equipment shapes. Simplify repetitive buckles, scratches, and fine texture.
+- Clear guild palette accents over recognizable clothing and materials.
+- Preserve identifying faces, hair, equipment, and signature garments from supplied references.
+- Use miniature sources as the authority for weapon silhouettes where earlier sheets differ.
+- Keep effects readable at gameplay distance. Smoke's clouds should expose timing and position without hiding fighters.
+
+Avoid drifting back into parchment illustrations, etched hatching, realistic metal gradients, miniature photography, or generic fantasy redesigns.
+
+## Reference guide contents
+
+Each guide includes a hero pose, front/side/back studies, expressions, equipment, palette, and combat pose thumbnails. Generated side views and proportions still require consistency checks before modeling; some views are closer to three-quarter than strict orthographic.
+
+## Review checklist for the next art pass
+
+- Is the character recognizable from the supplied identity reference?
+- Are the original weapon silhouette, grip, proportions, and handedness consistent across views?
+- Do body proportions, garment construction, and asymmetrical details remain consistent?
+- Are front, side, and back views usable as true modeling references?
+- Does the shading suggest solid volume while retaining the intended anime graphic treatment?
+- Are the roster's silhouettes and combat poses sufficiently distinct?
+
+Keep superseded images in `art/archive/`; promote changes into `art/characters/` deliberately and update the asset manifest.

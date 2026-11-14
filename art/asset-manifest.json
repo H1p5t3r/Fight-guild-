@@ -1,0 +1,217 @@
+{
+  "status": "Concept candidates; not production-approved",
+  "assets": [
+    {
+      "path": "art/archive/01-painted-steel.png",
+      "bytes": 2782960,
+      "sha256": "7274168c2f40b182eb823fd41a25ff2baf00ade26d5e9c4bfbbf1ef8d9df6a97",
+      "dimensions": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "art/archive/02-black-ink.png",
+      "bytes": 3167351,
+      "sha256": "7efdc451d01d0f097a1686918f16bebd63b738b3646dd1a85877099e936eb331",
+      "dimensions": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "art/archive/03-living-miniatures.png",
+      "bytes": 2573280,
+      "sha256": "685362ecbb77e77ac3c47132ce9bd1ce430e74d1e68b486685d7a9248343d781",
+      "dimensions": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "art/archive/04-cel-shaded-combat.png",
+      "bytes": 2343735,
+      "sha256": "dc054cf7c233542574191e124c8181f46f1278deba3f749446605cda2660d80c",
+      "dimensions": [
+        1672,
+        941
+      ]
+    },
+    {
+      "path": "art/archive/05-smoke-hammer-render-study.png",
+      "bytes": 2335688,
+      "sha256": "eaaaa1803c1ffa601734285357c9edd7b47a18d200daf028daf0ffc08d2bf597",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/06-tapper-before-weapon-check.png",
+      "bytes": 2363209,
+      "sha256": "7ec7af7d6f4472740a6d1deb032b0e0e0da810140a9f903274ee84688b9febae",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/07-shark-before-weapon-check.png",
+      "bytes": 2494802,
+      "sha256": "c562ad53cca27e2d81633976ac1518d170104fbad12c9dc50261ff1b17b1f0df",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/08-anvil-before-weapon-check.png",
+      "bytes": 2374730,
+      "sha256": "b0cb72062dea677876878e2f610b19e9abdb5fb764c780a211a877883e5008ed",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/09-fillet-before-weapon-check.png",
+      "bytes": 2344051,
+      "sha256": "d0223214b2e044815efa79ed035d53659e8d4bda602c6395c34946a3a12319fc",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/characters/anvil.png",
+      "bytes": 2437315,
+      "sha256": "8c013022712c56fe6892b0c1280de62c0374d45f5fc0250acf7ee5855c3a67c0",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/characters/fillet.png",
+      "bytes": 2239917,
+      "sha256": "27274fa80fa64e53f6b00d799940292c6dc991b384d2635dbfe17926419ba060",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/characters/hammer.png",
+      "bytes": 2163229,
+      "sha256": "8b12bad77f8fdda6c6a86c3aaf002f075286fcd356225cc9208b156353dc2b10",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/characters/shark.png",
+      "bytes": 2519360,
+      "sha256": "3de67bf2650fc8476738cb9233730e9cfb0d07346a0ff757a688a3fb060de540",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/characters/smoke.png",
+      "bytes": 2291656,
+      "sha256": "9177e7385a36648510624792b9d7f786ee10dee4c1cbc5b3fb8a633661316eed",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/characters/tapper.png",
+      "bytes": 2381123,
+      "sha256": "0e45b0461343a61390f38ee6003d4d6fd90c26a7edddfb302c2f1b1acc8f775e",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "exports/character-reference-guides.pdf",
+      "bytes": 1873916,
+      "sha256": "13348c301377022be1754afebb4a6657e6a5e6ae76af4b6f120ab3e185d5f125"
+    },
+    {
+      "path": "references/miniatures/anvil-mini.png",
+      "bytes": 988133,
+      "sha256": "669c3c8efae6d517fdc18b289b1aeb082d59abf14d60ddc47602ae228338a553",
+      "dimensions": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "path": "references/miniatures/fillet-mini.png",
+      "bytes": 385189,
+      "sha256": "3b4826c150d0c8207de7db2ee0ad2bbcbc4848d260cba0514d694fe304af4ed6",
+      "dimensions": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "path": "references/miniatures/fillet-original-large.jpg",
+      "bytes": 326450,
+      "sha256": "8e7d385150185c90393dca113c48cf6bb8756d94ad5f70865e8512b84b5cf6e6",
+      "dimensions": [
+        1500,
+        1500
+      ]
+    },
+    {
+      "path": "references/miniatures/fillet-original.jpg",
+      "bytes": 20840,
+      "sha256": "54feb0b9f40fe59b9b9ec8ed5af858115ad95bb4975f5d9b818fdc42ae2373cc",
+      "dimensions": [
+        240,
+        240
+      ]
+    },
+    {
+      "path": "references/miniatures/hammer-mini.png",
+      "bytes": 985835,
+      "sha256": "3f9fc4292dfa3c18e5c0b982f97a9c2c3a921337d7eb96f59e19cfe40662c48f",
+      "dimensions": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "path": "references/miniatures/shark-mini.png",
+      "bytes": 471779,
+      "sha256": "aac8191baf7673ebb674103b48f72dfa74a647c3aca2cf2919b05882defe6166",
+      "dimensions": [
+        1500,
+        1500
+      ]
+    },
+    {
+      "path": "references/miniatures/smoke-mini.png",
+      "bytes": 1021782,
+      "sha256": "b915276647cb5f1cb7a69806d253a26a01496249fe04c0f3d16a207f959a295d",
+      "dimensions": [
+        1500,
+        1500
+      ]
+    },
+    {
+      "path": "references/miniatures/tapper-mini.png",
+      "bytes": 196034,
+      "sha256": "7f3ea014c89c67a2791eee4f2aa7806e5ce462a76eb048f42f3ca8845be835dd",
+      "dimensions": [
+        700,
+        700
+      ]
+    }
+  ]
+}

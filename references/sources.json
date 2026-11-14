@@ -1,0 +1,13 @@
+{
+  "status": "Concept reference guides for review; not 3D assets or validated modeling blueprints.",
+  "style": "Arc System Works / Guilty Gear Strive-inspired cel-shaded fighting game",
+  "character_identity": "User-supplied reference designs",
+  "weapon_sources": {
+    "tapper": "https://steamforged.com/products/guild-ball-the-brewers-guild-a-drop-of-old-jakes",
+    "shark": "https://steamforged.com/products/the-fishermens-guild-the-changing-tide",
+    "anvil": "https://steamforged.com/products/guild-ball-the-blacksmiths-forged-from-steel",
+    "smoke": "https://steamforged.com/products/guild-ball-alchemists-new-age-of-science",
+    "hammer": "https://steamforged.com/products/guild-ball-masons-punshing-march",
+    "fillet": "https://www.nobleknight.com/P/2147623700/Fillet"
+  }
+}
