@@ -1,39 +1,39 @@
 # Combat lab architecture
 
-## Runtime boundary
+## Native Godot runtime
 
-`core/fight.h` and `core/fight.cpp` contain the combat simulation. It uses fixed-size structures and integer arithmetic, no engine objects, heap allocation, clocks, randomness, physics engine, rendering, or network calls. One `step(input0, input1)` advances one 60 Hz simulation tick. Native tests compile with a C++17 compiler; the browser compiles exactly the same source to freestanding WebAssembly with Zig 0.14.1. The module has no imports or runtime glue dependency.
+`core/fight.h` and `core/fight.cpp` implement an engine-independent C++17 simulation. Each `fight::Simulation` owns its state, six fighters' move definitions and input rules. Each step advances one 60 Hz tick using fixed-size structures and integer arithmetic. The core does not use engine objects, heap allocation, clocks, physics, rendering or network calls.
 
-`web/engine.mjs` wraps the C ABI. `web/app.mjs` owns keyboard/gamepad sampling, rendering, UI, and editor persistence. `web/rollback.mjs` owns transport-independent input prediction and resimulation. `scripts/server.mjs` serves the files and relays room messages. The server does not determine combat results.
+`native/fight_extension.cpp` exposes independent simulations as Godot `FightCore` objects through GDExtension. The minimal godot-cpp build is pinned to the 4.5 stable revision `e83fd0904c13356ed1d4c3d09f8bb9132bdc6b77` and verified with Godot 4.6.3. Linux and Windows x86-64 libraries compile the same core. Editor/debug builds use template-debug extensions; release exports use separately compiled template-release extensions. Matching targets matters: these godot-cpp bindings use different allocator padding in debug and release engines.
 
-The simulation stores position, velocity, facing, health, move age, contact/hit flags, dash/stun state, prior input, and 64 input-history samples for both players. Move definitions and input rules are immutable during a match and separate from snapshots. The local snapshot copies all of `State`, including input histories and press consumption. Visual effects are derived from current state and do not affect combat.
+Godot's `CombatModel` wraps data validation and persistence. `main.gd` handles input, training, selection, move editing and scheduling. `arena.gd`, `FighterArt` and `FighterPreview` present generated PNG regions. They do not decide hits or movement. Physics processing schedules fixed ticks; Godot collision physics is not authoritative.
 
-The snapshot ABI uses 32-bit integers on little-endian native/Wasm targets. It is a local in-process format, not a network serialization format. Its version must change when layout or simulation contract changes. There is one world per native process or WebAssembly instance; a multi-match native host should wrap this in a per-match owner before integration.
+State includes position, velocity, facing, health, move age, contact/hit flags, dash/stun state, previous input and 64 history samples per player. Snapshots copy all of `State`, including consumed presses. Configuration stays immutable during a network match. The local 32-bit integer snapshot ABI is not a network serialization format. Configuration schema/core version is 2; version-1 files migrate the first two fighters into the six-character configuration. The C ABI/default instance remains for native tests and the archived WebAssembly harness.
 
-## Rollback and rooms
+## Rollback and direct connections
 
-Each frame records state before stepping, the two inputs used, and the resulting checksum. Unknown input predicts the previous input. When late input differs, restore the preceding state and replay subsequent frames through the same core. Press edges are reconstructed from restored history, so held buttons do not become repeated new attacks.
+`RollbackSession` records state before each frame, inputs used and resulting checksum. Unknown remote input holds its previous value. When late input differs, the session restores and replays through the core. Press edges are reconstructed from restored history. It retains 240 frames, permits 12 predicted frames and stalls when prediction exceeds the confirmed input horizon.
 
-The default session retains 240 frames, permits at most 12 frames of prediction, and stalls when the confirmed input horizon is exceeded. Network matches use two frames of input delay. Actual input is immutable once received; conflicting packets, invalid input, and packets outside history stop the session. Out-of-order packets within history are supported. Checksums are compared only for frames whose entire input prefix is confirmed.
+`NativePeer` uses Godot ENet over UDP with reliable input messages and two frames of input delay. Hello negotiation compares versioned move-data fingerprints; both peers must complete the handshake. Each supplies their fighter/simple-input choice. Actual input is immutable once received. Checksums compare only completely confirmed input prefixes. Divergence, conflicting input or exhausted history ends the session. Reliable delivery can still cause stalls during loss and requires real-network measurement before production tuning.
 
-Room negotiation checks a versioned move-data fingerprint and exchanges fighter/simple-input choices. The fingerprint is a compatibility check, not authentication. Confirmed hashes detect divergent execution. Transport is WebSocket/TCP, useful for prototype validation and LAN iteration but susceptible to head-of-line blocking. There is no production matchmaking, account system, anti-cheat, reconnect, spectator mode, or platform network integration. Real Internet conditions and physical gamepad hardware still need playtesting.
+No browser relay is involved. Direct host/join requires a reachable address/UDP port. Authentication, matchmaking, NAT traversal, reconnect, spectators, platform services and production resilience remain future work. The data fingerprint checks compatibility, not authentication.
 
-## Move-data model
+## Move data and art
 
-Two provisional characters have 22 move slots each. Numeric fields cover button/category, direction/motion, ground/air state, timing, damage/stun/hitstop, movement, rectangular hitboxes, cancels, guard level, and simple mappings. Slots have stable IDs for this version; adding/removing slots requires a schema change. IDs such as `236P` identify slots, so remapping does not rename the ID.
+Each of six fighters has 22 stable provisional move slots. Fields describe buttons/categories, motions/directions, ground/air eligibility, timing, damage, stun, hitstop, advance, rectangular hitboxes, cancels, guard levels and simple mappings. Slot IDs such as `236P` do not change when inputs are remapped. Slot-layout changes need a schema change. Imports validate a complete candidate configuration before committing it atomically.
 
-Unified gatlings live in one C++ predicate. `normalRoutes` and `commandRoutes` use −1 for the shared default or a five-button mask for an override. The universal same-button command-normal route precedes those overrides; self/whiff restrictions still apply. Special and jump cancels have explicit flags.
+Unified gatlings live in one C++ predicate. `normalRoutes` and `commandRoutes` use -1 for shared defaults or a five-button override mask. Every attack's same-button command-normal route precedes those overrides; self/whiff restrictions still apply. Special and jump cancels have explicit flags.
 
-## Unreal and platform path
+Art regions, foot pivots and body scale are recorded in `godot/assets/fighters/manifest.json`. Windups display before the first active tick; active poses display during active ticks and their hitstop. Recovery currently returns to a ready pose while gameplay recovery continues. Crouching, command, special and air slots temporarily reuse button artwork. Pose changes derive from current state, so rollback corrects them automatically. Art never enters simulation hashes. [Sprite production](sprite-production.md) defines the planned consistency pipeline and five-stage animation contract.
 
-Unreal was recommended for the eventual PC/PS5 game, but it is not installed in the current cloud image. This iteration delivers a playable browser harness and portable native simulation. There is no Unreal project or PS5 build yet.
+## PC, PS5 and future 3D
 
-The next engine adapter should compile the same C++ core into an Unreal module, sample platform input into the same bitmasks, and feed a fixed-tick scheduler. Actor transforms, sprites, animation, cameras, audio, and effects should read simulation state. They must not drive authoritative hit detection or movement. Replace the browser renderer without translating combat rules into Blueprints. A later 3D model adapter should use the same state and data.
+Godot is the current engine. PC packages use its compatibility renderer. The future 3D presentation should also read simulation state: models, animation, cameras and effects must not drive authoritative movement or hits. The integer combat plane can remain unchanged.
 
-Before console work, obtain Sony developer/SDK access and Unreal console tooling. Validate determinism on the actual compiler/platform, introduce versioned protocol/build identifiers, replace the prototype relay with the chosen production transport, and measure rollback budgets on target hardware.
+PS5 requires Sony approval/SDK access and compatible console port tooling, typically through a licensed Godot console provider. This repository contains no PS5 SDK or export. Validate determinism on the console compiler and measure rollback budgets on hardware before production delivery.
 
-## Verification and next iteration
+## Verification
 
-Native checks exercise cancel policy, motion input, simple mode, hit/block/trade resolution, buffering, jump cancels, movement, KO, and replay. JavaScript tests compare a 1,200-frame native/Wasm trace, test latency/jitter correction and prediction bounds, validate atomic imports, and connect clients through the relay. Browser checks exercise gameplay, editing, persistence, controls, both room clients, the standalone artifact, and a narrow layout.
+`bash scripts/test-godot.sh` checks combat rules, all six fighters' basic buttons, exact 1,200-frame native/Godot parity, save migration and atomic imports, delayed/jittered rollback, artwork metadata/alpha, actual keyboard UI paths, windup-to-active switching for 30 basic buttons, sprite review and two separate ENet processes selecting Shark/Fillet. Script errors fail the runner even if Godot exits zero. Native screenshots validate rendering and layout.
 
-Next priorities are playtesting button feel and unified routes, measuring Strive input behavior against traces, designing character-specific Drive mechanics, and improving animation feedback. Production content, air-combat rules, throws/overheads/anti-airs, round/match flow, and console delivery remain separate milestones.
+The archived browser harness remains useful for native/WebAssembly determinism and relay regression tests via `npm test`. It is no longer the primary gameplay client. Windows export validation does not replace Windows hardware playtesting.

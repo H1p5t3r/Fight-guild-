@@ -34,7 +34,7 @@ Her neutral and defense, teleport restrictions, cloud activation timing, and def
 
 ## Implementation decisions
 
-- Target platforms: PC and PS5. The first executable prototype runs in a PC browser.
+- Target platforms: PC and PS5. The current executable prototype runs natively in Godot on PC.
 - Start with 2D sprites; later use 3D models on a 2D gameplay plane.
 - Five attack buttons: P, K, S, Hs, D, plus a dash macro and a simplified-input modifier.
 - Traditional motions are the original control design. Simple input mappings are per move, enabled independently at character select.
@@ -49,4 +49,4 @@ Her neutral and defense, teleport restrictions, cloud activation timing, and def
 - Unreal integration, console access, production online infrastructure, and the art/animation pipeline.
 - Final visual approval, orthographic model sheets, and animation specifications.
 
-The first combat lab uses portable C++ with a browser presentation layer. This enables immediate iteration while preserving the core for a future Unreal integration. Placeholder sprites and provisional Anvil/Hammer kits do not represent finished character designs.
+The current lab uses portable C++ through a Godot GDExtension, with generated 2D sprites for all six fighters. Each has playable basic buttons, windup/active poses and provisional move data. The simulation remains independent of presentation for eventual 3D models on the 2D plane. A repeatable sprite and future-character pipeline is tracked in the backlog.

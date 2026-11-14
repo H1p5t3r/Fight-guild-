@@ -6,4 +6,6 @@ export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$fight_tools/cache}"
 export XDG_DATA_HOME="${XDG_DATA_HOME:-$fight_tools/data}"
 export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$fight_tools/config}"
 mkdir -p "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$XDG_CONFIG_HOME"
-exec godot --path godot "$@"
+fight_godot="${FIGHT_GODOT:-godot}"
+if [[ -z "${FIGHT_GODOT:-}" && -x "$fight_tools/godot/godot" ]]; then fight_godot="$fight_tools/godot/godot"; fi
+exec "$fight_godot" --path godot "$@"

@@ -53,6 +53,12 @@ func _ready() -> void:
 	populate_editor()
 	if not OS.get_cmdline_user_args().has("--test"):
 		selection_dialog.popup_centered(Vector2i(660, 600))
+	if OS.get_cmdline_user_args().has("--verify-build"):
+		call_deferred("verify_build")
+
+func verify_build() -> void:
+	var verification = load("res://scripts/build_verification.gd").new()
+	await verification.run(get_tree(), self)
 
 func box(color: Color, border: Color = Color("39444d")) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()

@@ -1,48 +1,51 @@
 # Fight Guild
 
-A Guild Ball character-based 1v1 fighting game concept, with **Guilty Gear Strive** as the closest gameplay and visual reference.
+A native **Godot 4.6.3** fighting-game lab for iterating toward a PC/PS5 game. The PC build includes **Anvil, Hammer, Smoke, Tapper, Shark and Fillet**, generated sprites, all five basic **P / K / S / Hs / D** buttons, unified gatlings, a move editor and experimental direct rollback multiplayer.
 
-The project now has an initial **playable combat lab** alongside its concept art. The ball and sports mechanics are excluded. The starting roster is **Anvil, Smoke, Tapper, Shark, Fillet, and Hammer**; the lab uses original placeholder sprites and provisional kits for Anvil and Hammer.
+Each fighter has matching **windup and active** pose studies plus movement/defense poses. Open **Sprite review** to compare actions at the same scale. These are provisional kits and images. The [sprite production contract](docs/sprite-production.md) and [backlog](docs/backlog.md) cover consistent palettes, silhouettes, smear shapes, future characters and eventual windup → active → impact → follow-through → recovery sequences.
 
-## Play the combat lab
+## Play or edit
 
-Build once, then open `build/FightGuild.html` in a current desktop Chrome or Edge browser. This standalone file includes the C++ combat core as WebAssembly and works without a server for local training, local versus, move editing, and simulated rollback checks.
+Download the Windows/Linux ZIP from this branch's successful GitHub Actions artifacts, extract the whole folder and run its executable. For the editable project archive, import `godot/project.godot` in Godot 4.6.3. [Native play guide](docs/play-native.md) covers controls, saves, editing and direct online play.
 
-For development on Linux or WSL, with Node 22+, Python 3, and a C++17 compiler:
+- **Player 1:** WASD; J/K/L/I/O = P/K/S/Hs/D; Space = dash; left Shift = simple modifier.
+- **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = dash; numpad + = modifier.
+- Choose simplified inputs independently at fighter select. Traditional motions stay available.
+- Edit any fighter, Apply & reset, then Save locally or export JSON. Old two-fighter saves preserve Anvil/Hammer edits during migration.
+- Online: direct ENet/UDP host and join, default port 7000. Both players use Player 1 controls locally. Matching move data is required.
+
+## Develop on Linux
+
+Needs Git, curl, Python 3 with pip, a C++17 compiler and standard Linux Godot runtime libraries. Setup installs a pinned editor if needed, SCons and godot-cpp bindings in `FIGHT_TOOLS`, then builds and tests. The cloud default is `/workspace/.fight-guild-tools`; elsewhere set `FIGHT_TOOLS` to an absolute writable path outside the checkout.
 
 ```bash
 bash scripts/setup.sh
-npm start
+bash scripts/godot.sh --editor
+# Or launch the game directly:
+bash scripts/godot.sh
 ```
 
-The development server listens on port 8080 on the local machine. `npm run build` rebuilds the native tests, WebAssembly core, and standalone HTML. Set `FIGHT_TOOLS` to an absolute writable tools directory outside this checkout if `/workspace` is unavailable. Setup installs the pinned Zig compiler there. An installed `zig` can also be used; Zig 0.14.1 is the verified version.
+After C++ changes, run `bash scripts/build-godot.sh`. GDScript/data/art changes do not require recompiling the extension. Validate with `bash scripts/test-godot.sh`.
 
-- **Player 1:** WASD movement; J/K/L/I/O = P/K/S/Hs/D; Space = dash; left Shift = simplified-input modifier.
-- **Player 2:** arrow movement; numpad 1/2/3/5/6 = P/K/S/Hs/D; numpad 0 = dash; numpad + = modifier.
-- Standard gamepads are supported. See **Controls** in the lab for the mapping. Click the arena after editing to return keyboard focus to gameplay.
-- Choose simplified inputs independently at fighter select. Traditional motions remain available. The initial shortcuts are modifier + forward/P, down/S, and up/Hs; direction is relative to facing.
-- The move editor changes timing, damage, hitboxes, input mappings, and cancel options. **Apply & reset** tests changes immediately. **Save locally** persists in that browser; export JSON for a portable backup. Browser storage for files opened from disk varies, so keep exported backups.
-
-## Validation
+To export, install templates and build the Windows library with MinGW-w64 (setup builds the Linux library):
 
 ```bash
-npm test
-npm run test:browser
+bash scripts/install-godot.sh --templates
+bash scripts/build-godot.sh target=template_release
+bash scripts/build-godot.sh platform=windows
+bash scripts/build-godot.sh platform=windows target=template_release
+bash scripts/export-godot.sh
 ```
 
-The first command builds and tests native C++, compares every frame of a native/WebAssembly trace, tests rollback under latency and jitter, validates move imports, and exercises two clients through the room relay. The browser smoke suite requires Chromium (`CHROMIUM_PATH` can select it); otherwise install Playwright's browser with `npx playwright install chromium`. Run `npm run build` before the browser suite to refresh the standalone artifact.
+`build/` receives Windows and Linux ZIPs plus an editable Godot project ZIP containing available extension binaries. `bash scripts/export-godot.sh Linux` packages only Linux. `mingw_prefix=/absolute/toolchain/prefix` selects a relocated MinGW toolchain. The template download is approximately 1.2 GB; only four PC templates are installed.
 
-## Experimental online rooms
+## Implementation and limits
 
-Run the repository server for room matches; the standalone HTML provides local play only. Two browser clients opening the same server can use **Host room** and **Join**. Both clients use Player 1 controls locally. Selection uses each client's Player 1 fighter and simple-input toggle. Move-data mismatches are rejected, editing is locked during a session, and confirmed simulation hashes are compared during play. The connection uses a WebSocket relay with rollback prediction and two frames of input delay.
+The shared C++ core runs at 60 fixed ticks with integer state, independent of presentation. [Architecture](docs/combat-architecture.md) explains native instances, rollback, versioned data and future 3D integration. [Combat rules](docs/combat-rules.md) separates confirmed design from defaults.
 
-For a trusted LAN, run `HOST=0.0.0.0 npm start` and connect both machines to that host's port 8080. The default binds only to the local machine. Public hosting, authentication, matchmaking, NAT traversal, platform services, and production network resilience are future work. A disconnect or exhausted rollback history requires a new room; online rematches currently require a new room too.
+Linux rendering, keyboard gameplay, all 30 basic attacks, editing, save migration, sprites, latency/jitter correction and two UDP processes are tested. Windows is cross-compiled/exported and needs hardware playtesting. PS5 requires approved console access and Godot port tooling; no PS5 build is included. Strive input-buffer parity is a future measurement task.
 
-## Implementation status
-
-The shared simulation is portable C++17, runs at 60 fixed steps per second, and has no engine dependency. The browser executes the same code as the native test runner. Presentation and the editor are separate JavaScript modules; they do not decide combat results. [Architecture](docs/combat-architecture.md) documents the state model and Unreal integration path. [Combat rules](docs/combat-rules.md) records confirmed decisions and provisional defaults.
-
-This is an early PC browser prototype. Unreal integration, a packaged native PC game, and PS5 builds are not implemented. PS5 tooling and platform access remain prerequisites for console work. The input recognizer is original and configurable; exact Guilty Gear Strive input parity has not been established. Character mechanics, art, frame data, and game feel remain provisional. Throws, universal overheads, dedicated anti-air rules, meter, full aerial combat, and production animation are deferred.
+The browser harness is retained for regressions only: `bash scripts/setup-web.sh`, then `npm test`. Godot is the primary client and delivery path.
 
 ## Current reference guides
 
@@ -69,18 +72,16 @@ These are the latest concept candidates, with weapons revised using miniature re
 ## Repository layout
 
 ```text
-art/characters/        Latest six character guides
-art/archive/           Superseded concepts and earlier guide drafts
-docs/                  Concept and visual direction notes
-exports/               Combined reference PDF
-references/miniatures/ Downloaded miniature reference images
-references/sources.json Source URLs
-core/                  Portable deterministic C++ combat simulation
-web/                   Training interface, move editor, rollback session
-scripts/               Build, standalone packaging, development/room server
-tests/                 Native, WebAssembly, relay, and browser validation
+godot/                 Native project, UI, generated sprites and tests
+native/                GDExtension adapter and build configuration
+core/                  Deterministic C++ simulation
+scripts/               Setup, build, tests and PC packaging
+tests/                 Core, network and archived browser checks
+docs/                  Rules, architecture, play guide and art pipeline backlog
+art/characters/        Six source character reference guides
+references/            Miniature sources and equipment notes
+licenses/              Engine, dependencies and binding notices
+web/                   Archived browser prototype
 ```
 
-The original user-created reference sheets were supplied in chat, but were not available as local source files when this repository was initialized. The generated guides and downloaded miniature references are included; the original uploaded sheets can be added separately.
-
-Guild Ball characters, names, and source miniature images belong to their respective rights holders. This is an unofficial concept project. No license for third-party material is implied.
+Guild Ball characters, names and miniature images belong to their respective rights holders. This is an unofficial concept project. No license for third-party material is implied.

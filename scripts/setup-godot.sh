@@ -3,6 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 fight_tools="${FIGHT_TOOLS:-/workspace/.fight-guild-tools}"
 fight_bindings_commit=e83fd0904c13356ed1d4c3d09f8bb9132bdc6b77
+bash scripts/install-godot.sh
 if ! PYTHONPATH="$fight_tools/python${PYTHONPATH:+:$PYTHONPATH}" python -c 'import SCons' 2>/dev/null; then
   python -m pip install --disable-pip-version-check --target "$fight_tools/python" scons==4.9.1
 fi

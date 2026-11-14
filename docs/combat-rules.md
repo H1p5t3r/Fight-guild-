@@ -2,7 +2,7 @@
 
 ## Confirmed direction
 
-PC and PS5 are target platforms. Begin with sprites and move to 3D models on a 2D plane later. The core must support rollback online play. An in-program editor must allow manual move tuning.
+PC and PS5 are target platforms; Godot is the current engine. Begin with sprites and move to 3D models on a 2D plane later. The core must support rollback online play. An in-program editor must allow manual move tuning.
 
 Attack buttons are **P, K, S, Hs, D**; their names do not dictate each character's action. There is a dedicated dash macro. Traditional motions are supported; simplified execution uses a modifier plus a per-move direction/button mapping. Each player enables or disables simplified controls in fighter select.
 
@@ -29,7 +29,7 @@ These are useful prototype defaults, not additional approved design requirements
 - All starter attacks are mid attacks. The editor can assign low/overhead guard levels for later experiments; no universal overhead or anti-air kit has been selected.
 - Simplified execution has no damage penalty, and traditional inputs remain available when enabled. Holding the modifier reserves mapped inputs; unmapped modifier chords do not become ordinary attacks. Up with the modifier is a special input direction, not a jump request.
 - Default motions: 236P, 236S, 623Hs. Default command normals: 6P, 6K, 6S, 6Hs, 6D. There are standing and crouching P/K/S/Hs, a grounded Drive starter, and five provisional air attacks.
-- Anvil is slower and slightly stronger. Hammer moves faster and advances on specials/Drive. These are testing values, not completed character identities. Anvil's displayed shield does not imply implemented armor or parry mechanics.
+- All six fighters have 22 playable slots. Anvil is slower and slightly stronger; Hammer advances on specials/Drive. Tapper/Shark have slightly longer reach; Shark/Fillet move faster and their Drive starters advance. Smoke uses the shared baseline with a stationary Drive attack. These are testing values: no shield armor, smoke status, hook pull or bleed mechanic is implied by the art.
 
 ## Input recognition
 
@@ -49,4 +49,4 @@ Startup includes the first active frame: startup 5 means the attack becomes acti
 
 Positions use hundredths of a pixel. The editor displays hitbox, pushback, and advance values in pixels and converts them to integers. The hitbox is a rectangle from 12 pixels in front of the fighter to its authored reach, with a bottom offset and height. A single hit per move instance is supported.
 
-Move-data changes reset the local simulation. Save locally persists a complete set in browser storage; JSON export/import is portable. Invalid imports restore the previous complete set. Restore defaults changes the working set; saving afterward replaces the browser's saved set. Online rooms require matching data and lock editing during play.
+Move-data changes reset the local simulation. Save locally persists the complete set in Godot's user data directory; JSON export/import is portable. Invalid imports leave the prior set unchanged. Schema-1 saves migrate old edits and add defaults for the other four fighters. Restore defaults changes the working set; saving afterward replaces the saved set. Online peers require matching data and lock editing during play.

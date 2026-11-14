@@ -11,3 +11,4 @@ godot/bin/
 native/.sconsign.dblite
 native/*.os
 core/*.os
+__pycache__/
