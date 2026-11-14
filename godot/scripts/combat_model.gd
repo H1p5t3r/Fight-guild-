@@ -2,16 +2,16 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 3
+const DATA_VERSION := 4
 const MOMENTUM_MAX := 10000
 const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
 const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D"]
-const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak"]
+const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible"]
 const RULES := ["buttonBuffer", "motionWindow", "motionGap"]
 const MOMENTUM_RULES := ["movementGain", "attackGain", "blockedAttackGain", "damageTakenGain", "guardGain", "specialGain", "fdDrain", "fdBlockCost", "fdDamageCost", "fdPushPercent"]
 const RULE_COUNT := 13 # 3 input rules + 10 Momentum rules, matching fight::RULE_COUNT.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable"]
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge"]
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
 
@@ -63,7 +63,7 @@ static func valid_integer(value: Variant) -> bool:
 func load_data(value: Variant) -> String:
 	if not value is Dictionary:
 		return "Unsupported move data version."
-	var legacy: bool = valid_integer(value.get("schema")) and int(value.schema) in [1, 2] and value.schema == value.get("coreVersion")
+	var legacy: bool = valid_integer(value.get("schema")) and int(value.schema) in [1, 2, 3] and value.schema == value.get("coreVersion")
 	if not legacy and (value.get("schema") != DATA_VERSION or value.get("coreVersion") != DATA_VERSION):
 		return "Unsupported move data version."
 	var characters: Variant = value.get("characters")
@@ -81,10 +81,13 @@ func load_data(value: Variant) -> String:
 			if not definitions[m] is Dictionary or definitions[m].get("id") != MOVE_IDS[m]:
 				return "Move slot IDs must match this build."
 			for field in FIELDS:
-				if legacy and field == "guardBreak":
+				if legacy and field in ["counterHitstun", "counterHitstop", "reversalEligible"]:
+					candidate.append(4 if field == "counterHitstun" else 3 if field == "counterHitstop" else int(int(definitions[m].category) in [2, 3]))
+					continue
+				if value.schema < 3 and field == "guardBreak":
 					candidate.append(0)
 					continue
-				if legacy and field == "chipDamage":
+				if value.schema < 3 and field == "chipDamage":
 					if not valid_integer(definitions[m].get("reserved")) or definitions[m].reserved != 0:
 						return "Invalid legacy reserved field."
 					var chip: int = maxi(1, int(definitions[m].damage) / 10) if int(definitions[m].category) in [2, 3] else 0
@@ -101,7 +104,7 @@ func load_data(value: Variant) -> String:
 		if not valid_integer(value.inputRules.get(rule)):
 			return "Invalid input rule: " + rule
 		candidate.append(int(value.inputRules[rule]))
-	if legacy:
+	if value.schema < 3:
 		candidate.append_array(defaults.slice(defaults.size() - MOMENTUM_RULES.size()))
 	else:
 		if not value.get("momentumRules") is Dictionary:

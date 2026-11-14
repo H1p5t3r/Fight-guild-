@@ -226,6 +226,104 @@ static void test_block_reactions() {
     CHECK(!world.players[1].guard_break&&world.players[1].block_reaction==NoBlock&&fg_get(1,21)==1);
     CHECK(fg_move_set(0,0,GuardBreak,0)); CHECK(!fg_move_set(0,0,GuardBreak,2));
 }
+static void test_counter_and_punish() {
+    // Startup, first/last active, first/last recovery, and the first idle tick.
+    const int phases[]={0,3,4,6,7,16,-1};
+    for(int age:phases) {
+        fresh(); near(); moves[0][0].v[Startup]=1;
+        moves[1][0].v[Reach]=100; // The interrupted move cannot trade in this fixture.
+        world.players[1].move=age<0?-1:0; world.players[1].age=age<0?0:age;
+        step(P,0);
+        int kind=age<0?NormalHit:age<7?CounterHit:PunishHit;
+        CHECK(world.players[0].event==kind);
+        CHECK(world.players[1].health==965); // Classification adds no damage multiplier.
+        CHECK(world.players[1].stun==20+(kind==CounterHit?4:0));
+        CHECK(world.hitstop==6+(kind==CounterHit?3:0));
+        CHECK(world.players[0].hit_notice_time==(kind==NormalHit?0:NOTICE_TICKS));
+    }
+    fresh(); near(); moves[0][0].v[Startup]=1; moves[1][0].v[WhiffCancel]=1;
+    world.players[1].move=0; world.players[1].age=9;
+    step(P,K); CHECK(world.players[0].event==CounterHit); // A recovery cancel was already in new startup.
+    fresh(); near(); moves[0][0].v[Startup]=moves[1][0].v[Startup]=1;
+    moves[1][0].v[CounterHitstop]=5; moves[1][0].v[CounterHitstun]=7;
+    State before=world; step(P,P); unsigned hash=checksum();
+    CHECK(world.players[0].event==CounterHit&&world.players[1].event==CounterHit);
+    CHECK(world.players[0].stun==27&&world.players[1].stun==24&&world.hitstop==11);
+    world=before; step(P,P); CHECK(checksum()==hash); // Trade classifications survive replay.
+    fresh(); near(); moves[0][0].v[Startup]=1; step(P,Right|Down);
+    CHECK(world.players[0].event==Blocked&&world.players[0].hit_notice_time==0);
+    CHECK(world.players[1].stun==12&&world.hitstop==6);
+    fresh(); near(); moves[0][0].v[Startup]=1;
+    moves[0][0].v[CounterHitstun]=moves[0][0].v[CounterHitstop]=0;
+    step(P,S); CHECK(world.players[0].event==CounterHit&&world.players[1].stun==20&&world.hitstop==6);
+    fresh(); near(); moves[0][0].v[Startup]=1;
+    moves[0][0].v[Hitstun]=180; moves[0][0].v[CounterHitstun]=60;
+    moves[0][0].v[Hitstop]=moves[0][0].v[CounterHitstop]=30;
+    step(P,S); CHECK(world.players[1].stun==MAX_STUN&&world.hitstop==MAX_HITSTOP);
+    CHECK(!fg_move_set(0,0,CounterHitstun,61)&&!fg_move_set(0,0,CounterHitstop,-1));
+}
+static void test_reversals() {
+    for(int guard=0;guard<2;++guard) for(int player=0;player<2;++player) {
+        fresh(1,1); auto& f=world.players[player]; f.stun=3; f.guarding=guard;
+        int shortcut=Simple|(player?Left:Right)|P;
+        ticks(2); step(player?0:shortcut,player?shortcut:0);
+        CHECK(f.stun==0&&f.move==-1&&f.reversal_time==0);
+        State before=world; step(0,0); unsigned hash=checksum();
+        CHECK(f.move==14&&f.reversal_time==NOTICE_TICKS&&f.reversal_input_age==1);
+        world=before; step(0,0); CHECK(checksum()==hash);
+    }
+    fresh(1); step(Simple|Right|P,0); CHECK(!world.players[0].reversal_time); // Neutral special.
+    fresh(1); world.players[0].stun=1; step(0,0); step(0,0); step(Simple|Right|P,0);
+    CHECK(world.players[0].move==14&&!world.players[0].reversal_time); // One actionable tick late.
+    fresh(1); world.players[0].stun=4; step(Simple|Right|P,0); ticks(3); step(0,0);
+    CHECK(world.players[0].move==14&&world.players[0].reversal_input_age==4); // Earliest buffered edge.
+    fresh(1); world.players[0].stun=5; step(Simple|Right|P,0); ticks(4); step(0,0);
+    CHECK(world.players[0].move==-1&&!world.players[0].reversal_time); // Just outside 5-tick buffer.
+    fresh(); world.players[0].stun=3;
+    step(Down,0); step(Down|Right,0); step(Right|P,0); step(0,0);
+    CHECK(world.players[0].move==14&&world.players[0].reversal_time==NOTICE_TICKS); // Motion, not just simple.
+    fresh(); world.players[0].stun=1; step(0,0); step(P,0);
+    CHECK(world.players[0].move==0&&!world.players[0].reversal_time); // Normals are opt-in.
+    fresh(); moves[0][0].v[ReversalEligible]=1; world.players[0].stun=1;
+    step(0,0); step(P,0); CHECK(world.players[0].reversal_time==NOTICE_TICKS);
+    fresh(1); world.players[0].stun=1; world.players[0].momentum=5000;
+    step(0,0); step(Left|Faultless,0); step(Simple|Right|P,0);
+    CHECK(!world.players[0].reversal_time); // Choosing FD used the first actionable tick.
+    fresh(1); world.players[0].stun=1; world.hitstop=5;
+    ticks(6,Simple|Right|P); step(0,0);
+    CHECK(world.players[0].move==-1&&!world.players[0].reversal_time); // Hitstop does not extend buffer.
+    fresh(1); world.players[0].move=0; world.players[0].age=16;
+    step(Simple|Right|P,0); step(0,0);
+    CHECK(world.players[0].move==14&&!world.players[0].reversal_time); // Own recovery is not a reversal.
+    fresh(1); near(); world.players[0].stun=1; step(0,0);
+    moves[1][0].v[Startup]=1; step(Simple|Right|P,P);
+    CHECK(world.players[0].reversal_time==NOTICE_TICKS&&world.players[0].health==970);
+    CHECK(world.players[1].event==CounterHit); // Reversal timing does not confer invulnerability.
+    CHECK(!fg_move_set(0,0,ReversalEligible,2));
+}
+static void test_combo_feedback() {
+    fresh(); near();
+    for(int m=0;m<=4;m+=4) { moves[0][m].v[Startup]=1; moves[0][m].v[Pushback]=0; }
+    step(P,S); CHECK(world.players[0].combo==1&&world.players[0].combo_display==0);
+    thaw(); step(Down|P,0);
+    CHECK(world.players[0].event==NormalHit&&world.players[0].combo==2);
+    CHECK(world.players[0].combo_display==2&&world.players[0].combo_time==COMBO_HOLD);
+    CHECK(world.players[1].stun==20); // Follow-up in hitstun is not another counter hit.
+    int age=world.players[0].combo_age; ticks(3);
+    CHECK(world.players[0].combo_age==age); // Pop animation freezes during hitstop.
+    thaw(); step(P,0); // New press after thaw; 2P -> 5P unified route.
+    CHECK(world.players[0].combo==3&&world.players[0].combo_display==3);
+    State before=world; ticks(100); unsigned hash=checksum();
+    CHECK(world.players[0].combo==0&&world.players[0].combo_time==0);
+    world=before; ticks(100); CHECK(checksum()==hash);
+    step(P,0); CHECK(world.players[0].combo==1&&world.players[0].combo_display==0);
+    thaw(); step(Down|P,0); CHECK(world.players[0].combo==2);
+    world.hitstop=0; world.players[0].move=-1; world.players[0].previous=0;
+    world.players[1].stun=0; step(P,Right|Down);
+    CHECK(world.players[0].event==Blocked&&world.players[0].combo==0&&world.players[0].combo_time==0);
+    reset(0,1,0,0);
+    CHECK(world.players[0].combo_display==0&&world.players[0].hit_notice_time==0&&world.players[0].reversal_time==0);
+}
 static void test_roster() {
     const int slots[5]={0,1,2,3,13};
     for(int c=0;c<CHARACTER_COUNT;++c) for(int button=0;button<5;++button) {
@@ -275,6 +373,7 @@ int main(int argc,char** argv) {
     }
     test_routes(); test_motion(); test_combat(); test_replay(); test_roster();
     test_momentum(); test_faultless(); test_no_negative_penalty(); test_block_reactions();
+    test_counter_and_punish(); test_reversals(); test_combo_feedback();
     std::printf("%d checks, %d failures\n",checks,failures);
     return failures?1:0;
 }

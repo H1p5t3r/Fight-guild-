@@ -52,6 +52,23 @@ func _initialize() -> void:
 	legacy.characters[5].moves[14].damage = 190
 	check(model.load_data(JSON.parse_string(JSON.stringify(legacy))).is_empty(), "Schema-2 JSON migration rejected")
 	check(model.move(5, 14).damage == 190 and model.move(5, 14).chipDamage == 19, "Migration lost edits or failed to add chip")
+	var previous := edited.duplicate(true)
+	previous.schema = 3
+	previous.coreVersion = 3
+	previous.momentumRules.fdDrain = 25
+	previous.characters[0].moves[0].guardBreak = 1
+	previous.characters[0].moves[0].chipDamage = 17
+	previous.characters[0].moves[0].category = 3
+	for character in previous.characters:
+		for definition in character.moves:
+			for field in ["counterHitstun", "counterHitstop", "reversalEligible"]: definition.erase(field)
+	check(model.load_data(JSON.parse_string(JSON.stringify(previous))).is_empty(), "Schema-3 migration rejected")
+	check(model.move(0, 0).damage == 177 and model.move(0, 0).guardBreak == 1 and model.move(0, 0).chipDamage == 17 and model.data().momentumRules.fdDrain == 25, "Migration lost defensive edits")
+	check(model.move(0, 0).counterHitstun == 4 and model.move(0, 0).counterHitstop == 3 and model.move(0, 0).reversalEligible == 1, "Timing migration did not respect saved move category")
+	var invalid_timing := model.data()
+	invalid_timing.characters[0].moves[0].counterHitstun = 61
+	var timing_hash := model.fingerprint()
+	check(not model.load_data(invalid_timing).is_empty() and model.fingerprint() == timing_hash, "Invalid counter-hit edit was not atomic")
 	var invalid_momentum := model.data()
 	invalid_momentum.momentumRules.fdDrain = 0
 	check(not model.load_data(invalid_momentum).is_empty(), "Free Faultless Defense configuration accepted")
@@ -67,6 +84,24 @@ func _initialize() -> void:
 	check(model.state().players[0].faultless == 1 and model.state().players[0].momentum < 5000, "Faultless Defense did not drain meter")
 	check(model.core.restore(momentum_snapshot) and model.state().players[0].momentum == 5000, "Snapshot lost Momentum")
 	check(not model.core.set_training_momentum(0, 10001), "Overfilled Momentum accepted")
+	var extreme := original.duplicate(true)
+	var strike: Dictionary = extreme.characters[0].moves[0]
+	strike.startup = 1
+	strike.reach = 50000
+	strike.hitstun = 180
+	strike.counterHitstun = 60
+	strike.hitstop = 30
+	strike.counterHitstop = 30
+	check(model.load_data(extreme).is_empty(), "Maximum legal counter-hit values rejected")
+	model.reset()
+	model.step(16, 64)
+	check(model.state().players[0].event == 3 and model.state().players[1].stun == 240 and model.state().hitstop == 60, "Counter-hit classification/bonuses missing")
+	var counter_snapshot: PackedByteArray = model.core.snapshot()
+	model.step(0, 0)
+	var counter_hash := model.state_hash()
+	check(model.core.restore(counter_snapshot), "Valid extended stun/hitstop snapshot rejected")
+	model.step(0, 0)
+	check(model.state_hash() == counter_hash and model.state().players[0].hitNoticeTime == 60, "Counter-hit feedback diverged on restore")
 	for latency in [0, 1, 4, 8, 12]:
 		var result := RollbackSession.trial(original, latency, 4, 1200)
 		check(result.get("pass", false), "Rollback divergence: " + str(result))

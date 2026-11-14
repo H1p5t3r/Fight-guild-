@@ -57,6 +57,9 @@ void Simulation::defaults() {
             m.v[SpecialCancel]=c==1||c==4||c==5;
         }
         m.v[ChipDamage]=(m.v[Category]==Special||m.v[Category]==Drive)?max(1,m.v[Damage]/10):0;
+        m.v[CounterHitstun]=4;
+        m.v[CounterHitstop]=3;
+        m.v[ReversalEligible]=m.v[Category]==Special||m.v[Category]==Drive;
         moves[c][i]=m;
     }
 }
@@ -193,10 +196,15 @@ bool Simulation::active(const Fighter& f) const {
 }
 void Simulation::control(Fighter& f) {
     if(f.stun>0) {
+        f.reversal_ready=1;
         if(f.guarding) ++f.block_age;
         --f.stun;
         return;
     }
+    // This opportunity exists for exactly the first actionable tick after stun.
+    // The ordinary input buffer supplies execution leniency; it grants no invulnerability.
+    bool reversal=f.reversal_ready!=0;
+    f.reversal_ready=0;
     f.guarding=f.block_reaction=f.block_age=f.block_advantage=f.guard_break=0;
     if(faultless_requested(f)&&f.move<0) {
         f.dash=0;
@@ -222,6 +230,10 @@ void Simulation::control(Fighter& f) {
         const int target=requested(f,*h);
         if(target>=0&&(f.move<0||cancel_allowed(moves[f.character][f.move],
              moves[f.character][target],f.move==target,f.contact!=0))) {
+            if(reversal&&f.move<0&&moves[f.character][target].v[ReversalEligible]) {
+                f.reversal_time=NOTICE_TICKS;
+                f.reversal_input_age=world.frame-h->frame;
+            }
             begin(f,target);
             h->consumed|=h->pressed; // A chord cannot become multiple buffered attacks.
             // Older attacks must not fire after the newly chosen command.
@@ -286,6 +298,17 @@ void Simulation::step(int raw0,int raw1) {
     int moved[2]={0,0};
     for(int p=0;p<2;++p) {
         auto& f=world.players[p];
+        // Feedback clocks are fixed-tick state: pause, hitstop and rollback all agree.
+        if(f.hit_notice_time>0) --f.hit_notice_time;
+        if(f.reversal_time>0) --f.reversal_time;
+        if(f.combo_display>0) f.combo_age=min(1000,f.combo_age+1);
+        if(prior_stun[1-p]>0&&!prior_guard[1-p]) {
+            if(f.combo>=2) f.combo_time=COMBO_HOLD;
+        }
+        else {
+            f.combo=0;
+            if(f.combo_time>0) --f.combo_time;
+        }
         control(f);
         if(f.move<0&&!prior_stun[p]&&!faultless_requested(f)) moved[p]=max(0,(f.x-prior_x[p])*f.facing);
         if(f.y>0) {
@@ -317,20 +340,38 @@ void Simulation::step(int raw0,int raw1) {
             f.movement_remainder=amount%100;
         }
     }
-    int hits[2]={-1,-1}; bool blocked[2]={false,false};
+    int hits[2]={-1,-1}, contacts[2]={NoContact,NoContact};
+    bool blocked[2]={false,false};
     for(int p=0;p<2;++p) {
         Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
         if(active(f)&&!f.hit_done&&overlaps(f,other)) {
             hits[p]=f.move; blocked[p]=blocks(f,other,prior_stun[1-p]>0);
+            contacts[p]=blocked[p]?Blocked:NormalHit;
+            if(!blocked[p]&&other.move>=0&&prior_stun[1-p]==0) {
+                const Move& interrupted=moves[other.character][other.move];
+                contacts[p]=other.age+1<interrupted.v[Startup]+interrupted.v[Active]?CounterHit:PunishHit;
+            }
         }
     }
-    // Detect both hits before applying either, so trades do not favor player 1.
+    // Detect both hits AND their classifications before changing either fighter.
+    // Clear interrupted combo displays before applying either side of a trade.
+    for(int p=0;p<2;++p) if(hits[p]>=0&&!blocked[p]) {
+        auto& defender=world.players[1-p];
+        defender.combo=defender.combo_display=defender.combo_time=defender.combo_age=0;
+    }
     for(int p=0;p<2;++p) if(hits[p]>=0) {
         Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
         const Move& m=moves[f.character][hits[p]];
         f.hit_done=f.contact=1;
-        f.event=blocked[p]?2:1;
+        f.event=contacts[p];
         f.combo=blocked[p]?0:((prior_stun[1-p]&&!prior_guard[1-p])?f.combo+1:1);
+        f.combo_display=f.combo>=2?f.combo:0;
+        f.combo_time=f.combo>=2?COMBO_HOLD:0;
+        f.combo_age=0;
+        if(contacts[p]==CounterHit||contacts[p]==PunishHit) {
+            f.hit_notice=contacts[p];
+            f.hit_notice_time=NOTICE_TICKS;
+        }
         bool fd=blocked[p]&&other.faultless;
         int damage=blocked[p]?(fd?0:m.v[ChipDamage]):m.v[Damage];
         other.health=max(0,other.health-damage);
@@ -338,7 +379,7 @@ void Simulation::step(int raw0,int raw1) {
         gain_momentum(f,m.v[Damage]*(blocked[p]?rules.block_attack_gain:rules.attack_gain));
         if(!fd) gain_momentum(other,m.v[Damage]*(blocked[p]?rules.guard_gain:rules.damage_gain));
         if(fd) other.momentum=max(0,other.momentum-rules.fd_block_cost-m.v[Damage]*rules.fd_damage_cost);
-        other.stun=m.v[blocked[p]?Blockstun:Hitstun];
+        other.stun=m.v[blocked[p]?Blockstun:Hitstun]+(contacts[p]==CounterHit?m.v[CounterHitstun]:0);
         other.guarding=blocked[p];
         other.block_age=0;
         other.guard_break=blocked[p]&&m.v[GuardBreak]&&other.stun>0;
@@ -353,7 +394,7 @@ void Simulation::step(int raw0,int raw1) {
         other.x=clamp(other.x+f.facing*push,2800,97200);
         // FD still creates space at the corner by transferring blocked displacement to the attacker.
         if(fd) f.x=clamp(f.x-f.facing*(push-abs(other.x-old_x)),2800,97200);
-        world.hitstop=max(world.hitstop,m.v[Hitstop]);
+        world.hitstop=max(world.hitstop,m.v[Hitstop]+(contacts[p]==CounterHit?m.v[CounterHitstop]:0));
     }
     for(auto& f:world.players) if(f.move>=0) {
         const Move& m=moves[f.character][f.move];
@@ -392,6 +433,9 @@ int Simulation::get(int player,int field) const {
         // Eligibility contract for the future throw system. Ordinary blockstun
         // protects against grabs; guard break deliberately does not.
         case 21:return (f.guarding&&!f.guard_break)||(f.stun>0&&!f.guarding);
+        case 22:return f.combo_display; case 23:return f.combo_time; case 24:return f.combo_age;
+        case 25:return f.hit_notice; case 26:return f.hit_notice_time;
+        case 27:return f.reversal_time; case 28:return f.reversal_input_age;
         default:return 0;
     }
 }
@@ -409,11 +453,13 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case Direction: low=1; high=9; break;
         case SimpleDirection: high=9; break;
         case Motion: if(v!=0&&v!=236&&v!=214&&v!=623) return 0; high=623; break;
-        case Air:case SpecialCancel:case JumpCancel:case WhiffCancel:case SelfCancel:case GuardBreak: high=1; break;
+        case Air:case SpecialCancel:case JumpCancel:case WhiffCancel:case SelfCancel:case GuardBreak:case ReversalEligible: high=1; break;
         case Startup:case Active: low=1; high=120; break;
         case Recovery:case Hitstun:case Blockstun: high=180; break;
         case Damage: high=1000; break;
         case Hitstop: high=30; break;
+        case CounterHitstun: high=60; break;
+        case CounterHitstop: high=30; break;
         case Reach:case Height: low=100; high=50000; break;
         case Pushback: high=20000; break;
         case Bottom: low=-50000; high=50000; break;

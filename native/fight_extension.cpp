@@ -48,16 +48,21 @@ public:
         if(bytes.size()!=sizeof(fight::State)) return false;
         fight::State candidate{};
         std::memcpy(&candidate,bytes.ptr(),sizeof(candidate));
-        if(candidate.frame<0||candidate.winner< -1||candidate.winner>2||candidate.hitstop<0||candidate.hitstop>30) return false;
+        if(candidate.frame<0||candidate.winner< -1||candidate.winner>2||candidate.hitstop<0||candidate.hitstop>fight::MAX_HITSTOP) return false;
         for(const auto& f:candidate.players) {
             if(f.character<0||f.character>=fight::CHARACTER_COUNT||f.move< -1||f.move>=fight::MOVE_COUNT
                 ||f.simple<0||f.simple>1||(f.facing!=1&&f.facing!= -1)
-                ||f.age<0||f.age>420||f.stun<0||f.stun>180
+                ||f.age<0||f.age>420||f.stun<0||f.stun>fight::MAX_STUN
                 ||f.momentum<0||f.momentum>fight::MOMENTUM_MAX||f.faultless<0||f.faultless>1
                 ||f.movement_remainder<0||f.movement_remainder>=100
                 ||f.block_reaction<0||f.block_reaction>fight::BrokenGuard
                 ||f.block_age<0||f.block_age>180||f.block_advantage< -300||f.block_advantage>180
-                ||f.guard_break<0||f.guard_break>1) return false;
+                ||f.guard_break<0||f.guard_break>1
+                ||f.combo<0||f.combo_display<0||f.combo_time<0||f.combo_time>fight::COMBO_HOLD
+                ||f.combo_age<0||f.combo_age>1000||f.hit_notice<0||f.hit_notice>fight::PunishHit
+                ||f.hit_notice_time<0||f.hit_notice_time>fight::NOTICE_TICKS
+                ||f.reversal_ready<0||f.reversal_ready>1||f.reversal_time<0||f.reversal_time>fight::NOTICE_TICKS
+                ||f.reversal_input_age<0||f.reversal_input_age>=12) return false;
         }
         simulation.world=candidate;
         return true;

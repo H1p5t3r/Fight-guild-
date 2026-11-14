@@ -35,6 +35,10 @@ These are useful prototype defaults, not additional approved design requirements
 
 Momentum follows the requested Strive-inspired resource direction with FD as its only spending option. Negative Penalty is explicitly deferred. The editor controls chip damage, guard break and provisional meter rates. Block reactions distinguish negative/even and positive attacker advantage; guard break overrides them and removes backward dash buffering and blockstun grab immunity. See [Momentum and defense](momentum-defense.md) for exact implemented behavior and remaining parity/throw work.
 
+## Hit timing and combos
+
+Counter hits interrupt startup/active frames and add per-move hitstun/hitstop bonuses (initially +4/+3). Recovery hits are punishes. Eligible moves starting on the first actionable frame after stun are reversals; the existing button buffer supplies timing leniency. No invulnerability is implied. [Combo and timing rules](combat-feedback.md) specify phase boundaries, eligibility, combo lifetime and provisional defaults.
+
 ## Input recognition
 
 This is an original implementation intended for tuning toward the requested feel. It does not copy Strive's source or claim an exact match.
@@ -53,4 +57,4 @@ Startup includes the first active frame: startup 5 means the attack becomes acti
 
 Positions use hundredths of a pixel. The editor displays hitbox, pushback, and advance values in pixels and converts them to integers. The hitbox is a rectangle from 12 pixels in front of the fighter to its authored reach, with a bottom offset and height. A single hit per move instance is supported.
 
-Move-data changes reset the local simulation. Save locally persists the complete set in Godot's user data directory; JSON export/import is portable. Invalid imports leave the prior set unchanged. Schema-1/2 saves migrate old edits, supply new defensive/meter defaults and add any missing fighters. Restore defaults changes the working set; saving afterward replaces the saved set. Online peers require matching data and lock editing during play.
+Move-data changes reset the local simulation. Save locally persists the complete set in Godot's user data directory; JSON export/import is portable. Invalid imports leave the prior set unchanged. Schema-1/2/3 saves migrate old edits, supply new defensive/meter/timing defaults and add any missing fighters. Restore defaults changes the working set; saving afterward replaces the saved set. Online peers require matching data and lock editing during play.

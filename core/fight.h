@@ -3,8 +3,9 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 3, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 22, FIELD_COUNT = 28;
+constexpr int VERSION = 4, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 22, FIELD_COUNT = 31;
 constexpr int MOMENTUM_MAX = 10000, INPUT_MASK = 4095;
+constexpr int MAX_STUN = 240, MAX_HITSTOP = 60, NOTICE_TICKS = 60, COMBO_HOLD = 60;
 enum Input { Left=1, Right=2, Down=4, Up=8, P=16, K=32, S=64, Hs=128, D=256,
              Dash=512, Simple=1024, Faultless=2048 };
 enum Kind { Normal, Command, Special, Drive };
@@ -12,8 +13,9 @@ enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery
              Damage, Hitstun, Blockstun, Hitstop, Pushback, Reach, Bottom, Height,
              SpecialCancel, JumpCancel, WhiffCancel, SelfCancel, Advance,
              SimpleDirection, SimpleButton, NormalRoutes, CommandRoutes,
-             HitLevel, ChipDamage, GuardBreak };
+             HitLevel, ChipDamage, GuardBreak, CounterHitstun, CounterHitstop, ReversalEligible };
 enum BlockReaction { NoBlock, StableBlock, PressureBlock, BrokenGuard };
+enum Contact { NoContact, NormalHit, Blocked, CounterHit, PunishHit };
 enum Rule { ButtonBuffer, MotionWindow, MotionGap, MoveGain, AttackGain,
             BlockAttackGain, DamageGain, GuardGain, SpecialGain, FDDrain,
             FDBlockCost, FDDamageCost, FDPushPercent, RULE_COUNT };
@@ -25,6 +27,9 @@ struct Fighter {
     int combo, event, last_move;
     int momentum, faultless, movement_remainder;
     int block_reaction, block_age, block_advantage, guard_break;
+    int combo_display, combo_time, combo_age;
+    int hit_notice, hit_notice_time;
+    int reversal_ready, reversal_time, reversal_input_age;
     Sample history[HISTORY];
 };
 struct State { int frame, remaining, hitstop, winner; Fighter players[2]; };
