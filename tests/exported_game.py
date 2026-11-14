@@ -15,8 +15,8 @@ with tempfile.TemporaryDirectory(prefix='fight-guild-export-') as cwd:
         archive.extractall(cwd)
     executable = Path(cwd) / 'FightGuild/FightGuild.x86_64'
     executable.chmod(0o755)
-    result = subprocess.run([str(executable), '--headless', '--', '--test', '--verify-build', '--review'], cwd=cwd, env=environment,
+    result = subprocess.run([str(executable), '--headless', '--', '--test', '--verify-build', '--review', '--block-review'], cwd=cwd, env=environment,
                             text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=90)
 print(result.stdout, end='')
 assert result.returncode == 0 and 'ERROR:' not in result.stdout and '0 failures' in result.stdout, 'Packaged gameplay smoke test failed'
-print('PASS exported Linux game, six fighters and sprite review')
+print('PASS exported Linux game, Momentum/FD, six fighters and guard-break sprite review')

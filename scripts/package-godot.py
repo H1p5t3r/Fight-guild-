@@ -17,6 +17,7 @@ for platform in (['Linux', 'Windows'] if target == 'all' else [target]):
         for name in files:
             archive.write(source / name, 'FightGuild/' + name)
         archive.write(root / 'docs/play-native.md', 'FightGuild/START-HERE.md')
+        archive.write(root / 'docs/momentum-defense.md', 'FightGuild/momentum-defense.md')
         for file in notices: archive.write(file, 'FightGuild/licenses/' + file.name)
     packages.append(output)
 
