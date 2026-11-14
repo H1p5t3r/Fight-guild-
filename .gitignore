@@ -6,3 +6,8 @@ build/
 web/generated/
 node_modules/
 test-results/
+godot/.godot/
+godot/bin/
+native/.sconsign.dblite
+native/*.os
+core/*.os

@@ -22,9 +22,36 @@ struct Fighter {
 };
 struct State { int frame, remaining, hitstop, winner; Fighter players[2]; };
 struct Rules { int buffer=5, motion_window=20, motion_gap=8; };
-extern State world;
-extern Move moves[2][MOVE_COUNT];
-extern Rules rules;
+// Each engine adapter owns a simulation; multiple matches never share state.
+class Simulation {
+public:
+    State world{};
+    Move moves[2][MOVE_COUNT]{};
+    Rules rules{};
+    void defaults();
+    void reset(int character0, int character1, int simple0, int simple1);
+    void step(int input0, int input1);
+    bool motion_matches(const Fighter& f, int frame, int motion) const;
+    unsigned checksum() const;
+    int get(int player, int field) const;
+    int move_get(int character, int move, int field) const;
+    int move_set(int character, int move, int field, int value);
+    int rule_get(int field) const;
+    int rule_set(int field, int value);
+    int can_cancel(int character, int from, int to, int contact) const;
+private:
+    int requested(Fighter& f, Sample& h) const;
+    void begin(Fighter& f, int move);
+    bool active(const Fighter& f) const;
+    void control(Fighter& f);
+    bool overlaps(const Fighter& a, const Fighter& b) const;
+    bool blocks(const Fighter& attacker, const Fighter& defender, bool was_stunned) const;
+};
+// Compatibility instance for the original C ABI and native test runner.
+extern Simulation default_simulation;
+extern State& world;
+extern Move (&moves)[2][MOVE_COUNT];
+extern Rules& rules;
 void defaults();
 void reset(int character0, int character1, int simple0, int simple1);
 void step(int input0, int input1);

@@ -2,16 +2,17 @@
 
 namespace fight {
 static_assert(sizeof(int)==4, "The snapshot ABI requires 32-bit int");
-State world{};
-Move moves[2][MOVE_COUNT]{};
-Rules rules{};
+Simulation default_simulation{};
+State& world=default_simulation.world;
+Move (&moves)[2][MOVE_COUNT]=default_simulation.moves;
+Rules& rules=default_simulation.rules;
 static int min(int a,int b) { return a<b?a:b; }
 static int max(int a,int b) { return a>b?a:b; }
 static int clamp(int v,int lo,int hi) { return max(lo,min(v,hi)); }
 static int abs(int v) { return v<0?-v:v; }
 static int button_bit(int b) { return P<<b; }
 
-void defaults() {
+void Simulation::defaults() {
     rules=Rules{};
     for(int c=0;c<2;++c) for(int i=0;i<MOVE_COUNT;++i) {
         Move m{};
@@ -52,7 +53,7 @@ void defaults() {
     }
 }
 
-void reset(int c0,int c1,int s0,int s1) {
+void Simulation::reset(int c0,int c1,int s0,int s1) {
     world=State{};
     world.remaining=99*60;
     world.winner=-1;
@@ -101,7 +102,7 @@ static const Sample* sample(const Fighter& f,int frame) {
     return h.frame==frame?&h:nullptr;
 }
 
-bool motion_matches(const Fighter& f,int at,int motion) {
+bool Simulation::motion_matches(const Fighter& f,int at,int motion) const {
     if(!motion) return true;
     const int sequence[3]={motion/100,(motion/10)%10,motion%10};
     int next=2, last=at;
@@ -122,7 +123,7 @@ static bool dir_matches(int want,int got) {
     if(want==6) return got==6||got==3||got==9;
     return want==got;
 }
-static int requested(Fighter& f,Sample& h) {
+int Simulation::requested(Fighter& f,Sample& h) const {
     const int presses=h.pressed&~h.consumed;
     int best=-1,best_priority=-1;
     bool simplified=f.simple&&(h.held&Simple);
@@ -152,17 +153,17 @@ static int requested(Fighter& f,Sample& h) {
     }
     return best;
 }
-static void begin(Fighter& f,int move) {
+void Simulation::begin(Fighter& f,int move) {
     f.move=f.last_move=move;
     f.age=f.contact=f.hit_done=f.dash=0;
     f.x+=moves[f.character][move].v[Advance]*f.facing;
 }
-static bool active(const Fighter& f) {
+bool Simulation::active(const Fighter& f) const {
     if(f.move<0) return false;
     const Move& m=moves[f.character][f.move];
     return f.age+1>=m.v[Startup]&&f.age+1<m.v[Startup]+m.v[Active];
 }
-static void control(Fighter& f) {
+void Simulation::control(Fighter& f) {
     if(f.stun>0) { --f.stun; return; }
     f.guarding=0;
     for(int n=world.frame;n>=max(0,world.frame-rules.buffer+1);--n) {
@@ -203,7 +204,7 @@ static void control(Fighter& f) {
         } else if(!(f.raw&Down)||f.y>0) f.x+=horizontal*(f.character?360:300);
     }
 }
-static bool overlaps(const Fighter& a,const Fighter& b) {
+bool Simulation::overlaps(const Fighter& a,const Fighter& b) const {
     const Move& m=moves[a.character][a.move];
     int front=a.x+a.facing*m.v[Reach], back=a.x+a.facing*1200;
     int lo=min(front,back), hi=max(front,back);
@@ -212,7 +213,7 @@ static bool overlaps(const Fighter& a,const Fighter& b) {
     return hi>b.x-2200&&lo<b.x+2200&&bottom<b.y+hurt_height
         &&bottom+m.v[Height]>b.y;
 }
-static bool blocks(const Fighter& attacker,const Fighter& defender,bool was_stunned) {
+bool Simulation::blocks(const Fighter& attacker,const Fighter& defender,bool was_stunned) const {
     if(defender.y||defender.move>=0||((defender.stun||was_stunned)&&!defender.guarding)) return false;
     int away=attacker.x<defender.x?Right:Left;
     int toward=away==Left?Right:Left;
@@ -222,7 +223,7 @@ static bool blocks(const Fighter& attacker,const Fighter& defender,bool was_stun
     return level==0||(level==1?crouch:!crouch);
 }
 
-void step(int raw0,int raw1) {
+void Simulation::step(int raw0,int raw1) {
     int raw[2]={raw0&2047,raw1&2047};
     for(int p=0;p<2;++p) {
         Fighter& f=world.players[p];
@@ -289,23 +290,13 @@ void step(int raw0,int raw1) {
     ++world.frame;
 }
 
-unsigned checksum() {
+unsigned Simulation::checksum() const {
     const unsigned char* bytes=reinterpret_cast<const unsigned char*>(&world);
     unsigned hash=2166136261u;
     for(unsigned i=0;i<sizeof(State);++i) hash=(hash^bytes[i])*16777619u;
     return hash;
 }
-}
-
-extern "C" {
-int fg_version() { return fight::VERSION; }
-void fg_defaults() { fight::defaults(); }
-void fg_reset(int a,int b,int c,int d) { fight::reset(a,b,c,d); }
-void fg_step(int a,int b) { fight::step(a,b); }
-void* fg_state_ptr() { return &fight::world; }
-int fg_state_size() { return sizeof(fight::State); }
-unsigned fg_checksum() { return fight::checksum(); }
-int fg_get(int player,int field) {
+int Simulation::get(int player,int field) const {
     using namespace fight;
     if(player<0) {
         switch(field) { case 0:return world.frame; case 1:return world.remaining;
@@ -322,11 +313,11 @@ int fg_get(int player,int field) {
         default:return 0;
     }
 }
-int fg_move_get(int c,int m,int f) {
-    if(c<0||c>1||m<0||m>=fight::MOVE_COUNT||f<0||f>=fight::FIELD_COUNT) return -999;
-    return fight::moves[c][m].v[f];
+int Simulation::move_get(int c,int m,int f) const {
+    if(c<0||c>1||m<0||m>=MOVE_COUNT||f<0||f>=FIELD_COUNT) return -999;
+    return moves[c][m].v[f];
 }
-int fg_move_set(int c,int m,int f,int v) {
+int Simulation::move_set(int c,int m,int f,int v) {
     using namespace fight;
     if(c<0||c>1||m<0||m>=MOVE_COUNT||f<0||f>=FIELD_COUNT) return 0;
     int low=0,high=0;
@@ -354,19 +345,41 @@ int fg_move_set(int c,int m,int f,int v) {
     moves[c][m].v[f]=v;
     return 1;
 }
-int fg_rule_get(int f) {
-    return f==0?fight::rules.buffer:f==1?fight::rules.motion_window:f==2?fight::rules.motion_gap:-1;
+int Simulation::rule_get(int f) const {
+    return f==0?rules.buffer:f==1?rules.motion_window:f==2?rules.motion_gap:-1;
 }
-int fg_rule_set(int f,int v) {
-    if(f==0&&v>=1&&v<=12) fight::rules.buffer=v;
-    else if(f==1&&v>=3&&v<=30) fight::rules.motion_window=v;
-    else if(f==2&&v>=1&&v<=12) fight::rules.motion_gap=v;
+int Simulation::rule_set(int f,int v) {
+    if(f==0&&v>=1&&v<=12) rules.buffer=v;
+    else if(f==1&&v>=3&&v<=30) rules.motion_window=v;
+    else if(f==2&&v>=1&&v<=12) rules.motion_gap=v;
     else return 0;
     return 1;
 }
-int fg_can_cancel(int c,int from,int to,int contact) {
+int Simulation::can_cancel(int c,int from,int to,int contact) const {
     using namespace fight;
     if(c<0||c>1||from<0||from>=MOVE_COUNT||to<0||to>=MOVE_COUNT) return 0;
     return cancel_allowed(moves[c][from],moves[c][to],from==to,contact!=0);
 }
+
+void defaults() { default_simulation.defaults(); }
+void reset(int a,int b,int c,int d) { default_simulation.reset(a,b,c,d); }
+void step(int a,int b) { default_simulation.step(a,b); }
+bool motion_matches(const Fighter& f,int at,int motion) { return default_simulation.motion_matches(f,at,motion); }
+unsigned checksum() { return default_simulation.checksum(); }
+}
+
+extern "C" {
+int fg_version() { return fight::VERSION; }
+void fg_defaults() { fight::defaults(); }
+void fg_reset(int a,int b,int c,int d) { fight::reset(a,b,c,d); }
+void fg_step(int a,int b) { fight::step(a,b); }
+void* fg_state_ptr() { return &fight::world; }
+int fg_state_size() { return sizeof(fight::State); }
+unsigned fg_checksum() { return fight::checksum(); }
+int fg_get(int p,int f) { return fight::default_simulation.get(p,f); }
+int fg_move_get(int c,int m,int f) { return fight::default_simulation.move_get(c,m,f); }
+int fg_move_set(int c,int m,int f,int v) { return fight::default_simulation.move_set(c,m,f,v); }
+int fg_rule_get(int f) { return fight::default_simulation.rule_get(f); }
+int fg_rule_set(int f,int v) { return fight::default_simulation.rule_set(f,v); }
+int fg_can_cancel(int c,int from,int to,int contact) { return fight::default_simulation.can_cancel(c,from,to,contact); }
 }
