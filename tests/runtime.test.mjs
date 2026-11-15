@@ -71,3 +71,30 @@ test('Five-frame floor, schema-4 migration and compiled collision API agree',asy
   }
   assert.equal(e.state().players[0].poseIndex,1);
 });
+
+test('Signature moves, movement profiles and schema-6 migration survive the WASM adapter',async()=>{
+  const e=await create(),original=e.data(),legacy=structuredClone(original);
+  legacy.schema=legacy.coreVersion=6;
+  for(const character of legacy.characters) {
+    character.moves.length=25;delete character.movement;
+    for(const move of character.moves) for(const key of ['enabled','artPose','followFrom','followFrom2','followHit','travelSpeed','inertiaPercent','pullFrames','pullGap','hitAngle']) delete move[key];
+  }
+  legacy.characters[5].moves[15].damage=137;e.loadData(legacy);
+  assert.equal(e.move(5,15).damage,137);assert.equal(e.move(4,28).motion,214);
+  assert.equal(e.data().characters[4].movement.forwardStyle,0);
+  const changed=e.data();changed.characters[4].movement.runSpeed=1300;e.loadData(changed);
+  const fingerprint=e.fingerprint();changed.characters[4].movement.runSpeed=-1;
+  assert.throws(()=>e.loadData(changed),/movement/);assert.equal(e.fingerprint(),fingerprint);
+  e.loadData(original);e.reset([4,5]);let followed=false,sawPull=false,sawCombo=false,saved;
+  const inputs=[];
+  for(let frame=0;frame<110;++frame) {
+    let input=frame===0?4:frame===1?5:frame===2?65:0, other=frame===12?8:0;
+    if(e.state().players[0].contact&&!e.state().hitstop&&!followed) {input=16;followed=true;}
+    if(frame===25) saved=e.snapshot();
+    inputs.push([input,other]);e.step(input,other);
+    sawPull ||= e.state().players[1].reaction===5;sawCombo ||= e.state().players[0].combo===2;
+  }
+  assert.ok(sawPull&&sawCombo);assert.equal(e.state().players[1].health,930);
+  const expected=e.hash;e.restore(saved);for(const input of inputs.slice(25)) e.step(...input);
+  assert.equal(e.hash,expected);
+});

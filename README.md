@@ -6,7 +6,9 @@ Each fighter has matching **windup and active** pose studies plus movement poses
 
 **Fillet versus Shark** is the default matchup. Recovery editing includes independent grounded/airborne knockback, block pushback, launch and soft/hard knockdown. Universal **2D** sweep and **4P+K / 6P+K** throws cause hard knockdown. Combo gravity begins after five hits by default; Strive-style wallsplats, wall breaks and a Momentum Positive Bonus are playable. See [recovery and walls](docs/recovery-and-walls.md) for editable values and prototype limits.
 
-Body-only hurtboxes follow all **144 current poses**, using **legs, torso-and-arms, head, and at most one optional extension**—four boxes maximum. Per-fighter pushboxes and preliminary stats/hitboxes cover **150 move slots**. **Weapons never extend hurtboxes; attack startup is at least 5 frames.** Development overlays and Sprite review show the actual collision geometry. See [collision rules](docs/collision-rules.md) and [move stats](docs/move-stats.md).
+Fillet has **236K** knife spiral and **236S > 6S > 2S** rekka, with **236S > 2S** as the shortcut. Shark has **214S / j.214P** diagonal hook pulls and **P** on-hit stabs. Both have dedicated generated windup/active art. Most fighters run forward; Anvil provisionally steps. Run/step velocity carries into attacks, including motion commands. Tune these in Development; [signature moves and movement](docs/signature-moves.md) lists the inputs and settings.
+
+Body-only hurtboxes follow all **160 current poses**, using **legs, torso-and-arms, head, and at most one optional extension**—four boxes maximum. Per-fighter pushboxes and preliminary stats/hitboxes cover **192 move slots (157 enabled)**. **Weapons never extend hurtboxes; attack startup is at least 5 frames.** Development overlays and Sprite review show the actual collision geometry. See [collision rules](docs/collision-rules.md) and [move stats](docs/move-stats.md).
 
 Menus share the supplied **Guild Ball** visual language: Barlow Condensed, charcoal panels, raised blue controls and brass trim. Character select adds a central angled roster and large guild-colored fighters, following the requested 2XKO-inspired direction. The match HUD extends it with portrait nameplates, shaped health/Momentum rails, diamond Scrum markers and bold framed combat/announcer text. Menus use interruptible eased transitions, with a saved reduced-motion option. Controls uses its separate warm Settings skin. [Menu style and provenance](docs/menu-style.md) records the reusable assets and review workflow.
 
@@ -16,10 +18,10 @@ Download the Windows/Linux ZIP from this branch's successful GitHub Actions arti
 
 - Versus is first to two Scrum wins: **1st Scrum**, **2nd Scrum**, and **Final Down** at 1–1. Fighter loading/intros and the four-beat opening lead into each match; online clients synchronize before release.
 - Start from **Versus**, **Training** or **Development**, then choose fighters. Esc / gamepad Start opens the match menu. [Menu flow](docs/menu-flow.md) explains entry, pause, rematch and connection recovery.
-- **Player 1:** WASD; J/K/L/I/O = P/K/S/Hs/D; Space = dash; left Shift = simple modifier; back + Q = Faultless Defense.
-- **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = dash; numpad + = modifier; back + numpad Enter = Faultless Defense.
+- **Player 1:** WASD; J/K/L/I/O = P/K/S/Hs/D; Space = run/dash; left Shift = simple modifier; back + Q = Faultless Defense.
+- **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = run/dash; numpad + = modifier; back + numpad Enter = Faultless Defense.
 - Choose simplified inputs independently at fighter select. Traditional motions stay available.
-- In **Development**, edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1/2/3/4/5 saves preserve edits during migration; Restore default move set loads the new starter tuning.
+- In **Development**, edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1–6 saves preserve edits during migration; Restore default move set loads the new starter tuning.
 - Online: direct ENet/UDP host and join, default port 7000. Both players use Player 1 controls locally. Matching move data is required.
 
 Momentum has **three equal sections**, with continuous gain and unchanged FD costs. Try **Start Momentum: 50%** and the **Faultless guard** dummy in training. The move editor exposes chip damage and **Guard break on block**; Sprite review includes negative/even, positive and guard-break clips. [Momentum and defense rules](docs/momentum-defense.md) describe the provisional tuning. Negative Penalty is deferred; FD is the only meter spend.

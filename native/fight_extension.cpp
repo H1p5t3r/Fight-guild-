@@ -88,12 +88,16 @@ public:
                 ||f.hit_notice_time<0||f.hit_notice_time>fight::NOTICE_TICKS
                 ||f.reversal_ready<0||f.reversal_ready>1||f.reversal_time<0||f.reversal_time>fight::NOTICE_TICKS
                 ||f.reversal_input_age<0||f.reversal_input_age>=12
-                ||f.reaction<fight::Free||f.reaction>fight::WallSplat||f.knockdown<0||f.knockdown>2
+                ||f.reaction<fight::Free||f.reaction>fight::Reeled||f.knockdown<0||f.knockdown>2
                 ||f.down_frames<0||f.down_frames>180||f.wakeup_frames<0||f.wakeup_frames>60
                 ||f.recovery_time<0||f.recovery_time>180||f.combo_received<0||f.combo_received>1000
                 ||f.wall_damage<0||f.wall_damage>10000||f.wall_delay<0||f.wall_delay>600
                 ||f.wall_time<0||f.wall_time>180||f.wall_side< -1||f.wall_side>1
-                ||f.positive_time<0||f.positive_time>1800) return false;
+                ||f.positive_time<0||f.positive_time>1800
+                ||f.vx< -4000||f.vx>4000||f.running<0||f.running>1||f.dash<0||f.dash>60
+                ||f.dash_direction< -1||f.dash_direction>1||f.pull_time<0||f.pull_time>60
+                ||f.pull_owner< -1||f.pull_owner>1||f.pull_gap<0||f.pull_gap>10000
+                ||f.carry_vx< -4000||f.carry_vx>4000||f.carry_time<0||f.carry_time>12) return false;
         }
         simulation.world=candidate;
         return true;
@@ -102,15 +106,19 @@ public:
         PackedInt32Array data;
         for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
             for(int f=0;f<fight::FIELD_COUNT;++f) data.push_back(simulation.move_get(c,m,f));
+        for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int f=0;f<fight::MOBILITY_FIELDS;++f)
+            data.push_back(simulation.mobility_get(c,f));
         for(int f=0;f<fight::RULE_COUNT;++f) data.push_back(simulation.rule_get(f));
         return data;
     }
     bool configure(const PackedInt32Array& data) {
-        if(data.size()!=fight::CHARACTER_COUNT*fight::MOVE_COUNT*fight::FIELD_COUNT+fight::RULE_COUNT) return false;
+        if(data.size()!=fight::CHARACTER_COUNT*(fight::MOVE_COUNT*fight::FIELD_COUNT+fight::MOBILITY_FIELDS)+fight::RULE_COUNT) return false;
         auto candidate=simulation;
         int at=0;
         for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
             for(int f=0;f<fight::FIELD_COUNT;++f) if(!candidate.move_set(c,m,f,data[at++])) return false;
+        for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int f=0;f<fight::MOBILITY_FIELDS;++f)
+            if(!candidate.mobility_set(c,f,data[at++])) return false;
         for(int f=0;f<fight::RULE_COUNT;++f) if(!candidate.rule_set(f,data[at++])) return false;
         simulation=candidate;
         return true;

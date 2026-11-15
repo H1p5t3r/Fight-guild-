@@ -19,6 +19,8 @@ for platform in (['Linux', 'Windows'] if target == 'all' else [target]):
         archive.write(root / 'docs/play-native.md', 'FightGuild/START-HERE.md')
         archive.write(root / 'docs/momentum-defense.md', 'FightGuild/momentum-defense.md')
         archive.write(root / 'docs/combat-feedback.md', 'FightGuild/combat-feedback.md')
+        archive.write(root / 'docs/recovery-and-walls.md', 'FightGuild/recovery-and-walls.md')
+        archive.write(root / 'docs/signature-moves.md', 'FightGuild/signature-moves.md')
         archive.write(root / 'docs/collision-rules.md', 'FightGuild/collision-rules.md')
         archive.write(root / 'docs/move-stats.md', 'FightGuild/move-stats.md')
         archive.write(root / 'docs/menu-flow.md', 'FightGuild/menu-flow.md')

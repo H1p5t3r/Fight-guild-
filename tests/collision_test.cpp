@@ -21,7 +21,7 @@ static void flush(Simulation& s,bool mirror=false,bool corner=false) {
 static void poses() {
     Simulation s; s.defaults();
     CHECK(Simulation::collision_hash()!=0);
-    for(int c=0;c<6;++c) for(int phase=0;phase<3;++phase) for(int p=0;p<(phase==0?12:6);++p) {
+    for(int c=0;c<6;++c) for(int phase=0;phase<(c>=4?5:3);++phase) for(int p=0;p<(phase==0?12:phase<=2?6:4);++p) {
         int count=Simulation::pose_box_count(c,phase,p);
         CHECK(count>=3&&count<=4&&count<=MAX_HURTBOXES);
         auto outside=Simulation::pose_box(c,phase,p,MAX_HURTBOXES);

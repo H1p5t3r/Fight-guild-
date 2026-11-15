@@ -12,8 +12,8 @@ func _initialize() -> void:
 	check(source.version == 2, "Unsupported hurtbox authoring schema")
 	# Catch stale native binaries, wrong pivots/scale and dropped authored body parts.
 	for character in 6:
-		for phase_index in 3:
-			var phase: String = ["active", "windup", "block"][phase_index]
+		for phase in FighterArt.phase_names(character):
+			var phase_index := FighterArt.PHASES.find(phase)
 			var art := FighterArt.sheet(character, phase)
 			var poses: Array = source.fighters[character].poses[phase]
 			for pose in poses.size():
@@ -37,5 +37,5 @@ func _initialize() -> void:
 			var move := model.move(character, slot)
 			check(move.startup >= 5, "Invalid shipped startup")
 			check(move.hitboxBack < move.reach and move.height > 0, "Empty shipped hitbox")
-	print("Godot compiled collision: ", failures, " failures; 144 pose mappings, push profiles, 150 move definitions")
+	print("Godot compiled collision: ", failures, " failures; 160 pose mappings, push profiles, 192 move slots")
 	quit(1 if failures else 0)

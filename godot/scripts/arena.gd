@@ -9,6 +9,7 @@ var score := [0, 0]
 var presentation_active := false
 var diagnostics := true
 var sprites: Array[Sprite2D] = []
+var weapons: Array[HookWeapon] = []
 var collision_layer: Control
 var hud_layer: Control
 var feedback := CombatFeedback.new()
@@ -26,6 +27,9 @@ func _ready() -> void:
 		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		add_child(sprite)
 		sprites.append(sprite)
+		var weapon := HookWeapon.new()
+		add_child(weapon)
+		weapons.append(weapon)
 	collision_layer = Control.new()
 	collision_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	collision_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -53,11 +57,18 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 		var fighter: Dictionary = view.players[p]
 		var sprite := sprites[p]
 		var character := int(fighter.character)
-		var phase: String = ["active", "windup", "block"][int(fighter.posePhase)]
+		var phase: String = FighterArt.PHASES[int(fighter.posePhase)]
 		var pose := int(fighter.poseIndex)
 		FighterArt.apply(sprite, character, phase, pose, scale_x, fighter.facing)
 		sprite.position = Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x)
 		sprite.modulate = Color("ffa69a") if fighter.stun and not fighter.guarding else Color.WHITE
+		weapons[p].visible = false
+		if character == 4 and fighter.weaponVisible:
+			var move := model.move(character, fighter.move)
+			var origin := Vector2((fighter.x + fighter.facing * move.hitboxBack) / 100.0 * scale_x, floor_y - (fighter.y + move.bottom) / 100.0 * scale_x)
+			var back := Vector2(fighter.weaponBackX / 100.0 * scale_x, floor_y - fighter.weaponBackY / 100.0 * scale_x)
+			var tip := Vector2(fighter.weaponTipX / 100.0 * scale_x, floor_y - fighter.weaponTipY / 100.0 * scale_x)
+			weapons[p].present(origin, back, tip, fighter.facing, scale_x)
 	queue_redraw()
 	hud_layer.queue_redraw()
 	collision_layer.queue_redraw()
@@ -89,6 +100,9 @@ func _draw() -> void:
 			elif fighter.reaction == 2: status = "HARD DOWN" if fighter.knockdown == 2 else "SOFT DOWN · AUTO TECH"
 			elif fighter.reaction == 3: status = "WAKEUP · %df" % fighter.recoveryTime
 			elif fighter.reaction == 4: status = "WALL SPLAT · %df" % fighter.wallSplatTime
+			elif fighter.reaction == 5: status = "HOOK PULL · %df" % fighter.pullTime
+			elif fighter.running: status = "RUN"
+			elif fighter.dashTicks: status = "STEP"
 			label(status, Vector2(clampf(px + 28, 12, size.x - 165), py - 10), 12, Color("f68b79") if fighter.guardBreak else MUTED)
 		if fighter.positiveTime > 0:
 			FightHud.centered(self, "POSITIVE BONUS", Vector2(size.x * (0.22 if p == 0 else 0.78), size.y - 96), 18, Color("a8e9b1"), 2)

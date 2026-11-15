@@ -3,7 +3,7 @@ extends AcceptDialog
 var tabs: Array[Button] = []
 var bindings: VBoxContainer
 var headings := ["Player 1", "Player 2", "Gamepad"]
-const ACTIONS := ["Move / jump / crouch", "P", "K", "S", "Hs", "D", "Dash", "Simple modifier", "Faultless Defense", "Match menu"]
+const ACTIONS := ["Move / jump / crouch", "P", "K", "S", "Hs", "D", "Run / dash macro", "Simple modifier", "Faultless Defense", "Match menu"]
 const BINDINGS := [
 	["W / A / S / D", "J", "K", "L", "I", "O", "Space", "Left Shift", "Hold away + Q", "Esc"],
 	["Arrow keys", "Numpad 1", "Numpad 2", "Numpad 3", "Numpad 5", "Numpad 6", "Numpad 0", "Numpad +", "Hold away + Numpad Enter", "Esc"],
@@ -85,5 +85,8 @@ func show_bindings(scheme: int) -> void:
 		label(keycap, BINDINGS[scheme][i], 20, GuildTheme.CREAM)
 	bindings.add_child(HSeparator.new())
 	label(bindings, "MOTIONS & DEFENSE", 18, GuildTheme.ORANGE)
-	var note := label(bindings, "Enable simplified inputs at fighter select: modifier + forward P / down S / up Hs.\nNumpad directions follow facing: 5 neutral, 2 down, 4 back, 6 forward; j. means airborne.\n2D: sweep. 4P+K / 6P+K: back / forward throw (+ means simultaneous).\nTraditional 236P, 236S and 623Hs remain available.\nHold away to block. Away + two of P / K / S / Hs activates FD, except grounded 4P+K (back throw).\nFD spends Momentum to prevent chip and add pushback. Guard break removes backdash and blockstun grab protection.\nOnline: both players use Player 1 controls locally. Click the arena after editing to resume gameplay input.", 18, GuildTheme.WARM_MUTED)
+	var note := label(bindings, "Enable simplified inputs at fighter select; hold the modifier for shortcuts.
+Fillet: 236K spiral; 236S > 6S > 2S, or 236S > 2S. Simple: 6K / 6S.
+Shark: 214S / j.214P hook; P after a successful hit to stab. Simple: 4S / j.4P.
+66 or Dash starts a run (Anvil uses a step). Hold forward or Dash to run; 4 + Dash goes back. Run/step velocity carries into attacks.\nNumpad directions follow facing: 5 neutral, 2 down, 4 back, 6 forward; j. means airborne.\n2D: sweep. 4P+K / 6P+K: back / forward throw (+ means simultaneous).\nTraditional 236P, 236S and 623Hs remain available.\nHold away to block. Away + two of P / K / S / Hs activates FD, except grounded 4P+K (back throw).\nFD spends Momentum to prevent chip and add pushback. Guard break removes backdash and blockstun grab protection.\nOnline: both players use Player 1 controls locally. Click the arena after editing to resume gameplay input.", 18, GuildTheme.WARM_MUTED)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

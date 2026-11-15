@@ -40,6 +40,7 @@ static void test_routes() {
     CHECK(!fg_can_cancel(0,3,0,1));
     for(int c=0;c<CHARACTER_COUNT;++c) for(int from=0;from<MOVE_COUNT;++from) {
         const auto& source=moves[c][from];
+        if(!source.v[Enabled]) continue;
         int command=8+source.v[Button];
         if(from!=command) CHECK(fg_can_cancel(c,from,command,1));
         CHECK(!fg_can_cancel(c,from,command,0));

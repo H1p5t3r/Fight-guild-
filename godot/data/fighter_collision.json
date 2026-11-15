@@ -3313,6 +3313,252 @@
             },
             "extensionFor": "rear arm"
           }
+        ],
+        "signature_windup": [
+          {
+            "hurt": {
+              "legs": [
+                108,
+                346,
+                347,
+                493
+              ],
+              "torsoArms": [
+                158,
+                222,
+                276,
+                357
+              ],
+              "head": [
+                218,
+                145,
+                279,
+                224
+              ],
+              "extension": [
+                89,
+                268,
+                166,
+                367
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded"
+          },
+          {
+            "hurt": {
+              "legs": [
+                126,
+                279,
+                287,
+                420
+              ],
+              "torsoArms": [
+                166,
+                156,
+                280,
+                283
+              ],
+              "head": [
+                220,
+                108,
+                282,
+                177
+              ],
+              "extension": [
+                111,
+                87,
+                197,
+                173
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded"
+          },
+          {
+            "hurt": {
+              "legs": [
+                94,
+                339,
+                336,
+                492
+              ],
+              "torsoArms": [
+                86,
+                216,
+                287,
+                357
+              ],
+              "head": [
+                214,
+                133,
+                279,
+                213
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                134,
+                303,
+                297,
+                423
+              ],
+              "torsoArms": [
+                116,
+                155,
+                306,
+                307
+              ],
+              "head": [
+                235,
+                142,
+                292,
+                214
+              ]
+            }
+          }
+        ],
+        "signature_active": [
+          {
+            "hurt": {
+              "legs": [
+                29,
+                340,
+                303,
+                480
+              ],
+              "torsoArms": [
+                79,
+                219,
+                218,
+                353
+              ],
+              "head": [
+                143,
+                163,
+                202,
+                226
+              ],
+              "extension": [
+                175,
+                195,
+                245,
+                249
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded",
+            "strike": [
+              201,
+              194,
+              248,
+              246
+            ]
+          },
+          {
+            "hurt": {
+              "legs": [
+                63,
+                212,
+                214,
+                355
+              ],
+              "torsoArms": [
+                94,
+                115,
+                214,
+                230
+              ],
+              "head": [
+                153,
+                73,
+                211,
+                139
+              ],
+              "extension": [
+                190,
+                171,
+                232,
+                226
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded",
+            "strike": [
+              194,
+              186,
+              241,
+              237
+            ]
+          },
+          {
+            "hurt": {
+              "legs": [
+                75,
+                338,
+                317,
+                480
+              ],
+              "torsoArms": [
+                117,
+                218,
+                255,
+                351
+              ],
+              "head": [
+                209,
+                158,
+                269,
+                222
+              ],
+              "extension": [
+                246,
+                210,
+                339,
+                255
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded",
+            "strike": [
+              335,
+              211,
+              393,
+              248
+            ]
+          },
+          {
+            "hurt": {
+              "legs": [
+                110,
+                279,
+                243,
+                404
+              ],
+              "torsoArms": [
+                110,
+                170,
+                246,
+                293
+              ],
+              "head": [
+                196,
+                119,
+                247,
+                184
+              ],
+              "extension": [
+                238,
+                188,
+                284,
+                226
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded",
+            "strike": [
+              280,
+              188,
+              332,
+              224
+            ]
+          }
         ]
       }
     },
@@ -3986,6 +4232,259 @@
               ]
             },
             "extensionFor": "rear arm"
+          }
+        ],
+        "signature_windup": [
+          {
+            "hurt": {
+              "legs": [
+                102,
+                322,
+                305,
+                477
+              ],
+              "torsoArms": [
+                142,
+                240,
+                260,
+                342
+              ],
+              "head": [
+                218,
+                166,
+                306,
+                252
+              ],
+              "extension": [
+                86,
+                235,
+                163,
+                284
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded"
+          },
+          {
+            "hurt": {
+              "legs": [
+                60,
+                316,
+                309,
+                477
+              ],
+              "torsoArms": [
+                117,
+                202,
+                246,
+                327
+              ],
+              "head": [
+                176,
+                115,
+                261,
+                205
+              ],
+              "extension": [
+                67,
+                244,
+                127,
+                310
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded"
+          },
+          {
+            "hurt": {
+              "legs": [
+                44,
+                307,
+                340,
+                477
+              ],
+              "torsoArms": [
+                106,
+                190,
+                274,
+                315
+              ],
+              "head": [
+                184,
+                105,
+                266,
+                199
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                73,
+                326,
+                290,
+                476
+              ],
+              "torsoArms": [
+                111,
+                244,
+                249,
+                346
+              ],
+              "head": [
+                188,
+                171,
+                275,
+                256
+              ],
+              "extension": [
+                60,
+                256,
+                126,
+                322
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded"
+          }
+        ],
+        "signature_active": [
+          {
+            "hurt": {
+              "legs": [
+                20,
+                294,
+                220,
+                405
+              ],
+              "torsoArms": [
+                100,
+                225,
+                245,
+                327
+              ],
+              "head": [
+                236,
+                183,
+                313,
+                277
+              ],
+              "extension": [
+                220,
+                268,
+                312,
+                316
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded",
+            "strike": [
+              282,
+              245,
+              382,
+              317
+            ]
+          },
+          {
+            "hurt": {
+              "legs": [
+                35,
+                295,
+                300,
+                444
+              ],
+              "torsoArms": [
+                119,
+                188,
+                207,
+                326
+              ],
+              "head": [
+                105,
+                113,
+                202,
+                190
+              ],
+              "extension": [
+                193,
+                100,
+                285,
+                178
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded",
+            "strike": [
+              200,
+              73,
+              360,
+              287
+            ]
+          },
+          {
+            "hurt": {
+              "legs": [
+                28,
+                300,
+                310,
+                443
+              ],
+              "torsoArms": [
+                102,
+                182,
+                230,
+                325
+              ],
+              "head": [
+                100,
+                112,
+                184,
+                190
+              ],
+              "extension": [
+                195,
+                180,
+                282,
+                217
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded",
+            "strike": [
+              270,
+              180,
+              363,
+              211
+            ]
+          },
+          {
+            "hurt": {
+              "legs": [
+                44,
+                322,
+                204,
+                443
+              ],
+              "torsoArms": [
+                112,
+                251,
+                213,
+                350
+              ],
+              "head": [
+                149,
+                167,
+                246,
+                253
+              ],
+              "extension": [
+                200,
+                280,
+                288,
+                365
+              ]
+            },
+            "extensionFor": "extended forearm; blade excluded",
+            "strike": [
+              280,
+              353,
+              374,
+              397
+            ]
           }
         ]
       }

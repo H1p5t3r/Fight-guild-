@@ -3,8 +3,10 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 6, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 25, FIELD_COUNT = 41;
+constexpr int VERSION = 7, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 51;
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
+constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
+              STAB_GROUND=30, STAB_AIR=31;
 constexpr int MIN_STARTUP = 5;
 constexpr int MAX_HURTBOXES = 4;
 enum HurtRegion { LegsHurt, TorsoArmsHurt, HeadHurt, ExtensionHurt };
@@ -20,12 +22,17 @@ enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery
              SimpleDirection, SimpleButton, NormalRoutes, CommandRoutes,
              HitLevel, ChipDamage, GuardBreak, CounterHitstun, CounterHitstop, ReversalEligible, HitboxBack,
              AirPushback, BlockPushback, Launch, AirLaunch, Knockdown, KnockdownFrames, WakeupFrames,
-             WallDamage, ThrowRange };
+             WallDamage, ThrowRange, Enabled, ArtPose, FollowFrom, FollowFrom2, FollowHit,
+             TravelSpeed, InertiaPercent, PullFrames, PullGap, HitAngle };
 enum KnockdownKind { NoKnockdown, SoftKnockdown, HardKnockdown };
-enum Reaction { Free, AirReel, Downed, Waking, WallSplat };
+enum Reaction { Free, AirReel, Downed, Waking, WallSplat, Reeled };
+enum MobilityField { ForwardStyle, WalkSpeed, RunSpeed, RunAcceleration, StepSpeed, StepFrames,
+                     BackSpeed, BackFrames, AttackFriction, MOBILITY_FIELDS };
+enum ForwardMovement { ForwardRun, StepDash };
+struct Mobility { int v[MOBILITY_FIELDS]; };
 enum BoxKind { HurtBox, PushBox, HitBox };
 struct Box { int left, bottom, right, top; };
-struct Pose { int phase, index; }; // active, windup, block; shared with the sprite renderer.
+struct Pose { int phase, index; }; // active, windup, block, signature windup/active; shared with rendering.
 enum BlockReaction { NoBlock, StableBlock, PressureBlock, BrokenGuard };
 enum Contact { NoContact, NormalHit, Blocked, CounterHit, PunishHit };
 enum Rule { ButtonBuffer, MotionWindow, MotionGap, MoveGain, AttackGain,
@@ -47,6 +54,8 @@ struct Fighter {
     int reversal_ready, reversal_time, reversal_input_age;
     int reaction, knockdown, down_frames, wakeup_frames, recovery_time, combo_received;
     int wall_damage, wall_delay, wall_time, wall_side, positive_time;
+    int vx, running, dash_direction, pull_time, pull_owner, pull_gap;
+    int carry_vx, carry_time;
     Sample history[HISTORY];
 };
 struct State {
@@ -69,6 +78,7 @@ class Simulation {
 public:
     State world{};
     Move moves[CHARACTER_COUNT][MOVE_COUNT]{};
+    Mobility mobility[CHARACTER_COUNT]{};
     Rules rules{};
     void defaults();
     void reset(int character0, int character1, int simple0, int simple1);
@@ -80,6 +90,8 @@ public:
     int move_set(int character, int move, int field, int value);
     int rule_get(int field) const;
     int rule_set(int field, int value);
+    int mobility_get(int character, int field) const;
+    int mobility_set(int character, int field, int value);
     int can_cancel(int character, int from, int to, int contact) const;
     Pose pose(const Fighter& fighter, int tick_offset=0) const;
     int box_count(int player, int kind) const;
@@ -97,7 +109,8 @@ private:
     void gain_momentum(Fighter& fighter, int amount);
     void update_faultless(Fighter& fighter);
     Box push_box(const Fighter& fighter) const;
-    Box attack_box(const Fighter& fighter) const;
+    Box attack_box(const Fighter& fighter, int segment=0, int tick_offset=0) const;
+    Box weapon_span(const Fighter& fighter, int tick_offset=0) const;
     Box hurt_box(const Fighter& fighter, int index, int tick_offset=0) const;
     void resolve_push(int previous_order, bool preserve_order);
     int clamp_x(const Fighter& fighter, int x) const;
@@ -105,6 +118,9 @@ private:
     bool throw_invulnerable(const Fighter& fighter) const;
     void land(Fighter& fighter);
     void finish_wall_break();
+    void move_horizontal(Fighter& fighter);
+    void reel_targets();
+    bool double_forward(const Fighter& fighter, const Sample& sample) const;
 };
 // Compatibility instance for the original C ABI and native test runner.
 extern Simulation default_simulation;
@@ -134,6 +150,8 @@ FG_EXPORT(fg_move_get) int fg_move_get(int character, int move, int field);
 FG_EXPORT(fg_move_set) int fg_move_set(int character, int move, int field, int value);
 FG_EXPORT(fg_rule_get) int fg_rule_get(int field);
 FG_EXPORT(fg_rule_set) int fg_rule_set(int field, int value);
+FG_EXPORT(fg_mobility_get) int fg_mobility_get(int character, int field);
+FG_EXPORT(fg_mobility_set) int fg_mobility_set(int character, int field, int value);
 FG_EXPORT(fg_can_cancel) int fg_can_cancel(int character, int from, int to, int contact);
 FG_EXPORT(fg_state_ptr) void* fg_state_ptr();
 FG_EXPORT(fg_state_size) int fg_state_size();

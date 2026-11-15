@@ -2382,6 +2382,188 @@
             ]
           }
         ]
+      },
+      "signature_windup": {
+        "file": "shark-signatures.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 350,
+        "sha256": "79cc0ba2a0ca69189044c37b551992ce10bb4ddd30611453e5463a1244f7a972",
+        "generation_file": "exec-dd3611d3-a461-4700-a936-140eae688b51.png",
+        "frames": [
+          {
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              210,
+              491
+            ],
+            "bounds": [
+              18,
+              137,
+              349,
+              493
+            ]
+          },
+          {
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              190,
+              419
+            ],
+            "bounds": [
+              11,
+              43,
+              294,
+              420
+            ]
+          },
+          {
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              200,
+              492
+            ],
+            "bounds": [
+              25,
+              128,
+              337,
+              492
+            ]
+          },
+          {
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              190,
+              423
+            ],
+            "bounds": [
+              17,
+              90,
+              313,
+              424
+            ]
+          }
+        ]
+      },
+      "signature_active": {
+        "file": "shark-signatures.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 350,
+        "sha256": "79cc0ba2a0ca69189044c37b551992ce10bb4ddd30611453e5463a1244f7a972",
+        "generation_file": "exec-dd3611d3-a461-4700-a936-140eae688b51.png",
+        "frames": [
+          {
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              145,
+              479
+            ],
+            "bounds": [
+              28,
+              140,
+              304,
+              480
+            ]
+          },
+          {
+            "region": [
+              384,
+              512,
+              372,
+              512
+            ],
+            "pivot": [
+              145,
+              354
+            ],
+            "bounds": [
+              20,
+              36,
+              237,
+              359
+            ]
+          },
+          {
+            "region": [
+              756,
+              512,
+              394,
+              512
+            ],
+            "pivot": [
+              192,
+              479
+            ],
+            "bounds": [
+              1,
+              139,
+              391,
+              480
+            ]
+          },
+          {
+            "region": [
+              1150,
+              512,
+              386,
+              512
+            ],
+            "pivot": [
+              182,
+              404
+            ],
+            "bounds": [
+              8,
+              72,
+              376,
+              405
+            ]
+          }
+        ]
+      },
+      "hook_weapon": {
+        "file": "shark-spear.png",
+        "sha256": "a2677140e56417c9bb6b3d2689f673041172d611c0695b4e2264c6a54d071173",
+        "generation_file": "exec-8dd42c4f-27f0-4ca3-a7b8-c30e865566f2.png",
+        "size": [
+          1254,
+          1254
+        ],
+        "butt": [
+          160,
+          1120
+        ],
+        "tip": [
+          1090,
+          155
+        ],
+        "description": "Detached hooked spear. The rope is visual only; weapon never adds hurtboxes."
       }
     },
     {
@@ -2855,6 +3037,170 @@
               89,
               429,
               492
+            ]
+          }
+        ]
+      },
+      "signature_windup": {
+        "file": "fillet-signatures.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 350,
+        "sha256": "a255f5cd99a9736be42a5c98e2856028e19aa179fb2032aa953a027d8a37dcd7",
+        "generation_file": "exec-c4ba0e01-802c-4f0a-b7ad-2994814b737f.png",
+        "frames": [
+          {
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              180,
+              477
+            ],
+            "bounds": [
+              34,
+              163,
+              350,
+              478
+            ]
+          },
+          {
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              180,
+              477
+            ],
+            "bounds": [
+              37,
+              113,
+              310,
+              477
+            ]
+          },
+          {
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              185,
+              477
+            ],
+            "bounds": [
+              39,
+              106,
+              340,
+              477
+            ]
+          },
+          {
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              165,
+              476
+            ],
+            "bounds": [
+              36,
+              171,
+              302,
+              476
+            ]
+          }
+        ]
+      },
+      "signature_active": {
+        "file": "fillet-signatures.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 350,
+        "sha256": "a255f5cd99a9736be42a5c98e2856028e19aa179fb2032aa953a027d8a37dcd7",
+        "generation_file": "exec-c4ba0e01-802c-4f0a-b7ad-2994814b737f.png",
+        "frames": [
+          {
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              160,
+              443
+            ],
+            "bounds": [
+              19,
+              156,
+              381,
+              404
+            ]
+          },
+          {
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              170,
+              443
+            ],
+            "bounds": [
+              33,
+              73,
+              359,
+              443
+            ]
+          },
+          {
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              180,
+              443
+            ],
+            "bounds": [
+              4,
+              112,
+              377,
+              443
+            ]
+          },
+          {
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              135,
+              443
+            ],
+            "bounds": [
+              2,
+              165,
+              371,
+              443
             ]
           }
         ]

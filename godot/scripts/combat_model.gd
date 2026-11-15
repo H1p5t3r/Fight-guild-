@@ -2,17 +2,18 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 6
+const DATA_VERSION := 7
 const MOMENTUM_MAX := 10000
 const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
-const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D", "2D", "4P+K", "6P+K"]
-const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange"]
+const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D", "2D", "4P+K", "6P+K", "236K", "236S>6S", "236S>2S", "214S", "j.214P", "214S>P", "j.214P>P"]
+const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange", "enabled", "artPose", "followFrom", "followFrom2", "followHit", "travelSpeed", "inertiaPercent", "pullFrames", "pullGap", "hitAngle"]
+const MOVEMENT_FIELDS := ["forwardStyle", "walkSpeed", "runSpeed", "runAcceleration", "stepSpeed", "stepFrames", "backSpeed", "backFrames", "attackFriction"]
 const RULES := ["buttonBuffer", "motionWindow", "motionGap"]
 const MOMENTUM_RULES := ["movementGain", "attackGain", "blockedAttackGain", "damageTakenGain", "guardGain", "specialGain", "fdDrain", "fdBlockCost", "fdDamageCost", "fdPushPercent"]
 const RECOVERY_RULES := ["gravityAfter", "gravityStep", "gravityCap", "wallThreshold", "wallRange", "wallDecayDelay", "wallDecay", "wallSplatFrames", "wallBreakFrames", "wallBreakDamage", "positiveFrames", "positiveGainPercent", "positiveRegen"]
 const RULE_COUNT := 26 # Input, Momentum, then recovery/wall rules; matches fight::RULE_COUNT.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime"]
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime"]
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
 
@@ -43,6 +44,12 @@ func move(character: int, slot: int) -> Dictionary:
 		result[FIELDS[i]] = config[(character * MOVE_IDS.size() + slot) * FIELDS.size() + i]
 	return result
 
+func movement(character: int) -> Dictionary:
+	var result := {}
+	var offset := CHARACTERS.size() * MOVE_IDS.size() * FIELDS.size() + character * MOVEMENT_FIELDS.size()
+	for i in MOVEMENT_FIELDS.size(): result[MOVEMENT_FIELDS[i]] = config[offset + i]
+	return result
+
 func data() -> Dictionary:
 	var result := {"schema": DATA_VERSION, "coreVersion": DATA_VERSION, "inputRules": {}, "momentumRules": {}, "recoveryRules": {}, "characters": []}
 	for i in RULES.size():
@@ -52,7 +59,7 @@ func data() -> Dictionary:
 	for i in RECOVERY_RULES.size():
 		result.recoveryRules[RECOVERY_RULES[i]] = config[config.size() - RECOVERY_RULES.size() + i]
 	for c in CHARACTERS.size():
-		var character := {"name": CHARACTERS[c], "moves": []}
+		var character := {"name": CHARACTERS[c], "moves": [], "movement": movement(c)}
 		for m in MOVE_IDS.size():
 			var definition := {"id": MOVE_IDS[m]}
 			definition.merge(move(c, m))
@@ -71,7 +78,7 @@ func load_data(value: Variant) -> String:
 		return "Unsupported move data version."
 	var characters: Variant = value.get("characters")
 	var expected := 2 if version == 1 else CHARACTERS.size()
-	var slots := 22 if version < 6 else MOVE_IDS.size()
+	var slots := 22 if version < 6 else 25 if version == 6 else MOVE_IDS.size()
 	if not characters is Array or characters.size() != expected:
 		return "Missing characters."
 	# Start with shipped defaults, so older files gain the new universal move slots.
@@ -109,6 +116,8 @@ func load_data(value: Variant) -> String:
 				definition.wakeupFrames = 8
 				definition.wallDamage = clampi(int(definition.damage) * 3 + 80, 0, 5000)
 				definition.throwRange = 2000
+			if version < 7:
+				for i in range(41, FIELDS.size()): definition[FIELDS[i]] = candidate[(c * MOVE_IDS.size() + m) * FIELDS.size() + i]
 			for i in FIELDS.size():
 				var field: String = FIELDS[i]
 				if not valid_integer(definition.get(field)):
@@ -116,6 +125,13 @@ func load_data(value: Variant) -> String:
 				if field == "startup" and definition[field] < 5:
 					return "%s / %s: startup must be at least 5 frames." % [CHARACTERS[c], MOVE_IDS[m]]
 				candidate[(c * MOVE_IDS.size() + m) * FIELDS.size() + i] = int(definition[field])
+		if version >= 7:
+			if not characters[c].get("movement") is Dictionary: return "Missing movement profile."
+			var start := CHARACTERS.size() * MOVE_IDS.size() * FIELDS.size() + c * MOVEMENT_FIELDS.size()
+			for i in MOVEMENT_FIELDS.size():
+				var field: String = MOVEMENT_FIELDS[i]
+				if not valid_integer(characters[c].movement.get(field)): return "Invalid movement: " + field
+				candidate[start + i] = int(characters[c].movement[field])
 	var offset := candidate.size() - RULE_COUNT
 	for group in [["inputRules", RULES, 1], ["momentumRules", MOMENTUM_RULES, 3], ["recoveryRules", RECOVERY_RULES, 6]]:
 		if version >= group[2]:

@@ -10,7 +10,7 @@ Requested scope: make repeatable character images performing directed actions, w
 - [ ] Establish the common smear library: tapered crescents, thrust wedges, blunt arcs, smoke lobes. Separate effects from the body; make impact effects depend on contact. Replace inconsistent baked-in effects in the starter sheets.
 - [ ] Add a review tool that compares silhouette, palette and landmarks against the master, scrubs adjacent frames, and previews actual in-game size, flipped facing, hitboxes and backgrounds.
 - [ ] Automate validated import/packing: transparent margins, no neighboring sprite leakage, stable root/feet pivots, per-frame bounds, versioned manifests, naming, missing-frame checks and reproducible source-to-runtime mapping. Retain source art unchanged.
-- [ ] Re-author windup and active frames per move, including crouching, command, special and airborne variations; the initial build reuses five button poses per fighter.
+- [ ] Continue per-move windup/active art beyond the first Fillet/Shark signatures, including crouching, command and airborne normals.
 - [ ] Extend each attack to **windup, active, impact, follow-through and recovery** animations after the first two stages are approved. Support multiple drawings per phase and explicit whiff/hit/block paths without changing authoritative combat timing accidentally.
 - [ ] Trial the complete workflow on one fighter and a second fighter with a different silhouette; measure drift and revision cost before using it for the rest of the roster or a new character.
 
@@ -55,7 +55,7 @@ Requested scope: make repeatable character images performing directed actions, w
 
 ## Combat and delivery
 
-- [x] Fit body-only hurtboxes to all 144 existing sprite poses; weapons and effects add no hurt area.
+- [x] Fit body-only hurtboxes to all 160 existing sprite poses; weapons and effects add no hurt area.
 - [x] Limit each pose to legs, torso-and-arms, head, and one optional extension; enforce the four-hurtbox maximum in authoring and native storage.
 - [x] Add per-fighter pushboxes, wall separation, movement sweeps and airborne crossing/landing checks.
 - [x] Give the original 132 move slots preliminary stats and sprite-derived attack rectangles; enforce startup ≥ 5f in core, editor and imports.
@@ -75,8 +75,19 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Edit ground/air hit displacement, block pushback, launch, soft/hard down and wakeup timing, wall damage and throw range.
 - [x] Keep gravity unchanged for the first X hits, then scale per hit to an editable cap.
 - [x] Add wall damage/decay, splat/follow-up break, deterministic transition/neutral reset and timed Momentum Positive Bonus.
-- [x] Preserve schema 1–5 move edits and test delayed-input rollback through wall breaks.
+- [x] Preserve schema 1–6 move edits and test delayed-input rollback through wall breaks.
 - [ ] Tune Fillet/Shark routes, gravity threshold and wall durability through local playtests.
 - [ ] Author dedicated windup/active sweep and throw art first, then coherent launch/splat/down/wakeup clips under the existing sprite contract. Current reactions reuse existing poses.
 - [ ] Produce distinct stage-travel backgrounds and wall-break shots; current ground variants share a layout.
 - [ ] Measure a chosen Strive patch's wall-damage and Positive Bonus behavior before claiming exact parity. Super-specific break knockdowns wait for super design.
+
+## First signature kits and locomotion
+
+- [x] Generate Fillet knife spiral and upward/mid/low rekka windup/active poses under the shared style contract.
+- [x] Implement 236K; 236S > 6S > 2S and the 236S > 2S shortcut, with a low soft-knockdown finisher.
+- [x] Generate Shark ground/air hooks and short-blade follow-up pairs; separate the spear weapon from hook-active bodies.
+- [x] Implement 214S / j.214P, opposing 45° trajectories, narrow moving hitboxes, body-only hurtboxes, pull and hit-only P follow-ups.
+- [x] Add forward runs for most fighters, provisional Anvil step dash, 66/macro inputs and attack velocity carry; expose per-character movement and per-move inertia/travel.
+- [x] Extend Sprite review, configuration migration, collision validation and rollback checks for the new kits.
+- [ ] Playtest follow-up windows, whiff routes, travel friction, pull distance and hook matchups before locking balance.
+- [ ] Author dedicated run/step poses and coherent return/retrieval animation. Current movement reuses walking poses; hook retraction reuses the active body.

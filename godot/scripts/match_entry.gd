@@ -88,8 +88,12 @@ func begin(chosen: Array, number: int, is_practice: bool, is_online: bool, repea
 		return
 	# Load the actual selected atlas resources before revealing the stage.
 	for character in characters:
-		for stage in ["active", "windup", "block"]:
-			var path: String = FighterArt.DIRECTORY + FighterArt.sheet(character, stage).file
+		var paths: Array[String] = []
+		for stage in FighterArt.phase_names(character):
+			paths.append(FighterArt.DIRECTORY + FighterArt.sheet(character, stage).file)
+		if FighterArt.catalog().fighters[character].has("hook_weapon"):
+			paths.append(FighterArt.DIRECTORY + FighterArt.catalog().fighters[character].hook_weapon.file)
+		for path in paths:
 			if path in asset_paths: continue
 			asset_paths.append(path)
 			abandoned_loads.erase(path)

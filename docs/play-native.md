@@ -34,17 +34,23 @@ See [menu paths and edge cases](menu-flow.md).
 | S | L | Numpad 3 | Top face button |
 | Hs | I | Numpad 5 | Right face button |
 | D | O | Numpad 6 | Right shoulder |
-| Dash macro | Space | Numpad 0 | Left shoulder |
+| Run / dash macro | Space | Numpad 0 | Left shoulder |
 | Simple modifier | Left Shift | Numpad + | Left trigger |
 | Faultless Defense (hold away too) | Q | Numpad Enter | Right trigger |
 
-With simple controls enabled, hold the modifier and use forward+P, down+S or up+Hs. Directions are relative to facing. Traditional 236P, 236S and 623Hs still work. Buttons also have crouching, forward command-normal and air variants. These kits are provisional.
+With simple controls enabled, hold the modifier for per-move shortcuts. Fillet uses 6K / 6S for her spiral/rekka; Shark uses 4S / j.4P for his hooks. Other original shortcuts include forward+P, down+S and up+Hs. Directions are relative to facing. Traditional 236P, 236S and 623Hs still work. Buttons also have crouching, forward command-normal and air variants. These kits are provisional.
 
 Hold back + any two of P/K/S/Hs as an alternative FD chord. Momentum builds through approaching, attacking and defending; FD is its only spend. Its three equal HUD sections fill continuously to 100%; the divisions do not alter gain or costs. Select **Start Momentum: 50%** in training to try it immediately. FD prevents chip damage and adds pushback. Empty meter falls back to ordinary guard. Negative Penalty is deferred.
 
-Block animations distinguish negative/even attacks, plus-on-block pressure and guard break. Enable **Guard break on block** for a move to test its exposed stance: backdash inputs during the stun are discarded and blockstun grab protection is absent. Throws themselves are future work. See [Momentum and defense](momentum-defense.md).
+Block animations distinguish negative/even attacks, plus-on-block pressure and guard break. Enable **Guard break on block** for a move to test its exposed stance: backdash inputs during the stun are discarded and blockstun grab protection is absent. See [Momentum and defense](momentum-defense.md).
 
 Combos show a large number behind the fighters on the attacker's current side. **COUNTER** means startup/active interruption; **PUNISH** means a hit during recovery; **REVERSAL** means an eligible move started on the first actionable frame after stun. Try **Attack loop** or **Guard → reversal** for practice. [Combo and timing rules](combat-feedback.md) cover the editable +4 hitstun/+3 hitstop counter defaults and five-frame reversal input buffer. Reversal timing does not grant invulnerability.
+
+## Fillet and Shark signatures
+
+Fillet: **236K** knife spiral; **236S > 6S > 2S** rekka or **236S > 2S** to skip the mid stab. Shark: **214S** upward ground hook, **j.214P** downward air hook, then **P** after a successful hit to stab. Press each follow-up anew during the source move; Shark’s stab requires a hit.
+
+**66 or Dash** starts forward movement. Most fighters run while forward or Dash is held; Anvil provisionally steps. Back + Dash goes backward. Run/step speed carries into attacks. In Development, expand **Run, step dash & inertia** to tune the selected fighter, and select **Signature attack** in Sprite review for the new art. [Move timings, routes and settings](signature-moves.md).
 
 ## Iterate
 
@@ -52,7 +58,7 @@ Enter **Development** for move editing and sprite review. Training also offers p
 
 - **Pause / +1 frame:** inspect startup, active frames, hitstop and recovery. Generated windup and active images follow simulation timing.
 - **Development workbench:** scroll below the editor controls for the rollback latency check and gatling reference.
-- **Move editor:** choose a fighter/move, adjust values, then Apply & reset. Startup cannot be below **5 frames**. Hitbox back/front, bottom and height control the attack rectangle. Save locally or export/import JSON. Old schema-1/2/3/4 saves retain edits and their previous hitbox ranges; Restore default move set loads the new preliminary kits.
+- **Move editor:** choose a fighter/move, adjust values, then Apply & reset. Startup cannot be below **5 frames**. Hitbox back/front, bottom and height control the attack rectangle. Save locally or export/import JSON. Old schema-1–6 saves retain edits and their previous hitbox ranges; Restore default move set loads the new preliminary kits.
 - **Sprite review:** inspect all existing attack, defense and movement poses at the same body scale, with collision and facing toggles. Complete animation sequences are still future work.
 - **Hitboxes:** cyan body hurtboxes, green pushboxes and orange active hitboxes show the actual simulation geometry. Weapons never extend hurtboxes. Walking, dashing and advancing moves respect body spacing; jump-overs require vertical clearance. See [collision rules](collision-rules.md) and [preliminary move stats](move-stats.md).
 
@@ -68,4 +74,4 @@ This direct ENet connection uses rollback, two frames of input delay, bounded pr
 
 Linux native rendering, menu routes/back paths, keyboard and simulated-controller navigation, first-to-two matches, draw replay, intro/readiness gates, pause/rematch, connection recovery, all 30 basic buttons, editing, sprite loading, rollback and two independent UDP peers are tested. Windows is cross-compiled/exported; Windows gameplay and physical controllers need hardware playtesting. PS5 requires approved console access and a compatible Godot port provider; no PS5 build is included.
 
-The buffer is an original configurable implementation, not verified Strive parity. Character mechanics, distinct move animations, throws, universal overheads and dedicated anti-air rules remain future work. See the source project's `docs/backlog.md` and `docs/sprite-production.md`.
+The buffer is an original configurable implementation, not verified Strive parity. Further character mechanics, full move animations, universal overheads and dedicated anti-air rules remain future work. See the source project's `docs/backlog.md` and `docs/sprite-production.md`.

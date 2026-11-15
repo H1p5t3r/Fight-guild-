@@ -260,6 +260,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	game.confirm_selection()
 	game.reset_round()
 	verify_timing_feedback()
+	await verify_signatures()
 	game.show_controls()
 	check(game.has_open_dialog(), "Controls dialog did not open")
 	for child in game.get_children():
@@ -327,5 +328,47 @@ func verify_recovery_editor() -> void:
 	check(not game.recovery_fields.gravityAfter.control.editable and game.fields.knockdown.control.disabled, "Recovery editor remains editable online")
 	game.lock_online(false)
 	game.model.load_data(original)
+	game.populate_editor()
+	game.reset_round()
+
+func verify_signatures() -> void:
+	var original: Dictionary = game.model.data()
+	game.edit_character.select(5)
+	game.edit_move.select(25)
+	game.populate_editor()
+	game.fields.travelSpeed.control.value = 12
+	game.fields.inertiaPercent.control.value = 80
+	game.apply_move()
+	check(game.model.move(5, 25).travelSpeed == 1200 and game.model.move(5, 25).inertiaPercent == 80, "Attack travel / inertia editor did not apply")
+	game.movement_fields.runSpeed.control.value = 13
+	game.movement_fields.forwardStyle.control.selected = 1
+	game.apply_movement()
+	check(game.model.movement(5).runSpeed == 1300 and game.model.movement(5).forwardStyle == 1, "Per-character movement controls did not apply")
+	game.lock_online(true)
+	check(game.movement_fields.forwardStyle.control.disabled and not game.movement_fields.runSpeed.control.editable and game.fields.enabled.control.disabled, "Signature / movement editor remains editable online")
+	game.lock_online(false)
+	game.model.load_data(original)
+	game.model.reset([5, 4])
+	game.release_focus_from_ui()
+	key(KEY_S, true); ticks(1)
+	key(KEY_D, true); ticks(1)
+	key(KEY_S, false); key(KEY_K, true); ticks(1)
+	key(KEY_K, false); key(KEY_D, false)
+	check(game.model.state().players[0].move == 25 and game.arena.sprites[0].get_meta("phase") == "signature_windup", "Keyboard 236K / signature windup failed")
+	ticks(game.model.move(5, 25).startup - 1)
+	check(game.arena.sprites[0].get_meta("phase") == "signature_active", "Signature active art did not follow combat timing")
+	game.model.reset([4, 5])
+	game.model.step(4, 0); game.model.step(5, 0); game.model.step(65, 0)
+	for _tick in 20: game.model.step(0, 0)
+	game._process(0.0)
+	check(game.arena.weapons[0].visible and game.model.core.boxes(0, 2).size() == 32, "Detached spear / narrow diagonal boxes are missing")
+	game.show_sprite_review(10)
+	await tree.process_frame
+	check(game.has_open_dialog(), "Signature sprite review did not open")
+	for child in game.get_children():
+		if child is AcceptDialog and child != game.file_dialog: child.queue_free()
+	await tree.process_frame
+	game.edit_character.select(0)
+	game.edit_move.select(0)
 	game.populate_editor()
 	game.reset_round()

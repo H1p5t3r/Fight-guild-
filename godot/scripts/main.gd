@@ -28,6 +28,7 @@ var fields := {}
 var buffer_fields: Array[SpinBox] = []
 var momentum_fields := {}
 var recovery_fields := {}
+var movement_fields := {}
 var training_momentum: OptionButton
 var editor_title: Label
 var routes: Label
@@ -241,7 +242,7 @@ func build_interface() -> void:
 	var checks := GridContainer.new()
 	checks.columns = 2
 	editor.add_child(checks)
-	for pair in [["specialCancel","Special cancel"],["jumpCancel","Jump cancel"],["whiffCancel","Whiff cancel"],["selfCancel","Allow self route"]]:
+	for pair in [["enabled","Move enabled"],["followHit","Follow-up needs hit"],["specialCancel","Special cancel"],["jumpCancel","Jump cancel"],["whiffCancel","Whiff cancel"],["selfCancel","Allow self route"]]:
 		var check := CheckBox.new()
 		check.text = pair[1]
 		check.add_theme_font_size_override("font_size", 17)
@@ -256,9 +257,9 @@ func build_interface() -> void:
 	var advanced_grid := GridContainer.new()
 	advanced_grid.columns = 2
 	advanced.add_child(advanced_grid)
-	for spec in [["button","Button (0–4)",0,4,1],["category","Kind (0–4)",0,4,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (0/214/236/623)",0,623,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["simpleDirection","Simple direction",0,9,1],["simpleButton","Simple button",0,4,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
+	for spec in [["artPose","Signature pose (0–4)",0,4,1],["followFrom","Follow source slot",-1,31,1],["followFrom2","Second source slot",-1,31,1],["travelSpeed","Active travel px/f",-20,20,100],["inertiaPercent","Carry speed %",0,200,1],["pullFrames","Pull duration f",0,60,1],["pullGap","Pull extra gap px",0,100,100],["hitAngle","Hit slope −1/0/+1",-1,1,1],["button","Button (0–4)",0,4,1],["category","Kind (0–4)",0,4,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (0/214/236/623)",0,623,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["simpleDirection","Simple direction",0,9,1],["simpleButton","Simple button",0,4,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
 		add_field(advanced_grid, spec)
-	var note := label(advanced, "Kind: 0 normal, 1 command, 2 special, 3 Drive, 4 throw. Button: P=0 K=1 S=2 Hs=3 D=4. Masks: −1 unified; P=1 K=2 S=4 Hs=8 D=16.", 10, MUTED)
+	var note := label(advanced, "Kind: 0 normal, 1 command, 2 special, 3 Drive, 4 throw. Button: P=0 K=1 S=2 Hs=3 D=4. Masks: −1 unified; P=1 K=2 S=4 Hs=8 D=16. Follow source −1 disables the route. Signature slots: 15 up slash, 25 spiral, 26 mid, 27 low, 28/29 hooks, 30/31 stabs. Hook slope ±1 travels at 45°; height is its thickness. Art pose 0 uses button art.", 10, MUTED)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button(editor, "Apply & reset", apply_move, true, "essential")
 	var saves := row(editor)
@@ -323,6 +324,28 @@ func build_interface() -> void:
 	var recovery_note := label(recovery_panel, "First X hits use normal gravity. Each further hit adds gravity up to the cap. Splat, then strike again to break; an expired splat falls into soft recovery. Wall breaks return to neutral with a Momentum gain bonus.", 11, MUTED)
 	recovery_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button(recovery_panel, "Apply recovery & reset", apply_recovery, true, "essential")
+	var movement_panel := VBoxContainer.new()
+	editor.add_child(movement_panel)
+	movement_panel.visible = false
+	button(editor, "Run, step dash & inertia ▾", func(): movement_panel.visible = not movement_panel.visible)
+	var movement_grid := GridContainer.new()
+	movement_grid.columns = 2
+	movement_panel.add_child(movement_grid)
+	var forward_style := option(movement_grid, "Forward movement", ["Run", "Step dash"])
+	movement_fields.forwardStyle = {"control": forward_style, "scale": 1}
+	for spec in [["walkSpeed","Walk px/f",0.01,10,100],["runSpeed","Run cap px/f",0.01,20,100],["runAcceleration","Run accel px/f²",0.01,10,100],["stepSpeed","Step px/f",0.01,20,100],["stepFrames","Step duration f",1,60,1],["backSpeed","Backdash px/f",0.01,20,100],["backFrames","Backdash duration f",1,60,1],["attackFriction","Attack drag px/f²",0,5,100]]:
+		var column := VBoxContainer.new()
+		movement_grid.add_child(column)
+		label(column, spec[1], 10, MUTED)
+		var spin := SpinBox.new()
+		spin.min_value = spec[2]
+		spin.max_value = spec[3]
+		spin.step = 0.01 if spec[4] == 100 else 1
+		column.add_child(spin)
+		movement_fields[spec[0]] = {"control": spin, "scale": spec[4]}
+	var movement_note := label(movement_panel, "Selected fighter only. 66 or Dash starts forward movement. Hold forward or Dash to keep running; back + Dash steps backward. Attacks retain velocity and slow by attack drag. Active travel adds the move's own speed.", 11, MUTED)
+	movement_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	button(movement_panel, "Apply movement & reset", apply_movement, true, "essential")
 	diagnostics = VBoxContainer.new()
 	editor.add_child(diagnostics)
 	var network := panel(diagnostics)
@@ -637,8 +660,10 @@ func show_sprite_review(clip: int = 0) -> void:
 	layout.add_child(pickers)
 	var fighter_picker := option(pickers, "Fighter", CombatModel.CHARACTERS)
 	var button_picker := option(pickers, "Button", CombatModel.BUTTONS)
-	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard"])
-	clip_picker.select(clampi(clip, 0, 9))
+	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard", "Signature attack"])
+	clip_picker.select(clampi(clip, 0, 10))
+	var signature_picker := option(pickers, "Signature", ["1", "2", "3", "4"])
+	fighter_picker.select(edit_character.selected)
 	var options := row(layout)
 	var collision_toggle := CheckBox.new()
 	collision_toggle.text = "Collision boxes"
@@ -662,13 +687,23 @@ func show_sprite_review(clip: int = 0) -> void:
 		previews.append(preview)
 	var stats := label(layout, "", 12, ACCENT)
 	var update := func(_index: int = 0):
+		clip_picker.set_item_disabled(10, fighter_picker.selected < 4)
+		if clip_picker.selected == 10 and fighter_picker.selected < 4: clip_picker.select(0)
 		button_picker.disabled = clip_picker.selected != 0
-		var move := model.move(fighter_picker.selected, [0, 1, 2, 3, 13][button_picker.selected])
-		stats.text = "%df startup · %df active · %df recovery · %d damage · %+df on first-frame block" % [move.startup, move.active, move.recovery, move.damage, move.blockstun - (move.active - 1 + move.recovery)] if clip_picker.selected == 0 else "Body hurtboxes follow the displayed pose. Pushboxes keep a stable body width."
+		signature_picker.visible = clip_picker.selected == 10
+		var signature_slots: Array = [25, 15, 26, 27] if fighter_picker.selected == 5 else [28, 29, 30, 31]
+		for i in 4: signature_picker.set_item_text(i, CombatModel.MOVE_IDS[signature_slots[i]])
+		var slot: int = signature_slots[signature_picker.selected] if clip_picker.selected == 10 else [0, 1, 2, 3, 13][button_picker.selected]
+		var move := model.move(fighter_picker.selected, slot)
+		stats.text = "%df startup · %df active · %df recovery · %d damage · %+df on first-frame block" % [move.startup, move.active, move.recovery, move.damage, move.blockstun - (move.active - 1 + move.recovery)] if clip_picker.selected in [0, 10] else "Body hurtboxes follow the displayed pose. Pushboxes keep a stable body width."
 		for i in 2:
 			previews[i].show_collision = collision_toggle.button_pressed
 			previews[i].facing = -1 if mirror_toggle.button_pressed else 1
-			if clip_picker.selected == 0:
+			previews[i].move_slot = slot
+			if clip_picker.selected == 10:
+				captions[i].text = ["WINDUP", "ACTIVE"][i]
+				previews[i].present(fighter_picker.selected, ["signature_windup", "signature_active"][i], signature_picker.selected, previews[i].facing)
+			elif clip_picker.selected == 0:
 				captions[i].text = ["WINDUP", "ACTIVE"][i]
 				previews[i].present(fighter_picker.selected, ["windup", "active"][i], button_picker.selected + 1, previews[i].facing)
 			elif clip_picker.selected <= 3:
@@ -679,11 +714,12 @@ func show_sprite_review(clip: int = 0) -> void:
 				captions[i].text = "READY / WINDUP BASE" if clip_picker.selected == 4 and i == 1 else clip_picker.get_item_text(clip_picker.selected).to_upper()
 				previews[i].present(fighter_picker.selected, "windup" if clip_picker.selected == 4 and i == 1 else "active", pose_pair[i], previews[i].facing)
 			if collision_toggle.button_pressed:
-				var hurt: PackedInt32Array = model.core.pose_boxes(fighter_picker.selected, ["active", "windup", "block"].find(previews[i].phase), previews[i].pose)
+				var hurt: PackedInt32Array = model.core.pose_boxes(fighter_picker.selected, FighterArt.PHASES.find(previews[i].phase), previews[i].pose)
 				captions[i].text += " · %d/4 hurtboxes" % (hurt.size() / 4)
 	fighter_picker.item_selected.connect(update)
 	button_picker.item_selected.connect(update)
 	clip_picker.item_selected.connect(update)
+	signature_picker.item_selected.connect(update)
 	collision_toggle.toggled.connect(func(_value: bool): update.call())
 	mirror_toggle.toggled.connect(func(_value: bool): update.call())
 	update.call()
@@ -728,6 +764,7 @@ func show_file(load_mode: bool) -> void:
 func populate_editor() -> void:
 	var definition := model.move(edit_character.selected, edit_move.selected)
 	editor_title.text = CombatModel.MOVE_IDS[edit_move.selected] + " / " + ["NORMAL", "COMMAND", "SPECIAL", "DRIVE", "THROW"][definition.category]
+	editor_title.text += " · DISABLED" if not definition.enabled else ""
 	for key in fields:
 		var control: Control = fields[key].control
 		if control is CheckBox: control.button_pressed = bool(definition[key])
@@ -736,7 +773,12 @@ func populate_editor() -> void:
 	var destinations: Array[String] = []
 	for to in CombatModel.MOVE_IDS.size():
 		if model.core.can_cancel(edit_character.selected, edit_move.selected, to, true): destinations.append(CombatModel.MOVE_IDS[to])
-	routes.text = "On contact → " + ", ".join(destinations) + (" / jump" if definition.jumpCancel else "")
+	routes.text = "On hit → " + ", ".join(destinations) + (" / jump" if definition.jumpCancel else "")
+	for rule in movement_fields:
+		var entry: Dictionary = movement_fields[rule]
+		var value: int = model.movement(edit_character.selected)[rule]
+		if entry.control is OptionButton: entry.control.selected = value
+		else: entry.control.value = float(value) / entry.scale
 	var data := model.data()
 	for i in 3: buffer_fields[i].value = data.inputRules[CombatModel.RULES[i]]
 	for rule in momentum_fields:
@@ -773,6 +815,16 @@ func apply_momentum() -> void:
 	var error := model.load_data(data)
 	if error.is_empty(): reset_round()
 	editor_status.text = "Momentum settings applied." if error.is_empty() else error
+
+func apply_movement() -> void:
+	if connection.active: return
+	var data := model.data()
+	for rule in movement_fields:
+		var entry: Dictionary = movement_fields[rule]
+		data.characters[edit_character.selected].movement[rule] = entry.control.selected if entry.control is OptionButton else roundi(entry.control.value * entry.scale)
+	var error := model.load_data(data)
+	if error.is_empty(): reset_round()
+	editor_status.text = "Movement settings applied." if error.is_empty() else error
 
 func apply_recovery() -> void:
 	if connection.active: return
@@ -946,6 +998,9 @@ func lock_online(locked: bool) -> void:
 	for spin in buffer_fields: spin.editable = not locked
 	for field in momentum_fields.values(): field.control.editable = not locked
 	for field in recovery_fields.values(): field.control.editable = not locked
+	for field in movement_fields.values():
+		if field.control is OptionButton: field.control.disabled = locked
+		else: field.control.editable = not locked
 	mode.disabled = locked
 	training_momentum.disabled = locked or mode.selected == 1
 	dummy.disabled = locked or mode.selected == 1
