@@ -4,7 +4,7 @@ Combat runs at 60 fixed ticks per second. **No attack may start faster than 5 fr
 
 ## Three separate shapes
 
-- **Hurtboxes (cyan):** head, torso, arms and legs traced against every existing drawing: 12 active/support, 6 windup and 6 block poses for each of the six fighters. Equipment worn on the body is included with the body; projecting blades, shafts, shields, hair, loose cloth and smears add no vulnerable area. A weapon overlapping the underlying body does not make that body invulnerable.
+- **Hurtboxes (cyan):** **at most four per pose**. Three required boxes cover the legs, torso and arms together, and head. A fourth is reserved for an extended limb or a complex pose, such as a kicking leg or raised arms. All 144 drawings follow this grouping. Equipment worn on the body is included with the body; projecting blades, shafts, shields, hair, loose cloth and smears add no vulnerable area. A weapon overlapping the underlying body does not make that body invulnerable. These are broad combat regions, so a leg box can also cover the gap between the legs.
 - **Pushboxes (green):** stable body spacing per fighter, with standing, crouching and tucked-jump heights. These do not expand with a weapon or attacking limb. Movement sweeps retain left/right order while vertically overlapping, so walking, dashing and advancing attacks cannot tunnel through an opponent. Wall-blocked separation transfers to the other fighter. Vertical clearance permits jump-overs; landing resolves any remaining overlap.
 - **Hitboxes (orange):** one preliminary damaging rectangle per current button image, following its limb, weapon or visible strike arc. Hitboxes exist only during active frames and hit any opposing body hurtbox. Touching only a weapon outside the body does not connect. Boxes mirror around the same foot/root pivot as the art.
 
@@ -14,13 +14,13 @@ Startup counts the first active tick: a 5f move has four windup ticks and can fi
 
 ## Review and tune
 
-In **Development**, enable **Hitboxes**, pause and use **+1 frame** to inspect live collision. **Sprite review** covers attack pairs, all block reactions, ready, walk, jump, hurt, crouch and the legacy guard pose. Toggle collision or left-facing display there. The active preview uses the current edited basic move hitbox and displays its frame data.
+In **Development**, enable **Hitboxes**, pause and use **+1 frame** to inspect live collision. **Sprite review** covers attack pairs, all block reactions, ready, walk, jump, hurt, crouch and the legacy guard pose. Toggle collision or left-facing display there. Each caption shows its hurtbox count out of four. The active preview uses the current edited basic move hitbox and displays its frame data.
 
 The Move editor exposes **Hitbox back**, **Hitbox front**, **Bottom** and **Height** in world pixels. Negative back offsets can extend behind the root. Startup has a hard 5f minimum; importing a faster value rejects the entire edit without changing the live move set. Schema-1 through schema-4 files migrate to schema 5, preserving their edits and previous 12px hitbox origin. Existing saves retain their old tuning/ranges; use **Restore default move set** to try the new starter kits.
 
 ## Authoring and reproducibility
 
-`godot/data/fighter_collision.json` owns body rectangles in atlas-region pixel coordinates and push dimensions in hundredths of a world pixel. Each rectangle is `[left, top, right, bottom]` in image space. Edit the body rectangles independently from the `strike` rectangle; never derive hurtboxes from the full alpha silhouette, because it contains weapons and effects.
+`godot/data/fighter_collision.json` (authoring schema 2) owns body rectangles in atlas-region pixel coordinates and push dimensions in hundredths of a world pixel. Each pose's `hurt` object has required `legs`, `torsoArms` and `head` rectangles, and at most one optional `extension`. Describe that fourth region in `extensionFor`. Each rectangle is `[left, top, right, bottom]` in image space. The compiler rejects extra or missing regions; native storage also has a hard four-box capacity. Rectangles always compile in legs / torso-and-arms / head / extension order. Edit body rectangles independently from the `strike` rectangle; never derive hurtboxes from the full alpha silhouette, because it contains weapons and effects. Move-save schema 5 is unchanged; saved move tuning uses the updated body geometry automatically.
 
 `godot/data/starter_moves.json` owns the initial move stats. `hitPose` selects the corresponding active-image strike rectangle. `godot/assets/fighters/manifest.json` supplies the identical region pivot and 150px body-height normalization used by the renderer.
 

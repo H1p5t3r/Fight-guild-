@@ -23,7 +23,9 @@ static void poses() {
     CHECK(Simulation::collision_hash()!=0);
     for(int c=0;c<6;++c) for(int phase=0;phase<3;++phase) for(int p=0;p<(phase==0?12:6);++p) {
         int count=Simulation::pose_box_count(c,phase,p);
-        CHECK(count>1&&count<=12);
+        CHECK(count>=3&&count<=4&&count<=MAX_HURTBOXES);
+        auto outside=Simulation::pose_box(c,phase,p,MAX_HURTBOXES);
+        CHECK(outside.left==0&&outside.bottom==0&&outside.right==0&&outside.top==0);
         for(int i=0;i<count;++i) {
             auto b=Simulation::pose_box(c,phase,p,i);
             CHECK(b.left<b.right&&b.bottom<b.top);

@@ -5,6 +5,9 @@
 namespace fight {
 constexpr int VERSION = 5, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 22, FIELD_COUNT = 32;
 constexpr int MIN_STARTUP = 5;
+constexpr int MAX_HURTBOXES = 4;
+enum HurtRegion { LegsHurt, TorsoArmsHurt, HeadHurt, ExtensionHurt };
+static_assert(ExtensionHurt+1==MAX_HURTBOXES, "Three body regions and one optional extension only");
 constexpr int MOMENTUM_MAX = 10000, INPUT_MASK = 4095;
 constexpr int MAX_STUN = 240, MAX_HITSTOP = 60, NOTICE_TICKS = 60, COMBO_HOLD = 60;
 enum Input { Left=1, Right=2, Down=4, Up=8, P=16, K=32, S=64, Hs=128, D=256,

@@ -17,7 +17,7 @@ All normals, including command normals, are special cancelable by default, with 
 
 **Every attack can cancel into a command normal on the same button.** This includes specials and Drive attacks. It is an additional route, so P gains same-button command normals without gaining every command normal. The implementation preserves this universal rule even when a move has custom cancel masks.
 
-**Weapons do not extend hurtboxes. Every attack has at least 5 frames of startup.** Body-only hurtboxes follow the current drawing, while separate pushboxes maintain body spacing. See [collision rules](collision-rules.md).
+**Weapons do not extend hurtboxes. Every attack has at least 5 frames of startup.** Each pose uses at most **four hurtboxes**: legs, torso and arms together, head, and one optional extension for an extended limb or complex pose. Separate pushboxes maintain body spacing. See [collision rules](collision-rules.md).
 
 ## Provisional implementation choices
 

@@ -63,9 +63,10 @@ test('Five-frame floor, schema-4 migration and compiled collision API agree',asy
   assert.equal(e.move(0,0).counterHitstun,19);assert.equal(e.move(0,0).hitboxBack,1200);
   e.loadData(original);
   assert.ok(e.fingerprint().includes((e.api.fg_collision_hash()>>>0).toString(16)));
-  assert.equal(e.boxes(0,1).length,1);assert.ok(e.boxes(0,0).length>1);
+  assert.equal(e.boxes(0,1).length,1);assert.equal(e.boxes(0,0).length,3);
   for(let tick=1;tick<=e.move(0,0).startup;++tick) {
     e.step(16,0);
+    assert.ok([3,4].includes(e.boxes(0,0).length));
     assert.equal(e.boxes(0,2).length,tick===e.move(0,0).startup?1:0);
   }
   assert.equal(e.state().players[0].poseIndex,1);

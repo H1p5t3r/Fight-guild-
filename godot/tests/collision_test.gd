@@ -9,6 +9,7 @@ func check(condition: bool, description: String) -> void:
 func _initialize() -> void:
 	var model := CombatModel.new()
 	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/fighter_collision.json"))
+	check(source.version == 2, "Unsupported hurtbox authoring schema")
 	# Catch stale native binaries, wrong pivots/scale and dropped authored body parts.
 	for character in 6:
 		for phase_index in 3:
@@ -18,7 +19,11 @@ func _initialize() -> void:
 			for pose in poses.size():
 				var expected := PackedInt32Array()
 				var pivot: Array = art.frames[pose].pivot
-				for rect in poses[pose].hurt:
+				var regions: Dictionary = poses[pose].hurt
+				check(regions.size() in [3, 4] and regions.has_all(["legs", "torsoArms", "head"]), "Pose does not follow the three body regions / four-box limit")
+				for region in ["legs", "torsoArms", "head", "extension"]:
+					if not regions.has(region): continue
+					var rect: Array = regions[region]
 					expected.append(floori((float(rect[0]) - pivot[0]) * 15000.0 / art.body_height))
 					expected.append(floori((float(pivot[1]) - rect[3]) * 15000.0 / art.body_height))
 					expected.append(ceili((float(rect[2]) - pivot[0]) * 15000.0 / art.body_height))

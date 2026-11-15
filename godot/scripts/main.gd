@@ -645,13 +645,16 @@ func show_sprite_review(clip: int = 0) -> void:
 				var pose_pair: Array = [[0, 0], [6, 7], [8, 8], [9, 9], [11, 11], [10, 10]][clip_picker.selected - 4]
 				captions[i].text = "READY / WINDUP BASE" if clip_picker.selected == 4 and i == 1 else clip_picker.get_item_text(clip_picker.selected).to_upper()
 				previews[i].present(fighter_picker.selected, "windup" if clip_picker.selected == 4 and i == 1 else "active", pose_pair[i], previews[i].facing)
+			if collision_toggle.button_pressed:
+				var hurt: PackedInt32Array = model.core.pose_boxes(fighter_picker.selected, ["active", "windup", "block"].find(previews[i].phase), previews[i].pose)
+				captions[i].text += " · %d/4 hurtboxes" % (hurt.size() / 4)
 	fighter_picker.item_selected.connect(update)
 	button_picker.item_selected.connect(update)
 	clip_picker.item_selected.connect(update)
 	collision_toggle.toggled.connect(func(_value: bool): update.call())
 	mirror_toggle.toggled.connect(func(_value: bool): update.call())
 	update.call()
-	label(layout, "Cyan: body hurtboxes · green: pushbox · orange: active hitbox.\nWeapons, hair, loose cloth and effects do not extend hurtboxes. Startup is at least 5 frames.", 12, MUTED)
+	label(layout, "Hurt: legs · torso + arms · head · optional extension. Maximum 4 per pose.\nCyan: hurt · green: push · orange: hit. Weapons excluded; startup is at least 5 frames.", 12, MUTED)
 	dialog.canceled.connect(func(): close_dialog(dialog))
 	dialog.confirmed.connect(func(): close_dialog(dialog))
 	dialog.popup_centered(Vector2i(760, 600))

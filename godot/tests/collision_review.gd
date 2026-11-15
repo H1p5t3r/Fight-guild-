@@ -28,7 +28,7 @@ func run() -> void:
 	heading.add_theme_font_size_override("font_size", 24)
 	column.add_child(heading)
 	var note := Label.new()
-	note.text = "Cyan: body hurtboxes · green: pushbox · orange: damaging strike. Weapons never extend hurtboxes."
+	note.text = "Cyan: legs, torso + arms, head; optional fourth extension · green: pushbox · orange: strike. Weapons excluded."
 	column.add_child(note)
 	var grid := GridContainer.new()
 	grid.columns = 6
@@ -42,7 +42,8 @@ func run() -> void:
 			cell.size_flags_vertical = Control.SIZE_EXPAND_FILL
 			grid.add_child(cell)
 			var label := Label.new()
-			label.text = "%s %02d" % [phase.to_upper(), pose]
+			var hurt_count := model.core.pose_boxes(character, ["active", "windup", "block"].find(phase), pose).size() / 4
+			label.text = "%s %02d · %d/4" % [phase.to_upper(), pose, hurt_count]
 			cell.add_child(label)
 			var preview := FighterPreview.new()
 			preview.custom_minimum_size = Vector2(216, 198)
