@@ -120,6 +120,8 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	await tree.process_frame
 	var transitions = load("res://scripts/transition_verification.gd").new()
 	failures += await transitions.run(tree, game)
+	var entry = load("res://scripts/match_entry_verification.gd").new()
+	failures += await entry.run(tree, game)
 	var menus = load("res://scripts/menu_verification.gd").new()
 	failures += await menus.run(tree, game)
 	game.release_focus_from_ui()
@@ -287,7 +289,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	if args.has("--connection"): game.go_home(); game.choose_activity("online"); game.confirm_selection()
 	if args.has("--controls"): game.go_home(); game.show_controls()
 	if args.has("--screenshot"):
-		await game.wait_for_menu_motion()
+		await game.wait_for_match_entry()
 		await tree.process_frame
 		await RenderingServer.frame_post_draw
 		var path: String = args[args.find("--screenshot") + 1]

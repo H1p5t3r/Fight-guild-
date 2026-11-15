@@ -51,6 +51,7 @@ func tour() -> void:
 	game.menus.selection.tiles[5].grab_focus()
 	await create_timer(0.9).timeout
 	game.confirm_selection()
+	await game.wait_for_match_entry()
 	await create_timer(0.8).timeout
 	game.open_pause()
 	await create_timer(0.7).timeout

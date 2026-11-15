@@ -101,6 +101,7 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	check(game.screen == "results" and game.menus.result_title.text == "Anvil wins.", "KO did not produce a winner/result screen")
 	press("rematch")
 	check(game.screen == "play" and game.model.state().winner == -1 and game.model.frame() == 0, "Rematch did not reset the round")
+	check(game.round_number == 2, "Rematch did not advance the numbered call")
 	game.model.load_data(original)
 	game.go_home()
 	await verify_online()

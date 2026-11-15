@@ -40,3 +40,9 @@ bash scripts/godot.sh --resolution 1280x720 --script tests/style_review.gd -- --
 For quicker character-select captures, use `tests/menu_preview.gd -- --test --fighters --p1 0 --p2 4 --screenshot /absolute/path/select.png`. `--online`, `--training` and `--mirror` inspect those variants. The same script's `--tour` plays a reproducible native navigation tour; Godot's `--write-movie /absolute/path/tour.avi --fixed-fps 60` can record it.
 
 The surface fixture shows normal, hover, pressed, focus and disabled artwork together. Actual input behavior is exercised by the menu suite: entry/back paths, keyboard/controller navigation, simplified controls, pause/rematch, input isolation, Controls tabs/fixed footer/focus return, and ENet handshake/cancellation/disconnect recovery. The host-port check also prevents delayed SpinBox text from replacing the selected value.
+
+## Match entrance
+
+`MatchEntry` presents real selected-atlas loading, two skippable fighter spotlights, and a four-beat on-screen ceremony. Copy and beat timings live in `godot/data/match_ceremony.json`. The current calls are “The stands hunger for legends.” → “Let the guilds give them names.” → “1st Scrum” / “2nd Scrum” / “Final Down” → “Break the line!” Intros reuse existing windup poses with character-specific motion; dedicated authored intro frames and recorded announcer audio can replace these presentation assets later.
+
+Offline combat remains at frame zero until release. Online protocol 3 has separate readiness barriers for introductions and the opening, so the core cannot start while either player is still preparing. Skipping an intro does not skip the opening; a held selection confirm must be released before it can skip. Back cancels safely. Practice/development enter through loading without the full ceremony, and practice Reset stays immediate.

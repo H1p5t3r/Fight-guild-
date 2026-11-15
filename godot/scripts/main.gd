@@ -39,6 +39,9 @@ var address: LineEdit
 var port: SpinBox
 var leave_button: Button
 var menus: GameMenus
+var match_entry: MatchEntry
+var round_number := 1
+var entry_accept_released := false
 var screen := "home"
 var activity := "development"
 var pending_activity := "development"
@@ -66,8 +69,11 @@ func _ready() -> void:
 	motion.load_preferences()
 	build_theme()
 	build_interface()
+	connection.manual_presentation = true
 	add_child(connection)
 	connection.status_changed.connect(func(message: String): net_status.text = message)
+	connection.match_preparing.connect(on_network_preparing)
+	connection.countdown_started.connect(func(): match_entry.begin_opening())
 	connection.match_started.connect(on_network_started)
 	connection.match_ended.connect(on_network_ended)
 	if FileAccess.file_exists(SAVE_PATH) and not OS.get_cmdline_user_args().has("--test"):
@@ -307,6 +313,17 @@ func build_interface() -> void:
 	net_status = menus.status
 	leave_button = menus.buttons.cancel_connection
 	lock_online(false)
+	match_entry = MatchEntry.new()
+	match_entry.motion = motion
+	add_child(match_entry)
+	match_entry.intros_finished.connect(func():
+		if connection.active: connection.finish_intros()
+		else: match_entry.begin_opening())
+	match_entry.opening_finished.connect(func():
+		if connection.active: connection.finish_countdown()
+		else: release_match())
+	match_entry.canceled.connect(cancel_match_entry)
+	match_entry.failed.connect(entry_failed)
 
 func add_field(parent: Node, spec: Array) -> void:
 	var column := VBoxContainer.new()
@@ -344,7 +361,10 @@ func menu_action(action: String) -> void:
 			finish_menu_motion()
 		"quit": get_tree().quit()
 		"resume": show_screen("play")
-		"restart", "rematch": reset_round(); show_screen("play")
+		"restart", "rematch":
+			if action == "rematch": round_number += 1
+			reset_round()
+			begin_match_entry(true)
 		"change_fighters", "results_fighters": choose_activity(activity)
 		"pause_home", "results_home": go_home()
 		"host": start_network(true)
@@ -359,13 +379,14 @@ func show_screen(next: String) -> void:
 	screen = next
 	held.clear()
 	release_focus_from_ui()
-	var playing := next == "play"
+	var playing := next in ["play", "entry"]
 	menus.set_active(not playing)
 	if not playing: menus.show_page(next, previous == "play")
-	else: input_release_required = has_gameplay_input_held()
+	elif next == "play": input_release_required = has_gameplay_input_held()
 	var target := "play" if playing else "menus"
 	if target == layer_target:
 		if motion.instant: finish_menu_motion()
+		elif not changing_layers(): settle_layers()
 		return
 	layer_target = target
 	if layer_tween: layer_tween.kill()
@@ -384,13 +405,13 @@ func changing_layers() -> bool:
 	return layer_tween != null and layer_tween.is_running()
 
 func settle_layers() -> void:
-	var playing := screen == "play"
+	var playing := screen in ["play", "entry"]
 	play_root.visible = playing
 	play_root.modulate.a = 1.0 if playing else 0.0
 	menus.visible = not playing
 	menus.modulate.a = 0.0 if playing else 1.0
-	MenuMotion.interactive(play_root, playing)
-	if playing:
+	MenuMotion.interactive(play_root, screen == "play")
+	if screen == "play":
 		held.clear()
 		input_release_required = has_gameplay_input_held()
 
@@ -402,6 +423,40 @@ func finish_menu_motion() -> void:
 func wait_for_menu_motion() -> void:
 	while changing_layers() or menus.is_animating():
 		await get_tree().process_frame
+
+func wait_for_match_entry() -> void:
+	while screen == "entry" or match_entry.phase == "release":
+		await get_tree().process_frame
+	await wait_for_menu_motion()
+
+func begin_match_entry(repeated: bool = false) -> void:
+	entry_accept_released = not Input.is_action_pressed("ui_accept")
+	show_screen("entry")
+	var state := model.state()
+	var chosen := [state.players[0].character, state.players[1].character]
+	match_entry.begin(chosen, round_number, activity in ["training", "development"], connection.active, repeated)
+
+func release_match() -> void:
+	match_entry.release()
+	held.clear()
+	show_screen("play")
+
+func cancel_match_entry() -> void:
+	if screen != "entry": return
+	match_entry.cancel()
+	if connection.active:
+		cancel_connection()
+		show_screen("online")
+	else:
+		selection_return = "matches" if activity == "local" else "home"
+		pending_activity = activity
+		menus.configure_selection(activity, characters, simple)
+		show_screen("fighters")
+
+func entry_failed(message: String) -> void:
+	cancel_match_entry()
+	if activity == "online": net_status.text = message
+	else: menus.selection.instruction.text = message
 
 func choose_activity(which: String) -> void:
 	if connection.active: return
@@ -423,8 +478,9 @@ func confirm_selection() -> void:
 			net_status.text = "Choose Host or Join to begin."
 			show_screen("online")
 			return
+	round_number = 1
 	reset_round()
-	show_screen("play")
+	begin_match_entry()
 
 func configure_activity() -> void:
 	var development := activity == "development"
@@ -454,6 +510,7 @@ func open_pause() -> void:
 
 func menu_back() -> void:
 	match screen:
+		"entry": cancel_match_entry()
 		"matches": show_screen("home")
 		"fighters": show_screen(selection_return)
 		"online":
@@ -465,6 +522,7 @@ func menu_back() -> void:
 		"pause": show_screen("play")
 
 func go_home() -> void:
+	match_entry.cancel()
 	cancel_connection()
 	show_screen("home")
 
@@ -474,16 +532,21 @@ func cancel_connection() -> void:
 	net_status.text = "Connection closed. Choose Host or Join when ready."
 	if screen == "online": menus.focus_page("online")
 
-func on_network_started() -> void:
+func on_network_preparing() -> void:
 	activity = "online"
 	configure_activity()
 	result_probe.load_data(model.data())
 	history.clear()
 	last_raw = 0
 	paused = false
-	show_screen("play")
+	round_number = 1
+	begin_match_entry()
+
+func on_network_started() -> void:
+	release_match()
 
 func on_network_ended() -> void:
+	match_entry.cancel()
 	lock_online(false)
 	if activity == "online": show_screen("online")
 
@@ -647,6 +710,15 @@ func has_open_dialog() -> bool:
 	return false
 
 func _input(event: InputEvent) -> void:
+	if screen == "entry":
+		if event.is_action_released("ui_accept"): entry_accept_released = true
+		if event.is_action_pressed("ui_cancel"):
+			cancel_match_entry()
+		elif entry_accept_released and (event.is_action_pressed("ui_accept") or (event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_START)):
+			match_entry.request_skip()
+		if event is InputEventKey or event is InputEventJoypadButton:
+			get_viewport().set_input_as_handled()
+			return
 	if not has_open_dialog() and not (event is InputEventKey and event.echo):
 		if (event is InputEventKey and event.pressed and (event.keycode == KEY_ESCAPE or event.physical_keycode == KEY_ESCAPE)) or (event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_START):
 			if screen == "play": open_pause()
@@ -749,10 +821,11 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	var state := model.state()
-	arena.refresh(model, state, show_boxes, paused)
+	arena.round_label = MatchCeremony.round_call(round_number)
+	if match_entry.phase != "loading": arena.refresh(model, state, show_boxes, paused)
 	if screen in ["play", "pause"] and activity in ["local", "online"] and state.winner >= 0:
 		if activity == "local" or online_result_confirmed():
-			menus.configure_results(state, connection.active)
+			menus.configure_results(state, connection.active, MatchCeremony.round_call(round_number))
 			show_screen("results")
 	input_label.text = "INPUT HISTORY   " + ("   ".join(history) if not history.is_empty() else "—")
 	var fighter: Dictionary = state.players[connection.player if connection.active else 0]

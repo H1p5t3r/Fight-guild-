@@ -4,6 +4,7 @@ var model: CombatModel
 var view := {}
 var show_boxes := true
 var paused := false
+var round_label := ""
 var sprites: Array[Sprite2D] = []
 var feedback := CombatFeedback.new()
 var font := ThemeDB.fallback_font
@@ -130,12 +131,13 @@ func _draw() -> void:
 			var angle := 0.0 if fighter.facing == 1 else PI
 			var guard_color := Color("75dcbc") if fighter.faultless else Color("89c3e0")
 			draw_arc(Vector2(px, py - 70 * sx), 58 * sx, angle - 1.4, angle + 1.4, 24, guard_color, 5 if fighter.faultless else 2)
+	label(round_label, Vector2(size.x / 2 - 30, 23), 12, ACCENT)
 	label("%02d" % ceili(view.remaining / 60.0), Vector2(size.x / 2 - 24, 67), 42)
 	if paused:
 		label("PAUSED", Vector2(size.x / 2 - 28, 117), 12, ACCENT)
 	label("%05d · %s" % [view.frame, "STOP" if view.hitstop else "60HZ"], Vector2(size.x / 2 - 41, size.y - 19), 10, MUTED)
 	if view.winner >= 0:
 		draw_rect(Rect2(0, size.y * 0.37, size.x, 112), Color("111b23"))
-		var title: String = "DRAW" if view.winner == 2 else CombatModel.CHARACTERS[view.players[view.winner].character].to_upper() + " TAKES THE ROUND"
+		var title: String = "DRAW" if view.winner == 2 else CombatModel.CHARACTERS[view.players[view.winner].character].to_upper() + " TAKES " + str(MatchCeremony.script().roundName).to_upper()
 		label(title, Vector2(size.x * 0.23, size.y * 0.37 + 46), 25, ACCENT)
 		label("Reset to run it back. Online: leave and reconnect to rematch.", Vector2(size.x * 0.18, size.y * 0.37 + 80), 12, MUTED)

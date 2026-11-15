@@ -239,7 +239,7 @@ func build_pause(page: VBoxContainer) -> void:
 	actions.get_parent().size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	actions.custom_minimum_size.x = 420
 	action(actions, "resume", "Resume", 40, "essential")
-	action(actions, "restart", "Restart round")
+	action(actions, "restart", "Restart " + str(MatchCeremony.script().roundName).to_lower())
 	action(actions, "change_fighters", "Change fighters")
 	action(actions, "pause_home", "Main menu", 38, "secondary")
 
@@ -264,9 +264,9 @@ func configure_pause(online: bool) -> void:
 	buttons.change_fighters.visible = not online
 	buttons.pause_home.text = "Leave match & main menu" if online else "Main menu"
 
-func configure_results(state: Dictionary, online: bool) -> void:
+func configure_results(state: Dictionary, online: bool, round_label: String = "") -> void:
 	result_title.text = "Draw." if state.winner == 2 else CombatModel.CHARACTERS[state.players[state.winner].character] + " wins."
-	result_note.text = "Return to the lobby to host or join another match." if online else "Choose your next round."
+	result_note.text = (round_label + " COMPLETE · " if not round_label.is_empty() else "") + ("Return to the lobby to host or join another match." if online else "Run it back or choose new fighters.")
 	buttons.rematch.visible = not online
 	buttons.results_fighters.visible = not online
 	buttons.return_lobby.visible = online
