@@ -95,14 +95,16 @@ func _draw() -> void:
 		draw_rect(Rect2(x, 64, width, 12), Color("111c23"))
 		draw_rect(Rect2(x, 64, width * fighter.health / 1000.0, 12), tint)
 		label(str(fighter.health), Vector2(x, 94), 11, MUTED)
-		var meter_width: float = width * fighter.momentum / CombatModel.MOMENTUM_MAX
 		var meter_y := size.y - 30.0
 		var meter_color := Color("75dcbc") if fighter.faultless else ACCENT
-		label("MOMENTUM  %05.1f%%" % (fighter.momentum / 100.0), Vector2(x, meter_y - 7), 12, meter_color)
-		draw_rect(Rect2(x, meter_y, width, 10), Color("111c23"))
-		draw_rect(Rect2(x if left else x + width - meter_width, meter_y, meter_width, 10), meter_color)
-		draw_line(Vector2(x + width / 2, meter_y - 1), Vector2(x + width / 2, meter_y + 11), TEXT, 1)
-		draw_rect(Rect2(x, meter_y, width, 10), Color("62777e"), false)
+		label("MOMENTUM  %.1f%%" % (fighter.momentum / 100.0), Vector2(x, meter_y - 7), 12, meter_color)
+		var section_width := (width - 10.0) / 3.0
+		for section in 3:
+			var section_x: float = x + (section if left else 2 - section) * (section_width + 5.0)
+			var fill: float = clampf(fighter.momentum * 3.0 / CombatModel.MOMENTUM_MAX - section, 0.0, 1.0)
+			draw_rect(Rect2(section_x, meter_y, section_width, 10), Color("111c23"))
+			draw_rect(Rect2(section_x if left else section_x + section_width * (1.0 - fill), meter_y, section_width * fill, 10), meter_color)
+			draw_rect(Rect2(section_x, meter_y, section_width, 10), Color("62777e"), false)
 		var px: float = fighter.x / 100.0 * sx
 		var py: float = floor_y - fighter.y / 100.0 * sx
 		var crouched: bool = fighter.y == 0 and (int(fighter.raw) & 4) != 0

@@ -1,6 +1,6 @@
 # Momentum and defensive reactions
 
-Momentum is Fight Guild's Strive-inspired resource: a 0–100% gauge with a 50% divider, approach/offense/defense gains, and Faultless Defense (FD). **FD is the only spending mechanic. Negative Penalty is deferred**, including its meter removal and gain reduction. These are editable prototype rates, not a verified reproduction of Strive's numerical formulas. Supers, Roman Cancels, RISC, Positive Bonus and wall-break systems are not implemented.
+Momentum is Fight Guild's Strive-inspired resource: a 0–100% gauge displayed in **three equal sections**, approach/offense/defense gains, and Faultless Defense (FD). Each section represents one third of the meter; fill and FD drain remain continuous across the gaps. Player 2's gauge fills from the opposite edge. **FD is the only spending mechanic. Negative Penalty is deferred**, including its meter removal and gain reduction. These are editable prototype rates, not a verified reproduction of Strive's numerical formulas. Supers, Roman Cancels, RISC, Positive Bonus and wall-break systems are not implemented.
 
 ## Gain and spending
 
