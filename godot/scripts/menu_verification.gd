@@ -42,9 +42,10 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	await verify_controls_dialog()
 	press("training")
 	await tree.process_frame
-	check(game.screen == "fighters" and game.menus.fighters[0].has_focus(), "Training selection or keyboard focus missing")
-	game.selection_characters[0].select(2)
-	game.selection_characters[1].select(5)
+	check(game.screen == "fighters" and game.menus.selection.tiles[game.menus.selection.chosen[0]].has_focus(), "Training selection or keyboard focus missing")
+	await verify_roster()
+	game.menus.selection.choose_fighter(0, 2)
+	game.menus.selection.choose_fighter(1, 5)
 	game.selection_simple[0].button_pressed = true
 	game.selection_simple[1].button_pressed = false
 	# A menu key that remains held across the transition is ignored until released.
@@ -63,7 +64,7 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	game._physics_process(1.0 / 60.0)
 	check(game.model.state_hash() == before, "Offline pause advanced the round")
 	press("change_fighters")
-	game.selection_characters[0].select(4)
+	game.menus.selection.choose_fighter(0, 4)
 	press("back")
 	check(game.screen == "pause" and game.characters[0] == 2 and game.model.state_hash() == before, "Cancel selection changed the fight or lost its return path")
 	press("resume")
@@ -81,8 +82,8 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	game.go_home()
 	press("matches")
 	press("local")
-	game.selection_characters[0].select(0)
-	game.selection_characters[1].select(1)
+	game.menus.selection.choose_fighter(0, 0)
+	game.menus.selection.choose_fighter(1, 1)
 	press("confirm_fighters")
 	check(game.activity == "local" and not game.practice.visible and not game.editor_shell.visible and not game.inputs.visible and not game.show_boxes, "Local match contains lab controls")
 	check(game.model.state().players[0].momentum == 0 and game.model.fingerprint() == fingerprint, "Practice meter leaked into match or move edits were lost")
@@ -111,7 +112,7 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	game.dummy.select(0)
 	press("development")
 	for p in 2:
-		game.selection_characters[p].select(p)
+		game.menus.selection.choose_fighter(p, p)
 		game.selection_simple[p].button_pressed = false
 	press("confirm_fighters")
 	await tree.process_frame
@@ -126,6 +127,34 @@ func joy(button: int, pressed: bool) -> void:
 	event.pressed = pressed
 	Input.parse_input_event(event)
 	Input.flush_buffered_events()
+
+func verify_roster() -> void:
+	var selection: FighterSelect = game.menus.selection
+	await tree.process_frame
+	check(game.get_viewport_rect().encloses(selection.start_button.get_global_rect()), "Character select action is outside the viewport")
+	for step in [[KEY_RIGHT, 1], [KEY_DOWN, 3], [KEY_LEFT, 2], [KEY_DOWN, 4], [KEY_RIGHT, 5]]:
+		var index: int = step[1]
+		key(step[0], true)
+		key(step[0], false)
+		check(selection.chosen == [index, 1] and selection.tiles[index].has_focus(), "Roster navigation changed the wrong player's fighter")
+	key(KEY_DOWN, true)
+	key(KEY_DOWN, false)
+	check(selection.start_button.has_focus(), "Roster Down did not reach Start")
+	key(KEY_UP, true)
+	key(KEY_UP, false)
+	check(selection.tiles[5].has_focus(), "Start Up did not return to the current fighter")
+	selection.slot_buttons[1].pressed.emit()
+	check(selection.active_player == 1 and selection.tiles[1].has_focus(), "Switching player did not focus their retained selection")
+	for _i in 2:
+		joy(JOY_BUTTON_DPAD_DOWN, true)
+		joy(JOY_BUTTON_DPAD_DOWN, false)
+	check(selection.chosen == [5, 5] and selection.tiles[5].markers == [true, true], "Mirror selection lost a player or marker")
+	selection.simple_checks[1].grab_focus()
+	key(KEY_SPACE, true)
+	key(KEY_SPACE, false)
+	check(selection.simple_checks[1].button_pressed and not selection.simple_checks[0].button_pressed, "Input toggle changed both players")
+	selection.set_active_player(0)
+	selection.focus_selection()
 
 func verify_controls_dialog() -> void:
 	game.menus.buttons.controls.grab_focus()
@@ -181,8 +210,8 @@ func verify_controller() -> void:
 func verify_online() -> void:
 	press("matches")
 	press("online")
-	check(not game.menus.selection_cards[1].visible, "Online asks local user to select the remote fighter")
-	game.selection_characters[0].select(4)
+	check(not game.menus.selection.hero_panels[1].visible, "Online asks local user to select the remote fighter")
+	game.menus.selection.choose_fighter(0, 4)
 	press("confirm_fighters")
 	game.address.text = " "
 	press("join")
@@ -237,6 +266,6 @@ func verify_online() -> void:
 	remote.queue_free()
 	game.cancel_connection()
 	press("back")
-	check(game.screen == "fighters" and game.selection_characters[0].selected == 4, "Lobby back lost local fighter")
+	check(game.screen == "fighters" and game.menus.selection.chosen[0] == 4, "Lobby back lost local fighter")
 	press("back")
 	check(game.screen == "matches", "Online fighter selection back path is incorrect")

@@ -19,7 +19,11 @@ func run(tree: SceneTree, game: Control) -> int:
 	# Exercise real running tweens, including reversal before the first fade finishes.
 	key(KEY_ENTER, true)
 	key(KEY_ENTER, false)
-	await tree.create_timer(0.06).timeout
+	# Sample an actual tween at a known time; cold asset loading can stall a render frame.
+	for tween in game.menus.page_tweens.values():
+		tween.pause()
+		tween.custom_step(0.06)
+	await tree.process_frame
 	check(game.screen == "matches" and game.menus.buttons.local.has_focus(), "Incoming menu was not immediately navigable")
 	check(game.menus.pages.matches.modulate.a > 0.0 and game.menus.pages.matches.modulate.a < 1.0, "Page transition did not animate")
 	var visible_alpha: float = game.menus.pages.home.modulate.a
@@ -33,6 +37,17 @@ func run(tree: SceneTree, game: Control) -> int:
 	for id in game.menus.pages:
 		check(game.menus.pages[id].visible == (id == "home"), "Outgoing page survived transition: " + id)
 	game.menu_action("training")
+	await game.wait_for_menu_motion()
+	game.menus.selection.choose_fighter(0, 2)
+	var portrait: FighterSelectPortrait = game.menus.selection.portraits[0]
+	portrait.tween.pause()
+	portrait.tween.custom_step(0.05)
+	check(portrait.arrival > 0.0 and portrait.arrival < 1.0, "Changing fighter did not animate the portrait")
+	game.menus.selection.choose_fighter(0, 3)
+	game.menus.selection.choose_fighter(0, 4)
+	await game.wait_for_menu_motion()
+	check(game.menus.selection.portraits[0].fighter_name.text == "SHARK" and game.menus.selection.chosen[1] == 1, "Rapid portrait selection finished on a stale fighter or changed P2")
+	game.menus.selection.choose_fighter(0, 0)
 	await game.wait_for_menu_motion()
 	key(KEY_J, true)
 	game.confirm_selection()

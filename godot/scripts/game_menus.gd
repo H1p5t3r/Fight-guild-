@@ -17,13 +17,8 @@ var header: HBoxContainer
 var breadcrumb: Label
 var back_button: Button
 var home_utilities: HBoxContainer
-var selection_title: Label
-var selection_note: Label
-var selection_cards: Array[Control] = []
-var selection_roles: Array[Label] = []
-var fighters: Array[OptionButton] = []
+var selection: FighterSelect
 var simplified: Array[CheckBox] = []
-var portraits: Array[FighterPreview] = []
 var address: LineEdit
 var port: SpinBox
 var status: Label
@@ -66,6 +61,7 @@ func _ready() -> void:
 		page.offset_top = 0 if id == "home" else 64
 		page.visible = false
 		pages[id] = page
+		page.minimum_size_changed.connect(func(): layout_pages.call_deferred())
 		match id:
 			"home": build_home(page)
 			"matches": build_matches(page)
@@ -199,41 +195,12 @@ func build_matches(page: VBoxContainer) -> void:
 	text(body, "Both players need the same build and move data for online play.", 18, MUTED)
 
 func build_fighters(page: VBoxContainer) -> void:
-	selection_title = heading(page, "CHOOSE YOUR FIGHTERS", "Motions remain available. Enable simplified inputs independently for each fighter.")
-	var body := scroll_body(page)
-	var pair := line(body)
-	pair.add_theme_constant_override("separation", 12)
-	pair.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	for p in 2:
-		var card := section(pair)
-		selection_cards.append(card.get_parent())
-		selection_roles.append(text(card, "PLAYER " + str(p + 1), 18, GOLD))
-		var picker := OptionButton.new()
-		picker.custom_minimum_size.y = 40
-		picker.add_theme_font_size_override("font_size", 24)
-		for fighter in CombatModel.CHARACTERS: picker.add_item(fighter)
-		card.add_child(picker)
-		fighters.append(picker)
-		var portrait := FighterPreview.new()
-		portrait.custom_minimum_size = Vector2(240, 210)
-		portrait.size_flags_vertical = Control.SIZE_EXPAND_FILL
-		portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		card.add_child(portrait)
-		portraits.append(portrait)
-		picker.item_selected.connect(func(index: int): portrait.present(index, "active", 0, 1 if p == 0 else -1))
-		var check := CheckBox.new()
-		check.text = "Enable simplified inputs"
-		check.custom_minimum_size.y = 38
-		card.add_child(check)
-		simplified.append(check)
-		text(card, "Modifier + → P / ↓ S / ↑ Hs · directions follow facing", 17, MUTED)
-	selection_note = text(page, "", 18, MUTED)
-	selection_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	var footer := line(page)
-	var fill := Control.new()
-	fill.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	footer.add_child(fill)
-	action(footer, "confirm_fighters", "Start match", 40, "essential")
+	selection = FighterSelect.new()
+	selection.motion = motion
+	page.add_child(selection)
+	selection.confirmed.connect(func(): action_requested.emit("confirm_fighters"))
+	simplified = selection.simple_checks
+	buttons.confirm_fighters = selection.start_button
 
 func build_online(page: VBoxContainer) -> void:
 	heading(page, "ONLINE / CONNECTION", "Both players choose a fighter locally and use Player 1 controls on their own computer.")
@@ -289,17 +256,7 @@ func build_results(page: VBoxContainer) -> void:
 	action(actions, "results_home", "Main menu", 38, "secondary")
 
 func configure_selection(activity: String, chosen: Array, simple: Array) -> void:
-	var online := activity == "online"
-	var practice := activity in ["training", "development"]
-	selection_title.text = {"local":"LOCAL VERSUS", "online":"CHOOSE YOUR FIGHTER", "training":"TRAINING", "development":"DEVELOPMENT / COMBAT LAB"}[activity]
-	selection_cards[1].visible = not online
-	for p in 2:
-		selection_roles[p].text = "LOCAL PLAYER" if online else "TRAINING DUMMY" if practice and p == 1 else "PLAYER " + str(p + 1)
-		fighters[p].select(chosen[p])
-		simplified[p].button_pressed = simple[p]
-		portraits[p].present(chosen[p], "active", 0, 1 if p == 0 else -1)
-	selection_note.text = "Your opponent chooses their fighter on their own computer." if online else "Dummy behavior and starting Momentum can be changed during practice." if practice else "Share a keyboard or connect two controllers. Open Controls for the full layout."
-	buttons.confirm_fighters.text = {"local":"Start match", "online":"Continue to connection", "training":"Start training", "development":"Open combat lab"}[activity]
+	selection.configure(activity, chosen, simple)
 
 func configure_pause(online: bool) -> void:
 	pause_note.text = "Online match continues while this menu is open." if online else "The round is paused."
@@ -383,9 +340,10 @@ func settle_page(id: String) -> void:
 func is_animating() -> bool:
 	for tween in page_tweens.values():
 		if tween.is_running(): return true
-	return chrome_tween != null and chrome_tween.is_running()
+	return (chrome_tween != null and chrome_tween.is_running()) or selection.is_animating()
 
 func finish_motion() -> void:
+	selection.finish_motion()
 	for id in pages:
 		if page_tweens.has(id): page_tweens[id].kill()
 		settle_page(id)
@@ -398,7 +356,7 @@ func focus_page(page: String) -> void:
 	match page:
 		"home": buttons.matches.grab_focus()
 		"matches": buttons.local.grab_focus()
-		"fighters": fighters[0].grab_focus()
+		"fighters": selection.focus_selection()
 		"online": (buttons.cancel_connection if buttons.host.disabled else buttons.host).grab_focus()
 		"pause": buttons.resume.grab_focus()
 		"results": (buttons.rematch if buttons.rematch.visible else buttons.return_lobby).grab_focus()

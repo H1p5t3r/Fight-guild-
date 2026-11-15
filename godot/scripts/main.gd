@@ -32,7 +32,6 @@ var editor_title: Label
 var routes: Label
 var pause_button: Button
 var locked_buttons: Array[Button] = []
-var selection_characters: Array[OptionButton] = []
 var selection_simple: Array[CheckBox] = []
 var file_dialog: FileDialog
 var importing := false
@@ -302,7 +301,6 @@ func build_interface() -> void:
 	menus.motion = motion
 	add_child(menus)
 	menus.action_requested.connect(menu_action)
-	selection_characters = menus.fighters
 	selection_simple = menus.simplified
 	address = menus.address
 	port = menus.port
@@ -415,7 +413,7 @@ func choose_activity(which: String) -> void:
 func confirm_selection() -> void:
 	if connection.active: return
 	for p in 2:
-		characters[p] = selection_characters[p].selected
+		characters[p] = menus.selection.chosen[p]
 		simple[p] = selection_simple[p].button_pressed
 	if screen == "fighters":
 		activity = pending_activity

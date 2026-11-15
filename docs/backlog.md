@@ -41,6 +41,8 @@ Requested scope: make repeatable character images performing directed actions, w
 - [ ] Import the actual newspaper drawing/page-turn background films when supplied; retain a still presentation for reduced motion.
 
 - [x] Main menu with separate Versus, Training and Development paths and full-screen fighter selection.
+- [x] Smooth interruptible menu/match transitions, input isolation and persistent reduced motion.
+- [x] Central six-fighter portrait grid, opposing guild artwork, animated selection and independent player markers/input toggles.
 - [x] Local match results/rematch, offline pause/restart, cancelable fighter changes and return to main menu.
 - [x] Direct online connection lobby with waiting/cancel/error recovery and neutral input while the in-match menu is open.
 - [x] Keyboard/controller UI actions and held-confirm protection; verify source and exported Linux builds.

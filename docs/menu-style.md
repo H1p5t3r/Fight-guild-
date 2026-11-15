@@ -15,9 +15,15 @@ Source: the user-supplied `guildball-menu-reference-pack-2026-11-15.zip`, taken 
 
 The home screen adapts the reference's palette, type and button surfaces to a fighting-game title screen: a large Fight Guild wordmark, an Anvil/Shark face-off and direct Versus, Training and Development choices. `home_faceoff.gd` reads the existing windup atlases for its decorative fighter artwork; it never starts or advances the combat simulation. Angled planes, a VS divider and guild-colored nameplates frame the pair. The six-fighter roster appears below the artwork, while mode help follows mouse hover or keyboard/controller focus. The unused runtime copies of the earlier concept-sheet cards were removed; original concept art remains under `art/characters`.
 
-`GameMenus` uses grouped compact panels with a fixed heading/navigation area. Fighter select keeps its start action outside the scrolling body. `controls_guide.gd` keeps its heading, scheme tabs and 40-pixel Close action fixed while bindings scroll. Closing it restores focus to the opening control. Native buttons, checkboxes, option pickers, editable fields and keyboard/controller actions retain their behavior.
+Character select takes its personality direction from the user's **2XKO** reference: a shared stage with large opposing fighters, oversized names, angled portrait tiles in a central 2×3 roster, and short character lines. It uses Fight Guild's existing sprites, fonts and palette. Guild-color planes and original geometric motifs identify each fighter; these are provisional UI motifs, not canonical guild crests. No external game's art or UI assets are included.
 
-The reference's newspaper drawing/page-turn films were not supplied. `guild_backdrop.gd` supplies a quiet, static teal/brass gradient based on the reference home screen; there is no fabricated film playback or motion setting. Replace this still layer when the actual background films become available. Decorative layers ignore pointer input.
+`FighterSelect` owns draft choices and native keyboard/controller focus. `FighterSelectPortrait` crossfades and slides the existing windup artwork with a brief guild-colored smear. `FighterRosterTile` draws clipped atlas portraits, player badges, hover color and an independent focus outline. Mirror matches show both player badges on the same tile. Online displays only the local player's controls. Character selection does not change combat pose rendering or simulation data.
+
+`GameMenus` keeps fixed navigation and uses grouped panels for connection, pause and results. Character select keeps its roster, input toggles and start action visible together at 720p. `controls_guide.gd` keeps its heading, scheme tabs and 40-pixel Close action fixed while bindings scroll. Closing it restores focus to the opening control. Native buttons, checkboxes, option pickers, editable fields and keyboard/controller actions retain their behavior.
+
+The reference's newspaper drawing/page-turn films were not supplied. `guild_backdrop.gd` supplies a quiet, static teal/brass gradient based on the reference home screen; it does not attempt to reproduce the absent films. Replace this still layer when the actual background films become available. Decorative layers ignore pointer input.
+
+Page navigation uses interruptible eased slides/crossfades (280 ms in, 180 ms out), match entry/resume uses a 280 ms fade, and portrait changes use a 260 ms entrance. New navigation retargets from the visible state; outgoing pages lose pointer/focus access immediately. **Motion: Reduced** in the home footer persists locally and removes translation and smear accents, shortening fades to at most 90 ms. Animation time never enters combat or rollback snapshots.
 
 The project uses a 1280×720 logical canvas and scales to 1920×1080. The development workbench and gatling reference now sit below the editor's other tools, inside its scroll area, leaving the arena and practice controls usable at 720p.
 
@@ -30,5 +36,7 @@ bash scripts/godot.sh --resolution 1280x720 --script tests/ui_smoke.gd -- --test
 bash scripts/godot.sh --resolution 1920x1080 --script tests/ui_smoke.gd -- --test --controls --screenshot /absolute/path/controls-1080.png
 bash scripts/godot.sh --resolution 1280x720 --script tests/style_review.gd -- --screenshot /absolute/path/surface-states.png
 ```
+
+For quicker character-select captures, use `tests/menu_preview.gd -- --test --fighters --p1 0 --p2 4 --screenshot /absolute/path/select.png`. `--online`, `--training` and `--mirror` inspect those variants. The same script's `--tour` plays a reproducible native navigation tour; Godot's `--write-movie /absolute/path/tour.avi --fixed-fps 60` can record it.
 
 The surface fixture shows normal, hover, pressed, focus and disabled artwork together. Actual input behavior is exercised by the menu suite: entry/back paths, keyboard/controller navigation, simplified controls, pause/rematch, input isolation, Controls tabs/fixed footer/focus return, and ENet handshake/cancellation/disconnect recovery. The host-port check also prevents delayed SpinBox text from replacing the selected value.

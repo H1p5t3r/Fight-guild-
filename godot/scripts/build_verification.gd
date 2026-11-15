@@ -201,7 +201,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	game.fields.reach.control.value = 500
 	game.dummy.select(2)
 	for character in CombatModel.CHARACTERS.size():
-		game.selection_characters[1].select(character)
+		game.menus.selection.choose_fighter(1, character)
 		game.confirm_selection()
 		for reaction in range(1, 4):
 			game.fields.blockstun.control.value = 10 if reaction == 1 else 16
@@ -227,13 +227,13 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	game.populate_editor()
 	game.training_momentum.select(0)
 	game.dummy.select(0)
-	game.selection_characters[1].select(1)
+	game.menus.selection.choose_fighter(1, 1)
 	game.confirm_selection()
 	# Exercise actual keyboard -> selected fighter -> windup/active artwork for all 30 basic buttons.
 	var button_keys := [KEY_J, KEY_K, KEY_L, KEY_I, KEY_O]
 	var slots := [0, 1, 2, 3, 13]
 	for character in CombatModel.CHARACTERS.size():
-		game.selection_characters[0].select(character)
+		game.menus.selection.choose_fighter(0, character)
 		game.selection_simple[0].button_pressed = false
 		game.confirm_selection()
 		for b in button_keys.size():
@@ -248,7 +248,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 			var anticipation: Texture2D = visual.texture
 			ticks(game.model.move(character, slots[b]).startup - 1)
 			check(visual.get_meta("phase") == "active" and visual.get_meta("pose") == b + 1 and visual.texture != anticipation, "Attack did not change to its active image")
-	game.selection_characters[0].select(0)
+	game.menus.selection.choose_fighter(0, 0)
 	game.confirm_selection()
 	game.reset_round()
 	verify_timing_feedback()
