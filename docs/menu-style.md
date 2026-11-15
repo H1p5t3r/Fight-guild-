@@ -27,6 +27,16 @@ Page navigation uses interruptible eased slides/crossfades (280 ms in, 180 ms ou
 
 The project uses a 1280×720 logical canvas and scales to 1920×1080. The development workbench and gatling reference now sit below the editor's other tools, inside its scroll area, leaving the arena and practice controls usable at 720p.
 
+## Match HUD
+
+`FightHud` carries the same type and palette into gameplay: cut-corner portrait/name plates, guild-colored trim and mirrored health rails, a central Scrum/timer plate, and two diamond win marks per fighter. Health uses the fighter's guild palette at every value: Blacksmiths brass, Masons slate blue, Alchemists sage, Brewers amber, Fishermen teal, and Butchers rose. Mirror matches share their guild color. Damage clears each outside end toward the center timer, with a darker guild-tinted empty region; remaining health stays next to the timer. A shallow bend at 30% remaining health lowers each inner end by eight logical pixels; rail, fill, highlight and depletion edge follow the same mirrored profile. Player badges, score marks and Momentum use brass for Player 1 and teal for Player 2 regardless of their positions. The three Momentum sections share the shaped framing; Faultless Defense changes the meter to mint green and names the active defense.
+
+The HUD draws above fighter sprites, while oversized outlined combo numerals remain in the stage background. COUNTER, PUNISH, REVERSAL, the intro names, and the opening ceremony use a shared chamfered headline stamp with offset shadows and short diagonal accents. All displayed values and feedback clocks still come directly from the combat state. Training/Development retain health numbers and move/frame diagnostics; Versus keeps that space for controls and score. The narrower development arena scales its plates with a minimum size for supporting labels.
+
+`ArenaStage` is a provisional graphic sports ground: charcoal stands, guild pennants, and chalked field planes. The hitbox grid appears only when hitboxes are enabled. This is a reusable presentation study; it does not change fighter scale, positions, collisions, or combat rules.
+
+`tests/hud_preview.gd -- --test --screenshot PATH` captures the native HUD with an unsaved six-hit fixture. Add `--neutral`, `--low-health`, `--fd`, `--training`, or `--development` to review specific states; `--p1 N --p2 N` selects portraits. Fixture move edits and scores never save to the player configuration.
+
 ## Review
 
 On a machine with a rendering display:

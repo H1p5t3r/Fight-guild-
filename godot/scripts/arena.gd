@@ -7,9 +7,11 @@ var paused := false
 var round_label := ""
 var score := [0, 0]
 var presentation_active := false
+var diagnostics := true
 var sprites: Array[Sprite2D] = []
+var hud_layer: Control
 var feedback := CombatFeedback.new()
-var font := ThemeDB.fallback_font
+var font := GuildTheme.SEMIBOLD
 const ACCENT := Color("f4b45e")
 const TEXT := Color("f0ede5")
 const MUTED := Color("a3b8c7")
@@ -23,6 +25,13 @@ func _ready() -> void:
 		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		add_child(sprite)
 		sprites.append(sprite)
+	hud_layer = Control.new()
+	hud_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	hud_layer.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	hud_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(hud_layer)
+	hud_layer.draw.connect(func():
+		if not view.is_empty(): FightHud.draw(hud_layer, view, score, round_label, diagnostics))
 
 func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bool) -> void:
 	model = simulation
@@ -69,50 +78,21 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 		sprite.position = Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x)
 		sprite.modulate = Color("ffa69a") if fighter.stun and not fighter.guarding else Color.WHITE
 	queue_redraw()
+	hud_layer.queue_redraw()
 
 func label(value: String, point: Vector2, font_size: int = 14, color: Color = TEXT) -> void:
 	draw_string(font, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color)
 
 func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, size), Color("202e38"))
+	ArenaStage.draw(self, show_boxes)
 	var sx := size.x / 1000.0
 	var floor_y := size.y - 76.0
-	for x in range(0, int(size.x), 70):
-		draw_line(Vector2(x, 100), Vector2(x, floor_y), Color("2c3d48"))
-	for y in range(120, int(floor_y), 50):
-		draw_line(Vector2(0, y), Vector2(size.x, y), Color("293b47"))
-	draw_line(Vector2(0, floor_y), Vector2(size.x, floor_y), Color("7d939e"), 2)
-	label("F G", Vector2(size.x * 0.43, size.y * 0.49), 64, Color("2d404b"))
 	if view.is_empty():
 		return
 	# Draw in the stage background before the HUD and before child fighter sprites.
 	feedback.draw(self)
 	for p in 2:
 		var fighter: Dictionary = view.players[p]
-		var left := p == 0
-		var width := size.x * 0.37
-		var x := 22.0 if left else size.x - width - 22.0
-		var tint := ACCENT if left else Color("91b6cb")
-		label(CombatModel.CHARACTERS[fighter.character].to_upper(), Vector2(x, 34), 20)
-		label("PLAYER %d / %s" % [p + 1, "SIMPLE + MOTIONS" if fighter.simple else "MOTION INPUTS"], Vector2(x, 52), 10, MUTED)
-		draw_rect(Rect2(x, 64, width, 12), Color("111c23"))
-		draw_rect(Rect2(x, 64, width * fighter.health / 1000.0, 12), tint)
-		for mark in MatchScore.WINS_REQUIRED:
-			var marker_x := x + width - 12 - mark * 20 if left else x + 12 + mark * 20
-			draw_circle(Vector2(marker_x, 88), 5, tint if score[p] > mark else Color("30434e"))
-		var health_text := str(fighter.health)
-		var health_width := font.get_string_size(health_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 11).x
-		label(health_text, Vector2(x if left else x + width - health_width, 94), 11, MUTED)
-		var meter_y := size.y - 30.0
-		var meter_color := Color("75dcbc") if fighter.faultless else ACCENT
-		label("MOMENTUM  %.1f%%" % (fighter.momentum / 100.0), Vector2(x, meter_y - 7), 12, meter_color)
-		var section_width := (width - 10.0) / 3.0
-		for section in 3:
-			var section_x: float = x + (section if left else 2 - section) * (section_width + 5.0)
-			var fill: float = clampf(fighter.momentum * 3.0 / CombatModel.MOMENTUM_MAX - section, 0.0, 1.0)
-			draw_rect(Rect2(section_x, meter_y, section_width, 10), Color("111c23"))
-			draw_rect(Rect2(section_x if left else section_x + section_width * (1.0 - fill), meter_y, section_width * fill, 10), meter_color)
-			draw_rect(Rect2(section_x, meter_y, section_width, 10), Color("62777e"), false)
 		var px: float = fighter.x / 100.0 * sx
 		var py: float = floor_y - fighter.y / 100.0 * sx
 		var crouched: bool = fighter.y == 0 and (int(fighter.raw) & 4) != 0
@@ -127,25 +107,22 @@ func _draw() -> void:
 				var hitbox := Rect2(minf(front, back) * sx, py - (move.bottom + move.height) / 100.0 * sx, absf(front - back) * sx, move.height / 100.0 * sx)
 				draw_rect(hitbox, Color(1, 0.65, 0.25, 0.25))
 				draw_rect(hitbox, ACCENT, false, 2)
-			label("%s · %df" % [CombatModel.MOVE_IDS[fighter.move], fighter.age], Vector2(px - 25, py + 24), 12)
-		else:
+			if diagnostics: label("%s · %df" % [CombatModel.MOVE_IDS[fighter.move], fighter.age], Vector2(px + 28, py - 10), 12)
+		elif diagnostics:
 			var status := "HITSTUN" if fighter.stun else "READY"
 			if fighter.guarding:
 				status = "GUARD BREAK" if fighter.guardBreak else "BLOCK · attacker %+df" % fighter.blockAdvantage
 			elif fighter.faultless: status = "FAULTLESS"
-			label(status, Vector2(clampf(px - 45, 12, size.x - 165), py + 20), 11, Color("f68b79") if fighter.guardBreak else MUTED)
+			label(status, Vector2(clampf(px + 28, 12, size.x - 165), py - 10), 12, Color("f68b79") if fighter.guardBreak else MUTED)
 		if fighter.faultless or (fighter.guarding and not fighter.guardBreak):
 			var angle := 0.0 if fighter.facing == 1 else PI
 			var guard_color := Color("75dcbc") if fighter.faultless else Color("89c3e0")
 			draw_arc(Vector2(px, py - 70 * sx), 58 * sx, angle - 1.4, angle + 1.4, 24, guard_color, 5 if fighter.faultless else 2)
-	var call_width := font.get_string_size(round_label, HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x
-	label(round_label, Vector2((size.x - call_width) * 0.5, 23), 12, ACCENT)
-	label("%02d" % ceili(view.remaining / 60.0), Vector2(size.x / 2 - 24, 67), 42)
 	if paused:
-		label("PAUSED", Vector2(size.x / 2 - 28, 117), 12, ACCENT)
-	label("%05d · %s" % [view.frame, "STOP" if view.hitstop else "60HZ"], Vector2(size.x / 2 - 41, size.y - 19), 10, MUTED)
+		FightHud.centered(self, "PAUSED", Vector2(size.x * 0.5, 151), 17, GuildTheme.BRASS)
+	if diagnostics:
+		FightHud.centered(self, "%05d · %s" % [view.frame, "STOP" if view.hitstop else "60HZ"], Vector2(size.x * 0.5, size.y - 9), 12, MUTED)
 	if view.winner >= 0 and not presentation_active:
-		draw_rect(Rect2(0, size.y * 0.37, size.x, 112), Color("111b23"))
 		var title: String = "DRAW" if view.winner == 2 else CombatModel.CHARACTERS[view.players[view.winner].character].to_upper() + " TAKES " + str(MatchCeremony.script().roundName).to_upper()
-		label(title, Vector2(size.x * 0.23, size.y * 0.37 + 46), 25, ACCENT)
-		label("Reset to run it back. Online: leave and reconnect to rematch.", Vector2(size.x * 0.18, size.y * 0.37 + 80), 12, MUTED)
+		FightHud.stamp(self, title, Vector2(size.x * 0.5, size.y * 0.42), 32, GuildTheme.BRASS)
+		FightHud.centered(self, "Reset to run it back.", Vector2(size.x * 0.5, size.y * 0.42 + 63), 18, MUTED)

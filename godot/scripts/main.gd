@@ -843,6 +843,7 @@ func _process(_delta: float) -> void:
 	arena.round_label = MatchCeremony.round_call(round_number)
 	arena.score = match_score.wins
 	arena.presentation_active = screen in ["entry", "results"]
+	arena.diagnostics = activity in ["training", "development"]
 	if match_entry.phase != "loading": arena.refresh(model, state, show_boxes, paused)
 	if screen in ["play", "pause"] and activity in ["local", "online"] and state.winner >= 0:
 		finish_scrum(state)

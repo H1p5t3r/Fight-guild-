@@ -3,7 +3,7 @@ extends RefCounted
 
 # All clocks come from the restored combat state. Drawing never advances a timer.
 const DISPLAY_FONT = preload("res://assets/fonts/DejaVuSansCondensed-BoldOblique.ttf")
-const TINTS := [Color("f4b45e"), Color("91b6cb")]
+const TINTS := FightHud.PLAYER_COLORS
 var cards: Array[Dictionary] = []
 var area := Vector2.ZERO
 
@@ -57,11 +57,11 @@ func draw(canvas: CanvasItem) -> void:
 			centered(canvas, "HIT COMBO", center_x + 35, base.y + 22, 15, Color(tint, 0.95 * alpha))
 		if card.hit in [3, 4]:
 			var hit_color := Color("ffc771") if card.hit == 3 else Color("ff9d87")
-			centered(canvas, "COUNTER" if card.hit == 3 else "PUNISH", center_x, 151, 31, Color(hit_color, card.hit_alpha))
+			FightHud.stamp(canvas, "COUNTER" if card.hit == 3 else "PUNISH", Vector2(center_x, 182), 31, hit_color, card.hit_alpha)
 		if card.reversal:
 			var detail := "FIRST FRAME" if card.input_age == 0 else "BUFFERED %df" % card.input_age
 			if card.number >= 2 or card.hit in [3, 4]:
-				centered(canvas, "REVERSAL · " + detail, center_x, 123, 14, Color(Color("8ee4cf"), card.reversal_alpha))
+				FightHud.centered(canvas, "REVERSAL · " + detail, Vector2(center_x, 232), 17, Color(Color("8ee4cf"), card.reversal_alpha), 2)
 			else:
-				centered(canvas, "REVERSAL", center_x, 151, 23, Color(Color("8ee4cf"), card.reversal_alpha))
-				centered(canvas, detail, center_x, 169, 11, Color(Color("b5d5d0"), card.reversal_alpha))
+				FightHud.stamp(canvas, "REVERSAL", Vector2(center_x, 182), 29, Color("8ee4cf"), card.reversal_alpha)
+				FightHud.centered(canvas, detail, Vector2(center_x, 232), 16, Color(Color("b5d5d0"), card.reversal_alpha), 2)

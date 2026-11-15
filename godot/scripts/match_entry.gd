@@ -287,7 +287,7 @@ func draw_intro(scale_factor: float) -> void:
 	sprites[intro_player].visible = true
 	var center_x := w * 0.28
 	centered("PLAYER %02d / %s" % [intro_player + 1, FighterSelectPortrait.GUILDS[character]], Vector2(center_x, h * 0.37), int(22 * scale_factor), Color(accent, text_alpha))
-	centered(CombatModel.CHARACTERS[character].to_upper(), Vector2(center_x, h * 0.51), int(76 * scale_factor), Color(GuildTheme.IVORY, text_alpha))
+	FightHud.stamp(self, CombatModel.CHARACTERS[character].to_upper(), Vector2(center_x, h * 0.47), int(76 * scale_factor), accent, text_alpha)
 	centered(FighterSelectPortrait.LINES[character], Vector2(center_x, h * 0.59), int(27 * scale_factor), Color(accent, text_alpha))
 	draw_line(Vector2(w * 0.10, h * 0.63), Vector2(w * (0.10 + 0.36 * reveal), h * 0.63), Color(accent, text_alpha), 3 * scale_factor)
 	centered("Enter / A: skip introductions", Vector2(w * 0.5, h * 0.94), int(18 * scale_factor), GuildTheme.MUTED)
@@ -303,7 +303,7 @@ func draw_opening(scale_factor: float) -> void:
 		draw_rect(Rect2(0, h * 0.90, w, h * 0.10), Color(0.03, 0.07, 0.09, curtain))
 		var opacity := 1.0 - smoothstep(0.28, 0.65, elapsed)
 		var expansion := 1.0 if motion.reduced else 1.0 + 0.06 * (1.0 - smoothstep(0.0, 0.20, elapsed))
-		centered(str(MatchCeremony.script().releaseCall).to_upper(), Vector2(w * 0.5, h * 0.49), int(78 * scale_factor * expansion), Color(GuildTheme.BRASS, opacity))
+		FightHud.stamp(self, str(MatchCeremony.script().releaseCall).to_upper(), Vector2(w * 0.5, h * 0.46), int(78 * scale_factor * expansion), GuildTheme.BRASS, opacity, true)
 		return
 	var duration: float = MatchCeremony.script().beatSeconds[beat]
 	var reveal := 1.0 if phase == "ready" else smoothstep(0.0, motion.duration(0.20), elapsed)
@@ -316,9 +316,7 @@ func draw_opening(scale_factor: float) -> void:
 	var text: String = MatchCeremony.round_call(round_number) if beat == 2 else MatchCeremony.script().opening[beat]
 	var font_size := 82 if beat == 2 else 44
 	var y := h * 0.49 + motion.distance(12.0) * (1.0 - reveal)
-	centered(text, Vector2(w * 0.5, y), int(font_size * scale_factor), Color(GuildTheme.BRASS if beat == 2 else GuildTheme.IVORY, opacity))
-	if beat == 2:
-		draw_line(Vector2(w * 0.32, h * 0.54), Vector2(w * 0.68, h * 0.54), Color(GuildTheme.BRASS, opacity), 2 * scale_factor)
+	FightHud.stamp(self, text.to_upper() if beat == 2 else text, Vector2(w * 0.5, y - 22 * scale_factor), int(font_size * scale_factor), GuildTheme.BRASS, opacity)
 	if phase == "ready":
 		centered(waiting_text, Vector2(w * 0.5, h * 0.64), int(20 * scale_factor), GuildTheme.MUTED)
 
@@ -328,7 +326,7 @@ func draw_intermission(scale_factor: float) -> void:
 	var reveal := 1.0 if phase == "round_wait" else smoothstep(0.0, motion.duration(0.22), elapsed)
 	draw_rect(Rect2(Vector2.ZERO, size), Color(0.025, 0.045, 0.055, 0.78 * reveal))
 	var title := "EVEN GROUND" if score_winner == 2 else str(CombatModel.CHARACTERS[characters[score_winner]]).to_upper() + " CLAIMS THE SCRUM"
-	centered(title, Vector2(w * 0.5, h * 0.35), int(48 * scale_factor), Color(GuildTheme.IVORY, reveal))
+	FightHud.stamp(self, title, Vector2(w * 0.5, h * 0.32), int(48 * scale_factor), GuildTheme.BRASS if score_winner == 2 else FightHud.PLAYER_COLORS[score_winner], reveal)
 	centered("%d  —  %d" % [score_points[0], score_points[1]], Vector2(w * 0.5, h * 0.52), int(86 * scale_factor), Color(GuildTheme.BRASS, reveal))
 	var note := "DRAW · REPLAY " if score_winner == 2 else "UP NEXT · "
 	centered(note + next_call, Vector2(w * 0.5, h * 0.65), int(26 * scale_factor), Color(GuildTheme.IVORY, reveal))

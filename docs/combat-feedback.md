@@ -43,10 +43,10 @@ The move editor exposes **Counter +stun**, **Counter +stop** and **Eligible for 
 
 Select the **Attack loop** dummy to practice interrupting startup or catching Hs recovery. **Guard → reversal** holds down-back, then enters a traditional 236P during the last three blockstun ticks outside hitstop. It is a training aid, not an invulnerable response; pressure can interrupt it. Timing, hitstop and notice clocks can all be inspected with Pause / +1 frame.
 
-The display bundles the unchanged DejaVu Sans Condensed Bold Oblique font with its license to keep numeral shapes consistent across PC platforms.
+The display bundles the unchanged DejaVu Sans Condensed Bold Oblique font with its license to keep numeral shapes consistent across PC platforms. Notices use the shared Barlow Condensed headline stamp, brass/teal player colors, chamfered plates and diagonal accents from the [match HUD](menu-style.md#match-hud). Counter/punish and reversal lines have separate vertical slots so simultaneous notices remain readable.
 
 ## Persistence and verification
 
-Schema/core version **4** adds the three per-move timing fields and snapshot feedback state. Schema-1/2/3 JSON imports preserve prior move, Momentum, FD and guard-break settings, then add default timing fields; reversal eligibility follows the saved move category. Fingerprints prevent mixed builds/data from playing together. The native input protocol remains 2 because no input bit changed.
+Schema/core version **4** adds the three per-move timing fields and snapshot feedback state. Schema-1/2/3 JSON imports preserve prior move, Momentum, FD and guard-break settings, then add default timing fields; reversal eligibility follows the saved move category. Fingerprints prevent mixed builds/data from playing together. Native network protocol **4** adds synchronized match presentation and per-Scrum generations; input bits remain unchanged.
 
 Regression tests cover startup/active/recovery edges, trade symmetry, recovery cancels, zero/max bonuses, counter-hit follow-ups, blocked contacts, both players' reversal timing, traditional/simple execution, expired buffers/hitstop, late inputs, opt-in normals, interruption of a timed reversal, combo continuity and deterministic restoration. Native, Godot and WebAssembly traces must still agree frame by frame.
