@@ -9,7 +9,7 @@ The [2026-11-15 source review](research/strive-dustloop-2026-11-15.md) compares 
 - [x] Add starter proration, per-move combo scaling and minimum damage independently of gravity; preserve the first-X-hits rule and add repeated-move gravity after that threshold.
 - [x] Add ordinary block carryover and editable post-recovery throw protection, preserving guard-break throw vulnerability and its backdash restriction.
 - [x] Add move-specific landing recovery, including Shark's air hook and air stab, and a separate recovered-air-action landing duration.
-- [ ] Add grounded jump startup before takeoff; define empty-jump recovery independently of aerial attacks.
+- [x] Add editable grounded jump startup before takeoff; define empty-jump recovery independently of aerial attacks.
 - [x] Add ordinary corner pushback and separate FD ground/air drain and attack-level contact costs. Keep FD as the only Momentum spend and Negative Penalty deferred.
 - [x] Add optional attack-strength/counter presets, per-move overrides and counter-vulnerability masks; distinguish heavy counters from pokes and follow-ups.
 - [x] Add an editable midscreen wall-damage cap and grounded wall priming, with separate airborne threshold behavior.

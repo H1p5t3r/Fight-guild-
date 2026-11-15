@@ -63,10 +63,11 @@ func verify_hook_rollback(air: bool) -> void:
 			var input := 0
 			var other := 0
 			if air:
-				input = 8 if frame == 0 else 4 if frame == 1 else 5 if frame == 2 else 17 if frame == 3 else 0
+				input = 8 if frame == 0 else 4 if frame == 5 else 5 if frame == 6 else 17 if frame == 7 else 0
 			else:
 				input = 4 if frame == 0 else 5 if frame == 1 else 65 if frame == 2 else 0
-				other = 8 if frame == 12 else 0
+				# Begin the four-frame prejump earlier to preserve the recorded hook contact height.
+				other = 8 if frame == 8 else 0
 			var before := reference.state()
 			if before.players[0].contact and before.hitstop == 0 and not followed:
 				input = 16
@@ -84,5 +85,5 @@ func verify_hook_rollback(air: bool) -> void:
 					packets.remove_at(i)
 			check(session.advance(), "Signature rollback stalled: " + session.error)
 		for packet in packets: session.submit(0, packet.frame, packet.input)
-		check(saw_pull and saw_weapon and saw_combo and reference.state().players[1].health == 948, "Real input hook / scaled stab did not connect")
+		check(saw_pull and saw_weapon and saw_combo and reference.state().players[1].health == 948, "Real input hook / scaled stab did not connect: air=%s delay=%d" % [air, delay])
 		check(session.error.is_empty() and session.rollbacks > 0 and reference.state_hash() == predicted.state_hash(), "Hook rollback diverged: air=%s delay=%d" % [air, delay])

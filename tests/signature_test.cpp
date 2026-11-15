@@ -62,7 +62,9 @@ static void mobility() {
         fresh(s,c,mirror);s.step((mirror?Right:Left)|Dash,0);int start=s.world.players[0].x;
         s.step(forward,0);CHECK((s.world.players[0].x-start)*sign<0); // Fixed backward burst.
         fresh(s,c,mirror);s.step(forward|Dash,0);ticks(s,5,forward|Dash);
-        int vx=s.world.players[0].vx;s.step(Up|forward,0);CHECK(s.world.players[0].y>0&&s.world.players[0].vx==vx);
+        int vx=s.world.players[0].vx;s.step(Up|forward,0);
+        CHECK(s.world.players[0].prejump_time==4&&s.world.players[0].vx==vx);
+        ticks(s,4,forward);CHECK(s.world.players[0].y>0&&s.world.players[0].vx==vx);
     }
     fresh(s);s.step(Dash|Right,0);ticks(s,6,Right);s.moves[5][0].v[InertiaPercent]=50;
     int x=s.world.players[0].x,v=s.world.players[0].vx;s.step(P,0);CHECK(s.world.players[0].x-x==v/2);

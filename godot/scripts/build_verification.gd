@@ -89,7 +89,7 @@ func verify_timing_feedback() -> void:
 	game.reset_round()
 	for _tick in 32: game.model.step(2, 1)
 	game.model.step(8 | 2, 1)
-	for _tick in 36: game.model.step(2, 1)
+	for _tick in 36 + int(game.model.data().jumpRules.prejumpFrames): game.model.step(2, 1)
 	game._process(0.0)
 	check(game.model.state().players[0].x > game.model.state().players[1].x, "Jump-over fixture did not cross")
 	check(game.model.state().players[0].move == -1 and game.model.state().players[0].y == 0, "Jump-over did not land")

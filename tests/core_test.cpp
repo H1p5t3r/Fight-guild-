@@ -104,12 +104,13 @@ static void test_combat() {
     fresh(); ticks(5,P); ticks(1,K);
     CHECK(world.players[0].move==0); // No whiff gatlings.
     fresh(); near(); ticks(8,K); thaw(); ticks(1,Up);
-    CHECK(world.players[0].y>0&&world.players[0].move==-1);
+    CHECK(world.players[0].prejump_time==4&&world.players[0].move==-1);
     fresh(); near(); ticks(5,P); thaw(); ticks(1,Up);
     CHECK(world.players[0].y==0&&world.players[0].move==0);
     fresh(1); near(); ticks(1,Simple|Right|P); ticks(13); thaw(); ticks(1,Right|P);
     CHECK(world.players[0].move==8); // Special P -> command P.
-    fresh(); ticks(1,Up); CHECK(world.players[0].y>0);
+    fresh(); ticks(1,Up); CHECK(world.players[0].prejump_time==4);
+    ticks(4); CHECK(world.players[0].y>0);
     ticks(1,S); CHECK(world.players[0].move==19);
     ticks(60); CHECK(world.players[0].y==0&&world.players[0].move==-1);
     fresh(); int start=world.players[0].x; ticks(3,Dash);

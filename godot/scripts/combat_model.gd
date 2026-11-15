@@ -2,7 +2,7 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 8
+const DATA_VERSION := 9
 const MOMENTUM_MAX := 10000
 const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
@@ -13,8 +13,9 @@ const RULES := ["buttonBuffer", "motionWindow", "motionGap"]
 const MOMENTUM_RULES := ["movementGain", "attackGain", "blockedAttackGain", "damageTakenGain", "guardGain", "specialGain", "fdDrain", "fdBlockCost", "fdDamageCost", "fdPushPercent"]
 const RECOVERY_RULES := ["gravityAfter", "gravityStep", "gravityCap", "wallThreshold", "wallRange", "wallDecayDelay", "wallDecay", "wallSplatFrames", "wallBreakFrames", "wallBreakDamage", "positiveFrames", "positiveGainPercent", "positiveRegen"]
 const TUNING_RULES := ["fdAirDrain", "fdLevelCost", "cornerPushTransfer", "wallMidCap", "groundedWallPrime", "blockCarryover", "throwGraceFrames", "airLandingFrames", "repeatAfter", "repeatGravityStep"]
-const RULE_COUNT := 36 # Input, Momentum, recovery/walls, then tuning rules.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage"]
+const JUMP_RULES := ["prejumpFrames", "emptyLandingFrames"]
+const RULE_COUNT := 38 # Input, Momentum, recovery/walls, tuning, then jump rules.
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime"]
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
 
@@ -52,7 +53,7 @@ func movement(character: int) -> Dictionary:
 	return result
 
 func data() -> Dictionary:
-	var result := {"schema": DATA_VERSION, "coreVersion": DATA_VERSION, "inputRules": {}, "momentumRules": {}, "recoveryRules": {}, "tuningRules": {}, "characters": []}
+	var result := {"schema": DATA_VERSION, "coreVersion": DATA_VERSION, "inputRules": {}, "momentumRules": {}, "recoveryRules": {}, "tuningRules": {}, "jumpRules": {}, "characters": []}
 	for i in RULES.size():
 		result.inputRules[RULES[i]] = config[config.size() - RULE_COUNT + i]
 	for i in MOMENTUM_RULES.size():
@@ -60,7 +61,9 @@ func data() -> Dictionary:
 	for i in RECOVERY_RULES.size():
 		result.recoveryRules[RECOVERY_RULES[i]] = config[config.size() - RULE_COUNT + RULES.size() + MOMENTUM_RULES.size() + i]
 	for i in TUNING_RULES.size():
-		result.tuningRules[TUNING_RULES[i]] = config[config.size() - TUNING_RULES.size() + i]
+		result.tuningRules[TUNING_RULES[i]] = config[config.size() - TUNING_RULES.size() - JUMP_RULES.size() + i]
+	for i in JUMP_RULES.size():
+		result.jumpRules[JUMP_RULES[i]] = config[config.size() - JUMP_RULES.size() + i]
 	for c in CHARACTERS.size():
 		var character := {"name": CHARACTERS[c], "moves": [], "movement": movement(c)}
 		for m in MOVE_IDS.size():
@@ -139,7 +142,7 @@ func load_data(value: Variant) -> String:
 				if not valid_integer(characters[c].movement.get(field)): return "Invalid movement: " + field
 				candidate[start + i] = int(characters[c].movement[field])
 	var offset := candidate.size() - RULE_COUNT
-	for group in [["inputRules", RULES, 1], ["momentumRules", MOMENTUM_RULES, 3], ["recoveryRules", RECOVERY_RULES, 6], ["tuningRules", TUNING_RULES, 8]]:
+	for group in [["inputRules", RULES, 1], ["momentumRules", MOMENTUM_RULES, 3], ["recoveryRules", RECOVERY_RULES, 6], ["tuningRules", TUNING_RULES, 8], ["jumpRules", JUMP_RULES, 9]]:
 		if version >= group[2]:
 			if not value.get(group[0]) is Dictionary: return "Missing " + group[0]
 			for i in group[1].size():
@@ -149,9 +152,11 @@ func load_data(value: Variant) -> String:
 		offset += group[1].size()
 	if version < 8:
 		# Retain saved FD costs and gravity behavior; new editor fields remain available.
-		candidate[candidate.size() - TUNING_RULES.size()] = candidate[candidate.size() - RULE_COUNT + 9]
-		candidate[candidate.size() - TUNING_RULES.size() + 1] = 0
-		candidate[candidate.size() - 1] = 0
+		candidate[candidate.size() - RULE_COUNT + 26] = candidate[candidate.size() - RULE_COUNT + 9]
+		candidate[candidate.size() - RULE_COUNT + 27] = 0
+		candidate[candidate.size() - RULE_COUNT + 35] = 0
+	if version < 9:
+		candidate[candidate.size() - JUMP_RULES.size()] = 0 # Preserve legacy instant takeoff.
 	if not core.configure(candidate):
 		return "A move value or rule is outside the supported range."
 	config = core.configuration()

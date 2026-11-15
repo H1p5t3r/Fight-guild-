@@ -79,7 +79,7 @@ void Simulation::gain_momentum(Fighter& f,int amount) {
 }
 void Simulation::update_faultless(Fighter& f) {
     bool request=faultless_requested(f);
-    f.faultless=request&&f.momentum>0&&f.move<0&&f.reaction==Free&&!f.landing_time&&(f.stun==0||f.guarding);
+    f.faultless=request&&f.momentum>0&&f.move<0&&f.reaction==Free&&!f.landing_time&&!f.prejump_time&&(f.stun==0||f.guarding);
     // Reserve the chord even with an empty meter: it falls back to ordinary guard.
     // It cannot become a buffered attack, dash or jump when the shield is released.
     if(request) f.history[world.frame%HISTORY].consumed|=P|K|S|Hs|D|Dash|Up;
@@ -231,6 +231,12 @@ void Simulation::control(Fighter& f) {
         if(f.stun==0&&!f.guard_break) f.throw_grace=rules.throw_grace_frames;
         return;
     }
+    if(f.prejump_time>0) {
+        if(--f.prejump_time>0) return;
+        f.vy=1450; f.y=1;
+        // FD can begin on takeoff, at the airborne rate; it cannot guard prejump.
+        update_faultless(f);
+    }
     // This opportunity exists for exactly the first actionable tick after stun.
     // The ordinary input buffer supplies execution leniency; it grants no invulnerability.
     bool reversal=f.reversal_ready!=0;
@@ -252,8 +258,15 @@ void Simulation::control(Fighter& f) {
                 can=m.v[JumpCancel]&&(f.contact||m.v[WhiffCancel])&&cancel_window(f,2);
             }
             if(can) {
-                f.vy=1450; f.y=1; f.move=-1; f.dash=f.running=0;
+                f.move=-1; f.contact=f.hit_done=f.dash=f.running=0;
                 h->consumed|=Up;
+                f.prejump_time=rules.prejump_frames;
+                if(f.prejump_time>0) {
+                    int horizontal=((h->held&Right)!=0)-((h->held&Left)!=0);
+                    if(horizontal&&f.vx*horizontal<=0) f.vx=horizontal*mobility[f.character].v[WalkSpeed];
+                    return;
+                }
+                f.vy=1450; f.y=1;
                 break;
             }
         }
@@ -331,6 +344,7 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     if(f.reaction==AirReel||f.reaction==WallSplat||f.reaction==Reeled) return {0,9};
     if(f.guarding&&f.block_reaction>0) return {2,(f.block_reaction-1)*2+(f.block_age>=4)};
     if(f.stun) return {0,9};
+    if(f.prejump_time) return {0,11};
     if(f.faultless) return {2,1};
     if(f.move>=0) {
         const auto& m=moves[f.character][f.move];
@@ -449,7 +463,7 @@ bool Simulation::overlaps(const Fighter& a,const Fighter& b) const {
 }
 bool Simulation::blocks(const Fighter& attacker,const Fighter& defender,bool was_stunned,bool was_landing) const {
     if(defender.reaction!=Free||moves[attacker.character][attacker.move].v[Category]==Throw) return false;
-    if(defender.move>=0||defender.landing_time||was_landing||((defender.stun||was_stunned)&&!defender.guarding)) return false;
+    if(defender.move>=0||defender.prejump_time||defender.landing_time||was_landing||((defender.stun||was_stunned)&&!defender.guarding)) return false;
     int away=attacker.x<defender.x?Right:Left;
     int toward=away==Left?Right:Left;
     bool carry=rules.block_carryover&&was_stunned&&defender.guarding&&!defender.guard_break;
@@ -465,11 +479,11 @@ int Simulation::gravity_percent(const Fighter& f) const {
     return min(rules.gravity_cap,100+(f.combo_received-rules.gravity_after)*rules.gravity_step+f.repeat_gravity);
 }
 bool Simulation::throw_invulnerable(const Fighter& f) const {
-    return f.y>0||f.reaction!=Free||(!f.guard_break&&f.throw_grace>0)||(f.guarding&&!f.guard_break)||(f.stun>0&&!f.guarding);
+    return f.y>0||f.prejump_time>0||f.reaction!=Free||(!f.guard_break&&f.throw_grace>0)||(f.guarding&&!f.guard_break)||(f.stun>0&&!f.guarding);
 }
 void Simulation::land(Fighter& f) {
-    if(f.reaction==Free&&f.air_action)
-        f.landing_time=f.move>=0?moves[f.character][f.move].v[LandingRecovery]:rules.air_landing_frames;
+    if(f.reaction==Free)
+        f.landing_time=f.air_action?(f.move>=0?moves[f.character][f.move].v[LandingRecovery]:rules.air_landing_frames):rules.empty_landing_frames;
     f.air_action=0;
     f.y=f.vy=0; f.move=-1; f.contact=f.hit_done=0;
     if(f.reaction==AirReel) {
@@ -685,7 +699,7 @@ void Simulation::step(int raw0,int raw1) {
         other.guarding=blocked[p];
         other.block_age=0;
         other.guard_break=blocked[p]&&m.v[GuardBreak]&&other.stun>0;
-        other.throw_grace=other.landing_time=0;
+        other.throw_grace=other.landing_time=other.prejump_time=0;
         // Count the remaining active/recovery ticks AFTER this contact tick.
         int remaining=m.v[Startup]-1+m.v[Active]+m.v[Recovery]-(f.age+1);
         other.block_advantage=blocked[p]?m.v[Blockstun]-remaining:0;
@@ -817,6 +831,7 @@ int Simulation::get(int player,int field) const {
         case 54:return f.input_age; case 55:return f.last_damage; case 56:return f.damage_scale;
         case 57:return f.combo_proration; case 58:return f.combo_scale;
         case 59:return f.counter_tier; case 60:return f.repeat_gravity; case 61:return f.last_base_damage;
+        case 62:return f.prejump_time;
         default:return 0;
     }
 }
@@ -884,13 +899,14 @@ int Simulation::rule_get(int f) const {
         rules.wall_decay_delay,rules.wall_decay,rules.wall_splat_frames,rules.wall_break_frames,
         rules.wall_break_damage,rules.positive_frames,rules.positive_gain_percent,rules.positive_regen,
         rules.fd_air_drain,rules.fd_level_cost,rules.corner_push_transfer,rules.wall_mid_cap,rules.grounded_wall_prime,
-        rules.block_carryover,rules.throw_grace_frames,rules.air_landing_frames,rules.repeat_after,rules.repeat_gravity_step};
+        rules.block_carryover,rules.throw_grace_frames,rules.air_landing_frames,rules.repeat_after,rules.repeat_gravity_step,
+        rules.prejump_frames,rules.empty_landing_frames};
     return f>=0&&f<RULE_COUNT?values[f]:-1;
 }
 int Simulation::rule_set(int f,int v) {
-    const int low[RULE_COUNT]={1,3,1,0,0,0,0,0,0,1,0,0,100, 0,0,100,1,0,0,0,1,30,0,0,100,0, 1,0,0,0,0,0,0,0,0,0};
+    const int low[RULE_COUNT]={1,3,1,0,0,0,0,0,0,1,0,0,100, 0,0,100,1,0,0,0,1,30,0,0,100,0, 1,0,0,0,0,0,0,0,0,0, 0,0};
     const int high[RULE_COUNT]={12,30,12,100,100,100,100,100,10000,1000,10000,100,1000,
-        100,100,400,10000,50000,600,1000,180,300,1000,1800,300,100, 1000,1000,1,100,1,1,30,120,100,100};
+        100,100,400,10000,50000,600,1000,180,300,1000,1800,300,100, 1000,1000,1,100,1,1,30,120,100,100, 30,120};
     if(f<0||f>=RULE_COUNT||v<low[f]||v>high[f]) return 0;
     int* values[RULE_COUNT]={&rules.buffer,&rules.motion_window,&rules.motion_gap,
         &rules.move_gain,&rules.attack_gain,&rules.block_attack_gain,&rules.damage_gain,&rules.guard_gain,
@@ -899,7 +915,8 @@ int Simulation::rule_set(int f,int v) {
         &rules.wall_decay_delay,&rules.wall_decay,&rules.wall_splat_frames,&rules.wall_break_frames,
         &rules.wall_break_damage,&rules.positive_frames,&rules.positive_gain_percent,&rules.positive_regen,
         &rules.fd_air_drain,&rules.fd_level_cost,&rules.corner_push_transfer,&rules.wall_mid_cap,&rules.grounded_wall_prime,
-        &rules.block_carryover,&rules.throw_grace_frames,&rules.air_landing_frames,&rules.repeat_after,&rules.repeat_gravity_step};
+        &rules.block_carryover,&rules.throw_grace_frames,&rules.air_landing_frames,&rules.repeat_after,&rules.repeat_gravity_step,
+        &rules.prejump_frames,&rules.empty_landing_frames};
     *values[f]=v;
     return 1;
 }

@@ -1,4 +1,4 @@
-# Combat tuning: schema 8
+# Combat tuning: schema 9
 
 This implements the approved priorities from the [saved Dustloop review](research/strive-dustloop-2026-11-15.md). Values are editable Fight Guild defaults, not a claim of exact Strive parity. The user clarified that block carryover and post-stun throw protection are wanted; **Just Guard / Instant Block timing mechanics are not**.
 
@@ -40,9 +40,11 @@ Normal blockstun, hitstun and completed knockdown recovery grant **five unfrozen
 
 Guard break continues to require an actual guard direction, forbids buffered backward dash and allows throws **during** the state. It bypasses throw grace and does not grant grace on recovery. It retains correct high/low guarding and FD. This intentionally differs from the saved Strive guard-crush rule.
 
-## Landing recovery
+## Jump startup and landing recovery
 
-Landing during an aerial attack clears the attack and enters its authored landing recovery. Shark's air hook defaults to **12f**, its air stab to **10f**, and other air attacks to **3f**. If an aerial attack has already recovered before landing, the global recovered-air-action landing duration applies (default **3f**). Empty jumps retain their existing behavior.
+Jumps begin with **four grounded startup ticks** before takeoff, editable from zero to thirty frames. These ticks are vulnerable to strikes and immune to throws; blocking, FD and attacks cannot interrupt them. Input buffering continues, run/step inertia carries through takeoff, and hitstop freezes the startup timer. The frame lab labels this state **PREJUMP**. Its current art reuses the crouching pose.
+
+Landing during an aerial attack clears the attack and enters its authored landing recovery. Shark's air hook defaults to **12f**, its air stab to **10f**, and other air attacks to **3f**. If an aerial attack has already recovered before landing, the global recovered-air-action landing duration applies (default **3f**). Empty-jump landing recovery is separately editable and defaults to **0f**, retaining immediate empty-jump recovery.
 
 During landing recovery the fighter cannot attack, move, block or FD. A strike can score a punish. Inputs can buffer into the first free tick. Landing is not knockdown/wakeup and does not create reversal eligibility or throw immunity. Dedicated recovery artwork remains part of the sprite pipeline.
 
@@ -81,8 +83,8 @@ A grounded strike that fills the wall primes it; a subsequent grounded hit can s
 
 ## Persistence and verification
 
-Schema/core 8 has 67 move fields, nine movement fields per fighter and 36 global rules. New per-fighter timers, combo factors, move-use counts and diagnostic values are integer rollback state. Online fingerprints include all tuning; editing is locked online.
+Schema/core 9 has 67 move fields, nine movement fields per fighter and 38 global rules. New per-fighter timers, combo factors, move-use counts and diagnostic values are integer rollback state. Online fingerprints include all tuning; editing is locked online.
 
-Schema 1–7 saves preserve authored damage, counter bonuses, movement and existing global rates. Existing moves migrate with unrestricted legacy windows, unscaled legacy combo damage and zero authored landing recovery. Their saved FD holding/contact costs and original combo-gravity increment are preserved. New defensive carryover, throw grace and wall rules are supplied as editable defaults. **Restore default move set** opts into the complete new starter balance; export existing edits first if you want to keep both versions.
+Schema 1–7 saves preserve authored damage, counter bonuses, movement and existing global rates. Existing moves migrate with unrestricted legacy windows, unscaled legacy combo damage and zero authored landing recovery. Their saved FD holding/contact costs and original combo-gravity increment are preserved. New defensive carryover, throw grace and wall rules are supplied as editable defaults. Schema 8 tuning is preserved when moving to schema 9. All pre-schema-9 saves retain immediate jump takeoff and zero empty-jump landing recovery. **Restore default move set** opts into the complete new starter balance; export existing edits first if you want to keep both versions.
 
-Verification includes inclusive cancel-window boundaries and buffered entry, hit/block conditions, same-button routes, proration/floors/reset, repetition after X, landing input lock/buffering, high/low carryover and gaps, five-frame throw grace, guard-break exceptions, ground/air FD costs, ordinary corner transfer, both wall states, counter masks, old-save migration, editor application and delayed-input rollback.
+Verification includes inclusive cancel-window boundaries and buffered entry, hit/block conditions, same-button routes, proration/floors/reset, repetition after X, prejump duration/strike vulnerability/throw immunity/inertia, landing input lock/buffering, high/low carryover and gaps, five-frame throw grace, guard-break exceptions, ground/air FD costs, ordinary corner transfer, both wall states, counter masks, old-save migration, editor application and delayed-input rollback.

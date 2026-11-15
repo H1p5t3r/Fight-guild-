@@ -8,6 +8,7 @@ const RULES = ['buttonBuffer','motionWindow','motionGap'];
 const MOMENTUM_RULES = ['movementGain','attackGain','blockedAttackGain','damageTakenGain','guardGain','specialGain','fdDrain','fdBlockCost','fdDamageCost','fdPushPercent'];
 const RECOVERY_RULES = ['gravityAfter','gravityStep','gravityCap','wallThreshold','wallRange','wallDecayDelay','wallDecay','wallSplatFrames','wallBreakFrames','wallBreakDamage','positiveFrames','positiveGainPercent','positiveRegen'];
 const TUNING_RULES = ["fdAirDrain", "fdLevelCost", "cornerPushTransfer", "wallMidCap", "groundedWallPrime", "blockCarryover", "throwGraceFrames", "airLandingFrames", "repeatAfter", "repeatGravityStep"];
+const JUMP_RULES = ['prejumpFrames', 'emptyLandingFrames'];
 let compiled;
 export async function loadEngine() {
   compiled ??= (globalThis.FIGHT_WASM
@@ -39,7 +40,7 @@ export class Engine {
     new Uint8Array(this.api.memory.buffer,this.api.fg_state_ptr(),bytes.length).set(bytes);
   }
   state() {
-    const keys=['x','y','facing','health','move','age','stun','guarding','contact','combo','event','lastMove','raw','character','simple','momentum','faultless','blockReaction','blockAge','blockAdvantage','guardBreak','throwInvulnerable','comboDisplay','comboTime','comboAge','hitNotice','hitNoticeTime','reversalTime','reversalInputAge','posePhase','poseIndex','reaction','knockdown','recoveryTime','comboReceived','gravityPercent','wallDamage','wallSplatTime','positiveTime','vx','running','dashTicks','pullTime','pullOwner','weaponBackX','weaponBackY','weaponTipX','weaponTipY','weaponVisible','carryVx','carryTime',"landingTime","throwGrace","cancelMask","inputAge","lastDamage","damageScale","starterProration","comboScale","counterTier","repeatGravity","lastBaseDamage"];
+    const keys=['x','y','facing','health','move','age','stun','guarding','contact','combo','event','lastMove','raw','character','simple','momentum','faultless','blockReaction','blockAge','blockAdvantage','guardBreak','throwInvulnerable','comboDisplay','comboTime','comboAge','hitNotice','hitNoticeTime','reversalTime','reversalInputAge','posePhase','poseIndex','reaction','knockdown','recoveryTime','comboReceived','gravityPercent','wallDamage','wallSplatTime','positiveTime','vx','running','dashTicks','pullTime','pullOwner','weaponBackX','weaponBackY','weaponTipX','weaponTipY','weaponVisible','carryVx','carryTime',"landingTime","throwGrace","cancelMask","inputAge","lastDamage","damageScale","starterProration","comboScale","counterTier","repeatGravity","lastBaseDamage","prejumpTime"];
     return {
       frame:this.frame, remaining:this.api.fg_get(-1,1), hitstop:this.api.fg_get(-1,2),winner:this.api.fg_get(-1,3),
       wallBreakTime:this.api.fg_get(-1,4),wallBreakActor:this.api.fg_get(-1,5),wallBreakSide:this.api.fg_get(-1,6),stage:this.api.fg_get(-1,7),wallBreakDuration:this.api.fg_get(-1,8),
@@ -55,11 +56,12 @@ export class Engine {
     if(!Number.isInteger(value)||!this.api.fg_move_set(c,m,FIELDS.indexOf(key),value)) throw new Error(`Invalid ${key}: ${value}`);
   }
   data() {
-    return { schema:8, coreVersion:this.api.fg_version(),
+    return { schema:9, coreVersion:this.api.fg_version(),
       inputRules:Object.fromEntries(RULES.map((r,i)=>[r,this.api.fg_rule_get(i)])),
       momentumRules:Object.fromEntries(MOMENTUM_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+3)])),
       recoveryRules:Object.fromEntries(RECOVERY_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+13)])),
       tuningRules:Object.fromEntries(TUNING_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+26)])),
+      jumpRules:Object.fromEntries(JUMP_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+36)])),
       characters:CHARACTERS.map((name,c)=>({name,movement:Object.fromEntries(MOVEMENT_FIELDS.map((key,f)=>[key,this.api.fg_mobility_get(c,f)])),moves:MOVE_IDS.map((id,m)=>({id,...this.move(c,m)}))})) };
   }
   loadData(data) {
@@ -90,13 +92,19 @@ export class Engine {
       data.tuningRules={...this.defaultData.tuningRules,fdAirDrain:data.momentumRules.fdDrain,fdLevelCost:0,repeatGravityStep:0};
       data.schema=data.coreVersion=8;
     }
-    if(data?.schema!==8||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
+    if(data?.schema===8&&data.coreVersion===8) {
+      data=structuredClone(data);
+      data.jumpRules={prejumpFrames:0,emptyLandingFrames:0};
+      data.schema=data.coreVersion=9;
+    }
+    if(data?.schema!==9||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
     const previous=this.data();
     const apply=d=>{
       RULES.forEach((r,i)=>{ if(!Number.isInteger(d.inputRules?.[r])||!this.api.fg_rule_set(i,d.inputRules[r])) throw new Error(`Invalid ${r}`); });
       MOMENTUM_RULES.forEach((r,i)=>{ if(!Number.isInteger(d.momentumRules?.[r])||!this.api.fg_rule_set(i+3,d.momentumRules[r])) throw new Error(`Invalid ${r}`); });
       RECOVERY_RULES.forEach((r,i)=>{ if(!Number.isInteger(d.recoveryRules?.[r])||!this.api.fg_rule_set(i+13,d.recoveryRules[r])) throw new Error(`Invalid ${r}`); });
       TUNING_RULES.forEach((r,i)=>{ if(!Number.isInteger(d.tuningRules?.[r])||!this.api.fg_rule_set(i+26,d.tuningRules[r])) throw new Error(`Invalid ${r}`); });
+      JUMP_RULES.forEach((r,i)=>{ if(!Number.isInteger(d.jumpRules?.[r])||!this.api.fg_rule_set(i+36,d.jumpRules[r])) throw new Error(`Invalid ${r}`); });
       d.characters.forEach((character,c)=>{
         if(character.name!==CHARACTERS[c]||character.moves?.length!==MOVE_IDS.length) throw new Error('Character move list does not match this build');
         MOVEMENT_FIELDS.forEach((key,f)=>{

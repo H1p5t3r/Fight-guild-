@@ -55,7 +55,7 @@ Only hit reactions use scaled gravity; normal jumps keep base gravity. The first
 
 `gravityPercent = min(cap, 100 + max(0, hitsReceived - X) * step)`
 
-Base gravity is 85 world units per tick (0.85 pixels per tick squared). Integer multiplication/division is deterministic. Hitstop freezes launch, gravity and recovery clocks. A true air-reel/splat sequence keeps its hit count even if the numeric hitstun timer expires. Recovery and wall-break neutral reset clear the count; the next combo starts unscaled. Counter hits count as one hit. Separate damage scaling and repeated-move gravity are now implemented; see [schema-8 tuning](combat-tuning.md).
+Base gravity is 85 world units per tick (0.85 pixels per tick squared). Integer multiplication/division is deterministic. Hitstop freezes launch, gravity and recovery clocks. A true air-reel/splat sequence keeps its hit count even if the numeric hitstun timer expires. Recovery and wall-break neutral reset clear the count; the next combo starts unscaled. Counter hits count as one hit. Separate damage scaling and repeated-move gravity are now implemented; see [current combat tuning](combat-tuning.md).
 
 ## Walls
 

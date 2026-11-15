@@ -52,6 +52,7 @@ func inputs(a: int, b: int) -> Vector2i:
 	return Vector2i(a, b)
 
 static func phase(model: CombatModel, fighter: Dictionary) -> String:
+	if fighter.get("prejumpTime", 0): return "PREJUMP"
 	if fighter.get("landingTime", 0): return "LAND"
 	if fighter.reaction != 0: return "DOWN" if fighter.reaction in [2, 3] else "REEL"
 	if fighter.stun: return "GUARD" if fighter.guarding else "HIT"
@@ -83,7 +84,7 @@ func observe(model: CombatModel, before: Dictionary, raw: Vector2i) -> void:
 		var contact: bool = fighter.contact != 0 and (old.contact == 0 or old.move != fighter.move)
 		var incoming: bool = after.players[1-p].contact != 0 and (before.players[1-p].contact == 0 or before.players[1-p].move != after.players[1-p].move)
 		if old.guarding and old.stun > 0: chains[p] = true
-		if chains[p] and not tick.freeze and old.stun == 0 and old.reaction == 0 and old.get("landingTime", 0) == 0: gaps[p] += 1
+		if chains[p] and not tick.freeze and old.stun == 0 and old.reaction == 0 and old.get("landingTime", 0) == 0 and old.get("prejumpTime", 0) == 0: gaps[p] += 1
 		var gap: int = gaps[p] if incoming and chains[p] else -1
 		if incoming: gaps[p] = 0; chains[p] = bool(fighter.guarding)
 		if gaps[p] > TRACE_LENGTH: gaps[p] = 0; chains[p] = false

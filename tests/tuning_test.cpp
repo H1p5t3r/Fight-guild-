@@ -44,7 +44,7 @@ static void cancel_windows() {
     for(int age:{10,11}) {
         s=fresh();a.move=1;a.age=age;a.contact=1;a.event=NormalHit;
         s.moves[5][1].v[JumpCancelStart]=10;s.moves[5][1].v[JumpCancelEnd]=10;
-        s.step(Up,0);CHECK((a.y>0)==(age==10));
+        s.step(Up,0);CHECK((a.prejump_time>0)==(age==10));
     }
 }
 static void damage() {
@@ -118,6 +118,34 @@ static void landing_fd_walls() {
     a.x=85000;s.world.players[1].x=100000;s.world.players[1].y=3000;
     prime(s);s.step(0,0);CHECK(s.world.players[1].reaction==WallSplat);
 }
+static void jumps() {
+    auto s=fresh();s.world.players[1].x=90000;auto& a=s.world.players[0];
+    a.vx=900;
+    for(int remaining=4;remaining>=1;--remaining) {
+        s.step(remaining==4?Up|Right:remaining==1?P:0,0);
+        CHECK(a.y==0&&a.prejump_time==remaining&&a.move==-1);
+        CHECK(a.vx==900&&s.get(0,21)==1);
+        CHECK(s.get(0,29)==0&&s.get(0,30)==11); // Crouched body-only startup pose.
+    }
+    s.step(0,0);CHECK(a.y>0&&a.prejump_time==0&&a.move==17&&a.input_age==1);
+    s=fresh();s.step(Up,0);s.world.hitstop=2;
+    auto snapshot=s.world;ticks(s,9);auto hash=s.checksum();s.world=snapshot;
+    ticks(s,2);CHECK(a.prejump_time==4&&a.y==0);
+    ticks(s,7);CHECK(s.checksum()==hash);
+    s=fresh();prime(s,FORWARD_THROW);s.step(0,Up);
+    auto& b=s.world.players[1];CHECK(b.health==1000&&b.prejump_time==4);
+    strike(s);b.momentum=10000;prime(s);s.step(0,Right|Faultless);
+    CHECK(b.health==900&&!b.guarding&&!b.faultless&&b.prejump_time==0); // No guarding during startup.
+    s=fresh();a.momentum=10000;s.step(Up,0);ticks(s,3);
+    s.step(Left|Faultless,0);CHECK(a.y>0&&a.faultless&&a.momentum==9950);
+    s=fresh();s.rules.prejump_frames=0;s.step(Up,0);CHECK(a.y>0&&!a.prejump_time);
+    s=fresh();s.rules.empty_landing_frames=2;a.y=1;a.vy=-500;
+    s.step(0,0);CHECK(a.landing_time==2);
+    s.step(P,0);CHECK(a.move==-1&&a.landing_time==1);
+    s.step(0,0);CHECK(a.move==-1&&a.landing_time==0);
+    s.step(0,0);CHECK(a.move==0&&a.input_age==2);
+    CHECK(!s.rule_set(PrejumpFrames,31)&&!s.rule_set(EmptyLandingFrames,121));
+}
 static void counters() {
     auto s=fresh();strike(s);auto& b=s.world.players[1];
     b.move=0;b.age=s.moves[4][0].v[Startup]+s.moves[4][0].v[Active];
@@ -130,6 +158,6 @@ static void counters() {
     for(int c=0;c<CHARACTER_COUNT;++c) for(const auto& m:s.moves[c]) CHECK(m.v[Startup]>=5);
 }
 int main() {
-    cancel_windows();damage();defense();landing_fd_walls();counters();
+    cancel_windows();damage();defense();landing_fd_walls();jumps();counters();
     std::printf("%d tuning checks, %d failures\n",checks,failures);return failures?1:0;
 }

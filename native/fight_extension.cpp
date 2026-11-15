@@ -103,7 +103,7 @@ public:
                 ||f.combo_proration<0||f.combo_proration>100||f.combo_scale<0||f.combo_scale>100
                 ||f.repeat_gravity<0||f.repeat_gravity>300||f.last_damage<0||f.last_damage>1000
                 ||f.damage_scale<0||f.damage_scale>100||f.last_base_damage<0||f.last_base_damage>1000
-                ||f.counter_tier< -1||f.counter_tier>3) return false;
+                ||f.counter_tier< -1||f.counter_tier>3||f.prejump_time<0||f.prejump_time>30) return false;
             for(int uses:f.move_uses) if(uses<0||uses>1000) return false;
         }
         simulation.world=candidate;

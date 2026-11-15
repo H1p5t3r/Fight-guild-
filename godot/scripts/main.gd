@@ -29,6 +29,7 @@ var buffer_fields: Array[SpinBox] = []
 var momentum_fields := {}
 var recovery_fields := {}
 var movement_fields := {}
+var jump_fields := {}
 var tuning_fields := {}
 var training_momentum: OptionButton
 var editor_title: Label
@@ -366,7 +367,16 @@ func build_interface() -> void:
 		toggle.text = spec[1]
 		tuning_panel.add_child(toggle)
 		tuning_fields[spec[0]] = {"control": toggle, "scale": 1}
-	var tuning_note := label(tuning_panel, "No timed blocking bonus. Guard break bypasses carryover and throw protection. Repeated moves add gravity only after the unscaled-hit threshold.", 11, MUTED)
+	for spec in [["prejumpFrames", "Jump startup f", 30], ["emptyLandingFrames", "Empty jump landing f", 120]]:
+		var column := VBoxContainer.new()
+		tuning_grid.add_child(column)
+		label(column, spec[1], 10, MUTED)
+		var spin := SpinBox.new()
+		spin.min_value = 0
+		spin.max_value = spec[2]
+		column.add_child(spin)
+		jump_fields[spec[0]] = spin
+	var tuning_note := label(tuning_panel, "No timed blocking bonus. Guard break bypasses carryover and throw protection. Jump startup is throw-immune but cannot guard strikes. Repeated moves add gravity only after the unscaled-hit threshold.", 11, MUTED)
 	tuning_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button(tuning_panel, "Apply tuning & reset", apply_tuning, true, "essential")
 	var movement_panel := VBoxContainer.new()
@@ -889,6 +899,7 @@ func populate_editor() -> void:
 		var entry: Dictionary = tuning_fields[rule]
 		if entry.control is CheckBox: entry.control.button_pressed = bool(data.tuningRules[rule])
 		else: entry.control.value = float(data.tuningRules[rule]) / entry.scale
+	for rule in jump_fields: jump_fields[rule].value = data.jumpRules[rule]
 
 func apply_timing_presets() -> void:
 	if connection.active: return
@@ -909,6 +920,7 @@ func apply_tuning() -> void:
 	for key in tuning_fields:
 		var entry: Dictionary = tuning_fields[key]
 		data.tuningRules[key] = int(entry.control.button_pressed) if entry.control is CheckBox else roundi(entry.control.value * entry.scale)
+	for key in jump_fields: data.jumpRules[key] = int(jump_fields[key].value)
 	var error := model.load_data(data)
 	if error.is_empty(): reset_round()
 	editor_status.text = "Defense, landing and wall tuning applied." if error.is_empty() else error
@@ -1134,6 +1146,7 @@ func lock_online(locked: bool) -> void:
 	for spin in buffer_fields: spin.editable = not locked
 	for field in momentum_fields.values(): field.control.editable = not locked
 	for field in recovery_fields.values(): field.control.editable = not locked
+	for spin in jump_fields.values(): spin.editable = not locked
 	for field in tuning_fields.values():
 		if field.control is CheckBox: field.control.disabled = locked
 		else: field.control.editable = not locked

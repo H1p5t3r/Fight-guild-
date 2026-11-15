@@ -3,7 +3,7 @@ extends Control
 
 var lab: TrainingLab
 var selected := -1
-const COLORS := {"READY": Color("465460"), "START": Color("e7be64"), "ACTIVE": Color("ef6c61"), "RECOVER": Color("7497d0"), "GUARD": Color("67cfbb"), "HIT": Color("c48cdb"), "REEL": Color("c48cdb"), "DOWN": Color("89818e"), "LAND": Color("7497d0")}
+const COLORS := {"READY": Color("465460"), "START": Color("e7be64"), "ACTIVE": Color("ef6c61"), "RECOVER": Color("7497d0"), "GUARD": Color("67cfbb"), "HIT": Color("c48cdb"), "REEL": Color("c48cdb"), "DOWN": Color("89818e"), "LAND": Color("7497d0"), "PREJUMP": Color("e7be64")}
 
 func _ready() -> void:
 	custom_minimum_size = Vector2(760, 205)

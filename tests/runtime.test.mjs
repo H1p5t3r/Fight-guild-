@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {Engine} from '../web/engine.mjs';
+import {Engine, INPUT} from '../web/engine.mjs';
 import {RollbackSession,rollbackTrial} from '../web/rollback.mjs';
 const module=await WebAssembly.compile(await readFile(new URL('../web/generated/fight.wasm',import.meta.url)));
 const create=async()=>new Engine(await WebAssembly.instantiate(module));
@@ -88,7 +88,7 @@ test('Signature moves, movement profiles and schema-6 migration survive the WASM
   e.loadData(original);e.reset([4,5]);let followed=false,sawPull=false,sawCombo=false,saved;
   const inputs=[];
   for(let frame=0;frame<110;++frame) {
-    let input=frame===0?4:frame===1?5:frame===2?65:0, other=frame===12?8:0;
+    let input=frame===0?4:frame===1?5:frame===2?65:0, other=frame===8?8:0;
     if(e.state().players[0].contact&&!e.state().hitstop&&!followed) {input=16;followed=true;}
     if(frame===25) saved=e.snapshot();
     inputs.push([input,other]);e.step(input,other);
@@ -97,4 +97,28 @@ test('Signature moves, movement profiles and schema-6 migration survive the WASM
   assert.ok(sawPull&&sawCombo);assert.equal(e.state().players[1].health,948);
   const expected=e.hash;e.restore(saved);for(const input of inputs.slice(25)) e.step(...input);
   assert.equal(e.hash,expected);
+});
+
+test('Jump startup survives snapshots and schema-8 migration preserves instant takeoff', async () => {
+  const engine = await create();
+  const defaults = engine.data();
+  assert.equal(defaults.jumpRules.prejumpFrames, 4);
+  engine.reset([5,4]);
+  engine.step(INPUT.up, 0);
+  assert.equal(engine.state().players[0].prejumpTime, 4);
+  const snapshot = engine.snapshot();
+  for(let i=0;i<10;i++) engine.step(0,0);
+  const expected = engine.hash;
+  engine.restore(snapshot);
+  for(let i=0;i<10;i++) engine.step(0,0);
+  assert.equal(engine.hash, expected);
+  const legacy = structuredClone(defaults);
+  legacy.schema=legacy.coreVersion=8;
+  delete legacy.jumpRules;
+  engine.loadData(legacy);
+  assert.equal(engine.data().jumpRules.prejumpFrames, 0);
+  assert.deepEqual(engine.data().tuningRules, defaults.tuningRules);
+  engine.reset([5,4]);
+  engine.step(INPUT.up,0);
+  assert.ok(engine.state().players[0].y>0);
 });

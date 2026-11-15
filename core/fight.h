@@ -3,7 +3,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 8, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 67;
+constexpr int VERSION = 9, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 67;
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
               STAB_GROUND=30, STAB_AIR=31;
@@ -46,7 +46,8 @@ enum Rule { ButtonBuffer, MotionWindow, MotionGap, MoveGain, AttackGain,
             WallDecay, WallSplatFrames, WallBreakFrames, WallBreakDamage,
             PositiveFrames, PositiveGainPercent, PositiveRegen,
             FDAirDrain, FDLevelCost, CornerPushTransfer, WallMidCap, GroundedWallPrime,
-            BlockCarryover, ThrowGraceFrames, AirLandingFrames, RepeatAfter, RepeatGravityStep, RULE_COUNT };
+            BlockCarryover, ThrowGraceFrames, AirLandingFrames, RepeatAfter, RepeatGravityStep,
+            PrejumpFrames, EmptyLandingFrames, RULE_COUNT };
 struct Move { int v[FIELD_COUNT]; };
 struct Sample { int frame, direction, pressed, held, consumed; };
 struct Fighter {
@@ -65,6 +66,7 @@ struct Fighter {
     int landing_time, air_action, throw_grace, input_age;
     int combo_proration, combo_scale, repeat_gravity, move_uses[MOVE_COUNT];
     int last_damage, damage_scale, last_base_damage, counter_tier;
+    int prejump_time;
     Sample history[HISTORY];
 };
 struct State {
@@ -83,6 +85,7 @@ struct Rules {
     int positive_frames=360, positive_gain_percent=150, positive_regen=5;
     int fd_air_drain=50, fd_level_cost=50, corner_push_transfer=1, wall_mid_cap=50, grounded_wall_prime=1;
     int block_carryover=1, throw_grace_frames=5, air_landing_frames=3, repeat_after=3, repeat_gravity_step=15;
+    int prejump_frames=4, empty_landing_frames=0;
 };
 // Each engine adapter owns a simulation; multiple matches never share state.
 class Simulation {

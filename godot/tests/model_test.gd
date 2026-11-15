@@ -9,7 +9,7 @@ func check(condition: bool, description: String) -> void:
 func _initialize() -> void:
 	var model := CombatModel.new()
 	var original := model.data()
-	check(CombatModel.RULE_COUNT == CombatModel.RULES.size() + CombatModel.MOMENTUM_RULES.size() + CombatModel.RECOVERY_RULES.size() + CombatModel.TUNING_RULES.size(), "Rule layout differs from the adapter")
+	check(CombatModel.RULE_COUNT == CombatModel.RULES.size() + CombatModel.MOMENTUM_RULES.size() + CombatModel.RECOVERY_RULES.size() + CombatModel.TUNING_RULES.size() + CombatModel.JUMP_RULES.size(), "Rule layout differs from the adapter")
 	var fingerprint := model.fingerprint()
 	var edited := original.duplicate(true)
 	edited.characters[0].moves[0].damage = 177
