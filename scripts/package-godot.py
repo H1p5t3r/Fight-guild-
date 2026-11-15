@@ -19,6 +19,7 @@ for platform in (['Linux', 'Windows'] if target == 'all' else [target]):
         archive.write(root / 'docs/play-native.md', 'FightGuild/START-HERE.md')
         archive.write(root / 'docs/momentum-defense.md', 'FightGuild/momentum-defense.md')
         archive.write(root / 'docs/combat-feedback.md', 'FightGuild/combat-feedback.md')
+        archive.write(root / 'docs/menu-flow.md', 'FightGuild/menu-flow.md')
         for file in notices: archive.write(file, 'FightGuild/licenses/' + file.name)
     packages.append(output)
 

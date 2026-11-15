@@ -16,6 +16,7 @@ Requested scope: make repeatable character images performing directed actions, w
 
 ## Momentum and defense
 
+- [x] Divide the continuous Momentum HUD into three equal sections without adding spends or thresholds.
 - [x] Add Momentum gain, 0–100% HUD and Faultless Defense as the only spend; expose training and editor controls.
 - [x] Add three two-frame blocking clips for all six fighters, selected by actual contact advantage or authored guard break.
 - [x] Prevent backdash buffering during guard break and expose the removal of blockstun throw protection.
@@ -32,11 +33,20 @@ Requested scope: make repeatable character images performing directed actions, w
 - [ ] Playtest the provisional +4 hitstun/+3 hitstop counter defaults across the six kits before choosing distinct move-specific values.
 - [ ] Design knockdown/wakeup and invulnerable reversal moves separately; route wakeup completion through the same reversal timing opportunity.
 
+## Menus and match flow
+
+- [x] Main menu with separate Matches, Training and Development paths and full-screen fighter selection.
+- [x] Local match results/rematch, offline pause/restart, cancelable fighter changes and return to main menu.
+- [x] Direct online connection lobby with waiting/cancel/error recovery and neutral input while the in-match menu is open.
+- [x] Keyboard/controller UI actions and held-confirm protection; verify source and exported Linux builds.
+- [ ] Add negotiated online rematches, lobby readiness and matchmaking after the direct-connection prototype.
+- [ ] Decide round/set rules, stage selection and knockdown/wakeup presentation with the user.
+
 ## Combat and delivery
 
 - [ ] Playtest the basic P/K/S/Hs/D buttons and unified gatlings, then replace provisional move data and Drive behaviors character by character.
 - [ ] Collect repeatable Strive input traces to tune buffer behavior and motion leniency.
-- [ ] Design throws, universal overheads, universal anti-air rules and match flow with the user.
+- [ ] Design throws, universal overheads, universal anti-air rules with the user.
 - [ ] Broaden native online testing under real network conditions; add Internet connectivity/matchmaking and resilience after local rollback validation.
 - [ ] Validate physical controllers and Windows gameplay; establish the approved PS5 Godot port/tooling path before console delivery.
 - [ ] Retain the simulation/presentation boundary for eventual 3D characters constrained to the 2D plane.

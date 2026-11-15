@@ -32,7 +32,6 @@ var editor_title: Label
 var routes: Label
 var pause_button: Button
 var locked_buttons: Array[Button] = []
-var selection_dialog: ConfirmationDialog
 var selection_characters: Array[OptionButton] = []
 var selection_simple: Array[CheckBox] = []
 var file_dialog: FileDialog
@@ -40,6 +39,25 @@ var importing := false
 var address: LineEdit
 var port: SpinBox
 var leave_button: Button
+var menus: GameMenus
+var screen := "home"
+var activity := "development"
+var pending_activity := "development"
+var selection_return := "home"
+var input_release_required := false
+var play_root: Control
+var editor_shell: PanelContainer
+var toolbar: HBoxContainer
+var practice: HBoxContainer
+var diagnostics: HBoxContainer
+var inputs: HBoxContainer
+var keyboard_hint: Label
+var activity_title: Label
+var activity_subtitle: Label
+var activity_badge: Label
+var sprite_button: Button
+var fighter_button: Button
+var result_probe := CombatModel.new()
 
 func _ready() -> void:
 	name = "FightGuild"
@@ -47,14 +65,13 @@ func _ready() -> void:
 	build_interface()
 	add_child(connection)
 	connection.status_changed.connect(func(message: String): net_status.text = message)
-	connection.match_started.connect(func(): held.clear(); history.clear(); paused = false)
-	connection.match_ended.connect(func(): lock_online(false); reset_round())
+	connection.match_started.connect(on_network_started)
+	connection.match_ended.connect(on_network_ended)
 	if FileAccess.file_exists(SAVE_PATH) and not OS.get_cmdline_user_args().has("--test"):
 		var error := model.load_file(SAVE_PATH)
 		editor_status.text = "Loaded your saved move set." if error.is_empty() else error
 	populate_editor()
-	if not OS.get_cmdline_user_args().has("--test"):
-		selection_dialog.popup_centered(Vector2i(660, 600))
+	show_screen("home")
 	if OS.get_cmdline_user_args().has("--verify-build"):
 		call_deferred("verify_build")
 
@@ -83,6 +100,9 @@ func build_theme() -> void:
 	theme.set_stylebox("hover", "Button", box(Color("3c4a54")))
 	theme.set_stylebox("pressed", "Button", box(Color("63503a"), ACCENT))
 	theme.set_stylebox("normal", "LineEdit", box(Color("111a21")))
+	var focus := box(Color(0, 0, 0, 0), ACCENT)
+	focus.set_border_width_all(2)
+	for type in ["Button", "OptionButton", "CheckBox", "LineEdit"]: theme.set_stylebox("focus", type, focus)
 	theme.set_constant("separation", "VBoxContainer", 10)
 	theme.set_constant("separation", "HBoxContainer", 10)
 
@@ -127,28 +147,32 @@ func panel(parent: Node) -> VBoxContainer:
 	return column
 
 func build_interface() -> void:
+	play_root = Control.new()
+	play_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(play_root)
 	var margins := MarginContainer.new()
 	margins.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for edge in ["left", "right", "top", "bottom"]: margins.add_theme_constant_override("margin_" + edge, 24)
-	add_child(margins)
+	play_root.add_child(margins)
 	var root := VBoxContainer.new()
 	margins.add_child(root)
 	var header := row(root)
 	var brand := label(header, "FG   FIGHT GUILD", 23, ACCENT)
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label(header, "NATIVE COMBAT LAB / 004", 11, MUTED)
-	button(header, "Fighter select", func(): selection_dialog.popup_centered(Vector2i(660,600)), true)
-	button(header, "Sprite review", show_sprite_review)
+	activity_badge = label(header, "DEVELOPMENT", 11, MUTED)
+	fighter_button = button(header, "Fighter select", func(): choose_activity(activity), true)
+	sprite_button = button(header, "Sprite review", show_sprite_review)
 	button(header, "Controls", show_controls)
+	button(header, "Menu · Esc", open_pause)
 	var content := HBoxContainer.new()
 	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root.add_child(content)
 	var left := VBoxContainer.new()
 	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.add_child(left)
-	label(left, "Find the fight.", 31)
-	label(left, "Play a route. Tune a move. Run it back.", 13, MUTED)
-	var toolbar := row(left)
+	activity_title = label(left, "Find the fight.", 31)
+	activity_subtitle = label(left, "Play a route. Tune a move. Run it back.", 13, MUTED)
+	toolbar = row(left)
 	mode = option(toolbar, "", ["Training", "Local versus"])
 	mode.item_selected.connect(func(_i: int): reset_round(); dummy.disabled = mode.selected == 1; training_momentum.disabled = mode.selected == 1)
 	dummy = option(toolbar, "", ["Stand", "Guard all", "Crouch guard", "Practice sequence", "Faultless guard", "Attack loop", "Guard → reversal"])
@@ -157,7 +181,7 @@ func build_interface() -> void:
 	pause_button = button(toolbar, "Pause", func(): paused = not paused; pause_button.text = "Resume" if paused else "Pause", true)
 	button(toolbar, "+1 frame", advance_one, true)
 	button(toolbar, "Reset", reset_round, true)
-	var practice := row(left)
+	practice = row(left)
 	training_momentum = option(practice, "", ["Start Momentum: 0%", "Start Momentum: 50%", "Start Momentum: 100%"])
 	training_momentum.item_selected.connect(func(_i: int): reset_round())
 	label(practice, "Training reset only · hold back + Q for Faultless Defense", 11, MUTED)
@@ -165,41 +189,23 @@ func build_interface() -> void:
 	left.add_child(arena)
 	arena.gui_input.connect(func(event: InputEvent):
 		if event is InputEventMouseButton and event.pressed: release_focus_from_ui())
-	var inputs := row(left)
+	inputs = row(left)
 	input_label = label(inputs, "INPUT HISTORY   —", 12, ACCENT)
 	input_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	action_label = label(inputs, "READY", 12, MUTED)
-	label(left, "WASD move  ·  J / K / L / I / O attack  ·  Space dash  ·  Shift simple  ·  Back + Q FD", 11, MUTED)
-	var lower := row(left)
-	var network := panel(lower)
+	keyboard_hint = label(left, "WASD move  ·  J / K / L / I / O attack  ·  Space dash  ·  Shift simple  ·  Back + Q FD", 11, MUTED)
+	diagnostics = row(left)
+	var network := panel(diagnostics)
 	network.get_parent().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label(network, "Rollback workbench", 17)
 	var test_row := row(network)
 	button(test_row, "Run latency check", run_trial)
 	trial_status = label(test_row, "6–9 frames of delay", 11, MUTED)
-	var net_row := row(network)
-	address = LineEdit.new()
-	address.text = "127.0.0.1"
-	address.placeholder_text = "Host IP"
-	address.custom_minimum_size.x = 145
-	net_row.add_child(address)
-	port = SpinBox.new()
-	port.min_value = 1024
-	port.max_value = 65535
-	port.value = 7000
-	port.custom_minimum_size.x = 100
-	net_row.add_child(port)
-	button(net_row, "Host", func(): start_network(true), true)
-	button(net_row, "Join", func(): start_network(false), true)
-	leave_button = button(net_row, "Leave", func(): connection.close(); lock_online(false); reset_round(); net_status.text = "Offline · local play")
-	leave_button.disabled = true
-	net_status = label(network, "Offline · local play / direct UDP", 11, MUTED)
-	net_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	var route_panel := panel(lower)
+	var route_panel := panel(diagnostics)
 	label(route_panel, "Unified gatlings", 17)
 	label(route_panel, "P → P / K\nK → jump / command\nS → jump / Hs / command\nHs → command", 12, MUTED)
 	label(route_panel, "All attacks → same-button command", 10, ACCENT)
-	var editor_shell := PanelContainer.new()
+	editor_shell = PanelContainer.new()
 	editor_shell.custom_minimum_size.x = 352
 	content.add_child(editor_shell)
 	var scroll := ScrollContainer.new()
@@ -302,6 +308,16 @@ func build_interface() -> void:
 	var meter_note := label(momentum_panel, "Provisional rates. FD prevents chip and increases pushback. Negative Penalty is deferred.", 11, MUTED)
 	meter_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	build_dialogs()
+	menus = GameMenus.new()
+	add_child(menus)
+	menus.action_requested.connect(menu_action)
+	selection_characters = menus.fighters
+	selection_simple = menus.simplified
+	address = menus.address
+	port = menus.port
+	net_status = menus.status
+	leave_button = menus.buttons.cancel_connection
+	lock_online(false)
 
 func add_field(parent: Node, spec: Array) -> void:
 	var column := VBoxContainer.new()
@@ -316,34 +332,6 @@ func add_field(parent: Node, spec: Array) -> void:
 	fields[spec[0]] = {"control": spin, "scale": spec[4]}
 
 func build_dialogs() -> void:
-	selection_dialog = ConfirmationDialog.new()
-	selection_dialog.title = "Choose your fighters"
-	selection_dialog.ok_button_text = "Enter training floor"
-	add_child(selection_dialog)
-	var columns := HBoxContainer.new()
-	columns.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	selection_dialog.add_child(columns)
-	for p in 2:
-		var column := VBoxContainer.new()
-		column.custom_minimum_size.x = 300
-		columns.add_child(column)
-		label(column, "PLAYER " + str(p + 1), 16, ACCENT)
-		selection_characters.append(option(column, "Fighter", CombatModel.CHARACTERS, p))
-		var portrait := FighterPreview.new()
-		portrait.custom_minimum_size = Vector2(280, 260)
-		column.add_child(portrait)
-		portrait.present(p, "active", 0)
-		selection_characters[p].item_selected.connect(func(index: int): portrait.present(index, "active", 0))
-		var check := CheckBox.new()
-		check.text = "Enable simplified inputs"
-		column.add_child(check)
-		selection_simple.append(check)
-		label(column, "Motions remain available.\nModifier + → P / ↓ S / ↑ Hs\nNo damage penalty in this prototype.", 12, MUTED)
-	selection_dialog.confirmed.connect(func():
-		for p in 2:
-			characters[p] = selection_characters[p].selected
-			simple[p] = selection_simple[p].button_pressed
-		reset_round())
 	file_dialog = FileDialog.new()
 	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
 	file_dialog.filters = PackedStringArray(["*.json ; Fight Guild move data"])
@@ -354,10 +342,149 @@ func build_dialogs() -> void:
 		editor_status.text = error if not error.is_empty() else "Move set imported." if importing else "Move set exported."
 		if importing and error.is_empty(): populate_editor(); reset_round())
 
+func menu_action(action: String) -> void:
+	match action:
+		"matches": show_screen("matches")
+		"local", "online", "training", "development": choose_activity(action)
+		"confirm_fighters": confirm_selection()
+		"back": menu_back()
+		"controls": show_controls()
+		"quit": get_tree().quit()
+		"resume": show_screen("play")
+		"restart", "rematch": reset_round(); show_screen("play")
+		"change_fighters", "results_fighters": choose_activity(activity)
+		"pause_home", "results_home": go_home()
+		"host": start_network(true)
+		"join": start_network(false)
+		"cancel_connection": cancel_connection()
+		"return_lobby":
+			cancel_connection()
+			show_screen("online")
+
+func show_screen(next: String) -> void:
+	screen = next
+	held.clear()
+	release_focus_from_ui()
+	play_root.visible = next == "play"
+	menus.visible = next != "play"
+	if next == "play":
+		# A held menu confirm must not become a punch, dash or movement input.
+		input_release_required = has_gameplay_input_held()
+	else:
+		menus.show_page(next)
+
+func choose_activity(which: String) -> void:
+	if connection.active: return
+	pending_activity = which
+	selection_return = screen
+	menus.configure_selection(which, characters, simple)
+	show_screen("fighters")
+
+func confirm_selection() -> void:
+	if connection.active: return
+	for p in 2:
+		characters[p] = selection_characters[p].selected
+		simple[p] = selection_simple[p].button_pressed
+	if screen == "fighters":
+		activity = pending_activity
+		configure_activity()
+		if activity == "online":
+			menus.online_fighter.text = CombatModel.CHARACTERS[characters[0]] + ("  ·  Simplified inputs on" if simple[0] else "  ·  Motion inputs")
+			net_status.text = "Choose Host or Join to begin."
+			show_screen("online")
+			return
+	reset_round()
+	show_screen("play")
+
+func configure_activity() -> void:
+	var development := activity == "development"
+	var practice_mode := activity in ["training", "development"]
+	editor_shell.visible = development
+	sprite_button.visible = development
+	diagnostics.visible = development
+	toolbar.visible = practice_mode
+	practice.visible = practice_mode
+	inputs.visible = practice_mode
+	keyboard_hint.visible = practice_mode
+	mode.get_parent().visible = development
+	fighter_button.visible = practice_mode
+	activity_title.visible = practice_mode
+	activity_subtitle.visible = practice_mode
+	activity_title.text = "Build your next route." if activity == "training" else "Find the fight."
+	activity_subtitle.text = "Practice attacks, defense and timing. Reset as often as you need." if activity == "training" else "Play a route. Tune a move. Run it back."
+	activity_badge.text = {"local":"LOCAL VERSUS", "online":"ONLINE VERSUS", "training":"TRAINING", "development":"DEVELOPMENT / COMBAT LAB"}[activity]
+	mode.select(0 if practice_mode else 1)
+	show_boxes = development
+	lock_online(connection.active)
+
+func open_pause() -> void:
+	if screen != "play" or has_open_dialog(): return
+	menus.configure_pause(connection.active)
+	show_screen("pause")
+
+func menu_back() -> void:
+	match screen:
+		"matches": show_screen("home")
+		"fighters": show_screen(selection_return)
+		"online":
+			cancel_connection()
+			selection_return = "matches"
+			menus.configure_selection("online", characters, simple)
+			pending_activity = "online"
+			show_screen("fighters")
+		"pause": show_screen("play")
+
+func go_home() -> void:
+	cancel_connection()
+	show_screen("home")
+
+func cancel_connection() -> void:
+	connection.close()
+	lock_online(false)
+	net_status.text = "Connection closed. Choose Host or Join when ready."
+	if screen == "online": menus.focus_page("online")
+
+func on_network_started() -> void:
+	activity = "online"
+	configure_activity()
+	result_probe.load_data(model.data())
+	history.clear()
+	last_raw = 0
+	paused = false
+	show_screen("play")
+
+func on_network_ended() -> void:
+	lock_online(false)
+	if activity == "online": show_screen("online")
+
+func online_result_confirmed() -> bool:
+	# Results must survive rollback: inspect the latest fully confirmed world.
+	if connection.session == null: return false
+	var session := connection.session
+	var confirmed := mini(session.confirmed[0], session.confirmed[1])
+	if confirmed >= model.frame() - 1: return true
+	if not session.records.has(confirmed + 1): return false
+	return result_probe.core.restore(session.records[confirmed + 1].before) and result_probe.state().winner >= 0
+
+func has_gameplay_input_held() -> bool:
+	if Input.is_action_pressed("ui_accept"): return true
+	for mapping in KEY_MAPS:
+		for code in mapping:
+			if Input.is_physical_key_pressed(code) or Input.is_key_pressed(code): return true
+	for pad in Input.get_connected_joypads():
+		for b in [JOY_BUTTON_A, JOY_BUTTON_B, JOY_BUTTON_X, JOY_BUTTON_Y, JOY_BUTTON_LEFT_SHOULDER, JOY_BUTTON_RIGHT_SHOULDER, JOY_BUTTON_DPAD_LEFT, JOY_BUTTON_DPAD_RIGHT, JOY_BUTTON_DPAD_UP, JOY_BUTTON_DPAD_DOWN]:
+			if Input.is_joy_button_pressed(pad, b): return true
+		for axis in [JOY_AXIS_LEFT_X, JOY_AXIS_LEFT_Y]:
+			if absf(Input.get_joy_axis(pad, axis)) > 0.35: return true
+		for axis in [JOY_AXIS_TRIGGER_LEFT, JOY_AXIS_TRIGGER_RIGHT]:
+			if Input.get_joy_axis(pad, axis) > 0.5: return true
+	return false
+
 func show_sprite_review(clip: int = 0) -> void:
+	held.clear()
 	var dialog := AcceptDialog.new()
 	dialog.title = "Sprite review · attacks and defense"
-	dialog.ok_button_text = "Back to training"
+	dialog.ok_button_text = "Back to combat lab"
 	add_child(dialog)
 	var layout := VBoxContainer.new()
 	dialog.add_child(layout)
@@ -393,21 +520,35 @@ func show_sprite_review(clip: int = 0) -> void:
 	clip_picker.item_selected.connect(update)
 	update.call()
 	label(layout, "First pose studies. Compare silhouette, colors, weapon shape and attack direction.\nBlock clips settle after four unfrozen frames. Full attack animation is planned.", 12, MUTED)
-	dialog.close_requested.connect(dialog.queue_free)
-	dialog.confirmed.connect(dialog.queue_free)
+	dialog.canceled.connect(func(): close_dialog(dialog))
+	dialog.confirmed.connect(func(): close_dialog(dialog))
 	dialog.popup_centered(Vector2i(720, 540))
 
 func show_controls() -> void:
+	held.clear()
 	var dialog := AcceptDialog.new()
 	dialog.title = "Know your buttons"
-	dialog.dialog_text = "Player 1: WASD move; J K L I O = P K S Hs D\nSpace dash; Shift simple modifier; back + Q Faultless Defense\n\nPlayer 2: arrows move; numpad 1 2 3 5 6 attacks\nNumpad 0 dash; numpad + modifier; back + numpad Enter FD\n\nGamepad: bottom / left / top / right / RB = P K S Hs D\nD-pad or left stick moves; LB dash; LT modifier; back + RT FD\n\nHold away to block. Back + any two of P/K/S/Hs also activates FD.\nFD spends Momentum to prevent chip and push attackers away.\nGuard break: no backdash or blockstun grab protection.\n6 + button: command normal.\nSpecials: 236P, 236S, 623Hs; directions follow facing.\nClick the arena after editing to return to gameplay.\nOnline: each client uses Player 1 controls."
+	dialog.dialog_text = "Player 1: WASD move; J K L I O = P K S Hs D\nSpace dash; Shift simple modifier; back + Q Faultless Defense\n\nPlayer 2: arrows move; numpad 1 2 3 5 6 attacks\nNumpad 0 dash; numpad + modifier; back + numpad Enter FD\n\nGamepad: bottom / left / top / right / RB = P K S Hs D\nD-pad or left stick moves; LB dash; LT modifier; back + RT FD\n\nHold away to block. Back + any two of P/K/S/Hs also activates FD.\nFD spends Momentum to prevent chip and push attackers away.\nGuard break: no backdash or blockstun grab protection.\n6 + button: command normal.\nSpecials: 236P, 236S, 623Hs; directions follow facing.\nEsc or gamepad Start opens the match menu.\nClick the arena after editing to return to gameplay.\nOnline: each client uses Player 1 controls."
 	add_child(dialog)
 	dialog.popup_centered(Vector2i(580, 420))
-	dialog.confirmed.connect(dialog.queue_free)
-	dialog.canceled.connect(dialog.queue_free)
+	dialog.confirmed.connect(func(): close_dialog(dialog))
+	dialog.canceled.connect(func(): close_dialog(dialog))
+
+func close_dialog(dialog: Window) -> void:
+	dialog.queue_free()
+	call_deferred("resume_after_dialog")
+
+func resume_after_dialog() -> void:
+	held.clear()
+	if screen == "play":
+		release_focus_from_ui()
+		input_release_required = has_gameplay_input_held()
+	else:
+		menus.focus_page(screen)
 
 func show_file(load_mode: bool) -> void:
 	if load_mode and connection.active: return
+	held.clear()
 	importing = load_mode
 	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE if importing else FileDialog.FILE_MODE_SAVE_FILE
 	file_dialog.current_file = "fight-guild-moves.json"
@@ -472,16 +613,26 @@ func has_open_dialog() -> bool:
 	return false
 
 func _input(event: InputEvent) -> void:
+	if not has_open_dialog() and not (event is InputEventKey and event.echo):
+		if (event is InputEventKey and event.pressed and (event.keycode == KEY_ESCAPE or event.physical_keycode == KEY_ESCAPE)) or (event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_START):
+			if screen == "play": open_pause()
+			else: menu_back()
+			get_viewport().set_input_as_handled()
+			return
+		if screen != "play" and event.is_action_pressed("ui_cancel"):
+			menu_back()
+			get_viewport().set_input_as_handled()
+			return
 	if event is InputEventKey:
 		var code: int = event.physical_keycode if event.physical_keycode else event.keycode
 		if not event.pressed: held.erase(code)
-		elif not is_editing() and not event.echo: held[code] = true
+		elif screen == "play" and not input_release_required and not is_editing() and not event.echo: held[code] = true
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT: held.clear()
 
 func read_input(player: int) -> int:
-	if is_editing(): return 0
+	if screen != "play" or input_release_required or is_editing(): return 0
 	var raw := 0
 	for key in held: raw |= KEY_MAPS[player].get(key, 0)
 	var pads := Input.get_connected_joypads()
@@ -511,7 +662,7 @@ func reset_round() -> void:
 	release_focus_from_ui()
 
 func advance_one() -> void:
-	if connection.active: return
+	if connection.active or screen != "play" or activity not in ["training", "development"]: return
 	release_focus_from_ui()
 	paused = true
 	pause_button.text = "Resume"
@@ -554,16 +705,21 @@ func record_input(raw: int) -> void:
 	last_raw = raw
 
 func _physics_process(_delta: float) -> void:
+	if input_release_required and not has_gameplay_input_held(): input_release_required = false
 	if connection.active:
 		var raw := read_input(0)
 		connection.tick(raw)
 		record_input(raw)
-	elif not paused and not has_open_dialog():
+	elif screen == "play" and not paused and not has_open_dialog():
 		simulate_local()
 
 func _process(_delta: float) -> void:
 	var state := model.state()
 	arena.refresh(model, state, show_boxes, paused)
+	if screen in ["play", "pause"] and activity in ["local", "online"] and state.winner >= 0:
+		if activity == "local" or online_result_confirmed():
+			menus.configure_results(state, connection.active)
+			show_screen("results")
 	input_label.text = "INPUT HISTORY   " + ("   ".join(history) if not history.is_empty() else "—")
 	var fighter: Dictionary = state.players[connection.player if connection.active else 0]
 	action_label.text = "READY" if fighter.lastMove < 0 else CombatModel.MOVE_IDS[fighter.lastMove] + (" / CONTACT" if fighter.contact else "")
@@ -573,12 +729,18 @@ func run_trial() -> void:
 	trial_status.text = "PASS · %d corrections · %08x" % [result.rollbacks, result.hash] if result.get("pass", false) else "FAIL: " + str(result)
 
 func start_network(host: bool) -> void:
-	if connection.active: return
+	if connection.active or screen != "online": return
+	if not host and address.text.strip_edges().is_empty():
+		net_status.text = "Enter the host address before joining."
+		address.grab_focus()
+		return
+	port.apply()
 	var result := connection.begin(model, host, address.text.strip_edges(), int(port.value), characters[0], simple[0])
 	if result != OK: net_status.text = "Could not open connection: " + error_string(result); return
 	lock_online(true)
 	paused = false
 	held.clear()
+	menus.focus_page("online")
 
 func lock_online(locked: bool) -> void:
 	for control in locked_buttons: control.disabled = locked
@@ -590,6 +752,4 @@ func lock_online(locked: bool) -> void:
 	mode.disabled = locked
 	training_momentum.disabled = locked or mode.selected == 1
 	dummy.disabled = locked or mode.selected == 1
-	leave_button.disabled = not locked
-	address.editable = not locked
-	port.editable = not locked
+	menus.set_connecting(locked)

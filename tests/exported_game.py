@@ -18,5 +18,5 @@ with tempfile.TemporaryDirectory(prefix='fight-guild-export-') as cwd:
     result = subprocess.run([str(executable), '--headless', '--', '--test', '--verify-build', '--review', '--block-review'], cwd=cwd, env=environment,
                             text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=90)
 print(result.stdout, end='')
-assert result.returncode == 0 and 'ERROR:' not in result.stdout and '0 failures' in result.stdout, 'Packaged gameplay smoke test failed'
-print('PASS exported Linux game, Momentum/FD, six fighters and guard-break sprite review')
+assert result.returncode == 0 and 'ERROR:' not in result.stdout and 'Godot menu flows: 0 failures' in result.stdout and 'Godot playable scene: 0 failures' in result.stdout, 'Packaged gameplay smoke test failed'
+print('PASS exported Linux game, menu flows, connection recovery, Momentum/FD, six fighters and guard-break sprite review')

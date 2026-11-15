@@ -118,6 +118,8 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 		return
 	game.set_physics_process(false)
 	await tree.process_frame
+	var menus = load("res://scripts/menu_verification.gd").new()
+	failures += await menus.run(tree, game)
 	game.release_focus_from_ui()
 	key(KEY_D, true)
 	ticks(20)
@@ -147,7 +149,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	check(game.model.state().players[0].move == -1, "Typing in editor leaked into game input")
 	game.selection_simple[0].button_pressed = true
 	game.selection_simple[1].button_pressed = false
-	game.selection_dialog.confirmed.emit()
+	game.confirm_selection()
 	key(KEY_SHIFT, true)
 	key(KEY_W, true)
 	key(KEY_I, true)
@@ -198,7 +200,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	game.dummy.select(2)
 	for character in CombatModel.CHARACTERS.size():
 		game.selection_characters[1].select(character)
-		game.selection_dialog.confirmed.emit()
+		game.confirm_selection()
 		for reaction in range(1, 4):
 			game.fields.blockstun.control.value = 10 if reaction == 1 else 16
 			game.fields.guardBreak.control.button_pressed = reaction == 3
@@ -224,14 +226,14 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	game.training_momentum.select(0)
 	game.dummy.select(0)
 	game.selection_characters[1].select(1)
-	game.selection_dialog.confirmed.emit()
+	game.confirm_selection()
 	# Exercise actual keyboard -> selected fighter -> windup/active artwork for all 30 basic buttons.
 	var button_keys := [KEY_J, KEY_K, KEY_L, KEY_I, KEY_O]
 	var slots := [0, 1, 2, 3, 13]
 	for character in CombatModel.CHARACTERS.size():
 		game.selection_characters[0].select(character)
 		game.selection_simple[0].button_pressed = false
-		game.selection_dialog.confirmed.emit()
+		game.confirm_selection()
 		for b in button_keys.size():
 			game.reset_round()
 			key(button_keys[b], true)
@@ -245,13 +247,13 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 			ticks(game.model.move(character, slots[b]).startup - 1)
 			check(visual.get_meta("phase") == "active" and visual.get_meta("pose") == b + 1 and visual.texture != anticipation, "Attack did not change to its active image")
 	game.selection_characters[0].select(0)
-	game.selection_dialog.confirmed.emit()
+	game.confirm_selection()
 	game.reset_round()
 	verify_timing_feedback()
 	game.show_controls()
 	check(game.has_open_dialog(), "Controls dialog did not open")
 	for child in game.get_children():
-		if child is AcceptDialog and child != game.selection_dialog and child != game.file_dialog: child.queue_free()
+		if child is AcceptDialog and child != game.file_dialog: child.queue_free()
 	await tree.process_frame
 	var args := OS.get_cmdline_user_args()
 	if args.has("--combo"):
@@ -274,6 +276,10 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	if args.has("--review"):
 		game.show_sprite_review(3 if args.has("--block-review") else 0)
 		check(game.has_open_dialog(), "Sprite review did not open")
+	if args.has("--home"): game.go_home()
+	if args.has("--fighters"): game.go_home(); game.choose_activity("local")
+	if args.has("--training"): game.go_home(); game.choose_activity("training"); game.confirm_selection()
+	if args.has("--match"): game.go_home(); game.choose_activity("local"); game.confirm_selection()
 	if args.has("--screenshot"):
 		await tree.process_frame
 		await RenderingServer.frame_post_draw
