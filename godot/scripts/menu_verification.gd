@@ -90,17 +90,17 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	var original: Dictionary = game.model.data()
 	var fixture: Dictionary = original.duplicate(true)
 	fixture.characters[0].moves[0].damage = 1000
-	fixture.characters[0].moves[0].startup = 1
+	fixture.characters[0].moves[0].startup = 5
 	fixture.characters[0].moves[0].reach = 50000
 	game.model.load_data(fixture)
 	game.reset_round()
 	key(KEY_J, true)
-	game._physics_process(1.0 / 60.0)
+	for _tick in 5: game._physics_process(1.0 / 60.0)
 	key(KEY_J, false)
 	game._process(0.0)
 	check(game.screen == "play" and game.match_score.wins == [1, 0] and game.round_number == 2, "First Scrum win did not advance the match")
 	key(KEY_J, true)
-	game._physics_process(1.0 / 60.0)
+	for _tick in 5: game._physics_process(1.0 / 60.0)
 	key(KEY_J, false)
 	game._process(0.0)
 	check(game.screen == "results" and game.menus.result_title.text == "Anvil wins." and game.match_score.wins == [2, 0], "Two wins did not finish the match")

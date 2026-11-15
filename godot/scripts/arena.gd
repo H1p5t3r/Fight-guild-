@@ -9,6 +9,7 @@ var score := [0, 0]
 var presentation_active := false
 var diagnostics := true
 var sprites: Array[Sprite2D] = []
+var collision_layer: Control
 var hud_layer: Control
 var feedback := CombatFeedback.new()
 var font := GuildTheme.SEMIBOLD
@@ -25,6 +26,11 @@ func _ready() -> void:
 		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		add_child(sprite)
 		sprites.append(sprite)
+	collision_layer = Control.new()
+	collision_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	collision_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(collision_layer)
+	collision_layer.draw.connect(draw_collisions)
 	hud_layer = Control.new()
 	hud_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	hud_layer.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
@@ -44,41 +50,15 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	for p in 2:
 		var fighter: Dictionary = view.players[p]
 		var sprite := sprites[p]
-		var crouched: bool = fighter.y == 0 and (int(fighter.raw) & 4) != 0
 		var character := int(fighter.character)
-		var phase := "active"
-		var pose := 0
-		if fighter.guarding and fighter.blockReaction > 0:
-			phase = "block"
-			pose = (int(fighter.blockReaction) - 1) * 2 + (1 if fighter.blockAge >= 4 else 0)
-		elif fighter.stun:
-			pose = 9
-		elif fighter.faultless:
-			phase = "block"
-			pose = 1
-		elif fighter.move >= 0:
-			var move := model.move(character, fighter.move)
-			if fighter.age < move.startup:
-				phase = "windup"
-				pose = 1 + int(move.button)
-			elif fighter.age < move.startup + move.active:
-				pose = 1 + int(move.button)
-			# No fabricated recovery animation: hold ready pose while recovery runs.
-			elif fighter.y > 0:
-				pose = 8
-			elif crouched:
-				pose = 11
-		elif fighter.y > 0:
-			pose = 8
-		elif crouched:
-			pose = 11
-		elif (int(fighter.raw) & 3) in [1, 2] or (int(fighter.raw) & 512) != 0:
-			pose = 6 + (int(view.frame) / 8) % 2
+		var phase: String = ["active", "windup", "block"][int(fighter.posePhase)]
+		var pose := int(fighter.poseIndex)
 		FighterArt.apply(sprite, character, phase, pose, scale_x, fighter.facing)
 		sprite.position = Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x)
 		sprite.modulate = Color("ffa69a") if fighter.stun and not fighter.guarding else Color.WHITE
 	queue_redraw()
 	hud_layer.queue_redraw()
+	collision_layer.queue_redraw()
 
 func label(value: String, point: Vector2, font_size: int = 14, color: Color = TEXT) -> void:
 	draw_string(font, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color)
@@ -95,18 +75,7 @@ func _draw() -> void:
 		var fighter: Dictionary = view.players[p]
 		var px: float = fighter.x / 100.0 * sx
 		var py: float = floor_y - fighter.y / 100.0 * sx
-		var crouched: bool = fighter.y == 0 and (int(fighter.raw) & 4) != 0
-		var height := 90.0 if crouched else 150.0
-		if show_boxes:
-			draw_rect(Rect2(px - 22 * sx, py - height * sx, 44 * sx, height * sx), Color("71a8c0"), false)
 		if fighter.move >= 0:
-			var move := model.move(fighter.character, fighter.move)
-			if show_boxes and fighter.age >= move.startup and fighter.age < move.startup + move.active:
-				var front: float = fighter.x / 100.0 + fighter.facing * move.reach / 100.0
-				var back: float = fighter.x / 100.0 + fighter.facing * 12
-				var hitbox := Rect2(minf(front, back) * sx, py - (move.bottom + move.height) / 100.0 * sx, absf(front - back) * sx, move.height / 100.0 * sx)
-				draw_rect(hitbox, Color(1, 0.65, 0.25, 0.25))
-				draw_rect(hitbox, ACCENT, false, 2)
 			if diagnostics: label("%s · %df" % [CombatModel.MOVE_IDS[fighter.move], fighter.age], Vector2(px + 28, py - 10), 12)
 		elif diagnostics:
 			var status := "HITSTUN" if fighter.stun else "READY"
@@ -126,3 +95,23 @@ func _draw() -> void:
 		var title: String = "DRAW" if view.winner == 2 else CombatModel.CHARACTERS[view.players[view.winner].character].to_upper() + " TAKES " + str(MatchCeremony.script().roundName).to_upper()
 		FightHud.stamp(self, title, Vector2(size.x * 0.5, size.y * 0.42), 32, GuildTheme.BRASS)
 		FightHud.centered(self, "Reset to run it back.", Vector2(size.x * 0.5, size.y * 0.42 + 63), 18, MUTED)
+
+# Draw the simulation's actual rectangles above the sprites, below the HUD.
+func draw_collisions() -> void:
+	if not show_boxes or view.is_empty() or model == null: return
+	var sx := size.x / 100000.0
+	var floor_y := size.y - 76.0
+	var colors := [Color("67d5ff"), Color("9ce56b"), Color("ff8859")]
+	for p in 2:
+		for kind in 3:
+			var boxes: PackedInt32Array = model.core.boxes(p, kind)
+			for i in range(0, boxes.size(), 4):
+				var rect := Rect2(boxes[i] * sx, floor_y - boxes[i + 3] * sx, (boxes[i + 2] - boxes[i]) * sx, (boxes[i + 3] - boxes[i + 1]) * sx)
+				var color: Color = colors[kind]
+				collision_layer.draw_rect(rect, Color(color, 0.07 if kind == 0 else 0.12))
+				collision_layer.draw_rect(rect, color, false, 1.0 if kind == 0 else 2.0)
+	var left := 18.0
+	for kind in 3:
+		var caption: String = ["HURT · body", "PUSH · spacing", "HIT · active"][kind]
+		collision_layer.draw_string(font, Vector2(left, 129), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, colors[kind])
+		left += 145.0

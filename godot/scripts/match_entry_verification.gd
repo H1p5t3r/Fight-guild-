@@ -101,7 +101,7 @@ func knockout_data(model: CombatModel, fighters: Array) -> Dictionary:
 	for fighter in fighters:
 		var move: Dictionary = data.characters[fighter].moves[0]
 		move.damage = 1000
-		move.startup = 1
+		move.startup = 5
 		move.reach = 50000
 		move.hitstop = 0
 	return data
@@ -114,17 +114,17 @@ func verify_local_match() -> void:
 	game.choose_activity("local")
 	for p in 2: game.menus.selection.choose_fighter(p, p)
 	game.confirm_selection()
-	game.model.step(16, 0)
+	for _tick in 5: game.model.step(16, 0)
 	game._process(0.0)
 	check(game.match_score.wins == [1, 0] and game.round_number == 2 and game.model.frame() == 0, "First win did not reset fighters for 2nd Scrum")
-	game.model.step(0, 16)
+	for _tick in 5: game.model.step(0, 16)
 	game._process(0.0)
 	check(game.match_score.wins == [1, 1] and game.round_number == 3 and game.screen == "play", "1–1 did not advance to Final Down")
-	game.model.step(16, 16)
+	for _tick in 5: game.model.step(16, 16)
 	check(game.model.state().winner == 2, "Draw fixture did not trade")
 	game._process(0.0)
 	check(game.match_score.wins == [1, 1] and game.round_number == 3 and game.model.frame() == 0, "Draw did not replay Final Down without awarding a win")
-	game.model.step(16, 0)
+	for _tick in 5: game.model.step(16, 0)
 	game._process(0.0)
 	check(game.screen == "results" and game.match_score.wins == [2, 1], "Deciding Scrum did not end the match")
 	game.menu_action("rematch")

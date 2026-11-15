@@ -9,6 +9,7 @@ cases = [
     (["--headless", "--script", "tests/core_bridge.gd", "--", str(root / "build/native.trace")], "0 failures"),
     (["--headless", "--script", "tests/model_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/art_test.gd"], "0 failures"),
+    (["--headless", "--script", "tests/collision_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/ui_smoke.gd", "--", "--test", "--review"], "0 failures"),
 ]
 for args, expected in cases:

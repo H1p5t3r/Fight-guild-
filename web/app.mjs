@@ -113,12 +113,9 @@ function draw() {
     if(p.guarding) {ctx.strokeStyle='#83b9d7';ctx.lineWidth=3;ctx.beginPath();ctx.arc(10,-height*.5,60,-1.3,1.3);ctx.stroke();}
     ctx.restore();
     if(showBoxes) {
-      ctx.strokeStyle='#80bfd088';ctx.lineWidth=1;ctx.strokeRect(px-24,py-(crouched?99:165),48,crouched?99:165);
-      if(active) {
-        const back=p.x/100+p.facing*12,front=p.x/100+p.facing*m.reach/100;
-        ctx.fillStyle='#ffaf4033';ctx.strokeStyle='#ffc06c';
-        const bx=Math.min(back,front)*1.1,by=py-(m.bottom+m.height)/100*1.1,bw=Math.abs(front-back)*1.1,bh=m.height/100*1.1;
-        ctx.fillRect(bx,by,bw,bh);ctx.strokeRect(bx,by,bw,bh);
+      for(let kind=0;kind<3;++kind) for(const [left,bottom,right,top] of engine.boxes(index,kind)) {
+        ctx.strokeStyle=['#67d5ff','#9ce56b','#ff8859'][kind];ctx.lineWidth=kind?2:1;
+        ctx.strokeRect(left/100*1.1,450-top/100*1.1,(right-left)/100*1.1,(top-bottom)/100*1.1);
       }
     }
     text(m?`${MOVE_IDS[p.move]} · ${p.age}f`:p.stun?(p.guarding?'BLOCKSTUN':'HITSTUN'):'READY',px,py+25,10,'#c1cdd3','center');
@@ -138,10 +135,10 @@ function draw() {
 }
 
 const numericFields=[
-  ['frame-fields','startup','Startup',1,120],['frame-fields','active','Active',1,120],['frame-fields','recovery','Recovery',0,180],
+  ['frame-fields','startup','Startup',5,120],['frame-fields','active','Active',1,120],['frame-fields','recovery','Recovery',0,180],
   ['frame-fields','damage','Damage',0,1000],['frame-fields','hitstun','Hitstun',0,180],['frame-fields','blockstun','Blockstun',0,180],
   ['frame-fields','hitstop','Hitstop',0,30],['frame-fields','pushback','Push (px)',0,200,100],['frame-fields','advance','Advance (px)',-100,100,100],
-  ['box-fields','reach','Reach',1,500,100],['box-fields','bottom','Bottom',-500,500,100],['box-fields','height','Height',1,500,100],
+  ['box-fields','hitboxBack','Back',-500,500,100],['box-fields','reach','Reach',1,500,100],['box-fields','bottom','Bottom',-500,500,100],['box-fields','height','Height',1,500,100],
   ['advanced-fields','direction','Direction',1,9],['advanced-fields','simpleDirection','Simple dir.',0,9],['advanced-fields','normalRoutes','Normal routes',-1,31],['advanced-fields','commandRoutes','Command routes',-1,31]
 ];
 function setupEditor() {

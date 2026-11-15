@@ -25,7 +25,7 @@ func run() -> void:
 		for fighter in game.menus.selection.chosen:
 			var move: Dictionary = data.characters[fighter].moves[0]
 			move.damage = 1000
-			move.startup = 1
+			move.startup = 5
 			move.reach = 50000
 			move.hitstop = 0
 		game.model.load_data(data)
@@ -36,7 +36,7 @@ func run() -> void:
 		if args.has("--match-tour"):
 			for winner in [0, 1, 0]:
 				await create_timer(0.65).timeout
-				game.model.step(16 if winner == 0 else 0, 16 if winner == 1 else 0)
+				for _tick in 5: game.model.step(16 if winner == 0 else 0, 16 if winner == 1 else 0)
 				game._process(0.0)
 				await game.wait_for_match_entry()
 		await create_timer(0.9).timeout

@@ -2,16 +2,16 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 4
+const DATA_VERSION := 5
 const MOMENTUM_MAX := 10000
 const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
 const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D"]
-const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible"]
+const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack"]
 const RULES := ["buttonBuffer", "motionWindow", "motionGap"]
 const MOMENTUM_RULES := ["movementGain", "attackGain", "blockedAttackGain", "damageTakenGain", "guardGain", "specialGain", "fdDrain", "fdBlockCost", "fdDamageCost", "fdPushPercent"]
 const RULE_COUNT := 13 # 3 input rules + 10 Momentum rules, matching fight::RULE_COUNT.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge"]
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex"]
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
 
@@ -63,7 +63,7 @@ static func valid_integer(value: Variant) -> bool:
 func load_data(value: Variant) -> String:
 	if not value is Dictionary:
 		return "Unsupported move data version."
-	var legacy: bool = valid_integer(value.get("schema")) and int(value.schema) in [1, 2, 3] and value.schema == value.get("coreVersion")
+	var legacy: bool = valid_integer(value.get("schema")) and int(value.schema) in [1, 2, 3, 4] and value.schema == value.get("coreVersion")
 	if not legacy and (value.get("schema") != DATA_VERSION or value.get("coreVersion") != DATA_VERSION):
 		return "Unsupported move data version."
 	var characters: Variant = value.get("characters")
@@ -81,7 +81,10 @@ func load_data(value: Variant) -> String:
 			if not definitions[m] is Dictionary or definitions[m].get("id") != MOVE_IDS[m]:
 				return "Move slot IDs must match this build."
 			for field in FIELDS:
-				if legacy and field in ["counterHitstun", "counterHitstop", "reversalEligible"]:
+				if legacy and field == "hitboxBack":
+					candidate.append(1200) # Preserve the previous 12px origin for saved move edits.
+					continue
+				if value.schema < 4 and field in ["counterHitstun", "counterHitstop", "reversalEligible"]:
 					candidate.append(4 if field == "counterHitstun" else 3 if field == "counterHitstop" else int(int(definitions[m].category) in [2, 3]))
 					continue
 				if value.schema < 3 and field == "guardBreak":
@@ -95,6 +98,8 @@ func load_data(value: Variant) -> String:
 					continue
 				if not valid_integer(definitions[m].get(field)):
 					return "Invalid integer for %s / %s." % [MOVE_IDS[m], field]
+				if field == "startup" and definitions[m][field] < 5:
+					return "%s / %s: startup must be at least 5 frames." % [CHARACTERS[c], MOVE_IDS[m]]
 				candidate.append(int(definitions[m][field]))
 	# Old two-fighter saves keep their edits; newly added fighters start from defaults.
 	var defaults := FightCore.new().configuration()
@@ -126,7 +131,7 @@ func fingerprint() -> String:
 	var hash_value: int = 2166136261
 	for byte in JSON.stringify(data(), "", false).to_utf8_buffer():
 		hash_value = ((hash_value ^ byte) * 16777619) & 0xffffffff
-	return "%d-%08x" % [DATA_VERSION, hash_value]
+	return "%d-%08x-%08x" % [DATA_VERSION, core.collision_hash(), hash_value]
 
 func save_file(path: String) -> String:
 	var file := FileAccess.open(path, FileAccess.WRITE)

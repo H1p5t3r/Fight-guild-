@@ -4,5 +4,9 @@ func _initialize() -> void:
 	call_deferred("run")
 
 func run() -> void:
-	var verification = load("res://scripts/build_verification.gd").new()
+	var script := load("res://scripts/build_verification.gd") as Script
+	if script == null or not script.can_instantiate():
+		quit(1)
+		return
+	var verification = script.new()
 	await verification.run(self)

@@ -3,7 +3,8 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 4, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 22, FIELD_COUNT = 31;
+constexpr int VERSION = 5, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 22, FIELD_COUNT = 32;
+constexpr int MIN_STARTUP = 5;
 constexpr int MOMENTUM_MAX = 10000, INPUT_MASK = 4095;
 constexpr int MAX_STUN = 240, MAX_HITSTOP = 60, NOTICE_TICKS = 60, COMBO_HOLD = 60;
 enum Input { Left=1, Right=2, Down=4, Up=8, P=16, K=32, S=64, Hs=128, D=256,
@@ -13,7 +14,10 @@ enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery
              Damage, Hitstun, Blockstun, Hitstop, Pushback, Reach, Bottom, Height,
              SpecialCancel, JumpCancel, WhiffCancel, SelfCancel, Advance,
              SimpleDirection, SimpleButton, NormalRoutes, CommandRoutes,
-             HitLevel, ChipDamage, GuardBreak, CounterHitstun, CounterHitstop, ReversalEligible };
+             HitLevel, ChipDamage, GuardBreak, CounterHitstun, CounterHitstop, ReversalEligible, HitboxBack };
+enum BoxKind { HurtBox, PushBox, HitBox };
+struct Box { int left, bottom, right, top; };
+struct Pose { int phase, index; }; // active, windup, block; shared with the sprite renderer.
 enum BlockReaction { NoBlock, StableBlock, PressureBlock, BrokenGuard };
 enum Contact { NoContact, NormalHit, Blocked, CounterHit, PunishHit };
 enum Rule { ButtonBuffer, MotionWindow, MotionGap, MoveGain, AttackGain,
@@ -56,6 +60,12 @@ public:
     int rule_get(int field) const;
     int rule_set(int field, int value);
     int can_cancel(int character, int from, int to, int contact) const;
+    Pose pose(const Fighter& fighter, int tick_offset=0) const;
+    int box_count(int player, int kind) const;
+    Box box(int player, int kind, int index=0) const;
+    static int pose_box_count(int character, int phase, int pose);
+    static Box pose_box(int character, int phase, int pose, int index);
+    static unsigned collision_hash();
 private:
     int requested(Fighter& f, Sample& h) const;
     void begin(Fighter& f, int move);
@@ -65,6 +75,11 @@ private:
     bool blocks(const Fighter& attacker, const Fighter& defender, bool was_stunned) const;
     void gain_momentum(Fighter& fighter, int amount);
     void update_faultless(Fighter& fighter);
+    Box push_box(const Fighter& fighter) const;
+    Box attack_box(const Fighter& fighter) const;
+    Box hurt_box(const Fighter& fighter, int index, int tick_offset=0) const;
+    void resolve_push(int previous_order, bool preserve_order);
+    int clamp_x(const Fighter& fighter, int x) const;
 };
 // Compatibility instance for the original C ABI and native test runner.
 extern Simulation default_simulation;
@@ -98,4 +113,7 @@ FG_EXPORT(fg_can_cancel) int fg_can_cancel(int character, int from, int to, int 
 FG_EXPORT(fg_state_ptr) void* fg_state_ptr();
 FG_EXPORT(fg_state_size) int fg_state_size();
 FG_EXPORT(fg_checksum) unsigned fg_checksum();
+FG_EXPORT(fg_collision_hash) unsigned fg_collision_hash();
+FG_EXPORT(fg_box_count) int fg_box_count(int player, int kind);
+FG_EXPORT(fg_box_get) int fg_box_get(int player, int kind, int index, int edge);
 }

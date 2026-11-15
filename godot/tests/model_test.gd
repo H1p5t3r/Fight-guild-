@@ -18,6 +18,9 @@ func _initialize() -> void:
 	var invalid := original.duplicate(true)
 	invalid.characters[1].moves[21].startup = 0
 	check(not model.load_data(invalid).is_empty() and model.move(0, 0).damage == 177, "Invalid import changed live data")
+	for startup in [1, 2, 3, 4]:
+		invalid.characters[1].moves[21].startup = startup
+		check(model.load_data(invalid).contains("at least 5 frames") and model.move(0, 0).damage == 177, "Sub-5f startup accepted or changed live data")
 	invalid.characters[1].moves[21].startup = 4294967301
 	check(not model.load_data(invalid).is_empty(), "Integer overflow accepted")
 	var saved := "user://test-moves.json"
@@ -65,6 +68,15 @@ func _initialize() -> void:
 	check(model.load_data(JSON.parse_string(JSON.stringify(previous))).is_empty(), "Schema-3 migration rejected")
 	check(model.move(0, 0).damage == 177 and model.move(0, 0).guardBreak == 1 and model.move(0, 0).chipDamage == 17 and model.data().momentumRules.fdDrain == 25, "Migration lost defensive edits")
 	check(model.move(0, 0).counterHitstun == 4 and model.move(0, 0).counterHitstop == 3 and model.move(0, 0).reversalEligible == 1, "Timing migration did not respect saved move category")
+	var v4 := edited.duplicate(true)
+	v4.schema = 4
+	v4.coreVersion = 4
+	v4.characters[0].moves[0].counterHitstun = 19
+	v4.characters[0].moves[0].counterHitstop = 9
+	for character in v4.characters:
+		for definition in character.moves: definition.erase("hitboxBack")
+	check(model.load_data(v4).is_empty(), "Schema-4 migration rejected")
+	check(model.move(0, 0).counterHitstun == 19 and model.move(0, 0).counterHitstop == 9 and model.move(0, 0).hitboxBack == 1200, "Schema-4 migration lost timing edits or old hitbox origin")
 	var invalid_timing := model.data()
 	invalid_timing.characters[0].moves[0].counterHitstun = 61
 	var timing_hash := model.fingerprint()
@@ -86,7 +98,7 @@ func _initialize() -> void:
 	check(not model.core.set_training_momentum(0, 10001), "Overfilled Momentum accepted")
 	var extreme := original.duplicate(true)
 	var strike: Dictionary = extreme.characters[0].moves[0]
-	strike.startup = 1
+	strike.startup = 5
 	strike.reach = 50000
 	strike.hitstun = 180
 	strike.counterHitstun = 60
@@ -94,7 +106,7 @@ func _initialize() -> void:
 	strike.counterHitstop = 30
 	check(model.load_data(extreme).is_empty(), "Maximum legal counter-hit values rejected")
 	model.reset()
-	model.step(16, 64)
+	for _tick in 5: model.step(16, 64)
 	check(model.state().players[0].event == 3 and model.state().players[1].stun == 240 and model.state().hitstop == 60, "Counter-hit classification/bonuses missing")
 	var counter_snapshot: PackedByteArray = model.core.snapshot()
 	model.step(0, 0)

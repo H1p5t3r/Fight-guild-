@@ -54,6 +54,11 @@ Requested scope: make repeatable character images performing directed actions, w
 
 ## Combat and delivery
 
+- [x] Fit body-only hurtboxes to all 144 existing sprite poses; weapons and effects add no hurt area.
+- [x] Add per-fighter pushboxes, wall separation, movement sweeps and airborne crossing/landing checks.
+- [x] Give all 132 move slots preliminary stats and sprite-derived attack rectangles; enforce startup ≥ 5f in core, editor and imports.
+- [x] Share pose selection between collision and rendering; add live collision colors and all-pose/facing review.
+- [ ] Replace shared button collision with per-move, per-animation-frame geometry as dedicated animations are produced; playtest spacing and matchup balance.
 - [ ] Playtest the basic P/K/S/Hs/D buttons and unified gatlings, then replace provisional move data and Drive behaviors character by character.
 - [ ] Collect repeatable Strive input traces to tune buffer behavior and motion leniency.
 - [ ] Design throws, universal overheads, universal anti-air rules with the user.

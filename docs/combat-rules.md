@@ -17,6 +17,8 @@ All normals, including command normals, are special cancelable by default, with 
 
 **Every attack can cancel into a command normal on the same button.** This includes specials and Drive attacks. It is an additional route, so P gains same-button command normals without gaining every command normal. The implementation preserves this universal rule even when a move has custom cancel masks.
 
+**Weapons do not extend hurtboxes. Every attack has at least 5 frames of startup.** Body-only hurtboxes follow the current drawing, while separate pushboxes maintain body spacing. See [collision rules](collision-rules.md).
+
 ## Provisional implementation choices
 
 These are useful prototype defaults, not additional approved design requirements:
@@ -25,11 +27,11 @@ These are useful prototype defaults, not additional approved design requirements
 - A move cannot cancel into itself unless its self-cancel setting is enabled. Different command normals can form cycles when authored to do so; no hidden once-per-combo restriction has been added.
 - Command normals use the unified normal rules for their outgoing routes. The editor can override normal/command route masks, special cancelability, and jump cancelability.
 - Jump cancels require a grounded fighter. Air moves are separate definitions. Attack routes still require the target's ground/air condition.
-- Walking, a single jump, grounded dash, ground/air blocking, simple pushboxes, hitstop, hitstun, blockstun, health, one 99-count round, and reset are present. Momentum and Faultless Defense are present. There is no throw, dash invulnerability, damage scaling or juggle system yet.
+- Walking, a single jump, grounded dash, ground/air blocking, per-fighter pushboxes, hitstop, hitstun, blockstun, health, first-to-two Scrums with a 99-count timer, and reset are present. Momentum and Faultless Defense are present. There is no throw, dash invulnerability, damage scaling or juggle system yet.
 - All starter attacks are mid attacks. The editor can assign low/overhead guard levels for later experiments; no universal overhead or anti-air kit has been selected.
 - Simplified execution has no damage penalty, and traditional inputs remain available when enabled. Holding the modifier reserves mapped inputs; unmapped modifier chords do not become ordinary attacks. Up with the modifier is a special input direction, not a jump request.
 - Default motions: 236P, 236S, 623Hs. Default command normals: 6P, 6K, 6S, 6Hs, 6D. There are standing and crouching P/K/S/Hs, a grounded Drive starter, and five provisional air attacks.
-- All six fighters have 22 playable slots. Anvil is slower and slightly stronger; Hammer advances on specials/Drive. Tapper/Shark have slightly longer reach; Shark/Fillet move faster and their Drive starters advance. Smoke uses the shared baseline with a stationary Drive attack. These are testing values: no shield armor, smoke status, hook pull or bleed mechanic is implied by the art.
+- All six fighters have 22 playable slots. Anvil is slower and slightly stronger; Hammer advances on specials/Drive. Reach follows each button’s current sprite; Shark/Fillet move faster and their Drive starters advance. Smoke has a stationary Drive attack. See [all preliminary stats](move-stats.md). These are testing values: no shield armor, smoke status, hook pull or bleed mechanic is implied by the art.
 
 ## Momentum and defense
 
@@ -55,6 +57,6 @@ Strive comparison work should collect repeatable input traces for motion shortcu
 
 Startup includes the first active frame: startup 5 means the attack becomes active on its fifth simulation tick. Total duration is `startup - 1 + active + recovery`. Hitstop freezes combat progression; input sampling continues. Stun durations apply to subsequent unfrozen ticks.
 
-Positions use hundredths of a pixel. The editor displays hitbox, pushback, and advance values in pixels and converts them to integers. The hitbox is a rectangle from 12 pixels in front of the fighter to its authored reach, with a bottom offset and height. A single hit per move instance is supported.
+Positions use hundredths of a pixel. The editor displays hitbox, pushback, and advance values in pixels and converts them to integers. The hitbox is a rectangle between its authored back/front offsets, with a bottom offset and height. Defaults follow the current active artwork; weapons never add hurt area. A single hit per move instance is supported.
 
-Move-data changes reset the local simulation. Save locally persists the complete set in Godot's user data directory; JSON export/import is portable. Invalid imports leave the prior set unchanged. Schema-1/2/3 saves migrate old edits, supply new defensive/meter/timing defaults and add any missing fighters. Restore defaults changes the working set; saving afterward replaces the saved set. Online peers require matching data and lock editing during play.
+Move-data changes reset the local simulation. Save locally persists the complete set in Godot's user data directory; JSON export/import is portable. Invalid imports leave the prior set unchanged. Schema-1/2/3/4 saves migrate old edits, retain their previous 12px hitbox origin, supply new defensive/meter/timing defaults and add any missing fighters. Imports with startup below 5 frames are rejected. Restore defaults changes the working set; saving afterward replaces the saved set. Online peers require matching data and lock editing during play.

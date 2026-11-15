@@ -212,7 +212,7 @@ func build_interface() -> void:
 	grid.add_theme_constant_override("h_separation", 10)
 	grid.add_theme_constant_override("v_separation", 8)
 	editor.add_child(grid)
-	for spec in [["startup","Startup",1,120,1],["active","Active",1,120,1],["recovery","Recovery",0,180,1],["damage","Damage",0,1000,1],["hitstun","Hitstun",0,180,1],["blockstun","Blockstun",0,180,1],["hitstop","Hitstop",0,30,1],["pushback","Push (px)",0,200,100],["advance","Advance (px)",-100,100,100],["reach","Reach (px)",1,500,100],["bottom","Bottom (px)",-500,500,100],["height","Height (px)",1,500,100],["chipDamage","Chip damage",0,1000,1],["counterHitstun","Counter +stun",0,60,1],["counterHitstop","Counter +stop",0,30,1]]:
+	for spec in [["startup","Startup",5,120,1],["active","Active",1,120,1],["recovery","Recovery",0,180,1],["damage","Damage",0,1000,1],["hitstun","Hitstun",0,180,1],["blockstun","Blockstun",0,180,1],["hitstop","Hitstop",0,30,1],["pushback","Push (px)",0,200,100],["advance","Advance (px)",-100,100,100],["hitboxBack","Hitbox back (px)",-500,500,100],["reach","Hitbox front (px)",1,500,100],["bottom","Bottom (px)",-500,500,100],["height","Height (px)",1,500,100],["chipDamage","Chip damage",0,1000,1],["counterHitstun","Counter +stun",0,60,1],["counterHitstop","Counter +stop",0,30,1]]:
 		add_field(grid, spec)
 	var guard_break := CheckBox.new()
 	guard_break.text = "Guard break on block"
@@ -253,7 +253,7 @@ func build_interface() -> void:
 	button(saves, "Export", func(): show_file(false))
 	button(saves, "Import", func(): show_file(true), true)
 	button(editor, "Restore default move set", func(): model.restore_defaults(); populate_editor(); reset_round(); editor_status.text = "Defaults restored. Save locally to keep them.", true, "danger")
-	editor_status = label(editor, "Provisional tuning · changes stay local", 11, ACCENT)
+	editor_status = label(editor, "Provisional tuning · startup ≥ 5f · weapons have no hurtbox", 11, ACCENT)
 	editor_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label(editor, "INPUT BUFFER", 11, MUTED)
 	var buffer_grid := GridContainer.new()
@@ -595,7 +595,7 @@ func show_sprite_review(clip: int = 0) -> void:
 	held.clear()
 	var dialog := AcceptDialog.new()
 	dialog.theme = GuildTheme.stock()
-	dialog.title = "Sprite review · attacks and defense"
+	dialog.title = "Sprite & collision review"
 	dialog.ok_button_text = "Back to combat lab"
 	add_child(dialog)
 	var layout := VBoxContainer.new()
@@ -604,8 +604,16 @@ func show_sprite_review(clip: int = 0) -> void:
 	layout.add_child(pickers)
 	var fighter_picker := option(pickers, "Fighter", CombatModel.CHARACTERS)
 	var button_picker := option(pickers, "Button", CombatModel.BUTTONS)
-	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break"])
-	clip_picker.select(clampi(clip, 0, 3))
+	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard"])
+	clip_picker.select(clampi(clip, 0, 9))
+	var options := row(layout)
+	var collision_toggle := CheckBox.new()
+	collision_toggle.text = "Collision boxes"
+	collision_toggle.button_pressed = true
+	options.add_child(collision_toggle)
+	var mirror_toggle := CheckBox.new()
+	mirror_toggle.text = "Face left"
+	options.add_child(mirror_toggle)
 	var pair := HBoxContainer.new()
 	layout.add_child(pair)
 	var previews: Array[FighterPreview] = []
@@ -616,22 +624,34 @@ func show_sprite_review(clip: int = 0) -> void:
 		captions.append(label(column, phase, 16, ACCENT))
 		var preview := FighterPreview.new()
 		preview.custom_minimum_size = Vector2(330, 360)
+		preview.combat_model = model
 		column.add_child(preview)
 		previews.append(preview)
+	var stats := label(layout, "", 12, ACCENT)
 	var update := func(_index: int = 0):
 		button_picker.disabled = clip_picker.selected != 0
+		var move := model.move(fighter_picker.selected, [0, 1, 2, 3, 13][button_picker.selected])
+		stats.text = "%df startup · %df active · %df recovery · %d damage · %+df on first-frame block" % [move.startup, move.active, move.recovery, move.damage, move.blockstun - (move.active - 1 + move.recovery)] if clip_picker.selected == 0 else "Body hurtboxes follow the displayed pose. Pushboxes keep a stable body width."
 		for i in 2:
+			previews[i].show_collision = collision_toggle.button_pressed
+			previews[i].facing = -1 if mirror_toggle.button_pressed else 1
 			if clip_picker.selected == 0:
 				captions[i].text = ["WINDUP", "ACTIVE"][i]
-				previews[i].present(fighter_picker.selected, ["windup", "active"][i], button_picker.selected + 1)
-			else:
+				previews[i].present(fighter_picker.selected, ["windup", "active"][i], button_picker.selected + 1, previews[i].facing)
+			elif clip_picker.selected <= 3:
 				captions[i].text = ["CONTACT", "SETTLE / HOLD"][i]
-				previews[i].present(fighter_picker.selected, "block", (clip_picker.selected - 1) * 2 + i)
+				previews[i].present(fighter_picker.selected, "block", (clip_picker.selected - 1) * 2 + i, previews[i].facing)
+			else:
+				var pose_pair: Array = [[0, 0], [6, 7], [8, 8], [9, 9], [11, 11], [10, 10]][clip_picker.selected - 4]
+				captions[i].text = "READY / WINDUP BASE" if clip_picker.selected == 4 and i == 1 else clip_picker.get_item_text(clip_picker.selected).to_upper()
+				previews[i].present(fighter_picker.selected, "windup" if clip_picker.selected == 4 and i == 1 else "active", pose_pair[i], previews[i].facing)
 	fighter_picker.item_selected.connect(update)
 	button_picker.item_selected.connect(update)
 	clip_picker.item_selected.connect(update)
+	collision_toggle.toggled.connect(func(_value: bool): update.call())
+	mirror_toggle.toggled.connect(func(_value: bool): update.call())
 	update.call()
-	label(layout, "First pose studies. Compare silhouette, colors, weapon shape and attack direction.\nBlock clips settle after four unfrozen frames. Full attack animation is planned.", 12, MUTED)
+	label(layout, "Cyan: body hurtboxes · green: pushbox · orange: active hitbox.\nWeapons, hair, loose cloth and effects do not extend hurtboxes. Startup is at least 5 frames.", 12, MUTED)
 	dialog.canceled.connect(func(): close_dialog(dialog))
 	dialog.confirmed.connect(func(): close_dialog(dialog))
 	dialog.popup_centered(Vector2i(760, 600))

@@ -24,6 +24,9 @@ protected:
         ClassDB::bind_method(D_METHOD("restore_defaults"), &FightCore::restore_defaults);
         ClassDB::bind_method(D_METHOD("can_cancel", "character", "from", "to", "contact"), &FightCore::can_cancel);
         ClassDB::bind_method(D_METHOD("set_training_momentum", "player", "value"), &FightCore::set_training_momentum);
+        ClassDB::bind_method(D_METHOD("boxes", "player", "kind"), &FightCore::boxes);
+        ClassDB::bind_method(D_METHOD("pose_boxes", "character", "phase", "pose"), &FightCore::pose_boxes);
+        ClassDB::bind_method(D_METHOD("collision_hash"), &FightCore::collision_hash);
     }
 public:
     FightCore() { simulation.defaults(); simulation.reset(0,1,0,0); }
@@ -31,6 +34,25 @@ public:
     void step(int a,int b) { simulation.step(a,b); }
     int read_value(int p,int f) const { return simulation.get(p,f); }
     int64_t checksum() const { return simulation.checksum(); }
+    int64_t collision_hash() const { return fight::Simulation::collision_hash(); }
+    PackedInt32Array boxes(int player,int kind) const {
+        PackedInt32Array result;
+        for(int i=0;i<simulation.box_count(player,kind);++i) {
+            auto b=simulation.box(player,kind,i);
+            result.push_back(b.left); result.push_back(b.bottom);
+            result.push_back(b.right); result.push_back(b.top);
+        }
+        return result;
+    }
+    PackedInt32Array pose_boxes(int character,int phase,int pose) const {
+        PackedInt32Array result;
+        for(int i=0;i<fight::Simulation::pose_box_count(character,phase,pose);++i) {
+            auto b=fight::Simulation::pose_box(character,phase,pose,i);
+            result.push_back(b.left); result.push_back(b.bottom);
+            result.push_back(b.right); result.push_back(b.top);
+        }
+        return result;
+    }
     bool can_cancel(int c,int from,int to,bool contact) const { return simulation.can_cancel(c,from,to,contact)!=0; }
     void restore_defaults() { simulation.defaults(); }
     bool set_training_momentum(int player,int value) {

@@ -50,3 +50,23 @@ test('Move data round-trips, fingerprints change, and invalid imports are atomic
   assert.equal(e.fingerprint(),peer.fingerprint());
   e.loadData(original);assert.equal(e.fingerprint(),hash);
 });
+test('Five-frame floor, schema-4 migration and compiled collision API agree',async()=>{
+  const e=await create(),original=e.data();
+  for(let startup=0;startup<5;++startup) {
+    assert.throws(()=>e.setMove(0,0,'startup',startup),/startup/);
+    assert.equal(e.move(0,0).startup,original.characters[0].moves[0].startup);
+  }
+  const legacy=structuredClone(original);legacy.schema=legacy.coreVersion=4;
+  legacy.characters[0].moves[0].counterHitstun=19;
+  for(const character of legacy.characters) for(const move of character.moves) delete move.hitboxBack;
+  e.loadData(legacy);
+  assert.equal(e.move(0,0).counterHitstun,19);assert.equal(e.move(0,0).hitboxBack,1200);
+  e.loadData(original);
+  assert.ok(e.fingerprint().includes((e.api.fg_collision_hash()>>>0).toString(16)));
+  assert.equal(e.boxes(0,1).length,1);assert.ok(e.boxes(0,0).length>1);
+  for(let tick=1;tick<=e.move(0,0).startup;++tick) {
+    e.step(16,0);
+    assert.equal(e.boxes(0,2).length,tick===e.move(0,0).startup?1:0);
+  }
+  assert.equal(e.state().players[0].poseIndex,1);
+});

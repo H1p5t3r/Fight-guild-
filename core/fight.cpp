@@ -1,4 +1,5 @@
 #include "fight.h"
+#include "combat_data.h"
 
 namespace fight {
 static_assert(sizeof(int)==4, "The snapshot ABI requires 32-bit int");
@@ -14,54 +15,8 @@ static int button_bit(int b) { return P<<b; }
 
 void Simulation::defaults() {
     rules=Rules{};
-    for(int c=0;c<CHARACTER_COUNT;++c) for(int i=0;i<MOVE_COUNT;++i) {
-        Move m{};
-        const bool crouch=i>=4&&i<8, command=i>=8&&i<13;
-        const bool special=i>=14&&i<17, air=i>=17;
-        int b=i<8?i%4:command?i-8:i==13?4:i==14?0:i==15?2:i==16?3:i-17;
-        m.v[Button]=b;
-        m.v[Category]=command?Command:special?Special:(b==4?Drive:Normal);
-        m.v[Direction]=command?6:crouch?2:5;
-        m.v[Motion]=i==14||i==15?236:i==16?623:0;
-        m.v[Air]=air;
-        m.v[Startup]=command?12:special?14:5+b*3;
-        m.v[Active]=b<2?3:5;
-        m.v[Recovery]=10+b*3;
-        m.v[Damage]=30+b*16+(command?15:0)+(special?30:0);
-        m.v[Hitstun]=20+b*3;
-        m.v[Blockstun]=12+b*2;
-        m.v[Hitstop]=6+b;
-        m.v[Pushback]=800+b*300;
-        m.v[Reach]=8500+b*1700+(command?1500:0);
-        m.v[Bottom]=air?-3000:2000;
-        m.v[Height]=air?8500:8000;
-        m.v[SpecialCancel]=!special&&(command||b!=4);
-        m.v[JumpCancel]=!special&&b!=4&&(b==1||b==2);
-        m.v[Advance]=special&&c==1?1600:0;
-        m.v[SimpleDirection]=special?(i==14?6:i==15?2:8):0;
-        m.v[SimpleButton]=b;
-        m.v[NormalRoutes]=-1; // -1 = unified rule, otherwise a P/K/S/Hs/D bitmask.
-        m.v[CommandRoutes]=-1;
-        if(c==0) { m.v[Damage]+=5; m.v[Reach]+=600; }
-        // Starter tuning only: Anvil, Hammer, Smoke, Tapper, Shark, Fillet.
-        if(c==3) m.v[Reach]+=1000;
-        if(c==4) m.v[Reach]+=800;
-        if(c==5) m.v[Reach]-=400;
-        if(i==13) { // Provisional character-specific Drive starters.
-            const int startup[CHARACTER_COUNT]={18,15,18,17,13,14};
-            const int reach[CHARACTER_COUNT]={12500,16000,14500,17500,14500,15000};
-            const int advance[CHARACTER_COUNT]={0,2600,0,800,3000,2200};
-            m.v[Startup]=startup[c];
-            m.v[Reach]=reach[c];
-            m.v[Advance]=advance[c];
-            m.v[SpecialCancel]=c==1||c==4||c==5;
-        }
-        m.v[ChipDamage]=(m.v[Category]==Special||m.v[Category]==Drive)?max(1,m.v[Damage]/10):0;
-        m.v[CounterHitstun]=4;
-        m.v[CounterHitstop]=3;
-        m.v[ReversalEligible]=m.v[Category]==Special||m.v[Category]==Drive;
-        moves[c][i]=m;
-    }
+    for(int c=0;c<CHARACTER_COUNT;++c) for(int i=0;i<MOVE_COUNT;++i)
+        moves[c][i]=STARTER_MOVES[c][i];
 }
 
 void Simulation::reset(int c0,int c1,int s0,int s1) {
@@ -257,14 +212,106 @@ void Simulation::control(Fighter& f) {
         }
     }
 }
+static bool vertical_overlap(const Box& a,const Box& b) { return a.top>b.bottom&&a.bottom<b.top; }
+static bool intersects(const Box& a,const Box& b) {
+    return a.right>b.left&&a.left<b.right&&vertical_overlap(a,b);
+}
+static Box transform(Box b,const Fighter& f) {
+    return {f.x+(f.facing==1?b.left:-b.right),f.y+b.bottom,
+            f.x+(f.facing==1?b.right:-b.left),f.y+b.top};
+}
+static int pose_offset(int phase,int index) { return (phase==0?0:phase==1?12:18)+index; }
+Pose Simulation::pose(const Fighter& f,int tick_offset) const {
+    if(f.guarding&&f.block_reaction>0) return {2,(f.block_reaction-1)*2+(f.block_age>=4)};
+    if(f.stun) return {0,9};
+    if(f.faultless) return {2,1};
+    if(f.move>=0) {
+        const auto& m=moves[f.character][f.move];
+        int age=f.age+tick_offset;
+        if(age<m.v[Startup]) return {1,1+m.v[Button]};
+        if(age<m.v[Startup]+m.v[Active]) return {0,1+m.v[Button]};
+        return {0,f.y>0?8:(f.raw&Down)?11:0};
+    }
+    if(f.y>0) return {0,8};
+    if(f.raw&Down) return {0,11};
+    int horizontal=f.raw&(Left|Right);
+    if(horizontal==Left||horizontal==Right||(f.raw&Dash)) return {0,6+((world.frame+tick_offset)/8)%2};
+    return {0,0};
+}
+int Simulation::pose_box_count(int c,int phase,int index) {
+    if(c<0||c>=CHARACTER_COUNT||phase<0||phase>2||index<0||index>=(phase==0?12:6)) return 0;
+    return HURT_POSES[c][pose_offset(phase,index)].count;
+}
+Box Simulation::pose_box(int c,int phase,int index,int n) {
+    if(n<0||n>=pose_box_count(c,phase,index)) return {};
+    return HURT_POSES[c][pose_offset(phase,index)].boxes[n];
+}
+unsigned Simulation::collision_hash() { return COLLISION_HASH; }
+Box Simulation::hurt_box(const Fighter& f,int index,int tick_offset) const {
+    Pose art=pose(f,tick_offset);
+    return transform(pose_box(f.character,art.phase,art.index,index),f);
+}
+Box Simulation::push_box(const Fighter& f) const {
+    const auto& profile=PUSH_PROFILES[f.character];
+    Pose art=pose(f);
+    int height=f.y>0?profile.air:art.phase==0&&art.index==11?profile.crouching:profile.standing;
+    int bottom=f.y+(f.y>0?profile.air_bottom:0);
+    return {f.x-profile.half_width,bottom,f.x+profile.half_width,bottom+height};
+}
+Box Simulation::attack_box(const Fighter& f) const {
+    const auto& m=moves[f.character][f.move];
+    return transform({min(m.v[HitboxBack],m.v[Reach]),m.v[Bottom],
+                      max(m.v[HitboxBack],m.v[Reach]),m.v[Bottom]+m.v[Height]},f);
+}
+int Simulation::box_count(int player,int kind) const {
+    if(player<0||player>1) return 0;
+    const auto& f=world.players[player];
+    Pose art=pose(f);
+    if(kind==HurtBox) return pose_box_count(f.character,art.phase,art.index);
+    if(kind==PushBox) return 1;
+    if(kind==HitBox&&f.move>=0) {
+        const auto& m=moves[f.character][f.move];
+        return f.age>=m.v[Startup]&&f.age<m.v[Startup]+m.v[Active];
+    }
+    return 0;
+}
+Box Simulation::box(int player,int kind,int index) const {
+    if(index<0||index>=box_count(player,kind)) return {};
+    const auto& f=world.players[player];
+    return kind==HurtBox?hurt_box(f,index):kind==PushBox?push_box(f):attack_box(f);
+}
+int Simulation::clamp_x(const Fighter& f,int x) const {
+    int half=PUSH_PROFILES[f.character].half_width;
+    return clamp(x,half,100000-half);
+}
+void Simulation::resolve_push(int previous_order,bool preserve_order) {
+    auto& a=world.players[0]; auto& b=world.players[1];
+    Box pa=push_box(a),pb=push_box(b);
+    if(!vertical_overlap(pa,pb)) return;
+    // Keep the previous order across a movement sweep. A large dash/advance cannot
+    // teleport through a grounded opponent. An airborne crossing can change order.
+    int sign=preserve_order?previous_order:(a.x<=b.x?1:-1);
+    int separation=PUSH_PROFILES[a.character].half_width+PUSH_PROFILES[b.character].half_width;
+    int overlap=separation-(b.x-a.x)*sign;
+    if(overlap<=0) return;
+    a.x=clamp_x(a,a.x-sign*((overlap+1)/2));
+    b.x=clamp_x(b,b.x+sign*(overlap/2));
+    overlap=separation-(b.x-a.x)*sign;
+    if(overlap>0) {
+        // Transfer whatever a wall blocked to the fighter with space available.
+        int old=a.x;
+        a.x=clamp_x(a,a.x-sign*overlap);
+        overlap-=abs(a.x-old);
+        b.x=clamp_x(b,b.x+sign*overlap);
+    }
+}
 bool Simulation::overlaps(const Fighter& a,const Fighter& b) const {
-    const Move& m=moves[a.character][a.move];
-    int front=a.x+a.facing*m.v[Reach], back=a.x+a.facing*1200;
-    int lo=min(front,back), hi=max(front,back);
-    int hurt_height=b.y==0&&(b.raw&Down)?9000:15000;
-    int bottom=a.y+m.v[Bottom];
-    return hi>b.x-2200&&lo<b.x+2200&&bottom<b.y+hurt_height
-        &&bottom+m.v[Height]>b.y;
+    Box hit=attack_box(a);
+    // Hits are evaluated before age increments. Use the pose that this tick shows.
+    Pose art=pose(b,1);
+    for(int i=0;i<pose_box_count(b.character,art.phase,art.index);++i)
+        if(intersects(hit,hurt_box(b,i,1))) return true;
+    return false;
 }
 bool Simulation::blocks(const Fighter& attacker,const Fighter& defender,bool was_stunned) const {
     if(defender.move>=0||((defender.stun||was_stunned)&&!defender.guarding)) return false;
@@ -295,6 +342,8 @@ void Simulation::step(int raw0,int raw1) {
     const int prior_stun[2]={world.players[0].stun,world.players[1].stun};
     const int prior_guard[2]={world.players[0].guarding,world.players[1].guarding};
     const int prior_x[2]={world.players[0].x,world.players[1].x};
+    const int previous_order=prior_x[0]<=prior_x[1]?1:-1;
+    const bool prior_overlap=vertical_overlap(push_box(world.players[0]),push_box(world.players[1]));
     int moved[2]={0,0};
     for(int p=0;p<2;++p) {
         auto& f=world.players[p];
@@ -315,21 +364,10 @@ void Simulation::step(int raw0,int raw1) {
             f.y+=f.vy; f.vy-=85;
             if(f.y<=0) { f.y=f.vy=0; f.move=-1; f.contact=f.hit_done=0; }
         }
-        f.x=clamp(f.x,2800,97200);
+        f.x=clamp_x(f,f.x);
     }
     Fighter& a=world.players[0]; Fighter& b=world.players[1];
-    if(abs(a.y-b.y)<13000&&abs(a.x-b.x)<5600) {
-        int sign=a.x<=b.x?1:-1;
-        int half=(5600-abs(a.x-b.x)+1)/2;
-        a.x=clamp(a.x-sign*half,2800,97200);
-        b.x=clamp(b.x+sign*half,2800,97200);
-        // Transfer any remaining overlap away from a stage edge.
-        int overlap=5600-abs(a.x-b.x);
-        if(overlap>0) {
-            if(a.x==2800||a.x==97200) b.x=clamp(b.x+sign*overlap,2800,97200);
-            else a.x=clamp(a.x-sign*overlap,2800,97200);
-        }
-    }
+    resolve_push(previous_order,prior_overlap);
     // Only actual voluntary approach earns movement meter: no wall/pushbox or knockback farming.
     for(int p=0;p<2;++p) {
         auto& f=world.players[p];
@@ -391,9 +429,9 @@ void Simulation::step(int raw0,int raw1) {
         other.move=-1; other.dash=0;
         int push=m.v[Pushback]*(fd?rules.fd_push_percent:100)/100;
         int old_x=other.x;
-        other.x=clamp(other.x+f.facing*push,2800,97200);
+        other.x=clamp_x(other,other.x+f.facing*push);
         // FD still creates space at the corner by transferring blocked displacement to the attacker.
-        if(fd) f.x=clamp(f.x-f.facing*(push-abs(other.x-old_x)),2800,97200);
+        if(fd) f.x=clamp_x(f,f.x-f.facing*(push-abs(other.x-old_x)));
         world.hitstop=max(world.hitstop,m.v[Hitstop]+(contacts[p]==CounterHit?m.v[CounterHitstop]:0));
     }
     for(auto& f:world.players) if(f.move>=0) {
@@ -402,6 +440,7 @@ void Simulation::step(int raw0,int raw1) {
             f.move=-1; f.contact=f.hit_done=0;
         }
     }
+    resolve_push(previous_order,prior_overlap);
     if(--world.remaining<=0||a.health==0||b.health==0)
         world.winner=a.health==b.health?2:a.health>b.health?0:1;
     ++world.frame;
@@ -436,6 +475,7 @@ int Simulation::get(int player,int field) const {
         case 22:return f.combo_display; case 23:return f.combo_time; case 24:return f.combo_age;
         case 25:return f.hit_notice; case 26:return f.hit_notice_time;
         case 27:return f.reversal_time; case 28:return f.reversal_input_age;
+        case 29:return pose(f).phase; case 30:return pose(f).index;
         default:return 0;
     }
 }
@@ -454,7 +494,8 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case SimpleDirection: high=9; break;
         case Motion: if(v!=0&&v!=236&&v!=214&&v!=623) return 0; high=623; break;
         case Air:case SpecialCancel:case JumpCancel:case WhiffCancel:case SelfCancel:case GuardBreak:case ReversalEligible: high=1; break;
-        case Startup:case Active: low=1; high=120; break;
+        case Startup: low=MIN_STARTUP; high=120; break;
+        case Active: low=1; high=120; break;
         case Recovery:case Hitstun:case Blockstun: high=180; break;
         case Damage: high=1000; break;
         case Hitstop: high=30; break;
@@ -462,7 +503,7 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case CounterHitstop: high=30; break;
         case Reach:case Height: low=100; high=50000; break;
         case Pushback: high=20000; break;
-        case Bottom: low=-50000; high=50000; break;
+        case HitboxBack:case Bottom: low=-50000; high=50000; break;
         case Advance: low=-10000; high=10000; break;
         case NormalRoutes:case CommandRoutes: low=-1; high=31; break;
         case HitLevel: high=2; break;
@@ -510,6 +551,12 @@ void fg_step(int a,int b) { fight::step(a,b); }
 void* fg_state_ptr() { return &fight::world; }
 int fg_state_size() { return sizeof(fight::State); }
 unsigned fg_checksum() { return fight::checksum(); }
+unsigned fg_collision_hash() { return fight::Simulation::collision_hash(); }
+int fg_box_count(int p,int kind) { return fight::default_simulation.box_count(p,kind); }
+int fg_box_get(int p,int kind,int index,int edge) {
+    auto b=fight::default_simulation.box(p,kind,index);
+    return edge==0?b.left:edge==1?b.bottom:edge==2?b.right:edge==3?b.top:0;
+}
 int fg_get(int p,int f) { return fight::default_simulation.get(p,f); }
 int fg_move_get(int c,int m,int f) { return fight::default_simulation.move_get(c,m,f); }
 int fg_move_set(int c,int m,int f,int v) { return fight::default_simulation.move_set(c,m,f,v); }

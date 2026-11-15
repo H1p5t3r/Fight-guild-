@@ -30,10 +30,10 @@ func timing_fixture() -> Dictionary:
 			definition.damage = 0
 			definition.pushback = 0
 		for slot in [0, 4]:
-			character.moves[slot].startup = 1
+			character.moves[slot].startup = 5
 			character.moves[slot].reach = 50000
+			character.moves[slot].hitstun = 24
 	data.characters[1].moves[3].reach = 100 # Dummy Hs whiffs so its recovery can be punished.
-	data.characters[0].moves[13].advance = 10000 # Authored crossing move for the side-switch check.
 	return data
 
 func combo_inputs(hits: int = 2) -> void:
@@ -41,7 +41,7 @@ func combo_inputs(hits: int = 2) -> void:
 		if hit > 0: release_hitstop()
 		key(KEY_S, hit % 2 == 1)
 		key(KEY_J, true)
-		ticks(1)
+		ticks(5)
 		key(KEY_J, false)
 		key(KEY_S, false)
 
@@ -70,32 +70,29 @@ func verify_timing_feedback() -> void:
 	game._process(0.0)
 	check(game.arena.feedback.cards == cards, "Rollback did not restore visible feedback clocks/layout")
 	game.reset_round()
-	ticks(18)
+	var dummy_hs: Dictionary = game.model.move(1, 3)
+	ticks(dummy_hs.startup + dummy_hs.active - 1)
 	key(KEY_J, true)
-	ticks(1)
+	ticks(5)
 	key(KEY_J, false)
 	check(game.model.state().players[0].event == 4 and game.arena.feedback.cards[0].hit == 4, "Recovery contact did not show PUNISH")
 	game.dummy.select(6)
 	game.reset_round()
 	key(KEY_J, true)
-	ticks(1)
+	ticks(5)
 	key(KEY_J, false)
 	check(game.model.state().players[1].guarding == 1, "Reversal dummy did not begin by guarding")
-	ticks(19)
+	ticks(game.model.state().hitstop + game.model.state().players[1].stun + 1)
 	check(game.model.state().players[1].move == 14 and game.arena.feedback.cards[1].reversal and game.arena.feedback.cards[1].input_age == 1, "Guard dummy did not execute/display a buffered reversal")
-	# Cross behind the opponent using an authored advance, then perform a real right-side combo.
+	# Jump over an approaching opponent; ground advances now respect pushboxes.
 	game.dummy.select(0)
 	game.reset_round()
-	key(KEY_D, true)
-	ticks(32)
-	key(KEY_D, false)
-	key(KEY_O, true)
-	ticks(1)
-	key(KEY_O, false)
-	var crossing: Dictionary = game.model.move(0, 13)
-	ticks(crossing.startup + crossing.active + crossing.recovery)
-	check(game.model.state().players[0].x > game.model.state().players[1].x, "Side-switch fixture did not cross")
-	check(game.model.state().players[0].move == -1, "Crossing move did not finish recovery")
+	for _tick in 32: game.model.step(2, 1)
+	game.model.step(8 | 2, 1)
+	for _tick in 36: game.model.step(2, 1)
+	game._process(0.0)
+	check(game.model.state().players[0].x > game.model.state().players[1].x, "Jump-over fixture did not cross")
+	check(game.model.state().players[0].move == -1 and game.model.state().players[0].y == 0, "Jump-over did not land")
 	combo_inputs()
 	check(game.arena.feedback.cards[0].number == 2 and not game.arena.feedback.cards[0].left, "Combo stayed on a fixed player side after crossing")
 	ticks(120)
@@ -124,16 +121,18 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	failures += await entry.run(tree, game)
 	var menus = load("res://scripts/menu_verification.gd").new()
 	failures += await menus.run(tree, game)
+	check(game.fields.startup.control.min_value == 5 and game.fields.has("hitboxBack"), "Editor is missing the startup floor or strike origin")
 	game.release_focus_from_ui()
 	key(KEY_D, true)
 	ticks(20)
 	key(KEY_D, false)
 	key(KEY_J, true)
-	ticks(4)
+	var opening_move: Dictionary = game.model.move(0, 0)
+	ticks(opening_move.startup - 1)
 	check(game.model.state().players[1].health == 1000, "Attack hit before startup")
 	ticks(1)
 	key(KEY_J, false)
-	check(game.model.state().players[1].health == 965, "Native keyboard attack did not hit")
+	check(game.model.state().players[1].health == 1000 - opening_move.damage, "Native keyboard attack did not hit")
 	game.fields.damage.control.value = 177
 	game.apply_move()
 	check(game.model.move(0, 0).damage == 177, "Editor did not apply move")
@@ -141,7 +140,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	ticks(20)
 	key(KEY_D, false)
 	key(KEY_J, true)
-	ticks(5)
+	ticks(game.model.move(0, 0).startup)
 	key(KEY_J, false)
 	check(game.model.state().players[1].health == 823, "Edited damage did not affect combat")
 	game.reset_round()
@@ -206,11 +205,12 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 		game.menus.selection.choose_fighter(1, character)
 		game.confirm_selection()
 		for reaction in range(1, 4):
-			game.fields.blockstun.control.value = 10 if reaction == 1 else 16
+			var jab: Dictionary = game.model.move(0, 0)
+			game.fields.blockstun.control.value = 10 if reaction == 1 else jab.active - 1 + jab.recovery + 4
 			game.fields.guardBreak.control.button_pressed = reaction == 3
 			game.apply_move()
 			key(KEY_J, true)
-			ticks(5)
+			ticks(game.model.move(0, 0).startup)
 			key(KEY_J, false)
 			var defender: Dictionary = game.model.state().players[1]
 			check(defender.blockReaction == reaction and defender.throwInvulnerable == int(reaction != 3), "Incorrect block reaction / throw eligibility")
@@ -222,7 +222,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	game.apply_move()
 	game.dummy.select(4)
 	key(KEY_J, true)
-	ticks(5)
+	ticks(game.model.move(0, 0).startup)
 	key(KEY_J, false)
 	check(game.model.state().players[1].health == 1000 and game.model.state().players[1].faultless == 1, "FD dummy did not prevent chip")
 	game.model.restore_defaults()
@@ -275,7 +275,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 		game.fields.guardBreak.control.button_pressed = true
 		game.apply_move()
 		key(KEY_J, true)
-		ticks(5)
+		ticks(game.model.move(0, 0).startup)
 		key(KEY_J, false)
 	if args.has("--review"):
 		game.show_sprite_review(3 if args.has("--block-review") else 0)

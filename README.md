@@ -4,6 +4,8 @@ A native **Godot 4.6.3** fighting-game lab for iterating toward a PC/PS5 game. T
 
 Each fighter has matching **windup and active** pose studies plus movement poses and three two-frame block reactions. Open **Development → Sprite review** to compare actions at the same scale. These are provisional kits and images. The [sprite production contract](docs/sprite-production.md) and [backlog](docs/backlog.md) cover consistent palettes, silhouettes, smear shapes, future characters and eventual windup → active → impact → follow-through → recovery sequences.
 
+Body-only hurtboxes follow all **144 current poses**, with per-fighter pushboxes and preliminary stats/hitboxes for **132 move slots**. **Weapons never extend hurtboxes; attack startup is at least 5 frames.** Development overlays and Sprite review show the actual collision geometry. See [collision rules](docs/collision-rules.md) and [move stats](docs/move-stats.md).
+
 Menus share the supplied **Guild Ball** visual language: Barlow Condensed, charcoal panels, raised blue controls and brass trim. Character select adds a central angled roster and large guild-colored fighters, following the requested 2XKO-inspired direction. The match HUD extends it with portrait nameplates, shaped health/Momentum rails, diamond Scrum markers and bold framed combat/announcer text. Menus use interruptible eased transitions, with a saved reduced-motion option. Controls uses its separate warm Settings skin. [Menu style and provenance](docs/menu-style.md) records the reusable assets and review workflow.
 
 ## Play or edit
@@ -15,7 +17,7 @@ Download the Windows/Linux ZIP from this branch's successful GitHub Actions arti
 - **Player 1:** WASD; J/K/L/I/O = P/K/S/Hs/D; Space = dash; left Shift = simple modifier; back + Q = Faultless Defense.
 - **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = dash; numpad + = modifier; back + numpad Enter = Faultless Defense.
 - Choose simplified inputs independently at fighter select. Traditional motions stay available.
-- In **Development**, edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1/2/3 saves preserve edits during migration.
+- In **Development**, edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1/2/3/4 saves preserve edits during migration; Restore default move set loads the new starter tuning.
 - Online: direct ENet/UDP host and join, default port 7000. Both players use Player 1 controls locally. Matching move data is required.
 
 Momentum has **three equal sections**, with continuous gain and unchanged FD costs. Try **Start Momentum: 50%** and the **Faultless guard** dummy in training. The move editor exposes chip damage and **Guard break on block**; Sprite review includes negative/even, positive and guard-break clips. [Momentum and defense rules](docs/momentum-defense.md) describe the provisional tuning. Negative Penalty is deferred; FD is the only meter spend.
@@ -33,7 +35,7 @@ bash scripts/godot.sh --editor
 bash scripts/godot.sh
 ```
 
-After C++ changes, run `bash scripts/build-godot.sh`. GDScript/data/art changes do not require recompiling the extension. Validate with `bash scripts/test-godot.sh`.
+After C++ changes, run `bash scripts/build-godot.sh`. When changing collision authoring, default move data or atlas pivots/body scale, first run `python scripts/generate-combat-data.py`, then rebuild the extension. Ordinary GDScript/presentation changes need no native rebuild. Validate with `bash scripts/test-godot.sh`.
 
 To export, install templates and build the Windows library with MinGW-w64 (setup builds the Linux library):
 

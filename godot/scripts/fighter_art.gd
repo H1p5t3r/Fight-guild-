@@ -1,7 +1,7 @@
 class_name FighterArt
 extends RefCounted
 
-# Atlas coordinates are presentation data only. They never enter combat snapshots.
+# Atlas pivots/scales also compile into core/combat_data.h. Regenerate combat data after art geometry changes.
 const DIRECTORY := "res://assets/fighters/"
 static var manifest: Dictionary = {}
 static var textures: Dictionary = {}
