@@ -46,8 +46,11 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Local match results/rematch, offline pause/restart, cancelable fighter changes and return to main menu.
 - [x] Direct online connection lobby with waiting/cancel/error recovery and neutral input while the in-match menu is open.
 - [x] Keyboard/controller UI actions and held-confirm protection; verify source and exported Linux builds.
-- [ ] Add negotiated online rematches, lobby readiness and matchmaking after the direct-connection prototype.
-- [ ] Decide round/set rules, stage selection and knockdown/wakeup presentation with the user.
+- [x] Real fighter loading, two character spotlights, four-beat opening and synchronized online readiness.
+- [x] First-to-two Scrums: 1st Scrum, 2nd Scrum, Final Down at 1–1, automatic intermissions, draw replay, win marks and packet isolation between Scrums.
+- [ ] Author dedicated intro animation clips and record the announcer once the presentation copy is settled.
+- [ ] Add negotiated online match rematches and matchmaking after the direct-connection prototype.
+- [ ] Decide stage selection and knockdown/wakeup presentation with the user.
 
 ## Combat and delivery
 

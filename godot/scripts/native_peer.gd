@@ -29,6 +29,13 @@ var phase := "idle"
 var phase_elapsed := 0.0
 var local_ready := false
 var remote_ready := false
+var generation := 1
+var score := MatchScore.new()
+var match_characters := [0, 1]
+var match_simple := [false, false]
+var remote_winner := -1
+var result_probe := CombatModel.new()
+const ROUND_MESSAGES := ["intro_ready", "countdown_ready", "countdown", "go", "intermission_ready", "next_round", "input", "hash"]
 
 func begin(simulation: CombatModel, host: bool, address: String, port: int, character: int, simple: bool) -> Error:
 	close()
@@ -70,6 +77,9 @@ func close() -> void:
 	phase_elapsed = 0.0
 	local_ready = false
 	remote_ready = false
+	generation = 1
+	score.reset()
+	remote_winner = -1
 
 func fail(message: String) -> void:
 	error = message
@@ -81,10 +91,11 @@ func _connected(id: int) -> void:
 	if opponent != 0:
 		return
 	opponent = id
-	send({"type": "hello", "protocol": 3, "fingerprint": model.fingerprint(), "character": local_character, "simple": local_simple})
+	send({"type": "hello", "protocol": 4, "fingerprint": model.fingerprint(), "character": local_character, "simple": local_simple})
 
 func send(message: Dictionary) -> void:
 	if peer != null and opponent != 0:
+		if message.get("type") in ROUND_MESSAGES: message["generation"] = generation
 		peer.set_target_peer(opponent)
 		peer.put_packet(JSON.stringify(message).to_utf8_buffer())
 
@@ -106,7 +117,7 @@ func _process(delta: float) -> void:
 	if phase == "connecting" and elapsed_connection > 30.0 and not is_host:
 		fail("Connection timed out. Check the host address and UDP port.")
 		return
-	if phase in ["intro", "countdown"] and phase_elapsed > 45.0:
+	if phase in ["intro", "countdown", "intermission"] and phase_elapsed > 45.0:
 		fail("Match preparation timed out. Host or join a new match.")
 		return
 	while peer != null and peer.get_available_packet_count() > 0:
@@ -123,9 +134,17 @@ func _process(delta: float) -> void:
 		handle_message(message)
 
 func handle_message(message: Dictionary) -> void:
+	if message.get("type") in ROUND_MESSAGES:
+		if not CombatModel.valid_integer(message.get("generation")):
+			fail("Missing round generation.")
+			return
+		if int(message.generation) < generation: return # Delayed packets from the completed Scrum.
+		if int(message.generation) != generation:
+			fail("Round generation differs between peers.")
+			return
 	match message.get("type", ""):
 		"hello":
-			if hello_received or phase != "connecting" or message.get("protocol") != 3 or message.get("fingerprint") != model.fingerprint():
+			if hello_received or phase != "connecting" or message.get("protocol") != 4 or message.get("fingerprint") != model.fingerprint():
 				fail("Build or move data differs. Import the same move set or restore defaults on both clients.")
 				return
 			if not CombatModel.valid_integer(message.get("character")) or int(message.character) not in range(CombatModel.CHARACTERS.size()) or not message.get("simple") is bool:
@@ -164,6 +183,20 @@ func handle_message(message: Dictionary) -> void:
 				fail("Unexpected release message.")
 				return
 			start_match()
+		"intermission_ready":
+			if not is_host or phase not in ["live", "intermission"] or remote_ready or not CombatModel.valid_integer(message.get("winner")) or int(message.winner) not in [0, 1, 2]:
+				fail("Unexpected intermission-ready message.")
+				return
+			remote_winner = int(message.winner)
+			remote_ready = true
+			advance_preparation()
+		"next_round":
+			var received_score: Variant = message.get("score")
+			var score_matches: bool = received_score is Array and received_score.size() == 2 and CombatModel.valid_integer(received_score[0]) and CombatModel.valid_integer(received_score[1]) and int(received_score[0]) == score.wins[0] and int(received_score[1]) == score.wins[1]
+			if is_host or phase != "intermission" or not local_ready or score.finished() or message.get("winner") != score.last_winner or not score_matches:
+				fail("Next Scrum does not match the confirmed result.")
+				return
+			prepare_match(match_characters, match_simple, false)
 		"input":
 			if session == null or not CombatModel.valid_integer(message.get("frame")) or not CombatModel.valid_integer(message.get("input")):
 				fail("Invalid input message.")
@@ -183,7 +216,20 @@ func handle_message(message: Dictionary) -> void:
 		_:
 			fail("Unknown peer message.")
 
-func prepare_match(characters: Array, simple: Array) -> void:
+func prepare_match(characters: Array, simple: Array, new_match: bool = true) -> void:
+	if new_match:
+		score.reset()
+		generation = 1
+	else: generation += 1
+	match_characters = characters.duplicate()
+	match_simple = simple.duplicate()
+	session = null
+	hashes.clear()
+	last_sent_hash = -1
+	verified_through = -1
+	waiting_ticks = 0
+	remote_winner = -1
+	result_probe.load_data(model.data())
 	model.reset(characters, simple)
 	phase = "intro"
 	phase_elapsed = 0.0
@@ -199,6 +245,33 @@ func finish_intros() -> void:
 func finish_countdown() -> void:
 	mark_ready("countdown")
 
+func confirmed_winner() -> int:
+	if session == null or model.state().winner < 0: return -1
+	var confirmed := mini(session.confirmed[0], session.confirmed[1])
+	if confirmed >= model.frame() - 1: return int(model.state().winner)
+	if not session.records.has(confirmed + 1): return -1
+	if not result_probe.core.restore(session.records[confirmed + 1].before): return -1
+	return int(result_probe.state().winner)
+
+func confirm_result() -> bool:
+	if phase != "live": return false
+	var winner := confirmed_winner()
+	if winner < 0 or not score.record(winner): return false
+	if remote_ready and (remote_winner != winner or score.finished()):
+		fail("Peers disagreed on the completed Scrum.")
+		return false
+	phase = "result" if score.finished() else "intermission"
+	phase_elapsed = 0.0
+	local_ready = false
+	if not manual_presentation and not score.finished(): finish_intermission.call_deferred()
+	return true
+
+func finish_intermission() -> void:
+	if not active or phase != "intermission" or local_ready: return
+	local_ready = true
+	if is_host: advance_preparation()
+	else: send({"type": "intermission_ready", "winner": score.last_winner})
+
 func mark_ready(expected: String) -> void:
 	if not active or phase != expected or local_ready: return
 	local_ready = true
@@ -213,6 +286,12 @@ func advance_preparation() -> void:
 	elif phase == "countdown":
 		send({"type": "go"})
 		start_match()
+	elif phase == "intermission":
+		if score.finished() or remote_winner != score.last_winner:
+			fail("Peers disagreed on the completed Scrum.")
+			return
+		send({"type": "next_round", "winner": score.last_winner, "score": score.wins})
+		prepare_match(match_characters, match_simple, false)
 
 func begin_countdown() -> void:
 	phase = "countdown"
@@ -223,6 +302,9 @@ func begin_countdown() -> void:
 	if not manual_presentation: finish_countdown.call_deferred()
 
 func start_match() -> void:
+	local_ready = false
+	remote_ready = false
+	remote_winner = -1
 	phase = "live"
 	phase_elapsed = 0.0
 	session = RollbackSession.new(model)

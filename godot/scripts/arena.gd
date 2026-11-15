@@ -5,6 +5,8 @@ var view := {}
 var show_boxes := true
 var paused := false
 var round_label := ""
+var score := [0, 0]
+var presentation_active := false
 var sprites: Array[Sprite2D] = []
 var feedback := CombatFeedback.new()
 var font := ThemeDB.fallback_font
@@ -95,7 +97,12 @@ func _draw() -> void:
 		label("PLAYER %d / %s" % [p + 1, "SIMPLE + MOTIONS" if fighter.simple else "MOTION INPUTS"], Vector2(x, 52), 10, MUTED)
 		draw_rect(Rect2(x, 64, width, 12), Color("111c23"))
 		draw_rect(Rect2(x, 64, width * fighter.health / 1000.0, 12), tint)
-		label(str(fighter.health), Vector2(x, 94), 11, MUTED)
+		for mark in MatchScore.WINS_REQUIRED:
+			var marker_x := x + width - 12 - mark * 20 if left else x + 12 + mark * 20
+			draw_circle(Vector2(marker_x, 88), 5, tint if score[p] > mark else Color("30434e"))
+		var health_text := str(fighter.health)
+		var health_width := font.get_string_size(health_text, HORIZONTAL_ALIGNMENT_LEFT, -1, 11).x
+		label(health_text, Vector2(x if left else x + width - health_width, 94), 11, MUTED)
 		var meter_y := size.y - 30.0
 		var meter_color := Color("75dcbc") if fighter.faultless else ACCENT
 		label("MOMENTUM  %.1f%%" % (fighter.momentum / 100.0), Vector2(x, meter_y - 7), 12, meter_color)
@@ -131,12 +138,13 @@ func _draw() -> void:
 			var angle := 0.0 if fighter.facing == 1 else PI
 			var guard_color := Color("75dcbc") if fighter.faultless else Color("89c3e0")
 			draw_arc(Vector2(px, py - 70 * sx), 58 * sx, angle - 1.4, angle + 1.4, 24, guard_color, 5 if fighter.faultless else 2)
-	label(round_label, Vector2(size.x / 2 - 30, 23), 12, ACCENT)
+	var call_width := font.get_string_size(round_label, HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x
+	label(round_label, Vector2((size.x - call_width) * 0.5, 23), 12, ACCENT)
 	label("%02d" % ceili(view.remaining / 60.0), Vector2(size.x / 2 - 24, 67), 42)
 	if paused:
 		label("PAUSED", Vector2(size.x / 2 - 28, 117), 12, ACCENT)
 	label("%05d · %s" % [view.frame, "STOP" if view.hitstop else "60HZ"], Vector2(size.x / 2 - 41, size.y - 19), 10, MUTED)
-	if view.winner >= 0:
+	if view.winner >= 0 and not presentation_active:
 		draw_rect(Rect2(0, size.y * 0.37, size.x, 112), Color("111b23"))
 		var title: String = "DRAW" if view.winner == 2 else CombatModel.CHARACTERS[view.players[view.winner].character].to_upper() + " TAKES " + str(MatchCeremony.script().roundName).to_upper()
 		label(title, Vector2(size.x * 0.23, size.y * 0.37 + 46), 25, ACCENT)

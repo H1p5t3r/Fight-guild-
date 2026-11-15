@@ -10,6 +10,7 @@ Menus share the supplied **Guild Ball** visual language: Barlow Condensed, charc
 
 Download the Windows/Linux ZIP from this branch's successful GitHub Actions artifacts, extract the whole folder and run its executable. For the editable project archive, import `godot/project.godot` in Godot 4.6.3. [Native play guide](docs/play-native.md) covers controls, saves, editing and direct online play.
 
+- Versus is first to two Scrum wins: **1st Scrum**, **2nd Scrum**, and **Final Down** at 1–1. Fighter loading/intros and the four-beat opening lead into each match; online clients synchronize before release.
 - Start from **Versus**, **Training** or **Development**, then choose fighters. Esc / gamepad Start opens the match menu. [Menu flow](docs/menu-flow.md) explains entry, pause, rematch and connection recovery.
 - **Player 1:** WASD; J/K/L/I/O = P/K/S/Hs/D; Space = dash; left Shift = simple modifier; back + Q = Faultless Defense.
 - **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = dash; numpad + = modifier; back + numpad Enter = Faultless Defense.

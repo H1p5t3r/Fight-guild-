@@ -264,9 +264,9 @@ func configure_pause(online: bool) -> void:
 	buttons.change_fighters.visible = not online
 	buttons.pause_home.text = "Leave match & main menu" if online else "Main menu"
 
-func configure_results(state: Dictionary, online: bool, round_label: String = "") -> void:
+func configure_results(state: Dictionary, online: bool, round_label: String = "", score: Array = [0, 0]) -> void:
 	result_title.text = "Draw." if state.winner == 2 else CombatModel.CHARACTERS[state.players[state.winner].character] + " wins."
-	result_note.text = (round_label + " COMPLETE · " if not round_label.is_empty() else "") + ("Return to the lobby to host or join another match." if online else "Run it back or choose new fighters.")
+	result_note.text = "%d–%d · %s · MATCH COMPLETE · " % [score[0], score[1], round_label] + ("Return to the lobby to host or join another match." if online else "Run it back or choose new fighters.")
 	buttons.rematch.visible = not online
 	buttons.results_fighters.visible = not online
 	buttons.return_lobby.visible = online

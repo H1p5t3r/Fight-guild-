@@ -3,6 +3,7 @@ extends Control
 
 signal intros_finished
 signal opening_finished
+signal intermission_finished
 signal canceled
 signal failed(message: String)
 
@@ -22,10 +23,14 @@ var load_progress := 0.0
 var asset_paths: Array[String] = []
 var abandoned_loads: Array[String] = []
 var load_frames := 0
+var loaded_at := -1.0
 var sprites: Array[Sprite2D] = []
 var back_button: Button
 var skip_button: Button
 var waiting_text := ""
+var score_winner := 2
+var score_points := [0, 0]
+var next_call := ""
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -71,9 +76,11 @@ func begin(chosen: Array, number: int, is_practice: bool, is_online: bool, repea
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	MenuMotion.interactive(self, true)
 	back_button.visible = true
+	back_button.text = "Back"
 	skip_button.visible = false
 	load_progress = 0.0
 	load_frames = 0
+	loaded_at = -1.0
 	asset_paths.clear()
 	set_phase("loading")
 	if motion.instant:
@@ -132,9 +139,26 @@ func begin_opening() -> void:
 	if practice or motion.instant: finish_opening()
 
 func finish_opening() -> void:
-	set_phase("waiting")
+	set_phase("ready")
 	waiting_text = "Waiting for both players…" if online else "Ready."
 	opening_finished.emit()
+
+func begin_intermission(winner: int, points: Array, following: String) -> void:
+	visible = true
+	modulate.a = 1.0
+	MenuMotion.interactive(self, true)
+	mouse_filter = Control.MOUSE_FILTER_STOP
+	score_winner = winner
+	score_points = points.duplicate()
+	next_call = following
+	back_button.visible = true
+	back_button.text = "Leave match"
+	set_phase("score")
+	if motion.instant: finish_intermission()
+
+func finish_intermission() -> void:
+	set_phase("round_wait")
+	intermission_finished.emit()
 
 func release() -> void:
 	back_button.visible = false
@@ -161,7 +185,9 @@ func poll_loading() -> void:
 		complete = complete and status == ResourceLoader.THREAD_LOAD_LOADED
 		total += 1.0 if status == ResourceLoader.THREAD_LOAD_LOADED else float(progress[0]) if not progress.is_empty() else 0.0
 	load_progress = total / maxf(1.0, asset_paths.size())
-	if not complete or load_frames < 2 or elapsed < (0.3 if repeat_match else 0.65): return
+	if complete and loaded_at < 0.0: loaded_at = elapsed
+	var end := maxf(0.3 if repeat_match else 0.65, loaded_at + 0.18)
+	if not complete or load_frames < 2 or elapsed < end: return
 	for path in asset_paths:
 		FighterArt.textures[path.trim_prefix(FighterArt.DIRECTORY)] = ResourceLoader.load_threaded_get(path)
 	if practice or repeat_match:
@@ -192,6 +218,8 @@ func _process(delta: float) -> void:
 				else: finish_opening()
 		"release":
 			if elapsed >= (0.22 if practice else 0.65): cancel()
+		"score":
+			if elapsed >= 2.0: finish_intermission()
 	queue_redraw()
 
 func centered(value: String, center: Vector2, font_size: int, color: Color = GuildTheme.IVORY) -> void:
@@ -208,7 +236,10 @@ func _draw() -> void:
 	var scale_factor := minf(w / 1280.0, h / 720.0)
 	var left: Color = FighterSelectPortrait.COLORS[characters[0]]
 	var right: Color = FighterSelectPortrait.COLORS[characters[1]]
-	if phase in ["opening", "release"]:
+	if phase in ["score", "round_wait"]:
+		draw_intermission(scale_factor)
+		return
+	if phase in ["opening", "ready", "release"]:
 		draw_opening(scale_factor)
 		return
 	draw_rect(Rect2(Vector2.ZERO, size), Color("081218"))
@@ -218,21 +249,25 @@ func _draw() -> void:
 	if phase == "intro":
 		draw_intro(scale_factor)
 	else:
+		var content_alpha := 1.0
+		if phase == "loading" and loaded_at >= 0.0:
+			var end := maxf(0.3 if repeat_match else 0.65, loaded_at + 0.18)
+			content_alpha = 1.0 - smoothstep(end - 0.18, end, elapsed)
 		for p in 2:
 			var character: int = characters[p]
 			var x := w * (0.25 if p == 0 else 0.75)
 			FighterArt.apply(sprites[p], character, "windup", 0, h * 0.41 / 150.0, 1 if p == 0 else -1)
 			sprites[p].position = Vector2(x, h * 0.62)
-			sprites[p].modulate = Color.WHITE
+			sprites[p].modulate = Color(1, 1, 1, content_alpha)
 			sprites[p].visible = true
-			centered(CombatModel.CHARACTERS[character].to_upper(), Vector2(x, h * 0.72), int(44 * scale_factor))
-			centered(FighterSelectPortrait.GUILDS[character], Vector2(x, h * 0.76), int(18 * scale_factor), FighterSelectPortrait.COLORS[character])
-		centered("VS", Vector2(w * 0.5, h * 0.48), int(80 * scale_factor), GuildTheme.BRASS)
+			centered(CombatModel.CHARACTERS[character].to_upper(), Vector2(x, h * 0.72), int(44 * scale_factor), Color(GuildTheme.IVORY, content_alpha))
+			centered(FighterSelectPortrait.GUILDS[character], Vector2(x, h * 0.76), int(18 * scale_factor), Color(FighterSelectPortrait.COLORS[character], content_alpha))
+		centered("VS", Vector2(w * 0.5, h * 0.48), int(80 * scale_factor), Color(GuildTheme.BRASS, content_alpha))
 		if phase == "loading":
 			var caption := "FIGHTERS READY" if load_progress >= 1.0 else "PREPARING THE FIELD"
-			centered(caption, Vector2(w * 0.5, h * 0.84), int(20 * scale_factor), GuildTheme.MUTED)
-			draw_rect(Rect2(w * 0.3, h * 0.87, w * 0.4, 4 * scale_factor), Color("2b3b43"))
-			draw_rect(Rect2(w * 0.3, h * 0.87, w * 0.4 * load_progress, 4 * scale_factor), GuildTheme.BRASS)
+			centered(caption, Vector2(w * 0.5, h * 0.84), int(20 * scale_factor), Color(GuildTheme.MUTED, content_alpha))
+			draw_rect(Rect2(w * 0.3, h * 0.87, w * 0.4, 4 * scale_factor), Color(Color("2b3b43"), content_alpha))
+			draw_rect(Rect2(w * 0.3, h * 0.87, w * 0.4 * load_progress, 4 * scale_factor), Color(GuildTheme.BRASS, content_alpha))
 		else: centered(waiting_text, Vector2(w * 0.5, h * 0.85), int(21 * scale_factor), GuildTheme.MUTED)
 
 func draw_intro(scale_factor: float) -> void:
@@ -262,13 +297,17 @@ func draw_opening(scale_factor: float) -> void:
 	var h := size.y
 	if phase == "release":
 		if practice: return
+		var curtain := 1.0 - smoothstep(0.0, motion.duration(0.22), elapsed)
+		draw_rect(Rect2(Vector2.ZERO, size), Color(0.025, 0.045, 0.055, 0.48 * curtain))
+		draw_rect(Rect2(0, 0, w, h * 0.10), Color(0.03, 0.07, 0.09, curtain))
+		draw_rect(Rect2(0, h * 0.90, w, h * 0.10), Color(0.03, 0.07, 0.09, curtain))
 		var opacity := 1.0 - smoothstep(0.28, 0.65, elapsed)
 		var expansion := 1.0 if motion.reduced else 1.0 + 0.06 * (1.0 - smoothstep(0.0, 0.20, elapsed))
 		centered(str(MatchCeremony.script().releaseCall).to_upper(), Vector2(w * 0.5, h * 0.49), int(78 * scale_factor * expansion), Color(GuildTheme.BRASS, opacity))
 		return
 	var duration: float = MatchCeremony.script().beatSeconds[beat]
-	var reveal := smoothstep(0.0, motion.duration(0.20), elapsed)
-	var fade := 1.0 - smoothstep(duration - 0.15, duration, elapsed)
+	var reveal := 1.0 if phase == "ready" else smoothstep(0.0, motion.duration(0.20), elapsed)
+	var fade := 1.0 if phase == "ready" or (online and beat == 2) else 1.0 - smoothstep(duration - 0.15, duration, elapsed)
 	var opacity := minf(reveal, fade)
 	var veil := lerpf(1.0, 0.48, smoothstep(0.0, 0.3, elapsed)) if beat == 0 else 0.48
 	draw_rect(Rect2(Vector2.ZERO, size), Color(0.025, 0.045, 0.055, veil))
@@ -280,3 +319,17 @@ func draw_opening(scale_factor: float) -> void:
 	centered(text, Vector2(w * 0.5, y), int(font_size * scale_factor), Color(GuildTheme.BRASS if beat == 2 else GuildTheme.IVORY, opacity))
 	if beat == 2:
 		draw_line(Vector2(w * 0.32, h * 0.54), Vector2(w * 0.68, h * 0.54), Color(GuildTheme.BRASS, opacity), 2 * scale_factor)
+	if phase == "ready":
+		centered(waiting_text, Vector2(w * 0.5, h * 0.64), int(20 * scale_factor), GuildTheme.MUTED)
+
+func draw_intermission(scale_factor: float) -> void:
+	var w := size.x
+	var h := size.y
+	var reveal := 1.0 if phase == "round_wait" else smoothstep(0.0, motion.duration(0.22), elapsed)
+	draw_rect(Rect2(Vector2.ZERO, size), Color(0.025, 0.045, 0.055, 0.78 * reveal))
+	var title := "EVEN GROUND" if score_winner == 2 else str(CombatModel.CHARACTERS[characters[score_winner]]).to_upper() + " CLAIMS THE SCRUM"
+	centered(title, Vector2(w * 0.5, h * 0.35), int(48 * scale_factor), Color(GuildTheme.IVORY, reveal))
+	centered("%d  —  %d" % [score_points[0], score_points[1]], Vector2(w * 0.5, h * 0.52), int(86 * scale_factor), Color(GuildTheme.BRASS, reveal))
+	var note := "DRAW · REPLAY " if score_winner == 2 else "UP NEXT · "
+	centered(note + next_call, Vector2(w * 0.5, h * 0.65), int(26 * scale_factor), Color(GuildTheme.IVORY, reveal))
+	if phase == "round_wait": centered("Waiting for your rival…", Vector2(w * 0.5, h * 0.75), int(20 * scale_factor), GuildTheme.MUTED)

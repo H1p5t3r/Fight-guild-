@@ -8,16 +8,20 @@ For the editable project ZIP, import `godot/project.godot` into **Godot 4.6.3**,
 
 The game opens at the main menu. Use the mouse, arrow keys/Enter, or a controller's D-pad/A to navigate; Esc/B goes back. Menus use the supplied Guild Ball panel/font style; Controls opens in its separate warm Settings skin.
 
-- **Versus → Local versus → Fighter select → Let’s fight:** two players, a full-width arena, and a results screen with Rematch and Change fighters.
-- **Versus → Online versus → Fighter select → Connection:** choose only your local fighter, then Host or Join. The match starts after both peers connect successfully.
+- **Versus → Local versus → Fighter select → Let’s fight:** a first-to-two Scrum match, a full-width arena, and a results screen with Rematch and Change fighters.
+- **Versus → Online versus → Fighter select → Connection:** choose only your local fighter, then Host or Join. Both peers connect, prepare their fighters and finish the opening before combat starts.
 - **Training → Fighter select → Start training:** choose your fighter and a dummy, then practice with dummy behavior, starting Momentum, input history, hitboxes, pause, frame step and reset controls.
 - **Development → Fighter select → Open combat lab:** practice controls plus the move editor, sprite review, buffer/Momentum tuning, data import/export and rollback workbench.
 
 Choose Anvil, Hammer, Smoke, Tapper, Shark or Fillet. Each player independently chooses simplified controls. The training dummy can stand, guard, crouch guard, run a practice sequence, use Faultless Defense, repeat Hs attacks or attempt reversals after guarding.
 
-**Esc / gamepad Start / Menu** opens the match menu. Offline rounds freeze there; Resume keeps the exact round, Restart starts over, and Change fighters can be canceled without losing the round. Online play continues with neutral input while the menu is open; leaving closes the connection. Applied move edits survive navigation between modes. Save locally to retain them after quitting.
+**Esc / gamepad Start / Menu** opens the match menu. Offline rounds freeze there; Resume keeps the exact round, Restart scrum restarts the current Scrum while retaining earlier wins, and Change fighters can be canceled without losing the round. Online play continues with neutral input while the menu is open; leaving closes the connection. Applied move edits survive navigation between modes. Save locally to retain them after quitting.
 
 At fighter select, choose Player 1 or Player 2 above the central roster, then use arrows/D-pad or click a portrait. Both players may choose the same fighter. Simplified-input toggles remain independent. **Motion: Full / Reduced** on the main menu controls menu animation and is saved locally.
+
+Matches use **1st Scrum**, **2nd Scrum**, and **Final Down** when tied 1–1. First to two Scrum wins takes the match; draws replay the current Scrum. Win markers sit beside the health bars. Each Scrum resets health, Momentum and the timer.
+
+A loading card and two fighter introductions lead into “The stands hunger for legends.” → “Let the guilds give them names.” → the Scrum call → “Break the line!” Press Enter/A or click **Skip intros** to skip the spotlights. The four opening beats still play, and held buttons must be released before attacking. Practice resets remain immediate.
 
 See [menu paths and edge cases](menu-flow.md).
 
@@ -58,10 +62,10 @@ Saves use Godot's `user://` directory: normally `%APPDATA%/Godot/app_userdata/Fi
 
 Both players need the same build and move data. Go to **Versus → Online versus**, choose your local fighter and continue to the connection screen. One player hosts UDP port 7000; the other enters that computer's address and joins. Both use Player 1 controls locally. Allow that UDP port through the host's firewall as needed. `127.0.0.1` works only for two processes on the same computer.
 
-This direct ENet connection uses rollback, two frames of input delay, bounded prediction and confirmed-state checks. No room server is needed. Editing is locked while connected. Use **Return to online lobby** after a round and host/join again for a rematch. Cancel a pending connection to retry; failures and disconnects return to the connection screen with an explanation. Matchmaking, automatic NAT traversal and reconnect are backlog work; direct Internet hosting may require router configuration.
+This direct ENet connection uses rollback, two frames of input delay, bounded prediction and confirmed-state checks. No room server is needed. Editing is locked while connected. Use **Return to online lobby** after the full match and host/join again for a rematch; Scrums within the match advance automatically. Cancel a pending connection to retry; failures and disconnects return to the connection screen with an explanation. Matchmaking, automatic NAT traversal and reconnect are backlog work; direct Internet hosting may require router configuration.
 
 ## Validation and limits
 
-Linux native rendering, menu routes/back paths, keyboard and simulated-controller navigation, pause/rematch, connection recovery, all 30 basic buttons, editing, sprite loading, rollback and two independent UDP peers are tested. Windows is cross-compiled/exported; Windows gameplay and physical controllers need hardware playtesting. PS5 requires approved console access and a compatible Godot port provider; no PS5 build is included.
+Linux native rendering, menu routes/back paths, keyboard and simulated-controller navigation, first-to-two matches, draw replay, intro/readiness gates, pause/rematch, connection recovery, all 30 basic buttons, editing, sprite loading, rollback and two independent UDP peers are tested. Windows is cross-compiled/exported; Windows gameplay and physical controllers need hardware playtesting. PS5 requires approved console access and a compatible Godot port provider; no PS5 build is included.
 
 The buffer is an original configurable implementation, not verified Strive parity. Character mechanics, distinct move animations, throws, universal overheads and dedicated anti-air rules remain future work. See the source project's `docs/backlog.md` and `docs/sprite-production.md`.

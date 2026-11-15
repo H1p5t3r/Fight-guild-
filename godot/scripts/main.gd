@@ -41,6 +41,8 @@ var leave_button: Button
 var menus: GameMenus
 var match_entry: MatchEntry
 var round_number := 1
+var match_score := MatchScore.new()
+var round_resolved := false
 var entry_accept_released := false
 var screen := "home"
 var activity := "development"
@@ -62,7 +64,6 @@ var activity_subtitle: Label
 var activity_badge: Label
 var sprite_button: Button
 var fighter_button: Button
-var result_probe := CombatModel.new()
 
 func _ready() -> void:
 	name = "FightGuild"
@@ -322,6 +323,9 @@ func build_interface() -> void:
 	match_entry.opening_finished.connect(func():
 		if connection.active: connection.finish_countdown()
 		else: release_match())
+	match_entry.intermission_finished.connect(func():
+		if connection.active: connection.finish_intermission()
+		else: next_scrum())
 	match_entry.canceled.connect(cancel_match_entry)
 	match_entry.failed.connect(entry_failed)
 
@@ -362,7 +366,9 @@ func menu_action(action: String) -> void:
 		"quit": get_tree().quit()
 		"resume": show_screen("play")
 		"restart", "rematch":
-			if action == "rematch": round_number += 1
+			if action == "rematch":
+				match_score.reset()
+				round_number = 1
 			reset_round()
 			begin_match_entry(true)
 		"change_fighters", "results_fighters": choose_activity(activity)
@@ -430,11 +436,31 @@ func wait_for_match_entry() -> void:
 	await wait_for_menu_motion()
 
 func begin_match_entry(repeated: bool = false) -> void:
+	round_resolved = false
 	entry_accept_released = not Input.is_action_pressed("ui_accept")
 	show_screen("entry")
 	var state := model.state()
 	var chosen := [state.players[0].character, state.players[1].character]
 	match_entry.begin(chosen, round_number, activity in ["training", "development"], connection.active, repeated)
+
+func next_scrum() -> void:
+	round_number = match_score.next_number()
+	reset_round()
+	begin_match_entry(true)
+
+func finish_scrum(state: Dictionary) -> void:
+	if round_resolved: return
+	if connection.active:
+		if not connection.confirm_result(): return
+	elif not match_score.record(int(state.winner)): return
+	round_resolved = true
+	if match_score.finished():
+		match_entry.cancel()
+		menus.configure_results(state, connection.active, MatchCeremony.round_call(round_number), match_score.wins)
+		show_screen("results")
+	else:
+		show_screen("entry")
+		match_entry.begin_intermission(int(state.winner), match_score.wins, MatchCeremony.round_call(match_score.next_number()))
 
 func release_match() -> void:
 	match_entry.release()
@@ -478,6 +504,7 @@ func confirm_selection() -> void:
 			net_status.text = "Choose Host or Join to begin."
 			show_screen("online")
 			return
+	match_score.reset()
 	round_number = 1
 	reset_round()
 	begin_match_entry()
@@ -535,12 +562,12 @@ func cancel_connection() -> void:
 func on_network_preparing() -> void:
 	activity = "online"
 	configure_activity()
-	result_probe.load_data(model.data())
+	match_score = connection.score
 	history.clear()
 	last_raw = 0
 	paused = false
-	round_number = 1
-	begin_match_entry()
+	round_number = match_score.next_number()
+	begin_match_entry(connection.generation > 1)
 
 func on_network_started() -> void:
 	release_match()
@@ -549,15 +576,6 @@ func on_network_ended() -> void:
 	match_entry.cancel()
 	lock_online(false)
 	if activity == "online": show_screen("online")
-
-func online_result_confirmed() -> bool:
-	# Results must survive rollback: inspect the latest fully confirmed world.
-	if connection.session == null: return false
-	var session := connection.session
-	var confirmed := mini(session.confirmed[0], session.confirmed[1])
-	if confirmed >= model.frame() - 1: return true
-	if not session.records.has(confirmed + 1): return false
-	return result_probe.core.restore(session.records[confirmed + 1].before) and result_probe.state().winner >= 0
 
 func has_gameplay_input_held() -> bool:
 	if Input.is_action_pressed("ui_accept"): return true
@@ -757,6 +775,7 @@ func read_input(player: int) -> int:
 
 func reset_round() -> void:
 	if connection.active: return
+	round_resolved = false
 	model.reset(characters, simple)
 	if mode.selected == 0:
 		for p in 2: model.core.set_training_momentum(p, [0, 5000, 10000][training_momentum.selected])
@@ -822,11 +841,11 @@ func _physics_process(_delta: float) -> void:
 func _process(_delta: float) -> void:
 	var state := model.state()
 	arena.round_label = MatchCeremony.round_call(round_number)
+	arena.score = match_score.wins
+	arena.presentation_active = screen in ["entry", "results"]
 	if match_entry.phase != "loading": arena.refresh(model, state, show_boxes, paused)
 	if screen in ["play", "pause"] and activity in ["local", "online"] and state.winner >= 0:
-		if activity == "local" or online_result_confirmed():
-			menus.configure_results(state, connection.active, MatchCeremony.round_call(round_number))
-			show_screen("results")
+		finish_scrum(state)
 	input_label.text = "INPUT HISTORY   " + ("   ".join(history) if not history.is_empty() else "—")
 	var fighter: Dictionary = state.players[connection.player if connection.active else 0]
 	action_label.text = "READY" if fighter.lastMove < 0 else CombatModel.MOVE_IDS[fighter.lastMove] + (" / CONTACT" if fighter.contact else "")

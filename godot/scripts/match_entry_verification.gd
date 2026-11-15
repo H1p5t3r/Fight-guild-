@@ -81,24 +81,66 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	await tree.create_timer(0.7).timeout
 	check(game.screen == "fighters" and game.model.frame() == 0, "Canceled loading later reopened combat")
 	check(MatchCeremony.round_call(1) == "1st Scrum" and MatchCeremony.round_call(2) == "2nd Scrum" and MatchCeremony.round_call(3) == "Final Down", "Numbered calls do not match the chosen names")
+	verify_local_match()
 	await verify_online_gates()
 	game.characters = [0, 1]
 	game.simple = [false, false]
 	game.round_number = 1
+	game.match_score.reset()
 	game.reset_round()
 	game.go_home()
 	await game.wait_for_menu_motion()
 	game.motion.instant = true
 	game.finish_menu_motion()
 	await tree.process_frame
-	print("Godot match entry: ", failures, " failures; real loading, two intros, four beats, skip/cancel, input isolation, peer readiness")
+	print("Godot match entry: ", failures, " failures; real loading, two intros, four beats, skip/cancel, input isolation, first-to-two, draw replay, Final Down, peer readiness/generations")
 	return failures
+
+func knockout_data(model: CombatModel, fighters: Array) -> Dictionary:
+	var data: Dictionary = model.data().duplicate(true)
+	for fighter in fighters:
+		var move: Dictionary = data.characters[fighter].moves[0]
+		move.damage = 1000
+		move.startup = 1
+		move.reach = 50000
+		move.hitstop = 0
+	return data
+
+func verify_local_match() -> void:
+	game.motion.instant = true
+	var original: Dictionary = game.model.data()
+	game.model.load_data(knockout_data(game.model, [0, 1]))
+	game.go_home()
+	game.choose_activity("local")
+	for p in 2: game.menus.selection.choose_fighter(p, p)
+	game.confirm_selection()
+	game.model.step(16, 0)
+	game._process(0.0)
+	check(game.match_score.wins == [1, 0] and game.round_number == 2 and game.model.frame() == 0, "First win did not reset fighters for 2nd Scrum")
+	game.model.step(0, 16)
+	game._process(0.0)
+	check(game.match_score.wins == [1, 1] and game.round_number == 3 and game.screen == "play", "1–1 did not advance to Final Down")
+	game.model.step(16, 16)
+	check(game.model.state().winner == 2, "Draw fixture did not trade")
+	game._process(0.0)
+	check(game.match_score.wins == [1, 1] and game.round_number == 3 and game.model.frame() == 0, "Draw did not replay Final Down without awarding a win")
+	game.model.step(16, 0)
+	game._process(0.0)
+	check(game.screen == "results" and game.match_score.wins == [2, 1], "Deciding Scrum did not end the match")
+	game.menu_action("rematch")
+	check(game.round_number == 1 and game.match_score.wins == [0, 0] and game.screen == "play", "Rematch retained the previous match score")
+	game.model.load_data(original)
+	game.go_home()
+	game.motion.instant = false
 
 func verify_online_gates() -> void:
 	var host := NativePeer.new()
 	var client := NativePeer.new()
 	var host_model := CombatModel.new()
 	var client_model := CombatModel.new()
+	var fixture := knockout_data(host_model, [0, 4])
+	host_model.load_data(fixture)
+	client_model.load_data(fixture)
 	for peer in [host, client]:
 		peer.manual_presentation = true
 		tree.root.add_child(peer)
@@ -138,7 +180,51 @@ func verify_online_gates() -> void:
 		client.tick(0)
 		await tree.create_timer(0.01).timeout
 	check(host_model.frame() > 0 and host_model.state_hash() == client_model.state_hash(), "Readiness handshake broke subsequent combat parity")
+	await network_scrum(host, client, 0)
+	check(host.score.wins == [1, 0] and client.score.wins == [1, 0], "Online first win did not agree")
+	await next_network_scrum(host, client)
+	await network_scrum(host, client, 1)
+	check(host.score.wins == [1, 1] and client.score.next_number() == 3, "Online 1–1 did not produce Final Down")
+	await next_network_scrum(host, client)
+	await network_scrum(host, client, 0)
+	check(host.phase == "result" and client.phase == "result" and host.score.wins == [2, 1] and client.score.wins == [2, 1], "Online deciding win did not finish both matches")
+	check(not host.confirm_result() and host.score.wins == [2, 1], "Confirmed result was counted twice")
 	host.close()
 	client.close()
 	host.queue_free()
 	client.queue_free()
+
+func network_scrum(host: NativePeer, client: NativePeer, winner: int) -> void:
+	for _i in 300:
+		if host.phase in ["intermission", "result"] and client.phase in ["intermission", "result"]: return
+		host.tick(16 if winner == 0 else 0)
+		client.tick(16 if winner == 1 else 0)
+		if host.confirmed_winner() >= 0: host.confirm_result()
+		if client.confirmed_winner() >= 0: client.confirm_result()
+		await tree.create_timer(0.01).timeout
+	check(false, "Online Scrum failed to confirm: " + host.error + " / " + client.error)
+
+func next_network_scrum(host: NativePeer, client: NativePeer) -> void:
+	var previous := host.generation
+	host.finish_intermission()
+	await tree.create_timer(0.03).timeout
+	check(host.generation == previous and client.generation == previous, "A single intermission completion reset the round early")
+	client.finish_intermission()
+	for _i in 300:
+		if host.phase == "intro" and client.phase == "intro": break
+		await tree.create_timer(0.01).timeout
+	check(host.generation == previous + 1 and client.generation == host.generation and host.model.frame() == 0 and client.model.frame() == 0, "Next Scrum did not prepare a shared fresh generation")
+	var before := host.model.state_hash()
+	host.handle_message({"type":"input", "generation":previous, "frame":0, "input":16})
+	check(host.active and host.error.is_empty() and host.model.state_hash() == before, "Delayed old-round input contaminated the new Scrum")
+	host.finish_intros()
+	client.finish_intros()
+	for _i in 300:
+		if host.phase == "countdown" and client.phase == "countdown": break
+		await tree.create_timer(0.01).timeout
+	host.finish_countdown()
+	client.finish_countdown()
+	for _i in 300:
+		if host.phase == "live" and client.phase == "live": return
+		await tree.create_timer(0.01).timeout
+	check(false, "Next Scrum did not release")

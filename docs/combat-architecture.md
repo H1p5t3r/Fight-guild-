@@ -37,3 +37,9 @@ PS5 requires Sony approval/SDK access and compatible console port tooling, typic
 `bash scripts/test-godot.sh` checks combat rules, all six fighters' basic buttons, Momentum/FD/guard-break rules, counter/punish/reversal boundaries and combo lifetime, exact 1,200-frame native/Godot parity, save migration and atomic imports, delayed/jittered rollback, artwork metadata/alpha, actual keyboard UI paths, keyboard/simulated-controller menu navigation, offline pause/rematch and local ENet menu handshake/cancel/disconnect recovery, windup-to-active switching for 30 basic buttons, both frames of all 18 defensive clips, visible feedback restoration and a real combo after a side-switch, sprite review and two separate ENet processes selecting Shark/Fillet. Script errors fail the runner even if Godot exits zero. Native screenshots validate rendering and layout.
 
 The archived browser harness remains useful for native/WebAssembly determinism and relay regression tests via `npm test`. It is no longer the primary gameplay client. Windows export validation does not replace Windows hardware playtesting.
+
+## Native match orchestration
+
+`MatchScore` counts first-to-two wins outside the per-frame combat snapshot. Offline outcomes commit once; online outcomes commit only from a fully confirmed rollback state. `MatchEntry` prepares atlas resources, presents fighter introductions and the four opening beats, and freezes the combat clock until release. Practice resets bypass the ceremony.
+
+Native ENet protocol 4 gates intros, countdown and intermission with readiness from both peers. Each new Scrum resets combat into a fresh rollback session and increments a packet generation; old-generation inputs and hashes are discarded. The host verifies the remote outcome and the client verifies the next-Scrum score. A draw retains the score/call and uses a fresh generation. The results menu appears only after two wins; online match rematches still return through the lobby.
