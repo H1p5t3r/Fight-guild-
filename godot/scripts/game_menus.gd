@@ -9,6 +9,10 @@ const MUTED := GuildTheme.MUTED
 var pages := {}
 var buttons := {}
 var current_page := "home"
+var motion := MenuMotion.new()
+var page_tweens := {}
+var chrome_tween: Tween
+var active := true
 var header: HBoxContainer
 var breadcrumb: Label
 var back_button: Button
@@ -41,20 +45,26 @@ func _ready() -> void:
 	for edge in ["left", "right"]: margin.add_theme_constant_override("margin_" + edge, 36)
 	for edge in ["top", "bottom"]: margin.add_theme_constant_override("margin_" + edge, 24)
 	add_child(margin)
-	var root := column(margin)
+	var root := Control.new()
+	margin.add_child(root)
 	header = line(root)
+	header.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	header.offset_bottom = 40
 	var brand := text(header, "FIGHT GUILD", 28, GOLD)
 	brand.add_theme_font_override("font", DISPLAY_FONT)
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	breadcrumb = text(header, "MAIN MENU", 17, MUTED)
 	back_button = action(header, "back", "Back", 38, "secondary")
-	root.add_child(HSeparator.new())
 	var body := Control.new()
-	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root.add_child(body)
+	body.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	body.offset_bottom = -60
+	body.resized.connect(layout_pages)
 	for id in ["home", "matches", "fighters", "online", "pause", "results"]:
 		var page := column(body)
 		page.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		page.offset_top = 0 if id == "home" else 64
+		page.visible = false
 		pages[id] = page
 		match id:
 			"home": build_home(page)
@@ -63,16 +73,21 @@ func _ready() -> void:
 			"online": build_online(page)
 			"pause": build_pause(page)
 			"results": build_results(page)
-	root.add_child(HSeparator.new())
 	var footer := line(root)
+	footer.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	footer.offset_top = -40
 	home_utilities = line(footer)
 	action(home_utilities, "controls", "Controls", 40, "secondary")
 	var hint := text(footer, "Arrows / D-pad: navigate   ·   Enter / A: select   ·   Esc / B: back", 17, MUTED)
 	hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	action(home_utilities, "quit", "Quit", 40, "secondary")
+	var motion_button := action(home_utilities, "motion", "", 40, "secondary")
+	motion_button.tooltip_text = "Reduce menu motion: short fades, no sliding portraits or pages."
+	update_motion_label()
 	text(footer, "EARLY BUILD", 16, GOLD)
-	show_page("home")
+	show_page("home", true)
+	layout_pages.call_deferred()
 
 func column(parent: Node) -> VBoxContainer:
 	var node := VBoxContainer.new()
@@ -306,17 +321,80 @@ func set_connecting(connecting: bool) -> void:
 	address.editable = not connecting
 	port.editable = not connecting
 
-func show_page(page: String) -> void:
+func layout_pages() -> void:
+	for id in pages:
+		var node: Control = pages[id]
+		var slide := node.position.x
+		node.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		node.offset_top = 0 if id == "home" else 64
+		node.position.x = slide
+
+func update_motion_label() -> void:
+	buttons.motion.text = "Motion: Reduced" if motion.reduced else "Motion: Full"
+
+func set_active(enabled: bool) -> void:
+	active = enabled
+	MenuMotion.interactive(self, enabled)
+	for id in pages: MenuMotion.interactive(pages[id], enabled and id == current_page)
+	MenuMotion.interactive(header, enabled and current_page != "home")
+	MenuMotion.interactive(home_utilities, enabled and current_page == "home")
+
+func show_page(page: String, fresh: bool = false) -> void:
+	var depth := {"home":0, "matches":1, "fighters":2, "online":3, "pause":1, "results":1}
+	var direction := -1.0 if depth[page] < depth[current_page] else 1.0
 	current_page = page
-	header.visible = page != "home"
-	for id in pages: pages[id].visible = id == page
 	back_button.visible = page not in ["home", "results"]
-	home_utilities.visible = page == "home"
 	breadcrumb.text = {"home":"MAIN MENU", "matches":"VERSUS", "fighters":"FIGHTER SELECT", "online":"ONLINE / CONNECTION", "pause":"MATCH MENU", "results":"RESULT"}[page]
+	for id in pages:
+		var node: Control = pages[id]
+		if page_tweens.has(id): page_tweens[id].kill()
+		var incoming: bool = id == page
+		MenuMotion.interactive(node, active and incoming)
+		if fresh or motion.instant:
+			settle_page(id)
+			continue
+		if not node.visible and not incoming: continue
+		if not node.visible:
+			node.modulate.a = 0.0
+			node.position.x = motion.distance(32.0 * direction)
+		node.visible = true
+		var tween := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		page_tweens[id] = tween
+		var duration := motion.duration(0.28 if incoming else 0.18)
+		tween.tween_property(node, "modulate:a", 1.0 if incoming else 0.0, duration)
+		tween.tween_property(node, "position:x", 0.0 if incoming else motion.distance(-24.0 * direction), duration)
+		tween.chain().tween_callback(settle_page.bind(id))
+	if chrome_tween: chrome_tween.kill()
+	if fresh or motion.instant:
+		header.modulate.a = 0.0 if page == "home" else 1.0
+		home_utilities.modulate.a = 1.0 if page == "home" else 0.0
+	else:
+		chrome_tween = create_tween().set_parallel(true)
+		chrome_tween.tween_property(header, "modulate:a", 0.0 if page == "home" else 1.0, motion.duration(0.18))
+		chrome_tween.tween_property(home_utilities, "modulate:a", 1.0 if page == "home" else 0.0, motion.duration(0.18))
+	set_active(active)
 	call_deferred("focus_page", page)
 
+func settle_page(id: String) -> void:
+	pages[id].visible = id == current_page
+	pages[id].modulate.a = 1.0
+	pages[id].position.x = 0.0
+
+func is_animating() -> bool:
+	for tween in page_tweens.values():
+		if tween.is_running(): return true
+	return chrome_tween != null and chrome_tween.is_running()
+
+func finish_motion() -> void:
+	for id in pages:
+		if page_tweens.has(id): page_tweens[id].kill()
+		settle_page(id)
+	if chrome_tween: chrome_tween.kill()
+	header.modulate.a = 0.0 if current_page == "home" else 1.0
+	home_utilities.modulate.a = 1.0 if current_page == "home" else 0.0
+
 func focus_page(page: String) -> void:
-	if not is_visible_in_tree() or current_page != page: return
+	if not active or not is_visible_in_tree() or current_page != page: return
 	match page:
 		"home": buttons.matches.grab_focus()
 		"matches": buttons.local.grab_focus()

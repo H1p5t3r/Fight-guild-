@@ -118,6 +118,8 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 		return
 	game.set_physics_process(false)
 	await tree.process_frame
+	var transitions = load("res://scripts/transition_verification.gd").new()
+	failures += await transitions.run(tree, game)
 	var menus = load("res://scripts/menu_verification.gd").new()
 	failures += await menus.run(tree, game)
 	game.release_focus_from_ui()
@@ -276,6 +278,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	if args.has("--review"):
 		game.show_sprite_review(3 if args.has("--block-review") else 0)
 		check(game.has_open_dialog(), "Sprite review did not open")
+	game.motion.instant = false
 	if args.has("--home"): game.go_home()
 	if args.has("--fighters"): game.go_home(); game.choose_activity("local")
 	if args.has("--training"): game.go_home(); game.choose_activity("training"); game.confirm_selection()
@@ -284,6 +287,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	if args.has("--connection"): game.go_home(); game.choose_activity("online"); game.confirm_selection()
 	if args.has("--controls"): game.go_home(); game.show_controls()
 	if args.has("--screenshot"):
+		await game.wait_for_menu_motion()
 		await tree.process_frame
 		await RenderingServer.frame_post_draw
 		var path: String = args[args.find("--screenshot") + 1]

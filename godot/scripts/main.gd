@@ -45,6 +45,9 @@ var activity := "development"
 var pending_activity := "development"
 var selection_return := "home"
 var input_release_required := false
+var motion := MenuMotion.new()
+var layer_tween: Tween
+var layer_target := "menus"
 var play_root: Control
 var editor_shell: PanelContainer
 var toolbar: HBoxContainer
@@ -61,6 +64,7 @@ var result_probe := CombatModel.new()
 
 func _ready() -> void:
 	name = "FightGuild"
+	motion.load_preferences()
 	build_theme()
 	build_interface()
 	add_child(connection)
@@ -129,6 +133,9 @@ func build_interface() -> void:
 	play_root = Control.new()
 	play_root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(play_root)
+	play_root.visible = false
+	play_root.modulate.a = 0.0
+	MenuMotion.interactive(play_root, false)
 	var margins := MarginContainer.new()
 	margins.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for edge in ["left", "right", "top", "bottom"]: margins.add_theme_constant_override("margin_" + edge, 16)
@@ -292,6 +299,7 @@ func build_interface() -> void:
 	label(route_panel, "All attacks → same-button command", 10, ACCENT)
 	build_dialogs()
 	menus = GameMenus.new()
+	menus.motion = motion
 	add_child(menus)
 	menus.action_requested.connect(menu_action)
 	selection_characters = menus.fighters
@@ -332,6 +340,10 @@ func menu_action(action: String) -> void:
 		"confirm_fighters": confirm_selection()
 		"back": menu_back()
 		"controls": show_controls()
+		"motion":
+			motion.toggle_reduced()
+			menus.update_motion_label()
+			finish_menu_motion()
 		"quit": get_tree().quit()
 		"resume": show_screen("play")
 		"restart", "rematch": reset_round(); show_screen("play")
@@ -345,16 +357,53 @@ func menu_action(action: String) -> void:
 			show_screen("online")
 
 func show_screen(next: String) -> void:
+	var previous := screen
 	screen = next
 	held.clear()
 	release_focus_from_ui()
-	play_root.visible = next == "play"
-	menus.visible = next != "play"
-	if next == "play":
-		# A held menu confirm must not become a punch, dash or movement input.
+	var playing := next == "play"
+	menus.set_active(not playing)
+	if not playing: menus.show_page(next, previous == "play")
+	else: input_release_required = has_gameplay_input_held()
+	var target := "play" if playing else "menus"
+	if target == layer_target:
+		if motion.instant: finish_menu_motion()
+		return
+	layer_target = target
+	if layer_tween: layer_tween.kill()
+	MenuMotion.interactive(play_root, false)
+	if motion.instant:
+		settle_layers()
+		return
+	play_root.visible = true
+	menus.visible = true
+	layer_tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	layer_tween.tween_property(play_root, "modulate:a", 1.0 if playing else 0.0, motion.duration(0.28))
+	layer_tween.tween_property(menus, "modulate:a", 0.0 if playing else 1.0, motion.duration(0.28))
+	layer_tween.chain().tween_callback(settle_layers)
+
+func changing_layers() -> bool:
+	return layer_tween != null and layer_tween.is_running()
+
+func settle_layers() -> void:
+	var playing := screen == "play"
+	play_root.visible = playing
+	play_root.modulate.a = 1.0 if playing else 0.0
+	menus.visible = not playing
+	menus.modulate.a = 0.0 if playing else 1.0
+	MenuMotion.interactive(play_root, playing)
+	if playing:
+		held.clear()
 		input_release_required = has_gameplay_input_held()
-	else:
-		menus.show_page(next)
+
+func finish_menu_motion() -> void:
+	if layer_tween: layer_tween.kill()
+	settle_layers()
+	menus.finish_motion()
+
+func wait_for_menu_motion() -> void:
+	while changing_layers() or menus.is_animating():
+		await get_tree().process_frame
 
 func choose_activity(which: String) -> void:
 	if connection.active: return
@@ -613,13 +662,13 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		var code: int = event.physical_keycode if event.physical_keycode else event.keycode
 		if not event.pressed: held.erase(code)
-		elif screen == "play" and not input_release_required and not is_editing() and not event.echo: held[code] = true
+		elif screen == "play" and not changing_layers() and not input_release_required and not is_editing() and not event.echo: held[code] = true
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT: held.clear()
 
 func read_input(player: int) -> int:
-	if screen != "play" or input_release_required or is_editing(): return 0
+	if screen != "play" or changing_layers() or input_release_required or is_editing(): return 0
 	var raw := 0
 	for key in held: raw |= KEY_MAPS[player].get(key, 0)
 	var pads := Input.get_connected_joypads()
@@ -649,7 +698,7 @@ func reset_round() -> void:
 	release_focus_from_ui()
 
 func advance_one() -> void:
-	if connection.active or screen != "play" or activity not in ["training", "development"]: return
+	if connection.active or screen != "play" or changing_layers() or activity not in ["training", "development"]: return
 	release_focus_from_ui()
 	paused = true
 	pause_button.text = "Resume"
@@ -697,7 +746,7 @@ func _physics_process(_delta: float) -> void:
 		var raw := read_input(0)
 		connection.tick(raw)
 		record_input(raw)
-	elif screen == "play" and not paused and not has_open_dialog():
+	elif screen == "play" and not changing_layers() and not paused and not has_open_dialog():
 		simulate_local()
 
 func _process(_delta: float) -> void:

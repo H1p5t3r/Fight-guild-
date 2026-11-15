@@ -213,7 +213,9 @@ func verify_online() -> void:
 	check(game.screen == "play" and game.connection.session != null and remote.session != null, "Handshake did not enter online match")
 	if game.connection.session != null and remote.session != null:
 		check(game.model.state().players[0].character == 4 and game.model.state().players[1].character == 3, "Online handshake ignored fighter choices")
+		game.motion.instant = false
 		game.open_pause()
+		check(game.changing_layers(), "Online pause did not animate")
 		check(not game.menus.buttons.restart.visible and not game.menus.buttons.change_fighters.visible and game.menus.pause_note.text.contains("continues"), "Online menu offers a local reset or hides continuing match")
 		key(KEY_J, true)
 		frame = game.model.frame()
@@ -228,6 +230,9 @@ func verify_online() -> void:
 			if not game.connection.active: break
 			await tree.create_timer(0.01).timeout
 		check(game.screen == "online" and not game.connection.active and game.net_status.text.contains("disconnected") and not game.menus.buttons.join.disabled, "Disconnect did not return to a recoverable lobby")
+	await game.wait_for_menu_motion()
+	game.motion.instant = true
+	game.finish_menu_motion()
 	remote.close()
 	remote.queue_free()
 	game.cancel_connection()
