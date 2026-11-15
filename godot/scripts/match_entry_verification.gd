@@ -56,7 +56,7 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	key(KEY_J, false)
 	game._physics_process(1.0 / 60.0)
 	check(game.model.frame() == 1 and game.model.state().players[0].move == -1, "Combat did not begin cleanly after release")
-	entry._process(0.7)
+	entry._process(entry.release_seconds() + 0.01)
 	entry.set_process(true)
 	# A held Select cannot skip the intro it just opened. A new press can.
 	game.go_home()

@@ -23,7 +23,7 @@ Character select takes its personality direction from the user's **2XKO** refere
 
 The reference's newspaper drawing/page-turn films were not supplied. `guild_backdrop.gd` supplies a quiet, static teal/brass gradient based on the reference home screen; it does not attempt to reproduce the absent films. Replace this still layer when the actual background films become available. Decorative layers ignore pointer input.
 
-Page navigation uses interruptible eased slides/crossfades (280 ms in, 180 ms out), match entry/resume uses a 280 ms fade, and portrait changes use a 260 ms entrance. New navigation retargets from the visible state; outgoing pages lose pointer/focus access immediately. **Motion: Reduced** in the home footer persists locally and removes translation and smear accents, shortening menu navigation fades to at most 90 ms. Ceremony pauses retain their reading time and online synchronization. Animation time never enters combat or rollback snapshots.
+Page navigation uses interruptible eased slides/crossfades (840 ms in, 540 ms out), match entry/resume uses an 840 ms fade, and portrait changes use a 780 ms entrance. `MenuMotion.FULL_DURATION_SCALE` applies the shared 3× pace to full-motion fades, slides and reveals, including loading and ceremony artwork. New navigation retargets from the visible state; outgoing pages lose pointer/focus access immediately. **Motion: Reduced** in the home footer persists locally and removes translation and smear accents, shortening fades to at most 90 ms. Ceremony pauses retain their reading time and online synchronization. Animation time never enters combat or rollback snapshots.
 
 The project uses a 1280×720 logical canvas and scales to 1920×1080. The development workbench and gatling reference now sit below the editor's other tools, inside its scroll area, leaving the arena and practice controls usable at 720p.
 
@@ -54,6 +54,8 @@ The surface fixture shows normal, hover, pressed, focus and disabled artwork tog
 ## Match entrance
 
 `MatchEntry` presents real selected-atlas loading, two skippable fighter spotlights, and a four-beat on-screen ceremony. Copy and beat timings live in `godot/data/match_ceremony.json`. The current calls are “The stands hunger for legends.” → “Let the guilds give them names.” → “1st Scrum” / “2nd Scrum” / “Final Down” → “Break the line!” Intros reuse existing windup poses with character-specific motion; dedicated authored intro frames and recorded announcer audio can replace these presentation assets later.
+
+Each intro now lasts 3.5 seconds, with an 840 ms reveal and 540 ms exit. The two opening phrases last 3 seconds each, the Scrum call lasts 1.8 seconds, and the release call lasts 1.65 seconds. Intermissions hold for 3.5 seconds. Full-motion loading has a 1.95-second minimum for an initial match and a 900 ms minimum between Scrums; slow resource preparation extends it until the artwork is ready.
 
 Offline combat remains at frame zero until release. Online protocol 4 has separate readiness barriers for introductions and the opening, so the core cannot start while either player is still preparing. Skipping an intro does not skip the opening; a held selection confirm must be released before it can skip. Back cancels safely. Practice/development enter through loading without the full ceremony, and practice Reset stays immediate.
 

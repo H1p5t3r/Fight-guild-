@@ -172,6 +172,12 @@ func loading_failed(message: String) -> void:
 	cancel()
 	failed.emit(message)
 
+func loading_end() -> float:
+	return maxf(motion.duration(0.3 if repeat_match else 0.65), loaded_at + motion.duration(0.18))
+
+func release_seconds() -> float:
+	return motion.duration(0.22) if practice else float(MatchCeremony.script().releaseSeconds)
+
 func poll_loading() -> void:
 	load_frames += 1
 	var total := 0.0
@@ -186,7 +192,7 @@ func poll_loading() -> void:
 		total += 1.0 if status == ResourceLoader.THREAD_LOAD_LOADED else float(progress[0]) if not progress.is_empty() else 0.0
 	load_progress = total / maxf(1.0, asset_paths.size())
 	if complete and loaded_at < 0.0: loaded_at = elapsed
-	var end := maxf(0.3 if repeat_match else 0.65, loaded_at + 0.18)
+	var end := loading_end()
 	if not complete or load_frames < 2 or elapsed < end: return
 	for path in asset_paths:
 		FighterArt.textures[path.trim_prefix(FighterArt.DIRECTORY)] = ResourceLoader.load_threaded_get(path)
@@ -217,9 +223,9 @@ func _process(delta: float) -> void:
 					elapsed = 0.0
 				else: finish_opening()
 		"release":
-			if elapsed >= (0.22 if practice else 0.65): cancel()
+			if elapsed >= release_seconds(): cancel()
 		"score":
-			if elapsed >= 2.0: finish_intermission()
+			if elapsed >= float(MatchCeremony.script().intermissionSeconds): finish_intermission()
 	queue_redraw()
 
 func centered(value: String, center: Vector2, font_size: int, color: Color = GuildTheme.IVORY) -> void:
@@ -251,8 +257,8 @@ func _draw() -> void:
 	else:
 		var content_alpha := 1.0
 		if phase == "loading" and loaded_at >= 0.0:
-			var end := maxf(0.3 if repeat_match else 0.65, loaded_at + 0.18)
-			content_alpha = 1.0 - smoothstep(end - 0.18, end, elapsed)
+			var end := loading_end()
+			content_alpha = 1.0 - smoothstep(end - motion.duration(0.18), end, elapsed)
 		for p in 2:
 			var character: int = characters[p]
 			var x := w * (0.25 if p == 0 else 0.75)
@@ -277,7 +283,7 @@ func draw_intro(scale_factor: float) -> void:
 	var accent: Color = FighterSelectPortrait.COLORS[character]
 	var duration: float = MatchCeremony.script().introSeconds
 	var reveal := smoothstep(0.0, motion.duration(0.28), elapsed)
-	var fade := 1.0 - smoothstep(duration - 0.18, duration, elapsed)
+	var fade := 1.0 - smoothstep(duration - motion.duration(0.18), duration, elapsed)
 	var text_alpha := minf(reveal, fade)
 	var offset: Vector2 = ENTRANCES[character] * (1.0 - reveal) * scale_factor
 	if motion.reduced: offset = Vector2.ZERO
@@ -296,20 +302,23 @@ func draw_opening(scale_factor: float) -> void:
 	var w := size.x
 	var h := size.y
 	if phase == "release":
-		if practice: return
 		var curtain := 1.0 - smoothstep(0.0, motion.duration(0.22), elapsed)
+		if practice:
+			draw_rect(Rect2(Vector2.ZERO, size), Color(Color("081218"), curtain))
+			return
 		draw_rect(Rect2(Vector2.ZERO, size), Color(0.025, 0.045, 0.055, 0.48 * curtain))
 		draw_rect(Rect2(0, 0, w, h * 0.10), Color(0.03, 0.07, 0.09, curtain))
 		draw_rect(Rect2(0, h * 0.90, w, h * 0.10), Color(0.03, 0.07, 0.09, curtain))
-		var opacity := 1.0 - smoothstep(0.28, 0.65, elapsed)
-		var expansion := 1.0 if motion.reduced else 1.0 + 0.06 * (1.0 - smoothstep(0.0, 0.20, elapsed))
+		var end := release_seconds()
+		var opacity := 1.0 - smoothstep(end - motion.duration(0.37), end, elapsed)
+		var expansion := 1.0 if motion.reduced else 1.0 + 0.06 * (1.0 - smoothstep(0.0, motion.duration(0.20), elapsed))
 		FightHud.stamp(self, str(MatchCeremony.script().releaseCall).to_upper(), Vector2(w * 0.5, h * 0.46), int(78 * scale_factor * expansion), GuildTheme.BRASS, opacity, true)
 		return
 	var duration: float = MatchCeremony.script().beatSeconds[beat]
 	var reveal := 1.0 if phase == "ready" else smoothstep(0.0, motion.duration(0.20), elapsed)
-	var fade := 1.0 if phase == "ready" or (online and beat == 2) else 1.0 - smoothstep(duration - 0.15, duration, elapsed)
+	var fade := 1.0 if phase == "ready" or (online and beat == 2) else 1.0 - smoothstep(duration - motion.duration(0.15), duration, elapsed)
 	var opacity := minf(reveal, fade)
-	var veil := lerpf(1.0, 0.48, smoothstep(0.0, 0.3, elapsed)) if beat == 0 else 0.48
+	var veil := lerpf(1.0, 0.48, smoothstep(0.0, motion.duration(0.3), elapsed)) if beat == 0 else 0.48
 	draw_rect(Rect2(Vector2.ZERO, size), Color(0.025, 0.045, 0.055, veil))
 	draw_rect(Rect2(0, 0, w, h * 0.10), Color("081218"))
 	draw_rect(Rect2(0, h * 0.90, w, h * 0.10), Color("081218"))

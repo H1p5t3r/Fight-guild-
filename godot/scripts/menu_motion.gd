@@ -3,6 +3,7 @@ extends RefCounted
 
 # Presentation time only: never participates in combat frames or rollback state.
 const PREFERENCES := "user://preferences.cfg"
+const FULL_DURATION_SCALE := 3.0
 var reduced := false
 var instant := false # Deterministic fixture setup; animated navigation is tested separately.
 
@@ -21,7 +22,7 @@ func toggle_reduced() -> void:
 	config.save(PREFERENCES)
 
 func duration(seconds: float) -> float:
-	return 0.0 if instant else minf(seconds, 0.09) if reduced else seconds
+	return 0.0 if instant else minf(seconds, 0.09) if reduced else seconds * FULL_DURATION_SCALE
 
 func distance(pixels: float) -> float:
 	return 0.0 if reduced or instant else pixels

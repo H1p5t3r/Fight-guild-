@@ -6,11 +6,13 @@
   "roundName": "Scrum",
   "releaseCall": "Break the line!",
   "beatSeconds": [
-    1.65,
-    1.65,
-    0.9
+    3.0,
+    3.0,
+    1.8
   ],
-  "introSeconds": 1.5,
+  "introSeconds": 3.5,
+  "releaseSeconds": 1.65,
+  "intermissionSeconds": 3.5,
   "roundCalls": [
     "1st Scrum",
     "2nd Scrum",

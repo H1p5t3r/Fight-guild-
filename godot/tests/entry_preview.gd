@@ -43,7 +43,7 @@ func run() -> void:
 	else:
 		if args.has("--loading"):
 			game.match_entry.set_process(false)
-			game.match_entry._process(0.25)
+			game.match_entry._process(game.motion.duration(0.25))
 		else:
 			while game.match_entry.phase != "intro": await process_frame
 			game.match_entry.set_process(false)
@@ -58,7 +58,7 @@ func run() -> void:
 				if args.has("--release"): game.match_entry._process(float(MatchCeremony.script().beatSeconds[2]) + 0.01)
 			else:
 				if args.has("--second"): game.match_entry._process(float(MatchCeremony.script().introSeconds) + 0.01)
-			game.match_entry._process(0.28 if args.has("--release") else 0.65)
+			game.match_entry._process(0.4 if args.has("--release") else 1.0)
 		await process_frame
 		await RenderingServer.frame_post_draw
 		if args.has("--screenshot"):
