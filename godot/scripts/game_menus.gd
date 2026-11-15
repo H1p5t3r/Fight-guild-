@@ -9,6 +9,7 @@ const MUTED := GuildTheme.MUTED
 var pages := {}
 var buttons := {}
 var current_page := "home"
+var header: HBoxContainer
 var breadcrumb: Label
 var back_button: Button
 var home_utilities: HBoxContainer
@@ -41,7 +42,7 @@ func _ready() -> void:
 	for edge in ["top", "bottom"]: margin.add_theme_constant_override("margin_" + edge, 24)
 	add_child(margin)
 	var root := column(margin)
-	var header := line(root)
+	header = line(root)
 	var brand := text(header, "FIGHT GUILD", 28, GOLD)
 	brand.add_theme_font_override("font", DISPLAY_FONT)
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -65,13 +66,12 @@ func _ready() -> void:
 	root.add_child(HSeparator.new())
 	var footer := line(root)
 	home_utilities = line(footer)
-	text(home_utilities, "SETTINGS", 17, MUTED)
 	action(home_utilities, "controls", "Controls", 40, "secondary")
 	var hint := text(footer, "Arrows / D-pad: navigate   ·   Enter / A: select   ·   Esc / B: back", 17, MUTED)
 	hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	action(home_utilities, "quit", "Quit", 40, "secondary")
-	text(footer, "DEVELOPMENT BUILD", 16, GOLD)
+	text(footer, "EARLY BUILD", 16, GOLD)
 	show_page("home")
 
 func column(parent: Node) -> VBoxContainer:
@@ -139,54 +139,39 @@ func spacer(parent: Node) -> void:
 
 func build_home(page: VBoxContainer) -> void:
 	var body := scroll_body(page)
-	spacer(body)
 	var split := line(body)
+	split.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	split.add_theme_constant_override("separation", 24)
 	var choices := column(split)
-	choices.custom_minimum_size.x = 480
-	text(choices, "THE FLOOR IS YOURS", 18, GOLD)
-	var title := text(choices, "Find the fight.\nMake it your own.", 38)
+	choices.custom_minimum_size.x = 320
+	spacer(choices)
+	text(choices, "MAIN MENU", 18, GOLD)
+	var title := text(choices, "FIGHT\nGUILD", 88)
 	title.add_theme_font_override("font", DISPLAY_FONT)
-	text(choices, "Choose your fighter. Find your route.\nMake every opening count.", 20, MUTED)
-	var news := section(choices, "ON THE TRAINING FLOOR")
-	text(news, "Six fighters · P / K / S / Hs / D\nUnified gatlings · Momentum · Faultless Defense", 18, MUTED)
-	action(choices, "matches", "Matches", 48, "essential")
-	text(choices, "LOCAL VERSUS  /  ONLINE", 17, MUTED)
-	action(choices, "training", "Training", 40)
-	action(choices, "development", "Development environments", 40, "secondary")
-	var roster := column(split)
-	roster.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	text(roster, "FEATURED FIGHTERS", 17, MUTED)
-	var cards := line(roster)
-	for spec in [["anvil", "ANVIL", "BLACKSMITHS", Color("b5a187"), Rect2(105, 210, 375, 375)], ["smoke", "SMOKE", "ALCHEMISTS", Color("a3b15b"), Rect2(140, 155, 310, 310)], ["shark", "SHARK", "FISHERMEN", Color("5ab5b5"), Rect2(300, 100, 180, 180)]]:
-		var card := section(cards)
-		card.get_parent().add_theme_stylebox_override("panel", GuildTheme.surface("panel-tooltip"))
-		var portrait := TextureRect.new()
-		var atlas := AtlasTexture.new()
-		atlas.atlas = load("res://assets/ui/portraits/" + spec[0] + ".png")
-		atlas.region = spec[4]
-		atlas.filter_clip = true
-		portrait.texture = atlas
-		portrait.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
-		portrait.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		portrait.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
-		portrait.custom_minimum_size = Vector2(0, 208)
-		portrait.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		card.add_child(portrait)
-		text(card, spec[1], 26).add_theme_font_override("font", DISPLAY_FONT)
-		text(card, spec[2], 17, spec[3])
-		var rule := ColorRect.new()
-		rule.color = spec[3]
-		rule.custom_minimum_size.y = 2
-		rule.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		card.add_child(rule)
-	var clubhouse := section(roster, "YOUR COMBAT LAB")
-	text(clubhouse, "Shape the next round.", 26).add_theme_font_override("font", DISPLAY_FONT)
-	text(clubhouse, "Tune moves, compare sprites and test your changes.\nAlso on the roster: Hammer, Tapper and Fillet.", 18, MUTED)
-	spacer(body)
+	title.add_theme_constant_override("line_spacing", -22)
+	text(choices, "Choose your fighter.", 20, MUTED)
+	var versus := action(choices, "matches", "VERSUS", 64, "essential")
+	versus.add_theme_font_size_override("font_size", 32)
+	var training := action(choices, "training", "TRAINING", 52)
+	training.add_theme_font_size_override("font_size", 26)
+	action(choices, "development", "DEVELOPMENT", 42, "secondary")
+	var description := text(choices, "Local and online matches.", 18, MUTED)
+	description.custom_minimum_size.y = 44
+	description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	for id in ["matches", "training", "development"]:
+		var explain := func(): description.text = {"matches":"Local and online matches.", "training":"Practice combos, defense and timing.", "development":"Edit moves and test the combat lab."}[id]
+		buttons[id].focus_entered.connect(explain)
+		buttons[id].mouse_entered.connect(explain)
+	spacer(choices)
+	var artwork := column(split)
+	artwork.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var faceoff := preload("res://scripts/home_faceoff.gd").new()
+	artwork.add_child(faceoff)
+	var roster := text(artwork, "ANVIL   /   HAMMER   /   SMOKE   /   TAPPER   /   SHARK   /   FILLET", 17, MUTED)
+	roster.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 func build_matches(page: VBoxContainer) -> void:
-	heading(page, "MATCHES", "Play together on one computer or connect to a rival.")
+	heading(page, "VERSUS", "Play together on one computer or connect to a rival.")
 	var body := scroll_body(page)
 	var groups := line(body)
 	groups.add_theme_constant_override("separation", 12)
@@ -323,10 +308,11 @@ func set_connecting(connecting: bool) -> void:
 
 func show_page(page: String) -> void:
 	current_page = page
+	header.visible = page != "home"
 	for id in pages: pages[id].visible = id == page
 	back_button.visible = page not in ["home", "results"]
 	home_utilities.visible = page == "home"
-	breadcrumb.text = {"home":"MAIN MENU", "matches":"MATCHES", "fighters":"FIGHTER SELECT", "online":"ONLINE / CONNECTION", "pause":"MATCH MENU", "results":"RESULT"}[page]
+	breadcrumb.text = {"home":"MAIN MENU", "matches":"VERSUS", "fighters":"FIGHTER SELECT", "online":"ONLINE / CONNECTION", "pause":"MATCH MENU", "results":"RESULT"}[page]
 	call_deferred("focus_page", page)
 
 func focus_page(page: String) -> void:

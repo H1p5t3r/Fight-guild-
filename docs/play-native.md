@@ -8,8 +8,8 @@ For the editable project ZIP, import `godot/project.godot` into **Godot 4.6.3**,
 
 The game opens at the main menu. Use the mouse, arrow keys/Enter, or a controller's D-pad/A to navigate; Esc/B goes back. Menus use the supplied Guild Ball panel/font style; Controls opens in its separate warm Settings skin.
 
-- **Matches → Local versus → Fighter select → Start match:** two players, a full-width arena, and a results screen with Rematch and Change fighters.
-- **Matches → Online versus → Fighter select → Connection:** choose only your local fighter, then Host or Join. The match starts after both peers connect successfully.
+- **Versus → Local versus → Fighter select → Start match:** two players, a full-width arena, and a results screen with Rematch and Change fighters.
+- **Versus → Online versus → Fighter select → Connection:** choose only your local fighter, then Host or Join. The match starts after both peers connect successfully.
 - **Training → Fighter select → Start training:** choose your fighter and a dummy, then practice with dummy behavior, starting Momentum, input history, hitboxes, pause, frame step and reset controls.
 - **Development → Fighter select → Open combat lab:** practice controls plus the move editor, sprite review, buffer/Momentum tuning, data import/export and rollback workbench.
 
@@ -54,7 +54,7 @@ Saves use Godot's `user://` directory: normally `%APPDATA%/Godot/app_userdata/Fi
 
 ## Direct online prototype
 
-Both players need the same build and move data. Go to **Matches → Online versus**, choose your local fighter and continue to the connection screen. One player hosts UDP port 7000; the other enters that computer's address and joins. Both use Player 1 controls locally. Allow that UDP port through the host's firewall as needed. `127.0.0.1` works only for two processes on the same computer.
+Both players need the same build and move data. Go to **Versus → Online versus**, choose your local fighter and continue to the connection screen. One player hosts UDP port 7000; the other enters that computer's address and joins. Both use Player 1 controls locally. Allow that UDP port through the host's firewall as needed. `127.0.0.1` works only for two processes on the same computer.
 
 This direct ENet connection uses rollback, two frames of input delay, bounded prediction and confirmed-state checks. No room server is needed. Editing is locked while connected. Use **Return to online lobby** after a round and host/join again for a rematch. Cancel a pending connection to retry; failures and disconnects return to the connection screen with an explanation. Matchmaking, automatic NAT traversal and reconnect are backlog work; direct Internet hosting may require router configuration.
 

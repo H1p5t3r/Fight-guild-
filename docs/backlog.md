@@ -35,10 +35,12 @@ Requested scope: make repeatable character images performing directed actions, w
 
 ## Menus and match flow
 
-- [x] Match the supplied Guild Ball style with shared nine-slice surfaces, licensed fonts, semantic button states, featured-character cards and a scoped warm Controls guide.
+- [x] Give the main screen a fighting-game identity: title wordmark, full-size fighter face-off and a prominent Versus entry.
+
+- [x] Match the supplied Guild Ball style with shared nine-slice surfaces, licensed fonts, semantic button states, a scoped warm Controls guide and a fighting-game title screen.
 - [ ] Import the actual newspaper drawing/page-turn background films when supplied; retain a still presentation for reduced motion.
 
-- [x] Main menu with separate Matches, Training and Development paths and full-screen fighter selection.
+- [x] Main menu with separate Versus, Training and Development paths and full-screen fighter selection.
 - [x] Local match results/rematch, offline pause/restart, cancelable fighter changes and return to main menu.
 - [x] Direct online connection lobby with waiting/cancel/error recovery and neutral input while the in-match menu is open.
 - [x] Keyboard/controller UI actions and held-confirm protection; verify source and exported Linux builds.

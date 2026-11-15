@@ -4,8 +4,8 @@ The native game opens at **Main menu**. Applied move data remains in memory when
 
 | Entry | Sequence | Tools and exit paths |
 | --- | --- | --- |
-| Matches / Local versus | Main menu → Matches → Local versus → Fighter select → Start match | Full-width arena; Esc/Start opens Resume, Restart round, Change fighters, Main menu. A completed round offers Rematch, Change fighters and Main menu. |
-| Matches / Online versus | Main menu → Matches → Online versus → Local fighter select → Connection → Host or Join → Match | Opponent chooses their own fighter. Waiting exposes Cancel connection. Errors and disconnects return to the connection screen with the explanation and retained selection/address. Back cancels the connection and returns to fighter select, then Matches. |
+| Versus / Local versus | Main menu → Versus → Local versus → Fighter select → Start match | Full-width arena; Esc/Start opens Resume, Restart round, Change fighters, Main menu. A completed round offers Rematch, Change fighters and Main menu. |
+| Versus / Online versus | Main menu → Versus → Online versus → Local fighter select → Connection → Host or Join → Match | Opponent chooses their own fighter. Waiting exposes Cancel connection. Errors and disconnects return to the connection screen with the explanation and retained selection/address. Back cancels the connection and returns to fighter select, then Versus. |
 | Training | Main menu → Training → Fighter and dummy select → Start training | Dummy behavior, starting Momentum, input history, hitboxes, pause, one-frame step and reset. No move editor. |
 | Development | Main menu → Development → Fighter and dummy select → Open combat lab | Training tools plus move/buffer/Momentum editing, sprite review, import/export/save, unified gatling reference and rollback trial. The lab can also switch to local versus for testing. |
 

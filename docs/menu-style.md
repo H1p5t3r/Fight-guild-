@@ -13,7 +13,7 @@ Source: the user-supplied `guildball-menu-reference-pack-2026-11-15.zip`, taken 
 
 ## Layout and behavior
 
-The home screen follows the reference's action column and three featured-character cards. Their images are native atlas regions of the existing Anvil, Smoke and Shark concept sheets, copied unchanged into `godot/assets/ui/portraits`; no UI label is baked into the portraits. Guild identity colors are retained on the cards.
+The home screen adapts the reference's palette, type and button surfaces to a fighting-game title screen: a large Fight Guild wordmark, an Anvil/Shark face-off and direct Versus, Training and Development choices. `home_faceoff.gd` reads the existing windup atlases for its decorative fighter artwork; it never starts or advances the combat simulation. Angled planes, a VS divider and guild-colored nameplates frame the pair. The six-fighter roster appears below the artwork, while mode help follows mouse hover or keyboard/controller focus. The unused runtime copies of the earlier concept-sheet cards were removed; original concept art remains under `art/characters`.
 
 `GameMenus` uses grouped compact panels with a fixed heading/navigation area. Fighter select keeps its start action outside the scrolling body. `controls_guide.gd` keeps its heading, scheme tabs and 40-pixel Close action fixed while bindings scroll. Closing it restores focus to the opening control. Native buttons, checkboxes, option pickers, editable fields and keyboard/controller actions retain their behavior.
 
