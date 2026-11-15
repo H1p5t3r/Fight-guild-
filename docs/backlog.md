@@ -2,9 +2,9 @@
 
 ## Proposed combat priorities from the Dustloop study
 
-The [2026-11-15 source review](research/strive-dustloop-2026-11-15.md) compares the three supplied saved pages with the current Fillet/Shark build. These are research recommendations, not newly approved combat rules. Existing user decisions remain authoritative.
+The [2026-11-15 source review](research/strive-dustloop-2026-11-15.md) compares the three supplied saved pages with the Fillet/Shark build. The user approved these priorities, including block carryover and post-stun throw protection after clarification. **No Just Guard / Instant Block timing mechanic is requested.** Guard-break throw vulnerability and the backward-dash restriction remain authoritative.
 
-- [ ] Extend existing frame step, input history and dummy controls with a two-player frame timeline, gap/contact/cancel-window readouts and record/replay from a saved state.
+- [x] Add a two-player frame timeline with contact, phase, gap and spacing readouts; record/replay both players or P2 alone from a saved state. Cancel-window and damage readouts follow with their simulation fields.
 - [ ] Add editable normal/special/jump/follow-up cancel windows while retaining the unified routes; measure Fillet's immediate, delayed and stopped rekka sequences.
 - [ ] Design starter proration, per-move combo damage scaling and minimum damage independently of gravity; preserve the first-X-hits gravity rule and test repeated hook/command-normal routes.
 - [ ] Specify ordinary block carryover and post-recovery throw protection, preserving guard-break throw vulnerability and its backdash restriction.

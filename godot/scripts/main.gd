@@ -66,6 +66,10 @@ var activity_subtitle: Label
 var activity_badge: Label
 var sprite_button: Button
 var fighter_button: Button
+var lab := TrainingLab.new()
+var lab_window: Window
+var timeline: FrameTimeline
+var lab_status: Label
 
 func _ready() -> void:
 	name = "FightGuild"
@@ -169,7 +173,7 @@ func build_interface() -> void:
 	toolbar = row(left)
 	mode = option(toolbar, "", ["Training", "Local versus"])
 	mode.item_selected.connect(func(_i: int): reset_round(); dummy.disabled = mode.selected == 1; training_momentum.disabled = mode.selected == 1)
-	dummy = option(toolbar, "", ["Stand", "Guard all", "Crouch guard", "Practice sequence", "Faultless guard", "Attack loop", "Guard → reversal"])
+	dummy = option(toolbar, "", ["Stand", "Guard all", "Crouch guard", "Practice sequence", "Faultless guard", "Attack loop", "Guard → reversal", "Player 2 controls"])
 	dummy.tooltip_text = "Attack loop repeats Hs for counter/punish practice. Guard → reversal buffers 236P as blockstun ends."
 	button(toolbar, "Hitboxes", func(): show_boxes = not show_boxes)
 	pause_button = button(toolbar, "Pause", func(): paused = not paused; pause_button.text = "Resume" if paused else "Pause", true)
@@ -178,7 +182,10 @@ func build_interface() -> void:
 	practice = row(left)
 	training_momentum = option(practice, "", ["Start Momentum: 0%", "Start Momentum: 50%", "Start Momentum: 100%"])
 	training_momentum.item_selected.connect(func(_i: int): reset_round())
-	label(practice, "Training reset only · hold back + Q for Faultless Defense", 11, MUTED)
+	button(practice, "Record", record_exchange, true)
+	button(practice, "Stop", func(): lab.stop(), true)
+	button(practice, "Replay", func(): replay_exchange(false), true)
+	button(practice, "Frame lab", open_frame_lab, true)
 	arena = Arena.new()
 	left.add_child(arena)
 	arena.gui_input.connect(func(event: InputEvent):
@@ -360,6 +367,7 @@ func build_interface() -> void:
 	label(route_panel, "P → P / K\nK → jump / command\nS → jump / Hs / command\nHs → command", 12, MUTED)
 	label(route_panel, "All attacks → same-button command", 10, ACCENT)
 	build_dialogs()
+	build_frame_lab()
 	menus = GameMenus.new()
 	menus.motion = motion
 	add_child(menus)
@@ -396,6 +404,60 @@ func add_field(parent: Node, spec: Array) -> void:
 	spin.custom_minimum_size.x = 92
 	column.add_child(spin)
 	fields[spec[0]] = {"control": spin, "scale": spec[4]}
+
+func build_frame_lab() -> void:
+	lab_window = Window.new()
+	lab_window.visible = false
+	lab_window.title = "Training · frame lab"
+	lab_window.size = Vector2i(940, 300)
+	lab_window.min_size = Vector2i(790, 280)
+	lab_window.close_requested.connect(func(): lab_window.hide(); release_focus_from_ui())
+	add_child(lab_window)
+	var margin := MarginContainer.new()
+	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	for edge in ["left", "right", "top", "bottom"]: margin.add_theme_constant_override("margin_" + edge, 12)
+	lab_window.add_child(margin)
+	var column := VBoxContainer.new()
+	margin.add_child(column)
+	timeline = FrameTimeline.new()
+	timeline.lab = lab
+	column.add_child(timeline)
+	lab_status = label(column, lab.message, 16)
+	lab_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	var controls := row(column)
+	button(controls, "+1 tick", advance_one)
+	button(controls, "Replay both", func(): replay_exchange(false))
+	button(controls, "Replay P2 dummy", func(): replay_exchange(true))
+	button(controls, "Resume", func(): lab_window.hide(); paused = false; pause_button.text = "Pause")
+	label(column, "Opening this view pauses play. Record P2 with ‘Player 2 controls’; dummy replay leaves P1 live.", 12, MUTED)
+
+func open_frame_lab() -> void:
+	if connection.active or activity not in ["training", "development"]: return
+	paused = true
+	pause_button.text = "Resume"
+	lab_window.popup_centered()
+	timeline.queue_redraw()
+
+func record_exchange() -> void:
+	if connection.active or screen != "play" or activity not in ["training", "development"]: return
+	lab_window.hide()
+	lab.start_recording(model)
+	paused = false
+	pause_button.text = "Pause"
+
+func replay_exchange(dummy_only: bool) -> void:
+	if connection.active or screen != "play" or activity not in ["training", "development"]: return
+	if not lab.start_replay(model, dummy_only): return
+	lab_window.hide()
+	var state := model.state()
+	for p in 2:
+		characters[p] = int(state.players[p].character)
+		simple[p] = bool(state.players[p].simple)
+	held.clear()
+	history.clear()
+	last_raw = 0
+	paused = false
+	pause_button.text = "Pause"
 
 func build_dialogs() -> void:
 	file_dialog = FileDialog.new()
@@ -894,6 +956,8 @@ func read_input(player: int) -> int:
 	return raw
 
 func reset_round() -> void:
+	lab.stop()
+	lab.clear_trace()
 	if connection.active: return
 	round_resolved = false
 	model.reset(characters, simple)
@@ -929,10 +993,13 @@ func simulate_local() -> void:
 					3: b = 4
 					2: b = 4 | toward
 					1: b = toward | 16
-		else:
+		elif dummy.selected != 7:
 			b = [0, away, away | 4, RollbackSession.scripted_input(model.frame(), 1), away | 4 | 2048][dummy.selected]
-	model.step(a, b)
-	record_input(a)
+	var raw := lab.inputs(a, b) if activity in ["training", "development"] else Vector2i(a, b)
+	var before := model.state()
+	model.step(raw.x, raw.y)
+	if activity in ["training", "development"]: lab.observe(model, before, raw)
+	record_input(raw.x)
 
 func record_input(raw: int) -> void:
 	if raw != 0 and raw != last_raw:
@@ -970,6 +1037,10 @@ func _process(_delta: float) -> void:
 	input_label.text = "INPUT HISTORY   " + ("   ".join(history) if not history.is_empty() else "—")
 	var fighter: Dictionary = state.players[connection.player if connection.active else 0]
 	action_label.text = "READY" if fighter.lastMove < 0 else CombatModel.MOVE_IDS[fighter.lastMove] + (" / CONTACT" if fighter.contact else "")
+	if lab.recording_now: action_label.text = "REC · %d / 1800f" % lab.recording.size()
+	elif lab.playback: action_label.text = "REPLAY · %d / %df" % [lab.cursor, lab.recording.size()]
+	lab_status.text = lab.message
+	if lab_window.visible: timeline.queue_redraw()
 
 func run_trial() -> void:
 	var result := RollbackSession.trial(model.data())
