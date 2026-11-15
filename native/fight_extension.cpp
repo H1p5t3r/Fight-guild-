@@ -97,7 +97,14 @@ public:
                 ||f.vx< -4000||f.vx>4000||f.running<0||f.running>1||f.dash<0||f.dash>60
                 ||f.dash_direction< -1||f.dash_direction>1||f.pull_time<0||f.pull_time>60
                 ||f.pull_owner< -1||f.pull_owner>1||f.pull_gap<0||f.pull_gap>10000
-                ||f.carry_vx< -4000||f.carry_vx>4000||f.carry_time<0||f.carry_time>12) return false;
+                ||f.carry_vx< -4000||f.carry_vx>4000||f.carry_time<0||f.carry_time>12
+                ||f.landing_time<0||f.landing_time>120||f.air_action<0||f.air_action>1
+                ||f.throw_grace<0||f.throw_grace>30||f.input_age< -1||f.input_age>11
+                ||f.combo_proration<0||f.combo_proration>100||f.combo_scale<0||f.combo_scale>100
+                ||f.repeat_gravity<0||f.repeat_gravity>300||f.last_damage<0||f.last_damage>1000
+                ||f.damage_scale<0||f.damage_scale>100||f.last_base_damage<0||f.last_base_damage>1000
+                ||f.counter_tier< -1||f.counter_tier>3) return false;
+            for(int uses:f.move_uses) if(uses<0||uses>1000) return false;
         }
         simulation.world=candidate;
         return true;

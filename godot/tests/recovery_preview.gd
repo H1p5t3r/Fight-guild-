@@ -18,6 +18,7 @@ func run() -> void:
 			if args.has("--splat") or args.has("--break") or args.has("--bonus"):
 				var data: Dictionary = game.model.data()
 				data.recoveryRules.wallThreshold = 100
+				data.characters[5].moves[0].launch = 1
 				game.model.load_data(data)
 				game.model.reset()
 				for _tick in 200: game.model.step(2, 2)

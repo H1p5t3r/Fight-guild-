@@ -3,7 +3,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 7, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 51;
+constexpr int VERSION = 8, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 67;
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
               STAB_GROUND=30, STAB_AIR=31;
@@ -23,7 +23,11 @@ enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery
              HitLevel, ChipDamage, GuardBreak, CounterHitstun, CounterHitstop, ReversalEligible, HitboxBack,
              AirPushback, BlockPushback, Launch, AirLaunch, Knockdown, KnockdownFrames, WakeupFrames,
              WallDamage, ThrowRange, Enabled, ArtPose, FollowFrom, FollowFrom2, FollowHit,
-             TravelSpeed, InertiaPercent, PullFrames, PullGap, HitAngle };
+             TravelSpeed, InertiaPercent, PullFrames, PullGap, HitAngle,
+             NormalCancelStart, NormalCancelEnd, SpecialCancelStart, SpecialCancelEnd,
+             JumpCancelStart, JumpCancelEnd, FollowCancelStart, FollowCancelEnd, CancelOn,
+             StarterProration, ComboScaling, MinimumDamage, LandingRecovery, AttackLevel,
+             CounterTier, CounterVulnerable };
 enum KnockdownKind { NoKnockdown, SoftKnockdown, HardKnockdown };
 enum Reaction { Free, AirReel, Downed, Waking, WallSplat, Reeled };
 enum MobilityField { ForwardStyle, WalkSpeed, RunSpeed, RunAcceleration, StepSpeed, StepFrames,
@@ -40,7 +44,9 @@ enum Rule { ButtonBuffer, MotionWindow, MotionGap, MoveGain, AttackGain,
             FDBlockCost, FDDamageCost, FDPushPercent,
             GravityAfter, GravityStep, GravityCap, WallThreshold, WallRange, WallDecayDelay,
             WallDecay, WallSplatFrames, WallBreakFrames, WallBreakDamage,
-            PositiveFrames, PositiveGainPercent, PositiveRegen, RULE_COUNT };
+            PositiveFrames, PositiveGainPercent, PositiveRegen,
+            FDAirDrain, FDLevelCost, CornerPushTransfer, WallMidCap, GroundedWallPrime,
+            BlockCarryover, ThrowGraceFrames, AirLandingFrames, RepeatAfter, RepeatGravityStep, RULE_COUNT };
 struct Move { int v[FIELD_COUNT]; };
 struct Sample { int frame, direction, pressed, held, consumed; };
 struct Fighter {
@@ -56,6 +62,9 @@ struct Fighter {
     int wall_damage, wall_delay, wall_time, wall_side, positive_time;
     int vx, running, dash_direction, pull_time, pull_owner, pull_gap;
     int carry_vx, carry_time;
+    int landing_time, air_action, throw_grace, input_age;
+    int combo_proration, combo_scale, repeat_gravity, move_uses[MOVE_COUNT];
+    int last_damage, damage_scale, last_base_damage, counter_tier;
     Sample history[HISTORY];
 };
 struct State {
@@ -67,11 +76,13 @@ struct Rules {
     int buffer=5, motion_window=20, motion_gap=8;
     // Meter is hundredths of one percent. Rates are provisional, editable tuning.
     int move_gain=2, attack_gain=8, block_attack_gain=4, damage_gain=4, guard_gain=3;
-    int special_gain=100, fd_drain=10, fd_block_cost=100, fd_damage_cost=4, fd_push_percent=300;
+    int special_gain=100, fd_drain=25, fd_block_cost=250, fd_damage_cost=0, fd_push_percent=300;
     int gravity_after=5, gravity_step=10, gravity_cap=200;
     int wall_threshold=1000, wall_range=16000, wall_decay_delay=60, wall_decay=20;
     int wall_splat_frames=60, wall_break_frames=90, wall_break_damage=50;
     int positive_frames=360, positive_gain_percent=150, positive_regen=5;
+    int fd_air_drain=50, fd_level_cost=50, corner_push_transfer=1, wall_mid_cap=50, grounded_wall_prime=1;
+    int block_carryover=1, throw_grace_frames=5, air_landing_frames=3, repeat_after=3, repeat_gravity_step=15;
 };
 // Each engine adapter owns a simulation; multiple matches never share state.
 class Simulation {
@@ -105,7 +116,8 @@ private:
     bool active(const Fighter& f) const;
     void control(Fighter& f);
     bool overlaps(const Fighter& a, const Fighter& b) const;
-    bool blocks(const Fighter& attacker, const Fighter& defender, bool was_stunned) const;
+    bool blocks(const Fighter& attacker, const Fighter& defender, bool was_stunned, bool was_landing) const;
+    bool cancel_window(const Fighter& fighter, int group) const;
     void gain_momentum(Fighter& fighter, int amount);
     void update_faultless(Fighter& fighter);
     Box push_box(const Fighter& fighter) const;

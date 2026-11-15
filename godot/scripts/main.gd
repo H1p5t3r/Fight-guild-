@@ -29,6 +29,7 @@ var buffer_fields: Array[SpinBox] = []
 var momentum_fields := {}
 var recovery_fields := {}
 var movement_fields := {}
+var tuning_fields := {}
 var training_momentum: OptionButton
 var editor_title: Label
 var routes: Label
@@ -223,6 +224,18 @@ func build_interface() -> void:
 	editor.add_child(grid)
 	for spec in [["startup","Startup",5,120,1],["active","Active",1,120,1],["recovery","Recovery",0,180,1],["damage","Damage",0,1000,1],["hitstun","Hitstun",0,180,1],["blockstun","Blockstun",0,180,1],["hitstop","Hitstop",0,30,1],["advance","Advance (px)",-100,100,100],["hitboxBack","Hitbox back (px)",-500,500,100],["reach","Hitbox front (px)",1,500,100],["bottom","Bottom (px)",-500,500,100],["height","Height (px)",1,500,100],["chipDamage","Chip damage",0,1000,1],["counterHitstun","Counter +stun",0,60,1],["counterHitstop","Counter +stop",0,30,1]]:
 		add_field(grid, spec)
+	var timing_panel := VBoxContainer.new()
+	editor.add_child(timing_panel)
+	timing_panel.visible = false
+	button(editor, "Cancels, scaling & landing ▾", func(): timing_panel.visible = not timing_panel.visible)
+	var timing_grid := GridContainer.new()
+	timing_grid.columns = 2
+	timing_panel.add_child(timing_grid)
+	for spec in [["normalCancelStart","Normal open f",1,420,1],["normalCancelEnd","Normal close f",0,420,1],["specialCancelStart","Special open f",1,420,1],["specialCancelEnd","Special close f",0,420,1],["jumpCancelStart","Jump open f",1,420,1],["jumpCancelEnd","Jump close f",0,420,1],["followCancelStart","Follow-up open f",1,420,1],["followCancelEnd","Follow-up close f",0,420,1],["cancelOn","Cancel events mask",0,7,1],["starterProration","Starter %",0,100,1],["comboScaling","Scaling cost %",0,100,1],["minimumDamage","Minimum damage %",0,100,1],["landingRecovery","Landing recovery f",0,120,1],["attackLevel","Attack level",-1,4,1],["counterTier","Counter tier",-1,3,1],["counterVulnerable","Counter phases mask",0,7,1]]:
+		add_field(timing_grid, spec)
+	var timing_note := label(timing_panel, "Windows use completed move frames; close 0 = end of move. Cancel events: hit 1 + block 2 + whiff 4. Routes still apply. Counter phases: startup 1 + active 2 + recovery 4. Preset −1 keeps custom values.", 11, MUTED)
+	timing_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	button(timing_panel, "Use selected timing presets", apply_timing_presets)
 	label(editor, "HIT REACTIONS", 11, MUTED)
 	var reactions := GridContainer.new()
 	reactions.columns = 2
@@ -331,6 +344,31 @@ func build_interface() -> void:
 	var recovery_note := label(recovery_panel, "First X hits use normal gravity. Each further hit adds gravity up to the cap. Splat, then strike again to break; an expired splat falls into soft recovery. Wall breaks return to neutral with a Momentum gain bonus.", 11, MUTED)
 	recovery_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button(recovery_panel, "Apply recovery & reset", apply_recovery, true, "essential")
+	var tuning_panel := VBoxContainer.new()
+	editor.add_child(tuning_panel)
+	tuning_panel.visible = false
+	button(editor, "Defense, landing & wall tuning ▾", func(): tuning_panel.visible = not tuning_panel.visible)
+	var tuning_grid := GridContainer.new()
+	tuning_grid.columns = 2
+	tuning_panel.add_child(tuning_grid)
+	for spec in [["fdAirDrain","Air FD % / frame",0.01,10,100],["fdLevelCost","FD % / attack level",0,10,100],["wallMidCap","Midscreen wall cap %",0,100,1],["throwGraceFrames","Throw protection f",0,30,1],["airLandingFrames","Recovered air landing f",0,120,1],["repeatAfter","Repeat penalty from use",0,100,1],["repeatGravityStep","Repeat gravity +%",0,100,1]]:
+		var column := VBoxContainer.new()
+		tuning_grid.add_child(column)
+		label(column, spec[1], 10, MUTED)
+		var spin := SpinBox.new()
+		spin.min_value = spec[2]
+		spin.max_value = spec[3]
+		spin.step = 0.01 if spec[4] == 100 else 1
+		column.add_child(spin)
+		tuning_fields[spec[0]] = {"control": spin, "scale": spec[4]}
+	for spec in [["cornerPushTransfer","Ordinary corner pushback"],["groundedWallPrime","Prime wall before grounded splat"],["blockCarryover","Carry guard through blockstun"]]:
+		var toggle := CheckBox.new()
+		toggle.text = spec[1]
+		tuning_panel.add_child(toggle)
+		tuning_fields[spec[0]] = {"control": toggle, "scale": 1}
+	var tuning_note := label(tuning_panel, "No timed blocking bonus. Guard break bypasses carryover and throw protection. Repeated moves add gravity only after the unscaled-hit threshold.", 11, MUTED)
+	tuning_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	button(tuning_panel, "Apply tuning & reset", apply_tuning, true, "essential")
 	var movement_panel := VBoxContainer.new()
 	editor.add_child(movement_panel)
 	movement_panel.visible = false
@@ -409,8 +447,8 @@ func build_frame_lab() -> void:
 	lab_window = Window.new()
 	lab_window.visible = false
 	lab_window.title = "Training · frame lab"
-	lab_window.size = Vector2i(940, 300)
-	lab_window.min_size = Vector2i(790, 280)
+	lab_window.size = Vector2i(940, 350)
+	lab_window.min_size = Vector2i(790, 330)
 	lab_window.close_requested.connect(func(): lab_window.hide(); release_focus_from_ui())
 	add_child(lab_window)
 	var margin := MarginContainer.new()
@@ -847,6 +885,33 @@ func populate_editor() -> void:
 		momentum_fields[rule].control.value = float(data.momentumRules[rule]) / momentum_fields[rule].scale
 	for rule in recovery_fields:
 		recovery_fields[rule].control.value = float(data.recoveryRules[rule]) / recovery_fields[rule].scale
+	for rule in tuning_fields:
+		var entry: Dictionary = tuning_fields[rule]
+		if entry.control is CheckBox: entry.control.button_pressed = bool(data.tuningRules[rule])
+		else: entry.control.value = float(data.tuningRules[rule]) / entry.scale
+
+func apply_timing_presets() -> void:
+	if connection.active: return
+	var level := int(fields.attackLevel.control.value)
+	if level >= 0:
+		fields.hitstop.control.value = [11, 12, 13, 14, 15][level]
+		fields.hitstun.control.value = [12, 14, 16, 19, 21][level]
+		fields.blockstun.control.value = [9, 11, 13, 16, 18][level]
+	var tier := int(fields.counterTier.control.value)
+	if tier >= 0:
+		fields.counterHitstun.control.value = [0, 4, 8, 12][tier]
+		fields.counterHitstop.control.value = [0, 3, 6, 10][tier]
+	editor_status.text = "Preset copied into timing fields. Apply the move to test it."
+
+func apply_tuning() -> void:
+	if connection.active: return
+	var data := model.data()
+	for key in tuning_fields:
+		var entry: Dictionary = tuning_fields[key]
+		data.tuningRules[key] = int(entry.control.button_pressed) if entry.control is CheckBox else roundi(entry.control.value * entry.scale)
+	var error := model.load_data(data)
+	if error.is_empty(): reset_round()
+	editor_status.text = "Defense, landing and wall tuning applied." if error.is_empty() else error
 
 func apply_move() -> void:
 	if connection.active: return
@@ -1069,6 +1134,9 @@ func lock_online(locked: bool) -> void:
 	for spin in buffer_fields: spin.editable = not locked
 	for field in momentum_fields.values(): field.control.editable = not locked
 	for field in recovery_fields.values(): field.control.editable = not locked
+	for field in tuning_fields.values():
+		if field.control is CheckBox: field.control.disabled = locked
+		else: field.control.editable = not locked
 	for field in movement_fields.values():
 		if field.control is OptionButton: field.control.disabled = locked
 		else: field.control.editable = not locked

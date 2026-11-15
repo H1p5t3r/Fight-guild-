@@ -1,17 +1,21 @@
 # Playable-build backlog
 
-## Proposed combat priorities from the Dustloop study
+## Approved combat priorities from the Dustloop study
 
 The [2026-11-15 source review](research/strive-dustloop-2026-11-15.md) compares the three supplied saved pages with the Fillet/Shark build. The user approved these priorities, including block carryover and post-stun throw protection after clarification. **No Just Guard / Instant Block timing mechanic is requested.** Guard-break throw vulnerability and the backward-dash restriction remain authoritative.
 
-- [x] Add a two-player frame timeline with contact, phase, gap and spacing readouts; record/replay both players or P2 alone from a saved state. Cancel-window and damage readouts follow with their simulation fields.
-- [ ] Add editable normal/special/jump/follow-up cancel windows while retaining the unified routes; measure Fillet's immediate, delayed and stopped rekka sequences.
-- [ ] Design starter proration, per-move combo damage scaling and minimum damage independently of gravity; preserve the first-X-hits gravity rule and test repeated hook/command-normal routes.
-- [ ] Specify ordinary block carryover and post-recovery throw protection, preserving guard-break throw vulnerability and its backdash restriction.
-- [ ] Define prejump and move-specific landing recovery, especially Shark's air hook and air stab at different jump heights.
-- [ ] Tune ordinary corner pushback, FD ground/air drain and contact spacing using recorded matchup cases. Keep FD as the only Momentum spend and Negative Penalty deferred.
-- [ ] Add optional attack-strength/counter presets with per-move overrides; evaluate counter-vulnerability windows and victim-only slowdown separately from extra hitstop.
-- [ ] Evaluate a midscreen wall-damage cap, grounded/airborne splat conditions and the value of breaking the wall with an FD-only resource economy.
+- [x] Add a two-player frame timeline with contact, phase, gap, spacing, cancel-window, input-age, damage and gravity readouts; record/replay both players or P2 alone from a saved state.
+- [x] Add editable normal/special/jump/follow-up cancel windows while retaining the unified routes; verify Fillet's full rekka and low shortcut.
+- [x] Add starter proration, per-move combo scaling and minimum damage independently of gravity; preserve the first-X-hits rule and add repeated-move gravity after that threshold.
+- [x] Add ordinary block carryover and editable post-recovery throw protection, preserving guard-break throw vulnerability and its backdash restriction.
+- [x] Add move-specific landing recovery, including Shark's air hook and air stab, and a separate recovered-air-action landing duration.
+- [ ] Add grounded jump startup before takeoff; define empty-jump recovery independently of aerial attacks.
+- [x] Add ordinary corner pushback and separate FD ground/air drain and attack-level contact costs. Keep FD as the only Momentum spend and Negative Penalty deferred.
+- [x] Add optional attack-strength/counter presets, per-move overrides and counter-vulnerability masks; distinguish heavy counters from pokes and follow-ups.
+- [x] Add an editable midscreen wall-damage cap and grounded wall priming, with separate airborne threshold behavior.
+- [ ] Playtest the recorded Fillet/Shark pressure, FD spacing, hook height and wall-break reward cases from the source review before locking balance. Persistent victim-only slowdown remains a later feature, separate from shared hitstop.
+
+See [combat tuning](combat-tuning.md) for defaults, migration rules and verified cases.
 
 ## Next: consistent sprite and future-character pipeline
 
@@ -43,7 +47,7 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Distinguish startup/active counter hits from recovery punishes, including symmetric trades.
 - [x] Expose per-move counter-hit hitstun/hitstop bonuses and reversal eligibility; preserve old saved move sets.
 - [x] Detect first-actionable-frame reversals through the existing input buffer and add attack-loop / guard-to-reversal practice dummies.
-- [ ] Playtest the provisional +4 hitstun/+3 hitstop counter defaults across the six kits before choosing distinct move-specific values.
+- [ ] Playtest the new minimal/small/medium/large counter presets across the six kits before locking move-specific values.
 - [x] Add automatic soft/hard knockdown recovery and route wakeup completion through the existing reversal opportunity.
 - [ ] Design invulnerable reversal tools separately.
 

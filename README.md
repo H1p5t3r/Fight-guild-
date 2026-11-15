@@ -21,12 +21,15 @@ Download the Windows/Linux ZIP from this branch's successful GitHub Actions arti
 - **Player 1:** WASD; J/K/L/I/O = P/K/S/Hs/D; Space = run/dash; left Shift = simple modifier; back + Q = Faultless Defense.
 - **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = run/dash; numpad + = modifier; back + numpad Enter = Faultless Defense.
 - Choose simplified inputs independently at fighter select. Traditional motions stay available.
-- In **Development**, edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1–6 saves preserve edits during migration; Restore default move set loads the new starter tuning.
+- In **Training**, use **Record**, **Replay** and **Frame lab** to inspect both fighters, cancel windows, input age, spacing and damage scaling. P2-only replay lets you practice against a recorded exchange; [training lab](docs/training-lab.md) explains the controls.
+- In **Development**, edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1–7 saves preserve edits during migration; Restore default move set loads the new starter tuning.
 - Online: direct ENet/UDP host and join, default port 7000. Both players use Player 1 controls locally. Matching move data is required.
 
-Momentum has **three equal sections**, with continuous gain and unchanged FD costs. Try **Start Momentum: 50%** and the **Faultless guard** dummy in training. The move editor exposes chip damage and **Guard break on block**; Sprite review includes negative/even, positive and guard-break clips. [Momentum and defense rules](docs/momentum-defense.md) describe the provisional tuning. Negative Penalty is deferred; FD is the only meter spend.
+Momentum has **three equal sections**, with continuous gain and separately editable ground/air FD costs. Try **Start Momentum: 50%** and the **Faultless guard** dummy in training. The move editor exposes chip damage and **Guard break on block**; Sprite review includes negative/even, positive and guard-break clips. [Momentum and defense rules](docs/momentum-defense.md) describe the provisional tuning. Negative Penalty is deferred; FD is the only meter spend.
 
 Combos now appear as large background numerals on the attacker's current side. **Attack loop** and **Guard → reversal** training dummies help test counter hits, recovery punishes and first-frame reversals. Counter-hit bonuses and reversal eligibility are editable per move. See [combo and timing rules](docs/combat-feedback.md).
+
+The [combat tuning editor](docs/combat-tuning.md) now supports cancel windows, starter and progressive damage scaling, landing recovery, attack/counter presets, block carryover, five-frame post-stun throw protection and grounded wall priming. Guard break retains its throw vulnerability and backdash restriction. Blocking has no Just Guard or Instant Block timing requirement.
 
 ## Develop on Linux
 

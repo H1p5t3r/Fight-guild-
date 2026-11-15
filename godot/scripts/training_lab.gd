@@ -62,29 +62,42 @@ static func phase(model: CombatModel, fighter: Dictionary) -> String:
 		return "RECOVER"
 	return "READY"
 
+static func notation(raw: int, facing: int) -> String:
+	var x := (int(bool(raw & 2)) - int(bool(raw & 1))) * facing
+	var y := int(bool(raw & 8)) - int(bool(raw & 4))
+	var value := str(5 + x + 3*y)
+	for button in 5:
+		if raw & (16 << button): value += CombatModel.BUTTONS[button]
+	if raw & 512: value += " Dash"
+	if raw & 1024: value += " Simple"
+	if raw & 2048: value += " FD"
+	return value
+
 func observe(model: CombatModel, before: Dictionary, raw: Vector2i) -> void:
 	var after := model.state()
 	if after.frame == before.frame: return
-	var tick := {"frame": before.frame, "freeze": before.hitstop > 0, "players": []}
+	var tick := {"frame": before.frame, "freeze": before.hitstop > 0 or before.wallBreakTime > 0 or before.winner >= 0, "players": []}
 	for p in 2:
 		var old: Dictionary = before.players[p]
 		var fighter: Dictionary = after.players[p]
 		var contact: bool = fighter.contact != 0 and (old.contact == 0 or old.move != fighter.move)
 		var incoming: bool = after.players[1-p].contact != 0 and (before.players[1-p].contact == 0 or before.players[1-p].move != after.players[1-p].move)
 		if old.guarding and old.stun > 0: chains[p] = true
-		if chains[p] and not tick.freeze and old.stun == 0 and old.reaction == 0: gaps[p] += 1
+		if chains[p] and not tick.freeze and old.stun == 0 and old.reaction == 0 and old.get("landingTime", 0) == 0: gaps[p] += 1
 		var gap: int = gaps[p] if incoming and chains[p] else -1
 		if incoming: gaps[p] = 0; chains[p] = bool(fighter.guarding)
 		if gaps[p] > TRACE_LENGTH: gaps[p] = 0; chains[p] = false
 		var label := phase(model, fighter)
+		if old.get("landingTime", 0) > 0: label = "LAND"
 		# The final recovery tick has just cleared the move in the core.
 		if fighter.move < 0 and old.move >= 0 and not incoming: label = "RECOVER"
 		tick.players.append({"phase": label, "move": fighter.move, "age": fighter.age,
 			"input": raw.x if p == 0 else raw.y, "contact": contact, "gap": gap,
+			"notation": notation(raw.x if p == 0 else raw.y, old.facing),
 			"stun": fighter.stun, "advantage": fighter.blockAdvantage if fighter.guarding else null,
 			"spacing": abs(after.players[0].x - after.players[1].x) / 100.0,
 			"cancelMask": fighter.get("cancelMask", 0), "inputAge": fighter.get("inputAge", -1),
-			"damage": fighter.get("lastDamage", 0), "scaling": fighter.get("damageScale", 100),
+			"damage": fighter.get("lastDamage", 0), "baseDamage": fighter.get("lastBaseDamage", 0), "scaling": fighter.get("damageScale", 100),
 			"gravity": fighter.gravityPercent})
 	trace.append(tick)
 	if trace.size() > TRACE_LENGTH: trace.pop_front()

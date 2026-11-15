@@ -42,6 +42,9 @@ func _initialize() -> void:
 		move.bottom = 0
 		move.height = 50000
 		move.startup = 5
+		move.launch = 1 # A launching hit may splat immediately under the grounded-prime rule.
+		move.starterProration = 100
+		move.comboScaling = 0
 	check(model.load_data(settings).is_empty(), "Valid wall tuning rejected")
 	model.reset()
 	for _tick in 200: model.step(2, 2)

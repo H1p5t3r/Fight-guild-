@@ -84,5 +84,5 @@ func verify_hook_rollback(air: bool) -> void:
 					packets.remove_at(i)
 			check(session.advance(), "Signature rollback stalled: " + session.error)
 		for packet in packets: session.submit(0, packet.frame, packet.input)
-		check(saw_pull and saw_weapon and saw_combo and reference.state().players[1].health == 930, "Real input hook / stab did not connect")
+		check(saw_pull and saw_weapon and saw_combo and reference.state().players[1].health == 948, "Real input hook / scaled stab did not connect")
 		check(session.error.is_empty() and session.rollbacks > 0 and reference.state_hash() == predicted.state_hash(), "Hook rollback diverged: air=%s delay=%d" % [air, delay])

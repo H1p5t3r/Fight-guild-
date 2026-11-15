@@ -28,7 +28,8 @@ func refresh(state: Dictionary, bounds: Vector2) -> void:
 		cards.append({"number": count, "left": left, "center_x": center_x, "font_size": font_size,
 			"alpha": minf(1.0, fighter.comboTime / 18.0), "hit": fighter.hitNotice if fighter.hitNoticeTime > 0 else 0,
 			"hit_alpha": minf(1.0, fighter.hitNoticeTime / 12.0), "reversal": fighter.reversalTime > 0,
-			"reversal_alpha": minf(1.0, fighter.reversalTime / 12.0), "input_age": fighter.reversalInputAge})
+			"reversal_alpha": minf(1.0, fighter.reversalTime / 12.0), "input_age": fighter.reversalInputAge,
+			"tier": fighter.get("counterTier", -1)})
 
 func centered(canvas: CanvasItem, text: String, x: float, y: float, font_size: int, color: Color) -> void:
 	var width := DISPLAY_FONT.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
@@ -57,7 +58,8 @@ func draw(canvas: CanvasItem) -> void:
 			centered(canvas, "HIT COMBO", center_x + 35, base.y + 22, 15, Color(tint, 0.95 * alpha))
 		if card.hit in [3, 4]:
 			var hit_color := Color("ffc771") if card.hit == 3 else Color("ff9d87")
-			FightHud.stamp(canvas, "COUNTER" if card.hit == 3 else "PUNISH", Vector2(center_x, 182), 31, hit_color, card.hit_alpha)
+			var notice_size: int = [23, 29, 36, 44][card.tier] if card.hit == 3 and card.tier >= 0 else 31
+			FightHud.stamp(canvas, "COUNTER" if card.hit == 3 else "PUNISH", Vector2(center_x, 182), notice_size, hit_color, card.hit_alpha)
 		if card.reversal:
 			var detail := "FIRST FRAME" if card.input_age == 0 else "BUFFERED %df" % card.input_age
 			if card.number >= 2 or card.hit in [3, 4]:

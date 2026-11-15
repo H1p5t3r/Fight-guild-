@@ -190,7 +190,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	key(KEY_Q, true)
 	ticks(1)
 	for code in [KEY_A, KEY_Q]: key(code, false)
-	check(game.model.state().players[0].faultless == 1 and game.model.state().players[0].momentum == 4990, "Keyboard FD macro failed")
+	check(game.model.state().players[0].faultless == 1 and game.model.state().players[0].momentum == 5000 - game.model.data().momentumRules.fdDrain, "Keyboard FD macro failed")
 	check(game.arena.sprites[0].get_meta("phase") == "block", "FD has no guard pose")
 	game.mode.select(1)
 	game.reset_round()

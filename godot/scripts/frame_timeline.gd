@@ -6,7 +6,8 @@ var selected := -1
 const COLORS := {"READY": Color("465460"), "START": Color("e7be64"), "ACTIVE": Color("ef6c61"), "RECOVER": Color("7497d0"), "GUARD": Color("67cfbb"), "HIT": Color("c48cdb"), "REEL": Color("c48cdb"), "DOWN": Color("89818e"), "LAND": Color("7497d0")}
 
 func _ready() -> void:
-	custom_minimum_size = Vector2(760, 160)
+	custom_minimum_size = Vector2(760, 205)
+	clip_contents = true
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	gui_input.connect(func(event: InputEvent):
@@ -40,8 +41,12 @@ func _draw() -> void:
 	for p in 2:
 		var item: Dictionary = tick.players[p]
 		var move: String = CombatModel.MOVE_IDS[item.move] if item.move >= 0 else "—"
-		var details := "P%d · %s %s · age %df · input %d · stun %df · spacing %.1fpx" % [p+1, move, item.phase, item.age, item.input, item.stun, item.spacing]
+		var details := "P%d · %s %s · age %df · input %s · stun %df · spacing %.1fpx" % [p+1, move, item.phase, item.age, item.notation, item.stun, item.spacing]
 		if item.gap >= 0: details += " · gap %df" % item.gap
 		if item.advantage != null: details += " · attacker %+df" % item.advantage
-		text(details, Vector2(10, 106+p*22))
-	text("Tick %d · gold underline = open cancel window · hover to inspect" % tick.frame, Vector2(10, 151), GuildTheme.BRASS)
+		text(details, Vector2(10, 103+p*44))
+		var windows: Array[String] = []
+		for group in 4:
+			if item.cancelMask & (1 << group): windows.append(["normal", "special", "jump", "follow-up"][group])
+		text("Cancel: %s · input age %df · last hit %d → %d (%d%%) · gravity %d%%" % [" / ".join(windows) if not windows.is_empty() else "closed", item.inputAge, item.baseDamage, item.damage, item.scaling, item.gravity], Vector2(10, 123+p*44), GuildTheme.MUTED)
+	text("Tick %d · gold underline = open cancel window · hover to inspect" % tick.frame, Vector2(10, 195), GuildTheme.BRASS)

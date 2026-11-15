@@ -108,7 +108,7 @@ static void hooks() {
         CHECK(a.move==(air?STAB_AIR:STAB_GROUND));
         CHECK((b.x-a.x)*a.facing<before);
         ticks(s,24);auto hash=s.checksum();
-        CHECK(b.health<=930&&a.combo>=2); // Hook 25 + blade 45 remains a true combo.
+        CHECK(b.health==948&&a.combo>=2); // Hook 25 + scaled blade 27 remains a true combo.
         s.world=snapshot;s.step(P,0);ticks(s,24);CHECK(s.checksum()==hash);
     }
     CHECK(!hook(s,false,false,false));s.step(P,0);CHECK(s.world.players[0].move==HOOK_GROUND);
@@ -131,7 +131,7 @@ static void rekka_hits() {
             s.step(input,0);
             if(s.world.players[0].combo>highest) highest=s.world.players[0].combo;
         }
-        CHECK(highest==(skip?2:3));CHECK(s.world.players[1].health==(skip?920:890));
+        CHECK(highest==(skip?2:3));CHECK(s.world.players[1].health==(skip?930:911));
     }
     for(bool crouch:{false,true}) {
         Simulation s;s.defaults();s.reset(5,4,0,0);s.world.players[1].x=48000;

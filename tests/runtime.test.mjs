@@ -94,7 +94,7 @@ test('Signature moves, movement profiles and schema-6 migration survive the WASM
     inputs.push([input,other]);e.step(input,other);
     sawPull ||= e.state().players[1].reaction===5;sawCombo ||= e.state().players[0].combo===2;
   }
-  assert.ok(sawPull&&sawCombo);assert.equal(e.state().players[1].health,930);
+  assert.ok(sawPull&&sawCombo);assert.equal(e.state().players[1].health,948);
   const expected=e.hash;e.restore(saved);for(const input of inputs.slice(25)) e.step(...input);
   assert.equal(e.hash,expected);
 });

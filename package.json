@@ -9,7 +9,7 @@
   "scripts": {
     "build": "bash scripts/build.sh && node scripts/bundle.mjs",
     "start": "node scripts/server.mjs",
-    "test": "bash scripts/build.sh && ./build/core-tests && ./build/collision-tests && ./build/recovery-tests && ./build/signature-tests && node --test tests/*.test.mjs",
+    "test": "bash scripts/build.sh && ./build/core-tests && ./build/collision-tests && ./build/recovery-tests && ./build/signature-tests && ./build/tuning-tests && node --test tests/*.test.mjs",
     "test:browser": "node tests/browser-smoke.mjs"
   },
   "dependencies": {

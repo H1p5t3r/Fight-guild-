@@ -134,6 +134,8 @@ static Simulation splat(int actor=0) {
     auto s=match();s.rules.wall_threshold=100;
     auto& m=s.moves[s.world.players[actor].character][0];
     m.v[Reach]=50000;m.v[Bottom]=0;m.v[Height]=50000;m.v[WallDamage]=100;m.v[Damage]=20;
+    // An explicit launcher splats immediately; grounded priming is covered by tuning_test.
+    m.v[Launch]=1;m.v[StarterProration]=100;m.v[ComboScaling]=0;
     s.world.players[actor].x=actor==0?90000:10000;
     s.world.players[1-actor].x=actor==0?97000:2800;
     prime(s,actor);s.step(0,0);return s;
@@ -171,7 +173,7 @@ static void test_walls() {
     CHECK(bonus.world.players[0].momentum==245&&bonus.world.players[0].positive_time==0);
     auto fd=match();fd.world.players[0].positive_time=1;fd.world.players[0].momentum=1000;
     fd.step(Left|Faultless,0);
-    CHECK(fd.world.players[0].momentum==990&&fd.world.players[0].positive_time==0);
+    CHECK(fd.world.players[0].momentum==1000-fd.rules.fd_drain&&fd.world.players[0].positive_time==0);
     auto mid=match();wide(mid).v[WallDamage]=400;prime(mid);mid.step(0,0);
     CHECK(mid.world.players[1].wall_damage==100&&mid.world.players[1].reaction==Free);
     thaw(mid);ticks(mid,mid.rules.wall_decay_delay+1);

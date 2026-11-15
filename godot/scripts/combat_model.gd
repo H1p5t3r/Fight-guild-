@@ -2,18 +2,19 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 7
+const DATA_VERSION := 8
 const MOMENTUM_MAX := 10000
 const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
 const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D", "2D", "4P+K", "6P+K", "236K", "236S>6S", "236S>2S", "214S", "j.214P", "214S>P", "j.214P>P"]
-const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange", "enabled", "artPose", "followFrom", "followFrom2", "followHit", "travelSpeed", "inertiaPercent", "pullFrames", "pullGap", "hitAngle"]
+const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange", "enabled", "artPose", "followFrom", "followFrom2", "followHit", "travelSpeed", "inertiaPercent", "pullFrames", "pullGap", "hitAngle", "normalCancelStart", "normalCancelEnd", "specialCancelStart", "specialCancelEnd", "jumpCancelStart", "jumpCancelEnd", "followCancelStart", "followCancelEnd", "cancelOn", "starterProration", "comboScaling", "minimumDamage", "landingRecovery", "attackLevel", "counterTier", "counterVulnerable"]
 const MOVEMENT_FIELDS := ["forwardStyle", "walkSpeed", "runSpeed", "runAcceleration", "stepSpeed", "stepFrames", "backSpeed", "backFrames", "attackFriction"]
 const RULES := ["buttonBuffer", "motionWindow", "motionGap"]
 const MOMENTUM_RULES := ["movementGain", "attackGain", "blockedAttackGain", "damageTakenGain", "guardGain", "specialGain", "fdDrain", "fdBlockCost", "fdDamageCost", "fdPushPercent"]
 const RECOVERY_RULES := ["gravityAfter", "gravityStep", "gravityCap", "wallThreshold", "wallRange", "wallDecayDelay", "wallDecay", "wallSplatFrames", "wallBreakFrames", "wallBreakDamage", "positiveFrames", "positiveGainPercent", "positiveRegen"]
-const RULE_COUNT := 26 # Input, Momentum, then recovery/wall rules; matches fight::RULE_COUNT.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime"]
+const TUNING_RULES := ["fdAirDrain", "fdLevelCost", "cornerPushTransfer", "wallMidCap", "groundedWallPrime", "blockCarryover", "throwGraceFrames", "airLandingFrames", "repeatAfter", "repeatGravityStep"]
+const RULE_COUNT := 36 # Input, Momentum, recovery/walls, then tuning rules.
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage"]
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
 
@@ -51,13 +52,15 @@ func movement(character: int) -> Dictionary:
 	return result
 
 func data() -> Dictionary:
-	var result := {"schema": DATA_VERSION, "coreVersion": DATA_VERSION, "inputRules": {}, "momentumRules": {}, "recoveryRules": {}, "characters": []}
+	var result := {"schema": DATA_VERSION, "coreVersion": DATA_VERSION, "inputRules": {}, "momentumRules": {}, "recoveryRules": {}, "tuningRules": {}, "characters": []}
 	for i in RULES.size():
 		result.inputRules[RULES[i]] = config[config.size() - RULE_COUNT + i]
 	for i in MOMENTUM_RULES.size():
 		result.momentumRules[MOMENTUM_RULES[i]] = config[config.size() - RULE_COUNT + RULES.size() + i]
 	for i in RECOVERY_RULES.size():
-		result.recoveryRules[RECOVERY_RULES[i]] = config[config.size() - RECOVERY_RULES.size() + i]
+		result.recoveryRules[RECOVERY_RULES[i]] = config[config.size() - RULE_COUNT + RULES.size() + MOMENTUM_RULES.size() + i]
+	for i in TUNING_RULES.size():
+		result.tuningRules[TUNING_RULES[i]] = config[config.size() - TUNING_RULES.size() + i]
 	for c in CHARACTERS.size():
 		var character := {"name": CHARACTERS[c], "moves": [], "movement": movement(c)}
 		for m in MOVE_IDS.size():
@@ -117,7 +120,10 @@ func load_data(value: Variant) -> String:
 				definition.wallDamage = clampi(int(definition.damage) * 3 + 80, 0, 5000)
 				definition.throwRange = 2000
 			if version < 7:
-				for i in range(41, FIELDS.size()): definition[FIELDS[i]] = candidate[(c * MOVE_IDS.size() + m) * FIELDS.size() + i]
+				for i in range(41, 51): definition[FIELDS[i]] = candidate[(c * MOVE_IDS.size() + m) * FIELDS.size() + i]
+			if version < 8:
+				var legacy_defaults := [1, 0, 1, 0, 1, 0, 1, 0, 7, 100, 0, 0, 0, -1, -1, 3]
+				for i in legacy_defaults.size(): definition[FIELDS[51+i]] = legacy_defaults[i]
 			for i in FIELDS.size():
 				var field: String = FIELDS[i]
 				if not valid_integer(definition.get(field)):
@@ -133,7 +139,7 @@ func load_data(value: Variant) -> String:
 				if not valid_integer(characters[c].movement.get(field)): return "Invalid movement: " + field
 				candidate[start + i] = int(characters[c].movement[field])
 	var offset := candidate.size() - RULE_COUNT
-	for group in [["inputRules", RULES, 1], ["momentumRules", MOMENTUM_RULES, 3], ["recoveryRules", RECOVERY_RULES, 6]]:
+	for group in [["inputRules", RULES, 1], ["momentumRules", MOMENTUM_RULES, 3], ["recoveryRules", RECOVERY_RULES, 6], ["tuningRules", TUNING_RULES, 8]]:
 		if version >= group[2]:
 			if not value.get(group[0]) is Dictionary: return "Missing " + group[0]
 			for i in group[1].size():
@@ -141,6 +147,11 @@ func load_data(value: Variant) -> String:
 				if not valid_integer(value[group[0]].get(rule)): return "Invalid rule: " + rule
 				candidate[offset + i] = int(value[group[0]][rule])
 		offset += group[1].size()
+	if version < 8:
+		# Retain saved FD costs and gravity behavior; new editor fields remain available.
+		candidate[candidate.size() - TUNING_RULES.size()] = candidate[candidate.size() - RULE_COUNT + 9]
+		candidate[candidate.size() - TUNING_RULES.size() + 1] = 0
+		candidate[candidate.size() - 1] = 0
 	if not core.configure(candidate):
 		return "A move value or rule is outside the supported range."
 	config = core.configuration()

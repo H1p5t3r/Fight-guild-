@@ -1,6 +1,6 @@
 # Momentum and defensive reactions
 
-Momentum is Fight Guild's Strive-inspired resource: a 0–100% gauge displayed in **three equal sections**, approach/offense/defense gains, and Faultless Defense (FD). Each section represents one third of the meter; fill and FD drain remain continuous across the gaps. Player 2's gauge fills from the opposite edge. **FD is the only spending mechanic. Negative Penalty is deferred**, including its meter removal and gain reduction. These are editable prototype rates, not a verified reproduction of Strive's numerical formulas. Supers, Roman Cancels, RISC, Positive Bonus and wall-break systems are not implemented.
+Momentum is Fight Guild's Strive-inspired resource: a 0–100% gauge displayed in **three equal sections**, approach/offense/defense gains, and Faultless Defense (FD). Each section represents one third of the meter; fill and FD drain remain continuous across the gaps. Player 2's gauge fills from the opposite edge. **FD is the only spending mechanic. Negative Penalty is deferred**, including its meter removal and gain reduction. These are editable prototype rates, not a verified reproduction of Strive's numerical formulas. Wall breaks and a Momentum Positive Bonus are implemented. Supers, Roman Cancels and RISC are not implemented.
 
 ## Gain and spending
 
@@ -14,16 +14,19 @@ Both players start a round at 0%. Training can reset both gauges to 0%, 50% or 1
 | Take a hit | +0.04% per point of authored damage |
 | Ordinary guard | +0.03% per point of incoming authored damage |
 | Start a special or Drive | +1%, once per activation, including whiffs |
-| Hold FD | −0.10% per simulation tick (6% per second) |
-| Block a hit with FD | −1% plus −0.04% per point of incoming authored damage |
+| Hold grounded FD | −0.25% per simulation tick (15% per second) |
+| Hold airborne FD | −0.50% per simulation tick (30% per second) |
+| Block a hit with FD | −2.5% plus −0.5% per incoming attack level, in addition to holding drain |
 
 A whiffed normal earns nothing. Knockback, move-authored advance, walking into a wall or pushing against a stationary cornered opponent do not farm movement gain. Ordinary air movement toward the opponent can earn meter. Hitstop does not repeat contact gains, but holding FD continues to drain meter during it. FD suppresses the defender's meter gain while active.
 
-Values are integer hundredths of a percent internally. Fractional movement gain carries an integer remainder in the snapshot. The editor exposes these rates under **Momentum & Faultless Defense**. Changes reset the local round, save with the move set and participate in the online compatibility fingerprint.
+Values are integer hundredths of a percent internally. Fractional movement gain carries an integer remainder in the snapshot. The editor exposes basic rates under **Momentum & Faultless Defense**, and air drain / attack-level cost under **Defense, landing & wall tuning**. Changes reset the local round, save with the move set and participate in the online compatibility fingerprint.
 
 ## Faultless Defense
 
 Hold away plus **Q** (P1), **numpad Enter** (P2), or **right trigger** (gamepad). Holding away plus two of **P/K/S/Hs** also activates it, except grounded **4P+K**, which now performs back throw; Drive does not count toward the two-button chord. Use down-back for lows. Air guard has no high/low distinction in this prototype.
+
+Ordinary guard now carries through continuous blockstun while enforcing high/low defense. Normal recovery grants five ticks of throw grace. Guard break receives neither benefit. These are configurable and add no Just Guard / Instant Block timing mechanic.
 
 With positive meter, FD uses a teal shield, prevents chip damage/KO and multiplies block pushback by 3. At a corner, displacement that the defender cannot take transfers back to the attacker. FD does not add blockstun. It cannot cancel an attack or escape hitstun. It can be activated while already in blockstun. The chord reserves attack/jump/dash inputs so releasing it does not produce a buffered attack.
 
@@ -49,7 +52,7 @@ The throw resolver uses `throwInvulnerable`: ordinary blockstun/hitstun, airborn
 
 ## Data and validation
 
-Schema/core version 3 introduced `chipDamage`, `guardBreak`, ten Momentum rules and deterministic meter/FD/reaction state. Native protocol 2 uses a 12-bit input mask with FD at bit 2048. Old schema-1/2 move JSON preserves existing edits, defaults new defensive fields, derives special/Drive chip from the saved damage and adds default Momentum rules. Invalid imports are atomic. The current schema is 4, which adds counter-hit and reversal timing fields while preserving those defensive edits; see [combo and timing rules](combat-feedback.md). Existing binary snapshots and mismatched online builds are not interchangeable.
+Schema/core version 3 introduced `chipDamage`, `guardBreak`, ten Momentum rules and deterministic meter/FD/reaction state. Native protocol 2 uses a 12-bit input mask with FD at bit 2048. Old schema-1/2 move JSON preserves existing edits, defaults new defensive fields, derives special/Drive chip from the saved damage and adds default Momentum rules. Invalid imports are atomic. The current schema is 8; [combat tuning](combat-tuning.md) describes carryover, post-stun throw protection, new default FD rates and old-save preservation. Existing binary snapshots and mismatched online builds are not interchangeable.
 
 Coverage includes gain/cap/reset, no passive penalty, air/high/low FD, empty-meter fallback, input consumption, chip KO, corner push, late contact advantage, guard-break backdash/throw eligibility, replay restoration, native/Godot/WebAssembly parity and two-peer rollback. Godot UI tests drive keyboard input and all 18 block clips through actual contacts, including both frames. Windows/controller hardware validation remains separate from cross-compilation.
 

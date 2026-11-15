@@ -10,7 +10,7 @@ The game opens at the main menu. Use the mouse, arrow keys/Enter, or a controlle
 
 - **Versus → Local versus → Fighter select → Let’s fight:** a first-to-two Scrum match, a full-width arena, and a results screen with Rematch and Change fighters.
 - **Versus → Online versus → Fighter select → Connection:** choose only your local fighter, then Host or Join. Both peers connect, prepare their fighters and finish the opening before combat starts.
-- **Training → Fighter select → Start training:** choose your fighter and a dummy, then practice with dummy behavior, starting Momentum, input history, hitboxes, pause, frame step and reset controls.
+- **Training → Fighter select → Start training:** choose your fighter and a dummy, then practice with dummy behavior, starting Momentum, input history, hitboxes, pause, frame step and reset controls. **Record / Replay / Frame lab** capture exchanges and inspect both players; [training guide](training-lab.md).
 - **Development → Fighter select → Open combat lab:** practice controls plus the move editor, sprite review, buffer/Momentum tuning, data import/export and rollback workbench.
 
 Choose Anvil, Hammer, Smoke, Tapper, Shark or Fillet. Each player independently chooses simplified controls. The training dummy can stand, guard, crouch guard, run a practice sequence, use Faultless Defense, repeat Hs attacks or attempt reversals after guarding.
