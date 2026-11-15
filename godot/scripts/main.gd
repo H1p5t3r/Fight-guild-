@@ -2,8 +2,8 @@ extends Control
 
 const Arena = preload("res://scripts/arena.gd")
 const SAVE_PATH := "user://moves.json"
-const ACCENT := Color("f4b45e")
-const MUTED := Color("a3adb4")
+const ACCENT := GuildTheme.BRASS
+const MUTED := GuildTheme.MUTED
 const KEY_MAPS := [{KEY_A:1, KEY_D:2, KEY_S:4, KEY_W:8, KEY_J:16, KEY_K:32, KEY_L:64, KEY_I:128, KEY_O:256, KEY_SPACE:512, KEY_SHIFT:1024, KEY_Q:2048}, {KEY_LEFT:1, KEY_RIGHT:2, KEY_DOWN:4, KEY_UP:8, KEY_KP_1:16, KEY_KP_2:32, KEY_KP_3:64, KEY_KP_5:128, KEY_KP_6:256, KEY_KP_0:512, KEY_KP_ADD:1024, KEY_KP_ENTER:2048}]
 var model := CombatModel.new()
 var connection := NativePeer.new()
@@ -49,7 +49,7 @@ var play_root: Control
 var editor_shell: PanelContainer
 var toolbar: HBoxContainer
 var practice: HBoxContainer
-var diagnostics: HBoxContainer
+var diagnostics: VBoxContainer
 var inputs: HBoxContainer
 var keyboard_hint: Label
 var activity_title: Label
@@ -79,44 +79,22 @@ func verify_build() -> void:
 	var verification = load("res://scripts/build_verification.gd").new()
 	await verification.run(get_tree(), self)
 
-func box(color: Color, border: Color = Color("39444d")) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = color
-	style.border_color = border
-	style.set_border_width_all(1)
-	style.set_corner_radius_all(5)
-	style.content_margin_left = 12
-	style.content_margin_right = 12
-	style.content_margin_top = 8
-	style.content_margin_bottom = 8
-	return style
-
 func build_theme() -> void:
-	theme = Theme.new()
-	theme.default_font_size = 13
-	theme.set_color("font_color", "Label", Color("f0ede5"))
-	theme.set_stylebox("panel", "PanelContainer", box(Color("1b2329")))
-	theme.set_stylebox("normal", "Button", box(Color("26323b")))
-	theme.set_stylebox("hover", "Button", box(Color("3c4a54")))
-	theme.set_stylebox("pressed", "Button", box(Color("63503a"), ACCENT))
-	theme.set_stylebox("normal", "LineEdit", box(Color("111a21")))
-	var focus := box(Color(0, 0, 0, 0), ACCENT)
-	focus.set_border_width_all(2)
-	for type in ["Button", "OptionButton", "CheckBox", "LineEdit"]: theme.set_stylebox("focus", type, focus)
-	theme.set_constant("separation", "VBoxContainer", 10)
-	theme.set_constant("separation", "HBoxContainer", 10)
+	theme = GuildTheme.stock()
 
-func label(parent: Node, text: String, font_size: int = 13, color: Color = Color("f0ede5")) -> Label:
+func label(parent: Node, text: String, font_size: int = 13, color: Color = GuildTheme.IVORY) -> Label:
 	var node := Label.new()
 	node.text = text
-	node.add_theme_font_size_override("font_size", font_size)
+	node.add_theme_font_size_override("font_size", maxi(17, font_size))
+	if font_size >= 22: node.add_theme_font_override("font", GuildTheme.SEMIBOLD)
 	node.add_theme_color_override("font_color", color)
 	parent.add_child(node)
 	return node
 
-func button(parent: Node, text: String, action: Callable, lock_during_online: bool = false) -> Button:
+func button(parent: Node, text: String, action: Callable, lock_during_online: bool = false, family: String = "secondary") -> Button:
 	var node := Button.new()
 	node.text = text
+	GuildTheme.apply(node, family)
 	node.pressed.connect(action)
 	node.pressed.connect(release_focus_from_ui)
 	parent.add_child(node)
@@ -129,6 +107,7 @@ func option(parent: Node, caption: String, values: Array, selected: int = 0) -> 
 	parent.add_child(column)
 	if not caption.is_empty(): label(column, caption, 11, MUTED)
 	var node := OptionButton.new()
+	node.custom_minimum_size.y = 38
 	for value in values: node.add_item(str(value))
 	node.selected = selected
 	column.add_child(node)
@@ -152,7 +131,7 @@ func build_interface() -> void:
 	add_child(play_root)
 	var margins := MarginContainer.new()
 	margins.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for edge in ["left", "right", "top", "bottom"]: margins.add_theme_constant_override("margin_" + edge, 24)
+	for edge in ["left", "right", "top", "bottom"]: margins.add_theme_constant_override("margin_" + edge, 16)
 	play_root.add_child(margins)
 	var root := VBoxContainer.new()
 	margins.add_child(root)
@@ -193,23 +172,14 @@ func build_interface() -> void:
 	input_label = label(inputs, "INPUT HISTORY   —", 12, ACCENT)
 	input_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	action_label = label(inputs, "READY", 12, MUTED)
-	keyboard_hint = label(left, "WASD move  ·  J / K / L / I / O attack  ·  Space dash  ·  Shift simple  ·  Back + Q FD", 11, MUTED)
-	diagnostics = row(left)
-	var network := panel(diagnostics)
-	network.get_parent().size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label(network, "Rollback workbench", 17)
-	var test_row := row(network)
-	button(test_row, "Run latency check", run_trial)
-	trial_status = label(test_row, "6–9 frames of delay", 11, MUTED)
-	var route_panel := panel(diagnostics)
-	label(route_panel, "Unified gatlings", 17)
-	label(route_panel, "P → P / K\nK → jump / command\nS → jump / Hs / command\nHs → command", 12, MUTED)
-	label(route_panel, "All attacks → same-button command", 10, ACCENT)
+	keyboard_hint = label(left, "WASD move · J / K / L / I / O attack · Space dash · Shift simple · Back + Q FD", 11, MUTED)
+	keyboard_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	editor_shell = PanelContainer.new()
 	editor_shell.custom_minimum_size.x = 352
 	content.add_child(editor_shell)
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
 	editor_shell.add_child(scroll)
 	var editor := VBoxContainer.new()
 	editor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -248,7 +218,7 @@ func build_interface() -> void:
 	for pair in [["specialCancel","Special cancel"],["jumpCancel","Jump cancel"],["whiffCancel","Whiff cancel"],["selfCancel","Allow self route"]]:
 		var check := CheckBox.new()
 		check.text = pair[1]
-		check.add_theme_font_size_override("font_size", 11)
+		check.add_theme_font_size_override("font_size", 17)
 		checks.add_child(check)
 		fields[pair[0]] = {"control": check, "scale": 1}
 	routes = label(editor, "", 11, MUTED)
@@ -264,12 +234,12 @@ func build_interface() -> void:
 		add_field(advanced_grid, spec)
 	var note := label(advanced, "Kind: 0 normal, 1 command, 2 special, 3 Drive. Button: P=0 K=1 S=2 Hs=3 D=4. Masks: −1 unified; P=1 K=2 S=4 Hs=8 D=16.", 10, MUTED)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	button(editor, "Apply & reset", apply_move, true)
+	button(editor, "Apply & reset", apply_move, true, "essential")
 	var saves := row(editor)
 	button(saves, "Save locally", func(): var error := model.save_file(SAVE_PATH); editor_status.text = "Saved to " + SAVE_PATH if error.is_empty() else error)
 	button(saves, "Export", func(): show_file(false))
 	button(saves, "Import", func(): show_file(true), true)
-	button(editor, "Restore default move set", func(): model.restore_defaults(); populate_editor(); reset_round(); editor_status.text = "Defaults restored. Save locally to keep them.", true)
+	button(editor, "Restore default move set", func(): model.restore_defaults(); populate_editor(); reset_round(); editor_status.text = "Defaults restored. Save locally to keep them.", true, "danger")
 	editor_status = label(editor, "Provisional tuning · changes stay local", 11, ACCENT)
 	editor_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label(editor, "INPUT BUFFER", 11, MUTED)
@@ -285,7 +255,7 @@ func build_interface() -> void:
 		spin.max_value = [12,30,12][i]
 		column.add_child(spin)
 		buffer_fields.append(spin)
-	button(editor, "Apply buffer & reset", apply_buffer, true)
+	button(editor, "Apply buffer & reset", apply_buffer, true, "essential")
 	label(editor, "Strive parity is still to be measured.", 10, MUTED)
 	var momentum_panel := VBoxContainer.new()
 	editor.add_child(momentum_panel)
@@ -304,9 +274,22 @@ func build_interface() -> void:
 		spin.step = 0.01 if spec[4] == 100 else 1
 		column.add_child(spin)
 		momentum_fields[spec[0]] = {"control": spin, "scale": spec[4]}
-	button(momentum_panel, "Apply Momentum & reset", apply_momentum, true)
+	button(momentum_panel, "Apply Momentum & reset", apply_momentum, true, "essential")
 	var meter_note := label(momentum_panel, "Provisional rates. FD prevents chip and increases pushback. Negative Penalty is deferred.", 11, MUTED)
 	meter_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	diagnostics = VBoxContainer.new()
+	editor.add_child(diagnostics)
+	var network := panel(diagnostics)
+	network.get_parent().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label(network, "Rollback workbench", 17)
+	var test_row := VBoxContainer.new()
+	network.add_child(test_row)
+	button(test_row, "Run latency check", run_trial)
+	trial_status = label(test_row, "6–9 frames of delay", 11, MUTED)
+	var route_panel := panel(diagnostics)
+	label(route_panel, "Unified gatlings", 17)
+	label(route_panel, "P → P / K\nK → jump / command\nS → jump / Hs / command\nHs → command", 12, MUTED)
+	label(route_panel, "All attacks → same-button command", 10, ACCENT)
 	build_dialogs()
 	menus = GameMenus.new()
 	add_child(menus)
@@ -408,8 +391,8 @@ func configure_activity() -> void:
 	keyboard_hint.visible = practice_mode
 	mode.get_parent().visible = development
 	fighter_button.visible = practice_mode
-	activity_title.visible = practice_mode
-	activity_subtitle.visible = practice_mode
+	activity_title.visible = false
+	activity_subtitle.visible = false
 	activity_title.text = "Build your next route." if activity == "training" else "Find the fight."
 	activity_subtitle.text = "Practice attacks, defense and timing. Reset as often as you need." if activity == "training" else "Play a route. Tune a move. Run it back."
 	activity_badge.text = {"local":"LOCAL VERSUS", "online":"ONLINE VERSUS", "training":"TRAINING", "development":"DEVELOPMENT / COMBAT LAB"}[activity]
@@ -483,6 +466,7 @@ func has_gameplay_input_held() -> bool:
 func show_sprite_review(clip: int = 0) -> void:
 	held.clear()
 	var dialog := AcceptDialog.new()
+	dialog.theme = GuildTheme.stock()
 	dialog.title = "Sprite review · attacks and defense"
 	dialog.ok_button_text = "Back to combat lab"
 	add_child(dialog)
@@ -522,27 +506,30 @@ func show_sprite_review(clip: int = 0) -> void:
 	label(layout, "First pose studies. Compare silhouette, colors, weapon shape and attack direction.\nBlock clips settle after four unfrozen frames. Full attack animation is planned.", 12, MUTED)
 	dialog.canceled.connect(func(): close_dialog(dialog))
 	dialog.confirmed.connect(func(): close_dialog(dialog))
-	dialog.popup_centered(Vector2i(720, 540))
+	dialog.popup_centered(Vector2i(760, 600))
 
 func show_controls() -> void:
 	held.clear()
-	var dialog := AcceptDialog.new()
-	dialog.title = "Know your buttons"
-	dialog.dialog_text = "Player 1: WASD move; J K L I O = P K S Hs D\nSpace dash; Shift simple modifier; back + Q Faultless Defense\n\nPlayer 2: arrows move; numpad 1 2 3 5 6 attacks\nNumpad 0 dash; numpad + modifier; back + numpad Enter FD\n\nGamepad: bottom / left / top / right / RB = P K S Hs D\nD-pad or left stick moves; LB dash; LT modifier; back + RT FD\n\nHold away to block. Back + any two of P/K/S/Hs also activates FD.\nFD spends Momentum to prevent chip and push attackers away.\nGuard break: no backdash or blockstun grab protection.\n6 + button: command normal.\nSpecials: 236P, 236S, 623Hs; directions follow facing.\nEsc or gamepad Start opens the match menu.\nClick the arena after editing to return to gameplay.\nOnline: each client uses Player 1 controls."
+	var dialog := preload("res://scripts/controls_guide.gd").new()
+	var previous := get_viewport().gui_get_focus_owner()
+	if previous != null: dialog.set_meta("return_focus", weakref(previous))
 	add_child(dialog)
-	dialog.popup_centered(Vector2i(580, 420))
 	dialog.confirmed.connect(func(): close_dialog(dialog))
 	dialog.canceled.connect(func(): close_dialog(dialog))
+	dialog.popup_centered(Vector2i(900, 600))
 
 func close_dialog(dialog: Window) -> void:
+	var previous: Control = dialog.get_meta("return_focus").get_ref() if dialog.has_meta("return_focus") else null
 	dialog.queue_free()
-	call_deferred("resume_after_dialog")
+	call_deferred("resume_after_dialog", previous)
 
-func resume_after_dialog() -> void:
+func resume_after_dialog(previous: Control = null) -> void:
 	held.clear()
 	if screen == "play":
 		release_focus_from_ui()
 		input_release_required = has_gameplay_input_held()
+	elif is_instance_valid(previous) and previous.is_visible_in_tree():
+		previous.grab_focus()
 	else:
 		menus.focus_page(screen)
 
@@ -734,7 +721,8 @@ func start_network(host: bool) -> void:
 		net_status.text = "Enter the host address before joining."
 		address.grab_focus()
 		return
-	port.apply()
+	# SpinBox updates its text on a later frame; only commit text the user is editing.
+	if port.get_line_edit().has_focus(): port.apply()
 	var result := connection.begin(model, host, address.text.strip_edges(), int(port.value), characters[0], simple[0])
 	if result != OK: net_status.text = "Could not open connection: " + error_string(result); return
 	lock_online(true)

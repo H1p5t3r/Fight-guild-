@@ -18,3 +18,5 @@ Offline combat freezes while outside the play screen or while a modal dialog is 
 Online combat **continues with neutral local input** while its menu is open. Its menu explicitly says so and offers Resume or Leave match & main menu. A local restart or fighter change is unavailable during the connection. The results screen is shown only after the winner exists in a fully confirmed rollback state. It offers Return to online lobby; both players host/join again for another round. Negotiated rematches, matchmaking and reconnect remain backlog items.
 
 `GameMenus` presents the pages and emits actions; `main.gd` owns transitions and simulation scheduling. `menu_verification.gd` exercises these paths in both the editable project and release package, including actual loopback ENet handshake/cancel/disconnect, keyboard and synthetic-controller navigation. Physical controller and Windows hardware testing remain separate.
+
+Presentation follows the [Guild Ball menu style](menu-style.md). Headings and navigation stay fixed while bodies scroll. Controls has separate Player 1, Player 2 and Gamepad reference tabs and restores focus on close.

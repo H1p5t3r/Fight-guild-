@@ -20,6 +20,7 @@ for platform in (['Linux', 'Windows'] if target == 'all' else [target]):
         archive.write(root / 'docs/momentum-defense.md', 'FightGuild/momentum-defense.md')
         archive.write(root / 'docs/combat-feedback.md', 'FightGuild/combat-feedback.md')
         archive.write(root / 'docs/menu-flow.md', 'FightGuild/menu-flow.md')
+        archive.write(root / 'docs/menu-style.md', 'FightGuild/menu-style.md')
         for file in notices: archive.write(file, 'FightGuild/licenses/' + file.name)
     packages.append(output)
 
@@ -31,7 +32,7 @@ with zipfile.ZipFile(output, 'w', zipfile.ZIP_DEFLATED) as archive:
     for file in [root / 'README.md', *sorted((root / 'docs').glob('*.md')), *notices]:
         archive.write(file, 'FightGuild-Godot/' + str(file.relative_to(root)))
     # Include editable core/build sources, excluding compiler intermediates and caches.
-    paths = subprocess.check_output(['git', 'ls-files', '-z', 'core', 'native', 'scripts', 'tests', 'web', '.github', 'package.json', 'package-lock.json', '.gitignore'], cwd=root).decode().split('\0')
+    paths = subprocess.check_output(['git', 'ls-files', '-z', 'core', 'native', 'scripts', 'tests', 'web', 'art/ui-stock', 'references/menu-style', '.github', 'package.json', 'package-lock.json', '.gitignore'], cwd=root).decode().split('\0')
     for path in filter(None, paths):
         archive.write(root / path, 'FightGuild-Godot/' + path)
 packages.append(output)

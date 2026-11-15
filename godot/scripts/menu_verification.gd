@@ -33,12 +33,13 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	key(KEY_ENTER, false)
 	await tree.process_frame
 	check(game.screen == "matches" and game.menus.buttons.local.has_focus(), "Keyboard confirm did not enter Matches with focus")
-	key(KEY_DOWN, true)
-	key(KEY_DOWN, false)
+	key(KEY_RIGHT, true)
+	key(KEY_RIGHT, false)
 	check(game.menus.buttons.online.has_focus(), "Keyboard arrows did not navigate match choices")
 	key(KEY_ESCAPE, true)
 	key(KEY_ESCAPE, false)
 	check(game.screen == "home", "Escape did not return to main menu")
+	await verify_controls_dialog()
 	press("training")
 	await tree.process_frame
 	check(game.screen == "fighters" and game.menus.fighters[0].has_focus(), "Training selection or keyboard focus missing")
@@ -126,6 +127,32 @@ func joy(button: int, pressed: bool) -> void:
 	Input.parse_input_event(event)
 	Input.flush_buffered_events()
 
+func verify_controls_dialog() -> void:
+	game.menus.buttons.controls.grab_focus()
+	press("controls")
+	await tree.process_frame
+	var dialog: AcceptDialog
+	for child in game.get_children():
+		if child.has_method("show_bindings"): dialog = child
+	check(dialog != null and game.has_open_dialog(), "Controls guide did not open")
+	if dialog == null: return
+	dialog.tabs[1].pressed.emit()
+	check(dialog.bindings.get_child(0).text.begins_with("PLAYER 2"), "Controls tab did not switch bindings")
+	dialog.tabs[2].pressed.emit()
+	check(dialog.bindings.get_child(0).text.begins_with("GAMEPAD"), "Gamepad bindings missing")
+	await tree.process_frame
+	var scroll: ScrollContainer = dialog.find_child("ControlsBody", true, false)
+	var close: Button = dialog.find_child("CloseAction", true, false)
+	var close_position := close.global_position
+	var tabs_position: Vector2 = dialog.tabs[0].global_position
+	scroll.scroll_vertical = 500
+	await tree.process_frame
+	check(close.global_position == close_position and dialog.tabs[0].global_position == tabs_position and close.size.y >= 40, "Controls body moved its fixed navigation/Close action")
+	dialog.canceled.emit()
+	await tree.process_frame
+	await tree.process_frame
+	check(not game.has_open_dialog() and game.menus.buttons.controls.has_focus(), "Closing Controls did not return focus to its trigger")
+
 func verify_controller() -> void:
 	# Exercise real Godot UI actions with a synthetic pad; hardware testing is separate.
 	joy(JOY_BUTTON_START, true)
@@ -163,10 +190,12 @@ func verify_online() -> void:
 	game.address.text = "127.0.0.1"
 	var socket := PacketPeerUDP.new()
 	check(socket.bind(0) == OK, "Could not reserve a loopback test port")
-	game.port.value = socket.get_local_port()
+	var chosen_port := socket.get_local_port()
+	game.port.value = chosen_port
 	socket.close()
 	press("host")
 	check(game.connection.active and game.screen == "online" and game.menus.buttons.host.disabled and not game.leave_button.disabled, "Host waiting/cancel state is incorrect")
+	check(game.connection.active and game.connection.peer.host.get_local_port() == chosen_port, "Host ignored the selected port in favor of stale SpinBox text")
 	var frame: int = game.model.frame()
 	game._physics_process(1.0 / 60.0)
 	check(game.model.frame() == frame, "Waiting for opponent advanced the fight")

@@ -1,0 +1,142 @@
+[gd_resource type="Theme" load_steps=41 format=3]
+
+[ext_resource type="FontFile" path="res://Content/Fonts/BarlowCondensedSemibold.woff2" id="font"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/primary-normal.tres" id="s1"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/primary-hover.tres" id="s2"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/primary-pressed.tres" id="s3"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/primary-hover_pressed.tres" id="s4"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/primary-disabled.tres" id="s5"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/primary-focus.tres" id="s6"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/secondary-normal.tres" id="s7"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/secondary-hover.tres" id="s8"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/secondary-pressed.tres" id="s9"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/secondary-hover_pressed.tres" id="s10"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/secondary-disabled.tres" id="s11"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/secondary-focus.tres" id="s12"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/danger-normal.tres" id="s13"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/danger-hover.tres" id="s14"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/danger-pressed.tres" id="s15"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/danger-hover_pressed.tres" id="s16"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/danger-disabled.tres" id="s17"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/danger-focus.tres" id="s18"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/icon-normal.tres" id="s19"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/icon-hover.tres" id="s20"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/icon-pressed.tres" id="s21"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/icon-hover_pressed.tres" id="s22"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/icon-disabled.tres" id="s23"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/icon-focus.tres" id="s24"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/tab-normal.tres" id="s25"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/tab-hover.tres" id="s26"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/tab-selected.tres" id="s27"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/tab-hover_pressed.tres" id="s28"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/tab-disabled.tres" id="s29"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/tab-focus.tres" id="s30"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/essential-normal.tres" id="s31"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/essential-hover.tres" id="s32"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/essential-pressed.tres" id="s33"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/essential-hover_pressed.tres" id="s34"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/essential-disabled.tres" id="s35"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/essential-focus.tres" id="s36"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/panel-broadcast.tres" id="s37"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/panel-compact.tres" id="s38"]
+[ext_resource type="StyleBox" path="res://Content/UI/Stock/panel-tooltip.tres" id="s39"]
+
+[resource]
+default_font = ExtResource("font")
+default_font_size = 18
+StockPrimaryButton/base_type = &"Button"
+StockPrimaryButton/styles/normal = ExtResource("s1")
+StockPrimaryButton/styles/hover = ExtResource("s2")
+StockPrimaryButton/styles/pressed = ExtResource("s3")
+StockPrimaryButton/styles/hover_pressed = ExtResource("s4")
+StockPrimaryButton/styles/disabled = ExtResource("s5")
+StockPrimaryButton/styles/focus = ExtResource("s6")
+StockPrimaryButton/colors/font_color = Color(0.953, 0.925, 0.859, 1)
+StockPrimaryButton/colors/font_hover_color = Color(0.953, 0.925, 0.859, 1)
+StockPrimaryButton/colors/font_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockPrimaryButton/colors/font_hover_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockPrimaryButton/colors/font_focus_color = Color(0.953, 0.925, 0.859, 1)
+StockPrimaryButton/colors/font_disabled_color = Color(0.54, 0.59, 0.61, 1)
+StockPrimaryButton/constants/outline_size = 1
+StockPrimaryButton/colors/font_outline_color = Color(0.025, 0.045, 0.06, 1)
+StockSecondaryButton/base_type = &"Button"
+StockSecondaryButton/styles/normal = ExtResource("s7")
+StockSecondaryButton/styles/hover = ExtResource("s8")
+StockSecondaryButton/styles/pressed = ExtResource("s9")
+StockSecondaryButton/styles/hover_pressed = ExtResource("s10")
+StockSecondaryButton/styles/disabled = ExtResource("s11")
+StockSecondaryButton/styles/focus = ExtResource("s12")
+StockSecondaryButton/colors/font_color = Color(0.953, 0.925, 0.859, 1)
+StockSecondaryButton/colors/font_hover_color = Color(0.953, 0.925, 0.859, 1)
+StockSecondaryButton/colors/font_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockSecondaryButton/colors/font_hover_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockSecondaryButton/colors/font_focus_color = Color(0.953, 0.925, 0.859, 1)
+StockSecondaryButton/colors/font_disabled_color = Color(0.54, 0.59, 0.61, 1)
+StockSecondaryButton/constants/outline_size = 1
+StockSecondaryButton/colors/font_outline_color = Color(0.025, 0.045, 0.06, 1)
+StockDangerButton/base_type = &"Button"
+StockDangerButton/styles/normal = ExtResource("s13")
+StockDangerButton/styles/hover = ExtResource("s14")
+StockDangerButton/styles/pressed = ExtResource("s15")
+StockDangerButton/styles/hover_pressed = ExtResource("s16")
+StockDangerButton/styles/disabled = ExtResource("s17")
+StockDangerButton/styles/focus = ExtResource("s18")
+StockDangerButton/colors/font_color = Color(0.953, 0.925, 0.859, 1)
+StockDangerButton/colors/font_hover_color = Color(0.953, 0.925, 0.859, 1)
+StockDangerButton/colors/font_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockDangerButton/colors/font_hover_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockDangerButton/colors/font_focus_color = Color(0.953, 0.925, 0.859, 1)
+StockDangerButton/colors/font_disabled_color = Color(0.54, 0.59, 0.61, 1)
+StockDangerButton/constants/outline_size = 1
+StockDangerButton/colors/font_outline_color = Color(0.025, 0.045, 0.06, 1)
+StockIconButton/base_type = &"Button"
+StockIconButton/styles/normal = ExtResource("s19")
+StockIconButton/styles/hover = ExtResource("s20")
+StockIconButton/styles/pressed = ExtResource("s21")
+StockIconButton/styles/hover_pressed = ExtResource("s22")
+StockIconButton/styles/disabled = ExtResource("s23")
+StockIconButton/styles/focus = ExtResource("s24")
+StockIconButton/colors/font_color = Color(0.953, 0.925, 0.859, 1)
+StockIconButton/colors/font_hover_color = Color(0.953, 0.925, 0.859, 1)
+StockIconButton/colors/font_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockIconButton/colors/font_hover_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockIconButton/colors/font_focus_color = Color(0.953, 0.925, 0.859, 1)
+StockIconButton/colors/font_disabled_color = Color(0.54, 0.59, 0.61, 1)
+StockIconButton/constants/outline_size = 1
+StockIconButton/colors/font_outline_color = Color(0.025, 0.045, 0.06, 1)
+StockTabButton/base_type = &"Button"
+StockTabButton/styles/normal = ExtResource("s25")
+StockTabButton/styles/hover = ExtResource("s26")
+StockTabButton/styles/pressed = ExtResource("s27")
+StockTabButton/styles/hover_pressed = ExtResource("s28")
+StockTabButton/styles/disabled = ExtResource("s29")
+StockTabButton/styles/focus = ExtResource("s30")
+StockTabButton/colors/font_color = Color(0.953, 0.925, 0.859, 1)
+StockTabButton/colors/font_hover_color = Color(0.953, 0.925, 0.859, 1)
+StockTabButton/colors/font_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockTabButton/colors/font_hover_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockTabButton/colors/font_focus_color = Color(0.953, 0.925, 0.859, 1)
+StockTabButton/colors/font_disabled_color = Color(0.54, 0.59, 0.61, 1)
+StockTabButton/constants/outline_size = 1
+StockTabButton/colors/font_outline_color = Color(0.025, 0.045, 0.06, 1)
+StockEssentialButton/base_type = &"Button"
+StockEssentialButton/styles/normal = ExtResource("s31")
+StockEssentialButton/styles/hover = ExtResource("s32")
+StockEssentialButton/styles/pressed = ExtResource("s33")
+StockEssentialButton/styles/hover_pressed = ExtResource("s34")
+StockEssentialButton/styles/disabled = ExtResource("s35")
+StockEssentialButton/styles/focus = ExtResource("s36")
+StockEssentialButton/colors/font_color = Color(0.953, 0.925, 0.859, 1)
+StockEssentialButton/colors/font_hover_color = Color(0.953, 0.925, 0.859, 1)
+StockEssentialButton/colors/font_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockEssentialButton/colors/font_hover_pressed_color = Color(0.953, 0.925, 0.859, 1)
+StockEssentialButton/colors/font_focus_color = Color(0.953, 0.925, 0.859, 1)
+StockEssentialButton/colors/font_disabled_color = Color(0.54, 0.59, 0.61, 1)
+StockEssentialButton/constants/outline_size = 1
+StockEssentialButton/colors/font_outline_color = Color(0.025, 0.045, 0.06, 1)
+StockBroadcastPanel/base_type = &"PanelContainer"
+StockBroadcastPanel/styles/panel = ExtResource("s37")
+StockCompactPanel/base_type = &"PanelContainer"
+StockCompactPanel/styles/panel = ExtResource("s38")
+StockTooltipPanel/base_type = &"PanelContainer"
+StockTooltipPanel/styles/panel = ExtResource("s39")

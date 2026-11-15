@@ -6,7 +6,7 @@ For the editable project ZIP, import `godot/project.godot` into **Godot 4.6.3**,
 
 ## Choose a mode
 
-The game opens at the main menu. Use the mouse, arrow keys/Enter, or a controller's D-pad/A to navigate; Esc/B goes back.
+The game opens at the main menu. Use the mouse, arrow keys/Enter, or a controller's D-pad/A to navigate; Esc/B goes back. Menus use the supplied Guild Ball panel/font style; Controls opens in its separate warm Settings skin.
 
 - **Matches → Local versus → Fighter select → Start match:** two players, a full-width arena, and a results screen with Rematch and Change fighters.
 - **Matches → Online versus → Fighter select → Connection:** choose only your local fighter, then Host or Join. The match starts after both peers connect successfully.
@@ -45,6 +45,7 @@ Combos show a large number behind the fighters on the attacker's current side. *
 Enter **Development** for move editing and sprite review. Training also offers pause, frame step and hitboxes.
 
 - **Pause / +1 frame:** inspect startup, active frames, hitstop and recovery. Generated windup and active images follow simulation timing.
+- **Development workbench:** scroll below the editor controls for the rollback latency check and gatling reference.
 - **Move editor:** choose a fighter/move, adjust values, then Apply & reset. Save locally writes the complete six-fighter set. Export/import JSON for a portable backup. Old schema-1/2/3 saves retain edits and supply defaults for new fields/fighters.
 - **Sprite review:** compare windup/active or any of the three defensive contact/settle pairs at the same body scale. Some details/effects still need consistency cleanup; complete animation sequences are not present.
 - **Hitboxes:** overlays show authoritative collision shapes. Sprite weapons and smears do not decide hits.
