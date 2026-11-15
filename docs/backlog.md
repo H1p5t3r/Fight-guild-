@@ -1,5 +1,18 @@
 # Playable-build backlog
 
+## Proposed combat priorities from the Dustloop study
+
+The [2026-11-15 source review](research/strive-dustloop-2026-11-15.md) compares the three supplied saved pages with the current Fillet/Shark build. These are research recommendations, not newly approved combat rules. Existing user decisions remain authoritative.
+
+- [ ] Extend existing frame step, input history and dummy controls with a two-player frame timeline, gap/contact/cancel-window readouts and record/replay from a saved state.
+- [ ] Add editable normal/special/jump/follow-up cancel windows while retaining the unified routes; measure Fillet's immediate, delayed and stopped rekka sequences.
+- [ ] Design starter proration, per-move combo damage scaling and minimum damage independently of gravity; preserve the first-X-hits gravity rule and test repeated hook/command-normal routes.
+- [ ] Specify ordinary block carryover and post-recovery throw protection, preserving guard-break throw vulnerability and its backdash restriction.
+- [ ] Define prejump and move-specific landing recovery, especially Shark's air hook and air stab at different jump heights.
+- [ ] Tune ordinary corner pushback, FD ground/air drain and contact spacing using recorded matchup cases. Keep FD as the only Momentum spend and Negative Penalty deferred.
+- [ ] Add optional attack-strength/counter presets with per-move overrides; evaluate counter-vulnerability windows and victim-only slowdown separately from extra hitstop.
+- [ ] Evaluate a midscreen wall-damage cap, grounded/airborne splat conditions and the value of breaking the wall with an FD-only resource economy.
+
 ## Next: consistent sprite and future-character pipeline
 
 Requested scope: make repeatable character images performing directed actions, with one shared art language. See [the working sprite contract](sprite-production.md).
