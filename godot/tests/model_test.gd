@@ -9,7 +9,7 @@ func check(condition: bool, description: String) -> void:
 func _initialize() -> void:
 	var model := CombatModel.new()
 	var original := model.data()
-	check(CombatModel.RULE_COUNT == CombatModel.RULES.size() + CombatModel.MOMENTUM_RULES.size(), "Rule layout differs from the adapter")
+	check(CombatModel.RULE_COUNT == CombatModel.RULES.size() + CombatModel.MOMENTUM_RULES.size() + CombatModel.RECOVERY_RULES.size(), "Rule layout differs from the adapter")
 	var fingerprint := model.fingerprint()
 	var edited := original.duplicate(true)
 	edited.characters[0].moves[0].damage = 177
@@ -36,6 +36,7 @@ func _initialize() -> void:
 	legacy.characters.resize(2)
 	legacy.erase("momentumRules")
 	for character in legacy.characters:
+		character.moves.resize(22)
 		for definition in character.moves:
 			definition.erase("chipDamage")
 			definition.erase("guardBreak")
@@ -48,6 +49,7 @@ func _initialize() -> void:
 	legacy.coreVersion = 2
 	legacy.characters = edited.characters.duplicate(true)
 	for character in legacy.characters:
+		character.moves.resize(22)
 		for definition in character.moves:
 			definition.erase("chipDamage")
 			definition.erase("guardBreak")
@@ -63,6 +65,7 @@ func _initialize() -> void:
 	previous.characters[0].moves[0].chipDamage = 17
 	previous.characters[0].moves[0].category = 3
 	for character in previous.characters:
+		character.moves.resize(22)
 		for definition in character.moves:
 			for field in ["counterHitstun", "counterHitstop", "reversalEligible"]: definition.erase(field)
 	check(model.load_data(JSON.parse_string(JSON.stringify(previous))).is_empty(), "Schema-3 migration rejected")
@@ -74,6 +77,7 @@ func _initialize() -> void:
 	v4.characters[0].moves[0].counterHitstun = 19
 	v4.characters[0].moves[0].counterHitstop = 9
 	for character in v4.characters:
+		character.moves.resize(22)
 		for definition in character.moves: definition.erase("hitboxBack")
 	check(model.load_data(v4).is_empty(), "Schema-4 migration rejected")
 	check(model.move(0, 0).counterHitstun == 19 and model.move(0, 0).counterHitstop == 9 and model.move(0, 0).hitboxBack == 1200, "Schema-4 migration lost timing edits or old hitbox origin")
@@ -105,7 +109,7 @@ func _initialize() -> void:
 	strike.hitstop = 30
 	strike.counterHitstop = 30
 	check(model.load_data(extreme).is_empty(), "Maximum legal counter-hit values rejected")
-	model.reset()
+	model.reset([0, 1])
 	for _tick in 5: model.step(16, 64)
 	check(model.state().players[0].event == 3 and model.state().players[1].stun == 240 and model.state().hitstop == 60, "Counter-hit classification/bonuses missing")
 	var counter_snapshot: PackedByteArray = model.core.snapshot()

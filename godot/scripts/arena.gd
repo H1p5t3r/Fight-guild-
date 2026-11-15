@@ -37,7 +37,9 @@ func _ready() -> void:
 	hud_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(hud_layer)
 	hud_layer.draw.connect(func():
-		if not view.is_empty(): FightHud.draw(hud_layer, view, score, round_label, diagnostics))
+		if not view.is_empty():
+			draw_wall_break()
+			FightHud.draw(hud_layer, view, score, round_label, diagnostics))
 
 func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bool) -> void:
 	model = simulation
@@ -64,13 +66,14 @@ func label(value: String, point: Vector2, font_size: int = 14, color: Color = TE
 	draw_string(font, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color)
 
 func _draw() -> void:
-	ArenaStage.draw(self, show_boxes)
+	ArenaStage.draw(self, show_boxes, int(view.get("stage", 0)))
 	var sx := size.x / 1000.0
 	var floor_y := size.y - 76.0
 	if view.is_empty():
 		return
 	# Draw in the stage background before the HUD and before child fighter sprites.
 	feedback.draw(self)
+	draw_walls()
 	for p in 2:
 		var fighter: Dictionary = view.players[p]
 		var px: float = fighter.x / 100.0 * sx
@@ -82,7 +85,13 @@ func _draw() -> void:
 			if fighter.guarding:
 				status = "GUARD BREAK" if fighter.guardBreak else "BLOCK · attacker %+df" % fighter.blockAdvantage
 			elif fighter.faultless: status = "FAULTLESS"
+			elif fighter.reaction == 1: status = "AIR REEL · %d%% gravity" % fighter.gravityPercent
+			elif fighter.reaction == 2: status = "HARD DOWN" if fighter.knockdown == 2 else "SOFT DOWN · AUTO TECH"
+			elif fighter.reaction == 3: status = "WAKEUP · %df" % fighter.recoveryTime
+			elif fighter.reaction == 4: status = "WALL SPLAT · %df" % fighter.wallSplatTime
 			label(status, Vector2(clampf(px + 28, 12, size.x - 165), py - 10), 12, Color("f68b79") if fighter.guardBreak else MUTED)
+		if fighter.positiveTime > 0:
+			FightHud.centered(self, "POSITIVE BONUS", Vector2(size.x * (0.22 if p == 0 else 0.78), size.y - 96), 18, Color("a8e9b1"), 2)
 		if fighter.faultless or (fighter.guarding and not fighter.guardBreak):
 			var angle := 0.0 if fighter.facing == 1 else PI
 			var guard_color := Color("75dcbc") if fighter.faultless else Color("89c3e0")
@@ -95,6 +104,48 @@ func _draw() -> void:
 		var title: String = "DRAW" if view.winner == 2 else CombatModel.CHARACTERS[view.players[view.winner].character].to_upper() + " TAKES " + str(MatchCeremony.script().roundName).to_upper()
 		FightHud.stamp(self, title, Vector2(size.x * 0.5, size.y * 0.42), 32, GuildTheme.BRASS)
 		FightHud.centered(self, "Reset to run it back.", Vector2(size.x * 0.5, size.y * 0.42 + 63), 18, MUTED)
+
+# Presentation reads fixed-tick state, so prediction corrections cannot leave stale effects.
+func draw_walls() -> void:
+	var threshold: int = model.config[model.config.size() - CombatModel.RECOVERY_RULES.size() + 3]
+	for fighter in view.players:
+		if fighter.wallDamage == 0: continue
+		var side := -1.0 if fighter.x < 50000 else 1.0
+		var x := 12.0 if side < 0 else size.x - 12.0
+		var pressure := clampf(float(fighter.wallDamage) / threshold, 0.0, 1.0)
+		var center := Vector2(x, size.y - 155 - fighter.y / 100.0 * size.x / 1000.0)
+		var color := Color("f4b45e") if fighter.reaction != 4 else Color("f5e3c5")
+		draw_line(Vector2(x, 165), Vector2(x, size.y - 76), Color(color, 0.12 + pressure * 0.5), 2 + pressure * 4)
+		for i in ceili(pressure * 7):
+			var end := center + Vector2(-side * (20 + i % 3 * 15), (i - 3) * 24)
+			var kink := center.lerp(end, 0.55) + Vector2(-side * 8, 7)
+			draw_polyline(PackedVector2Array([center, kink, end]), Color(color, 0.2 + pressure * 0.7), 2, true)
+		if fighter.reaction == 4:
+			FightHud.stamp(self, "WALL SPLAT", Vector2(size.x * (0.24 if side < 0 else 0.76), 275), 23, ACCENT)
+
+func draw_wall_break() -> void:
+	if view.wallBreakTime <= 0: return
+	var progress := 1.0 - float(view.wallBreakTime) / float(view.wallBreakDuration)
+	var actor: int = view.wallBreakActor
+	var tint: Color = FighterSelectPortrait.COLORS[view.players[actor].character]
+	var side: int = view.wallBreakSide
+	var origin := Vector2(0 if side < 0 else size.x, size.y * 0.55)
+	var expansion := smoothstep(0.0, 0.7, progress)
+	var fade := 1.0 - smoothstep(0.65, 1.0, progress)
+	hud_layer.draw_rect(Rect2(Vector2.ZERO, size), Color("081219", 0.60 * fade))
+	for i in 12:
+		var distance := 35.0 + expansion * size.x * (0.25 + (i % 4) * 0.25)
+		var point := origin + Vector2(-side * distance, (i - 5.5) * (14.0 + expansion * 60.0))
+		var shard := PackedVector2Array([point, point + Vector2(-side * (32 + i * 4), -18), point + Vector2(-side * 14, 24)])
+		hud_layer.draw_colored_polygon(shard, Color(tint.lightened(0.25), 0.65 * fade))
+	var slide := Vector2(-side * (1.0 - smoothstep(0.0, 0.25, progress)) * 80.0, 0)
+	FightHud.stamp(hud_layer, "WALL BREAK", size * Vector2(0.5, 0.43) + slide, int(clampf(size.x * 0.052, 30, 64)), tint, fade)
+	var grants_bonus: bool = model.config[model.config.size() - CombatModel.RECOVERY_RULES.size() + 10] > 0
+	FightHud.centered(hud_layer, "POSITIVE BONUS" if grants_bonus else "NEUTRAL RESET", size * Vector2(0.5, 0.43) + Vector2(0, 75), 23, Color("a8e9b1", fade), 2)
+	FightHud.centered(hud_layer, "NEXT GROUND", size * Vector2(0.5, 0.43) + Vector2(0, 106), 15, Color(TEXT, fade))
+	# The core changes ground at two-thirds of the transition, under this curtain.
+	var curtain := smoothstep(0.50, 0.65, progress) * (1.0 - smoothstep(0.68, 1.0, progress))
+	hud_layer.draw_rect(Rect2(Vector2.ZERO, size), Color("081219", curtain))
 
 # Draw the simulation's actual rectangles above the sprites, below the HUD.
 func draw_collisions() -> void:

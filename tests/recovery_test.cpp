@@ -1,0 +1,190 @@
+#include "../core/fight.h"
+#include <initializer_list>
+#include <cstdio>
+using namespace fight;
+static int checks=0,failures=0;
+#define CHECK(x) do { ++checks; if(!(x)) { std::fprintf(stderr,"FAIL recovery line %d: %s\n",__LINE__,#x); ++failures; } } while(0)
+static Simulation match() {
+    Simulation s; s.defaults(); s.reset(5,4,0,0);
+    s.world.players[0].x=45000; s.world.players[1].x=51000;
+    return s;
+}
+static void ticks(Simulation& s,int n,int a=0,int b=0) { for(int i=0;i<n;++i) s.step(a,b); }
+static void thaw(Simulation& s) { while(s.world.hitstop&&!s.world.wall_break_time) s.step(0,0); }
+static void prime(Simulation& s,int player=0,int slot=0) {
+    auto& f=s.world.players[player]; f.move=slot; f.age=s.moves[f.character][slot].v[Startup]-1;
+    f.hit_done=0;
+}
+static Move& wide(Simulation& s,int slot=0) {
+    auto& m=s.moves[5][slot]; m.v[Reach]=50000; m.v[HitboxBack]=0;
+    m.v[Bottom]=0; m.v[Height]=50000; return m;
+}
+static void test_universals() {
+    for(int c=0;c<CHARACTER_COUNT;++c) {
+        auto s=match(); s.reset(c,(c+1)%6,0,0);
+        CHECK(s.moves[c][SWEEP].v[Knockdown]==HardKnockdown);
+        CHECK(s.moves[c][SWEEP].v[HitLevel]==1);
+        for(int slot=BACK_THROW;slot<=FORWARD_THROW;++slot) {
+            CHECK(s.moves[c][slot].v[Startup]>=5);
+            CHECK(s.moves[c][slot].v[Knockdown]==HardKnockdown);
+            CHECK(!s.can_cancel(c,0,slot,1));
+        }
+        for(int raw:{Down|D,Down|Left|D,Down|Right|D}) {
+            s.reset(c,(c+1)%6,0,0);s.step(raw,0);CHECK(s.world.players[0].move==SWEEP);
+        }
+    }
+    for(int guard:{int(Right),Right|Down}) {
+        auto s=match();wide(s,SWEEP);prime(s,0,SWEEP);s.step(0,guard);
+        CHECK((s.world.players[1].health<1000)==(guard==Right));
+        CHECK((s.world.players[1].knockdown==HardKnockdown)==(guard==Right));
+        CHECK(s.world.players[1].wall_damage==(guard==Right?s.moves[5][SWEEP].v[WallDamage]/4:0));
+    }
+    for(int direction:{Left,Right}) {
+        auto s=match();int slot=direction==Left?BACK_THROW:FORWARD_THROW;
+        ticks(s,4,direction|P|K);CHECK(s.world.players[0].move==slot);
+        CHECK(s.world.players[1].health==1000);
+        s.step(direction|P|K,0);
+        CHECK(s.world.players[1].health==920&&s.world.players[1].knockdown==HardKnockdown);
+        CHECK((s.world.players[0].x>s.world.players[1].x)==(direction==Left));
+        CHECK(s.world.players[0].faultless==0&&s.world.players[0].hit_done==1);
+    }
+    auto left=match();ticks(left,5,0,Left|P|K);
+    CHECK(left.world.players[1].last_move==FORWARD_THROW&&left.world.players[0].health==920);
+    auto backward=match();ticks(backward,5,0,Right|P|K);
+    CHECK(backward.world.players[1].last_move==BACK_THROW&&backward.world.players[1].x<backward.world.players[0].x);
+    auto fd=match();fd.world.players[0].momentum=1000;fd.step(Left|Faultless|P|K,0);
+    CHECK(fd.world.players[0].faultless&&fd.world.players[0].move==-1);
+    auto whiff=match();whiff.world.players[1].x=65000;ticks(whiff,50,Right|P|K);
+    CHECK(whiff.world.players[1].health==1000&&whiff.world.players[0].move==-1);
+    for(int mode=0;mode<6;++mode) {
+        auto s=match();auto& d=s.world.players[1];
+        d.stun=20;d.guarding=mode<2;d.guard_break=mode==1;
+        if(mode==3) { d.y=5000;d.vy=500; }
+        if(mode==4||mode==5) { d.reaction=mode==4?Downed:Waking;d.recovery_time=30; }
+        prime(s,0,FORWARD_THROW);s.step(0,0);
+        CHECK((d.health==920)==(mode==1)); // Only guard break removes stun's throw protection.
+    }
+    auto clash=match();ticks(clash,5,Right|P|K,Left|P|K);
+    CHECK(clash.world.players[0].health==1000&&clash.world.players[1].health==1000);
+    CHECK(clash.world.players[0].hit_done&&clash.world.players[1].hit_done);
+    auto strike=match();ticks(strike,5,Right|P|K,P);
+    CHECK(strike.world.players[0].health<1000&&strike.world.players[1].health==1000);
+}
+static void test_recovery() {
+    auto s=match();auto& m=wide(s);m.v[Launch]=1200;m.v[Knockdown]=SoftKnockdown;
+    m.v[KnockdownFrames]=6;m.v[WakeupFrames]=8;prime(s);s.step(0,0);
+    CHECK(s.world.players[1].reaction==AirReel&&s.world.players[1].vy==1200);
+    int y=s.world.players[1].y;ticks(s,3);CHECK(s.world.players[1].y==y);
+    thaw(s);
+    int guard=0;
+    while(s.world.players[1].reaction==AirReel&&guard++<180) s.step(0,0);
+    CHECK(guard<180&&s.world.players[1].reaction==Downed&&s.world.players[1].y==0);
+    int landing_x=s.world.players[1].x;
+    int health=s.world.players[1].health;
+    prime(s);s.step(0,Left|Up|Dash);
+    CHECK(s.world.players[1].health==health); // No OTG hit during automatic tech.
+    ticks(s,5,0,Left|Up|Dash);
+    CHECK(s.world.players[1].reaction==Waking&&s.world.players[1].recovery_time==8);
+    ticks(s,8,0,Left|Up|Dash);
+    CHECK(s.world.players[1].reaction==Free&&s.world.players[1].x==landing_x);
+    CHECK(s.world.players[1].combo_received==0&&s.get(1,35)==100);
+    auto hard=match();prime(hard,0,FORWARD_THROW);hard.step(0,0);thaw(hard);
+    for(int i=0;i<120&&hard.world.players[1].reaction==AirReel;++i) hard.step(0,0);
+    CHECK(hard.world.players[1].reaction==Downed&&hard.world.players[1].recovery_time==36);
+    ticks(hard,35,0,Up|Dash);CHECK(hard.world.players[1].reaction==Downed);
+    hard.step(0,0);CHECK(hard.world.players[1].reaction==Waking);
+    auto reversal=match();auto& d=reversal.world.players[1];
+    d.simple=1;d.reaction=Waking;d.recovery_time=2;d.knockdown=SoftKnockdown;
+    ticks(reversal,3,0,Simple|Up|Hs);
+    CHECK(d.move==16&&d.reversal_time==NOTICE_TICKS&&d.y==0);
+    for(int slot:{0,FORWARD_THROW}) {
+        auto last=match();wide(last);auto& recovering=last.world.players[1];
+        recovering.reaction=Waking;recovering.recovery_time=1;
+        prime(last,0,slot);last.step(0,0);
+        CHECK(recovering.health==1000&&recovering.reaction==Free);
+    }
+    for(int type=0;type<3;++type) {
+        auto k=match();auto& move=wide(k);move.v[Pushback]=1000;move.v[AirPushback]=5000;move.v[BlockPushback]=7000;
+        move.v[Launch]=1000;move.v[AirLaunch]=-200;
+        auto& target=k.world.players[1];int old=target.x;
+        if(type==1) {target.y=5000;target.vy=0;}
+        if(type==2) {target.stun=1;target.guarding=1;}
+        prime(k);k.step(0,type==2?Right:0);
+        CHECK(target.x-old==(type==0?1000:type==1?5000:7000));
+        CHECK(target.vy==(type==0?1000:type==1?-200:0));
+        CHECK((target.reaction==AirReel)==(type<2));
+    }
+}
+static void test_gravity() {
+    auto s=match();auto& d=s.world.players[1];auto& a=s.world.players[0];
+    d.y=12000;d.reaction=AirReel;d.combo_received=5;d.stun=20;a.combo=5;
+    s.step(0,0);CHECK(d.vy==-85&&s.get(1,35)==100);
+    wide(s).v[AirLaunch]=1000;prime(s);s.step(0,0);
+    CHECK(a.combo==6&&d.combo_received==6&&s.get(1,35)==110);
+    int vy=d.vy;thaw(s);CHECK(d.vy==vy);s.step(0,0);CHECK(d.vy==vy-93);
+    d.combo_received=1000;CHECK(s.get(1,35)==200);
+    CHECK(s.rule_set(GravityAfter,8)&&s.rule_set(GravityStep,20)&&s.rule_set(GravityCap,150));
+    d.combo_received=8;CHECK(s.get(1,35)==100);
+    d.combo_received=9;CHECK(s.get(1,35)==120);
+    d.combo_received=11;CHECK(s.get(1,35)==150);
+    d.reaction=Free;d.stun=0;d.vy=0;s.step(0,0);CHECK(d.vy==-85&&d.combo_received==0);
+    CHECK(!s.rule_set(GravityCap,99)&&!s.rule_set(GravityStep,-1));
+}
+static Simulation splat(int actor=0) {
+    auto s=match();s.rules.wall_threshold=100;
+    auto& m=s.moves[s.world.players[actor].character][0];
+    m.v[Reach]=50000;m.v[Bottom]=0;m.v[Height]=50000;m.v[WallDamage]=100;m.v[Damage]=20;
+    s.world.players[actor].x=actor==0?90000:10000;
+    s.world.players[1-actor].x=actor==0?97000:2800;
+    prime(s,actor);s.step(0,0);return s;
+}
+static void test_walls() {
+    for(int actor=0;actor<2;++actor) {
+        auto s=splat(actor);auto& d=s.world.players[1-actor];
+        CHECK(d.reaction==WallSplat&&d.wall_time==60&&d.wall_damage==100);
+        int y=d.y;thaw(s);s.step(0,0);CHECK(d.y==y&&d.wall_time==59);
+        prime(s,actor);s.step(0,0);
+        CHECK(s.world.wall_break_time==90&&s.world.wall_break_actor==actor);
+        CHECK(d.health==910&&s.world.players[actor].combo==2);
+        int timer=s.world.remaining;unsigned expected=0;
+        State snapshot=s.world;
+        ticks(s,90,Left|P,Right|K);expected=s.checksum();
+        CHECK(s.world.wall_break_time==0&&s.world.stage==1&&s.world.remaining==timer);
+        CHECK(s.world.players[actor].positive_time==360&&d.health==910);
+        CHECK(d.reaction==Free&&d.y==0&&d.stun==0&&d.wall_damage==0&&d.combo_received==0);
+        CHECK(s.world.players[0].x<s.world.players[1].x);
+        s.world=snapshot;ticks(s,90,Left|P,Right|K);CHECK(s.checksum()==expected);
+        s.step(Left|P,Right|K);CHECK(s.world.players[0].move==-1&&s.world.players[1].move==-1);
+        int meter=s.world.players[actor].momentum;
+        s.step(0,0);CHECK(s.world.players[actor].momentum==meter+5);
+    }
+    auto timeout=splat();thaw(timeout);ticks(timeout,60);
+    CHECK(timeout.world.players[1].reaction==AirReel&&timeout.world.players[1].wall_damage==0);
+    for(int i=0;i<100&&timeout.world.players[1].reaction!=Free;++i) timeout.step(0,0);
+    CHECK(timeout.world.players[1].reaction==Free&&timeout.world.stage==0);
+    auto last=splat();thaw(last);ticks(last,59);prime(last);last.step(0,0);
+    CHECK(last.world.wall_break_time==90); // The final splat tick remains a follow-up opportunity.
+    auto block=match();wide(block).v[WallDamage]=5000;prime(block);block.step(0,Right);
+    CHECK(block.world.players[1].wall_damage==0&&block.world.wall_break_time==0);
+    auto bonus=match();wide(bonus).v[Damage]=20;bonus.world.players[0].positive_time=1;
+    prime(bonus);bonus.step(0,0);
+    CHECK(bonus.world.players[0].momentum==245&&bonus.world.players[0].positive_time==0);
+    auto fd=match();fd.world.players[0].positive_time=1;fd.world.players[0].momentum=1000;
+    fd.step(Left|Faultless,0);
+    CHECK(fd.world.players[0].momentum==990&&fd.world.players[0].positive_time==0);
+    auto mid=match();wide(mid).v[WallDamage]=400;prime(mid);mid.step(0,0);
+    CHECK(mid.world.players[1].wall_damage==100&&mid.world.players[1].reaction==Free);
+    thaw(mid);ticks(mid,mid.rules.wall_decay_delay+1);
+    CHECK(mid.world.players[1].wall_damage==80);
+    auto ko=splat();thaw(ko);ko.world.players[1].health=30;prime(ko);ko.step(0,0);
+    CHECK(ko.world.winner==-1&&ko.world.players[1].health==0);
+    ticks(ko,90);CHECK(ko.world.winner==0&&ko.world.wall_break_time==0);
+    auto replay=splat();thaw(replay);State state=replay.world;prime(replay);replay.step(0,0);
+    ticks(replay,100);unsigned hash=replay.checksum();
+    replay.world=state;prime(replay);replay.step(0,0);ticks(replay,100);CHECK(replay.checksum()==hash);
+}
+int main() {
+    test_universals();test_recovery();test_gravity();test_walls();
+    std::printf("Recovery / throws / combo gravity / walls: %d checks, %d failures\n",checks,failures);
+    return failures?1:0;
+}

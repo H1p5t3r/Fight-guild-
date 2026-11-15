@@ -20,7 +20,7 @@ func _initialize() -> void:
 	config[8] = 177
 	if not core.configure(config) or independent.configuration()[8] == 177:
 		failures += 1
-	config[-1] = 0
+	config[-1] = -1
 	if core.configure(config) or core.configuration()[8] != 177:
 		failures += 1
 	var path := OS.get_cmdline_user_args()[0] if not OS.get_cmdline_user_args().is_empty() else ""

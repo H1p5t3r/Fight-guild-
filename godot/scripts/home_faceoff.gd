@@ -1,9 +1,9 @@
 extends Control
 
 # Presentation-only title artwork. Reuses the combat atlases without starting a fight.
-var anvil := Sprite2D.new()
+var fillet := Sprite2D.new()
 var shark := Sprite2D.new()
-const BRASS := GuildTheme.BRASS
+const BUTCHERS := Color("e96865")
 const TEAL := Color("5ab5b5")
 
 func _ready() -> void:
@@ -12,7 +12,7 @@ func _ready() -> void:
 	custom_minimum_size = Vector2(640, 460)
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
-	for fighter in [anvil, shark]:
+	for fighter in [fillet, shark]:
 		fighter.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		add_child(fighter)
 	resized.connect(queue_redraw)
@@ -32,11 +32,11 @@ func _draw() -> void:
 	var vs_size := 118
 	var vs_width := GuildTheme.SEMIBOLD.get_string_size("VS", HORIZONTAL_ALIGNMENT_LEFT, -1, vs_size).x
 	draw_string(GuildTheme.SEMIBOLD, Vector2(w * 0.51 - vs_width * 0.5, h * 0.39), "VS", HORIZONTAL_ALIGNMENT_LEFT, -1, vs_size, Color(0.95, 0.92, 0.86, 0.55))
-	FighterArt.apply(anvil, 0, "windup", 4, h * 0.59 / 150.0, 1)
-	anvil.position = Vector2(w * 0.25, floor_y)
+	FighterArt.apply(fillet, 5, "windup", 4, h * 0.59 / 150.0, 1)
+	fillet.position = Vector2(w * 0.25, floor_y)
 	FighterArt.apply(shark, 4, "windup", 4, h * 0.70 / 150.0, -1)
 	shark.position = Vector2(w * 0.77, floor_y)
-	nameplate("ANVIL", "BLACKSMITHS", Vector2(24, h - 64), w * 0.40, BRASS, false)
+	nameplate("FILLET", "BUTCHERS", Vector2(24, h - 64), w * 0.40, BUTCHERS, false)
 	nameplate("SHARK", "FISHERMEN", Vector2(w * 0.60, h - 64), w * 0.40 - 24, TEAL, true)
 
 func nameplate(fighter: String, guild: String, origin: Vector2, width: float, accent: Color, right: bool) -> void:

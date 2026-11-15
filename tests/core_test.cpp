@@ -16,7 +16,8 @@ static void fresh(int s0=0,int s1=0) {
         m.v[Active]=b<2?3:5; m.v[Recovery]=10+b*3;
         m.v[Damage]=30+b*16+(command?15:0)+(special?30:0)+(c==0?5:0);
         m.v[Hitstun]=20+b*3; m.v[Blockstun]=12+b*2; m.v[Hitstop]=6+b;
-        m.v[Pushback]=800+b*300; m.v[Reach]=8500+b*1700+(command?1500:0);
+        m.v[Pushback]=m.v[AirPushback]=m.v[BlockPushback]=800+b*300;
+        m.v[Launch]=m.v[AirLaunch]=m.v[Knockdown]=m.v[WallDamage]=0; m.v[Reach]=8500+b*1700+(command?1500:0);
         m.v[HitboxBack]=1200; m.v[Bottom]=2000; m.v[Height]=8000;
         m.v[ChipDamage]=(special||m.v[Category]==Drive)?m.v[Damage]/10:0;
     }
@@ -159,9 +160,9 @@ static void test_faultless() {
     step(0,Right|Faultless); CHECK(world.players[1].momentum==held-rules.fd_drain);
     step(0,0); CHECK(!world.players[1].faultless&&world.players[1].momentum==held-rules.fd_drain);
     fresh(); world.players[0].momentum=1000;
-    step(Left|P|K,0); CHECK(world.players[0].faultless&&world.players[0].move==-1);
+    step(Left|P|S,0); CHECK(world.players[0].faultless&&world.players[0].move==-1);
     step(Left,0); ticks(10); CHECK(world.players[0].move==-1); // FD chord cannot leak into buffered normals.
-    fresh(); step(Left|P|K,0);
+    fresh(); step(Left|P|S,0);
     CHECK(!world.players[0].faultless&&world.players[0].move==-1); // Empty-meter chord still guards.
     fresh(); world.players[0].momentum=1000; step(Left|P|D,0);
     CHECK(!world.players[0].faultless&&world.players[0].move==13); // D does not count toward the chord.

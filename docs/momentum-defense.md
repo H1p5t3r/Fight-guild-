@@ -23,7 +23,7 @@ Values are integer hundredths of a percent internally. Fractional movement gain 
 
 ## Faultless Defense
 
-Hold away plus **Q** (P1), **numpad Enter** (P2), or **right trigger** (gamepad). Holding away plus any two of **P/K/S/Hs** also activates it; Drive does not count toward the two-button chord. Use down-back for lows. Air guard has no high/low distinction in this prototype.
+Hold away plus **Q** (P1), **numpad Enter** (P2), or **right trigger** (gamepad). Holding away plus two of **P/K/S/Hs** also activates it, except grounded **4P+K**, which now performs back throw; Drive does not count toward the two-button chord. Use down-back for lows. Air guard has no high/low distinction in this prototype.
 
 With positive meter, FD uses a teal shield, prevents chip damage/KO and multiplies block pushback by 3. At a corner, displacement that the defender cannot take transfers back to the attacker. FD does not add blockstun. It cannot cancel an attack or escape hitstun. It can be activated while already in blockstun. The chord reserves attack/jump/dash inputs so releasing it does not produce a buffered attack.
 
@@ -45,10 +45,12 @@ The selector computes attacker advantage at contact: `blockstun − remaining ac
 
 Guard break overrides the advantage-based pose and lasts for the move's authored blockstun. No additional universal duration is imposed. Backdash presses sampled during the broken stun are consumed, including during hitstop, so they cannot execute through the input buffer as it expires. A fresh backdash works after recovery. A new blocked attack replaces the prior reaction; a normal hit clears guard break and uses hitstun. FD does not undo a move's guard-break property.
 
-The core exposes `throwInvulnerable`: ordinary blockstun/hitstun are protected, guard-broken blockstun is not. **Throws themselves have not been designed or implemented yet**; the forthcoming grab resolver must use this eligibility contract. This pass does not select a universal throw, overhead or anti-air. No move is automatically made a guard breaker: enable the editor flag on the tool you want to test.
+The throw resolver uses `throwInvulnerable`: ordinary blockstun/hitstun, airborne targets and down/wakeup recovery are protected; guard-broken blockstun is not. Universal **4P+K / 6P+K** ground throws are implemented. Overhead and anti-air design remains deferred. See [recovery and walls](recovery-and-walls.md). No move is automatically made a guard breaker: enable the editor flag on the tool you want to test.
 
 ## Data and validation
 
 Schema/core version 3 introduced `chipDamage`, `guardBreak`, ten Momentum rules and deterministic meter/FD/reaction state. Native protocol 2 uses a 12-bit input mask with FD at bit 2048. Old schema-1/2 move JSON preserves existing edits, defaults new defensive fields, derives special/Drive chip from the saved damage and adds default Momentum rules. Invalid imports are atomic. The current schema is 4, which adds counter-hit and reversal timing fields while preserving those defensive edits; see [combo and timing rules](combat-feedback.md). Existing binary snapshots and mismatched online builds are not interchangeable.
 
 Coverage includes gain/cap/reset, no passive penalty, air/high/low FD, empty-meter fallback, input consumption, chip KO, corner push, late contact advantage, guard-break backdash/throw eligibility, replay restoration, native/Godot/WebAssembly parity and two-peer rollback. Godot UI tests drive keyboard input and all 18 block clips through actual contacts, including both frames. Windows/controller hardware validation remains separate from cross-compilation.
+
+Wall breaks grant a provisional Positive Bonus: 150% earned Momentum and 0.05% passive gain per unfrozen tick for 360 ticks. FD suppresses these gains while used. These values are editable; no additional spend or Negative Penalty has been added.

@@ -22,7 +22,7 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Prevent backdash buffering during guard break and expose the removal of blockstun throw protection.
 - [ ] Measure/tune the provisional gain and FD formulas against a chosen GGST version. **Negative Penalty is deferred by user decision.** No additional meter spending is authorized in this pass.
 - [ ] Add standing/crouching/air variants and smooth intermediate defensive frames under the same shape/palette rules.
-- [ ] Connect the future throw resolver to `throwInvulnerable`; retain normal blockstun protection and the guard-break exception.
+- [x] Connect 4P+K / 6P+K throws to shared throw eligibility; retain normal blockstun protection and the guard-break exception.
 
 ## Combo feedback and hit timing
 
@@ -31,7 +31,8 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Expose per-move counter-hit hitstun/hitstop bonuses and reversal eligibility; preserve old saved move sets.
 - [x] Detect first-actionable-frame reversals through the existing input buffer and add attack-loop / guard-to-reversal practice dummies.
 - [ ] Playtest the provisional +4 hitstun/+3 hitstop counter defaults across the six kits before choosing distinct move-specific values.
-- [ ] Design knockdown/wakeup and invulnerable reversal moves separately; route wakeup completion through the same reversal timing opportunity.
+- [x] Add automatic soft/hard knockdown recovery and route wakeup completion through the existing reversal opportunity.
+- [ ] Design invulnerable reversal tools separately.
 
 ## Menus and match flow
 
@@ -57,12 +58,25 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Fit body-only hurtboxes to all 144 existing sprite poses; weapons and effects add no hurt area.
 - [x] Limit each pose to legs, torso-and-arms, head, and one optional extension; enforce the four-hurtbox maximum in authoring and native storage.
 - [x] Add per-fighter pushboxes, wall separation, movement sweeps and airborne crossing/landing checks.
-- [x] Give all 132 move slots preliminary stats and sprite-derived attack rectangles; enforce startup ≥ 5f in core, editor and imports.
+- [x] Give the original 132 move slots preliminary stats and sprite-derived attack rectangles; enforce startup ≥ 5f in core, editor and imports.
 - [x] Share pose selection between collision and rendering; add live collision colors and all-pose/facing review.
 - [ ] Replace shared button collision with per-move, per-animation-frame geometry as dedicated animations are produced; playtest spacing and matchup balance.
 - [ ] Playtest the basic P/K/S/Hs/D buttons and unified gatlings, then replace provisional move data and Drive behaviors character by character.
 - [ ] Collect repeatable Strive input traces to tune buffer behavior and motion leniency.
-- [ ] Design throws, universal overheads, universal anti-air rules with the user.
+- [x] Add universal 2D sweep and 4P+K / 6P+K throws with hard knockdown and the 5f startup floor.
+- [ ] Design universal overheads and universal anti-air rules with the user.
 - [ ] Broaden native online testing under real network conditions; add Internet connectivity/matchmaking and resilience after local rollback validation.
 - [ ] Validate physical controllers and Windows gameplay; establish the approved PS5 Godot port/tooling path before console delivery.
 - [ ] Retain the simulation/presentation boundary for eventual 3D characters constrained to the 2D plane.
+
+## First matchup, recovery and walls
+
+- [x] Focus Fillet/Shark, use numpad notation, and retain the full roster.
+- [x] Edit ground/air hit displacement, block pushback, launch, soft/hard down and wakeup timing, wall damage and throw range.
+- [x] Keep gravity unchanged for the first X hits, then scale per hit to an editable cap.
+- [x] Add wall damage/decay, splat/follow-up break, deterministic transition/neutral reset and timed Momentum Positive Bonus.
+- [x] Preserve schema 1–5 move edits and test delayed-input rollback through wall breaks.
+- [ ] Tune Fillet/Shark routes, gravity threshold and wall durability through local playtests.
+- [ ] Author dedicated windup/active sweep and throw art first, then coherent launch/splat/down/wakeup clips under the existing sprite contract. Current reactions reuse existing poses.
+- [ ] Produce distinct stage-travel backgrounds and wall-break shots; current ground variants share a layout.
+- [ ] Measure a chosen Strive patch's wall-damage and Positive Bonus behavior before claiming exact parity. Super-specific break knockdowns wait for super design.

@@ -23,6 +23,7 @@ void Simulation::reset(int c0,int c1,int s0,int s1) {
     world=State{};
     world.remaining=99*60;
     world.winner=-1;
+    world.wall_break_actor=-1;
     for(int p=0;p<2;++p) {
         Fighter& f=world.players[p];
         f.character=clamp(p?c1:c0,0,CHARACTER_COUNT-1);
@@ -36,6 +37,8 @@ void Simulation::reset(int c0,int c1,int s0,int s1) {
 }
 
 bool cancel_allowed(const Move& from,const Move& to,bool same,bool contact) {
+    // Universal throws start from neutral, never as an unblockable gatling.
+    if(to.v[Category]==Throw) return false;
     if((!contact&&!from.v[WhiffCancel])||(same&&!from.v[SelfCancel])) return false;
     // The universal same-button exception applies to ALL attack categories.
     if(to.v[Category]==Command && from.v[Button]==to.v[Button]) return true;
@@ -61,15 +64,18 @@ static bool faultless_requested(const Fighter& f) {
     int horizontal=((f.raw&Right)!=0)-((f.raw&Left)!=0);
     if(horizontal*f.facing!=-1) return false;
     int buttons=f.raw&(P|K|S|Hs);
+    // Grounded 4P+K belongs to back throw. FD remains on the macro or other pairs.
+    if(f.y==0&&direction(f.raw,f.facing)==4&&buttons==(P|K)&&!(f.raw&Faultless)) return false;
     return (f.raw&Faultless)||(buttons&&(buttons&(buttons-1)));
 }
 void Simulation::gain_momentum(Fighter& f,int amount) {
     if(f.faultless||amount<=0) return;
+    if(f.positive_time>0) amount=amount*rules.positive_gain_percent/100;
     f.momentum=min(MOMENTUM_MAX,f.momentum+amount);
 }
 void Simulation::update_faultless(Fighter& f) {
     bool request=faultless_requested(f);
-    f.faultless=request&&f.momentum>0&&f.move<0&&(f.stun==0||f.guarding);
+    f.faultless=request&&f.momentum>0&&f.move<0&&f.reaction==Free&&(f.stun==0||f.guarding);
     // Reserve the chord even with an empty meter: it falls back to ordinary guard.
     // It cannot become a buffered attack, dash or jump when the shield is released.
     if(request) f.history[world.frame%HISTORY].consumed|=P|K|S|Hs|D|Dash|Up;
@@ -109,10 +115,15 @@ static bool dir_matches(int want,int got) {
 }
 int Simulation::requested(Fighter& f,Sample& h) const {
     const int presses=h.pressed&~h.consumed;
+    const bool throw_chord=f.y==0&&(h.held&(P|K|S|Hs|D))==(P|K)
+        &&(presses&(P|K))&&!(h.consumed&(P|K))&&!(h.held&(Simple|Faultless))
+        &&(h.direction==4||h.direction==6);
+    if(throw_chord) return h.direction==4?BACK_THROW:FORWARD_THROW;
     int best=-1,best_priority=-1;
     bool simplified=f.simple&&(h.held&Simple);
     for(int i=0;i<MOVE_COUNT;++i) {
         const Move& m=moves[f.character][i];
+        if(m.v[Category]==Throw) continue;
         if(m.v[Air]!=(f.y>0)) continue;
         int priority=0;
         if(simplified) {
@@ -121,7 +132,9 @@ int Simulation::requested(Fighter& f,Sample& h) const {
             priority=50+m.v[Button];
         } else {
             if(!(presses&button_bit(m.v[Button]))) continue;
-            if(m.v[Motion]) {
+            if(i==SWEEP&&dir_matches(2,h.direction)) priority=45;
+            else if(i==SWEEP) continue;
+            else if(m.v[Motion]) {
                 if(!motion_matches(f,h.frame,m.v[Motion])) continue;
                 priority=m.v[Motion]==623?40:30;
             } else if(m.v[Category]==Command) {
@@ -150,6 +163,28 @@ bool Simulation::active(const Fighter& f) const {
     return f.age+1>=m.v[Startup]&&f.age+1<m.v[Startup]+m.v[Active];
 }
 void Simulation::control(Fighter& f) {
+    if(f.reaction!=Free) {
+        f.reversal_ready=1;
+        f.stun=max(0,f.stun-1);
+        if(f.reaction==WallSplat) {
+            if(--f.wall_time<=0) {
+                f.reaction=AirReel; f.knockdown=SoftKnockdown;
+                f.down_frames=6; f.wakeup_frames=8; f.vy=0;
+                // A missed wall-break opportunity does not permit an immediate re-splat.
+                f.wall_damage=0;
+            }
+        } else if(f.reaction==Downed||f.reaction==Waking) {
+            if(--f.recovery_time<=0) {
+                if(f.reaction==Downed&&f.wakeup_frames>0) {
+                    f.reaction=Waking; f.recovery_time=f.wakeup_frames;
+                } else {
+                    f.reaction=Free; f.knockdown=f.stun=f.combo_received=0;
+                    f.recovery_time=0;
+                }
+            }
+        }
+        return;
+    }
     if(f.stun>0) {
         f.reversal_ready=1;
         if(f.guarding) ++f.block_age;
@@ -222,6 +257,9 @@ static Box transform(Box b,const Fighter& f) {
 }
 static int pose_offset(int phase,int index) { return (phase==0?0:phase==1?12:18)+index; }
 Pose Simulation::pose(const Fighter& f,int tick_offset) const {
+    if(f.reaction==Downed) return {0,10};
+    if(f.reaction==Waking) return {0,11};
+    if(f.reaction==AirReel||f.reaction==WallSplat) return {0,9};
     if(f.guarding&&f.block_reaction>0) return {2,(f.block_reaction-1)*2+(f.block_age>=4)};
     if(f.stun) return {0,9};
     if(f.faultless) return {2,1};
@@ -260,6 +298,8 @@ Box Simulation::push_box(const Fighter& f) const {
 }
 Box Simulation::attack_box(const Fighter& f) const {
     const auto& m=moves[f.character][f.move];
+    if(m.v[Category]==Throw) return transform({0,0,
+        PUSH_PROFILES[f.character].half_width+m.v[ThrowRange],PUSH_PROFILES[f.character].standing},f);
     return transform({min(m.v[HitboxBack],m.v[Reach]),m.v[Bottom],
                       max(m.v[HitboxBack],m.v[Reach]),m.v[Bottom]+m.v[Height]},f);
 }
@@ -314,6 +354,7 @@ bool Simulation::overlaps(const Fighter& a,const Fighter& b) const {
     return false;
 }
 bool Simulation::blocks(const Fighter& attacker,const Fighter& defender,bool was_stunned) const {
+    if(defender.reaction!=Free||moves[attacker.character][attacker.move].v[Category]==Throw) return false;
     if(defender.move>=0||((defender.stun||was_stunned)&&!defender.guarding)) return false;
     int away=attacker.x<defender.x?Right:Left;
     int toward=away==Left?Right:Left;
@@ -322,6 +363,40 @@ bool Simulation::blocks(const Fighter& attacker,const Fighter& defender,bool was
     int level=moves[attacker.character][attacker.move].v[HitLevel];
     bool crouch=(defender.raw&Down)!=0;
     return level==0||(level==1?crouch:!crouch);
+}
+
+int Simulation::gravity_percent(const Fighter& f) const {
+    if(f.reaction!=AirReel) return 100;
+    return min(rules.gravity_cap,100+max(0,f.combo_received-rules.gravity_after)*rules.gravity_step);
+}
+bool Simulation::throw_invulnerable(const Fighter& f) const {
+    return f.y>0||f.reaction!=Free||(f.guarding&&!f.guard_break)||(f.stun>0&&!f.guarding);
+}
+void Simulation::land(Fighter& f) {
+    f.y=f.vy=0; f.move=-1; f.contact=f.hit_done=0;
+    if(f.reaction==AirReel) {
+        f.reaction=Downed; f.recovery_time=max(1,f.down_frames);
+        f.stun=0; f.guarding=f.guard_break=f.block_reaction=0;
+    }
+}
+void Simulation::finish_wall_break() {
+    int actor=world.wall_break_actor, side=world.wall_break_side;
+    for(int p=0;p<2;++p) {
+        Fighter saved=world.players[p];
+        Fighter& f=world.players[p];
+        f=Fighter{};
+        f.character=saved.character; f.simple=saved.simple;
+        f.health=saved.health; f.momentum=saved.momentum;
+        f.positive_time=p==actor?rules.positive_frames:saved.positive_time;
+        f.x=(p==actor)==(side>0)?42000:58000;
+        f.facing=f.x<50000?1:-1;
+        f.move=f.last_move=-1;
+        f.previous=f.raw=saved.raw; // A held transition input cannot become a fresh press.
+        f.combo_display=saved.combo_display; f.combo_time=saved.combo_time;
+        for(auto& h:f.history) { h.frame=-1000; h.direction=5; }
+    }
+    world.hitstop=0;
+    ++world.stage;
 }
 
 void Simulation::step(int raw0,int raw1) {
@@ -337,10 +412,26 @@ void Simulation::step(int raw0,int raw1) {
         f.previous=raw[p];
     }
     if(world.winner>=0) { ++world.frame; return; }
+    if(world.wall_break_time>0) {
+        for(auto& f:world.players) f.history[world.frame%HISTORY].consumed=INPUT_MASK;
+        // Change ground under the curtain, then reveal the neutral reset before play resumes.
+        if(--world.wall_break_time==rules.wall_break_frames/3) finish_wall_break();
+        if(world.wall_break_time==0) {
+            const auto& a=world.players[0]; const auto& b=world.players[1];
+            if(world.remaining<=0||a.health==0||b.health==0)
+                world.winner=a.health==b.health?2:a.health>b.health?0:1;
+        }
+        ++world.frame;
+        return;
+    }
     for(auto& f:world.players) update_faultless(f);
     if(world.hitstop>0) { --world.hitstop; ++world.frame; return; }
     const int prior_stun[2]={world.players[0].stun,world.players[1].stun};
     const int prior_guard[2]={world.players[0].guarding,world.players[1].guarding};
+    const int prior_reaction[2]={world.players[0].reaction,world.players[1].reaction};
+    const bool prior_combo[2]={
+        (prior_stun[0]>0&&!prior_guard[0])||world.players[0].reaction==AirReel||world.players[0].reaction==WallSplat,
+        (prior_stun[1]>0&&!prior_guard[1])||world.players[1].reaction==AirReel||world.players[1].reaction==WallSplat};
     const int prior_x[2]={world.players[0].x,world.players[1].x};
     const int previous_order=prior_x[0]<=prior_x[1]?1:-1;
     const bool prior_overlap=vertical_overlap(push_box(world.players[0]),push_box(world.players[1]));
@@ -351,19 +442,27 @@ void Simulation::step(int raw0,int raw1) {
         if(f.hit_notice_time>0) --f.hit_notice_time;
         if(f.reversal_time>0) --f.reversal_time;
         if(f.combo_display>0) f.combo_age=min(1000,f.combo_age+1);
-        if(prior_stun[1-p]>0&&!prior_guard[1-p]) {
+        if(prior_combo[1-p]) {
             if(f.combo>=2) f.combo_time=COMBO_HOLD;
         }
         else {
             f.combo=0;
             if(f.combo_time>0) --f.combo_time;
         }
-        control(f);
-        if(f.move<0&&!prior_stun[p]&&!faultless_requested(f)) moved[p]=max(0,(f.x-prior_x[p])*f.facing);
-        if(f.y>0) {
-            f.y+=f.vy; f.vy-=85;
-            if(f.y<=0) { f.y=f.vy=0; f.move=-1; f.contact=f.hit_done=0; }
+        if(!prior_combo[p]&&f.reaction==Free) f.combo_received=0;
+        if(f.positive_time>0) {
+            // Passive bonus is a fixed amount, not multiplied by its own gain multiplier.
+            if(!f.faultless) f.momentum=min(MOMENTUM_MAX,f.momentum+rules.positive_regen);
         }
+        if(f.wall_delay>0) --f.wall_delay;
+        else if(f.reaction!=WallSplat) f.wall_damage=max(0,f.wall_damage-rules.wall_decay);
+        control(f);
+        if(f.move<0&&!prior_stun[p]&&f.reaction==Free&&!faultless_requested(f)) moved[p]=max(0,(f.x-prior_x[p])*f.facing);
+        if(f.y>0&&f.reaction!=WallSplat) {
+            f.y+=f.vy; f.vy-=85*gravity_percent(f)/100;
+            if(f.y<=0) land(f);
+        }
+        else if(f.y<=0&&f.reaction==AirReel) land(f);
         f.x=clamp_x(f,f.x);
     }
     Fighter& a=world.players[0]; Fighter& b=world.players[1];
@@ -382,7 +481,19 @@ void Simulation::step(int raw0,int raw1) {
     bool blocked[2]={false,false};
     for(int p=0;p<2;++p) {
         Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
-        if(active(f)&&!f.hit_done&&overlaps(f,other)) {
+        if(other.reaction==Downed||other.reaction==Waking
+            ||prior_reaction[1-p]==Downed||prior_reaction[1-p]==Waking) continue;
+        bool throwing=f.move>=0&&moves[f.character][f.move].v[Category]==Throw;
+        bool connects=false;
+        if(active(f)&&!f.hit_done) {
+            if(throwing) {
+                int separation=PUSH_PROFILES[f.character].half_width+PUSH_PROFILES[other.character].half_width;
+                connects=f.y==0&&!throw_invulnerable(other)&&!(prior_stun[1-p]>0&&!prior_guard[1-p])
+                    &&(other.x-f.x)*f.facing>=0
+                    &&abs(other.x-f.x)<=separation+moves[f.character][f.move].v[ThrowRange];
+            } else connects=overlaps(f,other);
+        }
+        if(connects) {
             hits[p]=f.move; blocked[p]=blocks(f,other,prior_stun[1-p]>0);
             contacts[p]=blocked[p]?Blocked:NormalHit;
             if(!blocked[p]&&other.move>=0&&prior_stun[1-p]==0) {
@@ -390,6 +501,13 @@ void Simulation::step(int raw0,int raw1) {
                 contacts[p]=other.age+1<interrupted.v[Startup]+interrupted.v[Active]?CounterHit:PunishHit;
             }
         }
+    }
+    // Simultaneous throws clash. A simultaneous strike beats a throw; no player-index bias.
+    if(hits[0]>=0&&hits[1]>=0) {
+        bool t0=moves[a.character][hits[0]].v[Category]==Throw;
+        bool t1=moves[b.character][hits[1]].v[Category]==Throw;
+        if(t0) { hits[0]=-1; a.hit_done=1; }
+        if(t1) { hits[1]=-1; b.hit_done=1; }
     }
     // Detect both hits AND their classifications before changing either fighter.
     // Clear interrupted combo displays before applying either side of a trade.
@@ -402,7 +520,7 @@ void Simulation::step(int raw0,int raw1) {
         const Move& m=moves[f.character][hits[p]];
         f.hit_done=f.contact=1;
         f.event=contacts[p];
-        f.combo=blocked[p]?0:((prior_stun[1-p]&&!prior_guard[1-p])?f.combo+1:1);
+        f.combo=blocked[p]?0:(prior_combo[1-p]?min(1000,f.combo+1):1);
         f.combo_display=f.combo>=2?f.combo:0;
         f.combo_time=f.combo>=2?COMBO_HOLD:0;
         f.combo_age=0;
@@ -411,6 +529,9 @@ void Simulation::step(int raw0,int raw1) {
             f.hit_notice_time=NOTICE_TICKS;
         }
         bool fd=blocked[p]&&other.faultless;
+        bool was_airborne=other.y>0;
+        bool was_splatted=prior_reaction[1-p]==WallSplat;
+        bool throwing=m.v[Category]==Throw;
         int damage=blocked[p]?(fd?0:m.v[ChipDamage]):m.v[Damage];
         other.health=max(0,other.health-damage);
         if(!blocked[p]) other.faultless=0;
@@ -427,11 +548,50 @@ void Simulation::step(int raw0,int raw1) {
         other.block_reaction=!blocked[p]?NoBlock:other.guard_break?BrokenGuard:
             other.block_advantage>0?PressureBlock:StableBlock;
         other.move=-1; other.dash=0;
-        int push=m.v[Pushback]*(fd?rules.fd_push_percent:100)/100;
+        int push=m.v[blocked[p]?BlockPushback:was_airborne?AirPushback:Pushback]*(fd?rules.fd_push_percent:100)/100;
         int old_x=other.x;
         other.x=clamp_x(other,other.x+f.facing*push);
         // FD still creates space at the corner by transferring blocked displacement to the attacker.
         if(fd) f.x=clamp_x(f,f.x-f.facing*(push-abs(other.x-old_x)));
+        if(!blocked[p]) {
+            other.combo_received=f.combo;
+            other.knockdown=m.v[Knockdown];
+            other.down_frames=m.v[KnockdownFrames];
+            other.wakeup_frames=m.v[WakeupFrames];
+            if(throwing&&m.v[Direction]==4) {
+                // Exchange sides at contact, retaining both body widths at stage edges.
+                int separation=PUSH_PROFILES[f.character].half_width+PUSH_PROFILES[other.character].half_width;
+                f.x=clamp_x(f,old_x);
+                other.x=clamp_x(other,f.x-f.facing*(separation+push));
+                f.x=clamp_x(f,other.x+f.facing*separation);
+                f.facing=-f.facing; other.facing=-f.facing;
+            }
+            int lift=m.v[was_airborne?AirLaunch:Launch];
+            if(was_airborne||lift>0||other.knockdown!=NoKnockdown) {
+                other.reaction=AirReel;
+                other.y=max(1,other.y); other.vy=lift;
+                if(other.knockdown==NoKnockdown) other.knockdown=SoftKnockdown;
+            }
+            // Wall damage travels with the defender; midscreen hits contribute one quarter.
+            int wall_distance=min(other.x-PUSH_PROFILES[other.character].half_width,
+                100000-PUSH_PROFILES[other.character].half_width-other.x);
+            if(!throwing) {
+                other.wall_damage=min(rules.wall_threshold,other.wall_damage+
+                    (wall_distance<=rules.wall_range?m.v[WallDamage]:m.v[WallDamage]/4));
+                other.wall_delay=rules.wall_decay_delay;
+            }
+            if(was_splatted&&!throwing) {
+                other.health=max(0,other.health-rules.wall_break_damage);
+                world.wall_break_time=rules.wall_break_frames;
+                world.wall_break_actor=p; world.wall_break_side=other.wall_side;
+                other.wall_time=0;
+            } else if(!throwing&&wall_distance<=2000&&other.wall_damage>=rules.wall_threshold) {
+                other.reaction=WallSplat; other.wall_time=rules.wall_splat_frames;
+                other.wall_side=other.x<50000?-1:1;
+                other.x=clamp_x(other,other.wall_side<0?0:100000);
+                other.y=max(2000,min(12000,other.y)); other.vy=0;
+            }
+        }
         world.hitstop=max(world.hitstop,m.v[Hitstop]+(contacts[p]==CounterHit?m.v[CounterHitstop]:0));
     }
     for(auto& f:world.players) if(f.move>=0) {
@@ -440,8 +600,11 @@ void Simulation::step(int raw0,int raw1) {
             f.move=-1; f.contact=f.hit_done=0;
         }
     }
-    resolve_push(previous_order,prior_overlap);
-    if(--world.remaining<=0||a.health==0||b.health==0)
+    // A back throw is the explicit side-switch exception to movement's anti-tunneling rule.
+    resolve_push(previous_order,prior_overlap&&!(hits[0]==BACK_THROW||hits[1]==BACK_THROW));
+    for(auto& f:world.players) if(f.positive_time>0) --f.positive_time;
+    --world.remaining;
+    if(world.wall_break_time==0&&(world.remaining<=0||a.health==0||b.health==0))
         world.winner=a.health==b.health?2:a.health>b.health?0:1;
     ++world.frame;
 }
@@ -456,7 +619,10 @@ int Simulation::get(int player,int field) const {
     using namespace fight;
     if(player<0) {
         switch(field) { case 0:return world.frame; case 1:return world.remaining;
-        case 2:return world.hitstop; case 3:return world.winner; default:return 0; }
+        case 2:return world.hitstop; case 3:return world.winner;
+        case 4:return world.wall_break_time; case 5:return world.wall_break_actor;
+        case 6:return world.wall_break_side; case 7:return world.stage;
+        case 8:return rules.wall_break_frames; default:return 0; }
     }
     if(player>1) return 0;
     const Fighter& f=world.players[player];
@@ -469,13 +635,14 @@ int Simulation::get(int player,int field) const {
         case 15:return f.momentum; case 16:return f.faultless;
         case 17:return f.block_reaction; case 18:return f.block_age;
         case 19:return f.block_advantage; case 20:return f.guard_break;
-        // Eligibility contract for the future throw system. Ordinary blockstun
-        // protects against grabs; guard break deliberately does not.
-        case 21:return (f.guarding&&!f.guard_break)||(f.stun>0&&!f.guarding);
+        case 21:return throw_invulnerable(f);
         case 22:return f.combo_display; case 23:return f.combo_time; case 24:return f.combo_age;
         case 25:return f.hit_notice; case 26:return f.hit_notice_time;
         case 27:return f.reversal_time; case 28:return f.reversal_input_age;
         case 29:return pose(f).phase; case 30:return pose(f).index;
+        case 31:return f.reaction; case 32:return f.knockdown; case 33:return f.recovery_time;
+        case 34:return f.combo_received; case 35:return gravity_percent(f);
+        case 36:return f.wall_damage; case 37:return f.wall_time; case 38:return f.positive_time;
         default:return 0;
     }
 }
@@ -489,7 +656,7 @@ int Simulation::move_set(int c,int m,int f,int v) {
     int low=0,high=0;
     switch(f) {
         case Button:case SimpleButton: high=4; break;
-        case Category: high=3; break;
+        case Category: high=4; break;
         case Direction: low=1; high=9; break;
         case SimpleDirection: high=9; break;
         case Motion: if(v!=0&&v!=236&&v!=214&&v!=623) return 0; high=623; break;
@@ -502,7 +669,13 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case CounterHitstun: high=60; break;
         case CounterHitstop: high=30; break;
         case Reach:case Height: low=100; high=50000; break;
-        case Pushback: high=20000; break;
+        case Pushback:case AirPushback:case BlockPushback:case ThrowRange: high=20000; break;
+        case Launch: high=3000; break;
+        case AirLaunch: low=-3000; high=3000; break;
+        case Knockdown: high=2; break;
+        case KnockdownFrames: low=1; high=180; break;
+        case WakeupFrames: high=60; break;
+        case WallDamage: high=5000; break;
         case HitboxBack:case Bottom: low=-50000; high=50000; break;
         case Advance: low=-10000; high=10000; break;
         case NormalRoutes:case CommandRoutes: low=-1; high=31; break;
@@ -517,16 +690,23 @@ int Simulation::move_set(int c,int m,int f,int v) {
 int Simulation::rule_get(int f) const {
     const int values[RULE_COUNT]={rules.buffer,rules.motion_window,rules.motion_gap,
         rules.move_gain,rules.attack_gain,rules.block_attack_gain,rules.damage_gain,rules.guard_gain,
-        rules.special_gain,rules.fd_drain,rules.fd_block_cost,rules.fd_damage_cost,rules.fd_push_percent};
+        rules.special_gain,rules.fd_drain,rules.fd_block_cost,rules.fd_damage_cost,rules.fd_push_percent,
+        rules.gravity_after,rules.gravity_step,rules.gravity_cap,rules.wall_threshold,rules.wall_range,
+        rules.wall_decay_delay,rules.wall_decay,rules.wall_splat_frames,rules.wall_break_frames,
+        rules.wall_break_damage,rules.positive_frames,rules.positive_gain_percent,rules.positive_regen};
     return f>=0&&f<RULE_COUNT?values[f]:-1;
 }
 int Simulation::rule_set(int f,int v) {
-    const int low[RULE_COUNT]={1,3,1,0,0,0,0,0,0,1,0,0,100};
-    const int high[RULE_COUNT]={12,30,12,100,100,100,100,100,10000,1000,10000,100,1000};
+    const int low[RULE_COUNT]={1,3,1,0,0,0,0,0,0,1,0,0,100, 0,0,100,1,0,0,0,1,30,0,0,100,0};
+    const int high[RULE_COUNT]={12,30,12,100,100,100,100,100,10000,1000,10000,100,1000,
+        100,100,400,10000,50000,600,1000,180,300,1000,1800,300,100};
     if(f<0||f>=RULE_COUNT||v<low[f]||v>high[f]) return 0;
     int* values[RULE_COUNT]={&rules.buffer,&rules.motion_window,&rules.motion_gap,
         &rules.move_gain,&rules.attack_gain,&rules.block_attack_gain,&rules.damage_gain,&rules.guard_gain,
-        &rules.special_gain,&rules.fd_drain,&rules.fd_block_cost,&rules.fd_damage_cost,&rules.fd_push_percent};
+        &rules.special_gain,&rules.fd_drain,&rules.fd_block_cost,&rules.fd_damage_cost,&rules.fd_push_percent,
+        &rules.gravity_after,&rules.gravity_step,&rules.gravity_cap,&rules.wall_threshold,&rules.wall_range,
+        &rules.wall_decay_delay,&rules.wall_decay,&rules.wall_splat_frames,&rules.wall_break_frames,
+        &rules.wall_break_damage,&rules.positive_frames,&rules.positive_gain_percent,&rules.positive_regen};
     *values[f]=v;
     return 1;
 }

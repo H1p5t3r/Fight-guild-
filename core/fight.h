@@ -3,7 +3,8 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 5, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 22, FIELD_COUNT = 32;
+constexpr int VERSION = 6, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 25, FIELD_COUNT = 41;
+constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int MIN_STARTUP = 5;
 constexpr int MAX_HURTBOXES = 4;
 enum HurtRegion { LegsHurt, TorsoArmsHurt, HeadHurt, ExtensionHurt };
@@ -12,12 +13,16 @@ constexpr int MOMENTUM_MAX = 10000, INPUT_MASK = 4095;
 constexpr int MAX_STUN = 240, MAX_HITSTOP = 60, NOTICE_TICKS = 60, COMBO_HOLD = 60;
 enum Input { Left=1, Right=2, Down=4, Up=8, P=16, K=32, S=64, Hs=128, D=256,
              Dash=512, Simple=1024, Faultless=2048 };
-enum Kind { Normal, Command, Special, Drive };
+enum Kind { Normal, Command, Special, Drive, Throw };
 enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery,
              Damage, Hitstun, Blockstun, Hitstop, Pushback, Reach, Bottom, Height,
              SpecialCancel, JumpCancel, WhiffCancel, SelfCancel, Advance,
              SimpleDirection, SimpleButton, NormalRoutes, CommandRoutes,
-             HitLevel, ChipDamage, GuardBreak, CounterHitstun, CounterHitstop, ReversalEligible, HitboxBack };
+             HitLevel, ChipDamage, GuardBreak, CounterHitstun, CounterHitstop, ReversalEligible, HitboxBack,
+             AirPushback, BlockPushback, Launch, AirLaunch, Knockdown, KnockdownFrames, WakeupFrames,
+             WallDamage, ThrowRange };
+enum KnockdownKind { NoKnockdown, SoftKnockdown, HardKnockdown };
+enum Reaction { Free, AirReel, Downed, Waking, WallSplat };
 enum BoxKind { HurtBox, PushBox, HitBox };
 struct Box { int left, bottom, right, top; };
 struct Pose { int phase, index; }; // active, windup, block; shared with the sprite renderer.
@@ -25,7 +30,10 @@ enum BlockReaction { NoBlock, StableBlock, PressureBlock, BrokenGuard };
 enum Contact { NoContact, NormalHit, Blocked, CounterHit, PunishHit };
 enum Rule { ButtonBuffer, MotionWindow, MotionGap, MoveGain, AttackGain,
             BlockAttackGain, DamageGain, GuardGain, SpecialGain, FDDrain,
-            FDBlockCost, FDDamageCost, FDPushPercent, RULE_COUNT };
+            FDBlockCost, FDDamageCost, FDPushPercent,
+            GravityAfter, GravityStep, GravityCap, WallThreshold, WallRange, WallDecayDelay,
+            WallDecay, WallSplatFrames, WallBreakFrames, WallBreakDamage,
+            PositiveFrames, PositiveGainPercent, PositiveRegen, RULE_COUNT };
 struct Move { int v[FIELD_COUNT]; };
 struct Sample { int frame, direction, pressed, held, consumed; };
 struct Fighter {
@@ -37,14 +45,24 @@ struct Fighter {
     int combo_display, combo_time, combo_age;
     int hit_notice, hit_notice_time;
     int reversal_ready, reversal_time, reversal_input_age;
+    int reaction, knockdown, down_frames, wakeup_frames, recovery_time, combo_received;
+    int wall_damage, wall_delay, wall_time, wall_side, positive_time;
     Sample history[HISTORY];
 };
-struct State { int frame, remaining, hitstop, winner; Fighter players[2]; };
+struct State {
+    int frame, remaining, hitstop, winner;
+    int wall_break_time, wall_break_actor, wall_break_side, stage;
+    Fighter players[2];
+};
 struct Rules {
     int buffer=5, motion_window=20, motion_gap=8;
     // Meter is hundredths of one percent. Rates are provisional, editable tuning.
     int move_gain=2, attack_gain=8, block_attack_gain=4, damage_gain=4, guard_gain=3;
     int special_gain=100, fd_drain=10, fd_block_cost=100, fd_damage_cost=4, fd_push_percent=300;
+    int gravity_after=5, gravity_step=10, gravity_cap=200;
+    int wall_threshold=1000, wall_range=16000, wall_decay_delay=60, wall_decay=20;
+    int wall_splat_frames=60, wall_break_frames=90, wall_break_damage=50;
+    int positive_frames=360, positive_gain_percent=150, positive_regen=5;
 };
 // Each engine adapter owns a simulation; multiple matches never share state.
 class Simulation {
@@ -83,6 +101,10 @@ private:
     Box hurt_box(const Fighter& fighter, int index, int tick_offset=0) const;
     void resolve_push(int previous_order, bool preserve_order);
     int clamp_x(const Fighter& fighter, int x) const;
+    int gravity_percent(const Fighter& fighter) const;
+    bool throw_invulnerable(const Fighter& fighter) const;
+    void land(Fighter& fighter);
+    void finish_wall_break();
 };
 // Compatibility instance for the original C ABI and native test runner.
 extern Simulation default_simulation;

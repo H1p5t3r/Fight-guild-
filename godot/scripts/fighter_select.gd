@@ -4,7 +4,7 @@ extends VBoxContainer
 signal confirmed
 
 var motion := MenuMotion.new()
-var chosen := [0, 1]
+var chosen := [5, 4]
 var active_player := 0
 var online := false
 var simple_checks: Array[CheckBox] = []

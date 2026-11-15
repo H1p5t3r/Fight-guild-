@@ -9,7 +9,7 @@ const module=await WebAssembly.compile(await readFile(new URL('../web/generated/
 const create=async()=>new Engine(await WebAssembly.instantiate(module));
 
 test('Native C++ and WebAssembly match every frame of a 1200-frame input trace',async()=>{
-  const e=await create();
+  const e=await create();e.reset([0,1]);
   const trace=execFileSync(fileURLToPath(new URL('../build/core-tests',import.meta.url)),['--trace'],{encoding:'utf8'}).trim().split('\n');
   assert.equal(trace.length,1200);
   for(const row of trace){const [a,b,hash]=row.split(' ').map(Number);e.step(a,b);assert.equal(e.hash,hash,`frame ${e.frame}`);}
@@ -51,14 +51,14 @@ test('Move data round-trips, fingerprints change, and invalid imports are atomic
   e.loadData(original);assert.equal(e.fingerprint(),hash);
 });
 test('Five-frame floor, schema-4 migration and compiled collision API agree',async()=>{
-  const e=await create(),original=e.data();
+  const e=await create(),original=e.data();e.reset([0,1]);
   for(let startup=0;startup<5;++startup) {
     assert.throws(()=>e.setMove(0,0,'startup',startup),/startup/);
     assert.equal(e.move(0,0).startup,original.characters[0].moves[0].startup);
   }
   const legacy=structuredClone(original);legacy.schema=legacy.coreVersion=4;
   legacy.characters[0].moves[0].counterHitstun=19;
-  for(const character of legacy.characters) for(const move of character.moves) delete move.hitboxBack;
+  for(const character of legacy.characters) { character.moves.length=22; for(const move of character.moves) delete move.hitboxBack; }
   e.loadData(legacy);
   assert.equal(e.move(0,0).counterHitstun,19);assert.equal(e.move(0,0).hitboxBack,1200);
   e.loadData(original);

@@ -7,7 +7,7 @@ const MUTED := GuildTheme.MUTED
 const KEY_MAPS := [{KEY_A:1, KEY_D:2, KEY_S:4, KEY_W:8, KEY_J:16, KEY_K:32, KEY_L:64, KEY_I:128, KEY_O:256, KEY_SPACE:512, KEY_SHIFT:1024, KEY_Q:2048}, {KEY_LEFT:1, KEY_RIGHT:2, KEY_DOWN:4, KEY_UP:8, KEY_KP_1:16, KEY_KP_2:32, KEY_KP_3:64, KEY_KP_5:128, KEY_KP_6:256, KEY_KP_0:512, KEY_KP_ADD:1024, KEY_KP_ENTER:2048}]
 var model := CombatModel.new()
 var connection := NativePeer.new()
-var characters := [0, 1]
+var characters := [5, 4]
 var simple := [false, false]
 var held := {}
 var paused := false
@@ -27,6 +27,7 @@ var edit_move: OptionButton
 var fields := {}
 var buffer_fields: Array[SpinBox] = []
 var momentum_fields := {}
+var recovery_fields := {}
 var training_momentum: OptionButton
 var editor_title: Label
 var routes: Label
@@ -201,7 +202,7 @@ func build_interface() -> void:
 	label(editor, "Move editor", 25)
 	label(editor, "Apply a change, reset, and test it immediately.", 11, MUTED)
 	var pickers := row(editor)
-	edit_character = option(pickers, "Character", CombatModel.CHARACTERS)
+	edit_character = option(pickers, "Character", CombatModel.CHARACTERS, 5)
 	edit_move = option(pickers, "Move", CombatModel.MOVE_IDS)
 	edit_character.item_selected.connect(func(_i: int): populate_editor())
 	edit_move.item_selected.connect(func(_i: int): populate_editor())
@@ -212,8 +213,20 @@ func build_interface() -> void:
 	grid.add_theme_constant_override("h_separation", 10)
 	grid.add_theme_constant_override("v_separation", 8)
 	editor.add_child(grid)
-	for spec in [["startup","Startup",5,120,1],["active","Active",1,120,1],["recovery","Recovery",0,180,1],["damage","Damage",0,1000,1],["hitstun","Hitstun",0,180,1],["blockstun","Blockstun",0,180,1],["hitstop","Hitstop",0,30,1],["pushback","Push (px)",0,200,100],["advance","Advance (px)",-100,100,100],["hitboxBack","Hitbox back (px)",-500,500,100],["reach","Hitbox front (px)",1,500,100],["bottom","Bottom (px)",-500,500,100],["height","Height (px)",1,500,100],["chipDamage","Chip damage",0,1000,1],["counterHitstun","Counter +stun",0,60,1],["counterHitstop","Counter +stop",0,30,1]]:
+	for spec in [["startup","Startup",5,120,1],["active","Active",1,120,1],["recovery","Recovery",0,180,1],["damage","Damage",0,1000,1],["hitstun","Hitstun",0,180,1],["blockstun","Blockstun",0,180,1],["hitstop","Hitstop",0,30,1],["advance","Advance (px)",-100,100,100],["hitboxBack","Hitbox back (px)",-500,500,100],["reach","Hitbox front (px)",1,500,100],["bottom","Bottom (px)",-500,500,100],["height","Height (px)",1,500,100],["chipDamage","Chip damage",0,1000,1],["counterHitstun","Counter +stun",0,60,1],["counterHitstop","Counter +stop",0,30,1]]:
 		add_field(grid, spec)
+	label(editor, "HIT REACTIONS", 11, MUTED)
+	var reactions := GridContainer.new()
+	reactions.columns = 2
+	reactions.add_theme_constant_override("h_separation", 10)
+	reactions.add_theme_constant_override("v_separation", 8)
+	editor.add_child(reactions)
+	for spec in [["pushback","Ground knockback px",0,200,100],["airPushback","Air knockback px",0,200,100],["blockPushback","Block pushback px",0,200,100],["launch","Ground launch px/f",0,30,100],["airLaunch","Air launch px/f",-30,30,100],["knockdownFrames","Down duration f",1,180,1],["wakeupFrames","Wakeup duration f",0,60,1],["wallDamage","Wall damage",0,5000,1],["throwRange","Throw reach px",0,200,100]]:
+		add_field(reactions, spec)
+	var knockdown := option(reactions, "Knockdown", ["None", "Soft · auto tech", "Hard"])
+	fields.knockdown = {"control": knockdown, "scale": 1}
+	var reaction_note := label(editor, "Launch: upward speed; air launch may be negative. Knockback: distance per hit. Soft knockdowns tech in place automatically. 2D and 4P+K / 6P+K cause hard knockdown.", 11, MUTED)
+	reaction_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	var guard_break := CheckBox.new()
 	guard_break.text = "Guard break on block"
 	guard_break.tooltip_text = "Uses this move's blockstun. Defender cannot backdash or retain blockstun throw immunity."
@@ -221,7 +234,7 @@ func build_interface() -> void:
 	fields.guardBreak = {"control": guard_break, "scale": 1}
 	var reversal := CheckBox.new()
 	reversal.text = "Eligible for reversal timing"
-	reversal.tooltip_text = "Starting this move on the first actionable frame after stun earns REVERSAL. Uses the button buffer; grants no invulnerability."
+	reversal.tooltip_text = "Starting this move on the first actionable frame after stun or wakeup earns REVERSAL. Uses the button buffer; grants no invulnerability."
 	editor.add_child(reversal)
 	fields.reversalEligible = {"control": reversal, "scale": 1}
 	label(editor, "CANCEL BEHAVIOR", 11, MUTED)
@@ -243,9 +256,9 @@ func build_interface() -> void:
 	var advanced_grid := GridContainer.new()
 	advanced_grid.columns = 2
 	advanced.add_child(advanced_grid)
-	for spec in [["button","Button (0–4)",0,4,1],["category","Kind (0–3)",0,3,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (0/214/236/623)",0,623,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["simpleDirection","Simple direction",0,9,1],["simpleButton","Simple button",0,4,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
+	for spec in [["button","Button (0–4)",0,4,1],["category","Kind (0–4)",0,4,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (0/214/236/623)",0,623,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["simpleDirection","Simple direction",0,9,1],["simpleButton","Simple button",0,4,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
 		add_field(advanced_grid, spec)
-	var note := label(advanced, "Kind: 0 normal, 1 command, 2 special, 3 Drive. Button: P=0 K=1 S=2 Hs=3 D=4. Masks: −1 unified; P=1 K=2 S=4 Hs=8 D=16.", 10, MUTED)
+	var note := label(advanced, "Kind: 0 normal, 1 command, 2 special, 3 Drive, 4 throw. Button: P=0 K=1 S=2 Hs=3 D=4. Masks: −1 unified; P=1 K=2 S=4 Hs=8 D=16.", 10, MUTED)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button(editor, "Apply & reset", apply_move, true, "essential")
 	var saves := row(editor)
@@ -290,6 +303,26 @@ func build_interface() -> void:
 	button(momentum_panel, "Apply Momentum & reset", apply_momentum, true, "essential")
 	var meter_note := label(momentum_panel, "Provisional rates. FD prevents chip and increases pushback. Negative Penalty is deferred.", 11, MUTED)
 	meter_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	var recovery_panel := VBoxContainer.new()
+	editor.add_child(recovery_panel)
+	recovery_panel.visible = false
+	button(editor, "Combo gravity & walls ▾", func(): recovery_panel.visible = not recovery_panel.visible)
+	var recovery_grid := GridContainer.new()
+	recovery_grid.columns = 2
+	recovery_panel.add_child(recovery_grid)
+	for spec in [["gravityAfter","Unscaled hits",0,100,1],["gravityStep","Gravity +% / hit",0,100,1],["gravityCap","Gravity cap %",100,400,1],["wallThreshold","Wall durability",1,10000,1],["wallRange","Full wall damage px",0,500,100],["wallDecayDelay","Wall decay delay f",0,600,1],["wallDecay","Wall decay / f",0,1000,1],["wallSplatFrames","Splat duration f",1,180,1],["wallBreakFrames","Break transition f",30,300,1],["wallBreakDamage","Break bonus damage",0,1000,1],["positiveFrames","Positive duration f",0,1800,1],["positiveGainPercent","Positive gain %",100,300,1],["positiveRegen","Positive regen % / f",0,1,100]]:
+		var column := VBoxContainer.new()
+		recovery_grid.add_child(column)
+		label(column, spec[1], 10, MUTED)
+		var spin := SpinBox.new()
+		spin.min_value = spec[2]
+		spin.max_value = spec[3]
+		spin.step = 0.01 if spec[4] == 100 else 1
+		column.add_child(spin)
+		recovery_fields[spec[0]] = {"control": spin, "scale": spec[4]}
+	var recovery_note := label(recovery_panel, "First X hits use normal gravity. Each further hit adds gravity up to the cap. Splat, then strike again to break; an expired splat falls into soft recovery. Wall breaks return to neutral with a Momentum gain bonus.", 11, MUTED)
+	recovery_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	button(recovery_panel, "Apply recovery & reset", apply_recovery, true, "essential")
 	diagnostics = VBoxContainer.new()
 	editor.add_child(diagnostics)
 	var network := panel(diagnostics)
@@ -694,10 +727,11 @@ func show_file(load_mode: bool) -> void:
 
 func populate_editor() -> void:
 	var definition := model.move(edit_character.selected, edit_move.selected)
-	editor_title.text = CombatModel.MOVE_IDS[edit_move.selected] + " / " + ["NORMAL", "COMMAND", "SPECIAL", "DRIVE"][definition.category]
+	editor_title.text = CombatModel.MOVE_IDS[edit_move.selected] + " / " + ["NORMAL", "COMMAND", "SPECIAL", "DRIVE", "THROW"][definition.category]
 	for key in fields:
 		var control: Control = fields[key].control
 		if control is CheckBox: control.button_pressed = bool(definition[key])
+		elif control is OptionButton: control.selected = int(definition[key])
 		else: control.value = float(definition[key]) / fields[key].scale
 	var destinations: Array[String] = []
 	for to in CombatModel.MOVE_IDS.size():
@@ -707,6 +741,8 @@ func populate_editor() -> void:
 	for i in 3: buffer_fields[i].value = data.inputRules[CombatModel.RULES[i]]
 	for rule in momentum_fields:
 		momentum_fields[rule].control.value = float(data.momentumRules[rule]) / momentum_fields[rule].scale
+	for rule in recovery_fields:
+		recovery_fields[rule].control.value = float(data.recoveryRules[rule]) / recovery_fields[rule].scale
 
 func apply_move() -> void:
 	if connection.active: return
@@ -714,7 +750,7 @@ func apply_move() -> void:
 	var definition: Dictionary = data.characters[edit_character.selected].moves[edit_move.selected]
 	for key in fields:
 		var control: Control = fields[key].control
-		definition[key] = int(control.button_pressed) if control is CheckBox else roundi(control.value * fields[key].scale)
+		definition[key] = int(control.button_pressed) if control is CheckBox else control.selected if control is OptionButton else roundi(control.value * fields[key].scale)
 	var error := model.load_data(data)
 	if not error.is_empty(): editor_status.text = error; return
 	populate_editor()
@@ -737,6 +773,15 @@ func apply_momentum() -> void:
 	var error := model.load_data(data)
 	if error.is_empty(): reset_round()
 	editor_status.text = "Momentum settings applied." if error.is_empty() else error
+
+func apply_recovery() -> void:
+	if connection.active: return
+	var data := model.data()
+	for rule in recovery_fields:
+		data.recoveryRules[rule] = roundi(recovery_fields[rule].control.value * recovery_fields[rule].scale)
+	var error := model.load_data(data)
+	if error.is_empty(): reset_round()
+	editor_status.text = "Recovery and wall settings applied." if error.is_empty() else error
 
 func release_focus_from_ui() -> void:
 	var focus := get_viewport().gui_get_focus_owner()
@@ -900,6 +945,7 @@ func lock_online(locked: bool) -> void:
 		else: field.control.disabled = locked
 	for spin in buffer_fields: spin.editable = not locked
 	for field in momentum_fields.values(): field.control.editable = not locked
+	for field in recovery_fields.values(): field.control.editable = not locked
 	mode.disabled = locked
 	training_momentum.disabled = locked or mode.selected == 1
 	dummy.disabled = locked or mode.selected == 1

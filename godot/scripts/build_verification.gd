@@ -114,6 +114,8 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 		tree.quit(1)
 		return
 	game.set_physics_process(false)
+	check(game.characters == [5, 4] and game.menus.selection.chosen == [5, 4], "First matchup must be Fillet / Shark")
+	check(game.edit_character.selected == 5, "Move editor should open on Fillet")
 	await tree.process_frame
 	var transitions = load("res://scripts/transition_verification.gd").new()
 	failures += await transitions.run(tree, game)
@@ -121,6 +123,10 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	failures += await entry.run(tree, game)
 	var menus = load("res://scripts/menu_verification.gd").new()
 	failures += await menus.run(tree, game)
+	# Existing timing fixtures deliberately use Anvil/Hammer; keep that independent of defaults.
+	game.edit_character.select(0)
+	game.populate_editor()
+	verify_recovery_editor()
 	check(game.fields.startup.control.min_value == 5 and game.fields.has("hitboxBack"), "Editor is missing the startup floor or strike origin")
 	game.release_focus_from_ui()
 	key(KEY_D, true)
@@ -296,3 +302,30 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 		check(tree.root.get_texture().get_image().save_png(path) == OK, "Could not save native screenshot")
 	print("Godot playable scene: ", failures, " failures; combat, counter/punish/reversal, combo display/side-switch, editing, FD, block clips, rollback")
 	tree.quit(1 if failures else 0)
+
+func verify_recovery_editor() -> void:
+	var original: Dictionary = game.model.data()
+	game.fields.pushback.control.value = 12
+	game.fields.airPushback.control.value = 24
+	game.fields.blockPushback.control.value = 18
+	game.fields.launch.control.value = 10
+	game.fields.airLaunch.control.value = -2
+	game.fields.knockdown.control.selected = 1
+	game.fields.knockdownFrames.control.value = 7
+	game.fields.wakeupFrames.control.value = 9
+	game.fields.wallDamage.control.value = 123
+	game.apply_move()
+	var move: Dictionary = game.model.move(0, 0)
+	check(move.pushback == 1200 and move.airPushback == 2400 and move.blockPushback == 1800, "Independent hit / block displacement controls failed")
+	check(move.launch == 1000 and move.airLaunch == -200 and move.knockdown == 1 and move.knockdownFrames == 7 and move.wakeupFrames == 9 and move.wallDamage == 123, "Reaction fields did not apply")
+	game.recovery_fields.gravityAfter.control.value = 8
+	game.recovery_fields.gravityStep.control.value = 15
+	game.recovery_fields.wallThreshold.control.value = 800
+	game.apply_recovery()
+	check(game.model.data().recoveryRules.gravityAfter == 8 and game.model.data().recoveryRules.gravityStep == 15 and game.model.data().recoveryRules.wallThreshold == 800, "Recovery rules editor did not apply")
+	game.lock_online(true)
+	check(not game.recovery_fields.gravityAfter.control.editable and game.fields.knockdown.control.disabled, "Recovery editor remains editable online")
+	game.lock_online(false)
+	game.model.load_data(original)
+	game.populate_editor()
+	game.reset_round()

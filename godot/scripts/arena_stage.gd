@@ -1,7 +1,7 @@
 class_name ArenaStage
 extends RefCounted
 
-static func draw(canvas: Control, debug_grid: bool) -> void:
+static func draw(canvas: Control, debug_grid: bool, stage: int = 0) -> void:
 	var w := canvas.size.x
 	var h := canvas.size.y
 	var floor_y := h - 76.0
@@ -31,6 +31,10 @@ static func draw(canvas: Control, debug_grid: bool) -> void:
 	canvas.draw_line(Vector2(0, floor_y), Vector2(w, floor_y), Color("788e81"), 2)
 	FightHud.centered(canvas, "FIGHT GUILD", Vector2(w * 0.5, stand_y - 16), 46, Color("21363c"))
 	canvas.draw_rect(Rect2(0, floor_y + 1, w, h - floor_y), Color("0a161e"))
+	var zone_colors := [Color("5e9fa3"), Color("c7956c"), Color("97ad84")]
+	var zone: Color = zone_colors[stage % zone_colors.size()]
+	canvas.draw_rect(Rect2(0, 145, w, floor_y - 145), Color(zone, 0.025 if stage == 0 else 0.09))
+	FightHud.centered(canvas, ["CENTRE GROUND", "GUILD TERRACE", "THE NORTH END"][stage % 3], Vector2(w * 0.5, stand_y + 55), 13, Color(zone, 0.65))
 	if debug_grid:
 		for x in range(0, int(w), 70): canvas.draw_line(Vector2(x, 140), Vector2(x, floor_y), Color(0.25, 0.38, 0.43, 0.25))
 		for y in range(160, int(floor_y), 50): canvas.draw_line(Vector2(0, y), Vector2(w, y), Color(0.25, 0.38, 0.43, 0.25))

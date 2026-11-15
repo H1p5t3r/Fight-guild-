@@ -29,7 +29,7 @@ protected:
         ClassDB::bind_method(D_METHOD("collision_hash"), &FightCore::collision_hash);
     }
 public:
-    FightCore() { simulation.defaults(); simulation.reset(0,1,0,0); }
+    FightCore() { simulation.defaults(); simulation.reset(5,4,0,0); }
     void reset(int a,int b,bool simple_a,bool simple_b) { simulation.reset(a,b,simple_a,simple_b); }
     void step(int a,int b) { simulation.step(a,b); }
     int read_value(int p,int f) const { return simulation.get(p,f); }
@@ -71,6 +71,9 @@ public:
         fight::State candidate{};
         std::memcpy(&candidate,bytes.ptr(),sizeof(candidate));
         if(candidate.frame<0||candidate.winner< -1||candidate.winner>2||candidate.hitstop<0||candidate.hitstop>fight::MAX_HITSTOP) return false;
+        if(candidate.wall_break_time<0||candidate.wall_break_time>300||candidate.wall_break_actor< -1
+            ||candidate.wall_break_actor>1||candidate.wall_break_side< -1||candidate.wall_break_side>1
+            ||candidate.stage<0) return false;
         for(const auto& f:candidate.players) {
             if(f.character<0||f.character>=fight::CHARACTER_COUNT||f.move< -1||f.move>=fight::MOVE_COUNT
                 ||f.simple<0||f.simple>1||(f.facing!=1&&f.facing!= -1)
@@ -84,7 +87,13 @@ public:
                 ||f.combo_age<0||f.combo_age>1000||f.hit_notice<0||f.hit_notice>fight::PunishHit
                 ||f.hit_notice_time<0||f.hit_notice_time>fight::NOTICE_TICKS
                 ||f.reversal_ready<0||f.reversal_ready>1||f.reversal_time<0||f.reversal_time>fight::NOTICE_TICKS
-                ||f.reversal_input_age<0||f.reversal_input_age>=12) return false;
+                ||f.reversal_input_age<0||f.reversal_input_age>=12
+                ||f.reaction<fight::Free||f.reaction>fight::WallSplat||f.knockdown<0||f.knockdown>2
+                ||f.down_frames<0||f.down_frames>180||f.wakeup_frames<0||f.wakeup_frames>60
+                ||f.recovery_time<0||f.recovery_time>180||f.combo_received<0||f.combo_received>1000
+                ||f.wall_damage<0||f.wall_damage>10000||f.wall_delay<0||f.wall_delay>600
+                ||f.wall_time<0||f.wall_time>180||f.wall_side< -1||f.wall_side>1
+                ||f.positive_time<0||f.positive_time>1800) return false;
         }
         simulation.world=candidate;
         return true;

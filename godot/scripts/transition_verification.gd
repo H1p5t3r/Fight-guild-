@@ -46,7 +46,7 @@ func run(tree: SceneTree, game: Control) -> int:
 	game.menus.selection.choose_fighter(0, 3)
 	game.menus.selection.choose_fighter(0, 4)
 	await game.wait_for_menu_motion()
-	check(game.menus.selection.portraits[0].fighter_name.text == "SHARK" and game.menus.selection.chosen[1] == 1, "Rapid portrait selection finished on a stale fighter or changed P2")
+	check(game.menus.selection.portraits[0].fighter_name.text == "SHARK" and game.menus.selection.chosen[1] == 4, "Rapid portrait selection finished on a stale fighter or changed P2")
 	game.menus.selection.choose_fighter(0, 0)
 	await game.wait_for_menu_motion()
 	key(KEY_J, true)
