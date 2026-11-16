@@ -3,7 +3,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 13, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 69;
+constexpr int VERSION = 14, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 69;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
@@ -43,6 +43,13 @@ constexpr int HURT_PHASES = 3, HURT_FIELDS = 1+MAX_HURTBOXES*4;
 // count 0 inherits the current sprite pose. Custom phases have the three body
 // regions and optionally one extension; weapons never acquire hurt regions.
 struct MoveHurt { int count; Box boxes[MAX_HURTBOXES]; };
+constexpr int MAX_HIT_KEYS=32, MAX_HITBOXES=4, HIT_KEY_FIELDS=7+MAX_HITBOXES*4;
+constexpr int HIT_TRACK_FIELDS=2+MAX_HIT_KEYS*HIT_KEY_FIELDS;
+// A key starts at a 1-based active frame and holds until the next key.
+// count -1 uses ordinary strike/hook geometry; 0 is a non-hitting gap.
+// Timing/damage -1 inherits the move. Multiple boxes share one hit group.
+struct HitKey { int frame, group, count, damage, hitstun, blockstun, hitstop; Box boxes[MAX_HITBOXES]; };
+struct MoveHit { int multi, count; HitKey keys[MAX_HIT_KEYS]; };
 struct Pose { int phase, index; }; // active, windup, block, signature windup/active; shared with rendering.
 enum BlockReaction { NoBlock, StableBlock, PressureBlock, BrokenGuard };
 enum Contact { NoContact, NormalHit, Blocked, CounterHit, PunishHit };
@@ -61,6 +68,7 @@ struct Sample { int frame, direction, pressed, held, consumed; };
 struct Fighter {
     int character, simple, x, y, vy, facing, health;
     int move, age, stun, guarding, contact, hit_done, dash, previous, raw;
+    unsigned hit_groups;
     int combo, event, last_move;
     int momentum, faultless, movement_remainder;
     int block_reaction, block_age, block_advantage, guard_break;
@@ -107,6 +115,7 @@ public:
     State world{};
     Move moves[CHARACTER_COUNT][MOVE_COUNT]{};
     MoveHurt move_hurt[CHARACTER_COUNT][MOVE_COUNT][HURT_PHASES]{};
+    MoveHit move_hit[CHARACTER_COUNT][MOVE_COUNT]{};
     Mobility mobility[CHARACTER_COUNT]{};
     Rules rules{};
     void defaults();
@@ -119,6 +128,12 @@ public:
     int move_set(int character, int move, int field, int value);
     int hurt_get(int character, int move, int phase, int field) const;
     int hurt_set(int character, int move, int phase, int count, const Box* boxes);
+    int hit_get(int character, int move, int field) const;
+    int hit_clear(int character, int move, int multi);
+    int hit_add(int character, int move, const HitKey& key);
+    // Authoring harness setup. Neither helper changes move configuration.
+    int preview_place(int player, int x, int y, int momentum);
+    int preview_begin(int player, int move);
     int rule_get(int field) const;
     int rule_set(int field, int value);
     int mobility_get(int character, int field) const;
@@ -142,6 +157,9 @@ private:
     void update_faultless(Fighter& fighter);
     Box push_box(const Fighter& fighter) const;
     Box attack_box(const Fighter& fighter, int segment=0, int tick_offset=0) const;
+    const HitKey* hit_key(const Fighter& fighter, int tick_offset=0) const;
+    int attack_count(const Fighter& fighter, int tick_offset=0) const;
+    unsigned hit_bit(const Fighter& fighter, int tick_offset=0) const;
     Box weapon_span(const Fighter& fighter, int tick_offset=0) const;
     Box hurt_box(const Fighter& fighter, int index, int tick_offset=0) const;
     const MoveHurt* hurt_override(const Fighter& fighter, int tick_offset=0) const;
@@ -184,6 +202,12 @@ FG_EXPORT(fg_get) int fg_get(int player, int field);
 FG_EXPORT(fg_move_get) int fg_move_get(int character, int move, int field);
 FG_EXPORT(fg_move_set) int fg_move_set(int character, int move, int field, int value);
 FG_EXPORT(fg_hurt_get) int fg_hurt_get(int character, int move, int phase, int field);
+FG_EXPORT(fg_hit_get) int fg_hit_get(int character,int move,int field);
+FG_EXPORT(fg_hit_clear) int fg_hit_clear(int character,int move,int multi);
+FG_EXPORT(fg_hit_add) int fg_hit_add(int c,int m,int frame,int group,int count,int damage,int hitstun,int blockstun,int hitstop,
+    int l0,int b0,int r0,int t0,int l1,int b1,int r1,int t1,int l2,int b2,int r2,int t2,int l3,int b3,int r3,int t3);
+FG_EXPORT(fg_preview_place) int fg_preview_place(int player,int x,int y,int momentum);
+FG_EXPORT(fg_preview_begin) int fg_preview_begin(int player,int move);
 FG_EXPORT(fg_hurt_set) int fg_hurt_set(int character, int move, int phase, int count,
     int l0,int b0,int r0,int t0,int l1,int b1,int r1,int t1,
     int l2,int b2,int r2,int t2,int l3,int b3,int r3,int t3);

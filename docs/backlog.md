@@ -119,3 +119,11 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Extend Sprite review, configuration migration, collision validation and rollback checks for the new kits.
 - [ ] Playtest follow-up windows, whiff routes, travel friction, pull distance and hook matchups before locking balance.
 - [ ] Author dedicated run/step poses and coherent return/retrieval animation. Current movement reuses walking poses; hook retraction reuses the active body.
+
+### Completed: browser contact preview and attack authoring
+
+- Real combat playback with input-driven approach, hit/block reactions, travel,
+  freeze, launch/pull and scaled damage; uses existing art.
+- Active-frame hitbox keys, optional multi-hit groups and per-key impact values.
+- Prominent attack enable switch for optional command normals and other slots.
+- Schema-14 JSON migration, native import/save, rollback and updated control PDF.

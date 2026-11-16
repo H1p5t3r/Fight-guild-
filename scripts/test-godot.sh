@@ -13,6 +13,8 @@ python tests/combat_data_test.py
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/counter_test.cpp -o build/counter-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/wall_test.cpp -o build/wall-tests
 ./build/collision-tests
+"${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/hit_timeline_test.cpp -o build/hit-timeline-tests
+./build/hit-timeline-tests
 ./build/recovery-tests
 ./build/signature-tests
 ./build/tuning-tests

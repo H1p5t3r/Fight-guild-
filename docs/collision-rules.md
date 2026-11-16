@@ -35,3 +35,16 @@ Fillet and Shark now use 64 v2 body fits with updated atlas roots and strike reg
 ## Wallboxes
 
 Two solid half-spaces bound x=0 and x=1000px at all playable heights; their debug rectangles extend beyond every camera edge. A swept pushbox collision during hitstun removes the magnitude of horizontal velocity from the contacted wall's hidden health, then consumes that velocity and remaining travel. Depletion and splat require separate impacts. Both fighters share each wall's pool. Blocks and voluntary movement cannot damage walls. Purple WALL overlays use `boxes(-1, WallBox)` from the same native simulation.
+
+## Timed attack hitboxes
+
+Schema 14 adds optional active-frame keys to each move. A key can inherit the
+ordinary shape, hold up to four custom attack rectangles, or create a gap with
+no hitboxes. Each key holds until the next; unused keys beyond Active stay saved.
+These attack boxes are separate from the maximum four body hurtboxes per pose.
+Weapon reach still adds no body hurtboxes.
+
+Multiple boxes and keys share one contact by default. Enabling multiple hits
+allows separate hit numbers 1–32, consumed once each per execution on hit or
+block. Overlapping boxes with the same number cannot stack hits. The consumed
+mask rolls back with the fighter. Throws continue using their range resolver.

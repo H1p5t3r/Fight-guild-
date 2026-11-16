@@ -5,10 +5,10 @@
 `content.json` is the maintained source. Gameplay field labels and ranges are
 read from the current editor specifications and generated workshop data rather
 than copied into the layout code. Behavioral explanations were checked against
-the schema-13 C++ core and browser UI at `5d2351f`. This guide documents the
+the schema-14 C++ core and browser UI, including combat playback and hitbox keys. This guide documents the
 browser workshop; it does not claim to cover every global control in Godot.
 
-The PDF has 24 deliberately paginated A4 pages, embedded fonts, searchable text,
+The PDF has 27 deliberately paginated A4 pages, embedded fonts, searchable text,
 bookmarks, linked contents and a linked alphabetical gameplay-field index.
 Screenshots show a fresh default draft in a temporary browser context. Enabling
 the sample hurtbox profile does not modify repository move data or a user draft.
@@ -50,3 +50,8 @@ sheet plus full-size samples of the densest pages.
 - Hurtbox profiles cover whole phases; they are not per-frame animation keys.
 - Godot imports gameplay but does not retain workshop art notes or photos in
   its own subsequent exports. Keep the workshop JSON as the art master.
+
+Active-frame hitbox keys are distinct from whole-phase body hurtboxes. Multiple
+boxes default to one hit; separate hit numbers require Allow multiple hits.
+The guide also documents the prominent Attack enabled switch and real combat
+preview settings. Timelines survive native import/save; art metadata still does not.

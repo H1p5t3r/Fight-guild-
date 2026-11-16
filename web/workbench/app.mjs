@@ -3,11 +3,16 @@ import {HURT_PHASES,HURT_REGIONS,HURT_LABELS,validateHurtboxes} from '../hurtbox
 import {SPECS,GROUPS,TABS,ART_FIELDS,GUILDS,COLORS,KINDS} from './specs.mjs';
 import {Preview} from './preview.mjs';
 import {prepareReference,MAX_REFERENCES,MAX_IMPORT_BYTES,REFERENCE_PHASES} from './references.mjs';
+import {validateHitTimeline,keyAt} from '../hitboxes.mjs';
+import {renderHitEditor} from './hit-editor.mjs';
+import {CombatPreview,describeInput} from './simulation.mjs';
 const $=id=>document.getElementById(id),pack=globalThis.FIGHT_WORKSHOP_DATA;
 const STORAGE='fight-guild.move-workshop.v1';
 let model,character=5,slot=0,tab='timing',filter='all',frame=5,playing=false,lastTick=0,saveTimer,toastTimer,dragBefore;
 let storageOkay=true,savePending=false,unexported=false,bootLocked=false,recoveryRaw='',referenceBusy=false;
 let hurtPhase='active',hurtRegion='torsoArms',hurtDragBefore;
+let hitKeyFrame=null,hitBox=0,previewMode='test',testRecord,testIndex=0,testPlaying=false,testLastTick=0,testTimer,testSignature='';
+const combatPreview=new CombatPreview(pack);
 const errors=new Map();
 function el(tag,attributes={},text){const node=document.createElement(tag);for(const [key,value]of Object.entries(attributes)){if(key==='class')node.className=value;else if(key==='checked')node.checked=value;else node.setAttribute(key,value);}if(text!==undefined)node.textContent=text;return node;}
 function announce(text){$('toast').textContent=text;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,4200);}
@@ -27,7 +32,8 @@ function move(){return model.move(character,slot);}
 function fieldError(key,message){const id='field-'+key,node=$(id);if(message)errors.set(id,message);else errors.delete(id);node?.setAttribute('aria-invalid',String(!!message));const messageNode=$('error-'+key);if(messageNode)messageNode.textContent=message||'';refreshActions();}
 function refreshActions(){
   $('export').disabled=bootLocked||referenceBusy||errors.size>0;$('undo').disabled=bootLocked||referenceBusy||(!model.undoStack.length&&!errors.size);$('redo').disabled=bootLocked||referenceBusy||!model.redoStack.length||errors.size>0;
-  $('reset').disabled=bootLocked||referenceBusy||(!Object.keys(move().hurtboxes).length&&!Object.keys(SPECS).some(key=>move()[key]!==pack.defaults.characters[character].moves[slot][key]));
+  $('reset').disabled=bootLocked||referenceBusy||(!move().hitboxTimeline.keys.length&&!move().hitboxTimeline.multiHit&&!Object.keys(move().hurtboxes).length&&!Object.keys(SPECS).some(key=>move()[key]!==pack.defaults.characters[character].moves[slot][key]));
+  $('attack-enabled').disabled=bootLocked||referenceBusy;
   $('import').disabled=referenceBusy;$('fighter').disabled=bootLocked||referenceBusy;
   if(errors.size){$('save-status').textContent='Check the highlighted value';$('save-dot').style.background='var(--danger)';}
 }
@@ -38,6 +44,7 @@ function syncSummary(){
   $('move-title').textContent=m.id;$('move-label').textContent=note.label||'';
   $('move-kind').textContent=KINDS[m.category];$('actual-input').textContent=`Input ${inputName(m)}`;
   $('move-enabled').textContent=m.enabled?'● Enabled':'○ Unused slot';$('move-enabled').style.color=m.enabled?'#a8cbaa':'var(--muted)';
+  $('attack-enabled').checked=!!m.enabled;
   $('stat-startup').replaceChildren(document.createTextNode(m.startup),el('small',{},' f'));
   $('stat-damage').textContent=m.damage;$('stat-block').textContent=(adv>0?'+':'')+adv+' f';$('stat-block').className=adv>0?'positive':adv<0?'negative':'';
   $('stat-total').replaceChildren(document.createTextNode(totalFrames(m)),el('small',{},' f'));
@@ -184,14 +191,18 @@ function renderForm(){
   const groups=TABS.find(t=>t.id===tab).groups.map(id=>GROUPS.find(g=>g.id===id)),nodes=groups.map((group,i)=>{
     const view=section(group);if(i===0||tab==='hit')return view;
     const details=el('details',{class:'section-divider'});details.append(el('summary',{},group.title),view);return details;
-  });form.replaceChildren(...nodes);
+  });if(tab==='hit')nodes.unshift(renderHitEditor({move:move(),frame,pack,character,boxIndex:hitBox,selectedFrame:hitKeyFrame,
+    valid:validBeforeLeaving,onError:fieldError,onKey:value=>{stop();hitKeyFrame=value;if(value!==null)frame=move().startup+Math.min(Math.max(1,value),move().active)-1;renderForm();syncPreview();},
+    onBox:value=>{hitBox=value;renderForm();syncPreview();},
+    onChange:(track,render=true,group='')=>{model.setHitTimeline(character,slot,track,group);stop();if(render)renderForm();syncSummary();listMoves();scheduleSave();}
+  }));form.replaceChildren(...nodes);
 }
 function renderTabs(){
   $('tabs').replaceChildren(...TABS.map(t=>{const button=el('button',{id:'tab-'+t.id,type:'button',role:'tab','aria-selected':String(t.id===tab),'aria-controls':'form',tabindex:t.id===tab?'0':'-1'},t.label);
-    button.addEventListener('click',()=>{if(!validBeforeLeaving())return;tab=t.id;if(tab==='hurt'){stop();preview.options.hurt=true;$('show-hurt').checked=true;}renderTabs();renderForm();syncPreview();saveSelection();$('tab-'+tab).focus();});
+    button.addEventListener('click',()=>{if(!validBeforeLeaving())return;tab=t.id;hitKeyFrame=null;if(tab==='hit'||tab==='hurt')setPreviewMode('pose');if(tab==='hurt'){stop();preview.options.hurt=true;$('show-hurt').checked=true;}renderTabs();renderForm();syncPreview();saveSelection();$('tab-'+tab).focus();});
     button.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const index=TABS.indexOf(t),next=event.key==='Home'?0:event.key==='End'?TABS.length-1:(index+(event.key==='ArrowRight'?1:-1)+TABS.length)%TABS.length;$('tab-'+TABS[next].id).click();});return button;}));
 }
-function render(){errors.clear();$('fighter').value=character;listMoves();renderTabs();renderForm();syncSummary();
+function render(){hitKeyFrame=null;errors.clear();$('fighter').value=character;listMoves();renderTabs();renderForm();syncSummary();
   const list=$('move-list'),selected=list.querySelector('[aria-current="true"]');if(selected){const r=selected.getBoundingClientRect(),b=list.getBoundingClientRect();
     if(r.top<b.top)list.scrollTop+=r.top-b.top;else if(r.bottom>b.bottom)list.scrollTop+=r.bottom-b.bottom;
     if(r.left<b.left)list.scrollLeft+=r.left-b.left;else if(r.right>b.right)list.scrollLeft+=r.right-b.right;
@@ -199,17 +210,44 @@ function render(){errors.clear();$('fighter').value=character;listMoves();render
 }
 function syncPreview(){
   const m=move(),total=totalFrames(m);frame=Math.max(1,Math.min(total,frame));$('frame').max=total;$('frame').value=frame;$('frame-label').textContent=`${frame} / ${total}`;
-  const phase=phaseAt(m,frame);$('preview-title').textContent=phase==='windup'?'Windup pose':phase==='active'?'Active frame':'Recovery pose';
+  const phase=phaseAt(m,frame);$('preview-title').textContent=previewMode==='test'?'Test against target':phase==='windup'?'Windup pose':phase==='active'?'Active frame':'Recovery pose';
   if(tab==='hurt'&&hurtPhase!==phase)renderForm();
   $('windup-time').textContent=`Windup ${m.startup-1}f`;$('active-time').textContent=`Active ${m.active}f`;$('recovery-time').textContent=`Recovery ${m.recovery}f`;
   const phases=[['windup',m.startup-1,1],['active',m.active,m.startup],['recovery',m.recovery,m.startup+m.active]];
-  $('timeline').replaceChildren(...phases.filter(([,length])=>length).map(([name,length,start])=>{const b=el('button',{type:'button',class:name,'aria-label':`Preview ${name}: ${length} frames`,title:`${name}: ${length}f`});b.style.flex=length;b.addEventListener('click',()=>{if(!validBeforeLeaving())return;stop();frame=start;syncPreview();});return b;}));
-  $('geometry-help').textContent=tab==='hit'&&!m.hitAngle&&m.category!==4?'On an active frame, drag the orange edges to resize the hitbox or drag its center to move it. Numeric fields give precise control.':m.hitAngle?'The dotted line is the hook path; orange segments are the moving spear hitboxes. Edit the path and thickness in Hit & movement.':m.category===4?'Throw geometry uses the fighter’s pushbox plus Throw reach. The usual hitbox fields do not change its size.':'Current pose artwork stays fixed while you tune the attack. Match timing and movement should be tested in game.';
+  $('timeline').replaceChildren(...phases.filter(([,length])=>length).map(([name,length,start])=>{const b=el('button',{type:'button',class:name,'aria-label':`Preview ${name}: ${length} frames`,title:`${name}: ${length}f`});b.style.flex=length;b.addEventListener('click',()=>{if(!validBeforeLeaving())return;stop();hitKeyFrame=null;frame=start;if(tab==='hit')renderForm();syncPreview();});return b;}));
+  $('geometry-help').textContent=tab==='hit'&&!m.hitAngle&&m.category!==4?'On an active frame, drag the orange edges to resize the hitbox or drag its center to move it. Numeric fields give precise control.':m.hitAngle?'The dotted line is the hook path; orange segments are the moving spear hitboxes. Edit the path and thickness in Hit & movement.':m.category===4?'Throw geometry uses the fighter’s pushbox plus Throw reach. The usual hitbox fields do not change its size.':'Existing artwork stays fixed while you edit. Switch to Test against target to check contact, input movement and reactions.';
   if(tab==='hurt')$('geometry-help').textContent='Enable custom boxes, choose a body region, then drag its blue handles to resize or its center to move. The edit applies to this move and phase. Pushboxes stay separate.';
-  preview.show(character,m,frame,tab==='hit'&&!playing,tab==='hurt'&&!playing?{phase,region:hurtRegion,custom:!!m.hurtboxes[phase]}:null);
+  const key=keyAt(m,Math.max(1,frame-m.startup+1)),keyIndex=m.hitboxTimeline.keys.indexOf(key);
+  if(previewMode==='test'){scheduleTest();return;}
+  preview.show(character,m,frame,tab==='hit'&&!playing&&(hitKeyFrame===null||hitKeyFrame===key?.frame),tab==='hurt'&&!playing?{phase,region:hurtRegion,custom:!!m.hurtboxes[phase]}:null,key&&key.boxes!==null?{keyIndex,boxIndex:Math.min(hitBox,Math.max(0,key.boxes.length-1))}:null);
 }
-function stop(){playing=false;$('play').setAttribute('aria-label','Play move preview');}
+function stop(){playing=false;testPlaying=false;$('test-play').textContent='▶';$('test-play').setAttribute('aria-label','Play combat preview');$('play').setAttribute('aria-label','Play move preview');}
+function setPreviewMode(mode){stop();previewMode=mode;$('preview-mode').value=mode;$('test-settings').hidden=$('test-transport').hidden=mode!=='test';$('pose-transport').hidden=mode!=='pose';}
+function testOptions(){return {target:Number($('test-target').value),behavior:$('test-behavior').value,entry:$('test-entry').value,gap:Number($('test-gap').value),facing:Number($('test-facing').value),simple:$('test-simple').value==='1'};}
+function scheduleTest(){
+  const { _moveWorkshop, ...gameplay }=model.data;
+  const signature=JSON.stringify([character,slot,gameplay,testOptions()]);
+  if(signature===testSignature&&testRecord){drawTest();return;}
+  stop();clearTimeout(testTimer);testSignature=signature;$('test-readout').textContent='Preparing preview…';
+  testTimer=setTimeout(()=>{
+    try{testRecord=combatPreview.record(model.data,character,slot,testOptions());testIndex=0;drawTest();}
+    catch(error){testRecord=null;testSignature='';$('test-readout').textContent='Preview could not run: '+error.message;}
+  },80);
+}
+function drawTest(){
+  if(previewMode!=='test'||!testRecord)return;
+  testIndex=Math.min(testIndex,testRecord.frames.length-1);const f=testRecord.frames[testIndex],a=f.state.players[0],target=f.state.players[1];
+  preview.showTest(testRecord,testIndex);$('test-frame').max=testRecord.frames.length-1;$('test-frame').value=testIndex;
+  $('test-frame-label').textContent=`${testIndex} / ${testRecord.frames.length-1}`;
+  $('test-play').disabled=!move().enabled||testRecord.frames.length<2;
+  $('test-readout').textContent=`Input ${describeInput(f.input,a.facing)} · ${f.selectedFrame?'move frame '+f.selectedFrame:f.stage}${f.state.hitstop?' · freeze '+f.state.hitstop+'f':''} · target ${target.stun}f stun`;
+  const contacts=testRecord.contacts.filter(c=>c.tick<=testIndex),hits=contacts.filter(c=>c.event!==2).length;
+  $('test-result').textContent=`${hits} hit${hits===1?'':'s'} · ${contacts.length-hits} blocks · ${1000-target.health} damage · attacker travel ${((a.x-testRecord.frames[0].state.players[0].x)/100).toFixed(1)}px`;
+  $('test-warning').textContent=testRecord.warnings.join(' ');$('test-warning').hidden=!testRecord.warnings.length;
+  $('geometry-help').textContent='Real combat simulation. Approach and command inputs move the fighter; the target can be hit, launched, pulled or pushed on block. Switch to Edit poses & boxes to drag geometry.';
+}
 function animate(time){
+  if(testPlaying&&testRecord){if(!testLastTick)testLastTick=time;const step=1000/(60*Number($('test-speed').value)),advance=Math.floor((time-testLastTick)/step);if(advance){testIndex=Math.min(testRecord.frames.length-1,testIndex+advance);testLastTick+=advance*step;drawTest();if(testIndex===testRecord.frames.length-1)stop();}}
   if(playing){if(!lastTick)lastTick=time;const advance=Math.floor((time-lastTick)/(1000/30));if(advance){frame=(frame-1+advance)%totalFrames(move())+1;lastTick+=advance*(1000/30);syncPreview();}}
   requestAnimationFrame(animate);
 }
@@ -217,6 +255,14 @@ function syncVisibleFields(){for(const [key,spec]of Object.entries(SPECS)){const
 const preview=new Preview($('preview'),pack,(phase,patch)=>{
   if(phase==='start'){if(!validBeforeLeaving())return;dragBefore=model.snapshot();stop();}
   if(phase==='change'&&dragBefore){
+    if(patch.keyIndex!==undefined){
+      const track=clone(move().hitboxTimeline);track.keys[patch.keyIndex].boxes[patch.boxIndex]=patch.rect;
+      try{validateHitTimeline(track);}catch{return;}
+      move().hitboxTimeline=track;
+      const b=patch.rect,values={left:b[0]/100,bottom:b[1]/100,width:(b[2]-b[0])/100,height:(b[3]-b[1])/100};
+      for(const [key,value]of Object.entries(values))if($('field-hit-key-'+key))$('field-hit-key-'+key).value=value;
+      syncSummary();return;
+    }
     const limits=pack.limits.moves[character];for(const [key,value]of Object.entries(patch))if(value<limits[key].min||value>limits[key].max)return;
     const candidate={...move(),...patch};if(candidate.hitboxBack>=candidate.reach||candidate.height<100)return;
     Object.assign(move(),patch);syncVisibleFields();syncSummary();
@@ -254,7 +300,7 @@ $('search').addEventListener('input',listMoves);$('show-unused').addEventListene
 for(const button of document.querySelectorAll('[data-filter]'))button.addEventListener('click',()=>{filter=button.dataset.filter;for(const b of document.querySelectorAll('[data-filter]')){b.classList.toggle('selected',b===button);b.setAttribute('aria-pressed',String(b===button));}listMoves();});
 $('undo').onclick=()=>{stop();if(errors.size){errors.clear();render();announce('Invalid input discarded.');return;}if(model.undo()){frame=Math.min(frame,totalFrames(move()));render();scheduleSave();announce('Edit undone.');}};
 $('redo').onclick=()=>{if(!validBeforeLeaving())return;if(model.redo()){stop();render();scheduleSave();announce('Edit restored.');}};
-$('reset').onclick=()=>{errors.clear();model.resetMove(character,slot);stop();frame=move().startup;render();scheduleSave();announce('Move stats and hurtboxes reset. Art notes are kept. Undo is available.');};
+$('reset').onclick=()=>{errors.clear();model.resetMove(character,slot);stop();frame=move().startup;render();scheduleSave();announce('Move stats, hitbox keys and hurtboxes reset. Art notes are kept. Undo is available.');};
 $('import').onclick=()=>{if(validBeforeLeaving())$('import-file').click();};
 $('import-file').onchange=async event=>{
   const file=event.target.files[0];if(!file)return;
@@ -262,8 +308,8 @@ $('import-file').onchange=async event=>{
   catch(error){announce('Import stopped: '+error.message);}finally{event.target.value='';}
 };
 $('export').onclick=()=>{if(!validBeforeLeaving())return;try{download(model.export(),'FightGuild-moves-'+date()+'.json','application/json');save();unexported=false;announce('JSON downloaded. Import it in the Godot move editor or send it back for the sprite pass.');}catch(error){announce(error.message);}};
-$('frame').addEventListener('input',()=>{if(!validBeforeLeaving()){$('frame').value=frame;return;}stop();frame=Number($('frame').value);syncPreview();});
-$('play').onclick=()=>{if(!validBeforeLeaving())return;playing=!playing;lastTick=0;$('play').setAttribute('aria-label',playing?'Pause move preview':'Play move preview');$('play').title='Preview plays at half speed';syncPreview();};
+$('frame').addEventListener('input',()=>{if(!validBeforeLeaving()){$('frame').value=frame;return;}stop();hitKeyFrame=null;frame=Number($('frame').value);if(tab==='hit')renderForm();syncPreview();});
+$('play').onclick=()=>{if(!validBeforeLeaving())return;playing=!playing;hitKeyFrame=null;lastTick=0;if(tab==='hit')renderForm();$('play').setAttribute('aria-label',playing?'Pause move preview':'Play move preview');$('play').title='Preview plays at half speed';syncPreview();};
 for(const key of ['hit','hurt','push','art'])$('show-'+key).onchange=()=>{preview.options[key]=$('show-'+key).checked;preview.draw();};
 $('help').onclick=()=>{$('help-dialog').showModal();};$('close-help').onclick=()=>{$('help-dialog').close();};
 $('close-reference').onclick=()=>$('reference-dialog').close();
@@ -275,4 +321,12 @@ window.addEventListener('beforeunload',event=>{if(referenceBusy||errors.size||!s
 window.addEventListener('storage',event=>{if(event.key===STORAGE&&event.newValue){banner('This draft was saved in another tab. Download your current JSON before switching tabs to keep both versions.');}});
 // Read-only inspection used by browser integration checks and JSON round trips.
 globalThis.moveWorkshop={data:()=>model.snapshot(),selection:()=>({character,slot,tab}),version:pack.defaults.coreVersion};
+$('test-target').append(...CHARACTERS.map((name,i)=>el('option',{value:i},name)));$('test-target').value='4';
+$('attack-enabled').onchange=()=>{if(!validBeforeLeaving()){$('attack-enabled').checked=!!move().enabled;return;}commit('enabled',Number($('attack-enabled').checked));if($('field-enabled'))$('field-enabled').checked=!!move().enabled;};
+$('preview-mode').onchange=()=>{if(!validBeforeLeaving()){$('preview-mode').value=previewMode;return;}setPreviewMode($('preview-mode').value);syncPreview();};
+for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}testSignature='';scheduleTest();};
+$('test-play').onclick=()=>{if(!validBeforeLeaving()||!testRecord)return;if(testIndex===testRecord.frames.length-1)testIndex=0;testPlaying=!testPlaying;testLastTick=0;$('test-play').textContent=testPlaying?'Ⅱ':'▶';$('test-play').setAttribute('aria-label',testPlaying?'Pause combat preview':'Play combat preview');drawTest();};
+$('test-restart').onclick=()=>{stop();testIndex=0;drawTest();};
+$('test-frame').oninput=()=>{stop();testIndex=Number($('test-frame').value);drawTest();};
+globalThis.moveWorkshop.preview=()=>testRecord;
 initialize();requestAnimationFrame(animate);

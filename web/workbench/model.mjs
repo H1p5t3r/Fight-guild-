@@ -1,7 +1,8 @@
 import {FIELDS, MOVE_IDS, CHARACTERS} from '../engine.mjs';
 import {SPECS, ART_FIELDS} from './specs.mjs';
 import {validateReferences,MAX_REFERENCE_TOTAL,MAX_IMPORT_BYTES,REFERENCE_PHASES} from './references.mjs';
-import {validateHurtboxes,upgradeHurtboxes,HURT_PHASES} from '../hurtboxes.mjs';
+import {validateHurtboxes,HURT_PHASES} from '../hurtboxes.mjs';
+import {validateHitTimeline,upgradeHitboxes,keyAt} from '../hitboxes.mjs';
 export {FIELDS,MOVE_IDS,CHARACTERS};
 export const clone = value => structuredClone(value);
 export const META = '_moveWorkshop';
@@ -10,9 +11,9 @@ function integer(value, limit, name) {
   if(!Number.isInteger(value)||value<limit.min||value>limit.max) throw new Error(`${name}: use a whole number from ${limit.min} to ${limit.max}.`);
 }
 export function validate(data, pack) {
-  data=upgradeHurtboxes(data);
+  data=upgradeHitboxes(data);
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor accepts current Fight Guild moves or a version-12 workshop export. Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves or version-12/13 workshop exports. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);
@@ -29,6 +30,7 @@ export function validate(data, pack) {
         if(key==='motion'&&![0,214,236,623].includes(move[key])) throw new Error(`${c.name} ${move.id}: motion must be 0, 214, 236 or 623.`);
       });
       validateHurtboxes(move.hurtboxes);
+      validateHitTimeline(move.hitboxTimeline);
     });
   });
   if(data[META]!==undefined) {
@@ -69,6 +71,7 @@ export function inputName(m) {
 }
 export function geometryWarnings(m) {
   const notes=[];
+  if(m.hitboxTimeline.keys.some(k=>k.frame>m.active))notes.push('Some hitbox keys are beyond the current active duration. They are retained but cannot hit until Active is extended.');
   if(m.hitboxBack>=m.reach) notes.push('The back edge is beyond the front edge. The game sorts the edges; check that this is intentional.');
   for(const prefix of ['normal','special','jump','follow']) if(m[`${prefix}CancelEnd`]&&m[`${prefix}CancelEnd`]<m[`${prefix}CancelStart`]) notes.push(`${prefix==='follow'?'Follow-up':prefix} cancel window closes before it opens.`);
   if(m.hitAngle) notes.push('Hook preview shows the travel path. The game uses moving spear hitboxes; the rope does not hit.');
@@ -119,22 +122,37 @@ export class Workshop {
     try {validate(this.data,this.pack);}catch(error){this.data=before;throw error;}
     return this.remember(before,group);
   }
+  setHitTimeline(c,m,track,group=''){
+    const before=this.snapshot();this.move(c,m).hitboxTimeline=clone(track);
+    try{validate(this.data,this.pack);}catch(error){this.data=before;throw error;}
+    return this.remember(before,group);
+  }
   import(data){const next=clone(validate(data,this.pack)),before=this.snapshot();this.data=next;this.remember(before);}
   resetMove(c,m){const before=this.snapshot();this.data.characters[c].moves[m]=clone(this.pack.defaults.characters[c].moves[m]);this.remember(before);}
   undo(){if(!this.undoStack.length)return false;const item=this.undoStack.pop();this.redoStack.push({data:this.snapshot()});this.data=item.data;return true;}
   redo(){if(!this.redoStack.length)return false;const item=this.redoStack.pop();this.undoStack.push({data:this.snapshot(),group:'',time:0});this.data=item.data;return true;}
-  changed(c,m){return FIELDS.some(k=>this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||Object.keys(this.move(c,m).hurtboxes).length>0||!!this.note(c,m).references?.length||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
+  changed(c,m){return FIELDS.some(k=>this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||Object.keys(this.move(c,m).hurtboxes).length>0||this.move(c,m).hitboxTimeline.multiHit||this.move(c,m).hitboxTimeline.keys.length>0||!!this.note(c,m).references?.length||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
   changes(){return this.data.characters.flatMap((c,i)=>c.moves.map((_,m)=>({c:i,m}))).filter(p=>this.changed(p.c,p.m));}
   export(){return JSON.stringify(validate(this.data,this.pack),null,2);}
   brief(){
     const lines=['# Fight Guild — move and animation brief','','Export the companion JSON for authoritative gameplay values.',''];
     for(const {c,m} of this.changes()) {
       const move=this.move(c,m),note=this.note(c,m);
-      lines.push(`## ${CHARACTERS[c]} · ${move.id}${note.label?' — '+note.label:''}`,'',`Input: ${inputName(move)}. Startup ${move.startup}f / active ${move.active}f / recovery ${move.recovery}f. Damage ${move.damage}. First-active block advantage ${blockAdvantage(move)>=0?'+':''}${blockAdvantage(move)}f.`,
+      lines.push(`## ${CHARACTERS[c]} · ${move.id}${note.label?' — '+note.label:''}`,'',`${move.enabled?'Enabled':'Disabled'}. Input: ${inputName(move)}. Startup ${move.startup}f / active ${move.active}f / recovery ${move.recovery}f. Base damage ${move.damage}. Base first-active block advantage ${blockAdvantage(move)>=0?'+':''}${blockAdvantage(move)}f.`,
         `Hitbox: back ${move.hitboxBack/100}px, front ${move.reach/100}px, bottom ${move.bottom/100}px, height ${move.height/100}px. Knockdown: ${['none','soft','hard'][move.knockdown]}.`,
         `Ground / air / block push: ${move.pushback/100} / ${move.airPushback/100} / ${move.blockPushback/100}px. Ground / air launch: ${move.launch/100} / ${move.airLaunch/100}px per frame.`, '');
       for(const [key,label] of ART_FIELDS.slice(1)) if(note[key]?.trim())lines.push(`**${label}**`,note[key].trim(),'');
       for(const [phase,boxes] of Object.entries(move.hurtboxes)){lines.push(`**${phase} body hurtboxes**`);for(const [region,rect] of Object.entries(boxes))lines.push(`- ${region}: left / bottom / right / top ${rect.map(v=>v/100).join(' / ')} px`);lines.push('');}
+      if(move.hitboxTimeline.keys.length){
+        lines.push('**Active-frame hitboxes**',`Multiple hits: ${move.hitboxTimeline.multiHit?'on; each hit number connects once':'off; one contact across all keys'}.`);
+        for(const key of move.hitboxTimeline.keys){
+          lines.push(`- Active ${key.frame}: hit ${key.hit}; damage ${key.damage}, hitstun ${key.hitstun}f, blockstun ${key.blockstun}f, hitstop ${key.hitstop}f (−1 inherits).`);
+          if(key.boxes===null)lines.push('  Uses base geometry.');
+          else if(!key.boxes.length)lines.push('  No hitboxes: a gap.');
+          else for(const rect of key.boxes)lines.push(`  Box left / bottom / right / top: ${rect.map(v=>v/100).join(' / ')} px.`);
+        }
+        lines.push('Each key holds until the next; keys beyond Active do not run.','');
+      }
       if(note.references?.length){
         lines.push('**Pose references**','Image files are embedded in the companion JSON.','');
         for(const ref of note.references)lines.push(`- ${REFERENCE_PHASES.find(([id])=>id===ref.phase)[1]} · ${ref.name}${ref.caption?' — '+ref.caption:''}`);
@@ -150,6 +168,8 @@ export class Workshop {
 // Preview origin/pose can differ from a live match; the authored rectangle does not.
 export function attackBoxes(m,frame,push) {
   if(m.category===4)return [[0,0,push.halfWidth+m.throwRange,push.standingHeight]];
+  const key=keyAt(m,Math.max(1,frame-m.startup+1));
+  if(key?.boxes!==undefined&&key.boxes!==null)return clone(key.boxes);
   if(!m.hitAngle)return [[Math.min(m.hitboxBack,m.reach),m.bottom,Math.max(m.hitboxBack,m.reach),m.bottom+m.height]];
   const age=Math.max(0,Math.min(m.active-1,frame-m.startup));
   const length=Math.min(8000,Math.abs(m.reach-m.hitboxBack)),travel=Math.max(0,m.reach-m.hitboxBack-length);

@@ -1,14 +1,15 @@
 # Move Workshop
 
 Tune attacks in a normal browser without installing or running the game. The
-download is one self-contained **FightGuild-Move-Workshop.html** file (about 9 MB),
+download is one self-contained **FightGuild-Move-Workshop.html** file (about 13 MB),
 including the current six-fighter data, sprite sheets and fonts. No account,
 server, WebAssembly or network access is needed to use the downloaded page.
 
 The [complete control guide (PDF)](../exports/FightGuild-Move-Workshop-Guide.pdf)
 explains every browser editor control, with allowed ranges, worked examples,
 diagrams, clickable contents and an alphabetical field index. It covers the
-current schema-13 build, including hurtboxes, art notes and pose photos.
+current schema-14 build, including combat playback, timed hitboxes, hurtboxes,
+art notes and pose photos.
 
 ## Use it on another PC
 
@@ -39,7 +40,12 @@ downloaded for recovery before explicitly starting a new one.
 ## What you can tune
 
 - All 192 move slots across six fighters, with unused slots hidden by default.
+- **Attack enabled** beside the move title: turn off unused command normals or
+  attacks without deleting their tuning data. Enable **Show unused slots** to
+  find them again. Disabled attacks cannot execute or be cancel destinations.
 - Startup/active/recovery, damage, chip, hitstun and blockstun.
+- Active-frame hitbox keys, up to four boxes per key, optional separate hits,
+  and damage/stun/hitstop overrides per key.
 - Hitbox edges and height, opening movement, active travel and run/dash carry.
 - Per-attack **Hurtboxes** for windup, active and recovery: three body regions
   plus one optional extension, with numeric editing and draggable blue handles.
@@ -66,8 +72,57 @@ support files up to 32 MB. Large photo drafts may exceed browser storage; use
 Download JSON when the storage warning appears.
 
 Undo/redo and **Reset move** are available. Reset restores that move's stats and
-removes its custom hurtbox profiles while retaining its art notes and photos.
+removes its hitbox timeline and custom hurtbox profiles while retaining its art
+notes and photos.
 A successful import is also undoable.
+
+## Test contact and movement
+
+**Test against target** runs the same combat rules as the game. Choose the target,
+Take the hit / Standing guard / Crouching guard / Faultless Defense / Airborne,
+and an approach: standing, walking, running, jumping or forward jumping. Set the
+body gap, facing and Traditional / Simple inputs. The preview enters the move’s
+mapped command; air-only attacks jump automatically. Run or step movement comes
+from that fighter’s actual movement profile and carries into attacks.
+
+Play, pause, restart or scrub through the recorded exchange at quarter, half or
+full speed. The readouts show input, move frame, freeze, target stun, hit/block
+counts, scaled damage and attacker travel. Existing sprites follow the actual
+movement, hit and block reactions. Context-only follow-ups are started in
+isolation with a warning; this does not verify their entry route. Conflicting
+input mappings also show a warning. Disabled moves cannot run.
+
+This is an isolated spacing/reaction test, not an interactive training match.
+It uses existing artwork, with placeholder recovery poses; it does not generate
+new animation frames. Check full combo routes and match feel in Godot.
+
+## Change hitboxes during active frames
+
+1. Open **Hit & movement**. This switches the preview to **Edit poses & boxes**.
+2. Scrub to an active frame and choose **Add key at active …**. Active frame 1 is
+   the move’s first possible contact frame, not the start of its windup.
+3. A key holds until the next key. **Use base geometry** follows the ordinary
+   strike/hook shape; **Add hitbox** starts a custom rectangular profile, with
+   up to four boxes; **No hitboxes · gap** creates a non-hitting interval.
+4. Select a box and use its orange handles or Left / Bottom / Width / Height.
+   All boxes in a key share its hit number and values. The coordinates mirror
+   with facing. Custom hook boxes replace the moving spear geometry.
+5. Optional Hit damage, Hit hitstun, Hit blockstun and Hit hitstop values override
+   the move’s base values. **−1 inherits**. Combo scaling and counter bonuses
+   still apply. The top summary shows base values, not every key’s overrides.
+6. Keep **Allow multiple hits** off for one contact across all keys. Turn it on
+   and assign different **Hit number** values for separate hits. A number can
+   connect only once per attack, even if repeated later or used by overlapping
+   boxes. Repeated hits each apply damage, stun and hitstop normally.
+
+There are at most 32 keys, with distinct start frames 1–120 and hit numbers 1–32.
+Keys beyond the move’s Active duration are retained and editable, but cannot
+hit. Edges stay within ±500 game pixels and each box is at least 1×1 px. Before
+the first key, the move uses base geometry and hit number 1. A gap does not reset
+a consumed hit number. Throws retain their single-hit range resolver.
+
+JSON, browser Undo/Redo, Godot import, local saving and rollback preserve these
+settings. **Reset move** restores the bundled defaults and clears custom keys.
 
 ## Edit attack hurtboxes
 
@@ -80,7 +135,7 @@ A successful import is also undoable.
 4. Select Legs, Torso & arms, or Head. Drag the selected blue box's center to
    move it, drag its edge handles to resize it, or edit its position/size in
    game pixels. You can include one **Body extension** for an extended limb.
-5. Download JSON and import it into the updated schema-13 Godot build. The
+5. Download JSON and import it into the updated schema-14 Godot build. The
    imported profiles affect actual hit detection and the in-game collision
    overlay. **Save locally** in Godot retains them for future launches.
 
@@ -100,28 +155,27 @@ preserved through import/export, but are not tuning controls in this page.
 
 ## Preview and data conventions
 
-- One gameplay frame is 1/60 second. Playback runs at half speed for inspection.
+- One gameplay frame is 1/60 second. Playback defaults to half speed for inspection.
   A 5-frame startup has four windup frames, then its first active frame. Startup
   cannot be below five frames.
-- **On block** assumes contact on the first active frame, no cancel and no FD.
+- **Base on block** assumes contact on the first active frame, no cancel and no FD.
   A later active-frame hit can change the actual advantage.
 - Positions/distances use game pixels; travel/launch use pixels per frame.
   Hundredths are preserved exactly in the core's integer units.
 - Orange is attack geometry, blue is body hurtboxes, and green is the pushbox.
   On the Hit & movement tab, drag a normal strike's active rectangle or its edge
-  handles. Numeric fields cover hooks and throws. The hook preview draws eight
+  handles, or edit a selected custom key box. Numeric fields cover base hook and
+  throw geometry. The inherited hook preview draws eight
   moving spear segments; the rope is not a hitbox.
-- The preview holds existing pose studies. It does not simulate opponents,
-  attack movement or contacts, regenerate sprites, or promise that new hitbox
-  dimensions already match the old art. Match feel still needs in-game testing.
-  Recovery uses idle/crouch/air placeholders.
+- Both preview modes use existing pose studies. New hitbox dimensions do not
+  automatically refit the art. Recovery uses idle/crouch/air placeholders.
 - The **Hurtboxes** tab edits body coverage while pushboxes remain read-only.
   Weapons have no hurtboxes, and each pose retains at most four body boxes.
   Sprite replacement and body-box refitting remain a coordinated later pass.
 
-Exports use schema/core version **13**. Existing version-12 workshop exports and
-browser drafts migrate automatically, keeping their numbers, notes and photos
-and inheriting the original body poses. Invalid or incomplete files are rejected
+Exports use schema/core version **14**. Version-12 and version-13 workshop files
+and browser drafts migrate automatically, keeping their numbers, notes, photos
+and body profiles. Missing hitbox timelines inherit one-hit base geometry. Invalid or incomplete files are rejected
 before changing the draft. An older save can first be imported and re-exported
 by the current Godot build, which owns the earlier legacy migrations.
 Unknown JSON properties are preserved by the workshop.

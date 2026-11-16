@@ -2,7 +2,10 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 13
+const DATA_VERSION := 14
+const HIT_KEY_FIELDS := 23
+const HIT_TRACK_FIELDS := 738
+const HIT_OVERRIDES := ["damage", "hitstun", "blockstun", "hitstop"]
 const HURT_PHASES := ["windup", "active", "recovery"]
 const HURT_REGIONS := ["legs", "torsoArms", "head", "extension"]
 const HURT_FIELDS := 17
@@ -18,7 +21,7 @@ const RECOVERY_RULES := ["gravityAfter", "gravityStep", "gravityCap", "wallThres
 const TUNING_RULES := ["fdAirDrain", "fdLevelCost", "cornerPushTransfer", "wallMidCap", "groundedWallPrime", "blockCarryover", "throwGraceFrames", "airLandingFrames", "repeatAfter", "repeatGravityStep"]
 const JUMP_RULES := ["prejumpFrames", "emptyLandingFrames"]
 const RULE_COUNT := 38 # Input, Momentum, recovery/walls, tuning, then jump rules.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft"]
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy"]
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
 
@@ -57,7 +60,51 @@ func move(character: int, slot: int) -> Dictionary:
 			for edge in 4: rect.append(config[start + 1 + region * 4 + edge])
 			boxes[HURT_REGIONS[region]] = rect
 		result.hurtboxes[HURT_PHASES[p]] = boxes
+	result.hitboxTimeline = {"multiHit": false, "keys": []}
+	var hit_start := hit_offset(character, slot)
+	result.hitboxTimeline.multiHit = config[hit_start] != 0
+	for i in config[hit_start + 1]:
+		var at := hit_start + 2 + i * HIT_KEY_FIELDS
+		var key := {"frame": config[at], "hit": config[at + 1], "boxes": null}
+		if config[at + 2] >= 0:
+			key.boxes = []
+			for b in config[at + 2]:
+				key.boxes.append(Array(config.slice(at + 7 + b * 4, at + 11 + b * 4)))
+		for field in HIT_OVERRIDES.size(): key[HIT_OVERRIDES[field]] = config[at + 3 + field]
+		result.hitboxTimeline["keys"].append(key)
 	return result
+
+static func hit_offset(character: int, slot: int) -> int:
+	return CHARACTERS.size() * (MOVE_IDS.size() * (FIELDS.size() + HURT_PHASES.size() * HURT_FIELDS) + MOVEMENT_FIELDS.size()) + (character * MOVE_IDS.size() + slot) * HIT_TRACK_FIELDS
+
+static func load_hitboxes(value: Variant, candidate: PackedInt32Array, character: int, slot: int) -> String:
+	if not value is Dictionary or not value.get("multiHit") is bool or not value.get("keys") is Array or value["keys"].size() > 32:
+		return "Invalid hitbox timeline."
+	var start := hit_offset(character, slot)
+	candidate[start] = int(value.multiHit)
+	candidate[start + 1] = value["keys"].size()
+	var previous := 0
+	for i in value["keys"].size():
+		var key: Variant = value["keys"][i]
+		if not key is Dictionary or not valid_integer(key.get("frame")) or not valid_integer(key.get("hit")) or key.frame <= previous or key.frame > 120 or key.hit < 1 or key.hit > 32:
+			return "Hitbox keys need increasing active frames and hit numbers 1–32."
+		previous = int(key.frame)
+		if not key.has("boxes") or (key.boxes != null and (not key.boxes is Array or key.boxes.size() > 4)):
+			return "A hitbox key supports base geometry or up to four boxes."
+		var at: int = start + 2 + int(i) * HIT_KEY_FIELDS
+		candidate[at] = int(key.frame)
+		candidate[at + 1] = int(key.hit)
+		candidate[at + 2] = -1 if key.boxes == null else key.boxes.size()
+		for field in HIT_OVERRIDES.size():
+			if not valid_integer(key.get(HIT_OVERRIDES[field])): return "Invalid hit timing override."
+			candidate[at + 3 + field] = int(key[HIT_OVERRIDES[field]])
+		if key.boxes == null: continue
+		for b in key.boxes.size():
+			if not key.boxes[b] is Array or key.boxes[b].size() != 4: return "Hitboxes need four edges."
+			for edge in 4:
+				if not valid_integer(key.boxes[b][edge]): return "Invalid hitbox coordinate."
+				candidate[at + 7 + b * 4 + edge] = int(key.boxes[b][edge])
+	return ""
 
 static func hurt_offset(character: int, slot: int, phase: int) -> int:
 	return CHARACTERS.size() * (MOVE_IDS.size() * FIELDS.size() + MOVEMENT_FIELDS.size()) + ((character * MOVE_IDS.size() + slot) * HURT_PHASES.size() + phase) * HURT_FIELDS
@@ -177,6 +224,9 @@ func load_data(value: Variant) -> String:
 			if version >= 13:
 				var hurt_error := load_hurtboxes(definition.get("hurtboxes"), candidate, c, m)
 				if not hurt_error.is_empty(): return "%s / %s: %s" % [CHARACTERS[c], MOVE_IDS[m], hurt_error]
+			if version >= 14:
+				var hit_error := load_hitboxes(definition.get("hitboxTimeline"), candidate, c, m)
+				if not hit_error.is_empty(): return "%s / %s: %s" % [CHARACTERS[c], MOVE_IDS[m], hit_error]
 		if version >= 7:
 			if not characters[c].get("movement") is Dictionary: return "Missing movement profile."
 			var start := CHARACTERS.size() * MOVE_IDS.size() * FIELDS.size() + c * MOVEMENT_FIELDS.size()

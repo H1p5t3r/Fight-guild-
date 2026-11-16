@@ -11,6 +11,9 @@ try {
   await mkdir('docs/workshop-guide',{recursive:true});
   await page.goto(`http://127.0.0.1:${server.address().port}/`);
   await page.locator('#field-startup').waitFor();
+  await page.waitForFunction(()=>moveWorkshop.preview()?.contacts.length>0);
+  const tick=await page.evaluate(()=>moveWorkshop.preview().contacts[0].tick);
+  await page.locator('#test-frame').evaluate((n,tick)=>{n.value=String(tick);n.dispatchEvent(new Event('input',{bubbles:true}));},tick);
   await page.evaluate(()=>document.fonts.ready);
   await page.waitForFunction(()=>document.getElementById('preview-empty').hidden);
   await page.screenshot({path:'docs/workshop-guide/editor-overview.png'});

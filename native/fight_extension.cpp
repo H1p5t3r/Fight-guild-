@@ -126,11 +126,13 @@ public:
         for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
             for(int p=0;p<fight::HURT_PHASES;++p) for(int f=0;f<fight::HURT_FIELDS;++f)
                 data.push_back(simulation.hurt_get(c,m,p,f));
+        for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
+            for(int f=0;f<fight::HIT_TRACK_FIELDS;++f) data.push_back(simulation.hit_get(c,m,f));
         for(int f=0;f<fight::RULE_COUNT;++f) data.push_back(simulation.rule_get(f));
         return data;
     }
     bool configure(const PackedInt32Array& data) {
-        if(data.size()!=fight::CHARACTER_COUNT*(fight::MOVE_COUNT*(fight::FIELD_COUNT+fight::HURT_PHASES*fight::HURT_FIELDS)+fight::MOBILITY_FIELDS)+fight::RULE_COUNT) return false;
+        if(data.size()!=fight::CHARACTER_COUNT*(fight::MOVE_COUNT*(fight::FIELD_COUNT+fight::HURT_PHASES*fight::HURT_FIELDS+fight::HIT_TRACK_FIELDS)+fight::MOBILITY_FIELDS)+fight::RULE_COUNT) return false;
         auto candidate=simulation;
         int at=0;
         for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
@@ -141,6 +143,17 @@ public:
             int count=data[at++]; fight::Box boxes[fight::MAX_HURTBOXES]{};
             for(auto& b:boxes) { b.left=data[at++];b.bottom=data[at++];b.right=data[at++];b.top=data[at++]; }
             if(!candidate.hurt_set(c,m,p,count,boxes)) return false;
+        }
+        for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m) {
+            int multi=data[at++],count=data[at++];
+            if(count<0||count>fight::MAX_HIT_KEYS||!candidate.hit_clear(c,m,multi)) return false;
+            for(int i=0;i<fight::MAX_HIT_KEYS;++i) {
+                fight::HitKey key{};
+                key.frame=data[at++];key.group=data[at++];key.count=data[at++];key.damage=data[at++];
+                key.hitstun=data[at++];key.blockstun=data[at++];key.hitstop=data[at++];
+                for(auto& b:key.boxes) { b.left=data[at++];b.bottom=data[at++];b.right=data[at++];b.top=data[at++]; }
+                if(i<count&&!candidate.hit_add(c,m,key)) return false;
+            }
         }
         for(int f=0;f<fight::RULE_COUNT;++f) if(!candidate.rule_set(f,data[at++])) return false;
         simulation=candidate;

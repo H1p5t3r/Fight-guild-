@@ -1,4 +1,5 @@
-import {HURT_PHASES,validateHurtboxes,packHurtboxes,unpackHurtboxes,upgradeHurtboxes} from './hurtboxes.mjs';
+import {HURT_PHASES,validateHurtboxes,packHurtboxes,unpackHurtboxes} from './hurtboxes.mjs';
+import {validateHitTimeline,packHitKey,unpackHitKey,upgradeHitboxes,HIT_KEY_FIELDS} from './hitboxes.mjs';
 export const BUTTONS = ['P', 'K', 'S', 'Hs', 'D'];
 export const MOVE_IDS = ['5P','5K','5S','5Hs','2P','2K','2S','2Hs','6P','6K','6S','6Hs','6D','5D','236P','236S','623Hs','j.P','j.K','j.S','j.Hs','j.D','2D','4P+K','6P+K','236K','236S>6S','236S>2S','214S','j.214P','214S>P','j.214P>P'];
 export const CHARACTERS = ['Anvil', 'Hammer', 'Smoke', 'Tapper', 'Shark', 'Fillet'];
@@ -41,7 +42,7 @@ export class Engine {
     new Uint8Array(this.api.memory.buffer,this.api.fg_state_ptr(),bytes.length).set(bytes);
   }
   state() {
-    const keys=['x','y','facing','health','move','age','stun','guarding','contact','combo','event','lastMove','raw','character','simple','momentum','faultless','blockReaction','blockAge','blockAdvantage','guardBreak','throwInvulnerable','comboDisplay','comboTime','comboAge','hitNotice','hitNoticeTime','reversalTime','reversalInputAge','posePhase','poseIndex','reaction','knockdown','recoveryTime','comboReceived','gravityPercent','wallDamage','wallSplatTime','positiveTime','vx','running','dashTicks','pullTime','pullOwner','weaponBackX','weaponBackY','weaponTipX','weaponTipY','weaponVisible','carryVx','carryTime',"landingTime","throwGrace","cancelMask","inputAge","lastDamage","damageScale","starterProration","comboScale","counterTier","repeatGravity","lastBaseDamage","prejumpTime","counterSlowTime","counterSlowHeld","knockbackLeft"];
+    const keys=['x','y','facing','health','move','age','stun','guarding','contact','combo','event','lastMove','raw','character','simple','momentum','faultless','blockReaction','blockAge','blockAdvantage','guardBreak','throwInvulnerable','comboDisplay','comboTime','comboAge','hitNotice','hitNoticeTime','reversalTime','reversalInputAge','posePhase','poseIndex','reaction','knockdown','recoveryTime','comboReceived','gravityPercent','wallDamage','wallSplatTime','positiveTime','vx','running','dashTicks','pullTime','pullOwner','weaponBackX','weaponBackY','weaponTipX','weaponTipY','weaponVisible','carryVx','carryTime',"landingTime","throwGrace","cancelMask","inputAge","lastDamage","damageScale","starterProration","comboScale","counterTier","repeatGravity","lastBaseDamage","prejumpTime","counterSlowTime","counterSlowHeld","knockbackLeft","hitGroups","vy"];
     return {
       frame:this.frame, remaining:this.api.fg_get(-1,1), hitstop:this.api.fg_get(-1,2),winner:this.api.fg_get(-1,3),
       wallBreakTime:this.api.fg_get(-1,4),wallBreakActor:this.api.fg_get(-1,5),wallBreakSide:this.api.fg_get(-1,6),stage:this.api.fg_get(-1,7),wallBreakDuration:this.api.fg_get(-1,8),wallBreakX:[this.api.fg_get(-1,15),this.api.fg_get(-1,16)],wallBreakY:[this.api.fg_get(-1,17),this.api.fg_get(-1,18)],wallHealth:[this.api.fg_get(-1,19),this.api.fg_get(-1,20)],
@@ -53,7 +54,8 @@ export class Engine {
     return Array.from({length:this.api.fg_box_count(player,kind)},(_,i)=>
       Array.from({length:4},(_,edge)=>this.api.fg_box_get(player,kind,i,edge)));
   }
-  move(c,m) { return {...Object.fromEntries(FIELDS.map((key,f)=>[key,this.api.fg_move_get(c,m,f)])),hurtboxes:this.hurtboxes(c,m)}; }
+  move(c,m) { return {...Object.fromEntries(FIELDS.map((key,f)=>[key,this.api.fg_move_get(c,m,f)])),hurtboxes:this.hurtboxes(c,m),hitboxTimeline:this.hitTimeline(c,m)}; }
+  hitTimeline(c,m){return {multiHit:!!this.api.fg_hit_get(c,m,0),keys:Array.from({length:this.api.fg_hit_get(c,m,1)},(_,i)=>unpackHitKey(Array.from({length:HIT_KEY_FIELDS},(_,f)=>this.api.fg_hit_get(c,m,2+i*HIT_KEY_FIELDS+f))))};}
   hurtboxes(c,m){
     return Object.fromEntries(HURT_PHASES.flatMap((phase,p)=>{
       const values=Array.from({length:17},(_,i)=>this.api.fg_hurt_get(c,m,p,i));
@@ -64,7 +66,7 @@ export class Engine {
     if(!Number.isInteger(value)||!this.api.fg_move_set(c,m,FIELDS.indexOf(key),value)) throw new Error(`Invalid ${key}: ${value}`);
   }
   data() {
-    return { schema:13, coreVersion:this.api.fg_version(),
+    return { schema:14, coreVersion:this.api.fg_version(),
       inputRules:Object.fromEntries(RULES.map((r,i)=>[r,this.api.fg_rule_get(i)])),
       momentumRules:Object.fromEntries(MOMENTUM_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+3)])),
       recoveryRules:Object.fromEntries(RECOVERY_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+13)])),
@@ -116,8 +118,8 @@ export class Engine {
     if(data?.schema===11&&data.coreVersion===11) {
       data=structuredClone(data);data.schema=data.coreVersion=12;
     }
-    data=upgradeHurtboxes(data);
-    if(data?.schema!==13||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
+    data=upgradeHitboxes(data);
+    if(data?.schema!==14||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
     const previous=this.data();
     const apply=d=>{
       RULES.forEach((r,i)=>{ if(!Number.isInteger(d.inputRules?.[r])||!this.api.fg_rule_set(i,d.inputRules[r])) throw new Error(`Invalid ${r}`); });
@@ -135,6 +137,9 @@ export class Engine {
           FIELDS.forEach(key=>this.setMove(c,i,key,m[key]));
           validateHurtboxes(m.hurtboxes);
           HURT_PHASES.forEach((phase,p)=>{if(!this.api.fg_hurt_set(c,i,p,...packHurtboxes(m.hurtboxes[phase])))throw new Error(`Invalid ${phase} hurtboxes`);});
+          validateHitTimeline(m.hitboxTimeline);
+          this.api.fg_hit_clear(c,i,Number(m.hitboxTimeline.multiHit));
+          m.hitboxTimeline.keys.forEach(key=>{if(!this.api.fg_hit_add(c,i,...packHitKey(key)))throw new Error('Invalid active-frame hitbox key');});
         });
       });
     };

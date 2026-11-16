@@ -33,30 +33,46 @@
       <div><p class="eyebrow" id="move-context">THE COMBAT LAB, ANYWHERE</p><h1><span id="move-title">Loading…</span> <span id="move-label"></span></h1><div class="badges"><span id="move-kind"></span><span id="actual-input"></span><span id="move-enabled"></span></div></div>
       <div class="history-actions"><button id="undo" class="icon" aria-label="Undo edit" title="Undo edit" disabled>↶</button><button id="redo" class="icon" aria-label="Redo edit" title="Redo edit" disabled>↷</button><button id="reset" class="quiet" disabled>Reset move</button></div>
     </section>
-    <div class="summary" aria-label="Move summary"><div><span>STARTUP</span><strong id="stat-startup">—</strong></div><div><span>DAMAGE</span><strong id="stat-damage">—</strong></div><div><span>ON BLOCK</span><strong id="stat-block">—</strong></div><div><span>TOTAL</span><strong id="stat-total">—</strong></div></div>
+    <label class="attack-toggle"><input id="attack-enabled" type="checkbox" checked> Attack enabled <small>Disable unused command normals or other attacks without deleting their data.</small></label>
+    <div class="summary" aria-label="Move summary"><div><span>STARTUP</span><strong id="stat-startup">—</strong></div><div><span>BASE DAMAGE</span><strong id="stat-damage">—</strong></div><div><span>BASE ON BLOCK</span><strong id="stat-block">—</strong></div><div><span>TOTAL</span><strong id="stat-total">—</strong></div></div>
     <div class="editor-layout">
       <section class="editor-panel" aria-label="Attack settings">
         <div id="tabs" role="tablist" aria-label="Attack settings"></div>
         <div id="form" role="tabpanel" aria-live="off"></div>
       </section>
       <aside class="preview-panel" aria-label="Attack preview">
-        <div class="panel-heading"><div><span class="eyebrow">POSE & RANGE STUDY</span><h2 id="preview-title">Active frame</h2></div><span class="preview-live">½-speed preview</span></div>
+        <div class="panel-heading"><div><span class="eyebrow">MOVE PREVIEW</span><h2 id="preview-title">Test against target</h2></div><span class="preview-live">60f combat</span></div>
+        <label class="preview-mode-label" for="preview-mode">Preview mode</label><select id="preview-mode"><option value="test">Test against target</option><option value="pose">Edit poses & boxes</option></select>
+        <div id="test-settings" class="test-settings">
+          <label>Target<select id="test-target"></select></label>
+          <label>Reaction<select id="test-behavior"><option value="hit">Take the hit</option><option value="block">Standing guard</option><option value="crouch">Crouching guard</option><option value="fd">Faultless Defense</option><option value="air">Airborne target</option></select></label>
+          <label>Approach<select id="test-entry"><option value="standing">Standing</option><option value="walk">Walk forward</option><option value="run">Run / step forward</option><option value="jump">Neutral jump</option><option value="forwardJump">Forward jump</option></select></label>
+          <label>Starting body gap · px<input id="test-gap" type="number" min="0" max="450" step="1" value="24"></label>
+          <label>Facing<select id="test-facing"><option value="1">Right</option><option value="-1">Left</option></select></label>
+          <label>Inputs<select id="test-simple"><option value="0">Traditional</option><option value="1">Simple + modifier</option></select></label>
+        </div>
         <div class="canvas-wrap"><canvas id="preview" aria-label="Attack pose with hitbox, body hurtboxes and pushbox. Use the numeric fields to edit geometry." role="img"></canvas><p id="preview-empty" hidden>Artwork unavailable. Collision geometry is still shown.</p></div>
         <div class="legend"><label><input id="show-hit" type="checkbox" checked><i class="hit"></i> Hit</label><label><input id="show-hurt" type="checkbox" checked><i class="hurt"></i> Hurt</label><label><input id="show-push" type="checkbox"><i class="push"></i> Push</label><label><input id="show-art" type="checkbox" checked> Art</label></div>
-        <div class="transport"><button id="play" class="icon" aria-label="Play move preview"></button><input id="frame" type="range" min="1" max="16" value="5" aria-label="Preview frame"><output id="frame-label" for="frame">5 / 16</output></div>
+        <div id="test-transport">
+          <div class="transport"><button id="test-play" class="icon" type="button" aria-label="Play combat preview">▶</button><button id="test-restart" type="button" aria-label="Restart combat preview">↺</button><input id="test-frame" type="range" min="0" max="1" value="0" aria-label="Combat preview frame"><output id="test-frame-label">0 / 0</output></div>
+          <label class="test-speed">Playback speed<select id="test-speed"><option value="0.25">¼ speed</option><option value="0.5" selected>½ speed</option><option value="1">Full speed</option></select></label>
+          <p id="test-readout" class="test-readout" role="status"></p><p id="test-result" class="test-result"></p><p id="test-warning" class="test-warning" hidden></p>
+        </div>
+        <div id="pose-transport" hidden><div class="transport"><button id="play" class="icon" aria-label="Play move preview"></button><input id="frame" type="range" min="1" max="16" value="5" aria-label="Preview frame"><output id="frame-label" for="frame">5 / 16</output></div>
         <div id="timeline" class="timeline" aria-label="Frame phases"></div>
         <div class="phase-labels"><span><i class="windup"></i><span id="windup-time"></span></span><span><i class="hit"></i><span id="active-time"></span></span><span><i class="recover"></i><span id="recovery-time"></span></span></div>
-        <p id="geometry-help" class="preview-help">Current pose artwork stays fixed while you tune the attack. Match timing and movement should be tested in game.</p>
+        </div>
+        <p id="geometry-help" class="preview-help">Switch between Test against target and Edit poses &amp; boxes to check contact or edit geometry.</p>
         <div id="move-warnings" class="move-warnings" hidden></div>
         <div class="rule-note"><span aria-hidden="true">◇</span><p>Edit body coverage in Hurtboxes.<br>Four boxes maximum. Weapons have none.</p></div>
-        <p class="advantage-note">On-block value assumes contact on the first active frame, with no cancel or Faultless Defense.</p>
+        <p class="advantage-note">Base on-block value assumes contact on the first active frame, with no cancel or Faultless Defense.</p>
       </aside>
     </div>
   </main>
 </div>
 <div id="toast" role="status" class="toast" hidden></div>
 <dialog id="reference-dialog" aria-label="Pose reference"><button id="close-reference" class="close" aria-label="Close pose reference">×</button><img id="reference-photo" alt=""><p id="reference-photo-caption"></p></dialog>
-<dialog id="help-dialog" aria-labelledby="help-title"><button id="close-help" class="close" aria-label="Close help">×</button><p class="eyebrow">WORK ANYWHERE</p><h2 id="help-title">Your moves. Your browser.</h2><ol><li>Choose a fighter and move. Tune numbers, routes or hitbox dimensions.</li><li>Use <strong>Art brief</strong> to describe poses and effects, and attach pose-reference photos with captions.</li><li><strong>Download JSON</strong> to keep a backup or move between PCs.</li><li>At home, import it through the Godot move editor, or send the JSON back here for the next sprite pass.</li></ol><p>Drafts are saved in this browser when storage is available. They do not sync between devices, and clearing browser data removes the local draft.</p><p>The page works offline without installing anything. It makes no network requests. Preview playback holds existing poses; it does not run a match or regenerate artwork.</p><p>Startup cannot go below 5 frames. Positions are in game pixels; speed is pixels per frame. Existing global rules and the other fighters’ data are preserved when you edit a move.</p><p class="muted">Pose photos and notes travel in the workshop JSON. Keep that file: Godot exports gameplay values only.<br>Generated Fight Guild artwork · Barlow fonts, SIL Open Font License.</p></dialog>
+<dialog id="help-dialog" aria-labelledby="help-title"><button id="close-help" class="close" aria-label="Close help">×</button><p class="eyebrow">WORK ANYWHERE</p><h2 id="help-title">Your moves. Your browser.</h2><ol><li>Choose a fighter and move. Turn <strong>Attack enabled</strong> off to remove an unused command normal from play without deleting its data. Tune numbers, routes or hitbox dimensions.</li><li>Use <strong>Art brief</strong> to describe poses and effects, and attach pose-reference photos with captions.</li><li><strong>Download JSON</strong> to keep a backup or move between PCs.</li><li>At home, import it through the Godot move editor, or send the JSON back here for the next sprite pass.</li></ol><p>Drafts are saved in this browser when storage is available. They do not sync between devices, and clearing browser data removes the local draft.</p><p>The page works offline without installing anything. It makes no network requests. <strong>Test against target</strong> runs the combat rules with approach and command inputs, contact, hitstop and target reactions. <strong>Edit poses &amp; boxes</strong> lets you drag hitboxes or body hurtboxes. Both use existing artwork; they do not generate new animation frames.</p><p>In <strong>Hit &amp; movement</strong>, add active-frame keys to change hitboxes over time. Multiple boxes count as one hit by default. Turn on <strong>Allow multiple hits</strong> and use different hit numbers for separate hits; boxes with the same number connect only once per attack.</p><p>Startup cannot go below 5 frames. Positions are in game pixels; speed is pixels per frame. Existing global rules and the other fighters’ data are preserved when you edit a move.</p><p class="muted">Pose photos and notes travel in the workshop JSON. Keep that file: Godot exports gameplay values only.<br>Generated Fight Guild artwork · Barlow fonts, SIL Open Font License.</p></dialog>
 <noscript><div class="banner">JavaScript is needed for the move editor. Open this HTML page in Chrome, Edge or Firefox with JavaScript enabled.</div></noscript>
 <!--FONT_LICENSE-->
 <!--WORKSHOP_SCRIPT-->

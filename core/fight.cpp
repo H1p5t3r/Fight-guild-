@@ -17,6 +17,7 @@ void Simulation::defaults() {
     rules=Rules{};
     for(int c=0;c<CHARACTER_COUNT;++c) for(int i=0;i<MOVE_COUNT;++i) {
         moves[c][i]=STARTER_MOVES[c][i];
+        move_hit[c][i]=MoveHit{};
         for(int p=0;p<HURT_PHASES;++p) move_hurt[c][i][p]=MoveHurt{};
     }
     for(int c=0;c<CHARACTER_COUNT;++c) mobility[c]=STARTER_MOBILITY[c];
@@ -169,6 +170,7 @@ int Simulation::requested(Fighter& f,Sample& h) const {
 void Simulation::begin(Fighter& f,int move) {
     f.move=f.last_move=move;
     f.age=f.contact=f.hit_done=f.dash=0;
+    f.hit_groups=0;
     f.running=0;
     if(moves[f.character][move].v[Air]) f.air_action=1;
     // Briefly retain run/step momentum while directions form a motion command.
@@ -446,10 +448,28 @@ Box Simulation::weapon_span(const Fighter& f,int tick_offset) const {
     return {f.x+f.facing*back,f.y+m.v[Bottom]+m.v[HitAngle]*extension,
         f.x+f.facing*tip,f.y+m.v[Bottom]+m.v[HitAngle]*(extension+length)};
 }
+const HitKey* Simulation::hit_key(const Fighter& f,int tick_offset) const {
+    if(f.move<0||moves[f.character][f.move].v[Category]==Throw) return nullptr;
+    int frame=f.age+tick_offset-moves[f.character][f.move].v[Startup]+1;
+    const auto& track=move_hit[f.character][f.move];
+    const HitKey* result=nullptr;
+    for(int i=0;i<track.count&&track.keys[i].frame<=frame;++i) result=&track.keys[i];
+    return result;
+}
+unsigned Simulation::hit_bit(const Fighter& f,int tick_offset) const {
+    const auto* key=hit_key(f,tick_offset);
+    return 1u<<(key?key->group-1:0);
+}
+int Simulation::attack_count(const Fighter& f,int tick_offset) const {
+    const auto* key=hit_key(f,tick_offset);
+    return key&&key->count>=0?key->count:moves[f.character][f.move].v[HitAngle]?8:1;
+}
 Box Simulation::attack_box(const Fighter& f,int segment,int tick_offset) const {
     const auto& m=moves[f.character][f.move];
     if(m.v[Category]==Throw) return transform({0,0,
         PUSH_PROFILES[f.character].half_width+m.v[ThrowRange],PUSH_PROFILES[f.character].standing},f);
+    const auto* key=hit_key(f,tick_offset);
+    if(key&&key->count>=0) return segment<key->count?transform(key->boxes[segment],f):Box{};
     if(m.v[HitAngle]) {
         Box span=weapon_span(f,tick_offset);
         int left=span.left+(span.right-span.left)*segment/8;
@@ -470,7 +490,7 @@ int Simulation::box_count(int player,int kind) const {
     if(kind==PushBox) return 1;
     if(kind==HitBox&&f.move>=0) {
         const auto& m=moves[f.character][f.move];
-        return f.age>=m.v[Startup]&&f.age<m.v[Startup]+m.v[Active]?(m.v[HitAngle]?8:1):0;
+        return f.age>=m.v[Startup]&&f.age<m.v[Startup]+m.v[Active]?attack_count(f):0;
     }
     return 0;
 }
@@ -507,7 +527,7 @@ void Simulation::resolve_push(int previous_order,bool preserve_order) {
 }
 bool Simulation::overlaps(const Fighter& a,const Fighter& b) const {
     // Hits are evaluated before age increments. Use the pose that this tick shows.
-    int count=moves[a.character][a.move].v[HitAngle]?8:1;
+    int count=attack_count(a,1);
     for(int segment=0;segment<count;++segment) for(int i=0;i<hurt_count(b,1);++i)
         if(intersects(attack_box(a,segment,1),hurt_box(b,i,1))) return true;
     return false;
@@ -699,7 +719,9 @@ void Simulation::step(int raw0,int raw1) {
             ||prior_reaction[1-p]==Downed||prior_reaction[1-p]==Waking) continue;
         bool throwing=f.move>=0&&moves[f.character][f.move].v[Category]==Throw;
         bool connects=false;
-        if(advances[p]&&active(f)&&!f.hit_done) {
+        bool spent=f.move>=0&&(move_hit[f.character][f.move].multi
+            ? (f.hit_groups&hit_bit(f,1))!=0 : f.hit_done!=0);
+        if(advances[p]&&active(f)&&!spent) {
             if(throwing) {
                 int separation=PUSH_PROFILES[f.character].half_width+PUSH_PROFILES[other.character].half_width;
                 connects=f.y==0&&!throw_invulnerable(other)&&!(prior_stun[1-p]>0&&!prior_guard[1-p])
@@ -734,7 +756,17 @@ void Simulation::step(int raw0,int raw1) {
     }
     for(int p=0;p<2;++p) if(hits[p]>=0) {
         Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
-        const Move& m=moves[f.character][hits[p]];
+        Move m=moves[f.character][hits[p]];
+        // Copy before applying a trade: interruptions may replace the opponent's move.
+        Fighter contact_fighter=f; contact_fighter.move=hits[p];
+        const auto* key=hit_key(contact_fighter,1);
+        if(key) {
+            if(key->damage>=0) m.v[Damage]=key->damage;
+            if(key->hitstun>=0) m.v[Hitstun]=key->hitstun;
+            if(key->blockstun>=0) m.v[Blockstun]=key->blockstun;
+            if(key->hitstop>=0) m.v[Hitstop]=key->hitstop;
+        }
+        f.hit_groups|=hit_bit(contact_fighter,1);
         f.hit_done=f.contact=1;
         f.event=contacts[p];
         f.combo=blocked[p]?0:(prior_combo[1-p]?min(1000,f.combo+1):1);
@@ -918,6 +950,7 @@ int Simulation::get(int player,int field) const {
         case 62:return f.prejump_time;
         case 63:return f.slow_time; case 64:return f.slow_held;
         case 65:return f.knockback_left;
+        case 66:return static_cast<int>(f.hit_groups); case 67:return f.vy;
         default:return 0;
     }
 }
@@ -1001,6 +1034,51 @@ int Simulation::hurt_set(int c,int m,int p,int count,const Box* boxes) {
     }
     move_hurt[c][m][p]=next;
     return 1;
+}
+int Simulation::hit_get(int c,int m,int field) const {
+    if(c<0||c>=CHARACTER_COUNT||m<0||m>=MOVE_COUNT||field<0||field>=HIT_TRACK_FIELDS) return -999;
+    const auto& track=move_hit[c][m];
+    if(field<2) return field?track.count:track.multi;
+    int index=(field-2)/HIT_KEY_FIELDS,at=(field-2)%HIT_KEY_FIELDS;
+    if(index>=track.count) return 0;
+    const auto& k=track.keys[index];
+    const int meta[]={k.frame,k.group,k.count,k.damage,k.hitstun,k.blockstun,k.hitstop};
+    if(at<7) return meta[at];
+    const auto& b=k.boxes[(at-7)/4];
+    int edge=(at-7)%4;
+    return edge==0?b.left:edge==1?b.bottom:edge==2?b.right:b.top;
+}
+int Simulation::hit_clear(int c,int m,int multi) {
+    if(c<0||c>=CHARACTER_COUNT||m<0||m>=MOVE_COUNT||(multi!=0&&multi!=1)) return 0;
+    move_hit[c][m]=MoveHit{}; move_hit[c][m].multi=multi; return 1;
+}
+int Simulation::hit_add(int c,int m,const HitKey& key) {
+    if(c<0||c>=CHARACTER_COUNT||m<0||m>=MOVE_COUNT) return 0;
+    auto& track=move_hit[c][m];
+    if(track.count>=MAX_HIT_KEYS||key.frame<1||key.frame>120||key.group<1||key.group>32
+        ||key.count< -1||key.count>MAX_HITBOXES||key.damage< -1||key.damage>1000
+        ||key.hitstun< -1||key.hitstun>180||key.blockstun< -1||key.blockstun>180
+        ||key.hitstop< -1||key.hitstop>30||(track.count&&key.frame<=track.keys[track.count-1].frame)) return 0;
+    HitKey next=key;
+    for(int i=0;i<MAX_HITBOXES;++i) {
+        auto& b=next.boxes[i];
+        if(i>=key.count) { b=Box{}; continue; }
+        if(b.left< -50000||b.left>50000||b.right< -50000||b.right>50000
+            ||b.bottom< -50000||b.bottom>50000||b.top< -50000||b.top>50000
+            ||b.right-b.left<100||b.top-b.bottom<100) return 0;
+    }
+    track.keys[track.count++]=next; return 1;
+}
+int Simulation::preview_place(int p,int x,int y,int momentum) {
+    if(p<0||p>1||x<0||x>100000||y<0||y>50000||momentum<0||momentum>MOMENTUM_MAX) return 0;
+    auto& f=world.players[p]; f.x=clamp_x(f,x); f.y=y; f.vy=0; f.momentum=momentum;
+    world.players[0].facing=world.players[0].x<=world.players[1].x?1:-1;
+    world.players[1].facing=-world.players[0].facing;
+    return 1;
+}
+int Simulation::preview_begin(int p,int m) {
+    if(p<0||p>1||m<0||m>=MOVE_COUNT||!moves[world.players[p].character][m].v[Enabled]) return 0;
+    begin(world.players[p],m); return 1;
 }
 int Simulation::rule_get(int f) const {
     const int values[RULE_COUNT]={rules.buffer,rules.motion_window,rules.motion_gap,
@@ -1095,6 +1173,15 @@ int fg_get(int p,int f) { return fight::default_simulation.get(p,f); }
 int fg_move_get(int c,int m,int f) { return fight::default_simulation.move_get(c,m,f); }
 int fg_move_set(int c,int m,int f,int v) { return fight::default_simulation.move_set(c,m,f,v); }
 int fg_hurt_get(int c,int m,int p,int f) { return fight::default_simulation.hurt_get(c,m,p,f); }
+int fg_hit_get(int c,int m,int f) { return fight::default_simulation.hit_get(c,m,f); }
+int fg_hit_clear(int c,int m,int multi) { return fight::default_simulation.hit_clear(c,m,multi); }
+int fg_hit_add(int c,int m,int frame,int group,int count,int damage,int hitstun,int blockstun,int hitstop,
+    int l0,int b0,int r0,int t0,int l1,int b1,int r1,int t1,int l2,int b2,int r2,int t2,int l3,int b3,int r3,int t3) {
+    fight::HitKey key{frame,group,count,damage,hitstun,blockstun,hitstop,{{l0,b0,r0,t0},{l1,b1,r1,t1},{l2,b2,r2,t2},{l3,b3,r3,t3}}};
+    return fight::default_simulation.hit_add(c,m,key);
+}
+int fg_preview_place(int p,int x,int y,int momentum) { return fight::default_simulation.preview_place(p,x,y,momentum); }
+int fg_preview_begin(int p,int m) { return fight::default_simulation.preview_begin(p,m); }
 int fg_hurt_set(int c,int m,int p,int count,
     int l0,int b0,int r0,int t0,int l1,int b1,int r1,int t1,
     int l2,int b2,int r2,int t2,int l3,int b3,int r3,int t3) {

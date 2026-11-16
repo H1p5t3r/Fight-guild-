@@ -9,16 +9,17 @@
   "scripts": {
     "build": "bash scripts/build.sh && node scripts/bundle.mjs",
     "start": "node scripts/server.mjs",
-    "test": "bash scripts/build.sh && ./build/core-tests && ./build/collision-tests && ./build/recovery-tests && ./build/signature-tests && ./build/tuning-tests && ./build/counter-tests && ./build/wall-tests && node --test tests/*.test.mjs",
+    "test": "bash scripts/build.sh && ./build/core-tests && ./build/collision-tests && ./build/hit-timeline-tests && ./build/recovery-tests && ./build/signature-tests && ./build/tuning-tests && ./build/counter-tests && ./build/wall-tests && node --test tests/*.test.mjs",
     "test:browser": "node tests/browser-smoke.mjs",
     "build:workshop": "bash scripts/build.sh && node scripts/build-workbench.mjs",
     "start:workshop": "node scripts/serve-workbench.mjs",
-    "test:workshop": "node --test tests/workbench-check.mjs && node tests/workbench-browser.mjs"
+    "test:workshop": "node --test tests/workbench-check.mjs tests/workbench-preview.mjs && node tests/workbench-browser.mjs && node tests/workbench-preview-browser.mjs"
   },
   "dependencies": {
     "ws": "8.18.3"
   },
   "devDependencies": {
+    "binaryen": "123.0.0",
     "esbuild": "0.25.12",
     "playwright": "1.56.1"
   }

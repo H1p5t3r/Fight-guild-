@@ -8,7 +8,7 @@
 
 Godot's `CombatModel` wraps data validation and persistence. `main.gd` owns activity/screen state, input, training, move editing and scheduling. `GameMenus` renders home, match choice, fighter selection, connection, pause and results pages. Offline simulation only advances on the play screen; online sessions keep ticking with neutral input behind menus. Held confirmation inputs must be released before combat accepts input. Online results inspect a fully confirmed rollback snapshot before committing to a winner screen. Menu navigation preserves applied move data. See [menu flow](menu-flow.md). `arena.gd`, `FighterArt` and `FighterPreview` present generated PNG regions. `CombatFeedback` draws large background combo numerals and counter/punish/reversal notices before the HUD and fighter sprites. It consumes restored state clocks, never wall time, and follows the attacker's current side. These presentation classes do not decide hits or movement. Physics processing schedules fixed ticks; Godot collision physics is not authoritative.
 
-State includes position, velocity, facing, health, move age, contact/hit flags, dash/stun state, Momentum, FD status, movement gain remainder, block reaction/age/advantage, guard break, counter/punish notices, reversal timing, combo display clocks, previous input and 64 history samples per player. Recovery state additionally stores air reel, knockdown/wakeup timing, received-hit count, remaining knockback travel, wall splat, and Positive Bonus. Global state stores independent left/right wall health, wall-break actor/side/progress, captured departure positions and ground index. These all roll back together. Snapshots copy all of `State`, including consumed presses. Configuration stays immutable during a network match. The local 32-bit integer snapshot ABI is not a network serialization format. Configuration schema/core version is 13; version-1/2/3/4/5 files preserve edits while adding defensive fields/Momentum rates/hit-timing fields, the explicit hitbox back offset and any missing fighters. Startup below 5f rejects an import atomically. The C ABI/default instance remains for native tests and the archived WebAssembly harness.
+State includes position, velocity, facing, health, move age, contact/hit flags, dash/stun state, Momentum, FD status, movement gain remainder, block reaction/age/advantage, guard break, counter/punish notices, reversal timing, combo display clocks, previous input and 64 history samples per player. Recovery state additionally stores air reel, knockdown/wakeup timing, received-hit count, remaining knockback travel, wall splat, and Positive Bonus. Global state stores independent left/right wall health, wall-break actor/side/progress, captured departure positions and ground index. These all roll back together. Snapshots copy all of `State`, including consumed presses. Configuration stays immutable during a network match. The local 32-bit integer snapshot ABI is not a network serialization format. Configuration schema/core version is 14; version-1/2/3/4/5 files preserve edits while adding defensive fields/Momentum rates/hit-timing fields, the explicit hitbox back offset and any missing fighters. Startup below 5f rejects an import atomically. The C ABI/default instance remains for native tests and the archived WebAssembly harness.
 
 ## Rollback and direct connections
 
@@ -56,4 +56,30 @@ Schema 10 extends the packed layout to 69 move fields and 38 global rules, retai
 
 ## Editable attack hurtboxes (schema 13)
 
-Each move can override windup, active and recovery independently with three required body rectangles and one optional extension. Missing phases inherit the compiled sprite pose; moves sharing artwork remain independent. The fixed configuration layout appends 6 × 32 × 3 records of 17 integers (count plus four rectangles) after movement profiles and before global rules. Imports validate a complete candidate before applying it. Configured rectangles are canonical integer coordinates relative to the fighter, mirrored by facing, and apply to actual hit detection and runtime overlays. No additional hurtbox data is needed in snapshots: the profile is immutable during a match, and phase selection derives from restored move age. Profiles participate in the move-data fingerprint; mismatched peers cannot start. Version-1–12 saves retain inherited body poses.
+Each move can override windup, active and recovery independently with three required body rectangles and one optional extension. Missing phases inherit the compiled sprite pose; moves sharing artwork remain independent. The fixed configuration layout appends 6 × 32 × 3 records of 17 integers (count plus four rectangles) after movement profiles and before hitbox timelines/global rules. Imports validate a complete candidate before applying it. Configured rectangles are canonical integer coordinates relative to the fighter, mirrored by facing, and apply to actual hit detection and runtime overlays. No additional hurtbox data is needed in snapshots: the profile is immutable during a match, and phase selection derives from restored move age. Profiles participate in the move-data fingerprint; mismatched peers cannot start. Version-1–12 saves retain inherited body poses.
+
+## Active-frame hitboxes and browser combat preview (schema 14)
+
+Each move has a fixed `MoveHit` sidecar: a multi-hit flag and up to 32 ordered
+keys. A key stores an active-relative start frame, hit group 1–32, four optional
+damage/stun/hitstop overrides, and up to four rectangles. Inherited geometry
+uses count −1; a collision gap uses count 0. Keys hold until the next key. Before
+the first key the ordinary shape and hit group 1 apply. Without multi-hit enabled,
+all keys share the existing one-contact rule. With it enabled, a 32-bit consumed
+group mask allows one contact per hit group per move execution; the mask is part
+of rollback state. Multiple overlapping boxes never multiply a contact. Throws
+keep their separate single-hit resolver. Version-1–13 migrations retain ordinary
+one-hit behavior.
+
+Packed configuration appends 192 records of 738 integers after the hurtbox
+sidecar and before the 38 global rules. It is fingerprinted and validated
+atomically by both adapters. Snapshot version 14 includes the hit-group mask.
+
+The standalone workshop translates the same WebAssembly build to ordinary
+JavaScript with pinned Binaryen, then embeds independent core instances. There
+is no WebAssembly runtime or network dependency in the downloaded editor. Its
+preview enters approach and command inputs, records collision/reaction states,
+and replays them with existing sprites. Explicit authoring helpers place the
+fighters and start contextual follow-ups in isolation; the UI labels those
+follow-ups as isolated tests. JS/WASM parity and native JSON-import tests protect
+the shared behavior and portable data.

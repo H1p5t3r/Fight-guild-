@@ -259,7 +259,7 @@ def blocks(page):
             table=make_table(rows,[220,WIDTH-220],header=True,label_column=False)
             table.setStyle(TableStyle([('TOPPADDING',(0,0),(-1,-1),2),('BOTTOMPADDING',(0,0),(-1,-1),2)]))
             out.append(table)
-            out.append(p('Workspace controls: pp. 4–5. Hurtbox controls: p. 18. Art notes: p. 19. Pose-photo controls: p. 20. Storage and recovery: p. 21.', 'small'))
+            out.append(p(f"Workspace: pp. {page_numbers['navigation']}–{page_numbers['combat-preview']}. Hitbox keys: pp. {page_numbers['hit-keys']}–{page_numbers['hit-key-boxes']}. Hurtboxes: p. {page_numbers['hurtboxes']}. Art: p. {page_numbers['art']}. Photos: p. {page_numbers['photos']}. Files: p. {page_numbers['save']}.", 'small'))
         else:
             raise ValueError(kind)
     return out
