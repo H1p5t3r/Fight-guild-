@@ -66,6 +66,8 @@ Linux rendering, keyboard gameplay, all 30 basic attacks, editing, save migratio
 
 The browser combat harness is retained for regressions: `bash scripts/setup-web.sh`, then `npm test`. The separate [Move Workshop](docs/move-workshop.md) provides portable attack authoring; Godot remains the game client and delivery path.
 
+The [Move Workshop control guide (PDF)](exports/FightGuild-Move-Workshop-Guide.pdf) explains all 68 effective move settings, hurtboxes, preview tools, art briefs, pose photos and file controls, with examples and a searchable index.
+
 ## Current reference guides
 
 These are the latest concept candidates, with weapons revised using miniature references. They are not yet approved production model sheets or actual 3D assets.

@@ -5,6 +5,11 @@ download is one self-contained **FightGuild-Move-Workshop.html** file (about 9 M
 including the current six-fighter data, sprite sheets and fonts. No account,
 server, WebAssembly or network access is needed to use the downloaded page.
 
+The [complete control guide (PDF)](../exports/FightGuild-Move-Workshop-Guide.pdf)
+explains every browser editor control, with allowed ranges, worked examples,
+diagrams, clickable contents and an alphabetical field index. It covers the
+current schema-13 build, including hurtboxes, art notes and pose photos.
+
 ## Use it on another PC
 
 1. Download **FightGuild-Move-Workshop.html** from the chat attachment or this
