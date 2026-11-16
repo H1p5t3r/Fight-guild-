@@ -100,7 +100,8 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Preserve schema 1–6 move edits and test delayed-input rollback through wall breaks.
 - [ ] Tune Fillet/Shark routes, gravity threshold and wall durability through local playtests.
 - [ ] Author dedicated windup/active sweep and throw art first, then coherent launch/splat/down/wakeup clips under the existing sprite contract. Current reactions reuse existing poses.
-- [ ] Produce distinct stage-travel backgrounds and wall-break shots; current ground variants share a layout.
+- [x] Generate three layered arenas, independent horizontal parallax, left/right passage cutouts and deterministic wall-break travel. See [stage art](stage-art.md).
+- [ ] Author dedicated character travel/landing animation, environmental loops and sound for the generated stages.
 - [ ] Measure a chosen Strive patch's wall-damage and Positive Bonus behavior before claiming exact parity. Super-specific break knockdowns wait for super design.
 
 ## First signature kits and locomotion

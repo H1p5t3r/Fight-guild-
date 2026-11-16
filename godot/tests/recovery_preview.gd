@@ -34,7 +34,7 @@ func run() -> void:
 						printerr("Preview follow-up did not break")
 						quit(1)
 						return
-					for _tick in (90 if args.has("--bonus") else 24): game.model.step(0, 0)
+					for _tick in (int(game.model.state().wallBreakDuration) if args.has("--bonus") else 24): game.model.step(0, 0)
 			game._process(0.0)
 	await process_frame
 	if args.has("--reactions"):

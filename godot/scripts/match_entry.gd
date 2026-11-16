@@ -87,21 +87,26 @@ func begin(chosen: Array, number: int, is_practice: bool, is_online: bool, repea
 	if motion.instant:
 		finish_intros()
 		return
-	# Load the actual selected atlas resources before revealing the stage.
+	# Prepare selected fighters and every adjoining area before revealing the stage.
+	var paths: Array[String] = ArenaStage.asset_paths()
 	for character in characters:
-		var paths: Array[String] = []
 		for stage in FighterArt.phase_names(character):
 			paths.append(FighterArt.DIRECTORY + FighterArt.sheet(character, stage).file)
 		if FighterArt.catalog().fighters[character].has("hook_weapon"):
 			paths.append(FighterArt.DIRECTORY + FighterArt.catalog().fighters[character].hook_weapon.file)
-		for path in paths:
-			if path in asset_paths: continue
-			asset_paths.append(path)
-			abandoned_loads.erase(path)
-			var status := ResourceLoader.load_threaded_get_status(path)
-			if status not in [ResourceLoader.THREAD_LOAD_IN_PROGRESS, ResourceLoader.THREAD_LOAD_LOADED] and ResourceLoader.load_threaded_request(path) != OK:
-				loading_failed("Could not prepare fighter artwork. Return and try again.")
-				return
+	for path in paths:
+		if path in asset_paths: continue
+		asset_paths.append(path)
+		abandoned_loads.erase(path)
+		var status := ResourceLoader.load_threaded_get_status(path)
+		if status not in [ResourceLoader.THREAD_LOAD_IN_PROGRESS, ResourceLoader.THREAD_LOAD_LOADED] and ResourceLoader.load_threaded_request(path) != OK:
+			loading_failed("Could not prepare match artwork. Return and try again.")
+			return
+
+func cache_loaded(path: String) -> void:
+	var resource := ResourceLoader.load_threaded_get(path)
+	if path.begins_with(ArenaStage.DIRECTORY): ArenaStage.remember(path, resource)
+	else: FighterArt.textures[path.trim_prefix(FighterArt.DIRECTORY)] = resource
 
 func cancel() -> void:
 	phase = "hidden"
@@ -116,7 +121,7 @@ func drain_abandoned_loads() -> void:
 		var status := ResourceLoader.load_threaded_get_status(path)
 		if status == ResourceLoader.THREAD_LOAD_IN_PROGRESS: continue
 		if status == ResourceLoader.THREAD_LOAD_LOADED:
-			FighterArt.textures[path.trim_prefix(FighterArt.DIRECTORY)] = ResourceLoader.load_threaded_get(path)
+			cache_loaded(path)
 		abandoned_loads.erase(path)
 
 func _exit_tree() -> void:
@@ -191,7 +196,7 @@ func poll_loading() -> void:
 		var progress := []
 		var status := ResourceLoader.load_threaded_get_status(path, progress)
 		if status in [ResourceLoader.THREAD_LOAD_FAILED, ResourceLoader.THREAD_LOAD_INVALID_RESOURCE]:
-			loading_failed("Fighter artwork could not be loaded. Return and try again.")
+			loading_failed("Match artwork could not be loaded. Return and try again.")
 			return
 		complete = complete and status == ResourceLoader.THREAD_LOAD_LOADED
 		total += 1.0 if status == ResourceLoader.THREAD_LOAD_LOADED else float(progress[0]) if not progress.is_empty() else 0.0
@@ -200,7 +205,7 @@ func poll_loading() -> void:
 	var end := loading_end()
 	if not complete or load_frames < 2 or elapsed < end: return
 	for path in asset_paths:
-		FighterArt.textures[path.trim_prefix(FighterArt.DIRECTORY)] = ResourceLoader.load_threaded_get(path)
+		cache_loaded(path)
 	if practice or repeat_match:
 		finish_intros()
 	else:

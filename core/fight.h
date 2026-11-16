@@ -3,7 +3,8 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 10, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 69;
+constexpr int VERSION = 11, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 69;
+constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
               STAB_GROUND=30, STAB_AIR=31;
@@ -73,6 +74,7 @@ struct Fighter {
 struct State {
     int frame, remaining, hitstop, winner;
     int wall_break_time, wall_break_actor, wall_break_side, stage;
+    int wall_break_x[2], wall_break_y[2]; // Cinematic origins survive neutral reset and rollback.
     int impact_time, impact_duration, impact_actor, impact_tier, impact_x, impact_y;
     Fighter players[2];
 };
@@ -83,7 +85,7 @@ struct Rules {
     int special_gain=100, fd_drain=25, fd_block_cost=250, fd_damage_cost=0, fd_push_percent=300;
     int gravity_after=5, gravity_step=10, gravity_cap=200;
     int wall_threshold=1000, wall_range=16000, wall_decay_delay=60, wall_decay=20;
-    int wall_splat_frames=60, wall_break_frames=90, wall_break_damage=50;
+    int wall_splat_frames=60, wall_break_frames=150, wall_break_damage=50;
     int positive_frames=360, positive_gain_percent=150, positive_regen=5;
     int fd_air_drain=50, fd_level_cost=50, corner_push_transfer=1, wall_mid_cap=50, grounded_wall_prime=1;
     int block_carryover=1, throw_grace_frames=5, air_landing_frames=3, repeat_after=3, repeat_gravity_step=15;

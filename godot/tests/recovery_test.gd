@@ -33,6 +33,7 @@ func _initialize() -> void:
 	invalid_rule.recoveryRules.gravityCap = 99
 	check(not model.load_data(invalid_rule).is_empty() and model.fingerprint() == fingerprint, "Invalid gravity cap changed live data")
 	var settings := original.duplicate(true)
+	settings.recoveryRules.wallBreakFrames = 90 # This fixture also verifies authored legacy durations.
 	settings.recoveryRules.wallThreshold = 100
 	for slot in [0, 1]:
 		var move: Dictionary = settings.characters[5].moves[slot]

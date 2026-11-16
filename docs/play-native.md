@@ -75,3 +75,7 @@ This direct ENet connection uses rollback, two frames of input delay, bounded pr
 Linux native rendering, menu routes/back paths, keyboard and simulated-controller navigation, first-to-two matches, draw replay, intro/readiness gates, pause/rematch, connection recovery, all 30 basic buttons, editing, sprite loading, rollback and two independent UDP peers are tested. Windows is cross-compiled/exported; Windows gameplay and physical controllers need hardware playtesting. PS5 requires approved console access and a compatible Godot port provider; no PS5 build is included.
 
 The buffer is an original configurable implementation, not verified Strive parity. Further character mechanics, full move animations, universal overheads and dedicated anti-air rules remain future work. See the source project's `docs/backlog.md` and `docs/sprite-production.md`.
+
+## Generated arenas
+
+The match opens at the Charter Grounds. Breaking the left wall carries the fight into Foundry Walk; the right wall leads to the Tide Docks. Each arena scrolls through independent generated scenery layers as the camera follows the fighters. New configurations use a 2.5-second travel sequence. The existing Reduced motion setting uses a stationary dissolve instead. See [stage art](stage-art.md) for the connected routes and layering details.

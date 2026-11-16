@@ -73,7 +73,9 @@ public:
         if(candidate.frame<0||candidate.winner< -1||candidate.winner>2||candidate.hitstop<0||candidate.hitstop>fight::MAX_HITSTOP) return false;
         if(candidate.wall_break_time<0||candidate.wall_break_time>300||candidate.wall_break_actor< -1
             ||candidate.wall_break_actor>1||candidate.wall_break_side< -1||candidate.wall_break_side>1
-            ||candidate.stage<0) return false;
+            ||candidate.stage<0||candidate.stage>=fight::STAGE_COUNT) return false;
+        for(int p=0;p<2;++p) if(candidate.wall_break_x[p]<0||candidate.wall_break_x[p]>100000
+            ||candidate.wall_break_y[p]<0||candidate.wall_break_y[p]>200000) return false;
         if(candidate.impact_time<0||candidate.impact_time>198||candidate.impact_duration<0||candidate.impact_duration>198
             ||candidate.impact_time>candidate.impact_duration||candidate.impact_actor<0||candidate.impact_actor>1
             ||candidate.impact_tier<0||candidate.impact_tier>3||candidate.impact_x<0||candidate.impact_x>100000

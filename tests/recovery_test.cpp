@@ -146,16 +146,16 @@ static void test_walls() {
         CHECK(d.reaction==WallSplat&&d.wall_time==60&&d.wall_damage==100);
         int y=d.y;thaw(s);s.step(0,0);CHECK(d.y==y&&d.wall_time==59);
         prime(s,actor);s.step(0,0);
-        CHECK(s.world.wall_break_time==90&&s.world.wall_break_actor==actor);
+        CHECK(s.world.wall_break_time==s.rules.wall_break_frames&&s.world.wall_break_actor==actor);
         CHECK(d.health==910&&s.world.players[actor].combo==2);
         int timer=s.world.remaining;unsigned expected=0;
         State snapshot=s.world;
-        ticks(s,90,Left|P,Right|K);expected=s.checksum();
-        CHECK(s.world.wall_break_time==0&&s.world.stage==1&&s.world.remaining==timer);
+        ticks(s,s.rules.wall_break_frames,Left|P,Right|K);expected=s.checksum();
+        CHECK(s.world.wall_break_time==0&&s.world.stage==(actor==0?1:2)&&s.world.remaining==timer);
         CHECK(s.world.players[actor].positive_time==360&&d.health==910);
         CHECK(d.reaction==Free&&d.y==0&&d.stun==0&&d.wall_damage==0&&d.combo_received==0);
         CHECK(s.world.players[0].x<s.world.players[1].x);
-        s.world=snapshot;ticks(s,90,Left|P,Right|K);CHECK(s.checksum()==expected);
+        s.world=snapshot;ticks(s,s.rules.wall_break_frames,Left|P,Right|K);CHECK(s.checksum()==expected);
         s.step(Left|P,Right|K);CHECK(s.world.players[0].move==-1&&s.world.players[1].move==-1);
         int meter=s.world.players[actor].momentum;
         s.step(0,0);CHECK(s.world.players[actor].momentum==meter+5);
@@ -165,7 +165,7 @@ static void test_walls() {
     for(int i=0;i<100&&timeout.world.players[1].reaction!=Free;++i) timeout.step(0,0);
     CHECK(timeout.world.players[1].reaction==Free&&timeout.world.stage==0);
     auto last=splat();thaw(last);ticks(last,59);prime(last);last.step(0,0);
-    CHECK(last.world.wall_break_time==90); // The final splat tick remains a follow-up opportunity.
+    CHECK(last.world.wall_break_time==last.rules.wall_break_frames); // The final splat tick remains a follow-up opportunity.
     auto block=match();wide(block).v[WallDamage]=5000;prime(block);block.step(0,Right);
     CHECK(block.world.players[1].wall_damage==0&&block.world.wall_break_time==0);
     auto bonus=match();wide(bonus).v[Damage]=20;bonus.world.players[0].positive_time=1;
@@ -180,13 +180,35 @@ static void test_walls() {
     CHECK(mid.world.players[1].wall_damage==80);
     auto ko=splat();thaw(ko);ko.world.players[1].health=30;prime(ko);ko.step(0,0);
     CHECK(ko.world.winner==-1&&ko.world.players[1].health==0);
-    ticks(ko,90);CHECK(ko.world.winner==0&&ko.world.wall_break_time==0);
+    ticks(ko,ko.rules.wall_break_frames);CHECK(ko.world.winner==0&&ko.world.wall_break_time==0);
     auto replay=splat();thaw(replay);State state=replay.world;prime(replay);replay.step(0,0);
     ticks(replay,100);unsigned hash=replay.checksum();
     replay.world=state;prime(replay);replay.step(0,0);ticks(replay,100);CHECK(replay.checksum()==hash);
 }
+static void test_stage_routes() {
+    for(int stage=0;stage<STAGE_COUNT;++stage) for(int actor=0;actor<2;++actor)
+    for(int duration:{30,90,150,151,300}) {
+        auto s=splat(actor); s.world.stage=stage; s.rules.wall_break_frames=duration;
+        thaw(s); prime(s,actor); s.step(0,0);
+        int side=actor==0?1:-1, target=(stage+(side>0?1:2))%STAGE_COUNT;
+        CHECK(s.world.wall_break_side==side);
+        State origin=s.world;
+        CHECK(origin.wall_break_x[0]==origin.players[0].x&&origin.wall_break_x[1]==origin.players[1].x);
+        int cut=duration-duration/3;
+        ticks(s,cut-1,Left|P,Right|K);
+        CHECK(s.world.stage==stage&&s.world.remaining==origin.remaining);
+        s.step(Left|P,Right|K);
+        CHECK(s.world.stage==target&&s.world.wall_break_time==duration/3);
+        CHECK(s.world.players[actor].x==(side>0?42000:58000));
+        CHECK(s.world.wall_break_x[0]==origin.wall_break_x[0]&&s.world.wall_break_y[1]==origin.wall_break_y[1]);
+        State landing=s.world; ticks(s,duration/3,Left|P,Right|K);
+        CHECK(s.world.stage==target&&s.world.wall_break_time==0&&s.world.remaining==origin.remaining);
+        unsigned hash=s.checksum(); s.world=landing; ticks(s,duration/3,Left|P,Right|K); CHECK(s.checksum()==hash);
+        s.world=origin; ticks(s,duration,Left|P,Right|K); CHECK(s.checksum()==hash);
+    }
+}
 int main() {
-    test_universals();test_recovery();test_gravity();test_walls();
+    test_universals();test_recovery();test_gravity();test_walls();test_stage_routes();
     std::printf("Recovery / throws / combo gravity / walls: %d checks, %d failures\n",checks,failures);
     return failures?1:0;
 }

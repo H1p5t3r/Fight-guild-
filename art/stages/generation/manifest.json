@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "generator": "image_gen.imagegen",
+  "reference": "art/stages/charter-grounds-reference.png",
+  "canvas": [
+    1536,
+    1024
+  ],
+  "runtimePlanes": [
+    "far",
+    "mid",
+    "floor"
+  ],
+  "alpha": "Far planes opaque; all other layers generated with transparent_background=true. Originals copied byte-for-byte.",
+  "assets": [
+    {
+      "path": "godot/assets/stages/charter-far.png",
+      "source": "exec-11b127af-102c-4edd-bf00-d7d9876ad2b2.png",
+      "sha256": "ee72c666104100cb1d8462f9bdcb4d10300155f729ededb1e043a04555cca7ee",
+      "mode": "RGB"
+    },
+    {
+      "path": "godot/assets/stages/charter-floor.png",
+      "source": "exec-e83a76f2-0193-4ad9-8bf6-5fb4837c5a3b.png",
+      "sha256": "500af6d79ca273ccdad6ed5ae57aa6d38443ba76c4dd657a24e15dc257160182",
+      "mode": "RGBA"
+    },
+    {
+      "path": "godot/assets/stages/charter-mid.png",
+      "source": "exec-eea13e89-e24f-43aa-bdbc-ed53eaf6b951.png",
+      "sha256": "038c95b258316ba1522f979cad15a9417ed9db1e1667097c33864db5a8406f3b",
+      "mode": "RGBA"
+    },
+    {
+      "path": "godot/assets/stages/debris-kit.png",
+      "source": "exec-57781a6c-3ddc-4a91-9f98-8ab5bb143abd.png",
+      "sha256": "7587944fb56c1764578879465a3fef7a30c9cce05f85849c577d31d1726f4c84",
+      "mode": "RGBA"
+    },
+    {
+      "path": "godot/assets/stages/forge-breach.png",
+      "source": "exec-8375981b-322a-4f88-bb65-02ccbdc3b17a.png",
+      "sha256": "6a370daf88b7188c3d8bba0443e11c8fefebf803ff69c0e65d222841d5c55961",
+      "mode": "RGBA"
+    },
+    {
+      "path": "godot/assets/stages/foundry-far.png",
+      "source": "exec-e5bd9ddc-5c94-4735-85d3-095e7a5e9328.png",
+      "sha256": "ff32f06dac07ad680391de5e0f332b3fb25ebca3d81411586b12555a6411e29b",
+      "mode": "RGB"
+    },
+    {
+      "path": "godot/assets/stages/foundry-floor.png",
+      "source": "exec-213faf7e-a4a8-43a0-9894-7964079abb4f.png",
+      "sha256": "ae39f4c5f8ba26a99d8c5f81aab442a0a140bc848923847be13bc42862905ee6",
+      "mode": "RGBA"
+    },
+    {
+      "path": "godot/assets/stages/foundry-mid.png",
+      "source": "exec-b709c610-8b64-458b-8c08-77013d6fba79.png",
+      "sha256": "140163775dd681fa2419db6a922632c42aad00a9ea083f18cba71feeb19052ce",
+      "mode": "RGBA"
+    },
+    {
+      "path": "godot/assets/stages/quay-breach.png",
+      "source": "exec-5639e84e-95fb-49d9-850a-69b6e2315678.png",
+      "sha256": "80e536aebb4561793cd85950dee39832fac2a96ab3aeb4c7aaec90d81054326f",
+      "mode": "RGBA"
+    },
+    {
+      "path": "godot/assets/stages/quay-far.png",
+      "source": "exec-5f594663-84ba-4595-a35f-6825dbb9a005.png",
+      "sha256": "b42e451cb797bc575e6bc064d5c3e5544cfcef96cc7b928d3b025216851c1359",
+      "mode": "RGB"
+    },
+    {
+      "path": "godot/assets/stages/quay-floor.png",
+      "source": "exec-9a9172e6-11d5-4bc0-85a3-073b0e653cca.png",
+      "sha256": "8e7b04aff7e368383dce822d3d42a2e2223bc85ca33d721d5468f68a30479233",
+      "mode": "RGBA"
+    },
+    {
+      "path": "godot/assets/stages/quay-mid.png",
+      "source": "exec-a0cc61bc-8f47-4167-a110-9377ff71a7a4.png",
+      "sha256": "7b66ac9d7eb30776b7e0aa2d0d5ac11bb53bd55dcc8723519d82b388a0bcffdd",
+      "mode": "RGBA"
+    },
+    {
+      "path": "godot/assets/stages/wall-kit.png",
+      "source": "exec-be2b57f3-1253-4b62-b43d-18e3d1be2d80.png",
+      "sha256": "dd4e86e58d004b101859888f4f9a7f44e1479d1e85e80cab6ddf4609890a9ae5",
+      "mode": "RGBA"
+    }
+  ]
+}

@@ -114,6 +114,9 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 		tree.quit(1)
 		return
 	game.set_physics_process(false)
+	for path in ArenaStage.asset_paths():
+		var stage_texture := load(path) as Texture2D
+		check(stage_texture != null and stage_texture.get_width() == 1536, "Packaged stage art missing: " + path)
 	check(game.characters == [5, 4] and game.menus.selection.chosen == [5, 4], "First matchup must be Fillet / Shark")
 	check(game.edit_character.selected == 5, "Move editor should open on Fillet")
 	await tree.process_frame

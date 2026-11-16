@@ -533,7 +533,7 @@ void Simulation::finish_wall_break() {
         for(auto& h:f.history) { h.frame=-1000; h.direction=5; }
     }
     world.hitstop=0;
-    ++world.stage;
+    world.stage=(world.stage+(side>0?1:STAGE_COUNT-1))%STAGE_COUNT;
 }
 
 void Simulation::step(int raw0,int raw1) {
@@ -553,7 +553,7 @@ void Simulation::step(int raw0,int raw1) {
     if(world.winner>=0) { ++world.frame; return; }
     if(world.wall_break_time>0) {
         for(auto& f:world.players) f.history[world.frame%HISTORY].consumed=INPUT_MASK;
-        // Change ground under the curtain, then reveal the neutral reset before play resumes.
+        // Reset combat during travel; the presentation retains captured departure positions until landing.
         if(--world.wall_break_time==rules.wall_break_frames/3) finish_wall_break();
         if(world.wall_break_time==0) {
             const auto& a=world.players[0]; const auto& b=world.players[1];
@@ -771,6 +771,10 @@ void Simulation::step(int raw0,int raw1) {
                 other.health=max(0,other.health-rules.wall_break_damage);
                 world.wall_break_time=rules.wall_break_frames;
                 world.wall_break_actor=p; world.wall_break_side=other.wall_side;
+                for(int q=0;q<2;++q) {
+                    world.wall_break_x[q]=world.players[q].x;
+                    world.wall_break_y[q]=world.players[q].y;
+                }
                 other.wall_time=0;
             } else if(!throwing&&wall_distance<=2000&&other.wall_damage>=rules.wall_threshold
                 &&(!rules.grounded_wall_prime||was_airborne||lift>0||prior_wall>=rules.wall_threshold)) {
@@ -830,6 +834,8 @@ int Simulation::get(int player,int field) const {
         case 9:return world.impact_time; case 10:return world.impact_duration;
         case 11:return world.impact_actor; case 12:return world.impact_tier;
         case 13:return world.impact_x; case 14:return world.impact_y;
+        case 15:return world.wall_break_x[0]; case 16:return world.wall_break_x[1];
+        case 17:return world.wall_break_y[0]; case 18:return world.wall_break_y[1];
         default:return 0; }
     }
     if(player>1) return 0;

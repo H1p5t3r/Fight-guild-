@@ -22,7 +22,7 @@ Download the Windows/Linux ZIP from this branch's successful GitHub Actions arti
 - **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = run/dash; numpad + = modifier; back + numpad Enter = Faultless Defense.
 - Choose simplified inputs independently at fighter select. Traditional motions stay available.
 - In **Training**, use **Record**, **Replay** and **Frame lab** to inspect both fighters, cancel windows, input age, spacing and damage scaling. P2-only replay lets you practice against a recorded exchange; [training lab](docs/training-lab.md) explains the controls.
-- In **Development**, edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1–9 saves preserve edits during migration; Restore default move set loads the new starter tuning.
+- In **Development**, edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1–10 saves preserve edits during migration; Restore default move set loads the new starter tuning.
 - Online: direct ENet/UDP host and join, default port 7000. Both players use Player 1 controls locally. Matching move data is required.
 
 Momentum has **three equal sections**, with continuous gain and separately editable ground/air FD costs. Try **Start Momentum: 50%** and the **Faultless guard** dummy in training. The move editor exposes chip damage and **Guard break on block**; Sprite review includes negative/even, positive and guard-break clips. [Momentum and defense rules](docs/momentum-defense.md) describe the provisional tuning. Negative Penalty is deferred; FD is the only meter spend.
@@ -104,3 +104,5 @@ web/                   Archived browser prototype
 Guild Ball characters, names and miniature images belong to their respective rights holders. This is an unofficial concept project. No license for third-party material is implied.
 
 Fillet and Shark now have **32 redrawn poses each**, with mature athletic proportions, stronger hands/boots and fitted body-only hurtboxes. The new outlined combat callouts use translucent fills so the fight stays visible. See the [sprite contract](docs/sprite-production.md) for the remaining roster and animation pipeline.
+
+Generated stage presentation: [three layered arenas, directional wall breaks and the image-generation contract](docs/stage-art.md).

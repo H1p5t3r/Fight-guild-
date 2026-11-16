@@ -1,40 +1,116 @@
 class_name ArenaStage
 extends RefCounted
 
-static func draw(canvas: Control, debug_grid: bool, stage: int = 0) -> void:
-	var w := canvas.size.x
-	var h := canvas.size.y
-	var floor_y := h - 76.0
-	canvas.draw_rect(Rect2(Vector2.ZERO, canvas.size), Color("0b1821"))
-	# A graphic sports-ground study: stands, guild pennants and chalked field planes.
-	canvas.draw_colored_polygon(PackedVector2Array([Vector2(0, 120), Vector2(w * 0.36, 156), Vector2(w * 0.43, floor_y), Vector2(0, floor_y)]), Color("102630"))
-	canvas.draw_colored_polygon(PackedVector2Array([Vector2(w * 0.64, 156), Vector2(w, 120), Vector2(w, floor_y), Vector2(w * 0.57, floor_y)]), Color("17282c"))
-	for p in 2:
-		var x := w * (0.16 if p == 0 else 0.84)
-		var color: Color = FightHud.PLAYER_COLORS[p]
-		var banner := PackedVector2Array([Vector2(x - 32, 146), Vector2(x + 32, 146), Vector2(x + 32, h * 0.50), Vector2(x, h * 0.50 - 23), Vector2(x - 32, h * 0.50)])
-		canvas.draw_colored_polygon(banner, Color(color, 0.08))
-		canvas.draw_line(Vector2(x, 162), Vector2(x, h * 0.44), Color(color, 0.15), 2)
-	var stand_y := maxf(170.0, h * 0.48)
-	for row in 3:
-		var y := stand_y + row * 19
-		canvas.draw_rect(Rect2(0, y, w, 13), Color("14252c"))
-		for seat in range(0, int(w), 35):
-			var x := float(seat + (row % 2) * 13)
-			canvas.draw_circle(Vector2(x, y + 1), 3.5, Color("20353c"))
-			canvas.draw_line(Vector2(x - 4, y + 11), Vector2(x + 4, y + 11), Color("20353c"), 7)
-	canvas.draw_rect(Rect2(0, stand_y + 64, w, maxf(floor_y - stand_y - 64, 0)), Color("14292e"))
-	canvas.draw_line(Vector2(0, stand_y + 63), Vector2(w, stand_y + 63), Color("40504b"), 3)
+# Independently generated image planes; no painted scenery is reconstructed in code.
+# Coordinates and weights are shared by normal play, travel, and the review tool.
+const DIRECTORY := "res://assets/stages/"
+const IDS := ["charter", "quay", "foundry"]
+const NAMES := ["THE CHARTER GROUNDS", "THE TIDE DOCKS", "FOUNDRY WALK"]
+const SUBTITLES := ["THE GUILDS' COMMON GROUND", "EAST QUAY · FISHERMEN'S END", "WEST CONCOURSE · THE IRON GUILDS"]
+const COLORS := [Color("c4ad86"), Color("82b8bd"), Color("d2a178")]
+const DEPTHS := [0.16, 0.54, 1.0]
+const LAYERS := ["far", "mid", "floor"]
+const WALLS := [[0, 1], [4, 5], [2, 3]]
+static var textures := {}
+static var regions := {}
+
+static func asset_paths() -> Array[String]:
+	var paths: Array[String] = []
+	for id in IDS:
+		for layer in LAYERS: paths.append(DIRECTORY + id + "-" + layer + ".png")
+	for name in ["forge-breach", "quay-breach", "wall-kit", "debris-kit"]: paths.append(DIRECTORY + name + ".png")
+	return paths
+
+static func remember(path: String, resource: Resource) -> void:
+	textures[path.trim_prefix(DIRECTORY)] = resource
+
+static func texture(file: String) -> Texture2D:
+	if not textures.has(file): textures[file] = load(DIRECTORY + file)
+	return textures[file]
+
+static func tile(file: String, index: int, columns: int) -> AtlasTexture:
+	var key := "%s/%d" % [file, index]
+	if not regions.has(key):
+		var source := texture(file)
+		var result := AtlasTexture.new()
+		result.atlas = source
+		var width := source.get_width() / columns
+		var height := source.get_height() / 2
+		result.region = Rect2((index % columns) * width, (index / columns) * height, width, height)
+		result.filter_clip = true
+		regions[key] = result
+	return regions[key]
+
+static func next_stage(stage: int, side: int) -> int:
+	return posmod(stage + side, IDS.size())
+
+static func camera(state: Dictionary, bounds: Vector2, reduced: bool = false) -> Dictionary:
+	if state.is_empty() or reduced: return {"center": 0.5, "zoom": 1.0, "offset": Vector2.ZERO}
+	var separation := absf(float(state.players[0].x - state.players[1].x)) / 100000.0
+	var zoom := clampf(1.22 - separation * 0.30, 1.0, 1.20)
+	var half_view := 0.5 / zoom
+	var center := clampf(float(state.players[0].x + state.players[1].x) / 200000.0, half_view - 0.10, 1.10 - half_view)
+	return {"center": center, "zoom": zoom, "offset": Vector2(bounds.x * (0.5 - center * zoom), (bounds.y - 76.0) * (1.0 - zoom))}
+
+static func layer_rect(bounds: Vector2, image_size: Vector2, depth: float, center: float, zoom: float) -> Rect2:
+	# Extra image width covers the complete camera range without mirrored/repeated buildings.
+	var factor := bounds.x / image_size.x * maxf(1.14, 1.10 + depth * 0.20) * lerpf(1.0, zoom, depth)
+	var extent := image_size * factor
+	var x := (bounds.x - extent.x) * 0.5 - (center - 0.5) * bounds.x * depth * zoom
+	return Rect2(Vector2(x, bounds.y - 76.0 - image_size.y * (900.0 / 1024.0) * factor), extent)
+
+static func draw_plane(canvas: Control, stage: int, layer: int, center: float, zoom: float,
+		offset: Vector2 = Vector2.ZERO, opacity: float = 1.0, feather: bool = false) -> void:
+	if opacity <= 0.0: return
+	var source := texture(IDS[stage] + "-" + LAYERS[layer] + ".png")
+	var rect := layer_rect(canvas.size, source.get_size(), DEPTHS[layer], center, zoom)
+	rect.position += offset
+	if not feather:
+		canvas.draw_texture_rect(source, rect, false, Color(1, 1, 1, opacity))
+		return
+	# Fade the exposed image ends during travel; ordinary play uses the untouched
+	# image. Three textured quads avoid a rectangular seam between adjoining floors.
+	var stops := [0.0, 0.08, 0.92, 1.0]
+	var alphas := [0.0, opacity, opacity, 0.0]
+	for i in 3:
+		var a: float = stops[i]
+		var b: float = stops[i + 1]
+		var vertices := PackedVector2Array([rect.position + Vector2(rect.size.x * a, 0),
+			rect.position + Vector2(rect.size.x * b, 0), rect.position + Vector2(rect.size.x * b, rect.size.y),
+			rect.position + Vector2(rect.size.x * a, rect.size.y)])
+		var colors := PackedColorArray([Color(1, 1, 1, alphas[i]), Color(1, 1, 1, alphas[i + 1]),
+			Color(1, 1, 1, alphas[i + 1]), Color(1, 1, 1, alphas[i])])
+		canvas.draw_polygon(vertices, colors, PackedVector2Array([Vector2(a, 0), Vector2(b, 0), Vector2(b, 1), Vector2(a, 1)]), source)
+
+static func draw(canvas: Control, debug_grid: bool, stage: int = 0, center: float = 0.5, zoom: float = 1.0) -> void:
+	canvas.draw_rect(Rect2(Vector2.ZERO, canvas.size), Color("17252d"))
+	for layer in 3: draw_plane(canvas, stage, layer, center, zoom)
+	if debug_grid: draw_grid(canvas)
+
+static func draw_grid(canvas: Control) -> void:
+	var floor_y := canvas.size.y - 76.0
+	for x in range(0, int(canvas.size.x), 70): canvas.draw_line(Vector2(x, 140), Vector2(x, floor_y), Color(0.35, 0.65, 0.75, 0.16))
+	for y in range(160, int(floor_y), 50): canvas.draw_line(Vector2(0, y), Vector2(canvas.size.x, y), Color(0.35, 0.65, 0.75, 0.16))
+
+static func draw_boundaries(canvas: Control, stage: int, zoom: float, offset: Vector2,
+		broken_side: int = 0, fracture: float = 0.0) -> void:
+	var scale := canvas.size.x / 1000.0 * zoom
 	for side in [-1, 1]:
-		canvas.draw_line(Vector2(w * 0.5 + side * 36, stand_y + 64), Vector2(w * 0.5 + side * w * 0.44, floor_y), Color("243d3d"), 2, true)
-	canvas.draw_line(Vector2(0, floor_y - 26), Vector2(w, floor_y - 26), Color("294342"), 2)
-	canvas.draw_line(Vector2(0, floor_y), Vector2(w, floor_y), Color("788e81"), 2)
-	FightHud.centered(canvas, "FIGHT GUILD", Vector2(w * 0.5, stand_y - 16), 46, Color("21363c"))
-	canvas.draw_rect(Rect2(0, floor_y + 1, w, h - floor_y), Color("0a161e"))
-	var zone_colors := [Color("5e9fa3"), Color("c7956c"), Color("97ad84")]
-	var zone: Color = zone_colors[stage % zone_colors.size()]
-	canvas.draw_rect(Rect2(0, 145, w, floor_y - 145), Color(zone, 0.025 if stage == 0 else 0.09))
-	FightHud.centered(canvas, ["CENTRE GROUND", "GUILD TERRACE", "THE NORTH END"][stage % 3], Vector2(w * 0.5, stand_y + 55), 13, Color(zone, 0.65))
-	if debug_grid:
-		for x in range(0, int(w), 70): canvas.draw_line(Vector2(x, 140), Vector2(x, floor_y), Color(0.25, 0.38, 0.43, 0.25))
-		for y in range(160, int(floor_y), 50): canvas.draw_line(Vector2(0, y), Vector2(w, y), Color(0.25, 0.38, 0.43, 0.25))
+		var source := tile("wall-kit.png", WALLS[stage][0 if side < 0 else 1], 3)
+		var foot := offset + Vector2(0 if side < 0 else canvas.size.x, canvas.size.y - 76.0) * zoom
+		var extent := Vector2.ONE * 290.0 * scale
+		var alpha := 1.0 - fracture if side == broken_side else 1.0
+		canvas.draw_texture_rect(source, Rect2(foot - extent * Vector2(0.5, 480.0 / 512.0), extent), false, Color(1, 1, 1, alpha))
+
+static func portal(canvas: Control, file: String, progress: float, side: int, opacity: float) -> void:
+	if opacity <= 0.0: return
+	var source := texture(file + ".png")
+	var factor := maxf(canvas.size.x / source.get_width(), canvas.size.y / source.get_height()) * 1.2
+	var extent := source.get_size() * factor
+	var position := (canvas.size - extent) * 0.5 + Vector2(-side * (progress - 0.5) * canvas.size.x * 1.4, 0)
+	canvas.draw_texture_rect(source, Rect2(position, extent), false, Color(1, 1, 1, opacity))
+
+static func draw_footer(canvas: Control, stage: int) -> void:
+	# The HUD rests on its own calm strip; the generated playing plane remains unobscured.
+	canvas.draw_rect(Rect2(0, canvas.size.y - 75, canvas.size.x, 75), Color("081219", 0.80))
+	FightHud.centered(canvas, NAMES[stage], Vector2(canvas.size.x * 0.5, canvas.size.y - 57), 12, Color(COLORS[stage], 0.8), 2)
