@@ -36,6 +36,8 @@ downloaded for recovery before explicitly starting a new one.
 - All 192 move slots across six fighters, with unused slots hidden by default.
 - Startup/active/recovery, damage, chip, hitstun and blockstun.
 - Hitbox edges and height, opening movement, active travel and run/dash carry.
+- Per-attack **Hurtboxes** for windup, active and recovery: three body regions
+  plus one optional extension, with numeric editing and draggable blue handles.
 - Ground/air knockback, block pushback, ground/air launch, soft/hard knockdown,
   down/wakeup durations, landing recovery, hook pull and throw reach.
 - Unified or custom gatling destinations, normal/special/jump/follow-up cancel
@@ -58,8 +60,33 @@ The draft allows 12 MB of embedded reference data in total, and move JSON import
 support files up to 32 MB. Large photo drafts may exceed browser storage; use
 Download JSON when the storage warning appears.
 
-Undo/redo and per-move reset are available. Reset restores that move's stats
-while retaining its art notes. A successful import is also undoable.
+Undo/redo and **Reset move** are available. Reset restores that move's stats and
+removes its custom hurtbox profiles while retaining its art notes and photos.
+A successful import is also undoable.
+
+## Edit attack hurtboxes
+
+1. Choose the fighter and move, then open **Hurtboxes**.
+2. Choose Windup, Active or Recovery. Recovery is available when the move has
+   recovery frames. The preview jumps to that phase.
+3. Enable **Custom boxes for this phase** to start from the current sprite's
+   body boxes. Only this move and this phase change; shared sprites and other
+   attacks are unaffected.
+4. Select Legs, Torso & arms, or Head. Drag the selected blue box's center to
+   move it, drag its edge handles to resize it, or edit its position/size in
+   game pixels. You can include one **Body extension** for an extended limb.
+5. Download JSON and import it into the updated schema-13 Godot build. The
+   imported profiles affect actual hit detection and the in-game collision
+   overlay. **Save locally** in Godot retains them for future launches.
+
+Turning off Custom boxes restores the sprite profile for just that phase. The
+three main body boxes are required, so the editor cannot silently create an
+invulnerable phase by removing all boxes. There are at most four boxes, each at
+least 1×1 px, with edges between −500 and 500 px relative to the fighter's root.
+Fit them to the body; weapon reach adds no hurtbox. Pushboxes remain separate.
+These are whole-phase profiles; individual animation-frame keyframes remain
+future work. The inherited recovery pose can change with crouching/landing in
+the live game; a custom recovery profile stays fixed for that move's recovery.
 
 The page edits the 68 currently effective move fields and preserves the retired
 `wallDamage` compatibility field. Walls still take damage from horizontal
@@ -83,13 +110,15 @@ preserved through import/export, but are not tuning controls in this page.
   attack movement or contacts, regenerate sprites, or promise that new hitbox
   dimensions already match the old art. Match feel still needs in-game testing.
   Recovery uses idle/crouch/air placeholders.
-- Body hurtboxes and pushboxes are read-only. Weapons have no hurtboxes, and
-  each body pose retains at most four boxes. Sprite replacement and body-box
-  refitting remain a coordinated later pass.
+- The **Hurtboxes** tab edits body coverage while pushboxes remain read-only.
+  Weapons have no hurtboxes, and each pose retains at most four body boxes.
+  Sprite replacement and body-box refitting remain a coordinated later pass.
 
-Imports require the current schema/core version 12. Invalid or incomplete files
-are rejected before changing the draft. An older save can first be imported
-and re-exported by the current Godot build, which owns the legacy migrations.
+Exports use schema/core version **13**. Existing version-12 workshop exports and
+browser drafts migrate automatically, keeping their numbers, notes and photos
+and inheriting the original body poses. Invalid or incomplete files are rejected
+before changing the draft. An older save can first be imported and re-exported
+by the current Godot build, which owns the earlier legacy migrations.
 Unknown JSON properties are preserved by the workshop.
 
 Art notes and pose references are stored under `_moveWorkshop` alongside the ordinary game data.
@@ -121,7 +150,8 @@ pivots. Chromium is needed only for packaging/testing; `CHROMIUM_PATH` selects
 an existing installation. Users of the HTML need only ordinary browser
 JavaScript support.
 
-Tests cover core field limits, exact collision geometry, atomic imports,
+Tests cover core field limits, exact collision geometry, per-phase hurtboxes and
+real hit detection, shared-sprite isolation, version-12 migration, atomic imports,
 roster/rule preservation, fixed-point units, history, real browser JSON
 downloads with embedded images, photo removal/undo and validation, autosave,
 storage failure/recovery and responsive layouts. Run the

@@ -10,7 +10,7 @@ func _initialize() -> void:
 func run() -> void:
 	var model := CombatModel.new()
 	var defaults := model.data()
-	check(defaults.schema == 12 and model.move(5, 0).starterProration == 70, "New default tuning missing")
+	check(defaults.schema == 13 and model.move(5, 0).starterProration == 70, "New default tuning missing")
 	var legacy := defaults.duplicate(true)
 	legacy.schema = 7
 	legacy.coreVersion = 7

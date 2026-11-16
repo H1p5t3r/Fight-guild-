@@ -10,6 +10,7 @@ export const TABS = [
   {id:'timing',label:'Timing',groups:['timing','counter']},
   {id:'hit',label:'Hit & movement',groups:['geometry','reaction']},
   {id:'routes',label:'Cancels & inputs',groups:['cancel','input']},
+  {id:'hurt',label:'Hurtboxes',groups:[]},
   {id:'art',label:'Art brief',groups:[]},
 ];
 const labels = {

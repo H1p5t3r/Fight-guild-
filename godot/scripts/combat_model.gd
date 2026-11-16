@@ -2,7 +2,10 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 12
+const DATA_VERSION := 13
+const HURT_PHASES := ["windup", "active", "recovery"]
+const HURT_REGIONS := ["legs", "torsoArms", "head", "extension"]
+const HURT_FIELDS := 17
 const MOMENTUM_MAX := 10000
 const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
@@ -44,7 +47,41 @@ func move(character: int, slot: int) -> Dictionary:
 	var result := {}
 	for i in FIELDS.size():
 		result[FIELDS[i]] = config[(character * MOVE_IDS.size() + slot) * FIELDS.size() + i]
+	result.hurtboxes = {}
+	for p in HURT_PHASES.size():
+		var start := hurt_offset(character, slot, p)
+		if config[start] == 0: continue
+		var boxes := {}
+		for region in config[start]:
+			var rect := []
+			for edge in 4: rect.append(config[start + 1 + region * 4 + edge])
+			boxes[HURT_REGIONS[region]] = rect
+		result.hurtboxes[HURT_PHASES[p]] = boxes
 	return result
+
+static func hurt_offset(character: int, slot: int, phase: int) -> int:
+	return CHARACTERS.size() * (MOVE_IDS.size() * FIELDS.size() + MOVEMENT_FIELDS.size()) + ((character * MOVE_IDS.size() + slot) * HURT_PHASES.size() + phase) * HURT_FIELDS
+
+static func load_hurtboxes(value: Variant, candidate: PackedInt32Array, character: int, slot: int) -> String:
+	if not value is Dictionary: return "Missing attack hurtbox profiles."
+	for phase in value:
+		if not phase in HURT_PHASES: return "Unknown hurtbox phase."
+		var boxes: Variant = value[phase]
+		if not boxes is Dictionary: return "Invalid hurtbox profile."
+		for region in boxes:
+			if not region in HURT_REGIONS: return "Only four body hurtbox regions are allowed."
+		for region in HURT_REGIONS.slice(0, 3):
+			if not boxes.has(region): return "Hurtboxes require legs, torso and arms, and head."
+		var start := hurt_offset(character, slot, HURT_PHASES.find(phase))
+		candidate[start] = boxes.size()
+		for region in HURT_REGIONS:
+			if not boxes.has(region): continue
+			var rect: Variant = boxes[region]
+			if not rect is Array or rect.size() != 4: return "Hurtboxes need four edges."
+			for edge in 4:
+				if not valid_integer(rect[edge]): return "Invalid hurtbox coordinate."
+				candidate[start + 1 + HURT_REGIONS.find(region) * 4 + edge] = int(rect[edge])
+	return ""
 
 func movement(character: int) -> Dictionary:
 	var result := {}
@@ -137,6 +174,9 @@ func load_data(value: Variant) -> String:
 				if field == "startup" and definition[field] < 5:
 					return "%s / %s: startup must be at least 5 frames." % [CHARACTERS[c], MOVE_IDS[m]]
 				candidate[(c * MOVE_IDS.size() + m) * FIELDS.size() + i] = int(definition[field])
+			if version >= 13:
+				var hurt_error := load_hurtboxes(definition.get("hurtboxes"), candidate, c, m)
+				if not hurt_error.is_empty(): return "%s / %s: %s" % [CHARACTERS[c], MOVE_IDS[m], hurt_error]
 		if version >= 7:
 			if not characters[c].get("movement") is Dictionary: return "Missing movement profile."
 			var start := CHARACTERS.size() * MOVE_IDS.size() * FIELDS.size() + c * MOVEMENT_FIELDS.size()
@@ -186,6 +226,6 @@ func load_file(path: String) -> String:
 	var file := FileAccess.open(path, FileAccess.READ)
 	if file == null:
 		return "Could not read " + path
-	if file.get_length() > 1000000:
-		return "Move files must be smaller than 1 MB."
+	if file.get_length() > 32 * 1024 * 1024:
+		return "Move files must be smaller than 32 MB."
 	return load_data(JSON.parse_string(file.get_as_text()))

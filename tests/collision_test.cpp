@@ -116,8 +116,39 @@ static void contact_and_weapons() {
         s.world=before; s.step(0,0); CHECK(hash==s.checksum());
     }
 }
+static void edited_attack_hurtboxes() {
+    Simulation s; s.defaults();s.reset(5,0,0,0);
+    Box high[4]={{-1000,30000,1000,33000},{-1200,33000,1200,36000},{-800,36000,800,38000},{1000,34000,3000,35000}};
+    CHECK(s.hurt_set(5,0,0,3,high));CHECK(s.hurt_set(5,0,1,4,high));CHECK(s.hurt_set(5,0,2,3,high));
+    auto& f=s.world.players[0];f.move=0;
+    for(int phase=0;phase<3;++phase){
+        f.age=phase==0?1:phase==1?s.moves[5][0].v[Startup]:s.moves[5][0].v[Startup]+s.moves[5][0].v[Active];
+        CHECK(s.box_count(0,HurtBox)==(phase==1?4:3));
+        for(int facing=-1;facing<=1;facing+=2){f.facing=facing;auto b=s.box(0,HurtBox,0);CHECK(b.bottom==30000);CHECK(b.left==f.x-1000&&b.right==f.x+1000);}
+    }
+    f.move=4;f.age=s.moves[5][4].v[Startup];CHECK(s.box(0,HurtBox,0).bottom<30000); // same sprite, different move
+    f.move=0;f.stun=1;CHECK(s.box(0,HurtBox,0).bottom<30000);f.stun=0;
+    CHECK(!s.hurt_set(5,0,0,5,high));CHECK(!s.hurt_set(5,0,0,2,high));
+    high[0].right=high[0].left;CHECK(!s.hurt_set(5,0,0,3,high));CHECK(s.hurt_get(5,0,0,3)==1000);high[0].right=1000;
+    high[0].bottom=-2147483647;CHECK(!s.hurt_set(5,0,0,3,high));high[0].bottom=30000;
+    CHECK(s.hurt_set(5,0,0,0,nullptr));CHECK(s.hurt_get(5,0,0,0)==0);CHECK(s.hurt_get(5,0,0,2)==0);
+    // Collision uses the defender's current action tick, including the exact
+    // startup→active boundary. A replay with custom data gives the same result.
+    for(int mirror=0;mirror<2;++mirror)for(int enters_active=0;enters_active<2;++enters_active){
+        s.defaults();s.reset(0,5,0,0);auto& a=s.world.players[0];auto& d=s.world.players[1];
+        a.x=mirror?70000:30000;a.facing=mirror?-1:1;d.x=50000;d.facing=-a.facing;
+        CHECK(s.hurt_set(5,0,0,3,high));
+        Box low[4]={high[0],high[1],high[2],high[3]};low[0]={-1000,0,1000,6000};
+        CHECK(s.hurt_set(5,0,1,3,low));
+        auto& attack=s.moves[0][0];attack.v[HitboxBack]=19000;attack.v[Reach]=21000;attack.v[Bottom]=4000;attack.v[Height]=500;attack.v[Pushback]=0;
+        a.move=0;a.age=attack.v[Startup]-1;d.move=0;d.age=s.moves[5][0].v[Startup]-(enters_active?1:2);d.hit_done=1;
+        State before=s.world;s.step(0,0);CHECK((d.health<1000)==bool(enters_active));auto hash=s.checksum();
+        s.world=before;s.step(0,0);CHECK(s.checksum()==hash);
+    }
+    s.defaults();CHECK(s.hurt_get(5,0,1,0)==0);
+}
 int main() {
-    poses(); pushes(); contact_and_weapons();
+    poses(); pushes(); contact_and_weapons();edited_attack_hurtboxes();
     std::printf("Collision / sprite geometry: %d checks, %d failures\n",checks,failures);
     return failures?1:0;
 }

@@ -1,4 +1,5 @@
-import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,inputName,geometryWarnings,CHARACTERS,MOVE_IDS,clone,META} from './model.mjs';
+import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,phaseStart,defaultHurtboxes,effectiveHurtboxes,inputName,geometryWarnings,CHARACTERS,MOVE_IDS,clone,META} from './model.mjs';
+import {HURT_PHASES,HURT_REGIONS,HURT_LABELS,validateHurtboxes} from '../hurtboxes.mjs';
 import {SPECS,GROUPS,TABS,ART_FIELDS,GUILDS,COLORS,KINDS} from './specs.mjs';
 import {Preview} from './preview.mjs';
 import {prepareReference,MAX_REFERENCES,MAX_IMPORT_BYTES,REFERENCE_PHASES} from './references.mjs';
@@ -6,6 +7,7 @@ const $=id=>document.getElementById(id),pack=globalThis.FIGHT_WORKSHOP_DATA;
 const STORAGE='fight-guild.move-workshop.v1';
 let model,character=5,slot=0,tab='timing',filter='all',frame=5,playing=false,lastTick=0,saveTimer,toastTimer,dragBefore;
 let storageOkay=true,savePending=false,unexported=false,bootLocked=false,recoveryRaw='',referenceBusy=false;
+let hurtPhase='active',hurtRegion='torsoArms',hurtDragBefore;
 const errors=new Map();
 function el(tag,attributes={},text){const node=document.createElement(tag);for(const [key,value]of Object.entries(attributes)){if(key==='class')node.className=value;else if(key==='checked')node.checked=value;else node.setAttribute(key,value);}if(text!==undefined)node.textContent=text;return node;}
 function announce(text){$('toast').textContent=text;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,4200);}
@@ -25,7 +27,7 @@ function move(){return model.move(character,slot);}
 function fieldError(key,message){const id='field-'+key,node=$(id);if(message)errors.set(id,message);else errors.delete(id);node?.setAttribute('aria-invalid',String(!!message));const messageNode=$('error-'+key);if(messageNode)messageNode.textContent=message||'';refreshActions();}
 function refreshActions(){
   $('export').disabled=bootLocked||referenceBusy||errors.size>0;$('undo').disabled=bootLocked||referenceBusy||(!model.undoStack.length&&!errors.size);$('redo').disabled=bootLocked||referenceBusy||!model.redoStack.length||errors.size>0;
-  $('reset').disabled=bootLocked||referenceBusy||!Object.keys(SPECS).some(key=>move()[key]!==pack.defaults.characters[character].moves[slot][key]);
+  $('reset').disabled=bootLocked||referenceBusy||(!Object.keys(move().hurtboxes).length&&!Object.keys(SPECS).some(key=>move()[key]!==pack.defaults.characters[character].moves[slot][key]));
   $('import').disabled=referenceBusy;$('fighter').disabled=bootLocked||referenceBusy;
   if(errors.size){$('save-status').textContent='Check the highlighted value';$('save-dot').style.background='var(--danger)';}
 }
@@ -129,6 +131,42 @@ function referenceSection(){
   };
   section.append(add,file,el('small',{class:'reference-help'},'JPG, PNG or WebP · up to 3 per move. A smaller copy is embedded; your original stays unchanged.'),status);return section;
 }
+function hurtValues(rect){return {left:rect[0]/100,bottom:rect[1]/100,width:(rect[2]-rect[0])/100,height:(rect[3]-rect[1])/100};}
+function syncHurtFields(){
+  if(tab!=='hurt')return;const rect=effectiveHurtboxes(pack,character,move(),frame)[hurtRegion];if(!rect)return;
+  for(const [key,value]of Object.entries(hurtValues(rect))){const input=$('field-hurt-'+key);if(input&&document.activeElement!==input)input.value=value;}
+}
+function hurtForm(){
+  const m=move();hurtPhase=phaseAt(m,frame);const custom=!!m.hurtboxes[hurtPhase],boxes=effectiveHurtboxes(pack,character,m,frame);
+  if(!boxes[hurtRegion])hurtRegion='torsoArms';
+  const section=el('section',{class:'form-section hurt-editor'});section.append(el('h2',{},'Body hurtboxes'),el('p',{},'Edit this attack’s body coverage for each phase. Other moves that share its sprite keep their own boxes.'));
+  const phase=el('select',{id:'hurt-phase'});phase.append(...HURT_PHASES.map(p=>{const option=el('option',{value:p},p==='windup'?`Windup · ${m.startup-1}f`:p==='active'?`Active · ${m.active}f`:`Recovery · ${m.recovery}f`);option.disabled=p==='recovery'&&!m.recovery;return option;}));phase.value=hurtPhase;
+  phase.onchange=()=>{if(!validBeforeLeaving()){phase.value=hurtPhase;return;}stop();frame=phaseStart(m,phase.value);renderForm();syncPreview();saveSelection();};
+  const enable=el('input',{id:'hurt-custom',type:'checkbox',checked:custom}),enableRow=el('div',{class:'hurt-toggle'});enableRow.append(enable,el('label',{for:'hurt-custom'},'Custom boxes for this phase'));
+  enable.onchange=()=>{if(!validBeforeLeaving()){enable.checked=custom;return;}stop();model.setHurtPhase(character,slot,hurtPhase,enable.checked?defaultHurtboxes(pack,character,m,frame):null);renderForm();syncSummary();listMoves();scheduleSave();};
+  section.append(el('label',{for:'hurt-phase',class:'field-label'},'Attack phase'),phase,enableRow,el('p',{class:'hurt-status'},custom?'Custom profile · saved with this move':'Using the sprite pose. Enable custom boxes to make changes.'));
+  const region=el('select',{id:'hurt-region'});region.append(...HURT_REGIONS.filter(r=>boxes[r]).map(r=>el('option',{value:r},HURT_LABELS[r])));region.value=hurtRegion;
+  region.onchange=()=>{if(!validBeforeLeaving()){region.value=hurtRegion;return;}stop();hurtRegion=region.value;renderForm();syncPreview();};
+  section.append(el('label',{for:'hurt-region',class:'field-label'},'Selected body box'),region);
+  const grid=el('div',{class:'field-grid hurt-grid'}),values=hurtValues(boxes[hurtRegion]);
+  for(const [key,label]of [['left','Left position'],['bottom','Bottom position'],['width','Width'],['height','Height']]){
+    const id='field-hurt-'+key,field=el('div',{class:'field'}),wrap=el('div',{class:'input-wrap'}),input=el('input',{id,type:'number',min:key==='width'||key==='height'?1:-500,max:key==='width'||key==='height'?1000:500,step:'0.01',inputmode:'decimal','aria-describedby':'error-hurt-'+key});input.value=values[key];input.disabled=!custom;
+    wrap.append(input,el('span',{class:'unit'},'px'));field.append(el('label',{for:id},label),wrap,el('span',{id:'error-hurt-'+key,class:'error','aria-live':'polite'}));grid.append(field);
+    input.oninput=()=>{
+      try{
+        if(!input.value.trim())throw new Error('Enter a coordinate or size.');
+        const raw=Number(input.value)*100,value=Math.round(raw);if(!Number.isFinite(raw)||Math.abs(raw-value)>1e-6)throw new Error('Use up to two decimal places.');
+        const next=clone(move().hurtboxes[hurtPhase]),b=next[hurtRegion];
+        if(key==='left'){b[2]+=value-b[0];b[0]=value;}else if(key==='bottom'){b[3]+=value-b[1];b[1]=value;}else if(key==='width')b[2]=b[0]+value;else b[3]=b[1]+value;
+        stop();model.setHurtPhase(character,slot,hurtPhase,next,`hurt/${character}/${slot}/${hurtPhase}/${hurtRegion}/${key}`);fieldError('hurt-'+key,'');syncSummary();listMoves();scheduleSave();
+      }catch(error){fieldError('hurt-'+key,error.message);}
+    };
+  }
+  const extension=el('input',{id:'hurt-extension',type:'checkbox',checked:!!boxes.extension});extension.disabled=!custom;const extensionRow=el('div',{class:'hurt-toggle'});extensionRow.append(extension,el('label',{for:'hurt-extension'},'Include body extension · fourth box'));
+  extension.onchange=()=>{if(!validBeforeLeaving()){extension.checked=!!boxes.extension;return;}stop();const next=clone(move().hurtboxes[hurtPhase]);if(extension.checked){next.extension=[...next.torsoArms];hurtRegion='extension';}else{delete next.extension;if(hurtRegion==='extension')hurtRegion='torsoArms';}model.setHurtPhase(character,slot,hurtPhase,next);renderForm();syncSummary();listMoves();scheduleSave();};
+  section.append(grid,extensionRow,el('p',{class:'hurt-guidance'},'Keep legs, torso & arms, and head on the body. The optional extension starts over the torso; move it onto an extended limb. Weapon reach adds no hurtbox. Disable custom boxes to restore the sprite profile for this phase.'));
+  section.addEventListener('focusin',()=>{if(playing){stop();syncPreview();}});return section;
+}
 function artForm(){
   const container=el('section',{class:'form-section'});container.append(el('h2',{},'Give the attack a direction.'),el('p',{class:'art-intro'},'These notes travel with your JSON. Use them to brief new windup and active poses after the move feels right.'));
   const grid=el('div',{class:'field-grid'}),note=model.note(character,slot);
@@ -142,6 +180,7 @@ function artForm(){
 function renderForm(){
   const form=$('form');form.setAttribute('aria-labelledby','tab-'+tab);
   if(tab==='art'){form.replaceChildren(artForm());return;}
+  if(tab==='hurt'){form.replaceChildren(hurtForm());return;}
   const groups=TABS.find(t=>t.id===tab).groups.map(id=>GROUPS.find(g=>g.id===id)),nodes=groups.map((group,i)=>{
     const view=section(group);if(i===0||tab==='hit')return view;
     const details=el('details',{class:'section-divider'});details.append(el('summary',{},group.title),view);return details;
@@ -149,7 +188,7 @@ function renderForm(){
 }
 function renderTabs(){
   $('tabs').replaceChildren(...TABS.map(t=>{const button=el('button',{id:'tab-'+t.id,type:'button',role:'tab','aria-selected':String(t.id===tab),'aria-controls':'form',tabindex:t.id===tab?'0':'-1'},t.label);
-    button.addEventListener('click',()=>{if(!validBeforeLeaving())return;tab=t.id;renderTabs();renderForm();syncPreview();saveSelection();$('tab-'+tab).focus();});
+    button.addEventListener('click',()=>{if(!validBeforeLeaving())return;tab=t.id;if(tab==='hurt'){stop();preview.options.hurt=true;$('show-hurt').checked=true;}renderTabs();renderForm();syncPreview();saveSelection();$('tab-'+tab).focus();});
     button.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const index=TABS.indexOf(t),next=event.key==='Home'?0:event.key==='End'?TABS.length-1:(index+(event.key==='ArrowRight'?1:-1)+TABS.length)%TABS.length;$('tab-'+TABS[next].id).click();});return button;}));
 }
 function render(){errors.clear();$('fighter').value=character;listMoves();renderTabs();renderForm();syncSummary();
@@ -160,12 +199,14 @@ function render(){errors.clear();$('fighter').value=character;listMoves();render
 }
 function syncPreview(){
   const m=move(),total=totalFrames(m);frame=Math.max(1,Math.min(total,frame));$('frame').max=total;$('frame').value=frame;$('frame-label').textContent=`${frame} / ${total}`;
-  const phase=phaseAt(m,frame);$('preview-title').textContent=phase==='windup'?'Windup pose':phase==='active'?'Active frame':'Recovery · idle placeholder';
+  const phase=phaseAt(m,frame);$('preview-title').textContent=phase==='windup'?'Windup pose':phase==='active'?'Active frame':'Recovery pose';
+  if(tab==='hurt'&&hurtPhase!==phase)renderForm();
   $('windup-time').textContent=`Windup ${m.startup-1}f`;$('active-time').textContent=`Active ${m.active}f`;$('recovery-time').textContent=`Recovery ${m.recovery}f`;
   const phases=[['windup',m.startup-1,1],['active',m.active,m.startup],['recovery',m.recovery,m.startup+m.active]];
-  $('timeline').replaceChildren(...phases.filter(([,length])=>length).map(([name,length,start])=>{const b=el('button',{type:'button',class:name,'aria-label':`Preview ${name}: ${length} frames`,title:`${name}: ${length}f`});b.style.flex=length;b.addEventListener('click',()=>{stop();frame=start;syncPreview();});return b;}));
+  $('timeline').replaceChildren(...phases.filter(([,length])=>length).map(([name,length,start])=>{const b=el('button',{type:'button',class:name,'aria-label':`Preview ${name}: ${length} frames`,title:`${name}: ${length}f`});b.style.flex=length;b.addEventListener('click',()=>{if(!validBeforeLeaving())return;stop();frame=start;syncPreview();});return b;}));
   $('geometry-help').textContent=tab==='hit'&&!m.hitAngle&&m.category!==4?'On an active frame, drag the orange edges to resize the hitbox or drag its center to move it. Numeric fields give precise control.':m.hitAngle?'The dotted line is the hook path; orange segments are the moving spear hitboxes. Edit the path and thickness in Hit & movement.':m.category===4?'Throw geometry uses the fighter’s pushbox plus Throw reach. The usual hitbox fields do not change its size.':'Current pose artwork stays fixed while you tune the attack. Match timing and movement should be tested in game.';
-  preview.show(character,m,frame,tab==='hit'&&!playing);
+  if(tab==='hurt')$('geometry-help').textContent='Enable custom boxes, choose a body region, then drag its blue handles to resize or its center to move. The edit applies to this move and phase. Pushboxes stay separate.';
+  preview.show(character,m,frame,tab==='hit'&&!playing,tab==='hurt'&&!playing?{phase,region:hurtRegion,custom:!!m.hurtboxes[phase]}:null);
 }
 function stop(){playing=false;$('play').setAttribute('aria-label','Play move preview');}
 function animate(time){
@@ -181,6 +222,14 @@ const preview=new Preview($('preview'),pack,(phase,patch)=>{
     Object.assign(move(),patch);syncVisibleFields();syncSummary();
   }
   if(phase==='end'&&dragBefore){model.remember(dragBefore);dragBefore=null;listMoves();refreshActions();scheduleSave();}
+},(stage,patch)=>{
+  if(stage==='start'){if(!validBeforeLeaving())return;hurtDragBefore=model.snapshot();stop();}
+  if(stage==='change'&&hurtDragBefore){
+    const next=clone(move().hurtboxes[patch.phase]);next[patch.region]=patch.rect;
+    try{validateHurtboxes({[patch.phase]:next});}catch{return;}
+    move().hurtboxes[patch.phase]=next;syncHurtFields();syncSummary();
+  }
+  if(stage==='end'&&hurtDragBefore){model.remember(hurtDragBefore);hurtDragBefore=null;listMoves();refreshActions();scheduleSave();}
 });
 function start(data=pack.defaults,selection={}){
   model=new Workshop(pack,data);character=Number.isInteger(selection.character)&&selection.character>=0&&selection.character<6?selection.character:5;
@@ -205,7 +254,7 @@ $('search').addEventListener('input',listMoves);$('show-unused').addEventListene
 for(const button of document.querySelectorAll('[data-filter]'))button.addEventListener('click',()=>{filter=button.dataset.filter;for(const b of document.querySelectorAll('[data-filter]')){b.classList.toggle('selected',b===button);b.setAttribute('aria-pressed',String(b===button));}listMoves();});
 $('undo').onclick=()=>{stop();if(errors.size){errors.clear();render();announce('Invalid input discarded.');return;}if(model.undo()){frame=Math.min(frame,totalFrames(move()));render();scheduleSave();announce('Edit undone.');}};
 $('redo').onclick=()=>{if(!validBeforeLeaving())return;if(model.redo()){stop();render();scheduleSave();announce('Edit restored.');}};
-$('reset').onclick=()=>{errors.clear();model.resetMove(character,slot);stop();frame=move().startup;render();scheduleSave();announce('This move’s stats were reset. Art notes are kept. Undo is available.');};
+$('reset').onclick=()=>{errors.clear();model.resetMove(character,slot);stop();frame=move().startup;render();scheduleSave();announce('Move stats and hurtboxes reset. Art notes are kept. Undo is available.');};
 $('import').onclick=()=>{if(validBeforeLeaving())$('import-file').click();};
 $('import-file').onchange=async event=>{
   const file=event.target.files[0];if(!file)return;
@@ -213,8 +262,8 @@ $('import-file').onchange=async event=>{
   catch(error){announce('Import stopped: '+error.message);}finally{event.target.value='';}
 };
 $('export').onclick=()=>{if(!validBeforeLeaving())return;try{download(model.export(),'FightGuild-moves-'+date()+'.json','application/json');save();unexported=false;announce('JSON downloaded. Import it in the Godot move editor or send it back for the sprite pass.');}catch(error){announce(error.message);}};
-$('frame').addEventListener('input',()=>{stop();frame=Number($('frame').value);syncPreview();});
-$('play').onclick=()=>{playing=!playing;lastTick=0;$('play').setAttribute('aria-label',playing?'Pause move preview':'Play move preview');$('play').title='Preview plays at half speed';syncPreview();};
+$('frame').addEventListener('input',()=>{if(!validBeforeLeaving()){$('frame').value=frame;return;}stop();frame=Number($('frame').value);syncPreview();});
+$('play').onclick=()=>{if(!validBeforeLeaving())return;playing=!playing;lastTick=0;$('play').setAttribute('aria-label',playing?'Pause move preview':'Play move preview');$('play').title='Preview plays at half speed';syncPreview();};
 for(const key of ['hit','hurt','push','art'])$('show-'+key).onchange=()=>{preview.options[key]=$('show-'+key).checked;preview.draw();};
 $('help').onclick=()=>{$('help-dialog').showModal();};$('close-help').onclick=()=>{$('help-dialog').close();};
 $('close-reference').onclick=()=>$('reference-dialog').close();

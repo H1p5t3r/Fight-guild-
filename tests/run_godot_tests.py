@@ -8,6 +8,7 @@ cases = [
     (["--headless", "--editor", "--import"], None),
     (["--headless", "--script", "tests/core_bridge.gd", "--", str(root / "build/native.trace")], "0 failures"),
     (["--headless", "--script", "tests/model_test.gd"], "0 failures"),
+    (["--headless", "--script", "tests/hurtbox_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/recovery_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/stage_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/camera_test.gd"], "0 failures"),

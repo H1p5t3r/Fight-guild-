@@ -22,7 +22,7 @@ func _initialize() -> void:
 		quit(1)
 		return
 	var model := CombatModel.new()
-	var error := model.load_data(exported)
+	var error := model.load_file(args[0])
 	check(error.is_empty(), "Browser JSON was rejected by Godot: " + error)
 	var actual := model.data()
 	for group in ["inputRules", "momentumRules", "recoveryRules", "tuningRules", "jumpRules"]:
@@ -34,6 +34,12 @@ func _initialize() -> void:
 		for m in CombatModel.MOVE_IDS.size():
 			for field in CombatModel.FIELDS:
 				check(actual.characters[c].moves[m][field] == exported.characters[c].moves[m][field], "Imported field differs: %s/%s/%s" % [c, m, field])
+			var profiles: Dictionary = exported.characters[c].moves[m].hurtboxes
+			check(actual.characters[c].moves[m].hurtboxes.size() == profiles.size(), "Hurtbox phases lost")
+			for phase in profiles:
+				for region in profiles[phase]:
+					for edge in 4:
+						check(actual.characters[c].moves[m].hurtboxes[phase][region][edge] == profiles[phase][region][edge], "Hurtbox coordinate changed on import")
 	check(model.move(5, 0).startup == 7 and model.move(5, 0).damage == 44 and model.move(5, 0).reach == 9613, "Fillet browser edits did not arrive")
 	check(model.move(4, 28).airLaunch == 1300 and model.move(4, 28).normalRoutes == 1, "Shark browser edits did not arrive")
 	check(exported.has("_moveWorkshop"), "Companion art brief was not included")

@@ -1,3 +1,4 @@
+import {HURT_PHASES,validateHurtboxes,packHurtboxes,unpackHurtboxes,upgradeHurtboxes} from './hurtboxes.mjs';
 export const BUTTONS = ['P', 'K', 'S', 'Hs', 'D'];
 export const MOVE_IDS = ['5P','5K','5S','5Hs','2P','2K','2S','2Hs','6P','6K','6S','6Hs','6D','5D','236P','236S','623Hs','j.P','j.K','j.S','j.Hs','j.D','2D','4P+K','6P+K','236K','236S>6S','236S>2S','214S','j.214P','214S>P','j.214P>P'];
 export const CHARACTERS = ['Anvil', 'Hammer', 'Smoke', 'Tapper', 'Shark', 'Fillet'];
@@ -52,12 +53,18 @@ export class Engine {
     return Array.from({length:this.api.fg_box_count(player,kind)},(_,i)=>
       Array.from({length:4},(_,edge)=>this.api.fg_box_get(player,kind,i,edge)));
   }
-  move(c,m) { return Object.fromEntries(FIELDS.map((key,f)=>[key,this.api.fg_move_get(c,m,f)])); }
+  move(c,m) { return {...Object.fromEntries(FIELDS.map((key,f)=>[key,this.api.fg_move_get(c,m,f)])),hurtboxes:this.hurtboxes(c,m)}; }
+  hurtboxes(c,m){
+    return Object.fromEntries(HURT_PHASES.flatMap((phase,p)=>{
+      const values=Array.from({length:17},(_,i)=>this.api.fg_hurt_get(c,m,p,i));
+      return values[0]?[[phase,unpackHurtboxes(values)]]:[];
+    }));
+  }
   setMove(c,m,key,value) {
     if(!Number.isInteger(value)||!this.api.fg_move_set(c,m,FIELDS.indexOf(key),value)) throw new Error(`Invalid ${key}: ${value}`);
   }
   data() {
-    return { schema:12, coreVersion:this.api.fg_version(),
+    return { schema:13, coreVersion:this.api.fg_version(),
       inputRules:Object.fromEntries(RULES.map((r,i)=>[r,this.api.fg_rule_get(i)])),
       momentumRules:Object.fromEntries(MOMENTUM_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+3)])),
       recoveryRules:Object.fromEntries(RECOVERY_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+13)])),
@@ -109,7 +116,8 @@ export class Engine {
     if(data?.schema===11&&data.coreVersion===11) {
       data=structuredClone(data);data.schema=data.coreVersion=12;
     }
-    if(data?.schema!==12||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
+    data=upgradeHurtboxes(data);
+    if(data?.schema!==13||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
     const previous=this.data();
     const apply=d=>{
       RULES.forEach((r,i)=>{ if(!Number.isInteger(d.inputRules?.[r])||!this.api.fg_rule_set(i,d.inputRules[r])) throw new Error(`Invalid ${r}`); });
@@ -125,6 +133,8 @@ export class Engine {
         character.moves.forEach((m,i)=>{
           if(m.id!==MOVE_IDS[i]) throw new Error(`Missing move ${MOVE_IDS[i]}`);
           FIELDS.forEach(key=>this.setMove(c,i,key,m[key]));
+          validateHurtboxes(m.hurtboxes);
+          HURT_PHASES.forEach((phase,p)=>{if(!this.api.fg_hurt_set(c,i,p,...packHurtboxes(m.hurtboxes[phase])))throw new Error(`Invalid ${phase} hurtboxes`);});
         });
       });
     };

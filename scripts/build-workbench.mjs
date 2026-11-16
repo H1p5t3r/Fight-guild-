@@ -9,7 +9,7 @@ import {SPECS} from '../web/workbench/specs.mjs';
 const root=new URL('../',import.meta.url), path=p=>fileURLToPath(new URL(p,root));
 const wasm=await readFile(path('web/generated/fight.wasm'));
 const {instance}=await WebAssembly.instantiate(wasm),engine=new Engine(instance),defaults=engine.data();
-if(defaults.schema!==12||defaults.coreVersion!==12) throw new Error('Rebuild the current combat core before packaging the workshop.');
+if(defaults.schema!==13||defaults.coreVersion!==13) throw new Error('Rebuild the current combat core before packaging the workshop.');
 if(FIELDS.some(key=>!SPECS[key])||Object.keys(SPECS).length!==FIELDS.length)throw new Error('Every combat field needs an editor specification.');
 // Discover accepted integer intervals from the real combat core, so browser
 // validation cannot drift from native move/rule limits. Motion is a discrete enum.
@@ -58,7 +58,9 @@ try {
     images[file]='data:image/webp;base64,'+(await readFile(cached)).toString('base64');
   }
 } finally {await browser?.close();}
-const pack={format:1,defaults,limits,art,collisions:collisions.fighters,images};
+const regions=['legs','torsoArms','head','extension'],posePhases={active:0,windup:1,signature_windup:3,signature_active:4};
+const hurtPoses=art.map((fighter,c)=>Object.fromEntries(Object.entries(posePhases).filter(([phase])=>fighter[phase]).map(([phase,p])=>[phase,fighter[phase].frames.map((_,pose)=>Object.fromEntries(Array.from({length:engine.api.fg_pose_box_count(c,p,pose)},(_,n)=>[regions[n],Array.from({length:4},(_,edge)=>engine.api.fg_pose_box_get(c,p,pose,n,edge))])))])));
+const pack={format:1,defaults,limits,art,collisions:collisions.fighters,hurtPoses,images};
 const bundle=await build({entryPoints:[path('web/workbench/app.mjs')],bundle:true,format:'iife',write:false,minify:true,target:'es2022'});
 let css=await readFile(path('web/workbench/style.css'),'utf8');
 for(const [tag,file] of [['BARLOW_REGULAR','BarlowCondensed.woff2'],['BARLOW_SEMIBOLD','BarlowCondensedSemibold.woff2']])css=css.replace(tag,'data:font/woff2;base64,'+(await readFile(path('godot/Content/Fonts/'+file))).toString('base64'));

@@ -36,6 +36,28 @@ try {
   await page.mouse.move(x,y);await page.mouse.down();await page.mouse.move(x+20,y,{steps:5});await page.mouse.up();
   assert.ok((await data(page)).characters[5].moves[0].reach>9613,'Dragging a hitbox edge updates game units');
   await page.locator('#undo').click();assert.equal((await data(page)).characters[5].moves[0].reach,9613);
+  await page.locator('#tab-hurt').click();assert.equal(await page.locator('#field-hurt-width').isDisabled(),true);
+  await page.locator('#hurt-custom').check();await page.locator('#hurt-region').selectOption('torsoArms');
+  for(const [key,value]of [['left','-20'],['bottom','60'],['width','60'],['height','50']])await page.locator('#field-hurt-'+key).fill(value);
+  await page.locator('#field-hurt-height').fill('0');assert.equal(await page.locator('#export').isDisabled(),true);
+  await page.locator('#hurt-phase').selectOption('windup');assert.equal(await page.locator('#hurt-phase').inputValue(),'active');
+  await page.locator('#field-hurt-height').fill('50');await page.locator('#hurt-extension').uncheck();
+  assert.equal(Object.keys((await data(page)).characters[5].moves[0].hurtboxes.active).length,3);
+  await page.locator('#hurt-extension').check();assert.equal(Object.keys((await data(page)).characters[5].moves[0].hurtboxes.active).length,4);
+  await page.locator('#hurt-extension').uncheck();await page.locator('#hurt-region').selectOption('torsoArms');
+  await page.locator('#preview').scrollIntoViewIfNeeded();const hurtCanvas=await page.locator('#preview').boundingBox();
+  const hurtScale=Math.min((hurtCanvas.width-38)/260,(hurtCanvas.height-42)/200);
+  const hx=hurtCanvas.x+(hurtCanvas.width-260*hurtScale)/2+130*hurtScale,hy=hurtCanvas.y+(hurtCanvas.height-200*hurtScale)/2+100*hurtScale;
+  await page.mouse.move(hx,hy);await page.mouse.down();await page.mouse.move(hx+15,hy,{steps:4});await page.mouse.up();
+  assert.ok((await data(page)).characters[5].moves[0].hurtboxes.active.torsoArms[2]>4000);
+  await page.locator('#undo').click();assert.deepEqual((await data(page)).characters[5].moves[0].hurtboxes.active.torsoArms,[-2000,6000,4000,11000]);
+  await page.locator('#hurt-phase').selectOption('windup');assert.equal(await page.locator('#hurt-custom').isChecked(),false);await page.locator('#hurt-custom').check();
+  await page.locator('#hurt-region').selectOption('head');await page.locator('#field-hurt-width').fill('25');
+  await page.locator('#hurt-phase').selectOption('recovery');await page.locator('#hurt-custom').check();await page.locator('#field-hurt-height').fill('20');
+  const hurtProfiles=(await data(page)).characters[5].moves[0].hurtboxes;assert.deepEqual(hurtProfiles.active.torsoArms,[-2000,6000,4000,11000]);
+  await page.locator('[data-move="4"]').click();assert.equal(await page.locator('#hurt-custom').isChecked(),false);
+  await page.locator('[data-move="0"]').click();assert.equal(await page.locator('#hurt-custom').isChecked(),true);
+  await page.screenshot({path:`${screenshotDir}/hurtboxes.png`,fullPage:true});
   await page.locator('#tab-art').click();
   const nickname='Knife study <img src=x onerror=alert(1)>';
   await page.locator('#note-label').fill(nickname);
@@ -87,7 +109,9 @@ try {
   await page.locator('#fighter').selectOption('5');await page.locator('#reset').click();
   assert.equal((await data(page)).characters[5].moves[0].startup,5);assert.equal((await data(page))._moveWorkshop.notes['Fillet/5P'].label,nickname);
   assert.equal((await data(page))._moveWorkshop.notes['Fillet/5P'].references[0].src,photo.src);
+  assert.deepEqual((await data(page)).characters[5].moves[0].hurtboxes,{});
   await page.locator('#undo').click();assert.equal((await data(page)).characters[5].moves[0].startup,7);
+  assert.deepEqual((await data(page)).characters[5].moves[0].hurtboxes,hurtProfiles);
   // Search/filter controls and keyboard tab navigation remain usable.
   await page.locator('#search').fill('236S');assert.equal(await page.locator('.move-row').count(),3);await page.locator('#search').fill('');
   await page.locator('#tab-hit').click();await page.keyboard.press('ArrowRight');assert.equal(await page.locator('#tab-routes').getAttribute('aria-selected'),'true');
@@ -105,6 +129,8 @@ try {
   await page.locator('#fighter').selectOption('5');await page.locator('#tab-art').click();
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'Photo-reference mobile overflow');
   await page.screenshot({path:`${screenshotDir}/pose-reference-mobile.png`,fullPage:true});
+  await page.locator('#tab-hurt').click();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'Hurtbox editor mobile overflow');
+  await page.screenshot({path:`${screenshotDir}/hurtboxes-mobile.png`,fullPage:true});
   await page.locator('#help').click();assert.equal(await page.locator('#help-dialog').isVisible(),true);await page.keyboard.press('Escape');
   // Storage restrictions still allow downloads, with a clear unsaved warning.
   const denied=await browser.newContext();await denied.addInitScript(()=>{Storage.prototype.setItem=function(){throw new DOMException('Full','QuotaExceededError');};});

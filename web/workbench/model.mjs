@@ -1,6 +1,7 @@
 import {FIELDS, MOVE_IDS, CHARACTERS} from '../engine.mjs';
 import {SPECS, ART_FIELDS} from './specs.mjs';
 import {validateReferences,MAX_REFERENCE_TOTAL,MAX_IMPORT_BYTES,REFERENCE_PHASES} from './references.mjs';
+import {validateHurtboxes,upgradeHurtboxes,HURT_PHASES} from '../hurtboxes.mjs';
 export {FIELDS,MOVE_IDS,CHARACTERS};
 export const clone = value => structuredClone(value);
 export const META = '_moveWorkshop';
@@ -9,8 +10,9 @@ function integer(value, limit, name) {
   if(!Number.isInteger(value)||value<limit.min||value>limit.max) throw new Error(`${name}: use a whole number from ${limit.min} to ${limit.max}.`);
 }
 export function validate(data, pack) {
+  data=upgradeHurtboxes(data);
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor needs a current Fight Guild move export (version 12). Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves or a version-12 workshop export. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);
@@ -26,6 +28,7 @@ export function validate(data, pack) {
         integer(move[key],pack.limits.moves[i][key],`${c.name} ${move.id} / ${SPECS[key].label}`);
         if(key==='motion'&&![0,214,236,623].includes(move[key])) throw new Error(`${c.name} ${move.id}: motion must be 0, 214, 236 or 623.`);
       });
+      validateHurtboxes(move.hurtboxes);
     });
   });
   if(data[META]!==undefined) {
@@ -52,6 +55,14 @@ export function parseField(key, input, limit) {
 export const totalFrames=m=>m.startup-1+m.active+m.recovery;
 export const blockAdvantage=m=>m.blockstun-(m.active-1+m.recovery);
 export function phaseAt(m,frame) {return frame<m.startup?'windup':frame<m.startup+m.active?'active':'recovery';}
+export function phaseStart(m,phase){return phase==='windup'?1:phase==='active'?m.startup:m.startup+m.active;}
+export function poseAt(m,frame){
+  const phase=phaseAt(m,frame);
+  if(m.artPose&&(phase!=='recovery'||m.hitAngle&&frame<m.startup+m.active+8))return {phase:frame<m.startup?'signature_windup':'signature_active',index:m.artPose-1};
+  return phase==='recovery'?{phase:'active',index:m.air?8:[1,2,3].includes(m.direction)?11:0}:{phase,index:1+m.button};
+}
+export function defaultHurtboxes(pack,c,m,frame){const pose=poseAt(m,frame);return clone(pack.hurtPoses[c][pose.phase][pose.index]);}
+export function effectiveHurtboxes(pack,c,m,frame){return m.hurtboxes[phaseAt(m,frame)]||defaultHurtboxes(pack,c,m,frame);}
 export function inputName(m) {
   const button=m.category===4?'P+K':['P','K','S','Hs','D'][m.button];
   return `${m.air?'j.':''}${m.motion||m.direction}${button}`;
@@ -101,11 +112,18 @@ export class Workshop {
     ref[key]=value;return this.setNote(c,m,'references',refs,`reference/${c}/${m}/${id}/${key}`);
   }
   removeReference(c,m,id){return this.setNote(c,m,'references',(this.note(c,m).references||[]).filter(r=>r.id!==id),'');}
+  setHurtPhase(c,m,phase,boxes,group=''){
+    if(!HURT_PHASES.includes(phase))throw new Error('Unknown attack phase.');
+    const before=this.snapshot();
+    if(boxes===null)delete this.move(c,m).hurtboxes[phase];else this.move(c,m).hurtboxes[phase]=clone(boxes);
+    try {validate(this.data,this.pack);}catch(error){this.data=before;throw error;}
+    return this.remember(before,group);
+  }
   import(data){const next=clone(validate(data,this.pack)),before=this.snapshot();this.data=next;this.remember(before);}
   resetMove(c,m){const before=this.snapshot();this.data.characters[c].moves[m]=clone(this.pack.defaults.characters[c].moves[m]);this.remember(before);}
   undo(){if(!this.undoStack.length)return false;const item=this.undoStack.pop();this.redoStack.push({data:this.snapshot()});this.data=item.data;return true;}
   redo(){if(!this.redoStack.length)return false;const item=this.redoStack.pop();this.undoStack.push({data:this.snapshot(),group:'',time:0});this.data=item.data;return true;}
-  changed(c,m){return FIELDS.some(k=>this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||!!this.note(c,m).references?.length||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
+  changed(c,m){return FIELDS.some(k=>this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||Object.keys(this.move(c,m).hurtboxes).length>0||!!this.note(c,m).references?.length||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
   changes(){return this.data.characters.flatMap((c,i)=>c.moves.map((_,m)=>({c:i,m}))).filter(p=>this.changed(p.c,p.m));}
   export(){return JSON.stringify(validate(this.data,this.pack),null,2);}
   brief(){
@@ -116,6 +134,7 @@ export class Workshop {
         `Hitbox: back ${move.hitboxBack/100}px, front ${move.reach/100}px, bottom ${move.bottom/100}px, height ${move.height/100}px. Knockdown: ${['none','soft','hard'][move.knockdown]}.`,
         `Ground / air / block push: ${move.pushback/100} / ${move.airPushback/100} / ${move.blockPushback/100}px. Ground / air launch: ${move.launch/100} / ${move.airLaunch/100}px per frame.`, '');
       for(const [key,label] of ART_FIELDS.slice(1)) if(note[key]?.trim())lines.push(`**${label}**`,note[key].trim(),'');
+      for(const [phase,boxes] of Object.entries(move.hurtboxes)){lines.push(`**${phase} body hurtboxes**`);for(const [region,rect] of Object.entries(boxes))lines.push(`- ${region}: left / bottom / right / top ${rect.map(v=>v/100).join(' / ')} px`);lines.push('');}
       if(note.references?.length){
         lines.push('**Pose references**','Image files are embedded in the companion JSON.','');
         for(const ref of note.references)lines.push(`- ${REFERENCE_PHASES.find(([id])=>id===ref.phase)[1]} · ${ref.name}${ref.caption?' — '+ref.caption:''}`);

@@ -3,7 +3,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 12, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 69;
+constexpr int VERSION = 13, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 69;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
@@ -39,6 +39,10 @@ struct Mobility { int v[MOBILITY_FIELDS]; };
 enum BoxKind { HurtBox, PushBox, HitBox, WallBox };
 constexpr int HIT_TRAVEL_TICKS = 6; // Existing hit-distance budgets now travel over six action ticks.
 struct Box { int left, bottom, right, top; };
+constexpr int HURT_PHASES = 3, HURT_FIELDS = 1+MAX_HURTBOXES*4;
+// count 0 inherits the current sprite pose. Custom phases have the three body
+// regions and optionally one extension; weapons never acquire hurt regions.
+struct MoveHurt { int count; Box boxes[MAX_HURTBOXES]; };
 struct Pose { int phase, index; }; // active, windup, block, signature windup/active; shared with rendering.
 enum BlockReaction { NoBlock, StableBlock, PressureBlock, BrokenGuard };
 enum Contact { NoContact, NormalHit, Blocked, CounterHit, PunishHit };
@@ -102,6 +106,7 @@ class Simulation {
 public:
     State world{};
     Move moves[CHARACTER_COUNT][MOVE_COUNT]{};
+    MoveHurt move_hurt[CHARACTER_COUNT][MOVE_COUNT][HURT_PHASES]{};
     Mobility mobility[CHARACTER_COUNT]{};
     Rules rules{};
     void defaults();
@@ -112,6 +117,8 @@ public:
     int get(int player, int field) const;
     int move_get(int character, int move, int field) const;
     int move_set(int character, int move, int field, int value);
+    int hurt_get(int character, int move, int phase, int field) const;
+    int hurt_set(int character, int move, int phase, int count, const Box* boxes);
     int rule_get(int field) const;
     int rule_set(int field, int value);
     int mobility_get(int character, int field) const;
@@ -137,6 +144,8 @@ private:
     Box attack_box(const Fighter& fighter, int segment=0, int tick_offset=0) const;
     Box weapon_span(const Fighter& fighter, int tick_offset=0) const;
     Box hurt_box(const Fighter& fighter, int index, int tick_offset=0) const;
+    const MoveHurt* hurt_override(const Fighter& fighter, int tick_offset=0) const;
+    int hurt_count(const Fighter& fighter, int tick_offset=0) const;
     void resolve_push(int previous_order, bool preserve_order);
     int clamp_x(const Fighter& fighter, int x) const;
     int gravity_percent(const Fighter& fighter) const;
@@ -174,6 +183,12 @@ FG_EXPORT(fg_step) void fg_step(int input0, int input1);
 FG_EXPORT(fg_get) int fg_get(int player, int field);
 FG_EXPORT(fg_move_get) int fg_move_get(int character, int move, int field);
 FG_EXPORT(fg_move_set) int fg_move_set(int character, int move, int field, int value);
+FG_EXPORT(fg_hurt_get) int fg_hurt_get(int character, int move, int phase, int field);
+FG_EXPORT(fg_hurt_set) int fg_hurt_set(int character, int move, int phase, int count,
+    int l0,int b0,int r0,int t0,int l1,int b1,int r1,int t1,
+    int l2,int b2,int r2,int t2,int l3,int b3,int r3,int t3);
+FG_EXPORT(fg_pose_box_count) int fg_pose_box_count(int character,int phase,int pose);
+FG_EXPORT(fg_pose_box_get) int fg_pose_box_get(int character,int phase,int pose,int index,int edge);
 FG_EXPORT(fg_rule_get) int fg_rule_get(int field);
 FG_EXPORT(fg_rule_set) int fg_rule_set(int field, int value);
 FG_EXPORT(fg_mobility_get) int fg_mobility_get(int character, int field);

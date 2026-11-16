@@ -26,6 +26,7 @@ for platform in (['Linux', 'Windows'] if target == 'all' else [target]):
         archive.write(root / 'docs/research/strive-camera-framing-2026-11-16.md', 'FightGuild/research/strive-camera-framing-2026-11-16.md')
         archive.write(root / 'docs/signature-moves.md', 'FightGuild/signature-moves.md')
         archive.write(root / 'docs/collision-rules.md', 'FightGuild/collision-rules.md')
+        archive.write(root / 'docs/move-workshop.md', 'FightGuild/move-workshop.md')
         archive.write(root / 'docs/move-stats.md', 'FightGuild/move-stats.md')
         archive.write(root / 'docs/menu-flow.md', 'FightGuild/menu-flow.md')
         archive.write(root / 'docs/menu-style.md', 'FightGuild/menu-style.md')

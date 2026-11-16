@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {Engine,FIELDS,MOVEMENT_FIELDS,INPUT} from '../web/engine.mjs';
-import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,attackBoxes,META} from '../web/workbench/model.mjs';
+import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,attackBoxes,defaultHurtboxes,META} from '../web/workbench/model.mjs';
 import {SPECS,GROUPS} from '../web/workbench/specs.mjs';
 import {validateReferences,MAX_REFERENCE_DATA} from '../web/workbench/references.mjs';
 
@@ -93,6 +93,26 @@ test('Pose references travel with JSON, count as edits and survive stat resets a
   const broken=structuredClone(before);broken[META].notes['Fillet/5P'].references[0].src='data:text/html;base64,PHN2Zz4=';
   assert.throws(()=>imported.import(broken));assert.deepEqual(imported.snapshot(),before);
   assert.equal(validateReferences([ref]),png.length);
+});
+
+test('Per-attack hurtboxes migrate, export, affect the engine and reject invalid profiles atomically',async()=>{
+  const w=new Workshop(pack),legacy=w.snapshot();legacy.schema=legacy.coreVersion=12;
+  for(const c of legacy.characters)for(const m of c.moves)delete m.hurtboxes;
+  legacy.characters[5].moves[0].damage=77;legacy[META]={version:1,notes:{'Fillet/5P':{windup:'Keep these old notes.'}}};
+  const migrated=new Workshop(pack,legacy);assert.equal(migrated.data.schema,13);assert.equal(migrated.move(5,0).damage,77);assert.deepEqual(migrated.move(5,0).hurtboxes,{});assert.equal(migrated.note(5,0).windup,'Keep these old notes.');
+  const active=defaultHurtboxes(pack,5,w.move(5,0),5);active.torsoArms=[-2000,6000,4000,11000];delete active.extension;
+  w.setHurtPhase(5,0,'active',active);assert.equal(w.changed(5,0),true);assert.deepEqual(w.move(5,4).hurtboxes,{});
+  const e=await engine(),fingerprint=e.fingerprint();e.loadData(JSON.parse(w.export()));assert.notEqual(e.fingerprint(),fingerprint);
+  e.reset([5,0]);e.step(INPUT.P,0);for(let i=1;i<5;i++)e.step(0,0);
+  const f=e.state().players[0],boxes=e.boxes(0,0).map(b=>[b[0]-f.x,b[1]-f.y,b[2]-f.x,b[3]-f.y]);
+  assert.equal(boxes.length,3);assert.deepEqual(boxes[1],active.torsoArms);assert.deepEqual(e.data(),w.snapshot());
+  const before=w.snapshot(),fingerprintEdited=e.fingerprint();
+  const broken=[{...active,weapon:[0,0,100,100]}, {...active,head:undefined}, {...active,head:[0,0,0,100]}, {...active,head:[0,0,100,99]}, {...active,head:[0,0,100,50001]}, {...active,head:[0,0,100,100.5]}];
+  for(const bad of broken){
+    assert.throws(()=>w.setHurtPhase(5,0,'active',bad));assert.deepEqual(w.snapshot(),before);
+    const data=structuredClone(before);data.characters[5].moves[31].hurtboxes={active:bad};assert.throws(()=>e.loadData(data));assert.equal(e.fingerprint(),fingerprintEdited);
+  }
+  w.setHurtPhase(5,0,'active',null);assert.deepEqual(w.move(5,0).hurtboxes,{});w.undo();assert.deepEqual(w.move(5,0).hurtboxes.active,active);w.redo();assert.deepEqual(w.move(5,0).hurtboxes,{});
 });
 
 test('Straight, throw and both diagonal hook previews use the core collision geometry',async()=>{

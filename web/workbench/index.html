@@ -31,7 +31,7 @@
   <main id="main" tabindex="-1">
     <section class="move-heading">
       <div><p class="eyebrow" id="move-context">THE COMBAT LAB, ANYWHERE</p><h1><span id="move-title">Loading…</span> <span id="move-label"></span></h1><div class="badges"><span id="move-kind"></span><span id="actual-input"></span><span id="move-enabled"></span></div></div>
-      <div class="history-actions"><button id="undo" class="icon" aria-label="Undo edit" title="Undo edit" disabled>↶</button><button id="redo" class="icon" aria-label="Redo edit" title="Redo edit" disabled>↷</button><button id="reset" class="quiet" disabled>Reset stats</button></div>
+      <div class="history-actions"><button id="undo" class="icon" aria-label="Undo edit" title="Undo edit" disabled>↶</button><button id="redo" class="icon" aria-label="Redo edit" title="Redo edit" disabled>↷</button><button id="reset" class="quiet" disabled>Reset move</button></div>
     </section>
     <div class="summary" aria-label="Move summary"><div><span>STARTUP</span><strong id="stat-startup">—</strong></div><div><span>DAMAGE</span><strong id="stat-damage">—</strong></div><div><span>ON BLOCK</span><strong id="stat-block">—</strong></div><div><span>TOTAL</span><strong id="stat-total">—</strong></div></div>
     <div class="editor-layout">
@@ -48,7 +48,7 @@
         <div class="phase-labels"><span><i class="windup"></i><span id="windup-time"></span></span><span><i class="hit"></i><span id="active-time"></span></span><span><i class="recover"></i><span id="recovery-time"></span></span></div>
         <p id="geometry-help" class="preview-help">Current pose artwork stays fixed while you tune the attack. Match timing and movement should be tested in game.</p>
         <div id="move-warnings" class="move-warnings" hidden></div>
-        <div class="rule-note"><span aria-hidden="true">◇</span><p>Body hurtboxes are read-only here.<br>Weapons have none. Four boxes per pose, maximum.</p></div>
+        <div class="rule-note"><span aria-hidden="true">◇</span><p>Edit body coverage in Hurtboxes.<br>Four boxes maximum. Weapons have none.</p></div>
         <p class="advantage-note">On-block value assumes contact on the first active frame, with no cancel or Faultless Defense.</p>
       </aside>
     </div>

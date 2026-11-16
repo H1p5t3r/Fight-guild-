@@ -15,8 +15,10 @@ static int button_bit(int b) { return P<<b; }
 
 void Simulation::defaults() {
     rules=Rules{};
-    for(int c=0;c<CHARACTER_COUNT;++c) for(int i=0;i<MOVE_COUNT;++i)
+    for(int c=0;c<CHARACTER_COUNT;++c) for(int i=0;i<MOVE_COUNT;++i) {
         moves[c][i]=STARTER_MOVES[c][i];
+        for(int p=0;p<HURT_PHASES;++p) move_hurt[c][i][p]=MoveHurt{};
+    }
     for(int c=0;c<CHARACTER_COUNT;++c) mobility[c]=STARTER_MOBILITY[c];
 }
 
@@ -404,7 +406,22 @@ Box Simulation::pose_box(int c,int phase,int index,int n) {
     return HURT_POSES[c][pose_offset(phase,index)].boxes[n];
 }
 unsigned Simulation::collision_hash() { return COLLISION_HASH; }
+const MoveHurt* Simulation::hurt_override(const Fighter& f,int tick_offset) const {
+    if(f.move<0||f.reaction!=Free||f.stun||f.prejump_time||f.faultless
+        ||(f.guarding&&f.block_reaction>0)) return nullptr;
+    const auto& m=moves[f.character][f.move];
+    int age=f.age+tick_offset;
+    int phase=age<m.v[Startup]?0:age<m.v[Startup]+m.v[Active]?1:2;
+    const auto& profile=move_hurt[f.character][f.move][phase];
+    return profile.count?&profile:nullptr;
+}
+int Simulation::hurt_count(const Fighter& f,int tick_offset) const {
+    if(const auto* profile=hurt_override(f,tick_offset)) return profile->count;
+    Pose art=pose(f,tick_offset);
+    return pose_box_count(f.character,art.phase,art.index);
+}
 Box Simulation::hurt_box(const Fighter& f,int index,int tick_offset) const {
+    if(const auto* profile=hurt_override(f,tick_offset)) return transform(profile->boxes[index],f);
     Pose art=pose(f,tick_offset);
     return transform(pose_box(f.character,art.phase,art.index,index),f);
 }
@@ -449,8 +466,7 @@ int Simulation::box_count(int player,int kind) const {
     if(player<0) return kind==WallBox?2:0;
     if(player>1) return 0;
     const auto& f=world.players[player];
-    Pose art=pose(f);
-    if(kind==HurtBox) return pose_box_count(f.character,art.phase,art.index);
+    if(kind==HurtBox) return hurt_count(f);
     if(kind==PushBox) return 1;
     if(kind==HitBox&&f.move>=0) {
         const auto& m=moves[f.character][f.move];
@@ -491,9 +507,8 @@ void Simulation::resolve_push(int previous_order,bool preserve_order) {
 }
 bool Simulation::overlaps(const Fighter& a,const Fighter& b) const {
     // Hits are evaluated before age increments. Use the pose that this tick shows.
-    Pose art=pose(b,1);
     int count=moves[a.character][a.move].v[HitAngle]?8:1;
-    for(int segment=0;segment<count;++segment) for(int i=0;i<pose_box_count(b.character,art.phase,art.index);++i)
+    for(int segment=0;segment<count;++segment) for(int i=0;i<hurt_count(b,1);++i)
         if(intersects(attack_box(a,segment,1),hurt_box(b,i,1))) return true;
     return false;
 }
@@ -964,6 +979,29 @@ int Simulation::move_set(int c,int m,int f,int v) {
     moves[c][m].v[f]=v;
     return 1;
 }
+int Simulation::hurt_get(int c,int m,int p,int field) const {
+    if(c<0||c>=CHARACTER_COUNT||m<0||m>=MOVE_COUNT||p<0||p>=HURT_PHASES||field<0||field>=HURT_FIELDS) return -999;
+    const auto& h=move_hurt[c][m][p];
+    if(!field) return h.count;
+    const auto& b=h.boxes[(field-1)/4];
+    int edge=(field-1)%4;
+    return edge==0?b.left:edge==1?b.bottom:edge==2?b.right:b.top;
+}
+int Simulation::hurt_set(int c,int m,int p,int count,const Box* boxes) {
+    if(c<0||c>=CHARACTER_COUNT||m<0||m>=MOVE_COUNT||p<0||p>=HURT_PHASES
+        ||(count!=0&&count!=3&&count!=4)) return 0;
+    MoveHurt next{};
+    next.count=count;
+    for(int i=0;i<count;++i) {
+        const auto& b=boxes[i];
+        if(b.left< -50000||b.left>50000||b.bottom< -50000||b.bottom>50000
+            ||b.right< -50000||b.right>50000||b.top< -50000||b.top>50000
+            ||b.right-b.left<100||b.top-b.bottom<100) return 0;
+        next.boxes[i]=b;
+    }
+    move_hurt[c][m][p]=next;
+    return 1;
+}
 int Simulation::rule_get(int f) const {
     const int values[RULE_COUNT]={rules.buffer,rules.motion_window,rules.motion_gap,
         rules.move_gain,rules.attack_gain,rules.block_attack_gain,rules.damage_gain,rules.guard_gain,
@@ -1056,6 +1094,18 @@ int fg_box_get(int p,int kind,int index,int edge) {
 int fg_get(int p,int f) { return fight::default_simulation.get(p,f); }
 int fg_move_get(int c,int m,int f) { return fight::default_simulation.move_get(c,m,f); }
 int fg_move_set(int c,int m,int f,int v) { return fight::default_simulation.move_set(c,m,f,v); }
+int fg_hurt_get(int c,int m,int p,int f) { return fight::default_simulation.hurt_get(c,m,p,f); }
+int fg_hurt_set(int c,int m,int p,int count,
+    int l0,int b0,int r0,int t0,int l1,int b1,int r1,int t1,
+    int l2,int b2,int r2,int t2,int l3,int b3,int r3,int t3) {
+    const fight::Box boxes[4]={{l0,b0,r0,t0},{l1,b1,r1,t1},{l2,b2,r2,t2},{l3,b3,r3,t3}};
+    return fight::default_simulation.hurt_set(c,m,p,count,boxes);
+}
+int fg_pose_box_count(int c,int p,int pose) { return fight::Simulation::pose_box_count(c,p,pose); }
+int fg_pose_box_get(int c,int p,int pose,int n,int edge) {
+    auto b=fight::Simulation::pose_box(c,p,pose,n);
+    return edge==0?b.left:edge==1?b.bottom:edge==2?b.right:edge==3?b.top:0;
+}
 int fg_rule_get(int f) { return fight::default_simulation.rule_get(f); }
 int fg_rule_set(int f,int v) { return fight::default_simulation.rule_set(f,v); }
 int fg_mobility_get(int c,int f) { return fight::default_simulation.mobility_get(c,f); }
