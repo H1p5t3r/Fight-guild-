@@ -6,6 +6,7 @@ import {createCombatCore} from '../web/generated/fight-core.mjs';
 import {CombatPreview} from '../web/workbench/simulation.mjs';
 import {Workshop,attackBoxes} from '../web/workbench/model.mjs';
 import {makeHitKey,validateHitTimeline} from '../web/hitboxes.mjs';
+import {cursorAnchor,cursorIndex} from '../web/workbench/cursor.mjs';
 const pack=JSON.parse(await readFile('build/workbench-pack.json','utf8'));
 const wasm=await WebAssembly.compile(await readFile('web/generated/fight.wasm'));
 const sample=()=>{
@@ -63,6 +64,18 @@ test('Disabling a command normal prevents its execution and cancel destination w
   const data=structuredClone(pack.defaults),m=data.characters[5].moves[8];m.enabled=0;
   const e=new Engine({exports:createCombatCore()});e.loadData(data);e.reset();e.step(INPUT.right|INPUT.P,0);
   assert.equal(e.state().players[0].move,0);assert.equal(e.api.fg_can_cancel(5,0,8,1),0);
-  const preview=new CombatPreview(pack).record(data,5,8);assert.equal(preview.frames.length,1);assert.match(preview.warnings[0],/disabled/);
+  const preview=new CombatPreview(pack).record(data,5,8);assert.equal(preview.geometryOnly,true);assert.equal(preview.executed,false);assert.equal(preview.contacts.length,0);assert.ok(preview.frames.some(f=>f.selectedFrame===m.startup));assert.match(preview.warnings[0],/disabled/);
   m.enabled=1;e.loadData(data);e.reset();e.step(INPUT.right|INPUT.P,0);assert.equal(e.state().players[0].move,8);
+});
+
+test('Shared cursor preserves the move frame when contact or approach changes elapsed time',()=>{
+  const preview=new CombatPreview(pack),hit=preview.record(pack.defaults,5,0),miss=preview.record(pack.defaults,5,0,{gap:400});
+  const index=hit.frames.findIndex(f=>f.selectedFrame===6),anchor=cursorAnchor(hit,index);
+  assert.equal(miss.frames[cursorIndex(miss,anchor)].selectedFrame,6);
+  assert.notEqual(index,cursorIndex(miss,anchor),'Hitstop changes elapsed tick, not selected move frame');
+  const running=preview.record(pack.defaults,5,0,{entry:'run'});
+  assert.equal(running.frames[cursorIndex(running,anchor)].selectedFrame,6);
+  const freeze=hit.frames.findIndex(f=>f.selectedFrame===5)+2;
+  assert.equal(cursorIndex(hit,cursorAnchor(hit,freeze)),freeze,'Keep position within an impact freeze');
+  assert.equal(cursorIndex(miss,{tick:99999}),miss.frames.length-1);
 });

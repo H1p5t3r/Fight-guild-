@@ -1,3 +1,4 @@
+import {ready,seekMoveFrame,dragHandle} from './workbench-ui-helpers.mjs';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
 import {readFile,mkdir} from 'node:fs/promises';
@@ -27,13 +28,8 @@ try {
   await page.locator('#field-startup').fill('7');await page.locator('#field-damage').fill('44');
   await page.locator('#tab-hit').click();await page.locator('#field-reach').fill('96.13');
   assert.equal((await data(page)).characters[5].moves[0].reach,9613);
-  await page.locator('#frame').evaluate(el=>{el.value='7';el.dispatchEvent(new Event('input',{bubbles:true}));});
-  await page.locator('#preview').scrollIntoViewIfNeeded();
-  const bounds=await page.locator('#preview').boundingBox();
-  const m=(await data(page)).characters[5].moves[0],scale=Math.min((bounds.width-38)/260,(bounds.height-42)/200);
-  const originX=(bounds.width-260*scale)/2+90*scale,originY=(bounds.height-200*scale)/2+185*scale;
-  const x=bounds.x+originX+m.reach/100*scale,y=bounds.y+originY-(m.bottom+m.height/2)/100*scale;
-  await page.mouse.move(x,y);await page.mouse.down();await page.mouse.move(x+20,y,{steps:5});await page.mouse.up();
+  await seekMoveFrame(page,7);
+  await dragHandle(page,'base','reach',20);
   assert.ok((await data(page)).characters[5].moves[0].reach>9613,'Dragging a hitbox edge updates game units');
   await page.locator('#undo').click();assert.equal((await data(page)).characters[5].moves[0].reach,9613);
   await page.locator('#tab-hurt').click();assert.equal(await page.locator('#field-hurt-width').isDisabled(),true);
@@ -45,10 +41,7 @@ try {
   assert.equal(Object.keys((await data(page)).characters[5].moves[0].hurtboxes.active).length,3);
   await page.locator('#hurt-extension').check();assert.equal(Object.keys((await data(page)).characters[5].moves[0].hurtboxes.active).length,4);
   await page.locator('#hurt-extension').uncheck();await page.locator('#hurt-region').selectOption('torsoArms');
-  await page.locator('#preview').scrollIntoViewIfNeeded();const hurtCanvas=await page.locator('#preview').boundingBox();
-  const hurtScale=Math.min((hurtCanvas.width-38)/260,(hurtCanvas.height-42)/200);
-  const hx=hurtCanvas.x+(hurtCanvas.width-260*hurtScale)/2+130*hurtScale,hy=hurtCanvas.y+(hurtCanvas.height-200*hurtScale)/2+100*hurtScale;
-  await page.mouse.move(hx,hy);await page.mouse.down();await page.mouse.move(hx+15,hy,{steps:4});await page.mouse.up();
+  await dragHandle(page,'hurt',2,15);
   assert.ok((await data(page)).characters[5].moves[0].hurtboxes.active.torsoArms[2]>4000);
   await page.locator('#undo').click();assert.deepEqual((await data(page)).characters[5].moves[0].hurtboxes.active.torsoArms,[-2000,6000,4000,11000]);
   await page.locator('#hurt-phase').selectOption('windup');assert.equal(await page.locator('#hurt-custom').isChecked(),false);await page.locator('#hurt-custom').check();

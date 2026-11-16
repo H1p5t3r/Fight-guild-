@@ -88,7 +88,7 @@ export class Workshop {
   remember(before,group='') {
     if(JSON.stringify(before)===JSON.stringify(this.data))return false;
     const previous=this.undoStack.at(-1),now=Date.now();
-    if(!group||!previous||previous.group!==group||now-previous.time>850)this.undoStack.push({data:before,group,time:now});
+    if(this.redoStack.length||!group||!previous||previous.group!==group||now-previous.time>850)this.undoStack.push({data:before,group,time:now});
     else previous.time=now;
     if(this.undoStack.length>40)this.undoStack.shift();
     this.redoStack=[];return true;

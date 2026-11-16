@@ -83,3 +83,10 @@ and replays them with existing sprites. Explicit authoring helpers place the
 fighters and start contextual follow-ups in isolation; the UI labels those
 follow-ups as isolated tests. JS/WASM parity and native JSON-import tests protect
 the shared behavior and portable data.
+
+The workshop has one combat scene and timeline. Paused box handles transform
+through the attacker’s world position and facing. Drags freeze the current
+scene transform; on release, the core records the edited exchange and resolves
+the saved move-frame cursor into its new elapsed tick, preserving hitstop
+position where possible. Disabled or unmapped moves use labelled geometry-only
+frames in the same scene, without executing or fabricating contacts.

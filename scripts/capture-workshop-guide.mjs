@@ -13,13 +13,14 @@ try {
   await page.locator('#field-startup').waitFor();
   await page.waitForFunction(()=>moveWorkshop.preview()?.contacts.length>0);
   const tick=await page.evaluate(()=>moveWorkshop.preview().contacts[0].tick);
-  await page.locator('#test-frame').evaluate((n,tick)=>{n.value=String(tick);n.dispatchEvent(new Event('input',{bubbles:true}));},tick);
+  await page.locator('#frame').evaluate((n,tick)=>{n.value=String(tick);n.dispatchEvent(new Event('input',{bubbles:true}));},tick);
   await page.evaluate(()=>document.fonts.ready);
   await page.waitForFunction(()=>document.getElementById('preview-empty').hidden);
   await page.screenshot({path:'docs/workshop-guide/editor-overview.png'});
   await page.locator('#tab-hurt').click();
   await page.locator('#hurt-custom').check();
   await page.locator('#hurt-region').selectOption('torsoArms');
+  await page.waitForFunction(()=>!moveWorkshop.cursor().pending);
   await page.locator('#preview').screenshot({path:'docs/workshop-guide/hurtbox-preview.png'});
   console.log('Captured the editor overview and active-phase hurtbox preview.');
 } finally {

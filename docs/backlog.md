@@ -127,3 +127,6 @@ Requested scope: make repeatable character images performing directed actions, w
 - Active-frame hitbox keys, optional multi-hit groups and per-key impact values.
 - Prominent attack enable switch for optional command normals and other slots.
 - Schema-14 JSON migration, native import/save, rollback and updated control PDF.
+
+- Unified the browser editor and combat preview: one timeline and target scene,
+  direct box dragging in both facings, and move-frame preservation after edits.

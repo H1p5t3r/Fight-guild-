@@ -1,6 +1,6 @@
 import {Engine,INPUT,BUTTONS,MOVE_IDS} from '../engine.mjs';
 import {createCombatCore} from '../generated/fight-core.mjs';
-import {inputName} from './model.mjs';
+import {inputName,totalFrames} from './model.mjs';
 
 export const directionBits=(n,facing=1)=>{
   const x=(n-1)%3-1,y=Math.floor((n-1)/3)-1;
@@ -47,7 +47,7 @@ export class CombatPreview {
     };
     const step=(input,stage)=>{e.step(input,defenderInput());elapsed++;return capture(input,stage);};
     capture(0,'Ready');
-    if(!m.enabled){result.warnings.push('Attack disabled. Enable it to test execution.');return result;}
+    if(!m.enabled){result.warnings.push('Attack disabled: geometry only. You can edit its boxes here; enable it to test movement and contact.');return this.geometryRecord(result,m);}
     const forward=directionBits(6,facing);
     if(entry==='walk'||entry==='run')for(let i=0;i<12;++i)step(forward|(entry==='run'&&i===0?INPUT.dash:0),entry==='run'?'Run / step approach':'Walk approach');
     if(m.air||entry==='jump'||entry==='forwardJump'){
@@ -63,7 +63,7 @@ export class CombatPreview {
     }else if(m.category===4){
       step(directionBits(slot===23?4:6,facing)|INPUT.P|INPUT.K,'Throw input');
     }else if(simple){
-      if(!m.simpleDirection){result.warnings.push('This attack has no simple-input mapping.');return result;}
+      if(!m.simpleDirection){result.warnings.push('This attack has no simple-input mapping. Showing editable geometry only.');return this.geometryRecord(result,m);}
       step(directionBits(m.simpleDirection,facing)|INPUT.simple|(INPUT.P<<m.simpleButton),'Simple input');
     }else{
       const sequence=m.motion?String(m.motion).split('').map(Number):[m.direction];
@@ -80,9 +80,18 @@ export class CombatPreview {
       const actual=state.players[0].lastMove;
       result.warnings.push(actual>=0?`Input selected ${MOVE_IDS[actual]}, not ${m.id}. Check mappings, airborne state and competing moves.`:'The selected input did not start this attack. Check its mapping and grounded/airborne requirement.');
     }
+    if(!result.executed){result.warnings.push('Showing the selected move’s geometry only; no contacts are simulated.');return this.geometryRecord(result,m);}
     if(result.frames.length>=2400)result.warnings.push('Preview stopped at the recording limit.');
     result.totalDamage=1000-state.players[1].health;
     result.displacement=(state.players[0].x-result.frames[0].state.players[0].x)/100;
+    return result;
+  }
+  geometryRecord(result,move){
+    // Disabled/unmapped attacks stay editable in the same scene. These frames
+    // are explicitly labelled geometry-only and never claim a simulated hit.
+    const ready=result.frames[0];
+    result.frames=Array.from({length:totalFrames(move)+1},(_,i)=>({...structuredClone(ready),selectedFrame:i,stage:'Geometry only'}));
+    result.contacts=[];result.executed=false;result.geometryOnly=true;result.totalDamage=0;result.displacement=0;
     return result;
   }
 }

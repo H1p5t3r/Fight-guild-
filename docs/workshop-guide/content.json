@@ -2,7 +2,7 @@
   "title": "Move Workshop — Complete Control Guide",
   "edition": "16 November 2026",
   "schema": 14,
-  "source_revision": "schema-14 combat preview and hitbox timeline edition",
+  "source_revision": "schema-14 shared attack workspace edition",
   "pages": [
     {
       "id": "cover", "section": "FIELD GUIDE", "title": "Build the move.\nDefine the moment.",
@@ -11,7 +11,7 @@
         {"type":"image", "path":"editor-overview.png", "width":495, "caption":"The current browser editor, shown with Fillet’s 5P. Screenshots are examples, not changes to your draft."},
         {"type":"callout", "title":"Every control, in plain language", "text":"Covers all 68 effective move settings, combat playback, timed hitboxes and multi-hit controls, phase hurtboxes, art notes and photos, navigation, history and files."},
         {"type":"text", "text":"Use the contents and alphabetical field index to find a control. The PDF is searchable; search the exact label shown in the editor. Units and allowed ranges are printed beside each field."},
-        {"type":"text", "text":"Verified against browser editor / combat schema 14, combat preview and hitbox timeline edition. This describes Fight Guild’s implementation; Strive-inspired systems are not a claim of exact Guilty Gear behavior."}
+        {"type":"text", "text":"Verified against browser editor / combat schema 14, shared attack workspace edition. This describes Fight Guild’s implementation; Strive-inspired systems are not a claim of exact Guilty Gear behavior."}
       ]
     },
     {
@@ -39,9 +39,9 @@
           ["px", "Game-space pixels, not screen pixels. Camera zoom does not change a value. Distance fields accept two decimal places."],
           ["px/f", "Game-space pixels per advancing action frame. Used for active travel and launch speed."],
           ["%", "Whole percentages. Some fields multiply a value; Scaling cost instead subtracts percentage points from remaining combo scale."],
-          ["Facing", "Inputs and attack coordinates are relative to the fighter. Pose editing faces right; combat playback can face either way. Shapes mirror with facing."]
+          ["Facing", "Inputs and attack coordinates are relative to the fighter. Editing and playback share the selected facing. Shapes and handles mirror with the fighter."]
         ]},
-        {"type":"callout", "title":"Test contact, then play the matchup", "text":"Test against target runs movement, contact, hitstop and reactions using the combat rules. Edit poses & boxes provides draggable geometry. Both use existing art. Test full combo routes and match feel in Godot."}
+        {"type":"callout", "title":"Test contact, then play the matchup", "text":"One attack workspace runs movement, contact, hitstop and reactions. Pause or scrub to edit boxes on the fighter in that same scene. Existing art is reused. Test full combo routes and match feel in Godot."}
       ]
     },
     {
@@ -105,16 +105,16 @@
       ]
     },
     {
-      "id":"preview", "section":"WORKSPACE", "title":"Read the move & inspect its frames",
+      "id":"preview", "section":"WORKSPACE", "title":"Read, play & edit the same attack",
       "blocks":[
         {"type":"controls", "items":[
           {"label":"Move title, nickname & badges", "text":"The large notation is the fixed slot ID. Your nickname comes from Art brief. Input shows the mapping built from the current fields; changing a mapping does not rename the slot. The other badges show move type and enabled status."},
           {"label":"STARTUP / BASE DAMAGE / BASE ON BLOCK / TOTAL", "text":"Base values, excluding key overrides. Base on block = blockstun − (active − 1 + recovery): first-active contact, no cancel or FD. Positive favors the attacker. Total = startup − 1 + active + recovery, excluding hitstop."},
           {"label":"Hit / Hurt / Push / Art", "text":"Shows or hides orange attack geometry, blue body hurtboxes, green pushbox and sprite artwork. These are preview visibility toggles; hiding a box never disables it in gameplay."},
-          {"label":"Pose Play / Pause", "text":"In Edit poses & boxes, loops existing windup, active and recovery poses at half speed. Pause to drag collision handles. This transport does not simulate an opponent."},
-          {"label":"Preview frame slider / frame count", "text":"Scrubs to a precise frame and pauses playback. The readout is current frame / total frames. Scrubbing in Hurtboxes also switches to the corresponding phase profile."},
-          {"label":"Windup / Active / Recovery timeline", "text":"Click a colored segment to jump to its first frame. Segment widths show duration. Zero-length recovery has no segment. Dashed orange geometry outside active frames is a reference outline and cannot hit then."},
-          {"label":"Orange box center & handles", "text":"In Edit poses & boxes, open Hit & movement and pause on an active frame. Drag the selected custom key box, or the ordinary straight strike, to move it; drag an edge to resize it. Base hooks and throws use numeric geometry."},
+          {"label":"Play / Pause", "text":"Plays the exchange from the current tick and stops at the end. Play at the end starts again. Pause to edit boxes directly on the attacker while the target remains visible."},
+          {"label":"Attack timeline / tick count", "text":"Scrubs the exchange and pauses playback. The count is elapsed tick / total ticks, including approach and hitstop. Move frame is shown separately. Box controls follow the selected attack frame and phase."},
+          {"label":"Windup / Active / Recovery timeline", "text":"Click a colored segment to jump to that attack phase in the shared exchange. Widths show authored durations. Zero-length recovery has no segment. Dashed orange boxes outside active frames are reference outlines."},
+          {"label":"Orange box center & handles", "text":"Open Hit & movement and pause on an active frame. Drag a custom key box or ordinary straight strike to move it; drag an edge to resize it. Handles follow position and facing. Base hooks and throws use numeric geometry."},
           {"label":"Blue box center & handles", "text":"On Hurtboxes, enable a custom profile and select a body region. Drag the selected box to move it or its edge handles to resize it. One drag is one undo group."}
         ]},
         {"type":"callout", "title":"Frame example: 5 / 3 / 9", "text":"Frames 1–4 are windup, 5–7 are active, and 8–16 are recovery. The first ordinary actionable frame is 17. With 11f blockstun, the first-active On block estimate is 11 − (2 + 9) = 0f. Contact two active frames later improves it by 2f."},
@@ -125,14 +125,14 @@
       "id": "combat-preview",
       "section": "WORKSPACE",
       "title": "Test contact & input movement",
-      "intro": "Test against target records an isolated exchange using the game’s combat rules. Changing move data or test settings prepares a new recording.",
+      "intro": "The attack workspace records an isolated exchange using the game’s combat rules. Editing and playback share one canvas and timeline; no view switch is needed.",
       "blocks": [
         {
           "type": "controls",
           "items": [
             {
-              "label": "Preview mode",
-              "text": "Test against target shows combat playback. Edit poses & boxes provides draggable geometry. Opening Hit & movement or Hurtboxes selects pose editing; you can switch back."
+              "label": "Shared attack workspace",
+              "text": "Keep the target in view while tuning. Open Hit & movement for orange attack handles, or Hurtboxes for blue body handles. Pause or scrub to edit. Opening a tab keeps the scene and selected tick."
             },
             {
               "label": "Target / Reaction",
@@ -151,23 +151,23 @@
               "text": "Face Right or Left. Traditional enters the mapped direction or motion plus button. Simple uses the move’s simple modifier mapping. These test settings do not rewrite the move."
             },
             {
-              "label": "Combat Play / Pause / Restart",
-              "text": "Play advances to the end, then stops. Play at the end starts again. Pause holds the current tick. Restart returns to tick 0 without changing the draft."
+              "label": "Restart",
+              "text": "Returns to tick 0, including any approach or command inputs, without changing the draft. Windup, Active and Recovery jump directly to the corresponding move frames."
             },
             {
-              "label": "Combat slider / Playback speed",
-              "text": "Scrub through recorded ticks, including impact freeze and recovery. Quarter, half (default), or full speed changes playback only. The combat simulation remains 60 ticks per second."
+              "label": "Playback speed / edit continuity",
+              "text": "Quarter, half (default), or full speed affects playback only. After edits, the exchange recalculates at 60 ticks per second and keeps the selected move frame even if hitstop or approach changes elapsed time."
             },
             {
               "label": "Input, frame, stun & result readouts",
-              "text": "Shows actual input, move frame/stage, shared freeze and target stun. Totals count hits, blocks, scaled damage and attacker displacement from the start. Visibility toggles apply in both modes."
+              "text": "Shows actual input, move frame/stage, shared freeze and target stun. Totals count hits, blocks, scaled damage and attacker displacement. Updating exchange means new contact results are being calculated."
             }
           ]
         },
         {
           "type": "callout",
           "title": "Read the preview warning",
-          "text": "Disabled attacks cannot run. Context-only follow-ups start in isolation; their entry route is not tested. Conflicting mappings may execute another move and are flagged. Existing sprites and placeholder recovery poses are reused; new animation frames are not generated."
+          "text": "Disabled or unmapped attacks show editable geometry only, with no simulated contacts. Enable or fix their mapping to test execution. Context-only follow-ups start in isolation; entry routes are not tested. Existing sprites and recovery placeholders are reused."
         }
       ]
     },
@@ -222,7 +222,7 @@
     },
     {
       "id":"hitbox", "section":"HIT & MOVEMENT", "title":"Attack shape & reach",
-      "intro":"Coordinates are relative to the fighter’s root, with positive X forward and positive Y upward. The preview faces right; combat mirrors the shape when the fighter turns.",
+      "intro":"Coordinates are relative to the fighter’s root: positive X forward and positive Y upward. The scene and editing handles mirror when facing changes. Moving the fighter does not change a box’s local coordinates.",
       "blocks":[
         {"type":"fields", "items":[
           {"key":"hitboxBack", "text":"Horizontal position of the strike’s rear edge. Negative values extend behind the fighter. For a hook, this is the starting back position of the moving spear segment."},
@@ -255,7 +255,7 @@
             },
             {
               "label": "Add key at active … / Remove key",
-              "text": "Add copies the current key, or inherits the base move if none exists. It starts at the active frame under the pose cursor. Remove deletes the selected key. Both are undoable. Up to 32 keys per move."
+              "text": "Add copies the current key, or inherits base geometry if none exists. It starts at the active frame under the shared timeline cursor. Remove deletes the selected key. Both are undoable. Up to 32 keys per move."
             },
             {
               "label": "Key starts at active frame",
@@ -564,7 +564,7 @@
       "blocks":[
         {"type":"table", "headers":["What you see", "What to check"], "rows":[
           ["Cannot find a field", "Expand Counter hits & scaling inside Timing, or Inputs & identity inside Cancels & inputs. Scroll the editor panel and the tab strip on narrow windows."],
-          ["Cannot drag the orange box", "Select Edit poses & boxes → Hit & movement. Pause on an active frame with Hit visible. Choose a custom key box or ordinary straight strike."],
+          ["Cannot drag the orange box", "Open Hit & movement and pause on an active frame. Enable Hit visibility and choose a key box or straight strike."],
           ["Cannot edit blue boxes", "Open Hurtboxes, enable Custom boxes for this phase, select a body box and pause. Keep every edge within ±500px and dimensions at least 1px."],
           ["More Active did not add hits", "Enable Allow multiple hits and use distinct hit numbers. More active time or overlapping boxes alone cannot add hits."],
           ["Higher counter tier did not add slowdown", "Enter Counter freeze, Counter slowdown and bonuses directly. The browser tier dropdown changes classification/presentation, not timing values."],
@@ -572,7 +572,7 @@
           ["Starter damage did not reduce the first hit", "That is expected. It scales later hits only when this attack starts the combo."],
           ["A cancel will not happen", "Check destination enabled/air state, route permissions, Cancel events, source opening/closing frames and the buffered input. Whiff normally needs both whiff controls. Same-slot repeat needs Repeat this move."],
           ["Follow-up works on hit but not block", "Check Follow-up requires contact on the destination: it specifically means an unblocked hit. Also check the source’s Block event and follow-up window."],
-          ["Launch or movement does not appear in preview", "Switch to Test against target. Check approach, spacing and warnings about disabled moves or conflicting inputs."],
+          ["Launch or movement does not appear in preview", "Play the timeline. Check approach, spacing and warnings. Disabled or unmapped moves show geometry only."],
           ["Sprite stayed unchanged", "Geometry edits and art notes do not regenerate art. Artwork pose chooses an existing pose; a new sprite pass is separate work."],
           ["Changes vanished on another PC", "Local drafts do not sync. Import the JSON you downloaded from the original PC. Notes/photos require the workshop copy, not a later Godot export."]
         ]},

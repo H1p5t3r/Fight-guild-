@@ -55,3 +55,7 @@ Active-frame hitbox keys are distinct from whole-phase body hurtboxes. Multiple
 boxes default to one hit; separate hit numbers require Allow multiple hits.
 The guide also documents the prominent Attack enabled switch and real combat
 preview settings. Timelines survive native import/save; art metadata still does not.
+
+The shared workspace edition removes the preview-mode selector and separate
+pose transport. One combat timeline supports playback and box dragging in either
+facing; edits preserve the selected move frame as contact timing changes.

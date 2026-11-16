@@ -76,21 +76,29 @@ removes its hitbox timeline and custom hurtbox profiles while retaining its art
 notes and photos.
 A successful import is also undoable.
 
-## Test contact and movement
+## Play and edit in one workspace
 
-**Test against target** runs the same combat rules as the game. Choose the target,
+The shared attack workspace runs the same combat rules as the game. Choose the target,
 Take the hit / Standing guard / Crouching guard / Faultless Defense / Airborne,
 and an approach: standing, walking, running, jumping or forward jumping. Set the
 body gap, facing and Traditional / Simple inputs. The preview enters the move’s
 mapped command; air-only attacks jump automatically. Run or step movement comes
 from that fighter’s actual movement profile and carries into attacks.
 
-Play, pause, restart or scrub through the recorded exchange at quarter, half or
-full speed. The readouts show input, move frame, freeze, target stun, hit/block
+Play, pause, restart or scrub through the exchange at quarter, half or full
+speed. Open **Hit & movement** or **Hurtboxes** to drag boxes directly on the
+attacker in this same scene. The target stays visible, and the handles follow
+the attacker’s position and facing. There is one canvas and one timeline.
+
+After numeric edits or a drag, the exchange recalculates while keeping the
+selected move frame, even if contact changes hitstop or approach changes timing.
+Windup / Active / Recovery jump to those move phases in the same timeline. The readouts show input, move frame, freeze, target stun, hit/block
 counts, scaled damage and attacker travel. Existing sprites follow the actual
 movement, hit and block reactions. Context-only follow-ups are started in
 isolation with a warning; this does not verify their entry route. Conflicting
-input mappings also show a warning. Disabled moves cannot run.
+input mappings also show a warning. Disabled or unmapped moves remain editable
+in the same scene, labelled **Geometry only**, with no simulated contacts.
+Enable the move or correct the input mapping to test execution.
 
 This is an isolated spacing/reaction test, not an interactive training match.
 It uses existing artwork, with placeholder recovery poses; it does not generate
@@ -98,7 +106,8 @@ new animation frames. Check full combo routes and match feel in Godot.
 
 ## Change hitboxes during active frames
 
-1. Open **Hit & movement**. This switches the preview to **Edit poses & boxes**.
+1. Open **Hit & movement**, then pause or scrub the shared timeline. The attack
+   and its target stay in the same scene.
 2. Scrub to an active frame and choose **Add key at active …**. Active frame 1 is
    the move’s first possible contact frame, not the start of its windup.
 3. A key holds until the next key. **Use base geometry** follows the ordinary
@@ -167,7 +176,7 @@ preserved through import/export, but are not tuning controls in this page.
   handles, or edit a selected custom key box. Numeric fields cover base hook and
   throw geometry. The inherited hook preview draws eight
   moving spear segments; the rope is not a hitbox.
-- Both preview modes use existing pose studies. New hitbox dimensions do not
+- The shared workspace uses existing pose studies. New hitbox dimensions do not
   automatically refit the art. Recovery uses idle/crouch/air placeholders.
 - The **Hurtboxes** tab edits body coverage while pushboxes remain read-only.
   Weapons have no hurtboxes, and each pose retains at most four body boxes.
