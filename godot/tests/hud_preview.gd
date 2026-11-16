@@ -1,7 +1,7 @@
 extends SceneTree
 
 # Native visual fixture. Changes are in memory only and never saved to move data.
-# --development / --training / --neutral / --collisions / --review / --low-health / --fd / --p1 N / --p2 N / --screenshot PATH
+# --development / --training / --neutral / --collisions / --review / --low-health / --hits N / --fd / --p1 N / --p2 N / --screenshot PATH
 var game: Control
 
 func _initialize() -> void:
@@ -43,7 +43,9 @@ func run() -> void:
 			game.model.core.set_training_momentum(1, 6500)
 			for _tick in 5: game.model.step(16, 2 | 2048)
 		else:
-			for hit in (12 if args.has("--low-health") else 6):
+			var hit_count := 12 if args.has("--low-health") else 6
+			if args.has("--hits"): hit_count = clampi(int(args[args.find("--hits") + 1]), 2, 20)
+			for hit in hit_count:
 				while game.model.state().hitstop > 0: game.model.step(0, 0)
 				for _tick in 5: game.model.step(16 | (4 if hit % 2 else 0), 128 if hit == 0 else 0)
 		game.match_score.wins = [1, 1]

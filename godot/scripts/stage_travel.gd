@@ -1,6 +1,8 @@
 class_name StageTravel
 extends RefCounted
 
+const TRAVEL_WEIGHTS := [0.26, 0.72, 1.0]
+
 # Every pose, layer and particle is a function of authoritative break ticks.
 # No retained tween state: seeking, pausing and rollback reproduce the same view.
 static func describe(state: Dictionary) -> Dictionary:
@@ -28,6 +30,9 @@ static func destination_camera(state: Dictionary, bounds: Vector2) -> Dictionary
 	var xs := [42000, 58000] if shot.actor == int(shot.side < 0) else [58000, 42000]
 	return ArenaStage.camera({"players": [{"x": xs[0]}, {"x": xs[1]}]}, bounds)
 
+static func layer_offset(bounds: Vector2, layer: int, side: int, pan: float, incoming: bool) -> Vector2:
+	return Vector2(bounds.x * TRAVEL_WEIGHTS[layer] * side * (1.0 - pan if incoming else -pan), 0)
+
 static func draw_background(canvas: Control, state: Dictionary, reduced: bool) -> void:
 	var shot := describe(state)
 	var p: float = shot.progress
@@ -44,9 +49,10 @@ static func draw_background(canvas: Control, state: Dictionary, reduced: bool) -
 		ArenaStage.draw_boundaries(canvas, shot.target, destination.zoom, destination.offset, 0, 0.0, blend)
 		return
 	for layer in 3:
-		var travel: float = canvas.size.x * [0.26, 1.30, 1.0][layer]
-		var source_offset := Vector2(-shot.side * travel * t, 0)
-		var target_offset := Vector2(shot.side * travel * (1.0 - t), 0)
+		# Foreground travels fastest. Keep architecture overlap wide enough for the
+		# narrower scenic view, instead of opening a vertical gap during the break.
+		var source_offset := layer_offset(canvas.size, layer, shot.side, t, false)
+		var target_offset := layer_offset(canvas.size, layer, shot.side, t, true)
 		# Distant atmosphere crossfades; the architecture and floor pass laterally.
 		var source_alpha := 1.0 - t if layer == 0 else 1.0 - smoothstep(0.72, 1.0, t)
 		var target_alpha := t if layer == 0 else smoothstep(0.0, 0.28, t)
@@ -82,7 +88,7 @@ static func fighter(state: Dictionary, player: int, bounds: Vector2, reduced: bo
 	var arc := sin(flight * PI)
 	var scale := lerpf(float(camera.zoom), float(destination.zoom), flight) * (1.0 - 0.32 * arc)
 	var point := start.lerp(finish, flight)
-	var headroom := maxf(0.0, point.y - ArenaStage.FRAME_HEAD_HEIGHT * bounds.x / 1000.0 * scale - 140.0 * minf(bounds.x / 1248.0, 1.0))
+	var headroom := maxf(0.0, point.y - ArenaStage.FRAME_HEAD_HEIGHT * bounds.x / 1000.0 * scale - FightHud.TOP_CLEARANCE * minf(bounds.x / 1248.0, 1.0))
 	var lift := minf(arc * bounds.y * (0.25 if attacker else 0.34), headroom)
 	point.y -= lift
 	var phase := -1 if p < 0.10 else 0

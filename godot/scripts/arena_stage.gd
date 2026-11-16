@@ -10,6 +10,7 @@ const SUBTITLES := ["THE GUILDS' COMMON GROUND", "EAST QUAY · FISHERMEN'S END",
 const COLORS := [Color("c4ad86"), Color("82b8bd"), Color("d2a178")]
 const DEPTHS := [0.16, 0.54, 1.0]
 const LAYERS := ["far", "mid", "floor"]
+const TRAVEL_EDGE_FADE := 0.06
 # The supplied 1280x720 Strive reference has ~430px standing silhouettes (60%).
 # Our arena sits below the application header: 66% of its height is ~59% of the
 # full match window. Keep the canonical 150-world-pixel bodies/collisions intact.
@@ -55,27 +56,32 @@ static func camera(state: Dictionary, bounds: Vector2, _reduced: bool = false) -
 	if state.is_empty() or bounds.x <= 0 or bounds.y <= 0: return {"center": 0.5, "zoom": 1.0, "offset": Vector2.ZERO}
 	var separation := absf(float(state.players[0].x - state.players[1].x)) / 100000.0
 	var floor_y := bounds.y - 76.0
-	var hud_bottom := 140.0 * minf(bounds.x / 1248.0, 1.0)
+	var hud_bottom := FightHud.TOP_CLEARANCE * minf(bounds.x / 1248.0, 1.0)
 	var highest := maxf(float(state.players[0].get("y", 0)), float(state.players[1].get("y", 0))) / 100.0
 	var zoom := bounds.y * BODY_SCREEN_HEIGHT / (BODY_HEIGHT * bounds.x / 1000.0)
 	# Essential framing also applies with reduced motion: both fighters stay visible.
 	# No pose-dependent zoom or retained tween; pauses and rollback render identically.
 	zoom = minf(zoom, 1.0 / (separation + HORIZONTAL_MARGIN * 2.0))
 	zoom = minf(zoom, maxf(1.0, floor_y - hud_bottom) / ((highest + FRAME_HEAD_HEIGHT) * bounds.x / 1000.0))
-	var edge_center := minf(0.5, (0.5 - WALL_SCREEN_MARGIN) / zoom)
+	# Narrow development views need enough world-space room for a body beyond its
+	# pushbox, even when the minimum screen-relative margin would be too small.
+	var wall_margin := maxf(WALL_SCREEN_MARGIN, 0.055 * zoom)
+	var edge_center := minf(0.5, (0.5 - wall_margin) / zoom)
 	var center := clampf(float(state.players[0].x + state.players[1].x) / 200000.0, edge_center, 1.0 - edge_center)
 	return {"center": center, "zoom": zoom, "offset": Vector2(bounds.x * (0.5 - center * zoom), floor_y * (1.0 - zoom))}
 
 static func layer_rect(bounds: Vector2, image_size: Vector2, depth: float, center: float, zoom: float) -> Rect2:
-	# Extra image width covers the complete camera range without mirrored/repeated buildings.
-	var factor := bounds.x / image_size.x * maxf(1.14, 1.10 + depth * 0.20) * lerpf(1.0, zoom, depth)
-	var shift := (center - 0.5) * bounds.x * depth * zoom
-	# Very wide spacing/high launches can pull farther back than the authored view.
-	# Maintain coverage in both axes while preserving the image's aspect ratio.
-	factor = maxf(factor, (bounds.x + absf(shift) * 2.0) / image_size.x)
+	# These are matched scenic plates, not fighter-sized world geometry. Keep their
+	# shared y=735 architecture/floor seam registered and y=900 at the fighters' feet.
+	# A restrained, common zoom preserves the composition with the closer camera.
+	var scenic_zoom := clampf(1.0 + (zoom - 2.25) * 0.08, 0.92, 1.04)
+	var factor := bounds.x / image_size.x * 1.24 * scenic_zoom
 	factor = maxf(factor, (bounds.y - 76.0) / (image_size.y * (900.0 / 1024.0)))
 	factor = maxf(factor, 76.0 / (image_size.y * (124.0 / 1024.0)))
 	var extent := image_size * factor
+	# Pan within the actual image overscan; changing depth only changes horizontal
+	# travel, never layer size or vertical registration. No stretched/tiled scenery.
+	var shift := (clampf(center, 0.0, 1.0) - 0.5) * (extent.x - bounds.x) * depth
 	var x := (bounds.x - extent.x) * 0.5 - shift
 	return Rect2(Vector2(x, bounds.y - 76.0 - image_size.y * (900.0 / 1024.0) * factor), extent)
 
@@ -90,7 +96,7 @@ static func draw_plane(canvas: Control, stage: int, layer: int, center: float, z
 		return
 	# Fade the exposed image ends during travel; ordinary play uses the untouched
 	# image. Three textured quads avoid a rectangular seam between adjoining floors.
-	var stops := [0.0, 0.08, 0.92, 1.0]
+	var stops := [0.0, TRAVEL_EDGE_FADE, 1.0 - TRAVEL_EDGE_FADE, 1.0]
 	var alphas := [0.0, opacity, opacity, 0.0]
 	for i in 3:
 		var a: float = stops[i]

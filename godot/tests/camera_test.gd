@@ -28,11 +28,17 @@ func run() -> void:
 					var feet: Vector2 = camera.offset + Vector2(xs[p] * area.x / 100000.0, area.y - 76 - ys[p] * area.x / 100000.0) * camera.zoom
 					var body_half_width: float = 65.0 * area.x / 1000.0 * camera.zoom
 					var head_y: float = feet.y - 152.0 * area.x / 1000.0 * camera.zoom
-					check(feet.x - body_half_width >= -0.01 and feet.x + body_half_width <= area.x + 0.01, "Fighter body leaves a horizontal screen edge")
-					check(head_y >= 135.0 * minf(area.x / 1248.0, 1.0) and feet.y <= area.y - 75.99, "Airborne head or feet leave the fighting area")
+					check(feet.x - body_half_width >= -0.01 and feet.x + body_half_width <= area.x + 0.01, "Fighter body leaves a horizontal screen edge: %s at %s" % [area, xs])
+					check(head_y >= 110.0 * minf(area.x / 1248.0, 1.0) and feet.y <= area.y - 75.99, "Airborne head or feet leave the fighting area")
+				var anchor_y := -1.0
 				for depth in ArenaStage.DEPTHS:
 					var plane := ArenaStage.layer_rect(area, Vector2(1536, 1024), depth, camera.center, camera.zoom)
 					check(plane.position.x <= 0.01 and plane.position.y <= 0.01 and plane.end.x >= area.x - 0.01 and plane.end.y >= area.y - 0.01, "Zoom exposes a parallax image edge")
+					var seam_y := plane.position.y + plane.size.y * 735.0 / 1024.0
+					if anchor_y >= 0: check(absf(seam_y - anchor_y) < 0.01, "Architecture detached from the floor at the camera zoom")
+					anchor_y = seam_y
+					check(seam_y >= area.y * 0.5 and seam_y <= area.y * 0.75, "Floor overwhelms the arena or scenery disappears")
+					check(absf(plane.position.y + plane.size.y * 900.0 / 1024.0 - (area.y - 76.0)) < 0.01, "Fighters no longer stand on the scenic baseline")
 	var model := CombatModel.new()
 	model.reset([5, 4])
 	for _tick in 22: model.step(8, 0)

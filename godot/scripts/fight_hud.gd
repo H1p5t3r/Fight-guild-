@@ -4,6 +4,7 @@ extends RefCounted
 const INK := Color("081219")
 const IVORY := GuildTheme.IVORY
 const PLAYER_COLORS := [Color("e6b96e"), Color("7dcece")]
+const TOP_CLEARANCE := 112.0
 static var portraits := {}
 
 static func cut(rect: Rect2, corner: float = 10.0) -> PackedVector2Array:
@@ -85,9 +86,9 @@ static func stamp(canvas: CanvasItem, value: String, center: Vector2, font_size:
 
 static func fighter_name(canvas: CanvasItem, value: String, point: Vector2, right: bool) -> void:
 	var font := CombatTypography.FONT
-	if right: point.x -= font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, 31).x
-	canvas.draw_string_outline(font, point + Vector2(2, 2), value, HORIZONTAL_ALIGNMENT_LEFT, -1, 31, 3, INK)
-	canvas.draw_string(font, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, 31, IVORY)
+	if right: point.x -= font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, 26).x
+	canvas.draw_string_outline(font, point + Vector2(1, 1), value, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, 4, INK)
+	canvas.draw_string(font, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, IVORY)
 
 static func draw(canvas: Control, state: Dictionary, wins: Array, round_call: String, diagnostics: bool) -> void:
 	var scale_factor := minf(canvas.size.x / 1248.0, 1.0)
@@ -101,43 +102,39 @@ static func draw(canvas: Control, state: Dictionary, wins: Array, round_call: St
 		var x := area.x - width - 24 if right else 24.0
 		var accent: Color = PLAYER_COLORS[p]
 		var guild: Color = FighterSelectPortrait.COLORS[fighter.character]
-		var panel := Rect2(x, 10, width, 64)
-		plate(canvas, Rect2(panel.position + Vector2(0, 5), panel.size), Color(0, 0, 0, 0.35), Color(0, 0, 0, 0), 16)
-		plate(canvas, panel, Color("11222c"), Color(guild, 0.7), 16, 1)
-		var strip := Rect2(x + width - 6 if right else x, 25, 5, 35)
-		canvas.draw_rect(strip, accent)
-		var bust_x := x + width - 72 if right else x + 8
-		plate(canvas, Rect2(bust_x, 16, 60, 53), Color(guild, 0.15), Color(guild, 0.42), 8)
+		# Names live on the HP rail; the portrait caps its outside end. The old
+		# rectangular nameplate row is gone, bringing the whole health display up.
+		var rail := Rect2(x if right else 88.0, 18, width - 64.0, 38)
+		draw_health(canvas, rail, fighter.health, guild, right)
+		var name_x := rail.end.x - 12.0 if right else rail.position.x + 12.0
+		fighter_name(canvas, str(CombatModel.CHARACTERS[fighter.character]).to_upper(), Vector2(name_x, 46), right)
+		var bust_x := area.x - 92.0 if right else 16.0
+		plate(canvas, Rect2(bust_x, 5, 76, 88), INK, guild, 14, 2)
+		plate(canvas, Rect2(bust_x + 4, 9, 68, 80), Color(guild, 0.16), Color(guild, 0.35), 11)
 		var bust := portrait(int(fighter.character))
-		var image_size := bust.get_size() * minf(58.0 / bust.get_width(), 51.0 / bust.get_height())
-		var image_rect := Rect2(Vector2(bust_x + 30, 41.5) - image_size * 0.5, image_size)
+		var image_size := bust.get_size() * minf(70.0 / bust.get_width(), 72.0 / bust.get_height())
+		var image_rect := Rect2(Vector2(bust_x + 38, 45) - image_size * 0.5, image_size)
 		if right: image_rect.size.x = -image_rect.size.x
 		canvas.draw_texture_rect(bust, image_rect, false)
-		var name_x := x + width - 86 if right else x + 86
-		fighter_name(canvas, str(CombatModel.CHARACTERS[fighter.character]).to_upper(), Vector2(name_x, 43), right)
-		text(canvas, FighterSelectPortrait.GUILDS[fighter.character], Vector2(name_x, 63), detail_size, guild, right)
-		var badge_x := x + 11 if right else x + width - 42
-		plate(canvas, Rect2(badge_x, 20, 30, 23), accent, Color(accent, 0.9), 5)
-		centered(canvas, "P" + str(p + 1), Vector2(badge_x + 15, 37), 16, INK)
-		var rail := Rect2(x, 81, width, 27)
-		draw_health(canvas, rail, fighter.health, guild, right)
-		var mode := "%d / 1000" % fighter.health if diagnostics else "SIMPLE + MOTIONS" if fighter.simple else "MOTION INPUTS"
-		# Keep the status in the HUD strip, clear of the closer fighter silhouettes.
-		text(canvas, "POSITIVE BONUS" if fighter.positiveTime > 0 else mode, Vector2(x + width if right else x, 135), detail_size,
-			Color("a8e9b1") if fighter.positiveTime > 0 else GuildTheme.MUTED, right)
+		centered(canvas, "P" + str(p + 1), Vector2(bust_x + 38, 87), 12, accent, 2)
+		var detail: String = "%d / 1000" % fighter.health if diagnostics else FighterSelectPortrait.GUILDS[fighter.character]
+		if fighter.simple: detail += " · SIMPLE"
+		text(canvas, "POSITIVE BONUS" if fighter.positiveTime > 0 else detail,
+			Vector2(rail.end.x - 8 if right else rail.position.x + 8, 79), detail_size,
+			Color("a8e9b1") if fighter.positiveTime > 0 else guild, right, 2)
 		for mark in MatchScore.WINS_REQUIRED:
-			var marker_x := x + 10 + mark * 23 if right else x + width - 10 - mark * 23
-			var diamond := PackedVector2Array([Vector2(marker_x, 123), Vector2(marker_x + 7, 130), Vector2(marker_x, 137), Vector2(marker_x - 7, 130), Vector2(marker_x, 123)])
+			var marker_x := rail.position.x + 10 + mark * 23 if right else rail.end.x - 10 - mark * 23
+			var diamond := PackedVector2Array([Vector2(marker_x, 68), Vector2(marker_x + 7, 75), Vector2(marker_x, 82), Vector2(marker_x - 7, 75), Vector2(marker_x, 68)])
 			canvas.draw_colored_polygon(diamond, accent if wins[p] > mark else Color("162730"))
 			canvas.draw_polyline(diamond, accent if wins[p] > mark else Color("4b5c62"), 1.4, true)
-			if wins[p] > mark: canvas.draw_circle(Vector2(marker_x, 130), 2, IVORY)
+			if wins[p] > mark: canvas.draw_circle(Vector2(marker_x, 75), 2, IVORY)
 		draw_momentum(canvas, fighter, Rect2(x, area.y - 49, width, 23), accent, right)
 	var center := area.x * 0.5
-	plate(canvas, Rect2(center - 66, 10, 132, 100), INK, Color("687170"), 22, 2)
-	plate(canvas, Rect2(center - 60, 16, 120, 88), Color("14242d"), Color(GuildTheme.BRASS, 0.40), 18)
-	centered(canvas, round_call.to_upper(), Vector2(center, 36), 16, GuildTheme.BRASS)
-	centered(canvas, "%02d" % ceili(state.remaining / 60.0), Vector2(center, 88), 55, Color("ed9a7f") if state.remaining <= 600 else IVORY, 2)
-	centered(canvas, "PRACTICE" if diagnostics else "FIRST TO TWO", Vector2(center, 136), 12, GuildTheme.MUTED)
+	plate(canvas, Rect2(center - 60, 6, 120, 86), INK, Color("687170"), 20, 2)
+	plate(canvas, Rect2(center - 55, 11, 110, 76), Color("14242d"), Color(GuildTheme.BRASS, 0.40), 16)
+	centered(canvas, round_call.to_upper(), Vector2(center, 28), 14, GuildTheme.BRASS)
+	centered(canvas, "%02d" % ceili(state.remaining / 60.0), Vector2(center, 76), 48, Color("ed9a7f") if state.remaining <= 600 else IVORY, 2)
+	centered(canvas, "PRACTICE" if diagnostics else "FIRST TO TWO", Vector2(center, 109), 12, GuildTheme.MUTED)
 	centered(canvas, "F / G", Vector2(center, area.y - 24), 26, Color(GuildTheme.BRASS, 0.48))
 	canvas.draw_set_transform(Vector2.ZERO)
 

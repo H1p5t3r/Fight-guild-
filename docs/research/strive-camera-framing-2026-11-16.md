@@ -15,7 +15,7 @@ Live Steam access was blocked by this environment's network policy. The previous
 
 ## Fight Guild implementation
 
-Before this change, the starting Fillet/Shark matchup occupied about **31%** of the full match window height. It now occupies approximately **59%**, about **1.9×** the previous standing height. At the default 1280 × 720 logical viewport / 1440 × 810 window, their rendered silhouettes are about 477px / 476px tall in the exported-resolution capture. The 1248 × 642 logical arena is smaller than the viewport because of the surrounding application header and margins.
+Before this change, the starting Fillet/Shark matchup occupied about **31%** of the full match window height. It now occupies approximately **59%**, about **1.9×** the previous standing height. With the subsequent compact health-bar layout, their rendered silhouettes are about 481px / 480px tall at the default 1280 × 720 logical viewport / 1440 × 810 window. The 1248 × 642 logical arena is smaller than the viewport because of the surrounding application header and margins.
 
 `ArenaStage.camera` targets a canonical 150-world-pixel body at 66% of arena height, then limits zoom by horizontal separation and available vertical headroom below the HUD. Standing silhouettes differ slightly from that canonical height. Body geometry, attack reach, movement speed and arena collision dimensions remain the existing authored values; presentation applies the same camera projection to sprites, weapons, hit/hurt/push boxes and wall planes.
 

@@ -40,6 +40,25 @@ func _initialize() -> void:
 	check(feedback.zoom() > 1 and feedback.cards[0].tier == 3, "Counter camera/text classification missing")
 	feedback.reduced_motion = true
 	check(feedback.zoom() == 1, "Reduced motion still zoomed the camera")
+	var display := state.duplicate(true)
+	display.players[0].comboTime = 90
+	for reduced in [false, true]:
+		feedback.reduced_motion = reduced
+		for age in [0, 15]:
+			display.players[0].comboAge = age
+			var previous := 0
+			var at_two := 0
+			var at_ten := 0
+			for count in [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20, 100]:
+				display.players[0].comboDisplay = count
+				feedback.refresh(display, Vector2(1248, 642))
+				var size: int = feedback.cards[0].font_size
+				if count == 2: at_two = size
+				if count == 10: at_ten = size
+				check(size > previous if count <= 10 else size == at_ten, "Combo size does not grow toward and stop at ten hits")
+				check(feedback.cards[0].center_y < 642 * 0.55, "Combo counter fell back to the bottom of the screen")
+				previous = size
+			check(at_two < at_ten * 0.5, "A short combo starts too large")
 	for tick in 32: model.step(0, 0)
 	state = model.state()
 	check(state.players[1].counterSlowHeld == 1 and state.players[1].counterSlowTime == 34 and state.players[1].stun == 60, "First slowed frame did not hold defender")

@@ -55,6 +55,17 @@ func run() -> void:
 			var travel := StageTravel.describe(now)
 			check(travel.source == shot.source and travel.target == shot.target, "Route changed across reset")
 			check(now.wallBreakX == positions and now.remaining == state.remaining, "Travel lost origin or advanced round timer")
+			if travel.pan >= 0.28 and travel.pan <= 0.72:
+				var from := StageTravel.source_camera(now, bounds)
+				var to := StageTravel.destination_camera(now, bounds)
+				for layer in [1, 2]:
+					var a := ArenaStage.layer_rect(bounds, Vector2(1536, 1024), ArenaStage.DEPTHS[layer], from.center, from.zoom)
+					var b := ArenaStage.layer_rect(bounds, Vector2(1536, 1024), ArenaStage.DEPTHS[layer], to.center, to.zoom)
+					a.position += StageTravel.layer_offset(bounds, layer, side, travel.pan, false)
+					b.position += StageTravel.layer_offset(bounds, layer, side, travel.pan, true)
+					a = a.grow_individual(-a.size.x * ArenaStage.TRAVEL_EDGE_FADE, 0, -a.size.x * ArenaStage.TRAVEL_EDGE_FADE, 0)
+					b = b.grow_individual(-b.size.x * ArenaStage.TRAVEL_EDGE_FADE, 0, -b.size.x * ArenaStage.TRAVEL_EDGE_FADE, 0)
+					check(minf(a.position.x, b.position.x) <= 0 and maxf(a.end.x, b.end.x) >= bounds.x and maxf(a.position.x, b.position.x) <= minf(a.end.x, b.end.x), "Wall travel exposes a gap between scenic layers")
 			for player in 2:
 				var presentation := StageTravel.fighter(now, player, bounds, false)
 				check(is_finite(presentation.position.x) and is_finite(presentation.scale), "Non-finite presentation")
