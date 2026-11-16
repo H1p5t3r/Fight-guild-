@@ -99,7 +99,7 @@ func observe(model: CombatModel, before: Dictionary, raw: Vector2i) -> void:
 			"spacing": abs(after.players[0].x - after.players[1].x) / 100.0,
 			"cancelMask": fighter.get("cancelMask", 0), "inputAge": fighter.get("inputAge", -1),
 			"damage": fighter.get("lastDamage", 0), "baseDamage": fighter.get("lastBaseDamage", 0), "scaling": fighter.get("damageScale", 100),
-			"gravity": fighter.gravityPercent})
+			"gravity": fighter.gravityPercent, "slowHeld": fighter.get("counterSlowHeld", 0), "slowTime": fighter.get("counterSlowTime", 0)})
 	trace.append(tick)
 	if trace.size() > TRACE_LENGTH: trace.pop_front()
 	if recording_now:

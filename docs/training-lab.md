@@ -9,3 +9,5 @@ Record captures both players for up to 1,800 simulation ticks (30 seconds), star
 **Frame lab** pauses the simulation and shows the last 180 ticks for both players. Hover over a tick to inspect move phase, numpad/button input, stun, spacing, contact advantage, cancel windows, input age, last-hit damage scaling and gravity. White markers indicate contacts, dim cells indicate hitstop, and a gap readout measures actionable ticks between guard contacts. **+1 tick** advances the paused simulation; **Resume** closes the inspector and resumes play. Merely closing the inspector leaves the game paused.
 
 This tool extends the existing input history, collision display, pause and frame-step controls. It is confined to offline practice; recordings never change online inputs or simulation state.
+
+Counter slowdown is shown as **½ SPEED** with remaining ticks. Yellow diagonal marks identify held defender ticks on the timeline; shared hitstop remains separate. This distinguishes real defender-only slowdown from extra stun or a longer shared freeze.

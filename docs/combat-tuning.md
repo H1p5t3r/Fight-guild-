@@ -1,4 +1,4 @@
-# Combat tuning: schema 9
+# Combat tuning: schema 10
 
 This implements the approved priorities from the [saved Dustloop review](research/strive-dustloop-2026-11-15.md). Values are editable Fight Guild defaults, not a claim of exact Strive parity. The user clarified that block carryover and post-stun throw protection are wanted; **Just Guard / Instant Block timing mechanics are not**.
 
@@ -62,18 +62,18 @@ Ordinary block pushback now transfers the displacement blocked by a corner to th
 
 Attack level 0–4 selects the per-level FD cost and can populate hitstop/hitstun/blockstun from the source's standard table. The editable timing values remain authoritative. Level −1 uses custom timing and no extra per-level FD charge.
 
-Counter tiers set presentation strength and can populate these Fight Guild bonus presets:
+Counter tiers select presentation strength and can populate these presets:
 
-| Tier | Extra hitstun | Extra shared hitstop |
-| --- | --- | --- |
-| 0: minimal | 0 | 0 |
-| 1: small | 4 | 3 |
-| 2: medium | 8 | 6 |
-| 3: large | 12 | 10 |
+| Tier | Extra stun / stop | Total counter freeze | Defender half-speed duration |
+| --- | --- | --- | --- |
+| 0: minimal | 0 / 0 | Base hitstop | 0 |
+| 1: small | 4 / 3 | Base hitstop + 3 | 0 |
+| 2: medium | 0 / 0 | 21 ticks | 25 ticks |
+| 3: large | 0 / 0 | 31 ticks | 35 ticks |
 
-Tier −1 retains custom values and the original notice size. Heavy counters have larger callouts; rekka and hook follow-up families use minimal effects by default. Button names do not enforce a preset; each move can be edited individually.
+Counter freeze −1 uses base hitstop + extra stop; 0–60 overrides the total. Counter slowdown is 0–120 ticks. The defender holds every other tick after shared freeze, giving 13/18 held ticks in the medium/large presets. Additional shared hitstop pauses the slowdown. Small counters retain the existing Fight Guild tuning. Direct edits override presets; tier −1 retains custom timing. Heavy counters use a larger word and brief camera zoom. Rekka and hook follow-up families use minimal effects by default. Button names do not enforce a preset.
 
-Counter vulnerability is a separate mask on the interrupted move: startup = 1, active = 2, recovery = 4. Most moves default to startup + active; throw whiffs also permit recovery counter hits. A non-counterable startup/active interruption is an ordinary hit, while recovery remains punishable. Throws do not inflict counter hits. Persistent victim-only slowdown is not approximated by these shared hitstop bonuses.
+Counter vulnerability is a separate mask on the interrupted move: startup = 1, active = 2, recovery = 4. Most moves default to startup + active; throw whiffs also permit recovery counter hits. A non-counterable startup/active interruption is an ordinary hit, while recovery remains punishable. Throws do not inflict counter hits. See [counter clock and presentation rules](combat-feedback.md) for follow-up, input and reduced-motion behavior.
 
 ## Wall priming
 
@@ -83,8 +83,8 @@ A grounded strike that fills the wall primes it; a subsequent grounded hit can s
 
 ## Persistence and verification
 
-Schema/core 9 has 67 move fields, nine movement fields per fighter and 38 global rules. New per-fighter timers, combo factors, move-use counts and diagnostic values are integer rollback state. Online fingerprints include all tuning; editing is locked online.
+Schema/core 10 has 69 move fields, nine movement fields per fighter and 38 global rules. New per-fighter timers, combo factors, move-use counts and diagnostic values are integer rollback state. Online fingerprints include all tuning; editing is locked online.
 
-Schema 1–7 saves preserve authored damage, counter bonuses, movement and existing global rates. Existing moves migrate with unrestricted legacy windows, unscaled legacy combo damage and zero authored landing recovery. Their saved FD holding/contact costs and original combo-gravity increment are preserved. New defensive carryover, throw grace and wall rules are supplied as editable defaults. Schema 8 tuning is preserved when moving to schema 9. All pre-schema-9 saves retain immediate jump takeoff and zero empty-jump landing recovery. **Restore default move set** opts into the complete new starter balance; export existing edits first if you want to keep both versions.
+Schema 1–7 saves preserve authored damage, counter bonuses, movement and existing global rates. Existing moves migrate with unrestricted legacy windows, unscaled legacy combo damage and zero authored landing recovery. Their saved FD holding/contact costs and original combo-gravity increment are preserved. New defensive carryover, throw grace and wall rules are supplied as editable defaults. Schema 8–9 tuning is preserved when moving to schema 10. Pre-schema-10 saves keep additive counter freeze and no defender slowdown, preserving their authored counter bonuses. All pre-schema-9 saves retain immediate jump takeoff and zero empty-jump landing recovery. **Restore default move set** opts into the complete new starter balance; export existing edits first if you want to keep both versions.
 
 Verification includes inclusive cancel-window boundaries and buffered entry, hit/block conditions, same-button routes, proration/floors/reset, repetition after X, prejump duration/strike vulnerability/throw immunity/inertia, landing input lock/buffering, high/low carryover and gaps, five-frame throw grace, guard-break exceptions, ground/air FD costs, ordinary corner transfer, both wall states, counter masks, old-save migration, editor application and delayed-input rollback.

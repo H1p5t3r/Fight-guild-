@@ -2,12 +2,12 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 9
+const DATA_VERSION := 10
 const MOMENTUM_MAX := 10000
 const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
 const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D", "2D", "4P+K", "6P+K", "236K", "236S>6S", "236S>2S", "214S", "j.214P", "214S>P", "j.214P>P"]
-const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange", "enabled", "artPose", "followFrom", "followFrom2", "followHit", "travelSpeed", "inertiaPercent", "pullFrames", "pullGap", "hitAngle", "normalCancelStart", "normalCancelEnd", "specialCancelStart", "specialCancelEnd", "jumpCancelStart", "jumpCancelEnd", "followCancelStart", "followCancelEnd", "cancelOn", "starterProration", "comboScaling", "minimumDamage", "landingRecovery", "attackLevel", "counterTier", "counterVulnerable"]
+const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange", "enabled", "artPose", "followFrom", "followFrom2", "followHit", "travelSpeed", "inertiaPercent", "pullFrames", "pullGap", "hitAngle", "normalCancelStart", "normalCancelEnd", "specialCancelStart", "specialCancelEnd", "jumpCancelStart", "jumpCancelEnd", "followCancelStart", "followCancelEnd", "cancelOn", "starterProration", "comboScaling", "minimumDamage", "landingRecovery", "attackLevel", "counterTier", "counterVulnerable", "counterFreezeFrames", "counterSlowFrames"]
 const MOVEMENT_FIELDS := ["forwardStyle", "walkSpeed", "runSpeed", "runAcceleration", "stepSpeed", "stepFrames", "backSpeed", "backFrames", "attackFriction"]
 const RULES := ["buttonBuffer", "motionWindow", "motionGap"]
 const MOMENTUM_RULES := ["movementGain", "attackGain", "blockedAttackGain", "damageTakenGain", "guardGain", "specialGain", "fdDrain", "fdBlockCost", "fdDamageCost", "fdPushPercent"]
@@ -15,7 +15,7 @@ const RECOVERY_RULES := ["gravityAfter", "gravityStep", "gravityCap", "wallThres
 const TUNING_RULES := ["fdAirDrain", "fdLevelCost", "cornerPushTransfer", "wallMidCap", "groundedWallPrime", "blockCarryover", "throwGraceFrames", "airLandingFrames", "repeatAfter", "repeatGravityStep"]
 const JUMP_RULES := ["prejumpFrames", "emptyLandingFrames"]
 const RULE_COUNT := 38 # Input, Momentum, recovery/walls, tuning, then jump rules.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime"]
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld"]
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
 
@@ -32,7 +32,7 @@ func state_hash() -> int:
 	return core.checksum()
 
 func state() -> Dictionary:
-	var result := {"frame": frame(), "remaining": core.read_value(-1, 1), "hitstop": core.read_value(-1, 2), "winner": core.read_value(-1, 3), "wallBreakTime": core.read_value(-1, 4), "wallBreakActor": core.read_value(-1, 5), "wallBreakSide": core.read_value(-1, 6), "stage": core.read_value(-1, 7), "wallBreakDuration": core.read_value(-1, 8), "players": []}
+	var result := {"frame": frame(), "remaining": core.read_value(-1, 1), "hitstop": core.read_value(-1, 2), "winner": core.read_value(-1, 3), "wallBreakTime": core.read_value(-1, 4), "wallBreakActor": core.read_value(-1, 5), "wallBreakSide": core.read_value(-1, 6), "stage": core.read_value(-1, 7), "wallBreakDuration": core.read_value(-1, 8), "impactTime": core.read_value(-1, 9), "impactDuration": core.read_value(-1, 10), "impactActor": core.read_value(-1, 11), "impactTier": core.read_value(-1, 12), "impactX": core.read_value(-1, 13), "impactY": core.read_value(-1, 14), "players": []}
 	for p in 2:
 		var fighter := {}
 		for i in STATE_FIELDS.size():
@@ -127,6 +127,9 @@ func load_data(value: Variant) -> String:
 			if version < 8:
 				var legacy_defaults := [1, 0, 1, 0, 1, 0, 1, 0, 7, 100, 0, 0, 0, -1, -1, 3]
 				for i in legacy_defaults.size(): definition[FIELDS[51+i]] = legacy_defaults[i]
+			if version < 10:
+				definition.counterFreezeFrames = -1
+				definition.counterSlowFrames = 0
 			for i in FIELDS.size():
 				var field: String = FIELDS[i]
 				if not valid_integer(definition.get(field)):

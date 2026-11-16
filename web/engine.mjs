@@ -1,7 +1,7 @@
 export const BUTTONS = ['P', 'K', 'S', 'Hs', 'D'];
 export const MOVE_IDS = ['5P','5K','5S','5Hs','2P','2K','2S','2Hs','6P','6K','6S','6Hs','6D','5D','236P','236S','623Hs','j.P','j.K','j.S','j.Hs','j.D','2D','4P+K','6P+K','236K','236S>6S','236S>2S','214S','j.214P','214S>P','j.214P>P'];
 export const CHARACTERS = ['Anvil', 'Hammer', 'Smoke', 'Tapper', 'Shark', 'Fillet'];
-export const FIELDS = ['button','category','direction','motion','air','startup','active','recovery','damage','hitstun','blockstun','hitstop','pushback','reach','bottom','height','specialCancel','jumpCancel','whiffCancel','selfCancel','advance','simpleDirection','simpleButton','normalRoutes','commandRoutes','hitLevel','chipDamage','guardBreak','counterHitstun','counterHitstop','reversalEligible','hitboxBack','airPushback','blockPushback','launch','airLaunch','knockdown','knockdownFrames','wakeupFrames','wallDamage','throwRange','enabled','artPose','followFrom','followFrom2','followHit','travelSpeed','inertiaPercent','pullFrames','pullGap','hitAngle',"normalCancelStart","normalCancelEnd","specialCancelStart","specialCancelEnd","jumpCancelStart","jumpCancelEnd","followCancelStart","followCancelEnd","cancelOn","starterProration","comboScaling","minimumDamage","landingRecovery","attackLevel","counterTier","counterVulnerable"];
+export const FIELDS = ['button','category','direction','motion','air','startup','active','recovery','damage','hitstun','blockstun','hitstop','pushback','reach','bottom','height','specialCancel','jumpCancel','whiffCancel','selfCancel','advance','simpleDirection','simpleButton','normalRoutes','commandRoutes','hitLevel','chipDamage','guardBreak','counterHitstun','counterHitstop','reversalEligible','hitboxBack','airPushback','blockPushback','launch','airLaunch','knockdown','knockdownFrames','wakeupFrames','wallDamage','throwRange','enabled','artPose','followFrom','followFrom2','followHit','travelSpeed','inertiaPercent','pullFrames','pullGap','hitAngle',"normalCancelStart","normalCancelEnd","specialCancelStart","specialCancelEnd","jumpCancelStart","jumpCancelEnd","followCancelStart","followCancelEnd","cancelOn","starterProration","comboScaling","minimumDamage","landingRecovery","attackLevel","counterTier","counterVulnerable","counterFreezeFrames","counterSlowFrames"];
 export const INPUT = { left:1,right:2,down:4,up:8,P:16,K:32,S:64,Hs:128,D:256,dash:512,simple:1024,faultless:2048 };
 export const MOVEMENT_FIELDS = ['forwardStyle', 'walkSpeed', 'runSpeed', 'runAcceleration', 'stepSpeed', 'stepFrames', 'backSpeed', 'backFrames', 'attackFriction'];
 const RULES = ['buttonBuffer','motionWindow','motionGap'];
@@ -40,10 +40,11 @@ export class Engine {
     new Uint8Array(this.api.memory.buffer,this.api.fg_state_ptr(),bytes.length).set(bytes);
   }
   state() {
-    const keys=['x','y','facing','health','move','age','stun','guarding','contact','combo','event','lastMove','raw','character','simple','momentum','faultless','blockReaction','blockAge','blockAdvantage','guardBreak','throwInvulnerable','comboDisplay','comboTime','comboAge','hitNotice','hitNoticeTime','reversalTime','reversalInputAge','posePhase','poseIndex','reaction','knockdown','recoveryTime','comboReceived','gravityPercent','wallDamage','wallSplatTime','positiveTime','vx','running','dashTicks','pullTime','pullOwner','weaponBackX','weaponBackY','weaponTipX','weaponTipY','weaponVisible','carryVx','carryTime',"landingTime","throwGrace","cancelMask","inputAge","lastDamage","damageScale","starterProration","comboScale","counterTier","repeatGravity","lastBaseDamage","prejumpTime"];
+    const keys=['x','y','facing','health','move','age','stun','guarding','contact','combo','event','lastMove','raw','character','simple','momentum','faultless','blockReaction','blockAge','blockAdvantage','guardBreak','throwInvulnerable','comboDisplay','comboTime','comboAge','hitNotice','hitNoticeTime','reversalTime','reversalInputAge','posePhase','poseIndex','reaction','knockdown','recoveryTime','comboReceived','gravityPercent','wallDamage','wallSplatTime','positiveTime','vx','running','dashTicks','pullTime','pullOwner','weaponBackX','weaponBackY','weaponTipX','weaponTipY','weaponVisible','carryVx','carryTime',"landingTime","throwGrace","cancelMask","inputAge","lastDamage","damageScale","starterProration","comboScale","counterTier","repeatGravity","lastBaseDamage","prejumpTime","counterSlowTime","counterSlowHeld"];
     return {
       frame:this.frame, remaining:this.api.fg_get(-1,1), hitstop:this.api.fg_get(-1,2),winner:this.api.fg_get(-1,3),
       wallBreakTime:this.api.fg_get(-1,4),wallBreakActor:this.api.fg_get(-1,5),wallBreakSide:this.api.fg_get(-1,6),stage:this.api.fg_get(-1,7),wallBreakDuration:this.api.fg_get(-1,8),
+      impactTime:this.api.fg_get(-1,9),impactDuration:this.api.fg_get(-1,10),impactActor:this.api.fg_get(-1,11),impactTier:this.api.fg_get(-1,12),impactX:this.api.fg_get(-1,13),impactY:this.api.fg_get(-1,14),
       players:[0,1].map(p=>Object.fromEntries(keys.map((key,f)=>[key,this.api.fg_get(p,f)])))
     };
   }
@@ -56,7 +57,7 @@ export class Engine {
     if(!Number.isInteger(value)||!this.api.fg_move_set(c,m,FIELDS.indexOf(key),value)) throw new Error(`Invalid ${key}: ${value}`);
   }
   data() {
-    return { schema:9, coreVersion:this.api.fg_version(),
+    return { schema:10, coreVersion:this.api.fg_version(),
       inputRules:Object.fromEntries(RULES.map((r,i)=>[r,this.api.fg_rule_get(i)])),
       momentumRules:Object.fromEntries(MOMENTUM_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+3)])),
       recoveryRules:Object.fromEntries(RECOVERY_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+13)])),
@@ -88,7 +89,7 @@ export class Engine {
       data=structuredClone(data);
       if(data.characters?.length!==6) throw new Error('Character move list does not match this build');
       const defaults=[1,0,1,0,1,0,1,0,7,100,0,0,0,-1,-1,3];
-      for(const character of data.characters) for(const m of character.moves) FIELDS.slice(51).forEach((key,i)=>m[key]=defaults[i]);
+      for(const character of data.characters) for(const m of character.moves) FIELDS.slice(51,67).forEach((key,i)=>m[key]=defaults[i]);
       data.tuningRules={...this.defaultData.tuningRules,fdAirDrain:data.momentumRules.fdDrain,fdLevelCost:0,repeatGravityStep:0};
       data.schema=data.coreVersion=8;
     }
@@ -97,7 +98,12 @@ export class Engine {
       data.jumpRules={prejumpFrames:0,emptyLandingFrames:0};
       data.schema=data.coreVersion=9;
     }
-    if(data?.schema!==9||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
+    if(data?.schema===9&&data.coreVersion===9) {
+      data=structuredClone(data);
+      for(const character of data.characters) for(const move of character.moves) Object.assign(move,{counterFreezeFrames:-1,counterSlowFrames:0});
+      data.schema=data.coreVersion=10;
+    }
+    if(data?.schema!==10||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
     const previous=this.data();
     const apply=d=>{
       RULES.forEach((r,i)=>{ if(!Number.isInteger(d.inputRules?.[r])||!this.api.fg_rule_set(i,d.inputRules[r])) throw new Error(`Invalid ${r}`); });

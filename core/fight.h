@@ -3,7 +3,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 9, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 67;
+constexpr int VERSION = 10, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 69;
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
               STAB_GROUND=30, STAB_AIR=31;
@@ -27,7 +27,7 @@ enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery
              NormalCancelStart, NormalCancelEnd, SpecialCancelStart, SpecialCancelEnd,
              JumpCancelStart, JumpCancelEnd, FollowCancelStart, FollowCancelEnd, CancelOn,
              StarterProration, ComboScaling, MinimumDamage, LandingRecovery, AttackLevel,
-             CounterTier, CounterVulnerable };
+             CounterTier, CounterVulnerable, CounterFreezeFrames, CounterSlowFrames };
 enum KnockdownKind { NoKnockdown, SoftKnockdown, HardKnockdown };
 enum Reaction { Free, AirReel, Downed, Waking, WallSplat, Reeled };
 enum MobilityField { ForwardStyle, WalkSpeed, RunSpeed, RunAcceleration, StepSpeed, StepFrames,
@@ -67,11 +67,13 @@ struct Fighter {
     int combo_proration, combo_scale, repeat_gravity, move_uses[MOVE_COUNT];
     int last_damage, damage_scale, last_base_damage, counter_tier;
     int prejump_time;
+    int slow_time, slow_phase, slow_held;
     Sample history[HISTORY];
 };
 struct State {
     int frame, remaining, hitstop, winner;
     int wall_break_time, wall_break_actor, wall_break_side, stage;
+    int impact_time, impact_duration, impact_actor, impact_tier, impact_x, impact_y;
     Fighter players[2];
 };
 struct Rules {
@@ -134,7 +136,7 @@ private:
     void land(Fighter& fighter);
     void finish_wall_break();
     void move_horizontal(Fighter& fighter);
-    void reel_targets();
+    void reel_targets(const bool advances[2]);
     bool double_forward(const Fighter& fighter, const Sample& sample) const;
 };
 // Compatibility instance for the original C ABI and native test runner.

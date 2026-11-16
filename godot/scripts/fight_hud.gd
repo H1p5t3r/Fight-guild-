@@ -77,19 +77,17 @@ static func portrait(character: int) -> AtlasTexture:
 	return portraits[character]
 
 static func stamp(canvas: CanvasItem, value: String, center: Vector2, font_size: int, accent: Color, alpha: float = 1.0, inverted: bool = false) -> void:
-	var width := GuildTheme.SEMIBOLD.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
-	var height := float(font_size) * 1.05 + 28
-	var rect := Rect2(center - Vector2(width * 0.5 + 32, height * 0.5), Vector2(width + 64, height))
-	plate(canvas, Rect2(rect.position + Vector2(8, 8), rect.size), Color(accent, alpha * 0.24), Color(accent, alpha * 0.35), 22, 1)
-	plate(canvas, rect, Color(accent if inverted else INK, alpha * 0.96), Color(accent, alpha), 22, 2)
-	canvas.draw_line(rect.position + Vector2(26, 5), Vector2(rect.end.x - 12, rect.position.y + 5), Color(IVORY, alpha * 0.28), 2, true)
-	canvas.draw_line(Vector2(rect.position.x + 12, rect.end.y - 5), rect.end - Vector2(26, 5), Color(accent if not inverted else INK, alpha * 0.7), 3, true)
-	for i in 3:
-		var x := rect.position.x - 16.0 - i * 9
-		canvas.draw_line(Vector2(x, center.y + 12), Vector2(x + 8, center.y - 12), Color(accent, alpha * (0.9 - i * 0.2)), 3, true)
-		var rx := rect.end.x + 10.0 + i * 9
-		canvas.draw_line(Vector2(rx, center.y + 12), Vector2(rx + 8, center.y - 12), Color(accent, alpha * (0.9 - i * 0.2)), 3, true)
-	centered(canvas, value, center + Vector2(0, font_size * 0.34), font_size, Color(INK if inverted else IVORY, alpha), 0 if inverted else 2)
+	var available: float = canvas.size.x if canvas is Control else canvas.get_viewport_rect().size.x
+	var width := minf(available * 0.84, CombatTypography.FONT.get_string_size(value.to_upper(), HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x + 40)
+	CombatTypography.rule(canvas, center + Vector2(0, font_size * 0.67), width, accent, alpha * 0.8)
+	CombatTypography.word(canvas, value.to_upper(), center, font_size, available * 0.84,
+		accent if inverted else CombatTypography.PAPER, alpha, -0.045, 7 if inverted else 5)
+
+static func fighter_name(canvas: CanvasItem, value: String, point: Vector2, right: bool) -> void:
+	var font := CombatTypography.FONT
+	if right: point.x -= font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, 31).x
+	canvas.draw_string_outline(font, point + Vector2(2, 2), value, HORIZONTAL_ALIGNMENT_LEFT, -1, 31, 3, INK)
+	canvas.draw_string(font, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, 31, IVORY)
 
 static func draw(canvas: Control, state: Dictionary, wins: Array, round_call: String, diagnostics: bool) -> void:
 	var scale_factor := minf(canvas.size.x / 1248.0, 1.0)
@@ -116,7 +114,7 @@ static func draw(canvas: Control, state: Dictionary, wins: Array, round_call: St
 		if right: image_rect.size.x = -image_rect.size.x
 		canvas.draw_texture_rect(bust, image_rect, false)
 		var name_x := x + width - 86 if right else x + 86
-		text(canvas, str(CombatModel.CHARACTERS[fighter.character]).to_upper(), Vector2(name_x, 43), 34, IVORY, right, 1)
+		fighter_name(canvas, str(CombatModel.CHARACTERS[fighter.character]).to_upper(), Vector2(name_x, 43), right)
 		text(canvas, FighterSelectPortrait.GUILDS[fighter.character], Vector2(name_x, 63), detail_size, guild, right)
 		var badge_x := x + 11 if right else x + width - 42
 		plate(canvas, Rect2(badge_x, 20, 30, 23), accent, Color(accent, 0.9), 5)

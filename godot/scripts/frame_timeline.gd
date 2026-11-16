@@ -32,6 +32,7 @@ func _draw() -> void:
 			if tick.freeze: color = color.darkened(0.55)
 			var rect := Rect2(35+i*width, 30+p*28, maxf(1, width-1), 21)
 			draw_rect(rect, color)
+			if sample.get("slowHeld", 0): draw_line(rect.position, rect.end, CombatTypography.COUNTER, 1)
 			if sample.contact: draw_line(rect.position, rect.position + Vector2(width, 0), Color.WHITE, 3)
 			if sample.cancelMask: draw_line(rect.end - Vector2(width, 0), rect.end, GuildTheme.BRASS, 2)
 	if lab.trace.is_empty(): text("Play or record an exchange, then inspect its last 180 ticks here.", Vector2(10, 112)); return
@@ -42,6 +43,7 @@ func _draw() -> void:
 		var item: Dictionary = tick.players[p]
 		var move: String = CombatModel.MOVE_IDS[item.move] if item.move >= 0 else "—"
 		var details := "P%d · %s %s · age %df · input %s · stun %df · spacing %.1fpx" % [p+1, move, item.phase, item.age, item.notation, item.stun, item.spacing]
+		if item.get("slowTime", 0): details += " · ½ SPEED %df" % item.slowTime
 		if item.gap >= 0: details += " · gap %df" % item.gap
 		if item.advantage != null: details += " · attacker %+df" % item.advantage
 		text(details, Vector2(10, 103+p*44))

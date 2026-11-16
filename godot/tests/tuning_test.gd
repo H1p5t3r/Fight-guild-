@@ -10,7 +10,7 @@ func _initialize() -> void:
 func run() -> void:
 	var model := CombatModel.new()
 	var defaults := model.data()
-	check(defaults.schema == 9 and model.move(5, 0).starterProration == 70, "New default tuning missing")
+	check(defaults.schema == 10 and model.move(5, 0).starterProration == 70, "New default tuning missing")
 	var legacy := defaults.duplicate(true)
 	legacy.schema = 7
 	legacy.coreVersion = 7
@@ -77,7 +77,7 @@ func run() -> void:
 	app.fields.attackLevel.control.value = 4
 	app.fields.counterTier.control.value = 3
 	app.apply_timing_presets()
-	check(app.fields.hitstop.control.value == 15 and app.fields.blockstun.control.value == 18 and app.fields.counterHitstun.control.value == 12, "Timing presets did not populate editable fields")
+	check(app.fields.hitstop.control.value == 15 and app.fields.blockstun.control.value == 18 and app.fields.counterFreezeFrames.control.value == 31 and app.fields.counterSlowFrames.control.value == 35, "Timing presets did not populate editable fields")
 	app.lock_online(true)
 	check(not app.tuning_fields.throwGraceFrames.control.editable and app.tuning_fields.blockCarryover.control.disabled and not app.jump_fields.prejumpFrames.editable, "Online tuning controls were left editable")
 	app.queue_free()

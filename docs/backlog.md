@@ -47,6 +47,7 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Distinguish startup/active counter hits from recovery punishes, including symmetric trades.
 - [x] Expose per-move counter-hit hitstun/hitstop bonuses and reversal eligibility; preserve old saved move sets.
 - [x] Detect first-actionable-frame reversals through the existing input buffer and add attack-loop / guard-to-reversal practice dummies.
+- [x] Add medium/large counter impact freezes and deterministic defender-only slowdown, oversized italic combat text and a reduced-motion camera option.
 - [ ] Playtest the new minimal/small/medium/large counter presets across the six kits before locking move-specific values.
 - [x] Add automatic soft/hard knockdown recovery and route wakeup completion through the existing reversal opportunity.
 - [ ] Design invulnerable reversal tools separately.

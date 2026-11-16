@@ -232,7 +232,7 @@ func build_interface() -> void:
 	var timing_grid := GridContainer.new()
 	timing_grid.columns = 2
 	timing_panel.add_child(timing_grid)
-	for spec in [["normalCancelStart","Normal open f",1,420,1],["normalCancelEnd","Normal close f",0,420,1],["specialCancelStart","Special open f",1,420,1],["specialCancelEnd","Special close f",0,420,1],["jumpCancelStart","Jump open f",1,420,1],["jumpCancelEnd","Jump close f",0,420,1],["followCancelStart","Follow-up open f",1,420,1],["followCancelEnd","Follow-up close f",0,420,1],["cancelOn","Cancel events mask",0,7,1],["starterProration","Starter %",0,100,1],["comboScaling","Scaling cost %",0,100,1],["minimumDamage","Minimum damage %",0,100,1],["landingRecovery","Landing recovery f",0,120,1],["attackLevel","Attack level",-1,4,1],["counterTier","Counter tier",-1,3,1],["counterVulnerable","Counter phases mask",0,7,1]]:
+	for spec in [["normalCancelStart","Normal open f",1,420,1],["normalCancelEnd","Normal close f",0,420,1],["specialCancelStart","Special open f",1,420,1],["specialCancelEnd","Special close f",0,420,1],["jumpCancelStart","Jump open f",1,420,1],["jumpCancelEnd","Jump close f",0,420,1],["followCancelStart","Follow-up open f",1,420,1],["followCancelEnd","Follow-up close f",0,420,1],["cancelOn","Cancel events mask",0,7,1],["starterProration","Starter %",0,100,1],["comboScaling","Scaling cost %",0,100,1],["minimumDamage","Minimum damage %",0,100,1],["landingRecovery","Landing recovery f",0,120,1],["attackLevel","Attack level",-1,4,1],["counterTier","Counter tier",-1,3,1],["counterVulnerable","Counter phases mask",0,7,1],["counterFreezeFrames","Counter freeze f (-1: add)",-1,60,1],["counterSlowFrames","Counter half-speed f",0,120,1]]:
 		add_field(timing_grid, spec)
 	var timing_note := label(timing_panel, "Windows use completed move frames; close 0 = end of move. Cancel events: hit 1 + block 2 + whiff 4. Routes still apply. Counter phases: startup 1 + active 2 + recovery 4. Preset −1 keeps custom values.", 11, MUTED)
 	timing_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -910,8 +910,10 @@ func apply_timing_presets() -> void:
 		fields.blockstun.control.value = [9, 11, 13, 16, 18][level]
 	var tier := int(fields.counterTier.control.value)
 	if tier >= 0:
-		fields.counterHitstun.control.value = [0, 4, 8, 12][tier]
-		fields.counterHitstop.control.value = [0, 3, 6, 10][tier]
+		fields.counterHitstun.control.value = [0, 4, 0, 0][tier]
+		fields.counterHitstop.control.value = [0, 3, 0, 0][tier]
+		fields.counterFreezeFrames.control.value = [-1, -1, 21, 31][tier]
+		fields.counterSlowFrames.control.value = [0, 0, 25, 35][tier]
 	editor_status.text = "Preset copied into timing fields. Apply the move to test it."
 
 func apply_tuning() -> void:
@@ -1108,6 +1110,7 @@ func _process(_delta: float) -> void:
 	arena.score = match_score.wins
 	arena.presentation_active = screen in ["entry", "results"]
 	arena.diagnostics = activity in ["training", "development"]
+	arena.feedback.reduced_motion = motion.reduced
 	if match_entry.phase != "loading": arena.refresh(model, state, show_boxes, paused)
 	if screen in ["play", "pause"] and activity in ["local", "online"] and state.winner >= 0:
 		finish_scrum(state)

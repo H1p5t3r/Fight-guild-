@@ -13,6 +13,8 @@ var weapons: Array[HookWeapon] = []
 var collision_layer: Control
 var hud_layer: Control
 var feedback := CombatFeedback.new()
+var camera_zoom := 1.0
+var camera_offset := Vector2.ZERO
 var font := GuildTheme.SEMIBOLD
 const ACCENT := Color("f4b45e")
 const TEXT := Color("f0ede5")
@@ -53,14 +55,17 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	feedback.refresh(view, size)
 	var scale_x := size.x / 1000.0
 	var floor_y := size.y - 76.0
+	camera_zoom = feedback.zoom()
+	var focus := Vector2(clampf(float(view.get("impactX", 50000)) / 100.0 * scale_x, size.x * 0.2, size.x * 0.8), clampf(floor_y - float(view.get("impactY", 8000)) / 100.0 * scale_x, 180, floor_y))
+	camera_offset = focus * (1.0 - camera_zoom)
 	for p in 2:
 		var fighter: Dictionary = view.players[p]
 		var sprite := sprites[p]
 		var character := int(fighter.character)
 		var phase: String = FighterArt.PHASES[int(fighter.posePhase)]
 		var pose := int(fighter.poseIndex)
-		FighterArt.apply(sprite, character, phase, pose, scale_x, fighter.facing)
-		sprite.position = Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x)
+		FighterArt.apply(sprite, character, phase, pose, scale_x * camera_zoom, fighter.facing)
+		sprite.position = screen_point(Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x))
 		sprite.modulate = Color("ffa69a") if fighter.stun and not fighter.guarding else Color.WHITE
 		weapons[p].visible = false
 		if character == 4 and fighter.weaponVisible:
@@ -68,16 +73,21 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 			var origin := Vector2((fighter.x + fighter.facing * move.hitboxBack) / 100.0 * scale_x, floor_y - (fighter.y + move.bottom) / 100.0 * scale_x)
 			var back := Vector2(fighter.weaponBackX / 100.0 * scale_x, floor_y - fighter.weaponBackY / 100.0 * scale_x)
 			var tip := Vector2(fighter.weaponTipX / 100.0 * scale_x, floor_y - fighter.weaponTipY / 100.0 * scale_x)
-			weapons[p].present(origin, back, tip, fighter.facing, scale_x)
+			weapons[p].present(screen_point(origin), screen_point(back), screen_point(tip), fighter.facing, scale_x * camera_zoom)
 	queue_redraw()
 	hud_layer.queue_redraw()
 	collision_layer.queue_redraw()
+
+func screen_point(point: Vector2) -> Vector2:
+	return camera_offset + point * camera_zoom
 
 func label(value: String, point: Vector2, font_size: int = 14, color: Color = TEXT) -> void:
 	draw_string(font, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color)
 
 func _draw() -> void:
+	draw_set_transform(camera_offset, 0.0, Vector2.ONE * camera_zoom)
 	ArenaStage.draw(self, show_boxes, int(view.get("stage", 0)))
+	draw_set_transform(Vector2.ZERO)
 	var sx := size.x / 1000.0
 	var floor_y := size.y - 76.0
 	if view.is_empty():
@@ -87,8 +97,9 @@ func _draw() -> void:
 	draw_walls()
 	for p in 2:
 		var fighter: Dictionary = view.players[p]
-		var px: float = fighter.x / 100.0 * sx
-		var py: float = floor_y - fighter.y / 100.0 * sx
+		var point := screen_point(Vector2(fighter.x / 100.0 * sx, floor_y - fighter.y / 100.0 * sx))
+		var px := point.x
+		var py := point.y
 		if fighter.move >= 0:
 			if diagnostics: label("%s · %df" % [CombatModel.MOVE_IDS[fighter.move], fighter.age], Vector2(px + 28, py - 10), 12)
 		elif diagnostics:
@@ -101,15 +112,18 @@ func _draw() -> void:
 			elif fighter.reaction == 3: status = "WAKEUP · %df" % fighter.recoveryTime
 			elif fighter.reaction == 4: status = "WALL SPLAT · %df" % fighter.wallSplatTime
 			elif fighter.reaction == 5: status = "HOOK PULL · %df" % fighter.pullTime
+			elif fighter.prejumpTime: status = "PREJUMP · %df" % fighter.prejumpTime
+			elif fighter.landingTime: status = "LANDING · %df" % fighter.landingTime
 			elif fighter.running: status = "RUN"
 			elif fighter.dashTicks: status = "STEP"
+			if fighter.counterSlowTime: status += " · ½ SPEED %df" % fighter.counterSlowTime
 			label(status, Vector2(clampf(px + 28, 12, size.x - 165), py - 10), 12, Color("f68b79") if fighter.guardBreak else MUTED)
 		if fighter.positiveTime > 0:
 			FightHud.centered(self, "POSITIVE BONUS", Vector2(size.x * (0.22 if p == 0 else 0.78), size.y - 96), 18, Color("a8e9b1"), 2)
 		if fighter.faultless or (fighter.guarding and not fighter.guardBreak):
 			var angle := 0.0 if fighter.facing == 1 else PI
 			var guard_color := Color("75dcbc") if fighter.faultless else Color("89c3e0")
-			draw_arc(Vector2(px, py - 70 * sx), 58 * sx, angle - 1.4, angle + 1.4, 24, guard_color, 5 if fighter.faultless else 2)
+			draw_arc(Vector2(px, py - 70 * sx * camera_zoom), 58 * sx * camera_zoom, angle - 1.4, angle + 1.4, 24, guard_color, 5 if fighter.faultless else 2)
 	if paused:
 		FightHud.centered(self, "PAUSED", Vector2(size.x * 0.5, 151), 17, GuildTheme.BRASS)
 	if diagnostics:
@@ -121,7 +135,7 @@ func _draw() -> void:
 
 # Presentation reads fixed-tick state, so prediction corrections cannot leave stale effects.
 func draw_walls() -> void:
-	var threshold: int = model.config[model.config.size() - CombatModel.RECOVERY_RULES.size() + 3]
+	var threshold: int = model.config[model.config.size() - CombatModel.RULE_COUNT + 16]
 	for fighter in view.players:
 		if fighter.wallDamage == 0: continue
 		var side := -1.0 if fighter.x < 50000 else 1.0
@@ -154,7 +168,7 @@ func draw_wall_break() -> void:
 		hud_layer.draw_colored_polygon(shard, Color(tint.lightened(0.25), 0.65 * fade))
 	var slide := Vector2(-side * (1.0 - smoothstep(0.0, 0.25, progress)) * 80.0, 0)
 	FightHud.stamp(hud_layer, "WALL BREAK", size * Vector2(0.5, 0.43) + slide, int(clampf(size.x * 0.052, 30, 64)), tint, fade)
-	var grants_bonus: bool = model.config[model.config.size() - CombatModel.RECOVERY_RULES.size() + 10] > 0
+	var grants_bonus: bool = model.config[model.config.size() - CombatModel.RULE_COUNT + 23] > 0
 	FightHud.centered(hud_layer, "POSITIVE BONUS" if grants_bonus else "NEUTRAL RESET", size * Vector2(0.5, 0.43) + Vector2(0, 75), 23, Color("a8e9b1", fade), 2)
 	FightHud.centered(hud_layer, "NEXT GROUND", size * Vector2(0.5, 0.43) + Vector2(0, 106), 15, Color(TEXT, fade))
 	# The core changes ground at two-thirds of the transition, under this curtain.
@@ -166,6 +180,7 @@ func draw_collisions() -> void:
 	if not show_boxes or view.is_empty() or model == null: return
 	var sx := size.x / 100000.0
 	var floor_y := size.y - 76.0
+	collision_layer.draw_set_transform(camera_offset, 0.0, Vector2.ONE * camera_zoom)
 	var colors := [Color("67d5ff"), Color("9ce56b"), Color("ff8859")]
 	for p in 2:
 		for kind in 3:
@@ -175,6 +190,7 @@ func draw_collisions() -> void:
 				var color: Color = colors[kind]
 				collision_layer.draw_rect(rect, Color(color, 0.07 if kind == 0 else 0.12))
 				collision_layer.draw_rect(rect, color, false, 1.0 if kind == 0 else 2.0)
+	collision_layer.draw_set_transform(Vector2.ZERO)
 	var left := 18.0
 	for kind in 3:
 		var caption: String = ["HURT · body", "PUSH · spacing", "HIT · active"][kind]

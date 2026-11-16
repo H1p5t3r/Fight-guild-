@@ -74,6 +74,10 @@ public:
         if(candidate.wall_break_time<0||candidate.wall_break_time>300||candidate.wall_break_actor< -1
             ||candidate.wall_break_actor>1||candidate.wall_break_side< -1||candidate.wall_break_side>1
             ||candidate.stage<0) return false;
+        if(candidate.impact_time<0||candidate.impact_time>198||candidate.impact_duration<0||candidate.impact_duration>198
+            ||candidate.impact_time>candidate.impact_duration||candidate.impact_actor<0||candidate.impact_actor>1
+            ||candidate.impact_tier<0||candidate.impact_tier>3||candidate.impact_x<0||candidate.impact_x>100000
+            ||candidate.impact_y<0||candidate.impact_y>200000) return false;
         for(const auto& f:candidate.players) {
             if(f.character<0||f.character>=fight::CHARACTER_COUNT||f.move< -1||f.move>=fight::MOVE_COUNT
                 ||f.simple<0||f.simple>1||(f.facing!=1&&f.facing!= -1)
@@ -103,7 +107,8 @@ public:
                 ||f.combo_proration<0||f.combo_proration>100||f.combo_scale<0||f.combo_scale>100
                 ||f.repeat_gravity<0||f.repeat_gravity>300||f.last_damage<0||f.last_damage>1000
                 ||f.damage_scale<0||f.damage_scale>100||f.last_base_damage<0||f.last_base_damage>1000
-                ||f.counter_tier< -1||f.counter_tier>3||f.prejump_time<0||f.prejump_time>30) return false;
+                ||f.counter_tier< -1||f.counter_tier>3||f.prejump_time<0||f.prejump_time>30
+                ||f.slow_time<0||f.slow_time>120||f.slow_phase<0||f.slow_phase>1||f.slow_held<0||f.slow_held>1) return false;
             for(int uses:f.move_uses) if(uses<0||uses>1000) return false;
         }
         simulation.world=candidate;

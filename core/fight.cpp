@@ -491,10 +491,10 @@ void Simulation::land(Fighter& f) {
         f.stun=0; f.guarding=f.guard_break=f.block_reaction=0;
     }
 }
-void Simulation::reel_targets() {
+void Simulation::reel_targets(const bool advances[2]) {
     for(int p=0;p<2;++p) {
         auto& f=world.players[p];
-        if(f.reaction!=Reeled) continue;
+        if(f.reaction!=Reeled||!advances[p]) continue;
         auto& owner=world.players[1-p];
         if(f.pull_time<=0||f.pull_owner!=1-p||owner.reaction!=Free||(owner.stun>0&&!owner.guarding)) {
             f.pull_time=0; f.pull_owner=-1;
@@ -537,6 +537,8 @@ void Simulation::finish_wall_break() {
 }
 
 void Simulation::step(int raw0,int raw1) {
+    // Cinematic presentation follows real simulation ticks, including the impact freeze.
+    if(world.impact_time>0) --world.impact_time;
     int raw[2]={raw0&INPUT_MASK,raw1&INPUT_MASK};
     for(int p=0;p<2;++p) {
         Fighter& f=world.players[p];
@@ -563,6 +565,17 @@ void Simulation::step(int raw0,int raw1) {
     }
     for(auto& f:world.players) update_faultless(f);
     if(world.hitstop>0) { --world.hitstop; ++world.frame; return; }
+    bool advances[2]={true,true};
+    for(int p=0;p<2;++p) {
+        auto& f=world.players[p];
+        f.slow_held=0;
+        if(f.slow_time>0) {
+            advances[p]=f.slow_phase!=0;
+            f.slow_held=!advances[p];
+            f.slow_phase^=1;
+            if(--f.slow_time==0) f.slow_phase=0;
+        }
+    }
     const int prior_stun[2]={world.players[0].stun,world.players[1].stun};
     const int prior_guard[2]={world.players[0].guarding,world.players[1].guarding};
     const int prior_reaction[2]={world.players[0].reaction,world.players[1].reaction};
@@ -588,6 +601,8 @@ void Simulation::step(int raw0,int raw1) {
             f.combo=0;
             if(f.combo_time>0) --f.combo_time;
         }
+        // Inputs still sample at 60 Hz; only this fighter's action/reaction clock slows.
+        if(!advances[p]) continue;
         if(!prior_combo[p]&&f.reaction==Free) {
             f.combo_received=f.repeat_gravity=0;
             f.combo_proration=f.combo_scale=100;
@@ -611,7 +626,7 @@ void Simulation::step(int raw0,int raw1) {
         f.x=clamp_x(f,f.x);
     }
     Fighter& a=world.players[0]; Fighter& b=world.players[1];
-    reel_targets();
+    reel_targets(advances);
     resolve_push(previous_order,prior_overlap);
     // Only actual voluntary approach earns movement meter: no wall/pushbox or knockback farming.
     for(int p=0;p<2;++p) {
@@ -633,7 +648,7 @@ void Simulation::step(int raw0,int raw1) {
             ||prior_reaction[1-p]==Downed||prior_reaction[1-p]==Waking) continue;
         bool throwing=f.move>=0&&moves[f.character][f.move].v[Category]==Throw;
         bool connects=false;
-        if(active(f)&&!f.hit_done) {
+        if(advances[p]&&active(f)&&!f.hit_done) {
             if(throwing) {
                 int separation=PUSH_PROFILES[f.character].half_width+PUSH_PROFILES[other.character].half_width;
                 connects=f.y==0&&!throw_invulnerable(other)&&!(prior_stun[1-p]>0&&!prior_guard[1-p])
@@ -646,7 +661,8 @@ void Simulation::step(int raw0,int raw1) {
             contacts[p]=blocked[p]?Blocked:NormalHit;
             if(!blocked[p]&&other.move>=0&&prior_stun[1-p]==0) {
                 const Move& interrupted=moves[other.character][other.move];
-                int phase=other.age+1<interrupted.v[Startup]?1:other.age+1<interrupted.v[Startup]+interrupted.v[Active]?2:4;
+                int tick=other.age+(advances[1-p]?1:0);
+                int phase=tick<interrupted.v[Startup]?1:tick<interrupted.v[Startup]+interrupted.v[Active]?2:4;
                 contacts[p]=throwing?PunishHit:(interrupted.v[CounterVulnerable]&phase)?CounterHit:phase==4?PunishHit:NormalHit;
             }
             else if(!blocked[p]&&(other.landing_time||prior_landing[1-p])) contacts[p]=PunishHit;
@@ -764,10 +780,25 @@ void Simulation::step(int raw0,int raw1) {
                 other.y=max(2000,min(12000,other.y)); other.vy=0;
             }
         }
-        world.hitstop=max(world.hitstop,m.v[Hitstop]+(contacts[p]==CounterHit?m.v[CounterHitstop]:0));
+        int stop=m.v[Hitstop]+(contacts[p]==CounterHit?m.v[CounterHitstop]:0);
+        if(contacts[p]==CounterHit) {
+            if(m.v[CounterFreezeFrames]>=0) stop=m.v[CounterFreezeFrames];
+            if(m.v[CounterSlowFrames]>0) {
+                other.slow_time=max(other.slow_time,m.v[CounterSlowFrames]);
+                other.slow_phase=0;
+            }
+            int duration=stop+m.v[CounterSlowFrames]+18;
+            if(m.v[CounterTier]>=2&&(world.impact_time==0||m.v[CounterTier]>world.impact_tier)) {
+                world.impact_time=world.impact_duration=duration;
+                world.impact_actor=p; world.impact_tier=m.v[CounterTier];
+                world.impact_x=(f.x+other.x)/2; world.impact_y=clamp(other.y+8000,0,200000);
+            }
+        }
+        world.hitstop=max(world.hitstop,stop);
     }
-    for(int p=0;p<2;++p) if(prior_grace[p]>0&&world.players[p].throw_grace>0) --world.players[p].throw_grace;
-    for(auto& f:world.players) if(f.move>=0) {
+    for(int p=0;p<2;++p) if(advances[p]&&prior_grace[p]>0&&world.players[p].throw_grace>0) --world.players[p].throw_grace;
+    for(int p=0;p<2;++p) if(advances[p]&&world.players[p].move>=0) {
+        auto& f=world.players[p];
         const Move& m=moves[f.character][f.move];
         if(++f.age>=m.v[Startup]-1+m.v[Active]+m.v[Recovery]) {
             f.move=-1; f.contact=f.hit_done=0;
@@ -775,7 +806,7 @@ void Simulation::step(int raw0,int raw1) {
     }
     // A back throw is the explicit side-switch exception to movement's anti-tunneling rule.
     resolve_push(previous_order,prior_overlap&&!(hits[0]==BACK_THROW||hits[1]==BACK_THROW));
-    for(auto& f:world.players) if(f.positive_time>0) --f.positive_time;
+    for(int p=0;p<2;++p) if(advances[p]&&world.players[p].positive_time>0) --world.players[p].positive_time;
     --world.remaining;
     if(world.wall_break_time==0&&(world.remaining<=0||a.health==0||b.health==0))
         world.winner=a.health==b.health?2:a.health>b.health?0:1;
@@ -795,7 +826,11 @@ int Simulation::get(int player,int field) const {
         case 2:return world.hitstop; case 3:return world.winner;
         case 4:return world.wall_break_time; case 5:return world.wall_break_actor;
         case 6:return world.wall_break_side; case 7:return world.stage;
-        case 8:return rules.wall_break_frames; default:return 0; }
+        case 8:return rules.wall_break_frames;
+        case 9:return world.impact_time; case 10:return world.impact_duration;
+        case 11:return world.impact_actor; case 12:return world.impact_tier;
+        case 13:return world.impact_x; case 14:return world.impact_y;
+        default:return 0; }
     }
     if(player>1) return 0;
     const Fighter& f=world.players[player];
@@ -832,6 +867,7 @@ int Simulation::get(int player,int field) const {
         case 57:return f.combo_proration; case 58:return f.combo_scale;
         case 59:return f.counter_tier; case 60:return f.repeat_gravity; case 61:return f.last_base_damage;
         case 62:return f.prejump_time;
+        case 63:return f.slow_time; case 64:return f.slow_held;
         default:return 0;
     }
 }
@@ -865,6 +901,8 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case LandingRecovery: high=120; break;
         case AttackLevel: low=-1; high=4; break;
         case CounterTier: low=-1; high=3; break;
+        case CounterFreezeFrames: low=-1; high=60; break;
+        case CounterSlowFrames: high=120; break;
         case Startup: low=MIN_STARTUP; high=120; break;
         case Active: low=1; high=120; break;
         case Recovery:case Hitstun:case Blockstun: high=180; break;
