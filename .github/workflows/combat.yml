@@ -56,3 +56,15 @@ jobs:
         with:
           python-version: '3.12'
       - run: bash scripts/setup-web.sh
+      - name: Package and verify browser Move Workshop
+        run: |
+          npx playwright install --with-deps chromium
+          node scripts/build-workbench.mjs
+          npm run test:workshop
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FightGuild-Move-Workshop
+          path: |
+            build/FightGuild-Move-Workshop.html
+            docs/move-workshop.md
+          if-no-files-found: error

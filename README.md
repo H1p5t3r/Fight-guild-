@@ -14,6 +14,8 @@ Menus share the supplied **Guild Ball** visual language: Barlow Condensed, charc
 
 ## Play or edit
 
+For browser-only attack tuning on a work PC, download **FightGuild-Move-Workshop.html** from the **FightGuild-Move-Workshop** Actions artifact. It includes the artwork, saves a browser draft and exports JSON for the Godot editor. No game install is needed. [Move Workshop guide](docs/move-workshop.md) covers editing, backups, art notes and building the page.
+
 Download the Windows/Linux ZIP from this branch's successful GitHub Actions artifacts, extract the whole folder and run its executable. For the editable project archive, import `godot/project.godot` in Godot 4.6.3. [Native play guide](docs/play-native.md) covers controls, saves, editing and direct online play.
 
 - Versus is first to two Scrum wins: **1st Scrum**, **2nd Scrum**, and **Final Down** at 1–1. Fighter loading/intros and the four-beat opening lead into each match; online clients synchronize before release.
@@ -62,7 +64,7 @@ The shared C++ core runs at 60 fixed ticks with integer state, independent of pr
 
 Linux rendering, keyboard gameplay, all 30 basic attacks, editing, save migration, sprites, latency/jitter correction and two UDP processes are tested. Windows is cross-compiled/exported and needs hardware playtesting. PS5 requires approved console access and Godot port tooling; no PS5 build is included. Strive input-buffer parity is a future measurement task.
 
-The browser harness is retained for regressions only: `bash scripts/setup-web.sh`, then `npm test`. Godot is the primary client and delivery path.
+The browser combat harness is retained for regressions: `bash scripts/setup-web.sh`, then `npm test`. The separate [Move Workshop](docs/move-workshop.md) provides portable attack authoring; Godot remains the game client and delivery path.
 
 ## Current reference guides
 

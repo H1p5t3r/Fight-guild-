@@ -1,0 +1,95 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile,writeFile} from 'node:fs/promises';
+import {Engine,FIELDS,MOVEMENT_FIELDS,INPUT} from '../web/engine.mjs';
+import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,attackBoxes,META} from '../web/workbench/model.mjs';
+import {SPECS,GROUPS} from '../web/workbench/specs.mjs';
+
+const pack=JSON.parse(await readFile(new URL('../build/workbench-pack.json',import.meta.url),'utf8'));
+const wasm=await WebAssembly.compile(await readFile(new URL('../web/generated/fight.wasm',import.meta.url)));
+const engine=async()=>new Engine(await WebAssembly.instantiate(wasm));
+
+test('Shipped data and each editable field match the current combat core',async()=>{
+  const e=await engine();assert.deepEqual(pack.defaults,e.data());
+  const controls=GROUPS.flatMap(g=>g.fields);
+  assert.equal(new Set(controls).size,controls.length);
+  assert.deepEqual(FIELDS.filter(k=>!controls.includes(k)),['wallDamage']); // retired slot
+  assert.equal(Object.keys(SPECS).length,FIELDS.length);
+  for(let c=0;c<6;c++){
+    for(const [field,key] of FIELDS.entries()){
+      if(key==='motion') {for(const value of [0,214,236,623])assert.equal(e.api.fg_move_set(c,0,field,value),1);continue;}
+      const {min,max}=pack.limits.moves[c][key];
+      for(const value of [min,max])assert.equal(e.api.fg_move_set(c,0,field,value),1,`${c} ${key} boundary`);
+      for(const value of [min-1,max+1])assert.equal(e.api.fg_move_set(c,0,field,value),0,`${c} ${key} outside`);
+    }
+    for(const [field,key] of MOVEMENT_FIELDS.entries())for(const value of Object.values(pack.limits.movement[c][key]))assert.equal(e.api.fg_mobility_set(c,field,value),1);
+  }
+  let index=0;for(const fields of Object.values(pack.limits.rules))for(const range of Object.values(fields)){
+    for(const value of [range.min,range.max])assert.equal(e.api.fg_rule_set(index,value),1);
+    for(const value of [range.min-1,range.max+1])assert.equal(e.api.fg_rule_set(index,value),0);index++;
+  }
+});
+
+test('Edits preserve the rest of the roster, rules and notes through a core round trip',async()=>{
+  const w=new Workshop(pack),before=w.snapshot();
+  w.change(5,0,'startup',7);w.change(5,0,'damage',44);w.change(5,0,'reach',9613);
+  w.change(4,28,'airLaunch',1300);w.change(4,28,'normalRoutes',1);
+  w.setNote(5,0,'windup','Lower the shoulder; lead with the knife.');
+  const data=JSON.parse(w.export()),e=await engine();e.loadData(data);
+  const withoutNotes=structuredClone(data);delete withoutNotes[META];assert.deepEqual(e.data(),withoutNotes);
+  for(const key of Object.keys(before).filter(k=>k.endsWith('Rules')))assert.deepEqual(data[key],before[key]);
+  assert.deepEqual(data.characters.slice(0,4),before.characters.slice(0,4));
+  const restored=new Workshop(pack,data);assert.equal(restored.note(5,0).windup,w.note(5,0).windup);
+  await writeFile(new URL('../build/workshop-roundtrip.json',import.meta.url),w.export());
+});
+
+test('Invalid imports and edits never partially change a draft',()=>{
+  const w=new Workshop(pack);w.change(5,0,'damage',76);const saved=w.snapshot(),history=w.undoStack.length;
+  const corruptions=[d=>d.schema=11,d=>d.characters.pop(),d=>d.characters[5].moves[31].startup=4,
+    d=>d.characters[5].moves[31].startup=5.5,d=>d.characters[5].moves[31].reach=4294967396,
+    d=>d.characters[5].moves[31].motion=215,d=>delete d.characters[0].movement,
+    d=>d.characters[0].moves.reverse(),d=>d.momentumRules.fdDrain=0,
+    d=>d[META]={version:1,notes:{'Fillet/5P':{windup:47}}}];
+  for(const corrupt of corruptions){const data=w.snapshot();corrupt(data);assert.throws(()=>w.import(data));assert.deepEqual(w.snapshot(),saved);assert.equal(w.undoStack.length,history);}
+  assert.throws(()=>w.change(5,0,'startup',4));assert.deepEqual(w.snapshot(),saved);
+});
+
+test('Fixed-point units and frame convention are exact',()=>{
+  const limit=pack.limits.moves[5];assert.equal(parseField('reach','86.13',limit.reach),8613);
+  assert.equal(parseField('bottom','-0.01',limit.bottom),-1);
+  for(const input of ['', '4', '5.1','Infinity','5e20'])assert.throws(()=>parseField('startup',input,limit.startup));
+  assert.throws(()=>parseField('reach','86.131',limit.reach));
+  const m=pack.defaults.characters[5].moves[0];assert.equal(totalFrames(m),16);assert.equal(blockAdvantage(m),0);
+  assert.equal(phaseAt(m,4),'windup');assert.equal(phaseAt(m,5),'active');assert.equal(phaseAt(m,7),'active');assert.equal(phaseAt(m,8),'recovery');
+});
+
+test('Undo, redo, reset and import keep independent art notes and unknown data',()=>{
+  const w=new Workshop(pack),initial=w.snapshot();w.change(5,0,'startup',6);w.change(5,0,'startup',7);
+  assert.equal(w.undoStack.length,1);w.undo();assert.deepEqual(w.snapshot(),initial);w.redo();assert.equal(w.move(5,0).startup,7);
+  w.setNote(5,0,'active','<script>literal art notes</script>');w.resetMove(5,0);assert.equal(w.move(5,0).startup,5);assert.ok(w.note(5,0).active);
+  w.undo();assert.equal(w.move(5,0).startup,7);
+  const next=w.snapshot();next.futureMetadata={kept:true};next.characters[3].moves[8].futureField=5;w.import(next);
+  assert.deepEqual(JSON.parse(w.export()).futureMetadata,{kept:true});assert.equal(JSON.parse(w.export()).characters[3].moves[8].futureField,5);
+  assert.match(w.brief(),/literal art notes/);w.undo();assert.equal(w.snapshot().futureMetadata,undefined);
+});
+
+test('Straight, throw and both diagonal hook previews use the core collision geometry',async()=>{
+  // Rebind each tested slot to 5P, disabling the other slots. This exercises the
+  // real simulation at every active frame without needing test-only core APIs.
+  for(const [c,slot] of [[5,0],[5,23],[4,28],[4,29]]){
+    const e=await engine(),data=e.data(),m=data.characters[c].moves[slot];
+    for(const move of data.characters[c].moves)move.enabled=0;
+    Object.assign(m,{enabled:1,button:0,direction:5,motion:0,air:0,category:slot===23?4:2,followFrom:-1,followFrom2:-1});
+    e.loadData(data);e.reset([c,0]);e.step(slot===23?INPUT.left|INPUT.P|INPUT.K:INPUT.P,0);assert.equal(e.state().players[0].move,slot);
+    const checked=new Set();
+    for(let i=0;i<totalFrames(m)+60;i++){
+      const f=e.state().players[0],boxes=e.boxes(0,2);
+      if(boxes.length){
+        const local=boxes.map(b=>[b[0]-f.x,b[1]-f.y,b[2]-f.x,b[3]-f.y]);
+        assert.deepEqual(attackBoxes(m,f.age,pack.collisions[c].push),local,`${c}/${slot} frame ${f.age}`);checked.add(f.age);
+      }
+      e.step(0,0);
+    }
+    assert.equal(checked.size,m.active);
+  }
+});

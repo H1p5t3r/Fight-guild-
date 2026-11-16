@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Tune Fight Guild attacks in your browser. Import and export move data, inspect hitboxes and write animation briefs.">
+<title>Fight Guild · Move Workshop</title>
+<link rel="icon" href="data:,">
+<!--WORKSHOP_STYLES-->
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#main"><span class="brand-mark" aria-hidden="true">FG</span><span><strong>MOVE WORKSHOP</strong><small>FIGHT GUILD</small></span></a>
+  <div class="save-state"><span id="save-dot" aria-hidden="true"></span><span id="save-status" role="status">Opening workshop…</span></div>
+  <div class="file-actions"><button id="help" class="quiet" type="button" aria-label="How to use the workshop">?</button><button id="import" type="button">Import JSON</button><button id="export" class="primary" type="button" disabled>Download JSON</button></div>
+  <input type="file" id="import-file" accept=".json,application/json" hidden>
+</header>
+<div id="storage-warning" class="banner" role="alert" hidden></div>
+<div class="workspace">
+  <aside class="sidebar" aria-label="Fighter and move selection">
+    <label class="eyebrow" for="fighter">CHOOSE YOUR FIGHTER</label>
+    <select id="fighter" disabled aria-label="Fighter"></select>
+    <p class="guild-line"><span id="guild"></span><span id="roster-count"></span></p>
+    <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find a move · 236S" aria-label="Search moves" autocomplete="off"></label>
+    <div class="filters" aria-label="Move filters"><button data-filter="all" class="selected" aria-pressed="true">All</button><button data-filter="normal" aria-pressed="false">Normals</button><button data-filter="special" aria-pressed="false">Specials</button><button data-filter="air" aria-pressed="false">Air</button></div>
+    <label class="unused"><input id="show-unused" type="checkbox"> Show unused slots</label>
+    <nav id="move-list" aria-label="Moves"><p class="empty">Loading move data…</p></nav>
+    <div class="sidebar-footer"><span class="eyebrow">YOUR DRAFT</span><strong id="changed-count">0 edited moves</strong><small>Download JSON to take your edits to another PC.</small></div>
+  </aside>
+  <main id="main" tabindex="-1">
+    <section class="move-heading">
+      <div><p class="eyebrow" id="move-context">THE COMBAT LAB, ANYWHERE</p><h1><span id="move-title">Loading…</span> <span id="move-label"></span></h1><div class="badges"><span id="move-kind"></span><span id="actual-input"></span><span id="move-enabled"></span></div></div>
+      <div class="history-actions"><button id="undo" class="icon" aria-label="Undo edit" title="Undo edit" disabled>↶</button><button id="redo" class="icon" aria-label="Redo edit" title="Redo edit" disabled>↷</button><button id="reset" class="quiet" disabled>Reset stats</button></div>
+    </section>
+    <div class="summary" aria-label="Move summary"><div><span>STARTUP</span><strong id="stat-startup">—</strong></div><div><span>DAMAGE</span><strong id="stat-damage">—</strong></div><div><span>ON BLOCK</span><strong id="stat-block">—</strong></div><div><span>TOTAL</span><strong id="stat-total">—</strong></div></div>
+    <div class="editor-layout">
+      <section class="editor-panel" aria-label="Attack settings">
+        <div id="tabs" role="tablist" aria-label="Attack settings"></div>
+        <div id="form" role="tabpanel" aria-live="off"></div>
+      </section>
+      <aside class="preview-panel" aria-label="Attack preview">
+        <div class="panel-heading"><div><span class="eyebrow">POSE & RANGE STUDY</span><h2 id="preview-title">Active frame</h2></div><span class="preview-live">½-speed preview</span></div>
+        <div class="canvas-wrap"><canvas id="preview" aria-label="Attack pose with hitbox, body hurtboxes and pushbox. Use the numeric fields to edit geometry." role="img"></canvas><p id="preview-empty" hidden>Artwork unavailable. Collision geometry is still shown.</p></div>
+        <div class="legend"><label><input id="show-hit" type="checkbox" checked><i class="hit"></i> Hit</label><label><input id="show-hurt" type="checkbox" checked><i class="hurt"></i> Hurt</label><label><input id="show-push" type="checkbox"><i class="push"></i> Push</label><label><input id="show-art" type="checkbox" checked> Art</label></div>
+        <div class="transport"><button id="play" class="icon" aria-label="Play move preview"></button><input id="frame" type="range" min="1" max="16" value="5" aria-label="Preview frame"><output id="frame-label" for="frame">5 / 16</output></div>
+        <div id="timeline" class="timeline" aria-label="Frame phases"></div>
+        <div class="phase-labels"><span><i class="windup"></i><span id="windup-time"></span></span><span><i class="hit"></i><span id="active-time"></span></span><span><i class="recover"></i><span id="recovery-time"></span></span></div>
+        <p id="geometry-help" class="preview-help">Current pose artwork stays fixed while you tune the attack. Match timing and movement should be tested in game.</p>
+        <div id="move-warnings" class="move-warnings" hidden></div>
+        <div class="rule-note"><span aria-hidden="true">◇</span><p>Body hurtboxes are read-only here.<br>Weapons have none. Four boxes per pose, maximum.</p></div>
+        <p class="advantage-note">On-block value assumes contact on the first active frame, with no cancel or Faultless Defense.</p>
+      </aside>
+    </div>
+  </main>
+</div>
+<div id="toast" role="status" class="toast" hidden></div>
+<dialog id="help-dialog" aria-labelledby="help-title"><button id="close-help" class="close" aria-label="Close help">×</button><p class="eyebrow">WORK ANYWHERE</p><h2 id="help-title">Your moves. Your browser.</h2><ol><li>Choose a fighter and move. Tune numbers, routes or hitbox dimensions.</li><li>Use <strong>Art brief</strong> to describe the windup, active pose and effects you want.</li><li><strong>Download JSON</strong> to keep a backup or move between PCs.</li><li>At home, import it through the Godot move editor, or send the JSON back here for the next sprite pass.</li></ol><p>Drafts are saved in this browser when storage is available. They do not sync between devices, and clearing browser data removes the local draft.</p><p>The page works offline without installing anything. It makes no network requests. Preview playback holds existing poses; it does not run a match or regenerate artwork.</p><p>Startup cannot go below 5 frames. Positions are in game pixels; speed is pixels per frame. Existing global rules and the other fighters’ data are preserved when you edit a move.</p><p class="muted">Generated Fight Guild artwork · Barlow fonts, SIL Open Font License.</p></dialog>
+<noscript><div class="banner">JavaScript is needed for the move editor. Open this HTML page in Chrome, Edge or Firefox with JavaScript enabled.</div></noscript>
+<!--FONT_LICENSE-->
+<!--WORKSHOP_SCRIPT-->
+</body>
+</html>
