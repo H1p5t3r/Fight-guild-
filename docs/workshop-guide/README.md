@@ -59,3 +59,7 @@ preview settings. Timelines survive native import/save; art metadata still does 
 The shared workspace edition removes the preview-mode selector and separate
 pose transport. One combat timeline supports playback and box dragging in either
 facing; edits preserve the selected move frame as contact timing changes.
+
+Distance guides show root spacing, pushbox gap/overlap, forward box extent and
+selected-box dimensions in game pixels. The ruler follows facing; the visibility
+toggle preserves the scene scale and selected frame.

@@ -130,3 +130,6 @@ Requested scope: make repeatable character images performing directed actions, w
 
 - Unified the browser editor and combat preview: one timeline and target scene,
   direct box dragging in both facings, and move-frame preservation after edits.
+
+- Added live workshop distance guides: root spacing, pushbox gap/overlap, attack
+  front extent, selected-box size and a facing-relative ground ruler.

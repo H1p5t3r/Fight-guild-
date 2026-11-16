@@ -104,6 +104,27 @@ This is an isolated spacing/reaction test, not an interactive training match.
 It uses existing artwork, with placeholder recovery poses; it does not generate
 new animation frames. Check full combo routes and match feel in Godot.
 
+## Measure spacing and reach
+
+**Distances** starts enabled. The same scene shows horizontal measurements in
+**game pixels**, independent of browser zoom or camera scale:
+
+- **Roots** / **Root spacing**: distance between the fighter roots.
+- **Body gap**: space between the nearest pushbox edges. **Body overlap** shows
+  overlapping horizontal projections, which can happen with airborne fighters.
+- **Box front**: the farthest forward edge of the visible attack shape, measured
+  from the attacker’s root. It follows the current hitbox key or moving hook.
+  An inactive reference outline is labelled **inactive**; gaps have no reach.
+- A selected editable hitbox or hurtbox shows its **width × height**.
+- The ground ruler is **0 at the attacker**, positive forward and negative behind.
+  It mirrors with facing and uses wider tick intervals when needed for readability.
+
+The readout under the canvas repeats the values as text. Guides update during
+playback, scrubbing and dragging. Hide them with **Distances** to clear the view;
+the current frame, scene scale and move data stay the same. These are horizontal
+measurements; vertical alignment, timing and other collision rules still decide
+whether an attack connects.
+
 ## Change hitboxes during active frames
 
 1. Open **Hit & movement**, then pause or scrub the shared timeline. The attack

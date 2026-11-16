@@ -7,7 +7,7 @@ const server=await serveWorkshop(0);
 let browser;
 try {
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
-  const page=await browser.newPage({viewport:{width:1440,height:1000},deviceScaleFactor:1});
+  const page=await browser.newPage({viewport:{width:1440,height:1180},deviceScaleFactor:1});
   await mkdir('docs/workshop-guide',{recursive:true});
   await page.goto(`http://127.0.0.1:${server.address().port}/`);
   await page.locator('#field-startup').waitFor();

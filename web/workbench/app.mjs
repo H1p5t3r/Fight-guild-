@@ -335,7 +335,7 @@ $('frame').addEventListener('input',()=>{if(!validBeforeLeaving()){$('frame').va
 $('play').onclick=()=>{if(!validBeforeLeaving()||!testRecord||previewPending)return;if(testIndex===testRecord.frames.length-1)testIndex=0;playing=!playing;hitKeyFrame=null;lastTick=0;$('play').setAttribute('aria-label',playing?'Pause attack':'Play attack');drawTest();};
 $('restart').onclick=()=>{if(!validBeforeLeaving())return;stop();hitKeyFrame=null;pendingSeek={tick:0};syncPreview();renderForm();};
 $('form').addEventListener('focusin',()=>{if(playing){stop();drawTest();}});
-for(const key of ['hit','hurt','push','art'])$('show-'+key).onchange=()=>{preview.options[key]=$('show-'+key).checked;preview.draw();};
+for(const key of ['hit','hurt','push','art','distances'])$('show-'+key).onchange=()=>{preview.options[key]=$('show-'+key).checked;if(key==='distances')$('preview').classList.toggle('with-distances',preview.options.distances);preview.draw();};
 $('help').onclick=()=>{$('help-dialog').showModal();};$('close-help').onclick=()=>{$('help-dialog').close();};
 $('close-reference').onclick=()=>$('reference-dialog').close();
 $('reference-dialog').addEventListener('close',()=>{$('reference-photo').removeAttribute('src');});
@@ -351,5 +351,5 @@ $('attack-enabled').onchange=()=>{if(!validBeforeLeaving()){$('attack-enabled').
 for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}testSignature='';scheduleTest();};
 globalThis.moveWorkshop.preview=()=>testRecord;
 globalThis.moveWorkshop.cursor=()=>({index:testIndex,frame:testRecord?.frames[testIndex]?.selectedFrame||0,pending:previewPending});
-globalThis.moveWorkshop.geometry=()=>({handles:clone(preview.handles),view:clone(preview.view||{})});
+globalThis.moveWorkshop.geometry=()=>({handles:clone(preview.handles),view:clone(preview.view||{}),measurements:clone(preview.measurements||null),measurementLabels:clone(preview.measurementLabels||[])});
 initialize();requestAnimationFrame(animate);

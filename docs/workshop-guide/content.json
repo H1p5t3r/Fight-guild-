@@ -2,7 +2,7 @@
   "title": "Move Workshop — Complete Control Guide",
   "edition": "16 November 2026",
   "schema": 14,
-  "source_revision": "schema-14 shared attack workspace edition",
+  "source_revision": "schema-14 shared workspace and distance guides edition",
   "pages": [
     {
       "id": "cover", "section": "FIELD GUIDE", "title": "Build the move.\nDefine the moment.",
@@ -11,7 +11,7 @@
         {"type":"image", "path":"editor-overview.png", "width":495, "caption":"The current browser editor, shown with Fillet’s 5P. Screenshots are examples, not changes to your draft."},
         {"type":"callout", "title":"Every control, in plain language", "text":"Covers all 68 effective move settings, combat playback, timed hitboxes and multi-hit controls, phase hurtboxes, art notes and photos, navigation, history and files."},
         {"type":"text", "text":"Use the contents and alphabetical field index to find a control. The PDF is searchable; search the exact label shown in the editor. Units and allowed ranges are printed beside each field."},
-        {"type":"text", "text":"Verified against browser editor / combat schema 14, shared attack workspace edition. This describes Fight Guild’s implementation; Strive-inspired systems are not a claim of exact Guilty Gear behavior."}
+        {"type":"text", "text":"Verified against browser editor / combat schema 14, shared workspace and distance guides edition. This describes Fight Guild’s implementation; Strive-inspired systems are not a claim of exact Guilty Gear behavior."}
       ]
     },
     {
@@ -111,6 +111,7 @@
           {"label":"Move title, nickname & badges", "text":"The large notation is the fixed slot ID. Your nickname comes from Art brief. Input shows the mapping built from the current fields; changing a mapping does not rename the slot. The other badges show move type and enabled status."},
           {"label":"STARTUP / BASE DAMAGE / BASE ON BLOCK / TOTAL", "text":"Base values, excluding key overrides. Base on block = blockstun − (active − 1 + recovery): first-active contact, no cancel or FD. Positive favors the attacker. Total = startup − 1 + active + recovery, excluding hitstop."},
           {"label":"Hit / Hurt / Push / Art", "text":"Shows or hides orange attack geometry, blue body hurtboxes, green pushbox and sprite artwork. These are preview visibility toggles; hiding a box never disables it in gameplay."},
+          {"label": "Distances", "text": "Shows horizontal guides and a numeric readout. Values update in game pixels as you play, scrub or edit. Hiding the guides keeps the same scene scale and selected frame; it does not change gameplay or saved move data."},
           {"label":"Play / Pause", "text":"Plays the exchange from the current tick and stops at the end. Play at the end starts again. Pause to edit boxes directly on the attacker while the target remains visible."},
           {"label":"Attack timeline / tick count", "text":"Scrubs the exchange and pauses playback. The count is elapsed tick / total ticks, including approach and hitstop. Move frame is shown separately. Box controls follow the selected attack frame and phase."},
           {"label":"Windup / Active / Recovery timeline", "text":"Click a colored segment to jump to that attack phase in the shared exchange. Widths show authored durations. Zero-length recovery has no segment. Dashed orange boxes outside active frames are reference outlines."},
@@ -157,6 +158,10 @@
             {
               "label": "Playback speed / edit continuity",
               "text": "Quarter, half (default), or full speed affects playback only. After edits, the exchange recalculates at 60 ticks per second and keeps the selected move frame even if hitstop or approach changes elapsed time."
+            },
+            {
+              "label": "Distance values / ground ruler",
+              "text": "Root spacing measures between fighter roots. Body gap measures between pushbox edges; Body overlap means their horizontal projections overlap. Box front is the farthest forward hitbox edge from the attacker’s root. Selected box shows width × height. The ruler is 0 at the attacker, positive forward. All spacing is horizontal. Inactive outlines are labelled; range alone does not guarantee contact."
             },
             {
               "label": "Input, frame, stun & result readouts",
@@ -491,7 +496,7 @@
           {"label":"Include body extension · fourth box", "text":"Adds or removes one extra body rectangle. A new extension starts over the torso and becomes selected; move it to an extended limb or complex body shape. Legs, torso/arms and head remain required."},
           {"label":"Blue handles and center", "text":"With custom boxes enabled and playback paused, drag an edge to resize or the center to move. Invalid sizes/positions are refused. This changes the game’s actual hurtboxes, not just the preview."}
         ]},
-        {"type":"image", "path":"hurtbox-preview.png", "width":245, "caption":"Selected torso/arms box in the active phase. Blue = body; orange = attack."},
+        {"type":"image", "path":"hurtbox-preview.png", "width":220, "caption":"Selected torso/arms box in the active phase. Blue = body; orange = attack."},
         {"type":"callout", "title":"Three required regions, one optional extension", "text":"Keep boxes on the body; weapons add no hurtbox. The editor cannot create invulnerability by deleting every box. Custom recovery coverage stays fixed through that phase; inherited recovery coverage can follow live crouching or landing poses. Pushboxes remain separate and read-only."}
       ]
     },

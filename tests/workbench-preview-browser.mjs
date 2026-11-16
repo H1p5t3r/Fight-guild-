@@ -12,6 +12,26 @@ try{
   await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
   await page.goto(url);await page.waitForFunction(()=>moveWorkshop.preview()?.contacts.length===1);
   assert.equal(await page.evaluate(()=>typeof WebAssembly),'undefined');
+  // Game-pixel measurements share the scene, and hiding them only changes presentation.
+  await ready(page);await page.locator('#restart').click();
+  assert.match(await page.locator('#distance-readout').innerText(),/Body gap 24 px/);
+  const measuredDraft=await page.evaluate(()=>JSON.stringify(moveWorkshop.data()));
+  const measuredCursor=await page.evaluate(()=>moveWorkshop.cursor());
+  const measuredScale=await page.evaluate(()=>moveWorkshop.geometry().view.scale),height=await page.locator('#preview').evaluate(c=>c.clientHeight);
+  await page.locator('#show-distances').uncheck();assert.equal(await page.locator('#distance-readout').isHidden(),true);
+  assert.equal(await page.locator('#preview').evaluate(c=>c.clientHeight),height-72);
+  assert.ok(Math.abs(await page.evaluate(()=>moveWorkshop.geometry().view.scale)-measuredScale)<1e-9,'Measurement strip preserves scene scale');
+  assert.deepEqual(await page.evaluate(()=>moveWorkshop.cursor()),measuredCursor);
+  assert.equal(await page.evaluate(()=>JSON.stringify(moveWorkshop.data())),measuredDraft);
+  await page.locator('#show-distances').check();assert.equal(await page.locator('#preview').evaluate(c=>c.clientHeight),height);
+  await page.locator('#test-facing').selectOption('-1');await ready(page);
+  assert.match(await page.locator('#distance-readout').innerText(),/Body gap 24 px/);
+  await page.locator('#test-facing').selectOption('1');await ready(page);await seekMoveFrame(page,5);await page.locator('#tab-hit').click();
+  const guide=await page.evaluate(()=>({m:moveWorkshop.data().characters[5].moves[0],g:moveWorkshop.geometry().measurements}));
+  assert.equal(guide.g.reach.value,guide.m.reach);assert.equal(guide.g.selected.width,guide.m.reach-guide.m.hitboxBack);assert.equal(guide.g.selected.height,guide.m.height);
+  await mkdir('build/workshop-distance-review',{recursive:true});await page.locator('#preview').screenshot({path:'build/workshop-distance-review/active.png'});
+  await page.locator('#tab-timing').click();
+
   await page.locator('#test-entry').selectOption('run');
   await page.waitForFunction(()=>moveWorkshop.preview()?.frames.some(f=>f.input&512));
   await page.locator('#play').click();await page.waitForFunction(()=>Number(document.getElementById('frame').value)>8);
@@ -82,6 +102,7 @@ try{
   await dragHandle(page,'hit-key',2,-15);
   assert.ok(await page.evaluate(before=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys[1].boxes[0][2]>before,beforeLeft[2]));
   assert.equal(await page.evaluate(()=>moveWorkshop.cursor().frame),7,'Dragging keeps the same move frame');
+  assert.ok(await page.evaluate(before=>moveWorkshop.geometry().measurements.reach.value>before,beforeLeft[2]),'Measured front edge follows a mirrored drag');
   assert.equal(await page.evaluate(()=>moveWorkshop.preview().frames[moveWorkshop.cursor().index].state.players[0].facing),-1);
   await page.locator('#undo').click();await ready(page);
   assert.deepEqual(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys[1].boxes[0]),beforeLeft);
@@ -107,6 +128,7 @@ try{
   await page.locator('#frame').evaluate(n=>{n.value=n.max;n.dispatchEvent(new Event('input',{bubbles:true}));});assert.match(await page.locator('#test-result').innerText(),/blocks/);
   await page.setViewportSize({width:390,height:844});await page.screenshot({path:'build/workshop-preview-review/mobile.png',fullPage:true});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  assert.ok(await page.evaluate(()=>moveWorkshop.geometry().measurementLabels.every(l=>l.x>=0&&l.x+l.width<=document.getElementById('preview').clientWidth)),'Distance labels fit mobile canvas');
   assert.deepEqual(errors,[]);assert.ok(requests.every(r=>r===url||r.startsWith('data:')));
   console.log('PASS shared combat/editing workspace without WebAssembly; timed hitboxes, toggleable multi-hits, enabled attacks, JSON export, guarding and mobile layout.');
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
