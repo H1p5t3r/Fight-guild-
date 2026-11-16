@@ -57,6 +57,8 @@ var motion := MenuMotion.new()
 var layer_tween: Tween
 var layer_target := "menus"
 var play_root: Control
+var play_margins: MarginContainer
+var play_header: HBoxContainer
 var editor_shell: PanelContainer
 var toolbar: HBoxContainer
 var practice: HBoxContainer
@@ -151,12 +153,14 @@ func build_interface() -> void:
 	play_root.modulate.a = 0.0
 	MenuMotion.interactive(play_root, false)
 	var margins := MarginContainer.new()
+	play_margins = margins
 	margins.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	for edge in ["left", "right", "top", "bottom"]: margins.add_theme_constant_override("margin_" + edge, 16)
 	play_root.add_child(margins)
 	var root := VBoxContainer.new()
 	margins.add_child(root)
 	var header := row(root)
+	play_header = header
 	var brand := label(header, "FG   FIGHT GUILD", 23, ACCENT)
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	activity_badge = label(header, "DEVELOPMENT", 11, MUTED)
@@ -524,7 +528,7 @@ func menu_action(action: String) -> void:
 		"local", "online", "training", "development": choose_activity(action)
 		"confirm_fighters": confirm_selection()
 		"back": menu_back()
-		"controls": show_controls()
+		"controls", "pause_controls": show_controls()
 		"motion":
 			motion.toggle_reduced()
 			menus.update_motion_label()
@@ -678,6 +682,9 @@ func confirm_selection() -> void:
 func configure_activity() -> void:
 	var development := activity == "development"
 	var practice_mode := activity in ["training", "development"]
+	play_header.visible = practice_mode
+	for edge in ["left", "right", "top", "bottom"]:
+		play_margins.add_theme_constant_override("margin_" + edge, 16 if practice_mode else 0)
 	editor_shell.visible = development
 	sprite_button.visible = development
 	diagnostics.visible = development

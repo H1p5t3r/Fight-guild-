@@ -242,6 +242,7 @@ func build_pause(page: VBoxContainer) -> void:
 	action(actions, "restart", "Restart " + str(MatchCeremony.script().roundName).to_lower())
 	action(actions, "change_fighters", "Change fighters")
 	action(actions, "pause_home", "Main menu", 38, "secondary")
+	action(actions, "pause_controls", "Controls", 38, "secondary")
 
 func build_results(page: VBoxContainer) -> void:
 	result_title = heading(page, "ROUND COMPLETE", "Run it back, try another fighter, or return to the main menu.")

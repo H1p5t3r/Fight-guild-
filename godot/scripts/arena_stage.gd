@@ -11,16 +11,20 @@ const COLORS := [Color("c4ad86"), Color("82b8bd"), Color("d2a178")]
 const DEPTHS := [0.16, 0.54, 1.0]
 const LAYERS := ["far", "mid", "floor"]
 const TRAVEL_EDGE_FADE := 0.06
-# The supplied 1280x720 Strive reference has ~430px standing silhouettes (60%).
-# Our arena sits below the application header: 66% of its height is ~59% of the
-# full match window. Keep the canonical 150-world-pixel bodies/collisions intact.
+# Match presentation fills the viewport. Bodies and all nearby scenery use the
+# same world projection; distant scenery has parallax, not a separate zoom cap.
 const BODY_HEIGHT := 150.0
-const BODY_SCREEN_HEIGHT := 0.66
+const BODY_SCREEN_HEIGHT := 0.60
 const FRAME_HEAD_HEIGHT := 152.0
 const HORIZONTAL_MARGIN := 0.12
 const WALL_SCREEN_MARGIN := 0.12
+const SCENE_WORLD_WIDTH := 1240.0
+const SCENE_BASELINE := 810.0 / 1024.0
 static var textures := {}
 static var regions := {}
+
+static func floor_line(bounds: Vector2) -> float:
+	return bounds.y * 0.925
 
 static func asset_paths() -> Array[String]:
 	var paths: Array[String] = []
@@ -55,66 +59,79 @@ static func next_stage(stage: int, side: int) -> int:
 static func camera(state: Dictionary, bounds: Vector2, _reduced: bool = false) -> Dictionary:
 	if state.is_empty() or bounds.x <= 0 or bounds.y <= 0: return {"center": 0.5, "zoom": 1.0, "offset": Vector2.ZERO}
 	var separation := absf(float(state.players[0].x - state.players[1].x)) / 100000.0
-	var floor_y := bounds.y - 76.0
+	var floor_y := floor_line(bounds)
 	var hud_bottom := FightHud.TOP_CLEARANCE * minf(bounds.x / 1248.0, 1.0)
 	var highest := maxf(float(state.players[0].get("y", 0)), float(state.players[1].get("y", 0))) / 100.0
+	# Follow shared air height rather than shrinking two airborne fighters merely
+	# to keep an empty floor in view. With a grounded opponent the floor stays put.
+	var lowest := minf(float(state.players[0].get("y", 0)), float(state.players[1].get("y", 0))) / 100.0
+	var lift_world := maxf(0.0, lowest - 40.0)
 	var zoom := bounds.y * BODY_SCREEN_HEIGHT / (BODY_HEIGHT * bounds.x / 1000.0)
 	# Essential framing also applies with reduced motion: both fighters stay visible.
 	# No pose-dependent zoom or retained tween; pauses and rollback render identically.
 	zoom = minf(zoom, 1.0 / (separation + HORIZONTAL_MARGIN * 2.0))
-	zoom = minf(zoom, maxf(1.0, floor_y - hud_bottom) / ((highest + FRAME_HEAD_HEIGHT) * bounds.x / 1000.0))
+	zoom = minf(zoom, maxf(1.0, floor_y - hud_bottom) / ((highest - lift_world + FRAME_HEAD_HEIGHT) * bounds.x / 1000.0))
 	# Narrow development views need enough world-space room for a body beyond its
 	# pushbox, even when the minimum screen-relative margin would be too small.
 	var wall_margin := maxf(WALL_SCREEN_MARGIN, 0.055 * zoom)
 	var edge_center := minf(0.5, (0.5 - wall_margin) / zoom)
 	var center := clampf(float(state.players[0].x + state.players[1].x) / 200000.0, edge_center, 1.0 - edge_center)
-	return {"center": center, "zoom": zoom, "offset": Vector2(bounds.x * (0.5 - center * zoom), floor_y * (1.0 - zoom))}
+	var lift := lift_world * bounds.x / 1000.0 * zoom
+	return {"center": center, "zoom": zoom, "lift": lift,
+		"offset": Vector2(bounds.x * (0.5 - center * zoom), floor_y * (1.0 - zoom) + lift)}
 
-static func layer_rect(bounds: Vector2, image_size: Vector2, depth: float, center: float, zoom: float) -> Rect2:
-	# These are matched scenic plates, not fighter-sized world geometry. Keep their
-	# shared y=735 architecture/floor seam registered and y=900 at the fighters' feet.
-	# A restrained, common zoom preserves the composition with the closer camera.
-	var scenic_zoom := clampf(1.0 + (zoom - 2.25) * 0.08, 0.92, 1.04)
-	var factor := bounds.x / image_size.x * 1.24 * scenic_zoom
-	factor = maxf(factor, (bounds.y - 76.0) / (image_size.y * (900.0 / 1024.0)))
-	factor = maxf(factor, 76.0 / (image_size.y * (124.0 / 1024.0)))
+static func layer_rect(bounds: Vector2, image_size: Vector2, depth: float, center: float, zoom: float, lift: float = 0.0) -> Rect2:
+	# A source pixel has a fixed world size. The painted seam stays registered;
+	# y=810 is our ground plane, leaving visible paving below the fighters' feet.
+	var factor := bounds.x / 1000.0 * zoom * SCENE_WORLD_WIDTH / image_size.x
 	var extent := image_size * factor
-	# Pan within the actual image overscan; changing depth only changes horizontal
-	# travel, never layer size or vertical registration. No stretched/tiled scenery.
-	var shift := (clampf(center, 0.0, 1.0) - 0.5) * (extent.x - bounds.x) * depth
+	var shift := (center - 0.5) * bounds.x * zoom * depth
 	var x := (bounds.x - extent.x) * 0.5 - shift
-	return Rect2(Vector2(x, bounds.y - 76.0 - image_size.y * (900.0 / 1024.0) * factor), extent)
+	return Rect2(Vector2(x, floor_line(bounds) + lift - image_size.y * SCENE_BASELINE * factor), extent)
 
 static func draw_plane(canvas: Control, stage: int, layer: int, center: float, zoom: float,
-		offset: Vector2 = Vector2.ZERO, opacity: float = 1.0, feather: bool = false) -> void:
+		offset: Vector2 = Vector2.ZERO, opacity: float = 1.0, feather: bool = false, lift: float = 0.0) -> void:
 	if opacity <= 0.0: return
 	var source := texture(IDS[stage] + "-" + LAYERS[layer] + ".png")
-	var rect := layer_rect(canvas.size, source.get_size(), DEPTHS[layer], center, zoom)
+	var rect := layer_rect(canvas.size, source.get_size(), DEPTHS[layer], center, zoom, lift)
+	# The sky is the infinite backdrop; it must cover even when both fighters are
+	# high above the floor. Nearby plates retain their exact world scale.
+	if layer == 0:
+		var factor := maxf(rect.size.x / source.get_width(), maxf(canvas.size.x / source.get_width(), canvas.size.y / source.get_height()))
+		var extent := source.get_size() * factor
+		rect = Rect2(Vector2(clampf(rect.position.x, canvas.size.x - extent.x, 0), clampf(rect.position.y, canvas.size.y - extent.y, 0)), extent)
 	rect.position += offset
-	if not feather:
-		canvas.draw_texture_rect(source, rect, false, Color(1, 1, 1, opacity))
+	var tint := Color(0.83, 0.88, 0.93, opacity) if layer < 2 else Color(1, 1, 1, opacity)
+	var top_fade := layer == 1 and rect.position.y > -20.0
+	if not feather and not top_fade:
+		canvas.draw_texture_rect(source, rect, false, tint)
 		return
 	# Fade the exposed image ends during travel; ordinary play uses the untouched
 	# image. Three textured quads avoid a rectangular seam between adjoining floors.
-	var stops := [0.0, TRAVEL_EDGE_FADE, 1.0 - TRAVEL_EDGE_FADE, 1.0]
-	var alphas := [0.0, opacity, opacity, 0.0]
-	for i in 3:
+	var stops := [0.0, TRAVEL_EDGE_FADE, 1.0 - TRAVEL_EDGE_FADE, 1.0] if feather else [0.0, 1.0]
+	var alphas := [0.0, opacity, opacity, 0.0] if feather else [opacity, opacity]
+	var rows := [0.0, 0.06, 1.0] if top_fade else [0.0, 1.0]
+	var row_alphas := [0.0, 1.0, 1.0] if top_fade else [1.0, 1.0]
+	for i in stops.size() - 1:
 		var a: float = stops[i]
 		var b: float = stops[i + 1]
-		var vertices := PackedVector2Array([rect.position + Vector2(rect.size.x * a, 0),
-			rect.position + Vector2(rect.size.x * b, 0), rect.position + Vector2(rect.size.x * b, rect.size.y),
-			rect.position + Vector2(rect.size.x * a, rect.size.y)])
-		var colors := PackedColorArray([Color(1, 1, 1, alphas[i]), Color(1, 1, 1, alphas[i + 1]),
-			Color(1, 1, 1, alphas[i + 1]), Color(1, 1, 1, alphas[i])])
-		canvas.draw_polygon(vertices, colors, PackedVector2Array([Vector2(a, 0), Vector2(b, 0), Vector2(b, 1), Vector2(a, 1)]), source)
+		for j in rows.size() - 1:
+			var c: float = rows[j]
+			var d: float = rows[j + 1]
+			var uv := PackedVector2Array([Vector2(a, c), Vector2(b, c), Vector2(b, d), Vector2(a, d)])
+			var vertices := PackedVector2Array()
+			for point in uv: vertices.append(rect.position + point * rect.size)
+			var colors := PackedColorArray([Color(tint, alphas[i] * row_alphas[j]), Color(tint, alphas[i + 1] * row_alphas[j]),
+				Color(tint, alphas[i + 1] * row_alphas[j + 1]), Color(tint, alphas[i] * row_alphas[j + 1])])
+			canvas.draw_polygon(vertices, colors, uv, source)
 
-static func draw(canvas: Control, debug_grid: bool, stage: int = 0, center: float = 0.5, zoom: float = 1.0) -> void:
+static func draw(canvas: Control, debug_grid: bool, stage: int = 0, center: float = 0.5, zoom: float = 1.0, lift: float = 0.0) -> void:
 	canvas.draw_rect(Rect2(Vector2.ZERO, canvas.size), Color("17252d"))
-	for layer in 3: draw_plane(canvas, stage, layer, center, zoom)
+	for layer in 3: draw_plane(canvas, stage, layer, center, zoom, Vector2.ZERO, 1.0, false, lift)
 	if debug_grid: draw_grid(canvas)
 
 static func draw_grid(canvas: Control) -> void:
-	var floor_y := canvas.size.y - 76.0
+	var floor_y := floor_line(canvas.size)
 	for x in range(0, int(canvas.size.x), 70): canvas.draw_line(Vector2(x, 140), Vector2(x, floor_y), Color(0.35, 0.65, 0.75, 0.16))
 	for y in range(160, int(floor_y), 50): canvas.draw_line(Vector2(0, y), Vector2(canvas.size.x, y), Color(0.35, 0.65, 0.75, 0.16))
 
@@ -126,14 +143,39 @@ static func wall_rect(bounds: Vector2, side: int, zoom: float, offset: Vector2) 
 static func draw_boundaries(canvas: Control, stage: int, zoom: float, offset: Vector2,
 		broken_side: int = 0, fracture: float = 0.0, opacity: float = 1.0) -> void:
 	var source := texture(IDS[stage] + "-wall.png")
+	var factor := canvas.size.x / 1000.0 * zoom * 0.34
+	var ground := offset.y + floor_line(canvas.size) * zoom
 	for side in [-1, 1]:
 		var rect := wall_rect(canvas.size, side, zoom, offset)
 		if rect.size.x <= 0: continue
-		var factor := maxf(rect.size.y / source.get_height(), rect.size.x / source.get_width())
-		var source_width := rect.size.x / factor
-		var region := Rect2(source.get_width() - source_width if side < 0 else 0.0, 0.0, source_width, rect.size.y / factor)
+		# Repeat a world-sized surface through the infinite collision half-space.
+		# Bricks now change size with the fighters and stay anchored to the floor.
+		var region := Rect2(1160.0 - rect.size.x / factor if side < 0 else 360.0,
+			880.0 - ground / factor, rect.size.x / factor, rect.size.y / factor)
 		var alpha := opacity * (1.0 - fracture if side == broken_side else 1.0)
-		canvas.draw_texture_rect_region(source, rect, region, Color(1, 1, 1, alpha))
+		draw_wall_surface(canvas, source, rect, region.position, factor, alpha)
+		var edge := rect.end.x if side < 0 else rect.position.x
+		var bevel := minf(rect.size.x, 9.0 * factor)
+		canvas.draw_rect(Rect2(edge - bevel if side < 0 else edge, 0, bevel, canvas.size.y), Color("080d16", 0.55 * alpha))
+		canvas.draw_line(Vector2(edge - bevel if side < 0 else edge + bevel, 0), Vector2(edge - bevel if side < 0 else edge + bevel, canvas.size.y), Color(COLORS[stage], 0.42 * alpha), 1.2, true)
+		var shade_end: float = edge - side * 25.0 * factor
+		canvas.draw_polygon(PackedVector2Array([Vector2(edge, 0), Vector2(shade_end, 0), Vector2(shade_end, canvas.size.y), Vector2(edge, canvas.size.y)]),
+			PackedColorArray([Color("080d16", 0.28 * alpha), Color("080d16", 0), Color("080d16", 0), Color("080d16", 0.28 * alpha)]))
+
+static func draw_wall_surface(canvas: Control, source: Texture2D, rect: Rect2, origin: Vector2, factor: float, alpha: float) -> void:
+	# Explicit bounded UV tiles avoid the clamped edge streaks of out-of-range
+	# texture regions, including high airborne cameras and very wide views.
+	var x := rect.position.x
+	while x < rect.end.x - 0.01:
+		var u := fposmod(origin.x + (x - rect.position.x) / factor, source.get_width())
+		var width := minf(rect.end.x - x, (source.get_width() - u) * factor)
+		var y := rect.position.y
+		while y < rect.end.y - 0.01:
+			var v := fposmod(origin.y + (y - rect.position.y) / factor, source.get_height())
+			var height := minf(rect.end.y - y, (source.get_height() - v) * factor)
+			canvas.draw_texture_rect_region(source, Rect2(x, y, width, height), Rect2(u, v, width / factor, height / factor), Color(0.78, 0.83, 0.88, alpha))
+			y += height
+		x += width
 
 static func portal(canvas: Control, file: String, progress: float, side: int, opacity: float) -> void:
 	if opacity <= 0.0: return
@@ -143,7 +185,11 @@ static func portal(canvas: Control, file: String, progress: float, side: int, op
 	var position := (canvas.size - extent) * 0.5 + Vector2(-side * (progress - 0.5) * canvas.size.x * 1.4, 0)
 	canvas.draw_texture_rect(source, Rect2(position, extent), false, Color(1, 1, 1, opacity))
 
-static func draw_footer(canvas: Control, stage: int) -> void:
-	# The HUD rests on its own calm strip; the generated playing plane remains unobscured.
-	canvas.draw_rect(Rect2(0, canvas.size.y - 75, canvas.size.x, 75), Color("081219", 0.80))
-	FightHud.centered(canvas, NAMES[stage], Vector2(canvas.size.x * 0.5, canvas.size.y - 57), 12, Color(COLORS[stage], 0.8), 2)
+static func draw_footer(canvas: Control, stage: int, caption: bool = true) -> void:
+	# Momentum floats over the stage. A fade, rather than a hard panel edge, keeps
+	# the playing surface visible through the bottom of the frame.
+	var w := canvas.size.x
+	var h := canvas.size.y
+	canvas.draw_polygon(PackedVector2Array([Vector2(0, h - 62), Vector2(w, h - 62), Vector2(w, h), Vector2(0, h)]),
+		PackedColorArray([Color("081219", 0), Color("081219", 0), Color("081219", 0.68), Color("081219", 0.68)]))
+	if caption: FightHud.centered(canvas, NAMES[stage], Vector2(w * 0.5, h - 16), int(clampf(w * 0.009, 9, 12)), Color(COLORS[stage], 0.7), 2)

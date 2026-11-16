@@ -15,6 +15,7 @@ var hud_layer: Control
 var feedback := CombatFeedback.new()
 var camera_center := 0.5
 var stage_zoom := 1.0
+var stage_lift := 0.0
 var camera_accent := 1.0
 var accent_offset := Vector2.ZERO
 var camera_zoom := 1.0
@@ -50,7 +51,7 @@ func _ready() -> void:
 	hud_layer.draw.connect(func():
 		if not view.is_empty():
 			draw_wall_break()
-			ArenaStage.draw_footer(hud_layer, int(view.stage))
+			ArenaStage.draw_footer(hud_layer, int(view.stage), not diagnostics)
 			FightHud.draw(hud_layer, view, score, round_label, diagnostics))
 
 func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bool) -> void:
@@ -60,12 +61,13 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	paused = frozen
 	feedback.refresh(view, size)
 	var scale_x := size.x / 1000.0
-	var floor_y := size.y - 76.0
+	var floor_y := ArenaStage.floor_line(size)
 	var travel := int(view.wallBreakTime) > 0
 	var camera := ArenaStage.camera(view, size, feedback.reduced_motion)
 	camera_center = camera.center
 	camera_zoom = camera.zoom
 	stage_zoom = camera.zoom
+	stage_lift = camera.get("lift", 0.0)
 	camera_accent = 1.0
 	accent_offset = Vector2.ZERO
 	camera_offset = camera.offset
@@ -112,13 +114,14 @@ func _draw() -> void:
 		StageTravel.draw_background(self, view, feedback.reduced_motion)
 		return
 	draw_set_transform(accent_offset, 0.0, Vector2.ONE * camera_accent)
-	ArenaStage.draw(self, show_boxes, int(view.get("stage", 0)), camera_center, stage_zoom)
+	ArenaStage.draw(self, show_boxes, int(view.get("stage", 0)), camera_center, stage_zoom, stage_lift)
 	draw_set_transform(Vector2.ZERO)
 	ArenaStage.draw_boundaries(self, int(view.get("stage", 0)), camera_zoom, camera_offset)
 	var sx := size.x / 1000.0
-	var floor_y := size.y - 76.0
+	var floor_y := ArenaStage.floor_line(size)
 	if view.is_empty():
 		return
+	draw_ground_shadows()
 	# Draw in the stage background before the HUD and before child fighter sprites.
 	feedback.draw(self)
 	draw_walls()
@@ -178,7 +181,7 @@ func draw_wall_break() -> void:
 func draw_collisions() -> void:
 	if not show_boxes or view.is_empty() or model == null or int(view.wallBreakTime) > 0: return
 	var sx := size.x / 100000.0
-	var floor_y := size.y - 76.0
+	var floor_y := ArenaStage.floor_line(size)
 	collision_layer.draw_set_transform(camera_offset, 0.0, Vector2.ONE * camera_zoom)
 	var colors := [Color("67d5ff"), Color("9ce56b"), Color("ff8859")]
 	for p in 2:
@@ -201,3 +204,31 @@ func draw_collisions() -> void:
 		var caption: String = ["HURT · body", "PUSH · spacing", "HIT · active"][kind]
 		collision_layer.draw_string(font, Vector2(left, 129), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, colors[kind])
 		left += 145.0
+
+func draw_ground_shadows() -> void:
+	# Read the lowest body hurtbox, never the weapon or extended attack rectangle.
+	# The shadow stays on the world floor and softens as the body leaves it.
+	var sx := size.x / 100000.0
+	for p in 2:
+		var fighter: Dictionary = view.players[p]
+		var boxes: PackedInt32Array = model.core.boxes(p, 0)
+		if boxes.is_empty(): continue
+		var leg := 0
+		for i in range(4, boxes.size(), 4):
+			if boxes[i + 1] < boxes[leg + 1]: leg = i
+		var ground := screen_point(Vector2((boxes[leg] + boxes[leg + 2]) * 0.5 * sx, ArenaStage.floor_line(size)))
+		var height := maxf(0, float(fighter.y) / 100.0)
+		var width := clampf((boxes[leg + 2] - boxes[leg]) / 200.0, 20.0, 60.0)
+		var spread := 1.0 + minf(height / 300.0, 0.5)
+		var radius := Vector2(width * spread * 1.15, 5.0 * spread) * size.x / 1000.0 * camera_zoom
+		draw_set_transform(ground, 0, radius)
+		for ring in 7:
+			draw_circle(Vector2.ZERO, 1.0 - ring * 0.10, Color("080d16", 0.075 / (1.0 + height / 120.0)), true, -1, true)
+		draw_set_transform(Vector2.ZERO)
+		if height < 8.0:
+			for side in [-1, 1]:
+				var foot: Vector2 = ground + Vector2(side * radius.x * 0.68, 0)
+				draw_set_transform(foot, 0, Vector2(radius.x * 0.36, radius.y * 0.55))
+				for ring in 4:
+					draw_circle(Vector2.ZERO, 1.0 - ring * 0.16, Color("080d16", 0.11 * (1.0 - height / 8.0)), true, -1, true)
+				draw_set_transform(Vector2.ZERO)

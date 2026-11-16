@@ -59,8 +59,8 @@ func run() -> void:
 				var from := StageTravel.source_camera(now, bounds)
 				var to := StageTravel.destination_camera(now, bounds)
 				for layer in [1, 2]:
-					var a := ArenaStage.layer_rect(bounds, Vector2(1536, 1024), ArenaStage.DEPTHS[layer], from.center, from.zoom)
-					var b := ArenaStage.layer_rect(bounds, Vector2(1536, 1024), ArenaStage.DEPTHS[layer], to.center, to.zoom)
+					var a := ArenaStage.layer_rect(bounds, Vector2(1536, 1024), ArenaStage.DEPTHS[layer], from.center, from.zoom, from.lift)
+					var b := ArenaStage.layer_rect(bounds, Vector2(1536, 1024), ArenaStage.DEPTHS[layer], to.center, to.zoom, to.lift)
 					a.position += StageTravel.layer_offset(bounds, layer, side, travel.pan, false)
 					b.position += StageTravel.layer_offset(bounds, layer, side, travel.pan, true)
 					a = a.grow_individual(-a.size.x * ArenaStage.TRAVEL_EDGE_FADE, 0, -a.size.x * ArenaStage.TRAVEL_EDGE_FADE, 0)
@@ -71,7 +71,7 @@ func run() -> void:
 				check(is_finite(presentation.position.x) and is_finite(presentation.scale), "Non-finite presentation")
 				if tick == 0:
 					var origin_camera := ArenaStage.camera(state, bounds)
-					var expected: Vector2 = origin_camera.offset + Vector2(state.players[player].x * bounds.x / 100000.0, bounds.y - 76 - state.players[player].y * bounds.x / 100000.0) * origin_camera.zoom
+					var expected: Vector2 = origin_camera.offset + Vector2(state.players[player].x * bounds.x / 100000.0, ArenaStage.floor_line(bounds) - state.players[player].y * bounds.x / 100000.0) * origin_camera.zoom
 					check(presentation.position.distance_to(expected) < 0.1, "Travel jumps away from the gameplay camera")
 				if tick == int(state.wallBreakDuration) - 1:
 					landing[player] = presentation
@@ -80,7 +80,7 @@ func run() -> void:
 		var final_hash: int = model.core.checksum()
 		var camera := ArenaStage.camera(model.state(), bounds)
 		for player in 2:
-			var expected: Vector2 = camera.offset + Vector2(model.state().players[player].x * bounds.x / 100000.0, bounds.y - 76) * camera.zoom
+			var expected: Vector2 = camera.offset + Vector2(model.state().players[player].x * bounds.x / 100000.0, ArenaStage.floor_line(bounds)) * camera.zoom
 			check(landing[player].position.distance_to(expected) < 0.1 and absf(landing[player].scale - camera.zoom) < 0.001, "Landing jumps when gameplay resumes")
 			check(landing[player + 2].position.distance_to(expected) < 0.1 and absf(landing[player + 2].scale - camera.zoom) < 0.001, "Reduced-motion landing jumps when gameplay resumes")
 		check(model.core.restore(origin), "Travel snapshot rejected")

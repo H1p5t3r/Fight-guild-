@@ -32,7 +32,7 @@ func run() -> void:
 		for character in data.characters:
 			for move in character.moves: move.pushback = 0
 			for slot in [0, 4]:
-				character.moves[slot].damage = 70
+				character.moves[slot].damage = 180 if args.has("--low-health") else 70
 				character.moves[slot].startup = 5
 				character.moves[slot].reach = 50000
 		game.model.load_data(data)
@@ -51,6 +51,8 @@ func run() -> void:
 		game.match_score.wins = [1, 1]
 		game.round_number = 3
 	game._process(0.0)
+	var state: Dictionary = game.model.state()
+	print("HUD preview HP=", [state.players[0].health, state.players[1].health], " combo=", state.players[0].comboDisplay)
 	if args.has("--review"): game.show_sprite_review()
 	await process_frame
 	await RenderingServer.frame_post_draw

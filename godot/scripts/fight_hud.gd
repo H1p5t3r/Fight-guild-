@@ -4,7 +4,8 @@ extends RefCounted
 const INK := Color("081219")
 const IVORY := GuildTheme.IVORY
 const PLAYER_COLORS := [Color("e6b96e"), Color("7dcece")]
-const TOP_CLEARANCE := 112.0
+const TOP_CLEARANCE := 124.0
+const PORTRAIT_SHEET = preload("res://assets/ui/fighter-portraits.png")
 static var portraits := {}
 
 static func cut(rect: Rect2, corner: float = 10.0) -> PackedVector2Array:
@@ -52,12 +53,16 @@ static func draw_health(canvas: CanvasItem, rail: Rect2, health: int, guild: Col
 	var outline := health_shape(rail, right)
 	canvas.draw_colored_polygon(outline, guild.darkened(0.83))
 	outline.append(outline[0])
-	canvas.draw_polyline(outline, guild.darkened(0.20), 2, true)
-	var inner := rail.grow(-4)
+	canvas.draw_polyline(outline, Color(IVORY, 0.6), 1.2, true)
+	var inner := rail.grow(-2)
 	var fraction := clampf(health / 1000.0, 0.0, 1.0)
 	var fill_width := inner.size.x * fraction
 	if fill_width < 0.5: return
-	canvas.draw_colored_polygon(health_shape(inner, right, fraction, 4), guild)
+	var shape := health_shape(inner, right, fraction, 4)
+	var colors := PackedColorArray()
+	for point in shape:
+		colors.append(guild.lerp(guild.darkened(0.22), clampf((point.y - inner.position.y) / inner.size.y, 0, 1)))
+	canvas.draw_polygon(shape, colors)
 	if fill_width > 12:
 		var highlight := PackedVector2Array([health_point(inner, 5 / inner.size.x, 3, right)])
 		if fraction - 5 / inner.size.x > 0.30: highlight.append(health_point(inner, 0.30, 3, right))
@@ -68,11 +73,18 @@ static func draw_health(canvas: CanvasItem, rail: Rect2, health: int, guild: Col
 
 static func portrait(character: int) -> AtlasTexture:
 	if not portraits.has(character):
+		if character in [4, 5]:
+			var result := AtlasTexture.new()
+			result.atlas = PORTRAIT_SHEET
+			result.region = Rect2(24 if character == 5 else 776, 112, 716 if character == 5 else 752, 808)
+			result.filter_clip = true
+			portraits[character] = result
+			return result
 		var source := FighterArt.texture(character, "windup", 0)
 		var bounds: Array = FighterArt.sheet(character, "windup").frames[0].bounds
 		var result := AtlasTexture.new()
 		result.atlas = source.atlas
-		result.region = Rect2(source.region.position + Vector2(bounds[0], bounds[1]), Vector2(bounds[2] - bounds[0], (bounds[3] - bounds[1]) * 0.58))
+		result.region = Rect2(source.region.position + Vector2(bounds[0], bounds[1]), Vector2(bounds[2] - bounds[0], (bounds[3] - bounds[1]) * 0.34))
 		result.filter_clip = true
 		portraits[character] = result
 	return portraits[character]
@@ -87,69 +99,75 @@ static func stamp(canvas: CanvasItem, value: String, center: Vector2, font_size:
 static func fighter_name(canvas: CanvasItem, value: String, point: Vector2, right: bool) -> void:
 	var font := CombatTypography.FONT
 	if right: point.x -= font.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, 26).x
-	canvas.draw_string_outline(font, point + Vector2(1, 1), value, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, 4, INK)
+	canvas.draw_string_outline(font, point + Vector2(1, 1), value, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, 3, INK)
 	canvas.draw_string(font, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, IVORY)
 
 static func draw(canvas: Control, state: Dictionary, wins: Array, round_call: String, diagnostics: bool) -> void:
-	var scale_factor := minf(canvas.size.x / 1248.0, 1.0)
+	var scale_factor := minf(canvas.size.x / 1280.0, 1.0)
 	var area := canvas.size / scale_factor
-	var detail_size := maxi(14, ceili(12.0 / scale_factor))
 	canvas.draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE * scale_factor)
-	var width := (area.x - 244.0) * 0.5
+	# A soft shade carries the lettering without boxing off the scene.
+	canvas.draw_polygon(PackedVector2Array([Vector2.ZERO, Vector2(area.x, 0), Vector2(area.x, 126), Vector2(0, 126)]),
+		PackedColorArray([Color(INK, 0.70), Color(INK, 0.70), Color(INK, 0), Color(INK, 0)]))
+	var center := area.x * 0.5
+	var width := center - 170.0
 	for p in 2:
 		var fighter: Dictionary = state.players[p]
 		var right := p == 1
-		var x := area.x - width - 24 if right else 24.0
 		var accent: Color = PLAYER_COLORS[p]
 		var guild: Color = FighterSelectPortrait.COLORS[fighter.character]
-		# Names live on the HP rail; the portrait caps its outside end. The old
-		# rectangular nameplate row is gone, bringing the whole health display up.
-		var rail := Rect2(x if right else 88.0, 18, width - 64.0, 38)
+		var rail := Rect2(center + 64 if right else 106.0, 29, width, 31)
 		draw_health(canvas, rail, fighter.health, guild, right)
-		var name_x := rail.end.x - 12.0 if right else rail.position.x + 12.0
-		fighter_name(canvas, str(CombatModel.CHARACTERS[fighter.character]).to_upper(), Vector2(name_x, 46), right)
-		var bust_x := area.x - 92.0 if right else 16.0
-		plate(canvas, Rect2(bust_x, 5, 76, 88), INK, guild, 14, 2)
-		plate(canvas, Rect2(bust_x + 4, 9, 68, 80), Color(guild, 0.16), Color(guild, 0.35), 11)
+		var name_x := rail.end.x - 19 if right else rail.position.x + 19
+		fighter_name(canvas, str(CombatModel.CHARACTERS[fighter.character]).to_upper(), Vector2(name_x, 53), right)
+		text(canvas, FighterSelectPortrait.GUILDS[fighter.character], Vector2(name_x, 20), 13, guild.lightened(0.24), right, 2)
+		# Oversized cutout faces overlap the outer rail; no thumbnail card frames.
+		var origin := Vector2(area.x - 126 if right else 4.0, 3)
+		var crest := PackedVector2Array([origin + Vector2(4, 28), origin + Vector2(113, 14),
+			origin + Vector2(118, 83), origin + Vector2(68, 119), origin + Vector2(8, 103)])
+		canvas.draw_colored_polygon(crest, Color(INK, 0.78))
+		canvas.draw_polyline(PackedVector2Array([origin + Vector2(9, 105), origin + Vector2(68, 121), origin + Vector2(116, 86)]), guild, 2.0, true)
 		var bust := portrait(int(fighter.character))
-		var image_size := bust.get_size() * minf(70.0 / bust.get_width(), 72.0 / bust.get_height())
-		var image_rect := Rect2(Vector2(bust_x + 38, 45) - image_size * 0.5, image_size)
+		var image_size := bust.get_size() * minf(121.0 / bust.get_width(), 119.0 / bust.get_height())
+		var image_rect := Rect2(origin + Vector2(61, 60) - image_size * 0.5, image_size)
 		if right: image_rect.size.x = -image_rect.size.x
 		canvas.draw_texture_rect(bust, image_rect, false)
-		centered(canvas, "P" + str(p + 1), Vector2(bust_x + 38, 87), 12, accent, 2)
-		var detail: String = "%d / 1000" % fighter.health if diagnostics else FighterSelectPortrait.GUILDS[fighter.character]
-		if fighter.simple: detail += " · SIMPLE"
+		var detail := "P%d" % (p + 1)
+		if fighter.simple: detail += " / SIMPLE"
+		if diagnostics: detail += " / %d HP" % fighter.health
 		text(canvas, "POSITIVE BONUS" if fighter.positiveTime > 0 else detail,
-			Vector2(rail.end.x - 8 if right else rail.position.x + 8, 79), detail_size,
-			Color("a8e9b1") if fighter.positiveTime > 0 else guild, right, 2)
+			Vector2(name_x, 80), maxi(13, ceili(11.0 / scale_factor)), Color("a8e9b1") if fighter.positiveTime > 0 else Color(IVORY, 0.7), right, 2)
 		for mark in MatchScore.WINS_REQUIRED:
-			var marker_x := rail.position.x + 10 + mark * 23 if right else rail.end.x - 10 - mark * 23
-			var diamond := PackedVector2Array([Vector2(marker_x, 68), Vector2(marker_x + 7, 75), Vector2(marker_x, 82), Vector2(marker_x - 7, 75), Vector2(marker_x, 68)])
-			canvas.draw_colored_polygon(diamond, accent if wins[p] > mark else Color("162730"))
-			canvas.draw_polyline(diamond, accent if wins[p] > mark else Color("4b5c62"), 1.4, true)
-			if wins[p] > mark: canvas.draw_circle(Vector2(marker_x, 75), 2, IVORY)
-		draw_momentum(canvas, fighter, Rect2(x, area.y - 49, width, 23), accent, right)
-	var center := area.x * 0.5
-	plate(canvas, Rect2(center - 60, 6, 120, 86), INK, Color("687170"), 20, 2)
-	plate(canvas, Rect2(center - 55, 11, 110, 76), Color("14242d"), Color(GuildTheme.BRASS, 0.40), 16)
-	centered(canvas, round_call.to_upper(), Vector2(center, 28), 14, GuildTheme.BRASS)
-	centered(canvas, "%02d" % ceili(state.remaining / 60.0), Vector2(center, 76), 48, Color("ed9a7f") if state.remaining <= 600 else IVORY, 2)
-	centered(canvas, "PRACTICE" if diagnostics else "FIRST TO TWO", Vector2(center, 109), 12, GuildTheme.MUTED)
-	centered(canvas, "F / G", Vector2(center, area.y - 24), 26, Color(GuildTheme.BRASS, 0.48))
+			var marker_x := rail.position.x + 12 + mark * 23 if right else rail.end.x - 12 - mark * 23
+			var diamond := PackedVector2Array([Vector2(marker_x - 8, 77), Vector2(marker_x, 72), Vector2(marker_x + 8, 77), Vector2(marker_x, 82), Vector2(marker_x - 8, 77)])
+			canvas.draw_colored_polygon(diamond, accent if wins[p] > mark else Color(INK, 0.75))
+			canvas.draw_polyline(diamond, accent if wins[p] > mark else Color(IVORY, 0.40), 1.2, true)
+			if wins[p] > mark: canvas.draw_line(Vector2(marker_x - 3, 77), Vector2(marker_x + 3, 77), IVORY, 1.5)
+		var meter_width := center - 150.0
+		draw_momentum(canvas, fighter, Rect2(center + 100 if right else 50.0, area.y - 25, meter_width, 15), accent, right, scale_factor)
+	# Open timer dial: a compact sports instrument, not another panel.
+	canvas.draw_circle(Vector2(center, 45), 41, Color(INK, 0.74), true, -1, true)
+	for side in [-1, 1]:
+		var angle := 0.0 if side == 1 else PI
+		canvas.draw_arc(Vector2(center, 45), 43, angle - 0.86, angle + 0.86, 24, Color(IVORY, 0.72), 1.4, true)
+		canvas.draw_line(Vector2(center + side * 48, 36), Vector2(center + side * 58, 36), Color(GuildTheme.BRASS, 0.75), 2.0, true)
+	centered(canvas, "%02d" % ceili(state.remaining / 60.0), Vector2(center, 64), 53,
+		Color("ed9a7f") if state.remaining <= 600 else IVORY, 3)
+	centered(canvas, round_call.to_upper(), Vector2(center, 103), 15, GuildTheme.BRASS, 3)
 	canvas.draw_set_transform(Vector2.ZERO)
 
-static func draw_momentum(canvas: CanvasItem, fighter: Dictionary, rail: Rect2, accent: Color, right: bool) -> void:
+static func draw_momentum(canvas: CanvasItem, fighter: Dictionary, rail: Rect2, accent: Color, right: bool, ui_scale: float = 1.0) -> void:
 	var color := Color("80e0bc") if fighter.faultless else accent
 	var caption := "FAULTLESS DEFENSE" if fighter.faultless else "MOMENTUM"
-	text(canvas, caption, Vector2(rail.end.x if right else rail.position.x, rail.position.y - 9), 17, color, right)
-	text(canvas, "%.0f%%" % (fighter.momentum / 100.0), Vector2(rail.position.x if right else rail.end.x, rail.position.y - 9), 21, IVORY, not right)
+	text(canvas, caption, Vector2(rail.end.x if right else rail.position.x, rail.position.y - 6), maxi(13, ceili(12.0 / ui_scale)), color, right, 2)
+	text(canvas, "%.0f%%" % (fighter.momentum / 100.0), Vector2(rail.position.x if right else rail.end.x, rail.position.y - 6), maxi(15, ceili(14.0 / ui_scale)), IVORY, not right, 2)
 	var section_width := (rail.size.x - 12.0) / 3.0
 	for section in 3:
 		var x := rail.position.x + (2 - section if right else section) * (section_width + 6)
 		var cell := Rect2(x, rail.position.y, section_width, rail.size.y)
-		plate(canvas, cell, INK, Color(color, 0.50), 7, 1)
+		plate(canvas, cell, Color(INK, 0.65), Color(color, 0.65), 4, 1)
 		var fill := clampf(fighter.momentum * 3.0 / CombatModel.MOMENTUM_MAX - section, 0.0, 1.0)
-		var inside := cell.grow(-3)
+		var inside := cell.grow(-2)
 		var width := inside.size.x * fill
 		if width > 0.5:
 			canvas.draw_colored_polygon(cut(Rect2(inside.end.x - width if right else inside.position.x, inside.position.y, width, inside.size.y), 4), color)

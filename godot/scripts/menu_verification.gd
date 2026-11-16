@@ -86,6 +86,7 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	game.menus.selection.choose_fighter(1, 1)
 	press("confirm_fighters")
 	check(game.activity == "local" and not game.practice.visible and not game.editor_shell.visible and not game.inputs.visible and not game.show_boxes, "Local match contains lab controls")
+	check(not game.play_header.visible and game.play_margins.get_theme_constant("margin_top") == 0, "Versus still reserves space for the application toolbar")
 	check(game.model.state().players[0].momentum == 0 and game.model.fingerprint() == fingerprint, "Practice meter leaked into match or move edits were lost")
 	var original: Dictionary = game.model.data()
 	var fixture: Dictionary = original.duplicate(true)

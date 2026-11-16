@@ -27,13 +27,13 @@ static func rule(canvas: CanvasItem, center: Vector2, width: float, accent: Colo
 
 # Open, offset contours leave the fight visible through large background words.
 static func echo_word(canvas: CanvasItem, value: String, center: Vector2, font_size: int,
-		maximum_width: float, color: Color, alpha: float = 1.0, fill: float = 0.16) -> void:
+		maximum_width: float, color: Color, alpha: float = 1.0, fill: float = 0.16, contour: float = 0.48) -> void:
 	var width := FONT.get_string_size(value, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
 	var sx := minf(0.88, maximum_width / maxf(1.0, width))
 	canvas.draw_set_transform(center, -0.065, Vector2(sx, 1.28))
 	var point := Vector2(-width * 0.5, font_size * 0.32)
 	canvas.draw_string_outline(FONT, point + Vector2(9, 6), value, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, 3, Color(RED, alpha * 0.45))
-	canvas.draw_string_outline(FONT, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, 6, Color(INK, alpha * 0.48))
+	canvas.draw_string_outline(FONT, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, 9 if contour > 0.5 else 6, Color(INK, alpha * contour))
 	canvas.draw_string_outline(FONT, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, 3, Color(color, alpha * 0.85))
 	canvas.draw_string(FONT, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color(color, alpha * fill))
 	canvas.draw_set_transform(Vector2.ZERO)

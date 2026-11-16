@@ -24,7 +24,7 @@ func refresh(state: Dictionary, bounds: Vector2) -> void:
 		var growth := clampf(float(count - 2) / (COMBO_FULL_SIZE_HITS - 2), 0.0, 1.0)
 		var font_size := roundi(minf(maximum, lerpf(maximum * 0.34, maximum, growth) * lerpf(pop, 1.0, growth)))
 		# echo_word fits long counts horizontally, keeping the height capped at 10.
-		cards.append({"number": count, "left": left, "center_x": area.x * (0.21 if left else 0.79), "center_y": area.y * 0.47, "font_size": font_size,
+		cards.append({"number": count, "left": left, "center_x": area.x * (0.19 if left else 0.81), "center_y": area.y * 0.43, "font_size": font_size,
 			"alpha": minf(1.0, fighter.comboTime / 18.0), "hit": fighter.hitNotice if fighter.hitNoticeTime > 0 else 0,
 			"hit_alpha": minf(1.0, fighter.hitNoticeTime / 12.0), "reversal": fighter.reversalTime > 0,
 			"reversal_alpha": minf(1.0, fighter.reversalTime / 12.0), "input_age": fighter.reversalInputAge,
@@ -39,7 +39,7 @@ func draw(canvas: CanvasItem) -> void:
 		if card.number >= 2:
 			var base := Vector2(center_x, card.center_y)
 			CombatTypography.echo_word(canvas, str(card.number), base, card.font_size, area.x * 0.32,
-				CombatTypography.PAPER, card.alpha, 0.12)
+				CombatTypography.PAPER, card.alpha, 0.08, 0.88)
 			var caption_y: float = card.center_y + card.font_size * 0.38 + 12.0
 			var rule_width := clampf(card.font_size * 0.6, 64.0, 130.0)
 			CombatTypography.rule(canvas, Vector2(center_x, caption_y - 3), rule_width, tint, card.alpha * 0.35)

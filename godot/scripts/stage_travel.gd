@@ -43,9 +43,9 @@ static func draw_background(canvas: Control, state: Dictionary, reduced: bool) -
 	if reduced:
 		# A quiet dissolve keeps location readable without rapid camera motion or flight.
 		var blend := smoothstep(0.38, 0.82, p)
-		for layer in 3: ArenaStage.draw_plane(canvas, shot.source, layer, camera.center, camera.zoom)
+		for layer in 3: ArenaStage.draw_plane(canvas, shot.source, layer, camera.center, camera.zoom, Vector2.ZERO, 1.0, false, camera.lift)
 		ArenaStage.draw_boundaries(canvas, shot.source, camera.zoom, camera.offset, 0, 0.0, 1.0 - blend)
-		for layer in 3: ArenaStage.draw_plane(canvas, shot.target, layer, destination.center, destination.zoom, Vector2.ZERO, blend)
+		for layer in 3: ArenaStage.draw_plane(canvas, shot.target, layer, destination.center, destination.zoom, Vector2.ZERO, blend, false, destination.lift)
 		ArenaStage.draw_boundaries(canvas, shot.target, destination.zoom, destination.offset, 0, 0.0, blend)
 		return
 	for layer in 3:
@@ -56,8 +56,8 @@ static func draw_background(canvas: Control, state: Dictionary, reduced: bool) -
 		# Distant atmosphere crossfades; the architecture and floor pass laterally.
 		var source_alpha := 1.0 - t if layer == 0 else 1.0 - smoothstep(0.72, 1.0, t)
 		var target_alpha := t if layer == 0 else smoothstep(0.0, 0.28, t)
-		ArenaStage.draw_plane(canvas, shot.source, layer, camera.center, camera.zoom, source_offset, source_alpha, layer > 0)
-		ArenaStage.draw_plane(canvas, shot.target, layer, destination.center, destination.zoom, target_offset, target_alpha, layer > 0)
+		ArenaStage.draw_plane(canvas, shot.source, layer, camera.center, camera.zoom, source_offset, source_alpha, layer > 0, camera.lift)
+		ArenaStage.draw_plane(canvas, shot.target, layer, destination.center, destination.zoom, target_offset, target_alpha, layer > 0, destination.lift)
 	if p < 0.28:
 		ArenaStage.draw_boundaries(canvas, shot.source, camera.zoom, camera.offset, shot.side, smoothstep(0.02, 0.24, p))
 	elif p > 0.76:
@@ -72,7 +72,7 @@ static func fighter(state: Dictionary, player: int, bounds: Vector2, reduced: bo
 	var shot := describe(state)
 	var p: float = shot.progress
 	var attacker: bool = player == shot.actor
-	var floor_y := bounds.y - 76.0
+	var floor_y := ArenaStage.floor_line(bounds)
 	var final_x := bounds.x * (0.42 if attacker == (shot.side > 0) else 0.58)
 	var camera := source_camera(state, bounds)
 	var start := Vector2(float(state.wallBreakX[player]) / 100000.0 * bounds.x,
