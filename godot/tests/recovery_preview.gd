@@ -16,24 +16,12 @@ func run() -> void:
 			game.confirm_selection()
 			await game.wait_for_match_entry()
 			if args.has("--splat") or args.has("--break") or args.has("--bonus"):
-				var data: Dictionary = game.model.data()
-				data.recoveryRules.wallThreshold = 100
-				data.characters[5].moves[0].launch = 1
-				game.model.load_data(data)
-				game.model.reset()
-				for _tick in 200: game.model.step(2, 2)
-				for _tick in game.model.move(5, 0).startup: game.model.step(16, 0)
-				if game.model.state().players[1].reaction != 4:
-					printerr("Preview contact did not splat")
-					quit(1)
-					return
+				var fixture := preload("res://tests/stage_fixture.gd")
+				fixture.configure(game.model)
+				fixture.approach(game.model, 1)
+				if not fixture.splat(game.model, 1): printerr("Preview did not splat"); quit(1); return
 				if args.has("--break") or args.has("--bonus"):
-					while game.model.state().hitstop > 0: game.model.step(0, 0)
-					for _tick in game.model.move(5, 1).startup: game.model.step(32, 0)
-					if game.model.state().wallBreakTime == 0:
-						printerr("Preview follow-up did not break")
-						quit(1)
-						return
+					if not fixture.breach(game.model, 1): printerr("Preview did not break"); quit(1); return
 					for _tick in (int(game.model.state().wallBreakDuration) if args.has("--bonus") else 24): game.model.step(0, 0)
 			game._process(0.0)
 	await process_frame

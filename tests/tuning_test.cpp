@@ -108,15 +108,12 @@ static void landing_fd_walls() {
     s=fresh();auto& m=strike(s);m.v[BlockPushback]=1000;
     a.x=85000;s.world.players[1].x=100000;s.step(0,0);
     int before=a.x;prime(s);s.step(0,Right);CHECK(a.x==before-1000);
-    s=fresh();strike(s).v[WallDamage]=1000;
+    s=fresh();strike(s).v[WallDamage]=5000;
+    // Legacy attack-wall-damage and midscreen-cap fields no longer affect walls.
     for(int i=0;i<4;++i) {prime(s);s.step(0,0);}
-    CHECK(s.world.players[1].wall_damage==500&&s.world.players[1].reaction==Free);
+    CHECK(s.world.wall_health[0]==1000&&s.world.wall_health[1]==1000);
     a.x=85000;s.world.players[1].x=100000;s.step(0,0);
-    prime(s);s.step(0,0);CHECK(s.world.players[1].wall_damage==1000&&s.world.players[1].reaction==Free);
-    prime(s);s.step(0,0);CHECK(s.world.players[1].reaction==WallSplat);
-    s=fresh();strike(s).v[WallDamage]=1000;
-    a.x=85000;s.world.players[1].x=100000;s.world.players[1].y=3000;
-    prime(s);s.step(0,0);CHECK(s.world.players[1].reaction==WallSplat);
+    prime(s);s.step(0,0);CHECK(s.world.players[1].reaction==Free&&s.world.wall_health[1]==1000);
 }
 static void jumps() {
     auto s=fresh();s.world.players[1].x=90000;auto& a=s.world.players[0];

@@ -162,21 +162,11 @@ func _draw() -> void:
 
 # Presentation reads fixed-tick state, so prediction corrections cannot leave stale effects.
 func draw_walls() -> void:
-	var threshold: int = model.config[model.config.size() - CombatModel.RULE_COUNT + 16]
+	# Wall health is intentionally hidden. Only a pinned fighter announces a splat.
 	for fighter in view.players:
-		if fighter.wallDamage == 0: continue
-		var side := -1.0 if fighter.x < 50000 else 1.0
-		var x := 12.0 if side < 0 else size.x - 12.0
-		var pressure := clampf(float(fighter.wallDamage) / threshold, 0.0, 1.0)
-		var center := Vector2(x, size.y - 155 - fighter.y / 100.0 * size.x / 1000.0)
-		var color := Color("f4b45e") if fighter.reaction != 4 else Color("f5e3c5")
-		draw_line(Vector2(x, 165), Vector2(x, size.y - 76), Color(color, 0.12 + pressure * 0.5), 2 + pressure * 4)
-		for i in ceili(pressure * 7):
-			var end := center + Vector2(-side * (20 + i % 3 * 15), (i - 3) * 24)
-			var kink := center.lerp(end, 0.55) + Vector2(-side * 8, 7)
-			draw_polyline(PackedVector2Array([center, kink, end]), Color(color, 0.2 + pressure * 0.7), 2, true)
-		if fighter.reaction == 4:
-			FightHud.stamp(self, "WALL SPLAT", Vector2(size.x * (0.24 if side < 0 else 0.76), 275), 23, ACCENT)
+		if fighter.reaction != 4: continue
+		var side := -1 if fighter.x < 50000 else 1
+		FightHud.stamp(self, "WALL SPLAT", Vector2(size.x * (0.24 if side < 0 else 0.76), 275), 23, ACCENT)
 
 func draw_wall_break() -> void:
 	if view.wallBreakTime <= 0: return
@@ -201,7 +191,13 @@ func draw_collisions() -> void:
 				var color: Color = colors[kind]
 				collision_layer.draw_rect(rect, Color(color, 0.07 if kind == 0 else 0.12))
 				collision_layer.draw_rect(rect, color, false, 1.0 if kind == 0 else 2.0)
+	var walls: PackedInt32Array = model.core.boxes(-1, 3)
+	for i in range(0, walls.size(), 4):
+		var wall := Rect2(walls[i] * sx, floor_y - walls[i + 3] * sx, (walls[i + 2] - walls[i]) * sx, (walls[i + 3] - walls[i + 1]) * sx)
+		collision_layer.draw_rect(wall, Color("d49cf7", 0.12))
+		collision_layer.draw_rect(wall, Color("d49cf7", 0.8), false, 2.0)
 	collision_layer.draw_set_transform(Vector2.ZERO)
+	collision_layer.draw_string(font, Vector2(460, 129), "WALL · boundary", HORIZONTAL_ALIGNMENT_LEFT, -1, 12, Color("d49cf7"))
 	var left := 18.0
 	for kind in 3:
 		var caption: String = ["HURT · body", "PUSH · spacing", "HIT · active"][kind]

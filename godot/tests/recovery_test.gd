@@ -35,7 +35,7 @@ func _initialize() -> void:
 	var settings := original.duplicate(true)
 	settings.recoveryRules.wallBreakFrames = 90 # This fixture also verifies authored legacy durations.
 	settings.recoveryRules.wallThreshold = 100
-	for slot in [0, 1]:
+	for slot in [0, 1, 4]:
 		var move: Dictionary = settings.characters[5].moves[slot]
 		move.damage = 20
 		move.wallDamage = 100
@@ -43,18 +43,25 @@ func _initialize() -> void:
 		move.bottom = 0
 		move.height = 50000
 		move.startup = 5
-		move.launch = 1 # A launching hit may splat immediately under the grounded-prime rule.
+		move.launch = 0
+		move.knockdown = 0
+		move.pushback = 1200
+		move.hitstop = 3
+		move.hitstun = 30
 		move.starterProration = 100
 		move.comboScaling = 0
 	check(model.load_data(settings).is_empty(), "Valid wall tuning rejected")
 	model.reset()
 	for _tick in 200: model.step(2, 2)
-	for _tick in 5: model.step(16, 0)
-	check(model.state().players[1].reaction == 4, "Real inputs did not cause wall splat")
-	while model.state().hitstop > 0: model.step(0, 0)
+	for slot in [0, 4]:
+		for _tick in 5: model.step(16 if slot == 0 else 16 | 4, 0)
+		while model.state().hitstop > 0: model.step(0, 0)
+		model.step(0, 0)
+		if slot == 0: check(model.state().wallHealth == [100, 0] and model.state().players[1].reaction != 4, "Depleting impact must not splat")
+	check(model.state().players[1].reaction == 4, "Next hitstun collision did not splat")
 	var snapshot := model.core.snapshot()
 	for _tick in 5: model.step(32, 0)
-	check(model.state().wallBreakTime == 90 and model.state().players[1].health == 910, "Follow-up failed to break the wall")
+	check(model.state().wallBreakTime == 90 and model.state().players[1].health == 890, "Follow-up failed to break the wall")
 	for _tick in 90: model.step(0, 0)
 	var expected := model.state_hash()
 	var state := model.state()
@@ -79,13 +86,15 @@ func verify_wall_rollback(settings: Dictionary) -> void:
 		var predicted := CombatModel.new()
 		reference.load_data(settings)
 		predicted.load_data(settings)
+		reference.reset()
+		predicted.reset()
 		var session := RollbackSession.new(predicted)
 		session.max_prediction = 20
 		var pending: Array[Dictionary] = []
 		var saw_splat := false
 		var saw_break := false
 		for frame in 350:
-			var attack := 2 if frame < 200 else 16 if frame < 205 else 32 if frame >= 211 and frame < 216 else 0
+			var attack := 2 if frame < 200 else 16 if frame < 205 else (16 | 4) if frame >= 209 and frame < 214 else 32 if frame >= 218 and frame < 223 else 0
 			var defense := 2 if frame < 200 else 0
 			reference.step(attack, defense)
 			saw_splat = saw_splat or reference.state().players[1].reaction == 4

@@ -317,11 +317,10 @@ func verify_recovery_editor() -> void:
 	game.fields.knockdown.control.selected = 1
 	game.fields.knockdownFrames.control.value = 7
 	game.fields.wakeupFrames.control.value = 9
-	game.fields.wallDamage.control.value = 123
 	game.apply_move()
 	var move: Dictionary = game.model.move(0, 0)
-	check(move.pushback == 1200 and move.airPushback == 2400 and move.blockPushback == 1800, "Independent hit / block displacement controls failed")
-	check(move.launch == 1000 and move.airLaunch == -200 and move.knockdown == 1 and move.knockdownFrames == 7 and move.wakeupFrames == 9 and move.wallDamage == 123, "Reaction fields did not apply")
+	check(move.pushback == 1200 and move.airPushback == 2400 and move.blockPushback == 1800, "Independent hit distance / block displacement controls failed")
+	check(move.launch == 1000 and move.airLaunch == -200 and move.knockdown == 1 and move.knockdownFrames == 7 and move.wakeupFrames == 9, "Reaction fields did not apply")
 	game.recovery_fields.gravityAfter.control.value = 8
 	game.recovery_fields.gravityStep.control.value = 15
 	game.recovery_fields.wallThreshold.control.value = 800

@@ -29,3 +29,7 @@ Run `python scripts/generate-combat-data.py` after changing these sources. It re
 For a native contact sheet, run `bash scripts/godot.sh --script tests/collision_review.gd -- --character 0 --screenshot /absolute/path.png` with a display. Character indices 0–5 follow Anvil, Hammer, Smoke, Tapper, Shark and Fillet. This renders the original 24 poses with compiled geometry. `tests/signature_review.gd` renders the additional eight poses; add `--shark` for Shark, `--mirror` for left facing, or `--clean` to hide boxes.
 
 Fillet and Shark now use 64 v2 body fits with updated atlas roots and strike regions. All push dimensions remain stable; tucked-jump art uses the standing foot/root reference with the tucked soles 50px above it, preserving jump-over clearance. Both facings use the same compiled rectangles. The original v1 art and geometry are archived together for comparison.
+
+## Wallboxes
+
+Two solid half-spaces bound x=0 and x=1000px at all playable heights; their debug rectangles extend beyond every camera edge. A swept pushbox collision during hitstun removes the magnitude of horizontal velocity from the contacted wall's hidden health, then consumes that velocity and remaining travel. Depletion and splat require separate impacts. Both fighters share each wall's pool. Blocks and voluntary movement cannot damage walls. Purple WALL overlays use `boxes(-1, WallBox)` from the same native simulation.

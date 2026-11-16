@@ -75,15 +75,15 @@ Counter freeze −1 uses base hitstop + extra stop; 0–60 overrides the total. 
 
 Counter vulnerability is a separate mask on the interrupted move: startup = 1, active = 2, recovery = 4. Most moves default to startup + active; throw whiffs also permit recovery counter hits. A non-counterable startup/active interruption is an ordinary hit, while recovery remains punishable. Throws do not inflict counter hits. See [counter clock and presentation rules](combat-feedback.md) for follow-up, input and reduced-motion behavior.
 
-## Wall priming
+## Collision-driven wall health
 
-Far hits still contribute one quarter wall damage but now stop accumulating at **50% of wall durability**. Existing higher wall damage is retained when moving away, without further far-range growth. The percentage is editable. Near-wall hits can build to full durability.
+Each wall owns a hidden, independent pool. Only a player colliding with it during hitstun and with outward horizontal velocity can damage it. Damage equals absolute incoming speed, and the collision clears that speed and the remaining knockback travel. The collision that empties the pool does not splat; the next qualifying collision does. The same rule applies in the air and on the ground. There is no passive healing or midscreen wall-damage accumulation. A new round or stage arrival restores both pools. See [recovery and walls](recovery-and-walls.md) for values, units and examples.
 
-A grounded strike that fills the wall primes it; a subsequent grounded hit can splat. An airborne target or a hit that launches can splat when the threshold is reached. The grounded-priming rule is editable. Splat expiry, follow-up break, stage transition and the existing Momentum Positive Bonus remain in place. Their balance is still provisional and the break adds no new resource spend.
+The previous midscreen-cap and grounded-priming controls have been superseded and removed from the editor. Their JSON slots remain inert for compatibility. Block carryover, throw protection, FD costs and corner block pushback are unchanged.
 
 ## Persistence and verification
 
-Schema/core 10 has 69 move fields, nine movement fields per fighter and 38 global rules. New per-fighter timers, combo factors, move-use counts and diagnostic values are integer rollback state. Online fingerprints include all tuning; editing is locked online.
+Schema/core 12 retains 69 move fields, nine movement fields per fighter and 38 global rules. Per-fighter timers, remaining hit travel, combo factors, move-use counts, independent wall health and diagnostic values are integer rollback state. Snapshots carry an explicit core-version marker. Online fingerprints include all tuning; editing is locked online.
 
 Schema 1–7 saves preserve authored damage, counter bonuses, movement and existing global rates. Existing moves migrate with unrestricted legacy windows, unscaled legacy combo damage and zero authored landing recovery. Their saved FD holding/contact costs and original combo-gravity increment are preserved. New defensive carryover, throw grace and wall rules are supplied as editable defaults. Schema 8–9 tuning is preserved when moving to schema 10. Pre-schema-10 saves keep additive counter freeze and no defender slowdown, preserving their authored counter bonuses. All pre-schema-9 saves retain immediate jump takeoff and zero empty-jump landing recovery. **Restore default move set** opts into the complete new starter balance; export existing edits first if you want to keep both versions.
 

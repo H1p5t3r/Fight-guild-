@@ -12,7 +12,7 @@ The [2026-11-15 source review](research/strive-dustloop-2026-11-15.md) compares 
 - [x] Add editable grounded jump startup before takeoff; define empty-jump recovery independently of aerial attacks.
 - [x] Add ordinary corner pushback and separate FD ground/air drain and attack-level contact costs. Keep FD as the only Momentum spend and Negative Penalty deferred.
 - [x] Add optional attack-strength/counter presets, per-move overrides and counter-vulnerability masks; distinguish heavy counters from pokes and follow-ups.
-- [x] Add an editable midscreen wall-damage cap and grounded wall priming, with separate airborne threshold behavior.
+- [x] Replace the earlier midscreen cap / grounded priming design with per-wall health and velocity-based hitstun collisions; depletion primes a separate later collision to splat.
 - [ ] Playtest the recorded Fillet/Shark pressure, FD spacing, hook height and wall-break reward cases from the source review before locking balance.
 
 See [combat tuning](combat-tuning.md) for defaults, migration rules and verified cases.
@@ -94,15 +94,16 @@ Requested scope: make repeatable character images performing directed actions, w
 ## First matchup, recovery and walls
 
 - [x] Focus Fillet/Shark, use numpad notation, and retain the full roster.
-- [x] Edit ground/air hit displacement, block pushback, launch, soft/hard down and wakeup timing, wall damage and throw range.
+- [x] Edit ground/air hit displacement, block pushback, launch, soft/hard down and wakeup timing, wall health and throw range.
 - [x] Keep gravity unchanged for the first X hits, then scale per hit to an editable cap.
-- [x] Add wall damage/decay, splat/follow-up break, deterministic transition/neutral reset and timed Momentum Positive Bonus.
+- [x] Add independent hidden wall health, swept velocity-driven impacts, splat/follow-up break, deterministic transition/neutral reset and timed Momentum Positive Bonus.
+- [x] Fill each visible wall border with generated solid scenery across its full vertical and horizontal extent.
 - [x] Preserve schema 1–6 move edits and test delayed-input rollback through wall breaks.
 - [ ] Tune Fillet/Shark routes, gravity threshold and wall durability through local playtests.
 - [ ] Author dedicated windup/active sweep and throw art first, then coherent launch/splat/down/wakeup clips under the existing sprite contract. Current reactions reuse existing poses.
 - [x] Generate three layered arenas, independent horizontal parallax, left/right passage cutouts and deterministic wall-break travel. See [stage art](stage-art.md).
 - [ ] Author dedicated character travel/landing animation, environmental loops and sound for the generated stages.
-- [ ] Measure a chosen Strive patch's wall-damage and Positive Bonus behavior before claiming exact parity. Super-specific break knockdowns wait for super design.
+- [ ] Tune the custom wall-health values and Positive Bonus through playtests. Super-specific break knockdowns wait for super design.
 
 ## First signature kits and locomotion
 

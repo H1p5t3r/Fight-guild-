@@ -25,6 +25,7 @@ void Simulation::reset(int c0,int c1,int s0,int s1) {
     world.remaining=99*60;
     world.winner=-1;
     world.wall_break_actor=-1;
+    world.wall_health[0]=world.wall_health[1]=rules.wall_threshold;
     for(int p=0;p<2;++p) {
         Fighter& f=world.players[p];
         f.character=clamp(p?c1:c0,0,CHARACTER_COUNT-1);
@@ -198,7 +199,8 @@ void Simulation::control(Fighter& f) {
         return;
     }
     if(f.reaction!=Free) {
-        f.vx=f.running=f.dash=0;
+        if(f.reaction!=AirReel) f.vx=f.knockback_left=0;
+        f.running=f.dash=0;
         f.carry_vx=f.carry_time=0;
         f.reversal_ready=1;
         f.stun=max(0,f.stun-1);
@@ -206,8 +208,7 @@ void Simulation::control(Fighter& f) {
             if(--f.wall_time<=0) {
                 f.reaction=AirReel; f.knockdown=SoftKnockdown;
                 f.down_frames=6; f.wakeup_frames=8; f.vy=0;
-                // A missed wall-break opportunity does not permit an immediate re-splat.
-                f.wall_damage=0;
+                // Wall health belongs to the wall and stays depleted after a missed follow-up.
             }
         } else if(f.reaction==Downed||f.reaction==Waking) {
             if(--f.recovery_time<=0) {
@@ -223,7 +224,8 @@ void Simulation::control(Fighter& f) {
         return;
     }
     if(f.stun>0) {
-        f.vx=f.running=f.dash=0;
+        if(f.guarding) f.vx=f.knockback_left=0;
+        f.running=f.dash=0;
         f.carry_vx=f.carry_time=0;
         f.reversal_ready=1;
         if(f.guarding) ++f.block_age;
@@ -231,6 +233,7 @@ void Simulation::control(Fighter& f) {
         if(f.stun==0&&!f.guard_break) f.throw_grace=rules.throw_grace_frames;
         return;
     }
+    if(f.knockback_left>0) f.vx=f.knockback_left=0;
     if(f.prejump_time>0) {
         if(--f.prejump_time>0) return;
         f.vy=1450; f.y=1;
@@ -316,7 +319,38 @@ void Simulation::control(Fighter& f) {
         }
     }
 }
-void Simulation::move_horizontal(Fighter& f) {
+void Simulation::collide_wall(Fighter& f,int velocity,bool in_hitstun) {
+    int side=velocity<0?0:1;
+    if(in_hitstun&&!f.guarding&&f.reaction!=WallSplat&&f.reaction!=Downed&&f.reaction!=Waking) {
+        // Test health BEFORE this impact. Depleting a healthy wall cannot also splat.
+        if(world.wall_health[side]==0) {
+            f.reaction=WallSplat; f.wall_time=rules.wall_splat_frames;
+            f.wall_side=side==0?-1:1;
+            f.y=max(2000,f.y); f.vy=0; // A high airborne impact keeps its actual height.
+            f.pull_time=0; f.pull_owner=-1;
+        } else world.wall_health[side]=max(0,world.wall_health[side]-abs(velocity));
+    }
+    f.vx=f.knockback_left=f.carry_vx=f.carry_time=0;
+}
+void Simulation::move_horizontal(Fighter& f,bool was_hitstunned) {
+    if(f.reaction==WallSplat||f.reaction==Downed||f.reaction==Waking||f.reaction==Reeled||f.guarding) return;
+    if(was_hitstunned||f.reaction==AirReel) {
+        // Horizontal hit velocity advances on the defender's clock (including counter slowdown).
+        // Hitstop freezes it. The remaining-distance budget preserves authored knockback values.
+        int velocity=f.vx;
+        if(!velocity) return;
+        if(f.knockback_left>0) velocity=(velocity<0?-1:1)*min(abs(velocity),f.knockback_left);
+        int proposed=f.x+velocity;
+        int edge=clamp_x(f,velocity<0?0:100000);
+        f.x=clamp_x(f,proposed);
+        if((velocity<0&&proposed<=edge)||(velocity>0&&proposed>=edge)) {
+            collide_wall(f,velocity,was_hitstunned);
+        } else if(f.knockback_left>0) {
+            f.knockback_left-=abs(velocity);
+            f.vx=(velocity<0?-1:1)*min(abs(velocity),f.knockback_left);
+        }
+        return;
+    }
     if(f.reaction!=Free||f.stun>0) return;
     if(f.move<0&&(f.running||f.dash)) {
         f.carry_vx=f.vx;
@@ -412,7 +446,8 @@ Box Simulation::attack_box(const Fighter& f,int segment,int tick_offset) const {
                       max(m.v[HitboxBack],m.v[Reach]),m.v[Bottom]+m.v[Height]},f);
 }
 int Simulation::box_count(int player,int kind) const {
-    if(player<0||player>1) return 0;
+    if(player<0) return kind==WallBox?2:0;
+    if(player>1) return 0;
     const auto& f=world.players[player];
     Pose art=pose(f);
     if(kind==HurtBox) return pose_box_count(f.character,art.phase,art.index);
@@ -425,6 +460,7 @@ int Simulation::box_count(int player,int kind) const {
 }
 Box Simulation::box(int player,int kind,int index) const {
     if(index<0||index>=box_count(player,kind)) return {};
+    if(kind==WallBox) return index==0?Box{-1000000,-1000000,0,1000000}:Box{100000,-1000000,1100000,1000000};
     const auto& f=world.players[player];
     return kind==HurtBox?hurt_box(f,index):kind==PushBox?push_box(f):attack_box(f,index);
 }
@@ -487,6 +523,7 @@ void Simulation::land(Fighter& f) {
     f.air_action=0;
     f.y=f.vy=0; f.move=-1; f.contact=f.hit_done=0;
     if(f.reaction==AirReel) {
+        f.vx=f.knockback_left=0;
         f.reaction=Downed; f.recovery_time=max(1,f.down_frames);
         f.stun=0; f.guarding=f.guard_break=f.block_reaction=0;
     }
@@ -534,6 +571,7 @@ void Simulation::finish_wall_break() {
     }
     world.hitstop=0;
     world.stage=(world.stage+(side>0?1:STAGE_COUNT-1))%STAGE_COUNT;
+    world.wall_health[0]=world.wall_health[1]=rules.wall_threshold;
 }
 
 void Simulation::step(int raw0,int raw1) {
@@ -612,11 +650,9 @@ void Simulation::step(int raw0,int raw1) {
             // Passive bonus is a fixed amount, not multiplied by its own gain multiplier.
             if(!f.faultless) f.momentum=min(MOMENTUM_MAX,f.momentum+rules.positive_regen);
         }
-        if(f.wall_delay>0) --f.wall_delay;
-        else if(f.reaction!=WallSplat) f.wall_damage=max(0,f.wall_damage-rules.wall_decay);
         if(f.carry_time>0) --f.carry_time;
         control(f);
-        move_horizontal(f);
+        move_horizontal(f,prior_stun[p]>0&&!prior_guard[p]);
         if(f.move<0&&!prior_stun[p]&&f.reaction==Free&&!faultless_requested(f)) moved[p]=max(0,(f.x-prior_x[p])*f.facing);
         if(f.y>0&&f.reaction!=WallSplat&&f.reaction!=Reeled) {
             f.y+=f.vy; f.vy-=85*gravity_percent(f)/100;
@@ -638,7 +674,7 @@ void Simulation::step(int raw0,int raw1) {
             f.movement_remainder=amount%100;
         }
         // A blocked run cannot bank speed against a wall or another body.
-        if(f.move<0&&f.y==0&&f.vx&&(f.x-prior_x[p])*f.vx<=0) f.vx=f.carry_vx=f.carry_time=0;
+        if(advances[p]&&!prior_stun[p]&&f.reaction==Free&&f.move<0&&f.y==0&&f.vx&&(f.x-prior_x[p])*f.vx<=0) f.vx=f.carry_vx=f.carry_time=0;
     }
     int hits[2]={-1,-1}, contacts[2]={NoContact,NoContact};
     bool blocked[2]={false,false};
@@ -697,7 +733,7 @@ void Simulation::step(int raw0,int raw1) {
         }
         bool fd=blocked[p]&&other.faultless;
         bool was_airborne=other.y>0;
-        bool was_splatted=prior_reaction[1-p]==WallSplat;
+        bool was_splatted=other.reaction==WallSplat||prior_reaction[1-p]==WallSplat;
         bool throwing=m.v[Category]==Throw;
         if(!blocked[p]&&!prior_combo[1-p]) {
             other.combo_proration=m.v[StarterProration]; other.combo_scale=100;
@@ -721,12 +757,16 @@ void Simulation::step(int raw0,int raw1) {
         other.block_advantage=blocked[p]?m.v[Blockstun]-remaining:0;
         other.block_reaction=!blocked[p]?NoBlock:other.guard_break?BrokenGuard:
             other.block_advantage>0?PressureBlock:StableBlock;
-        other.move=-1; other.dash=other.running=other.vx=other.pull_time=0;
+        other.move=-1; other.dash=other.running=other.vx=other.pull_time=other.knockback_left=0;
         other.carry_vx=other.carry_time=0;
         other.pull_owner=-1;
         int push=m.v[blocked[p]?BlockPushback:was_airborne?AirPushback:Pushback]*(fd?rules.fd_push_percent:100)/100;
         int old_x=other.x;
-        other.x=clamp_x(other,other.x+f.facing*push);
+        if(blocked[p]||throwing) other.x=clamp_x(other,other.x+f.facing*push);
+        else {
+            other.knockback_left=push;
+            other.vx=f.facing*((push+HIT_TRAVEL_TICKS-1)/HIT_TRAVEL_TICKS);
+        }
         // FD still creates space at the corner by transferring blocked displacement to the attacker.
         if(blocked[p]&&(fd||rules.corner_push_transfer)) f.x=clamp_x(f,f.x-f.facing*(push-abs(other.x-old_x)));
         if(!blocked[p]) {
@@ -756,16 +796,7 @@ void Simulation::step(int raw0,int raw1) {
                 other.reaction=Reeled; other.pull_time=m.v[PullFrames];
                 other.pull_owner=p; other.pull_gap=m.v[PullGap]; other.vy=0;
                 other.knockdown=SoftKnockdown;
-            }
-            // Wall damage travels with the defender; midscreen hits contribute one quarter.
-            int wall_distance=min(other.x-PUSH_PROFILES[other.character].half_width,
-                100000-PUSH_PROFILES[other.character].half_width-other.x);
-            int prior_wall=other.wall_damage;
-            if(!throwing) {
-                int limit=wall_distance<=rules.wall_range?rules.wall_threshold:max(other.wall_damage,rules.wall_threshold*rules.wall_mid_cap/100);
-                other.wall_damage=min(limit,other.wall_damage+
-                    (wall_distance<=rules.wall_range?m.v[WallDamage]:m.v[WallDamage]/4));
-                other.wall_delay=rules.wall_decay_delay;
+                other.vx=other.knockback_left=0;
             }
             if(was_splatted&&!throwing) {
                 other.health=max(0,other.health-rules.wall_break_damage);
@@ -776,12 +807,7 @@ void Simulation::step(int raw0,int raw1) {
                     world.wall_break_y[q]=world.players[q].y;
                 }
                 other.wall_time=0;
-            } else if(!throwing&&wall_distance<=2000&&other.wall_damage>=rules.wall_threshold
-                &&(!rules.grounded_wall_prime||was_airborne||lift>0||prior_wall>=rules.wall_threshold)) {
-                other.reaction=WallSplat; other.wall_time=rules.wall_splat_frames;
-                other.wall_side=other.x<50000?-1:1;
-                other.x=clamp_x(other,other.wall_side<0?0:100000);
-                other.y=max(2000,min(12000,other.y)); other.vy=0;
+                other.vx=other.knockback_left=0;
             }
         }
         int stop=m.v[Hitstop]+(contacts[p]==CounterHit?m.v[CounterHitstop]:0);
@@ -836,6 +862,7 @@ int Simulation::get(int player,int field) const {
         case 13:return world.impact_x; case 14:return world.impact_y;
         case 15:return world.wall_break_x[0]; case 16:return world.wall_break_x[1];
         case 17:return world.wall_break_y[0]; case 18:return world.wall_break_y[1];
+        case 19:return world.wall_health[0]; case 20:return world.wall_health[1];
         default:return 0; }
     }
     if(player>1) return 0;
@@ -856,7 +883,8 @@ int Simulation::get(int player,int field) const {
         case 29:return pose(f).phase; case 30:return pose(f).index;
         case 31:return f.reaction; case 32:return f.knockdown; case 33:return f.recovery_time;
         case 34:return f.combo_received; case 35:return gravity_percent(f);
-        case 36:return f.wall_damage; case 37:return f.wall_time; case 38:return f.positive_time;
+        case 36:return 0; // Retired per-fighter damage; wall health is world state.
+        case 37:return f.wall_time; case 38:return f.positive_time;
         case 39:return f.vx; case 40:return f.running; case 41:return f.dash;
         case 42:return f.pull_time; case 43:return f.pull_owner;
         case 44:return weapon_span(f).left; case 45:return weapon_span(f).bottom;
@@ -874,6 +902,7 @@ int Simulation::get(int player,int field) const {
         case 59:return f.counter_tier; case 60:return f.repeat_gravity; case 61:return f.last_base_damage;
         case 62:return f.prejump_time;
         case 63:return f.slow_time; case 64:return f.slow_held;
+        case 65:return f.knockback_left;
         default:return 0;
     }
 }

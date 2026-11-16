@@ -3,7 +3,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 11, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 69;
+constexpr int VERSION = 12, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 69;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
@@ -17,6 +17,7 @@ constexpr int MAX_STUN = 240, MAX_HITSTOP = 60, NOTICE_TICKS = 60, COMBO_HOLD = 
 enum Input { Left=1, Right=2, Down=4, Up=8, P=16, K=32, S=64, Hs=128, D=256,
              Dash=512, Simple=1024, Faultless=2048 };
 enum Kind { Normal, Command, Special, Drive, Throw };
+// WallDamage is a retired save-compatibility slot. Collision speed determines wall damage.
 enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery,
              Damage, Hitstun, Blockstun, Hitstop, Pushback, Reach, Bottom, Height,
              SpecialCancel, JumpCancel, WhiffCancel, SelfCancel, Advance,
@@ -35,11 +36,13 @@ enum MobilityField { ForwardStyle, WalkSpeed, RunSpeed, RunAcceleration, StepSpe
                      BackSpeed, BackFrames, AttackFriction, MOBILITY_FIELDS };
 enum ForwardMovement { ForwardRun, StepDash };
 struct Mobility { int v[MOBILITY_FIELDS]; };
-enum BoxKind { HurtBox, PushBox, HitBox };
+enum BoxKind { HurtBox, PushBox, HitBox, WallBox };
+constexpr int HIT_TRAVEL_TICKS = 6; // Existing hit-distance budgets now travel over six action ticks.
 struct Box { int left, bottom, right, top; };
 struct Pose { int phase, index; }; // active, windup, block, signature windup/active; shared with rendering.
 enum BlockReaction { NoBlock, StableBlock, PressureBlock, BrokenGuard };
 enum Contact { NoContact, NormalHit, Blocked, CounterHit, PunishHit };
+// WallRange/Decay/DecayDelay/MidCap/GroundedWallPrime are inert compatibility slots.
 enum Rule { ButtonBuffer, MotionWindow, MotionGap, MoveGain, AttackGain,
             BlockAttackGain, DamageGain, GuardGain, SpecialGain, FDDrain,
             FDBlockCost, FDDamageCost, FDPushPercent,
@@ -61,7 +64,8 @@ struct Fighter {
     int hit_notice, hit_notice_time;
     int reversal_ready, reversal_time, reversal_input_age;
     int reaction, knockdown, down_frames, wakeup_frames, recovery_time, combo_received;
-    int wall_damage, wall_delay, wall_time, wall_side, positive_time;
+    int wall_time, wall_side, positive_time;
+    int knockback_left; // Untravelled hit distance; a wall impact consumes it and horizontal velocity.
     int vx, running, dash_direction, pull_time, pull_owner, pull_gap;
     int carry_vx, carry_time;
     int landing_time, air_action, throw_grace, input_age;
@@ -74,9 +78,11 @@ struct Fighter {
 struct State {
     int frame, remaining, hitstop, winner;
     int wall_break_time, wall_break_actor, wall_break_side, stage;
+    int wall_health[2]; // Shared by both fighters, independently for the left/right wall.
     int wall_break_x[2], wall_break_y[2]; // Cinematic origins survive neutral reset and rollback.
     int impact_time, impact_duration, impact_actor, impact_tier, impact_x, impact_y;
     Fighter players[2];
+    int version=VERSION; // Reject snapshots from a different core layout explicitly.
 };
 struct Rules {
     int buffer=5, motion_window=20, motion_gap=8;
@@ -137,7 +143,8 @@ private:
     bool throw_invulnerable(const Fighter& fighter) const;
     void land(Fighter& fighter);
     void finish_wall_break();
-    void move_horizontal(Fighter& fighter);
+    void move_horizontal(Fighter& fighter, bool was_hitstunned);
+    void collide_wall(Fighter& fighter, int velocity, bool in_hitstun);
     void reel_targets(const bool advances[2]);
     bool double_forward(const Fighter& fighter, const Sample& sample) const;
 };

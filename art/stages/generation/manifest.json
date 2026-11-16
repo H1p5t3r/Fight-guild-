@@ -11,7 +11,7 @@
     "mid",
     "floor"
   ],
-  "alpha": "Far planes opaque; all other layers generated with transparent_background=true. Originals copied byte-for-byte.",
+  "alpha": "Far planes and new full-height walls are opaque; all other layers were generated with transparency. Originals copied byte-for-byte.",
   "assets": [
     {
       "path": "godot/assets/stages/charter-far.png",
@@ -90,6 +90,27 @@
       "source": "exec-be2b57f3-1253-4b62-b43d-18e3d1be2d80.png",
       "sha256": "dd4e86e58d004b101859888f4f9a7f44e1479d1e85e80cab6ddf4609890a9ae5",
       "mode": "RGBA"
+    },
+    {
+      "path": "godot/assets/stages/charter-wall.png",
+      "source": "exec-d90236a7-10bf-4206-b01a-458793c48aaf.png",
+      "sha256": "deab627346b3247c0bad615058e25b8fdc69b66107cc8795d130b8df27146f5e",
+      "mode": "RGB",
+      "prompt": "art/stages/generation/full-wall-prompts.json"
+    },
+    {
+      "path": "godot/assets/stages/foundry-wall.png",
+      "source": "exec-4dbb59ae-8a2f-440e-8d8e-a149bdd7b7c0.png",
+      "sha256": "0bff2bcf20ded6802116235b3824e8db0a8474638399724c4c046a6582db7340",
+      "mode": "RGB",
+      "prompt": "art/stages/generation/full-wall-prompts.json"
+    },
+    {
+      "path": "godot/assets/stages/quay-wall.png",
+      "source": "exec-41f89483-5922-4b6e-9673-ae43d86d2130.png",
+      "sha256": "718143a86c83be8a6ed4d5817244beb297f128279228841fb8a3f11110a8aca8",
+      "mode": "RGB",
+      "prompt": "art/stages/generation/full-wall-prompts.json"
     }
   ]
 }

@@ -10,7 +10,6 @@ const SUBTITLES := ["THE GUILDS' COMMON GROUND", "EAST QUAY · FISHERMEN'S END",
 const COLORS := [Color("c4ad86"), Color("82b8bd"), Color("d2a178")]
 const DEPTHS := [0.16, 0.54, 1.0]
 const LAYERS := ["far", "mid", "floor"]
-const WALLS := [[0, 1], [4, 5], [2, 3]]
 static var textures := {}
 static var regions := {}
 
@@ -18,7 +17,7 @@ static func asset_paths() -> Array[String]:
 	var paths: Array[String] = []
 	for id in IDS:
 		for layer in LAYERS: paths.append(DIRECTORY + id + "-" + layer + ".png")
-	for name in ["forge-breach", "quay-breach", "wall-kit", "debris-kit"]: paths.append(DIRECTORY + name + ".png")
+	for name in ["forge-breach", "quay-breach", "debris-kit", "charter-wall", "quay-wall", "foundry-wall"]: paths.append(DIRECTORY + name + ".png")
 	return paths
 
 static func remember(path: String, resource: Resource) -> void:
@@ -92,15 +91,22 @@ static func draw_grid(canvas: Control) -> void:
 	for x in range(0, int(canvas.size.x), 70): canvas.draw_line(Vector2(x, 140), Vector2(x, floor_y), Color(0.35, 0.65, 0.75, 0.16))
 	for y in range(160, int(floor_y), 50): canvas.draw_line(Vector2(0, y), Vector2(canvas.size.x, y), Color(0.35, 0.65, 0.75, 0.16))
 
+static func wall_rect(bounds: Vector2, side: int, zoom: float, offset: Vector2) -> Rect2:
+	# Solid half-spaces: no gap above, below or beyond the physical contact plane.
+	var edge := clampf(offset.x + (0.0 if side < 0 else bounds.x * zoom), 0.0, bounds.x)
+	return Rect2(0, 0, edge, bounds.y) if side < 0 else Rect2(edge, 0, bounds.x - edge, bounds.y)
+
 static func draw_boundaries(canvas: Control, stage: int, zoom: float, offset: Vector2,
-		broken_side: int = 0, fracture: float = 0.0) -> void:
-	var scale := canvas.size.x / 1000.0 * zoom
+		broken_side: int = 0, fracture: float = 0.0, opacity: float = 1.0) -> void:
+	var source := texture(IDS[stage] + "-wall.png")
 	for side in [-1, 1]:
-		var source := tile("wall-kit.png", WALLS[stage][0 if side < 0 else 1], 3)
-		var foot := offset + Vector2(0 if side < 0 else canvas.size.x, canvas.size.y - 76.0) * zoom
-		var extent := Vector2.ONE * 290.0 * scale
-		var alpha := 1.0 - fracture if side == broken_side else 1.0
-		canvas.draw_texture_rect(source, Rect2(foot - extent * Vector2(0.5, 480.0 / 512.0), extent), false, Color(1, 1, 1, alpha))
+		var rect := wall_rect(canvas.size, side, zoom, offset)
+		if rect.size.x <= 0: continue
+		var factor := maxf(rect.size.y / source.get_height(), rect.size.x / source.get_width())
+		var source_width := rect.size.x / factor
+		var region := Rect2(source.get_width() - source_width if side < 0 else 0.0, 0.0, source_width, rect.size.y / factor)
+		var alpha := opacity * (1.0 - fracture if side == broken_side else 1.0)
+		canvas.draw_texture_rect_region(source, rect, region, Color(1, 1, 1, alpha))
 
 static func portal(canvas: Control, file: String, progress: float, side: int, opacity: float) -> void:
 	if opacity <= 0.0: return

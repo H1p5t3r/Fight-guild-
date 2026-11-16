@@ -9,14 +9,18 @@ func _initialize() -> void: call_deferred("run")
 func run() -> void:
 	var model := CombatModel.new()
 	var defaults := model.data()
-	check(defaults.schema == 11 and defaults.recoveryRules.wallBreakFrames == 150, "New wall timing/schema missing")
+	check(defaults.schema == 12 and defaults.recoveryRules.wallBreakFrames == 150, "New wall timing/schema missing")
 	var legacy := defaults.duplicate(true)
-	legacy.schema = 10
-	legacy.coreVersion = 10
+	legacy.schema = 11
+	legacy.coreVersion = 11
 	legacy.recoveryRules.wallBreakFrames = 91
 	legacy.characters[5].moves[0].damage = 133
 	check(model.load_data(legacy).is_empty() and model.data().recoveryRules.wallBreakFrames == 91 and model.move(5, 0).damage == 133, "Stage migration changed authored tuning")
 	model.load_data(defaults)
+	var old_snapshot := model.core.snapshot()
+	old_snapshot.encode_s32(old_snapshot.size() - 4, 11)
+	var hash_before := model.state_hash()
+	check(not model.core.restore(old_snapshot) and model.state_hash() == hash_before, "Old snapshot version was accepted or changed live state")
 	var bounds := Vector2(1404, 722)
 	for path in ArenaStage.asset_paths():
 		var texture := load(path) as Texture2D
@@ -28,6 +32,12 @@ func run() -> void:
 		check(left.position.x <= 0 and right.end.x >= bounds.x, "Camera exposed a layer edge")
 		shifts.append(left.position.x - right.position.x)
 	check(shifts[0] > 0 and shifts[0] < shifts[1] and shifts[1] < shifts[2], "Depths do not scroll independently")
+	for zoom in [1.0, 1.2, 1.3]:
+		for side in [-1, 1]:
+			var offset := Vector2(bounds.x * 0.1, 0) if side < 0 else Vector2(bounds.x * (0.9 - zoom), 0)
+			var wall := ArenaStage.wall_rect(bounds, side, zoom, offset)
+			check(wall.position.y == 0 and wall.size.y == bounds.y, "Wall leaves a vertical gap")
+			check((wall.position.x == 0 if side < 0 else wall.end.x == bounds.x) and wall.size.x > 0, "Wall does not fill the outer screen border")
 	for side in [1, -1]:
 		Fixture.configure(model)
 		Fixture.approach(model, side)

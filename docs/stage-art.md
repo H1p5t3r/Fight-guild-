@@ -12,9 +12,9 @@ A common painted, ink-outlined guild-sport city ties together slate, red brick, 
 
 ## Layer contract
 
-Each area uses three **separately generated 1536 × 1024 images**: an opaque distant city/sky, transparent middle architecture, and a transparent playing surface. Foreground boundary props are six independent regions in a generated atlas. Two additional generated cutouts form the forge/harbor passages, and an eight-region fragment atlas supplies broken masonry, iron, timber, fabric and dust.
+Each area uses three **separately generated 1536 × 1024 images**: an opaque distant city/sky, transparent middle architecture, and a transparent playing surface. Three additional opaque generated wall surfaces fill each visible boundary from the contact plane to the screen edge, for the full viewport height. The earlier six-prop atlas is preserved as an art study. Two additional generated cutouts form the forge/harbor passages, and an eight-region fragment atlas supplies broken masonry, iron, timber, fabric and dust.
 
-`godot/assets/stages/` contains the thirteen runtime images. `art/stages/charter-grounds-reference.png` is the style reference. `art/stages/generation/manifest.json` records original image-generator filenames and SHA-256 hashes. The originals were copied byte-for-byte; cutout corrections were performed through image generation. `cutout-revisions.json` preserves the exact correction prompts. The initial layer briefs below describe the generation requirements; they are a reconstruction, not a verbatim prompt transcript.
+`godot/assets/stages/` contains fifteen runtime images plus the earlier wall-prop study. `art/stages/charter-grounds-reference.png` is the style reference. `art/stages/generation/manifest.json` records original image-generator filenames and SHA-256 hashes. The originals were copied byte-for-byte; cutout corrections were performed through image generation. `cutout-revisions.json` preserves the exact correction prompts; `full-wall-prompts.json` preserves the complete prompts for the solid boundary surfaces. The initial layer briefs below describe the generation requirements; they are a reconstruction, not a verbatim prompt transcript.
 
 - Share the reference's cel-painted materials, perspective and top-left afternoon lighting. No characters, labels, UI or readable text in scenery.
 - Far: distant city, sky and atmospheric depth; no foreground floor or large nearby architecture. Harbor adds ships/water; foundry adds chimneys/industrial roofs.
@@ -24,7 +24,7 @@ Each area uses three **separately generated 1536 × 1024 images**: an opaque dis
 - Boundary atlas: three columns by two rows, 512-pixel cells; upright isolated props anchored near cell y=480. No background or cross-cell marks.
 - Fragment atlas: four columns by two rows, 384 × 512 cells; individual masonry, metal, wood, cloth and two dust shapes.
 
-Normal play tracks the fighters' midpoint with a restrained 1.0–1.2 zoom. Additional space beyond the physical walls keeps the fighter silhouettes inside the frame. The distant, middle and floor planes respond at 0.16, 0.54 and 1.0 depth weights, with overscan to avoid exposed image edges. Collision boxes, characters and boundary props share the same world projection. Counter zoom is composed afterward so feet remain attached to the ground.
+Normal play tracks the fighters' midpoint with a restrained 1.0–1.2 zoom. Additional space beyond the physical walls keeps the fighter silhouettes inside the frame. The distant, middle and floor planes respond at 0.16, 0.54 and 1.0 depth weights, with overscan to avoid exposed image edges. Collision boxes, characters and boundary surfaces share the same world projection. Counter zoom is composed afterward so feet remain attached to the ground.
 
 ## Travel
 
@@ -45,4 +45,4 @@ bash scripts/godot.sh --write-movie /absolute/path/stage-review.avi --fixed-fps 
   --script tests/stage_preview.gd -- --test --captures /existing/capture/folder
 ```
 
-Add `--reduced` after `--` to review the quieter presentation. This fixture uses real movement, a launcher and a splat follow-up; it lowers wall durability to make both breaks easy to inspect.
+Add `--reduced` after `--` to review the quieter presentation. This fixture uses real movement, a depleting hitstun collision, a separate splat collision and a follow-up break; it lowers wall health to make both breaks easy to inspect.

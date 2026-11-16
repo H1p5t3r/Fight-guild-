@@ -243,11 +243,11 @@ func build_interface() -> void:
 	reactions.add_theme_constant_override("h_separation", 10)
 	reactions.add_theme_constant_override("v_separation", 8)
 	editor.add_child(reactions)
-	for spec in [["pushback","Ground knockback px",0,200,100],["airPushback","Air knockback px",0,200,100],["blockPushback","Block pushback px",0,200,100],["launch","Ground launch px/f",0,30,100],["airLaunch","Air launch px/f",-30,30,100],["knockdownFrames","Down duration f",1,180,1],["wakeupFrames","Wakeup duration f",0,60,1],["wallDamage","Wall damage",0,5000,1],["throwRange","Throw reach px",0,200,100]]:
+	for spec in [["pushback","Ground knockback px",0,200,100],["airPushback","Air knockback px",0,200,100],["blockPushback","Block pushback px",0,200,100],["launch","Ground launch px/f",0,30,100],["airLaunch","Air launch px/f",-30,30,100],["knockdownFrames","Down duration f",1,180,1],["wakeupFrames","Wakeup duration f",0,60,1],["throwRange","Throw reach px",0,200,100]]:
 		add_field(reactions, spec)
 	var knockdown := option(reactions, "Knockdown", ["None", "Soft · auto tech", "Hard"])
 	fields.knockdown = {"control": knockdown, "scale": 1}
-	var reaction_note := label(editor, "Launch: upward speed; air launch may be negative. Knockback: distance per hit. Soft knockdowns tech in place automatically. 2D and 4P+K / 6P+K cause hard knockdown.", 11, MUTED)
+	var reaction_note := label(editor, "Launch: upward speed; air launch may be negative. Hit knockback travels over 6 action frames; wall impact damage equals the arriving horizontal speed. Soft knockdowns tech in place automatically. 2D and 4P+K / 6P+K cause hard knockdown.", 11, MUTED)
 	reaction_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	var guard_break := CheckBox.new()
 	guard_break.text = "Guard break on block"
@@ -332,7 +332,7 @@ func build_interface() -> void:
 	var recovery_grid := GridContainer.new()
 	recovery_grid.columns = 2
 	recovery_panel.add_child(recovery_grid)
-	for spec in [["gravityAfter","Unscaled hits",0,100,1],["gravityStep","Gravity +% / hit",0,100,1],["gravityCap","Gravity cap %",100,400,1],["wallThreshold","Wall durability",1,10000,1],["wallRange","Full wall damage px",0,500,100],["wallDecayDelay","Wall decay delay f",0,600,1],["wallDecay","Wall decay / f",0,1000,1],["wallSplatFrames","Splat duration f",1,180,1],["wallBreakFrames","Break transition f",30,300,1],["wallBreakDamage","Break bonus damage",0,1000,1],["positiveFrames","Positive duration f",0,1800,1],["positiveGainPercent","Positive gain %",100,300,1],["positiveRegen","Positive regen % / f",0,1,100]]:
+	for spec in [["gravityAfter","Unscaled hits",0,100,1],["gravityStep","Gravity +% / hit",0,100,1],["gravityCap","Gravity cap %",100,400,1],["wallThreshold","Wall health (velocity units)",1,10000,1],["wallSplatFrames","Splat duration f",1,180,1],["wallBreakFrames","Break transition f",30,300,1],["wallBreakDamage","Break bonus damage",0,1000,1],["positiveFrames","Positive duration f",0,1800,1],["positiveGainPercent","Positive gain %",100,300,1],["positiveRegen","Positive regen % / f",0,1,100]]:
 		var column := VBoxContainer.new()
 		recovery_grid.add_child(column)
 		label(column, spec[1], 10, MUTED)
@@ -342,7 +342,7 @@ func build_interface() -> void:
 		spin.step = 0.01 if spec[4] == 100 else 1
 		column.add_child(spin)
 		recovery_fields[spec[0]] = {"control": spin, "scale": spec[4]}
-	var recovery_note := label(recovery_panel, "First X hits use normal gravity. Each further hit adds gravity up to the cap. Splat, then strike again to break; an expired splat falls into soft recovery. Wall breaks return to neutral with a Momentum gain bonus.", 11, MUTED)
+	var recovery_note := label(recovery_panel, "First X hits use normal gravity. Each further hit adds gravity up to the cap. Each wall loses health only from hitstun impacts: 100 velocity units = 1 px/f. Depleting it primes the NEXT hitstun impact to splat. Strike the splat to break; an expired splat falls into soft recovery. Wall breaks return to neutral with a Momentum gain bonus.", 11, MUTED)
 	recovery_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button(recovery_panel, "Apply recovery & reset", apply_recovery, true, "essential")
 	var tuning_panel := VBoxContainer.new()
@@ -352,7 +352,7 @@ func build_interface() -> void:
 	var tuning_grid := GridContainer.new()
 	tuning_grid.columns = 2
 	tuning_panel.add_child(tuning_grid)
-	for spec in [["fdAirDrain","Air FD % / frame",0.01,10,100],["fdLevelCost","FD % / attack level",0,10,100],["wallMidCap","Midscreen wall cap %",0,100,1],["throwGraceFrames","Throw protection f",0,30,1],["airLandingFrames","Recovered air landing f",0,120,1],["repeatAfter","Repeat penalty from use",0,100,1],["repeatGravityStep","Repeat gravity +%",0,100,1]]:
+	for spec in [["fdAirDrain","Air FD % / frame",0.01,10,100],["fdLevelCost","FD % / attack level",0,10,100],["throwGraceFrames","Throw protection f",0,30,1],["airLandingFrames","Recovered air landing f",0,120,1],["repeatAfter","Repeat penalty from use",0,100,1],["repeatGravityStep","Repeat gravity +%",0,100,1]]:
 		var column := VBoxContainer.new()
 		tuning_grid.add_child(column)
 		label(column, spec[1], 10, MUTED)
@@ -362,7 +362,7 @@ func build_interface() -> void:
 		spin.step = 0.01 if spec[4] == 100 else 1
 		column.add_child(spin)
 		tuning_fields[spec[0]] = {"control": spin, "scale": spec[4]}
-	for spec in [["cornerPushTransfer","Ordinary corner pushback"],["groundedWallPrime","Prime wall before grounded splat"],["blockCarryover","Carry guard through blockstun"]]:
+	for spec in [["cornerPushTransfer","Ordinary corner pushback"],["blockCarryover","Carry guard through blockstun"]]:
 		var toggle := CheckBox.new()
 		toggle.text = spec[1]
 		tuning_panel.add_child(toggle)

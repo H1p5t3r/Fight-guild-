@@ -11,11 +11,13 @@ python tests/combat_data_test.py
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/signature_test.cpp -o build/signature-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/tuning_test.cpp -o build/tuning-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/counter_test.cpp -o build/counter-tests
+"${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/wall_test.cpp -o build/wall-tests
 ./build/collision-tests
 ./build/recovery-tests
 ./build/signature-tests
 ./build/tuning-tests
 ./build/counter-tests
+./build/wall-tests
 ./build/core-tests --trace > build/native.trace
 python tests/run_godot_tests.py
 python tests/godot_network.py

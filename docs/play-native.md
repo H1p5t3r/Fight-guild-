@@ -79,3 +79,5 @@ The buffer is an original configurable implementation, not verified Strive parit
 ## Generated arenas
 
 The match opens at the Charter Grounds. Breaking the left wall carries the fight into Foundry Walk; the right wall leads to the Tide Docks. Each arena scrolls through independent generated scenery layers as the camera follows the fighters. New configurations use a 2.5-second travel sequence. The existing Reduced motion setting uses a stationary dissolve instead. See [stage art](stage-art.md) for the connected routes and layering details.
+
+Walls fill the entire visible border. Hitstun collisions damage a hidden pool by incoming horizontal speed and stop that speed. The collision after depletion splats; strike the splat to travel. Each side has its own persistent pool, refreshed by a new arena or round. Tune **Wall health** under Development → Combo gravity & walls.

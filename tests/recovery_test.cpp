@@ -37,7 +37,7 @@ static void test_universals() {
         auto s=match();wide(s,SWEEP);prime(s,0,SWEEP);s.step(0,guard);
         CHECK((s.world.players[1].health<1000)==(guard==Right));
         CHECK((s.world.players[1].knockdown==HardKnockdown)==(guard==Right));
-        CHECK(s.world.players[1].wall_damage==(guard==Right?s.moves[5][SWEEP].v[WallDamage]/4:0));
+        CHECK(s.world.wall_health[0]==1000&&s.world.wall_health[1]==1000);
     }
     for(int direction:{Left,Right}) {
         auto s=match();int slot=direction==Left?BACK_THROW:FORWARD_THROW;
@@ -110,7 +110,8 @@ static void test_recovery() {
         if(type==1) {target.y=5000;target.vy=0;}
         if(type==2) {target.stun=1;target.guarding=1;}
         prime(k);k.step(0,type==2?Right:0);
-        CHECK(target.x-old==(type==0?1000:type==1?5000:7000));
+        CHECK(target.x-old==(type==2?7000:0));
+        CHECK(target.vx==(type==0?167:type==1?834:0));
         CHECK(target.vy==(type==0?1000:type==1?-200:0));
         CHECK((target.reaction==AirReel)==(type<2));
     }
@@ -131,29 +132,32 @@ static void test_gravity() {
     CHECK(!s.rule_set(GravityCap,99)&&!s.rule_set(GravityStep,-1));
 }
 static Simulation splat(int actor=0) {
-    auto s=match();s.rules.wall_threshold=100;
+    auto s=match();s.rules.wall_threshold=100;s.reset(5,4,0,0);
     auto& m=s.moves[s.world.players[actor].character][0];
-    m.v[Reach]=50000;m.v[Bottom]=0;m.v[Height]=50000;m.v[WallDamage]=100;m.v[Damage]=20;
-    // An explicit launcher splats immediately; grounded priming is covered by tuning_test.
-    m.v[Launch]=1;m.v[StarterProration]=100;m.v[ComboScaling]=0;
+    m.v[Reach]=50000;m.v[Bottom]=0;m.v[Height]=50000;m.v[Damage]=20;
+    m.v[Launch]=0;m.v[Pushback]=m.v[AirPushback]=1200;m.v[Hitstun]=60;
+    m.v[StarterProration]=100;m.v[ComboScaling]=0;
     s.world.players[actor].x=actor==0?90000:10000;
-    s.world.players[1-actor].x=actor==0?97000:2800;
-    prime(s,actor);s.step(0,0);return s;
+    s.world.players[1-actor].x=actor==0?100000:0;
+    s.step(0,0);
+    // First collision depletes the wall; the next collision splats.
+    for(int hit=0;hit<2;++hit) {prime(s,actor);s.step(0,0);thaw(s);s.step(0,0);}
+    return s;
 }
 static void test_walls() {
     for(int actor=0;actor<2;++actor) {
         auto s=splat(actor);auto& d=s.world.players[1-actor];
-        CHECK(d.reaction==WallSplat&&d.wall_time==60&&d.wall_damage==100);
+        CHECK(d.reaction==WallSplat&&d.wall_time==60&&s.world.wall_health[actor==0?1:0]==0);
         int y=d.y;thaw(s);s.step(0,0);CHECK(d.y==y&&d.wall_time==59);
         prime(s,actor);s.step(0,0);
         CHECK(s.world.wall_break_time==s.rules.wall_break_frames&&s.world.wall_break_actor==actor);
-        CHECK(d.health==910&&s.world.players[actor].combo==2);
+        CHECK(d.health==890&&s.world.players[actor].combo==3);
         int timer=s.world.remaining;unsigned expected=0;
         State snapshot=s.world;
         ticks(s,s.rules.wall_break_frames,Left|P,Right|K);expected=s.checksum();
         CHECK(s.world.wall_break_time==0&&s.world.stage==(actor==0?1:2)&&s.world.remaining==timer);
-        CHECK(s.world.players[actor].positive_time==360&&d.health==910);
-        CHECK(d.reaction==Free&&d.y==0&&d.stun==0&&d.wall_damage==0&&d.combo_received==0);
+        CHECK(s.world.players[actor].positive_time==360&&d.health==890);
+        CHECK(d.reaction==Free&&d.y==0&&d.stun==0&&s.world.wall_health[actor==0?1:0]==100&&d.combo_received==0);
         CHECK(s.world.players[0].x<s.world.players[1].x);
         s.world=snapshot;ticks(s,s.rules.wall_break_frames,Left|P,Right|K);CHECK(s.checksum()==expected);
         s.step(Left|P,Right|K);CHECK(s.world.players[0].move==-1&&s.world.players[1].move==-1);
@@ -161,13 +165,13 @@ static void test_walls() {
         s.step(0,0);CHECK(s.world.players[actor].momentum==meter+5);
     }
     auto timeout=splat();thaw(timeout);ticks(timeout,60);
-    CHECK(timeout.world.players[1].reaction==AirReel&&timeout.world.players[1].wall_damage==0);
+    CHECK(timeout.world.players[1].reaction==AirReel&&timeout.world.wall_health[1]==0);
     for(int i=0;i<100&&timeout.world.players[1].reaction!=Free;++i) timeout.step(0,0);
     CHECK(timeout.world.players[1].reaction==Free&&timeout.world.stage==0);
     auto last=splat();thaw(last);ticks(last,59);prime(last);last.step(0,0);
     CHECK(last.world.wall_break_time==last.rules.wall_break_frames); // The final splat tick remains a follow-up opportunity.
     auto block=match();wide(block).v[WallDamage]=5000;prime(block);block.step(0,Right);
-    CHECK(block.world.players[1].wall_damage==0&&block.world.wall_break_time==0);
+    CHECK(block.world.wall_health[0]==1000&&block.world.wall_health[1]==1000&&block.world.wall_break_time==0);
     auto bonus=match();wide(bonus).v[Damage]=20;bonus.world.players[0].positive_time=1;
     prime(bonus);bonus.step(0,0);
     CHECK(bonus.world.players[0].momentum==245&&bonus.world.players[0].positive_time==0);
@@ -175,9 +179,9 @@ static void test_walls() {
     fd.step(Left|Faultless,0);
     CHECK(fd.world.players[0].momentum==1000-fd.rules.fd_drain&&fd.world.players[0].positive_time==0);
     auto mid=match();wide(mid).v[WallDamage]=400;prime(mid);mid.step(0,0);
-    CHECK(mid.world.players[1].wall_damage==100&&mid.world.players[1].reaction==Free);
+    CHECK(mid.world.wall_health[0]==1000&&mid.world.wall_health[1]==1000&&mid.world.players[1].reaction==Free);
     thaw(mid);ticks(mid,mid.rules.wall_decay_delay+1);
-    CHECK(mid.world.players[1].wall_damage==80);
+    CHECK(mid.world.wall_health[0]==1000&&mid.world.wall_health[1]==1000);
     auto ko=splat();thaw(ko);ko.world.players[1].health=30;prime(ko);ko.step(0,0);
     CHECK(ko.world.winner==-1&&ko.world.players[1].health==0);
     ticks(ko,ko.rules.wall_break_frames);CHECK(ko.world.winner==0&&ko.world.wall_break_time==0);

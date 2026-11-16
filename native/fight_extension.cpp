@@ -70,12 +70,13 @@ public:
         if(bytes.size()!=sizeof(fight::State)) return false;
         fight::State candidate{};
         std::memcpy(&candidate,bytes.ptr(),sizeof(candidate));
-        if(candidate.frame<0||candidate.winner< -1||candidate.winner>2||candidate.hitstop<0||candidate.hitstop>fight::MAX_HITSTOP) return false;
+        if(candidate.version!=fight::VERSION||candidate.frame<0||candidate.winner< -1||candidate.winner>2||candidate.hitstop<0||candidate.hitstop>fight::MAX_HITSTOP) return false;
         if(candidate.wall_break_time<0||candidate.wall_break_time>300||candidate.wall_break_actor< -1
             ||candidate.wall_break_actor>1||candidate.wall_break_side< -1||candidate.wall_break_side>1
             ||candidate.stage<0||candidate.stage>=fight::STAGE_COUNT) return false;
         for(int p=0;p<2;++p) if(candidate.wall_break_x[p]<0||candidate.wall_break_x[p]>100000
             ||candidate.wall_break_y[p]<0||candidate.wall_break_y[p]>200000) return false;
+        for(int health:candidate.wall_health) if(health<0||health>10000) return false;
         if(candidate.impact_time<0||candidate.impact_time>198||candidate.impact_duration<0||candidate.impact_duration>198
             ||candidate.impact_time>candidate.impact_duration||candidate.impact_actor<0||candidate.impact_actor>1
             ||candidate.impact_tier<0||candidate.impact_tier>3||candidate.impact_x<0||candidate.impact_x>100000
@@ -97,7 +98,7 @@ public:
                 ||f.reaction<fight::Free||f.reaction>fight::Reeled||f.knockdown<0||f.knockdown>2
                 ||f.down_frames<0||f.down_frames>180||f.wakeup_frames<0||f.wakeup_frames>60
                 ||f.recovery_time<0||f.recovery_time>180||f.combo_received<0||f.combo_received>1000
-                ||f.wall_damage<0||f.wall_damage>10000||f.wall_delay<0||f.wall_delay>600
+                ||f.knockback_left<0||f.knockback_left>20000
                 ||f.wall_time<0||f.wall_time>180||f.wall_side< -1||f.wall_side>1
                 ||f.positive_time<0||f.positive_time>1800
                 ||f.vx< -4000||f.vx>4000||f.running<0||f.running>1||f.dash<0||f.dash>60
