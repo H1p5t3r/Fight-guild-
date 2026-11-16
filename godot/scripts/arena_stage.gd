@@ -10,6 +10,14 @@ const SUBTITLES := ["THE GUILDS' COMMON GROUND", "EAST QUAY · FISHERMEN'S END",
 const COLORS := [Color("c4ad86"), Color("82b8bd"), Color("d2a178")]
 const DEPTHS := [0.16, 0.54, 1.0]
 const LAYERS := ["far", "mid", "floor"]
+# The supplied 1280x720 Strive reference has ~430px standing silhouettes (60%).
+# Our arena sits below the application header: 66% of its height is ~59% of the
+# full match window. Keep the canonical 150-world-pixel bodies/collisions intact.
+const BODY_HEIGHT := 150.0
+const BODY_SCREEN_HEIGHT := 0.66
+const FRAME_HEAD_HEIGHT := 152.0
+const HORIZONTAL_MARGIN := 0.12
+const WALL_SCREEN_MARGIN := 0.12
 static var textures := {}
 static var regions := {}
 
@@ -43,19 +51,32 @@ static func tile(file: String, index: int, columns: int) -> AtlasTexture:
 static func next_stage(stage: int, side: int) -> int:
 	return posmod(stage + side, IDS.size())
 
-static func camera(state: Dictionary, bounds: Vector2, reduced: bool = false) -> Dictionary:
-	if state.is_empty() or reduced: return {"center": 0.5, "zoom": 1.0, "offset": Vector2.ZERO}
+static func camera(state: Dictionary, bounds: Vector2, _reduced: bool = false) -> Dictionary:
+	if state.is_empty() or bounds.x <= 0 or bounds.y <= 0: return {"center": 0.5, "zoom": 1.0, "offset": Vector2.ZERO}
 	var separation := absf(float(state.players[0].x - state.players[1].x)) / 100000.0
-	var zoom := clampf(1.22 - separation * 0.30, 1.0, 1.20)
-	var half_view := 0.5 / zoom
-	var center := clampf(float(state.players[0].x + state.players[1].x) / 200000.0, half_view - 0.10, 1.10 - half_view)
-	return {"center": center, "zoom": zoom, "offset": Vector2(bounds.x * (0.5 - center * zoom), (bounds.y - 76.0) * (1.0 - zoom))}
+	var floor_y := bounds.y - 76.0
+	var hud_bottom := 140.0 * minf(bounds.x / 1248.0, 1.0)
+	var highest := maxf(float(state.players[0].get("y", 0)), float(state.players[1].get("y", 0))) / 100.0
+	var zoom := bounds.y * BODY_SCREEN_HEIGHT / (BODY_HEIGHT * bounds.x / 1000.0)
+	# Essential framing also applies with reduced motion: both fighters stay visible.
+	# No pose-dependent zoom or retained tween; pauses and rollback render identically.
+	zoom = minf(zoom, 1.0 / (separation + HORIZONTAL_MARGIN * 2.0))
+	zoom = minf(zoom, maxf(1.0, floor_y - hud_bottom) / ((highest + FRAME_HEAD_HEIGHT) * bounds.x / 1000.0))
+	var edge_center := minf(0.5, (0.5 - WALL_SCREEN_MARGIN) / zoom)
+	var center := clampf(float(state.players[0].x + state.players[1].x) / 200000.0, edge_center, 1.0 - edge_center)
+	return {"center": center, "zoom": zoom, "offset": Vector2(bounds.x * (0.5 - center * zoom), floor_y * (1.0 - zoom))}
 
 static func layer_rect(bounds: Vector2, image_size: Vector2, depth: float, center: float, zoom: float) -> Rect2:
 	# Extra image width covers the complete camera range without mirrored/repeated buildings.
 	var factor := bounds.x / image_size.x * maxf(1.14, 1.10 + depth * 0.20) * lerpf(1.0, zoom, depth)
+	var shift := (center - 0.5) * bounds.x * depth * zoom
+	# Very wide spacing/high launches can pull farther back than the authored view.
+	# Maintain coverage in both axes while preserving the image's aspect ratio.
+	factor = maxf(factor, (bounds.x + absf(shift) * 2.0) / image_size.x)
+	factor = maxf(factor, (bounds.y - 76.0) / (image_size.y * (900.0 / 1024.0)))
+	factor = maxf(factor, 76.0 / (image_size.y * (124.0 / 1024.0)))
 	var extent := image_size * factor
-	var x := (bounds.x - extent.x) * 0.5 - (center - 0.5) * bounds.x * depth * zoom
+	var x := (bounds.x - extent.x) * 0.5 - shift
 	return Rect2(Vector2(x, bounds.y - 76.0 - image_size.y * (900.0 / 1024.0) * factor), extent)
 
 static func draw_plane(canvas: Control, stage: int, layer: int, center: float, zoom: float,

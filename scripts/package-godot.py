@@ -23,6 +23,7 @@ for platform in (['Linux', 'Windows'] if target == 'all' else [target]):
         archive.write(root / 'docs/training-lab.md', 'FightGuild/training-lab.md')
         archive.write(root / 'docs/recovery-and-walls.md', 'FightGuild/recovery-and-walls.md')
         archive.write(root / 'docs/stage-art.md', 'FightGuild/stage-art.md')
+        archive.write(root / 'docs/research/strive-camera-framing-2026-11-16.md', 'FightGuild/research/strive-camera-framing-2026-11-16.md')
         archive.write(root / 'docs/signature-moves.md', 'FightGuild/signature-moves.md')
         archive.write(root / 'docs/collision-rules.md', 'FightGuild/collision-rules.md')
         archive.write(root / 'docs/move-stats.md', 'FightGuild/move-stats.md')

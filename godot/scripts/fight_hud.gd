@@ -122,7 +122,9 @@ static func draw(canvas: Control, state: Dictionary, wins: Array, round_call: St
 		var rail := Rect2(x, 81, width, 27)
 		draw_health(canvas, rail, fighter.health, guild, right)
 		var mode := "%d / 1000" % fighter.health if diagnostics else "SIMPLE + MOTIONS" if fighter.simple else "MOTION INPUTS"
-		text(canvas, mode, Vector2(x + width if right else x, 135), detail_size, GuildTheme.MUTED, right)
+		# Keep the status in the HUD strip, clear of the closer fighter silhouettes.
+		text(canvas, "POSITIVE BONUS" if fighter.positiveTime > 0 else mode, Vector2(x + width if right else x, 135), detail_size,
+			Color("a8e9b1") if fighter.positiveTime > 0 else GuildTheme.MUTED, right)
 		for mark in MatchScore.WINS_REQUIRED:
 			var marker_x := x + 10 + mark * 23 if right else x + width - 10 - mark * 23
 			var diamond := PackedVector2Array([Vector2(marker_x, 123), Vector2(marker_x + 7, 130), Vector2(marker_x, 137), Vector2(marker_x - 7, 130), Vector2(marker_x, 123)])

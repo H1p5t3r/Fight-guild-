@@ -32,7 +32,7 @@ func run() -> void:
 		check(left.position.x <= 0 and right.end.x >= bounds.x, "Camera exposed a layer edge")
 		shifts.append(left.position.x - right.position.x)
 	check(shifts[0] > 0 and shifts[0] < shifts[1] and shifts[1] < shifts[2], "Depths do not scroll independently")
-	for zoom in [1.0, 1.2, 1.3]:
+	for zoom in [0.8, 1.2, 2.3, 2.5]:
 		for side in [-1, 1]:
 			var offset := Vector2(bounds.x * 0.1, 0) if side < 0 else Vector2(bounds.x * (0.9 - zoom), 0)
 			var wall := ArenaStage.wall_rect(bounds, side, zoom, offset)
@@ -58,17 +58,24 @@ func run() -> void:
 			for player in 2:
 				var presentation := StageTravel.fighter(now, player, bounds, false)
 				check(is_finite(presentation.position.x) and is_finite(presentation.scale), "Non-finite presentation")
-				if tick == int(state.wallBreakDuration) - 1: landing[player] = presentation
+				if tick == 0:
+					var origin_camera := ArenaStage.camera(state, bounds)
+					var expected: Vector2 = origin_camera.offset + Vector2(state.players[player].x * bounds.x / 100000.0, bounds.y - 76 - state.players[player].y * bounds.x / 100000.0) * origin_camera.zoom
+					check(presentation.position.distance_to(expected) < 0.1, "Travel jumps away from the gameplay camera")
+				if tick == int(state.wallBreakDuration) - 1:
+					landing[player] = presentation
+					landing[player + 2] = StageTravel.fighter(now, player, bounds, true)
 			model.step(1 | 16, 2 | 32)
 		var final_hash: int = model.core.checksum()
 		var camera := ArenaStage.camera(model.state(), bounds)
 		for player in 2:
 			var expected: Vector2 = camera.offset + Vector2(model.state().players[player].x * bounds.x / 100000.0, bounds.y - 76) * camera.zoom
 			check(landing[player].position.distance_to(expected) < 0.1 and absf(landing[player].scale - camera.zoom) < 0.001, "Landing jumps when gameplay resumes")
+			check(landing[player + 2].position.distance_to(expected) < 0.1 and absf(landing[player + 2].scale - camera.zoom) < 0.001, "Reduced-motion landing jumps when gameplay resumes")
 		check(model.core.restore(origin), "Travel snapshot rejected")
 		for _tick in int(state.wallBreakDuration): model.step(1 | 16, 2 | 32)
 		check(model.core.checksum() == final_hash, "Travel rollback diverged")
 		check(ArenaStage.next_stage(shot.target, -side) == 0, "Reverse route does not return")
-		check(ArenaStage.camera(model.state(), bounds, true).zoom == 1.0, "Reduced motion tracks camera")
+		check(ArenaStage.camera(model.state(), bounds, true) == camera, "Reduced motion changes essential fighter framing")
 	print("Generated stages, parallax, both wall routes, migration and landing continuity: ", failures, " failures")
 	quit(int(failures != 0))

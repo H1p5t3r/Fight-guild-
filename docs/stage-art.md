@@ -24,19 +24,19 @@ Each area uses three **separately generated 1536 × 1024 images**: an opaque dis
 - Boundary atlas: three columns by two rows, 512-pixel cells; upright isolated props anchored near cell y=480. No background or cross-cell marks.
 - Fragment atlas: four columns by two rows, 384 × 512 cells; individual masonry, metal, wood, cloth and two dust shapes.
 
-Normal play tracks the fighters' midpoint with a restrained 1.0–1.2 zoom. Additional space beyond the physical walls keeps the fighter silhouettes inside the frame. The distant, middle and floor planes respond at 0.16, 0.54 and 1.0 depth weights, with overscan to avoid exposed image edges. Collision boxes, characters and boundary surfaces share the same world projection. Counter zoom is composed afterward so feet remain attached to the ground.
+Normal play frames Fillet and Shark at about **59% of the full match window's height** at starting spacing, following the user's [Strive screenshot reference](research/strive-camera-framing-2026-11-16.md). The camera tracks their midpoint and pulls back only when their horizontal separation or airborne height needs more room. A screen-relative margin beyond each physical wall keeps their bodies visible. The distant, middle and floor planes respond at 0.16, 0.54 and 1.0 depth weights, with aspect-preserving overscan to avoid exposed image edges, including at wide spacing and high launches. Collision boxes, characters, weapons and boundary surfaces share the same world projection. Counter zoom is composed afterward so feet remain attached to the ground.
 
 ## Travel
 
 New configurations use **150 ticks / 2.5 seconds**. The existing editor still supports 30–300 ticks; old saved configurations keep their chosen duration. Ground, architecture and sky move at different speeds during travel. A generated portal passes the camera, fragments follow the broken side, and the existing jump/hurt/crouch poses provide provisional flight and landing. The target area name appears during arrival. Dedicated character travel animation and sound are future work.
 
-The core captures both fighters' departure positions when the follow-up breaks the wall. Those positions and the stage index are snapshot state. The neutral reset happens with one third of the transition remaining, while the rendered flight continues smoothly to the target camera's exact position and scale. All animation reads fixed-tick progress; pausing and rollback do not leave stale tweens or particles. Existing health, Momentum, timer, held-input and Positive Bonus rules remain in force.
+The core captures both fighters' departure positions when the follow-up breaks the wall. Those positions, including height, and the stage index are snapshot state. The neutral reset happens with one third of the transition remaining, while the rendered flight continues smoothly to the target camera's exact position and scale. The flight briefly reduces character scale and limits its arc to available headroom to accommodate the larger silhouettes. All animation reads fixed-tick progress; pausing and rollback do not leave stale tweens or particles. Existing health, Momentum, timer, held-input and Positive Bonus rules remain in force.
 
-Reduced motion uses a stationary camera, a scene dissolve and fighter fades around the reset, without flight or rotating debris. The loading screen prepares all adjoining scenery along with the selected fighters.
+Reduced motion retains essential camera framing so the fighters stay equally large and visible in play. It removes the counter accent, travel pan, flight and rotating debris; wall breaks use a scene dissolve and fighter fades between the source and destination views. The loading screen prepares all adjoining scenery along with the selected fighters.
 
 ## Review
 
-`tests/stage_test.gd` checks both live-input wall routes, source/target stability through the reset, legacy duration preservation, layer coverage and exact landing continuity. Native recovery tests cover all six directed connections at 30/90/150/151/300 ticks and snapshot replay. The packaged build verification loads every stage image.
+`tests/stage_test.gd` checks both live-input wall routes, source/target stability through the reset, legacy duration preservation, layer coverage and exact departure/landing continuity, including reduced motion. `tests/camera_test.gd` checks the standing silhouette ratio, corner and airborne visibility, parallax coverage at five arena sizes, a real jump, and restored-snapshot camera consistency. Native recovery tests cover all six directed connections at 30/90/150/151/300 ticks and snapshot replay. The packaged build verification loads every stage image.
 
 To record the visual review with a display available:
 
@@ -46,3 +46,5 @@ bash scripts/godot.sh --write-movie /absolute/path/stage-review.avi --fixed-fps 
 ```
 
 Add `--reduced` after `--` to review the quieter presentation. This fixture uses real movement, a depleting hitstun collision, a separate splat collision and a follow-up break; it lowers wall health to make both breaks easy to inspect.
+
+`tests/camera_preview.gd -- --test --captures /existing/capture/folder` captures neutral, jump, full separation, corner, collision overlays and a rekka using live inputs. Add `--editor` for the smaller development arena or `--reduced` for reduced-motion framing. Its silhouette percentages use the logical viewport, so window stretch does not distort the measurement.

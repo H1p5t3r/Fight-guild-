@@ -145,8 +145,6 @@ func _draw() -> void:
 			elif fighter.dashTicks: status = "STEP"
 			if fighter.counterSlowTime: status += " · ½ SPEED %df" % fighter.counterSlowTime
 			label(status, Vector2(clampf(px + 28, 12, size.x - 165), py - 10), 12, Color("f68b79") if fighter.guardBreak else MUTED)
-		if fighter.positiveTime > 0:
-			FightHud.centered(self, "POSITIVE BONUS", Vector2(size.x * (0.22 if p == 0 else 0.78), 176), 16, Color("a8e9b1", 0.85), 2)
 		if fighter.faultless or (fighter.guarding and not fighter.guardBreak):
 			var angle := 0.0 if fighter.facing == 1 else PI
 			var guard_color := Color("75dcbc") if fighter.faultless else Color("89c3e0")

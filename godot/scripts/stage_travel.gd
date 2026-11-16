@@ -19,7 +19,8 @@ static func describe(state: Dictionary) -> Dictionary:
 
 static func source_camera(state: Dictionary, bounds: Vector2) -> Dictionary:
 	var xs: Array = state.get("wallBreakX", [42000, 58000])
-	var mock := {"players": [{"x": xs[0]}, {"x": xs[1]}]}
+	var ys: Array = state.get("wallBreakY", [0, 0])
+	var mock := {"players": [{"x": xs[0], "y": ys[0]}, {"x": xs[1], "y": ys[1]}]}
 	return ArenaStage.camera(mock, bounds)
 
 static func destination_camera(state: Dictionary, bounds: Vector2) -> Dictionary:
@@ -37,8 +38,10 @@ static func draw_background(canvas: Control, state: Dictionary, reduced: bool) -
 	if reduced:
 		# A quiet dissolve keeps location readable without rapid camera motion or flight.
 		var blend := smoothstep(0.38, 0.82, p)
-		for layer in 3: ArenaStage.draw_plane(canvas, shot.source, layer, 0.5, 1.0)
-		for layer in 3: ArenaStage.draw_plane(canvas, shot.target, layer, 0.5, 1.0, Vector2.ZERO, blend)
+		for layer in 3: ArenaStage.draw_plane(canvas, shot.source, layer, camera.center, camera.zoom)
+		ArenaStage.draw_boundaries(canvas, shot.source, camera.zoom, camera.offset, 0, 0.0, 1.0 - blend)
+		for layer in 3: ArenaStage.draw_plane(canvas, shot.target, layer, destination.center, destination.zoom, Vector2.ZERO, blend)
+		ArenaStage.draw_boundaries(canvas, shot.target, destination.zoom, destination.offset, 0, 0.0, blend)
 		return
 	for layer in 3:
 		var travel: float = canvas.size.x * [0.26, 1.30, 1.0][layer]
@@ -68,20 +71,23 @@ static func fighter(state: Dictionary, player: int, bounds: Vector2, reduced: bo
 	var camera := source_camera(state, bounds)
 	var start := Vector2(float(state.wallBreakX[player]) / 100000.0 * bounds.x,
 		floor_y - float(state.wallBreakY[player]) / 100000.0 * bounds.x)
-	if not reduced: start = camera.offset + start * camera.zoom
-	if reduced:
-		return {"position": Vector2(final_x, floor_y) if shot.changed else start,
-			"scale": 1.0, "angle": 0.0, "phase": -1, "pose": -1,
-			"alpha": 1.0 - smoothstep(0.35, 0.57, p) if not shot.changed else smoothstep(0.70, 0.88, p)}
+	start = camera.offset + start * camera.zoom
 	var destination := destination_camera(state, bounds)
 	var finish: Vector2 = destination.offset + Vector2(final_x, floor_y) * destination.zoom
+	if reduced:
+		return {"position": finish if shot.changed else start,
+			"scale": destination.zoom if shot.changed else camera.zoom, "angle": 0.0, "phase": -1, "pose": -1,
+			"alpha": 1.0 - smoothstep(0.35, 0.57, p) if not shot.changed else smoothstep(0.70, 0.88, p)}
 	var flight := smoothstep(0.06, 0.92, p)
-	var lift := sin(flight * PI) * bounds.y * (0.25 if attacker else 0.34)
-	var point := start.lerp(finish, flight) - Vector2(0, lift)
+	var arc := sin(flight * PI)
+	var scale := lerpf(float(camera.zoom), float(destination.zoom), flight) * (1.0 - 0.32 * arc)
+	var point := start.lerp(finish, flight)
+	var headroom := maxf(0.0, point.y - ArenaStage.FRAME_HEAD_HEIGHT * bounds.x / 1000.0 * scale - 140.0 * minf(bounds.x / 1248.0, 1.0))
+	var lift := minf(arc * bounds.y * (0.25 if attacker else 0.34), headroom)
+	point.y -= lift
 	var phase := -1 if p < 0.10 else 0
 	var pose := -1 if phase == -1 else (8 if attacker else 9) if p < 0.84 else 11 if p < 0.96 else 0
 	var angle: float = shot.side * (0.10 if attacker else 0.35) * sin(flight * PI)
-	var scale := lerpf(float(camera.zoom), float(destination.zoom), flight) * (1.0 - 0.14 * sin(flight * PI))
 	return {"position": point, "scale": scale, "angle": angle, "phase": phase, "pose": pose, "alpha": 1.0}
 
 static func draw_front(canvas: Control, state: Dictionary, reduced: bool) -> void:
