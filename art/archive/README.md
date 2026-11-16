@@ -13,3 +13,5 @@ These images preserve the exploration history. They are **not the current visual
 | 07-shark-before-weapon-check.png | New style guide before restoring distinct original weapon shapes. |
 | 08-anvil-before-weapon-check.png | New style guide before restoring shield and original hammer. |
 | 09-fillet-before-weapon-check.png | New style guide before correcting dagger-like blades. |
+
+`proportions-v1/` preserves the eight superseded Fillet/Shark atlases plus their original region/pivot and collision metadata. `proportions-v2-studies/` preserves layouts/poses rejected during the first anatomy overhaul; rejection reasons and exact correction prompts are in `godot/assets/fighters/proportions-v2/generation.json`.

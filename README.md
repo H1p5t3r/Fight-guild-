@@ -102,3 +102,5 @@ web/                   Archived browser prototype
 ```
 
 Guild Ball characters, names and miniature images belong to their respective rights holders. This is an unofficial concept project. No license for third-party material is implied.
+
+Fillet and Shark now have **32 redrawn poses each**, with mature athletic proportions, stronger hands/boots and fitted body-only hurtboxes. The new outlined combat callouts use translucent fills so the fight stays visible. See the [sprite contract](docs/sprite-production.md) for the remaining roster and animation pipeline.

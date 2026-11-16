@@ -22,10 +22,10 @@ func run() -> void:
 		move.counterSlowFrames = 35
 		move.counterHitstun = 0
 		move.hitstun = 60
-		move.reach = 50000
 		move.pushback = 0
 		game.model.load_data(data)
 		game.model.reset([5, 4])
+		for tick in 20: game.model.step(2, 1)
 		for tick in 11: game.model.step(16 if tick < 5 else 0, 128 if tick < 5 else 0)
 	game._process(0.0)
 	await process_frame

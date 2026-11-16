@@ -13,13 +13,16 @@ The [2026-11-15 source review](research/strive-dustloop-2026-11-15.md) compares 
 - [x] Add ordinary corner pushback and separate FD ground/air drain and attack-level contact costs. Keep FD as the only Momentum spend and Negative Penalty deferred.
 - [x] Add optional attack-strength/counter presets, per-move overrides and counter-vulnerability masks; distinguish heavy counters from pokes and follow-ups.
 - [x] Add an editable midscreen wall-damage cap and grounded wall priming, with separate airborne threshold behavior.
-- [ ] Playtest the recorded Fillet/Shark pressure, FD spacing, hook height and wall-break reward cases from the source review before locking balance. Persistent victim-only slowdown remains a later feature, separate from shared hitstop.
+- [ ] Playtest the recorded Fillet/Shark pressure, FD spacing, hook height and wall-break reward cases from the source review before locking balance.
 
 See [combat tuning](combat-tuning.md) for defaults, migration rules and verified cases.
 
 ## Next: consistent sprite and future-character pipeline
 
 Requested scope: make repeatable character images performing directed actions, with one shared art language. See [the working sprite contract](sprite-production.md).
+
+- [x] Redraw Fillet/Shark first with mature athletic proportions; integrate all 64 current poses, refit body/strike regions, preserve old versions and record generation corrections.
+- [ ] Review the new Fillet/Shark studies in motion, approve their anatomical/palette masters, then apply the same proportion rules to Anvil, Hammer, Smoke and Tapper.
 
 - [ ] Review and approve a common style master: outline weights, cel shadows, lighting, material ramps, camera and scale. Establish exact palette swatches and silhouette landmarks for all six current fighters before adding characters.
 - [ ] Create a reusable character specification: neutral model sheet, proportions, face, costume landmarks, equipment geometry/handedness, palette, allowed deformation and prohibited drift. Use the same specification to onboard future characters.
@@ -48,6 +51,7 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Expose per-move counter-hit hitstun/hitstop bonuses and reversal eligibility; preserve old saved move sets.
 - [x] Detect first-actionable-frame reversals through the existing input buffer and add attack-loop / guard-to-reversal practice dummies.
 - [x] Add medium/large counter impact freezes and deterministic defender-only slowdown, oversized italic combat text and a reduced-motion camera option.
+- [x] Refine large callouts into translucent outline lettering, with lighter combo fills and split diagonal accents.
 - [ ] Playtest the new minimal/small/medium/large counter presets across the six kits before locking move-specific values.
 - [x] Add automatic soft/hard knockdown recovery and route wakeup completion through the existing reversal opportunity.
 - [ ] Design invulnerable reversal tools separately.

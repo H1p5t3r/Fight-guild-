@@ -21,6 +21,7 @@ const TEXT := Color("f0ede5")
 const MUTED := Color("a3b8c7")
 
 func _ready() -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	custom_minimum_size = Vector2(720, 430)
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
 	clip_contents = true

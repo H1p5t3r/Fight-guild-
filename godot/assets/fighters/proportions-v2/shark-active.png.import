@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1c17tebui71d"
-path="res://.godot/imported/shark-active.png-629f52a1d13ee32f9b115ecc01092e3d.ctex"
+uid="uid://biowkqar3bxjv"
+path="res://.godot/imported/shark-active.png-4e9087393ed0bb3b2f985dfb7a631d21.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fighters/shark-active.png"
-dest_files=["res://.godot/imported/shark-active.png-629f52a1d13ee32f9b115ecc01092e3d.ctex"]
+source_file="res://assets/fighters/proportions-v2/shark-active.png"
+dest_files=["res://.godot/imported/shark-active.png-4e9087393ed0bb3b2f985dfb7a631d21.ctex"]
 
 [params]
 

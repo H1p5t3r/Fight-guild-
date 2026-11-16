@@ -33,6 +33,7 @@ var score_points := [0, 0]
 var next_call := ""
 
 func _ready() -> void:
+	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	visible = false
 	for _p in 2:

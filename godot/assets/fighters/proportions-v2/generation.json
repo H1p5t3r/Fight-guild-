@@ -1,0 +1,153 @@
+{
+  "style": "Strive-inspired mature athletic proportions; Fillet and Shark",
+  "generator": "OpenAI image_gen",
+  "scope": "Fillet and Shark, 32 poses each; generated redraws and layout/pose repairs, no pixel manipulation.",
+  "jobs": [
+    {
+      "fighter": "fillet",
+      "phase": "active",
+      "prompt": "Create a production-ready 1536x1024 RGBA sprite atlas on a TRUE TRANSPARENT background. No words, no labels, no grid lines, no floor shadows or haze. The FIRST reference is the authoritative updated anatomy/style master: smaller mature head, powerful athletic limbs, big angular boots and hands, sculpted high-end Guilty Gear Strive-like cel-shaded forms, clean solid contour and two-tone hard-edged shadows. Preserve the first reference's exact costume, equipment, palette, head size and body proportions in EVERY pose. The SECOND reference supplies the ACTIONS only, not its old body proportions. All sprites face RIGHT. Full bodies and weapons must remain inside their own cells; leave clean empty gutters. Do not add impact stars, blood, gradients or glows. Keep a single neutral upper-left light and the same character scale throughout. Fillet is an athletic adult female dual-knife duelist: short swept brown hair, crimson shoulder/corset, ivory apron, charcoal trousers, two curved butcher knives, wrapped forearms. Approximate 7.5 heads tall anatomy, strong thighs and forearms. IMPORTANT: change layout from the old atlas to exactly FOUR COLUMNS by THREE ROWS, 12 cells each384px wide and about341px tall. Standing crown-to-sole height250px, foot baseline at300px within each row, constant head scale. Read order left to right: row1 NEUTRAL READY, P fully extended short knife jab, K fully extended forward kick, S fully extended horizontal knife/spear slash. Row2 Hs committed overhead heavy swing, D full forward lunge, WALK forward contact, WALK passing stance. Row3 JUMP with tucked legs, HURT recoil leaning backward, GUARD weapons close to chest, CROUCH low. Include every listed pose exactly once, no extra figures. The P pose needs the stabbing arm and knife aimed horizontally right, kick leg aimed right, Hs overhead path readable. No attack effects are needed: focus on body and equipment clarity. Each pose is a carefully directed animation frame of the SAME model.",
+      "promptStatus": "exact",
+      "references": [
+        "godot/assets/fighters/proportions-v2/fillet-windup.png",
+        "art/archive/proportions-v1/fillet-active.png"
+      ],
+      "generatedFile": "exec-52eac0f9-6383-49b1-844c-461236fd0b58.png"
+    },
+    {
+      "fighter": "fillet",
+      "phase": "block",
+      "prompt": "Create a production-ready 1536x1024 RGBA sprite atlas on a TRUE TRANSPARENT background. No words, no labels, no grid lines, no floor shadows or haze. The FIRST reference is the authoritative updated anatomy/style master: smaller mature head, powerful athletic limbs, big angular boots and hands, sculpted high-end Guilty Gear Strive-like cel-shaded forms, clean solid contour and two-tone hard-edged shadows. Preserve the first reference's exact costume, equipment, palette, head size and body proportions in EVERY pose. The SECOND reference supplies the ACTIONS only, not its old body proportions. All sprites face RIGHT. Full bodies and weapons must remain inside their own cells; leave clean empty gutters. Do not add impact stars, blood, gradients or glows. Keep a single neutral upper-left light and the same character scale throughout. Fillet is an athletic adult female dual-knife duelist: short swept brown hair, crimson shoulder/corset, ivory apron, charcoal trousers, two curved butcher knives, wrapped forearms. Approximate 7.5 heads tall anatomy, strong thighs and forearms. Layout EXACTLY3 columns x2 rows,512px square cells. Follow the SECOND reference's six block poses in order: stable-contact, stable-settle, pressure-contact, pressure-hold, guard-break-opening, guard-break-stagger. First two almost upright closed guard. Next two increasingly compressed tense guard, last two open torso and arms in off-balance reaction. Grounded soles baseline y490 within each row, uncompressed standing anatomy about450px crown-to-sole. Every pose fully contained,24px empty gutter, no changes of size or equipment. No released attack effects. Preserve the new anatomy of reference ONE consistently; do not copy the second reference's large heads.",
+      "promptStatus": "exact",
+      "references": [
+        "godot/assets/fighters/proportions-v2/fillet-windup.png",
+        "art/archive/proportions-v1/fillet-block.png"
+      ],
+      "generatedFile": "exec-7a3e8a0e-cf43-435e-9d6e-bb79373cbd3f.png"
+    },
+    {
+      "fighter": "fillet",
+      "phase": "signatures",
+      "prompt": "Create a production-ready 1536x1024 RGBA sprite atlas on a TRUE TRANSPARENT background. No words, no labels, no grid lines, no floor shadows or haze. The FIRST reference is the authoritative updated anatomy/style master: smaller mature head, powerful athletic limbs, big angular boots and hands, sculpted high-end Guilty Gear Strive-like cel-shaded forms, clean solid contour and two-tone hard-edged shadows. Preserve the first reference's exact costume, equipment, palette, head size and body proportions in EVERY pose. The SECOND reference supplies the ACTIONS only, not its old body proportions. All sprites face RIGHT. Full bodies and weapons must remain inside their own cells; leave clean empty gutters. Do not add impact stars, blood, gradients or glows. Keep a single neutral upper-left light and the same character scale throughout. Fillet is an athletic adult female dual-knife duelist: short swept brown hair, crimson shoulder/corset, ivory apron, charcoal trousers, two curved butcher knives, wrapped forearms. Approximate 7.5 heads tall anatomy, strong thighs and forearms. Layout EXACTLY4 columns x2 rows,384x512 cells. Row1 is the WINDUP of four actions. Row2 is the ACTIVE of the matching four actions. Preserve the SECOND reference's exact action sequence and facing with the FIRST reference's improved body anatomy; keep eight poses, constant anatomical scale, standing crown-to-sole350px, grounded sole baseline y480 per row. Columns:1 knife spiral low horizontal forward corkscrew (active body nearly horizontal, both knives leading right, no boot kick);2 upward knife slash from low to high;3 extended mid-height knife stab;4 deep crouched low knife slice. Windups have no smears. Active knife arcs use at most one thin hard-edged crimson crescent, thrust uses one narrow crimson wedge, no rings/glows/impact stars. Show the mature smaller head, long strong legs, substantial forearms and gloves even in compact poses.",
+      "promptStatus": "exact",
+      "references": [
+        "godot/assets/fighters/proportions-v2/fillet-windup.png",
+        "art/archive/proportions-v1/fillet-signatures.png"
+      ],
+      "generatedFile": "exec-cc6272f7-ab5b-42a2-94ee-a729fb03544c.png"
+    },
+    {
+      "fighter": "shark",
+      "phase": "active",
+      "prompt": "Create a production-ready 1536x1024 RGBA sprite atlas on a TRUE TRANSPARENT background. No words, no labels, no grid lines, no floor shadows or haze. The FIRST reference is the authoritative updated anatomy/style master: smaller mature head, powerful athletic limbs, big angular boots and hands, sculpted high-end Guilty Gear Strive-like cel-shaded forms, clean solid contour and two-tone hard-edged shadows. Preserve the first reference's exact costume, equipment, palette, head size and body proportions in EVERY pose. The SECOND reference supplies the ACTIONS only, not its old body proportions. All sprites face RIGHT. Full bodies and weapons must remain inside their own cells; leave clean empty gutters. Do not add impact stars, blood, gradients or glows. Keep a single neutral upper-left light and the same character scale throughout. Shark is an athletic adult male swimmer/harpooner: long white hair, teal eye mask and scale vest, bone jaw shoulder, rope belt, gray trousers, teal cloth, long hooked spear and separate short knife. Approximate 8-heads-tall anatomy, broad upper back and shoulders, lean waist, powerful limbs. IMPORTANT: change layout from the old atlas to exactly FOUR COLUMNS by THREE ROWS, 12 cells each384px wide and about341px tall. Standing crown-to-sole height250px, foot baseline at300px within each row, constant head scale. Read order left to right: row1 NEUTRAL READY, P fully extended short knife jab, K fully extended forward kick, S fully extended horizontal knife/spear slash. Row2 Hs committed overhead heavy swing, D full forward lunge, WALK forward contact, WALK passing stance. Row3 JUMP with tucked legs, HURT recoil leaning backward, GUARD weapons close to chest, CROUCH low. Include every listed pose exactly once, no extra figures. The P pose needs the stabbing arm and knife aimed horizontally right, kick leg aimed right, Hs overhead path readable. No attack effects are needed: focus on body and equipment clarity. Each pose is a carefully directed animation frame of the SAME model.",
+      "promptStatus": "exact",
+      "references": [
+        "art/archive/proportions-v2-studies/shark-windup-before-gutters.png",
+        "art/archive/proportions-v1/shark-active.png"
+      ],
+      "generatedFile": "exec-848a3a21-8e86-4ca9-a94a-85640c3225de.png"
+    },
+    {
+      "fighter": "shark",
+      "phase": "block",
+      "prompt": "Create a production-ready 1536x1024 RGBA sprite atlas on a TRUE TRANSPARENT background. No words, no labels, no grid lines, no floor shadows or haze. The FIRST reference is the authoritative updated anatomy/style master: smaller mature head, powerful athletic limbs, big angular boots and hands, sculpted high-end Guilty Gear Strive-like cel-shaded forms, clean solid contour and two-tone hard-edged shadows. Preserve the first reference's exact costume, equipment, palette, head size and body proportions in EVERY pose. The SECOND reference supplies the ACTIONS only, not its old body proportions. All sprites face RIGHT. Full bodies and weapons must remain inside their own cells; leave clean empty gutters. Do not add impact stars, blood, gradients or glows. Keep a single neutral upper-left light and the same character scale throughout. Shark is an athletic adult male swimmer/harpooner: long white hair, teal eye mask and scale vest, bone jaw shoulder, rope belt, gray trousers, teal cloth, long hooked spear and separate short knife. Approximate 8-heads-tall anatomy, broad upper back and shoulders, lean waist, powerful limbs. Layout EXACTLY3 columns x2 rows,512px square cells. Follow the SECOND reference's six block poses in order: stable-contact, stable-settle, pressure-contact, pressure-hold, guard-break-opening, guard-break-stagger. First two almost upright closed guard. Next two increasingly compressed tense guard, last two open torso and arms in off-balance reaction. Grounded soles baseline y490 within each row, uncompressed standing anatomy about450px crown-to-sole. Every pose fully contained,24px empty gutter, no changes of size or equipment. No released attack effects. Preserve the new anatomy of reference ONE consistently; do not copy the second reference's large heads.",
+      "promptStatus": "exact",
+      "references": [
+        "art/archive/proportions-v2-studies/shark-windup-before-gutters.png",
+        "art/archive/proportions-v1/shark-block.png"
+      ],
+      "generatedFile": "exec-e8f56699-aaa1-422d-95d8-b5950c2d9d03.png"
+    },
+    {
+      "fighter": "shark",
+      "phase": "signatures",
+      "prompt": "Create a production-ready 1536x1024 RGBA sprite atlas on a TRUE TRANSPARENT background. No words, no labels, no grid lines, no floor shadows or haze. The FIRST reference is the authoritative updated anatomy/style master: smaller mature head, powerful athletic limbs, big angular boots and hands, sculpted high-end Guilty Gear Strive-like cel-shaded forms, clean solid contour and two-tone hard-edged shadows. Preserve the first reference's exact costume, equipment, palette, head size and body proportions in EVERY pose. The SECOND reference supplies the ACTIONS only, not its old body proportions. All sprites face RIGHT. Full bodies and weapons must remain inside their own cells; leave clean empty gutters. Do not add impact stars, blood, gradients or glows. Keep a single neutral upper-left light and the same character scale throughout. Shark is an athletic adult male swimmer/harpooner: long white hair, teal eye mask and scale vest, bone jaw shoulder, rope belt, gray trousers, teal cloth, long hooked spear and separate short knife. Approximate 8-heads-tall anatomy, broad upper back and shoulders, lean waist, powerful limbs. Layout EXACTLY4 columns x2 rows,384x512 cells. Row1 is the WINDUP of four actions. Row2 is the ACTIVE of the matching four actions. Preserve the SECOND reference's exact action sequence and facing with the FIRST reference's improved body anatomy; keep eight poses, constant anatomical scale, standing crown-to-sole350px, grounded sole baseline y480 per row. Columns:1 grounded spear throw/pull up-right45 degrees;2 airborne spear throw/pull down-right45 degrees;3 grounded short-knife forward stab;4 airborne short-knife forward stab. CRITICAL: Row2 column1 and column2 show ONLY the body in a throwing/reeling pose with bare free gripping hands; do NOT draw ANY spear, shaft, rope or other weapon in those two cells. The runtime separately draws the thrown spear. The other six cells retain equipment exactly as reference2. Airborne poses keep legs tucked, matching anatomical scale. No smears, no glows, no detached weapons anywhere outside cells.",
+      "promptStatus": "exact",
+      "references": [
+        "art/archive/proportions-v2-studies/shark-windup-before-gutters.png",
+        "art/archive/proportions-v1/shark-signatures.png"
+      ],
+      "generatedFile": "exec-188c9a5e-85ce-4834-990e-4dae014c483a.png"
+    },
+    {
+      "phase": "layout correction",
+      "fighter": "fillet",
+      "prompt": "Edit this exact sprite sheet for clean game atlas layout. Preserve EXACTLY this character, mature anime athletic anatomy, long legs, muscular shoulders, red butcher armor, ivory apron, brown boots, two knives, style, palette, and ALL EIGHT of the existing action poses, ordered identically, four columns by two rows. The only change is adjust layout and size to guarantee transparent gutters between every sprite. The bottom row must not spill between cells: horizontal knife spiral in column 1, rising slash column 2, horizontal middle stab column 3, low slice column 4. Top row corresponding four windup poses unchanged. On a 1536x1024 canvas use 384x512 cells. Each entire pose including every blade and red smear must stay within its own cell with minimum 20 pixels transparent margin on all four sides. Fit a wide active pose by modestly reducing its entire uniform scale inside the cell, NOT shortening or cutting limbs or blades. Keep consistent head/body anatomy across the sheet. Never overlap neighboring cells. Keep sparse red hard-edged knife trail crescents only on the four active poses and no ground shadow. TRUE TRANSPARENT RGBA alpha background, absolutely no opaque background, no grid, no labels, no text. Preserve clean cel shading and crisp contours. This is a layout repair, not a redesign.",
+      "promptStatus": "exact",
+      "references": [
+        "art/archive/proportions-v2-studies/fillet-signatures-before-gutters.png"
+      ],
+      "generatedFile": "exec-8385b640-f7a1-41b3-94ec-f14d5c69d8e6.png"
+    },
+    {
+      "phase": "layout correction",
+      "fighter": "shark",
+      "prompt": "Edit this exact 1536x1024 sprite sheet for clean game atlas layout. Preserve EXACTLY this male character's muscular mature anime anatomy, eight-head proportions, long legs, powerful arms, teal scale armor, white hair and mask, bone jaw shoulder, wrapped boots, hooked spear and short blade, exact style and palette. Preserve ALL SIX existing poses, same order in three columns by two rows. Only repair layout: every entire pose, including the hooked weapon, must be contained in its own 512x512 cell with at least 24 transparent pixels of margin from all four cell edges. In particular bottom row middle heavy-slash windup and bottom row right crouched Drive windup must not touch/cross their shared cell border. Uniformly scale ALL six sprites a little smaller and center each, keeping the same character scale and an aligned planted-foot baseline within every cell. Do NOT shorten weapons or limbs, clip anything, or change poses. Top row ready/P/K windups, bottom S/Hs/D windups. TRUE TRANSPARENT RGBA alpha background, no shadow or painted background, no borders, no text, no labels. Crisp black contours and clean cel shading. Layout repair, not a redesign.",
+      "promptStatus": "exact",
+      "references": [
+        "art/archive/proportions-v2-studies/shark-windup-before-gutters.png"
+      ],
+      "generatedFile": "exec-c301e6d1-d12f-4d9c-97b8-21a932ef9785.png"
+    },
+    {
+      "fighter": "shark",
+      "phase": "block pose correction",
+      "prompt": "Edit reference1 ONLY: preserve these exact six defensive poses, their head positions, grips, foot placement and 3x2 grid. Reference2 is only the new anatomy/ink style. Redraw Shark from reference1 with the stronger shoulders/forearms, smaller adult head, substantial boots, and cleaner sculpted cel shadows of reference2. DO NOT copy ANY pose from reference2. Six blocking states, row-major: 1 stable guard contact, 2 stable guard settle, 3 pressured guard compressed, 4 pressured guard hold very compressed, 5 guard broken thrown back arms open, 6 guard broken stagger sinking forward. In first four poses, short dagger MUST be raised in front of the upper chest/face, NEVER hanging down. In row2col1 he is still guarding, NOT winding up a spear attack. In row2col2 arms open off balance, NOT raising spear behind head to attack. Preserve long white hair, teal mask, scale vest, bone jaw shoulder, rope belt, slate trousers and teal cloth, hooked spear and short pointed knife. All face right. Exact1536x1024 PNG,512x512cells, constant anatomical scale within sheet, fully contained silhouettes and weapons, baseline y490 in each row with clear gutters. True transparent background, NO floor shadows/halos/grid/text/effects. Crisp anime fighter sprites, only2tone hard edged planar shadows.",
+      "promptStatus": "exact",
+      "references": [
+        "art/archive/proportions-v1/shark-block.png",
+        "art/archive/proportions-v2-studies/shark-windup-before-gutters.png"
+      ],
+      "generatedFile": "exec-bb75393a-fe25-4a1f-b6e7-01917bcd793b.png"
+    },
+    {
+      "fighter": "fillet",
+      "phase": "heavy slash active correction",
+      "prompt": "Edit ONLY the Heavy Slash active pose in this sprite sheet: the FIRST CELL OF THE MIDDLE ROW, index 4, rectangle x=0..383,y=341..681 on a 1536x1024 canvas. Keep all the other eleven cells exactly unchanged, preserve atlas dimensions, positions, transparent background, colors, character identity, weapons and proportions. The current middle-row first pose has both knives held above her head and reads as a windup. Replace that ONE pose with its committed attacking follow-through: Fillet lunging slightly forward and bringing BOTH knives down and forward into a powerful diagonal overhead cut to the RIGHT. Maintain her broad planted stance with both soles near y=670, root near x=220. Strong twist in shoulders, elbows now extended diagonally forward, both hands around x=285..310, y=455..495; both blade tips near x=350..372,y=525..565. Knives must clearly threaten the space in FRONT of her torso at chest/waist height, not behind or above her own head. Preserve long athletic legs, mature small head, red shoulders/corset, torn ivory apron, big brown buckled boots. Keep pose anatomically coherent and readable, cel shaded crisp dark line art. At most one small hard-edged red diagonal blade trail within this cell, no circular effect and no impact flash. No part of the pose touches another cell. TRUE TRANSPARENT RGBA background, no frame labels, no text, no opaque background. Eleven untouched sprites plus ONE corrected heavy slash.",
+      "promptStatus": "exact",
+      "references": [
+        "art/archive/proportions-v2-studies/fillet-active-before-heavy-cut.png"
+      ],
+      "generatedFile": "exec-8ea4086e-e963-4898-9282-a5fd569a0b01.png"
+    }
+  ],
+  "status": "Iteration assets, not production-approved animation.",
+  "masters": [
+    {
+      "fighter": "fillet",
+      "generatedFile": "exec-18a69adb-8d68-4d12-ae8b-450e4fa1e200.png",
+      "references": [
+        "art/archive/proportions-v1/fillet-windup.png"
+      ],
+      "promptStatus": "reconstructed brief; original prompt text unavailable",
+      "brief": "Redraw the existing six windups with a smaller mature head, athletic long limbs, stronger shoulders/forearms, substantial boots and eight-head target anatomy. Preserve short brown hair, red butcher armor, ivory apron, two curved knives, clean cel shading, right-facing 3x2 atlas and transparent background."
+    },
+    {
+      "fighter": "shark",
+      "generatedFile": "exec-f6a7fa84-df4a-44db-864a-30e45f8931ba.png",
+      "references": [
+        "art/archive/proportions-v1/shark-windup.png"
+      ],
+      "promptStatus": "reconstructed brief; original prompt text unavailable",
+      "brief": "Redraw the existing six windups with a smaller mature head, athletic long limbs, broad muscular shoulders/forearms, substantial wrapped boots and eight-head target anatomy. Preserve white hair, teal mask/scale vest, bone jaw shoulder, rope belt, hooked spear and short blade, clean cel shading, right-facing 3x2 atlas and transparent background."
+    }
+  ],
+  "rejections": [
+    {
+      "file": "shark-windup-before-gutters.png",
+      "reason": "Bottom-row silhouettes spill across atlas boundaries; regenerated with gutters."
+    },
+    {
+      "file": "fillet-signatures-before-gutters.png",
+      "reason": "Active blades/smears cross cell borders; regenerated with gutters."
+    },
+    {
+      "file": "fillet-active-before-heavy-cut.png",
+      "reason": "Heavy Slash reads as windup and cannot support its forward hitbox; redrawn as a committed double cut."
+    },
+    {
+      "file": "shark-block-before-pose-fix.png",
+      "reason": "Copied windup gestures instead of defensive poses; redrawn from the original block reference."
+    }
+  ]
+}

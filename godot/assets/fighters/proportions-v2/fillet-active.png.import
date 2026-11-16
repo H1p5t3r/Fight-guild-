@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwed6owlklmov"
-path="res://.godot/imported/shark-windup.png-bd6976ace3be359990b08b4324ad7577.ctex"
+uid="uid://nrip3l2dpj6d"
+path="res://.godot/imported/fillet-active.png-83aeedbed76d5052b403611149edeb1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fighters/shark-windup.png"
-dest_files=["res://.godot/imported/shark-windup.png-bd6976ace3be359990b08b4324ad7577.ctex"]
+source_file="res://assets/fighters/proportions-v2/fillet-active.png"
+dest_files=["res://.godot/imported/fillet-active.png-83aeedbed76d5052b403611149edeb1e.ctex"]
 
 [params]
 

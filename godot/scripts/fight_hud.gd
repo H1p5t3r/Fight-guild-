@@ -79,9 +79,9 @@ static func portrait(character: int) -> AtlasTexture:
 static func stamp(canvas: CanvasItem, value: String, center: Vector2, font_size: int, accent: Color, alpha: float = 1.0, inverted: bool = false) -> void:
 	var available: float = canvas.size.x if canvas is Control else canvas.get_viewport_rect().size.x
 	var width := minf(available * 0.84, CombatTypography.FONT.get_string_size(value.to_upper(), HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x + 40)
-	CombatTypography.rule(canvas, center + Vector2(0, font_size * 0.67), width, accent, alpha * 0.8)
-	CombatTypography.word(canvas, value.to_upper(), center, font_size, available * 0.84,
-		accent if inverted else CombatTypography.PAPER, alpha, -0.045, 7 if inverted else 5)
+	CombatTypography.rule(canvas, center + Vector2(0, font_size * 0.67), width, accent, alpha * 0.38)
+	CombatTypography.echo_word(canvas, value.to_upper(), center, font_size, available * 0.84,
+		accent if inverted else CombatTypography.PAPER, alpha, 0.42)
 
 static func fighter_name(canvas: CanvasItem, value: String, point: Vector2, right: bool) -> void:
 	var font := CombatTypography.FONT

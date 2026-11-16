@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bn50c4cfjif3v"
-path="res://.godot/imported/fillet-signatures.png-605d49681789abe0c2fbd61c5d2f388c.ctex"
+uid="uid://cp2lbdkl8lcjw"
+path="res://.godot/imported/fillet-signatures.png-95017711f9a50463128f998755b5455b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fighters/fillet-signatures.png"
-dest_files=["res://.godot/imported/fillet-signatures.png-605d49681789abe0c2fbd61c5d2f388c.ctex"]
+source_file="res://assets/fighters/proportions-v2/fillet-signatures.png"
+dest_files=["res://.godot/imported/fillet-signatures.png-95017711f9a50463128f998755b5455b.ctex"]
 
 [params]
 

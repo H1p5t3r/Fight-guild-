@@ -16,7 +16,7 @@ Startup counts the first active tick: a 5f move has four windup ticks and can fi
 
 In **Development**, enable **Hitboxes**, pause and use **+1 frame** to inspect live collision. **Sprite review** covers basic/signature attack pairs, all block reactions, ready, walk, jump, hurt, crouch and the legacy guard pose. Toggle collision or left-facing display there. Each caption shows its hurtbox count out of four. The active preview uses the current edited basic move hitbox and displays its frame data.
 
-The Move editor exposes **Hitbox back**, **Hitbox front**, **Bottom** and **Height** in world pixels. Negative back offsets can extend behind the root. Startup has a hard 5f minimum; importing a faster value rejects the entire edit without changing the live move set. Schema-1 through schema-6 files migrate to schema 7, preserving edits and adding signature/movement defaults. Existing saves retain their old tuning/ranges; use **Restore default move set** to try the new starter kits.
+The Move editor exposes **Hitbox back**, **Hitbox front**, **Bottom** and **Height** in world pixels. Negative back offsets can extend behind the root. Startup has a hard 5f minimum; importing a faster value rejects the entire edit without changing the live move set. Schema-1 through schema-9 files migrate to schema 10, preserving edits; see the current combat-tuning migration rules. Existing saves retain their old tuning/ranges; use **Restore default move set** to try the new starter kits.
 
 ## Authoring and reproducibility
 
@@ -27,3 +27,5 @@ The Move editor exposes **Hitbox back**, **Hitbox front**, **Bottom** and **Heig
 Run `python scripts/generate-combat-data.py` after changing these sources. It regenerates `core/combat_data.h` and the stats reference using integer outward rounding. Rebuild the native extensions and WASM core afterward. `--check` rejects stale generated files in both test paths. Runtime collision uses only integer math, with no image sampling or engine physics, and the online fingerprint includes the compiled collision hash as well as move tuning.
 
 For a native contact sheet, run `bash scripts/godot.sh --script tests/collision_review.gd -- --character 0 --screenshot /absolute/path.png` with a display. Character indices 0–5 follow Anvil, Hammer, Smoke, Tapper, Shark and Fillet. This renders the original 24 poses with compiled geometry. `tests/signature_review.gd` renders the additional eight poses; add `--shark` for Shark, `--mirror` for left facing, or `--clean` to hide boxes.
+
+Fillet and Shark now use 64 v2 body fits with updated atlas roots and strike regions. All push dimensions remain stable; tucked-jump art uses the standing foot/root reference with the tucked soles 50px above it, preserving jump-over clearance. Both facings use the same compiled rectangles. The original v1 art and geometry are archived together for comparison.

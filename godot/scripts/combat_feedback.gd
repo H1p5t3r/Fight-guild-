@@ -36,20 +36,20 @@ func draw(canvas: CanvasItem) -> void:
 		var tint: Color = TINTS[p]
 		if card.number >= 2:
 			var base := Vector2(center_x, area.y - 175)
-			CombatTypography.word(canvas, str(card.number), base, card.font_size, area.x * 0.32,
-				CombatTypography.PAPER, card.alpha * 0.62, -0.07, 7)
-			CombatTypography.rule(canvas, Vector2(center_x, area.y - 101), 130, tint, card.alpha * 0.8)
+			CombatTypography.echo_word(canvas, str(card.number), base, card.font_size, area.x * 0.32,
+				CombatTypography.PAPER, card.alpha, 0.12)
+			CombatTypography.rule(canvas, Vector2(center_x, area.y - 101), 130, tint, card.alpha * 0.35)
 			CombatTypography.word(canvas, "HITS", Vector2(center_x + 40, area.y - 100), 23, 100, tint, card.alpha, -0.07, 2)
 		var cinematic: bool = int(impact.get("impactTime", 0)) > 0 and int(impact.get("impactActor", 0)) == p
 		if card.hit in [3, 4] and not cinematic:
 			var counter: bool = card.hit == 3
 			var notice_size: int = [25, 34, 44, 54][card.tier] if counter and card.tier >= 0 else 34
 			CombatTypography.word(canvas, "COUNTER" if counter else "PUNISH", Vector2(center_x, 182), notice_size,
-				area.x * 0.40, CombatTypography.COUNTER if counter else Color("ff8c70"), card.hit_alpha)
+				area.x * 0.40, CombatTypography.COUNTER if counter else Color("ff8c70"), card.hit_alpha * 0.7)
 		if card.reversal:
 			var detail := "FIRST FRAME" if card.input_age == 0 else "BUFFERED %df" % card.input_age
 			CombatTypography.word(canvas, "REVERSAL", Vector2(center_x, 232 if card.hit in [3, 4] else 182), 30,
-				area.x * 0.40, Color("b4f0df"), card.reversal_alpha)
+				area.x * 0.40, Color("b4f0df"), card.reversal_alpha * 0.7)
 			FightHud.centered(canvas, detail, Vector2(center_x, 263 if card.hit in [3, 4] else 216), 13,
 				Color(Color("b5d5d0"), card.reversal_alpha), 2)
 	if int(impact.get("impactTime", 0)) > 0:
@@ -59,9 +59,12 @@ func draw(canvas: CanvasItem) -> void:
 		var settle := 1.0 if reduced_motion else 1.0 + 0.10 * (1.0 - smoothstep(0.0, 8.0, age))
 		var size := int(clampf(area.x * (0.13 if large else 0.095), 62, 172) * settle)
 		var center := Vector2(area.x * 0.5, maxf(210, area.y * 0.46))
-		CombatTypography.rule(canvas, center + Vector2(0, size * 0.54), area.x * (0.77 if large else 0.57), CombatTypography.RED, opacity * 0.8)
-		CombatTypography.word(canvas, "COUNTER", center, size, area.x * (0.93 if large else 0.72),
-			CombatTypography.COUNTER, opacity, -0.055 if large else -0.035, 9 if large else 5)
+		# Two broken speed marks frame the open lettering instead of a solid banner.
+		for side in [-1, 1]:
+			var edge := center + Vector2(side * area.x * 0.30, size * 0.64)
+			CombatTypography.rule(canvas, edge, area.x * 0.13, CombatTypography.RED, opacity * 0.38)
+		CombatTypography.echo_word(canvas, "COUNTER", center, size, area.x * (0.93 if large else 0.72),
+			CombatTypography.COUNTER.lerp(CombatTypography.PAPER, 0.30), opacity, 0.24)
 
 func zoom() -> float:
 	if reduced_motion or int(impact.get("impactTime", 0)) <= 0 or int(impact.get("impactTier", 0)) < 3: return 1.0

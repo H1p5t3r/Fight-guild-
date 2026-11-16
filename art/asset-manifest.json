@@ -212,6 +212,186 @@
         700,
         700
       ]
+    },
+    {
+      "path": "art/archive/proportions-v1/fillet-active.png",
+      "bytes": 2086201,
+      "sha256": "480fb6429ad57644a2f10eafd694c8a43539638db9c1c1a8de2d234db6d1f953",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/proportions-v1/fillet-block.png",
+      "bytes": 2043076,
+      "sha256": "4709a94a5fb2da57e27f0c97fc1f8ee33c91859ae906a3a5ad1dbdb69c5d422a",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/proportions-v1/fillet-signatures.png",
+      "bytes": 2070958,
+      "sha256": "a255f5cd99a9736be42a5c98e2856028e19aa179fb2032aa953a027d8a37dcd7",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/proportions-v1/fillet-windup.png",
+      "bytes": 2012443,
+      "sha256": "399344c19cb41015b2116c555ac834a92048ed97484e3bb6725dc0406b5da43d",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/proportions-v1/shark-active.png",
+      "bytes": 2333407,
+      "sha256": "dd912ed33996ae6f945c77886ff706b1672fcaef1d651ea30978c654688564b4",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/proportions-v1/shark-block.png",
+      "bytes": 2302842,
+      "sha256": "269661d958086649557a203de78d01337d865e7d84c15be2f4907b1750541b26",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/proportions-v1/shark-signatures.png",
+      "bytes": 2160111,
+      "sha256": "79cc0ba2a0ca69189044c37b551992ce10bb4ddd30611453e5463a1244f7a972",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/proportions-v1/shark-windup.png",
+      "bytes": 2197643,
+      "sha256": "fca5ec82ac817ed4c1c676f3e8430c652ed7129ad21e450a85c3d35a1de26373",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/proportions-v2-studies/fillet-active-before-heavy-cut.png",
+      "bytes": 2393190,
+      "sha256": "b9c708c3cad5fb07731b6143a6603d6bc8829769f0cde57596ec33f404dfac0e",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/proportions-v2-studies/fillet-signatures-before-gutters.png",
+      "bytes": 2155563,
+      "sha256": "512864bd3ee13d44b08a5cd318949b5b070bad6659de018853f6126e592bc970",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/proportions-v2-studies/shark-block-before-pose-fix.png",
+      "bytes": 2326844,
+      "sha256": "fc6315a6269682f35d3953df0cc95bf99c06dc66e1968654258ad9cff3fe7c3b",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/proportions-v2-studies/shark-windup-before-gutters.png",
+      "bytes": 2290986,
+      "sha256": "8d69987d5ceb74dfaf560cd5221e34b4169fcf38d04c04c5144fc7960ab15c3b",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/proportions-v2/fillet-active.png",
+      "bytes": 2199170,
+      "sha256": "73ea8b6a4213e8b11341d70b9898079538b878bb1b2ec49255c2500459bdc0eb",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/proportions-v2/fillet-block.png",
+      "bytes": 2033047,
+      "sha256": "0c67964e9809eecd47f7f07e1669c18b09779040aeb8de3148a6d76a3ec8cafb",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/proportions-v2/fillet-signatures.png",
+      "bytes": 2032896,
+      "sha256": "0ef16679c855695300d79b561c41c939158791c8fd4d9a45e37019400807f619",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/proportions-v2/fillet-windup.png",
+      "bytes": 2057194,
+      "sha256": "9c0063ed076e43a0acf79044987b43c0f1b9bd0a09b0a62989568fd3ebff8292",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/proportions-v2/shark-active.png",
+      "bytes": 2444040,
+      "sha256": "a05d86fe7dab44c99fc04ea999989fdac972c9c75290ffb0170b0f57b54e40e3",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/proportions-v2/shark-block.png",
+      "bytes": 2323008,
+      "sha256": "e9e51f3229eaca96e4f7ebcbf13ae02f2cf0b7893e766732e85e2edc95cc8562",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/proportions-v2/shark-signatures.png",
+      "bytes": 2225583,
+      "sha256": "c358c970ac0e71db342312b258ba4d3944e05f0b28069eb9c78350530e3ddc93",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/proportions-v2/shark-windup.png",
+      "bytes": 2110664,
+      "sha256": "0ad0f01e6a198a78258ee90b5d3fb14f3ad1e237efe649702323afa0871e110a",
+      "dimensions": [
+        1536,
+        1024
+      ]
     }
   ]
 }

@@ -1,4 +1,4 @@
-# Sprite production direction — working contract v0.1
+# Sprite production direction — working contract v0.2
 
 The six generated sets are iteration studies. The goal is a repeatable character performing a directed action, not a new illustration of that character in every frame. These rules establish the target for the production pipeline in [the backlog](backlog.md); the current images still need a consistency review before becoming approved masters.
 
@@ -19,6 +19,16 @@ The six generated sets are iteration studies. The goal is a repeatable character
 | Shark | Lean diagonals; white hair, teal mask, bone jaw shoulder, long hook plus short blade | slate `#34454D`, bone `#D9D4BD`, teal `#258A99` |
 | Fillet | Compact angular silhouette; short brown hair, red shoulder/corset, ivory apron, two curved knives | charcoal `#393039`, ivory `#DDD0B1`, crimson `#A63242` |
 
+## Fillet and Shark proportion study v2
+
+The first proportion pass updates **32 poses per fighter**: 12 active/support, six windups, six block reactions and eight signature poses. These two fighters establish a new working target while the other four keep their existing sheets. Use the v2 windup/neutral references in `godot/assets/fighters/proportions-v2/`, not the older concept turnarounds, for subsequent sprite anatomy. They remain iteration studies awaiting play/art feedback.
+
+Target roughly 7.5–8 anatomical heads in an upright body, counting the skull rather than projecting hair. Use a smaller mature head, a clear ribcage/pelvis relationship, longer athletic limbs, strong shoulders and forearms, and substantial gloves/boots. Fillet keeps compact angular gestures and a red/ivory butcher silhouette; Shark keeps broad shoulders, long diagonals, teal/slate/bone masses and white hair. The head, hand and weapon scale must remain constant across actions; do not stretch a whole sprite vertically to simulate new proportions. Preserve the palette ramps above and one hard-edged shadow grouping per material.
+
+Every phase still normalizes to the same **150 world-pixel standing reference**. Its measured atlas `body_height`, per-pose root and local region are authoritative, including nonuniform cuts around wide weapons. The 64 body fits were authored independently of alpha, with three body regions plus at most one extension. All push dimensions remain stable; tucked-jump drawings lift the feet 50px above the standing foot/root reference, matching the existing air spacing. Fillet's Heavy Slash active was corrected to a forward double cut and fitted to its blades. Shark's moving hook remains a separate generated weapon layer.
+
+`proportions-v2/generation.json` records exact downstream generation/correction prompts, source files and rejection reasons; the two original master prompts are explicitly marked as reconstructed briefs. Original v1 art and collision metadata live in `art/archive/proportions-v1/`. Failed v2 layouts/poses live in `art/archive/proportions-v2-studies/`. Generated pixel files are preserved; changes to pivots, atlas bounds and collision are metadata. Redraws that cross atlas boundaries or substitute attack gestures for defensive poses must be repaired before promotion.
+
 ## Smear and effect grammar
 
 Use a shared vocabulary, not unrelated special effects for each image. A smear describes motion and must not obscure the hand, striking limb, or weapon silhouette.
@@ -33,7 +43,7 @@ Some first-pass active sheets include baked-in flashes, gradients, or inconsiste
 
 ## Current build contract
 
-Each fighter has a generated active/support atlas a generated windup atlas and a generated block-reaction atlas. Active/support: six columns by two rows, with idle, P, K, S, Hs, D, two walking poses, jump, hurt, guard, crouch. Windup: three columns by two rows, with a neutral scale reference, then P, K, S, Hs, D anticipations. Block reactions: three columns by two rows, row-major stable contact/settle, pressure contact/hold, guard-break contact/stagger. Stable and pressure maintain a closed silhouette, with pressure more compressed; broken guard opens the arms and chest. No baked-in impact effects in the defensive sheets. The contact pose settles after four unfrozen ticks; hitstop pauses it. PNG alpha, original generated files preserved; atlas regions, foot pivots and scale also anchor separately authored body/strike rectangles. Weapons and effects never extend hurtboxes. Regenerate compiled collision after geometry changes; see [collision rules](collision-rules.md).
+Each fighter has a generated active/support atlas a generated windup atlas and a generated block-reaction atlas. Active/support: four columns by three rows for Fillet/Shark v2, six columns by two rows for the other fighters, with idle, P, K, S, Hs, D, two walking poses, jump, hurt, guard, crouch. Windup: three columns by two rows, with a neutral scale reference, then P, K, S, Hs, D anticipations. Block reactions: three columns by two rows, row-major stable contact/settle, pressure contact/hold, guard-break contact/stagger. Stable and pressure maintain a closed silhouette, with pressure more compressed; broken guard opens the arms and chest. No baked-in impact effects in the defensive sheets. The contact pose settles after four unfrozen ticks; hitstop pauses it. PNG alpha, original generated files preserved; atlas regions, foot pivots and scale also anchor separately authored body/strike rectangles. Weapons and effects never extend hurtboxes. Regenerate compiled collision after geometry changes; see [collision rules](collision-rules.md).
 
 The renderer displays windup during startup and the active pose on active ticks, including any hitstop that freezes those ticks. It returns to a ready pose during recovery while the simulation continues to enforce recovery. These are pose changes, not completed animation clips. Slots without dedicated signature art temporarily reuse the corresponding button’s pose. Fillet and Shark add four dedicated windup/active pairs each, taking the catalog to 160 poses. Shark’s hook body and generated spear are separate layers; core endpoints direct weapon travel. The initial eight recovery ticks reuse the hook active body during weapon retraction; no new recovery drawing is implied. Every distinct directed action needs its own authored sequence later.
 

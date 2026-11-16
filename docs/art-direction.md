@@ -47,3 +47,5 @@ Each guide includes a hero pose, front/side/back studies, expressions, equipment
 - Are the roster's silhouettes and combat poses sufficiently distinct?
 
 Keep superseded images in `art/archive/`; promote changes into `art/characters/` deliberately and update the asset manifest.
+
+The current playable Fillet/Shark anatomy target is the [v2 sprite proportion study](sprite-production.md#fillet-and-shark-proportion-study-v2). Their older concept guides remain identity/equipment references, not the new body scale. The other four fighters await the same proportion pass.
