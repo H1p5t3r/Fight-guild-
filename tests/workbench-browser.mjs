@@ -41,6 +41,31 @@ try {
   await page.locator('#note-label').fill(nickname);
   await page.locator('#note-windup').fill('Shift onto the rear foot; lead with the knife.');
   assert.equal(await page.locator('#move-label').innerText(),nickname);assert.equal(await page.locator('#move-label img').count(),0);
+  // Reference photos are decoded/resized locally and embedded in the move JSON.
+  await page.locator('#reference-file').setInputFiles('art/characters/fillet.png');
+  await page.locator('.reference-card').waitFor();
+  await page.locator('[data-reference-phase]').selectOption('windup');
+  await page.locator('[data-reference-caption]').fill('Borrow the planted rear foot and torso twist.');
+  const photo=(await data(page))._moveWorkshop.notes['Fillet/5P'].references[0];assert.match(photo.src,/^data:image\/webp;base64,/);assert.equal(photo.phase,'windup');
+  await page.locator('.reference-thumbnail').click();assert.equal(await page.locator('#reference-dialog').isVisible(),true);
+  assert.equal(await page.locator('#reference-photo').evaluate(img=>img.naturalWidth<=1200&&img.naturalHeight<=1200&&img.naturalWidth>0),true);
+  await page.keyboard.press('Escape');await waitSaved(page);
+  await page.locator('.pose-references').screenshot({path:`${screenshotDir}/pose-reference.png`});
+  await page.locator('#reference-file').setInputFiles(['art/characters/fillet.png','art/characters/shark.png']);
+  await page.waitForFunction(()=>document.querySelectorAll('.reference-card').length===3);
+  assert.equal(await page.locator('#add-reference').isDisabled(),true);
+  await page.locator('#reference-file').setInputFiles('art/characters/fillet.png');
+  await page.waitForFunction(()=>document.getElementById('reference-status').textContent.includes('up to three'));
+  assert.equal(await page.locator('.reference-card').count(),3);
+  await page.locator('.reference-remove').last().click();await page.locator('.reference-remove').last().click();
+  assert.equal(await page.locator('.reference-card').count(),1);
+  await page.locator('.reference-remove').click();assert.equal(await page.locator('.reference-card').count(),0);
+  await page.locator('#undo').click();assert.equal((await data(page))._moveWorkshop.notes['Fillet/5P'].references[0].src,photo.src);
+  const beforeBadPhoto=await data(page);
+  await page.locator('#reference-file').setInputFiles({name:'bad.png',mimeType:'image/png',buffer:Buffer.from('not an image')});
+  await page.waitForFunction(()=>document.getElementById('reference-status').textContent.includes('could not be read'));
+  assert.deepEqual(await data(page),beforeBadPhoto);
+  await page.reload();await page.locator('.reference-card').waitFor();assert.equal((await data(page))._moveWorkshop.notes['Fillet/5P'].references[0].src,photo.src);
   await page.locator('#fighter').selectOption('4');await page.locator('[data-move="28"]').click();
   await page.locator('#tab-hit').click();await page.locator('#field-airLaunch').fill('13');
   await page.locator('#tab-routes').click();await page.locator('#field-normalRoutes-unified').uncheck();await page.locator('#field-normalRoutes-0').check();
@@ -61,6 +86,7 @@ try {
   // Reset is reversible, and art notes are kept.
   await page.locator('#fighter').selectOption('5');await page.locator('#reset').click();
   assert.equal((await data(page)).characters[5].moves[0].startup,5);assert.equal((await data(page))._moveWorkshop.notes['Fillet/5P'].label,nickname);
+  assert.equal((await data(page))._moveWorkshop.notes['Fillet/5P'].references[0].src,photo.src);
   await page.locator('#undo').click();assert.equal((await data(page)).characters[5].moves[0].startup,7);
   // Search/filter controls and keyboard tab navigation remain usable.
   await page.locator('#search').fill('236S');assert.equal(await page.locator('.move-row').count(),3);await page.locator('#search').fill('');
@@ -76,6 +102,9 @@ try {
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${label} horizontal overflow`);
     await page.screenshot({path:`${screenshotDir}/${label}.png`,fullPage:true});
   }
+  await page.locator('#fighter').selectOption('5');await page.locator('#tab-art').click();
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'Photo-reference mobile overflow');
+  await page.screenshot({path:`${screenshotDir}/pose-reference-mobile.png`,fullPage:true});
   await page.locator('#help').click();assert.equal(await page.locator('#help-dialog').isVisible(),true);await page.keyboard.press('Escape');
   // Storage restrictions still allow downloads, with a clear unsaved warning.
   const denied=await browser.newContext();await denied.addInitScript(()=>{Storage.prototype.setItem=function(){throw new DOMException('Full','QuotaExceededError');};});
@@ -92,6 +121,6 @@ try {
   await recoveryPage.locator('[data-move="1"]').click();assert.equal(await recoveryPage.evaluate(key=>localStorage.getItem(key),STORAGE),'broken-but-recoverable');
   await recoveryPage.getByRole('button',{name:'Start a new draft',exact:true}).click();assert.equal(await recoveryPage.locator('#export').isEnabled(),true);
   await recovery.close();await context.close();
-  assert.deepEqual(errors,[]);assert.deepEqual(requests.filter(u=>!u.startsWith('data:')&&u!==url),[],'No external or secondary runtime resources');
-  console.log('PASS browser edits, hitbox dragging, JSON round trip, autosave, atomic imports, undo/reset, storage recovery and responsive layouts; no runtime network resources.');
+  assert.deepEqual(errors,[]);assert.deepEqual(requests.filter(u=>!u.startsWith('data:')&&!u.startsWith('blob:')&&u!==url),[],'No external runtime resources');
+  console.log('PASS browser edits, hitbox dragging, embedded pose photos, JSON round trip, autosave, atomic imports, undo/reset, storage recovery and responsive layouts; no external runtime resources.');
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

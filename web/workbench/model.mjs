@@ -1,5 +1,6 @@
 import {FIELDS, MOVE_IDS, CHARACTERS} from '../engine.mjs';
 import {SPECS, ART_FIELDS} from './specs.mjs';
+import {validateReferences,MAX_REFERENCE_TOTAL,MAX_IMPORT_BYTES,REFERENCE_PHASES} from './references.mjs';
 export {FIELDS,MOVE_IDS,CHARACTERS};
 export const clone = value => structuredClone(value);
 export const META = '_moveWorkshop';
@@ -29,11 +30,15 @@ export function validate(data, pack) {
   });
   if(data[META]!==undefined) {
     if(!record(data[META])||data[META].version!==1||!record(data[META].notes)) throw new Error('Artwork notes are not in the supported workshop format.');
+    let referenceBytes=0;
     for(const notes of Object.values(data[META].notes)) {
       if(!record(notes)) throw new Error('Malformed artwork notes.');
       for(const [key,,,max] of ART_FIELDS) if(notes[key]!==undefined&&(typeof notes[key]!=='string'||notes[key].length>max)) throw new Error(`Artwork note ${key} is too long or is not text.`);
+      if(notes.references!==undefined)referenceBytes+=validateReferences(notes.references);
     }
+    if(referenceBytes>MAX_REFERENCE_TOTAL)throw new Error('This draft has reached its 12 MB pose-reference allowance. Remove a reference before adding another.');
   }
+  if(new TextEncoder().encode(JSON.stringify(data,null,2)).byteLength>MAX_IMPORT_BYTES)throw new Error('The move file must fit within 32 MB.');
   return data;
 }
 export function parseField(key, input, limit) {
@@ -80,19 +85,27 @@ export class Workshop {
     try {validate(this.data,this.pack);} catch(error){this.data=before;throw error;}
     return this.remember(before,`${c}/${m}/${key}`);
   }
-  setNote(c,m,key,value){
+  setNote(c,m,key,value,group=`note/${c}/${m}/${key}`){
     const before=this.snapshot();
     this.data[META]??={version:1,notes:{}};
     this.data[META].notes[this.key(c,m)]??={};
     this.data[META].notes[this.key(c,m)][key]=value;
     try {validate(this.data,this.pack);} catch(error){this.data=before;throw error;}
-    return this.remember(before,`note/${c}/${m}/${key}`);
+    return this.remember(before,group);
   }
+  addReferences(c,m,references){return this.setNote(c,m,'references',[...(this.note(c,m).references||[]),...clone(references)],'');}
+  editReference(c,m,id,key,value){
+    if(!['phase','caption'].includes(key))throw new Error('Unsupported reference edit.');
+    const refs=clone(this.note(c,m).references||[]),ref=refs.find(r=>r.id===id);
+    if(!ref)throw new Error('This pose reference is no longer in the draft.');
+    ref[key]=value;return this.setNote(c,m,'references',refs,`reference/${c}/${m}/${id}/${key}`);
+  }
+  removeReference(c,m,id){return this.setNote(c,m,'references',(this.note(c,m).references||[]).filter(r=>r.id!==id),'');}
   import(data){const next=clone(validate(data,this.pack)),before=this.snapshot();this.data=next;this.remember(before);}
   resetMove(c,m){const before=this.snapshot();this.data.characters[c].moves[m]=clone(this.pack.defaults.characters[c].moves[m]);this.remember(before);}
   undo(){if(!this.undoStack.length)return false;const item=this.undoStack.pop();this.redoStack.push({data:this.snapshot()});this.data=item.data;return true;}
   redo(){if(!this.redoStack.length)return false;const item=this.redoStack.pop();this.undoStack.push({data:this.snapshot(),group:'',time:0});this.data=item.data;return true;}
-  changed(c,m){return FIELDS.some(k=>this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
+  changed(c,m){return FIELDS.some(k=>this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||!!this.note(c,m).references?.length||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
   changes(){return this.data.characters.flatMap((c,i)=>c.moves.map((_,m)=>({c:i,m}))).filter(p=>this.changed(p.c,p.m));}
   export(){return JSON.stringify(validate(this.data,this.pack),null,2);}
   brief(){
@@ -103,6 +116,11 @@ export class Workshop {
         `Hitbox: back ${move.hitboxBack/100}px, front ${move.reach/100}px, bottom ${move.bottom/100}px, height ${move.height/100}px. Knockdown: ${['none','soft','hard'][move.knockdown]}.`,
         `Ground / air / block push: ${move.pushback/100} / ${move.airPushback/100} / ${move.blockPushback/100}px. Ground / air launch: ${move.launch/100} / ${move.airLaunch/100}px per frame.`, '');
       for(const [key,label] of ART_FIELDS.slice(1)) if(note[key]?.trim())lines.push(`**${label}**`,note[key].trim(),'');
+      if(note.references?.length){
+        lines.push('**Pose references**','Image files are embedded in the companion JSON.','');
+        for(const ref of note.references)lines.push(`- ${REFERENCE_PHASES.find(([id])=>id===ref.phase)[1]} · ${ref.name}${ref.caption?' — '+ref.caption:''}`);
+        lines.push('');
+      }
     }
     lines.push('Art rules: use windup and active poses first; weapons have no hurtboxes; use no more than four body hurtboxes per pose.');
     return lines.join('\n');

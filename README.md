@@ -14,7 +14,7 @@ Menus share the supplied **Guild Ball** visual language: Barlow Condensed, charc
 
 ## Play or edit
 
-For browser-only attack tuning on a work PC, download **FightGuild-Move-Workshop.html** from the **FightGuild-Move-Workshop** Actions artifact. It includes the artwork, saves a browser draft and exports JSON for the Godot editor. No game install is needed. [Move Workshop guide](docs/move-workshop.md) covers editing, backups, art notes and building the page.
+For browser-only attack tuning on a work PC, download **FightGuild-Move-Workshop.html** from the **FightGuild-Move-Workshop** Actions artifact. It includes the artwork, saves a browser draft and exports JSON for the Godot editor. Art briefs can include pose-reference photos and captions, embedded in the same JSON. No game install is needed. [Move Workshop guide](docs/move-workshop.md) covers editing, backups, art notes and building the page.
 
 Download the Windows/Linux ZIP from this branch's successful GitHub Actions artifacts, extract the whole folder and run its executable. For the editable project archive, import `godot/project.godot` in Godot 4.6.3. [Native play guide](docs/play-native.md) covers controls, saves, editing and direct online play.
 

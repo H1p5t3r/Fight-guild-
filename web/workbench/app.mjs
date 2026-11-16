@@ -1,10 +1,11 @@
 import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,inputName,geometryWarnings,CHARACTERS,MOVE_IDS,clone,META} from './model.mjs';
 import {SPECS,GROUPS,TABS,ART_FIELDS,GUILDS,COLORS,KINDS} from './specs.mjs';
 import {Preview} from './preview.mjs';
+import {prepareReference,MAX_REFERENCES,MAX_IMPORT_BYTES,REFERENCE_PHASES} from './references.mjs';
 const $=id=>document.getElementById(id),pack=globalThis.FIGHT_WORKSHOP_DATA;
 const STORAGE='fight-guild.move-workshop.v1';
 let model,character=5,slot=0,tab='timing',filter='all',frame=5,playing=false,lastTick=0,saveTimer,toastTimer,dragBefore;
-let storageOkay=true,savePending=false,unexported=false,bootLocked=false,recoveryRaw='';
+let storageOkay=true,savePending=false,unexported=false,bootLocked=false,recoveryRaw='',referenceBusy=false;
 const errors=new Map();
 function el(tag,attributes={},text){const node=document.createElement(tag);for(const [key,value]of Object.entries(attributes)){if(key==='class')node.className=value;else if(key==='checked')node.checked=value;else node.setAttribute(key,value);}if(text!==undefined)node.textContent=text;return node;}
 function announce(text){$('toast').textContent=text;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,4200);}
@@ -19,12 +20,13 @@ function save(){
   refreshActions();
 }
 function scheduleSave(){unexported=true;savePending=true;$('save-status').textContent='Saving draft…';clearTimeout(saveTimer);saveTimer=setTimeout(save,250);}
-function validBeforeLeaving(){if(bootLocked){announce('Recover your saved draft or start a new one first.');return false;}if(!errors.size)return true;announce('Fix the highlighted value before changing moves or downloading.');$(errors.keys().next().value)?.focus();return false;}
+function validBeforeLeaving(){if(referenceBusy){announce('The pose reference is still being prepared.');return false;}if(bootLocked){announce('Recover your saved draft or start a new one first.');return false;}if(!errors.size)return true;announce('Fix the highlighted value before changing moves or downloading.');$(errors.keys().next().value)?.focus();return false;}
 function move(){return model.move(character,slot);}
 function fieldError(key,message){const id='field-'+key,node=$(id);if(message)errors.set(id,message);else errors.delete(id);node?.setAttribute('aria-invalid',String(!!message));const messageNode=$('error-'+key);if(messageNode)messageNode.textContent=message||'';refreshActions();}
 function refreshActions(){
-  $('export').disabled=bootLocked||errors.size>0;$('undo').disabled=bootLocked||(!model.undoStack.length&&!errors.size);$('redo').disabled=bootLocked||!model.redoStack.length||errors.size>0;
-  $('reset').disabled=bootLocked||!Object.keys(SPECS).some(key=>move()[key]!==pack.defaults.characters[character].moves[slot][key]);
+  $('export').disabled=bootLocked||referenceBusy||errors.size>0;$('undo').disabled=bootLocked||referenceBusy||(!model.undoStack.length&&!errors.size);$('redo').disabled=bootLocked||referenceBusy||!model.redoStack.length||errors.size>0;
+  $('reset').disabled=bootLocked||referenceBusy||!Object.keys(SPECS).some(key=>move()[key]!==pack.defaults.characters[character].moves[slot][key]);
+  $('import').disabled=referenceBusy;$('fighter').disabled=bootLocked||referenceBusy;
   if(errors.size){$('save-status').textContent='Check the highlighted value';$('save-dot').style.background='var(--danger)';}
 }
 function syncSummary(){
@@ -95,12 +97,45 @@ function section(group){
   const node=el('section',{class:'form-section','aria-label':group.title});node.append(el('h2',{},group.title),el('p',{},group.intro));const grid=el('div',{class:'field-grid'});
   for(const key of group.fields){const type=SPECS[key].type;grid.append(type==='number'?numberField(key):type==='select'?selectField(key):type==='flag'?flagField(key):maskField(key));}node.append(grid);return node;
 }
+function referenceSection(){
+  const section=el('section',{class:'pose-references field wide','aria-labelledby':'reference-title'}),refs=model.note(character,slot).references||[];
+  const heading=el('div',{class:'reference-heading'});heading.append(el('h3',{id:'reference-title'},'Pose references'),el('span',{class:'reference-count'},`${refs.length} / ${MAX_REFERENCES}`));
+  section.append(heading,el('p',{},'Add a photo or pose sketch, then describe what to borrow from it. Images are included in Download JSON.'));
+  const gallery=el('div',{class:'reference-gallery'});
+  for(const ref of refs){
+    const card=el('article',{class:'reference-card','data-reference':ref.id}),view=el('button',{type:'button',class:'reference-thumbnail','aria-label':`Enlarge pose reference: ${ref.name}`});
+    const img=el('img',{src:ref.src,alt:ref.caption||ref.name});view.append(img);
+    view.onclick=()=>{const current=(model.note(character,slot).references||[]).find(r=>r.id===ref.id);if(!current)return;$('reference-photo').src=current.src;$('reference-photo').alt=current.caption||current.name;$('reference-photo-caption').textContent=current.caption||current.name;$('reference-dialog').showModal();};
+    const phaseId='reference-phase-'+ref.id,captionId='reference-caption-'+ref.id,phase=el('select',{id:phaseId,'data-reference-phase':ref.id}),caption=el('textarea',{id:captionId,rows:'2',maxlength:'1000',placeholder:'e.g. Borrow the shoulder angle and rear-foot placement.','data-reference-caption':ref.id});
+    phase.append(...REFERENCE_PHASES.map(([value,label])=>el('option',{value},label)));phase.value=ref.phase;caption.value=ref.caption;
+    const update=(key,value)=>{try{model.editReference(character,slot,ref.id,key,value);syncSummary();listMoves();scheduleSave();img.alt=key==='caption'?value||ref.name:img.alt;}catch(error){announce(error.message);const current=model.note(character,slot).references.find(r=>r.id===ref.id);phase.value=current.phase;caption.value=current.caption;}};
+    phase.onchange=()=>update('phase',phase.value);caption.oninput=()=>update('caption',caption.value);
+    const remove=el('button',{type:'button',class:'reference-remove','aria-label':`Remove pose reference: ${ref.name}`},'Remove photo');remove.onclick=()=>{if(referenceBusy)return;model.removeReference(character,slot,ref.id);renderForm();syncSummary();listMoves();scheduleSave();announce('Pose reference removed. Undo is available.');};
+    card.append(view,el('span',{class:'reference-name',title:ref.name},ref.name),el('label',{for:phaseId},'Use for'),phase,el('label',{for:captionId},'Pose notes'),caption,remove);gallery.append(card);
+  }
+  if(refs.length)section.append(gallery);
+  const file=el('input',{id:'reference-file',type:'file',accept:'image/png,image/jpeg,image/webp',multiple:'',hidden:''}),add=el('button',{id:'add-reference',type:'button',class:'reference-add'},'+ Add pose photo');add.disabled=refs.length>=MAX_REFERENCES;add.onclick=()=>file.click();
+  const status=el('p',{id:'reference-status',class:'reference-status',role:'status'});
+  file.onchange=async()=>{
+    const files=Array.from(file.files||[]);if(!files.length||referenceBusy)return;
+    if(refs.length+files.length>MAX_REFERENCES){status.textContent='Choose up to three references for this move.';file.value='';return;}
+    referenceBusy=true;add.disabled=true;refreshActions();section.querySelectorAll('select,textarea,.reference-remove').forEach(node=>node.disabled=true);status.textContent='Preparing your pose reference…';
+    try{
+      const prepared=[];for(const photo of files)prepared.push(await prepareReference(photo));
+      model.addReferences(character,slot,prepared);scheduleSave();announce(`${prepared.length===1?'Pose reference':'Pose references'} added. Download JSON includes the image${prepared.length===1?'':'s'}.`);
+    }catch(error){status.textContent=error.message;announce(error.message);}
+    finally{referenceBusy=false;refreshActions();add.disabled=(model.note(character,slot).references||[]).length>=MAX_REFERENCES;section.querySelectorAll('select,textarea,.reference-remove').forEach(node=>node.disabled=false);file.value='';}
+    if((model.note(character,slot).references||[]).length>refs.length){renderForm();syncSummary();listMoves();}
+  };
+  section.append(add,file,el('small',{class:'reference-help'},'JPG, PNG or WebP · up to 3 per move. A smaller copy is embedded; your original stays unchanged.'),status);return section;
+}
 function artForm(){
   const container=el('section',{class:'form-section'});container.append(el('h2',{},'Give the attack a direction.'),el('p',{class:'art-intro'},'These notes travel with your JSON. Use them to brief new windup and active poses after the move feels right.'));
   const grid=el('div',{class:'field-grid'}),note=model.note(character,slot);
   for(const [key,label,placeholder,max] of ART_FIELDS){
     const id='note-'+key,field=el('div',{class:'field wide'}),input=el(key==='label'?'input':'textarea',{id,...(key==='label'?{type:'text'}:{rows:'3'}),placeholder,maxlength:max});input.value=note[key]||'';field.append(el('label',{for:id},label),input);grid.append(field);
-    input.addEventListener('input',()=>{model.setNote(character,slot,key,input.value);syncSummary();if(key==='label')listMoves();scheduleSave();});
+    input.addEventListener('input',()=>{try{model.setNote(character,slot,key,input.value);syncSummary();if(key==='label')listMoves();scheduleSave();}catch(error){input.value=model.note(character,slot)[key]||'';announce(error.message);}});
+    if(key==='intent')grid.append(referenceSection());
   }
   const exportBrief=el('button',{type:'button',class:'art-export'},'Download art brief');exportBrief.addEventListener('click',()=>download(model.brief(),'FightGuild-art-brief-'+date()+'.md','text/markdown;charset=utf-8'));container.append(grid,exportBrief);return container;
 }
@@ -174,7 +209,7 @@ $('reset').onclick=()=>{errors.clear();model.resetMove(character,slot);stop();fr
 $('import').onclick=()=>{if(validBeforeLeaving())$('import-file').click();};
 $('import-file').onchange=async event=>{
   const file=event.target.files[0];if(!file)return;
-  try{if(file.size>5*1024*1024)throw new Error('Choose a move JSON file smaller than 5 MB.');const data=JSON.parse(await file.text());model.import(data);bootLocked=false;$('form').inert=false;$('fighter').disabled=false;errors.clear();stop();frame=move().startup;render();scheduleSave();announce('Move data imported. Undo returns to your previous draft.');}
+  try{if(file.size>MAX_IMPORT_BYTES)throw new Error('Choose a move JSON file smaller than 32 MB.');const data=JSON.parse(await file.text());model.import(data);bootLocked=false;$('form').inert=false;$('fighter').disabled=false;errors.clear();stop();frame=move().startup;render();scheduleSave();announce('Move data imported. Undo returns to your previous draft.');}
   catch(error){announce('Import stopped: '+error.message);}finally{event.target.value='';}
 };
 $('export').onclick=()=>{if(!validBeforeLeaving())return;try{download(model.export(),'FightGuild-moves-'+date()+'.json','application/json');save();unexported=false;announce('JSON downloaded. Import it in the Godot move editor or send it back for the sprite pass.');}catch(error){announce(error.message);}};
@@ -182,10 +217,12 @@ $('frame').addEventListener('input',()=>{stop();frame=Number($('frame').value);s
 $('play').onclick=()=>{playing=!playing;lastTick=0;$('play').setAttribute('aria-label',playing?'Pause move preview':'Play move preview');$('play').title='Preview plays at half speed';syncPreview();};
 for(const key of ['hit','hurt','push','art'])$('show-'+key).onchange=()=>{preview.options[key]=$('show-'+key).checked;preview.draw();};
 $('help').onclick=()=>{$('help-dialog').showModal();};$('close-help').onclick=()=>{$('help-dialog').close();};
+$('close-reference').onclick=()=>$('reference-dialog').close();
+$('reference-dialog').addEventListener('close',()=>{$('reference-photo').removeAttribute('src');});
 $('help-dialog').addEventListener('click',event=>{if(event.target===$('help-dialog')){const r=event.target.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)event.target.close();}});
 window.addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='s'){event.preventDefault();$('export').click();}if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='z'&&!['INPUT','TEXTAREA','SELECT'].includes(event.target.tagName)){event.preventDefault();$(event.shiftKey?'redo':'undo').click();}});
 window.addEventListener('pagehide',()=>{if(savePending)save();});
-window.addEventListener('beforeunload',event=>{if(errors.size||!storageOkay&&unexported){event.preventDefault();event.returnValue='';}});
+window.addEventListener('beforeunload',event=>{if(referenceBusy||errors.size||!storageOkay&&unexported){event.preventDefault();event.returnValue='';}});
 window.addEventListener('storage',event=>{if(event.key===STORAGE&&event.newValue){banner('This draft was saved in another tab. Download your current JSON before switching tabs to keep both versions.');}});
 // Read-only inspection used by browser integration checks and JSON round trips.
 globalThis.moveWorkshop={data:()=>model.snapshot(),selection:()=>({character,slot,tab}),version:pack.defaults.coreVersion};

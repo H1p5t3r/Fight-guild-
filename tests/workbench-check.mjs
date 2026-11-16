@@ -4,6 +4,7 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {Engine,FIELDS,MOVEMENT_FIELDS,INPUT} from '../web/engine.mjs';
 import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,attackBoxes,META} from '../web/workbench/model.mjs';
 import {SPECS,GROUPS} from '../web/workbench/specs.mjs';
+import {validateReferences,MAX_REFERENCE_DATA} from '../web/workbench/references.mjs';
 
 const pack=JSON.parse(await readFile(new URL('../build/workbench-pack.json',import.meta.url),'utf8'));
 const wasm=await WebAssembly.compile(await readFile(new URL('../web/generated/fight.wasm',import.meta.url)));
@@ -71,6 +72,27 @@ test('Undo, redo, reset and import keep independent art notes and unknown data',
   const next=w.snapshot();next.futureMetadata={kept:true};next.characters[3].moves[8].futureField=5;w.import(next);
   assert.deepEqual(JSON.parse(w.export()).futureMetadata,{kept:true});assert.equal(JSON.parse(w.export()).characters[3].moves[8].futureField,5);
   assert.match(w.brief(),/literal art notes/);w.undo();assert.equal(w.snapshot().futureMetadata,undefined);
+});
+
+test('Pose references travel with JSON, count as edits and survive stat resets and history',()=>{
+  const w=new Workshop(pack),png='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScLbtAAAAABJRU5ErkJggg==';
+  const ref={id:'pose-1',phase:'windup',caption:'Rear foot planted',name:'stance.png',src:png};
+  w.addReferences(5,0,[ref]);assert.equal(w.changed(5,0),true);assert.equal(w.changes().length,1);
+  w.editReference(5,0,'pose-1','phase','active');w.editReference(5,0,'pose-1','caption','Long arm, square hips');
+  const imported=new Workshop(pack,JSON.parse(w.export()));assert.deepEqual(imported.note(5,0).references,w.note(5,0).references);
+  assert.equal(imported.note(4,0).references,undefined);assert.match(w.brief(),/Active · stance.png — Long arm, square hips/);assert.match(w.brief(),/embedded in the companion JSON/);
+  w.change(5,0,'startup',7);w.resetMove(5,0);assert.equal(w.note(5,0).references.length,1);
+  w.removeReference(5,0,'pose-1');assert.equal(w.note(5,0).references.length,0);w.undo();assert.equal(w.note(5,0).references[0].src,png);
+  w.redo();assert.equal(w.note(5,0).references.length,0);
+  const before=imported.snapshot();
+  const invalid=[{...ref,id:'pose-2',src:'https://example.com/reference.png'}, {...ref,id:'pose-2',src:'data:image/svg+xml;base64,PHN2Zz4='},
+    {...ref,id:'pose-2',src:'data:image/png;base64,PHN2Zz4='}, {...ref,id:'pose-2',phase:'unknown'}, {...ref,id:'pose-2',caption:'x'.repeat(1001)},
+    {...ref,id:'pose-2',src:png+'x'.repeat(MAX_REFERENCE_DATA)},ref];
+  for(const image of invalid){assert.throws(()=>imported.addReferences(5,0,[image]));assert.deepEqual(imported.snapshot(),before);}
+  assert.throws(()=>imported.addReferences(5,0,[{...ref,id:'2'},{...ref,id:'3'},{...ref,id:'4'}]));assert.deepEqual(imported.snapshot(),before);
+  const broken=structuredClone(before);broken[META].notes['Fillet/5P'].references[0].src='data:text/html;base64,PHN2Zz4=';
+  assert.throws(()=>imported.import(broken));assert.deepEqual(imported.snapshot(),before);
+  assert.equal(validateReferences([ref]),png.length);
 });
 
 test('Straight, throw and both diagonal hook previews use the core collision geometry',async()=>{

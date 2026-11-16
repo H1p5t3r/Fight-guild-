@@ -20,8 +20,9 @@ server, WebAssembly or network access is needed to use the downloaded page.
    **Development** mode, choose **Import** in the move editor and select the
    downloaded JSON. The import applies the move set and resets the match.
    Choose **Save locally** in the game to keep those values for the next launch.
-5. You can also attach that JSON in the chat. The move values and **Art brief**
-   notes provide a brief for future sprite and hit/block-effect revisions.
+5. You can also attach that JSON in the chat. The move values, **Art brief**
+   notes and embedded pose photos provide a brief for future sprite and
+   hit/block-effect revisions.
 
 The page autosaves on the current browser/device when storage is available.
 Drafts do not sync across PCs. Clearing browser data, using a private window or
@@ -44,6 +45,18 @@ downloaded for recovery before explicitly starting a new one.
 - Per-move nickname, gameplay intent, windup, active/weapon-path, hit/block
   effects, and later follow-through/recovery notes. **Download art brief** also
   produces a readable Markdown companion.
+- **Pose references** in Art brief accepts up to three JPG, PNG or WebP photos
+  or pose sketches per move. Tag each as General pose, Windup or Active, and
+  add a caption describing what to borrow. Click a thumbnail to enlarge it.
+  Removing a photo is undoable; resetting move stats keeps the references.
+
+Photos are embedded directly in **Download JSON**, so importing that file on
+another PC restores the images, labels and captions. Adding a file does not
+upload it anywhere. The browser makes a WebP copy up to 1200 pixels along the
+longest edge; the source file stays unchanged. Source photos may be up to 20 MB.
+The draft allows 12 MB of embedded reference data in total, and move JSON imports
+support files up to 32 MB. Large photo drafts may exceed browser storage; use
+Download JSON when the storage warning appears.
 
 Undo/redo and per-move reset are available. Reset restores that move's stats
 while retaining its art notes. A successful import is also undoable.
@@ -79,10 +92,11 @@ are rejected before changing the draft. An older save can first be imported
 and re-exported by the current Godot build, which owns the legacy migrations.
 Unknown JSON properties are preserved by the workshop.
 
-Art notes are stored under `_moveWorkshop` alongside the ordinary game data.
+Art notes and pose references are stored under `_moveWorkshop` alongside the ordinary game data.
 Godot accepts the file and ignores that extra metadata. **Keep the workshop
-JSON or Markdown brief:** a subsequent export from Godot contains gameplay data
-only and does not carry the art notes back out.
+JSON:** a subsequent export from Godot contains gameplay data only and does not
+carry the art notes or photos back out. The Markdown brief lists reference names,
+phases and captions; the images themselves remain embedded in the JSON.
 
 ## Developer build and checks
 
@@ -109,7 +123,8 @@ JavaScript support.
 
 Tests cover core field limits, exact collision geometry, atomic imports,
 roster/rule preservation, fixed-point units, history, real browser JSON
-downloads, autosave, storage failure/recovery and responsive layouts. Run the
+downloads with embedded images, photo removal/undo and validation, autosave,
+storage failure/recovery and responsive layouts. Run the
 native interop check against the browser test's actual downloaded file:
 
 ```bash

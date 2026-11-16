@@ -22,6 +22,7 @@ See [combat tuning](combat-tuning.md) for defaults, migration rules and verified
 Requested scope: make repeatable character images performing directed actions, with one shared art language. See [the working sprite contract](sprite-production.md).
 
 - [x] Add a standalone browser move workshop for office PCs: existing sprite/hitbox preview, attack tuning, Godot JSON exchange and per-move art/effect notes. See [Move Workshop](move-workshop.md). The full generation/approval pipeline below remains to be built.
+- [x] Attach per-move pose-reference photos with captions and Windup/Active labels; preserve the image data in workshop JSON exports, browser drafts and undo history.
 
 - [x] Redraw Fillet/Shark first with mature athletic proportions; integrate all 64 current poses, refit body/strike regions, preserve old versions and record generation corrections.
 - [ ] Review the new Fillet/Shark studies in motion, approve their anatomical/palette masters, then apply the same proportion rules to Anvil, Hammer, Smoke and Tapper.
