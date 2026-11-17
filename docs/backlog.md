@@ -26,10 +26,11 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Edit attack hurtboxes in the browser by phase and body region, with a four-box limit, isolated move profiles, native JSON import/save, collision checks and rollback compatibility.
 
 - [x] Redraw Fillet/Shark first with mature athletic proportions; integrate all 64 current poses, refit body/strike regions, preserve old versions and record generation corrections.
+- [x] Remake Fillet/Shark model references and four windup/active signature pairs per fighter under a shared page/style system; record equipment/palette rules, editor-data handoff, exact prompts, archives and downloadable PDFs. See [reference 03](fillet-shark-references.md). These are reference candidates; runtime replacement and user approval remain separate work.
 - [ ] Review the new Fillet/Shark studies in motion, approve their anatomical/palette masters, then apply the same proportion rules to Anvil, Hammer, Smoke and Tapper.
 
 - [ ] Review and approve a common style master: outline weights, cel shadows, lighting, material ramps, camera and scale. Establish exact palette swatches and silhouette landmarks for all six current fighters before adding characters.
-- [ ] Create a reusable character specification: neutral model sheet, proportions, face, costume landmarks, equipment geometry/handedness, palette, allowed deformation and prohibited drift. Use the same specification to onboard future characters.
+- [ ] Complete and approve the reusable character specification across the roster: neutral model sheet, proportions, face, costume landmarks, equipment geometry/handedness, palette, allowed deformation and prohibited drift. The [Fillet/Shark draft](fillet-shark-references.md) supplies the first two model/action sets; use the same specification to onboard future characters.
 - [ ] Create a structured action brief and generation template with pose direction, planted foot, root/contact anchors, weapon path, timing, phase and approved references. Save prompt/reference provenance and review decisions with every revision.
 - [ ] Establish the common smear library: tapered crescents, thrust wedges, blunt arcs, smoke lobes. Separate effects from the body; make impact effects depend on contact. Replace inconsistent baked-in effects in the starter sheets.
 - [ ] Add a review tool that compares silhouette, palette and landmarks against the master, scrubs adjacent frames, and previews actual in-game size, flipped facing, hitboxes and backgrounds.

@@ -15,3 +15,10 @@ These images preserve the exploration history. They are **not the current visual
 | 09-fillet-before-weapon-check.png | New style guide before correcting dagger-like blades. |
 
 `proportions-v1/` preserves the eight superseded Fillet/Shark atlases plus their original region/pivot and collision metadata. `proportions-v2-studies/` preserves layouts/poses rejected during the first anatomy overhaul; rejection reasons and exact correction prompts are in `godot/assets/fighters/proportions-v2/generation.json`.
+
+`reference-guides-before-v3/` preserves the previous Fillet/Shark model sheets and
+six-character PDF. `reference-v3-studies/` preserves the initial Fillet page with
+its misleading head ruler/incorrect ready-shoulder thumbnail, and the initial
+Shark page with its disconnected hook diagram. Corrected reference 03 pages live
+in `art/characters/`, alongside the new action sheets and
+`reference-generation-v3.json` with exact prompts, input/output hashes and review notes.

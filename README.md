@@ -70,7 +70,7 @@ The [Move Workshop control guide (PDF)](exports/FightGuild-Move-Workshop-Guide.p
 
 ## Current reference guides
 
-These are the latest concept candidates, with weapons revised using miniature references. They are not yet approved production model sheets or actual 3D assets.
+These are the latest concept candidates. Fillet and Shark's **reference 03** sheets now use the mature athletic proportions, matched rendering rules, fixed equipment studies and separate windup/active action pages. They are drawing references awaiting feedback, not approved runtime atlases or actual 3D assets.
 
 | Anvil | Smoke | Tapper |
 | --- | --- | --- |
@@ -81,6 +81,12 @@ These are the latest concept candidates, with weapons revised using miniature re
 | [![Shark](art/characters/shark.png)](art/characters/shark.png) | [![Fillet](art/characters/fillet.png)](art/characters/fillet.png) | [![Hammer](art/characters/hammer.png)](art/characters/hammer.png) |
 
 [Download the six-page reference PDF](exports/character-reference-guides.pdf).
+
+For the first matchup: [Fillet action sheet](art/characters/fillet-actions.png),
+[Shark action sheet](art/characters/shark-actions.png), and the
+[four-page model/action PDF](exports/FightGuild-Fillet-Shark-References-v3.pdf).
+[Reference rules and move-editor handoff](docs/fillet-shark-references.md) cover
+palette, equipment, root travel, phased hitboxes, hurtboxes and pose-photo briefs.
 
 ## Project notes
 
@@ -99,7 +105,7 @@ core/                  Deterministic C++ simulation
 scripts/               Setup, build, tests and PC packaging
 tests/                 Core, network and archived browser checks
 docs/                  Rules, architecture, play guide and art pipeline backlog
-art/characters/        Six source character reference guides
+art/characters/        Character model guides, action sheets and generation provenance
 references/            Miniature sources and equipment notes
 licenses/              Engine, dependencies and binding notices
 web/                   Archived browser prototype

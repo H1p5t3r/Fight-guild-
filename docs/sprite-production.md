@@ -1,4 +1,4 @@
-# Sprite production direction — working contract v0.2
+# Sprite production direction — working contract v0.3
 
 The six generated sets are iteration studies. The goal is a repeatable character performing a directed action, not a new illustration of that character in every frame. These rules establish the target for the production pipeline in [the backlog](backlog.md); the current images still need a consistency review before becoming approved masters.
 
@@ -21,7 +21,7 @@ The six generated sets are iteration studies. The goal is a repeatable character
 
 ## Fillet and Shark proportion study v2
 
-The first proportion pass updates **32 poses per fighter**: 12 active/support, six windups, six block reactions and eight signature poses. These two fighters establish a new working target while the other four keep their existing sheets. Use the v2 windup/neutral references in `godot/assets/fighters/proportions-v2/`, not the older concept turnarounds, for subsequent sprite anatomy. They remain iteration studies awaiting play/art feedback.
+The first proportion pass updates **32 poses per fighter**: 12 active/support, six windups, six block reactions and eight signature poses. These remain the playable atlases while the other four fighters keep their existing sheets. The remade [reference 03 model/action pages](fillet-shark-references.md) now carry this mature anatomy into the character guides and serve as the drawing reference for the next sprite pass. Use the v2 windup/neutral poses to check continuity with the current build. Both sets remain iteration studies awaiting play/art feedback.
 
 Target roughly 7.5–8 anatomical heads in an upright body, counting the skull rather than projecting hair. Use a smaller mature head, a clear ribcage/pelvis relationship, longer athletic limbs, strong shoulders and forearms, and substantial gloves/boots. Fillet keeps compact angular gestures and a red/ivory butcher silhouette; Shark keeps broad shoulders, long diagonals, teal/slate/bone masses and white hair. The head, hand and weapon scale must remain constant across actions; do not stretch a whole sprite vertically to simulate new proportions. Preserve the palette ramps above and one hard-edged shadow grouping per material.
 
@@ -50,6 +50,8 @@ The renderer displays windup during startup and the active pose on active ticks,
 `godot/assets/fighters/manifest.json` records source references, generation filenames, checksums, atlas regions, pivots, and scale. Runtime attack timing comes from the move editor; the initial defensive settle transition is four ticks. `signature-generation.json` records exact signature, weapon-layer and cleanup prompts; `generation-prompts.json` includes the original windup prompts and explicitly marked reconstructed block prompt briefs. Visual silhouettes and smears never determine hit detection.
 
 ## Future action specification and review gate
+
+The [Fillet/Shark reference handoff](fillet-shark-references.md#using-an-edited-move-brief-for-the-next-sprite-pass) connects model identity to the workshop's current move JSON, art notes, embedded pose photos, enabled slots, active hitbox keys and optional multi-hit groups. Drawing-sheet arrows and registration marks are illustrative; edited game-space movement, reach and collision remain authoritative. Generate to those values rather than silently changing them to fit a new silhouette.
 
 For each action, record: character master/version, move ID, button, ground/air stance, facing, start/end root position, planted foot, weight shift, contact point/height, weapon grip, attack path, palette version, allowed deformation, and smear type. Reference the same approved neutral model and previous approved frame on every generation request. Keep prompt, references, generator version when available, and all rejection notes; seeds alone are not a consistency guarantee.
 

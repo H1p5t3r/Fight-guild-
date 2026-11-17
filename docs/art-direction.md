@@ -15,6 +15,7 @@ The generated images are visual concepts. They do not establish a working 3D sha
 5. A subsequent volumetric Smoke/Hammer render study drifted toward conventional detailed fantasy rendering and was rejected as too far from ArcSys.
 6. The user requested remaking all six complete reference guides in the game's new style.
 7. The user required original miniature weapons. The current guides incorporate a reference-based equipment correction pass.
+8. Fillet and Shark's reference 03 set remakes the model guides around the mature anatomy and adds separate signature windup/active pages. Matching layouts, material palettes, fixed weapon studies and detached FX samples support repeatable action drawing. See [the reference pack and editor handoff](fillet-shark-references.md).
 
 The current six sheets remain candidates for review. Do not treat the latest generation as user approval.
 
@@ -35,7 +36,7 @@ Avoid drifting back into parchment illustrations, etched hatching, realistic met
 
 ## Reference guide contents
 
-Each guide includes a hero pose, front/side/back studies, expressions, equipment, palette, and combat pose thumbnails. Generated side views and proportions still require consistency checks before modeling; some views are closer to three-quarter than strict orthographic.
+Fillet and Shark each have a model page with aligned front/side/back studies, expressions, equipment, palette, ready pose and FX samples, plus a signature-action page with four windup/active pairs. The other four guides retain their hero pose and combat thumbnails. Generated views and proportions still require consistency checks before modeling; some views are closer to three-quarter than strict orthographic.
 
 ## Review checklist for the next art pass
 
@@ -48,4 +49,4 @@ Each guide includes a hero pose, front/side/back studies, expressions, equipment
 
 Keep superseded images in `art/archive/`; promote changes into `art/characters/` deliberately and update the asset manifest.
 
-The current playable Fillet/Shark anatomy target is the [v2 sprite proportion study](sprite-production.md#fillet-and-shark-proportion-study-v2). Their older concept guides remain identity/equipment references, not the new body scale. The other four fighters await the same proportion pass.
+The current playable Fillet/Shark atlases remain the [v2 sprite proportion study](sprite-production.md#fillet-and-shark-proportion-study-v2). [Reference 03](fillet-shark-references.md) is the updated drawing reference for their next sprite pass; it does not replace runtime poses or collision. Their previous guides are archived. The other four fighters await the same proportion pass.

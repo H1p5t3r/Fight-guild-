@@ -93,8 +93,8 @@
     },
     {
       "path": "art/characters/fillet.png",
-      "bytes": 2239917,
-      "sha256": "27274fa80fa64e53f6b00d799940292c6dc991b384d2635dbfe17926419ba060",
+      "bytes": 2001946,
+      "sha256": "8601720ab2f3ea59f0321e9b07259affc21a0670633cea6cb27e4e51329de5c8",
       "dimensions": [
         1536,
         1024
@@ -111,8 +111,8 @@
     },
     {
       "path": "art/characters/shark.png",
-      "bytes": 2519360,
-      "sha256": "3de67bf2650fc8476738cb9233730e9cfb0d07346a0ff757a688a3fb060de540",
+      "bytes": 2187052,
+      "sha256": "fc67e1401a33a7b87d3fc1572c24c867e51d8070558a5f249353183d4adc89b9",
       "dimensions": [
         1536,
         1024
@@ -138,8 +138,8 @@
     },
     {
       "path": "exports/character-reference-guides.pdf",
-      "bytes": 1873916,
-      "sha256": "13348c301377022be1754afebb4a6657e6a5e6ae76af4b6f120ab3e185d5f125"
+      "bytes": 15681970,
+      "sha256": "a65bf74c5a959ff03edae1dcced90e7c57e3a9e515e24ca6fb7b772e0928702c"
     },
     {
       "path": "references/miniatures/anvil-mini.png",
@@ -392,6 +392,70 @@
         1536,
         1024
       ]
+    },
+    {
+      "path": "art/archive/reference-guides-before-v3/character-reference-guides.pdf",
+      "bytes": 1873916,
+      "sha256": "13348c301377022be1754afebb4a6657e6a5e6ae76af4b6f120ab3e185d5f125"
+    },
+    {
+      "path": "art/archive/reference-guides-before-v3/fillet.png",
+      "bytes": 2239917,
+      "sha256": "27274fa80fa64e53f6b00d799940292c6dc991b384d2635dbfe17926419ba060",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/reference-guides-before-v3/shark.png",
+      "bytes": 2519360,
+      "sha256": "3de67bf2650fc8476738cb9233730e9cfb0d07346a0ff757a688a3fb060de540",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/reference-v3-studies/fillet-before-consistency-fix.png",
+      "bytes": 1967659,
+      "sha256": "5cca6285a049711fdc1c6e749209cda8fee3ec57bd493c099ae496460f1d3cf9",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/reference-v3-studies/shark-before-hook-fix.png",
+      "bytes": 2249189,
+      "sha256": "64062b7ac31084261e6ad506c8ba4b433eaa10e8cafcbe6e9725a0d13524dfe3",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/characters/fillet-actions.png",
+      "bytes": 2044825,
+      "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/characters/shark-actions.png",
+      "bytes": 2130818,
+      "sha256": "389689cba6e436c333a6d0849e7b1e9be24c979f553fcf076c5adc9f7dfe8287",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "exports/FightGuild-Fillet-Shark-References-v3.pdf",
+      "bytes": 8958018,
+      "sha256": "7fe02725e5182333f24a18842c4b861205c0bbff83c7ff237da53562214cf252"
     }
   ]
 }
