@@ -3004,12 +3004,12 @@
       "name": "Fillet",
       "reference": "art/characters/fillet.png",
       "active": {
-        "file": "proportions-v2/fillet-active.png",
+        "file": "appearance-v3/fillet-active.png",
         "columns": 4,
         "rows": 3,
         "body_height": 310,
-        "sha256": "73ea8b6a4213e8b11341d70b9898079538b878bb1b2ec49255c2500459bdc0eb",
-        "generation_file": "exec-8ea4086e-e963-4898-9282-a5fd569a0b01.png",
+        "sha256": "ec937112021a82535d2304c4e97bd37c5cbd32f91097657a88dd3d5d748c029c",
+        "generation_file": "exec-3f3f7953-9d93-4d34-8112-ffa29452b053.png",
         "frames": [
           {
             "region": [
@@ -3100,9 +3100,6 @@
               397,
               332
             ],
-            "file": "swings-v3/fillet-active.png",
-            "sha256": "24529aef354746a5a4a373528dcf5b0e31144c5abef2ec4a7be17a84b9853b0c",
-            "generation_file": "exec-f069a19e-4d40-451f-8a1c-2c2591d49cb4.png",
             "swing_thickness_target": 3
           },
           {
@@ -3231,15 +3228,16 @@
               320
             ]
           }
-        ]
+        ],
+        "appearance_revision": "black-hair-lean-arms-v3"
       },
       "windup": {
-        "file": "proportions-v2/fillet-windup.png",
+        "file": "appearance-v3/fillet-windup.png",
         "columns": 3,
         "rows": 2,
         "body_height": 480,
-        "sha256": "9c0063ed076e43a0acf79044987b43c0f1b9bd0a09b0a62989568fd3ebff8292",
-        "generation_file": "exec-18a69adb-8d68-4d12-ae8b-450e4fa1e200.png",
+        "sha256": "1de7a43e2d2d8c6278b1d3ba44ee6068f2486bf972bb4b0ea10d9c659204e522",
+        "generation_file": "exec-49070d1c-80e7-4364-abb2-138bdf8566bd.png",
         "frames": [
           {
             "region": [
@@ -3349,15 +3347,16 @@
               498
             ]
           }
-        ]
+        ],
+        "appearance_revision": "black-hair-lean-arms-v3"
       },
       "block": {
-        "file": "proportions-v2/fillet-block.png",
+        "file": "appearance-v3/fillet-block.png",
         "columns": 3,
         "rows": 2,
         "body_height": 465,
-        "sha256": "0c67964e9809eecd47f7f07e1669c18b09779040aeb8de3148a6d76a3ec8cafb",
-        "generation_file": "exec-7a3e8a0e-cf43-435e-9d6e-bb79373cbd3f.png",
+        "sha256": "cfc1cd3eb81558461152bae4ed541f55c7307dd14cc256a4c47a0c8c751ab123",
+        "generation_file": "exec-4c245c2d-5014-48b1-a0c1-740726e01948.png",
         "frames": [
           {
             "region": [
@@ -3473,15 +3472,16 @@
             ],
             "name": "break-stagger"
           }
-        ]
+        ],
+        "appearance_revision": "black-hair-lean-arms-v3"
       },
       "signature_windup": {
-        "file": "proportions-v2/fillet-signatures.png",
+        "file": "appearance-v3/fillet-signatures.png",
         "columns": 4,
         "rows": 2,
         "body_height": 375,
-        "sha256": "0ef16679c855695300d79b561c41c939158791c8fd4d9a45e37019400807f619",
-        "generation_file": "exec-8385b640-f7a1-41b3-94ec-f14d5c69d8e6.png",
+        "sha256": "fef04ef290469fe761839189e8c6dce1e388ea8c9903beabbd5d606efbf15ee5",
+        "generation_file": "exec-437f8212-6fc8-4eb2-8fa9-0b1173505f88.png",
         "frames": [
           {
             "region": [
@@ -3555,15 +3555,16 @@
               486
             ]
           }
-        ]
+        ],
+        "appearance_revision": "black-hair-lean-arms-v3"
       },
       "signature_active": {
-        "file": "proportions-v2/fillet-signatures.png",
+        "file": "appearance-v3/fillet-signatures.png",
         "columns": 4,
         "rows": 2,
         "body_height": 375,
-        "sha256": "0ef16679c855695300d79b561c41c939158791c8fd4d9a45e37019400807f619",
-        "generation_file": "exec-8385b640-f7a1-41b3-94ec-f14d5c69d8e6.png",
+        "sha256": "fef04ef290469fe761839189e8c6dce1e388ea8c9903beabbd5d606efbf15ee5",
+        "generation_file": "exec-437f8212-6fc8-4eb2-8fa9-0b1173505f88.png",
         "frames": [
           {
             "region": [
@@ -3582,9 +3583,6 @@
               372,
               415
             ],
-            "file": "swings-v3/fillet-signatures.png",
-            "sha256": "50a354bbca4e6719832fdae7d6f93536eee4f87853d25bdd13e25f67573bdec8",
-            "generation_file": "exec-7eb69300-5b3c-4aa1-9660-b4d8cf09369c.png",
             "swing_thickness_target": 3
           },
           {
@@ -3604,9 +3602,6 @@
               337,
               447
             ],
-            "file": "swings-v3/fillet-signatures.png",
-            "sha256": "50a354bbca4e6719832fdae7d6f93536eee4f87853d25bdd13e25f67573bdec8",
-            "generation_file": "exec-7eb69300-5b3c-4aa1-9660-b4d8cf09369c.png",
             "swing_thickness_target": 3
           },
           {
@@ -3626,9 +3621,6 @@
               386,
               447
             ],
-            "file": "swings-v3/fillet-signatures.png",
-            "sha256": "50a354bbca4e6719832fdae7d6f93536eee4f87853d25bdd13e25f67573bdec8",
-            "generation_file": "exec-7eb69300-5b3c-4aa1-9660-b4d8cf09369c.png",
             "swing_thickness_target": 3
           },
           {
@@ -3648,12 +3640,10 @@
               361,
               447
             ],
-            "file": "swings-v3/fillet-signatures.png",
-            "sha256": "50a354bbca4e6719832fdae7d6f93536eee4f87853d25bdd13e25f67573bdec8",
-            "generation_file": "exec-7eb69300-5b3c-4aa1-9660-b4d8cf09369c.png",
             "swing_thickness_target": 3
           }
-        ]
+        ],
+        "appearance_revision": "black-hair-lean-arms-v3"
       },
       "proportion_version": 2,
       "proportion_reference": "godot/assets/fighters/proportions-v2/fillet-windup.png",
@@ -3676,7 +3666,7 @@
         ]
       ],
       "ready": {
-        "file": "locomotion-v1/fillet-ready.png",
+        "file": "appearance-v3/fillet-ready.png",
         "columns": 1,
         "rows": 1,
         "body_height": 1150,
@@ -3684,8 +3674,8 @@
           1254,
           1254
         ],
-        "sha256": "2c89c465354ef764c275d2a81f1d1d319956d1a98c977eba2310bf63af47a215",
-        "generation_file": "exec-1c067899-e9a9-44d0-8756-401e051e88b5.png",
+        "sha256": "118a679ca64c09deee61b48356aab113176878f6f9378771c496ef88eca78f9d",
+        "generation_file": "exec-648260a1-452e-4a0b-b687-a1119798b986.png",
         "transparent_samples": [
           [
             0,
@@ -3719,10 +3709,11 @@
               1174
             ]
           }
-        ]
+        ],
+        "appearance_revision": "black-hair-lean-arms-v3"
       },
       "walk": {
-        "file": "locomotion-v1/fillet-walk.png",
+        "file": "appearance-v3/fillet-walk.png",
         "columns": 4,
         "rows": 2,
         "body_height": 475,
@@ -3730,8 +3721,8 @@
           1536,
           1024
         ],
-        "sha256": "9470a7f2c488288c29cafd773ee5b5407e950581c40d845bde8fc857c81cf3a2",
-        "generation_file": "exec-da12e489-a12f-42e1-a9d6-a443ef99921a.png",
+        "sha256": "d57c49ef160e2001c7afecc4a84b01195278ecf3e4f759d9680da8c3e202f788",
+        "generation_file": "exec-8c388db3-bbf9-4988-9435-5731b628562c.png",
         "transparent_samples": [
           [
             0,
@@ -3891,10 +3882,11 @@
               473
             ]
           }
-        ]
+        ],
+        "appearance_revision": "black-hair-lean-arms-v3"
       },
       "run": {
-        "file": "locomotion-v1/fillet-run.png",
+        "file": "appearance-v3/fillet-run.png",
         "columns": 4,
         "rows": 2,
         "body_height": 475,
@@ -3902,8 +3894,8 @@
           1536,
           1024
         ],
-        "sha256": "d97be39a04b368b2b88d271e10bf3af1af8be5501f05d04961d9903cacc0d823",
-        "generation_file": "exec-711f54d1-4b14-480f-9d20-9a134a5ee270.png",
+        "sha256": "6c50547cfdc5a589d5d6131a0608f7416c39dcab3e54ff97f533188ce87a3269",
+        "generation_file": "exec-ccd556e5-58b5-479b-b9ac-0c299f539bb1.png",
         "transparent_samples": [
           [
             0,
@@ -4063,7 +4055,8 @@
               417
             ]
           }
-        ]
+        ],
+        "appearance_revision": "black-hair-lean-arms-v3"
       }
     }
   ],

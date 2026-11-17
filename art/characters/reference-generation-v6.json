@@ -1,0 +1,128 @@
+{
+  "revision": "reference-06",
+  "created_date": "2026-11-17",
+  "generator": "OpenAI image_gen",
+  "generator_version": "Not exposed by tool",
+  "pixel_processing": "Original generated PNGs copied byte-for-byte. No offline pixel edits.",
+  "jobs": [
+    {
+      "id": "actions",
+      "prompt": "Targeted Fillet appearance revision. IMAGE 1 is the exact target sheet to edit. IMAGE 2 is the approved new model reference. Preserve IMAGE 1's exact canvas size, layout, cell grid, pose count, every pose, character size, root/pivot locations, weapon endpoints, framing, costume, hands, feet, and existing thick crimson swing effects. Do not add or remove frames or shift any figure within its cell. Apply ONLY these two appearance changes to EVERY figure: all short swept hair is BLACK (#111318 with restrained cool charcoal #292C34 highlights), matching image 2; both bare upper arms and forearms are 20–25% slimmer, lean and athletic rather than bulky. Preserve shoulder, elbow and wrist positions and arm lengths; narrow the contours between joints. Do not shrink hands, legs, torso or weapons. Keep ivory sleeves and anatomical LEFT crimson shoulder plate. Keep the mature cel-shaded bold-outline style. Keep the opaque reference-page design and labels, update revision label to ACTION REFERENCE 06. Output only the edited IMAGE 1.",
+      "references": [
+        "art/archive/reference-guides-v5/fillet-actions.png",
+        "art/characters/fillet.png"
+      ],
+      "path": "art/characters/fillet-actions.png",
+      "generated": "exec-793ffa45-181d-4799-8c69-ac79546d24c0.png",
+      "transparent_background": false,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "art/characters/fillet-actions.png",
+        "bytes": 2033499,
+        "sha256": "8e3b62006936e3dfc5ecf133ad19f606f35ce6a8a80bfc88bfd013d71e6f4870",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/archive/reference-guides-v5/fillet-actions.png",
+          "bytes": 2044825,
+          "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "art/characters/fillet.png",
+          "bytes": 2015066,
+          "sha256": "4fb262dca63378b5c2d13b4fa08051e25da335e3e8894fd2626fbd4a76854408",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "id": "model",
+      "prompt": "Targeted FILLET model-sheet revision. Keep this exact sheet's layout, mature anatomy, full-body poses, costumes, weapons, scale and selected A / STALKER ready pose. Make only two character changes in EVERY model view, expression close-up and ready thumbnail: (1) change ALL of her short swept hair to unmistakable BLACK, using near-black #111318 and restrained cool charcoal #292C34 highlights, no brown/red hair highlights; (2) make BOTH ARMS visibly SLIMMER, about20–25% narrower across the bare upper arms and forearms, with lean athletic muscle definition rather than bulky biceps. Keep arm lengths, shoulder joint locations, elbow/wrist positions, hands/grips, blade positions and all pose silhouettes' endpoints fixed. Preserve the ivory blouse sleeves, crimson LEFT shoulder plate, corset, apron, trousers, skin tone and strong legs; do not thin her entire body or alter her face. Keep mature athletic proportions and crisp bold-outer/fine-inner cel-shaded style. Hair keeps the EXACT current swept cut and volume; recolor only, no new hairstyle. Update the header to MODEL REFERENCE 06. The shoulder and hand placements and weapon dimensions must remain unchanged. Warm opaque page background as before. Output only the finished full 1536x1024 sheet.",
+      "references": [
+        "art/archive/reference-guides-v5/fillet.png"
+      ],
+      "path": "art/characters/fillet.png",
+      "generated": "exec-4c47b4aa-91c4-41f1-9142-d19f07cc6a9e.png",
+      "transparent_background": false,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "art/characters/fillet.png",
+        "bytes": 2015066,
+        "sha256": "4fb262dca63378b5c2d13b4fa08051e25da335e3e8894fd2626fbd4a76854408",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/archive/reference-guides-v5/fillet.png",
+          "bytes": 2034541,
+          "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    }
+  ],
+  "review": "Fillet black hair and lean arms across ready, locomotion, attacks and defense. Run alpha cleanup replaces first attempt. Frames retain registered pivots and combat geometry.",
+  "carried_forward": [
+    {
+      "path": "art/characters/shark.png",
+      "source": "art/archive/reference-guides-v5/shark.png",
+      "output_metadata": {
+        "path": "art/characters/shark.png",
+        "bytes": 2201584,
+        "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "source_metadata": {
+        "path": "art/archive/reference-guides-v5/shark.png",
+        "bytes": 2201584,
+        "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      }
+    },
+    {
+      "path": "art/characters/shark-actions.png",
+      "source": "art/archive/reference-guides-v5/shark-actions.png",
+      "output_metadata": {
+        "path": "art/characters/shark-actions.png",
+        "bytes": 2090220,
+        "sha256": "16f9d32f3ac3e1ffaa2ae2a18adc0ec2110473568f76b4f545a5822599a57514",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "source_metadata": {
+        "path": "art/archive/reference-guides-v5/shark-actions.png",
+        "bytes": 2090220,
+        "sha256": "16f9d32f3ac3e1ffaa2ae2a18adc0ec2110473568f76b4f545a5822599a57514",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      }
+    }
+  ]
+}

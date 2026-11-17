@@ -93,8 +93,8 @@
     },
     {
       "path": "art/characters/fillet.png",
-      "bytes": 2034541,
-      "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
+      "bytes": 2015066,
+      "sha256": "4fb262dca63378b5c2d13b4fa08051e25da335e3e8894fd2626fbd4a76854408",
       "dimensions": [
         1536,
         1024
@@ -138,8 +138,8 @@
     },
     {
       "path": "exports/character-reference-guides.pdf",
-      "bytes": 15756554,
-      "sha256": "73973d72479d519081fc3dd12c6b1e6514755201bd0506900ed91fc05a209891"
+      "bytes": 15743656,
+      "sha256": "dc4bed14e61befd3f45c7621bb0baa253e4094cba4e06b74d7190ac42d0799a7"
     },
     {
       "path": "references/miniatures/anvil-mini.png",
@@ -436,8 +436,8 @@
     },
     {
       "path": "art/characters/fillet-actions.png",
-      "bytes": 2044825,
-      "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
+      "bytes": 2033499,
+      "sha256": "8e3b62006936e3dfc5ecf133ad19f606f35ce6a8a80bfc88bfd013d71e6f4870",
       "dimensions": [
         1536,
         1024
@@ -724,6 +724,151 @@
         1536,
         1024
       ]
+    },
+    {
+      "path": "art/archive/reference-guides-v5/fillet-actions.png",
+      "bytes": 2044825,
+      "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/reference-guides-v5/fillet.png",
+      "bytes": 2034541,
+      "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/reference-guides-v5/shark-actions.png",
+      "bytes": 2090220,
+      "sha256": "16f9d32f3ac3e1ffaa2ae2a18adc0ec2110473568f76b4f545a5822599a57514",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/reference-guides-v5/shark.png",
+      "bytes": 2201584,
+      "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/appearance-v3/fillet-ready.png",
+      "bytes": 830526,
+      "sha256": "118a679ca64c09deee61b48356aab113176878f6f9378771c496ef88eca78f9d",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/appearance-v3/fillet-walk.png",
+      "bytes": 2250879,
+      "sha256": "d57c49ef160e2001c7afecc4a84b01195278ecf3e4f759d9680da8c3e202f788",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/appearance-v3-studies/fillet-run-before-alpha-cleanup.png",
+      "bytes": 2216287,
+      "sha256": "f216fc5880a2b26b79f45ee997d7009fb68f1a28a5e9edc95fd3beaa74e4ac09",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/appearance-v3/fillet-active.png",
+      "bytes": 2205696,
+      "sha256": "ec937112021a82535d2304c4e97bd37c5cbd32f91097657a88dd3d5d748c029c",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/appearance-v3/fillet-windup.png",
+      "bytes": 2046894,
+      "sha256": "1de7a43e2d2d8c6278b1d3ba44ee6068f2486bf972bb4b0ea10d9c659204e522",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/appearance-v3/fillet-block.png",
+      "bytes": 2076015,
+      "sha256": "cfc1cd3eb81558461152bae4ed541f55c7307dd14cc256a4c47a0c8c751ab123",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/appearance-v3/fillet-signatures.png",
+      "bytes": 2052009,
+      "sha256": "fef04ef290469fe761839189e8c6dce1e388ea8c9903beabbd5d606efbf15ee5",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/appearance-v3/fillet-run.png",
+      "bytes": 2149550,
+      "sha256": "6c50547cfdc5a589d5d6131a0608f7416c39dcab3e54ff97f533188ce87a3269",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/appearance-v3/projectiles.png",
+      "bytes": 1165922,
+      "sha256": "5d3d08f7500f75852bac03c2788d0cb1fb060166dcb8a7e069a018e918fe8052",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/ui/fighter-portraits.png",
+      "bytes": 1773624,
+      "sha256": "23b84dcb4f00532be681ec83461b423f921a3a824fe63ee546c96f9f897b7bb0",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/reference-guides-v5/character-reference-guides.pdf",
+      "bytes": 15756554,
+      "sha256": "73973d72479d519081fc3dd12c6b1e6514755201bd0506900ed91fc05a209891"
+    },
+    {
+      "path": "art/archive/appearance-v3-studies/fighter-portraits-v2.png",
+      "bytes": 1971762,
+      "sha256": "aa51b86260ec2a1b930446023a0c6c1c7331d51c8286f2cb7f0c7918f70556b6",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "exports/FightGuild-Fillet-Shark-References-v6.pdf",
+      "bytes": 9035235,
+      "sha256": "40b976ecdab9e2edade1a6436856cf00372ae52881f7fe6706a1d77cd0142594"
     }
   ]
 }

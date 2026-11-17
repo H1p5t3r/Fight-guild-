@@ -51,3 +51,9 @@ Fillet and Shark each have a model page with aligned front/side/back studies, ex
 Keep superseded images in `art/archive/`; promote changes into `art/characters/` deliberately and update the asset manifest.
 
 Fillet/Shark use their selected Stalker and Shoulder Rest ready sprites and [eight-frame locomotion loops](sprite-production.md#selected-stances-and-locomotion-v1), with [reference 05](fillet-shark-references.md) as the character authority. Older v2 attack/defense art remains pending its next consistency pass. Swing bands across the roster target 3x previous thickness without changing attack reach. Their previous guides are archived. The other four fighters await the same proportion pass.
+
+## Appearance revision 06
+
+Fillet keeps the selected A / Stalker stance, with black swept hair and leaner arms (about 20–25% narrower). The ready, eight-frame walk/run cycles, button windups/active poses, block reactions and signature attacks now use that appearance. Her frame regions, pivots, body scale and combat geometry stay registered to the previous sheets. The HUD portraits also carry her black hair and Shark’s lower-volume long hair and blue sports glasses.
+
+Current references: `art/characters/reference-generation-v6.json` and `exports/FightGuild-Fillet-Shark-References-v6.pdf`. Runtime generation prompts, source hashes and unchanged PNG outputs are recorded in `godot/assets/fighters/appearance-v3/generation.json`. Previous references remain in `art/archive/reference-guides-v5/`; the first run-sheet alpha attempt remains archived. New projectile effect art is available for the authoring pass.

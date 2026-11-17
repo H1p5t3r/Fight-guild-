@@ -16,7 +16,7 @@ from reportlab.pdfgen.canvas import Canvas
 
 ROOT = Path(__file__).resolve().parents[1]
 CHARACTERS = ROOT / "art/characters"
-PROVENANCE = CHARACTERS / "reference-generation-v5.json"
+PROVENANCE = CHARACTERS / "reference-generation-v6.json"
 MANIFEST = ROOT / "art/asset-manifest.json"
 
 
@@ -86,8 +86,8 @@ def main() -> None:
         [(name.title(), f"{name}.png") for name in ("anvil", "smoke", "tapper", "shark", "fillet", "hammer")],
     )
     make_pdf(
-        "exports/FightGuild-Fillet-Shark-References-v5.pdf",
-        "Fight Guild — Fillet and Shark Reference 05",
+        "exports/FightGuild-Fillet-Shark-References-v6.pdf",
+        "Fight Guild — Fillet and Shark Reference 06",
         [
             ("Fillet — Model", "fillet.png"),
             ("Fillet — Windup and Active", "fillet-actions.png"),
@@ -102,8 +102,8 @@ def main() -> None:
     existing = {entry["path"]: entry for entry in manifest["assets"]}
     paths.update({
         "exports/character-reference-guides.pdf",
-        "exports/FightGuild-Fillet-Shark-References-v5.pdf",
-        "art/archive/reference-guides-v4/character-reference-guides.pdf",
+        "exports/FightGuild-Fillet-Shark-References-v6.pdf",
+        "art/archive/reference-guides-v5/character-reference-guides.pdf",
     })
     for path in sorted(paths):
         existing[path] = {**existing.get(path, {}), **describe(path)}

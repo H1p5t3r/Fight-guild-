@@ -39,7 +39,7 @@
     },
     {
       "id": "shark-actions-blue-sports-glasses",
-      "path": "art/characters/shark-actions.png",
+      "path": "art/archive/reference-guides-v5/shark-actions.png",
       "references": [
         "art/archive/reference-guides-v4/shark-actions.png",
         "art/archive/reference-v5-studies/shark-before-stance-selection.png"
@@ -49,7 +49,7 @@
       "transparent_background": false,
       "prompt_status": "exact",
       "output_metadata": {
-        "path": "art/characters/shark-actions.png",
+        "path": "art/archive/reference-guides-v5/shark-actions.png",
         "bytes": 2090220,
         "sha256": "16f9d32f3ac3e1ffaa2ae2a18adc0ec2110473568f76b4f545a5822599a57514",
         "dimensions": [
@@ -111,7 +111,7 @@
     },
     {
       "id": "shark-standard-shoulder-rest",
-      "path": "art/characters/shark.png",
+      "path": "art/archive/reference-guides-v5/shark.png",
       "references": [
         "art/archive/reference-v5-studies/shark-before-stance-selection.png",
         "art/characters/stance-studies/shark-01.png"
@@ -121,7 +121,7 @@
       "transparent_background": false,
       "prompt_status": "exact",
       "output_metadata": {
-        "path": "art/characters/shark.png",
+        "path": "art/archive/reference-guides-v5/shark.png",
         "bytes": 2201584,
         "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
         "dimensions": [
@@ -153,10 +153,10 @@
   ],
   "carried_forward": [
     {
-      "path": "art/characters/fillet.png",
+      "path": "art/archive/reference-guides-v5/fillet.png",
       "source": "art/archive/reference-guides-v4/fillet.png",
       "output_metadata": {
-        "path": "art/characters/fillet.png",
+        "path": "art/archive/reference-guides-v5/fillet.png",
         "bytes": 2034541,
         "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
         "dimensions": [
@@ -175,10 +175,10 @@
       }
     },
     {
-      "path": "art/characters/fillet-actions.png",
+      "path": "art/archive/reference-guides-v5/fillet-actions.png",
       "source": "art/archive/reference-guides-v4/fillet-actions.png",
       "output_metadata": {
-        "path": "art/characters/fillet-actions.png",
+        "path": "art/archive/reference-guides-v5/fillet-actions.png",
         "bytes": 2044825,
         "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
         "dimensions": [

@@ -17,7 +17,16 @@
           "Keep the longer right-hand knife low and the shorter left-hand knife close to the chest, pointing down.",
           "Preserve the selected pose's shoulder side, weapon identities and mature anatomy."
         ],
-        "supersedes": "Earlier B/F narrow-leg preference and G–J upper-body refinements; do not create an A/B/F hybrid."
+        "supersedes": "Earlier B/F narrow-leg preference and G\u2013J upper-body refinements; do not create an A/B/F hybrid."
+      },
+      "appearance": {
+        "status": "user_requested_direction",
+        "reference": "art/characters/fillet.png",
+        "requirements": [
+          "Black swept hair (#111318, cool charcoal highlights); preserve cut and volume.",
+          "Lean athletic arms, about 20\u201325% slimmer; preserve arm length, joints and hands.",
+          "Keep A / Stalker stance, costume, strong legs and fixed knife geometry."
+        ]
       }
     },
     "shark": {
