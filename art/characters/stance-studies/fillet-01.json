@@ -1,0 +1,74 @@
+{
+  "revision": "fillet-stance-exploration-01",
+  "created_date": "2026-11-17",
+  "generator": "OpenAI image_gen",
+  "generator_version": "Not exposed by the tool",
+  "status": "Six alternative ready-stance candidates; no option selected or promoted to runtime",
+  "purpose": "Compare Fillet's posture and fighting personality using the reference-03 identity, equipment and rendering rules",
+  "prompt": "Create a polished COMPARISON BOARD of SIX genuinely different neutral combat stance options for FILLET from FIGHT GUILD. Use the supplied Fillet MODEL REFERENCE 03 as the identity, anatomy, equipment, color and rendering authority. This is the SAME character trying six alternative idle/ready stances, not six costume variants and not an attack animation. The user needs to choose her fighting personality.\n\nFORMAT: one spacious landscape artbook sheet about1536x1024 or larger, THREE COLUMNS by TWO ROWS, six full-body drawings. Top heading 'FILLET / COMBAT STANCES'. Small subheading 'READY POSE EXPLORATION'. Each panel has a bold readable letter and short name: 'A / STALKER', 'B / DUELIST', 'C / CROSSED BLADES', 'D / COILED', 'E / HIGH GUARD', 'F / UNBOTHERED'. Use the reference's warm light-gray background, thin crimson panel rules, dark condensed italic titles. Keep the letters clearly legible. Every pose has the complete body, BOTH boots and BOTH knives inside its panel with generous clear gutters, no cropped hands, weapons, hair or heels. All six face RIGHT at the SAME side/three-quarter gameplay camera, with identical anatomical scale, head/hand size and weapon lengths. Place feet on a consistent thin baseline per row. Preserve upright body length even in a crouch; do not shrink the low stances into shorter people. Give the drawings most of the page, no portraits, palette or equipment insets, no explanatory paragraphs.\n\nCHARACTER LOCK: mature adult athletic woman, about7.5–8 anatomical skull-heads in upright height, small angular face, strong forearms/shoulders and athletic thighs, long limbs, substantial gloved hands and practical broad boots. Short swept dark-brown hair, single crimson armor plate on ANATOMICAL LEFT shoulder, ivory rolled-sleeve blouse, crimson buckled corset, brown belt with compact pouches, split ivory apron with graphic crimson markings, charcoal trousers, wrapped forearms, fingerless gloves, brown three-buckle boots. Near anatomical RIGHT shoulder is ivory fabric; far LEFT shoulder is armored in this right-facing camera. Do not add a second pauldron, change garments, add headgear, or turn her into a different person. Neutral upper-left lighting, crisp dark outer contours, fine interior lines, sculpted three-dimensional forms rendered in flat two/three-tone cel shadows. Palette crimson #A63242, ivory #DDD0B1, charcoal #393039, muted brown leather/hair and silver blades. No airbrush gradients, painterly texture, photo rendering or exaggerated sexual posing.\n\nKNIVES ARE FIXED: exactly two curved BROAD single-edged butcher knives, the longer main knife always in her RIGHT hand and the shorter companion always in her LEFT. Same broad curved slicing silhouette and brown riveted grip as reference, no dagger triangles, swords, straight razors, reverse-grip weapons or extra blades. Keep both grips clearly attached to actual hands and arm anatomy easy to read. Knife grips remain conventional; vary ARM POSITION rather than changing weapons.\n\nDIRECT SIX VERY DIFFERENT SHAPES:\nA / STALKER: aggressive low FORWARD-weighted stance, long staggered base, knees flexed, upper torso inclines forward about30degrees and head projects over the front knee. Main right knife carried low in front of the thigh, point angled toward opponent; short left knife protects near chest. Both feet planted. Alert predatory focus, poised to advance. Low head, strong forward diagonal, open space between forearms.\nB / DUELIST: tall NARROW almost side-on stance, lead foot forward, rear foot turned slightly out. Spine nearly upright, chin tucked. Main right knife extended moderately forward at lower chest height, elbow still bent, shorter left knife close to ribs as offhand guard. Precise, economical, balanced and springy, NOT a full stab or lunge. Highest controlled vertical posture with a clear forward blade.\nC / CROSSED BLADES: CENTERED compact ready pose at middle height. Feet slightly wider than shoulders and knees modestly bent, torso upright. Forearms cross loosely in FRONT OF THE STERNUM so two blades form a clear shallow X below the face; hands separated and anatomically readable, both elbows tucked, face unobstructed. A patient closed silhouette with restrained tension. This is idle guard, not a hit reaction or block effect.\nD / COILED: distinct REAR-weighted loaded stance, wide staggered feet, rear knee deeply bent carrying most weight, lead leg extended but not locked. Pelvis and head sit over the REAR leg, spine tall/diagonal and visibly farther back than A. Main right knife drawn back low beside rear hip, tip angled slightly rearward; short left knife reaches forward at waist height to measure distance. Twisted torso stores rotation. Both soles stay grounded. Compact spring poised to explode forward, not a crouch attack.\nE / HIGH GUARD: confident upright BROAD base, front knee softly bent, rear heel just light but toe stays grounded. Main right knife raised beside and above her RIGHT shoulder, elbow out and hand clear of face, blade angled backward/upward; shorter left knife presented forward at waist height. Chest open, angular elbow silhouette, lively combative grin. Ready to cut from above without drawing an actual attack. Strong contrast between one high arm and one low arm.\nF / UNBOTHERED: relaxed MENACING idle, medium/narrow stagger, nearly vertical spine, chin lowered and eyes fixed on opponent, most weight casually on rear leg. Both arms down and loose, main right knife hanging outside rear thigh with tip down, shorter left knife held low and slightly forward across hip level. Shoulders relaxed, wrists ready, feet stable. Looks deceptively calm, deliberately unlike every guarded/crouched option; not slumped, walking or a fashion pose.\n\nThe differences must be obvious even as solid silhouettes: A forward low, B upright narrow and extended, C compact crossed center, D rear-loaded wide, E elbow-high/open, F relaxed low hands. All are sustainable ready poses that could have subtle breathing/weight-shift animation; NONE is mid-swing, airborne, running or a finished attack. No smear effects, motion arrows, ground dust, impact sparks, speed lines, glow, blood spray, hitboxes, opponents or scenery. Let posture alone sell her personality. Produce only the finished six-option comparison image.",
+  "prompt_status": "exact",
+  "transparent_background": false,
+  "generated_file": "exec-fbb9997c-924c-4e5a-821d-e7403b32e7fb.png",
+  "path": "art/characters/stance-studies/fillet-01.png",
+  "references": [
+    "art/characters/fillet.png"
+  ],
+  "options": [
+    {
+      "id": "A",
+      "name": "Stalker",
+      "direction": "Low forward-weighted posture; main blade low and offhand close."
+    },
+    {
+      "id": "B",
+      "name": "Duelist",
+      "direction": "Tall narrow stance; main blade forward with economical hand placement."
+    },
+    {
+      "id": "C",
+      "name": "Crossed Blades",
+      "direction": "Centered compact guard; both knives cross below the face."
+    },
+    {
+      "id": "D",
+      "name": "Coiled",
+      "direction": "Wide base with weight drawn back; forward offhand and rear main knife."
+    },
+    {
+      "id": "E",
+      "name": "High Guard",
+      "direction": "Open angular silhouette; main knife high, offhand low; combative confidence."
+    },
+    {
+      "id": "F",
+      "name": "Unbothered",
+      "direction": "Relaxed shoulders, low hands and a calm threatening presence."
+    }
+  ],
+  "review": {
+    "completed": "Checked six readable labels, complete figures and weapons, visible posture differences, consistent costume palette and absence of attack FX.",
+    "remaining": "Selection studies rather than matched animation frames. C turns the torso more toward camera; A uses a downward offhand grip. Standardize the selected stance's camera, grips, body scale and idle silhouette against the model before producing runtime frames.",
+    "pixel_processing": "Generated PNG copied byte-for-byte; no painting, compositing, recoloring or resampling.",
+    "runtime_changes": "None. No model sheet, move, hurtbox, pushbox or runtime atlas was replaced."
+  },
+  "output_metadata": {
+    "path": "art/characters/stance-studies/fillet-01.png",
+    "bytes": 1992871,
+    "sha256": "9f9b6c7500a73cf51a3d8b7b15fb8fc0acc51b7d32c97d01f1370d86466b54f0",
+    "dimensions": [
+      1536,
+      1024
+    ]
+  },
+  "reference_metadata": [
+    {
+      "path": "art/characters/fillet.png",
+      "bytes": 2001946,
+      "sha256": "8601720ab2f3ea59f0321e9b07259affc21a0670633cea6cb27e4e51329de5c8",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    }
+  ]
+}

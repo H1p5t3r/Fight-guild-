@@ -75,6 +75,28 @@ block or whiff does not grant the follow-up. The released hook, tether and body
 must be separate runtime layers. The diagram arrows illustrate direction; use
 the core's exact path and range, not a measurement of a drawn arrow.
 
+## Fillet ready-stance options
+
+[Compare six ready-stance candidates](../art/characters/stance-studies/fillet-01.png).
+They explore posture and personality while retaining reference 03's character
+design. No stance has been selected or substituted into the playable atlas.
+
+| Option | Direction |
+| --- | --- |
+| A — Stalker | Low forward pressure; main blade low, offhand close. |
+| B — Duelist | Tall, narrow and economical; main knife presented forward. |
+| C — Crossed Blades | Compact centered guard; crossed knives frame the torso. |
+| D — Coiled | Wide base and weight drawn back; ready to spring forward. |
+| E — High Guard | Main knife high, offhand low; open, confident body language. |
+| F — Unbothered | Relaxed shoulders and low hands; calm threat. |
+
+These are selection studies, not matched idle-animation frames. C turns farther
+toward the viewer, and A explores a downward offhand grip. Once a direction is
+chosen, standardize camera, grips and body scale against the model, then develop
+the breathing/weight-shift loop and check its silhouette with the current
+body-only hurtboxes. [Generation notes](../art/characters/stance-studies/fillet-01.json)
+retain the exact prompt, source reference and image checksum.
+
 ## Using an edited move brief for the next sprite pass
 
 1. Start with the user's latest **Move Workshop JSON**, including `_moveWorkshop`

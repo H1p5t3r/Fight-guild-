@@ -456,6 +456,15 @@
       "path": "exports/FightGuild-Fillet-Shark-References-v3.pdf",
       "bytes": 8958018,
       "sha256": "7fe02725e5182333f24a18842c4b861205c0bbff83c7ff237da53562214cf252"
+    },
+    {
+      "path": "art/characters/stance-studies/fillet-01.png",
+      "bytes": 1992871,
+      "sha256": "9f9b6c7500a73cf51a3d8b7b15fb8fc0acc51b7d32c97d01f1370d86466b54f0",
+      "dimensions": [
+        1536,
+        1024
+      ]
     }
   ]
 }
