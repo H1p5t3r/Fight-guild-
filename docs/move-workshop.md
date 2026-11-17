@@ -9,7 +9,7 @@ The [complete control guide (PDF)](../exports/FightGuild-Move-Workshop-Guide.pdf
 explains every browser editor control, with allowed ranges, worked examples,
 diagrams, clickable contents and an alphabetical field index. It covers the
 current schema-15 build, including combat playback, timed hitboxes, hurtboxes,
-art notes and pose photos, character movement, projectiles and transition smears.
+art notes and pose photos, character movement and projectiles.
 
 ## Use it on another PC
 
@@ -257,7 +257,7 @@ self-contained HTML through a temporary local HTTP server. They verify that
 the document requests no secondary resources. Workplace browser policies still
 determine whether local HTML or a hosted URL is allowed.
 
-## Movement, defense, projectiles and smears (schema 15)
+## Movement, defense and projectiles (schema 15)
 
 **Movement & defense** edits the selected character and keeps the shared preview. Choose an idle, walk, 66, 44, jump, air dash or FD demonstration, then play or scrub the actual core simulation. Fillet uses A / Stalker with black hair and lean arms; Shark uses F / Shoulder Rest. Both have eight-frame walk/run cycles.
 
@@ -265,6 +265,6 @@ determine whether local HTML or a hosted URL is allowed.
 - **Air movement:** forward/backward toggles, independent styles/speeds/durations, a shared dash budget, and additional air jumps per character. Budgets refill on landing. Jump speed, directional steering, gravity and prejump are editable. Existing run/dash momentum carries into jumps and attacks.
 - **Pushblock:** the existing Faultless Defense mechanic. Per-character overrides control enablement, separation, ground/air drain and base block cost. `-1` inherits the match rule. Costs use 100 units per 1% Momentum; attack-level/damage surcharges still apply.
 - **Projectiles:** disabled by default for every move. Enable Moving or Stationary, set spawn frame/offset, dimensions, speed, gravity, lifetime, hit count, re-hit interval, clash durability and survival on owner hit. Spawn frame 0 uses first active; no spawn is earlier than frame 5. Throws do not spawn projectiles. Enable “Keep the body strike too” for melee plus projectile attacks. The projectile uses the move’s damage, stun, guard, knockback, launch and knockdown; hitbox-timeline overrides belong to the body strike. Each owner can have eight live objects. Fixed-point swept collision handles fast thin shots and opposing clashes. Stationary objects ignore velocity/gravity. Shared hitstop freezes projectile time; rounds and wall travel clear them. Projectile immunity remains a separate future feature.
-- **Smears:** one presentation frame stretches a sampled arm, leg or weapon patch between poses, without changing combat timing, collisions or rollback. Automatic movement smears and per-attack controls are independent. Attacks can use every pose transition, no smears, or up to four explicit move-frame beats. Custom beats at 0 are disabled; beats beyond the move are retained but inactive. Choose the moving part and stretch amount. The current pose’s body/head stays crisp; the source PNG is unchanged. These are runtime transition samples, not a replacement for future authored windup/active/impact/follow-through/recovery animation.
+- **Animation:** poses display directly, with no generated transition smear frames. Weapon smearing is deferred. Old JSON smear fields are retained for compatibility and ignored by both renderers.
 
 Movement and all attack controls support undo, autosave and JSON export/import. Schema-14 imports preserve old edited values and add new fields with compatible defaults. A move’s art brief and pose photos remain in the workshop JSON. Native Godot imports the same gameplay values; keep the workshop file for its art metadata.

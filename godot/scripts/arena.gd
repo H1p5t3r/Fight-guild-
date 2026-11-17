@@ -9,9 +9,6 @@ var score := [0, 0]
 var presentation_active := false
 var diagnostics := true
 var sprites: Array[Sprite2D] = []
-var smears: Array[Polygon2D] = []
-var smear_plans: Array = [{}, {}]
-var smear_tick := -1
 var weapons: Array[HookWeapon] = []
 var collision_layer: Control
 var hud_layer: Control
@@ -35,10 +32,6 @@ func _ready() -> void:
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
 	clip_contents = true
 	for _p in 2:
-		var smear := Polygon2D.new()
-		smear.visible = false
-		add_child(smear)
-		smears.append(smear)
 		var sprite := Sprite2D.new()
 		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		add_child(sprite)
@@ -64,10 +57,6 @@ func _ready() -> void:
 
 func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bool) -> void:
 	model = simulation
-	if int(state.frame) != smear_tick:
-		for p in 2:
-			smear_plans[p] = PoseSmear.plan(view.players[p], state.players[p], model) if not view.is_empty() and int(state.frame) == int(view.frame) + 1 and not presentation_active else {}
-		smear_tick = state.frame
 	view = state
 	show_boxes = boxes
 	paused = frozen
@@ -104,17 +93,6 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 		sprite.position = shot.position if travel else screen_point(Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x))
 		sprite.rotation = float(shot.angle) if travel else 0.0
 		sprite.modulate = Color(1, 1, 1, shot.alpha) if travel else Color("ffa69a") if fighter.stun and not fighter.guarding else Color.WHITE
-		var smear: Polygon2D = smears[p]
-		var smear_plan: Dictionary = smear_plans[p]
-		smear.visible = not travel and not smear_plan.is_empty()
-		if smear.visible:
-			var points := PackedVector2Array()
-			for point in smear_plan.points: points.append(screen_point(Vector2(point.x * scale_x, floor_y - point.y * scale_x)))
-			smear.polygon = points
-			smear.uv = smear_plan.uv
-			var file: String = smear_plan.file
-			if not FighterArt.textures.has(file): FighterArt.textures[file] = load(FighterArt.DIRECTORY + file)
-			smear.texture = FighterArt.textures[file]
 		weapons[p].visible = false
 		if not travel and character == 4 and fighter.weaponVisible:
 			var move := model.move(character, fighter.move)

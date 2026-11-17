@@ -39,7 +39,7 @@ META = json.loads(subprocess.check_output([
 expected = [k for g in META['groups'] for k in g['fields']]
 documented = [i['key'] for p in CONTENT['pages'] for b in p['blocks']
               if b['type'] == 'fields' for i in b['items']]
-assert len(set(expected)) == len(expected) == 90
+assert len(set(expected)) == len(expected) == 83
 assert Counter(expected) == Counter(documented), 'Gameplay field coverage mismatch'
 art_expected = [row[0] for row in META['art']]
 art_documented = [i['key'] for p in CONTENT['pages'] for b in p['blocks']

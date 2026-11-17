@@ -35,7 +35,7 @@ function move(){return model.move(character,slot);}
 function fieldError(key,message){const id='field-'+key,node=$(id);if(message)errors.set(id,message);else errors.delete(id);node?.setAttribute('aria-invalid',String(!!message));const messageNode=$('error-'+key);if(messageNode)messageNode.textContent=message||'';refreshActions();}
 function refreshActions(){
   $('export').disabled=bootLocked||referenceBusy||errors.size>0;$('undo').disabled=bootLocked||referenceBusy||(!model.undoStack.length&&!errors.size);$('redo').disabled=bootLocked||referenceBusy||!model.redoStack.length||errors.size>0;
-  $('reset').disabled=tab==='movement'?bootLocked||referenceBusy:bootLocked||referenceBusy||(!move().hitboxTimeline.keys.length&&!move().hitboxTimeline.multiHit&&!Object.keys(move().hurtboxes).length&&!Object.keys(SPECS).some(key=>move()[key]!==pack.defaults.characters[character].moves[slot][key]));
+  $('reset').disabled=tab==='movement'?bootLocked||referenceBusy:bootLocked||referenceBusy||(!move().hitboxTimeline.keys.length&&!move().hitboxTimeline.multiHit&&!Object.keys(move().hurtboxes).length&&!Object.keys(SPECS).filter(key=>!key.startsWith('smear')).some(key=>move()[key]!==pack.defaults.characters[character].moves[slot][key]));
   $('attack-enabled').disabled=bootLocked||referenceBusy;
   $('import').disabled=referenceBusy;$('fighter').disabled=bootLocked||referenceBusy;
   if(errors.size){$('save-status').textContent='Check the highlighted value';$('save-dot').style.background='var(--danger)';}
@@ -56,7 +56,7 @@ function syncSummary(){
   $('stat-startup').replaceChildren(document.createTextNode(m.startup),el('small',{},' f'));
   $('stat-damage').textContent=m.damage;$('stat-block').textContent=(adv>0?'+':'')+adv+' f';$('stat-block').className=adv>0?'positive':adv<0?'negative':'';
   $('stat-total').replaceChildren(document.createTextNode(totalFrames(m)),el('small',{},' f'));
-  const profiles=model.data.characters.filter((c,i)=>JSON.stringify(c.movement)!==JSON.stringify(pack.defaults.characters[i].movement)).length;
+  const profiles=model.data.characters.filter((c,i)=>Object.keys(c.movement).some(key=>!key.startsWith('smear')&&c.movement[key]!==pack.defaults.characters[i].movement[key])).length;
   $('changed-count').textContent=`${model.changes().length} edited move${model.changes().length===1?'':'s'}${profiles?' · '+profiles+' movement profile'+(profiles===1?'':'s'):''}`;
   $('guild').textContent=GUILDS[character];$('roster-count').textContent=`${model.data.characters[character].moves.filter(m=>m.enabled).length} moves`;
   const warnings=geometryWarnings(m);$('move-warnings').replaceChildren(...warnings.map(w=>el('p',{},w)));$('move-warnings').hidden=!warnings.length;
@@ -364,5 +364,5 @@ $('attack-enabled').onchange=()=>{if(!validBeforeLeaving()){$('attack-enabled').
 for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}testSignature='';scheduleTest();};
 globalThis.moveWorkshop.preview=()=>testRecord;
 globalThis.moveWorkshop.cursor=()=>({index:testIndex,frame:testRecord?.frames[testIndex]?.selectedFrame||0,pending:previewPending});
-globalThis.moveWorkshop.geometry=()=>({handles:clone(preview.handles),view:clone(preview.view||{}),measurements:clone(preview.measurements||null),measurementLabels:clone(preview.measurementLabels||[]),smears:clone(preview.smearPlans||[])});
+globalThis.moveWorkshop.geometry=()=>({handles:clone(preview.handles),view:clone(preview.view||{}),measurements:clone(preview.measurements||null),measurementLabels:clone(preview.measurementLabels||[])});
 initialize();requestAnimationFrame(animate);

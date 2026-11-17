@@ -18,6 +18,7 @@ enum Input { Left=1, Right=2, Down=4, Up=8, P=16, K=32, S=64, Hs=128, D=256,
              Dash=512, Simple=1024, Faultless=2048 };
 enum Kind { Normal, Command, Special, Drive, Throw };
 // WallDamage is a retired save-compatibility slot. Collision speed determines wall damage.
+// Smear slots are reserved for schema compatibility; transition smearing is removed.
 enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery,
              Damage, Hitstun, Blockstun, Hitstop, Pushback, Reach, Bottom, Height,
              SpecialCancel, JumpCancel, WhiffCancel, SelfCancel, Advance,

@@ -28,7 +28,7 @@ export class CombatPreview {
     const separation=this.pack.collisions[character].push.halfWidth+this.pack.collisions[target].push.halfWidth+Math.round(gap*100);
     e.api.fg_preview_place(0,45000,0,10000);
     e.api.fg_preview_place(1,45000+facing*separation,behavior==='air'?12000:0,10000);
-    const result={smearProfiles:data.characters,frames:[],contacts:[],warnings:[],executed:false,requested:inputName(m),slot,character,target};
+    const result={frames:[],contacts:[],warnings:[],executed:false,requested:inputName(m),slot,character,target};
     let elapsed=0,quiet=0,lastGroups=0;
     const capture=(input,stage)=>{
       const state=e.state(),players=state.players;
@@ -91,7 +91,7 @@ export class CombatPreview {
     e.loadData(data);e.reset([character,target],[false,false]);
     e.api.fg_preview_place(0,50000,0,10000);
     e.api.fg_preview_place(1,50000+facing*(action==='fd'?10000:40000),0,10000);
-    const result={smearProfiles:data.characters,frames:[],contacts:[],warnings:[],executed:true,requested:action,slot,character,target,movement:action,totalDamage:0,displacement:0};
+    const result={frames:[],contacts:[],warnings:[],executed:true,requested:action,slot,character,target,movement:action,totalDamage:0,displacement:0};
     const forward=directionBits(6,facing),back=directionBits(4,facing),profile=data.characters[character].movement;
     if(action==='airForward'&&!profile.airDashEnabled||action==='airBack'&&!profile.airBackdashEnabled)result.warnings.push('This air dash direction is disabled for this character. Enable it to test the dash.');
     if(action==='airJump'&&!profile.airJumps)result.warnings.push('Additional air jumps are set to zero.');

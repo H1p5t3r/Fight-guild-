@@ -14,7 +14,7 @@ test('Shipped data and each editable field match the current combat core',async(
   const e=await engine();assert.deepEqual(pack.defaults,e.data());
   const controls=GROUPS.flatMap(g=>g.fields);
   assert.equal(new Set(controls).size,controls.length);
-  assert.deepEqual(FIELDS.filter(k=>!controls.includes(k)),['wallDamage']); // retired slot
+  assert.deepEqual(FIELDS.filter(k=>!controls.includes(k)),['wallDamage','smearMode','smearPart','smearStretch','smearFrame1','smearFrame2','smearFrame3','smearFrame4']); // inactive compatibility slots
   assert.equal(Object.keys(SPECS).length,FIELDS.length);
   for(let c=0;c<6;c++){
     for(const [field,key] of FIELDS.entries()){

@@ -2,7 +2,7 @@
   "title": "Move Workshop — Complete Control Guide",
   "edition": "17 November 2026",
   "schema": 15,
-  "source_revision": "schema-15 movement, projectiles and smear edition",
+  "source_revision": "schema-15 movement and projectile edition; transition smears removed",
   "pages": [
     {
       "id": "cover",
@@ -147,7 +147,7 @@
               "text": "Selects an attack. The three numbers mean startup / active / recovery. A dot marks an edit relative to the workshop’s bundled defaults, including notes, photos or hurtboxes. The edited-move count is not an unsaved-change count."
             },
             {
-              "label": "Movement & defense / Projectiles / Smears / Timing / Hit & movement / Cancels & inputs / Hurtboxes / Art brief",
+              "label": "Movement & defense / Projectiles / Timing / Hit & movement / Cancels & inputs / Hurtboxes / Art brief",
               "text": "Switches editor sections. Inside Timing, expand Counter hits & scaling; inside Cancels & inputs, expand Inputs & identity. Narrow screens may require horizontal scrolling to reach a tab."
             },
             {
@@ -1514,50 +1514,6 @@
       ]
     },
     {
-      "id": "smears-0",
-      "section": "AUTHORING",
-      "title": "Transition smears",
-      "blocks": [
-        {
-          "type": "text",
-          "text": "One visual frame stretches the moving limb or weapon between poses. Smears never add combat frames or change collision. Custom beats use 1-based move frames; 0 disables a beat."
-        },
-        {
-          "type": "fields",
-          "items": [
-            {
-              "key": "smearMode",
-              "text": "Off disables attack smears. Every pose transition samples the previous pose and stretches its moving part into the new pose for one visual frame. Custom move frames uses the four beat fields instead. No extra combat frames, hitboxes, stun or damage are added."
-            },
-            {
-              "key": "smearPart",
-              "text": "Automatic chooses weapon motion for attacks and legs for locomotion."
-            },
-            {
-              "key": "smearStretch",
-              "text": "100% spans the two positions; higher values exaggerate the moving patch. The face and whole body are never stretched."
-            },
-            {
-              "key": "smearFrame1",
-              "text": "First optional visual beat, using the move-frame counter. 0 disables this beat. Duplicate beats still draw one frame."
-            },
-            {
-              "key": "smearFrame2",
-              "text": "Second optional beat. 0 disables it. Frames beyond the move are retained but cannot play."
-            },
-            {
-              "key": "smearFrame3",
-              "text": "Third optional beat. 0 disables it."
-            },
-            {
-              "key": "smearFrame4",
-              "text": "Fourth optional beat. 0 disables it."
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "movement-0-0",
       "section": "MOVEMENT & DEFENSE",
       "title": "Walk & run",
@@ -1812,34 +1768,6 @@
             {
               "label": "Base cost per blocked hit",
               "text": "Base cost per blocked hit, with −1 inheritance. Existing damage and attack-level surcharges still apply. Range: -1–10000."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "movement-4-0",
-      "section": "MOVEMENT & DEFENSE",
-      "title": "Movement smears",
-      "blocks": [
-        {
-          "type": "text",
-          "text": "A single visual frame bridges each new pose. Attack smears have their own tab."
-        },
-        {
-          "type": "controls",
-          "items": [
-            {
-              "label": "Automatic movement smears",
-              "text": "Enable one visual smear frame per movement pose change. Does not alter movement, collision or attack timing. Range: 0–1."
-            },
-            {
-              "label": "Moving part",
-              "text": "Choose automatic, arms, legs or weapon. Automatic uses legs for walk/run and arms for other pose transitions. Range: 0–3."
-            },
-            {
-              "label": "Stretch (%)",
-              "text": "Amount of visual stretching applied to the sampled part. 100% spans the pose change; larger values exaggerate it. Range: 100–400."
             }
           ]
         }

@@ -1,4 +1,5 @@
-// Schema 15 adds movement, projectile and visual smear authoring. Older edits remain authoritative.
+// Schema 15 adds movement and projectile authoring. Older edits remain authoritative.
+// Former smear fields are retained as inactive compatibility data.
 export function upgradeMovement(data,defaults){
   if(data?.schema!==14||data.coreVersion!==14)return data;
   const next=structuredClone(data);

@@ -139,7 +139,7 @@ export class Workshop {
   resetMove(c,m){const before=this.snapshot();this.data.characters[c].moves[m]=clone(this.pack.defaults.characters[c].moves[m]);this.remember(before);}
   undo(){if(!this.undoStack.length)return false;const item=this.undoStack.pop();this.redoStack.push({data:this.snapshot()});this.data=item.data;return true;}
   redo(){if(!this.redoStack.length)return false;const item=this.redoStack.pop();this.undoStack.push({data:this.snapshot(),group:'',time:0});this.data=item.data;return true;}
-  changed(c,m){return FIELDS.some(k=>this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||Object.keys(this.move(c,m).hurtboxes).length>0||this.move(c,m).hitboxTimeline.multiHit||this.move(c,m).hitboxTimeline.keys.length>0||!!this.note(c,m).references?.length||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
+  changed(c,m){return FIELDS.some(k=>!k.startsWith('smear')&&this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||Object.keys(this.move(c,m).hurtboxes).length>0||this.move(c,m).hitboxTimeline.multiHit||this.move(c,m).hitboxTimeline.keys.length>0||!!this.note(c,m).references?.length||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
   changes(){return this.data.characters.flatMap((c,i)=>c.moves.map((_,m)=>({c:i,m}))).filter(p=>this.changed(p.c,p.m));}
   export(){return JSON.stringify(validate(this.data,this.pack),null,2);}
   brief(){

@@ -4,7 +4,6 @@ import {readFile} from 'node:fs/promises';
 import {Engine,FIELDS,MOVEMENT_FIELDS} from '../web/engine.mjs';
 import {Workshop} from '../web/workbench/model.mjs';
 import {CombatPreview} from '../web/workbench/simulation.mjs';
-import {smearPlan} from '../web/workbench/smears.mjs';
 const pack=JSON.parse(await readFile(new URL('../build/workbench-pack.json',import.meta.url),'utf8'));
 test('Schema-14 drafts retain movement, hitbox and art edits while adding new controls',()=>{
  const old=structuredClone(pack.defaults);old.schema=old.coreVersion=14;
@@ -30,15 +29,14 @@ test('Moving shots and traps show real independent contact and persistent geomet
  Object.assign(m,{projectileKind:2,projectileOffsetX:15000,projectileHits:3,projectileRehit:10,hitstun:30,pushback:0,hitstop:0,launch:0});
  const trap=preview.record(data,5,0,{gap:100});assert.equal(trap.contacts.length,3);const x=trap.frames.flatMap(f=>f.state.projectiles.map(q=>q.x));assert.equal(new Set(x).size,1);
 });
-test('One-frame smears can be disabled or scheduled without changing collision or timing',()=>{
- const data=structuredClone(pack.defaults),preview=new CombatPreview(pack),record=preview.record(data,5,0),config=data.characters[5];
- let auto=0;
- for(let i=1;i<record.frames.length;i++){const prev=record.frames[i-1].state.players[0],now=record.frames[i].state.players[0];if(smearPlan(pack,prev,now,config)){auto++;assert.ok(prev.posePhase!==now.posePhase||prev.poseIndex!==now.poseIndex);}}
- assert.ok(auto>=2);config.moves[0].smearMode=0;config.movement.smearMode=0;
- assert.ok(record.frames.every((f,i)=>!i||!smearPlan(pack,record.frames[i-1].state.players[0],f.state.players[0],config)));
- config.moves[0].smearMode=2;config.moves[0].smearFrame1=3;
- const beats=record.frames.flatMap((f,i)=>i&&smearPlan(pack,record.frames[i-1].state.players[0],f.state.players[0],config)?[f.state.players[0].age]:[]);assert.deepEqual(beats,[3]);
- const second=preview.record(data,5,0);assert.deepEqual(record.contacts,second.contacts);assert.equal(record.frames.length,second.frames.length);
+test('Retired smear settings round-trip without affecting poses, contacts or timing',()=>{
+ const preview=new CombatPreview(pack),baseline=preview.record(pack.defaults,5,0),w=new Workshop(pack);
+ Object.assign(w.data.characters[5].movement,{smearMode:1,smearPart:2,smearStretch:400});
+ Object.assign(w.move(5,0),{smearMode:2,smearPart:3,smearStretch:400,smearFrame1:3});
+ assert.equal(w.changed(5,0),false);
+ const restored=new Workshop(pack,JSON.parse(w.export()));assert.deepEqual(restored.data,w.data);
+ const record=preview.record(restored.data,5,0);
+ assert.deepEqual(record.frames,baseline.frames);assert.deepEqual(record.contacts,baseline.contacts);
 });
 test('Native WASM and plain-JS projectiles produce the same state through rollback',async()=>{
  const data=structuredClone(pack.defaults);data.characters[5].moves[0].projectileKind=1;data.characters[5].movement.airDashEnabled=1;

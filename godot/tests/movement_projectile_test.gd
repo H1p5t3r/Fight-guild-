@@ -26,11 +26,7 @@ func _initialize() -> void:
 	for i in 5: model.step(0, 0)
 	check(model.state().players[0].x > model.state().players[1].x, "Teleport failed to switch sides")
 	model.reset()
-	var previous: Dictionary = model.state().players[0]
 	model.step(16, 0)
-	var current: Dictionary = model.state().players[0]
-	var smear := PoseSmear.plan(previous, current, model)
-	check(not smear.is_empty() and smear.points.size() == 4 and smear.uv.size() == 4, "Pose transition did not produce one part smear")
 	for i in 5: model.step(0, 0)
 	check(model.state().projectiles.size() > 0, "Projectile not exposed to Godot")
 	var snapshot: PackedByteArray = model.core.snapshot()
@@ -40,5 +36,5 @@ func _initialize() -> void:
 	for i in 50: model.step(0, 0)
 	check(model.state_hash() == expected, "Projectile replay desynchronized")
 	check(model.state().players[1].health < 1000, "Projectile did not hit")
-	print("Godot movement, projectiles, smears and schema migration: %d failures" % failures)
+	print("Godot movement, projectiles and schema migration: %d failures" % failures)
 	quit(1 if failures else 0)
