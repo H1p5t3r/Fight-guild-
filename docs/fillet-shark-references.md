@@ -97,8 +97,8 @@ of the selected pose; keep the weapon identities and anatomical handedness.
 
 This choice **supersedes the earlier B/F leg-spacing preference**. Do not mix A's
 upper body with B/F's narrower legs. Keep the stance's planted root and review
-body-only hurtboxes when authoring its runtime idle; the reference update itself
-does not change pushboxes or combat data. A complete breathing/weight-shift loop
+body-only hurtboxes when authoring its runtime idle; the runtime locomotion pass now supplies the selected ready sprite and fitted
+body hurtboxes while retaining the existing pushbox. A complete breathing/weight-shift loop
 remains animation work.
 
 ### Earlier exploration
@@ -182,7 +182,8 @@ the move actually plants it; never fake root travel by sliding a stationary body
 
 ## Effects and remaining animation work
 
-Both pages use the same small effect vocabulary: a tapered crescent with a thin
+Both pages illustrate the shared effect vocabulary; the newer runtime pass targets
+3x the previous swing-band thickness: a tapered crescent with a thin
 light inner edge, a narrow directional thrust wedge, and at most two short
 trailing pieces. Recolor within the guild palette. Windup has no released smear;
 active follows the real blade path. Impact sparks belong to hit/block contact,

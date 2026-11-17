@@ -70,7 +70,7 @@ The [Move Workshop control guide (PDF)](exports/FightGuild-Move-Workshop-Guide.p
 
 ## Current reference guides
 
-These are the latest character references. Fillet and Shark's **reference 05** set keeps the mature athletic proportions and matched rendering rules, selects **A / Stalker** for Fillet's standard combat stance, selects **F / Shoulder Rest** for Shark, and gives him blue sports glasses with long, lower-volume white hair. These drawing references guide the next sprite pass; they are not runtime atlases or actual 3D assets.
+These are the latest character references. Fillet and Shark's **reference 05** set keeps the mature athletic proportions and matched rendering rules, selects **A / Stalker** for Fillet's standard combat stance, selects **F / Shoulder Rest** for Shark, and gives him blue sports glasses with long, lower-volume white hair. These drawing references guide sprite production; they are not runtime atlases or actual 3D assets. Their selected ready poses and separate eight-frame walk/run loops are now playable.
 
 | Anvil | Smoke | Tapper |
 | --- | --- | --- |
@@ -92,6 +92,14 @@ Fillet's selected standard stance is **A / Stalker** from the
 [six-option sheet](art/characters/stance-studies/fillet-01.png). The later
 [B/F spacing refinements](art/characters/stance-studies/fillet-02.png) remain
 exploration history; the A selection supersedes that narrower-base direction.
+
+[Open the offline movement preview](exports/FightGuild-Movement-Preview.html)
+for both selected stances, eight-frame walk/run loops, mirroring and hurtboxes.
+In Godot, use **Development → Sprite & collision review → Walk / Run** to play
+or scrub the same frames. The Move Workshop's approach preview also uses them.
+Existing swing trails have a generated **3x thickness** pass; attack reach and
+hitboxes are unchanged. [Production notes](docs/sprite-production.md) record
+source prompts, collision fits and the remaining attack-art consistency work.
 
 ## Project notes
 

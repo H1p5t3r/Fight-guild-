@@ -1,0 +1,255 @@
+{
+  "revision": "locomotion-v1",
+  "created_date": "2026-11-17",
+  "generator": "OpenAI image_gen",
+  "generator_version": "Not exposed by the tool",
+  "pixel_processing": "Generated PNGs copied byte-for-byte. Packing, roots and body-only collision are metadata.",
+  "jobs": [
+    {
+      "id": "fillet-ready",
+      "prompt": "Produce a SINGLE full-body, right-facing side/three-quarter fighting-game sprite on TRUE TRANSPARENT RGBA background, about1024x1024. One character only, no text, labels, ground, shadows, glow or FX. Preserve the supplied model's mature proportions and costume, crisp thick outer contour/fine internal line, neutral upper-left light and flat cel shadows. Entire head, both boots and both weapons inside generous transparent margins. One approved neutral combat stance, ready for an animation pipeline, not an attack. Do not include a second pose or an equipment inset.\nThe first reference is Fillet's current model; the second supplies the exact selected pose A / STALKER in its TOP-LEFT cell ONLY. Reproduce A as drawn, not any other option: wide staggered planted feet, front knee bent, rear leg extending back, torso leaning low/forward, alert gaze RIGHT. Main longer RIGHT-hand curved butcher knife carried low horizontally across/in front of the forward thigh; shorter LEFT-hand curved knife near chest pointed down. This selected grip is intentional. Single crimson anatomical LEFT shoulder plate, ivory cloth at near RIGHT shoulder, short swept brown hair, crimson corset, ivory split apron with crimson markings, charcoal trousers, wrapped forearms, fingerless gloves and substantial three-buckle brown boots. Same adult athletic anatomy and 7.5–8 skull-head upright body scale, strong forearms/thighs. The pose is bent: do not shorten her limbs or enlarge the head to fill space. Both knives remain broad curved single-edge profiles, not fantasy daggers. Position pelvis/root at x512 and ground at y900, fill roughly x150–880 with whole body and knives; crown around y220 due to bent stance. Same stable body construction and weapon dimensions as the reference.",
+      "references": [
+        "art/characters/fillet.png",
+        "art/characters/stance-studies/fillet-01.png"
+      ],
+      "path": "godot/assets/fighters/locomotion-v1/fillet-ready.png",
+      "generated": "exec-1c067899-e9a9-44d0-8756-401e051e88b5.png",
+      "transparent_background": true,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "godot/assets/fighters/locomotion-v1/fillet-ready.png",
+        "sha256": "2c89c465354ef764c275d2a81f1d1d319956d1a98c977eba2310bf63af47a215",
+        "bytes": 819101,
+        "dimensions": [
+          1254,
+          1254
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/characters/fillet.png",
+          "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
+          "bytes": 2034541,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "art/characters/stance-studies/fillet-01.png",
+          "sha256": "9f9b6c7500a73cf51a3d8b7b15fb8fc0acc51b7d32c97d01f1370d86466b54f0",
+          "bytes": 1992871,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shark-ready",
+      "prompt": "Produce a SINGLE full-body, right-facing side/three-quarter fighting-game sprite on TRUE TRANSPARENT RGBA background, about1024x1024. One character only, no text, labels, ground, shadows, glow or FX. Preserve the supplied model's mature proportions and costume, crisp thick outer contour/fine internal line, neutral upper-left light and flat cel shadows. Entire head, both boots and both weapons inside generous transparent margins. One approved neutral combat stance, ready for an animation pipeline, not an attack. Do not include a second pose or an equipment inset.\nThe first reference is Shark's updated model with BLUE SPORTS GLASSES and lower-volume long white hair. The second is his six-stance board; use ONLY option F / SHOULDER REST in the BOTTOM-RIGHT as his selected neutral stance. Tall relaxed athletic stagger, weight casually back, front knee loose, confident slight smirk looking RIGHT. His RIGHT hand carries the long rope-wrapped hooked shaft across/just behind his shoulders, hook to the left, butt ring to the right; shoulder and hands must visibly support it. LEFT hand holds the separate short triangular blade low beside his thigh. Whole pole and knife are visible. Keep one continuous connected open silver J-hook, never an added spear point.\nEight-head mature swimmer anatomy, small angular adult face, broad shoulders and lean waist, long strong limbs, teal scale vest, bone jaw on anatomical LEFT shoulder, rope belt/hip net, slate trousers, teal sash, wrapped boots. LONG white hair with low crown and slim locks following the back, not a giant spiky mane. Physical cobalt-blue sports glasses with blue lenses, bridge and temple arms; NO face paint or old eye mask. Position pelvis/root at x512 and ground at y900, crown around y140; full hooked pole fits inside x120–900. Preserve all original costume landmarks and restrained top-left cel rendering.",
+      "references": [
+        "art/archive/reference-v5-studies/shark-before-stance-selection.png",
+        "art/characters/stance-studies/shark-01.png"
+      ],
+      "path": "godot/assets/fighters/locomotion-v1/shark-ready.png",
+      "generated": "exec-e50d387e-ef5b-41fb-ab53-047bb1913d86.png",
+      "transparent_background": true,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
+        "bytes": 924505,
+        "dimensions": [
+          1254,
+          1254
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/archive/reference-v5-studies/shark-before-stance-selection.png",
+          "sha256": "d7ddb43fdc14b43353d9fd1418f4ada40d6e21a7e7313e05750d18106490d09f",
+          "bytes": 2208563,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "art/characters/stance-studies/shark-01.png",
+          "sha256": "d5cdbc5dec12567dc8127d59ed1f19bd05f2848095243bb58fef98989568fcf3",
+          "bytes": 2123930,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fillet-walk",
+      "prompt": "Create a production 2D fighting-game locomotion sprite atlas, EXACTLY 1536 x 1024 pixels, transparent RGBA background, 4 equal columns by 2 equal rows, EIGHT chronological frames in row-major order, one full body per 384x512 cell. These are eight animation frames of ONE identical character, NOT different character concepts. Right-facing three-quarter gameplay view, consistent camera and anatomy and costume. Match the supplied character sprite and model references exactly. Bold dark outer ink, thinner interior ink, crisp anime cel shading, upper-left neutral light. Keep body and face scale absolutely constant throughout all eight frames. Reference upright body height 350 pixels in each cell (crouched character naturally occupies less vertical height). Root center x192 per cell, ground line y475 per cell, ample transparent gutter around every weapon and foot; never cross a cell boundary. In-place locomotion cycle: character does not travel across the atlas cell. Draw genuinely different sequential leg silhouettes and alternating near/far legs, weight transfer, planted contacts, toe push-off. Frame 8 flows seamlessly into frame1. No labels, grid lines, numbers, decorative effects, speed lines, background or floor shadows. Weapons keep identical lengths, correct hands, never bend or disappear. Hair and cloth have subtle delayed follow-through.\nA powerful, low STALKING WALK loop based on Fillet's chosen A/Stalker neutral. Keep wide combat readiness, forward chest angle, bent loaded legs, intense gaze. Right hand holds the long broad curved butcher knife low across the forward thigh, left hand holds the short curved knife close to chest pointing down. Quiet controlled upper body, strong purposeful footfalls, not an upright parade march. Eight poses: 1 near/right foot forward heel contact with far foot behind; 2 near foot planted and body settles; 3 far foot passes under pelvis, near foot supports; 4 far knee carries forward as near heel lifts; 5 far/left foot forward contact with near foot behind; 6 far foot planted body settles; 7 near foot passes under pelvis, far foot supports; 8 near knee advances and far heel lifts. Preserve the lower stalking silhouette even at passing frames. Crimson armor ONLY on anatomical LEFT shoulder; near/right shoulder is ivory blouse. Short brown hair, crimson corset, split ivory/crimson apron, three-buckle broad brown boots. Keep knives away from knees.",
+      "references": [
+        "godot/assets/fighters/locomotion-v1/fillet-ready.png",
+        "art/characters/fillet.png"
+      ],
+      "path": "godot/assets/fighters/locomotion-v1/fillet-walk.png",
+      "generated": "exec-da12e489-a12f-42e1-a9d6-a443ef99921a.png",
+      "transparent_background": true,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "godot/assets/fighters/locomotion-v1/fillet-walk.png",
+        "sha256": "9470a7f2c488288c29cafd773ee5b5407e950581c40d845bde8fc857c81cf3a2",
+        "bytes": 2207039,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/locomotion-v1/fillet-ready.png",
+          "sha256": "2c89c465354ef764c275d2a81f1d1d319956d1a98c977eba2310bf63af47a215",
+          "bytes": 819101,
+          "dimensions": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "art/characters/fillet.png",
+          "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
+          "bytes": 2034541,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fillet-run",
+      "prompt": "Create a production 2D fighting-game locomotion sprite atlas, EXACTLY 1536 x 1024 pixels, transparent RGBA background, 4 equal columns by 2 equal rows, EIGHT chronological frames in row-major order, one full body per 384x512 cell. These are eight animation frames of ONE identical character, NOT different character concepts. Right-facing three-quarter gameplay view, consistent camera and anatomy and costume. Match the supplied character sprite and model references exactly. Bold dark outer ink, thinner interior ink, crisp anime cel shading, upper-left neutral light. Keep body and face scale absolutely constant throughout all eight frames. Reference upright body height 350 pixels in each cell (crouched character naturally occupies less vertical height). Root center x192 per cell, ground line y475 per cell, ample transparent gutter around every weapon and foot; never cross a cell boundary. In-place locomotion cycle: character does not travel across the atlas cell. Draw genuinely different sequential leg silhouettes and alternating near/far legs, weight transfer, planted contacts, toe push-off. Frame 8 flows seamlessly into frame1. No labels, grid lines, numbers, decorative effects, speed lines, background or floor shadows. Weapons keep identical lengths, correct hands, never bend or disappear. Hair and cloth have subtle delayed follow-through.\nA strong aggressive RUN loop springing from Fillet's chosen A/Stalker neutral. Low forward drive, powerful alternating knee lifts and fully committed rear-leg push-off, clear moments of flight, compact controlled knife arms. Long curved right-hand knife held low safely outside legs, short curved left-hand knife close to chest, no arm windmill. Eight phases: 1 near/right foot forward landing, far leg folded behind; 2 near stance leg compresses supporting weight; 3 near leg extends pushing back while far knee drives forward; 4 flight far leg reaches forward near foot folds behind; 5 far/left foot forward landing, near leg folded behind; 6 far stance leg compresses; 7 far leg extends pushing back while near knee drives forward; 8 flight near leg reaches forward far foot folds behind. Different clear leg silhouette each frame, not eight copies of the same pose. Torso maintains low predatory athletic lean, not a sprint so deep the head points down. Crimson armor ONLY anatomical LEFT shoulder, near/right shoulder ivory blouse. Short brown hair, crimson corset, split ivory/crimson apron, broad three-buckle brown boots.",
+      "references": [
+        "godot/assets/fighters/locomotion-v1/fillet-ready.png",
+        "art/characters/fillet.png"
+      ],
+      "path": "godot/assets/fighters/locomotion-v1/fillet-run.png",
+      "generated": "exec-711f54d1-4b14-480f-9d20-9a134a5ee270.png",
+      "transparent_background": true,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "godot/assets/fighters/locomotion-v1/fillet-run.png",
+        "sha256": "d97be39a04b368b2b88d271e10bf3af1af8be5501f05d04961d9903cacc0d823",
+        "bytes": 2175244,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/locomotion-v1/fillet-ready.png",
+          "sha256": "2c89c465354ef764c275d2a81f1d1d319956d1a98c977eba2310bf63af47a215",
+          "bytes": 819101,
+          "dimensions": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "art/characters/fillet.png",
+          "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
+          "bytes": 2034541,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shark-walk",
+      "prompt": "Create a production 2D fighting-game locomotion sprite atlas, EXACTLY 1536 x 1024 pixels, transparent RGBA background, 4 equal columns by 2 equal rows, EIGHT chronological frames in row-major order, one full body per 384x512 cell. These are eight animation frames of ONE identical character, NOT different character concepts. Right-facing three-quarter gameplay view, consistent camera and anatomy and costume. Match the supplied character sprite and model references exactly. Bold dark outer ink, thinner interior ink, crisp anime cel shading, upper-left neutral light. Keep body and face scale absolutely constant throughout all eight frames. Reference upright body height 350 pixels in each cell (crouched character naturally occupies less vertical height). Root center x192 per cell, ground line y475 per cell, ample transparent gutter around every weapon and foot; never cross a cell boundary. In-place locomotion cycle: character does not travel across the atlas cell. Draw genuinely different sequential leg silhouettes and alternating near/far legs, weight transfer, planted contacts, toe push-off. Frame 8 flows seamlessly into frame1. No labels, grid lines, numbers, decorative effects, speed lines, background or floor shadows. Weapons keep identical lengths, correct hands, never bend or disappear. Hair and cloth have subtle delayed follow-through.\nA confident heavy athletic WALK loop based on Shark's selected F/SHOULDER REST. Keep the long hooked shaft resting across/behind the shoulders, anatomical RIGHT hand stabilizing the shaft; hooked end to screen-left, ring butt to screen-right. Anatomical LEFT hand holds separate short triangular blade down by his side. Relaxed proud chest and controlled shoulder roll, deliberate long steps, mature swimmer build, not bouncing childlike. Eight poses: 1 near/right foot forward contact far foot behind; 2 near foot planted body settles; 3 far foot passing under pelvis; 4 far knee advances near heel rises; 5 far/left foot forward contact near foot behind; 6 far foot planted body settles; 7 near foot passes beneath pelvis; 8 near knee advances far heel rises. Long WHITE hair with LOW volume and flat crown, narrow grouped locks following neck/back; physical BLUE sports glasses with frame and temples in every frame, no face paint. Teal scale vest, bone jaw LEFT shoulder armor, rope and net belt, slate trousers, teal sash, broad strapped boots. Full hook silhouette and butt ring remain inside each cell. Do not enlarge the head or shorten the weapon to fit; whole character scale identical.",
+      "references": [
+        "godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "art/characters/shark.png"
+      ],
+      "path": "godot/assets/fighters/locomotion-v1/shark-walk.png",
+      "generated": "exec-47d6be33-3da9-496b-a0a7-33cfa3e0eb59.png",
+      "transparent_background": true,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "godot/assets/fighters/locomotion-v1/shark-walk.png",
+        "sha256": "64dac06595246c3a1e65adfe6db7b1ccc41b756b3298ec5fedea200a9816c149",
+        "bytes": 2371296,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
+          "bytes": 924505,
+          "dimensions": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+          "bytes": 2201584,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shark-run",
+      "prompt": "Create a production 2D fighting-game locomotion sprite atlas, EXACTLY 1536 x 1024 pixels, transparent RGBA background, 4 equal columns by 2 equal rows, EIGHT chronological frames in row-major order, one full body per 384x512 cell. These are eight animation frames of ONE identical character, NOT different character concepts. Right-facing three-quarter gameplay view, consistent camera and anatomy and costume. Match the supplied character sprite and model references exactly. Bold dark outer ink, thinner interior ink, crisp anime cel shading, upper-left neutral light. Keep body and face scale absolutely constant throughout all eight frames. Reference upright body height 350 pixels in each cell (crouched character naturally occupies less vertical height). Root center x192 per cell, ground line y475 per cell, ample transparent gutter around every weapon and foot; never cross a cell boundary. In-place locomotion cycle: character does not travel across the atlas cell. Draw genuinely different sequential leg silhouettes and alternating near/far legs, weight transfer, planted contacts, toe push-off. Frame 8 flows seamlessly into frame1. No labels, grid lines, numbers, decorative effects, speed lines, background or floor shadows. Weapons keep identical lengths, correct hands, never bend or disappear. Hair and cloth have subtle delayed follow-through.\nA powerful athletic RUN loop launched from Shark's chosen F/SHOULDER REST. Strong forward torso pitch, long driving strides and compact high knee recovery; confident sports captain charging. Keep hooked shaft controlled across/behind shoulders in RIGHT hand, hook left and ring butt right, no overhead spin. LEFT hand keeps separate short triangular knife safely beside torso. Eight phases: 1 near/right foot forward landing far leg folded behind; 2 near stance leg compresses; 3 near leg pushes fully back as far knee drives forward; 4 flight far leg reaching forward near foot folded; 5 far/left foot forward landing near leg folded behind; 6 far stance compresses; 7 far leg pushes back near knee drives forward; 8 flight near leg reaching forward far foot folded. Alternate visible near/far legs clearly; show distinct traction and airborne frames. Consistent long low-volume WHITE hair swept narrowly back, BLUE framed sports glasses in all frames, no face paint. Teal scaled vest, LEFT bone-jaw shoulder armor, rope/net belt, slate trousers, teal sash, broad strapped boots. Preserve exact hooked weapon and knife geometry and both hands; no limb fusion. Full hook fits each cell.",
+      "references": [
+        "godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "art/characters/shark.png"
+      ],
+      "path": "godot/assets/fighters/locomotion-v1/shark-run.png",
+      "generated": "exec-eec61089-f4fa-4e59-84c5-bad9e2f03746.png",
+      "transparent_background": true,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "godot/assets/fighters/locomotion-v1/shark-run.png",
+        "sha256": "44c730bbd3008da01f83197f7e13bc8c31d5b6b9d0e62b8f75dd74067e3bd185",
+        "bytes": 2271946,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
+          "bytes": 924505,
+          "dimensions": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+          "bytes": 2201584,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    }
+  ]
+}

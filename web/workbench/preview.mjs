@@ -50,10 +50,10 @@ export class Preview {
     const ground=point(0,0);ctx.strokeStyle='#718086';ctx.beginPath();ctx.moveTo(12,ground.y);ctx.lineTo(w-12,ground.y);ctx.stroke();
     const rect=(box,color,alpha=.1,dashed=false)=>{const p=point(box[0],box[3]);ctx.fillStyle=color;ctx.globalAlpha=alpha;ctx.fillRect(p.x,p.y,(box[2]-box[0])/100*scale,(box[3]-box[1])/100*scale);ctx.globalAlpha=1;ctx.strokeStyle=color;ctx.setLineDash(dashed?[4,4]:[]);ctx.strokeRect(p.x,p.y,(box[2]-box[0])/100*scale,(box[3]-box[1])/100*scale);ctx.setLineDash([]);};
     frame.state.players.forEach((f,i)=>{
-      const p=point(f.x,f.y),pose=!i&&record.geometryOnly&&moveFrame?poseAt(m,moveFrame):{phase:['active','windup','block','signature_windup','signature_active'][f.posePhase],index:f.poseIndex};
+      const p=point(f.x,f.y),pose=!i&&record.geometryOnly&&moveFrame?poseAt(m,moveFrame,!!this.pack.art[f.character].ready):{phase:['active','windup','block','signature_windup','signature_active','ready','walk','run'][f.posePhase],index:f.poseIndex};
       const sheet=this.pack.art[f.character][pose.phase],tile=sheet?.frames[pose.index];
       ctx.fillStyle='#050d12';ctx.beginPath();ctx.ellipse(p.x,ground.y,22*scale,5*scale,0,0,Math.PI*2);ctx.fill();
-      if(this.options.art&&tile){const img=this.image(sheet.file),s=150/sheet.body_height*scale;if(img.complete&&img.naturalWidth){const [sx,sy,sw,sh]=tile.region;ctx.save();ctx.translate(p.x,p.y);ctx.scale(f.facing,1);ctx.drawImage(img,sx,sy,sw,sh,-tile.pivot[0]*s,-tile.pivot[1]*s,sw*s,sh*s);ctx.restore();}}
+      if(this.options.art&&tile){const img=this.image(tile.file??sheet.file),s=150/sheet.body_height*scale;if(img.complete&&img.naturalWidth){const [sx,sy,sw,sh]=tile.render_region??tile.region;ctx.save();ctx.translate(p.x,p.y);ctx.scale(f.facing,1);ctx.drawImage(img,sx,sy,sw,sh,(sx-tile.region[0]-tile.pivot[0])*s,(sy-tile.region[1]-tile.pivot[1])*s,sw*s,sh*s);ctx.restore();}}
       if(this.options.push)frame.boxes[i].push.forEach(box=>rect(box,'#a8ba76'));
       const hurt=!i&&moveFrame&&(record.geometryOnly||m.hurtboxes[phase])?Object.values(effectiveHurtboxes(this.pack,record.character,m,moveFrame)).map(localToWorld):frame.boxes[i].hurt;
       if(this.options.hurt)hurt.forEach(box=>rect(box,'#7bb8d4'));

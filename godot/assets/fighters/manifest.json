@@ -2,7 +2,7 @@
   "schema": 1,
   "style_rules": "docs/sprite-production.md",
   "generator": "OpenAI image_gen",
-  "status": "Iteration sprites; Fillet and Shark proportion study v2; windup/active attack poses and two-frame defensive reactions, not finished clips",
+  "status": "Iteration sprites: Fillet/Shark selected ready stances and eight-frame walk/run loops; existing attacks/defense remain pose studies; generated swing bands target 3x thickness.",
   "fighters": [
     {
       "id": "anvil",
@@ -75,7 +75,7 @@
             "region": [
               765,
               0,
-              259,
+              270,
               512
             ],
             "pivot": [
@@ -84,10 +84,14 @@
             ],
             "bounds": [
               1,
-              210,
-              257,
+              209,
+              269,
               430
-            ]
+            ],
+            "file": "swings-v3/anvil-active.png",
+            "sha256": "a33b59f7ffc53dd6243041f997929eee65a77debfcbd63b3f753bcf53d10bb87",
+            "generation_file": "exec-210d12e3-7ce0-4978-bfd3-761920bc2a09.png",
+            "swing_thickness_target": 3
           },
           {
             "region": [
@@ -102,9 +106,19 @@
             ],
             "bounds": [
               13,
-              99,
-              234,
-              431
+              87,
+              242,
+              432
+            ],
+            "file": "swings-v3/anvil-active.png",
+            "sha256": "a33b59f7ffc53dd6243041f997929eee65a77debfcbd63b3f753bcf53d10bb87",
+            "generation_file": "exec-210d12e3-7ce0-4978-bfd3-761920bc2a09.png",
+            "swing_thickness_target": 3,
+            "render_region": [
+              1035,
+              0,
+              231,
+              512
             ]
           },
           {
@@ -1017,17 +1031,21 @@
               445
             ],
             "bounds": [
-              1,
-              110,
+              0,
+              109,
               243,
-              445
-            ]
+              446
+            ],
+            "file": "swings-v3/smoke-active.png",
+            "sha256": "de6a6f87214075f4b4429b9be3b3f5cb2172f5f6cb4967ed672c3e5fd7ea6452",
+            "generation_file": "exec-b7ff9f27-823f-4310-9755-e1fdbf73f761.png",
+            "swing_thickness_target": 3
           },
           {
             "region": [
               754,
               0,
-              268,
+              280,
               512
             ],
             "pivot": [
@@ -1036,10 +1054,14 @@
             ],
             "bounds": [
               0,
-              143,
-              268,
-              445
-            ]
+              142,
+              280,
+              447
+            ],
+            "file": "swings-v3/smoke-s-clean.png",
+            "sha256": "35be3b230ef4207543cf11d395290e462a9aba9bcb1510c0ee9c7c63bcda343f",
+            "generation_file": "exec-851b43e5-1cae-479e-a84f-206594116b8d.png",
+            "swing_thickness_target": 3
           },
           {
             "region": [
@@ -1521,7 +1543,7 @@
             "region": [
               1026,
               0,
-              249,
+              252,
               512
             ],
             "pivot": [
@@ -1529,11 +1551,15 @@
               448
             ],
             "bounds": [
-              6,
-              72,
-              249,
-              448
-            ]
+              0,
+              69,
+              251,
+              450
+            ],
+            "file": "swings-v3/tapper-hs-alpha.png",
+            "sha256": "9b73611c5b336092635742a4baa1c61f77b5986e4d0522c5b92f29514e1c9d44",
+            "generation_file": "exec-7cc73bd1-7766-45f4-9234-d7f58a2c8ea0.png",
+            "swing_thickness_target": 3
           },
           {
             "region": [
@@ -2581,7 +2607,397 @@
           1535,
           1023
         ]
-      ]
+      ],
+      "ready": {
+        "file": "locomotion-v1/shark-ready.png",
+        "columns": 1,
+        "rows": 1,
+        "body_height": 1140,
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
+        "generation_file": "exec-e50d387e-ef5b-41fb-ab53-047bb1913d86.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1253,
+            0
+          ],
+          [
+            0,
+            1253
+          ]
+        ],
+        "frames": [
+          {
+            "region": [
+              0,
+              0,
+              1254,
+              1254
+            ],
+            "pivot": [
+              640,
+              1210
+            ],
+            "bounds": [
+              155,
+              67,
+              1042,
+              1211
+            ]
+          }
+        ]
+      },
+      "walk": {
+        "file": "locomotion-v1/shark-walk.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 440,
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "64dac06595246c3a1e65adfe6db7b1ccc41b756b3298ec5fedea200a9816c149",
+        "generation_file": "exec-47d6be33-3da9-496b-a0a7-33cfa3e0eb59.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              208,
+              477
+            ],
+            "bounds": [
+              26,
+              36,
+              358,
+              481
+            ]
+          },
+          {
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              208,
+              477
+            ],
+            "bounds": [
+              17,
+              36,
+              341,
+              481
+            ]
+          },
+          {
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              208,
+              477
+            ],
+            "bounds": [
+              8,
+              36,
+              340,
+              481
+            ]
+          },
+          {
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              208,
+              477
+            ],
+            "bounds": [
+              2,
+              36,
+              339,
+              478
+            ]
+          },
+          {
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              208,
+              479
+            ],
+            "bounds": [
+              9,
+              35,
+              352,
+              481
+            ]
+          },
+          {
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              208,
+              479
+            ],
+            "bounds": [
+              7,
+              34,
+              353,
+              481
+            ]
+          },
+          {
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              208,
+              479
+            ],
+            "bounds": [
+              9,
+              35,
+              349,
+              480
+            ]
+          },
+          {
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              208,
+              479
+            ],
+            "bounds": [
+              10,
+              35,
+              350,
+              475
+            ]
+          }
+        ]
+      },
+      "run": {
+        "file": "locomotion-v1/shark-run.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 440,
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "44c730bbd3008da01f83197f7e13bc8c31d5b6b9d0e62b8f75dd74067e3bd185",
+        "generation_file": "exec-eec61089-f4fa-4e59-84c5-bad9e2f03746.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              202,
+              474
+            ],
+            "bounds": [
+              54,
+              84,
+              358,
+              477
+            ]
+          },
+          {
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              202,
+              474
+            ],
+            "bounds": [
+              57,
+              111,
+              356,
+              477
+            ]
+          },
+          {
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              202,
+              474
+            ],
+            "bounds": [
+              27,
+              80,
+              350,
+              473
+            ]
+          },
+          {
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              202,
+              474
+            ],
+            "bounds": [
+              41,
+              68,
+              356,
+              414
+            ]
+          },
+          {
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              202,
+              474
+            ],
+            "bounds": [
+              54,
+              85,
+              358,
+              477
+            ]
+          },
+          {
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              202,
+              474
+            ],
+            "bounds": [
+              57,
+              112,
+              356,
+              478
+            ]
+          },
+          {
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              202,
+              474
+            ],
+            "bounds": [
+              20,
+              80,
+              352,
+              475
+            ]
+          },
+          {
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              202,
+              474
+            ],
+            "bounds": [
+              44,
+              69,
+              358,
+              405
+            ]
+          }
+        ]
+      }
     },
     {
       "id": "fillet",
@@ -2671,7 +3087,7 @@
             "region": [
               0,
               341,
-              384,
+              397,
               341
             ],
             "pivot": [
@@ -2679,11 +3095,15 @@
               331
             ],
             "bounds": [
-              55,
               54,
-              367,
-              331
-            ]
+              53,
+              397,
+              332
+            ],
+            "file": "swings-v3/fillet-active.png",
+            "sha256": "24529aef354746a5a4a373528dcf5b0e31144c5abef2ec4a7be17a84b9853b0c",
+            "generation_file": "exec-f069a19e-4d40-451f-8a1c-2c2591d49cb4.png",
+            "swing_thickness_target": 3
           },
           {
             "region": [
@@ -3158,10 +3578,14 @@
             ],
             "bounds": [
               27,
-              151,
-              371,
+              141,
+              372,
               415
-            ]
+            ],
+            "file": "swings-v3/fillet-signatures.png",
+            "sha256": "50a354bbca4e6719832fdae7d6f93536eee4f87853d25bdd13e25f67573bdec8",
+            "generation_file": "exec-7eb69300-5b3c-4aa1-9660-b4d8cf09369c.png",
+            "swing_thickness_target": 3
           },
           {
             "region": [
@@ -3175,17 +3599,21 @@
               444
             ],
             "bounds": [
-              43,
+              42,
               71,
               337,
-              446
-            ]
+              447
+            ],
+            "file": "swings-v3/fillet-signatures.png",
+            "sha256": "50a354bbca4e6719832fdae7d6f93536eee4f87853d25bdd13e25f67573bdec8",
+            "generation_file": "exec-7eb69300-5b3c-4aa1-9660-b4d8cf09369c.png",
+            "swing_thickness_target": 3
           },
           {
             "region": [
               768,
               512,
-              384,
+              386,
               512
             ],
             "pivot": [
@@ -3193,11 +3621,15 @@
               444
             ],
             "bounds": [
-              11,
-              114,
-              374,
-              446
-            ]
+              9,
+              113,
+              386,
+              447
+            ],
+            "file": "swings-v3/fillet-signatures.png",
+            "sha256": "50a354bbca4e6719832fdae7d6f93536eee4f87853d25bdd13e25f67573bdec8",
+            "generation_file": "exec-7eb69300-5b3c-4aa1-9660-b4d8cf09369c.png",
+            "swing_thickness_target": 3
           },
           {
             "region": [
@@ -3211,11 +3643,15 @@
               443
             ],
             "bounds": [
-              8,
-              169,
-              358,
-              446
-            ]
+              0,
+              168,
+              361,
+              447
+            ],
+            "file": "swings-v3/fillet-signatures.png",
+            "sha256": "50a354bbca4e6719832fdae7d6f93536eee4f87853d25bdd13e25f67573bdec8",
+            "generation_file": "exec-7eb69300-5b3c-4aa1-9660-b4d8cf09369c.png",
+            "swing_thickness_target": 3
           }
         ]
       },
@@ -3238,7 +3674,397 @@
           1535,
           1023
         ]
-      ]
+      ],
+      "ready": {
+        "file": "locomotion-v1/fillet-ready.png",
+        "columns": 1,
+        "rows": 1,
+        "body_height": 1150,
+        "size": [
+          1254,
+          1254
+        ],
+        "sha256": "2c89c465354ef764c275d2a81f1d1d319956d1a98c977eba2310bf63af47a215",
+        "generation_file": "exec-1c067899-e9a9-44d0-8756-401e051e88b5.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1253,
+            0
+          ],
+          [
+            0,
+            1253
+          ]
+        ],
+        "frames": [
+          {
+            "region": [
+              0,
+              0,
+              1254,
+              1254
+            ],
+            "pivot": [
+              625,
+              1173
+            ],
+            "bounds": [
+              137,
+              224,
+              1114,
+              1174
+            ]
+          }
+        ]
+      },
+      "walk": {
+        "file": "locomotion-v1/fillet-walk.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 475,
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "9470a7f2c488288c29cafd773ee5b5407e950581c40d845bde8fc857c81cf3a2",
+        "generation_file": "exec-da12e489-a12f-42e1-a9d6-a443ef99921a.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              200,
+              473
+            ],
+            "bounds": [
+              20,
+              80,
+              381,
+              477
+            ]
+          },
+          {
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              200,
+              473
+            ],
+            "bounds": [
+              21,
+              81,
+              359,
+              473
+            ]
+          },
+          {
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              200,
+              473
+            ],
+            "bounds": [
+              37,
+              81,
+              357,
+              472
+            ]
+          },
+          {
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              200,
+              473
+            ],
+            "bounds": [
+              48,
+              82,
+              355,
+              472
+            ]
+          },
+          {
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              200,
+              472
+            ],
+            "bounds": [
+              27,
+              82,
+              364,
+              472
+            ]
+          },
+          {
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              200,
+              472
+            ],
+            "bounds": [
+              20,
+              81,
+              364,
+              472
+            ]
+          },
+          {
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              200,
+              472
+            ],
+            "bounds": [
+              40,
+              82,
+              358,
+              472
+            ]
+          },
+          {
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              200,
+              472
+            ],
+            "bounds": [
+              27,
+              82,
+              357,
+              473
+            ]
+          }
+        ]
+      },
+      "run": {
+        "file": "locomotion-v1/fillet-run.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 475,
+        "size": [
+          1536,
+          1024
+        ],
+        "sha256": "d97be39a04b368b2b88d271e10bf3af1af8be5501f05d04961d9903cacc0d823",
+        "generation_file": "exec-711f54d1-4b14-480f-9d20-9a134a5ee270.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              195,
+              464
+            ],
+            "bounds": [
+              37,
+              75,
+              352,
+              465
+            ]
+          },
+          {
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              195,
+              464
+            ],
+            "bounds": [
+              51,
+              75,
+              348,
+              465
+            ]
+          },
+          {
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              195,
+              464
+            ],
+            "bounds": [
+              33,
+              71,
+              347,
+              464
+            ]
+          },
+          {
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              195,
+              464
+            ],
+            "bounds": [
+              35,
+              56,
+              374,
+              411
+            ]
+          },
+          {
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              195,
+              464
+            ],
+            "bounds": [
+              30,
+              73,
+              351,
+              466
+            ]
+          },
+          {
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              195,
+              464
+            ],
+            "bounds": [
+              43,
+              79,
+              349,
+              466
+            ]
+          },
+          {
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              195,
+              464
+            ],
+            "bounds": [
+              30,
+              76,
+              350,
+              465
+            ]
+          },
+          {
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              195,
+              464
+            ],
+            "bounds": [
+              46,
+              65,
+              375,
+              417
+            ]
+          }
+        ]
+      }
     }
   ],
   "active_order": [
@@ -3262,5 +4088,15 @@
     "S",
     "Hs",
     "D"
+  ],
+  "locomotion_order": [
+    "near_contact",
+    "near_down",
+    "far_pass_or_drive",
+    "far_reach_or_flight",
+    "far_contact",
+    "far_down",
+    "near_pass_or_drive",
+    "near_reach_or_flight"
   ]
 }

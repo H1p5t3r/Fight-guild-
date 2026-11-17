@@ -584,6 +584,146 @@
       "path": "exports/FightGuild-Fillet-Shark-References-v5.pdf",
       "bytes": 9021236,
       "sha256": "517281a6e186d02836274d508ed632fa8d15de49c706adb87c58c99e64ed3656"
+    },
+    {
+      "path": "godot/assets/fighters/locomotion-v1/shark-ready.png",
+      "bytes": 924505,
+      "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/locomotion-v1/fillet-walk.png",
+      "bytes": 2207039,
+      "sha256": "9470a7f2c488288c29cafd773ee5b5407e950581c40d845bde8fc857c81cf3a2",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/locomotion-v1/fillet-run.png",
+      "bytes": 2175244,
+      "sha256": "d97be39a04b368b2b88d271e10bf3af1af8be5501f05d04961d9903cacc0d823",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/locomotion-v1/shark-walk.png",
+      "bytes": 2371296,
+      "sha256": "64dac06595246c3a1e65adfe6db7b1ccc41b756b3298ec5fedea200a9816c149",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/locomotion-v1/shark-run.png",
+      "bytes": 2271946,
+      "sha256": "44c730bbd3008da01f83197f7e13bc8c31d5b6b9d0e62b8f75dd74067e3bd185",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/locomotion-v1/fillet-ready.png",
+      "bytes": 819101,
+      "sha256": "2c89c465354ef764c275d2a81f1d1d319956d1a98c977eba2310bf63af47a215",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/swings-v3/tapper-active.png",
+      "bytes": 2297717,
+      "sha256": "96ebd496acd411398dded0bc2d13fd7f3eb66f202be39a094ad1ffcd1f95bb9f",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/swings-v3/fillet-active.png",
+      "bytes": 2230380,
+      "sha256": "24529aef354746a5a4a373528dcf5b0e31144c5abef2ec4a7be17a84b9853b0c",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/swings-v3/fillet-signatures.png",
+      "bytes": 2040996,
+      "sha256": "50a354bbca4e6719832fdae7d6f93536eee4f87853d25bdd13e25f67573bdec8",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/swings-v3/anvil-active.png",
+      "bytes": 2233382,
+      "sha256": "a33b59f7ffc53dd6243041f997929eee65a77debfcbd63b3f753bcf53d10bb87",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/swings-v3/smoke-active.png",
+      "bytes": 2274356,
+      "sha256": "de6a6f87214075f4b4429b9be3b3f5cb2172f5f6cb4967ed672c3e5fd7ea6452",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "exports/FightGuild-Movement-Preview.html",
+      "bytes": 14371856,
+      "sha256": "a378de8046833a6c3834e140a6d6f076409ca4e12f6c9d70f35989c67b8e0174"
+    },
+    {
+      "path": "godot/assets/fighters/swings-v3/smoke-s-clean.png",
+      "bytes": 2249006,
+      "sha256": "35be3b230ef4207543cf11d395290e462a9aba9bcb1510c0ee9c7c63bcda343f",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/swing-v3-studies/anvil-hs-clean.png",
+      "bytes": 2394354,
+      "sha256": "394b7f0f627cf5b4983cce6492b76b2f79540c2a3b00c1f9243198a1dd5d1c56",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/swing-v3-studies/tapper-hs-clean.png",
+      "bytes": 2465459,
+      "sha256": "2d6c4730b0c47c306437017742bf6acf0d0bd29264c2ab424fb36002675b5111",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "godot/assets/fighters/swings-v3/tapper-hs-alpha.png",
+      "bytes": 2340528,
+      "sha256": "9b73611c5b336092635742a4baa1c61f77b5986e4d0522c5b92f29514e1c9d44",
+      "dimensions": [
+        1536,
+        1024
+      ]
     }
   ]
 }

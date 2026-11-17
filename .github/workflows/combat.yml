@@ -60,11 +60,13 @@ jobs:
         run: |
           npx playwright install --with-deps chromium
           node scripts/build-workbench.mjs
+          python scripts/build-locomotion-preview.py
           npm run test:workshop
       - uses: actions/upload-artifact@v4
         with:
           name: FightGuild-Move-Workshop
           path: |
             build/FightGuild-Move-Workshop.html
+            exports/FightGuild-Movement-Preview.html
             docs/move-workshop.md
           if-no-files-found: error

@@ -25,22 +25,31 @@ func _initialize() -> void:
 			var source := Image.new()
 			var image_error := source.load_png_from_buffer(FileAccess.get_file_as_bytes(path))
 			check(image_error == OK, "Could not decode source atlas: " + path)
-			check(source != null and source.get_size() == Vector2i(1536, 1024), "Unexpected atlas dimensions: " + path)
+			var dimensions: Array = sheet.get("size", [1536, 1024])
+			check(source != null and source.get_size() == Vector2i(dimensions[0], dimensions[1]), "Unexpected atlas dimensions: " + path)
 			if source == null: continue
 			# Layouts may differ (v2 active sheets are 4x3). Validate declared gutters,
 			# not the old six-column sheet's hard-coded inter-row coordinate.
-			var samples: Array = fighters[c].get("transparent_samples", [[0, 0], [1535, 0], [0, 1023], [500, 510]])
+			var samples: Array = sheet.get("transparent_samples", fighters[c].get("transparent_samples", [[0, 0], [1535, 0], [0, 1023], [500, 510]]))
 			for sample in samples:
 				var point := Vector2i(sample[0], sample[1])
 				check(source.get_pixelv(point).a < 0.03, "Atlas background is not transparent: " + path)
-			check(sheet.frames.size() == (12 if phase == "active" else 4 if phase.begins_with("signature_") else 6), "Missing poses: " + path)
+			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": 4, "signature_active": 4, "ready": 1, "walk": 8, "run": 8}[phase]
+			check(sheet.frames.size() == count, "Missing poses: " + path)
 			for pose in sheet.frames.size():
+				if sheet.frames[pose].has("file"):
+					var alternate: String = FighterArt.DIRECTORY + sheet.frames[pose].file
+					check(FileAccess.get_sha256(alternate) == sheet.frames[pose].sha256, "Swing frame checksum is stale: " + alternate)
+					var alternate_image := Image.new()
+					check(alternate_image.load_png_from_buffer(FileAccess.get_file_as_bytes(alternate)) == OK, "Cannot decode swing frame")
+					check(alternate_image.get_size() == source.get_size() and alternate_image.get_pixel(0, 0).a < 0.03, "Invalid swing atlas dimensions/alpha")
 				var texture := FighterArt.texture(c, phase, pose)
 				var bounds: Array = sheet.frames[pose].bounds
 				check(bounds[2] - bounds[0] > 30 and bounds[3] - bounds[1] > 80, "Empty/tiny pose: " + path)
 				check(texture.region.position.x >= 0 and texture.region.end.x <= source.get_width(), "Atlas region outside image")
 				check(texture.region.position.y >= 0 and texture.region.end.y <= source.get_height(), "Atlas row outside image")
-				check(bounds[0] >= 0 and bounds[1] >= 0 and bounds[2] <= texture.region.size.x and bounds[3] <= texture.region.size.y, "Pose bounds outside frame")
-				check(sheet.frames[pose].pivot[1] > 0 and sheet.frames[pose].pivot[1] <= 512, "Invalid foot pivot")
-	print("Godot sprite catalog: ", failures, " failures; six fighters, 160 source poses, alpha, regions, provenance")
+				check(bounds[0] >= 0 and bounds[1] >= 0 and bounds[2] <= texture.get_width() and bounds[3] <= texture.get_height(), "Pose bounds outside frame")
+				check(texture.get_size() == Vector2(sheet.frames[pose].region[2], sheet.frames[pose].region[3]), "Atlas trim changed logical sprite size")
+				check(sheet.frames[pose].pivot[1] > 0 and sheet.frames[pose].pivot[1] <= source.get_height(), "Invalid foot pivot")
+	print("Godot sprite catalog: ", failures, " failures; six fighters, 194 source poses, alpha, regions, provenance")
 	quit(1 if failures else 0)

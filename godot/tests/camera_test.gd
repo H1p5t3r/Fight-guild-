@@ -16,6 +16,13 @@ func run() -> void:
 		var silhouette: Array = art.frames[0].bounds
 		var height: float = (silhouette[3] - silhouette[1]) * sprite.scale.y
 		check(height / bounds.y >= 0.59 and height / bounds.y <= 0.62, "Neutral silhouette misses the supplied ~60% screen-height reference")
+		# The new low Stalker stance must bend at the same anatomical scale,
+		# rather than stretching back to the upright character's screen height.
+		FighterArt.apply(sprite, character, "ready", 0, bounds.x / 1000.0 * close.zoom, 1)
+		var ready: Dictionary = FighterArt.sheet(character, "ready")
+		var ready_bounds: Array = ready.frames[0].bounds
+		var ready_height: float = (ready_bounds[3] - ready_bounds[1]) * sprite.scale.y / bounds.y
+		check(ready_height >= (0.48 if character == 5 else 0.59) and ready_height <= (0.52 if character == 5 else 0.62), "New stance changed anatomical scale or camera composition")
 		check(ArenaStage.floor_line(bounds) / bounds.y > 0.91, "Floor is still raised onto a HUD panel")
 		sprite.free()
 	# World projection at match, practice, editor and wider window sizes.

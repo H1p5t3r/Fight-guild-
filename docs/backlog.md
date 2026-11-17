@@ -29,7 +29,9 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Remake Fillet/Shark model references and four windup/active signature pairs per fighter under a shared page/style system; record equipment/palette rules, editor-data handoff, exact prompts, archives and downloadable PDFs. See [reference 03](fillet-shark-references.md). These are reference candidates; runtime replacement and user approval remain separate work.
 - [x] Record the user's A / Stalker standard-stance selection, superseding B/F spacing; update Fillet's model thumbnail and Shark's lower-volume long hair across model/action references in revision 04, with preserved history and new PDFs.
 - [x] Select Shark F / Shoulder Rest; replace face paint with blue sports glasses across model/action references and preserve long, lower-volume hair (reference 05).
-- [ ] Produce Fillet's selected Stalker idle frames and carry Shark's revised hair into runtime sprites, preserving anatomy scale, roots and body-only collision fits.
+- [x] Add selected Stalker / Shoulder Rest ready sprites and separate eight-frame walk/run loops for Fillet/Shark, with blue sports glasses, fitted body-only hurtboxes, distance-driven playback and native/browser review.
+- [x] Generate a 3x swing-band thickness pass for all existing swing trails; retain attack reach, timings and geometry.
+- [ ] Add breathing loops and transition in-betweens; carry the selected model/eyewear into older attack, defensive, jump, portrait and intro drawings.
 - [ ] Review the new Fillet/Shark studies in motion, approve their anatomical/palette masters, then apply the same proportion rules to Anvil, Hammer, Smoke and Tapper.
 
 - [ ] Review and approve a common style master: outline weights, cel shadows, lighting, material ramps, camera and scale. Establish exact palette swatches and silhouette landmarks for all six current fighters before adding characters.

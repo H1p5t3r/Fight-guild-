@@ -58,12 +58,13 @@ export const totalFrames=m=>m.startup-1+m.active+m.recovery;
 export const blockAdvantage=m=>m.blockstun-(m.active-1+m.recovery);
 export function phaseAt(m,frame) {return frame<m.startup?'windup':frame<m.startup+m.active?'active':'recovery';}
 export function phaseStart(m,phase){return phase==='windup'?1:phase==='active'?m.startup:m.startup+m.active;}
-export function poseAt(m,frame){
+export function poseAt(m,frame,hasReady=false){
   const phase=phaseAt(m,frame);
   if(m.artPose&&(phase!=='recovery'||m.hitAngle&&frame<m.startup+m.active+8))return {phase:frame<m.startup?'signature_windup':'signature_active',index:m.artPose-1};
+  if(phase==='recovery'&&hasReady&&!m.air&&![1,2,3].includes(m.direction))return {phase:'ready',index:0};
   return phase==='recovery'?{phase:'active',index:m.air?8:[1,2,3].includes(m.direction)?11:0}:{phase,index:1+m.button};
 }
-export function defaultHurtboxes(pack,c,m,frame){const pose=poseAt(m,frame);return clone(pack.hurtPoses[c][pose.phase][pose.index]);}
+export function defaultHurtboxes(pack,c,m,frame){const pose=poseAt(m,frame,!!pack.hurtPoses[c].ready);return clone(pack.hurtPoses[c][pose.phase][pose.index]);}
 export function effectiveHurtboxes(pack,c,m,frame){return m.hurtboxes[phaseAt(m,frame)]||defaultHurtboxes(pack,c,m,frame);}
 export function inputName(m) {
   const button=m.category===4?'P+K':['P','K','S','Hs','D'][m.button];

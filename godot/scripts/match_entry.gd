@@ -92,6 +92,8 @@ func begin(chosen: Array, number: int, is_practice: bool, is_online: bool, repea
 	for character in characters:
 		for stage in FighterArt.phase_names(character):
 			paths.append(FighterArt.DIRECTORY + FighterArt.sheet(character, stage).file)
+			for frame in FighterArt.sheet(character, stage).frames:
+				if frame.has("file"): paths.append(FighterArt.DIRECTORY + frame.file)
 		if FighterArt.catalog().fighters[character].has("hook_weapon"):
 			paths.append(FighterArt.DIRECTORY + FighterArt.catalog().fighters[character].hook_weapon.file)
 	for path in paths:

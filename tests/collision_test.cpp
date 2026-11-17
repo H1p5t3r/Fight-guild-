@@ -21,7 +21,7 @@ static void flush(Simulation& s,bool mirror=false,bool corner=false) {
 static void poses() {
     Simulation s; s.defaults();
     CHECK(Simulation::collision_hash()!=0);
-    for(int c=0;c<6;++c) for(int phase=0;phase<(c>=4?5:3);++phase) for(int p=0;p<(phase==0?12:phase<=2?6:4);++p) {
+    for(int c=0;c<6;++c) for(int phase=0;phase<(c>=4?8:3);++phase) for(int p=0;p<(phase==0?12:phase<=2?6:phase<=4?4:phase==5?1:8);++p) {
         int count=Simulation::pose_box_count(c,phase,p);
         CHECK(count>=3&&count<=4&&count<=MAX_HURTBOXES);
         auto outside=Simulation::pose_box(c,phase,p,MAX_HURTBOXES);
@@ -31,6 +31,39 @@ static void poses() {
             CHECK(b.left<b.right&&b.bottom<b.top);
         }
     }
+    // Locomotion follows travelled distance, not render time. A restored snapshot
+    // and hitstop must preserve both the drawing and its fitted body geometry.
+    for(int c=4;c<6;++c) {
+        s.reset(c,c,0,0);
+        auto& f=s.world.players[0];
+        CHECK(s.pose(f).phase==5);
+        s.step(Right,0);
+        CHECK(s.pose(f).phase==6);
+        const auto saved=s.world;
+        const auto walk=s.pose(f);
+        s.world.hitstop=8;
+        for(int i=0;i<8;++i) { s.step(Right,0); CHECK(s.pose(f).phase==6&&s.pose(f).index==walk.index); }
+        s.world=saved;
+        CHECK(s.pose(f).index==walk.index);
+        f.running=1;
+        CHECK(s.pose(f).phase==7);
+        for(int mirror=0;mirror<2;++mirror) {
+            f.facing=mirror?-1:1;
+            int visited=0;
+            for(int i=0;i<8;++i) {
+                f.x=(i+1)*s.mobility[c].v[RunSpeed]*3;
+                CHECK(s.pose(f).index>=0&&s.pose(f).index<8);
+                visited|=1<<s.pose(f).index;
+                CHECK(s.box_count(0,HurtBox)==3);
+            }
+            CHECK(visited==255);
+        }
+        f.vx=0;
+        CHECK(s.pose(f).phase==5);
+        CHECK(Simulation::pose_box_count(c,5,1)==0);
+        CHECK(Simulation::pose_box_count(c,8,0)==0);
+    }
+    CHECK(Simulation::pose_box_count(0,6,0)==0);
     for(int c=0;c<6;++c) for(int m=0;m<MOVE_COUNT;++m) {
         for(int field=0;field<FIELD_COUNT;++field) CHECK(s.move_set(c,m,field,s.moves[c][m].v[field]));
         CHECK(s.moves[c][m].v[Startup]>=5);

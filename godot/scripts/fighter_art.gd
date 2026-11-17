@@ -2,7 +2,7 @@ class_name FighterArt
 extends RefCounted
 
 # Atlas pivots/scales also compile into core/combat_data.h. Regenerate combat data after art geometry changes.
-const PHASES := ["active", "windup", "block", "signature_windup", "signature_active"]
+const PHASES := ["active", "windup", "block", "signature_windup", "signature_active", "ready", "walk", "run"]
 const DIRECTORY := "res://assets/fighters/"
 static var manifest: Dictionary = {}
 static var textures: Dictionary = {}
@@ -20,11 +20,17 @@ static func texture(character: int, phase: String, pose: int) -> AtlasTexture:
 	var key := "%d/%s/%d" % [character, phase, pose]
 	if not regions.has(key):
 		var info := sheet(character, phase)
-		if not textures.has(info.file): textures[info.file] = load(DIRECTORY + info.file)
+		var file: String = info.frames[pose].get("file", info.file)
+		if not textures.has(file): textures[file] = load(DIRECTORY + file)
 		var result := AtlasTexture.new()
-		result.atlas = textures[info.file]
-		var rect: Array = info.frames[pose].region
+		result.atlas = textures[file]
+		var frame: Dictionary = info.frames[pose]
+		var rect: Array = frame.get("render_region", frame.region)
 		result.region = Rect2(rect[0], rect[1], rect[2], rect[3])
+		if frame.has("render_region"):
+			# Trim atlas-neighbor bleed without changing the logical foot pivot,
+			# body coordinates or texture size used by collision authoring.
+			result.margin = Rect2(rect[0] - frame.region[0], rect[1] - frame.region[1], frame.region[2] - rect[2], frame.region[3] - rect[3])
 		result.filter_clip = true
 		regions[key] = result
 	return regions[key]

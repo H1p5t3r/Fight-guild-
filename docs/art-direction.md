@@ -50,4 +50,4 @@ Fillet and Shark each have a model page with aligned front/side/back studies, ex
 
 Keep superseded images in `art/archive/`; promote changes into `art/characters/` deliberately and update the asset manifest.
 
-The current playable Fillet/Shark atlases remain the [v2 sprite proportion study](sprite-production.md#fillet-and-shark-proportion-study-v2). [Reference 05](fillet-shark-references.md) is the updated drawing reference for their next sprite pass; it does not replace runtime poses or collision. Their previous guides are archived. The other four fighters await the same proportion pass.
+Fillet/Shark use their selected Stalker and Shoulder Rest ready sprites and [eight-frame locomotion loops](sprite-production.md#selected-stances-and-locomotion-v1), with [reference 05](fillet-shark-references.md) as the character authority. Older v2 attack/defense art remains pending its next consistency pass. Swing bands across the roster target 3x previous thickness without changing attack reach. Their previous guides are archived. The other four fighters await the same proportion pass.

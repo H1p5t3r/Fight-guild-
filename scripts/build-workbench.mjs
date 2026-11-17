@@ -43,9 +43,9 @@ for(const [group,values] of Object.entries(defaults).filter(([key])=>key.endsWit
 if(JSON.stringify(defaults)!==JSON.stringify(engine.data()))throw new Error('Limit probing changed defaults.');
 const manifest=JSON.parse(await readFile(path('godot/assets/fighters/manifest.json'),'utf8'));
 const collisions=JSON.parse(await readFile(path('godot/data/fighter_collision.json'),'utf8'));
-const phases=['active','windup','block','signature_active','signature_windup'];
+const phases=['active','windup','block','signature_active','signature_windup','ready','walk','run'];
 const art=manifest.fighters.map(f=>Object.fromEntries(['name',...phases].filter(p=>f[p]).map(p=>[p,f[p]])));
-const files=[...new Set(art.flatMap(f=>phases.filter(p=>f[p]).map(p=>f[p].file)))];
+const files=[...new Set(art.flatMap(f=>phases.filter(p=>f[p]).flatMap(p=>[f[p].file,...f[p].frames.flatMap(frame=>frame.file?[frame.file]:[])])))];
 const images={};await mkdir(path('build/workbench-assets'),{recursive:true});
 let browser,page;
 try {
@@ -68,7 +68,7 @@ try {
     images[file]='data:image/webp;base64,'+(await readFile(cached)).toString('base64');
   }
 } finally {await browser?.close();}
-const regions=['legs','torsoArms','head','extension'],posePhases={active:0,windup:1,block:2,signature_windup:3,signature_active:4};
+const regions=['legs','torsoArms','head','extension'],posePhases={active:0,windup:1,block:2,signature_windup:3,signature_active:4,ready:5,walk:6,run:7};
 const hurtPoses=art.map((fighter,c)=>Object.fromEntries(Object.entries(posePhases).filter(([phase])=>fighter[phase]).map(([phase,p])=>[phase,fighter[phase].frames.map((_,pose)=>Object.fromEntries(Array.from({length:engine.api.fg_pose_box_count(c,p,pose)},(_,n)=>[regions[n],Array.from({length:4},(_,edge)=>engine.api.fg_pose_box_get(c,p,pose,n,edge))])))])));
 const pack={format:1,defaults,limits,art,collisions:collisions.fighters,hurtPoses,images};
 const bundle=await build({entryPoints:[path('web/workbench/app.mjs')],bundle:true,format:'iife',write:false,minify:true,target:'es2022'});

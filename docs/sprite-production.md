@@ -21,9 +21,9 @@ The six generated sets are iteration studies. The goal is a repeatable character
 
 ## Fillet and Shark proportion study v2
 
-The first proportion pass updates **32 poses per fighter**: 12 active/support, six windups, six block reactions and eight signature poses. These remain the playable atlases while the other four fighters keep their existing sheets. The remade [reference 05 model/action pages](fillet-shark-references.md) carry this mature anatomy into the character guides and serve as the drawing reference for the next sprite pass. Use the v2 windup/neutral poses to check scale continuity with the current build; use the current design decisions below for the selected ready stance and hair treatment.
+The first proportion pass updates **32 poses per fighter**: 12 active/support, six windups, six block reactions and eight signature poses. Their attack and defensive drawings remain playable; the new locomotion pass below replaces their neutral and two-pose walking presentation. The other four fighters retain their original locomotion. The current [reference 05 model/action pages](fillet-shark-references.md) carry this mature anatomy into the character guides and serve as the drawing reference for the next sprite pass. Use the v2 windup/neutral poses to check scale continuity with the current build; use the current design decisions below for the selected ready stance and hair treatment.
 
-Fillet's selected standard stance is **A / Stalker** from the original six-option study: wider stagger, forward-loaded low torso, longer right knife low and shorter left knife close/downward. This supersedes the intermediate B/F narrower-leg direction; do not blend the two. Shark keeps long white hair with a lower crown, less outward volume and fewer controlled locks along the nape/back. Moving hair should follow the pose without reintroducing the old radiating mane. These choices are recorded in [current design decisions](../art/characters/design-decisions.json); reference-sheet changes do not alter runtime pivots, pushboxes or body geometry.
+Fillet's selected standard stance is **A / Stalker** from the original six-option study: wider stagger, forward-loaded low torso, longer right knife low and shorter left knife close/downward. This supersedes the intermediate B/F narrower-leg direction; do not blend the two. Shark keeps long white hair with a lower crown, less outward volume and fewer controlled locks along the nape/back. Moving hair should follow the pose without reintroducing the old radiating mane. Shark uses **F / Shoulder Rest**, balancing the hook across his shoulders in his right hand and keeping the separate left knife low. Physical blue sports glasses replace the old eye mask. These choices are recorded in [current design decisions](../art/characters/design-decisions.json); the locomotion pass registers these choices with new roots and body fits while retaining the existing push profiles.
 
 Target roughly 7.5–8 anatomical heads in an upright body, counting the skull rather than projecting hair. Use a smaller mature head, a clear ribcage/pelvis relationship, longer athletic limbs, strong shoulders and forearms, and substantial gloves/boots. Fillet keeps compact angular gestures and a red/ivory butcher silhouette; Shark keeps broad shoulders, long diagonals, teal/slate/bone masses and white hair. The head, hand and weapon scale must remain constant across actions; do not stretch a whole sprite vertically to simulate new proportions. Preserve the palette ramps above and one hard-edged shadow grouping per material.
 
@@ -31,9 +31,47 @@ Every phase still normalizes to the same **150 world-pixel standing reference**.
 
 `proportions-v2/generation.json` records exact downstream generation/correction prompts, source files and rejection reasons; the two original master prompts are explicitly marked as reconstructed briefs. Original v1 art and collision metadata live in `art/archive/proportions-v1/`. Failed v2 layouts/poses live in `art/archive/proportions-v2-studies/`. Generated pixel files are preserved; changes to pivots, atlas bounds and collision are metadata. Redraws that cross atlas boundaries or substitute attack gestures for defensive poses must be repaired before promotion.
 
+## Selected stances and locomotion v1
+
+Fillet and Shark each add **one ready sprite, eight walk frames and eight run
+frames**, bringing the available catalog to **194 poses**. Fillet keeps the low,
+wide Stalker silhouette and compact knife carry. Shark keeps F / Shoulder Rest,
+blue sports glasses, long low-volume white hair and a controlled shoulder carry
+through his forward-driving run. The run has distinct compression, drive and
+flight drawings. These are generated iteration loops, with final cleanup and
+further in-betweens still available for art feedback.
+
+`locomotion-v1/generation.json` retains exact prompts, references and checksums.
+Original generated PNGs are unchanged. Atlas regions, opacity bounds and foot
+roots live in the main manifest. Upright body normalization remains 150 game
+pixels; Fillet's bent stance naturally appears shorter. Each new pose has three
+independently authored body hurtboxes: legs, torso/arms, head. The four-box cap
+and existing push dimensions remain in force. Hair, cloth and both weapons do
+not add hurt regions.
+
+The core selects ready/walk/run as pose phases 5/6/7. Grounded recovery returns
+to the selected ready stance; crouch, jump, attacks and defensive reactions keep
+their existing poses. Distance travelled drives eight-frame gait playback:
+one frame per five walking-speed ticks or three full-run-speed ticks of travel.
+Acceleration therefore slows the run cycle, backward travel reverses the walk,
+and hitstop freezes it. Zero velocity at a wall or pushbox returns to ready.
+The phase is derived from integer simulation position, speed and facing, so
+native, browser preview and rollback require no independent animation clock.
+
+Development → Sprite & collision review now supports **Run**, animated Walk/Run,
+manual frame selection, mirroring and per-frame hurtboxes. The browser Move
+Workshop uses the same new frames for its walk/run approaches and ready states.
+The [offline movement viewer](../exports/FightGuild-Movement-Preview.html) also
+shows both complete loops with slow playback, frame scrubbing and hurtboxes.
+Rebuild it with `python scripts/build-locomotion-preview.py`.
+
+This pass does not redraw the older attack, jump, block, portrait or intro art.
+Those drawings still need the latest costume, hair and eyewear consistency pass.
+A separate breathing loop and transition in-betweens remain future animation.
+
 ## Smear and effect grammar
 
-Use a shared vocabulary, not unrelated special effects for each image. A smear describes motion and must not obscure the hand, striking limb, or weapon silhouette.
+Use a shared vocabulary, not unrelated special effects for each image. All swing bands now target **three times their previous perpendicular thickness**, preserving the weapon path, length, guild color and reach. The thin highlight is an edge within that thicker colored band. A smear describes motion and must not obscure the hand, striking limb, or weapon silhouette.
 
 - **Slash:** one tapered crescent following the actual weapon arc. Thin bright inner edge, a single character-accent body, then at most two short trailing wedges. No full circular rings unless the action actually makes that arc.
 - **Thrust / dash:** a narrow directional wedge aligned with travel, broad near the source and tapered toward the trailing end. Do not turn a jab into a projectile or put an impact burst on a whiff.
@@ -41,13 +79,26 @@ Use a shared vocabulary, not unrelated special effects for each image. A smear d
 - **Smoke:** two or three connected rounded lobes or one curling ribbon, using the same hard-edged value grouping as the cast. No hazy full-cell glow. Smoke's curved vocabulary is an explicit material exception, not a different rendering style.
 - Windups have no released smear or impact. Active smears follow the outgoing action. Future impact shapes appear only when contact occurs; they must be separate from the reusable attack pose.
 
+`swings-v3/generation.json` records the generated thickness pass for Anvil S/Hs,
+Tapper Hs, Smoke K/S, Fillet Hs and all four Fillet signatures. Only edited
+frames select the new images using an optional manifest frame `file` override;
+their untouched neighbors and signature windups keep their original pixels.
+This is an image-generated **3x thickness target**, not an exact mathematical
+dilation of every pixel. Original atlases remain available for comparison.
+Widened texture crops use empty gutters where possible. Anvil uses a
+registered `render_region` trim with logical atlas margins to remove neighboring
+fragments without moving the source pivot or collision coordinates. Smoke S and Tapper Hs have
+generated fragment cleanups; Tapper also needed a background-alpha correction. Two rejected cleanups with opaque haze are
+preserved under `art/archive/swing-v3-studies/`. Roots, body scale,
+attack hitboxes, reach, movement and timings stay unchanged.
+
 Some first-pass active sheets include baked-in flashes, gradients, or inconsistent weapon details. Track and replace these during the consistency pass; do not treat them as new style rules. Body/equipment and effect layers should be separate in the production pipeline.
 
 ## Current build contract
 
 Each fighter has a generated active/support atlas a generated windup atlas and a generated block-reaction atlas. Active/support: four columns by three rows for Fillet/Shark v2, six columns by two rows for the other fighters, with idle, P, K, S, Hs, D, two walking poses, jump, hurt, guard, crouch. Windup: three columns by two rows, with a neutral scale reference, then P, K, S, Hs, D anticipations. Block reactions: three columns by two rows, row-major stable contact/settle, pressure contact/hold, guard-break contact/stagger. Stable and pressure maintain a closed silhouette, with pressure more compressed; broken guard opens the arms and chest. No baked-in impact effects in the defensive sheets. The contact pose settles after four unfrozen ticks; hitstop pauses it. PNG alpha, original generated files preserved; atlas regions, foot pivots and scale also anchor separately authored body/strike rectangles. Weapons and effects never extend hurtboxes. Regenerate compiled collision after geometry changes; see [collision rules](collision-rules.md).
 
-The renderer displays windup during startup and the active pose on active ticks, including any hitstop that freezes those ticks. It returns to a ready pose during recovery while the simulation continues to enforce recovery. These are pose changes, not completed animation clips. Slots without dedicated signature art temporarily reuse the corresponding button’s pose. Fillet and Shark add four dedicated windup/active pairs each, taking the catalog to 160 poses. Shark’s hook body and generated spear are separate layers; core endpoints direct weapon travel. The initial eight recovery ticks reuse the hook active body during weapon retraction; no new recovery drawing is implied. Every distinct directed action needs its own authored sequence later.
+The renderer displays windup during startup and the active pose on active ticks, including any hitstop that freezes those ticks. It returns to a ready pose during recovery while the simulation continues to enforce recovery. These are pose changes, not completed animation clips. Slots without dedicated signature art temporarily reuse the corresponding button’s pose. Fillet and Shark add four dedicated windup/active pairs each, taking the original catalog to 160 poses before the 34 new ready/locomotion drawings. Shark’s hook body and generated spear are separate layers; core endpoints direct weapon travel. The initial eight recovery ticks reuse the hook active body during weapon retraction; no new recovery drawing is implied. Every distinct directed action needs its own authored sequence later.
 
 `godot/assets/fighters/manifest.json` records source references, generation filenames, checksums, atlas regions, pivots, and scale. Runtime attack timing comes from the move editor; the initial defensive settle transition is four ticks. `signature-generation.json` records exact signature, weapon-layer and cleanup prompts; `generation-prompts.json` includes the original windup prompts and explicitly marked reconstructed block prompt briefs. Visual silhouettes and smears never determine hit detection.
 

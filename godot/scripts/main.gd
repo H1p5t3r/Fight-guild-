@@ -777,8 +777,8 @@ func show_sprite_review(clip: int = 0) -> void:
 	layout.add_child(pickers)
 	var fighter_picker := option(pickers, "Fighter", CombatModel.CHARACTERS)
 	var button_picker := option(pickers, "Button", CombatModel.BUTTONS)
-	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard", "Signature attack"])
-	clip_picker.select(clampi(clip, 0, 10))
+	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard", "Signature attack", "Run"])
+	clip_picker.select(clampi(clip, 0, 11))
 	var signature_picker := option(pickers, "Signature", ["1", "2", "3", "4"])
 	fighter_picker.select(edit_character.selected)
 	var options := row(layout)
@@ -789,6 +789,11 @@ func show_sprite_review(clip: int = 0) -> void:
 	var mirror_toggle := CheckBox.new()
 	mirror_toggle.text = "Face left"
 	options.add_child(mirror_toggle)
+	var loop_toggle := CheckBox.new()
+	loop_toggle.text = "Play loop"
+	loop_toggle.button_pressed = true
+	options.add_child(loop_toggle)
+	var frame_picker := option(options, "Frame", ["1", "2", "3", "4", "5", "6", "7", "8"])
 	var pair := HBoxContainer.new()
 	layout.add_child(pair)
 	var previews: Array[FighterPreview] = []
@@ -805,7 +810,11 @@ func show_sprite_review(clip: int = 0) -> void:
 	var stats := label(layout, "", 12, ACCENT)
 	var update := func(_index: int = 0):
 		clip_picker.set_item_disabled(10, fighter_picker.selected < 4)
-		if clip_picker.selected == 10 and fighter_picker.selected < 4: clip_picker.select(0)
+		clip_picker.set_item_disabled(11, fighter_picker.selected < 4)
+		if clip_picker.selected in [10, 11] and fighter_picker.selected < 4: clip_picker.select(0)
+		var locomotion: bool = fighter_picker.selected >= 4 and clip_picker.selected in [5, 11]
+		loop_toggle.visible = locomotion
+		frame_picker.visible = locomotion
 		button_picker.disabled = clip_picker.selected != 0
 		signature_picker.visible = clip_picker.selected == 10
 		var signature_slots: Array = [25, 15, 26, 27] if fighter_picker.selected == 5 else [28, 29, 30, 31]
@@ -817,7 +826,15 @@ func show_sprite_review(clip: int = 0) -> void:
 			previews[i].show_collision = collision_toggle.button_pressed
 			previews[i].facing = -1 if mirror_toggle.button_pressed else 1
 			previews[i].move_slot = slot
-			if clip_picker.selected == 10:
+			if locomotion:
+				var motion_phase := "run" if clip_picker.selected == 11 else "walk"
+				var frame := (frame_picker.selected + i) % 8
+				captions[i].text = "%s · FRAME %d / 8" % [motion_phase.to_upper(), frame + 1]
+				previews[i].present(fighter_picker.selected, motion_phase, frame, previews[i].facing)
+			elif clip_picker.selected == 4 and fighter_picker.selected >= 4:
+				captions[i].text = "STALKER" if fighter_picker.selected == 5 else "SHOULDER REST"
+				previews[i].present(fighter_picker.selected, "ready", 0, previews[i].facing)
+			elif clip_picker.selected == 10:
 				captions[i].text = ["WINDUP", "ACTIVE"][i]
 				previews[i].present(fighter_picker.selected, ["signature_windup", "signature_active"][i], signature_picker.selected, previews[i].facing)
 			elif clip_picker.selected == 0:
@@ -839,6 +856,18 @@ func show_sprite_review(clip: int = 0) -> void:
 	signature_picker.item_selected.connect(update)
 	collision_toggle.toggled.connect(func(_value: bool): update.call())
 	mirror_toggle.toggled.connect(func(_value: bool): update.call())
+	frame_picker.item_selected.connect(func(index: int): loop_toggle.button_pressed = false; update.call(index))
+	var loop_timer := Timer.new()
+	dialog.add_child(loop_timer)
+	loop_timer.wait_time = 1.0 / 60.0
+	var loop_ticks := [0]
+	loop_timer.timeout.connect(func():
+		if not loop_toggle.visible or not loop_toggle.button_pressed: return
+		loop_ticks[0] += 1
+		if loop_ticks[0] % (3 if clip_picker.selected == 11 else 5) == 0:
+			frame_picker.select((frame_picker.selected + 1) % 8)
+			update.call())
+	loop_timer.start()
 	update.call()
 	label(layout, "Hurt: legs · torso + arms · head · optional extension. Maximum 4 per pose.\nCyan: hurt · green: push · orange: hit. Weapons excluded; startup is at least 5 frames.", 12, MUTED)
 	dialog.canceled.connect(func(): close_dialog(dialog))
