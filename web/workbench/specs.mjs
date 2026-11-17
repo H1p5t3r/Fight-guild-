@@ -7,6 +7,7 @@ export const GROUPS = [
   {id:'counter', title:'Counter hits & scaling', intro:'Reversal eligibility recognizes first-frame execution; it does not add invulnerability.', fields:['attackLevel','counterTier','counterVulnerable','counterFreezeFrames','counterSlowFrames','counterHitstun','counterHitstop','reversalEligible','starterProration','comboScaling','minimumDamage']},
 ];
 GROUPS.push({id:'projectiles',title:'Projectile',intro:'Moving shots travel independently; stationary objects stay where they spawn. They use this move’s damage, stun, launch and block rules. No projectile is created until enabled.',fields:["projectileKind", "projectileSpawnFrame", "projectileSpeedX", "projectileSpeedY", "projectileGravity", "projectileLife", "projectileOffsetX", "projectileOffsetY", "projectileWidth", "projectileHeight", "projectileHits", "projectileRehit", "projectileDurability", "projectilePersist", "projectileMelee"]});
+GROUPS.push({id:'vulnerability',title:'Vulnerable body regions',intro:'Choose which regions can receive hits in each attack phase. Disabled regions retain their coordinates.',fields:['hurtMaskWindup','hurtMaskActive','hurtMaskRecovery']});
 export const TABS = [
   {id:'movement',label:'Movement & defense',groups:[]},
   {id:'projectiles',label:'Projectiles',groups:['projectiles']},
@@ -62,6 +63,8 @@ for(const key of ['projectilePersist','projectileMelee'])flags.add(key);
 percent.add('smearStretch');
 Object.assign(options,{projectileKind:[[0,'None'],[1,'Moving projectile'],[2,'Stationary object']]});
 Object.assign(hints,{"projectileSpawnFrame": "0 spawns on the first active frame. Other values are absolute move frames (earliest 5). Values beyond the move do not spawn; throws do not spawn projectiles.", "projectileSpeedX": "Positive travels forward from the launch facing. Negative travels backward. Stationary objects ignore speed and gravity.", "projectileSpeedY": "Positive rises; negative falls.", "projectileGravity": "Downward acceleration per frame (px/f\u00b2). Negative accelerates upward.", "projectileLife": "Action frames alive; shared hitstop freezes the lifetime.", "projectileRehit": "Minimum action frames between contacts with the same target.", "projectileDurability": "Opposing projectiles subtract durability. Equal strength destroys both.", "projectileMelee": "Enable to retain the attack\u2019s normal hitboxes as well as its projectile.", "projectilePersist": "Otherwise disappears when its owner is hit. All projectiles clear during wall travel and round resets."});
+Object.assign(labels,{hurtMaskWindup:'Windup hurtboxes',hurtMaskActive:'Active hurtboxes',hurtMaskRecovery:'Recovery hurtboxes'});
+for(const key of ['hurtMaskWindup','hurtMaskActive','hurtMaskRecovery'])masks[key]=['Legs','Torso & arms','Head','Body extension'];
 // Smear fields are inactive compatibility data; no renderer or editor control uses them.
 for(const key of Object.keys(labels).filter(key=>key.startsWith('smear'))){labels[key]='Legacy '+labels[key].toLowerCase();hints[key]='Retained for older JSON drafts; has no effect.';}
 export const SPECS = Object.fromEntries(Object.entries(labels).map(([key,label])=>[key,{

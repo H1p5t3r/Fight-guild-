@@ -1,4 +1,4 @@
-import {ready,seekMoveFrame,dragHandle} from './workbench-ui-helpers.mjs';
+import {seedBaseline,ready,seekMoveFrame,dragHandle} from './workbench-ui-helpers.mjs';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
 import {mkdir} from 'node:fs/promises';
@@ -10,7 +10,7 @@ try{
   const page=await browser.newPage({viewport:{width:1440,height:1060}}),errors=[],requests=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
   await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
-  await page.goto(url);await page.waitForFunction(()=>moveWorkshop.preview()?.contacts.length===1);
+  await seedBaseline(page);await page.goto(url);await page.waitForFunction(()=>moveWorkshop.preview()?.contacts.length===1);
   assert.equal(await page.evaluate(()=>typeof WebAssembly),'undefined');
   // Game-pixel measurements share the scene, and hiding them only changes presentation.
   await ready(page);await page.locator('#restart').click();

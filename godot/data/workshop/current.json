@@ -1,0 +1,8 @@
+{
+  "label": "Batch 1 · 17 November 2026",
+  "status": "work in progress",
+  "file": "2026-11-17-batch-01/FightGuild-moves-2026-11-17.json",
+  "sha256": "232d762b956ae22791b6e092a7012d97486ef5acf5d21196cc1b8d672ae5963b",
+  "baseCommit": "793d131",
+  "note": "User move tuning; art briefs and remaining moves are unfinished. Schema migration adds editable universal 6P hurtbox protection."
+}

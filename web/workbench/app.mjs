@@ -1,6 +1,6 @@
 import {renderMovement} from './movement-editor.mjs';
 import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,phaseStart,effectiveHurtboxes,inputName,geometryWarnings,CHARACTERS,MOVE_IDS,clone,META} from './model.mjs';
-import {HURT_PHASES,HURT_REGIONS,HURT_LABELS,validateHurtboxes} from '../hurtboxes.mjs';
+import {HURT_PHASES,HURT_REGIONS,HURT_LABELS,HURT_MASK_FIELDS,regionEnabled,validateHurtboxes} from '../hurtboxes.mjs';
 import {SPECS,GROUPS,TABS,ART_FIELDS,GUILDS,COLORS,KINDS} from './specs.mjs';
 import {Preview} from './preview.mjs';
 import {prepareReference,MAX_REFERENCES,MAX_IMPORT_BYTES,REFERENCE_PHASES} from './references.mjs';
@@ -150,7 +150,7 @@ function referenceSection(){
 function hurtValues(rect){return {left:rect[0]/100,bottom:rect[1]/100,width:(rect[2]-rect[0])/100,height:(rect[3]-rect[1])/100};}
 function visibleHurtboxes(){
   const m=move(),phase=phaseAt(m,frame),recorded=testRecord?.frames[testIndex];
-  if(m.hurtboxes[phase]||!matchingRecord()||previewPending||testRecord.geometryOnly||recorded?.selectedFrame!==frame)return effectiveHurtboxes(pack,character,m,frame);
+  if(m.hurtboxes[phase]||m[HURT_MASK_FIELDS[phase]]!==15||!matchingRecord()||previewPending||testRecord.geometryOnly||recorded?.selectedFrame!==frame)return effectiveHurtboxes(pack,character,m,frame);
   const a=recorded.state.players[0];
   return Object.fromEntries(recorded.boxes[0].hurt.map((b,i)=>[HURT_REGIONS[i],a.facing===1?[b[0]-a.x,b[1]-a.y,b[2]-a.x,b[3]-a.y]:[a.x-b[2],b[1]-a.y,a.x-b[0],b[3]-a.y]]));
 }
@@ -167,6 +167,14 @@ function hurtForm(){
   const enable=el('input',{id:'hurt-custom',type:'checkbox',checked:custom}),enableRow=el('div',{class:'hurt-toggle'});enableRow.append(enable,el('label',{for:'hurt-custom'},'Custom boxes for this phase'));
   enable.onchange=()=>{if(!validBeforeLeaving()){enable.checked=custom;return;}stop();model.setHurtPhase(character,slot,hurtPhase,enable.checked?visibleHurtboxes():null);renderForm();syncSummary();listMoves();scheduleSave();};
   section.append(el('label',{for:'hurt-phase',class:'field-label'},'Attack phase'),phase,enableRow,el('p',{class:'hurt-status'},custom?'Custom profile · saved with this move':'Using the sprite pose. Enable custom boxes to make changes.'));
+  const vulnerability=el('fieldset',{class:'hurt-vulnerability'});vulnerability.append(el('legend',{},'Regions that can be hit'));
+  for(const region of HURT_REGIONS){
+    const id='hurt-enabled-'+region,check=el('input',{id,type:'checkbox',checked:regionEnabled(m,hurtPhase,region)}),row=el('div',{class:'hurt-toggle'});
+    check.disabled=!boxes[region];row.append(check,el('label',{for:id},HURT_LABELS[region]));vulnerability.append(row);
+    check.onchange=()=>{if(!validBeforeLeaving()){check.checked=regionEnabled(m,hurtPhase,region);return;}stop();const field=HURT_MASK_FIELDS[hurtPhase],bit=1<<HURT_REGIONS.indexOf(region);model.change(character,slot,field,check.checked?move()[field]|bit:move()[field]&~bit,'');renderForm();syncSummary();listMoves();scheduleSave();};
+  }
+  vulnerability.append(el('p',{class:'hurt-guidance'},'Uncheck a region to protect it during this phase. Its size is kept. 6P starts with only Legs enabled during windup and active frames; recovery restores the full body.'));
+  section.append(vulnerability);
   const region=el('select',{id:'hurt-region'});region.append(...HURT_REGIONS.filter(r=>boxes[r]).map(r=>el('option',{value:r},HURT_LABELS[r])));region.value=hurtRegion;
   region.onchange=()=>{if(!validBeforeLeaving()){region.value=hurtRegion;return;}stop();hurtRegion=region.value;renderForm();syncPreview();};
   section.append(el('label',{for:'hurt-region',class:'field-label'},'Selected body box'),region);
@@ -313,11 +321,11 @@ const preview=new Preview($('preview'),pack,(phase,patch)=>{
   }
   if(stage==='end'&&hurtDragBefore){model.remember(hurtDragBefore);hurtDragBefore=null;listMoves();refreshActions();scheduleSave();syncPreview();}
 });
-function start(data=pack.defaults,selection={}){
+function start(data=pack.draft?.data??pack.defaults,selection={}){
   model=new Workshop(pack,data);character=Number.isInteger(selection.character)&&selection.character>=0&&selection.character<6?selection.character:5;
   slot=Number.isInteger(selection.slot)&&selection.slot>=0&&selection.slot<32?selection.slot:0;tab=TABS.some(t=>t.id===selection.tab)?selection.tab:'timing';frame=move().startup;pendingSeek={frame};
   $('fighter').replaceChildren(...[5,4,0,1,2,3].map(i=>el('option',{value:i},CHARACTERS[i])));$('fighter').disabled=false;render();
-  $('save-status').textContent=storageOkay?'Saved on this device only':'Download to keep your edits';
+  $('save-status').textContent=data===pack.draft?.data?pack.draft.label+' · work in progress':storageOkay?'Saved on this device only':'Download to keep your edits';
 }
 function initialize(){
   try{

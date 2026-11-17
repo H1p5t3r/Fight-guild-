@@ -48,3 +48,6 @@ Multiple boxes and keys share one contact by default. Enabling multiple hits
 allows separate hit numbers 1–32, consumed once each per execution on hit or
 block. Overlapping boxes with the same number cannot stack hits. The consumed
 mask rolls back with the fighter. Throws continue using their range resolver.
+
+
+Per-move vulnerability switches can disable any of those four regions during windup, active or recovery without deleting their fitted coordinates. Universal 6P starts with only legs vulnerable during windup/active and full coverage in recovery. Disabled regions do not collide with melee or projectile hits; pushboxes and throw eligibility remain independent. See the Move Workshop’s Regions that can be hit controls.

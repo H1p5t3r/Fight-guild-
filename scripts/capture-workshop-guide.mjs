@@ -1,4 +1,5 @@
 // Capture the current standalone editor with a fresh, temporary browser draft.
+import {seedBaseline} from '../tests/workbench-ui-helpers.mjs';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
 import {mkdir} from 'node:fs/promises';
@@ -9,7 +10,7 @@ try {
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
   const page=await browser.newPage({viewport:{width:1440,height:1180},deviceScaleFactor:1});
   await mkdir('docs/workshop-guide',{recursive:true});
-  await page.goto(`http://127.0.0.1:${server.address().port}/`);
+  await seedBaseline(page);await page.goto(`http://127.0.0.1:${server.address().port}/`);
   await page.locator('#field-startup').waitFor();
   await page.waitForFunction(()=>moveWorkshop.preview()?.contacts.length>0);
   const tick=await page.evaluate(()=>moveWorkshop.preview().contacts[0].tick);

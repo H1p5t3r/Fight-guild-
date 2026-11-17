@@ -1,11 +1,11 @@
 import {upgradeMovement} from './movement-data.mjs';
-import {HURT_PHASES,validateHurtboxes,packHurtboxes,unpackHurtboxes} from './hurtboxes.mjs';
+import {upgradeHurtMasks,HURT_PHASES,validateHurtboxes,packHurtboxes,unpackHurtboxes} from './hurtboxes.mjs';
 import {validateHitTimeline,packHitKey,unpackHitKey,upgradeHitboxes,HIT_KEY_FIELDS} from './hitboxes.mjs';
 export const BUTTONS = ['P', 'K', 'S', 'Hs', 'D'];
 export const MOVE_IDS = ['5P','5K','5S','5Hs','2P','2K','2S','2Hs','6P','6K','6S','6Hs','6D','5D','236P','236S','623Hs','j.P','j.K','j.S','j.Hs','j.D','2D','4P+K','6P+K','236K','236S>6S','236S>2S','214S','j.214P','214S>P','j.214P>P'];
 export const CHARACTERS = ['Anvil', 'Hammer', 'Smoke', 'Tapper', 'Shark', 'Fillet'];
 // Smear slots are reserved for schema compatibility; transition smearing is removed.
-export const FIELDS = ['button','category','direction','motion','air','startup','active','recovery','damage','hitstun','blockstun','hitstop','pushback','reach','bottom','height','specialCancel','jumpCancel','whiffCancel','selfCancel','advance','simpleDirection','simpleButton','normalRoutes','commandRoutes','hitLevel','chipDamage','guardBreak','counterHitstun','counterHitstop','reversalEligible','hitboxBack','airPushback','blockPushback','launch','airLaunch','knockdown','knockdownFrames','wakeupFrames','wallDamage','throwRange','enabled','artPose','followFrom','followFrom2','followHit','travelSpeed','inertiaPercent','pullFrames','pullGap','hitAngle',"normalCancelStart","normalCancelEnd","specialCancelStart","specialCancelEnd","jumpCancelStart","jumpCancelEnd","followCancelStart","followCancelEnd","cancelOn","starterProration","comboScaling","minimumDamage","landingRecovery","attackLevel","counterTier","counterVulnerable","counterFreezeFrames","counterSlowFrames","projectileKind","projectileSpawnFrame","projectileSpeedX","projectileSpeedY","projectileGravity","projectileLife","projectileOffsetX","projectileOffsetY","projectileWidth","projectileHeight","projectileHits","projectileRehit","projectileDurability","projectilePersist","projectileMelee","smearMode","smearPart","smearStretch","smearFrame1","smearFrame2","smearFrame3","smearFrame4"];
+export const FIELDS = ['button','category','direction','motion','air','startup','active','recovery','damage','hitstun','blockstun','hitstop','pushback','reach','bottom','height','specialCancel','jumpCancel','whiffCancel','selfCancel','advance','simpleDirection','simpleButton','normalRoutes','commandRoutes','hitLevel','chipDamage','guardBreak','counterHitstun','counterHitstop','reversalEligible','hitboxBack','airPushback','blockPushback','launch','airLaunch','knockdown','knockdownFrames','wakeupFrames','wallDamage','throwRange','enabled','artPose','followFrom','followFrom2','followHit','travelSpeed','inertiaPercent','pullFrames','pullGap','hitAngle',"normalCancelStart","normalCancelEnd","specialCancelStart","specialCancelEnd","jumpCancelStart","jumpCancelEnd","followCancelStart","followCancelEnd","cancelOn","starterProration","comboScaling","minimumDamage","landingRecovery","attackLevel","counterTier","counterVulnerable","counterFreezeFrames","counterSlowFrames","projectileKind","projectileSpawnFrame","projectileSpeedX","projectileSpeedY","projectileGravity","projectileLife","projectileOffsetX","projectileOffsetY","projectileWidth","projectileHeight","projectileHits","projectileRehit","projectileDurability","projectilePersist","projectileMelee","smearMode","smearPart","smearStretch","smearFrame1","smearFrame2","smearFrame3","smearFrame4","hurtMaskWindup","hurtMaskActive","hurtMaskRecovery"];
 export const INPUT = { left:1,right:2,down:4,up:8,P:16,K:32,S:64,Hs:128,D:256,dash:512,simple:1024,faultless:2048 };
 export const MOVEMENT_FIELDS = ['forwardStyle', 'walkSpeed', 'runSpeed', 'runAcceleration', 'stepSpeed', 'stepFrames', 'backSpeed', 'backFrames', 'attackFriction',"backStyle","backWalkSpeed","backRunSpeed","jumpSpeed","jumpForwardSpeed","jumpBackSpeed","gravity","airJumps","prejumpFrames","airDashEnabled","airBackdashEnabled","airDashStyle","airBackdashStyle","airDashSpeed","airBackdashSpeed","airDashFrames","airBackdashFrames","airDashUses","hoverHeight","hoverRiseSpeed","teleportDistance","backTeleportDistance","teleportStartup","fdEnabled","fdPushPercent","fdDrain","fdAirDrain","fdBlockCost","smearMode","smearPart","smearStretch"];
 const RULES = ['buttonBuffer','motionWindow','motionGap'];
@@ -69,7 +69,7 @@ export class Engine {
     if(!Number.isInteger(value)||!this.api.fg_move_set(c,m,FIELDS.indexOf(key),value)) throw new Error(`Invalid ${key}: ${value}`);
   }
   data() {
-    return { schema:15, coreVersion:this.api.fg_version(),
+    return { schema:16, coreVersion:this.api.fg_version(),
       inputRules:Object.fromEntries(RULES.map((r,i)=>[r,this.api.fg_rule_get(i)])),
       momentumRules:Object.fromEntries(MOMENTUM_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+3)])),
       recoveryRules:Object.fromEntries(RECOVERY_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+13)])),
@@ -122,7 +122,8 @@ export class Engine {
       data=structuredClone(data);data.schema=data.coreVersion=12;
     }
     data=upgradeMovement(upgradeHitboxes(data),this.defaultData);
-    if(data?.schema!==15||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
+    data=upgradeHurtMasks(data);
+    if(data?.schema!==16||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
     const previous=this.data();
     const apply=d=>{
       RULES.forEach((r,i)=>{ if(!Number.isInteger(d.inputRules?.[r])||!this.api.fg_rule_set(i,d.inputRules[r])) throw new Error(`Invalid ${r}`); });

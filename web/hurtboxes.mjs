@@ -22,3 +22,16 @@ export function upgradeHurtboxes(data){
   }
   return data;
 }
+
+// These flags affect vulnerability only; source coordinates and pushboxes stay intact.
+export const HURT_MASK_FIELDS={windup:'hurtMaskWindup',active:'hurtMaskActive',recovery:'hurtMaskRecovery'};
+export const regionEnabled=(move,phase,region)=>!!((move[HURT_MASK_FIELDS[phase]]??15)&(1<<HURT_REGIONS.indexOf(region)));
+export const enabledHurtboxes=(boxes,move,phase)=>Object.fromEntries(Object.entries(boxes).filter(([region])=>regionEnabled(move,phase,region)));
+export function upgradeHurtMasks(data){
+  if(data?.schema!==15||data.coreVersion!==15)return data;
+  const next=structuredClone(data);next.schema=next.coreVersion=16;
+  for(const character of next.characters??[])for(const move of character.moves??[]){
+    for(const [phase,key]of Object.entries(HURT_MASK_FIELDS))move[key]??=move.id==='6P'&&phase!=='recovery'?1:15;
+  }
+  return next;
+}

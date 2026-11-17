@@ -16,3 +16,5 @@
 
 [hidden]{display:none!important}
 #tabs{flex-wrap:wrap;row-gap:2px} .movement-editor select,.movement-editor input[type=number]{width:100%}.movement-editor input[type=checkbox]{margin-top:8px}.movement-editor>.form-section:first-child select{margin-top:8px}
+
+.hurt-vulnerability{border:1px solid var(--line);border-radius:4px;padding:12px 15px;margin:18px 0}.hurt-vulnerability legend{font-size:16px;color:var(--gold);padding:0 5px}.hurt-vulnerability .hurt-toggle{margin:8px 0}.hurt-vulnerability .hurt-guidance{margin-bottom:0}

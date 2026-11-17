@@ -1,4 +1,4 @@
-import {ready,seekMoveFrame,dragHandle} from './workbench-ui-helpers.mjs';
+import {seedBaseline,ready,seekMoveFrame,dragHandle} from './workbench-ui-helpers.mjs';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
 import {readFile,mkdir} from 'node:fs/promises';
@@ -15,7 +15,7 @@ const screenshotDir='build/workshop-review';await mkdir(screenshotDir,{recursive
 try {
   const context=await browser.newContext({viewport:{width:1440,height:1000}}),page=await context.newPage();
   page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
-  await page.goto(url);await page.locator('#field-startup').waitFor();
+  await seedBaseline(page);await page.goto(url);await page.locator('#field-startup').waitFor();
   await page.evaluate(()=>document.fonts.ready);
   const initial=await data(page);assert.equal(initial.characters.length,6);
   assert.equal(await page.locator('#fighter').inputValue(),'5');

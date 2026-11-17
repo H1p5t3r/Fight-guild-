@@ -1,4 +1,5 @@
 import {build} from 'esbuild';
+import {isDeepStrictEqual} from 'node:util';
 import {chromium} from 'playwright';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
@@ -6,11 +7,12 @@ import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {Engine,FIELDS,MOVEMENT_FIELDS} from '../web/engine.mjs';
+import {validate} from '../web/workbench/model.mjs';
 import {SPECS} from '../web/workbench/specs.mjs';
 const root=new URL('../',import.meta.url), path=p=>fileURLToPath(new URL(p,root));
 const wasm=await readFile(path('web/generated/fight.wasm'));
 const {instance}=await WebAssembly.instantiate(wasm),engine=new Engine(instance),defaults=engine.data();
-if(defaults.schema!==15||defaults.coreVersion!==15) throw new Error('Rebuild the current combat core before packaging the workshop.');
+if(defaults.schema!==16||defaults.coreVersion!==16) throw new Error('Rebuild the current combat core before packaging the workshop.');
 // Ship the actual integer combat simulation as plain JS. Workplace browsers
 // need neither a native executable nor WebAssembly permission to play a preview.
 execFileSync(path('node_modules/.bin/wasm2js'),[path('web/generated/fight.wasm'),'-O','--enable-bulk-memory','-o',path('build/fight-core-js.mjs')]);
@@ -72,6 +74,15 @@ try {
 const regions=['legs','torsoArms','head','extension'],posePhases={active:0,windup:1,block:2,signature_windup:3,signature_active:4,ready:5,walk:6,run:7};
 const hurtPoses=art.map((fighter,c)=>Object.fromEntries(Object.entries(posePhases).filter(([phase])=>fighter[phase]).map(([phase,p])=>[phase,fighter[phase].frames.map((_,pose)=>Object.fromEntries(Array.from({length:engine.api.fg_pose_box_count(c,p,pose)},(_,n)=>[regions[n],Array.from({length:4},(_,edge)=>engine.api.fg_pose_box_get(c,p,pose,n,edge))])))])));
 const pack={format:1,defaults,limits,art,collisions:collisions.fighters,hurtPoses,images};
+const manifestPath=path('godot/data/workshop/current.json');
+if(existsSync(manifestPath)){
+  const batch=JSON.parse(await readFile(manifestPath,'utf8')),raw=await readFile(path('godot/data/workshop/'+batch.file));
+  if(createHash('sha256').update(raw).digest('hex')!==batch.sha256)throw new Error('Workshop source checksum mismatch.');
+  pack.draft={label:batch.label,data:validate(JSON.parse(raw),pack)};
+  engine.loadData(pack.draft.data);
+  const { _moveWorkshop, ...gameplay }=pack.draft.data;
+  if(!isDeepStrictEqual(gameplay,engine.data()))throw new Error('Workshop draft changed during core import.');
+}
 const bundle=await build({entryPoints:[path('web/workbench/app.mjs')],bundle:true,format:'iife',write:false,minify:true,target:'es2022'});
 let css=await readFile(path('web/workbench/style.css'),'utf8');
 for(const [tag,file] of [['BARLOW_REGULAR','BarlowCondensed.woff2'],['BARLOW_SEMIBOLD','BarlowCondensedSemibold.woff2']])css=css.replace(tag,'data:font/woff2;base64,'+(await readFile(path('godot/Content/Fonts/'+file))).toString('base64'));

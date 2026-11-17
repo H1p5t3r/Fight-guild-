@@ -99,7 +99,7 @@ test('Per-attack hurtboxes migrate, export, affect the engine and reject invalid
   const w=new Workshop(pack),legacy=w.snapshot();legacy.schema=legacy.coreVersion=12;
   for(const c of legacy.characters)for(const m of c.moves)delete m.hurtboxes;
   legacy.characters[5].moves[0].damage=77;legacy[META]={version:1,notes:{'Fillet/5P':{windup:'Keep these old notes.'}}};
-  const migrated=new Workshop(pack,legacy);assert.equal(migrated.data.schema,15);assert.equal(migrated.move(5,0).damage,77);assert.deepEqual(migrated.move(5,0).hurtboxes,{});assert.equal(migrated.note(5,0).windup,'Keep these old notes.');
+  const migrated=new Workshop(pack,legacy);assert.equal(migrated.data.schema,16);assert.equal(migrated.move(5,0).damage,77);assert.deepEqual(migrated.move(5,0).hurtboxes,{});assert.equal(migrated.note(5,0).windup,'Keep these old notes.');
   const active=defaultHurtboxes(pack,5,w.move(5,0),5);active.torsoArms=[-2000,6000,4000,11000];delete active.extension;
   w.setHurtPhase(5,0,'active',active);assert.equal(w.changed(5,0),true);assert.deepEqual(w.move(5,4).hurtboxes,{});
   const e=await engine(),fingerprint=e.fingerprint();e.loadData(JSON.parse(w.export()));assert.notEqual(e.fingerprint(),fingerprint);

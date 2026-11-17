@@ -8,7 +8,7 @@ server, WebAssembly or network access is needed to use the downloaded page.
 The [complete control guide (PDF)](../exports/FightGuild-Move-Workshop-Guide.pdf)
 explains every browser editor control, with allowed ranges, worked examples,
 diagrams, clickable contents and an alphabetical field index. It covers the
-current schema-15 build, including combat playback, timed hitboxes, hurtboxes,
+current schema-16 build, including combat playback, timed hitboxes, hurtboxes,
 art notes and pose photos, character movement and projectiles.
 
 ## Use it on another PC
@@ -165,7 +165,7 @@ settings. **Reset move** restores the bundled defaults and clears custom keys.
 4. Select Legs, Torso & arms, or Head. Drag the selected blue box's center to
    move it, drag its edge handles to resize it, or edit its position/size in
    game pixels. You can include one **Body extension** for an extended limb.
-5. Download JSON and import it into the updated schema-15 Godot build. The
+5. Download JSON and import it into the updated schema-16 Godot build. The
    imported profiles affect actual hit detection and the in-game collision
    overlay. **Save locally** in Godot retains them for future launches.
 
@@ -268,3 +268,16 @@ determine whether local HTML or a hosted URL is allowed.
 - **Animation:** poses display directly, with no generated transition smear frames. Weapon smearing is deferred. Old JSON smear fields are retained for compatibility and ignored by both renderers.
 
 Movement and all attack controls support undo, autosave and JSON export/import. Schema-14 imports preserve old edited values and add new fields with compatible defaults. A move’s art brief and pose photos remain in the workshop JSON. Native Godot imports the same gameplay values; keep the workshop file for its art metadata.
+
+
+## Vulnerable regions (schema 16)
+
+In **Hurtboxes → Regions that can be hit**, turn Legs, Torso & arms, Head and the available Body extension on or off independently for windup, active and recovery. This works on inherited sprite geometry and custom profiles. Turning a region off preserves its coordinates, removes it from collision and the live hurtbox overlay, and supports undo, autosave and JSON. At most four regions still exist. Pushboxes and attacking hitboxes are independent.
+
+Every fighter’s **6P** defaults to legs only during windup and active frames, with all body regions restored in recovery. This is upper-body protection against melee and projectiles; overlapping leg hits and throws remain possible. The three exported fields are `hurtMaskWindup`, `hurtMaskActive` and `hurtMaskRecovery` (bits 1/2/4/8, all = 15). Earlier exports migrate without dropping edited stats, rectangles, timelines or art briefs. No transition smearing is reintroduced.
+
+## Current working batch
+
+The [17 November batch 1](move-batches/2026-11-17-batch-01.md) is bundled as a work-in-progress preset. A fresh browser opens that batch; an existing local draft takes priority. To replace an existing browser draft, use **Import JSON** with the archived batch (or your newer file); Undo restores the prior draft. Reset move still restores the starter data.
+
+Godot loads the batch before a locally saved move set. **Development → Load latest workshop batch** applies it again for playtesting; **Save locally** is explicit. The archived upload is unchanged and the shared schema migration adds 6P vulnerability controls. Art briefs and remaining moves are still pending.

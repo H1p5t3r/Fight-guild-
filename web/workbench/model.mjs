@@ -2,7 +2,7 @@ import {upgradeMovement} from '../movement-data.mjs';
 import {FIELDS, MOVE_IDS, CHARACTERS} from '../engine.mjs';
 import {SPECS, ART_FIELDS} from './specs.mjs';
 import {validateReferences,MAX_REFERENCE_TOTAL,MAX_IMPORT_BYTES,REFERENCE_PHASES} from './references.mjs';
-import {validateHurtboxes,HURT_PHASES} from '../hurtboxes.mjs';
+import {validateHurtboxes,upgradeHurtMasks,HURT_PHASES,HURT_MASK_FIELDS,regionEnabled} from '../hurtboxes.mjs';
 import {validateHitTimeline,upgradeHitboxes,keyAt} from '../hitboxes.mjs';
 export {FIELDS,MOVE_IDS,CHARACTERS};
 export const clone = value => structuredClone(value);
@@ -12,9 +12,9 @@ function integer(value, limit, name) {
   if(!Number.isInteger(value)||value<limit.min||value>limit.max) throw new Error(`${name}: use a whole number from ${limit.min} to ${limit.max}.`);
 }
 export function validate(data, pack) {
-  data=upgradeMovement(upgradeHitboxes(data),pack.defaults);
+  data=upgradeHurtMasks(upgradeMovement(upgradeHitboxes(data),pack.defaults));
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14 workshop exports. Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15 workshop exports. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);
@@ -101,11 +101,11 @@ export class Workshop {
     this.remember(before,`movement/${c}/${key}`);
   }
   resetMovement(c){const before=this.snapshot();this.data.characters[c].movement=clone(this.pack.defaults.characters[c].movement);this.remember(before);}
-  change(c,m,key,value){
+  change(c,m,key,value,group=`${c}/${m}/${key}`){
     const before=this.snapshot();
     this.move(c,m)[key]=value;
     try {validate(this.data,this.pack);} catch(error){this.data=before;throw error;}
-    return this.remember(before,`${c}/${m}/${key}`);
+    return this.remember(before,group);
   }
   setNote(c,m,key,value,group=`note/${c}/${m}/${key}`){
     const before=this.snapshot();
@@ -150,7 +150,7 @@ export class Workshop {
         `Hitbox: back ${move.hitboxBack/100}px, front ${move.reach/100}px, bottom ${move.bottom/100}px, height ${move.height/100}px. Knockdown: ${['none','soft','hard'][move.knockdown]}.`,
         `Ground / air / block push: ${move.pushback/100} / ${move.airPushback/100} / ${move.blockPushback/100}px. Ground / air launch: ${move.launch/100} / ${move.airLaunch/100}px per frame.`, '');
       for(const [key,label] of ART_FIELDS.slice(1)) if(note[key]?.trim())lines.push(`**${label}**`,note[key].trim(),'');
-      for(const [phase,boxes] of Object.entries(move.hurtboxes)){lines.push(`**${phase} body hurtboxes**`);for(const [region,rect] of Object.entries(boxes))lines.push(`- ${region}: left / bottom / right / top ${rect.map(v=>v/100).join(' / ')} px`);lines.push('');}
+      for(const [phase,boxes] of Object.entries(move.hurtboxes)){lines.push(`**${phase} body hurtboxes**`);for(const [region,rect] of Object.entries(boxes))lines.push(`- ${region}: left / bottom / right / top ${rect.map(v=>v/100).join(' / ')} px${regionEnabled(move,phase,region)?'':' · disabled'}`);lines.push('');}
       if(move.hitboxTimeline.keys.length){
         lines.push('**Active-frame hitboxes**',`Multiple hits: ${move.hitboxTimeline.multiHit?'on; each hit number connects once':'off; one contact across all keys'}.`);
         for(const key of move.hitboxTimeline.keys){

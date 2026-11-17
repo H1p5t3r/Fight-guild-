@@ -1,5 +1,5 @@
 import {phaseAt,attackBoxes,poseAt,effectiveHurtboxes} from './model.mjs';
-import {HURT_LABELS} from '../hurtboxes.mjs';
+import {HURT_LABELS,enabledHurtboxes,regionEnabled} from '../hurtboxes.mjs';
 import {measureDistances,distanceSummary,pixels} from './measurements.mjs';
 
 export class Preview {
@@ -62,7 +62,7 @@ export class Preview {
       }
       if(this.options.art&&tile){const img=this.image(tile.file??sheet.file),s=150/sheet.body_height*scale;if(img.complete&&img.naturalWidth){const [sx,sy,sw,sh]=tile.render_region??tile.region;ctx.save();ctx.translate(p.x,p.y);ctx.scale(f.facing,1);ctx.drawImage(img,sx,sy,sw,sh,(sx-tile.region[0]-tile.pivot[0])*s,(sy-tile.region[1]-tile.pivot[1])*s,sw*s,sh*s);ctx.restore();}}
       if(this.options.push)frame.boxes[i].push.forEach(box=>rect(box,'#a8ba76'));
-      const hurt=!i&&moveFrame&&(record.geometryOnly||m.hurtboxes[phase])?Object.values(effectiveHurtboxes(this.pack,record.character,m,moveFrame)).map(localToWorld):frame.boxes[i].hurt;
+      const hurt=!i&&moveFrame&&(record.geometryOnly||m.hurtboxes[phase])?Object.values(enabledHurtboxes(effectiveHurtboxes(this.pack,record.character,m,moveFrame),m,phase)).map(localToWorld):frame.boxes[i].hurt;
       if(this.options.hurt)hurt.forEach(box=>rect(box,'#7bb8d4'));
       const authored=!i&&moveFrame;
       const hits=authored?attackLocal.map(localToWorld):frame.boxes[i].hit;
@@ -84,7 +84,7 @@ export class Preview {
     }
     if(moveFrame&&this.edit.hurt?.custom&&this.options.hurt){
       const box=m.hurtboxes[this.edit.hurt.phase]?.[this.edit.hurt.region];
-      if(box){handles(box,'#b9e9ff','hurt');const p=local(box[0],box[3]);ctx.fillStyle='#b9e9ff';ctx.font='11px system-ui';ctx.textAlign='left';ctx.fillText(HURT_LABELS[this.edit.hurt.region],p.x,p.y-9);}
+      if(box&&regionEnabled(m,this.edit.hurt.phase,this.edit.hurt.region)){handles(box,'#b9e9ff','hurt');const p=local(box[0],box[3]);ctx.fillStyle='#b9e9ff';ctx.font='11px system-ui';ctx.textAlign='left';ctx.fillText(HURT_LABELS[this.edit.hurt.region],p.x,p.y-9);}
     }
     const impact=record.contacts.findLast(c=>c.tick<=index&&index-c.tick<18);
     if(impact){const p=point(impact.x,impact.y),age=index-impact.tick;ctx.strokeStyle=impact.event===2?'#8bd8ed':'#ffcf89';ctx.globalAlpha=1-age/18;ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x,p.y,8+age*1.5,0,Math.PI*2);ctx.stroke();ctx.fillStyle=ctx.strokeStyle;ctx.textAlign='center';ctx.font='bold 15px system-ui';ctx.fillText(impact.event===2?'BLOCK':`${impact.damage} DAMAGE`,p.x,p.y-24-age);ctx.globalAlpha=1;ctx.lineWidth=1;}

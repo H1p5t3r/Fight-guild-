@@ -87,6 +87,8 @@ func _ready() -> void:
 	connection.countdown_started.connect(func(): match_entry.begin_opening())
 	connection.match_started.connect(on_network_started)
 	connection.match_ended.connect(on_network_ended)
+	if not OS.get_cmdline_user_args().has("--test"):
+		load_workshop_draft()
 	if FileAccess.file_exists(SAVE_PATH) and not OS.get_cmdline_user_args().has("--test"):
 		var error := model.load_file(SAVE_PATH)
 		editor_status.text = "Loaded your saved move set." if error.is_empty() else error
@@ -94,6 +96,17 @@ func _ready() -> void:
 	show_screen("home")
 	if OS.get_cmdline_user_args().has("--verify-build"):
 		call_deferred("verify_build")
+
+func load_workshop_draft() -> void:
+	var batch: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/workshop/current.json"))
+	if not batch is Dictionary or not batch.get("file") is String:
+		editor_status.text = "Workshop batch could not be read."
+		return
+	var error := model.load_file("res://data/workshop/" + batch.file)
+	editor_status.text = error if not error.is_empty() else str(batch.label) + " · work in progress"
+	if error.is_empty():
+		populate_editor()
+		reset_round()
 
 func verify_build() -> void:
 	var verification = load("res://scripts/build_verification.gd").new()
@@ -291,6 +304,7 @@ func build_interface() -> void:
 	button(saves, "Save locally", func(): var error := model.save_file(SAVE_PATH); editor_status.text = "Saved to " + SAVE_PATH if error.is_empty() else error)
 	button(saves, "Export", func(): show_file(false))
 	button(saves, "Import", func(): show_file(true), true)
+	button(editor, "Load latest workshop batch", load_workshop_draft, true)
 	button(editor, "Restore default move set", func(): model.restore_defaults(); populate_editor(); reset_round(); editor_status.text = "Defaults restored. Save locally to keep them.", true, "danger")
 	editor_status = label(editor, "Provisional tuning · startup ≥ 5f · weapons have no hurtbox", 11, ACCENT)
 	editor_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

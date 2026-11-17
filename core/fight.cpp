@@ -441,14 +441,28 @@ const MoveHurt* Simulation::hurt_override(const Fighter& f,int tick_offset) cons
     return profile.count?&profile:nullptr;
 }
 int Simulation::hurt_count(const Fighter& f,int tick_offset) const {
-    if(const auto* profile=hurt_override(f,tick_offset)) return profile->count;
     Pose art=pose(f,tick_offset);
-    return pose_box_count(f.character,art.phase,art.index);
+    const auto* profile=hurt_override(f,tick_offset);
+    int count=profile?profile->count:pose_box_count(f.character,art.phase,art.index);
+    int enabled=0,mask=hurt_mask(f,tick_offset);
+    for(int i=0;i<count;++i) if(mask&(1<<i)) ++enabled;
+    return enabled;
+}
+int Simulation::hurt_mask(const Fighter& f,int tick_offset) const {
+    if(f.move<0||f.reaction!=Free||f.stun||f.prejump_time||f.faultless
+        ||(f.guarding&&f.block_reaction>0)) return 15;
+    const auto& m=moves[f.character][f.move];
+    int age=f.age+tick_offset;
+    return m.v[age<m.v[Startup]?HurtMaskWindup:age<m.v[Startup]+m.v[Active]?HurtMaskActive:HurtMaskRecovery];
 }
 Box Simulation::hurt_box(const Fighter& f,int index,int tick_offset) const {
-    if(const auto* profile=hurt_override(f,tick_offset)) return transform(profile->boxes[index],f);
+    if(index<0) return {};
+    int mask=hurt_mask(f,tick_offset),region=0;
+    for(;region<MAX_HURTBOXES;++region) if((mask&(1<<region))&&index--==0) break;
+    if(region==MAX_HURTBOXES) return {};
+    if(const auto* profile=hurt_override(f,tick_offset)) return transform(profile->boxes[region],f);
     Pose art=pose(f,tick_offset);
-    return transform(pose_box(f.character,art.phase,art.index,index),f);
+    return transform(pose_box(f.character,art.phase,art.index,region),f);
 }
 Box Simulation::push_box(const Fighter& f) const {
     const auto& profile=PUSH_PROFILES[f.character];
@@ -1197,6 +1211,7 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case Knockdown: high=2; break;
         case KnockdownFrames: low=1; high=180; break;
         case WakeupFrames: high=60; break;
+        case HurtMaskWindup:case HurtMaskActive:case HurtMaskRecovery: high=15; break;
         case WallDamage: high=5000; break;
         case HitboxBack:case Bottom: low=-50000; high=50000; break;
         case Advance: low=-10000; high=10000; break;

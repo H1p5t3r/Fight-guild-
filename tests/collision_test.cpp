@@ -180,8 +180,42 @@ static void edited_attack_hurtboxes() {
     }
     s.defaults();CHECK(s.hurt_get(5,0,1,0)==0);
 }
+static void phased_hurtbox_toggles() {
+    const Box body[4]={{-1000,0,1000,5000},{-1200,5000,1200,11000},{-800,11000,800,14000},{1200,7000,3000,9000}};
+    for(int c=0;c<CHARACTER_COUNT;++c) {
+        Simulation s;s.defaults();s.reset(c,0,0,0);auto& f=s.world.players[0];f.move=8;
+        for(int p=0;p<3;++p) CHECK(s.hurt_set(c,8,p,4,body));
+        for(int phase=0;phase<3;++phase) {
+            f.age=phase==0?1:phase==1?s.moves[c][8].v[Startup]:s.moves[c][8].v[Startup]+s.moves[c][8].v[Active];
+            CHECK(s.box_count(0,HurtBox)==(phase==2?4:1));CHECK(s.box(0,HurtBox,0).top==5000);
+            CHECK(s.box_count(0,PushBox)==1);
+        }
+        f.age=1;CHECK(s.move_set(c,8,HurtMaskWindup,5));CHECK(s.box_count(0,HurtBox)==2);
+        CHECK(s.box(0,HurtBox,1).bottom==11000); // Legs + head retain their role order.
+        CHECK(s.move_set(c,8,HurtMaskWindup,0));CHECK(s.box_count(0,HurtBox)==0);CHECK(s.box_count(0,PushBox)==1);
+        CHECK(s.move_set(c,8,HurtMaskWindup,15));CHECK(s.box_count(0,HurtBox)==4);
+        CHECK(s.hurt_get(c,8,0,6)==5000); // Disabled coordinates are never erased.
+        CHECK(!s.move_set(c,8,HurtMaskWindup,16));CHECK(!s.move_set(c,8,HurtMaskActive,-1));
+        for(int phase=0;phase<3;++phase)for(int low=0;low<2;++low)for(int projectile=0;projectile<2;++projectile) {
+            s.defaults();s.reset(0,c,0,0);auto& a=s.world.players[0];auto& d=s.world.players[1];
+            a.x=30000;d.x=50000;a.facing=1;d.facing=-1;d.move=8;
+            for(int p=0;p<3;++p)CHECK(s.hurt_set(c,8,p,4,body));
+            auto& defend=s.moves[c][8];defend.v[Advance]=0;defend.v[TravelSpeed]=0;
+            d.age=phase==0?defend.v[Startup]-2:phase==1?defend.v[Startup]:defend.v[Startup]+defend.v[Active]-1;
+            auto& attack=s.moves[0][0];attack.v[HitboxBack]=19000;attack.v[Reach]=21000;
+            attack.v[Bottom]=low?2000:7000;attack.v[Height]=500;attack.v[Pushback]=0;
+            if(projectile){
+                attack.v[ProjectileKind]=1;attack.v[ProjectileHeight]=500;attack.v[ProjectileWidth]=2000;
+                auto& q=s.world.projectiles[0];q.life=20;q.owner=0;q.character=0;q.move=0;q.serial=1;
+                q.x=49000;q.y=low?2250:7250;q.vx=1000;q.facing=1;q.hits=1;q.durability=1;
+            }else{a.move=0;a.age=attack.v[Startup]-1;}
+            const State before=s.world;s.step(0,0);CHECK((d.health<1000)==bool(low||phase==2));
+            auto hash=s.checksum();s.world=before;s.step(0,0);CHECK(s.checksum()==hash);
+        }
+    }
+}
 int main() {
-    poses(); pushes(); contact_and_weapons();edited_attack_hurtboxes();
+    poses(); pushes(); contact_and_weapons();edited_attack_hurtboxes();phased_hurtbox_toggles();
     std::printf("Collision / sprite geometry: %d checks, %d failures\n",checks,failures);
     return failures?1:0;
 }

@@ -5,10 +5,10 @@
 `content.json` is the maintained source. Gameplay field labels and ranges are
 read from the current editor specifications and generated workshop data rather
 than copied into the layout code. Behavioral explanations were checked against
-the schema-15 C++ core and browser UI, including combat playback, hitbox keys, movement, defense and projectiles. This guide documents the
+the schema-16 C++ core and browser UI, including combat playback, hitbox keys, movement, defense, projectiles and per-region hurtbox switches. This guide documents the
 browser workshop; it does not claim to cover every global control in Godot.
 
-The PDF has 40 deliberately paginated A4 pages, embedded fonts, searchable text,
+The PDF has 41 deliberately paginated A4 pages, embedded fonts, searchable text,
 bookmarks, linked contents and a linked alphabetical gameplay-field index.
 Screenshots show a fresh default draft in a temporary browser context. Enabling
 the sample hurtbox profile does not modify repository move data or a user draft.

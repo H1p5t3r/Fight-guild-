@@ -140,3 +140,11 @@ Requested scope: make repeatable character images performing directed actions, w
 
 - Added live workshop distance guides: root spacing, pushbox gap/overlap, attack
   front extent, selected-box size and a facing-relative ground ruler.
+
+
+## User move authoring batches
+
+- [x] Preserve and validate 2026-11-17 batch 1: 21 edited moves across Fillet and Shark, plus Fillet air-dash tuning. Load as a work-in-progress preset in the editor and native build.
+- [x] Add independent per-phase hurtbox region switches and universal 6P upper-body protection, with coordinate preservation and editable recovery coverage.
+- [ ] Review Shark 5Hs’s key at active frame 10 (currently beyond 7 active frames) and the S input on the `j.214P` slot with the remaining move edits.
+- [ ] Receive the remaining moves and art briefs/references before deriving revised attack sprite sheets.

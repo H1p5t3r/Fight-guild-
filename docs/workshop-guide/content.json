@@ -1,8 +1,8 @@
 {
   "title": "Move Workshop — Complete Control Guide",
   "edition": "17 November 2026",
-  "schema": 15,
-  "source_revision": "schema-15 movement and projectile edition; transition smears removed",
+  "schema": 16,
+  "source_revision": "schema-16 per-phase hurtbox toggles and first user move batch",
   "pages": [
     {
       "id": "cover",
@@ -1098,6 +1098,46 @@
           "type": "callout",
           "title": "Three required regions, one optional extension",
           "text": "Keep boxes on the body; weapons add no hurtbox. The editor cannot create invulnerability by deleting every box. Custom recovery coverage stays fixed through that phase; inherited recovery coverage can follow live crouching or landing poses. Pushboxes remain separate and read-only."
+        }
+      ]
+    },
+    {
+      "id": "hurt-toggles",
+      "section": "HURTBOXES",
+      "title": "Choose which regions can be hit",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "In Hurtboxes, Regions that can be hit has a switch for Legs, Torso & arms, Head, and an available Body extension. Each attack phase has its own settings. These switches work with the sprite profile or your custom rectangles."
+        },
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "hurtMaskWindup",
+              "text": "Controls vulnerable regions before the first active frame. Default 6P leaves only Legs enabled."
+            },
+            {
+              "key": "hurtMaskActive",
+              "text": "Controls vulnerable regions while the attack is active. Default 6P leaves only Legs enabled. The move’s attacking hitboxes still work."
+            },
+            {
+              "key": "hurtMaskRecovery",
+              "text": "Controls vulnerable regions during recovery. Default 6P restores all regions so missed anti-airs can be punished."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Turning a region off removes it from hit detection and the live cyan overlay. Its coordinates remain saved, so turning it back on restores the same shape. Disabled custom rectangles can still be adjusted using their numeric controls. At most four body regions exist per pose; the extension switch is available when that region exists."
+        },
+        {
+          "type": "text",
+          "text": "The switches do not change pushboxes, movement, throw eligibility, damage-dealing hitboxes, or the sprite art. Attacks can still connect anywhere a remaining hurtbox overlaps. Protection applies against both melee attacks and projectiles. Hitstun and blocking use their usual body profiles."
+        },
+        {
+          "type": "text",
+          "text": "JSON stores each phase as a mask: Legs = 1, Torso & arms = 2, Head = 4, Body extension = 8. All on = 15; legs only = 1; all off = 0. Use the checkboxes instead of editing these values by hand. Version-15 exports import automatically, retaining your edits and adding the universal 6P defaults."
         }
       ]
     },

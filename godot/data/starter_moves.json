@@ -93,7 +93,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5K",
@@ -184,7 +187,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5S",
@@ -275,7 +281,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5Hs",
@@ -366,7 +375,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2P",
@@ -457,7 +469,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2K",
@@ -548,7 +563,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2S",
@@ -639,7 +657,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2Hs",
@@ -730,7 +751,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P",
@@ -821,7 +845,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 1,
+          "hurtMaskActive": 1,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6K",
@@ -912,7 +939,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6S",
@@ -1003,7 +1033,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6Hs",
@@ -1094,7 +1127,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6D",
@@ -1185,7 +1221,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5D",
@@ -1276,7 +1315,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236P",
@@ -1367,7 +1409,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S",
@@ -1458,7 +1503,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "623Hs",
@@ -1549,7 +1597,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.P",
@@ -1640,7 +1691,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.K",
@@ -1731,7 +1785,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.S",
@@ -1822,7 +1879,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.Hs",
@@ -1913,7 +1973,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.D",
@@ -2004,7 +2067,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2D",
@@ -2095,7 +2161,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "4P+K",
@@ -2186,7 +2255,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P+K",
@@ -2277,7 +2349,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236K",
@@ -2368,7 +2443,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>6S",
@@ -2459,7 +2537,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>2S",
@@ -2550,7 +2631,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S",
@@ -2641,7 +2725,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P",
@@ -2732,7 +2819,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S>P",
@@ -2823,7 +2913,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P>P",
@@ -2914,7 +3007,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         }
       ],
       "movement": {
@@ -3052,7 +3148,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5K",
@@ -3143,7 +3242,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5S",
@@ -3234,7 +3336,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5Hs",
@@ -3325,7 +3430,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2P",
@@ -3416,7 +3524,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2K",
@@ -3507,7 +3618,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2S",
@@ -3598,7 +3712,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2Hs",
@@ -3689,7 +3806,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P",
@@ -3780,7 +3900,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 1,
+          "hurtMaskActive": 1,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6K",
@@ -3871,7 +3994,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6S",
@@ -3962,7 +4088,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6Hs",
@@ -4053,7 +4182,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6D",
@@ -4144,7 +4276,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5D",
@@ -4235,7 +4370,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236P",
@@ -4326,7 +4464,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S",
@@ -4417,7 +4558,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "623Hs",
@@ -4508,7 +4652,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.P",
@@ -4599,7 +4746,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.K",
@@ -4690,7 +4840,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.S",
@@ -4781,7 +4934,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.Hs",
@@ -4872,7 +5028,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.D",
@@ -4963,7 +5122,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2D",
@@ -5054,7 +5216,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "4P+K",
@@ -5145,7 +5310,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P+K",
@@ -5236,7 +5404,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236K",
@@ -5327,7 +5498,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>6S",
@@ -5418,7 +5592,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>2S",
@@ -5509,7 +5686,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S",
@@ -5600,7 +5780,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P",
@@ -5691,7 +5874,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S>P",
@@ -5782,7 +5968,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P>P",
@@ -5873,7 +6062,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         }
       ],
       "movement": {
@@ -6011,7 +6203,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5K",
@@ -6102,7 +6297,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5S",
@@ -6193,7 +6391,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5Hs",
@@ -6284,7 +6485,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2P",
@@ -6375,7 +6579,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2K",
@@ -6466,7 +6673,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2S",
@@ -6557,7 +6767,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2Hs",
@@ -6648,7 +6861,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P",
@@ -6739,7 +6955,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 1,
+          "hurtMaskActive": 1,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6K",
@@ -6830,7 +7049,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6S",
@@ -6921,7 +7143,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6Hs",
@@ -7012,7 +7237,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6D",
@@ -7103,7 +7331,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5D",
@@ -7194,7 +7425,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236P",
@@ -7285,7 +7519,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S",
@@ -7376,7 +7613,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "623Hs",
@@ -7467,7 +7707,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.P",
@@ -7558,7 +7801,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.K",
@@ -7649,7 +7895,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.S",
@@ -7740,7 +7989,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.Hs",
@@ -7831,7 +8083,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.D",
@@ -7922,7 +8177,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2D",
@@ -8013,7 +8271,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "4P+K",
@@ -8104,7 +8365,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P+K",
@@ -8195,7 +8459,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236K",
@@ -8286,7 +8553,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>6S",
@@ -8377,7 +8647,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>2S",
@@ -8468,7 +8741,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S",
@@ -8559,7 +8835,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P",
@@ -8650,7 +8929,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S>P",
@@ -8741,7 +9023,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P>P",
@@ -8832,7 +9117,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         }
       ],
       "movement": {
@@ -8970,7 +9258,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5K",
@@ -9061,7 +9352,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5S",
@@ -9152,7 +9446,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5Hs",
@@ -9243,7 +9540,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2P",
@@ -9334,7 +9634,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2K",
@@ -9425,7 +9728,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2S",
@@ -9516,7 +9822,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2Hs",
@@ -9607,7 +9916,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P",
@@ -9698,7 +10010,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 1,
+          "hurtMaskActive": 1,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6K",
@@ -9789,7 +10104,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6S",
@@ -9880,7 +10198,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6Hs",
@@ -9971,7 +10292,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6D",
@@ -10062,7 +10386,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5D",
@@ -10153,7 +10480,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236P",
@@ -10244,7 +10574,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S",
@@ -10335,7 +10668,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "623Hs",
@@ -10426,7 +10762,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.P",
@@ -10517,7 +10856,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.K",
@@ -10608,7 +10950,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.S",
@@ -10699,7 +11044,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.Hs",
@@ -10790,7 +11138,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.D",
@@ -10881,7 +11232,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2D",
@@ -10972,7 +11326,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "4P+K",
@@ -11063,7 +11420,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P+K",
@@ -11154,7 +11514,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236K",
@@ -11245,7 +11608,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>6S",
@@ -11336,7 +11702,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>2S",
@@ -11427,7 +11796,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S",
@@ -11518,7 +11890,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P",
@@ -11609,7 +11984,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S>P",
@@ -11700,7 +12078,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P>P",
@@ -11791,7 +12172,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         }
       ],
       "movement": {
@@ -11929,7 +12313,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5K",
@@ -12020,7 +12407,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5S",
@@ -12111,7 +12501,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5Hs",
@@ -12202,7 +12595,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2P",
@@ -12293,7 +12689,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2K",
@@ -12384,7 +12783,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2S",
@@ -12475,7 +12877,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2Hs",
@@ -12566,7 +12971,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P",
@@ -12657,7 +13065,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 1,
+          "hurtMaskActive": 1,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6K",
@@ -12748,7 +13159,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6S",
@@ -12839,7 +13253,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6Hs",
@@ -12930,7 +13347,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6D",
@@ -13021,7 +13441,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5D",
@@ -13112,7 +13535,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236P",
@@ -13203,7 +13629,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S",
@@ -13294,7 +13723,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "623Hs",
@@ -13385,7 +13817,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.P",
@@ -13476,7 +13911,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.K",
@@ -13567,7 +14005,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.S",
@@ -13658,7 +14099,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.Hs",
@@ -13749,7 +14193,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.D",
@@ -13840,7 +14287,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2D",
@@ -13931,7 +14381,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "4P+K",
@@ -14022,7 +14475,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P+K",
@@ -14113,7 +14569,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236K",
@@ -14204,7 +14663,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>6S",
@@ -14295,7 +14757,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>2S",
@@ -14386,7 +14851,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S",
@@ -14483,7 +14951,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P",
@@ -14580,7 +15051,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S>P",
@@ -14671,7 +15145,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P>P",
@@ -14762,7 +15239,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         }
       ],
       "movement": {
@@ -14900,7 +15380,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5K",
@@ -14991,7 +15474,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5S",
@@ -15082,7 +15568,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5Hs",
@@ -15173,7 +15662,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2P",
@@ -15264,7 +15756,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2K",
@@ -15355,7 +15850,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2S",
@@ -15446,7 +15944,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2Hs",
@@ -15537,7 +16038,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P",
@@ -15628,7 +16132,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 1,
+          "hurtMaskActive": 1,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6K",
@@ -15719,7 +16226,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6S",
@@ -15810,7 +16320,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6Hs",
@@ -15901,7 +16414,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6D",
@@ -15992,7 +16508,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "5D",
@@ -16083,7 +16602,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236P",
@@ -16174,7 +16696,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S",
@@ -16265,7 +16790,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "623Hs",
@@ -16356,7 +16884,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.P",
@@ -16447,7 +16978,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.K",
@@ -16538,7 +17072,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.S",
@@ -16629,7 +17166,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.Hs",
@@ -16720,7 +17260,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.D",
@@ -16811,7 +17354,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "2D",
@@ -16902,7 +17448,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "4P+K",
@@ -16993,7 +17542,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "6P+K",
@@ -17084,7 +17636,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236K",
@@ -17175,7 +17730,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>6S",
@@ -17266,7 +17824,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "236S>2S",
@@ -17357,7 +17918,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S",
@@ -17448,7 +18012,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P",
@@ -17539,7 +18106,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "214S>P",
@@ -17630,7 +18200,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         },
         {
           "id": "j.214P>P",
@@ -17721,7 +18294,10 @@
           "smearFrame1": 0,
           "smearFrame2": 0,
           "smearFrame3": 0,
-          "smearFrame4": 0
+          "smearFrame4": 0,
+          "hurtMaskWindup": 15,
+          "hurtMaskActive": 15,
+          "hurtMaskRecovery": 15
         }
       ],
       "movement": {

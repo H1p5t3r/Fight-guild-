@@ -1,3 +1,4 @@
+import {seedBaseline} from './workbench-ui-helpers.mjs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
@@ -7,7 +8,7 @@ const server=await serveWorkshop(0),browser=await chromium.launch({headless:true
 const dir='build/workbench-movement-review';await mkdir(dir,{recursive:true});
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto(`http://127.0.0.1:${server.address().port}/`);await page.locator('#field-startup').waitFor();
+ await seedBaseline(page);await page.goto(`http://127.0.0.1:${server.address().port}/`);await page.locator('#field-startup').waitFor();
  const ready=()=>page.waitForFunction(()=>moveWorkshop.preview()&&!moveWorkshop.cursor().pending);
  await ready();await page.locator('#tab-movement').click();await page.locator('#movement-action').waitFor();await ready();
  assert.equal(await page.locator('.summary').isVisible(),false);

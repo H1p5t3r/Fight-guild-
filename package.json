@@ -13,7 +13,7 @@
     "test:browser": "node tests/browser-smoke.mjs",
     "build:workshop": "bash scripts/build.sh && node scripts/build-workbench.mjs",
     "start:workshop": "node scripts/serve-workbench.mjs",
-    "test:workshop": "node --test tests/workbench-check.mjs tests/workbench-preview.mjs tests/workbench-measurements.mjs tests/workbench-movement.mjs && node tests/workbench-browser.mjs && node tests/workbench-preview-browser.mjs && node tests/workbench-movement-browser.mjs"
+    "test:workshop": "node --test tests/workbench-check.mjs tests/workbench-preview.mjs tests/workbench-measurements.mjs tests/workbench-movement.mjs && node tests/workbench-browser.mjs && node tests/workbench-preview-browser.mjs && node tests/workbench-movement-browser.mjs && node tests/workbench-hurt-toggles-browser.mjs"
   },
   "dependencies": {
     "ws": "8.18.3"
