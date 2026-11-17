@@ -16,6 +16,7 @@ The generated images are visual concepts. They do not establish a working 3D sha
 6. The user requested remaking all six complete reference guides in the game's new style.
 7. The user required original miniature weapons. The current guides incorporate a reference-based equipment correction pass.
 8. Fillet and Shark's reference 03 set remakes the model guides around the mature anatomy and adds separate signature windup/active pages. Matching layouts, material palettes, fixed weapon studies and detached FX samples support repeatable action drawing. See [the reference pack and editor handoff](fillet-shark-references.md).
+9. The user selected **A / Stalker** as Fillet's standard combat stance, superseding the interim B/F leg-spacing preference. Reference 04 promotes that ready thumbnail and reduces Shark's hair volume across model/action views while keeping his long white hair.
 
 The current six sheets remain candidates for review. Do not treat the latest generation as user approval.
 
@@ -49,4 +50,4 @@ Fillet and Shark each have a model page with aligned front/side/back studies, ex
 
 Keep superseded images in `art/archive/`; promote changes into `art/characters/` deliberately and update the asset manifest.
 
-The current playable Fillet/Shark atlases remain the [v2 sprite proportion study](sprite-production.md#fillet-and-shark-proportion-study-v2). [Reference 03](fillet-shark-references.md) is the updated drawing reference for their next sprite pass; it does not replace runtime poses or collision. Their previous guides are archived. The other four fighters await the same proportion pass.
+The current playable Fillet/Shark atlases remain the [v2 sprite proportion study](sprite-production.md#fillet-and-shark-proportion-study-v2). [Reference 04](fillet-shark-references.md) is the updated drawing reference for their next sprite pass; it does not replace runtime poses or collision. Their previous guides are archived. The other four fighters await the same proportion pass.

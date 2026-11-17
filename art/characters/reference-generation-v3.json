@@ -3,7 +3,7 @@
   "created_date": "2026-11-17",
   "generator": "OpenAI image_gen",
   "generator_version": "Not exposed by the tool",
-  "status": "Generated reference candidates; assistant visual review completed, not user-approved production masters",
+  "status": "Historical reference-03 generation record; model pages and Shark actions superseded by reference 04. Fillet actions carried forward.",
   "scope": "Two model and two action reference boards. Existing runtime atlases and collision/move data are unchanged.",
   "pixel_processing": "Generated PNGs copied byte-for-byte; no image compositing, painting, recoloring or resampling. PDFs embed the original PNGs.",
   "reference_paths": "Repository paths identify retained input snapshots; original generated files remain under /workspace/generated_images.",
@@ -59,18 +59,18 @@
     },
     {
       "id": "fillet-model-correction",
-      "path": "art/characters/fillet.png",
+      "path": "art/archive/reference-guides-v3/fillet.png",
       "generated": "exec-080be86e-6028-4fd5-bc86-ca8025376938.png",
       "references": [
         "art/archive/reference-v3-studies/fillet-before-consistency-fix.png"
       ],
-      "status": "current-reference-candidate",
+      "status": "superseded-by-reference-04",
       "review": "Visual check: ruler removed; front/back/ready shoulder side and separate curved knife studies corrected. Generated turnarounds still need a production geometry review.",
       "prompt": "Refine this exact FILLET model-reference page without redesigning it. Keep the layout, mature athletic figure proportions, three model views, face close-ups, knife studies, palette, costume, cel shading, all typography and crimson accents exactly as they are. Two precision corrections only:\n1. REMOVE the entire stack of repeated little head drawings and its segmented ruler on the far left. It incorrectly illustrates the head count. Leave this narrow gutter empty except the existing concise '7.5–8 HEADS' label at the top, with one simple unsegmented height arrow if needed. Do not replace it with any other repeated symbols or numbered measurement grid.\n2. In the tiny bottom-left READY (3/4 VIEW) figure, ensure the single crimson armor plate is on her anatomical LEFT shoulder, matching the FRONT and BACK views. She faces right, so her near right shoulder/upper sleeve should be ivory cloth, and the red armor belongs on the far left shoulder. Do not swap weapons: long main curved knife in right hand, shorter knife in left. Keep the figure's stance and size.\nEverything else is preserved. This is a precision consistency edit of a finished reference board. Flat neutral background remains opaque.",
       "prompt_status": "exact",
       "transparent_background": false,
       "output_metadata": {
-        "path": "art/characters/fillet.png",
+        "path": "art/archive/reference-guides-v3/fillet.png",
         "bytes": 2001946,
         "sha256": "8601720ab2f3ea59f0321e9b07259affc21a0670633cea6cb27e4e51329de5c8",
         "dimensions": [
@@ -95,7 +95,7 @@
       "path": "art/archive/reference-v3-studies/shark-before-hook-fix.png",
       "generated": "exec-6bc1fdb9-a358-4a16-8b13-d213deaad883.png",
       "references": [
-        "art/characters/fillet.png",
+        "art/archive/reference-guides-v3/fillet.png",
         "godot/assets/fighters/proportions-v2/shark-windup.png",
         "art/archive/reference-guides-before-v3/shark.png",
         "references/miniatures/shark-mini.png"
@@ -116,7 +116,7 @@
       },
       "reference_metadata": [
         {
-          "path": "art/characters/fillet.png",
+          "path": "art/archive/reference-guides-v3/fillet.png",
           "bytes": 2001946,
           "sha256": "8601720ab2f3ea59f0321e9b07259affc21a0670633cea6cb27e4e51329de5c8",
           "dimensions": [
@@ -155,18 +155,18 @@
     },
     {
       "id": "shark-model-correction",
-      "path": "art/characters/shark.png",
+      "path": "art/archive/reference-guides-v3/shark.png",
       "generated": "exec-59f6041e-58f0-4032-9fb9-6919367073a7.png",
       "references": [
         "art/archive/reference-v3-studies/shark-before-hook-fix.png"
       ],
-      "status": "current-reference-candidate",
+      "status": "superseded-by-reference-04",
       "review": "Visual check: open hooked weapon connects continuously to its shaft; short blade is a separate object; model layout matches Fillet. Generated views are drawing references, not dimensionally certified orthographic plans.",
       "prompt": "Precision edit of this exact SHARK reference board. Preserve all character drawings, proportions, layout, palette, labels, type, expressions, small ready pose and FX samples. Correct ONLY the isolated horizontal long weapon drawing in the right-hand WEAPONS panel beside 'HOOK (RIGHT)'. It currently has an incorrect detached crescent and a tiny spike. Replace that isolated drawing with a SINGLE CONTINUOUS connected rope-wrapped gaff, matching the actual weapon already in his right hand in the FRONT full-body view: long dark wooden shaft with tan rope wraps, metal butt ring on the right, ONE curved OPEN silver J-shaped hook at the left attached solidly to the shaft by its straight metal shank. The silver shank must flow continuously out of the shaft, curve around into the hook, and end in one inward-pointing hook tip, just like the full-body weapon. No floating C-shaped ring, no separate crescent, no spear spike, no double tips, no gap where metal meets shaft. Keep the original size and position of this equipment study. Nothing else on the page changes.",
       "prompt_status": "exact",
       "transparent_background": false,
       "output_metadata": {
-        "path": "art/characters/shark.png",
+        "path": "art/archive/reference-guides-v3/shark.png",
         "bytes": 2187052,
         "sha256": "fc67e1401a33a7b87d3fc1572c24c867e51d8070558a5f249353183d4adc89b9",
         "dimensions": [
@@ -188,10 +188,10 @@
     },
     {
       "id": "fillet-actions",
-      "path": "art/characters/fillet-actions.png",
+      "path": "art/archive/reference-guides-v3/fillet-actions.png",
       "generated": "exec-2c7c47f4-7268-4bcc-985b-b6a92fd445bd.png",
       "references": [
-        "art/characters/fillet.png"
+        "art/archive/reference-guides-v3/fillet.png"
       ],
       "status": "current-reference-candidate",
       "review": "Eight windup/active drawings; spiral travel, rising/mid/low action heights, both rekka routes and separate FX samples are present. Drawn registration marks are illustrative; move-data anchors remain authoritative.",
@@ -199,7 +199,7 @@
       "prompt_status": "exact",
       "transparent_background": false,
       "output_metadata": {
-        "path": "art/characters/fillet-actions.png",
+        "path": "art/archive/reference-guides-v3/fillet-actions.png",
         "bytes": 2044825,
         "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
         "dimensions": [
@@ -209,7 +209,7 @@
       },
       "reference_metadata": [
         {
-          "path": "art/characters/fillet.png",
+          "path": "art/archive/reference-guides-v3/fillet.png",
           "bytes": 2001946,
           "sha256": "8601720ab2f3ea59f0321e9b07259affc21a0670633cea6cb27e4e51329de5c8",
           "dimensions": [
@@ -221,19 +221,19 @@
     },
     {
       "id": "shark-actions",
-      "path": "art/characters/shark-actions.png",
+      "path": "art/archive/reference-guides-v3/shark-actions.png",
       "generated": "exec-6f8ab03c-d92e-40cb-b9e5-9573b798c956.png",
       "references": [
-        "art/characters/shark.png",
-        "art/characters/fillet-actions.png"
+        "art/archive/reference-guides-v3/shark.png",
+        "art/archive/reference-guides-v3/fillet-actions.png"
       ],
-      "status": "current-reference-candidate",
+      "status": "superseded-by-reference-04",
       "review": "Eight windup/active drawings; ground up/air down hook paths, independently drawn released hooks, ground/air short-blade follow-ups and hit-only follow-up labels are present. Trajectory arrows illustrate direction; the core supplies exact angles and range.",
       "prompt": "Create the SHARK ACTION REFERENCE 03 sheet for FIGHT GUILD. The FIRST reference is the just-remade Shark model sheet: the exact character, weapon geometry, proportions, palette, costume and lighting authority. The SECOND reference is Fillet's action sheet, used ONLY for matching the page layout, clean phase grid, typography, gutters, annotation style and visual finish. Do not import Fillet's knives, clothes or body. Landscape about1536x1024 or larger, warm neutral-gray page with teal section rules, bold black condensed italic type. Title 'FIGHT GUILD / SHARK', 'FISHERMENS GUILD', 'ACTION REFERENCE 03'.\n\nEvery drawing is the SAME adult athletic Shark: about8 anatomical heads excluding hair, small mature angular face, broad powerful swimmer shoulders, narrow waist, long limbs, large hands and boots, swept long white hair, teal eye mask and sleeveless scale vest, bone jaw plate on anatomical LEFT shoulder, rope belt and hip net, gray trousers, split teal sash, brown wrapped boots. Camera is side/three-quarter, ALL poses face RIGHT. Near anatomical RIGHT shoulder is bare; far LEFT shoulder has the bone jaw. Dark confident outside contour, finer inside linework, upper-left key light, flat two/three-tone shading. Palette slate #34454D, bone #D9D4BD, teal #258A99. Consistent body/head scale and costume construction across poses.\n\nWEAPONS: RIGHT hand uses long rope-wrapped hooked spear/gaff, a shaft with ONE physically attached open silver J-hook, no floating crescent, no added spike/trident/scythe. LEFT hand uses a separate short broad triangular stabbing blade. Use the first reference's isolated weapon drawings as authority. Do not lengthen the short blade into a sword. The hook and tether are independently animated layers, and must be visually separate from his body in the released-hook ACTIVE frames. Keep the short blade in LEFT hand even while right hand casts/pulls.\n\nMAIN LAYOUT is four columns and two rows, same as Fillet's second reference: top row WINDUP, bottom row ACTIVE, one full-body drawing per cell. Four column headings:\n1 '214S / GROUND HOOK'\n2 'j.214P / AIR HOOK'\n3 'P / GROUND FOLLOW-UP'\n4 'P / AIR FOLLOW-UP'\nExactly eight Shark drawings, all weapons and full bodies contained in each panel, no clipping into labels/gutters. Flight can be indicated by feet clear of a ground registration line, not by shrinking his body.\n\nDIRECTED PAIRS:\nColumn1 windup: GROUNDED, feet planted in throwing lunge, right hook held/chambered behind shoulder, body coiled to send weapon UP-RIGHT; short left blade held close to waist. Column1 ACTIVE: grounded throw/pull stance, right arm reaches diagonally UP-RIGHT. The released COMPLETE hooked shaft is separately visible in the upper-right of this same cell, shaft pointed up-right along a clear straight 45-degree trajectory from his throwing hand. A thin dark tether connects hand to weapon butt, without being fused to body art. Show a separate small teal annotation arrow UP-RIGHT labeled '45° UP'. Do not draw a second spear in his hand. Foot stays planted.\nColumn2 windup: AIRBORNE with knees tucked, hook chambered high/behind right shoulder to cast down-right, short left blade close to body. Column2 ACTIVE: airborne Shark placed upper-left of the cell with tucked legs and right arm extended DOWN-RIGHT; released full hooked shaft separately visible lower-right along a straight 45-degree downward trajectory. Thin tether connects to its butt. Small separate arrow labeled '45° DOWN' points down-right. No spear still gripped in the casting hand, no upside-down body, no floor contact.\nColumn3 windup: GROUNDED short LEFT blade chambered near ribs, ready to stab after a successful hook. Right hand controls the retracted long hook beside/behind body, away from contact path. Column3 ACTIVE: grounded forward lunge, LEFT hand driving SHORT blade horizontally RIGHT at torso height, right hook held back and not striking. Physical blade contact, no projectile or impact spark.\nColumn4 windup: AIRBORNE compact knees, short LEFT blade drawn back near ribs, long right hook controlled behind body. Column4 ACTIVE: aerial forward short LEFT blade stab horizontally RIGHT, knees tucked, whole fighter above baseline, right hook stays trailing behind. Distinct airborne silhouette, no feet planted.\n\nBOTTOM strip readable route notes '214S > P', 'j.214P > P', and 'P FOLLOW-UP: ON HOOK HIT'. Smaller notes 'PULL TO CLOSE RANGE', 'HOOK / TETHER / BODY SEPARATE', 'WEAPONS: NO HURTBOX', '4 BODY BOXES MAX', 'WINDUP + ACTIVE ONLY'. A compact isolated teal tapered crescent and narrow directional wedge FX sample can occupy the central footer. Thin arrows are trajectory annotations, not part of runtime sprite art. Windups have no released smears; active figures remain clean equipment/body studies. No defender or extra character figures, no impact effects, no particles, no water powers. Complete the action sheet with especially clear correct UP45 ground and DOWN45 air hook directions.",
       "prompt_status": "exact",
       "transparent_background": false,
       "output_metadata": {
-        "path": "art/characters/shark-actions.png",
+        "path": "art/archive/reference-guides-v3/shark-actions.png",
         "bytes": 2130818,
         "sha256": "389689cba6e436c333a6d0849e7b1e9be24c979f553fcf076c5adc9f7dfe8287",
         "dimensions": [
@@ -243,7 +243,7 @@
       },
       "reference_metadata": [
         {
-          "path": "art/characters/shark.png",
+          "path": "art/archive/reference-guides-v3/shark.png",
           "bytes": 2187052,
           "sha256": "fc67e1401a33a7b87d3fc1572c24c867e51d8070558a5f249353183d4adc89b9",
           "dimensions": [
@@ -252,7 +252,7 @@
           ]
         },
         {
-          "path": "art/characters/fillet-actions.png",
+          "path": "art/archive/reference-guides-v3/fillet-actions.png",
           "bytes": 2044825,
           "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
           "dimensions": [
@@ -262,5 +262,6 @@
         }
       ]
     }
-  ]
+  ],
+  "reference_relocation_note": "Reference-03 image snapshots moved to art/archive/reference-guides-v3 on 2026-11-17; original prompts and all image checksums retained."
 }

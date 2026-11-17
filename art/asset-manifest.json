@@ -93,8 +93,8 @@
     },
     {
       "path": "art/characters/fillet.png",
-      "bytes": 2001946,
-      "sha256": "8601720ab2f3ea59f0321e9b07259affc21a0670633cea6cb27e4e51329de5c8",
+      "bytes": 2034541,
+      "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
       "dimensions": [
         1536,
         1024
@@ -111,8 +111,8 @@
     },
     {
       "path": "art/characters/shark.png",
-      "bytes": 2187052,
-      "sha256": "fc67e1401a33a7b87d3fc1572c24c867e51d8070558a5f249353183d4adc89b9",
+      "bytes": 2168641,
+      "sha256": "0d4685fac4bf030ce86b6aa36b908d9c0dafca10858e0be8b92e484af66c305a",
       "dimensions": [
         1536,
         1024
@@ -138,8 +138,8 @@
     },
     {
       "path": "exports/character-reference-guides.pdf",
-      "bytes": 15681970,
-      "sha256": "a65bf74c5a959ff03edae1dcced90e7c57e3a9e515e24ca6fb7b772e0928702c"
+      "bytes": 15683889,
+      "sha256": "64f6d4fc7738238914c4ae2895d19d8d6931b078f82aa944f39c21599ff830e3"
     },
     {
       "path": "references/miniatures/anvil-mini.png",
@@ -445,8 +445,8 @@
     },
     {
       "path": "art/characters/shark-actions.png",
-      "bytes": 2130818,
-      "sha256": "389689cba6e436c333a6d0849e7b1e9be24c979f553fcf076c5adc9f7dfe8287",
+      "bytes": 2107784,
+      "sha256": "30abe1d8e520dc159081e92f247ecd95c37142d959fd98022170ea77c2e1db5a",
       "dimensions": [
         1536,
         1024
@@ -474,6 +474,52 @@
         1536,
         1024
       ]
+    },
+    {
+      "path": "art/archive/reference-guides-v3/character-reference-guides.pdf",
+      "bytes": 15681970,
+      "sha256": "a65bf74c5a959ff03edae1dcced90e7c57e3a9e515e24ca6fb7b772e0928702c"
+    },
+    {
+      "path": "art/archive/reference-guides-v3/fillet-actions.png",
+      "bytes": 2044825,
+      "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/reference-guides-v3/fillet.png",
+      "bytes": 2001946,
+      "sha256": "8601720ab2f3ea59f0321e9b07259affc21a0670633cea6cb27e4e51329de5c8",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/reference-guides-v3/shark-actions.png",
+      "bytes": 2130818,
+      "sha256": "389689cba6e436c333a6d0849e7b1e9be24c979f553fcf076c5adc9f7dfe8287",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/reference-guides-v3/shark.png",
+      "bytes": 2187052,
+      "sha256": "fc67e1401a33a7b87d3fc1572c24c867e51d8070558a5f249353183d4adc89b9",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "exports/FightGuild-Fillet-Shark-References-v4.pdf",
+      "bytes": 8961677,
+      "sha256": "e58266eb5fd2a3cf63555c4bac11072cce695173d453c21d91a232d8b20c8474"
     }
   ]
 }

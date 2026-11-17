@@ -70,7 +70,7 @@ The [Move Workshop control guide (PDF)](exports/FightGuild-Move-Workshop-Guide.p
 
 ## Current reference guides
 
-These are the latest concept candidates. Fillet and Shark's **reference 03** sheets now use the mature athletic proportions, matched rendering rules, fixed equipment studies and separate windup/active action pages. They are drawing references awaiting feedback, not approved runtime atlases or actual 3D assets.
+These are the latest character references. Fillet and Shark's **reference 04** set keeps the mature athletic proportions and matched rendering rules, selects **A / Stalker** for Fillet's standard combat stance, and reduces Shark's hair volume while retaining its long length. These drawing references guide the next sprite pass; they are not runtime atlases or actual 3D assets.
 
 | Anvil | Smoke | Tapper |
 | --- | --- | --- |
@@ -84,13 +84,14 @@ These are the latest concept candidates. Fillet and Shark's **reference 03** she
 
 For the first matchup: [Fillet action sheet](art/characters/fillet-actions.png),
 [Shark action sheet](art/characters/shark-actions.png), and the
-[four-page model/action PDF](exports/FightGuild-Fillet-Shark-References-v3.pdf).
+[four-page model/action PDF](exports/FightGuild-Fillet-Shark-References-v4.pdf).
 [Reference rules and move-editor handoff](docs/fillet-shark-references.md) cover
 palette, equipment, root travel, phased hitboxes, hurtboxes and pose-photo briefs.
 
-[Fillet's six initial ready-stance options](art/characters/stance-studies/fillet-01.png)
-explore alternative combat personalities. The preferred B/F leg spacing now
-anchors [four upper-body refinements](art/characters/stance-studies/fillet-02.png).
+Fillet's selected standard stance is **A / Stalker** from the
+[six-option sheet](art/characters/stance-studies/fillet-01.png). The later
+[B/F spacing refinements](art/characters/stance-studies/fillet-02.png) remain
+exploration history; the A selection supersedes that narrower-base direction.
 
 ## Project notes
 

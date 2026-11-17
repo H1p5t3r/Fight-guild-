@@ -22,7 +22,7 @@
   "path": "art/characters/stance-studies/fillet-02.png",
   "references": [
     "art/characters/stance-studies/fillet-01.png",
-    "art/characters/fillet.png"
+    "art/archive/reference-guides-v3/fillet.png"
   ],
   "options": [
     {
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "path": "art/characters/fillet.png",
+      "path": "art/archive/reference-guides-v3/fillet.png",
       "bytes": 2001946,
       "sha256": "8601720ab2f3ea59f0321e9b07259affc21a0670633cea6cb27e4e51329de5c8",
       "dimensions": [
@@ -80,5 +80,6 @@
         1024
       ]
     }
-  ]
+  ],
+  "reference_relocation_note": "Reference-03 image snapshots moved to art/archive/reference-guides-v3 on 2026-11-17; original prompts and all image checksums retained."
 }

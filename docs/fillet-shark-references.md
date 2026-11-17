@@ -1,19 +1,24 @@
-# Fillet and Shark — reference 03
+# Fillet and Shark — reference 04
 
-These remade reference candidates bring the character guides up to the current
-sprite and move-authoring requirements. Each fighter has a model page and a
-separate signature-action page. They establish the next drawing reference;
-the playable v2 atlases, move values and collision data remain as they were.
+These guides carry the current character-art direction: **Fillet uses A / Stalker
+as her standard combat stance**, and **Shark keeps long white hair with less
+volume**. Each fighter has a model page and a separate signature-action page.
+Reference 04 updates Fillet's ready thumbnail and Shark's hair across model and
+action views; Fillet's signature-action sheet is carried forward from reference 03.
+These are drawing references. The playable v2 atlases, move values and collision
+data remain as they were; the selected idle still needs a runtime sprite pass.
 
 | Fighter | Model sheet | Windup / active sheet |
 | --- | --- | --- |
 | Fillet | [Anatomy, costume, knives and palette](../art/characters/fillet.png) | [Knife spiral and rekka](../art/characters/fillet-actions.png) |
 | Shark | [Anatomy, costume, hook and short blade](../art/characters/shark.png) | [Ground/air hooks and follow-ups](../art/characters/shark-actions.png) |
 
-[Download the four-page PDF](../exports/FightGuild-Fillet-Shark-References-v3.pdf).
+[Download the four-page PDF](../exports/FightGuild-Fillet-Shark-References-v4.pdf).
 The [six-character reference PDF](../exports/character-reference-guides.pdf)
 also contains the updated model pages. Exact prompts, input snapshots, checksums
-and correction notes are in [the generation record](../art/characters/reference-generation-v3.json).
+and correction notes are in [the generation record](../art/characters/reference-generation-v4.json).
+[Current design decisions](../art/characters/design-decisions.json) distinguish
+the selected stance from earlier explorations.
 
 ## Shared model rules
 
@@ -35,10 +40,16 @@ and correction notes are in [the generation record](../art/characters/reference-
 | Character | Shape and costume landmarks | Palette targets |
 | --- | --- | --- |
 | Fillet | Compact angular gestures; short swept brown hair; crimson **left** shoulder armor; ivory blouse; crimson corset; split ivory apron; charcoal trousers; wrapped forearms; three-buckle boots. | Crimson `#A63242`, ivory `#DDD0B1`, charcoal `#393039`; muted brown leather/hair and silver steel. |
-| Shark | Broad swimmer shoulders and lean waist; long grouped white hair; teal eye mask and scale vest; bone jaw on **left** shoulder; rope belt and hip net; split teal sash; gray trousers; wrapped boots. | Teal `#258A99`, slate `#34454D`, bone `#D9D4BD`; muted brown rope/leather and silver steel. |
+| Shark | Broad swimmer shoulders and lean waist; long, lower-volume white hair close to the skull/nape and trailing down the back; teal eye mask and scale vest; bone jaw on **left** shoulder; rope belt and hip net; split teal sash; gray trousers; wrapped boots. | Teal `#258A99`, slate `#34454D`, bone `#D9D4BD`; muted brown rope/leather and silver steel. |
 
 These hex values are authoring targets. Generated shaded pixels and the printed
 swatches have not been quantized to exact material ramps.
+
+Shark's long hair uses fewer grouped locks, a lower crown and a slimmer outer
+silhouette. Keep the length below the shoulder blades in settled neutral views.
+Motion can draw the locks backward, but must not recreate the old radiating
+mane. Preserve loose hair and the white/silver color; no tie, braid, shaved side
+or short cut has been requested.
 
 ## Equipment and directed actions
 
@@ -75,11 +86,27 @@ block or whiff does not grant the follow-up. The released hook, tether and body
 must be separate runtime layers. The diagram arrows illustrate direction; use
 the core's exact path and range, not a measurement of a drawn arrow.
 
-## Fillet ready-stance options
+## Fillet standard combat stance — A / Stalker
+
+The user selected **A / Stalker** from the top-left of the
+[original six-option sheet](../art/characters/stance-studies/fillet-01.png).
+The model page now labels its ready thumbnail **STANDARD / A: STALKER**.
+Use the full selected pose: wider staggered feet, bent front knee, extended rear
+leg, low forward-loaded torso, main right knife carried low, and shorter left
+knife close to the chest pointing down. The downward offhand placement is part
+of the selected pose; keep the weapon identities and anatomical handedness.
+
+This choice **supersedes the earlier B/F leg-spacing preference**. Do not mix A's
+upper body with B/F's narrower legs. Keep the stance's planted root and review
+body-only hurtboxes when authoring its runtime idle; the reference update itself
+does not change pushboxes or combat data. A complete breathing/weight-shift loop
+remains animation work.
+
+### Earlier exploration
 
 [Compare six ready-stance candidates](../art/characters/stance-studies/fillet-01.png).
 They explore posture and personality while retaining reference 03's character
-design. No stance has been selected or substituted into the playable atlas.
+design. A is the selected standard; the other options remain historical studies.
 
 | Option | Direction |
 | --- | --- |
@@ -91,15 +118,11 @@ design. No stance has been selected or substituted into the playable atlas.
 | F — Unbothered | Relaxed shoulders and low hands; calm threat. |
 
 These are selection studies, not matched idle-animation frames. C turns farther
-toward the viewer, and A explores a downward offhand grip. Once a direction is
-chosen, standardize camera, grips and body scale against the model, then develop
-the breathing/weight-shift loop and check its silhouette with the current
-body-only hurtboxes. [Generation notes](../art/characters/stance-studies/fillet-01.json)
+toward the viewer. [Generation notes](../art/characters/stance-studies/fillet-01.json)
 retain the exact prompt, source reference and image checksum.
 
-The user's next preference is **the leg spacing of B and F**. Carry that narrower,
-natural stagger into subsequent ready-pose work. This selects the lower-body
-spacing, not either complete stance or an upper-body posture.
+An intermediate preference for **the leg spacing of B and F** led to the
+following narrower-base refinements. That preference is now superseded by A.
 
 [The second comparison sheet](../art/characters/stance-studies/fillet-02.png)
 uses that base for four upper-body alternatives:
@@ -111,8 +134,7 @@ uses that base for four upper-body alternatives:
 | I — High Knife | Main knife beside the head, offhand low. |
 | J — Forward Guard | Main blade presented forward, offhand near the face. |
 
-The narrower spacing is an artwork direction, not a pushbox-width change.
-Upper-body selection, final grip/weapon cleanup and the idle loop remain open.
+These refinements remain exploration history, not the current stance direction.
 [Refinement provenance](../art/characters/stance-studies/fillet-02.json) records
 the exact feedback, references, prompt, checksums and remaining drawing checks.
 
@@ -172,6 +194,13 @@ The previous two model sheets and six-page PDF are preserved in
 `art/archive/reference-guides-before-v3/`. Two intermediate generations in
 `art/archive/reference-v3-studies/` record the corrected head ruler/shoulder
 thumbnail and detached hook diagram. Source PNGs are copied without pixel edits.
+
+`art/archive/reference-guides-v3/` preserves all four reference-03 PNGs and that
+revision's six-character PDF. Earlier generation/stance records now point to
+these retained inputs with their original hashes and verbatim prompts. The
+[reference-03 four-page PDF](../exports/FightGuild-Fillet-Shark-References-v3.pdf)
+remains available as history. Rebuilding generates the current reference-04 pack
+and six-character PDF without rewriting that historical PDF.
 
 Rebuild the two PDFs from the checked-in PNGs with:
 

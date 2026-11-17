@@ -22,3 +22,11 @@ its misleading head ruler/incorrect ready-shoulder thumbnail, and the initial
 Shark page with its disconnected hook diagram. Corrected reference 03 pages live
 in `art/characters/`, alongside the new action sheets and
 `reference-generation-v3.json` with exact prompts, input/output hashes and review notes.
+
+`reference-guides-v3/` retains all four reference-03 model/action pages and their
+six-character PDF before the Stalker selection and Shark hair revision. Earlier
+generation and stance-study records point to these archived input snapshots;
+their verbatim prompts and image checksums are retained. Current model pages and
+Shark actions are revision 04, with provenance in
+`art/characters/reference-generation-v4.json`. The reference-03 four-page export
+remains available under its original versioned filename.

@@ -16,7 +16,7 @@ from reportlab.pdfgen.canvas import Canvas
 
 ROOT = Path(__file__).resolve().parents[1]
 CHARACTERS = ROOT / "art/characters"
-PROVENANCE = CHARACTERS / "reference-generation-v3.json"
+PROVENANCE = CHARACTERS / "reference-generation-v4.json"
 MANIFEST = ROOT / "art/asset-manifest.json"
 
 
@@ -73,14 +73,21 @@ def main() -> None:
         paths.add(job["path"])
         paths.update(job["references"])
 
+    for carried in provenance.get("carried_forward", []):
+        output, source = describe(carried["path"]), describe(carried["source"])
+        if output["sha256"] != source["sha256"]:
+            raise ValueError(f"{carried['path']}: carried-forward artwork differs from its source")
+        carried["output_metadata"], carried["source_metadata"] = output, source
+        paths.update((carried["path"], carried["source"]))
+
     make_pdf(
         "exports/character-reference-guides.pdf",
         "Fight Guild — Current Character References",
         [(name.title(), f"{name}.png") for name in ("anvil", "smoke", "tapper", "shark", "fillet", "hammer")],
     )
     make_pdf(
-        "exports/FightGuild-Fillet-Shark-References-v3.pdf",
-        "Fight Guild — Fillet and Shark Reference 03",
+        "exports/FightGuild-Fillet-Shark-References-v4.pdf",
+        "Fight Guild — Fillet and Shark Reference 04",
         [
             ("Fillet — Model", "fillet.png"),
             ("Fillet — Windup and Active", "fillet-actions.png"),
@@ -95,8 +102,8 @@ def main() -> None:
     existing = {entry["path"]: entry for entry in manifest["assets"]}
     paths.update({
         "exports/character-reference-guides.pdf",
-        "exports/FightGuild-Fillet-Shark-References-v3.pdf",
-        "art/archive/reference-guides-before-v3/character-reference-guides.pdf",
+        "exports/FightGuild-Fillet-Shark-References-v4.pdf",
+        "art/archive/reference-guides-v3/character-reference-guides.pdf",
     })
     for path in sorted(paths):
         existing[path] = {**existing.get(path, {}), **describe(path)}

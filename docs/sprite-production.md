@@ -1,4 +1,4 @@
-# Sprite production direction — working contract v0.3
+# Sprite production direction — working contract v0.4
 
 The six generated sets are iteration studies. The goal is a repeatable character performing a directed action, not a new illustration of that character in every frame. These rules establish the target for the production pipeline in [the backlog](backlog.md); the current images still need a consistency review before becoming approved masters.
 
@@ -16,12 +16,14 @@ The six generated sets are iteration studies. The goal is a repeatable character
 | Hammer | Tall block/triangle mass; bald head, white armor, blue cloth, rectangular hammer | ivory steel `#D9D6CF`, shadow `#545868`, blue `#2D5FB7` |
 | Smoke | Narrow flowing curves; green hood, long dark hair, ivory coat tails, vials | ivory `#DCD1AA`, brown `#554333`, olive `#778B33`, vapor `#A4CA35` |
 | Tapper | Sturdy rectangle with open circular hooks; blond hair/beard, hooked staff at both ends | brown `#65503A`, ivory `#D8C6A2`, ochre `#C39832`, burgundy `#713A38` |
-| Shark | Lean diagonals; white hair, teal mask, bone jaw shoulder, long hook plus short blade | slate `#34454D`, bone `#D9D4BD`, teal `#258A99` |
+| Shark | Lean diagonals; long low-volume white hair close to skull/nape and back, teal mask, bone jaw shoulder, long hook plus short blade | slate `#34454D`, bone `#D9D4BD`, teal `#258A99` |
 | Fillet | Compact angular silhouette; short brown hair, red shoulder/corset, ivory apron, two curved knives | charcoal `#393039`, ivory `#DDD0B1`, crimson `#A63242` |
 
 ## Fillet and Shark proportion study v2
 
-The first proportion pass updates **32 poses per fighter**: 12 active/support, six windups, six block reactions and eight signature poses. These remain the playable atlases while the other four fighters keep their existing sheets. The remade [reference 03 model/action pages](fillet-shark-references.md) now carry this mature anatomy into the character guides and serve as the drawing reference for the next sprite pass. Use the v2 windup/neutral poses to check continuity with the current build. Both sets remain iteration studies awaiting play/art feedback.
+The first proportion pass updates **32 poses per fighter**: 12 active/support, six windups, six block reactions and eight signature poses. These remain the playable atlases while the other four fighters keep their existing sheets. The remade [reference 04 model/action pages](fillet-shark-references.md) carry this mature anatomy into the character guides and serve as the drawing reference for the next sprite pass. Use the v2 windup/neutral poses to check scale continuity with the current build; use the current design decisions below for the selected ready stance and hair treatment.
+
+Fillet's selected standard stance is **A / Stalker** from the original six-option study: wider stagger, forward-loaded low torso, longer right knife low and shorter left knife close/downward. This supersedes the intermediate B/F narrower-leg direction; do not blend the two. Shark keeps long white hair with a lower crown, less outward volume and fewer controlled locks along the nape/back. Moving hair should follow the pose without reintroducing the old radiating mane. These choices are recorded in [current design decisions](../art/characters/design-decisions.json); reference-sheet changes do not alter runtime pivots, pushboxes or body geometry.
 
 Target roughly 7.5–8 anatomical heads in an upright body, counting the skull rather than projecting hair. Use a smaller mature head, a clear ribcage/pelvis relationship, longer athletic limbs, strong shoulders and forearms, and substantial gloves/boots. Fillet keeps compact angular gestures and a red/ivory butcher silhouette; Shark keeps broad shoulders, long diagonals, teal/slate/bone masses and white hair. The head, hand and weapon scale must remain constant across actions; do not stretch a whole sprite vertically to simulate new proportions. Preserve the palette ramps above and one hard-edged shadow grouping per material.
 

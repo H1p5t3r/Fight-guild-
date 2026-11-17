@@ -1,0 +1,155 @@
+{
+  "revision": "reference-04",
+  "created_date": "2026-11-17",
+  "generator": "OpenAI image_gen",
+  "generator_version": "Not exposed by the tool",
+  "status": "Fillet stance choice selected by user; Shark hair direction requested by user. Revised drawings have an assistant visual check and await art feedback.",
+  "scope": "Reference-sheet refinement: selected Fillet A/Stalker and reduced Shark hair volume while retaining length. No runtime sprite or collision changes.",
+  "pixel_processing": "Generated PNGs copied byte-for-byte; no pixel edits or resampling. PDFs embed the source image pixels.",
+  "carried_forward": [
+    {
+      "path": "art/characters/fillet-actions.png",
+      "source": "art/archive/reference-guides-v3/fillet-actions.png",
+      "reason": "Stance selection does not redesign the signature actions.",
+      "output_metadata": {
+        "path": "art/characters/fillet-actions.png",
+        "bytes": 2044825,
+        "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "source_metadata": {
+        "path": "art/archive/reference-guides-v3/fillet-actions.png",
+        "bytes": 2044825,
+        "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "id": "fillet-standard-stalker",
+      "path": "art/characters/fillet.png",
+      "generated": "exec-760550b1-161d-48b6-aca8-f54395e3867f.png",
+      "references": [
+        "art/archive/reference-guides-v3/fillet.png",
+        "art/characters/stance-studies/fillet-01.png"
+      ],
+      "review": "Bottom-left ready thumbnail and label now use selected A/Stalker, including its wide forward-loaded base and close downward offhand knife. Neutral turnarounds and equipment studies are retained.",
+      "status": "current-reference",
+      "prompt": "Precision update of the supplied FILLET character MODEL REFERENCE sheet (image1), using option A / STALKER in the six-option stance board (image2) as her now-selected STANDARD COMBAT STANCE. Preserve the existing model sheet's three neutral turnarounds, facial expressions, palette, equipment profiles, anatomy, costume and rendering. Only change the bottom-left ready-pose thumbnail and its label, and the revision title.\n\nReplace the bottom-left READY (3/4 VIEW) drawing with a faithful full-body rendition of image2's TOP-LEFT A / STALKER pose. The user has selected A AS DRAWN, superseding the earlier exploration of narrow B/F feet. Preserve A's wider staggered base, bent forward knee and extended rear leg, forward-weighted low torso, alert head looking RIGHT, the longer right-hand knife held low across/in front of the forward thigh, and the shorter left-hand knife held close to the chest with its blade pointing down. Keep the EXACT stance attitude, leg spacing and arm positions of A; do not mix in the upright B/F legs or the G–J refinements. Feet remain planted, no attacking swing. Maintain the model sheet's mature athletic proportions, short brown hair, crimson anatomical LEFT shoulder armor, ivory cloth on anatomical RIGHT shoulder, corset, split apron, wraps, charcoal pants and broad brown boots. Both broad curved single-edged knives remain in their correct hands. Scale the entire thumbnail uniformly to fit its existing panel with complete boots/blades and empty margins; never squeeze its legs narrower. It is a sustained ready stance, not an attack or impact pose.\n\nChange that small panel label to 'STANDARD / A: STALKER'. Change 'MODEL REFERENCE 03' at the top-right to 'MODEL REFERENCE 04'. Everything else on the page must be preserved, including front/right-side/back model drawings and weapons. Same crisp cel shadows, dark contour, top-left lighting, warm neutral opaque page, crimson graphics. No added poses, redesigned clothes, FX, hitboxes, new text blocks or layout changes.",
+      "prompt_status": "exact",
+      "transparent_background": false,
+      "output_metadata": {
+        "path": "art/characters/fillet.png",
+        "bytes": 2034541,
+        "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/archive/reference-guides-v3/fillet.png",
+          "bytes": 2001946,
+          "sha256": "8601720ab2f3ea59f0321e9b07259affc21a0670633cea6cb27e4e51329de5c8",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "art/characters/stance-studies/fillet-01.png",
+          "bytes": 1992871,
+          "sha256": "9f9b6c7500a73cf51a3d8b7b15fb8fc0acc51b7d32c97d01f1370d86466b54f0",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shark-lower-volume-hair-model",
+      "path": "art/characters/shark.png",
+      "generated": "exec-4f331e18-8516-43b7-a541-2c779012fc7f.png",
+      "references": [
+        "art/archive/reference-guides-v3/shark.png"
+      ],
+      "review": "Long white hair retained, with a lower crown, slimmer silhouette, fewer spikes and locks lying close to the nape/back across model views, expression studies and ready thumbnail.",
+      "status": "current-reference",
+      "prompt": "Edit this exact SHARK MODEL REFERENCE sheet to refine ONLY HIS HAIR in ALL six character depictions: FRONT, RIGHT SIDE, BACK, both expression close-ups and the small READY pose. The user says his hair is too wild and voluminous, but MUST remain LONG. Preserve the character identity and all other body/costume/weapon details. Change the revision title to 'MODEL REFERENCE 04'.\n\nHAIR DIRECTION: keep his white/silver color and existing long length, reaching down the upper-to-mid back when settled. Reduce the mass, outward spread and lifted crown substantially, roughly one-half of the current fan-like silhouette width. It should lie close to the skull, sweep backward from the forehead, follow the nape and fall as a slimmer controlled shape along his back. Use a few clean grouped locks with restrained pointed ends, not dozens of thick radiating spikes. Smooth the enormous outward flying triangular mane into a low-profile, naturally swept-back head and long narrow trailing locks. In the side view, show a shallow hair cap over the skull with long hair following the neck/back; in the back view, a slimmer curtain of long hair rather than a wide starburst. The tips should still reach at least below the shoulder blades in full-body neutral views. Keep a few familiar face-framing strands, without covering his teal eye mask. No wind-machine effect on neutral poses. Do not shorten the haircut, turn it into a bob, shave sides, add a ponytail tie/braids or new accessories. Long, loose, controlled, lower volume.\n\nKEEP UNCHANGED: small mature angular face; teal eye mask; eight-head athletic anatomy; broad swimmer shoulders and powerful arms; teal scale vest; bone jaw on anatomical LEFT shoulder; rope belt/net; slate trousers; split teal sash; wrapped brown boots; RIGHT hand long hooked gaff with a continuous connected open silver hook, LEFT hand separate short triangular blade. Same front, right-side and rear poses, expression gestures, grounded ready stance, and exact equipment/palette panels. Same neutral upper-left lighting, 2–3 flat cel tones, confident dark contour, slate #34454D, bone #D9D4BD, teal #258A99. Preserve title/labels except revision number; identical landscape layout and warm neutral opaque background. No changes to muscles, equipment, weapons, clothing, height or stance. Make the hair reduction very clear while retaining long-haired Shark's recognizability.",
+      "prompt_status": "exact",
+      "transparent_background": false,
+      "output_metadata": {
+        "path": "art/characters/shark.png",
+        "bytes": 2168641,
+        "sha256": "0d4685fac4bf030ce86b6aa36b908d9c0dafca10858e0be8b92e484af66c305a",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/archive/reference-guides-v3/shark.png",
+          "bytes": 2187052,
+          "sha256": "fc67e1401a33a7b87d3fc1572c24c867e51d8070558a5f249353183d4adc89b9",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shark-lower-volume-hair-actions",
+      "path": "art/characters/shark-actions.png",
+      "generated": "exec-b8de2e5b-74f0-4ccd-94cd-ceb6626b7c23.png",
+      "references": [
+        "art/archive/reference-guides-v3/shark-actions.png",
+        "art/characters/shark.png"
+      ],
+      "review": "Reduced-volume long hair carried across all eight windup/active studies; hook paths, follow-up stances, weapon identities and input labels retained.",
+      "status": "current-reference",
+      "prompt": "Precision hair-only edit of SHARK's ACTION REFERENCE sheet in IMAGE1, using his updated MODEL REFERENCE 04 in IMAGE2 as the exact new HAIR authority. Preserve the eight full-body action poses, camera, weapons, trajectory arrows, inputs, labels, body proportions, clothing, panel layout, colors, FX samples and notes of IMAGE1. Change the title 'ACTION REFERENCE 03' to 'ACTION REFERENCE 04'.\n\nReplace the old enormous white spiky fan/mane in EACH of all eight drawings with the new lower-volume long white hair from IMAGE2. Flat swept-back crown close to skull, hair following the nape into a slender long loose shape down/trailing behind the upper-to-mid back. Keep its long length; do NOT cut it short. Use only a few grouped locks with restrained tapered ends, not dozens of thick radiating spikes. Approximate half the original hair silhouette bulk. Motion may pull the long narrow locks gently backward in an aerial or lunging pose, but must NOT recreate the wide starburst or oversized swept-up crown. No ponytail tie, shaved sides, braids or new accessories. Keep the teal mask and face visible. Head, neck and face sizes must stay exactly as original; reduced hair is not a smaller skull.\n\nKeep the established eight pairs exactly: 214S grounded up45 hook windup/active; j.214P airborne down45 hook windup/active; grounded short LEFT-blade P follow-up windup/active; airborne short LEFT-blade P follow-up windup/active. Released hooks remain independent connected hooked shafts and tethers in the two active cast cells, no spare spear appears in the casting hand. Do not change the hook shape, blade size, directions, foot planting, airborne heights or action poses. No new effects or impact sparks. Same top-left key light, dark outer line, fine internal lines, clean cel shading and palette as both references. This is one targeted consistency revision to existing action art, not a redesign or layout change. Output only the finished edited sheet.",
+      "prompt_status": "exact",
+      "transparent_background": false,
+      "output_metadata": {
+        "path": "art/characters/shark-actions.png",
+        "bytes": 2107784,
+        "sha256": "30abe1d8e520dc159081e92f247ecd95c37142d959fd98022170ea77c2e1db5a",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/archive/reference-guides-v3/shark-actions.png",
+          "bytes": 2130818,
+          "sha256": "389689cba6e436c333a6d0849e7b1e9be24c979f553fcf076c5adc9f7dfe8287",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "art/characters/shark.png",
+          "bytes": 2168641,
+          "sha256": "0d4685fac4bf030ce86b6aa36b908d9c0dafca10858e0be8b92e484af66c305a",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    }
+  ]
+}
