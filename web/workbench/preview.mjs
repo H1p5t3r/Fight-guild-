@@ -1,3 +1,4 @@
+import {smearPlan,drawSmear} from './smears.mjs';
 import {phaseAt,attackBoxes,poseAt,effectiveHurtboxes} from './model.mjs';
 import {HURT_LABELS} from '../hurtboxes.mjs';
 import {measureDistances,distanceSummary,pixels} from './measurements.mjs';
@@ -29,6 +30,7 @@ export class Preview {
       left=Math.min(left,p.x/100-(i?100:extent)-20);right=Math.max(right,p.x/100+(i?100:extent)+20);
       high=Math.max(high,p.y/100+(i?180:top)+20);low=Math.min(low,p.y/100+(i?0:bottom)-20);
     });
+    for(const frame of record.frames)for(const boxes of frame.boxes)for(const q of boxes.projectiles??[]){left=Math.min(left,q[0]/100-20);right=Math.max(right,q[2]/100+20);high=Math.max(high,q[3]/100+20);low=Math.min(low,q[1]/100-20);}
     this.boundsRecord=record;this.boundsSignature=signature;return this.fittedBounds={left,right,top:high,bottom:low};
   }
   draw(){
@@ -49,10 +51,20 @@ export class Preview {
     for(let x=gridOrigin+Math.floor((b.left-gridOrigin)/50)*50;x<b.right;x+=50){const p=point(x*100,0);ctx.beginPath();ctx.moveTo(p.x,30);ctx.lineTo(p.x,h-25-space);ctx.stroke();}
     const ground=point(0,0);ctx.strokeStyle='#718086';ctx.beginPath();ctx.moveTo(12,ground.y);ctx.lineTo(w-12,ground.y);ctx.stroke();
     const rect=(box,color,alpha=.1,dashed=false)=>{const p=point(box[0],box[3]);ctx.fillStyle=color;ctx.globalAlpha=alpha;ctx.fillRect(p.x,p.y,(box[2]-box[0])/100*scale,(box[3]-box[1])/100*scale);ctx.globalAlpha=1;ctx.strokeStyle=color;ctx.setLineDash(dashed?[4,4]:[]);ctx.strokeRect(p.x,p.y,(box[2]-box[0])/100*scale,(box[3]-box[1])/100*scale);ctx.setLineDash([]);};
+    this.smearPlans=[];
     frame.state.players.forEach((f,i)=>{
       const p=point(f.x,f.y),pose=!i&&record.geometryOnly&&moveFrame?poseAt(m,moveFrame,!!this.pack.art[f.character].ready):{phase:['active','windup','block','signature_windup','signature_active','ready','walk','run'][f.posePhase],index:f.poseIndex};
       const sheet=this.pack.art[f.character][pose.phase],tile=sheet?.frames[pose.index];
       ctx.fillStyle='#050d12';ctx.beginPath();ctx.ellipse(p.x,ground.y,22*scale,5*scale,0,0,Math.PI*2);ctx.fill();
+      const previous=record.frames[index-1]?.state.players[i];
+      const smear=record.smearProfiles&&!record.geometryOnly?smearPlan(this.pack,previous,f,record.smearProfiles[f.character]):null;
+      if(smear&&this.options.art){drawSmear(ctx,smear,this.image(smear.file),point);this.smearPlans.push(smear);}
+      for(const q of frame.state.projectiles?.filter(q=>q.owner===i)??[]){
+        const box=[q.x-q.width/2,q.y-q.height/2,q.x+q.width/2,q.y+q.height/2],from=point(box[0],box[3]),to=point(box[2],box[1]);
+        const effect=this.image('appearance-v3/projectiles.png'),region=q.kind===2?[797,350,708,390]:[28,326,695,432];
+        if(this.options.art&&effect.complete&&effect.naturalWidth){ctx.save();ctx.translate((from.x+to.x)/2,from.y);ctx.scale(q.facing,1);ctx.drawImage(effect,...region,-Math.abs(to.x-from.x)/2,0,Math.abs(to.x-from.x),Math.abs(to.y-from.y));ctx.restore();}
+        if(this.options.hit)rect(box,'#d7a7ff',.15);
+      }
       if(this.options.art&&tile){const img=this.image(tile.file??sheet.file),s=150/sheet.body_height*scale;if(img.complete&&img.naturalWidth){const [sx,sy,sw,sh]=tile.render_region??tile.region;ctx.save();ctx.translate(p.x,p.y);ctx.scale(f.facing,1);ctx.drawImage(img,sx,sy,sw,sh,(sx-tile.region[0]-tile.pivot[0])*s,(sy-tile.region[1]-tile.pivot[1])*s,sw*s,sh*s);ctx.restore();}}
       if(this.options.push)frame.boxes[i].push.forEach(box=>rect(box,'#a8ba76'));
       const hurt=!i&&moveFrame&&(record.geometryOnly||m.hurtboxes[phase])?Object.values(effectiveHurtboxes(this.pack,record.character,m,moveFrame)).map(localToWorld):frame.boxes[i].hurt;

@@ -6,7 +6,11 @@ export const GROUPS = [
   {id:'input', title:'Inputs & identity', intro:'Move slots keep their IDs for game compatibility. These fields control the actual input and move type.', fields:['enabled','button','category','direction','motion','air','simpleDirection','simpleButton','artPose']},
   {id:'counter', title:'Counter hits & scaling', intro:'Reversal eligibility recognizes first-frame execution; it does not add invulnerability.', fields:['attackLevel','counterTier','counterVulnerable','counterFreezeFrames','counterSlowFrames','counterHitstun','counterHitstop','reversalEligible','starterProration','comboScaling','minimumDamage']},
 ];
+GROUPS.push({id:'projectiles',title:'Projectile',intro:'Moving shots travel independently; stationary objects stay where they spawn. They use this move’s damage, stun, launch and block rules. No projectile is created until enabled.',fields:["projectileKind", "projectileSpawnFrame", "projectileSpeedX", "projectileSpeedY", "projectileGravity", "projectileLife", "projectileOffsetX", "projectileOffsetY", "projectileWidth", "projectileHeight", "projectileHits", "projectileRehit", "projectileDurability", "projectilePersist", "projectileMelee"]},{id:'smears',title:'Transition smears',intro:'One visual frame stretches the moving limb or weapon between poses. Smears never add combat frames or change collision. Custom beats use 1-based move frames; 0 disables a beat.',fields:["smearMode", "smearPart", "smearStretch", "smearFrame1", "smearFrame2", "smearFrame3", "smearFrame4"]});
 export const TABS = [
+  {id:'movement',label:'Movement & defense',groups:[]},
+  {id:'projectiles',label:'Projectiles',groups:['projectiles']},
+  {id:'smears',label:'Smears',groups:['smears']},
   {id:'timing',label:'Timing',groups:['timing','counter']},
   {id:'hit',label:'Hit & movement',groups:['geometry','reaction']},
   {id:'routes',label:'Cancels & inputs',groups:['cancel','input']},
@@ -52,9 +56,16 @@ const hints = {
   normalCancelEnd:'0 closes at the end of the move. All window values are move-frame numbers.', specialCancelEnd:'0 closes at the end of the move.', jumpCancelEnd:'0 closes at the end of the move.', followCancelEnd:'0 closes at the end of the move.',
   specialCancel:'All normals are special-cancelable by default unless deliberately opted out.',
 };
+Object.assign(labels,{"projectileKind": "Projectile type", "projectileSpawnFrame": "Spawn frame", "projectileSpeedX": "Horizontal speed", "projectileSpeedY": "Upward speed", "projectileGravity": "Projectile gravity", "projectileLife": "Lifetime", "projectileOffsetX": "Spawn forward offset", "projectileOffsetY": "Spawn height", "projectileWidth": "Projectile width", "projectileHeight": "Projectile height", "projectileHits": "Hits before disappearing", "projectileRehit": "Re-hit interval", "projectileDurability": "Clash durability", "projectilePersist": "Survives owner being hit", "projectileMelee": "Keep the body strike too", "smearMode": "Smear timing", "smearPart": "Moving part", "smearStretch": "Stretch", "smearFrame1": "Custom beat 1", "smearFrame2": "Custom beat 2", "smearFrame3": "Custom beat 3", "smearFrame4": "Custom beat 4"});
+for(const key of ['projectileOffsetX','projectileOffsetY','projectileWidth','projectileHeight'])pixel.add(key);
+for(const key of ['projectileSpeedX','projectileSpeedY','projectileGravity'])speed.add(key);
+for(const key of ['projectilePersist','projectileMelee'])flags.add(key);
+percent.add('smearStretch');
+Object.assign(options,{projectileKind:[[0,'None'],[1,'Moving projectile'],[2,'Stationary object']],smearMode:[[0,'Off'],[1,'Every pose transition'],[2,'Custom move frames']],smearPart:[[0,'Automatic'],[1,'Arms'],[2,'Legs'],[3,'Weapon']]});
+Object.assign(hints,{"projectileSpawnFrame": "0 spawns on the first active frame. Other values are absolute move frames (earliest 5). Values beyond the move do not spawn; throws do not spawn projectiles.", "projectileSpeedX": "Positive travels forward from the launch facing. Negative travels backward. Stationary objects ignore speed and gravity.", "projectileSpeedY": "Positive rises; negative falls.", "projectileGravity": "Downward acceleration per frame (px/f\u00b2). Negative accelerates upward.", "projectileLife": "Action frames alive; shared hitstop freezes the lifetime.", "projectileRehit": "Minimum action frames between contacts with the same target.", "projectileDurability": "Opposing projectiles subtract durability. Equal strength destroys both.", "projectileMelee": "Enable to retain the attack\u2019s normal hitboxes as well as its projectile.", "smearStretch": "100% spans the two positions; higher values exaggerate the moving patch. The face and whole body are never stretched.", "smearPart": "Automatic samples the arm for attacks and the legs for walk/run poses.", "projectilePersist": "Otherwise disappears when its owner is hit. All projectiles clear during wall travel and round resets."});
 export const SPECS = Object.fromEntries(Object.entries(labels).map(([key,label])=>[key,{
   key,label,scale:pixel.has(key)||speed.has(key)?100:1,
-  unit:pixel.has(key)?'px':speed.has(key)?'px/f':percent.has(key)?'%': /startup|active|recovery|stun|stop|Frames|Start|End/i.test(key)?'f':'',
+  unit:key==='projectileGravity'?'px/f²':['projectileLife','projectileRehit','projectileSpawnFrame','smearFrame1','smearFrame2','smearFrame3','smearFrame4'].includes(key)?'f':pixel.has(key)?'px':speed.has(key)?'px/f':percent.has(key)?'%': /startup|active|recovery|stun|stop|Frames|Start|End/i.test(key)?'f':'',
   type:flags.has(key)?'flag':masks[key]?'mask':options[key]||['followFrom','followFrom2','artPose'].includes(key)?'select':'number',
   options:options[key],mask:masks[key],unified:key==='normalRoutes'||key==='commandRoutes',hint:hints[key]||''
 }]));

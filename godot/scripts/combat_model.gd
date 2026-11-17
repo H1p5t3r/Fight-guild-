@@ -2,7 +2,7 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 14
+const DATA_VERSION := 15
 const HIT_KEY_FIELDS := 23
 const HIT_TRACK_FIELDS := 738
 const HIT_OVERRIDES := ["damage", "hitstun", "blockstun", "hitstop"]
@@ -13,15 +13,15 @@ const MOMENTUM_MAX := 10000
 const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
 const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D", "2D", "4P+K", "6P+K", "236K", "236S>6S", "236S>2S", "214S", "j.214P", "214S>P", "j.214P>P"]
-const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange", "enabled", "artPose", "followFrom", "followFrom2", "followHit", "travelSpeed", "inertiaPercent", "pullFrames", "pullGap", "hitAngle", "normalCancelStart", "normalCancelEnd", "specialCancelStart", "specialCancelEnd", "jumpCancelStart", "jumpCancelEnd", "followCancelStart", "followCancelEnd", "cancelOn", "starterProration", "comboScaling", "minimumDamage", "landingRecovery", "attackLevel", "counterTier", "counterVulnerable", "counterFreezeFrames", "counterSlowFrames"]
-const MOVEMENT_FIELDS := ["forwardStyle", "walkSpeed", "runSpeed", "runAcceleration", "stepSpeed", "stepFrames", "backSpeed", "backFrames", "attackFriction"]
+const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange", "enabled", "artPose", "followFrom", "followFrom2", "followHit", "travelSpeed", "inertiaPercent", "pullFrames", "pullGap", "hitAngle", "normalCancelStart", "normalCancelEnd", "specialCancelStart", "specialCancelEnd", "jumpCancelStart", "jumpCancelEnd", "followCancelStart", "followCancelEnd", "cancelOn", "starterProration", "comboScaling", "minimumDamage", "landingRecovery", "attackLevel", "counterTier", "counterVulnerable", "counterFreezeFrames", "counterSlowFrames", "projectileKind", "projectileSpawnFrame", "projectileSpeedX", "projectileSpeedY", "projectileGravity", "projectileLife", "projectileOffsetX", "projectileOffsetY", "projectileWidth", "projectileHeight", "projectileHits", "projectileRehit", "projectileDurability", "projectilePersist", "projectileMelee", "smearMode", "smearPart", "smearStretch", "smearFrame1", "smearFrame2", "smearFrame3", "smearFrame4"]
+const MOVEMENT_FIELDS := ["forwardStyle", "walkSpeed", "runSpeed", "runAcceleration", "stepSpeed", "stepFrames", "backSpeed", "backFrames", "attackFriction", "backStyle", "backWalkSpeed", "backRunSpeed", "jumpSpeed", "jumpForwardSpeed", "jumpBackSpeed", "gravity", "airJumps", "prejumpFrames", "airDashEnabled", "airBackdashEnabled", "airDashStyle", "airBackdashStyle", "airDashSpeed", "airBackdashSpeed", "airDashFrames", "airBackdashFrames", "airDashUses", "hoverHeight", "hoverRiseSpeed", "teleportDistance", "backTeleportDistance", "teleportStartup", "fdEnabled", "fdPushPercent", "fdDrain", "fdAirDrain", "fdBlockCost", "smearMode", "smearPart", "smearStretch"]
 const RULES := ["buttonBuffer", "motionWindow", "motionGap"]
 const MOMENTUM_RULES := ["movementGain", "attackGain", "blockedAttackGain", "damageTakenGain", "guardGain", "specialGain", "fdDrain", "fdBlockCost", "fdDamageCost", "fdPushPercent"]
 const RECOVERY_RULES := ["gravityAfter", "gravityStep", "gravityCap", "wallThreshold", "wallRange", "wallDecayDelay", "wallDecay", "wallSplatFrames", "wallBreakFrames", "wallBreakDamage", "positiveFrames", "positiveGainPercent", "positiveRegen"]
 const TUNING_RULES := ["fdAirDrain", "fdLevelCost", "cornerPushTransfer", "wallMidCap", "groundedWallPrime", "blockCarryover", "throwGraceFrames", "airLandingFrames", "repeatAfter", "repeatGravityStep"]
 const JUMP_RULES := ["prejumpFrames", "emptyLandingFrames"]
 const RULE_COUNT := 38 # Input, Momentum, recovery/walls, tuning, then jump rules.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy"]
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy", "dashKind", "dashAge", "airDashUsed", "airJumpUsed", "teleported", "contactCount"]
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
 
@@ -44,6 +44,13 @@ func state() -> Dictionary:
 		for i in STATE_FIELDS.size():
 			fighter[STATE_FIELDS[i]] = core.read_value(p, i)
 		result.players.append(fighter)
+	result["projectiles"] = []
+	for i in 16:
+		if core.read_value(-2-i, 0) <= 0: continue
+		var projectile := {}
+		var keys := ["life", "owner", "x", "y", "width", "height", "kind", "facing", "move", "vx", "vy"]
+		for field in keys.size(): projectile[keys[field]] = core.read_value(-2-i, field)
+		result.projectiles.append(projectile)
 	return result
 
 func move(character: int, slot: int) -> Dictionary:
@@ -215,6 +222,7 @@ func load_data(value: Variant) -> String:
 				definition.counterFreezeFrames = -1
 				definition.counterSlowFrames = 0
 			for i in FIELDS.size():
+				if version < 15 and i >= 69: continue
 				var field: String = FIELDS[i]
 				if not valid_integer(definition.get(field)):
 					return "Invalid integer for %s / %s." % [MOVE_IDS[m], field]
@@ -231,6 +239,7 @@ func load_data(value: Variant) -> String:
 			if not characters[c].get("movement") is Dictionary: return "Missing movement profile."
 			var start := CHARACTERS.size() * MOVE_IDS.size() * FIELDS.size() + c * MOVEMENT_FIELDS.size()
 			for i in MOVEMENT_FIELDS.size():
+				if version < 15 and i >= 9: continue
 				var field: String = MOVEMENT_FIELDS[i]
 				if not valid_integer(characters[c].movement.get(field)): return "Invalid movement: " + field
 				candidate[start + i] = int(characters[c].movement[field])

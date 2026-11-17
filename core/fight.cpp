@@ -83,11 +83,11 @@ void Simulation::gain_momentum(Fighter& f,int amount) {
 }
 void Simulation::update_faultless(Fighter& f) {
     bool request=faultless_requested(f);
-    f.faultless=request&&f.momentum>0&&f.move<0&&f.reaction==Free&&!f.landing_time&&!f.prejump_time&&(f.stun==0||f.guarding);
+    f.faultless=request&&mobility[f.character].v[FdEnabled]&&f.momentum>0&&f.move<0&&f.reaction==Free&&!f.landing_time&&!f.prejump_time&&(f.stun==0||f.guarding);
     // Reserve the chord even with an empty meter: it falls back to ordinary guard.
     // It cannot become a buffered attack, dash or jump when the shield is released.
     if(request) f.history[world.frame%HISTORY].consumed|=P|K|S|Hs|D|Dash|Up;
-    if(f.faultless) f.momentum=max(0,f.momentum-(f.y>0?rules.fd_air_drain:rules.fd_drain));
+    if(f.faultless) f.momentum=max(0,f.momentum-mobility_or(f,f.y>0?FdAirDrain:FdDrain,f.y>0?rules.fd_air_drain:rules.fd_drain));
 }
 static Sample* sample(Fighter& f,int frame) {
     if(frame<0) return nullptr;
@@ -170,6 +170,7 @@ int Simulation::requested(Fighter& f,Sample& h) const {
 void Simulation::begin(Fighter& f,int move) {
     f.move=f.last_move=move;
     f.age=f.contact=f.hit_done=f.dash=0;
+    f.projectile_spawned=0; f.attack_serial=(f.attack_serial+1)%100000000;
     f.hit_groups=0;
     f.running=0;
     if(moves[f.character][move].v[Air]) f.air_action=1;
@@ -187,12 +188,12 @@ bool Simulation::active(const Fighter& f) const {
     const Move& m=moves[f.character][f.move];
     return f.age+1>=m.v[Startup]&&f.age+1<m.v[Startup]+m.v[Active];
 }
-bool Simulation::double_forward(const Fighter& f,const Sample& h) const {
-    const int forward=f.facing==1?Right:Left;
-    if(h.direction!=6||!(h.pressed&forward)||(h.consumed&forward)) return false;
+bool Simulation::double_forward(const Fighter& f,const Sample& h,int want) const {
+    const int forward=(f.facing==1)==(want==6)?Right:Left;
+    if(h.direction!=want||!(h.pressed&forward)||(h.consumed&forward)) return false;
     for(int n=h.frame-1;n>=max(0,h.frame-10);--n) {
         const Sample* old=sample(f,n);
-        if(old&&old->direction==6&&(old->pressed&forward)&&!(old->consumed&forward)) return true;
+        if(old&&old->direction==want&&(old->pressed&forward)&&!(old->consumed&forward)) return true;
     }
     return false;
 }
@@ -240,7 +241,7 @@ void Simulation::control(Fighter& f) {
     if(f.knockback_left>0) f.vx=f.knockback_left=0;
     if(f.prejump_time>0) {
         if(--f.prejump_time>0) return;
-        f.vy=1450; f.y=1;
+        f.vy=mobility[f.character].v[JumpSpeed]; f.y=max(1,f.y);
         // FD can begin on takeoff, at the airborne rate; it cannot guard prejump.
         update_faultless(f);
     }
@@ -255,10 +256,11 @@ void Simulation::control(Fighter& f) {
         if(f.y==0) f.vx=0;
         return;
     }
+    if(f.dash>0&&f.dash_kind==Teleport) { tick_dash(f); return; }
     for(int n=world.frame;n>=max(0,world.frame-rules.buffer+1);--n) {
         Sample* h=sample(f,n);
         if(!h) continue;
-        if((h->pressed&Up)&&!(h->consumed&Up)&&f.y==0&&!(f.simple&&(h->held&Simple))) {
+        if((h->pressed&Up)&&!(h->consumed&Up)&&(f.y==0||f.air_jump_used<mobility[f.character].v[AirJumps])&&!(f.simple&&(h->held&Simple))) {
             bool can=f.move<0;
             if(!can) {
                 const Move& m=moves[f.character][f.move];
@@ -267,13 +269,17 @@ void Simulation::control(Fighter& f) {
             if(can) {
                 f.move=-1; f.contact=f.hit_done=f.dash=f.running=0;
                 h->consumed|=Up;
-                f.prejump_time=rules.prejump_frames;
+                bool airborne=f.y>0;
+                if(airborne) ++f.air_jump_used;
+                f.prejump_time=airborne?0:mobility_or(f,MovePrejumpFrames,rules.prejump_frames);
+                int horizontal=((h->held&Right)!=0)-((h->held&Left)!=0);
+                if(horizontal&&f.vx*horizontal<=0) f.vx=horizontal*mobility[f.character].v[horizontal*f.facing>0?JumpForwardSpeed:JumpBackSpeed];
                 if(f.prejump_time>0) {
                     int horizontal=((h->held&Right)!=0)-((h->held&Left)!=0);
-                    if(horizontal&&f.vx*horizontal<=0) f.vx=horizontal*mobility[f.character].v[WalkSpeed];
+                    if(horizontal&&f.vx*horizontal<=0) f.vx=horizontal*mobility[f.character].v[horizontal*f.facing>0?JumpForwardSpeed:JumpBackSpeed];
                     return;
                 }
-                f.vy=1450; f.y=1;
+                f.vy=mobility[f.character].v[JumpSpeed]; f.y=max(1,f.y);
                 break;
             }
         }
@@ -294,13 +300,12 @@ void Simulation::control(Fighter& f) {
             return;
         }
         bool macro=(h->pressed&Dash)&&!(h->consumed&Dash);
-        if(f.move<0&&f.y==0&&(macro||double_forward(f,*h))) {
-            const auto& profile=mobility[f.character];
-            bool backwards=macro&&h->direction%3==1;
-            f.running=!backwards&&profile.v[ForwardStyle]==ForwardRun;
-            f.dash=f.running?0:profile.v[backwards?BackFrames:StepFrames];
-            f.dash_direction=f.facing*(backwards?-1:1);
-            if(f.dash) f.vx=f.dash_direction*profile.v[backwards?BackSpeed:StepSpeed];
+        bool backwards=(macro&&h->direction%3==1)||double_forward(f,*h,4);
+        bool dash_request=macro||double_forward(f,*h)||backwards;
+        const auto& profile=mobility[f.character];
+        bool air_allowed=f.y==0||(profile.v[backwards?AirBackdashEnabled:AirDashEnabled]&&f.air_dash_used<profile.v[AirDashUses]);
+        if(f.move<0&&!f.dash&&dash_request&&air_allowed) {
+            start_dash(f,backwards);
             h->consumed|=Dash|Left|Right;
             for(auto& old:f.history) if(old.frame<h->frame) old.consumed|=Left|Right;
             break;
@@ -310,16 +315,16 @@ void Simulation::control(Fighter& f) {
         int horizontal=((f.raw&Right)!=0)-((f.raw&Left)!=0);
         const auto& profile=mobility[f.character];
         if(f.dash>0) {
-            --f.dash;
+            tick_dash(f);
         } else if(f.y>0) {
             // A run/step jump retains horizontal speed; steering can redirect to walking speed.
-            if(horizontal&&(f.vx*horizontal<=0)) f.vx=horizontal*profile.v[WalkSpeed];
-        } else if(f.running&&(f.raw&Down)==0&&(horizontal==f.facing||((f.raw&Dash)&&horizontal!=-f.facing))) {
-            int speed=max(0,f.vx*f.facing);
-            f.vx=f.facing*min(profile.v[RunSpeed],speed+profile.v[RunAcceleration]);
+            if(horizontal&&(f.vx*horizontal<=0)) f.vx=horizontal*profile.v[horizontal*f.facing>0?JumpForwardSpeed:JumpBackSpeed];
+        } else if(f.running&&(f.raw&Down)==0&&(horizontal==f.dash_direction||((f.raw&Dash)&&horizontal!=-f.dash_direction))) {
+            int speed=max(0,f.vx*f.dash_direction);
+            f.vx=f.dash_direction*min(profile.v[f.dash_direction==f.facing?RunSpeed:BackRunSpeed],speed+profile.v[RunAcceleration]);
         } else {
             f.running=0;
-            f.vx=(f.raw&Down)?0:horizontal*profile.v[WalkSpeed];
+            f.vx=(f.raw&Down)?0:horizontal*profile.v[horizontal*f.facing<0?BackWalkSpeed:WalkSpeed];
         }
     }
 }
@@ -504,10 +509,12 @@ int Simulation::box_count(int player,int kind) const {
     if(player<0) return kind==WallBox?2:0;
     if(player>1) return 0;
     const auto& f=world.players[player];
+    if(kind==ProjectileBox) { int count=0; for(const auto& q:world.projectiles) if(q.life&&q.owner==player) ++count; return count; }
     if(kind==HurtBox) return hurt_count(f);
     if(kind==PushBox) return 1;
     if(kind==HitBox&&f.move>=0) {
         const auto& m=moves[f.character][f.move];
+        if(m.v[ProjectileKind]&&!m.v[ProjectileMelee]) return 0;
         return f.age>=m.v[Startup]&&f.age<m.v[Startup]+m.v[Active]?attack_count(f):0;
     }
     return 0;
@@ -515,6 +522,12 @@ int Simulation::box_count(int player,int kind) const {
 Box Simulation::box(int player,int kind,int index) const {
     if(index<0||index>=box_count(player,kind)) return {};
     if(kind==WallBox) return index==0?Box{-1000000,-1000000,0,1000000}:Box{100000,-1000000,1100000,1000000};
+    if(kind==ProjectileBox) {
+        for(const auto& q:world.projectiles) if(q.life&&q.owner==player&&index--==0) {
+            const auto& m=moves[q.character][q.move];
+            return {q.x-m.v[ProjectileWidth]/2,q.y-m.v[ProjectileHeight]/2,q.x+(m.v[ProjectileWidth]+1)/2,q.y+(m.v[ProjectileHeight]+1)/2};
+        }
+    }
     const auto& f=world.players[player];
     return kind==HurtBox?hurt_box(f,index):kind==PushBox?push_box(f):attack_box(f,index);
 }
@@ -573,7 +586,7 @@ bool Simulation::throw_invulnerable(const Fighter& f) const {
 void Simulation::land(Fighter& f) {
     if(f.reaction==Free)
         f.landing_time=f.air_action?(f.move>=0?moves[f.character][f.move].v[LandingRecovery]:rules.air_landing_frames):rules.empty_landing_frames;
-    f.air_action=0;
+    f.air_action=f.air_dash_used=f.air_jump_used=f.dash=f.running=0;
     f.y=f.vy=0; f.move=-1; f.contact=f.hit_done=0;
     if(f.reaction==AirReel) {
         f.vx=f.knockback_left=0;
@@ -638,11 +651,12 @@ void Simulation::step(int raw0,int raw1) {
         Sample& h=f.history[world.frame%HISTORY];
         h={world.frame,direction(raw[p],f.facing),raw[p]&~f.previous,raw[p],0};
         // A backdash pressed during guard break cannot escape through the input buffer.
-        if(f.guard_break&&f.stun>0&&h.direction%3==1) h.consumed|=Dash;
+        if(f.guard_break&&f.stun>0&&h.direction%3==1) h.consumed|=Dash|Left|Right;
         f.previous=raw[p];
     }
     if(world.winner>=0) { ++world.frame; return; }
     if(world.wall_break_time>0) {
+        for(auto& q:world.projectiles) q.life=0;
         for(auto& f:world.players) f.history[world.frame%HISTORY].consumed=INPUT_MASK;
         // Reset combat during travel; the presentation retains captured departure positions until landing.
         if(--world.wall_break_time==rules.wall_break_frames/3) finish_wall_break();
@@ -704,11 +718,14 @@ void Simulation::step(int raw0,int raw1) {
             if(!f.faultless) f.momentum=min(MOMENTUM_MAX,f.momentum+rules.positive_regen);
         }
         if(f.carry_time>0) --f.carry_time;
+        f.teleported=0;
         control(f);
+        spawn_projectile(f);
         move_horizontal(f,prior_stun[p]>0&&!prior_guard[p]);
-        if(f.move<0&&!prior_stun[p]&&f.reaction==Free&&!faultless_requested(f)) moved[p]=max(0,(f.x-prior_x[p])*f.facing);
+        if(f.move<0&&!f.teleported&&!prior_stun[p]&&f.reaction==Free&&!faultless_requested(f)) moved[p]=max(0,(f.x-prior_x[p])*f.facing);
         if(f.y>0&&f.reaction!=WallSplat&&f.reaction!=Reeled) {
-            f.y+=f.vy; f.vy-=85*gravity_percent(f)/100;
+            f.y+=f.vy;
+            if(!(f.dash>0&&(f.dash_kind==HoverDash||f.dash_air))) f.vy-=mobility[f.character].v[Gravity]*gravity_percent(f)/100;
             if(f.y<=0) land(f);
         }
         else if(f.y<=0&&f.reaction==AirReel) land(f);
@@ -716,7 +733,7 @@ void Simulation::step(int raw0,int raw1) {
     }
     Fighter& a=world.players[0]; Fighter& b=world.players[1];
     reel_targets(advances);
-    resolve_push(previous_order,prior_overlap);
+    resolve_push(previous_order,prior_overlap&&!a.teleported&&!b.teleported);
     // Only actual voluntary approach earns movement meter: no wall/pushbox or knockback farming.
     for(int p=0;p<2;++p) {
         auto& f=world.players[p];
@@ -745,7 +762,7 @@ void Simulation::step(int raw0,int raw1) {
                 connects=f.y==0&&!throw_invulnerable(other)&&!(prior_stun[1-p]>0&&!prior_guard[1-p])
                     &&(other.x-f.x)*f.facing>=0
                     &&abs(other.x-f.x)<=separation+moves[f.character][f.move].v[ThrowRange];
-            } else connects=overlaps(f,other);
+            } else if(!moves[f.character][f.move].v[ProjectileKind]||moves[f.character][f.move].v[ProjectileMelee]) connects=overlaps(f,other);
         }
         if(connects) {
             hits[p]=f.move; blocked[p]=blocks(f,other,prior_stun[1-p]>0,prior_landing[1-p]>0);
@@ -773,7 +790,7 @@ void Simulation::step(int raw0,int raw1) {
         defender.combo=defender.combo_display=defender.combo_time=defender.combo_age=0;
     }
     for(int p=0;p<2;++p) if(hits[p]>=0) {
-        Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
+        Fighter& f=world.players[p];
         Move m=moves[f.character][hits[p]];
         // Copy before applying a trade: interruptions may replace the opponent's move.
         Fighter contact_fighter=f; contact_fighter.move=hits[p];
@@ -786,58 +803,215 @@ void Simulation::step(int raw0,int raw1) {
         }
         f.hit_groups|=hit_bit(contact_fighter,1);
         f.hit_done=f.contact=1;
-        f.event=contacts[p];
-        f.combo=blocked[p]?0:(prior_combo[1-p]?min(1000,f.combo+1):1);
+        apply_contact(p,hits[p],m,contacts[p],prior_combo[1-p],prior_reaction[1-p],f.facing,false);
+    }
+    update_projectiles();
+    for(int p=0;p<2;++p) if(advances[p]&&prior_grace[p]>0&&world.players[p].throw_grace>0) --world.players[p].throw_grace;
+    for(int p=0;p<2;++p) if(advances[p]&&world.players[p].move>=0) {
+        auto& f=world.players[p];
+        const Move& m=moves[f.character][f.move];
+        if(++f.age>=m.v[Startup]-1+m.v[Active]+m.v[Recovery]) {
+            f.move=-1; f.contact=f.hit_done=0;
+        }
+    }
+    // A back throw is the explicit side-switch exception to movement's anti-tunneling rule.
+    resolve_push(previous_order,prior_overlap&&!a.teleported&&!b.teleported&&!(hits[0]==BACK_THROW||hits[1]==BACK_THROW));
+    for(int p=0;p<2;++p) if(advances[p]&&world.players[p].positive_time>0) --world.players[p].positive_time;
+    --world.remaining;
+    if(world.wall_break_time==0&&(world.remaining<=0||a.health==0||b.health==0))
+        world.winner=a.health==b.health?2:a.health>b.health?0:1;
+    ++world.frame;
+}
+
+int Simulation::mobility_or(const Fighter& f,int field,int fallback) const {
+    int value=mobility[f.character].v[field]; return value<0?fallback:value;
+}
+void Simulation::start_dash(Fighter& f,bool backwards) {
+    const auto& m=mobility[f.character];
+    f.dash_air=f.y>0;
+    f.dash_kind=m.v[f.dash_air?(backwards?AirBackdashStyle:AirDashStyle):(backwards?BackStyle:ForwardStyle)];
+    f.dash_direction=f.facing*(backwards?-1:1); f.dash_age=0;
+    f.running=!f.dash_air&&f.dash_kind==ForwardRun;
+    f.dash=f.running?0:m.v[f.dash_air?(backwards?AirBackdashFrames:AirDashFrames):(backwards?BackFrames:StepFrames)];
+    if(f.dash_kind==Teleport) f.dash=max(f.dash,m.v[TeleportStartup]+1);
+    if(f.dash_air) { ++f.air_dash_used; f.air_action=1; f.vy=0; }
+    if(f.dash_kind==HoverDash&&!f.dash_air) { f.y=1; f.vy=0; }
+    if(f.dash_kind==Teleport) f.vx=f.carry_vx=f.carry_time=0;
+    else if(!f.running) f.vx=f.dash_direction*m.v[f.dash_air?(backwards?AirBackdashSpeed:AirDashSpeed):(backwards?BackSpeed:StepSpeed)];
+}
+void Simulation::tick_dash(Fighter& f) {
+    const auto& m=mobility[f.character];
+    ++f.dash_age;
+    if(f.dash_kind==Teleport) {
+        f.vx=0; f.vy=0;
+        if(f.dash_age==m.v[TeleportStartup]) {
+            f.x=clamp_x(f,f.x+f.dash_direction*m.v[f.dash_direction==f.facing?TeleportDistance:BackTeleportDistance]);
+            f.teleported=1;
+        }
+    } else if(f.dash_kind==HoverDash) {
+        f.vy=0;
+        if(!f.dash_air) f.y=min(m.v[HoverHeight],f.y+m.v[HoverRiseSpeed]);
+    } else if(f.dash_air) f.vy=0;
+    --f.dash;
+}
+void Simulation::spawn_projectile(Fighter& f) {
+    if(f.move<0||f.projectile_spawned||f.stun||f.reaction!=Free) return;
+    const auto& m=moves[f.character][f.move];
+    int at=max(MIN_STARTUP,m.v[ProjectileSpawnFrame]?m.v[ProjectileSpawnFrame]:m.v[Startup]);
+    if(!m.v[ProjectileKind]||m.v[Category]==Throw||f.age+1!=at) return;
+    f.projectile_spawned=1;
+    int owner=&f==&world.players[0]?0:1,owned=0;
+    for(const auto& q:world.projectiles) if(q.life&&q.owner==owner) ++owned;
+    if(owned>=MAX_PROJECTILES/2) return; // Fixed, symmetric budget; no allocation in rollback.
+    for(auto& q:world.projectiles) if(!q.life) {
+        q={m.v[ProjectileLife],owner,f.character,f.move,f.attack_serial,
+           f.x+f.facing*m.v[ProjectileOffsetX],f.y+m.v[ProjectileOffsetY],
+           m.v[ProjectileKind]==1?f.facing*m.v[ProjectileSpeedX]:0,
+           m.v[ProjectileKind]==1?m.v[ProjectileSpeedY]:0,f.facing,
+           m.v[ProjectileHits],0,m.v[ProjectileDurability]};
+        break;
+    }
+}
+// Swept AABB in fixed-point time. Fast/thin shots cannot tunnel through a body
+// or one another; relative motion also keeps diagonal clashes honest.
+static bool swept_point(int x0,int y0,int x1,int y1,const Box& b) {
+    long long enter=0,leave=1000000;
+    const int starts[]={x0,y0},deltas[]={x1-x0,y1-y0},lo[]={b.left,b.bottom},hi[]={b.right,b.top};
+    for(int axis=0;axis<2;++axis) {
+        if(!deltas[axis]) { if(starts[axis]<lo[axis]||starts[axis]>hi[axis]) return false; continue; }
+        long long a=static_cast<long long>(lo[axis]-starts[axis])*1000000;
+        long long z=static_cast<long long>(hi[axis]-starts[axis])*1000000,d=deltas[axis];
+        if(d<0) { long long t=a; a=-z; z=-t; d=-d; }
+        long long first=a/d+(a>0&&a%d?1:0),last=z/d-(z<0&&z%d?1:0);
+        if(first>enter) enter=first;
+        if(last<leave) leave=last;
+        if(enter>leave) return false;
+    }
+    return enter<=leave;
+}
+void Simulation::update_projectiles() {
+    int old_x[MAX_PROJECTILES],old_y[MAX_PROJECTILES];
+    for(int i=0;i<MAX_PROJECTILES;++i) { old_x[i]=world.projectiles[i].x; old_y[i]=world.projectiles[i].y; }
+    // Projectiles run on the world clock, freezing with hitstop. Stationary traps
+    // ignore velocity and gravity even when those fields retain previous edits.
+    for(auto& q:world.projectiles) if(q.life) {
+        const auto& m=moves[q.character][q.move]; const auto& owner=world.players[q.owner];
+        if((!m.v[ProjectilePersist]&&((owner.stun&&!owner.guarding)||owner.reaction!=Free))||world.wall_break_time) { q.life=0; continue; }
+        if(q.cooldown) --q.cooldown;
+        if(m.v[ProjectileKind]==1) { q.x+=q.vx; q.y+=q.vy; q.vy=clamp(q.vy-m.v[ProjectileGravity],-10000,10000); }
+        if(q.x< -30000||q.x>130000||q.y< -30000||q.y>100000) q.life=0;
+    }
+    // Opposing projectiles exchange durability simultaneously on each collision.
+    for(int i=0;i<MAX_PROJECTILES;++i) for(int j=i+1;j<MAX_PROJECTILES;++j) {
+        auto& a=world.projectiles[i]; auto& b=world.projectiles[j];
+        if(!a.life||!b.life||a.owner==b.owner) continue;
+        const auto& ma=moves[a.character][a.move]; const auto& mb=moves[b.character][b.move];
+        int width=(ma.v[ProjectileWidth]+mb.v[ProjectileWidth])/2-1,height=(ma.v[ProjectileHeight]+mb.v[ProjectileHeight])/2-1;
+        if(swept_point(old_x[i]-old_x[j],old_y[i]-old_y[j],a.x-b.x,a.y-b.y,{-width,-height,width,height})) {
+            int da=a.durability,db=b.durability;
+            a.durability=max(0,da-db); b.durability=max(0,db-da);
+            if(!a.durability) a.life=0;
+            if(!b.durability) b.life=0;
+        }
+    }
+    int contacts[MAX_PROJECTILES]={}; bool combos[MAX_PROJECTILES]={}; int reactions[MAX_PROJECTILES]={};
+    for(int i=0;i<MAX_PROJECTILES;++i) {
+        auto& q=world.projectiles[i]; if(!q.life||q.cooldown) continue;
+        auto& defender=world.players[1-q.owner]; const auto& m=moves[q.character][q.move];
+        if(defender.reaction==Downed||defender.reaction==Waking) continue;
+        bool hit=false;
+        for(int b=0;b<hurt_count(defender,defender.slow_held?0:1);++b) {
+            Box target=hurt_box(defender,b,defender.slow_held?0:1);
+            target.left-=(m.v[ProjectileWidth]+1)/2-1; target.right+=m.v[ProjectileWidth]/2-1;
+            target.bottom-=(m.v[ProjectileHeight]+1)/2-1; target.top+=m.v[ProjectileHeight]/2-1;
+            if(swept_point(old_x[i],old_y[i],q.x,q.y,target)) hit=true;
+        }
+        if(!hit) continue;
+        Fighter source=world.players[q.owner]; source.move=q.move; source.x=old_x[i]; source.y=q.y; source.facing=q.facing;
+        bool blocked=blocks(source,defender,defender.stun>0,defender.landing_time>0);
+        contacts[i]=blocked?Blocked:NormalHit;
+        if(!blocked&&defender.move>=0&&!defender.stun) {
+            const auto& target=moves[defender.character][defender.move];
+            int tick=defender.age+(defender.slow_held?0:1);
+            int phase=tick<target.v[Startup]?1:tick<target.v[Startup]+target.v[Active]?2:4;
+            contacts[i]=(target.v[CounterVulnerable]&phase)?CounterHit:phase==4?PunishHit:NormalHit;
+        } else if(!blocked&&defender.landing_time) contacts[i]=PunishHit;
+        combos[i]=(defender.stun&&!defender.guarding)||defender.reaction==AirReel||defender.reaction==WallSplat||defender.reaction==Reeled;
+        reactions[i]=defender.reaction;
+    }
+    bool hit_this_tick[2]={false,false};
+    for(int i=0;i<MAX_PROJECTILES;++i) {
+        auto& q=world.projectiles[i]; if(!q.life) continue;
+        if(contacts[i]) {
+            auto& owner=world.players[q.owner]; auto& defender=world.players[1-q.owner];
+            if(contacts[i]!=Blocked) defender.combo=defender.combo_display=defender.combo_time=defender.combo_age=0;
+            if(owner.move==q.move&&owner.attack_serial==q.serial) owner.contact=1;
+            Move m=moves[q.character][q.move]; m.v[Category]=Special; m.v[PullFrames]=0;
+            apply_contact(q.owner,q.move,m,contacts[i],combos[i]||hit_this_tick[1-q.owner],reactions[i],q.facing,true);
+            if(contacts[i]!=Blocked) hit_this_tick[1-q.owner]=true;
+            q.cooldown=m.v[ProjectileRehit];
+            if(--q.hits<=0) q.life=0;
+        }
+        if(q.life) --q.life;
+    }
+}
+
+void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_combo,int prior_reaction,int facing,bool projectile) {
+    Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
+    bool blocked=contact==Blocked;
+    f.contact_count=(f.contact_count+1)%100000000;
+        f.event=contact;
+        f.combo=blocked?0:(prior_combo?min(1000,f.combo+1):1);
         f.combo_display=f.combo>=2?f.combo:0;
         f.combo_time=f.combo>=2?COMBO_HOLD:0;
         f.combo_age=0;
-        if(contacts[p]==CounterHit||contacts[p]==PunishHit) {
-            f.hit_notice=contacts[p];
+        if(contact==CounterHit||contact==PunishHit) {
+            f.hit_notice=contact;
             f.hit_notice_time=NOTICE_TICKS;
-            f.counter_tier=contacts[p]==CounterHit?m.v[CounterTier]:0;
+            f.counter_tier=contact==CounterHit?m.v[CounterTier]:0;
         }
-        bool fd=blocked[p]&&other.faultless;
+        bool fd=blocked&&other.faultless;
         bool was_airborne=other.y>0;
-        bool was_splatted=other.reaction==WallSplat||prior_reaction[1-p]==WallSplat;
+        bool was_splatted=other.reaction==WallSplat||prior_reaction==WallSplat;
         bool throwing=m.v[Category]==Throw;
-        if(!blocked[p]&&!prior_combo[1-p]) {
+        if(!blocked&&!prior_combo) {
             other.combo_proration=m.v[StarterProration]; other.combo_scale=100;
         }
-        int scale=!prior_combo[1-p]?100:max(m.v[MinimumDamage],other.combo_proration*other.combo_scale/100);
-        int damage=blocked[p]?(fd?0:m.v[ChipDamage]):m.v[Damage]>0?max(1,m.v[Damage]*scale/100):0;
-        f.last_damage=damage; f.damage_scale=blocked[p]?100:scale; f.last_base_damage=m.v[Damage];
-        if(!blocked[p]) other.combo_scale=max(0,other.combo_scale-m.v[ComboScaling]);
+        int scale=!prior_combo?100:max(m.v[MinimumDamage],other.combo_proration*other.combo_scale/100);
+        int damage=blocked?(fd?0:m.v[ChipDamage]):m.v[Damage]>0?max(1,m.v[Damage]*scale/100):0;
+        f.last_damage=damage; f.damage_scale=blocked?100:scale; f.last_base_damage=m.v[Damage];
+        if(!blocked) other.combo_scale=max(0,other.combo_scale-m.v[ComboScaling]);
         other.health=max(0,other.health-damage);
-        if(!blocked[p]) other.faultless=0;
-        gain_momentum(f,m.v[Damage]*(blocked[p]?rules.block_attack_gain:rules.attack_gain));
-        if(!fd) gain_momentum(other,m.v[Damage]*(blocked[p]?rules.guard_gain:rules.damage_gain));
-        if(fd) other.momentum=max(0,other.momentum-rules.fd_block_cost-m.v[Damage]*rules.fd_damage_cost-max(0,m.v[AttackLevel])*rules.fd_level_cost);
-        other.stun=m.v[blocked[p]?Blockstun:Hitstun]+(contacts[p]==CounterHit?m.v[CounterHitstun]:0);
-        other.guarding=blocked[p];
+        if(!blocked) other.faultless=0;
+        gain_momentum(f,m.v[Damage]*(blocked?rules.block_attack_gain:rules.attack_gain));
+        if(!fd) gain_momentum(other,m.v[Damage]*(blocked?rules.guard_gain:rules.damage_gain));
+        if(fd) other.momentum=max(0,other.momentum-mobility_or(other,FdBlockCost,rules.fd_block_cost)-m.v[Damage]*rules.fd_damage_cost-max(0,m.v[AttackLevel])*rules.fd_level_cost);
+        other.stun=m.v[blocked?Blockstun:Hitstun]+(contact==CounterHit?m.v[CounterHitstun]:0);
+        other.guarding=blocked;
         other.block_age=0;
-        other.guard_break=blocked[p]&&m.v[GuardBreak]&&other.stun>0;
+        other.guard_break=blocked&&m.v[GuardBreak]&&other.stun>0;
         other.throw_grace=other.landing_time=other.prejump_time=0;
         // Count the remaining active/recovery ticks AFTER this contact tick.
-        int remaining=m.v[Startup]-1+m.v[Active]+m.v[Recovery]-(f.age+1);
-        other.block_advantage=blocked[p]?m.v[Blockstun]-remaining:0;
-        other.block_reaction=!blocked[p]?NoBlock:other.guard_break?BrokenGuard:
+        int remaining=max(0,m.v[Startup]-1+m.v[Active]+m.v[Recovery]-(f.move==move?f.age+1:m.v[Startup]+m.v[Active]+m.v[Recovery]));
+        other.block_advantage=blocked?m.v[Blockstun]-remaining:0;
+        other.block_reaction=!blocked?NoBlock:other.guard_break?BrokenGuard:
             other.block_advantage>0?PressureBlock:StableBlock;
         other.move=-1; other.dash=other.running=other.vx=other.pull_time=other.knockback_left=0;
         other.carry_vx=other.carry_time=0;
         other.pull_owner=-1;
-        int push=m.v[blocked[p]?BlockPushback:was_airborne?AirPushback:Pushback]*(fd?rules.fd_push_percent:100)/100;
+        int push=m.v[blocked?BlockPushback:was_airborne?AirPushback:Pushback]*(fd?mobility_or(other,FdPushPercent,rules.fd_push_percent):100)/100;
         int old_x=other.x;
-        if(blocked[p]||throwing) other.x=clamp_x(other,other.x+f.facing*push);
+        if(blocked||throwing) other.x=clamp_x(other,other.x+facing*push);
         else {
             other.knockback_left=push;
-            other.vx=f.facing*((push+HIT_TRAVEL_TICKS-1)/HIT_TRAVEL_TICKS);
+            other.vx=facing*((push+HIT_TRAVEL_TICKS-1)/HIT_TRAVEL_TICKS);
         }
         // FD still creates space at the corner by transferring blocked displacement to the attacker.
-        if(blocked[p]&&(fd||rules.corner_push_transfer)) f.x=clamp_x(f,f.x-f.facing*(push-abs(other.x-old_x)));
-        if(!blocked[p]) {
+        if(!projectile&&blocked&&(fd||rules.corner_push_transfer)) f.x=clamp_x(f,f.x-facing*(push-abs(other.x-old_x)));
+        if(!blocked) {
             if(other.reaction==Reeled) other.reaction=was_airborne?AirReel:Free;
             other.combo_received=f.combo;
-            int uses=other.move_uses[hits[p]]=min(1000,other.move_uses[hits[p]]+1);
+            int uses=other.move_uses[move]=min(1000,other.move_uses[move]+1);
             if(rules.repeat_after>0&&uses>=rules.repeat_after&&f.combo>rules.gravity_after)
                 other.repeat_gravity=min(300,other.repeat_gravity+rules.repeat_gravity_step);
             other.knockdown=m.v[Knockdown];
@@ -847,9 +1021,9 @@ void Simulation::step(int raw0,int raw1) {
                 // Exchange sides at contact, retaining both body widths at stage edges.
                 int separation=PUSH_PROFILES[f.character].half_width+PUSH_PROFILES[other.character].half_width;
                 f.x=clamp_x(f,old_x);
-                other.x=clamp_x(other,f.x-f.facing*(separation+push));
-                f.x=clamp_x(f,other.x+f.facing*separation);
-                f.facing=-f.facing; other.facing=-f.facing;
+                other.x=clamp_x(other,f.x-facing*(separation+push));
+                f.x=clamp_x(f,other.x+facing*separation);
+                f.facing=-facing; other.facing=-f.facing;
             }
             int lift=m.v[was_airborne?AirLaunch:Launch];
             if(was_airborne||lift>0||other.knockdown!=NoKnockdown) {
@@ -875,8 +1049,8 @@ void Simulation::step(int raw0,int raw1) {
                 other.vx=other.knockback_left=0;
             }
         }
-        int stop=m.v[Hitstop]+(contacts[p]==CounterHit?m.v[CounterHitstop]:0);
-        if(contacts[p]==CounterHit) {
+        int stop=m.v[Hitstop]+(contact==CounterHit?m.v[CounterHitstop]:0);
+        if(contact==CounterHit) {
             if(m.v[CounterFreezeFrames]>=0) stop=m.v[CounterFreezeFrames];
             if(m.v[CounterSlowFrames]>0) {
                 other.slow_time=max(other.slow_time,m.v[CounterSlowFrames]);
@@ -886,26 +1060,10 @@ void Simulation::step(int raw0,int raw1) {
             if(m.v[CounterTier]>=2&&(world.impact_time==0||m.v[CounterTier]>world.impact_tier)) {
                 world.impact_time=world.impact_duration=duration;
                 world.impact_actor=p; world.impact_tier=m.v[CounterTier];
-                world.impact_x=(f.x+other.x)/2; world.impact_y=clamp(other.y+8000,0,200000);
+                world.impact_x=projectile?other.x:(f.x+other.x)/2; world.impact_y=clamp(other.y+8000,0,200000);
             }
         }
         world.hitstop=max(world.hitstop,stop);
-    }
-    for(int p=0;p<2;++p) if(advances[p]&&prior_grace[p]>0&&world.players[p].throw_grace>0) --world.players[p].throw_grace;
-    for(int p=0;p<2;++p) if(advances[p]&&world.players[p].move>=0) {
-        auto& f=world.players[p];
-        const Move& m=moves[f.character][f.move];
-        if(++f.age>=m.v[Startup]-1+m.v[Active]+m.v[Recovery]) {
-            f.move=-1; f.contact=f.hit_done=0;
-        }
-    }
-    // A back throw is the explicit side-switch exception to movement's anti-tunneling rule.
-    resolve_push(previous_order,prior_overlap&&!(hits[0]==BACK_THROW||hits[1]==BACK_THROW));
-    for(int p=0;p<2;++p) if(advances[p]&&world.players[p].positive_time>0) --world.players[p].positive_time;
-    --world.remaining;
-    if(world.wall_break_time==0&&(world.remaining<=0||a.health==0||b.health==0))
-        world.winner=a.health==b.health?2:a.health>b.health?0:1;
-    ++world.frame;
 }
 
 unsigned Simulation::checksum() const {
@@ -916,6 +1074,13 @@ unsigned Simulation::checksum() const {
 }
 int Simulation::get(int player,int field) const {
     using namespace fight;
+    if(player<=-2) {
+        int index=-player-2; if(index>=MAX_PROJECTILES) return 0;
+        const auto& q=world.projectiles[index]; if(!q.life) return 0;
+        const auto& m=moves[q.character][q.move];
+        const int values[]={q.life,q.owner,q.x,q.y,m.v[ProjectileWidth],m.v[ProjectileHeight],m.v[ProjectileKind],q.facing,q.move,q.vx,q.vy};
+        return field>=0&&field<11?values[field]:0;
+    }
     if(player<0) {
         switch(field) { case 0:return world.frame; case 1:return world.remaining;
         case 2:return world.hitstop; case 3:return world.winner;
@@ -969,6 +1134,8 @@ int Simulation::get(int player,int field) const {
         case 63:return f.slow_time; case 64:return f.slow_held;
         case 65:return f.knockback_left;
         case 66:return static_cast<int>(f.hit_groups); case 67:return f.vy;
+        case 68:return f.dash_kind; case 69:return f.dash_age; case 70:return f.air_dash_used;
+        case 71:return f.air_jump_used; case 72:return f.teleported; case 73:return f.contact_count;
         default:return 0;
     }
 }
@@ -1004,6 +1171,18 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case CounterTier: low=-1; high=3; break;
         case CounterFreezeFrames: low=-1; high=60; break;
         case CounterSlowFrames: high=120; break;
+        case ProjectileKind:case SmearMode: high=2; break;
+        case SmearPart: high=3; break;
+        case ProjectileSpawnFrame:case SmearFrame1:case SmearFrame2:case SmearFrame3:case SmearFrame4: high=420; break;
+        case ProjectileSpeedX:case ProjectileSpeedY: low=-4000; high=4000; break;
+        case ProjectileGravity: low=-500; high=500; break;
+        case ProjectileLife: low=1; high=600; break;
+        case ProjectileOffsetX:case ProjectileOffsetY: low=-50000; high=50000; break;
+        case ProjectileWidth:case ProjectileHeight: low=100; high=30000; break;
+        case ProjectileHits:case ProjectileDurability: low=1; high=32; break;
+        case ProjectileRehit: low=1; high=120; break;
+        case ProjectilePersist:case ProjectileMelee: high=1; break;
+        case SmearStretch: low=100; high=400; break;
         case Startup: low=MIN_STARTUP; high=120; break;
         case Active: low=1; high=120; break;
         case Recovery:case Hitstun:case Blockstun: high=180; break;
@@ -1159,8 +1338,8 @@ int Simulation::mobility_get(int c,int field) const {
     return c>=0&&c<CHARACTER_COUNT&&field>=0&&field<MOBILITY_FIELDS?mobility[c].v[field]:-1;
 }
 int Simulation::mobility_set(int c,int field,int value) {
-    const int low[MOBILITY_FIELDS]={0,1,1,1,1,1,1,1,0};
-    const int high[MOBILITY_FIELDS]={1,1000,2000,1000,2000,60,2000,60,500};
+    const int low[MOBILITY_FIELDS]={0,1,1,1,1,1,1,1,0,0,1,1,100,0,0,1,0,-1,0,0,0,0,1,1,1,1,0,0,1,0,0,1,0,-1,-1,-1,-1,0,0,100};
+    const int high[MOBILITY_FIELDS]={3,1000,2000,1000,2000,120,2000,120,500,3,1000,2000,3000,2000,2000,500,5,30,1,1,3,3,4000,4000,120,120,5,20000,2000,80000,80000,60,1,1000,1000,1000,10000,1,3,400};
     if(c<0||c>=CHARACTER_COUNT||field<0||field>=MOBILITY_FIELDS||value<low[field]||value>high[field]) return 0;
     mobility[c].v[field]=value;
     return 1;

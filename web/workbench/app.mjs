@@ -1,3 +1,4 @@
+import {renderMovement} from './movement-editor.mjs';
 import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,phaseStart,effectiveHurtboxes,inputName,geometryWarnings,CHARACTERS,MOVE_IDS,clone,META} from './model.mjs';
 import {HURT_PHASES,HURT_REGIONS,HURT_LABELS,validateHurtboxes} from '../hurtboxes.mjs';
 import {SPECS,GROUPS,TABS,ART_FIELDS,GUILDS,COLORS,KINDS} from './specs.mjs';
@@ -11,6 +12,7 @@ const $=id=>document.getElementById(id),pack=globalThis.FIGHT_WORKSHOP_DATA;
 const STORAGE='fight-guild.move-workshop.v1';
 let model,character=5,slot=0,tab='timing',filter='all',frame=5,playing=false,lastTick=0,saveTimer,toastTimer,dragBefore;
 let storageOkay=true,savePending=false,unexported=false,bootLocked=false,recoveryRaw='',referenceBusy=false;
+let movementAction='idle';
 let hurtPhase='active',hurtRegion='torsoArms',hurtDragBefore;
 let hitKeyFrame=null,hitBox=0,testRecord,testIndex=0,testTimer,testSignature='',recordSignature='',previewPending=false,pendingSeek={frame:5};
 const combatPreview=new CombatPreview(pack);
@@ -33,7 +35,7 @@ function move(){return model.move(character,slot);}
 function fieldError(key,message){const id='field-'+key,node=$(id);if(message)errors.set(id,message);else errors.delete(id);node?.setAttribute('aria-invalid',String(!!message));const messageNode=$('error-'+key);if(messageNode)messageNode.textContent=message||'';refreshActions();}
 function refreshActions(){
   $('export').disabled=bootLocked||referenceBusy||errors.size>0;$('undo').disabled=bootLocked||referenceBusy||(!model.undoStack.length&&!errors.size);$('redo').disabled=bootLocked||referenceBusy||!model.redoStack.length||errors.size>0;
-  $('reset').disabled=bootLocked||referenceBusy||(!move().hitboxTimeline.keys.length&&!move().hitboxTimeline.multiHit&&!Object.keys(move().hurtboxes).length&&!Object.keys(SPECS).some(key=>move()[key]!==pack.defaults.characters[character].moves[slot][key]));
+  $('reset').disabled=tab==='movement'?bootLocked||referenceBusy:bootLocked||referenceBusy||(!move().hitboxTimeline.keys.length&&!move().hitboxTimeline.multiHit&&!Object.keys(move().hurtboxes).length&&!Object.keys(SPECS).some(key=>move()[key]!==pack.defaults.characters[character].moves[slot][key]));
   $('attack-enabled').disabled=bootLocked||referenceBusy;
   $('import').disabled=referenceBusy;$('fighter').disabled=bootLocked||referenceBusy;
   if(errors.size){$('save-status').textContent='Check the highlighted value';$('save-dot').style.background='var(--danger)';}
@@ -42,14 +44,20 @@ function syncSummary(){
   const m=move(),adv=blockAdvantage(m),note=model.note(character,slot);
   document.documentElement.style.setProperty('--accent',COLORS[character]);
   $('move-context').textContent=`${CHARACTERS[character].toUpperCase()} / ${GUILDS[character].toUpperCase()}`;
-  $('move-title').textContent=m.id;$('move-label').textContent=note.label||'';
+  const movement=tab==='movement';
+  document.querySelector('.attack-toggle').hidden=movement;document.querySelector('.summary').hidden=movement;
+  for(const id of ['test-behavior','test-entry','test-gap','test-simple'])$(id).closest('label').hidden=movement;
+  $('reset').textContent=movement?'Reset movement':'Reset move';
+  $('move-kind').hidden=movement;$('actual-input').hidden=movement;$('move-enabled').hidden=movement;
+  $('move-title').textContent=movement?'Movement & defense':m.id;$('move-label').textContent=note.label||'';
   $('move-kind').textContent=KINDS[m.category];$('actual-input').textContent=`Input ${inputName(m)}`;
   $('move-enabled').textContent=m.enabled?'● Enabled':'○ Unused slot';$('move-enabled').style.color=m.enabled?'#a8cbaa':'var(--muted)';
   $('attack-enabled').checked=!!m.enabled;
   $('stat-startup').replaceChildren(document.createTextNode(m.startup),el('small',{},' f'));
   $('stat-damage').textContent=m.damage;$('stat-block').textContent=(adv>0?'+':'')+adv+' f';$('stat-block').className=adv>0?'positive':adv<0?'negative':'';
   $('stat-total').replaceChildren(document.createTextNode(totalFrames(m)),el('small',{},' f'));
-  $('changed-count').textContent=`${model.changes().length} edited move${model.changes().length===1?'':'s'}`;
+  const profiles=model.data.characters.filter((c,i)=>JSON.stringify(c.movement)!==JSON.stringify(pack.defaults.characters[i].movement)).length;
+  $('changed-count').textContent=`${model.changes().length} edited move${model.changes().length===1?'':'s'}${profiles?' · '+profiles+' movement profile'+(profiles===1?'':'s'):''}`;
   $('guild').textContent=GUILDS[character];$('roster-count').textContent=`${model.data.characters[character].moves.filter(m=>m.enabled).length} moves`;
   const warnings=geometryWarnings(m);$('move-warnings').replaceChildren(...warnings.map(w=>el('p',{},w)));$('move-warnings').hidden=!warnings.length;
   refreshActions();syncPreview();
@@ -192,6 +200,10 @@ function artForm(){
   const exportBrief=el('button',{type:'button',class:'art-export'},'Download art brief');exportBrief.addEventListener('click',()=>download(model.brief(),'FightGuild-art-brief-'+date()+'.md','text/markdown;charset=utf-8'));container.append(grid,exportBrief);return container;
 }
 function renderForm(){
+  if(tab==='movement'){
+    $('form').setAttribute('aria-labelledby','tab-movement');
+    $('form').replaceChildren(renderMovement({el,profile:model.data.characters[character].movement,limits:pack.limits.movement[character],onError:fieldError,action:movementAction,onAction:value=>{if(!validBeforeLeaving())return;movementAction=value;pendingSeek={tick:0};stop();syncPreview();},onChange:(key,value)=>{model.changeMovement(character,key,value);syncSummary();scheduleSave();}}));return;
+  }
   const form=$('form');form.setAttribute('aria-labelledby','tab-'+tab);
   if(tab==='art'){form.replaceChildren(artForm());return;}
   if(tab==='hurt'){form.replaceChildren(hurtForm());return;}
@@ -206,7 +218,7 @@ function renderForm(){
 }
 function renderTabs(){
   $('tabs').replaceChildren(...TABS.map(t=>{const button=el('button',{id:'tab-'+t.id,type:'button',role:'tab','aria-selected':String(t.id===tab),'aria-controls':'form',tabindex:t.id===tab?'0':'-1'},t.label);
-    button.addEventListener('click',()=>{if(!validBeforeLeaving())return;stop();tab=t.id;hitKeyFrame=null;if(tab==='hurt'){stop();preview.options.hurt=true;$('show-hurt').checked=true;}renderTabs();renderForm();syncPreview();saveSelection();$('tab-'+tab).focus();});
+    button.addEventListener('click',()=>{if(!validBeforeLeaving())return;stop();tab=t.id;hitKeyFrame=null;if(tab==='hurt'){stop();preview.options.hurt=true;$('show-hurt').checked=true;}renderTabs();renderForm();syncSummary();saveSelection();$('tab-'+tab).focus();});
     button.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const index=TABS.indexOf(t),next=event.key==='Home'?0:event.key==='End'?TABS.length-1:(index+(event.key==='ArrowRight'?1:-1)+TABS.length)%TABS.length;$('tab-'+TABS[next].id).click();});return button;}));
 }
 function render(){hitKeyFrame=null;errors.clear();$('fighter').value=character;listMoves();renderTabs();renderForm();syncSummary();
@@ -219,12 +231,13 @@ function syncPreview(){
   const m=move();frame=Math.max(1,Math.min(totalFrames(m),frame));
   $('windup-time').textContent=`Windup ${m.startup-1}f`;$('active-time').textContent=`Active ${m.active}f`;$('recovery-time').textContent=`Recovery ${m.recovery}f`;
   const phases=[['windup',m.startup-1,1],['active',m.active,m.startup],['recovery',m.recovery,m.startup+m.active]];
+  $('timeline').hidden=tab==='movement';
   $('timeline').replaceChildren(...phases.filter(([,length])=>length).map(([name,length,start])=>{const b=el('button',{type:'button',class:name,'aria-label':`Jump to ${name}: ${length} frames`,title:`${name}: ${length}f`});b.style.flex=length;b.addEventListener('click',()=>{if(!validBeforeLeaving())return;hitKeyFrame=null;seekMove(start);});return b;}));
   scheduleTest();
 }
 function stop(){playing=false;$('play').setAttribute('aria-label','Play attack');}
-function testOptions(){return {target:Number($('test-target').value),behavior:$('test-behavior').value,entry:$('test-entry').value,gap:Number($('test-gap').value),facing:Number($('test-facing').value),simple:$('test-simple').value==='1'};}
-function matchingRecord(){return testRecord?.character===character&&testRecord?.slot===slot;}
+function testOptions(){return {target:Number($('test-target').value),behavior:$('test-behavior').value,entry:$('test-entry').value,gap:Number($('test-gap').value),facing:Number($('test-facing').value),simple:$('test-simple').value==='1',movement:tab==='movement'?movementAction:null};}
+function matchingRecord(){return testRecord?.character===character&&testRecord?.slot===slot&&!!testRecord.movement===(tab==='movement');}
 function seekMove(value){
   stop();frame=Math.max(1,Math.min(totalFrames(move()),value));pendingSeek={frame};
   renderForm();syncPreview();
@@ -244,7 +257,7 @@ function scheduleTest(){
   $('play').disabled=true;$('test-readout').textContent='Updating exchange…';
   testTimer=setTimeout(()=>{
     try{
-      testRecord=combatPreview.record(model.data,character,slot,testOptions());recordSignature=signature;
+      testRecord=tab==='movement'?combatPreview.recordMovement(model.data,character,slot,movementAction,testOptions()):combatPreview.record(model.data,character,slot,testOptions());recordSignature=signature;
       testIndex=cursorIndex(testRecord,pendingSeek||{frame:move().startup});pendingSeek=null;previewPending=false;drawTest();
     }catch(error){testRecord=null;testSignature='';previewPending=false;preview.clear();$('test-readout').textContent='Preview could not run: '+error.message;}
   },80);
@@ -255,7 +268,7 @@ function drawTest(){
   if(f.selectedFrame&&!previewPending&&!pendingSeek)frame=f.selectedFrame;
   const phase=phaseAt(m,frame),key=keyAt(m,Math.max(1,frame-m.startup+1)),keyIndex=m.hitboxTimeline.keys.indexOf(key);
   if(!previewPending&&!dragBefore&&!hurtDragBefore&&((tab==='hurt'&&hurtPhase!==phase)||(tab==='hit'&&hitKeyFrame===null&&keyAt(m,Math.max(1,oldFrame-m.startup+1))!==key)))renderForm();
-  const editable=!playing&&(!previewPending||dragBefore||hurtDragBefore)&&!!f.selectedFrame;
+  const editable=tab!=='movement'&&!playing&&(!previewPending||dragBefore||hurtDragBefore)&&!!f.selectedFrame;
   preview.show(testRecord,testIndex,m,{
     hit:editable&&tab==='hit'&&(hitKeyFrame===null||hitKeyFrame===key?.frame),
     hitKey:key&&key.boxes!==null?{keyIndex,boxIndex:Math.min(hitBox,Math.max(0,key.boxes.length-1))}:null,
@@ -263,12 +276,12 @@ function drawTest(){
   });
   $('frame').max=testRecord.frames.length-1;$('frame').value=testIndex;$('frame-label').textContent=`${testIndex} / ${testRecord.frames.length-1}`;
   $('play').disabled=previewPending||testRecord.frames.length<2;
-  $('preview-title').textContent=f.selectedFrame?`${phase==='windup'?'Windup':phase==='active'?'Active':'Recovery'} · frame ${f.selectedFrame}`:'Attack workspace';
+  $('preview-title').textContent=testRecord.movement?f.stage:f.selectedFrame?`${phase==='windup'?'Windup':phase==='active'?'Active':'Recovery'} · frame ${f.selectedFrame}`:'Attack workspace';
   $('test-readout').textContent=previewPending?'Updating exchange…':`${testRecord.geometryOnly?'Geometry only':`Input ${describeInput(f.input,a.facing)}`} · ${f.selectedFrame?'move frame '+f.selectedFrame:f.stage}${f.state.hitstop?' · freeze '+f.state.hitstop+'f':''} · target ${target.stun}f stun`;
   const contacts=testRecord.contacts.filter(c=>c.tick<=testIndex),hits=contacts.filter(c=>c.event!==2).length;
   $('test-result').textContent=previewPending?'Recalculating contact…':`${hits} hit${hits===1?'':'s'} · ${contacts.length-hits} blocks · ${1000-target.health} damage · attacker travel ${((a.x-testRecord.frames[0].state.players[0].x)/100).toFixed(1)}px`;
   $('test-warning').textContent=testRecord.warnings.join(' ');$('test-warning').hidden=!testRecord.warnings.length;
-  $('geometry-help').textContent=playing?'Pause or scrub to edit boxes directly on the fighter.':!f.selectedFrame?'Use Windup, Active or Recovery to jump to an editable attack frame.':tab==='hurt'?'Enable custom boxes, choose a body region and drag its blue handles. Changes update this same exchange.':tab==='hit'?'On active frames, drag the selected orange box or its edges. Edits keep this move frame while recalculating contact.':'Play, pause or scrub here. Open Hit & movement or Hurtboxes to edit directly on the fighter.';
+  $('geometry-help').textContent=testRecord.movement?'Play or scrub the movement here. Edit the character profile alongside this preview.':playing?'Pause or scrub to edit boxes directly on the fighter.':!f.selectedFrame?'Use Windup, Active or Recovery to jump to an editable attack frame.':tab==='hurt'?'Enable custom boxes, choose a body region and drag its blue handles. Changes update this same exchange.':tab==='hit'?'On active frames, drag the selected orange box or its edges. Edits keep this move frame while recalculating contact.':'Play, pause or scrub here. Open Hit & movement or Hurtboxes to edit directly on the fighter.';
 }
 function animate(time){
   if(playing&&testRecord&&!previewPending){if(!lastTick)lastTick=time;const step=1000/(60*Number($('test-speed').value)),advance=Math.floor((time-lastTick)/step);if(advance){testIndex=Math.min(testRecord.frames.length-1,testIndex+advance);lastTick+=advance*step;if(testIndex===testRecord.frames.length-1)stop();drawTest();}}
@@ -323,7 +336,7 @@ $('search').addEventListener('input',listMoves);$('show-unused').addEventListene
 for(const button of document.querySelectorAll('[data-filter]'))button.addEventListener('click',()=>{filter=button.dataset.filter;for(const b of document.querySelectorAll('[data-filter]')){b.classList.toggle('selected',b===button);b.setAttribute('aria-pressed',String(b===button));}listMoves();});
 $('undo').onclick=()=>{stop();if(errors.size){errors.clear();render();announce('Invalid input discarded.');return;}if(model.undo()){frame=Math.min(frame,totalFrames(move()));render();scheduleSave();announce('Edit undone.');}};
 $('redo').onclick=()=>{if(!validBeforeLeaving())return;if(model.redo()){stop();render();scheduleSave();announce('Edit restored.');}};
-$('reset').onclick=()=>{errors.clear();model.resetMove(character,slot);stop();frame=move().startup;pendingSeek={frame};render();scheduleSave();announce('Move stats, hitbox keys and hurtboxes reset. Art notes are kept. Undo is available.');};
+$('reset').onclick=()=>{errors.clear();if(tab==='movement')model.resetMovement(character);else model.resetMove(character,slot);stop();frame=move().startup;pendingSeek={frame};render();scheduleSave();announce('Move stats, hitbox keys and hurtboxes reset. Art notes are kept. Undo is available.');};
 $('import').onclick=()=>{if(validBeforeLeaving())$('import-file').click();};
 $('import-file').onchange=async event=>{
   const file=event.target.files[0];if(!file)return;
@@ -351,5 +364,5 @@ $('attack-enabled').onchange=()=>{if(!validBeforeLeaving()){$('attack-enabled').
 for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}testSignature='';scheduleTest();};
 globalThis.moveWorkshop.preview=()=>testRecord;
 globalThis.moveWorkshop.cursor=()=>({index:testIndex,frame:testRecord?.frames[testIndex]?.selectedFrame||0,pending:previewPending});
-globalThis.moveWorkshop.geometry=()=>({handles:clone(preview.handles),view:clone(preview.view||{}),measurements:clone(preview.measurements||null),measurementLabels:clone(preview.measurementLabels||[])});
+globalThis.moveWorkshop.geometry=()=>({handles:clone(preview.handles),view:clone(preview.view||{}),measurements:clone(preview.measurements||null),measurementLabels:clone(preview.measurementLabels||[]),smears:clone(preview.smearPlans||[])});
 initialize();requestAnimationFrame(animate);

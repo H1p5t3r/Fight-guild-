@@ -1,3 +1,4 @@
+import {upgradeMovement} from '../movement-data.mjs';
 import {FIELDS, MOVE_IDS, CHARACTERS} from '../engine.mjs';
 import {SPECS, ART_FIELDS} from './specs.mjs';
 import {validateReferences,MAX_REFERENCE_TOTAL,MAX_IMPORT_BYTES,REFERENCE_PHASES} from './references.mjs';
@@ -11,9 +12,9 @@ function integer(value, limit, name) {
   if(!Number.isInteger(value)||value<limit.min||value>limit.max) throw new Error(`${name}: use a whole number from ${limit.min} to ${limit.max}.`);
 }
 export function validate(data, pack) {
-  data=upgradeHitboxes(data);
+  data=upgradeMovement(upgradeHitboxes(data),pack.defaults);
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor accepts current Fight Guild moves or version-12/13 workshop exports. Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14 workshop exports. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);
@@ -94,6 +95,12 @@ export class Workshop {
     if(this.undoStack.length>40)this.undoStack.shift();
     this.redoStack=[];return true;
   }
+  changeMovement(c,key,value){
+    integer(value,this.pack.limits.movement[c][key],key);
+    const before=this.snapshot();this.data.characters[c].movement[key]=value;
+    this.remember(before,`movement/${c}/${key}`);
+  }
+  resetMovement(c){const before=this.snapshot();this.data.characters[c].movement=clone(this.pack.defaults.characters[c].movement);this.remember(before);}
   change(c,m,key,value){
     const before=this.snapshot();
     this.move(c,m)[key]=value;

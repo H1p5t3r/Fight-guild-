@@ -3,7 +3,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 14, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 69;
+constexpr int VERSION = 15, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 91;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
@@ -29,14 +29,14 @@ enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery
              NormalCancelStart, NormalCancelEnd, SpecialCancelStart, SpecialCancelEnd,
              JumpCancelStart, JumpCancelEnd, FollowCancelStart, FollowCancelEnd, CancelOn,
              StarterProration, ComboScaling, MinimumDamage, LandingRecovery, AttackLevel,
-             CounterTier, CounterVulnerable, CounterFreezeFrames, CounterSlowFrames };
+             CounterTier, CounterVulnerable, CounterFreezeFrames, CounterSlowFrames, ProjectileKind, ProjectileSpawnFrame, ProjectileSpeedX, ProjectileSpeedY, ProjectileGravity, ProjectileLife, ProjectileOffsetX, ProjectileOffsetY, ProjectileWidth, ProjectileHeight, ProjectileHits, ProjectileRehit, ProjectileDurability, ProjectilePersist, ProjectileMelee, SmearMode, SmearPart, SmearStretch, SmearFrame1, SmearFrame2, SmearFrame3, SmearFrame4 };
 enum KnockdownKind { NoKnockdown, SoftKnockdown, HardKnockdown };
 enum Reaction { Free, AirReel, Downed, Waking, WallSplat, Reeled };
 enum MobilityField { ForwardStyle, WalkSpeed, RunSpeed, RunAcceleration, StepSpeed, StepFrames,
-                     BackSpeed, BackFrames, AttackFriction, MOBILITY_FIELDS };
-enum ForwardMovement { ForwardRun, StepDash };
+                     BackSpeed, BackFrames, AttackFriction, BackStyle, BackWalkSpeed, BackRunSpeed, JumpSpeed, JumpForwardSpeed, JumpBackSpeed, Gravity, AirJumps, MovePrejumpFrames, AirDashEnabled, AirBackdashEnabled, AirDashStyle, AirBackdashStyle, AirDashSpeed, AirBackdashSpeed, AirDashFrames, AirBackdashFrames, AirDashUses, HoverHeight, HoverRiseSpeed, TeleportDistance, BackTeleportDistance, TeleportStartup, FdEnabled, FdPushPercent, FdDrain, FdAirDrain, FdBlockCost, MoveSmearMode, MoveSmearPart, MoveSmearStretch, MOBILITY_FIELDS };
+enum ForwardMovement { ForwardRun, StepDash, HoverDash, Teleport };
 struct Mobility { int v[MOBILITY_FIELDS]; };
-enum BoxKind { HurtBox, PushBox, HitBox, WallBox };
+enum BoxKind { HurtBox, PushBox, HitBox, WallBox, ProjectileBox };
 constexpr int HIT_TRAVEL_TICKS = 6; // Existing hit-distance budgets now travel over six action ticks.
 struct Box { int left, bottom, right, top; };
 constexpr int HURT_PHASES = 3, HURT_FIELDS = 1+MAX_HURTBOXES*4;
@@ -85,8 +85,12 @@ struct Fighter {
     int last_damage, damage_scale, last_base_damage, counter_tier;
     int prejump_time;
     int slow_time, slow_phase, slow_held;
+    int dash_kind, dash_age, dash_air, air_dash_used, air_jump_used, teleported;
+    int attack_serial, projectile_spawned, contact_count;
     Sample history[HISTORY];
 };
+constexpr int MAX_PROJECTILES=16;
+struct Projectile { int life, owner, character, move, serial, x, y, vx, vy, facing, hits, cooldown, durability; };
 struct State {
     int frame, remaining, hitstop, winner;
     int wall_break_time, wall_break_actor, wall_break_side, stage;
@@ -94,6 +98,7 @@ struct State {
     int wall_break_x[2], wall_break_y[2]; // Cinematic origins survive neutral reset and rollback.
     int impact_time, impact_duration, impact_actor, impact_tier, impact_x, impact_y;
     Fighter players[2];
+    Projectile projectiles[MAX_PROJECTILES];
     int version=VERSION; // Reject snapshots from a different core layout explicitly.
 };
 struct Rules {
@@ -173,7 +178,13 @@ private:
     void move_horizontal(Fighter& fighter, bool was_hitstunned);
     void collide_wall(Fighter& fighter, int velocity, bool in_hitstun);
     void reel_targets(const bool advances[2]);
-    bool double_forward(const Fighter& fighter, const Sample& sample) const;
+    bool double_forward(const Fighter& fighter, const Sample& sample, int direction=6) const;
+    void start_dash(Fighter& fighter, bool backwards);
+    void tick_dash(Fighter& fighter);
+    int mobility_or(const Fighter& fighter, int field, int fallback) const;
+    void update_projectiles();
+    void spawn_projectile(Fighter& fighter);
+    void apply_contact(int player, int move, Move effective, int contact, bool prior_combo, int prior_reaction, int facing, bool projectile);
 };
 // Compatibility instance for the original C ABI and native test runner.
 extern Simulation default_simulation;

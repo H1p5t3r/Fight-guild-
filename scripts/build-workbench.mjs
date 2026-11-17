@@ -10,7 +10,7 @@ import {SPECS} from '../web/workbench/specs.mjs';
 const root=new URL('../',import.meta.url), path=p=>fileURLToPath(new URL(p,root));
 const wasm=await readFile(path('web/generated/fight.wasm'));
 const {instance}=await WebAssembly.instantiate(wasm),engine=new Engine(instance),defaults=engine.data();
-if(defaults.schema!==14||defaults.coreVersion!==14) throw new Error('Rebuild the current combat core before packaging the workshop.');
+if(defaults.schema!==15||defaults.coreVersion!==15) throw new Error('Rebuild the current combat core before packaging the workshop.');
 // Ship the actual integer combat simulation as plain JS. Workplace browsers
 // need neither a native executable nor WebAssembly permission to play a preview.
 execFileSync(path('node_modules/.bin/wasm2js'),[path('web/generated/fight.wasm'),'-O','--enable-bulk-memory','-o',path('build/fight-core-js.mjs')]);
@@ -46,6 +46,7 @@ const collisions=JSON.parse(await readFile(path('godot/data/fighter_collision.js
 const phases=['active','windup','block','signature_active','signature_windup','ready','walk','run'];
 const art=manifest.fighters.map(f=>Object.fromEntries(['name',...phases].filter(p=>f[p]).map(p=>[p,f[p]])));
 const files=[...new Set(art.flatMap(f=>phases.filter(p=>f[p]).flatMap(p=>[f[p].file,...f[p].frames.flatMap(frame=>frame.file?[frame.file]:[])])))];
+files.push("appearance-v3/projectiles.png");
 const images={};await mkdir(path('build/workbench-assets'),{recursive:true});
 let browser,page;
 try {

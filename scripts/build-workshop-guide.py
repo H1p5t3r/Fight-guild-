@@ -39,7 +39,7 @@ META = json.loads(subprocess.check_output([
 expected = [k for g in META['groups'] for k in g['fields']]
 documented = [i['key'] for p in CONTENT['pages'] for b in p['blocks']
               if b['type'] == 'fields' for i in b['items']]
-assert len(set(expected)) == len(expected) == 68
+assert len(set(expected)) == len(expected) == 90
 assert Counter(expected) == Counter(documented), 'Gameplay field coverage mismatch'
 art_expected = [row[0] for row in META['art']]
 art_documented = [i['key'] for p in CONTENT['pages'] for b in p['blocks']
@@ -241,7 +241,7 @@ def blocks(page):
             out += [Diagram(block['kind']), Spacer(1, 6)]
         elif kind == 'contents':
             rows=[]
-            for item in CONTENT['pages'][2:]:
+            for item in [page for page in CONTENT['pages'] if page['id'] != 'cover' and not page['id'].startswith('contents')][block.get('start',0):block.get('start',0)+block.get('count',100)]:
                 number=page_numbers[item['id']]
                 rows.append([rich(f'<link href="#{item["id"]}" color="#182933">{escape(item["title"])}</link>', 'index'), p(str(number), 'index')])
             table=make_table(rows, [WIDTH-38, 38], label_column=False)

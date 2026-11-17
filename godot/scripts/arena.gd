@@ -9,6 +9,9 @@ var score := [0, 0]
 var presentation_active := false
 var diagnostics := true
 var sprites: Array[Sprite2D] = []
+var smears: Array[Polygon2D] = []
+var smear_plans: Array = [{}, {}]
+var smear_tick := -1
 var weapons: Array[HookWeapon] = []
 var collision_layer: Control
 var hud_layer: Control
@@ -21,6 +24,7 @@ var accent_offset := Vector2.ZERO
 var camera_zoom := 1.0
 var camera_offset := Vector2.ZERO
 var font := GuildTheme.SEMIBOLD
+const PROJECTILE_ART = preload("res://assets/fighters/appearance-v3/projectiles.png")
 const ACCENT := Color("f4b45e")
 const TEXT := Color("f0ede5")
 const MUTED := Color("a3b8c7")
@@ -31,6 +35,10 @@ func _ready() -> void:
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
 	clip_contents = true
 	for _p in 2:
+		var smear := Polygon2D.new()
+		smear.visible = false
+		add_child(smear)
+		smears.append(smear)
 		var sprite := Sprite2D.new()
 		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		add_child(sprite)
@@ -56,6 +64,10 @@ func _ready() -> void:
 
 func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bool) -> void:
 	model = simulation
+	if int(state.frame) != smear_tick:
+		for p in 2:
+			smear_plans[p] = PoseSmear.plan(view.players[p], state.players[p], model) if not view.is_empty() and int(state.frame) == int(view.frame) + 1 and not presentation_active else {}
+		smear_tick = state.frame
 	view = state
 	show_boxes = boxes
 	paused = frozen
@@ -92,6 +104,17 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 		sprite.position = shot.position if travel else screen_point(Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x))
 		sprite.rotation = float(shot.angle) if travel else 0.0
 		sprite.modulate = Color(1, 1, 1, shot.alpha) if travel else Color("ffa69a") if fighter.stun and not fighter.guarding else Color.WHITE
+		var smear: Polygon2D = smears[p]
+		var smear_plan: Dictionary = smear_plans[p]
+		smear.visible = not travel and not smear_plan.is_empty()
+		if smear.visible:
+			var points := PackedVector2Array()
+			for point in smear_plan.points: points.append(screen_point(Vector2(point.x * scale_x, floor_y - point.y * scale_x)))
+			smear.polygon = points
+			smear.uv = smear_plan.uv
+			var file: String = smear_plan.file
+			if not FighterArt.textures.has(file): FighterArt.textures[file] = load(FighterArt.DIRECTORY + file)
+			smear.texture = FighterArt.textures[file]
 		weapons[p].visible = false
 		if not travel and character == 4 and fighter.weaponVisible:
 			var move := model.move(character, fighter.move)
@@ -102,6 +125,18 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	queue_redraw()
 	hud_layer.queue_redraw()
 	collision_layer.queue_redraw()
+
+func draw_projectiles() -> void:
+	if view.is_empty() or int(view.wallBreakTime) > 0: return
+	var sx := size.x / 1000.0
+	var floor_y := ArenaStage.floor_line(size)
+	for q in view.get("projectiles", []):
+		var from := screen_point(Vector2((q.x - q.width * 0.5) / 100.0 * sx, floor_y - (q.y + q.height * 0.5) / 100.0 * sx))
+		var extent := Vector2(q.width, q.height) / 100.0 * sx * camera_zoom
+		var target := Rect2(from, extent)
+		if int(q.facing) < 0: target.position.x += extent.x; target.size.x = -extent.x
+		var source := Rect2(797, 350, 708, 390) if int(q.kind) == 2 else Rect2(28, 326, 695, 432)
+		draw_texture_rect_region(PROJECTILE_ART, target, source)
 
 func screen_point(point: Vector2) -> Vector2:
 	return camera_offset + point * camera_zoom
@@ -122,6 +157,7 @@ func _draw() -> void:
 	if view.is_empty():
 		return
 	draw_ground_shadows()
+	draw_projectiles()
 	# Draw in the stage background before the HUD and before child fighter sprites.
 	feedback.draw(self)
 	draw_walls()
@@ -185,11 +221,11 @@ func draw_collisions() -> void:
 	collision_layer.draw_set_transform(camera_offset, 0.0, Vector2.ONE * camera_zoom)
 	var colors := [Color("67d5ff"), Color("9ce56b"), Color("ff8859")]
 	for p in 2:
-		for kind in 3:
+		for kind in [0, 1, 2, 4]:
 			var boxes: PackedInt32Array = model.core.boxes(p, kind)
 			for i in range(0, boxes.size(), 4):
 				var rect := Rect2(boxes[i] * sx, floor_y - boxes[i + 3] * sx, (boxes[i + 2] - boxes[i]) * sx, (boxes[i + 3] - boxes[i + 1]) * sx)
-				var color: Color = colors[kind]
+				var color: Color = Color("d7a7ff") if kind == 4 else colors[kind]
 				collision_layer.draw_rect(rect, Color(color, 0.07 if kind == 0 else 0.12))
 				collision_layer.draw_rect(rect, color, false, 1.0 if kind == 0 else 2.0)
 	var walls: PackedInt32Array = model.core.boxes(-1, 3)

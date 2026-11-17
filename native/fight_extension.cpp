@@ -101,7 +101,10 @@ public:
                 ||f.knockback_left<0||f.knockback_left>20000
                 ||f.wall_time<0||f.wall_time>180||f.wall_side< -1||f.wall_side>1
                 ||f.positive_time<0||f.positive_time>1800
-                ||f.vx< -4000||f.vx>4000||f.running<0||f.running>1||f.dash<0||f.dash>60
+                ||f.vx< -4000||f.vx>4000||f.running<0||f.running>1||f.dash<0||f.dash>120
+                ||f.dash_kind<0||f.dash_kind>3||f.dash_age<0||f.dash_age>120
+                ||f.dash_air<0||f.dash_air>1||f.air_dash_used<0||f.air_dash_used>5||f.air_jump_used<0||f.air_jump_used>5
+                ||f.teleported<0||f.teleported>1||f.attack_serial<0||f.attack_serial>=100000000||f.projectile_spawned<0||f.projectile_spawned>1||f.contact_count<0||f.contact_count>=100000000
                 ||f.dash_direction< -1||f.dash_direction>1||f.pull_time<0||f.pull_time>60
                 ||f.pull_owner< -1||f.pull_owner>1||f.pull_gap<0||f.pull_gap>10000
                 ||f.carry_vx< -4000||f.carry_vx>4000||f.carry_time<0||f.carry_time>12
@@ -113,6 +116,14 @@ public:
                 ||f.counter_tier< -1||f.counter_tier>3||f.prejump_time<0||f.prejump_time>30
                 ||f.slow_time<0||f.slow_time>120||f.slow_phase<0||f.slow_phase>1||f.slow_held<0||f.slow_held>1) return false;
             for(int uses:f.move_uses) if(uses<0||uses>1000) return false;
+        }
+        for(const auto& q:candidate.projectiles) {
+            if(q.life<0||q.life>600) return false;
+            if(!q.life) continue;
+            if(q.owner<0||q.owner>1||q.character<0||q.character>=fight::CHARACTER_COUNT||q.move<0||q.move>=fight::MOVE_COUNT
+                ||q.serial<0||q.serial>=100000000||q.x< -30000||q.x>130000||q.y< -30000||q.y>100000
+                ||q.vx< -4000||q.vx>4000||q.vy< -10000||q.vy>10000||(q.facing!=1&&q.facing!=-1)
+                ||q.hits<1||q.hits>32||q.cooldown<0||q.cooldown>120||q.durability<1||q.durability>32) return false;
         }
         simulation.world=candidate;
         return true;

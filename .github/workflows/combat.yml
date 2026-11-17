@@ -69,4 +69,5 @@ jobs:
             build/FightGuild-Move-Workshop.html
             exports/FightGuild-Movement-Preview.html
             docs/move-workshop.md
+            exports/FightGuild-Move-Workshop-Guide.pdf
           if-no-files-found: error

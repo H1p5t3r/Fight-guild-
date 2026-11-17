@@ -390,7 +390,7 @@ func build_interface() -> void:
 	var movement_grid := GridContainer.new()
 	movement_grid.columns = 2
 	movement_panel.add_child(movement_grid)
-	var forward_style := option(movement_grid, "Forward movement", ["Run", "Step dash"])
+	var forward_style := option(movement_grid, "Forward movement", ["Run", "Step dash", "Hover dash", "Teleport"])
 	movement_fields.forwardStyle = {"control": forward_style, "scale": 1}
 	for spec in [["walkSpeed","Walk px/f",0.01,10,100],["runSpeed","Run cap px/f",0.01,20,100],["runAcceleration","Run accel px/f²",0.01,10,100],["stepSpeed","Step px/f",0.01,20,100],["stepFrames","Step duration f",1,60,1],["backSpeed","Backdash px/f",0.01,20,100],["backFrames","Backdash duration f",1,60,1],["attackFriction","Attack drag px/f²",0,5,100]]:
 		var column := VBoxContainer.new()
