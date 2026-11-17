@@ -8,11 +8,11 @@
   "pixel_processing": "Generated PNGs copied byte-for-byte; no pixel edits or resampling. PDFs embed the source image pixels.",
   "carried_forward": [
     {
-      "path": "art/characters/fillet-actions.png",
+      "path": "art/archive/reference-guides-v4/fillet-actions.png",
       "source": "art/archive/reference-guides-v3/fillet-actions.png",
       "reason": "Stance selection does not redesign the signature actions.",
       "output_metadata": {
-        "path": "art/characters/fillet-actions.png",
+        "path": "art/archive/reference-guides-v4/fillet-actions.png",
         "bytes": 2044825,
         "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
         "dimensions": [
@@ -34,7 +34,7 @@
   "jobs": [
     {
       "id": "fillet-standard-stalker",
-      "path": "art/characters/fillet.png",
+      "path": "art/archive/reference-guides-v4/fillet.png",
       "generated": "exec-760550b1-161d-48b6-aca8-f54395e3867f.png",
       "references": [
         "art/archive/reference-guides-v3/fillet.png",
@@ -46,7 +46,7 @@
       "prompt_status": "exact",
       "transparent_background": false,
       "output_metadata": {
-        "path": "art/characters/fillet.png",
+        "path": "art/archive/reference-guides-v4/fillet.png",
         "bytes": 2034541,
         "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
         "dimensions": [
@@ -77,7 +77,7 @@
     },
     {
       "id": "shark-lower-volume-hair-model",
-      "path": "art/characters/shark.png",
+      "path": "art/archive/reference-guides-v4/shark.png",
       "generated": "exec-4f331e18-8516-43b7-a541-2c779012fc7f.png",
       "references": [
         "art/archive/reference-guides-v3/shark.png"
@@ -88,7 +88,7 @@
       "prompt_status": "exact",
       "transparent_background": false,
       "output_metadata": {
-        "path": "art/characters/shark.png",
+        "path": "art/archive/reference-guides-v4/shark.png",
         "bytes": 2168641,
         "sha256": "0d4685fac4bf030ce86b6aa36b908d9c0dafca10858e0be8b92e484af66c305a",
         "dimensions": [
@@ -110,11 +110,11 @@
     },
     {
       "id": "shark-lower-volume-hair-actions",
-      "path": "art/characters/shark-actions.png",
+      "path": "art/archive/reference-guides-v4/shark-actions.png",
       "generated": "exec-b8de2e5b-74f0-4ccd-94cd-ceb6626b7c23.png",
       "references": [
         "art/archive/reference-guides-v3/shark-actions.png",
-        "art/characters/shark.png"
+        "art/archive/reference-guides-v4/shark.png"
       ],
       "review": "Reduced-volume long hair carried across all eight windup/active studies; hook paths, follow-up stances, weapon identities and input labels retained.",
       "status": "current-reference",
@@ -122,7 +122,7 @@
       "prompt_status": "exact",
       "transparent_background": false,
       "output_metadata": {
-        "path": "art/characters/shark-actions.png",
+        "path": "art/archive/reference-guides-v4/shark-actions.png",
         "bytes": 2107784,
         "sha256": "30abe1d8e520dc159081e92f247ecd95c37142d959fd98022170ea77c2e1db5a",
         "dimensions": [
@@ -141,7 +141,7 @@
           ]
         },
         {
-          "path": "art/characters/shark.png",
+          "path": "art/archive/reference-guides-v4/shark.png",
           "bytes": 2168641,
           "sha256": "0d4685fac4bf030ce86b6aa36b908d9c0dafca10858e0be8b92e484af66c305a",
           "dimensions": [

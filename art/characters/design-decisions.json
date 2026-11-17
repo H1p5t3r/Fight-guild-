@@ -33,6 +33,30 @@
           "Retain loose hair; no added tie, braid, shaved side or shortened cut.",
           "Carry the slimmer silhouette into motion without inflating it back into the old mane."
         ]
+      },
+      "eyewear": {
+        "status": "user_requested_direction",
+        "model_reference": "art/characters/shark.png",
+        "requirements": [
+          "Physical cobalt-blue sports glasses with blue lenses, visible bridge and temple arms.",
+          "Natural skin around the glasses; remove all teal face paint / eye mask.",
+          "Keep guild-teal costume colors separate from the blue eyewear accent."
+        ]
+      },
+      "standard_combat_stance": {
+        "id": "F",
+        "name": "Shoulder Rest",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/stance-studies/shark-01.png",
+        "source_panel": "bottom-right",
+        "model_reference": "art/characters/shark.png",
+        "user_instruction": "F shoulder rest is definitely the right one.",
+        "requirements": [
+          "Relaxed upright stagger and confident expression.",
+          "Right hand stabilizes the hooked shaft across / behind the shoulders; hook and butt remain visible.",
+          "Left hand holds the separate short triangular blade low.",
+          "Retain low-volume long white hair and physical blue sports glasses."
+        ]
       }
     }
   }

@@ -70,7 +70,7 @@ The [Move Workshop control guide (PDF)](exports/FightGuild-Move-Workshop-Guide.p
 
 ## Current reference guides
 
-These are the latest character references. Fillet and Shark's **reference 04** set keeps the mature athletic proportions and matched rendering rules, selects **A / Stalker** for Fillet's standard combat stance, and reduces Shark's hair volume while retaining its long length. These drawing references guide the next sprite pass; they are not runtime atlases or actual 3D assets.
+These are the latest character references. Fillet and Shark's **reference 05** set keeps the mature athletic proportions and matched rendering rules, selects **A / Stalker** for Fillet's standard combat stance, selects **F / Shoulder Rest** for Shark, and gives him blue sports glasses with long, lower-volume white hair. These drawing references guide the next sprite pass; they are not runtime atlases or actual 3D assets.
 
 | Anvil | Smoke | Tapper |
 | --- | --- | --- |
@@ -84,7 +84,7 @@ These are the latest character references. Fillet and Shark's **reference 04** s
 
 For the first matchup: [Fillet action sheet](art/characters/fillet-actions.png),
 [Shark action sheet](art/characters/shark-actions.png), and the
-[four-page model/action PDF](exports/FightGuild-Fillet-Shark-References-v4.pdf).
+[four-page model/action PDF](exports/FightGuild-Fillet-Shark-References-v5.pdf).
 [Reference rules and move-editor handoff](docs/fillet-shark-references.md) cover
 palette, equipment, root travel, phased hitboxes, hurtboxes and pose-photo briefs.
 

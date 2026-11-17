@@ -1,22 +1,21 @@
-# Fillet and Shark — reference 04
+# Fillet and Shark — reference 05
 
-These guides carry the current character-art direction: **Fillet uses A / Stalker
-as her standard combat stance**, and **Shark keeps long white hair with less
-volume**. Each fighter has a model page and a separate signature-action page.
-Reference 04 updates Fillet's ready thumbnail and Shark's hair across model and
-action views; Fillet's signature-action sheet is carried forward from reference 03.
-These are drawing references. The playable v2 atlases, move values and collision
-data remain as they were; the selected idle still needs a runtime sprite pass.
+These guides carry the current character-art direction: **Fillet uses A / Stalker**
+and **Shark uses F / Shoulder Rest**, with long, lower-volume white hair and
+physical blue sports glasses. Reference 05 updates Shark's eyewear in every model
+and action view and promotes his selected shoulder-rest thumbnail. Fillet's
+model/action references are carried forward unchanged. These are drawing guides;
+locomotion atlases are tracked separately in the sprite production contract.
 
 | Fighter | Model sheet | Windup / active sheet |
 | --- | --- | --- |
 | Fillet | [Anatomy, costume, knives and palette](../art/characters/fillet.png) | [Knife spiral and rekka](../art/characters/fillet-actions.png) |
 | Shark | [Anatomy, costume, hook and short blade](../art/characters/shark.png) | [Ground/air hooks and follow-ups](../art/characters/shark-actions.png) |
 
-[Download the four-page PDF](../exports/FightGuild-Fillet-Shark-References-v4.pdf).
+[Download the four-page PDF](../exports/FightGuild-Fillet-Shark-References-v5.pdf).
 The [six-character reference PDF](../exports/character-reference-guides.pdf)
 also contains the updated model pages. Exact prompts, input snapshots, checksums
-and correction notes are in [the generation record](../art/characters/reference-generation-v4.json).
+and correction notes are in [the generation record](../art/characters/reference-generation-v5.json).
 [Current design decisions](../art/characters/design-decisions.json) distinguish
 the selected stance from earlier explorations.
 
@@ -40,7 +39,7 @@ the selected stance from earlier explorations.
 | Character | Shape and costume landmarks | Palette targets |
 | --- | --- | --- |
 | Fillet | Compact angular gestures; short swept brown hair; crimson **left** shoulder armor; ivory blouse; crimson corset; split ivory apron; charcoal trousers; wrapped forearms; three-buckle boots. | Crimson `#A63242`, ivory `#DDD0B1`, charcoal `#393039`; muted brown leather/hair and silver steel. |
-| Shark | Broad swimmer shoulders and lean waist; long, lower-volume white hair close to the skull/nape and trailing down the back; teal eye mask and scale vest; bone jaw on **left** shoulder; rope belt and hip net; split teal sash; gray trousers; wrapped boots. | Teal `#258A99`, slate `#34454D`, bone `#D9D4BD`; muted brown rope/leather and silver steel. |
+| Shark | Broad swimmer shoulders and lean waist; long, lower-volume white hair close to the skull/nape and trailing down the back; blue sports glasses and teal scale vest; bone jaw on **left** shoulder; rope belt and hip net; split teal sash; gray trousers; wrapped boots. | Teal `#258A99`, slate `#34454D`, bone `#D9D4BD`; muted brown rope/leather and silver steel. |
 
 These hex values are authoring targets. Generated shaded pixels and the printed
 swatches have not been quantized to exact material ramps.
@@ -138,6 +137,18 @@ These refinements remain exploration history, not the current stance direction.
 [Refinement provenance](../art/characters/stance-studies/fillet-02.json) records
 the exact feedback, references, prompt, checksums and remaining drawing checks.
 
+## Shark standard combat stance — F / Shoulder Rest
+
+The user selected **F / Shoulder Rest** from the bottom-right of the
+[six-option study](../art/characters/stance-studies/shark-01.png). Keep the
+relaxed upright stagger, right-hand hooked shaft carried across the shoulders,
+and separate left-hand short blade held low. His walk retains this confident
+carry; his run adds forward drive and controlled weapon stabilization.
+
+Use physical **blue sports glasses**, including lenses, bridge and temple arms.
+Natural skin surrounds the frame; the old teal face paint is superseded. Keep
+the long white hair slim through movement rather than restoring its old mane.
+
 ## Using an edited move brief for the next sprite pass
 
 1. Start with the user's latest **Move Workshop JSON**, including `_moveWorkshop`
@@ -199,7 +210,8 @@ thumbnail and detached hook diagram. Source PNGs are copied without pixel edits.
 revision's six-character PDF. Earlier generation/stance records now point to
 these retained inputs with their original hashes and verbatim prompts. The
 [reference-03 four-page PDF](../exports/FightGuild-Fillet-Shark-References-v3.pdf)
-remains available as history. Rebuilding generates the current reference-04 pack
+remains available as history. `art/archive/reference-guides-v4/` preserves the previous model/action PNGs and
+six-character PDF. Rebuilding generates the current reference-05 pack
 and six-character PDF without rewriting that historical PDF.
 
 Rebuild the two PDFs from the checked-in PNGs with:
