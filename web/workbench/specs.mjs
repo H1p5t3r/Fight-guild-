@@ -1,3 +1,4 @@
+import {MECHANIC_SPECS} from './mechanics-specs.mjs';
 export const GROUPS = [
   {id:'timing', title:'Frame data', intro:'Tune the pace and reward. One frame is 1/60 of a second.', fields:['startup','active','recovery','damage','hitstun','blockstun','hitstop','chipDamage']},
   {id:'geometry', title:'Hitbox & movement', intro:'Distances use game pixels. The preview keeps the existing artwork while you change its attack geometry.', fields:['hitboxBack','reach','bottom','height','advance','travelSpeed','inertiaPercent','hitAngle','throwRange']},
@@ -8,7 +9,9 @@ export const GROUPS = [
 ];
 GROUPS.push({id:'projectiles',title:'Projectile',intro:'Moving shots travel independently; stationary objects stay where they spawn. They use this move’s damage, stun, launch and block rules. No projectile is created until enabled.',fields:["projectileKind", "projectileSpawnFrame", "projectileSpeedX", "projectileSpeedY", "projectileGravity", "projectileLife", "projectileOffsetX", "projectileOffsetY", "projectileWidth", "projectileHeight", "projectileHits", "projectileRehit", "projectileDurability", "projectilePersist", "projectileMelee"]});
 GROUPS.push({id:'vulnerability',title:'Vulnerable body regions',intro:'Choose which regions can receive hits in each attack phase. Disabled regions retain their coordinates.',fields:['hurtMaskWindup','hurtMaskActive','hurtMaskRecovery']});
+GROUPS.push({id:'mechanics',title:'Drive mechanics',intro:'Tether and bleed attach on hit. Reuse the applying input for its conditional follow-up. Getting hit clears your statuses. All values below are provisional tuning.',fields:MECHANIC_SPECS.map(row=>row[0])});
 export const TABS = [
+  {id:'mechanics',label:'Drive mechanics',groups:['mechanics']},
   {id:'movement',label:'Movement & defense',groups:[]},
   {id:'projectiles',label:'Projectiles',groups:['projectiles']},
   {id:'timing',label:'Timing',groups:['timing','counter']},
@@ -67,9 +70,13 @@ Object.assign(labels,{hurtMaskWindup:'Windup hurtboxes',hurtMaskActive:'Active h
 for(const key of ['hurtMaskWindup','hurtMaskActive','hurtMaskRecovery'])masks[key]=['Legs','Torso & arms','Head','Body extension'];
 // Smear fields are inactive compatibility data; no renderer or editor control uses them.
 for(const key of Object.keys(labels).filter(key=>key.startsWith('smear'))){labels[key]='Legacy '+labels[key].toLowerCase();hints[key]='Retained for older JSON drafts; has no effect.';}
+for(const [key,label,,, ,hint] of MECHANIC_SPECS){labels[key]=label;hints[key]=hint;}
+for(const key of ['tetherSpeed','variantSpeed','variantLift'])speed.add(key);pixel.add('variantRange');percent.add('bleedBlockPercent');
+options.mechanic=[[0,'None'],[1,'Tether → pull'],[2,'Bleed → cash-out grab']];
+options.variantKnockdown=options.knockdown;
 export const SPECS = Object.fromEntries(Object.entries(labels).map(([key,label])=>[key,{
   key,label,scale:pixel.has(key)||speed.has(key)?100:1,
-  unit:key==='projectileGravity'?'px/f²':['projectileLife','projectileRehit','projectileSpawnFrame','smearFrame1','smearFrame2','smearFrame3','smearFrame4'].includes(key)?'f':pixel.has(key)?'px':speed.has(key)?'px/f':percent.has(key)?'%': /startup|active|recovery|stun|stop|Frames|Start|End/i.test(key)?'f':'',
+  unit:key==='projectileGravity'?'px/f²':['variantStartup','variantActive','variantRecovery','bleedDuration','projectileLife','projectileRehit','projectileSpawnFrame','smearFrame1','smearFrame2','smearFrame3','smearFrame4'].includes(key)?'f':pixel.has(key)?'px':speed.has(key)?'px/f':percent.has(key)?'%': /startup|active|recovery|stun|stop|Frames|Start|End/i.test(key)?'f':'',
   type:flags.has(key)?'flag':masks[key]?'mask':options[key]||['followFrom','followFrom2','artPose'].includes(key)?'select':'number',
   options:options[key],mask:masks[key],unified:key==='normalRoutes'||key==='commandRoutes',hint:hints[key]||''
 }]));

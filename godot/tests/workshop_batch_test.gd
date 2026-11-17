@@ -11,7 +11,7 @@ func run() -> void:
 	check(model.load_data(source).is_empty(), "Uploaded batch did not import")
 	var actual := model.data()
 	var serialized: Dictionary = JSON.parse_string(JSON.stringify(actual))
-	check(actual.schema == 16, "Batch was not upgraded")
+	check(actual.schema == 17, "Batch was not upgraded")
 	for group in ["inputRules", "momentumRules", "recoveryRules", "tuningRules", "jumpRules"]:
 		for key in source[group]: check(actual[group][key] == source[group][key], "Global rule changed")
 	for c in 6:
@@ -20,7 +20,7 @@ func run() -> void:
 		for m in CombatModel.MOVE_IDS.size():
 			var before: Dictionary = source.characters[c].moves[m]
 			var after: Dictionary = actual.characters[c].moves[m]
-			for key in CombatModel.FIELDS.slice(0, 91): check(before[key] == after[key], "Uploaded move value changed: %s/%s/%s" % [c,m,key])
+			for key in CombatModel.FIELDS.slice(0, 94): check(before[key] == after[key], "Uploaded move value changed: %s/%s/%s" % [c,m,key])
 			check(before.hurtboxes == serialized.characters[c].moves[m].hurtboxes, "Authored hurtboxes changed")
 			check(before.hitboxTimeline == serialized.characters[c].moves[m].hitboxTimeline, "Authored hit timeline changed")
 		check(actual.characters[c].moves[8].hurtMaskWindup == 1 and actual.characters[c].moves[8].hurtMaskActive == 1 and actual.characters[c].moves[8].hurtMaskRecovery == 15, "Universal 6P protection missing")

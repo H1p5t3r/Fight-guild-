@@ -136,6 +136,13 @@ func _draw() -> void:
 		return
 	draw_ground_shadows()
 	draw_projectiles()
+	for p in 2:
+		var target: Dictionary = view.players[p]
+		var owner: Dictionary = view.players[1-p]
+		if target.get("tetherSource", 0) > 0:
+			var start := screen_point(Vector2(owner.x / 100.0 * sx, floor_y - (owner.y / 100.0 + 85) * sx))
+			var end := screen_point(Vector2(target.x / 100.0 * sx, floor_y - (target.y / 100.0 + 70) * sx))
+			draw_line(start, end, Color("57bcca", 0.8), 2.5, true)
 	# Draw in the stage background before the HUD and before child fighter sprites.
 	feedback.draw(self)
 	draw_walls()
@@ -144,6 +151,10 @@ func _draw() -> void:
 		var point := screen_point(Vector2(fighter.x / 100.0 * sx, floor_y - fighter.y / 100.0 * sx))
 		var px := point.x
 		var py := point.y
+		if fighter.get("bleedTime", 0) > 0:
+			label("BLEED · %d GREY" % fighter.greyLife, Vector2(px - 52, py - 185 * sx * camera_zoom), 13, Color("eba4b6"))
+		elif fighter.get("tetherSource", 0) > 0:
+			label("TETHER · PULLED" if fighter.tetherUsed else "TETHER", Vector2(px - 40, py - 185 * sx * camera_zoom), 13, Color("79d3df"))
 		if fighter.move >= 0:
 			if diagnostics: label("%s · %df" % [CombatModel.MOVE_IDS[fighter.move], fighter.age], Vector2(px + 28, py - 10), 12)
 		elif diagnostics:

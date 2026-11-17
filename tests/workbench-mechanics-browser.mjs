@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {existsSync} from 'node:fs';
+import {readFile,mkdir} from 'node:fs/promises';
+import {serveWorkshop} from '../scripts/serve-workbench.mjs';
+import {ready} from './workbench-ui-helpers.mjs';
+const server=await serveWorkshop(0),browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
+try{
+ const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];
+ page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
+ await page.goto(`http://127.0.0.1:${server.address().port}/`);await page.locator('#field-startup').waitFor();await ready(page);
+ await page.locator('[data-move="13"]').click();await page.locator('#tab-mechanics').click();await ready(page);
+ assert.equal(await page.locator('#field-mechanic').inputValue(),'2');
+ await page.locator('#field-bleedInitial').fill('35');await page.locator('#field-bleedInitial').blur();await ready(page);
+ await page.locator('#test-mechanic').selectOption('followup');await ready(page);
+ let record=await page.evaluate(()=>moveWorkshop.preview());assert.equal(record.contacts.length,2);assert.ok(record.contacts[1].damage>=95);
+ const tick=record.frames.findIndex(f=>f.state.players[0].variant===2&&f.state.players[0].age>=6);
+ await page.locator('#frame').evaluate((n,i)=>{n.value=String(i);n.dispatchEvent(new Event('input',{bubbles:true}));},tick);
+ assert.match(await page.locator('#preview-title').textContent(),/Cash-out/);
+ assert.equal(await page.locator('#windup-time').textContent(),'Windup 15f');
+ await page.locator('#timeline .active').click();await ready(page);assert.match(await page.locator('#preview-title').textContent(),/Cash-out · Active · frame 16/);
+ await mkdir('build/workshop-mechanics-review',{recursive:true});await page.screenshot({path:'build/workshop-mechanics-review/fillet-cashout.png'});
+ const draft=await page.evaluate(()=>moveWorkshop.data()),pending=page.waitForEvent('download');await page.locator('#export').click();const download=await pending;
+ await download.saveAs('build/workshop-mechanics-roundtrip.json');assert.deepEqual(JSON.parse(await readFile('build/workshop-mechanics-roundtrip.json','utf8')),draft);
+ await page.waitForFunction(()=>document.getElementById('save-status').textContent==='Saved in this browser');
+ await page.reload();await page.locator('#field-bleedInitial').waitFor();await ready(page);assert.equal(await page.locator('#field-bleedInitial').inputValue(),'35');
+ await page.locator('#fighter').selectOption('4');await page.locator('[data-move="13"]').click();await page.locator('#test-mechanic').selectOption('followup');await ready(page);
+ assert.equal(await page.locator('#field-mechanic').inputValue(),'1');record=await page.evaluate(()=>moveWorkshop.preview());
+ const pull=record.frames.findIndex(f=>f.state.players[1].tetherUsed);assert.ok(pull>=0);
+ await page.locator('#frame').evaluate((n,i)=>{n.value=String(i);n.dispatchEvent(new Event('input',{bubbles:true}));},pull);
+ await page.screenshot({path:'build/workshop-mechanics-review/shark-pull.png'});
+ await page.setViewportSize({width:860,height:1000});await page.screenshot({path:'build/workshop-mechanics-review/compact.png'});
+ assert.deepEqual(errors,[]);console.log('PASS Drive controls, real follow-up preview, grey life, pull, offline operation, JSON and local persistence');
+}finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

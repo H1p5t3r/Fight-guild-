@@ -254,6 +254,20 @@ func build_interface() -> void:
 	var timing_note := label(timing_panel, "Windows use completed move frames; close 0 = end of move. Cancel events: hit 1 + block 2 + whiff 4. Routes still apply. Counter phases: startup 1 + active 2 + recovery 4. Preset −1 keeps custom values.", 11, MUTED)
 	timing_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button(timing_panel, "Use selected timing presets", apply_timing_presets)
+	var mechanic_panel := VBoxContainer.new()
+	editor.add_child(mechanic_panel)
+	mechanic_panel.visible = false
+	button(editor, "Drive mechanics ▾", func(): mechanic_panel.visible = not mechanic_panel.visible)
+	var mechanic_grid := GridContainer.new()
+	mechanic_grid.columns = 2
+	mechanic_panel.add_child(mechanic_grid)
+	var mechanic_rows: Array = JSON.parse_string(FileAccess.get_file_as_string("res://data/mechanic_fields.json"))
+	for row in mechanic_rows:
+		var scale := 100 if row[0] in ["tetherSpeed", "variantRange", "variantSpeed", "variantLift"] else 1
+		add_field(mechanic_grid, [row[0], row[1], float(row[3]) / scale, float(row[4]) / scale, scale])
+		fields[row[0]].control.tooltip_text = row[5]
+	var mechanic_note := label(mechanic_panel, "Mechanic: 0 off · 1 tether/pull · 2 bleed/cash-out. Same input becomes the follow-up. Speeds are px/f, range is px; timing is frames. Getting hit clears your statuses. Cash-out KD: 0 none, 1 soft, 2 hard.", 11, MUTED)
+	mechanic_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label(editor, "HIT REACTIONS", 11, MUTED)
 	var reactions := GridContainer.new()
 	reactions.columns = 2

@@ -1,9 +1,9 @@
 {
-  "label": "Batch 2 · 17 November 2026",
+  "label": "Batch 2 \u00b7 17 November 2026",
   "status": "work in progress",
   "file": "2026-11-17-batch-02/FightGuild-moves-2026-11-17 _1_.json",
   "sha256": "de5d4de94ad530a4ec77529aa4dcd23ddcbb1adee078746f964103c66b98e672",
   "baseCommit": "1a42049",
   "previousFile": "2026-11-17-batch-01/FightGuild-moves-2026-11-17.json",
-  "note": "Two further move edits and four art/design briefs. Tether and bleed/grey-life are recorded requirements, not implemented mechanics. Existing 6P hurtbox settings are preserved."
+  "note": "Work-in-progress batch: preserves all submitted move values, notes and references. Schema 17 migration adds editable Shark tether/pull and Fillet bleed/cash-out mechanics. Existing local drafts still take priority."
 }

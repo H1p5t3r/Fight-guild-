@@ -98,7 +98,7 @@ public:
                 ||f.reaction<fight::Free||f.reaction>fight::Reeled||f.knockdown<0||f.knockdown>2
                 ||f.down_frames<0||f.down_frames>180||f.wakeup_frames<0||f.wakeup_frames>60
                 ||f.recovery_time<0||f.recovery_time>180||f.combo_received<0||f.combo_received>1000
-                ||f.knockback_left<0||f.knockback_left>20000
+                ||f.knockback_left<0||f.knockback_left>240000
                 ||f.wall_time<0||f.wall_time>180||f.wall_side< -1||f.wall_side>1
                 ||f.positive_time<0||f.positive_time>1800
                 ||f.vx< -4000||f.vx>4000||f.running<0||f.running>1||f.dash<0||f.dash>120
@@ -111,9 +111,12 @@ public:
                 ||f.landing_time<0||f.landing_time>120||f.air_action<0||f.air_action>1
                 ||f.throw_grace<0||f.throw_grace>30||f.input_age< -1||f.input_age>11
                 ||f.combo_proration<0||f.combo_proration>100||f.combo_scale<0||f.combo_scale>100
-                ||f.repeat_gravity<0||f.repeat_gravity>300||f.last_damage<0||f.last_damage>1000
+                ||f.repeat_gravity<0||f.repeat_gravity>300||f.last_damage<0||f.last_damage>2000
                 ||f.damage_scale<0||f.damage_scale>100||f.last_base_damage<0||f.last_base_damage>1000
                 ||f.counter_tier< -1||f.counter_tier>3||f.prejump_time<0||f.prejump_time>30
+                ||f.variant<0||f.variant>2||f.tether_source<0||f.tether_source>fight::MOVE_COUNT||f.tether_used<0||f.tether_used>1
+                ||f.bleed_source<0||f.bleed_source>fight::MOVE_COUNT||f.bleed_time<0||f.bleed_time>3600||f.bleed_clock<0||f.bleed_clock>600
+                ||f.grey_life<0||f.grey_life>999
                 ||f.slow_time<0||f.slow_time>120||f.slow_phase<0||f.slow_phase>1||f.slow_held<0||f.slow_held>1) return false;
             for(int uses:f.move_uses) if(uses<0||uses>1000) return false;
         }

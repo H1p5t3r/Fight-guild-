@@ -167,7 +167,67 @@ int Simulation::requested(Fighter& f,Sample& h) const {
     }
     return best;
 }
+Move Simulation::effective_move(const Fighter& f) const {
+    Move m=moves[f.character][f.move];
+    if(!f.variant) return m;
+    m.v[Startup]=m.v[VariantStartup]; m.v[Active]=m.v[VariantActive]; m.v[Recovery]=m.v[VariantRecovery];
+    m.v[Category]=f.variant==2?Throw:Drive;
+    m.v[Damage]=f.variant==2?m.v[VariantDamage]:0;
+    m.v[Hitstun]=m.v[VariantHitstun]; m.v[ThrowRange]=m.v[VariantRange];
+    m.v[Knockdown]=m.v[VariantKnockdown];
+    m.v[Launch]=m.v[AirLaunch]=0;
+    m.v[SpecialCancel]=m.v[JumpCancel]=m.v[WhiffCancel]=m.v[SelfCancel]=0;
+    m.v[NormalRoutes]=m.v[CommandRoutes]=0;
+    m.v[ProjectileKind]=m.v[HitAngle]=m.v[PullFrames]=m.v[TravelSpeed]=m.v[GuardBreak]=0;
+    m.v[Direction]=5; // A cash-out never inherits back-throw side switching.
+    return m;
+}
+void Simulation::clear_owned_status(int owner) {
+    auto& target=world.players[1-owner];
+    target.tether_source=target.tether_used=0;
+    target.bleed_source=target.bleed_time=target.bleed_clock=target.grey_life=0;
+}
+void Simulation::tick_statuses() {
+    for(int p=0;p<2;++p) {
+        auto& target=world.players[p];
+        if(!target.bleed_source) continue;
+        const auto& m=moves[world.players[1-p].character][target.bleed_source-1];
+        if(--target.bleed_time<=0) {
+            target.bleed_source=target.bleed_time=target.bleed_clock=target.grey_life=0;
+            continue;
+        }
+        if(++target.bleed_clock>=m.v[BleedTickFrames]) {
+            target.bleed_clock=0;
+            target.grey_life=min(min(m.v[BleedCap],max(0,target.health-1)),target.grey_life+m.v[BleedTickDamage]);
+        }
+    }
+}
+void Simulation::trigger_tether(Fighter& f) {
+    if(f.variant!=1||f.hit_done||!active(f)) return;
+    f.hit_done=1;
+    int p=&f-world.players;
+    auto& target=world.players[1-p];
+    if(!target.tether_source||target.tether_used) return;
+    const auto& m=moves[f.character][f.move];
+    target.tether_used=1;
+    // Aim once toward the owner's current position, using deterministic integer math.
+    int dx=f.x-target.x,dy=f.y-target.y,den=max(1,max(abs(dx),abs(dy)));
+    target.vx=m.v[TetherSpeed]*dx/den;
+    target.vy=m.v[TetherSpeed]*dy/den;
+    target.knockback_left=abs(target.vx)*m.v[TetherFrames];
+    target.stun=m.v[TetherFrames];
+    if(target.vy>0) target.y=max(1,target.y);
+    target.reaction=target.y>0?AirReel:Free;
+    target.move=-1; target.dash=target.running=target.guarding=target.faultless=0;
+    target.guard_break=target.block_reaction=target.throw_grace=target.prejump_time=target.landing_time=0;
+    target.knockdown=target.down_frames=target.wakeup_frames=target.recovery_time=0;
+    target.pull_time=0; target.pull_owner=-1;
+    target.carry_vx=target.carry_time=0;
+}
 void Simulation::begin(Fighter& f,int move) {
+    const auto& target=world.players[1-(&f-world.players)];
+    int mechanic=moves[f.character][move].v[Mechanic];
+    f.variant=mechanic==1&&target.tether_source?1:mechanic==2&&target.bleed_source?2:0;
     f.move=f.last_move=move;
     f.age=f.contact=f.hit_done=f.dash=0;
     f.projectile_spawned=0; f.attack_serial=(f.attack_serial+1)%100000000;
@@ -179,13 +239,16 @@ void Simulation::begin(Fighter& f,int move) {
     if(f.carry_time>0&&abs(f.carry_vx)>abs(f.vx)) f.vx=f.carry_vx;
     f.carry_vx=f.carry_time=0;
     f.vx=clamp(f.vx*moves[f.character][move].v[InertiaPercent]/100,-4000,4000);
-    f.x+=moves[f.character][move].v[Advance]*f.facing;
+    if(!f.variant) f.x+=moves[f.character][move].v[Advance]*f.facing;
+    if(f.variant==2&&moves[f.character][move].v[VariantLift]>0) {
+        f.y=max(1,f.y); f.vy=moves[f.character][move].v[VariantLift];
+    }
     int kind=moves[f.character][move].v[Category];
     if(kind==Special||kind==Drive) gain_momentum(f,rules.special_gain);
 }
 bool Simulation::active(const Fighter& f) const {
     if(f.move<0) return false;
-    const Move& m=moves[f.character][f.move];
+    const Move& m=effective_move(f);
     return f.age+1>=m.v[Startup]&&f.age+1<m.v[Startup]+m.v[Active];
 }
 bool Simulation::double_forward(const Fighter& f,const Sample& h,int want) const {
@@ -263,7 +326,7 @@ void Simulation::control(Fighter& f) {
         if((h->pressed&Up)&&!(h->consumed&Up)&&(f.y==0||f.air_jump_used<mobility[f.character].v[AirJumps])&&!(f.simple&&(h->held&Simple))) {
             bool can=f.move<0;
             if(!can) {
-                const Move& m=moves[f.character][f.move];
+                const Move& m=effective_move(f);
                 can=m.v[JumpCancel]&&(f.contact||m.v[WhiffCancel])&&cancel_window(f,2);
             }
             if(can) {
@@ -285,9 +348,9 @@ void Simulation::control(Fighter& f) {
         }
         const int target=requested(f,*h);
         bool chain=target>=0&&(moves[f.character][target].v[FollowFrom]>=0||moves[f.character][target].v[FollowFrom2]>=0);
-        bool chain_window=!chain||(f.move>=0&&(f.contact||f.age>=moves[f.character][f.move].v[Startup]-1+moves[f.character][f.move].v[Active]));
+        bool chain_window=!chain||(f.move>=0&&(f.contact||f.age>=effective_move(f).v[Startup]-1+effective_move(f).v[Active]));
         int group=chain?3:target>=0&&(moves[f.character][target].v[Category]==Special||moves[f.character][target].v[Category]==Drive)?1:0;
-        if(target>=0&&chain_window&&(f.move<0||(can_cancel(f.character,f.move,target,f.contact!=0)&&cancel_window(f,group)))) {
+        if(target>=0&&chain_window&&(f.move<0||(!f.variant&&can_cancel(f.character,f.move,target,f.contact!=0)&&cancel_window(f,group)))) {
             if(reversal&&f.move<0&&moves[f.character][target].v[ReversalEligible]) {
                 f.reversal_time=NOTICE_TICKS;
                 f.reversal_input_age=world.frame-h->frame;
@@ -367,7 +430,9 @@ void Simulation::move_horizontal(Fighter& f,bool was_hitstunned) {
     }
     f.x+=f.vx;
     if(f.move>=0) {
-        if(active(f)) f.x+=f.facing*moves[f.character][f.move].v[TravelSpeed];
+        if(f.variant==2&&f.age+1<effective_move(f).v[Startup]+effective_move(f).v[Active])
+            f.x+=f.facing*effective_move(f).v[VariantSpeed];
+        else if(active(f)) f.x+=f.facing*effective_move(f).v[TravelSpeed];
         int drag=mobility[f.character].v[AttackFriction];
         f.vx=f.vx>0?max(0,f.vx-drag):min(0,f.vx+drag);
     }
@@ -394,7 +459,7 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     if(f.prejump_time) return {0,11};
     if(f.faultless) return {2,1};
     if(f.move>=0) {
-        const auto& m=moves[f.character][f.move];
+        const auto& m=effective_move(f);
         int age=f.age+tick_offset;
         if(m.v[ArtPose]>0&&age<m.v[Startup]+m.v[Active]+(m.v[HitAngle]?8:0))
             return {age<m.v[Startup]?3:4,m.v[ArtPose]-1};
@@ -434,7 +499,7 @@ unsigned Simulation::collision_hash() { return COLLISION_HASH; }
 const MoveHurt* Simulation::hurt_override(const Fighter& f,int tick_offset) const {
     if(f.move<0||f.reaction!=Free||f.stun||f.prejump_time||f.faultless
         ||(f.guarding&&f.block_reaction>0)) return nullptr;
-    const auto& m=moves[f.character][f.move];
+    const auto& m=effective_move(f);
     int age=f.age+tick_offset;
     int phase=age<m.v[Startup]?0:age<m.v[Startup]+m.v[Active]?1:2;
     const auto& profile=move_hurt[f.character][f.move][phase];
@@ -451,7 +516,7 @@ int Simulation::hurt_count(const Fighter& f,int tick_offset) const {
 int Simulation::hurt_mask(const Fighter& f,int tick_offset) const {
     if(f.move<0||f.reaction!=Free||f.stun||f.prejump_time||f.faultless
         ||(f.guarding&&f.block_reaction>0)) return 15;
-    const auto& m=moves[f.character][f.move];
+    const auto& m=effective_move(f);
     int age=f.age+tick_offset;
     return m.v[age<m.v[Startup]?HurtMaskWindup:age<m.v[Startup]+m.v[Active]?HurtMaskActive:HurtMaskRecovery];
 }
@@ -473,7 +538,7 @@ Box Simulation::push_box(const Fighter& f) const {
 }
 Box Simulation::weapon_span(const Fighter& f,int tick_offset) const {
     if(f.move<0) return {};
-    const auto& m=moves[f.character][f.move];
+    const auto& m=effective_move(f);
     int age=f.age+tick_offset-m.v[Startup];
     if(!m.v[HitAngle]||age<0||age>=m.v[Active]+8) return {};
     int length=min(8000,abs(m.v[Reach]-m.v[HitboxBack]));
@@ -486,8 +551,8 @@ Box Simulation::weapon_span(const Fighter& f,int tick_offset) const {
         f.x+f.facing*tip,f.y+m.v[Bottom]+m.v[HitAngle]*(extension+length)};
 }
 const HitKey* Simulation::hit_key(const Fighter& f,int tick_offset) const {
-    if(f.move<0||moves[f.character][f.move].v[Category]==Throw) return nullptr;
-    int frame=f.age+tick_offset-moves[f.character][f.move].v[Startup]+1;
+    if(f.move<0||f.variant||effective_move(f).v[Category]==Throw) return nullptr;
+    int frame=f.age+tick_offset-effective_move(f).v[Startup]+1;
     const auto& track=move_hit[f.character][f.move];
     const HitKey* result=nullptr;
     for(int i=0;i<track.count&&track.keys[i].frame<=frame;++i) result=&track.keys[i];
@@ -498,11 +563,12 @@ unsigned Simulation::hit_bit(const Fighter& f,int tick_offset) const {
     return 1u<<(key?key->group-1:0);
 }
 int Simulation::attack_count(const Fighter& f,int tick_offset) const {
+    if(f.variant==1) return 0;
     const auto* key=hit_key(f,tick_offset);
-    return key&&key->count>=0?key->count:moves[f.character][f.move].v[HitAngle]?8:1;
+    return key&&key->count>=0?key->count:effective_move(f).v[HitAngle]?8:1;
 }
 Box Simulation::attack_box(const Fighter& f,int segment,int tick_offset) const {
-    const auto& m=moves[f.character][f.move];
+    const auto& m=effective_move(f);
     if(m.v[Category]==Throw) return transform({0,0,
         PUSH_PROFILES[f.character].half_width+m.v[ThrowRange],PUSH_PROFILES[f.character].standing},f);
     const auto* key=hit_key(f,tick_offset);
@@ -527,7 +593,7 @@ int Simulation::box_count(int player,int kind) const {
     if(kind==HurtBox) return hurt_count(f);
     if(kind==PushBox) return 1;
     if(kind==HitBox&&f.move>=0) {
-        const auto& m=moves[f.character][f.move];
+        const auto& m=effective_move(f);
         if(m.v[ProjectileKind]&&!m.v[ProjectileMelee]) return 0;
         return f.age>=m.v[Startup]&&f.age<m.v[Startup]+m.v[Active]?attack_count(f):0;
     }
@@ -578,14 +644,14 @@ bool Simulation::overlaps(const Fighter& a,const Fighter& b) const {
     return false;
 }
 bool Simulation::blocks(const Fighter& attacker,const Fighter& defender,bool was_stunned,bool was_landing) const {
-    if(defender.reaction!=Free||moves[attacker.character][attacker.move].v[Category]==Throw) return false;
+    if(defender.reaction!=Free||effective_move(attacker).v[Category]==Throw) return false;
     if(defender.move>=0||defender.prejump_time||defender.landing_time||was_landing||((defender.stun||was_stunned)&&!defender.guarding)) return false;
     int away=attacker.x<defender.x?Right:Left;
     int toward=away==Left?Right:Left;
     bool carry=rules.block_carryover&&was_stunned&&defender.guarding&&!defender.guard_break;
     if(!carry&&(!(defender.raw&away)||(defender.raw&toward))) return false;
     if(defender.y>0) return true; // Air guard has no high/low distinction.
-    int level=moves[attacker.character][attacker.move].v[HitLevel];
+    int level=effective_move(attacker).v[HitLevel];
     bool crouch=(defender.raw&Down)!=0;
     return level==0||(level==1?crouch:!crouch);
 }
@@ -599,9 +665,11 @@ bool Simulation::throw_invulnerable(const Fighter& f) const {
 }
 void Simulation::land(Fighter& f) {
     if(f.reaction==Free)
-        f.landing_time=f.air_action?(f.move>=0?moves[f.character][f.move].v[LandingRecovery]:rules.air_landing_frames):rules.empty_landing_frames;
+        f.landing_time=f.air_action?(f.move>=0?effective_move(f).v[LandingRecovery]:rules.air_landing_frames):rules.empty_landing_frames;
     f.air_action=f.air_dash_used=f.air_jump_used=f.dash=f.running=0;
-    f.y=f.vy=0; f.move=-1; f.contact=f.hit_done=0;
+    f.y=f.vy=0;
+    if(f.move<0||f.variant!=2) { f.move=-1; f.contact=f.hit_done=0; }
+    else f.landing_time=0;
     if(f.reaction==AirReel) {
         f.vx=f.knockback_left=0;
         f.reaction=Downed; f.recovery_time=max(1,f.down_frames);
@@ -684,6 +752,7 @@ void Simulation::step(int raw0,int raw1) {
     }
     for(auto& f:world.players) update_faultless(f);
     if(world.hitstop>0) { --world.hitstop; ++world.frame; return; }
+    tick_statuses();
     bool advances[2]={true,true};
     for(int p=0;p<2;++p) {
         auto& f=world.players[p];
@@ -746,6 +815,7 @@ void Simulation::step(int raw0,int raw1) {
         f.x=clamp_x(f,f.x);
     }
     Fighter& a=world.players[0]; Fighter& b=world.players[1];
+    for(int p=0;p<2;++p) if(advances[p]&&world.players[p].move>=0) trigger_tether(world.players[p]);
     reel_targets(advances);
     resolve_push(previous_order,prior_overlap&&!a.teleported&&!b.teleported);
     // Only actual voluntary approach earns movement meter: no wall/pushbox or knockback farming.
@@ -758,7 +828,7 @@ void Simulation::step(int raw0,int raw1) {
             f.movement_remainder=amount%100;
         }
         // A blocked run cannot bank speed against a wall or another body.
-        if(advances[p]&&!prior_stun[p]&&f.reaction==Free&&f.move<0&&f.y==0&&f.vx&&(f.x-prior_x[p])*f.vx<=0) f.vx=f.carry_vx=f.carry_time=0;
+        if(advances[p]&&!prior_stun[p]&&!f.stun&&f.reaction==Free&&f.move<0&&f.y==0&&f.vx&&(f.x-prior_x[p])*f.vx<=0) f.vx=f.carry_vx=f.carry_time=0;
     }
     int hits[2]={-1,-1}, contacts[2]={NoContact,NoContact};
     bool blocked[2]={false,false};
@@ -766,23 +836,23 @@ void Simulation::step(int raw0,int raw1) {
         Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
         if(other.reaction==Downed||other.reaction==Waking
             ||prior_reaction[1-p]==Downed||prior_reaction[1-p]==Waking) continue;
-        bool throwing=f.move>=0&&moves[f.character][f.move].v[Category]==Throw;
+        bool throwing=f.move>=0&&effective_move(f).v[Category]==Throw;
         bool connects=false;
         bool spent=f.move>=0&&(move_hit[f.character][f.move].multi
             ? (f.hit_groups&hit_bit(f,1))!=0 : f.hit_done!=0);
-        if(advances[p]&&active(f)&&!spent) {
+        if(advances[p]&&active(f)&&!spent&&f.variant!=1) {
             if(throwing) {
                 int separation=PUSH_PROFILES[f.character].half_width+PUSH_PROFILES[other.character].half_width;
-                connects=f.y==0&&!throw_invulnerable(other)&&!(prior_stun[1-p]>0&&!prior_guard[1-p])
+                connects=(f.y==0||(f.variant==2&&f.y<=8000))&&!throw_invulnerable(other)&&!(prior_stun[1-p]>0&&!prior_guard[1-p])
                     &&(other.x-f.x)*f.facing>=0
-                    &&abs(other.x-f.x)<=separation+moves[f.character][f.move].v[ThrowRange];
-            } else if(!moves[f.character][f.move].v[ProjectileKind]||moves[f.character][f.move].v[ProjectileMelee]) connects=overlaps(f,other);
+                    &&abs(other.x-f.x)<=separation+effective_move(f).v[ThrowRange];
+            } else if(!effective_move(f).v[ProjectileKind]||effective_move(f).v[ProjectileMelee]) connects=overlaps(f,other);
         }
         if(connects) {
             hits[p]=f.move; blocked[p]=blocks(f,other,prior_stun[1-p]>0,prior_landing[1-p]>0);
             contacts[p]=blocked[p]?Blocked:NormalHit;
             if(!blocked[p]&&other.move>=0&&prior_stun[1-p]==0) {
-                const Move& interrupted=moves[other.character][other.move];
+                const Move interrupted=effective_move(other);
                 int tick=other.age+(advances[1-p]?1:0);
                 int phase=tick<interrupted.v[Startup]?1:tick<interrupted.v[Startup]+interrupted.v[Active]?2:4;
                 contacts[p]=throwing?PunishHit:(interrupted.v[CounterVulnerable]&phase)?CounterHit:phase==4?PunishHit:NormalHit;
@@ -792,11 +862,14 @@ void Simulation::step(int raw0,int raw1) {
     }
     // Simultaneous throws clash. A simultaneous strike beats a throw; no player-index bias.
     if(hits[0]>=0&&hits[1]>=0) {
-        bool t0=moves[a.character][hits[0]].v[Category]==Throw;
-        bool t1=moves[b.character][hits[1]].v[Category]==Throw;
+        bool t0=effective_move(a).v[Category]==Throw;
+        bool t1=effective_move(b).v[Category]==Throw;
         if(t0) { hits[0]=-1; a.hit_done=1; }
         if(t1) { hits[1]=-1; b.hit_done=1; }
     }
+    Move contact_moves[2]{};
+    Fighter contact_fighters[2]={a,b};
+    for(int p=0;p<2;++p) if(hits[p]>=0) contact_moves[p]=effective_move(world.players[p]);
     // Detect both hits AND their classifications before changing either fighter.
     // Clear interrupted combo displays before applying either side of a trade.
     for(int p=0;p<2;++p) if(hits[p]>=0&&!blocked[p]) {
@@ -805,9 +878,9 @@ void Simulation::step(int raw0,int raw1) {
     }
     for(int p=0;p<2;++p) if(hits[p]>=0) {
         Fighter& f=world.players[p];
-        Move m=moves[f.character][hits[p]];
+        Move m=contact_moves[p];
         // Copy before applying a trade: interruptions may replace the opponent's move.
-        Fighter contact_fighter=f; contact_fighter.move=hits[p];
+        Fighter contact_fighter=contact_fighters[p];
         const auto* key=hit_key(contact_fighter,1);
         if(key) {
             if(key->damage>=0) m.v[Damage]=key->damage;
@@ -823,7 +896,7 @@ void Simulation::step(int raw0,int raw1) {
     for(int p=0;p<2;++p) if(advances[p]&&prior_grace[p]>0&&world.players[p].throw_grace>0) --world.players[p].throw_grace;
     for(int p=0;p<2;++p) if(advances[p]&&world.players[p].move>=0) {
         auto& f=world.players[p];
-        const Move& m=moves[f.character][f.move];
+        const Move& m=effective_move(f);
         if(++f.age>=m.v[Startup]-1+m.v[Active]+m.v[Recovery]) {
             f.move=-1; f.contact=f.hit_done=0;
         }
@@ -870,7 +943,7 @@ void Simulation::tick_dash(Fighter& f) {
 }
 void Simulation::spawn_projectile(Fighter& f) {
     if(f.move<0||f.projectile_spawned||f.stun||f.reaction!=Free) return;
-    const auto& m=moves[f.character][f.move];
+    const auto& m=effective_move(f);
     int at=max(MIN_STARTUP,m.v[ProjectileSpawnFrame]?m.v[ProjectileSpawnFrame]:m.v[Startup]);
     if(!m.v[ProjectileKind]||m.v[Category]==Throw||f.age+1!=at) return;
     f.projectile_spawned=1;
@@ -973,6 +1046,10 @@ void Simulation::update_projectiles() {
 void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_combo,int prior_reaction,int facing,bool projectile) {
     Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
     bool blocked=contact==Blocked;
+    const bool cashout=!projectile&&f.variant==2;
+    const int cash=(!blocked&&cashout&&other.bleed_source)?other.grey_life:0;
+    if(!blocked) clear_owned_status(1-p);
+    for(auto& target:world.players) if(target.tether_used) target.tether_source=target.tether_used=0;
     f.contact_count=(f.contact_count+1)%100000000;
         f.event=contact;
         f.combo=blocked?0:(prior_combo?min(1000,f.combo+1):1);
@@ -993,9 +1070,26 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
         }
         int scale=!prior_combo?100:max(m.v[MinimumDamage],other.combo_proration*other.combo_scale/100);
         int damage=blocked?(fd?0:m.v[ChipDamage]):m.v[Damage]>0?max(1,m.v[Damage]*scale/100):0;
+        if(!blocked) damage+=cash;
         f.last_damage=damage; f.damage_scale=blocked?100:scale; f.last_base_damage=m.v[Damage];
         if(!blocked) other.combo_scale=max(0,other.combo_scale-m.v[ComboScaling]);
         other.health=max(0,other.health-damage);
+        if(other.bleed_source) {
+            const auto& source=moves[f.character][other.bleed_source-1];
+            if(blocked) other.grey_life+=m.v[Damage]*source.v[BleedBlockPercent]/100;
+            else other.bleed_time=source.v[BleedDuration];
+            other.grey_life=min(min(source.v[BleedCap],max(0,other.health-1)),other.grey_life);
+        }
+        if(!blocked&&cashout) other.bleed_source=other.bleed_time=other.bleed_clock=other.grey_life=0;
+        // A projectile or simultaneous strike from an interrupted owner cannot
+        // reattach a status cleared by that same hit/trade.
+        if(!blocked&&!cashout&&!(f.stun>0&&!f.guarding)&&f.reaction==Free) {
+            if(m.v[Mechanic]==1) { other.tether_source=move+1; other.tether_used=0; }
+            if(m.v[Mechanic]==2) {
+                other.bleed_source=move+1; other.bleed_time=m.v[BleedDuration]; other.bleed_clock=0;
+                other.grey_life=min(min(m.v[BleedCap],max(0,other.health-1)),other.grey_life+m.v[BleedInitial]*scale/100);
+            }
+        }
         if(!blocked) other.faultless=0;
         gain_momentum(f,m.v[Damage]*(blocked?rules.block_attack_gain:rules.attack_gain));
         if(!fd) gain_momentum(other,m.v[Damage]*(blocked?rules.guard_gain:rules.damage_gain));
@@ -1150,6 +1244,8 @@ int Simulation::get(int player,int field) const {
         case 66:return static_cast<int>(f.hit_groups); case 67:return f.vy;
         case 68:return f.dash_kind; case 69:return f.dash_age; case 70:return f.air_dash_used;
         case 71:return f.air_jump_used; case 72:return f.teleported; case 73:return f.contact_count;
+        case 74:return f.variant; case 75:return f.tether_source; case 76:return f.tether_used;
+        case 77:return f.bleed_source; case 78:return f.bleed_time; case 79:return f.bleed_clock; case 80:return f.grey_life;
         default:return 0;
     }
 }
@@ -1162,6 +1258,24 @@ int Simulation::move_set(int c,int m,int f,int v) {
     if(c<0||c>=CHARACTER_COUNT||m<0||m>=MOVE_COUNT||f<0||f>=FIELD_COUNT) return 0;
     int low=0,high=0;
     switch(f) {
+        case Mechanic: low=0; high=2; break;
+        case TetherSpeed: low=100; high=4000; break;
+        case TetherFrames: low=1; high=60; break;
+        case BleedInitial: low=0; high=1000; break;
+        case BleedTickDamage: low=0; high=1000; break;
+        case BleedTickFrames: low=1; high=600; break;
+        case BleedDuration: low=1; high=3600; break;
+        case BleedBlockPercent: low=0; high=100; break;
+        case BleedCap: low=0; high=1000; break;
+        case VariantStartup: low=5; high=120; break;
+        case VariantActive: low=1; high=120; break;
+        case VariantRecovery: low=0; high=180; break;
+        case VariantDamage: low=0; high=1000; break;
+        case VariantRange: low=0; high=20000; break;
+        case VariantSpeed: low=0; high=2000; break;
+        case VariantLift: low=0; high=3000; break;
+        case VariantHitstun: low=0; high=180; break;
+        case VariantKnockdown: low=0; high=2; break;
         case Button:case SimpleButton: high=4; break;
         case Category: high=4; break;
         case Direction: low=1; high=9; break;
@@ -1332,7 +1446,7 @@ int Simulation::can_cancel(int c,int from,int to,int contact) const {
 }
 bool Simulation::cancel_window(const Fighter& f,int group) const {
     if(f.move<0||group<0||group>3) return false;
-    const auto& m=moves[f.character][f.move];
+    const auto& m=effective_move(f);
     int condition=f.contact?(f.event==Blocked?2:1):4;
     if(!(m.v[CancelOn]&condition)) return false;
     if(!f.contact&&!m.v[WhiffCancel]&&group!=3) return false;

@@ -48,14 +48,16 @@ static func health_shape(rect: Rect2, right: bool, fraction: float = 1.0, corner
 	result.append(health_point(rect, 0, rect.size.y, right))
 	return result
 
-static func draw_health(canvas: CanvasItem, rail: Rect2, health: int, guild: Color, right: bool) -> void:
+static func draw_health(canvas: CanvasItem, rail: Rect2, health: int, guild: Color, right: bool, grey_life: int = 0) -> void:
 	canvas.draw_colored_polygon(health_shape(Rect2(rail.position + Vector2(0, 4), rail.size), right), Color(0, 0, 0, 0.42))
 	var outline := health_shape(rail, right)
 	canvas.draw_colored_polygon(outline, guild.darkened(0.83))
 	outline.append(outline[0])
 	canvas.draw_polyline(outline, Color(IVORY, 0.6), 1.2, true)
 	var inner := rail.grow(-2)
-	var fraction := clampf(health / 1000.0, 0.0, 1.0)
+	if grey_life > 0:
+		canvas.draw_colored_polygon(health_shape(inner, right, clampf(health / 1000.0, 0.0, 1.0), 4), Color("c4bdbe"))
+	var fraction := clampf((health - grey_life) / 1000.0, 0.0, 1.0)
 	var fill_width := inner.size.x * fraction
 	if fill_width < 0.5: return
 	var shape := health_shape(inner, right, fraction, 4)
@@ -117,7 +119,7 @@ static func draw(canvas: Control, state: Dictionary, wins: Array, round_call: St
 		var accent: Color = PLAYER_COLORS[p]
 		var guild: Color = FighterSelectPortrait.COLORS[fighter.character]
 		var rail := Rect2(center + 64 if right else 106.0, 29, width, 31)
-		draw_health(canvas, rail, fighter.health, guild, right)
+		draw_health(canvas, rail, fighter.health, guild, right, int(fighter.get("greyLife", 0)))
 		var name_x := rail.end.x - 19 if right else rail.position.x + 19
 		fighter_name(canvas, str(CombatModel.CHARACTERS[fighter.character]).to_upper(), Vector2(name_x, 53), right)
 		text(canvas, FighterSelectPortrait.GUILDS[fighter.character], Vector2(name_x, 20), 13, guild.lightened(0.24), right, 2)

@@ -46,7 +46,8 @@ function syncSummary(){
   $('move-context').textContent=`${CHARACTERS[character].toUpperCase()} / ${GUILDS[character].toUpperCase()}`;
   const movement=tab==='movement';
   document.querySelector('.attack-toggle').hidden=movement;document.querySelector('.summary').hidden=movement;
-  for(const id of ['test-behavior','test-entry','test-gap','test-simple'])$(id).closest('label').hidden=movement;
+  for(const id of ['test-behavior','test-entry','test-gap','test-simple','test-mechanic'])$(id).closest('label').hidden=movement;
+  $('test-mechanic').closest('label').hidden=movement||!m.mechanic;
   $('reset').textContent=movement?'Reset movement':'Reset move';
   $('move-kind').hidden=movement;$('actual-input').hidden=movement;$('move-enabled').hidden=movement;
   $('move-title').textContent=movement?'Movement & defense':m.id;$('move-label').textContent=note.label||'';
@@ -235,19 +236,25 @@ function render(){hitKeyFrame=null;errors.clear();$('fighter').value=character;l
     if(r.left<b.left)list.scrollLeft+=r.left-b.left;else if(r.right>b.right)list.scrollLeft+=r.right-b.right;
   }
 }
-function syncPreview(){
-  const m=move();frame=Math.max(1,Math.min(totalFrames(m),frame));
+function variantMove(m,variant){return variant?{...m,startup:m.variantStartup,active:m.variantActive,recovery:m.variantRecovery}:m;}
+function drawTimeline(m,variant=0){
   $('windup-time').textContent=`Windup ${m.startup-1}f`;$('active-time').textContent=`Active ${m.active}f`;$('recovery-time').textContent=`Recovery ${m.recovery}f`;
   const phases=[['windup',m.startup-1,1],['active',m.active,m.startup],['recovery',m.recovery,m.startup+m.active]];
   $('timeline').hidden=tab==='movement';
-  $('timeline').replaceChildren(...phases.filter(([,length])=>length).map(([name,length,start])=>{const b=el('button',{type:'button',class:name,'aria-label':`Jump to ${name}: ${length} frames`,title:`${name}: ${length}f`});b.style.flex=length;b.addEventListener('click',()=>{if(!validBeforeLeaving())return;hitKeyFrame=null;seekMove(start);});return b;}));
-  scheduleTest();
+  const key=JSON.stringify([m.startup,m.active,m.recovery,variant]);
+  if($('timeline').dataset.timing===key)return;
+  $('timeline').dataset.timing=key;
+  $('timeline').replaceChildren(...phases.filter(([,length])=>length).map(([name,length,start])=>{const b=el('button',{type:'button',class:name,'aria-label':`Jump to ${name}: ${length} frames`,title:`${name}: ${length}f`});b.style.flex=length;b.addEventListener('click',()=>{if(!validBeforeLeaving())return;hitKeyFrame=null;seekMove(start,variant);});return b;}));
+}
+function syncPreview(){
+  const f=matchingRecord()?testRecord.frames[testIndex]:null,variant=f?.selectedFrame?f.state.players[0].variant:0,m=variantMove(move(),variant);
+  frame=Math.max(1,Math.min(totalFrames(m),frame));drawTimeline(m,variant);scheduleTest();
 }
 function stop(){playing=false;$('play').setAttribute('aria-label','Play attack');}
-function testOptions(){return {target:Number($('test-target').value),behavior:$('test-behavior').value,entry:$('test-entry').value,gap:Number($('test-gap').value),facing:Number($('test-facing').value),simple:$('test-simple').value==='1',movement:tab==='movement'?movementAction:null};}
+function testOptions(){return {mechanic:$('test-mechanic').value,target:Number($('test-target').value),behavior:$('test-behavior').value,entry:$('test-entry').value,gap:Number($('test-gap').value),facing:Number($('test-facing').value),simple:$('test-simple').value==='1',movement:tab==='movement'?movementAction:null};}
 function matchingRecord(){return testRecord?.character===character&&testRecord?.slot===slot&&!!testRecord.movement===(tab==='movement');}
-function seekMove(value){
-  stop();frame=Math.max(1,Math.min(totalFrames(move()),value));pendingSeek={frame};
+function seekMove(value,variant=0){
+  stop();frame=Math.max(1,Math.min(totalFrames(variantMove(move(),variant)),value));pendingSeek={frame,variant};
   renderForm();syncPreview();
 }
 function scheduleTest(){
@@ -274,9 +281,10 @@ function drawTest(){
   if(!matchingRecord())return;
   testIndex=Math.min(testIndex,testRecord.frames.length-1);const f=testRecord.frames[testIndex],a=f.state.players[0],target=f.state.players[1],m=move(),oldFrame=frame;
   if(f.selectedFrame&&!previewPending&&!pendingSeek)frame=f.selectedFrame;
-  const phase=phaseAt(m,frame),key=keyAt(m,Math.max(1,frame-m.startup+1)),keyIndex=m.hitboxTimeline.keys.indexOf(key);
+  const displayed=variantMove(m,f.selectedFrame?a.variant:0);drawTimeline(displayed,f.selectedFrame?a.variant:0);
+  const phase=phaseAt(displayed,frame),key=keyAt(m,Math.max(1,frame-m.startup+1)),keyIndex=m.hitboxTimeline.keys.indexOf(key);
   if(!previewPending&&!dragBefore&&!hurtDragBefore&&((tab==='hurt'&&hurtPhase!==phase)||(tab==='hit'&&hitKeyFrame===null&&keyAt(m,Math.max(1,oldFrame-m.startup+1))!==key)))renderForm();
-  const editable=tab!=='movement'&&!playing&&(!previewPending||dragBefore||hurtDragBefore)&&!!f.selectedFrame;
+  const editable=!a.variant&&tab!=='movement'&&!playing&&(!previewPending||dragBefore||hurtDragBefore)&&!!f.selectedFrame;
   preview.show(testRecord,testIndex,m,{
     hit:editable&&tab==='hit'&&(hitKeyFrame===null||hitKeyFrame===key?.frame),
     hitKey:key&&key.boxes!==null?{keyIndex,boxIndex:Math.min(hitBox,Math.max(0,key.boxes.length-1))}:null,
@@ -284,12 +292,12 @@ function drawTest(){
   });
   $('frame').max=testRecord.frames.length-1;$('frame').value=testIndex;$('frame-label').textContent=`${testIndex} / ${testRecord.frames.length-1}`;
   $('play').disabled=previewPending||testRecord.frames.length<2;
-  $('preview-title').textContent=testRecord.movement?f.stage:f.selectedFrame?`${phase==='windup'?'Windup':phase==='active'?'Active':'Recovery'} · frame ${f.selectedFrame}`:'Attack workspace';
+  $('preview-title').textContent=testRecord.movement?f.stage:f.selectedFrame?`${a.variant===1?'Pull · ':a.variant===2?'Cash-out · ':''}${phase==='windup'?'Windup':phase==='active'?'Active':'Recovery'} · frame ${f.selectedFrame}`:'Attack workspace';
   $('test-readout').textContent=previewPending?'Updating exchange…':`${testRecord.geometryOnly?'Geometry only':`Input ${describeInput(f.input,a.facing)}`} · ${f.selectedFrame?'move frame '+f.selectedFrame:f.stage}${f.state.hitstop?' · freeze '+f.state.hitstop+'f':''} · target ${target.stun}f stun`;
   const contacts=testRecord.contacts.filter(c=>c.tick<=testIndex),hits=contacts.filter(c=>c.event!==2).length;
   $('test-result').textContent=previewPending?'Recalculating contact…':`${hits} hit${hits===1?'':'s'} · ${contacts.length-hits} blocks · ${1000-target.health} damage · attacker travel ${((a.x-testRecord.frames[0].state.players[0].x)/100).toFixed(1)}px`;
   $('test-warning').textContent=testRecord.warnings.join(' ');$('test-warning').hidden=!testRecord.warnings.length;
-  $('geometry-help').textContent=testRecord.movement?'Play or scrub the movement here. Edit the character profile alongside this preview.':playing?'Pause or scrub to edit boxes directly on the fighter.':!f.selectedFrame?'Use Windup, Active or Recovery to jump to an editable attack frame.':tab==='hurt'?'Enable custom boxes, choose a body region and drag its blue handles. Changes update this same exchange.':tab==='hit'?'On active frames, drag the selected orange box or its edges. Edits keep this move frame while recalculating contact.':'Play, pause or scrub here. Open Hit & movement or Hurtboxes to edit directly on the fighter.';
+  $('geometry-help').textContent=a.variant&&f.selectedFrame?'Follow-up timing is shown here. Edit its range and movement in Drive mechanics; phase hurtboxes inherit from the applying move.':testRecord.movement?'Play or scrub the movement here. Edit the character profile alongside this preview.':playing?'Pause or scrub to edit boxes directly on the fighter.':!f.selectedFrame?'Use Windup, Active or Recovery to jump to an editable attack frame.':tab==='hurt'?'Enable custom boxes, choose a body region and drag its blue handles. Changes update this same exchange.':tab==='hit'?'On active frames, drag the selected orange box or its edges. Edits keep this move frame while recalculating contact.':'Play, pause or scrub here. Open Hit & movement or Hurtboxes to edit directly on the fighter.';
 }
 function animate(time){
   if(playing&&testRecord&&!previewPending){if(!lastTick)lastTick=time;const step=1000/(60*Number($('test-speed').value)),advance=Math.floor((time-lastTick)/step);if(advance){testIndex=Math.min(testRecord.frames.length-1,testIndex+advance);lastTick+=advance*step;if(testIndex===testRecord.frames.length-1)stop();drawTest();}}
@@ -369,7 +377,7 @@ window.addEventListener('storage',event=>{if(event.key===STORAGE&&event.newValue
 globalThis.moveWorkshop={data:()=>model.snapshot(),selection:()=>({character,slot,tab}),version:pack.defaults.coreVersion};
 $('test-target').append(...CHARACTERS.map((name,i)=>el('option',{value:i},name)));$('test-target').value='4';
 $('attack-enabled').onchange=()=>{if(!validBeforeLeaving()){$('attack-enabled').checked=!!move().enabled;return;}commit('enabled',Number($('attack-enabled').checked));if($('field-enabled'))$('field-enabled').checked=!!move().enabled;};
-for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}testSignature='';scheduleTest();};
+for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple','test-mechanic'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}testSignature='';scheduleTest();};
 globalThis.moveWorkshop.preview=()=>testRecord;
 globalThis.moveWorkshop.cursor=()=>({index:testIndex,frame:testRecord?.frames[testIndex]?.selectedFrame||0,pending:previewPending});
 globalThis.moveWorkshop.geometry=()=>({handles:clone(preview.handles),view:clone(preview.view||{}),measurements:clone(preview.measurements||null),measurementLabels:clone(preview.measurementLabels||[])});

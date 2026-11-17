@@ -1,7 +1,7 @@
 extends SceneTree
 
 # Native visual fixture. Changes are in memory only and never saved to move data.
-# --development / --training / --neutral / --collisions / --review / --low-health / --hits N / --fd / --p1 N / --p2 N / --screenshot PATH
+# --drive / --development / --training / --neutral / --collisions / --review / --low-health / --hits N / --fd / --p1 N / --p2 N / --screenshot PATH
 var game: Control
 
 func _initialize() -> void:
@@ -23,7 +23,12 @@ func run() -> void:
 	game.confirm_selection()
 	await game.wait_for_match_entry()
 	game.motion.instant = false
-	if args.has("--collisions"):
+	if args.has("--drive"):
+		for _tick in 30: game.model.step(2, 1)
+		game.model.step(0, 0)
+		game.model.step(256, 0)
+		for _tick in 100: game.model.step(0, 0)
+	elif args.has("--collisions"):
 		game.show_boxes = true
 		for _tick in 40: game.model.step(2, 0)
 		for _tick in game.model.move(game.characters[0], 0).startup: game.model.step(16, 0)

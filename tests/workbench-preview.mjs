@@ -51,7 +51,7 @@ test('Multiple boxes remain one hit unless multi-hit is enabled; hit groups are 
 test('Timelines migrate and round-trip with notes, undo, per-frame geometry and atomic validation',()=>{
   const legacy=structuredClone(pack.defaults);legacy.schema=legacy.coreVersion=13;
   for(const c of legacy.characters)for(const m of c.moves)delete m.hitboxTimeline;
-  const w=new Workshop(pack,legacy);assert.equal(w.data.schema,16);w.setNote(5,0,'active','Keep the knife pose.');
+  const w=new Workshop(pack,legacy);assert.equal(w.data.schema,17);w.setNote(5,0,'active','Keep the knife pose.');
   const track=sample().characters[5].moves[0].hitboxTimeline;w.setHitTimeline(5,0,track);
   const imported=new Workshop(pack,JSON.parse(w.export()));assert.deepEqual(imported.move(5,0).hitboxTimeline,track);assert.equal(imported.note(5,0).active,'Keep the knife pose.');
   assert.equal(attackBoxes(imported.move(5,0),5,pack.collisions[5].push).length,2);

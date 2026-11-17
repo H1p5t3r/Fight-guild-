@@ -1,8 +1,8 @@
 {
   "title": "Move Workshop — Complete Control Guide",
   "edition": "17 November 2026",
-  "schema": 16,
-  "source_revision": "schema-16 per-phase hurtbox toggles and first user move batch",
+  "schema": 17,
+  "source_revision": "schema-17 tether, bleed and conditional Drive follow-ups",
   "pages": [
     {
       "id": "cover",
@@ -19,7 +19,7 @@
         {
           "type": "callout",
           "title": "Every control, in plain language",
-          "text": "Covers all 90 effective move settings plus 40 movement and defense settings, combat playback, timed hitboxes and multi-hit controls, phase hurtboxes, art notes and photos, navigation, history and files."
+          "text": "Covers all 104 effective move settings plus 40 movement and defense settings, combat playback, timed hitboxes and multi-hit controls, phase hurtboxes, art notes and photos, navigation, history and files."
         },
         {
           "type": "text",
@@ -27,7 +27,7 @@
         },
         {
           "type": "text",
-          "text": "Verified against browser editor / combat schema 15, shared workspace and distance guides edition. This describes Fight Guild’s implementation; Strive-inspired systems are not a claim of exact Guilty Gear behavior."
+          "text": "Verified against browser editor / combat schema 17, shared workspace and distance guides edition. This describes Fight Guild’s implementation; Strive-inspired systems are not a claim of exact Guilty Gear behavior."
         }
       ]
     },
@@ -1814,13 +1814,195 @@
       ]
     },
     {
+      "id": "drive-overview",
+      "section": "DRIVE MECHANICS",
+      "title": "Attach. Transform. Cash out.",
+      "intro": "Shark and Fillet now have persistent Drive mechanics. Open the Drive mechanics tab to edit them; the preview and controls stay together.",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Shark: 5D and 2D attach a tether only on hit. While tethered, either input becomes a one-use pull toward Shark’s current position. The pull itself does no damage and cannot be blocked. Any subsequent hit or block consumes a used tether. Shark being hit clears it at any time. Initial 2D remains a hard knockdown."
+        },
+        {
+          "type": "text",
+          "text": "Fillet: 5D applies bleed. Grey life marks possible future cash-out damage; normal HP is not removed by its buildup. Initial grey life uses combo scaling, periodic ticks add more, and blocked attacks add the configured percentage of on-hit damage. FD prevents chip, but not this grey-life buildup."
+        },
+        {
+          "type": "text",
+          "text": "While bleeding, Fillet’s 5D becomes a leaping ground command grab. A successful grab deals its base damage plus stored grey life, then clears the status. It beats standing guard but respects blockstun, wakeup throw immunity and jumping; guard break still removes ordinary blockstun throw immunity. A whiff keeps the remaining bleed."
+        },
+        {
+          "type": "text",
+          "text": "Bleed clears if Fillet is hit or if she goes 420 action frames (7 seconds, excluding shared hitstop) without landing an unblocked hit. Blocks do not refresh the timer. Grey life is capped at current HP minus one, but a cash-out may KO. Both statuses clear at a round reset or wall-break stage transition."
+        },
+        {
+          "type": "controls",
+          "items": [
+            {
+              "text": "Plays the selected move using the chosen target behavior. A blocked applying attack does not attach its status.",
+              "label": "Drive test — Apply status"
+            },
+            {
+              "text": "First lands the applying move unguarded, waits until both fighters recover, then repeats its input. The chosen target behavior applies to the follow-up. Whiffs remain whiffs; the test does not reposition fighters or force contact.",
+              "label": "Drive test — Apply → follow-up"
+            },
+            {
+              "text": "Applies the move unguarded and lets the bleed expire. Tethers have no timeout, so their recording ends once both fighters are idle.",
+              "label": "Drive test — Apply → wait for timeout"
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Existing art, real simulation",
+          "text": "The follow-ups currently reuse the move’s existing art and hurtbox phase profiles. Their startup, active and recovery timing is independent. Cash-out uses ground throw reach; base strike hitbox keys and multi-hit settings do not affect it. New dedicated animation can follow your final tuning."
+        }
+      ]
+    },
+    {
+      "id": "drive-fields-0",
+      "section": "DRIVE MECHANICS",
+      "title": "Status application",
+      "intro": "Settings apply only when this move has the corresponding Drive mechanic enabled. Distances use game pixels; one action frame is 1/60 second.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "mechanic",
+              "text": "0 off; 1 tether; 2 bleed. The same input becomes its follow-up while the opponent has this status."
+            },
+            {
+              "key": "tetherSpeed",
+              "text": "Velocity toward the owner’s position when the pull activates. Direction is captured once; it does not home."
+            },
+            {
+              "key": "tetherFrames",
+              "text": "Hitstun and travel budget for the pull. Pull once; the next hit or block breaks the tether."
+            },
+            {
+              "key": "bleedInitial",
+              "text": "Grey life added on the applying hit, multiplied by that hit’s combo damage scale."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drive-fields-4",
+      "section": "DRIVE MECHANICS",
+      "title": "Bleed economy",
+      "intro": "Settings apply only when this move has the corresponding Drive mechanic enabled. Distances use game pixels; one action frame is 1/60 second.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "bleedTickDamage",
+              "text": "Grey life added each tick interval. It does not remove health."
+            },
+            {
+              "key": "bleedTickFrames",
+              "text": "Action frames between grey-life ticks; pauses during shared hitstop."
+            },
+            {
+              "key": "bleedDuration",
+              "text": "Frames without an unblocked hit from the owner. Blocks do not refresh. 420 = 7 seconds at 60 Hz, excluding shared hitstop."
+            },
+            {
+              "key": "bleedBlockPercent",
+              "text": "Percentage of the blocked move’s unscaled on-hit damage added as grey life, including Faultless Defense."
+            },
+            {
+              "key": "bleedCap",
+              "text": "Maximum stored grey life, also limited to current health minus one. Grey life cannot kill."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drive-fields-9",
+      "section": "DRIVE MECHANICS",
+      "title": "Follow-up timing & reward",
+      "intro": "Settings apply only when this move has the corresponding Drive mechanic enabled. Distances use game pixels; one action frame is 1/60 second.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "variantStartup",
+              "text": "Startup of tether pull or cash-out grab. At least 5 frames."
+            },
+            {
+              "key": "variantActive",
+              "text": "Active duration. Pull happens once on its first active frame; grab can connect throughout."
+            },
+            {
+              "key": "variantRecovery",
+              "text": "Recovery after the conditional follow-up."
+            },
+            {
+              "key": "variantDamage",
+              "text": "Base grab damage before scaling; stored grey life is added unscaled on a successful grab."
+            },
+            {
+              "key": "variantRange",
+              "text": "Extra ground throw reach beyond both pushbox half-widths. Opponent can jump or use throw immunity."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drive-fields-14",
+      "section": "DRIVE MECHANICS",
+      "title": "Cash-out movement & reaction",
+      "intro": "Settings apply only when this move has the corresponding Drive mechanic enabled. Distances use game pixels; one action frame is 1/60 second.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "variantSpeed",
+              "text": "Forward speed throughout startup and active frames. Existing run inertia is added."
+            },
+            {
+              "key": "variantLift",
+              "text": "Initial upward velocity. Uses this character’s gravity; landing does not cut the grab short."
+            },
+            {
+              "key": "variantHitstun",
+              "text": "Hitstun on a successful cash-out grab."
+            },
+            {
+              "key": "variantKnockdown",
+              "text": "0 none, 1 soft, 2 hard. Down and wake durations inherit the applying move’s settings."
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "index-a",
       "section": "CONTROL INDEX",
-      "title": "Gameplay fields · A–F",
+      "title": "Gameplay fields · A–C",
       "blocks": [
         {
           "type": "index",
           "start": "A",
+          "end": "C"
+        }
+      ]
+    },
+    {
+      "id": "index-df",
+      "section": "CONTROL INDEX",
+      "title": "Gameplay fields · D–F",
+      "blocks": [
+        {
+          "type": "index",
+          "start": "D",
           "end": "F"
         }
       ]

@@ -29,7 +29,8 @@ export class CombatPreview {
     e.api.fg_preview_place(0,45000,0,10000);
     e.api.fg_preview_place(1,45000+facing*separation,behavior==='air'?12000:0,10000);
     const result={frames:[],contacts:[],warnings:[],executed:false,requested:inputName(m),slot,character,target};
-    let elapsed=0,quiet=0,lastGroups=0;
+    let elapsed=0,quiet=0,lastGroups=0,followed=false;
+    const mechanicTest=m.mechanic?(options.mechanic||'single'):'single';
     const capture=(input,stage)=>{
       const state=e.state(),players=state.players;
       const contact=players[0].contactCount!==lastGroups;
@@ -42,11 +43,13 @@ export class CombatPreview {
       result.frames.push(frame);return state;
     };
     const defenderInput=()=>{
+      if(mechanicTest!=='single'&&!followed)return 0;
       const p=e.state().players[1],back=directionBits(4,p.facing);
       return behavior==='block'?back:behavior==='crouch'?back|INPUT.down:behavior==='fd'?back|INPUT.faultless:0;
     };
     const step=(input,stage)=>{e.step(input,defenderInput());elapsed++;return capture(input,stage);};
     capture(0,'Ready');
+    if(mechanicTest!=='single')result.warnings.push('Status setup uses an unguarded hit. The selected guard behavior is used for the follow-up.');
     if(!m.enabled){result.warnings.push('Attack disabled: geometry only. You can edit its boxes here; enable it to test movement and contact.');return this.geometryRecord(result,m);}
     const forward=directionBits(6,facing);
     if(entry==='walk'||entry==='run')for(let i=0;i<12;++i)step(forward|(entry==='run'&&i===0?INPUT.dash:0),entry==='run'?'Run / step approach':'Walk approach');
@@ -70,18 +73,25 @@ export class CombatPreview {
       sequence.forEach((direction,index)=>step(directionBits(direction,facing)|(index===sequence.length-1?INPUT.P<<m.button:0),'Move input'));
     }
     let state=e.state();
-    for(let i=0;i<2400;++i){
-      state=step(0,result.executed?'Attack & reaction':'Waiting for input');
+    for(let i=0;i<4800;++i){
+      state=step(0,followed?'Drive follow-up':result.executed?'Attack & reaction':'Waiting for input');
       if(state.winner!==-1)break;
       const free=state.players.every(p=>p.move<0&&p.stun===0&&p.reaction===0&&p.landingTime===0&&p.y===0)&&state.hitstop===0&&!e.boxes(0,4).length&&!e.boxes(1,4).length;
-      quiet=free?quiet+1:0;if(quiet>=24)break;
+      quiet=free?quiet+1:0;
+      const status=state.players[1].tetherSource||state.players[1].bleedSource;
+      if(mechanicTest==='followup'&&!followed&&status&&quiet>=6){
+        followed=true;quiet=0;
+        const dir=state.players[0].facing;
+        if(simple)step(directionBits(m.simpleDirection,dir)|INPUT.simple|(INPUT.P<<m.simpleButton),'Follow-up input');
+        else {const sequence=m.motion?String(m.motion).split('').map(Number):[m.direction];sequence.forEach((d,j)=>step(directionBits(d,dir)|(j===sequence.length-1?INPUT.P<<m.button:0),'Follow-up input'));}
+      }else if(quiet>=24&&!(mechanicTest==='expire'&&state.players[1].bleedTime))break;
     }
     if(!result.executed){
       const actual=state.players[0].lastMove;
       result.warnings.push(actual>=0?`Input selected ${MOVE_IDS[actual]}, not ${m.id}. Check mappings, airborne state and competing moves.`:'The selected input did not start this attack. Check its mapping and grounded/airborne requirement.');
     }
     if(!result.executed){result.warnings.push('Showing the selected move’s geometry only; no contacts are simulated.');return this.geometryRecord(result,m);}
-    if(result.frames.length>=2400)result.warnings.push('Preview stopped at the recording limit.');
+    if(result.frames.length>=4800)result.warnings.push('Preview stopped at the recording limit.');
     result.totalDamage=1000-state.players[1].health;
     result.displacement=(state.players[0].x-result.frames[0].state.players[0].x)/100;
     return result;

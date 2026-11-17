@@ -1,0 +1,146 @@
+[
+  [
+    "mechanic",
+    "Drive mechanic",
+    0,
+    0,
+    2,
+    "0 off; 1 tether; 2 bleed. The same input becomes its follow-up while the opponent has this status."
+  ],
+  [
+    "tetherSpeed",
+    "Tether pull speed",
+    1800,
+    100,
+    4000,
+    "Velocity toward the owner\u2019s position when the pull activates. Direction is captured once; it does not home."
+  ],
+  [
+    "tetherFrames",
+    "Tether pull duration",
+    12,
+    1,
+    60,
+    "Hitstun and travel budget for the pull. Pull once; the next hit or block breaks the tether."
+  ],
+  [
+    "bleedInitial",
+    "Initial grey life",
+    20,
+    0,
+    1000,
+    "Grey life added on the applying hit, multiplied by that hit\u2019s combo damage scale."
+  ],
+  [
+    "bleedTickDamage",
+    "Bleed tick grey life",
+    2,
+    0,
+    1000,
+    "Grey life added each tick interval. It does not remove health."
+  ],
+  [
+    "bleedTickFrames",
+    "Bleed tick interval",
+    30,
+    1,
+    600,
+    "Action frames between grey-life ticks; pauses during shared hitstop."
+  ],
+  [
+    "bleedDuration",
+    "Bleed inactivity timeout",
+    420,
+    1,
+    3600,
+    "Frames without an unblocked hit from the owner. Blocks do not refresh. 420 = 7 seconds at 60 Hz, excluding shared hitstop."
+  ],
+  [
+    "bleedBlockPercent",
+    "Blocked-hit grey life",
+    20,
+    0,
+    100,
+    "Percentage of the blocked move\u2019s unscaled on-hit damage added as grey life, including Faultless Defense."
+  ],
+  [
+    "bleedCap",
+    "Grey-life cap",
+    300,
+    0,
+    1000,
+    "Maximum stored grey life, also limited to current health minus one. Grey life cannot kill."
+  ],
+  [
+    "variantStartup",
+    "Follow-up startup",
+    16,
+    5,
+    120,
+    "Startup of tether pull or cash-out grab. At least 5 frames."
+  ],
+  [
+    "variantActive",
+    "Follow-up active",
+    6,
+    1,
+    120,
+    "Active duration. Pull happens once on its first active frame; grab can connect throughout."
+  ],
+  [
+    "variantRecovery",
+    "Follow-up recovery",
+    26,
+    0,
+    180,
+    "Recovery after the conditional follow-up."
+  ],
+  [
+    "variantDamage",
+    "Cash-out base damage",
+    60,
+    0,
+    1000,
+    "Base grab damage before scaling; stored grey life is added unscaled on a successful grab."
+  ],
+  [
+    "variantRange",
+    "Cash-out grab range",
+    3000,
+    0,
+    20000,
+    "Extra ground throw reach beyond both pushbox half-widths. Opponent can jump or use throw immunity."
+  ],
+  [
+    "variantSpeed",
+    "Cash-out leap speed",
+    600,
+    0,
+    2000,
+    "Forward speed throughout startup and active frames. Existing run inertia is added."
+  ],
+  [
+    "variantLift",
+    "Cash-out leap lift",
+    650,
+    0,
+    3000,
+    "Initial upward velocity. Uses this character\u2019s gravity; landing does not cut the grab short."
+  ],
+  [
+    "variantHitstun",
+    "Cash-out hitstun",
+    24,
+    0,
+    180,
+    "Hitstun on a successful cash-out grab."
+  ],
+  [
+    "variantKnockdown",
+    "Cash-out knockdown",
+    1,
+    0,
+    2,
+    "0 none, 1 soft, 2 hard. Down and wake durations inherit the applying move\u2019s settings."
+  ]
+]
