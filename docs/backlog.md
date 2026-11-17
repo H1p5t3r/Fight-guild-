@@ -147,4 +147,7 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Preserve and validate 2026-11-17 batch 1: 21 edited moves across Fillet and Shark, plus Fillet air-dash tuning. Load as a work-in-progress preset in the editor and native build.
 - [x] Add independent per-phase hurtbox region switches and universal 6P upper-body protection, with coordinate preservation and editable recovery coverage.
 - [ ] Review Shark 5Hs’s key at active frame 10 (currently beyond 7 active frames) and the S input on the `j.214P` slot with the remaining move edits.
-- [ ] Receive the remaining moves and art briefs/references before deriving revised attack sprite sheets.
+- [x] Preserve and validate 2026-11-17 batch 2: Shark 2D reach/height, Fillet 5D overhead/soft-knockdown tuning, and four named move briefs.
+- [ ] Implement Shark’s persistent Drive tether and follow-up pull after settling its timing and contact rules. See [character mechanic briefs](character-mechanics-drafts.md).
+- [ ] Implement Fillet’s bleed, refundable grey-life accumulation and leaping command-grab cash-out after settling the remaining values.
+- [ ] Receive the remaining move edits and completed art briefs/references before deriving revised attack sprite sheets.

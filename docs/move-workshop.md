@@ -278,6 +278,6 @@ Every fighter’s **6P** defaults to legs only during windup and active frames, 
 
 ## Current working batch
 
-The [17 November batch 1](move-batches/2026-11-17-batch-01.md) is bundled as a work-in-progress preset. A fresh browser opens that batch; an existing local draft takes priority. To replace an existing browser draft, use **Import JSON** with the archived batch (or your newer file); Undo restores the prior draft. Reset move still restores the starter data.
+The [17 November batch 2](move-batches/2026-11-17-batch-02.md) is bundled as a work-in-progress preset. A fresh browser opens that batch; an existing local draft takes priority. To replace an existing browser draft, use **Import JSON** with the archived batch (or your newer file); Undo restores the prior draft. Reset move still restores the starter data.
 
-Godot loads the batch before a locally saved move set. **Development → Load latest workshop batch** applies it again for playtesting; **Save locally** is explicit. The archived upload is unchanged and the shared schema migration adds 6P vulnerability controls. Art briefs and remaining moves are still pending.
+Godot loads the batch before a locally saved move set. **Development → Load latest workshop batch** applies it again for playtesting; **Save locally** is explicit. Both original uploads are archived unchanged. The current file preserves the 6P vulnerability controls and includes four move briefs. The proposed tether and bleed/grey-life systems are documented in [the character mechanic briefs](character-mechanics-drafts.md); they are not yet implemented. Remaining moves and pose references are still pending.
