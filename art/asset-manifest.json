@@ -465,6 +465,15 @@
         1536,
         1024
       ]
+    },
+    {
+      "path": "art/characters/stance-studies/fillet-02.png",
+      "bytes": 1819344,
+      "sha256": "ef5a1d017c44084ec58e356bac42671e631eeb2a3c05d1cbf5233889106522fb",
+      "dimensions": [
+        1536,
+        1024
+      ]
     }
   ]
 }

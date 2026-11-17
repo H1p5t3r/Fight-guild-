@@ -88,8 +88,9 @@ For the first matchup: [Fillet action sheet](art/characters/fillet-actions.png),
 [Reference rules and move-editor handoff](docs/fillet-shark-references.md) cover
 palette, equipment, root travel, phased hitboxes, hurtboxes and pose-photo briefs.
 
-[Fillet's six ready-stance options](art/characters/stance-studies/fillet-01.png)
-explore alternative combat personalities for the next idle-pose pass.
+[Fillet's six initial ready-stance options](art/characters/stance-studies/fillet-01.png)
+explore alternative combat personalities. The preferred B/F leg spacing now
+anchors [four upper-body refinements](art/characters/stance-studies/fillet-02.png).
 
 ## Project notes
 

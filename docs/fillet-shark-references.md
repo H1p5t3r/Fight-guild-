@@ -97,6 +97,25 @@ the breathing/weight-shift loop and check its silhouette with the current
 body-only hurtboxes. [Generation notes](../art/characters/stance-studies/fillet-01.json)
 retain the exact prompt, source reference and image checksum.
 
+The user's next preference is **the leg spacing of B and F**. Carry that narrower,
+natural stagger into subsequent ready-pose work. This selects the lower-body
+spacing, not either complete stance or an upper-body posture.
+
+[The second comparison sheet](../art/characters/stance-studies/fillet-02.png)
+uses that base for four upper-body alternatives:
+
+| Option | Upper-body direction |
+| --- | --- |
+| G — Low Ready | Relaxed low hands, with the offhand near the belt. |
+| H — Close Guard | Knives held close to the torso at separate heights. |
+| I — High Knife | Main knife beside the head, offhand low. |
+| J — Forward Guard | Main blade presented forward, offhand near the face. |
+
+The narrower spacing is an artwork direction, not a pushbox-width change.
+Upper-body selection, final grip/weapon cleanup and the idle loop remain open.
+[Refinement provenance](../art/characters/stance-studies/fillet-02.json) records
+the exact feedback, references, prompt, checksums and remaining drawing checks.
+
 ## Using an edited move brief for the next sprite pass
 
 1. Start with the user's latest **Move Workshop JSON**, including `_moveWorkshop`
