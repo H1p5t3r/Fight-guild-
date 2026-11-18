@@ -1,0 +1,919 @@
+{
+  "format": "fight-guild.character-reference.v1",
+  "source": {
+    "file": "GGST - Leo Whitefang.mht",
+    "sha256": "7a674b4dbce99f7db24eb5685fefd4070573ca4d21f3748d344a24ef34aa1235",
+    "bytes": 2037931,
+    "capturedAt": "2026-11-18T01:11:35Z",
+    "article": "https://www.dustloop.com/w/GGST/Leo_Whitefang",
+    "revision": "https://www.dustloop.com/wiki/index.php?title=GGST/Leo_Whitefang&oldid=581554",
+    "lastEdited": "2026-10-20T16:48:00Z",
+    "verification": "User-supplied MHTML snapshot; no live fetch or tested Strive patch claimed.",
+    "encodingNote": "Raw table strings preserve replacement characters present in the saved HTML. The j.S damage expression is normalized as 24 x 2 because the two-hit value and description agree."
+  },
+  "purpose": "Verified source-to-Tapper mapping; not gameplay configuration. Source Damage, proration and RISC values are preserved for reference, not applied to Fight Guild balance.",
+  "moves": [
+    {
+      "sourceMove": "5P",
+      "tapperMapping": "5P",
+      "utility": "Fast, low-recovery pressure/defense jab; upward coverage also supports anti-airing. Can be low-profiled.",
+      "frames": [
+        {
+          "Damage": "26",
+          "Guard": "All",
+          "Startup": "5",
+          "Active": "5",
+          "Recovery": "6",
+          "On-Block": "-1",
+          "Invuln": "",
+          "Derived stationary blockstun": 9
+        }
+      ],
+      "details": [
+        {
+          "Proration": "60%",
+          "Level": "0",
+          "CH Type": "Small",
+          "On-Hit": "+2",
+          "R.I.S.C. Gain": "500",
+          "R.I.S.C. Loss": "1500",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "5K",
+      "tapperMapping": "5K",
+      "utility": "Advancing whiff-punish and approach normal, with useful dash momentum carry.",
+      "frames": [
+        {
+          "Damage": "32",
+          "Guard": "All",
+          "Startup": "9",
+          "Active": "4",
+          "Recovery": "13",
+          "On-Block": "-3",
+          "Invuln": "",
+          "Derived stationary blockstun": 13
+        }
+      ],
+      "details": [
+        {
+          "Proration": "90%",
+          "Level": "2",
+          "CH Type": "Small",
+          "On-Hit": "0",
+          "R.I.S.C. Gain": "1100",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "c.S",
+      "tapperMapping": "5S close-distance variant",
+      "utility": "Proximity-only pressure/punish starter, +1 on block, low pushback; ground bounce against airborne targets.",
+      "frames": [
+        {
+          "Damage": "40",
+          "Guard": "All",
+          "Startup": "7",
+          "Active": "6",
+          "Recovery": "10",
+          "On-Block": "+1",
+          "Invuln": "",
+          "Derived stationary blockstun": 16
+        }
+      ],
+      "details": [
+        {
+          "Proration": "100%",
+          "Level": "3",
+          "CH Type": "Mid",
+          "On-Hit": "+4",
+          "R.I.S.C. Gain": "1400",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Down",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "f.S",
+      "tapperMapping": "5S far-distance variant",
+      "utility": "Longer poke with strong dash carry and airborne horizontal push. Holding S enters Guard Stance on move frame 26.",
+      "frames": [
+        {
+          "Damage": "34",
+          "Guard": "All",
+          "Startup": "12",
+          "Active": "6",
+          "Recovery": "21",
+          "On-Block": "-13",
+          "Invuln": "",
+          "Derived stationary blockstun": 13
+        }
+      ],
+      "details": [
+        {
+          "Proration": "90%",
+          "Level": "2",
+          "CH Type": "Mid",
+          "On-Hit": "-10",
+          "R.I.S.C. Gain": "1100",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "5H",
+      "tapperMapping": "5Hs",
+      "utility": "Large, slower poke; low-reaching hitbox during move frames 17-19; wall bounce on airborne hit. Holding H enters Guard Stance on frame 27.",
+      "frames": [
+        {
+          "Damage": "42",
+          "Guard": "All",
+          "Startup": "15",
+          "Active": "5",
+          "Recovery": "22",
+          "On-Block": "-10",
+          "Invuln": "",
+          "Derived stationary blockstun": 16
+        }
+      ],
+      "details": [
+        {
+          "Proration": "90%",
+          "Level": "3",
+          "CH Type": "Large",
+          "On-Hit": "-7",
+          "R.I.S.C. Gain": "1700",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Down",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "5D",
+      "tapperMapping": "custom 5D excluded",
+      "utility": "Strive Dust/charged Dust overheads. Reference only: Tapper has a custom Drive entry instead.",
+      "frames": [
+        {
+          "Version": "Dust Attack",
+          "Damage": "40",
+          "Guard": "High",
+          "Startup": "20",
+          "Active": "3",
+          "Recovery": "26",
+          "On-Block": "-15",
+          "Invuln": "",
+          "Derived stationary blockstun": 13
+        },
+        {
+          "Version": "Charged Dust Attack",
+          "Damage": "50",
+          "Guard": "High",
+          "Startup": "28",
+          "Active": "3",
+          "Recovery": "26",
+          "On-Block": "-10",
+          "Invuln": "",
+          "Derived stationary blockstun": 18
+        }
+      ],
+      "details": [
+        {
+          "Version": "Dust Attack",
+          "Proration": "80%",
+          "Level": "2",
+          "CH Type": "Mid",
+          "On-Hit": "0",
+          "R.I.S.C. Gain": "825",
+          "R.I.S.C. Loss": "3000 [1000]",
+          "Wall Damage": "700 (900)",
+          "OTG Type": "Up",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        },
+        {
+          "Version": "Charged Dust Attack",
+          "Proration": "100%",
+          "Level": "4",
+          "CH Type": "Mid",
+          "On-Hit": "KD +36",
+          "R.I.S.C. Gain": "1275",
+          "R.I.S.C. Loss": "1500 [1000]",
+          "Wall Damage": "0 (200)",
+          "OTG Type": "Up",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "[H]S_or_[S]H",
+      "tapperMapping": "held S/Hs guard and opposite-button follow-up",
+      "utility": "Hold S after f.S or H after 5H to guard mids/highs. Lows and throws beat the hold. The opposite button starts Guard Attack, which has one-hit mid/high armor on frames 1-9. Guard hold negates blockstun, preserves chip/hitstop, and has 16f release recovery.",
+      "frames": [
+        {
+          "Version": "Guard Stance",
+          "Damage": "",
+          "Guard": "",
+          "Startup": "5",
+          "Active": "Until Released",
+          "Recovery": "16",
+          "On-Block": "",
+          "Invuln": "Guard Point: 5-Until Released;"
+        },
+        {
+          "Version": "Guard Attack",
+          "Damage": "42",
+          "Guard": "All",
+          "Startup": "10",
+          "Active": "3",
+          "Recovery": "14",
+          "On-Block": "0",
+          "Invuln": "1 Hit Mid/High Armour 1-9",
+          "Derived stationary blockstun": 16
+        }
+      ],
+      "details": [
+        {
+          "Version": "Guard Stance",
+          "Proration": "",
+          "Level": "",
+          "CH Type": "",
+          "On-Hit": "",
+          "R.I.S.C. Gain": "",
+          "R.I.S.C. Loss": "",
+          "Wall Damage": "",
+          "OTG Type": "",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        },
+        {
+          "Version": "Guard Attack",
+          "Proration": "60%",
+          "Level": "3",
+          "CH Type": "Large",
+          "On-Hit": "KD +40",
+          "R.I.S.C. Gain": "1400",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "500",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "2P",
+      "tapperMapping": "2P",
+      "utility": "Lower-reaching jab; slower than 5P but less susceptible to low-profile attacks.",
+      "frames": [
+        {
+          "Damage": "22",
+          "Guard": "All",
+          "Startup": "6",
+          "Active": "4",
+          "Recovery": "8",
+          "On-Block": "-2",
+          "Invuln": "",
+          "Derived stationary blockstun": 9
+        }
+      ],
+      "details": [
+        {
+          "Proration": "60%",
+          "Level": "0",
+          "CH Type": "Small",
+          "On-Hit": "+1",
+          "R.I.S.C. Gain": "500",
+          "R.I.S.C. Loss": "1500",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "2K",
+      "tapperMapping": "2K",
+      "utility": "Long and active low with run/dash carry; pressure, counterpoke and retreat-catching utility.",
+      "frames": [
+        {
+          "Damage": "26",
+          "Guard": "Low",
+          "Startup": "7",
+          "Active": "6",
+          "Recovery": "11",
+          "On-Block": "-5",
+          "Invuln": "",
+          "Derived stationary blockstun": 11
+        }
+      ],
+      "details": [
+        {
+          "Proration": "70%",
+          "Level": "1",
+          "CH Type": "Small",
+          "On-Hit": "-2",
+          "R.I.S.C. Gain": "600",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "2S",
+      "tapperMapping": "2S",
+      "utility": "Low poke and pressure tool; -2 on block permits threatening a delayed follow-up or pressure reset.",
+      "frames": [
+        {
+          "Damage": "26",
+          "Guard": "Low",
+          "Startup": "10",
+          "Active": "3",
+          "Recovery": "13",
+          "On-Block": "-2",
+          "Invuln": "",
+          "Derived stationary blockstun": 13
+        }
+      ],
+      "details": [
+        {
+          "Proration": "90%",
+          "Level": "2",
+          "CH Type": "Mid",
+          "On-Hit": "+1",
+          "R.I.S.C. Gain": "825",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "2H",
+      "tapperMapping": "2Hs",
+      "utility": "Launcher/combo filler; substantial recovery and punishable on block.",
+      "frames": [
+        {
+          "Damage": "44",
+          "Guard": "All",
+          "Startup": "12",
+          "Active": "8",
+          "Recovery": "29",
+          "On-Block": "-20",
+          "Invuln": "",
+          "Derived stationary blockstun": 16
+        }
+      ],
+      "details": [
+        {
+          "Proration": "90%",
+          "Level": "3",
+          "CH Type": "Large",
+          "On-Hit": "KD +22",
+          "R.I.S.C. Gain": "1400",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "500",
+          "OTG Type": "Up",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "2D",
+      "tapperMapping": "2D outside rolling stance",
+      "utility": "Hard-knockdown sweep, no special cancel. Semi-airborne frames 5-18 give low-crush/throw-avoidance utility.",
+      "frames": [
+        {
+          "Damage": "40",
+          "Guard": "Low",
+          "Startup": "12",
+          "Active": "6",
+          "Recovery": "19",
+          "On-Block": "-8",
+          "Invuln": "5-18F Semi-Airborne",
+          "Derived stationary blockstun": 16
+        }
+      ],
+      "details": [
+        {
+          "Proration": "90%",
+          "Level": "3",
+          "CH Type": "Large",
+          "On-Hit": "HKD +48",
+          "R.I.S.C. Gain": "1050",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "6P",
+      "tapperMapping": "6P",
+      "utility": "Upper-body-protected anti-air; low hurt profile on frames 1-3 and 4-14. Floating crumple on grounded hit and hard knockdown on airborne counter hit.",
+      "frames": [
+        {
+          "Damage": "38",
+          "Guard": "All",
+          "Startup": "10",
+          "Active": "5",
+          "Recovery": "21",
+          "On-Block": "-9",
+          "Invuln": "1-3 Below Crouch 4-14 Low Profile",
+          "Derived stationary blockstun": 16
+        }
+      ],
+      "details": [
+        {
+          "Proration": "90%",
+          "Level": "3",
+          "CH Type": "Mid",
+          "On-Hit": "+3",
+          "R.I.S.C. Gain": "1400",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "500",
+          "OTG Type": "Up",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "6K",
+      "tapperMapping": "6K",
+      "utility": "Advances during startup; kick confirm/pressure tool, -4 on block. Counter hit can link to close Slash.",
+      "frames": [
+        {
+          "Damage": "30",
+          "Guard": "All",
+          "Startup": "14",
+          "Active": "3",
+          "Recovery": "18",
+          "On-Block": "-4",
+          "Invuln": "",
+          "Derived stationary blockstun": 16
+        }
+      ],
+      "details": [
+        {
+          "Proration": "90%",
+          "Level": "3",
+          "CH Type": "Mid",
+          "On-Hit": "-1",
+          "R.I.S.C. Gain": "1400",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "6H",
+      "tapperMapping": "6Hs",
+      "utility": "Slow advancing mid, not an overhead; airborne ground bounce and backdash-callout utility. No overhead anti-air hitbox implied by the animation.",
+      "frames": [
+        {
+          "Damage": "50",
+          "Guard": "All",
+          "Startup": "28",
+          "Active": "2",
+          "Recovery": "30",
+          "On-Block": "-15",
+          "Invuln": "",
+          "Derived stationary blockstun": 16
+        }
+      ],
+      "details": [
+        {
+          "Proration": "90%",
+          "Level": "3",
+          "CH Type": "Large",
+          "On-Hit": "-12",
+          "R.I.S.C. Gain": "1400",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "500",
+          "OTG Type": "Down",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "j.P",
+      "tapperMapping": "j.P",
+      "utility": "Fast, short air-to-air jab; listed advantage is a contextual IAD repeated-jab example.",
+      "frames": [
+        {
+          "Damage": "24",
+          "Guard": "High",
+          "Startup": "5",
+          "Active": "3",
+          "Recovery": "9",
+          "On-Block": "+5~+6 (IAD j.PPPP)",
+          "Invuln": ""
+        }
+      ],
+      "details": [
+        {
+          "Proration": "80%",
+          "Level": "0",
+          "CH Type": "Small",
+          "On-Hit": "+8~+9 (IAD j.PPPP)",
+          "R.I.S.C. Gain": "375",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "j.K",
+      "tapperMapping": "j.K",
+      "utility": "Versatile air-to-air/jump-in; listed advantage assumes an IAD setup.",
+      "frames": [
+        {
+          "Damage": "30",
+          "Guard": "High",
+          "Startup": "10",
+          "Active": "7",
+          "Recovery": "25",
+          "On-Block": "0 (IAD)",
+          "Invuln": ""
+        }
+      ],
+      "details": [
+        {
+          "Proration": "80%",
+          "Level": "1",
+          "CH Type": "Small",
+          "On-Hit": "+3 (IAD)",
+          "R.I.S.C. Gain": "600",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "j.S",
+      "tapperMapping": "j.S",
+      "utility": "Two-hit, short-range air combo tool: 3 active, 3 inactive, 3 active frames. Upward hit trajectory; jump/air-dash cancelable on either hit.",
+      "frames": [
+        {
+          "Damage": "24��2",
+          "Guard": "High",
+          "Startup": "7",
+          "Active": "3(3)3",
+          "Recovery": "17",
+          "On-Block": "+6 (IAD)",
+          "Invuln": ""
+        }
+      ],
+      "details": [
+        {
+          "Proration": "80%",
+          "Level": "2",
+          "CH Type": "Mid",
+          "On-Hit": "+9 (IAD)",
+          "R.I.S.C. Gain": "375��2",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "250��2",
+          "OTG Type": "Up",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "j.H",
+      "tapperMapping": "j.Hs",
+      "utility": "Long horizontal air-to-air and retreating air normal; limited downward coverage.",
+      "frames": [
+        {
+          "Damage": "42",
+          "Guard": "High",
+          "Startup": "11",
+          "Active": "3",
+          "Recovery": "19",
+          "On-Block": "+3 (IAD)",
+          "Invuln": ""
+        }
+      ],
+      "details": [
+        {
+          "Proration": "80%",
+          "Level": "2",
+          "CH Type": "Mid",
+          "On-Hit": "+6 (IAD)",
+          "R.I.S.C. Gain": "825",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "j.D",
+      "tapperMapping": "j.D",
+      "utility": "Stalls air momentum during startup, then dives diagonally until landing; 15f landing recovery. Air hit has wall/ground bounce. Hit/block allows special, jump and air-dash cancels, including landing frames.",
+      "frames": [
+        {
+          "Damage": "44",
+          "Guard": "High",
+          "Startup": "22",
+          "Active": "Until Landing",
+          "Recovery": "15",
+          "On-Block": "-6 ~ -2",
+          "Invuln": ""
+        }
+      ],
+      "details": [
+        {
+          "Proration": "80%",
+          "Level": "2",
+          "CH Type": "Mid",
+          "On-Hit": "-3 ~ +1",
+          "R.I.S.C. Gain": "825",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "500",
+          "OTG Type": "Up",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "Ground_Throw",
+      "tapperMapping": "4P+K / 6P+K outside rolling stance",
+      "utility": "Forward/back throw gives hard knockdown and enters offensive stance. Source startup is 2f; Fight Guild minimum requires 5f unless that rule is explicitly changed.",
+      "frames": [
+        {
+          "Damage": "80",
+          "Guard": "Ground Throw",
+          "Startup": "2",
+          "Active": "3",
+          "Recovery": "38",
+          "On-Block": "",
+          "Invuln": ""
+        }
+      ],
+      "details": [
+        {
+          "Proration": "50%",
+          "Level": "",
+          "CH Type": "",
+          "On-Hit": "HKD +50",
+          "R.I.S.C. Gain": "",
+          "R.I.S.C. Loss": "2500",
+          "Wall Damage": "1000",
+          "OTG Type": "",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    },
+    {
+      "sourceMove": "Air_Throw",
+      "tapperMapping": "air-throw definitions needed",
+      "utility": "Forward/back air throw can catch targets on either side; hard knockdown. Source startup is 2f; recovery is 38 or landing+10.",
+      "frames": [
+        {
+          "Damage": "80",
+          "Guard": "Air Throw",
+          "Startup": "2",
+          "Active": "3",
+          "Recovery": "38 or Until Landing+10",
+          "On-Block": "",
+          "Invuln": ""
+        }
+      ],
+      "details": [
+        {
+          "Proration": "50%",
+          "Level": "",
+          "CH Type": "",
+          "On-Hit": "HKD +48 (IAD)",
+          "R.I.S.C. Gain": "",
+          "R.I.S.C. Loss": "2500",
+          "Wall Damage": "1000",
+          "OTG Type": "",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "reference only; not a runtime move-file import"
+    }
+  ],
+  "stanceComparison": [
+    {
+      "sourceMove": "bt.P",
+      "frames": [
+        {
+          "Damage": "33",
+          "Guard": "All",
+          "Startup": "7",
+          "Active": "4",
+          "Recovery": "12",
+          "On-Block": "-2 [+2]",
+          "Invuln": "1-10 Upper Body"
+        }
+      ],
+      "details": [
+        {
+          "Proration": "90%",
+          "Level": "2",
+          "CH Type": "Mid",
+          "On-Hit": "13 [+17]",
+          "R.I.S.C. Gain": "1100",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "500",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "comparison only; not approved Tapper stance tuning"
+    },
+    {
+      "sourceMove": "bt.K",
+      "frames": [
+        {
+          "Damage": "27",
+          "Guard": "Low",
+          "Startup": "5",
+          "Active": "3",
+          "Recovery": "6",
+          "On-Block": "+3 [+0]",
+          "Invuln": ""
+        }
+      ],
+      "details": [
+        {
+          "Proration": "70%",
+          "Level": "1",
+          "CH Type": "Small",
+          "On-Hit": "+6 [+3]",
+          "R.I.S.C. Gain": "600",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "comparison only; not approved Tapper stance tuning"
+    },
+    {
+      "sourceMove": "bt.S",
+      "frames": [
+        {
+          "Damage": "30",
+          "Guard": "All",
+          "Startup": "6",
+          "Active": "6",
+          "Recovery": "14",
+          "On-Block": "-3 [+5]",
+          "Invuln": ""
+        }
+      ],
+      "details": [
+        {
+          "Proration": "90%",
+          "Level": "3",
+          "CH Type": "Mid",
+          "On-Hit": "0 [+8]",
+          "R.I.S.C. Gain": "1400",
+          "R.I.S.C. Loss": "1000",
+          "Wall Damage": "300",
+          "OTG Type": "Mid",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "comparison only; not approved Tapper stance tuning"
+    },
+    {
+      "sourceMove": "bt.H",
+      "frames": [
+        {
+          "Damage": "48",
+          "Guard": "High",
+          "Startup": "18",
+          "Active": "4",
+          "Recovery": "21",
+          "On-Block": "-8 [+3]",
+          "Invuln": "9-19F Airborne"
+        }
+      ],
+      "details": [
+        {
+          "Proration": "70%",
+          "Level": "3",
+          "CH Type": "Mid",
+          "On-Hit": "KD +38 [KD +50]",
+          "R.I.S.C. Gain": "1050",
+          "R.I.S.C. Loss": "2000",
+          "Wall Damage": "700",
+          "OTG Type": "Down",
+          "Chip Ratio": "",
+          "Input Tension": ""
+        }
+      ],
+      "status": "comparison only; not approved Tapper stance tuning"
+    },
+    {
+      "sourceMove": "Cancel",
+      "frames": [
+        {
+          "Damage": "",
+          "Guard": "",
+          "Startup": "",
+          "Active": "",
+          "Recovery": "Total 11F",
+          "On-Block": "",
+          "Invuln": ""
+        }
+      ],
+      "details": [
+        {
+          "Proration": "",
+          "Level": "",
+          "CH Type": "",
+          "On-Hit": "",
+          "R.I.S.C. Gain": "",
+          "R.I.S.C. Loss": "",
+          "Wall Damage": "",
+          "OTG Type": "",
+          "Chip Ratio": "",
+          "Input Tension": "50"
+        }
+      ],
+      "status": "comparison only; not approved Tapper stance tuning"
+    }
+  ],
+  "preservedProjectRules": [
+    "Attacks start no faster than 5f; source 2f throws need a documented 5f adaptation.",
+    "Weapons do not extend body hurtboxes.",
+    "Tapper custom Drive and rolling stance follow user design, not copied Dust/backturn behavior.",
+    "Specials are excluded from this source mapping.",
+    "Fixed IAD/knockdown advantage is not a general hitstun or blockstun value."
+  ]
+}

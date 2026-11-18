@@ -1,6 +1,6 @@
 # Tapper — Leo baseline and rolling stance
 
-Design decisions recorded 2026-11-18. **Design specification only: Tapper's new stance and Leo-derived frame data are not yet implemented.** Shark and Fillet's implemented Drive mechanics are documented separately in [Drive mechanics](character-mechanics-drafts.md).
+Design decisions recorded 2026-11-18. **Design specification only: Tapper's new stance and Leo-derived frame data are not yet implemented.** The supplied Leo archive has now been extracted into a [verified timing/utility map](research/leo-tapper-2026-11-18.md). Shark and Fillet's implemented Drive mechanics are documented separately in [Drive mechanics](character-mechanics-drafts.md).
 
 ## Character direction
 
@@ -40,10 +40,10 @@ The user explicitly confirmed S self-canceling. Self-cancel permissions for othe
 
 Also open: whether the initial Drive is a blockable hit-grab or command grab, whether a blocked entry reaches stance, throw run limits/steering/air-target eligibility, the tackle's knockdown and spacing, and stance movement/evasive properties. The Dempsey animation alone does not establish invulnerability or armor. Preserve looping offense as the target when tuning these details.
 
-## Reference availability and implementation gate
+## Reference availability
 
 The supplied `GGST_Frame Data - Dustloop Wiki.mht` is the general [GGST/Frame_Data](https://www.dustloop.com/w/GGST/Frame_Data) page, revision 563708, captured 2026-11-15. It contains some character-comparison entries for Leo, but not his complete normal-move table. The supplied Damage and Mechanics pages describe shared systems. See the [saved-source review](research/strive-dustloop-2026-11-15.md).
 
-On 2026-11-18 the connected environment's network policy was restricted and did not allow Dustloop. No web-search tool was available. No live Leo page or patch-specific normal timings were verified, and no frame values have been invented or applied.
+The user subsequently supplied **GGST - Leo Whitefang.mht**, captured 2026-11-18 at 01:11:35 UTC. It contains the complete normal descriptions, main and extended frame-data tables, normal guard-hold mechanic, throws and stance comparisons. Its saved permalink is revision **581554**, with a last-edited timestamp of 2026-10-20 at 16:48. Live access is not required to read this source; the archive is sufficient for the requested move mapping.
 
-Needed source: a saved MHTML/HTML/PDF copy of [GGST Leo Whitefang / Frame Data](https://www.dustloop.com/w/GGST/Leo_Whitefang/Frame_Data), plus the character's move descriptions where utility is not explained in the frame table. Save the page revision or patch label with the source. Once available, build a source-to-Tapper mapping and identify engine/editor support needed for each normal and stance action before claiming the baseline is implemented.
+The [source-to-Tapper map](research/leo-tapper-2026-11-18.md) and [structured reference](../references/frame-data/leo-whitefang-2026-11-18.json) preserve 22 normal/throw entries and five relevant stance comparisons, including raw source values and archive SHA-256. They distinguish ordinary frame advantage from IAD/knockdown/stance-cancel examples. Exact gameplay implementation still needs the selector, guard, movement, bounce, throw and stance support enumerated in that map. Do not request the same source again or claim these reference files have already changed runtime behavior.
