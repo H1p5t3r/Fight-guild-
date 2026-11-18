@@ -142,6 +142,15 @@ Requested scope: make repeatable character images performing directed actions, w
   front extent, selected-box size and a facing-relative ground ruler.
 
 
+## Tapper stance and Leo baseline
+
+- [x] Record the user's rolling-stance direction and 2026-11-18 cancel/input corrections in [Tapper's design specification](tapper-design.md).
+- [ ] Obtain and archive a dated Strive Leo character frame-data/move-description source. The supplied general Frame Data page does not contain his complete normal table.
+- [ ] Map non-stance normals, command normals, aerials and ordinary throws to the verified Leo baseline, including any close/far Slash or hold-action support required. Keep Tapper's specials for separate design.
+- [ ] Implement the no-blocking stance, cross-normal cancels, S self-cancel, Hs overhead, low branch and cancelable 2D exit, with editor controls and real preview playback.
+- [ ] Implement Drive/throw stance entries and the stance command throw: run → tackle → one strong punch → stance offense. Finalize the motion, recovery and knockdown/spacing values.
+- [ ] Generate directed stance/entry/throw animation after the move definitions and pose briefs are settled.
+
 ## User move authoring batches
 
 - [x] Preserve and validate 2026-11-17 batch 1: 21 edited moves across Fillet and Shark, plus Fillet air-dash tuning. Load as a work-in-progress preset in the editor and native build.

@@ -17,7 +17,7 @@ These are working translations discussed during planning, not finalized movesets
 | --- | --- | --- |
 | Anvil | Defensive powerhouse | Holds ground and punishes commitments; his original shield supports this identity. |
 | Smoke | Setplay / okizeme specialist | Uses knockdown time to establish cloud setups, then exploits them through teleport positioning and timed threats. |
-| Tapper | Close-range brawling grappler | Threatens throws and sustained close pressure; retain his hooked staff in the kit. |
+| Tapper | Stance-based brawling grappler | Uses a Strive Leo normal-kit baseline and collar-grab/headbutt entries into a Dempsey-style stance with no blocking and looping high/low/throw pressure. |
 | Shark | Mobile hit-and-run fighter | Creates openings through movement and evasive positioning. |
 | Fillet | Bleed-driven rushdown | Opens a wound and sustains aggressive offense. |
 | Hammer | Advancing bruiser | Takes ground and converts clean hits into forceful knockdowns. |
@@ -33,6 +33,8 @@ Proposed loop: earn a knockdown → place clouds → threaten a wake-up mixup th
 Her neutral and defense, teleport restrictions, cloud activation timing, and defensive counterplay are still to be designed. Avoid treating fullscreen fog or generic keep-away zoning as her core identity.
 
 ## Implementation decisions
+
+Tapper's updated [design specification](tapper-design.md) records the 2026-11-18 decisions: non-stance Leo frame data/utility, specials deferred, free stance gatlings, S self-pressure, Hs overhead, 2D stance exit, and a running tackle/punch command throw. Exact Leo timings still require a character-specific reference; the new stance is not implemented yet.
 
 - Target platforms: PC and PS5. The current executable prototype runs natively in Godot on PC.
 - Start with 2D sprites; later use 3D models on a 2D gameplay plane.
