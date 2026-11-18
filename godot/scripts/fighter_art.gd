@@ -2,7 +2,7 @@ class_name FighterArt
 extends RefCounted
 
 # Atlas pivots/scales also compile into core/combat_data.h. Regenerate combat data after art geometry changes.
-const PHASES := ["active", "windup", "block", "signature_windup", "signature_active", "ready", "walk", "run"]
+const PHASES := ["active", "windup", "block", "signature_windup", "signature_active", "ready", "walk", "run", "stance"]
 const DIRECTORY := "res://assets/fighters/"
 static var manifest: Dictionary = {}
 static var textures: Dictionary = {}

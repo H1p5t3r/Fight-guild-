@@ -263,10 +263,12 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 			var fighter: Dictionary = game.model.state().players[0]
 			check(fighter.character == character and fighter.move == slots[b], "Missing basic button for " + CombatModel.CHARACTERS[character])
 			var visual: Sprite2D = game.arena.sprites[0]
-			check(visual.get_meta("phase") == "windup" and visual.get_meta("pose") == b + 1, "Attack has no windup pose")
+			var art: int = game.model.move(character, slots[b]).artPose
+			var expected_pose := art - 1 if art else b + 1
+			check(visual.get_meta("phase") == ("signature_windup" if art else "windup") and visual.get_meta("pose") == expected_pose, "Attack has no windup pose")
 			var anticipation: Texture2D = visual.texture
 			ticks(game.model.move(character, slots[b]).startup - 1)
-			check(visual.get_meta("phase") == "active" and visual.get_meta("pose") == b + 1 and visual.texture != anticipation, "Attack did not change to its active image")
+			check(visual.get_meta("phase") == ("signature_active" if art else "active") and visual.get_meta("pose") == expected_pose and visual.texture != anticipation, "Attack did not change to its active image")
 	game.menus.selection.choose_fighter(0, 0)
 	game.confirm_selection()
 	game.reset_round()

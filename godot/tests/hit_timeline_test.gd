@@ -48,6 +48,7 @@ func _initialize() -> void:
 	legacy.schema = 13
 	legacy.coreVersion = 13
 	for c in legacy.characters:
+		c.moves.resize(32)
 		for m in c.moves: m.erase("hitboxTimeline")
 	check(model.load_data(legacy).is_empty() and model.move(5,0).hitboxTimeline["keys"].is_empty(), "Schema-13 migration failed")
 	var args := OS.get_cmdline_user_args()

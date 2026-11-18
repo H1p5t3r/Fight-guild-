@@ -117,13 +117,14 @@ static void pushes() {
 static void contact_and_weapons() {
     Simulation s; s.defaults();
     for(int c=0;c<6;++c) for(int slot=0;slot<5;++slot) {
-        int m=slot==4?13:slot;
+        int m=slot==4?13:slot; if(c==3&&slot==2)m=CLOSE_SLASH;
         s.reset(c,(c+1)%6,0,0); flush(s);
         for(int tick=1;tick<=s.moves[c][m].v[Startup];++tick) {
             s.step(P<<slot,0);
-            if(tick<s.moves[c][m].v[Startup]) { CHECK(s.world.players[1].health==1000); CHECK(s.box_count(0,HitBox)==0); CHECK(s.get(0,29)==1); }
+            if(tick<s.moves[c][m].v[Startup]) { CHECK(s.world.players[1].health==1000); CHECK(s.box_count(0,HitBox)==0); CHECK(s.get(0,29)==(s.moves[c][m].v[ArtPose]?3:1)); }
         }
-        CHECK(s.box_count(0,HitBox)==1&&s.get(0,29)==0&&s.get(0,30)==slot+1);
+        CHECK(s.box_count(0,HitBox)==(s.world.players[0].grab_time?0:1)&&s.get(0,29)==(s.moves[c][m].v[ArtPose]?4:0)&&s.get(0,30)==(s.moves[c][m].v[ArtPose]?s.moves[c][m].v[ArtPose]-1:slot+1));
+        for(int n=0;n<s.moves[c][m].v[GrabFrames];++n)s.step(0,0);
         CHECK(s.world.players[1].health==1000-s.moves[c][m].v[Damage]);
     }
     // Contact with Anvil's extended P shield alone cannot hurt him. A tiny probe
@@ -190,6 +191,7 @@ static void phased_hurtbox_toggles() {
             CHECK(s.box_count(0,HurtBox)==(phase==2?4:1));CHECK(s.box(0,HurtBox,0).top==5000);
             CHECK(s.box_count(0,PushBox)==1);
         }
+        s.move_set(c,8,HurtWindowStart,0); // Isolate phase-mask editing from Tapper’s finer move-frame window.
         f.age=1;CHECK(s.move_set(c,8,HurtMaskWindup,5));CHECK(s.box_count(0,HurtBox)==2);
         CHECK(s.box(0,HurtBox,1).bottom==11000); // Legs + head retain their role order.
         CHECK(s.move_set(c,8,HurtMaskWindup,0));CHECK(s.box_count(0,HurtBox)==0);CHECK(s.box_count(0,PushBox)==1);

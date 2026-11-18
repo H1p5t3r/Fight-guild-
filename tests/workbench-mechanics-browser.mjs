@@ -17,8 +17,9 @@ try{
  const tick=record.frames.findIndex(f=>f.state.players[0].variant===2&&f.state.players[0].age>=6);
  await page.locator('#frame').evaluate((n,i)=>{n.value=String(i);n.dispatchEvent(new Event('input',{bubbles:true}));},tick);
  assert.match(await page.locator('#preview-title').textContent(),/Cash-out/);
- assert.equal(await page.locator('#windup-time').textContent(),'Windup 15f');
- await page.locator('#timeline .active').click();await ready(page);assert.match(await page.locator('#preview-title').textContent(),/Cash-out · Active · frame 16/);
+ const followStartup=await page.evaluate(()=>moveWorkshop.data().characters[5].moves[13].variantStartup);
+ assert.equal(await page.locator('#windup-time').textContent(),`Windup ${followStartup-1}f`);
+ await page.locator('#timeline .active').click();await ready(page);assert.equal(await page.locator('#preview-title').textContent(),`Cash-out · Active · frame ${followStartup}`);
  await mkdir('build/workshop-mechanics-review',{recursive:true});await page.screenshot({path:'build/workshop-mechanics-review/fillet-cashout.png'});
  const draft=await page.evaluate(()=>moveWorkshop.data()),pending=page.waitForEvent('download');await page.locator('#export').click();const download=await pending;
  await download.saveAs('build/workshop-mechanics-roundtrip.json');assert.deepEqual(JSON.parse(await readFile('build/workshop-mechanics-roundtrip.json','utf8')),draft);

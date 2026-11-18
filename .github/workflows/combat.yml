@@ -69,5 +69,7 @@ jobs:
             build/FightGuild-Move-Workshop.html
             exports/FightGuild-Movement-Preview.html
             docs/move-workshop.md
+            docs/tapper-design.md
+            godot/data/workshop/2026-11-18-tapper/FightGuild-Tapper.json
             exports/FightGuild-Move-Workshop-Guide.pdf
           if-no-files-found: error

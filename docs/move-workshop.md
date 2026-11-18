@@ -39,7 +39,7 @@ downloaded for recovery before explicitly starting a new one.
 
 ## What you can tune
 
-- All 192 move slots across six fighters, with unused slots hidden by default.
+- All 258 move slots across six fighters, with unused slots hidden by default.
 - **Attack enabled** beside the move title: turn off unused command normals or
   attacks without deleting their tuning data. Enable **Show unused slots** to
   find them again. Disabled attacks cannot execute or be cancel destinations.
@@ -285,3 +285,41 @@ Godot loads the batch before a locally saved move set. **Development → Load la
 ### Drive mechanics (schema 17)
 
 The **Drive mechanics** tab configures status application, bleed amounts/timing, tether velocity, and conditional follow-up startup, active/recovery, grab damage, reach and leap movement. Select **Drive test → Apply → follow-up** to record the applying hit and repeat its input; **Apply → wait for timeout** shows bleed expiry. Grey life and tethers are visible in the shared preview. Older imports retain their prior move values and notes while receiving these new defaults. See [complete behavior and inheritance](character-mechanics-drafts.md).
+
+
+### Stance & behavior (schema 18)
+
+Tapper's full kit and confirmed **st.236D** are in the [current Tapper guide](tapper-design.md). These controls are per move and appear in both editors. Values use frames, world pixels and pixels/frame as labeled; JSON keeps the existing 100-units-per-pixel convention. A timed mask intersects the phase mask; it never enables a region disabled in Hurtboxes. Bits are legs=1, torso/arms=2, head=4, extension=8.
+
+| Control | What it does |
+|---|---|
+| Required stance | Any, normal stance only, or rolling stance only. |
+| Stance transition | Enter rolling stance on successful hit, or exit when the action starts. |
+| Action behavior | Strike, held guard, stance exit, stall/dive, or timed grab sequence. |
+| Held-input destination | Move slot entered while holding the source attack button; -1 disables. |
+| Hold transition frame | First move frame on which the held-input transition can start. |
+| Guard hold button | Button to keep held when previewing this guard action. |
+| Guard attack destination | Opposite S/Hs input starts this move from held guard; -1 disables. |
+| Close-distance move | Alternate move selected when starting this input within the proximity range. |
+| Close-distance range | Root-to-root distance for the close version; checked at move start. |
+| Startup travel | Forward movement per startup tick; retains authored run/dash carry. |
+| Dive horizontal speed | Forward speed during an active stall/dive attack. |
+| Dive vertical speed | Downward speed during the active dive. Startup holds air velocity. |
+| Air-hit ground bounce | One bounce upward at ground contact, only when this move hits an airborne target. |
+| Air-hit wall bounce | One rebound away from the wall; velocity still damages wall health and depleted walls splat first. |
+| Grounded floating crumple | Grounded hit enters a vulnerable floating crumple for this many ticks. |
+| Air counter-hit knockdown | Override knockdown on an airborne counter hit; 0 keeps the ordinary result. |
+| Hurtbox window begins | Move-frame start of a finer body-region mask; 0 disables the window. |
+| Hurtbox window ends | Inclusive final move frame for the temporary body mask. |
+| Window body mask | Bit mask: legs 1, torso/arms 2, head 4, extension 8. Weapons never add hurtboxes. |
+| Low-crush window begins | During this window low strikes and ground throws miss, without changing input selection. |
+| Low-crush window ends | Inclusive final move frame of low/ground-throw avoidance. |
+| Mid/high armor duration | First move frames protected by hit-limited armor. Lows and throws beat it. |
+| Armor hits | Hits absorbed within the armor window; damage and hitstop still apply. |
+| Grab sequence duration | Ticks from capture to the single finishing hit. Target is held until the finish. |
+| Finisher artwork pose | Optional second pose during the grab or active timeline; 0 uses the initial pose. |
+| Finisher pose frame | Active frame or grab-sequence tick at which the finisher drawing appears. |
+
+The base block-advantage card is inapplicable to throws, exits and guard holds. Captures pause the move clock and show a separate capture/finish clock. Bounces are one-use reactions on airborne hits. Stance requirements and transitions do not grant invulnerability. Startup/active hitboxes, per-phase hurtbox editing and no more than four body regions remain unchanged.
+
+New contextual slots are disabled when importing an older file; existing values and art notes survive. Local browser drafts take priority over the bundled draft. Back up the current draft, then import `FightGuild-Tapper.json` to load the new kit deliberately.

@@ -7,9 +7,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 # Smear slots are reserved for schema compatibility; transition smearing is removed.
-FIELDS = 'button category direction motion air startup active recovery damage hitstun blockstun hitstop pushback reach bottom height specialCancel jumpCancel whiffCancel selfCancel advance simpleDirection simpleButton normalRoutes commandRoutes hitLevel chipDamage guardBreak counterHitstun counterHitstop reversalEligible hitboxBack airPushback blockPushback launch airLaunch knockdown knockdownFrames wakeupFrames wallDamage throwRange enabled artPose followFrom followFrom2 followHit travelSpeed inertiaPercent pullFrames pullGap hitAngle normalCancelStart normalCancelEnd specialCancelStart specialCancelEnd jumpCancelStart jumpCancelEnd followCancelStart followCancelEnd cancelOn starterProration comboScaling minimumDamage landingRecovery attackLevel counterTier counterVulnerable counterFreezeFrames counterSlowFrames projectileKind projectileSpawnFrame projectileSpeedX projectileSpeedY projectileGravity projectileLife projectileOffsetX projectileOffsetY projectileWidth projectileHeight projectileHits projectileRehit projectileDurability projectilePersist projectileMelee smearMode smearPart smearStretch smearFrame1 smearFrame2 smearFrame3 smearFrame4 hurtMaskWindup hurtMaskActive hurtMaskRecovery mechanic tetherSpeed tetherFrames bleedInitial bleedTickDamage bleedTickFrames bleedDuration bleedBlockPercent bleedCap variantStartup variantActive variantRecovery variantDamage variantRange variantSpeed variantLift variantHitstun variantKnockdown'.split()
+FIELDS = 'button category direction motion air startup active recovery damage hitstun blockstun hitstop pushback reach bottom height specialCancel jumpCancel whiffCancel selfCancel advance simpleDirection simpleButton normalRoutes commandRoutes hitLevel chipDamage guardBreak counterHitstun counterHitstop reversalEligible hitboxBack airPushback blockPushback launch airLaunch knockdown knockdownFrames wakeupFrames wallDamage throwRange enabled artPose followFrom followFrom2 followHit travelSpeed inertiaPercent pullFrames pullGap hitAngle normalCancelStart normalCancelEnd specialCancelStart specialCancelEnd jumpCancelStart jumpCancelEnd followCancelStart followCancelEnd cancelOn starterProration comboScaling minimumDamage landingRecovery attackLevel counterTier counterVulnerable counterFreezeFrames counterSlowFrames projectileKind projectileSpawnFrame projectileSpeedX projectileSpeedY projectileGravity projectileLife projectileOffsetX projectileOffsetY projectileWidth projectileHeight projectileHits projectileRehit projectileDurability projectilePersist projectileMelee smearMode smearPart smearStretch smearFrame1 smearFrame2 smearFrame3 smearFrame4 hurtMaskWindup hurtMaskActive hurtMaskRecovery mechanic tetherSpeed tetherFrames bleedInitial bleedTickDamage bleedTickFrames bleedDuration bleedBlockPercent bleedCap variantStartup variantActive variantRecovery variantDamage variantRange variantSpeed variantLift variantHitstun variantKnockdown stanceRequired stanceChange actionType holdFollow holdFrame holdButton guardFollow proximityMove proximityRange startupTravel diveSpeedX diveSpeedY groundBounce wallBounce crumpleFrames airCounterKnockdown hurtWindowStart hurtWindowEnd hurtWindowMask semiAirStart semiAirEnd armorFrames armorHits grabFrames finishArtPose finishArtFrame'.split()
 MOBILITY = 'forwardStyle walkSpeed runSpeed runAcceleration stepSpeed stepFrames backSpeed backFrames attackFriction backStyle backWalkSpeed backRunSpeed jumpSpeed jumpForwardSpeed jumpBackSpeed gravity airJumps prejumpFrames airDashEnabled airBackdashEnabled airDashStyle airBackdashStyle airDashSpeed airBackdashSpeed airDashFrames airBackdashFrames airDashUses hoverHeight hoverRiseSpeed teleportDistance backTeleportDistance teleportStartup fdEnabled fdPushPercent fdDrain fdAirDrain fdBlockCost smearMode smearPart smearStretch'.split()
-PHASES = {'active': 12, 'windup': 6, 'block': 6, 'signature_windup': 4, 'signature_active': 4, 'ready': 1, 'walk': 8, 'run': 8}
+PHASES = {'active': 12, 'windup': 6, 'block': 6, 'signature_windup': 32, 'signature_active': 32, 'ready': 1, 'walk': 8, 'run': 8, 'stance': 4}
 HURT_REGIONS = ('legs', 'torsoArms', 'head', 'extension')
 
 
@@ -34,17 +34,17 @@ def compile_data():
     for body, fighter, character in zip(collision['fighters'], art['fighters'], tuning['characters']):
         assert body['name'] == fighter['name'] == character['name']
         poses, strikes = [], {}
-        signatures.append(4 if 'signature_active' in fighter else 0)
+        signatures.append(len(fighter.get('signature_active',{}).get('frames',[])))
         has_motion = all(phase in fighter for phase in ('ready', 'walk', 'run'))
         assert has_motion or not any(phase in fighter for phase in ('ready', 'walk', 'run'))
         locomotion.append(8 if has_motion else 0)
         for phase, count in PHASES.items():
             if phase not in fighter:
-                assert phase.startswith('signature_') or phase in ('ready', 'walk', 'run')
+                assert phase.startswith('signature_') or phase in ('ready', 'walk', 'run', 'stance')
                 poses.extend(['{0, {}}'] * count)
                 continue
             sheet = fighter[phase]
-            assert len(body['poses'][phase]) == len(sheet['frames']) == count
+            assert len(body['poses'][phase]) == len(sheet['frames']) <= count
             geometry.append([sheet['body_height'], [f['pivot'] for f in sheet['frames']]])
             for i, authored in enumerate(body['poses'][phase]):
                 pivot = sheet['frames'][i]['pivot']
@@ -64,12 +64,13 @@ def compile_data():
                 if 'strike' in authored:
                     assert (phase == 'active' and 1 <= i <= 5) or phase == 'signature_active'
                     strikes[(phase, i)] = convert(authored['strike'])
+            poses.extend(['{0, {}}'] * (count-len(sheet['frames'])))
         hurt.append('    {\n        ' + ',\n        '.join(poses) + '\n    }')
         p = body['push']
         assert all(type(v) is int and 0 < v < 20000 for v in p.values())
         push.append('    {' + ','.join(str(p[k]) for k in ['halfWidth', 'standingHeight', 'crouchingHeight', 'airHeight', 'airBottom']) + '}')
         char_moves = []
-        assert len(character['moves']) == 32
+        assert len(character['moves']) == 43
         assert set(character['movement']) == set(MOBILITY)
         mobility.append('    {{' + ','.join(str(character['movement'][k]) for k in MOBILITY) + '}}')
         docs.extend(['## ' + character['name'], '', '| Move | Start | Active | Recovery | Damage | Hitstun | Blockstun | On block | Stop | Ground / air / block push px | Ground / air launch px/f | KD / down / wake | Hitbox (back, bottom → front, top), px |', '|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|'])
@@ -83,8 +84,12 @@ def compile_data():
                 back, bottom, reach, top = move['path']
             if move['category'] == 4:
                 back, bottom, reach, top = 0, 0, p['halfWidth'] + move['throwRange'], p['standingHeight']
+            if 'geometry' in move: back, bottom, reach, top = move['geometry']
             m = dict(move, hitboxBack=back, bottom=bottom, reach=reach, height=top-bottom)
             m.pop('path', None)
+            m.pop('geometry', None)
+            m.pop('hitboxTimeline', None)
+            m.pop('hurtboxes', None)
             assert back < reach and reach > 0
             assert set(m) == set(FIELDS) | {'id', 'hitPose'}
             char_moves.append('        {{' + ','.join(str(m[k]) for k in FIELDS) + '}}')
@@ -99,9 +104,21 @@ def compile_data():
     header += f'constexpr unsigned COLLISION_HASH = {digest}u;\n'
     header += 'constexpr int SIGNATURE_POSES[CHARACTER_COUNT] = {' + ','.join(map(str, signatures)) + '};\n'
     header += 'constexpr int LOCOMOTION_POSES[CHARACTER_COUNT] = {' + ','.join(map(str, locomotion)) + '};\n'
-    header += 'constexpr PoseBoxes HURT_POSES[CHARACTER_COUNT][49] = {\n' + ',\n'.join(hurt) + '\n};\n'
+    header += 'constexpr PoseBoxes HURT_POSES[CHARACTER_COUNT][109] = {\n' + ',\n'.join(hurt) + '\n};\n'
     header += 'constexpr Mobility STARTER_MOBILITY[CHARACTER_COUNT] = {\n' + ',\n'.join(mobility) + '\n};\n'
     header += 'constexpr PushProfile PUSH_PROFILES[CHARACTER_COUNT] = {\n' + ',\n'.join(push) + '\n};\n'
+    tracks=[]
+    for character in tuning['characters']:
+        entries=[]
+        for move in character['moves']:
+            track=move.get('hitboxTimeline',{'multiHit':False,'keys':[]}); keys=[]
+            for key in track['keys']:
+                boxes=key.get('boxes'); coords=', '.join('{'+','.join(map(str,b))+'}' for b in boxes or [])
+                values=[key['frame'],key['hit'],len(boxes) if boxes is not None else -1]+[key.get(k,-1) for k in ['damage','hitstun','blockstun','hitstop']]
+                keys.append('{'+','.join(map(str,values))+', {'+coords+'}}')
+            entries.append('{'+str(int(track['multiHit']))+','+str(len(keys))+', {'+','.join(keys)+'}}')
+        tracks.append('{'+','.join(entries)+'}')
+    header += 'constexpr MoveHit STARTER_HITS[CHARACTER_COUNT][MOVE_COUNT] = {'+','.join(tracks)+'};\n'
     header += 'constexpr Move STARTER_MOVES[CHARACTER_COUNT][MOVE_COUNT] = {\n' + ',\n'.join(moves) + '\n};\n}\n'
     return {ROOT / 'core/combat_data.h': header, ROOT / 'docs/move-stats.md': '\n'.join(docs) + '\n'}
 
@@ -116,4 +133,4 @@ if __name__ == '__main__':
                 raise SystemExit(f'Stale generated file: {path.relative_to(ROOT)}; run {Path(__file__).name}')
         else:
             path.write_text(content)
-    print('Combat data verified: 194 poses (3 body boxes + at most 1 extension), 6 movement/push profiles, 192 move slots, startup >= 5f.')
+    print('Combat data verified: 279 poses (3 body boxes + at most 1 extension), 6 movement/push profiles, 258 move slots, startup >= 5f.')

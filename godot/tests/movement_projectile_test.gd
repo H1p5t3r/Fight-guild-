@@ -9,6 +9,7 @@ func _initialize() -> void:
 	legacy.schema = 14
 	legacy.coreVersion = 14
 	for c in legacy.characters:
+		c.moves.resize(32)
 		for key in CombatModel.MOVEMENT_FIELDS.slice(9): c.movement.erase(key)
 		for m in c.moves:
 			for key in CombatModel.FIELDS.slice(69): m.erase(key)

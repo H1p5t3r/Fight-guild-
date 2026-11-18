@@ -55,7 +55,7 @@ function syncSummary(){
   $('move-enabled').textContent=m.enabled?'● Enabled':'○ Unused slot';$('move-enabled').style.color=m.enabled?'#a8cbaa':'var(--muted)';
   $('attack-enabled').checked=!!m.enabled;
   $('stat-startup').replaceChildren(document.createTextNode(m.startup),el('small',{},' f'));
-  $('stat-damage').textContent=m.damage;$('stat-block').textContent=(adv>0?'+':'')+adv+' f';$('stat-block').className=adv>0?'positive':adv<0?'negative':'';
+  $('stat-damage').textContent=m.damage;$('stat-block').textContent=m.category===4||[1,2].includes(m.actionType)?'—':(adv>0?'+':'')+adv+' f';$('stat-block').className=m.category===4||[1,2].includes(m.actionType)?'':adv>0?'positive':adv<0?'negative':'';
   $('stat-total').replaceChildren(document.createTextNode(totalFrames(m)),el('small',{},' f'));
   const profiles=model.data.characters.filter((c,i)=>Object.keys(c.movement).some(key=>!key.startsWith('smear')&&c.movement[key]!==pack.defaults.characters[i].movement[key])).length;
   $('changed-count').textContent=`${model.changes().length} edited move${model.changes().length===1?'':'s'}${profiles?' · '+profiles+' movement profile'+(profiles===1?'':'s'):''}`;
@@ -78,8 +78,8 @@ function listMoves(){
 }
 function saveSelection(){if(storageOkay&&!bootLocked){clearTimeout(saveTimer);saveTimer=setTimeout(save,200);}}
 function optionsFor(key){
-  if(key==='followFrom'||key==='followFrom2')return [[-1,'None'],...MOVE_IDS.map((name,i)=>[i,`${name}${!model.move(character,i).enabled?' · unused':''}`])];
-  if(key==='artPose')return [[0,'Button poses'],...Array.from({length:pack.limits.moves[character].artPose.max},(_,i)=>[i+1,`${i+1} · ${(character===5?['Knife spiral','Rekka rise','Rekka stab','Rekka low']:['Ground hook','Air hook','Ground stab','Air stab'])[i]}`])];
+  if(['followFrom','followFrom2','holdFollow','guardFollow','proximityMove'].includes(key))return [[-1,'None'],...MOVE_IDS.map((name,i)=>[i,`${name}${!model.move(character,i).enabled?' · unused':''}`])];
+  if(key==='artPose'||key==='finishArtPose')return [[0,key==='artPose'?'Button poses':'Same pose'],...Array.from({length:pack.limits.moves[character].artPose.max},(_,i)=>[i+1,`${i+1} · ${pack.art[character].signature_active?.frames[i]?.name??'Action '+(i+1)}`])];
   return SPECS[key].options;
 }
 function commit(key,value){
@@ -292,7 +292,7 @@ function drawTest(){
   });
   $('frame').max=testRecord.frames.length-1;$('frame').value=testIndex;$('frame-label').textContent=`${testIndex} / ${testRecord.frames.length-1}`;
   $('play').disabled=previewPending||testRecord.frames.length<2;
-  $('preview-title').textContent=testRecord.movement?f.stage:f.selectedFrame?`${a.variant===1?'Pull · ':a.variant===2?'Cash-out · ':''}${phase==='windup'?'Windup':phase==='active'?'Active':'Recovery'} · frame ${f.selectedFrame}`:'Attack workspace';
+  $('preview-title').textContent=testRecord.movement?f.stage:a.grabTime?`${m.finishArtPose&&a.poseIndex===m.finishArtPose-1?'Finish':'Capture'} · ${m.grabFrames-a.grabTime+1} / ${m.grabFrames}f`:f.selectedFrame?`${a.variant===1?'Pull · ':a.variant===2?'Cash-out · ':''}${phase==='windup'?'Windup':phase==='active'?'Active':'Recovery'} · frame ${f.selectedFrame}`:'Attack workspace';
   $('test-readout').textContent=previewPending?'Updating exchange…':`${testRecord.geometryOnly?'Geometry only':`Input ${describeInput(f.input,a.facing)}`} · ${f.selectedFrame?'move frame '+f.selectedFrame:f.stage}${f.state.hitstop?' · freeze '+f.state.hitstop+'f':''} · target ${target.stun}f stun`;
   const contacts=testRecord.contacts.filter(c=>c.tick<=testIndex),hits=contacts.filter(c=>c.event!==2).length;
   $('test-result').textContent=previewPending?'Recalculating contact…':`${hits} hit${hits===1?'':'s'} · ${contacts.length-hits} blocks · ${1000-target.health} damage · attacker travel ${((a.x-testRecord.frames[0].state.players[0].x)/100).toFixed(1)}px`;

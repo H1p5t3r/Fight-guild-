@@ -40,11 +40,11 @@ static void test_routes() {
     CHECK(!fg_can_cancel(0,3,0,1));
     for(int c=0;c<CHARACTER_COUNT;++c) for(int from=0;from<MOVE_COUNT;++from) {
         const auto& source=moves[c][from];
-        if(!source.v[Enabled]) continue;
+        if(!source.v[Enabled]||source.v[StanceRequired]==2||source.v[ActionType]==1||source.v[ActionType]==2) continue;
         int command=8+source.v[Button];
-        if(from!=command) CHECK(fg_can_cancel(c,from,command,1));
+        if(from!=command&&moves[c][command].v[Enabled]) CHECK(fg_can_cancel(c,from,command,1));
         CHECK(!fg_can_cancel(c,from,command,0));
-        CHECK(!fg_can_cancel(c,from,from,1));
+        CHECK(bool(fg_can_cancel(c,from,from,1))==bool(source.v[SelfCancel]));
     }
     for(int from=1;from<4;++from) for(int to=8;to<13;++to) CHECK(fg_can_cancel(0,from,to,1));
     for(int from=0;from<8;++from) CHECK(fg_can_cancel(0,from,14,1));
@@ -356,14 +356,16 @@ static void test_roster() {
         world.players[1].x=45000+(pa.right-pa.left+pb.right-pb.left)/2;
         CHECK(world.players[0].character==c);
         step(P<<button,0);
-        const auto& move=moves[c][slots[button]];
-        CHECK(world.players[0].move==slots[button]);
+        const int selected=c==3&&button==2?CLOSE_SLASH:slots[button];
+        const auto& move=moves[c][selected];
+        CHECK(world.players[0].move==selected);
         ticks(move.v[Startup]-1);
+        if(move.v[GrabFrames]) ticks(move.v[GrabFrames]);
         if(world.players[1].health!=1000-move.v[Damage]) std::fprintf(stderr,"Roster contact c=%d button=%d x=%d/%d\n",c,button,world.players[0].x,world.players[1].x);
         CHECK(world.players[1].health==1000-move.v[Damage]);
         CHECK(world.players[0].contact==1);
         thaw(); ticks(1,Right|(P<<button));
-        CHECK(world.players[0].move==8+button); // Same-button command route for every fighter/button.
+        if(moves[c][8+button].v[Enabled]&&!world.players[0].stance) CHECK(world.players[0].move==8+button); // Same-button command route for every fighter/button.
     }
     CHECK(fg_move_get(CHARACTER_COUNT,0,Damage)==-999);
     CHECK(!fg_move_set(-1,0,Damage,1));

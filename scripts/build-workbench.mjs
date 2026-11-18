@@ -12,7 +12,7 @@ import {SPECS} from '../web/workbench/specs.mjs';
 const root=new URL('../',import.meta.url), path=p=>fileURLToPath(new URL(p,root));
 const wasm=await readFile(path('web/generated/fight.wasm'));
 const {instance}=await WebAssembly.instantiate(wasm),engine=new Engine(instance),defaults=engine.data();
-if(defaults.schema!==17||defaults.coreVersion!==17) throw new Error('Rebuild the current combat core before packaging the workshop.');
+if(defaults.schema!==18||defaults.coreVersion!==18) throw new Error('Rebuild the current combat core before packaging the workshop.');
 // Ship the actual integer combat simulation as plain JS. Workplace browsers
 // need neither a native executable nor WebAssembly permission to play a preview.
 execFileSync(path('node_modules/.bin/wasm2js'),[path('web/generated/fight.wasm'),'-O','--enable-bulk-memory','-o',path('build/fight-core-js.mjs')]);
@@ -45,7 +45,7 @@ for(const [group,values] of Object.entries(defaults).filter(([key])=>key.endsWit
 if(JSON.stringify(defaults)!==JSON.stringify(engine.data()))throw new Error('Limit probing changed defaults.');
 const manifest=JSON.parse(await readFile(path('godot/assets/fighters/manifest.json'),'utf8'));
 const collisions=JSON.parse(await readFile(path('godot/data/fighter_collision.json'),'utf8'));
-const phases=['active','windup','block','signature_active','signature_windup','ready','walk','run'];
+const phases=['active','windup','block','signature_active','signature_windup','ready','walk','run','stance'];
 const art=manifest.fighters.map(f=>Object.fromEntries(['name',...phases].filter(p=>f[p]).map(p=>[p,f[p]])));
 const files=[...new Set(art.flatMap(f=>phases.filter(p=>f[p]).flatMap(p=>[f[p].file,...f[p].frames.flatMap(frame=>frame.file?[frame.file]:[])])))];
 files.push("appearance-v3/projectiles.png");
@@ -71,7 +71,7 @@ try {
     images[file]='data:image/webp;base64,'+(await readFile(cached)).toString('base64');
   }
 } finally {await browser?.close();}
-const regions=['legs','torsoArms','head','extension'],posePhases={active:0,windup:1,block:2,signature_windup:3,signature_active:4,ready:5,walk:6,run:7};
+const regions=['legs','torsoArms','head','extension'],posePhases={active:0,windup:1,block:2,signature_windup:3,signature_active:4,ready:5,walk:6,run:7,stance:8};
 const hurtPoses=art.map((fighter,c)=>Object.fromEntries(Object.entries(posePhases).filter(([phase])=>fighter[phase]).map(([phase,p])=>[phase,fighter[phase].frames.map((_,pose)=>Object.fromEntries(Array.from({length:engine.api.fg_pose_box_count(c,p,pose)},(_,n)=>[regions[n],Array.from({length:4},(_,edge)=>engine.api.fg_pose_box_get(c,p,pose,n,edge))])))])));
 const pack={format:1,defaults,limits,art,collisions:collisions.fighters,hurtPoses,images};
 const manifestPath=path('godot/data/workshop/current.json');

@@ -10,7 +10,7 @@ func _initialize() -> void:
 func run() -> void:
 	var model := CombatModel.new()
 	var defaults := model.data()
-	check(defaults.schema == 17 and model.move(5, 0).starterProration == 70, "New default tuning missing")
+	check(defaults.schema == 18 and model.move(5, 0).starterProration == 70, "New default tuning missing")
 	var legacy := defaults.duplicate(true)
 	legacy.schema = 7
 	legacy.coreVersion = 7
@@ -19,6 +19,7 @@ func run() -> void:
 	legacy.characters[5].moves[0].damage = 123
 	legacy.characters[5].moves[0].counterHitstun = 13
 	for character in legacy.characters:
+		character.moves.resize(32)
 		for move in character.moves:
 			for field in CombatModel.FIELDS.slice(51): move.erase(field)
 	check(model.load_data(legacy).is_empty(), "Schema-7 save failed to migrate")
@@ -30,6 +31,7 @@ func run() -> void:
 	var version8 := defaults.duplicate(true)
 	version8.schema = 8
 	version8.coreVersion = 8
+	for character in version8.characters: character.moves.resize(32)
 	version8.erase("jumpRules")
 	version8.tuningRules.throwGraceFrames = 7
 	check(model.load_data(version8).is_empty() and model.data().jumpRules.prejumpFrames == 0 and model.data().tuningRules.throwGraceFrames == 7, "Schema-8 tuning lost during jump migration")

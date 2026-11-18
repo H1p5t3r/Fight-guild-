@@ -24,6 +24,8 @@ python tests/combat_data_test.py
 ./build/tuning-tests
 ./build/counter-tests
 ./build/wall-tests
+"${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/tapper_test.cpp -o build/tapper-tests
+./build/tapper-tests
 ./build/core-tests --trace > build/native.trace
 python tests/run_godot_tests.py
 python tests/godot_network.py

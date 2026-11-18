@@ -2,7 +2,7 @@
   "schema": 1,
   "style_rules": "docs/sprite-production.md",
   "generator": "OpenAI image_gen",
-  "status": "Iteration sprites: Fillet/Shark selected ready stances and eight-frame walk/run loops; existing attacks/defense remain pose studies; generated swing bands target 3x thickness.",
+  "status": "Tapper v1: dedicated normal/stance move windups and active poses, collar/headbutt, tackle/punch, ready/rolling idles, walk and step dash. Generated iteration artwork; no transition smear frames.",
   "fighters": [
     {
       "id": "anvil",
@@ -1459,284 +1459,294 @@
       "name": "Tapper",
       "reference": "art/characters/tapper.png",
       "active": {
-        "file": "tapper-active.png",
-        "columns": 6,
+        "file": "tapper-v1/idle.png",
+        "columns": 4,
         "rows": 2,
-        "body_height": 304,
-        "pivot_x": 128,
-        "sha256": "a71aa38116800a2db028195a7fdd12d28585dd28976115b1d43aa7ee2de1f431",
-        "generation_file": "exec-8d38b3b2-fce8-407d-97c5-777edbf3d8b9.png",
+        "body_height": 400,
+        "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+        "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png",
         "frames": [
           {
+            "name": "idle 1",
+            "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+            "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png",
+            "file": "tapper-v1/idle.png",
             "region": [
               0,
               0,
-              252,
+              512,
               512
             ],
             "pivot": [
-              128,
-              448
+              256,
+              480
             ],
             "bounds": [
-              11,
-              113,
-              233,
-              448
+              72,
+              18,
+              462,
+              488
             ]
           },
           {
+            "name": "5P jab active",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
             "region": [
-              252,
               0,
-              261,
+              512,
+              384,
               512
             ],
             "pivot": [
-              132,
-              448
+              180,
+              456
             ],
             "bounds": [
-              1,
-              128,
-              261,
-              448
+              45,
+              33,
+              335,
+              457
             ]
           },
           {
+            "name": "5K kick active",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
             "region": [
-              513,
-              0,
-              255,
+              384,
+              512,
+              363,
               512
             ],
             "pivot": [
-              127,
-              445
-            ],
-            "bounds": [
-              0,
-              132,
-              244,
-              445
-            ]
-          },
-          {
-            "region": [
-              768,
-              0,
-              258,
-              512
-            ],
-            "pivot": [
-              128,
-              448
+              136,
+              456
             ],
             "bounds": [
               6,
-              172,
-              258,
-              448
+              33,
+              350,
+              457
             ]
           },
           {
+            "name": "f.S long staff active",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
             "region": [
-              1026,
-              0,
-              252,
+              1096,
+              512,
+              440,
               512
             ],
             "pivot": [
-              126,
-              448
+              174,
+              456
             ],
             "bounds": [
-              0,
-              69,
-              251,
-              450
-            ],
-            "file": "swings-v3/tapper-hs-alpha.png",
-            "sha256": "9b73611c5b336092635742a4baa1c61f77b5986e4d0522c5b92f29514e1c9d44",
-            "generation_file": "exec-7cc73bd1-7766-45f4-9234-d7f58a2c8ea0.png",
-            "swing_thickness_target": 3
-          },
-          {
-            "region": [
-              1275,
-              0,
-              261,
-              512
-            ],
-            "pivot": [
-              133,
-              447
-            ],
-            "bounds": [
-              0,
-              190,
-              257,
-              447
+              1,
+              84,
+              399,
+              457
             ]
           },
           {
+            "name": "5Hs staff chop active",
+            "sha256": "5b9343bd570d7677e379bd1db24b82ce735012454bd1e305688a4cc392c3c388",
+            "generation_file": "exec-6f8f9032-9199-4573-98b9-0b3f4ba86c0b.png",
+            "file": "tapper-v1/actions-2.png",
             "region": [
               0,
               512,
-              256,
+              384,
               512
             ],
             "pivot": [
-              128,
-              449
+              170,
+              447
             ],
             "bounds": [
-              20,
-              111,
-              238,
+              42,
+              116,
+              355,
               449
             ]
           },
           {
+            "name": "Collar capture active",
+            "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+            "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png",
+            "file": "tapper-v1/actions-6.png",
             "region": [
-              256,
+              384,
               512,
-              246,
+              384,
               512
             ],
             "pivot": [
-              128,
-              448
+              196,
+              456
             ],
             "bounds": [
-              8,
-              108,
-              246,
-              448
+              47,
+              40,
+              348,
+              456
             ]
           },
           {
+            "name": "walk 1",
+            "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+            "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png",
+            "file": "tapper-v1/walk.png",
             "region": [
-              502,
-              512,
-              263,
-              512
-            ],
-            "pivot": [
-              138,
-              420
-            ],
-            "bounds": [
               0,
-              100,
-              257,
-              420
-            ]
-          },
-          {
-            "region": [
-              765,
-              512,
-              259,
+              0,
+              384,
               512
             ],
             "pivot": [
-              131,
-              447
+              192,
+              480
             ],
             "bounds": [
-              1,
-              122,
-              244,
-              447
+              50,
+              22,
+              373,
+              474
             ]
           },
           {
+            "name": "walk 5",
+            "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+            "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png",
+            "file": "tapper-v1/walk.png",
             "region": [
-              1024,
+              0,
               512,
-              238,
+              384,
               512
             ],
             "pivot": [
-              128,
-              446
+              192,
+              480
             ],
             "bounds": [
-              7,
-              139,
-              233,
-              446
+              52,
+              27,
+              369,
+              480
             ]
           },
           {
+            "name": "j.K kick windup",
+            "sha256": "6f10e8c4d56ad688ec11c2bf8bd1288f2a49d50e9856f685b31f0530b1b53793",
+            "generation_file": "exec-8fe17627-d1c3-4cc9-95f6-8f483570e349.png",
+            "file": "tapper-v1/actions-4.png",
             "region": [
-              1262,
-              512,
-              274,
+              768,
+              0,
+              384,
               512
             ],
             "pivot": [
-              146,
-              446
+              202,
+              456
             ],
             "bounds": [
-              1,
-              213,
-              271,
-              446
+              45,
+              49,
+              306,
+              413
+            ]
+          },
+          {
+            "name": "Headbutt active",
+            "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+            "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png",
+            "file": "tapper-v1/actions-6.png",
+            "region": [
+              768,
+              512,
+              382,
+              512
+            ],
+            "pivot": [
+              162,
+              456
+            ],
+            "bounds": [
+              23,
+              44,
+              332,
+              457
+            ]
+          },
+          {
+            "name": "Held guard active",
+            "sha256": "24599d1747f98dc1f298a90d01671b6d93e547b00c984473548f802effaa3a4d",
+            "generation_file": "exec-59c7fc2c-7287-4e16-ba8e-c1f8d5770222.png",
+            "file": "tapper-v1/actions-5.png",
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              168,
+              445
+            ],
+            "bounds": [
+              14,
+              97,
+              322,
+              438
+            ]
+          },
+          {
+            "name": "Crouch active",
+            "sha256": "10068af5b9afb0edf567ec8ea00d4f1f15843a362d1fab17bf7a63d0be193579",
+            "generation_file": "exec-ed6630a6-c872-4439-a1fd-9b76a6dc0fa5.png",
+            "file": "tapper-v1/actions-8.png",
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              168,
+              455
+            ],
+            "bounds": [
+              28,
+              157,
+              339,
+              455
             ]
           }
         ]
       },
       "windup": {
-        "file": "tapper-windup.png",
-        "columns": 3,
+        "file": "tapper-v1/idle.png",
+        "columns": 4,
         "rows": 2,
-        "body_height": 425,
-        "pivot_x": 256,
-        "sha256": "d0ecf7cc810aa90e037849cc9769e38f15c968d59729d62ecfe2387925cc85da",
-        "generation_file": "exec-fa890b17-3091-4222-b480-164159c130f1.png",
+        "body_height": 400,
+        "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+        "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png",
         "frames": [
           {
+            "name": "idle 1",
+            "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+            "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png",
+            "file": "tapper-v1/idle.png",
             "region": [
               0,
-              0,
-              512,
-              512
-            ],
-            "pivot": [
-              256,
-              479
-            ],
-            "bounds": [
-              108,
-              22,
-              414,
-              479
-            ]
-          },
-          {
-            "region": [
-              512,
-              0,
-              512,
-              512
-            ],
-            "pivot": [
-              256,
-              479
-            ],
-            "bounds": [
-              101,
-              31,
-              416,
-              479
-            ]
-          },
-          {
-            "region": [
-              1024,
               0,
               512,
               512
@@ -1746,64 +1756,120 @@
               480
             ],
             "bounds": [
-              78,
-              29,
-              384,
-              480
-            ]
-          },
-          {
-            "region": [
-              0,
-              512,
-              512,
-              512
-            ],
-            "pivot": [
-              256,
-              480
-            ],
-            "bounds": [
-              80,
-              71,
+              72,
+              18,
               462,
-              480
+              488
             ]
           },
           {
+            "name": "5P jab windup",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
             "region": [
-              512,
-              512,
-              512,
+              0,
+              0,
+              384,
               512
             ],
             "pivot": [
-              256,
-              479
-            ],
-            "bounds": [
-              88,
-              22,
-              442,
-              479
-            ]
-          },
-          {
-            "region": [
-              1024,
-              512,
-              512,
-              512
-            ],
-            "pivot": [
-              256,
-              481
+              180,
+              456
             ],
             "bounds": [
               49,
-              117,
-              427,
-              481
+              30,
+              320,
+              458
+            ]
+          },
+          {
+            "name": "5K kick windup",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              156,
+              456
+            ],
+            "bounds": [
+              41,
+              31,
+              293,
+              459
+            ]
+          },
+          {
+            "name": "f.S long staff windup",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
+            "region": [
+              1143,
+              0,
+              393,
+              512
+            ],
+            "pivot": [
+              177,
+              456
+            ],
+            "bounds": [
+              1,
+              81,
+              345,
+              458
+            ]
+          },
+          {
+            "name": "5Hs staff chop windup",
+            "sha256": "5b9343bd570d7677e379bd1db24b82ce735012454bd1e305688a4cc392c3c388",
+            "generation_file": "exec-6f8f9032-9199-4573-98b9-0b3f4ba86c0b.png",
+            "file": "tapper-v1/actions-2.png",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              230,
+              465
+            ],
+            "bounds": [
+              44,
+              34,
+              360,
+              465
+            ]
+          },
+          {
+            "name": "Collar capture windup",
+            "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+            "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png",
+            "file": "tapper-v1/actions-6.png",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              206,
+              456
+            ],
+            "bounds": [
+              46,
+              39,
+              366,
+              463
             ]
           }
         ]
@@ -1932,6 +1998,1943 @@
             ]
           }
         ]
+      },
+      "signature_windup": {
+        "file": "tapper-v1/actions-1.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 400,
+        "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+        "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+        "frames": [
+          {
+            "name": "5P jab windup",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              180,
+              456
+            ],
+            "bounds": [
+              49,
+              30,
+              320,
+              458
+            ]
+          },
+          {
+            "name": "5K kick windup",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              156,
+              456
+            ],
+            "bounds": [
+              41,
+              31,
+              293,
+              459
+            ]
+          },
+          {
+            "name": "c.S close staff windup",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
+            "region": [
+              768,
+              0,
+              375,
+              512
+            ],
+            "pivot": [
+              142,
+              456
+            ],
+            "bounds": [
+              18,
+              81,
+              297,
+              457
+            ]
+          },
+          {
+            "name": "f.S long staff windup",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
+            "region": [
+              1143,
+              0,
+              393,
+              512
+            ],
+            "pivot": [
+              177,
+              456
+            ],
+            "bounds": [
+              1,
+              81,
+              345,
+              458
+            ]
+          },
+          {
+            "name": "5Hs staff chop windup",
+            "sha256": "5b9343bd570d7677e379bd1db24b82ce735012454bd1e305688a4cc392c3c388",
+            "generation_file": "exec-6f8f9032-9199-4573-98b9-0b3f4ba86c0b.png",
+            "file": "tapper-v1/actions-2.png",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              230,
+              465
+            ],
+            "bounds": [
+              44,
+              34,
+              360,
+              465
+            ]
+          },
+          {
+            "name": "2P low jab windup",
+            "sha256": "5b9343bd570d7677e379bd1db24b82ce735012454bd1e305688a4cc392c3c388",
+            "generation_file": "exec-6f8f9032-9199-4573-98b9-0b3f4ba86c0b.png",
+            "file": "tapper-v1/actions-2.png",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              196,
+              465
+            ],
+            "bounds": [
+              25,
+              58,
+              317,
+              466
+            ]
+          },
+          {
+            "name": "2K low kick windup",
+            "sha256": "5b9343bd570d7677e379bd1db24b82ce735012454bd1e305688a4cc392c3c388",
+            "generation_file": "exec-6f8f9032-9199-4573-98b9-0b3f4ba86c0b.png",
+            "file": "tapper-v1/actions-2.png",
+            "region": [
+              768,
+              0,
+              382,
+              512
+            ],
+            "pivot": [
+              182,
+              465
+            ],
+            "bounds": [
+              18,
+              73,
+              302,
+              466
+            ]
+          },
+          {
+            "name": "2S low staff windup",
+            "sha256": "5b9343bd570d7677e379bd1db24b82ce735012454bd1e305688a4cc392c3c388",
+            "generation_file": "exec-6f8f9032-9199-4573-98b9-0b3f4ba86c0b.png",
+            "file": "tapper-v1/actions-2.png",
+            "region": [
+              1150,
+              0,
+              386,
+              512
+            ],
+            "pivot": [
+              170,
+              465
+            ],
+            "bounds": [
+              1,
+              138,
+              339,
+              466
+            ]
+          },
+          {
+            "name": "2Hs launcher windup",
+            "sha256": "798fbfe551209542c4a5c9f407524bb4ef8fd24eef67d75cc1c48ae3a3d87d79",
+            "generation_file": "exec-e0ef7cff-e7d8-4611-acfb-d615bf69a461.png",
+            "file": "tapper-v1/actions-3.png",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              210,
+              480
+            ],
+            "bounds": [
+              18,
+              159,
+              376,
+              512
+            ],
+            "render_region": [
+              0,
+              0,
+              384,
+              490
+            ]
+          },
+          {
+            "name": "2D sweep windup",
+            "sha256": "798fbfe551209542c4a5c9f407524bb4ef8fd24eef67d75cc1c48ae3a3d87d79",
+            "generation_file": "exec-e0ef7cff-e7d8-4611-acfb-d615bf69a461.png",
+            "file": "tapper-v1/actions-3.png",
+            "region": [
+              384,
+              0,
+              381,
+              512
+            ],
+            "pivot": [
+              196,
+              480
+            ],
+            "bounds": [
+              23,
+              143,
+              369,
+              473
+            ]
+          },
+          {
+            "name": "6P anti-air windup",
+            "sha256": "798fbfe551209542c4a5c9f407524bb4ef8fd24eef67d75cc1c48ae3a3d87d79",
+            "generation_file": "exec-e0ef7cff-e7d8-4611-acfb-d615bf69a461.png",
+            "file": "tapper-v1/actions-3.png",
+            "region": [
+              765,
+              0,
+              374,
+              512
+            ],
+            "pivot": [
+              195,
+              480
+            ],
+            "bounds": [
+              1,
+              126,
+              343,
+              473
+            ]
+          },
+          {
+            "name": "6K advancing kick windup",
+            "sha256": "798fbfe551209542c4a5c9f407524bb4ef8fd24eef67d75cc1c48ae3a3d87d79",
+            "generation_file": "exec-e0ef7cff-e7d8-4611-acfb-d615bf69a461.png",
+            "file": "tapper-v1/actions-3.png",
+            "region": [
+              1139,
+              0,
+              397,
+              512
+            ],
+            "pivot": [
+              181,
+              480
+            ],
+            "bounds": [
+              1,
+              33,
+              318,
+              473
+            ]
+          },
+          {
+            "name": "6Hs advancing staff windup",
+            "sha256": "6f10e8c4d56ad688ec11c2bf8bd1288f2a49d50e9856f685b31f0530b1b53793",
+            "generation_file": "exec-8fe17627-d1c3-4cc9-95f6-8f483570e349.png",
+            "file": "tapper-v1/actions-4.png",
+            "region": [
+              0,
+              0,
+              402,
+              512
+            ],
+            "pivot": [
+              210,
+              456
+            ],
+            "bounds": [
+              46,
+              38,
+              402,
+              454
+            ]
+          },
+          {
+            "name": "j.P jab windup",
+            "sha256": "6f10e8c4d56ad688ec11c2bf8bd1288f2a49d50e9856f685b31f0530b1b53793",
+            "generation_file": "exec-8fe17627-d1c3-4cc9-95f6-8f483570e349.png",
+            "file": "tapper-v1/actions-4.png",
+            "region": [
+              402,
+              0,
+              366,
+              512
+            ],
+            "pivot": [
+              178,
+              456
+            ],
+            "bounds": [
+              43,
+              49,
+              323,
+              383
+            ]
+          },
+          {
+            "name": "j.K kick windup",
+            "sha256": "6f10e8c4d56ad688ec11c2bf8bd1288f2a49d50e9856f685b31f0530b1b53793",
+            "generation_file": "exec-8fe17627-d1c3-4cc9-95f6-8f483570e349.png",
+            "file": "tapper-v1/actions-4.png",
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              202,
+              456
+            ],
+            "bounds": [
+              45,
+              49,
+              306,
+              413
+            ]
+          },
+          {
+            "name": "j.S first hit windup",
+            "sha256": "6f10e8c4d56ad688ec11c2bf8bd1288f2a49d50e9856f685b31f0530b1b53793",
+            "generation_file": "exec-8fe17627-d1c3-4cc9-95f6-8f483570e349.png",
+            "file": "tapper-v1/actions-4.png",
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              178,
+              456
+            ],
+            "bounds": [
+              19,
+              69,
+              307,
+              397
+            ]
+          },
+          {
+            "name": "j.S second hit windup",
+            "sha256": "24599d1747f98dc1f298a90d01671b6d93e547b00c984473548f802effaa3a4d",
+            "generation_file": "exec-59c7fc2c-7287-4e16-ba8e-c1f8d5770222.png",
+            "file": "tapper-v1/actions-5.png",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              185,
+              445
+            ],
+            "bounds": [
+              51,
+              99,
+              374,
+              426
+            ]
+          },
+          {
+            "name": "j.Hs horizontal windup",
+            "sha256": "24599d1747f98dc1f298a90d01671b6d93e547b00c984473548f802effaa3a4d",
+            "generation_file": "exec-59c7fc2c-7287-4e16-ba8e-c1f8d5770222.png",
+            "file": "tapper-v1/actions-5.png",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              181,
+              445
+            ],
+            "bounds": [
+              52,
+              51,
+              316,
+              435
+            ]
+          },
+          {
+            "name": "j.D dive windup",
+            "sha256": "24599d1747f98dc1f298a90d01671b6d93e547b00c984473548f802effaa3a4d",
+            "generation_file": "exec-59c7fc2c-7287-4e16-ba8e-c1f8d5770222.png",
+            "file": "tapper-v1/actions-5.png",
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              172,
+              445
+            ],
+            "bounds": [
+              51,
+              56,
+              281,
+              357
+            ]
+          },
+          {
+            "name": "Held guard windup",
+            "sha256": "24599d1747f98dc1f298a90d01671b6d93e547b00c984473548f802effaa3a4d",
+            "generation_file": "exec-59c7fc2c-7287-4e16-ba8e-c1f8d5770222.png",
+            "file": "tapper-v1/actions-5.png",
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              173,
+              445
+            ],
+            "bounds": [
+              26,
+              101,
+              324,
+              445
+            ]
+          },
+          {
+            "name": "Guard attack windup",
+            "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+            "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png",
+            "file": "tapper-v1/actions-6.png",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              225,
+              456
+            ],
+            "bounds": [
+              57,
+              86,
+              359,
+              463
+            ]
+          },
+          {
+            "name": "Collar capture windup",
+            "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+            "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png",
+            "file": "tapper-v1/actions-6.png",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              206,
+              456
+            ],
+            "bounds": [
+              46,
+              39,
+              366,
+              463
+            ]
+          },
+          {
+            "name": "Headbutt windup",
+            "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+            "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png",
+            "file": "tapper-v1/actions-6.png",
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              182,
+              456
+            ],
+            "bounds": [
+              48,
+              36,
+              329,
+              462
+            ]
+          },
+          {
+            "name": "Air throw windup",
+            "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+            "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png",
+            "file": "tapper-v1/actions-6.png",
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              158,
+              456
+            ],
+            "bounds": [
+              4,
+              24,
+              338,
+              412
+            ]
+          },
+          {
+            "name": "Stance P windup",
+            "sha256": "35bc5f23b35323208b137b394b0157c17f2278b35d628aeca3396ce174fbcedd",
+            "generation_file": "exec-5265475a-a22e-41c6-8e77-43a3a3d7aca0.png",
+            "file": "tapper-v1/actions-7.png",
+            "region": [
+              0,
+              0,
+              390,
+              512
+            ],
+            "pivot": [
+              230,
+              480
+            ],
+            "bounds": [
+              48,
+              26,
+              390,
+              493
+            ]
+          },
+          {
+            "name": "Stance K low windup",
+            "sha256": "35bc5f23b35323208b137b394b0157c17f2278b35d628aeca3396ce174fbcedd",
+            "generation_file": "exec-5265475a-a22e-41c6-8e77-43a3a3d7aca0.png",
+            "file": "tapper-v1/actions-7.png",
+            "region": [
+              390,
+              0,
+              378,
+              512
+            ],
+            "pivot": [
+              205,
+              480
+            ],
+            "bounds": [
+              26,
+              26,
+              337,
+              490
+            ]
+          },
+          {
+            "name": "Stance S hook windup",
+            "sha256": "35bc5f23b35323208b137b394b0157c17f2278b35d628aeca3396ce174fbcedd",
+            "generation_file": "exec-5265475a-a22e-41c6-8e77-43a3a3d7aca0.png",
+            "file": "tapper-v1/actions-7.png",
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              25,
+              26,
+              351,
+              490
+            ]
+          },
+          {
+            "name": "Stance Hs overhead windup",
+            "sha256": "35bc5f23b35323208b137b394b0157c17f2278b35d628aeca3396ce174fbcedd",
+            "generation_file": "exec-5265475a-a22e-41c6-8e77-43a3a3d7aca0.png",
+            "file": "tapper-v1/actions-7.png",
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              168,
+              480
+            ],
+            "bounds": [
+              14,
+              11,
+              359,
+              491
+            ]
+          },
+          {
+            "name": "2D stance exit windup",
+            "sha256": "10068af5b9afb0edf567ec8ea00d4f1f15843a362d1fab17bf7a63d0be193579",
+            "generation_file": "exec-ed6630a6-c872-4439-a1fd-9b76a6dc0fa5.png",
+            "file": "tapper-v1/actions-8.png",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              205,
+              468
+            ],
+            "bounds": [
+              57,
+              45,
+              331,
+              466
+            ]
+          },
+          {
+            "name": "Running tackle windup",
+            "sha256": "10068af5b9afb0edf567ec8ea00d4f1f15843a362d1fab17bf7a63d0be193579",
+            "generation_file": "exec-ed6630a6-c872-4439-a1fd-9b76a6dc0fa5.png",
+            "file": "tapper-v1/actions-8.png",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              201,
+              468
+            ],
+            "bounds": [
+              27,
+              74,
+              341,
+              466
+            ]
+          },
+          {
+            "name": "Single punch finish windup",
+            "sha256": "10068af5b9afb0edf567ec8ea00d4f1f15843a362d1fab17bf7a63d0be193579",
+            "generation_file": "exec-ed6630a6-c872-4439-a1fd-9b76a6dc0fa5.png",
+            "file": "tapper-v1/actions-8.png",
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              187,
+              468
+            ],
+            "bounds": [
+              42,
+              135,
+              343,
+              467
+            ]
+          },
+          {
+            "name": "Crouch windup",
+            "sha256": "10068af5b9afb0edf567ec8ea00d4f1f15843a362d1fab17bf7a63d0be193579",
+            "generation_file": "exec-ed6630a6-c872-4439-a1fd-9b76a6dc0fa5.png",
+            "file": "tapper-v1/actions-8.png",
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              168,
+              468
+            ],
+            "bounds": [
+              37,
+              132,
+              337,
+              466
+            ]
+          }
+        ]
+      },
+      "signature_active": {
+        "file": "tapper-v1/actions-1.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 400,
+        "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+        "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+        "frames": [
+          {
+            "name": "5P jab active",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              180,
+              456
+            ],
+            "bounds": [
+              45,
+              33,
+              335,
+              457
+            ]
+          },
+          {
+            "name": "5K kick active",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
+            "region": [
+              384,
+              512,
+              363,
+              512
+            ],
+            "pivot": [
+              136,
+              456
+            ],
+            "bounds": [
+              6,
+              33,
+              350,
+              457
+            ]
+          },
+          {
+            "name": "c.S close staff active",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
+            "region": [
+              747,
+              512,
+              349,
+              512
+            ],
+            "pivot": [
+              128,
+              456
+            ],
+            "bounds": [
+              1,
+              30,
+              299,
+              457
+            ]
+          },
+          {
+            "name": "f.S long staff active",
+            "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+            "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png",
+            "file": "tapper-v1/actions-1.png",
+            "region": [
+              1096,
+              512,
+              440,
+              512
+            ],
+            "pivot": [
+              174,
+              456
+            ],
+            "bounds": [
+              1,
+              84,
+              399,
+              457
+            ]
+          },
+          {
+            "name": "5Hs staff chop active",
+            "sha256": "5b9343bd570d7677e379bd1db24b82ce735012454bd1e305688a4cc392c3c388",
+            "generation_file": "exec-6f8f9032-9199-4573-98b9-0b3f4ba86c0b.png",
+            "file": "tapper-v1/actions-2.png",
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              170,
+              447
+            ],
+            "bounds": [
+              42,
+              116,
+              355,
+              449
+            ]
+          },
+          {
+            "name": "2P low jab active",
+            "sha256": "5b9343bd570d7677e379bd1db24b82ce735012454bd1e305688a4cc392c3c388",
+            "generation_file": "exec-6f8f9032-9199-4573-98b9-0b3f4ba86c0b.png",
+            "file": "tapper-v1/actions-2.png",
+            "region": [
+              384,
+              512,
+              374,
+              512
+            ],
+            "pivot": [
+              151,
+              447
+            ],
+            "bounds": [
+              11,
+              61,
+              333,
+              448
+            ]
+          },
+          {
+            "name": "2K low kick active",
+            "sha256": "5b9343bd570d7677e379bd1db24b82ce735012454bd1e305688a4cc392c3c388",
+            "generation_file": "exec-6f8f9032-9199-4573-98b9-0b3f4ba86c0b.png",
+            "file": "tapper-v1/actions-2.png",
+            "region": [
+              758,
+              512,
+              376,
+              512
+            ],
+            "pivot": [
+              142,
+              447
+            ],
+            "bounds": [
+              1,
+              68,
+              322,
+              448
+            ]
+          },
+          {
+            "name": "2S low staff active",
+            "sha256": "5b9343bd570d7677e379bd1db24b82ce735012454bd1e305688a4cc392c3c388",
+            "generation_file": "exec-6f8f9032-9199-4573-98b9-0b3f4ba86c0b.png",
+            "file": "tapper-v1/actions-2.png",
+            "region": [
+              1134,
+              512,
+              402,
+              512
+            ],
+            "pivot": [
+              166,
+              447
+            ],
+            "bounds": [
+              1,
+              150,
+              372,
+              448
+            ]
+          },
+          {
+            "name": "2Hs launcher active",
+            "sha256": "798fbfe551209542c4a5c9f407524bb4ef8fd24eef67d75cc1c48ae3a3d87d79",
+            "generation_file": "exec-e0ef7cff-e7d8-4611-acfb-d615bf69a461.png",
+            "file": "tapper-v1/actions-3.png",
+            "region": [
+              0,
+              512,
+              369,
+              512
+            ],
+            "pivot": [
+              180,
+              480
+            ],
+            "bounds": [
+              29,
+              0,
+              369,
+              472
+            ]
+          },
+          {
+            "name": "2D sweep active",
+            "sha256": "798fbfe551209542c4a5c9f407524bb4ef8fd24eef67d75cc1c48ae3a3d87d79",
+            "generation_file": "exec-e0ef7cff-e7d8-4611-acfb-d615bf69a461.png",
+            "file": "tapper-v1/actions-3.png",
+            "region": [
+              369,
+              512,
+              398,
+              512
+            ],
+            "pivot": [
+              181,
+              480
+            ],
+            "bounds": [
+              0,
+              123,
+              384,
+              463
+            ]
+          },
+          {
+            "name": "6P anti-air active",
+            "sha256": "798fbfe551209542c4a5c9f407524bb4ef8fd24eef67d75cc1c48ae3a3d87d79",
+            "generation_file": "exec-e0ef7cff-e7d8-4611-acfb-d615bf69a461.png",
+            "file": "tapper-v1/actions-3.png",
+            "region": [
+              767,
+              512,
+              345,
+              512
+            ],
+            "pivot": [
+              203,
+              480
+            ],
+            "bounds": [
+              1,
+              16,
+              322,
+              471
+            ]
+          },
+          {
+            "name": "6K advancing kick active",
+            "sha256": "798fbfe551209542c4a5c9f407524bb4ef8fd24eef67d75cc1c48ae3a3d87d79",
+            "generation_file": "exec-e0ef7cff-e7d8-4611-acfb-d615bf69a461.png",
+            "file": "tapper-v1/actions-3.png",
+            "region": [
+              1112,
+              512,
+              424,
+              512
+            ],
+            "pivot": [
+              198,
+              480
+            ],
+            "bounds": [
+              1,
+              30,
+              402,
+              470
+            ]
+          },
+          {
+            "name": "6Hs advancing staff active",
+            "sha256": "6f10e8c4d56ad688ec11c2bf8bd1288f2a49d50e9856f685b31f0530b1b53793",
+            "generation_file": "exec-8fe17627-d1c3-4cc9-95f6-8f483570e349.png",
+            "file": "tapper-v1/actions-4.png",
+            "region": [
+              0,
+              512,
+              402,
+              512
+            ],
+            "pivot": [
+              200,
+              456
+            ],
+            "bounds": [
+              46,
+              102,
+              402,
+              454
+            ]
+          },
+          {
+            "name": "j.P jab active",
+            "sha256": "6f10e8c4d56ad688ec11c2bf8bd1288f2a49d50e9856f685b31f0530b1b53793",
+            "generation_file": "exec-8fe17627-d1c3-4cc9-95f6-8f483570e349.png",
+            "file": "tapper-v1/actions-4.png",
+            "region": [
+              402,
+              512,
+              366,
+              512
+            ],
+            "pivot": [
+              178,
+              456
+            ],
+            "bounds": [
+              36,
+              45,
+              343,
+              374
+            ]
+          },
+          {
+            "name": "j.K kick active",
+            "sha256": "6f10e8c4d56ad688ec11c2bf8bd1288f2a49d50e9856f685b31f0530b1b53793",
+            "generation_file": "exec-8fe17627-d1c3-4cc9-95f6-8f483570e349.png",
+            "file": "tapper-v1/actions-4.png",
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              456
+            ],
+            "bounds": [
+              22,
+              41,
+              363,
+              410
+            ]
+          },
+          {
+            "name": "j.S first hit active",
+            "sha256": "6f10e8c4d56ad688ec11c2bf8bd1288f2a49d50e9856f685b31f0530b1b53793",
+            "generation_file": "exec-8fe17627-d1c3-4cc9-95f6-8f483570e349.png",
+            "file": "tapper-v1/actions-4.png",
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              188,
+              456
+            ],
+            "bounds": [
+              39,
+              72,
+              342,
+              414
+            ]
+          },
+          {
+            "name": "j.S second hit active",
+            "sha256": "24599d1747f98dc1f298a90d01671b6d93e547b00c984473548f802effaa3a4d",
+            "generation_file": "exec-59c7fc2c-7287-4e16-ba8e-c1f8d5770222.png",
+            "file": "tapper-v1/actions-5.png",
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              175,
+              445
+            ],
+            "bounds": [
+              50,
+              47,
+              311,
+              419
+            ]
+          },
+          {
+            "name": "j.Hs horizontal active",
+            "sha256": "24599d1747f98dc1f298a90d01671b6d93e547b00c984473548f802effaa3a4d",
+            "generation_file": "exec-59c7fc2c-7287-4e16-ba8e-c1f8d5770222.png",
+            "file": "tapper-v1/actions-5.png",
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              186,
+              445
+            ],
+            "bounds": [
+              18,
+              86,
+              349,
+              388
+            ]
+          },
+          {
+            "name": "j.D dive active",
+            "sha256": "24599d1747f98dc1f298a90d01671b6d93e547b00c984473548f802effaa3a4d",
+            "generation_file": "exec-59c7fc2c-7287-4e16-ba8e-c1f8d5770222.png",
+            "file": "tapper-v1/actions-5.png",
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              445
+            ],
+            "bounds": [
+              32,
+              71,
+              346,
+              417
+            ]
+          },
+          {
+            "name": "Held guard active",
+            "sha256": "24599d1747f98dc1f298a90d01671b6d93e547b00c984473548f802effaa3a4d",
+            "generation_file": "exec-59c7fc2c-7287-4e16-ba8e-c1f8d5770222.png",
+            "file": "tapper-v1/actions-5.png",
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              168,
+              445
+            ],
+            "bounds": [
+              14,
+              97,
+              322,
+              438
+            ]
+          },
+          {
+            "name": "Guard attack active",
+            "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+            "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png",
+            "file": "tapper-v1/actions-6.png",
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              230,
+              456
+            ],
+            "bounds": [
+              38,
+              100,
+              375,
+              456
+            ]
+          },
+          {
+            "name": "Collar capture active",
+            "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+            "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png",
+            "file": "tapper-v1/actions-6.png",
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              196,
+              456
+            ],
+            "bounds": [
+              47,
+              40,
+              348,
+              456
+            ]
+          },
+          {
+            "name": "Headbutt active",
+            "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+            "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png",
+            "file": "tapper-v1/actions-6.png",
+            "region": [
+              768,
+              512,
+              382,
+              512
+            ],
+            "pivot": [
+              162,
+              456
+            ],
+            "bounds": [
+              23,
+              44,
+              332,
+              457
+            ]
+          },
+          {
+            "name": "Air throw active",
+            "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+            "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png",
+            "file": "tapper-v1/actions-6.png",
+            "region": [
+              1150,
+              512,
+              386,
+              512
+            ],
+            "pivot": [
+              150,
+              456
+            ],
+            "bounds": [
+              1,
+              34,
+              359,
+              394
+            ]
+          },
+          {
+            "name": "Stance P active",
+            "sha256": "35bc5f23b35323208b137b394b0157c17f2278b35d628aeca3396ce174fbcedd",
+            "generation_file": "exec-5265475a-a22e-41c6-8e77-43a3a3d7aca0.png",
+            "file": "tapper-v1/actions-7.png",
+            "region": [
+              0,
+              512,
+              407,
+              512
+            ],
+            "pivot": [
+              210,
+              480
+            ],
+            "bounds": [
+              29,
+              24,
+              407,
+              495
+            ]
+          },
+          {
+            "name": "Stance K low active",
+            "sha256": "35bc5f23b35323208b137b394b0157c17f2278b35d628aeca3396ce174fbcedd",
+            "generation_file": "exec-5265475a-a22e-41c6-8e77-43a3a3d7aca0.png",
+            "file": "tapper-v1/actions-7.png",
+            "region": [
+              407,
+              512,
+              371,
+              512
+            ],
+            "pivot": [
+              168,
+              480
+            ],
+            "bounds": [
+              2,
+              21,
+              371,
+              493
+            ]
+          },
+          {
+            "name": "Stance S hook active",
+            "sha256": "35bc5f23b35323208b137b394b0157c17f2278b35d628aeca3396ce174fbcedd",
+            "generation_file": "exec-5265475a-a22e-41c6-8e77-43a3a3d7aca0.png",
+            "file": "tapper-v1/actions-7.png",
+            "region": [
+              778,
+              512,
+              374,
+              512
+            ],
+            "pivot": [
+              187,
+              480
+            ],
+            "bounds": [
+              20,
+              23,
+              347,
+              495
+            ]
+          },
+          {
+            "name": "Stance Hs overhead active",
+            "sha256": "35bc5f23b35323208b137b394b0157c17f2278b35d628aeca3396ce174fbcedd",
+            "generation_file": "exec-5265475a-a22e-41c6-8e77-43a3a3d7aca0.png",
+            "file": "tapper-v1/actions-7.png",
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              178,
+              480
+            ],
+            "bounds": [
+              7,
+              20,
+              365,
+              494
+            ]
+          },
+          {
+            "name": "2D stance exit active",
+            "sha256": "10068af5b9afb0edf567ec8ea00d4f1f15843a362d1fab17bf7a63d0be193579",
+            "generation_file": "exec-ed6630a6-c872-4439-a1fd-9b76a6dc0fa5.png",
+            "file": "tapper-v1/actions-8.png",
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              205,
+              455
+            ],
+            "bounds": [
+              46,
+              40,
+              335,
+              455
+            ]
+          },
+          {
+            "name": "Running tackle active",
+            "sha256": "10068af5b9afb0edf567ec8ea00d4f1f15843a362d1fab17bf7a63d0be193579",
+            "generation_file": "exec-ed6630a6-c872-4439-a1fd-9b76a6dc0fa5.png",
+            "file": "tapper-v1/actions-8.png",
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              196,
+              455
+            ],
+            "bounds": [
+              7,
+              132,
+              373,
+              455
+            ]
+          },
+          {
+            "name": "Single punch finish active",
+            "sha256": "10068af5b9afb0edf567ec8ea00d4f1f15843a362d1fab17bf7a63d0be193579",
+            "generation_file": "exec-ed6630a6-c872-4439-a1fd-9b76a6dc0fa5.png",
+            "file": "tapper-v1/actions-8.png",
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              177,
+              455
+            ],
+            "bounds": [
+              31,
+              146,
+              346,
+              455
+            ]
+          },
+          {
+            "name": "Crouch active",
+            "sha256": "10068af5b9afb0edf567ec8ea00d4f1f15843a362d1fab17bf7a63d0be193579",
+            "generation_file": "exec-ed6630a6-c872-4439-a1fd-9b76a6dc0fa5.png",
+            "file": "tapper-v1/actions-8.png",
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              168,
+              455
+            ],
+            "bounds": [
+              28,
+              157,
+              339,
+              455
+            ]
+          }
+        ]
+      },
+      "ready": {
+        "file": "tapper-v1/idle.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 400,
+        "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+        "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png",
+        "frames": [
+          {
+            "name": "idle 1",
+            "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+            "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png",
+            "file": "tapper-v1/idle.png",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              72,
+              18,
+              462,
+              488
+            ]
+          }
+        ]
+      },
+      "stance": {
+        "file": "tapper-v1/idle.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 400,
+        "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+        "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png",
+        "frames": [
+          {
+            "name": "idle 3",
+            "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+            "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png",
+            "file": "tapper-v1/idle.png",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              69,
+              36,
+              429,
+              488
+            ]
+          },
+          {
+            "name": "idle 4",
+            "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+            "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png",
+            "file": "tapper-v1/idle.png",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              88,
+              36,
+              461,
+              489
+            ]
+          },
+          {
+            "name": "idle 5",
+            "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+            "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png",
+            "file": "tapper-v1/idle.png",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              92,
+              25,
+              452,
+              489
+            ]
+          },
+          {
+            "name": "idle 6",
+            "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+            "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png",
+            "file": "tapper-v1/idle.png",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              80,
+              12,
+              442,
+              489
+            ]
+          }
+        ]
+      },
+      "walk": {
+        "file": "tapper-v1/walk.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 400,
+        "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+        "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png",
+        "frames": [
+          {
+            "name": "walk 1",
+            "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+            "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png",
+            "file": "tapper-v1/walk.png",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              50,
+              22,
+              373,
+              474
+            ]
+          },
+          {
+            "name": "walk 2",
+            "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+            "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png",
+            "file": "tapper-v1/walk.png",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              53,
+              25,
+              367,
+              473
+            ]
+          },
+          {
+            "name": "walk 3",
+            "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+            "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png",
+            "file": "tapper-v1/walk.png",
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              54,
+              27,
+              367,
+              477
+            ]
+          },
+          {
+            "name": "walk 4",
+            "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+            "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png",
+            "file": "tapper-v1/walk.png",
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              57,
+              26,
+              368,
+              474
+            ]
+          },
+          {
+            "name": "walk 5",
+            "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+            "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png",
+            "file": "tapper-v1/walk.png",
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              52,
+              27,
+              369,
+              480
+            ]
+          },
+          {
+            "name": "walk 6",
+            "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+            "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png",
+            "file": "tapper-v1/walk.png",
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              57,
+              25,
+              371,
+              478
+            ]
+          },
+          {
+            "name": "walk 7",
+            "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+            "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png",
+            "file": "tapper-v1/walk.png",
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              62,
+              23,
+              372,
+              478
+            ]
+          },
+          {
+            "name": "walk 8",
+            "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+            "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png",
+            "file": "tapper-v1/walk.png",
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              58,
+              23,
+              371,
+              477
+            ]
+          }
+        ]
+      },
+      "run": {
+        "file": "tapper-v1/step.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 400,
+        "sha256": "b8d3bbcee89c16e5618c7b9fc149fd2d9dc0bf89a130b91c5bbf5a90a6208cad",
+        "generation_file": "exec-1383c375-6467-4b87-b3cd-aca5bf69ce84.png",
+        "frames": [
+          {
+            "name": "step 1",
+            "sha256": "b8d3bbcee89c16e5618c7b9fc149fd2d9dc0bf89a130b91c5bbf5a90a6208cad",
+            "generation_file": "exec-1383c375-6467-4b87-b3cd-aca5bf69ce84.png",
+            "file": "tapper-v1/step.png",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              438
+            ],
+            "bounds": [
+              50,
+              64,
+              340,
+              439
+            ]
+          },
+          {
+            "name": "step 2",
+            "sha256": "b8d3bbcee89c16e5618c7b9fc149fd2d9dc0bf89a130b91c5bbf5a90a6208cad",
+            "generation_file": "exec-1383c375-6467-4b87-b3cd-aca5bf69ce84.png",
+            "file": "tapper-v1/step.png",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              438
+            ],
+            "bounds": [
+              37,
+              67,
+              340,
+              439
+            ]
+          },
+          {
+            "name": "step 3",
+            "sha256": "b8d3bbcee89c16e5618c7b9fc149fd2d9dc0bf89a130b91c5bbf5a90a6208cad",
+            "generation_file": "exec-1383c375-6467-4b87-b3cd-aca5bf69ce84.png",
+            "file": "tapper-v1/step.png",
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              438
+            ],
+            "bounds": [
+              20,
+              76,
+              328,
+              439
+            ]
+          },
+          {
+            "name": "step 4",
+            "sha256": "b8d3bbcee89c16e5618c7b9fc149fd2d9dc0bf89a130b91c5bbf5a90a6208cad",
+            "generation_file": "exec-1383c375-6467-4b87-b3cd-aca5bf69ce84.png",
+            "file": "tapper-v1/step.png",
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              438
+            ],
+            "bounds": [
+              9,
+              85,
+              343,
+              398
+            ]
+          },
+          {
+            "name": "step 5",
+            "sha256": "b8d3bbcee89c16e5618c7b9fc149fd2d9dc0bf89a130b91c5bbf5a90a6208cad",
+            "generation_file": "exec-1383c375-6467-4b87-b3cd-aca5bf69ce84.png",
+            "file": "tapper-v1/step.png",
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              438
+            ],
+            "bounds": [
+              38,
+              91,
+              354,
+              437
+            ]
+          },
+          {
+            "name": "step 6",
+            "sha256": "b8d3bbcee89c16e5618c7b9fc149fd2d9dc0bf89a130b91c5bbf5a90a6208cad",
+            "generation_file": "exec-1383c375-6467-4b87-b3cd-aca5bf69ce84.png",
+            "file": "tapper-v1/step.png",
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              438
+            ],
+            "bounds": [
+              23,
+              95,
+              341,
+              439
+            ]
+          },
+          {
+            "name": "step 7",
+            "sha256": "b8d3bbcee89c16e5618c7b9fc149fd2d9dc0bf89a130b91c5bbf5a90a6208cad",
+            "generation_file": "exec-1383c375-6467-4b87-b3cd-aca5bf69ce84.png",
+            "file": "tapper-v1/step.png",
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              438
+            ],
+            "bounds": [
+              31,
+              70,
+              326,
+              439
+            ]
+          },
+          {
+            "name": "step 8",
+            "sha256": "b8d3bbcee89c16e5618c7b9fc149fd2d9dc0bf89a130b91c5bbf5a90a6208cad",
+            "generation_file": "exec-1383c375-6467-4b87-b3cd-aca5bf69ce84.png",
+            "file": "tapper-v1/step.png",
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              438
+            ],
+            "bounds": [
+              35,
+              57,
+              331,
+              439
+            ]
+          }
+        ],
+        "animation": "Non-looping eight-pose step dash, sampled by dash age."
       }
     },
     {

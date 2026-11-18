@@ -58,13 +58,13 @@ export class CombatPreview {
       for(let i=0;i<11;++i)step(entry==='forwardJump'?forward:0,'Jump approach');
     }
     const contextual=m.followFrom>=0||m.followFrom2>=0;
-    if(contextual){
+    if(contextual||m.stanceRequired===2||slot===32||slot===33||slot===34){
       // A selected rekka ending can be studied on its own without changing any
       // routes. This explicit isolated mode is identified in the visible result.
       e.api.fg_preview_begin(0,slot);
-      result.warnings.push('Isolated follow-up: starts directly after the approach. Source-route timing is not tested in this preview.');
-    }else if(m.category===4){
-      step(directionBits(slot===23?4:6,facing)|INPUT.P|INPUT.K,'Throw input');
+      result.warnings.push(m.stanceRequired===2?'Preview starts in rolling stance. Entry-route timing is tested separately.':'Isolated contextual action; input selection is not tested in this clip.');
+    }else if(m.category===4&&!m.motion){
+      step(directionBits(m.direction===4?4:6,facing)|INPUT.P|INPUT.K,'Throw input');
     }else if(simple){
       if(!m.simpleDirection){result.warnings.push('This attack has no simple-input mapping. Showing editable geometry only.');return this.geometryRecord(result,m);}
       step(directionBits(m.simpleDirection,facing)|INPUT.simple|(INPUT.P<<m.simpleButton),'Simple input');
@@ -74,7 +74,7 @@ export class CombatPreview {
     }
     let state=e.state();
     for(let i=0;i<4800;++i){
-      state=step(0,followed?'Drive follow-up':result.executed?'Attack & reaction':'Waiting for input');
+      state=step(m.actionType===1&&i<40?(INPUT.P<<m.holdButton):0,followed?'Drive follow-up':result.executed?'Attack & reaction':'Waiting for input');
       if(state.winner!==-1)break;
       const free=state.players.every(p=>p.move<0&&p.stun===0&&p.reaction===0&&p.landingTime===0&&p.y===0)&&state.hitstop===0&&!e.boxes(0,4).length&&!e.boxes(1,4).length;
       quiet=free?quiet+1:0;
@@ -105,6 +105,8 @@ export class CombatPreview {
     const forward=directionBits(6,facing),back=directionBits(4,facing),profile=data.characters[character].movement;
     if(action==='airForward'&&!profile.airDashEnabled||action==='airBack'&&!profile.airBackdashEnabled)result.warnings.push('This air dash direction is disabled for this character. Enable it to test the dash.');
     if(action==='airJump'&&!profile.airJumps)result.warnings.push('Additional air jumps are set to zero.');
+    if(action==='rolling'&&character===3){e.api.fg_preview_begin(0,35);for(let n=0;n<60&&e.state().players[0].move>=0;++n)e.step(0,0);}
+    if(action==='rolling'&&character!==3)result.warnings.push('Rolling stance is Tapper’s character mechanic.');
     let lastContact=0;
     for(let tick=0;tick<=150;++tick){
       let input=0,other=0;

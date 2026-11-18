@@ -1,3 +1,4 @@
+import {upgradeStances} from '../stance-data.mjs';
 import {upgradeMechanics} from '../mechanics-data.mjs';
 import {upgradeMovement} from '../movement-data.mjs';
 import {FIELDS, MOVE_IDS, CHARACTERS} from '../engine.mjs';
@@ -13,9 +14,9 @@ function integer(value, limit, name) {
   if(!Number.isInteger(value)||value<limit.min||value>limit.max) throw new Error(`${name}: use a whole number from ${limit.min} to ${limit.max}.`);
 }
 export function validate(data, pack) {
-  data=upgradeMechanics(upgradeHurtMasks(upgradeMovement(upgradeHitboxes(data),pack.defaults)),pack.defaults);
+  data=upgradeStances(upgradeMechanics(upgradeHurtMasks(upgradeMovement(upgradeHitboxes(data),pack.defaults)),pack.defaults),pack.defaults);
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15/16 workshop exports. Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15/16/17 workshop exports. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);
@@ -62,6 +63,7 @@ export function phaseAt(m,frame) {return frame<m.startup?'windup':frame<m.startu
 export function phaseStart(m,phase){return phase==='windup'?1:phase==='active'?m.startup:m.startup+m.active;}
 export function poseAt(m,frame,hasReady=false){
   const phase=phaseAt(m,frame);
+  if(m.finishArtPose&&m.finishArtFrame&&phase==='active'&&frame>=m.startup+m.finishArtFrame-1)return {phase:'signature_active',index:m.finishArtPose-1};
   if(m.artPose&&(phase!=='recovery'||m.hitAngle&&frame<m.startup+m.active+8))return {phase:frame<m.startup?'signature_windup':'signature_active',index:m.artPose-1};
   if(phase==='recovery'&&hasReady&&!m.air&&![1,2,3].includes(m.direction))return {phase:'ready',index:0};
   return phase==='recovery'?{phase:'active',index:m.air?8:[1,2,3].includes(m.direction)?11:0}:{phase,index:1+m.button};
@@ -69,8 +71,8 @@ export function poseAt(m,frame,hasReady=false){
 export function defaultHurtboxes(pack,c,m,frame){const pose=poseAt(m,frame,!!pack.hurtPoses[c].ready);return clone(pack.hurtPoses[c][pose.phase][pose.index]);}
 export function effectiveHurtboxes(pack,c,m,frame){return m.hurtboxes[phaseAt(m,frame)]||defaultHurtboxes(pack,c,m,frame);}
 export function inputName(m) {
-  const button=m.category===4?'P+K':['P','K','S','Hs','D'][m.button];
-  return `${m.air?'j.':''}${m.motion||m.direction}${button}`;
+  const button=m.category===4&&!m.motion?'P+K':['P','K','S','Hs','D'][m.button];
+  return `${m.stanceRequired===2?'st.':''}${m.air?'j.':''}${m.motion||m.direction}${button}`;
 }
 export function geometryWarnings(m) {
   const notes=[];
@@ -140,7 +142,7 @@ export class Workshop {
   resetMove(c,m){const before=this.snapshot();this.data.characters[c].moves[m]=clone(this.pack.defaults.characters[c].moves[m]);this.remember(before);}
   undo(){if(!this.undoStack.length)return false;const item=this.undoStack.pop();this.redoStack.push({data:this.snapshot()});this.data=item.data;return true;}
   redo(){if(!this.redoStack.length)return false;const item=this.redoStack.pop();this.undoStack.push({data:this.snapshot(),group:'',time:0});this.data=item.data;return true;}
-  changed(c,m){return FIELDS.some(k=>!k.startsWith('smear')&&this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||Object.keys(this.move(c,m).hurtboxes).length>0||this.move(c,m).hitboxTimeline.multiHit||this.move(c,m).hitboxTimeline.keys.length>0||!!this.note(c,m).references?.length||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
+  changed(c,m){return FIELDS.some(k=>!k.startsWith('smear')&&this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||JSON.stringify(this.move(c,m).hurtboxes)!==JSON.stringify(this.pack.defaults.characters[c].moves[m].hurtboxes)||JSON.stringify(this.move(c,m).hitboxTimeline)!==JSON.stringify(this.pack.defaults.characters[c].moves[m].hitboxTimeline)||!!this.note(c,m).references?.length||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
   changes(){return this.data.characters.flatMap((c,i)=>c.moves.map((_,m)=>({c:i,m}))).filter(p=>this.changed(p.c,p.m));}
   export(){return JSON.stringify(validate(this.data,this.pack),null,2);}
   brief(){

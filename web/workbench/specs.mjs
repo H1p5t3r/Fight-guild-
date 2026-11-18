@@ -1,3 +1,4 @@
+import STANCE_FIELDS from '../../godot/data/stance_fields.json' with {type:'json'};
 import {MECHANIC_SPECS} from './mechanics-specs.mjs';
 export const GROUPS = [
   {id:'timing', title:'Frame data', intro:'Tune the pace and reward. One frame is 1/60 of a second.', fields:['startup','active','recovery','damage','hitstun','blockstun','hitstop','chipDamage']},
@@ -10,7 +11,9 @@ export const GROUPS = [
 GROUPS.push({id:'projectiles',title:'Projectile',intro:'Moving shots travel independently; stationary objects stay where they spawn. They use this move’s damage, stun, launch and block rules. No projectile is created until enabled.',fields:["projectileKind", "projectileSpawnFrame", "projectileSpeedX", "projectileSpeedY", "projectileGravity", "projectileLife", "projectileOffsetX", "projectileOffsetY", "projectileWidth", "projectileHeight", "projectileHits", "projectileRehit", "projectileDurability", "projectilePersist", "projectileMelee"]});
 GROUPS.push({id:'vulnerability',title:'Vulnerable body regions',intro:'Choose which regions can receive hits in each attack phase. Disabled regions retain their coordinates.',fields:['hurtMaskWindup','hurtMaskActive','hurtMaskRecovery']});
 GROUPS.push({id:'mechanics',title:'Drive mechanics',intro:'Tether and bleed attach on hit. Reuse the applying input for its conditional follow-up. Getting hit clears your statuses. All values below are provisional tuning.',fields:MECHANIC_SPECS.map(row=>row[0])});
+GROUPS.push({id:'stance',title:'Stance & move behavior',intro:'Contextual moves, timed guard and armor, bounces, dives and grab sequences. Tapper stance timings are provisional.',fields:STANCE_FIELDS.map(f=>f.key)});
 export const TABS = [
+  {id:'stance',label:'Stance & behavior',groups:['stance']},
   {id:'mechanics',label:'Drive mechanics',groups:['mechanics']},
   {id:'movement',label:'Movement & defense',groups:[]},
   {id:'projectiles',label:'Projectiles',groups:['projectiles']},
@@ -74,10 +77,13 @@ for(const [key,label,,, ,hint] of MECHANIC_SPECS){labels[key]=label;hints[key]=h
 for(const key of ['tetherSpeed','variantSpeed','variantLift'])speed.add(key);pixel.add('variantRange');percent.add('bleedBlockPercent');
 options.mechanic=[[0,'None'],[1,'Tether → pull'],[2,'Bleed → cash-out grab']];
 options.variantKnockdown=options.knockdown;
+for(const f of STANCE_FIELDS){labels[f.key]=f.label;hints[f.key]=f.help;if(f.scale===100)(/Speed|Travel|Bounce/.test(f.key)?speed:pixel).add(f.key);}
+Object.assign(options,{stanceRequired:[[0,'Any'],[1,'Normal stance'],[2,'Rolling stance']],stanceChange:[[0,'None'],[1,'Enter on hit'],[2,'Exit on start']],actionType:[[0,'Strike'],[1,'Held guard'],[2,'Stance exit'],[3,'Stall and dive'],[4,'Grab sequence']],airCounterKnockdown:options.knockdown,holdButton:options.button});
+masks.hurtWindowMask=['Legs','Torso & arms','Head','Body extension'];
 export const SPECS = Object.fromEntries(Object.entries(labels).map(([key,label])=>[key,{
   key,label,scale:pixel.has(key)||speed.has(key)?100:1,
   unit:key==='projectileGravity'?'px/f²':['variantStartup','variantActive','variantRecovery','bleedDuration','projectileLife','projectileRehit','projectileSpawnFrame','smearFrame1','smearFrame2','smearFrame3','smearFrame4'].includes(key)?'f':pixel.has(key)?'px':speed.has(key)?'px/f':percent.has(key)?'%': /startup|active|recovery|stun|stop|Frames|Start|End/i.test(key)?'f':'',
-  type:flags.has(key)?'flag':masks[key]?'mask':options[key]||['followFrom','followFrom2','artPose'].includes(key)?'select':'number',
+  type:flags.has(key)?'flag':masks[key]?'mask':options[key]||['followFrom','followFrom2','artPose','finishArtPose','holdFollow','guardFollow','proximityMove'].includes(key)?'select':'number',
   options:options[key],mask:masks[key],unified:key==='normalRoutes'||key==='commandRoutes',hint:hints[key]||''
 }]));
 export const ART_FIELDS = [

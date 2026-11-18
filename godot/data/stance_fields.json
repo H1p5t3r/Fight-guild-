@@ -1,0 +1,236 @@
+[
+  {
+    "key": "stanceRequired",
+    "default": 0,
+    "min": 0,
+    "max": 2,
+    "label": "Required stance",
+    "help": "Any, normal stance only, or rolling stance only.",
+    "scale": 1
+  },
+  {
+    "key": "stanceChange",
+    "default": 0,
+    "min": 0,
+    "max": 2,
+    "label": "Stance transition",
+    "help": "Enter rolling stance on successful hit, or exit when the action starts.",
+    "scale": 1
+  },
+  {
+    "key": "actionType",
+    "default": 0,
+    "min": 0,
+    "max": 4,
+    "label": "Action behavior",
+    "help": "Strike, held guard, stance exit, stall/dive, or timed grab sequence.",
+    "scale": 1
+  },
+  {
+    "key": "holdFollow",
+    "default": -1,
+    "min": -1,
+    "max": 42,
+    "label": "Held-input destination",
+    "help": "Move slot entered while holding the source attack button; -1 disables.",
+    "scale": 1
+  },
+  {
+    "key": "holdFrame",
+    "default": 0,
+    "min": 0,
+    "max": 420,
+    "label": "Hold transition frame",
+    "help": "First move frame on which the held-input transition can start.",
+    "scale": 1
+  },
+  {
+    "key": "holdButton",
+    "default": 2,
+    "min": 0,
+    "max": 4,
+    "label": "Guard hold button",
+    "help": "Button to keep held when previewing this guard action.",
+    "scale": 1
+  },
+  {
+    "key": "guardFollow",
+    "default": -1,
+    "min": -1,
+    "max": 42,
+    "label": "Guard attack destination",
+    "help": "Opposite S/Hs input starts this move from held guard; -1 disables.",
+    "scale": 1
+  },
+  {
+    "key": "proximityMove",
+    "default": -1,
+    "min": -1,
+    "max": 42,
+    "label": "Close-distance move",
+    "help": "Alternate move selected when starting this input within the proximity range.",
+    "scale": 1
+  },
+  {
+    "key": "proximityRange",
+    "default": 8000,
+    "min": 0,
+    "max": 20000,
+    "label": "Close-distance range",
+    "help": "Root-to-root distance for the close version; checked at move start.",
+    "scale": 100
+  },
+  {
+    "key": "startupTravel",
+    "default": 0,
+    "min": -2000,
+    "max": 2000,
+    "label": "Startup travel",
+    "help": "Forward movement per startup tick; retains authored run/dash carry.",
+    "scale": 100
+  },
+  {
+    "key": "diveSpeedX",
+    "default": 0,
+    "min": -2000,
+    "max": 2000,
+    "label": "Dive horizontal speed",
+    "help": "Forward speed during an active stall/dive attack.",
+    "scale": 100
+  },
+  {
+    "key": "diveSpeedY",
+    "default": -1100,
+    "min": -3000,
+    "max": 0,
+    "label": "Dive vertical speed",
+    "help": "Downward speed during the active dive. Startup holds air velocity.",
+    "scale": 100
+  },
+  {
+    "key": "groundBounce",
+    "default": 0,
+    "min": 0,
+    "max": 3000,
+    "label": "Air-hit ground bounce",
+    "help": "One bounce upward at ground contact, only when this move hits an airborne target.",
+    "scale": 100
+  },
+  {
+    "key": "wallBounce",
+    "default": 0,
+    "min": 0,
+    "max": 3000,
+    "label": "Air-hit wall bounce",
+    "help": "One rebound away from the wall; velocity still damages wall health and depleted walls splat first.",
+    "scale": 100
+  },
+  {
+    "key": "crumpleFrames",
+    "default": 0,
+    "min": 0,
+    "max": 180,
+    "label": "Grounded floating crumple",
+    "help": "Grounded hit enters a vulnerable floating crumple for this many ticks.",
+    "scale": 1
+  },
+  {
+    "key": "airCounterKnockdown",
+    "default": 0,
+    "min": 0,
+    "max": 2,
+    "label": "Air counter-hit knockdown",
+    "help": "Override knockdown on an airborne counter hit; 0 keeps the ordinary result.",
+    "scale": 1
+  },
+  {
+    "key": "hurtWindowStart",
+    "default": 0,
+    "min": 0,
+    "max": 420,
+    "label": "Hurtbox window begins",
+    "help": "Move-frame start of a finer body-region mask; 0 disables the window.",
+    "scale": 1
+  },
+  {
+    "key": "hurtWindowEnd",
+    "default": 0,
+    "min": 0,
+    "max": 420,
+    "label": "Hurtbox window ends",
+    "help": "Inclusive final move frame for the temporary body mask.",
+    "scale": 1
+  },
+  {
+    "key": "hurtWindowMask",
+    "default": 15,
+    "min": 0,
+    "max": 15,
+    "label": "Window body mask",
+    "help": "Bit mask: legs 1, torso/arms 2, head 4, extension 8. Weapons never add hurtboxes.",
+    "scale": 1
+  },
+  {
+    "key": "semiAirStart",
+    "default": 0,
+    "min": 0,
+    "max": 420,
+    "label": "Low-crush window begins",
+    "help": "During this window low strikes and ground throws miss, without changing input selection.",
+    "scale": 1
+  },
+  {
+    "key": "semiAirEnd",
+    "default": 0,
+    "min": 0,
+    "max": 420,
+    "label": "Low-crush window ends",
+    "help": "Inclusive final move frame of low/ground-throw avoidance.",
+    "scale": 1
+  },
+  {
+    "key": "armorFrames",
+    "default": 0,
+    "min": 0,
+    "max": 120,
+    "label": "Mid/high armor duration",
+    "help": "First move frames protected by hit-limited armor. Lows and throws beat it.",
+    "scale": 1
+  },
+  {
+    "key": "armorHits",
+    "default": 0,
+    "min": 0,
+    "max": 8,
+    "label": "Armor hits",
+    "help": "Hits absorbed within the armor window; damage and hitstop still apply.",
+    "scale": 1
+  },
+  {
+    "key": "grabFrames",
+    "default": 0,
+    "min": 0,
+    "max": 120,
+    "label": "Grab sequence duration",
+    "help": "Ticks from capture to the single finishing hit. Target is held until the finish.",
+    "scale": 1
+  },
+  {
+    "key": "finishArtPose",
+    "default": 0,
+    "min": 0,
+    "max": 32,
+    "label": "Finisher artwork pose",
+    "help": "Optional second pose during the grab or active timeline; 0 uses the initial pose.",
+    "scale": 1
+  },
+  {
+    "key": "finishArtFrame",
+    "default": 0,
+    "min": 0,
+    "max": 420,
+    "label": "Finisher pose frame",
+    "help": "Active frame or grab-sequence tick at which the finisher drawing appears.",
+    "scale": 1
+  }
+]

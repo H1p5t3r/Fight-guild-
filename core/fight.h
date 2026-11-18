@@ -3,11 +3,12 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 17, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 32, FIELD_COUNT = 112;
+constexpr int VERSION = 18, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 43, FIELD_COUNT = 138;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
               STAB_GROUND=30, STAB_AIR=31;
+constexpr int CLOSE_SLASH=32, HELD_GUARD=33, GUARD_ATTACK=34, STANCE_P=35, STANCE_K=36, STANCE_S=37, STANCE_HS=38, STANCE_EXIT=39, STANCE_THROW=40, AIR_BACK_THROW=41, AIR_FORWARD_THROW=42;
 constexpr int MIN_STARTUP = 5;
 constexpr int MAX_HURTBOXES = 4;
 enum HurtRegion { LegsHurt, TorsoArmsHurt, HeadHurt, ExtensionHurt };
@@ -30,9 +31,9 @@ enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery
              NormalCancelStart, NormalCancelEnd, SpecialCancelStart, SpecialCancelEnd,
              JumpCancelStart, JumpCancelEnd, FollowCancelStart, FollowCancelEnd, CancelOn,
              StarterProration, ComboScaling, MinimumDamage, LandingRecovery, AttackLevel,
-             CounterTier, CounterVulnerable, CounterFreezeFrames, CounterSlowFrames, ProjectileKind, ProjectileSpawnFrame, ProjectileSpeedX, ProjectileSpeedY, ProjectileGravity, ProjectileLife, ProjectileOffsetX, ProjectileOffsetY, ProjectileWidth, ProjectileHeight, ProjectileHits, ProjectileRehit, ProjectileDurability, ProjectilePersist, ProjectileMelee, SmearMode, SmearPart, SmearStretch, SmearFrame1, SmearFrame2, SmearFrame3, SmearFrame4, HurtMaskWindup, HurtMaskActive, HurtMaskRecovery, Mechanic, TetherSpeed, TetherFrames, BleedInitial, BleedTickDamage, BleedTickFrames, BleedDuration, BleedBlockPercent, BleedCap, VariantStartup, VariantActive, VariantRecovery, VariantDamage, VariantRange, VariantSpeed, VariantLift, VariantHitstun, VariantKnockdown };
+             CounterTier, CounterVulnerable, CounterFreezeFrames, CounterSlowFrames, ProjectileKind, ProjectileSpawnFrame, ProjectileSpeedX, ProjectileSpeedY, ProjectileGravity, ProjectileLife, ProjectileOffsetX, ProjectileOffsetY, ProjectileWidth, ProjectileHeight, ProjectileHits, ProjectileRehit, ProjectileDurability, ProjectilePersist, ProjectileMelee, SmearMode, SmearPart, SmearStretch, SmearFrame1, SmearFrame2, SmearFrame3, SmearFrame4, HurtMaskWindup, HurtMaskActive, HurtMaskRecovery, Mechanic, TetherSpeed, TetherFrames, BleedInitial, BleedTickDamage, BleedTickFrames, BleedDuration, BleedBlockPercent, BleedCap, VariantStartup, VariantActive, VariantRecovery, VariantDamage, VariantRange, VariantSpeed, VariantLift, VariantHitstun, VariantKnockdown, StanceRequired, StanceChange, ActionType, HoldFollow, HoldFrame, HoldButton, GuardFollow, ProximityMove, ProximityRange, StartupTravel, DiveSpeedX, DiveSpeedY, GroundBounce, WallBounce, CrumpleFrames, AirCounterKnockdown, HurtWindowStart, HurtWindowEnd, HurtWindowMask, SemiAirStart, SemiAirEnd, ArmorFrames, ArmorHits, GrabFrames, FinishArtPose, FinishArtFrame };
 enum KnockdownKind { NoKnockdown, SoftKnockdown, HardKnockdown };
-enum Reaction { Free, AirReel, Downed, Waking, WallSplat, Reeled };
+enum Reaction { Free, AirReel, Downed, Waking, WallSplat, Reeled, Captured, Crumpled };
 enum MobilityField { ForwardStyle, WalkSpeed, RunSpeed, RunAcceleration, StepSpeed, StepFrames,
                      BackSpeed, BackFrames, AttackFriction, BackStyle, BackWalkSpeed, BackRunSpeed, JumpSpeed, JumpForwardSpeed, JumpBackSpeed, Gravity, AirJumps, MovePrejumpFrames, AirDashEnabled, AirBackdashEnabled, AirDashStyle, AirBackdashStyle, AirDashSpeed, AirBackdashSpeed, AirDashFrames, AirBackdashFrames, AirDashUses, HoverHeight, HoverRiseSpeed, TeleportDistance, BackTeleportDistance, TeleportStartup, FdEnabled, FdPushPercent, FdDrain, FdAirDrain, FdBlockCost, MoveSmearMode, MoveSmearPart, MoveSmearStretch, MOBILITY_FIELDS };
 enum ForwardMovement { ForwardRun, StepDash, HoverDash, Teleport };
@@ -89,6 +90,7 @@ struct Fighter {
     int dash_kind, dash_age, dash_air, air_dash_used, air_jump_used, teleported;
     int attack_serial, projectile_spawned, contact_count;
     int variant, tether_source, tether_used, bleed_source, bleed_time, bleed_clock, grey_life;
+    int stance, guard_button, armor_left, bounce_ground, bounce_wall, crumple_time, grab_time, grab_owner, idle_time;
     Sample history[HISTORY];
 };
 constexpr int MAX_PROJECTILES=16;
@@ -154,6 +156,11 @@ public:
     static unsigned collision_hash();
 private:
     Move effective_move(const Fighter& fighter) const;
+    bool faultless_requested(const Fighter& fighter) const;
+    bool stance_allowed(const Fighter& fighter, const Move& move) const;
+    bool semi_airborne(const Fighter& fighter) const;
+    bool guard_point(const Fighter& fighter, const Move& incoming) const;
+    void tick_grabs(const bool advances[2]);
     void tick_statuses();
     void trigger_tether(Fighter& fighter);
     void clear_owned_status(int owner);

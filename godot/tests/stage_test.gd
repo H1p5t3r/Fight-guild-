@@ -9,10 +9,11 @@ func _initialize() -> void: call_deferred("run")
 func run() -> void:
 	var model := CombatModel.new()
 	var defaults := model.data()
-	check(defaults.schema == 17 and defaults.recoveryRules.wallBreakFrames == 150, "New wall timing/schema missing")
+	check(defaults.schema == 18 and defaults.recoveryRules.wallBreakFrames == 150, "New wall timing/schema missing")
 	var legacy := defaults.duplicate(true)
 	legacy.schema = 11
 	legacy.coreVersion = 11
+	for character in legacy.characters: character.moves.resize(32)
 	legacy.recoveryRules.wallBreakFrames = 91
 	legacy.characters[5].moves[0].damage = 133
 	check(model.load_data(legacy).is_empty() and model.data().recoveryRules.wallBreakFrames == 91 and model.move(5, 0).damage == 133, "Stage migration changed authored tuning")

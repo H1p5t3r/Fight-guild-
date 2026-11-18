@@ -53,6 +53,7 @@ func _initialize() -> void:
 	legacy.coreVersion = 12
 	legacy.characters[5].moves[0].damage = 77
 	for character in legacy.characters:
+		character.moves.resize(32)
 		for move in character.moves: move.erase("hurtboxes")
 	check(model.load_data(legacy).is_empty() and model.move(5, 0).damage == 77 and model.move(5, 0).hurtboxes.is_empty(), "Version-12 migration changed tuning or body defaults")
 	print("Godot attack hurtboxes, saves and rollback: %d failures" % failures)

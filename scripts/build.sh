@@ -14,6 +14,7 @@ python tests/combat_data_test.py
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/counter_test.cpp -o build/counter-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/wall_test.cpp -o build/wall-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/mechanics_test.cpp -o build/mechanics-tests
+"${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/tapper_test.cpp -o build/tapper-tests
 if command -v zig >/dev/null 2>&1; then
   fight_zig="$(command -v zig)"
 else
@@ -27,6 +28,6 @@ export ZIG_GLOBAL_CACHE_DIR="${FIGHT_TOOLS:-/workspace/.fight-guild-tools}/zig-c
 export ZIG_LOCAL_CACHE_DIR="$PWD/build/zig-cache"
 "$fight_zig" c++ -target wasm32-freestanding -std=c++17 -O2 -nostdlib \
   -fno-exceptions -fno-rtti -Wl,--no-entry -rdynamic \
-  -Wl,-z,stack-size=65536 -Wl,--initial-memory=2097152 -Wl,--max-memory=2097152 \
+  -Wl,-z,stack-size=65536 -Wl,--initial-memory=4194304 -Wl,--max-memory=4194304 \
   core/fight.cpp -o web/generated/fight.wasm
 echo 'Built native tests and web/generated/fight.wasm'

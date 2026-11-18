@@ -9,11 +9,11 @@
   "scripts": {
     "build": "bash scripts/build.sh && node scripts/bundle.mjs",
     "start": "node scripts/server.mjs",
-    "test": "bash scripts/build.sh && ./build/core-tests && ./build/mechanics-tests && ./build/movement-projectile-tests && ./build/collision-tests && ./build/hit-timeline-tests && ./build/recovery-tests && ./build/signature-tests && ./build/tuning-tests && ./build/counter-tests && ./build/wall-tests && node --test tests/*.test.mjs",
+    "test": "bash scripts/build.sh && ./build/tapper-tests && ./build/core-tests && ./build/mechanics-tests && ./build/movement-projectile-tests && ./build/collision-tests && ./build/hit-timeline-tests && ./build/recovery-tests && ./build/signature-tests && ./build/tuning-tests && ./build/counter-tests && ./build/wall-tests && node --test tests/*.test.mjs",
     "test:browser": "node tests/browser-smoke.mjs",
     "build:workshop": "bash scripts/build.sh && node scripts/build-workbench.mjs",
     "start:workshop": "node scripts/serve-workbench.mjs",
-    "test:workshop": "node --test tests/workbench-check.mjs tests/workbench-preview.mjs tests/workbench-measurements.mjs tests/workbench-movement.mjs tests/workbench-mechanics.mjs && node tests/workbench-browser.mjs && node tests/workbench-preview-browser.mjs && node tests/workbench-movement-browser.mjs && node tests/workbench-hurt-toggles-browser.mjs && node tests/workbench-mechanics-browser.mjs"
+    "test:workshop": "node --test tests/workbench-check.mjs tests/workbench-preview.mjs tests/workbench-measurements.mjs tests/workbench-movement.mjs tests/workbench-mechanics.mjs tests/workbench-tapper.mjs && node tests/workbench-browser.mjs && node tests/workbench-preview-browser.mjs && node tests/workbench-movement-browser.mjs && node tests/workbench-hurt-toggles-browser.mjs && node tests/workbench-mechanics-browser.mjs && node tests/workbench-tapper-browser.mjs"
   },
   "dependencies": {
     "ws": "8.18.3"

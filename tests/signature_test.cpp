@@ -42,7 +42,7 @@ static void routes() {
     CHECK(s.can_cancel(5,15,REKKA_LOW,0)&&s.can_cancel(5,REKKA_MID,REKKA_LOW,0));
     CHECK(!s.can_cancel(5,0,REKKA_MID,1)&&!s.can_cancel(5,0,REKKA_LOW,1));
     CHECK(!s.can_cancel(4,HOOK_GROUND,STAB_GROUND,0)&&s.can_cancel(4,HOOK_GROUND,STAB_GROUND,1));
-    for(int c=0;c<6;++c) for(int m=25;m<MOVE_COUNT;++m)
+    for(int c=0;c<6;++c) for(int m=25;m<32;++m)
         CHECK(bool(s.moves[c][m].v[Enabled])==(c==5?m<=27:c==4?m>=28:false));
 }
 static void mobility() {

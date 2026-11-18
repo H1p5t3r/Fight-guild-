@@ -1,9 +1,11 @@
 {
-  "label": "Batch 3 · 17 November 2026",
-  "status": "work in progress",
-  "file": "2026-11-17-batch-03/FightGuild-moves-2026-11-17 _2_.json",
-  "sha256": "21ff7634070015b39289c703ea5bf178300cd40ab6644d13199609a3d1ad6d7c",
-  "baseCommit": "f7449bb",
-  "previousFile": "2026-11-17-batch-02/FightGuild-moves-2026-11-17 _1_.json",
-  "note": "Original schema-17 upload preserved byte-for-byte; all move tuning and art briefs retained. Tapper implementation is based on this batch."
+  "label": "Tapper kit + Batch3 ·18 November2026",
+  "status": "playable provisional tuning",
+  "file": "2026-11-18-tapper/FightGuild-Tapper.json",
+  "sha256": "c8dadb797da5022646dde000e101e11bb37504362dd3f32d941165fa46d769db",
+  "sourceFile": "2026-11-17-batch-03/FightGuild-moves-2026-11-17 _2_.json",
+  "sourceSha256": "21ff7634070015b39289c703ea5bf178300cd40ab6644d13199609a3d1ad6d7c",
+  "baseCommit": "1627395",
+  "previousFile": "2026-11-17-batch-03/FightGuild-moves-2026-11-17 _2_.json",
+  "note": "Preserves all uploaded non-Tapper move values and art notes. Adds editable Tapper Leo normal baseline, custom rolling stance and confirmed236D tackle. Local browser drafts remain untouched."
 }

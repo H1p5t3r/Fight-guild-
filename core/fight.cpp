@@ -17,7 +17,7 @@ void Simulation::defaults() {
     rules=Rules{};
     for(int c=0;c<CHARACTER_COUNT;++c) for(int i=0;i<MOVE_COUNT;++i) {
         moves[c][i]=STARTER_MOVES[c][i];
-        move_hit[c][i]=MoveHit{};
+        move_hit[c][i]=STARTER_HITS[c][i];
         for(int p=0;p<HURT_PHASES;++p) move_hurt[c][i][p]=MoveHurt{};
     }
     for(int c=0;c<CHARACTER_COUNT;++c) mobility[c]=STARTER_MOBILITY[c];
@@ -37,7 +37,7 @@ void Simulation::reset(int c0,int c1,int s0,int s1) {
         f.facing=p?-1:1;
         f.health=1000;
         f.move=f.last_move=-1;
-        f.pull_owner=-1;
+        f.pull_owner=f.grab_owner=-1;
         f.combo_proration=f.combo_scale=f.damage_scale=100; f.input_age=-1;
         for(auto& h:f.history) { h.frame=-1000; h.direction=5; }
     }
@@ -68,12 +68,12 @@ static int direction(int raw,int facing) {
     int y=((raw&Up)!=0)-((raw&Down)!=0);
     return 5+x*facing+y*3; // SOCD: opposite directions neutralize.
 }
-static bool faultless_requested(const Fighter& f) {
+bool Simulation::faultless_requested(const Fighter& f) const {
     int horizontal=((f.raw&Right)!=0)-((f.raw&Left)!=0);
     if(horizontal*f.facing!=-1) return false;
     int buttons=f.raw&(P|K|S|Hs);
     // Grounded 4P+K belongs to back throw. FD remains on the macro or other pairs.
-    if(f.y==0&&direction(f.raw,f.facing)==4&&buttons==(P|K)&&!(f.raw&Faultless)) return false;
+    if((f.y==0||moves[f.character][AIR_BACK_THROW].v[Enabled])&&direction(f.raw,f.facing)==4&&buttons==(P|K)&&!(f.raw&Faultless)) return false;
     return (f.raw&Faultless)||(buttons&&(buttons&(buttons-1)));
 }
 void Simulation::gain_momentum(Fighter& f,int amount) {
@@ -83,7 +83,7 @@ void Simulation::gain_momentum(Fighter& f,int amount) {
 }
 void Simulation::update_faultless(Fighter& f) {
     bool request=faultless_requested(f);
-    f.faultless=request&&mobility[f.character].v[FdEnabled]&&f.momentum>0&&f.move<0&&f.reaction==Free&&!f.landing_time&&!f.prejump_time&&(f.stun==0||f.guarding);
+    f.faultless=request&&!f.stance&&mobility[f.character].v[FdEnabled]&&f.momentum>0&&f.move<0&&f.reaction==Free&&!f.landing_time&&!f.prejump_time&&(f.stun==0||f.guarding);
     // Reserve the chord even with an empty meter: it falls back to ordinary guard.
     // It cannot become a buffered attack, dash or jump when the shield is released.
     if(request) f.history[world.frame%HISTORY].consumed|=P|K|S|Hs|D|Dash|Up;
@@ -100,6 +100,20 @@ static const Sample* sample(const Fighter& f,int frame) {
     return h.frame==frame?&h:nullptr;
 }
 
+bool Simulation::stance_allowed(const Fighter& f,const Move& m) const {
+    return !m.v[StanceRequired]||(m.v[StanceRequired]==1?!f.stance:f.stance!=0);
+}
+bool Simulation::semi_airborne(const Fighter& f) const {
+    if(f.move<0) return false;
+    const auto& m=moves[f.character][f.move]; int tick=f.age+1;
+    return m.v[SemiAirStart]>0&&tick>=m.v[SemiAirStart]&&tick<=m.v[SemiAirEnd];
+}
+bool Simulation::guard_point(const Fighter& f,const Move& incoming) const {
+    if(f.stance||f.move<0||f.stun||f.reaction!=Free) return false;
+    const auto& m=moves[f.character][f.move];
+    return m.v[ActionType]==1&&f.age+1>=m.v[Startup]&&f.age<m.v[Startup]-1+m.v[Active]
+        &&incoming.v[Category]!=Throw&&incoming.v[HitLevel]!=1;
+}
 bool Simulation::motion_matches(const Fighter& f,int at,int motion) const {
     if(!motion) return true;
     const int sequence[3]={motion/100,(motion/10)%10,motion%10};
@@ -123,18 +137,19 @@ static bool dir_matches(int want,int got) {
 }
 int Simulation::requested(Fighter& f,Sample& h) const {
     const int presses=h.pressed&~h.consumed;
-    const bool throw_chord=f.y==0&&(h.held&(P|K|S|Hs|D))==(P|K)
+    const bool throw_chord=!f.stance&&(h.held&(P|K|S|Hs|D))==(P|K)
         &&(presses&(P|K))&&!(h.consumed&(P|K))&&!(h.held&(Simple|Faultless))
         &&(h.direction==4||h.direction==6);
     if(throw_chord) {
-        int slot=h.direction==4?BACK_THROW:FORWARD_THROW;
-        return moves[f.character][slot].v[Enabled]?slot:-1;
+        int slot=f.y>0?(h.direction==4?AIR_BACK_THROW:AIR_FORWARD_THROW):(h.direction==4?BACK_THROW:FORWARD_THROW);
+        return moves[f.character][slot].v[Enabled]&&stance_allowed(f,moves[f.character][slot])?slot:-1;
     }
     int best=-1,best_priority=-1;
     bool simplified=f.simple&&(h.held&Simple);
     for(int i=0;i<MOVE_COUNT;++i) {
         const Move& m=moves[f.character][i];
-        if(!m.v[Enabled]||m.v[Category]==Throw) continue;
+        if(!m.v[Enabled]||!stance_allowed(f,m)||m.v[ActionType]==1||(m.v[Category]==Throw&&!m.v[Motion])) continue;
+        if(i==CLOSE_SLASH||i==GUARD_ATTACK) continue;
         if(m.v[Air]!=(f.y>0)) continue;
         int priority=0;
         if(m.v[FollowFrom]>=0||m.v[FollowFrom2]>=0) {
@@ -149,8 +164,8 @@ int Simulation::requested(Fighter& f,Sample& h) const {
             priority=50+m.v[Button];
         } else {
             if(!(presses&button_bit(m.v[Button]))) continue;
-            if(i==SWEEP&&dir_matches(2,h.direction)) priority=45;
-            else if(i==SWEEP) continue;
+            if((i==SWEEP||m.v[ActionType]==2)&&dir_matches(2,h.direction)) priority=45;
+            else if(i==SWEEP||m.v[ActionType]==2) continue;
             else if(m.v[Motion]) {
                 if(!motion_matches(f,h.frame,m.v[Motion])) continue;
                 priority=m.v[Motion]==623?40:30;
@@ -164,6 +179,12 @@ int Simulation::requested(Fighter& f,Sample& h) const {
             priority=priority*8+m.v[Button];
         }
         if(priority>best_priority) { best=i; best_priority=priority; }
+    }
+    if(best>=0) {
+        const auto& m=moves[f.character][best]; int close=m.v[ProximityMove];
+        const auto& other=world.players[1-(&f-world.players)];
+        if(close>=0&&close<MOVE_COUNT&&moves[f.character][close].v[Enabled]
+           &&stance_allowed(f,moves[f.character][close])&&abs(other.x-f.x)<=m.v[ProximityRange]) best=close;
     }
     return best;
 }
@@ -229,6 +250,9 @@ void Simulation::begin(Fighter& f,int move) {
     int mechanic=moves[f.character][move].v[Mechanic];
     f.variant=mechanic==1&&target.tether_source?1:mechanic==2&&target.bleed_source?2:0;
     f.move=f.last_move=move;
+    f.armor_left=moves[f.character][move].v[ArmorHits];
+    if(moves[f.character][move].v[StanceChange]==2) f.stance=0;
+    if(moves[f.character][move].v[ActionType]==1) f.guard_button=button_bit(moves[f.character][move].v[HoldButton]);
     f.age=f.contact=f.hit_done=f.dash=0;
     f.projectile_spawned=0; f.attack_serial=(f.attack_serial+1)%100000000;
     f.hit_groups=0;
@@ -249,7 +273,7 @@ void Simulation::begin(Fighter& f,int move) {
 bool Simulation::active(const Fighter& f) const {
     if(f.move<0) return false;
     const Move& m=effective_move(f);
-    return f.age+1>=m.v[Startup]&&f.age+1<m.v[Startup]+m.v[Active];
+    return f.age+1>=m.v[Startup]&&((m.v[ActionType]==3&&f.y>0)||f.age+1<m.v[Startup]+m.v[Active]);
 }
 bool Simulation::double_forward(const Fighter& f,const Sample& h,int want) const {
     const int forward=(f.facing==1)==(want==6)?Right:Left;
@@ -261,6 +285,30 @@ bool Simulation::double_forward(const Fighter& f,const Sample& h,int want) const
     return false;
 }
 void Simulation::control(Fighter& f) {
+    if(f.grab_time>0||f.reaction==Captured) { f.vx=f.running=f.dash=0; return; }
+    if(f.reaction==Crumpled) {
+        f.vx=0; f.y=500; f.vy=0;
+        if(--f.crumple_time<=0) { f.reaction=Free; f.y=f.stun=0; f.throw_grace=rules.throw_grace_frames; }
+        return;
+    }
+    if(f.move>=0&&f.reaction==Free&&!f.stun) {
+        const auto& m=moves[f.character][f.move];
+        if(m.v[HoldFollow]>=0&&moves[f.character][m.v[HoldFollow]].v[Enabled]&&stance_allowed(f,moves[f.character][m.v[HoldFollow]])&&m.v[HoldFrame]>0&&f.age+1>=m.v[HoldFrame]&&(f.raw&button_bit(m.v[Button]))) {
+            int held=button_bit(m.v[Button]); begin(f,m.v[HoldFollow]); f.guard_button=held;
+        }
+        const auto& current=moves[f.character][f.move];
+        if(current.v[ActionType]==1) {
+            f.vx=0;
+            if(f.age<current.v[Startup]-1+current.v[Active]) {
+                const int opposite=f.guard_button==S?Hs:S;
+                auto& h=f.history[world.frame%HISTORY];
+                if(f.age>=current.v[Startup]-1&&(h.pressed&opposite)&&current.v[GuardFollow]>=0&&moves[f.character][current.v[GuardFollow]].v[Enabled]&&stance_allowed(f,moves[f.character][current.v[GuardFollow]])) { begin(f,current.v[GuardFollow]); h.consumed|=opposite; }
+                else if(!(f.raw&f.guard_button)) f.age=current.v[Startup]-1+current.v[Active];
+                else if(f.age>=current.v[Startup]-1) f.age=current.v[Startup]-1;
+            }
+            return;
+        }
+    }
     if(f.landing_time>0) {
         --f.landing_time; f.vx=f.running=f.dash=0;
         f.carry_vx=f.carry_time=0;
@@ -313,7 +361,7 @@ void Simulation::control(Fighter& f) {
     bool reversal=f.reversal_ready!=0;
     f.reversal_ready=0;
     f.guarding=f.block_reaction=f.block_age=f.block_advantage=f.guard_break=0;
-    if(faultless_requested(f)&&f.move<0) {
+    if(!f.stance&&faultless_requested(f)&&f.move<0) {
         f.dash=f.running=0;
         f.carry_vx=f.carry_time=0;
         if(f.y==0) f.vx=0;
@@ -332,6 +380,7 @@ void Simulation::control(Fighter& f) {
             if(can) {
                 f.move=-1; f.contact=f.hit_done=f.dash=f.running=0;
                 h->consumed|=Up;
+                f.stance=0;
                 bool airborne=f.y>0;
                 if(airborne) ++f.air_jump_used;
                 f.prejump_time=airborne?0:mobility_or(f,MovePrejumpFrames,rules.prejump_frames);
@@ -367,7 +416,8 @@ void Simulation::control(Fighter& f) {
         bool dash_request=macro||double_forward(f,*h)||backwards;
         const auto& profile=mobility[f.character];
         bool air_allowed=f.y==0||(profile.v[backwards?AirBackdashEnabled:AirDashEnabled]&&f.air_dash_used<profile.v[AirDashUses]);
-        if(f.move<0&&!f.dash&&dash_request&&air_allowed) {
+        if((f.move<0||(f.y>0&&effective_move(f).v[JumpCancel]&&f.contact&&cancel_window(f,2)))&&!f.dash&&dash_request&&air_allowed) {
+            f.move=-1; f.contact=f.hit_done=0;
             start_dash(f,backwards);
             h->consumed|=Dash|Left|Right;
             for(auto& old:f.history) if(old.frame<h->frame) old.consumed|=Left|Right;
@@ -399,13 +449,17 @@ void Simulation::collide_wall(Fighter& f,int velocity,bool in_hitstun) {
             f.reaction=WallSplat; f.wall_time=rules.wall_splat_frames;
             f.wall_side=side==0?-1:1;
             f.y=max(2000,f.y); f.vy=0; // A high airborne impact keeps its actual height.
-            f.pull_time=0; f.pull_owner=-1;
+            f.pull_time=0; f.pull_owner=f.grab_owner=-1;
         } else world.wall_health[side]=max(0,world.wall_health[side]-abs(velocity));
     }
     f.vx=f.knockback_left=f.carry_vx=f.carry_time=0;
+    if(in_hitstun&&f.reaction!=WallSplat&&f.bounce_wall>0) {
+        f.vx=velocity<0?f.bounce_wall:-f.bounce_wall; f.knockback_left=abs(f.vx)*HIT_TRAVEL_TICKS;
+        f.bounce_wall=0; f.vy=max(f.vy,500); f.y=max(1,f.y); f.reaction=AirReel;
+    }
 }
 void Simulation::move_horizontal(Fighter& f,bool was_hitstunned) {
-    if(f.reaction==WallSplat||f.reaction==Downed||f.reaction==Waking||f.reaction==Reeled||f.guarding) return;
+    if(f.reaction==WallSplat||f.reaction==Downed||f.reaction==Waking||f.reaction==Reeled||f.reaction==Captured||f.reaction==Crumpled||f.guarding||f.grab_time) return;
     if(was_hitstunned||f.reaction==AirReel) {
         // Horizontal hit velocity advances on the defender's clock (including counter slowdown).
         // Hitstop freezes it. The remaining-distance budget preserves authored knockback values.
@@ -428,11 +482,17 @@ void Simulation::move_horizontal(Fighter& f,bool was_hitstunned) {
         f.carry_vx=f.vx;
         f.carry_time=rules.buffer;
     }
+    if(f.grab_time>0) return;
     f.x+=f.vx;
     if(f.move>=0) {
         if(f.variant==2&&f.age+1<effective_move(f).v[Startup]+effective_move(f).v[Active])
             f.x+=f.facing*effective_move(f).v[VariantSpeed];
+        else if(effective_move(f).v[ActionType]==3) {
+            if(active(f)) f.x+=f.facing*effective_move(f).v[DiveSpeedX];
+            f.vx=0;
+        }
         else if(active(f)) f.x+=f.facing*effective_move(f).v[TravelSpeed];
+        else if(f.age+1<effective_move(f).v[Startup]) f.x+=f.facing*effective_move(f).v[StartupTravel];
         int drag=mobility[f.character].v[AttackFriction];
         f.vx=f.vx>0?max(0,f.vx-drag):min(0,f.vx+drag);
     }
@@ -446,14 +506,14 @@ static Box transform(Box b,const Fighter& f) {
             f.x+(f.facing==1?b.right:-b.left),f.y+b.top};
 }
 static int pose_offset(int phase,int index) {
-    const int offsets[]={0,12,18,24,28,32,33,41};
+    const int offsets[]={0,12,18,24,56,88,89,97,105};
     return offsets[phase]+index;
 }
 Pose Simulation::pose(const Fighter& f,int tick_offset) const {
-    const Pose ready={LOCOMOTION_POSES[f.character]?5:0,0};
+    const Pose ready=f.stance&&f.character==3?Pose{8,((f.idle_time+tick_offset)/7)%4}:Pose{LOCOMOTION_POSES[f.character]?5:0,0};
     if(f.reaction==Downed) return {0,10};
     if(f.reaction==Waking) return {0,11};
-    if(f.reaction==AirReel||f.reaction==WallSplat||f.reaction==Reeled) return {0,9};
+    if(f.reaction==AirReel||f.reaction==WallSplat||f.reaction==Reeled||f.reaction==Captured||f.reaction==Crumpled) return {0,9};
     if(f.guarding&&f.block_reaction>0) return {2,(f.block_reaction-1)*2+(f.block_age>=4)};
     if(f.stun) return {0,9};
     if(f.prejump_time) return {0,11};
@@ -461,6 +521,11 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     if(f.move>=0) {
         const auto& m=effective_move(f);
         int age=f.age+tick_offset;
+        if(f.grab_time>0) {
+            int art=m.v[FinishArtPose]>0&&m.v[GrabFrames]-f.grab_time>=m.v[FinishArtFrame]?m.v[FinishArtPose]:m.v[ArtPose];
+            return art>0?Pose{4,art-1}:Pose{0,1+m.v[Button]};
+        }
+        if(m.v[FinishArtPose]>0&&m.v[FinishArtFrame]>0&&age>=m.v[Startup]+m.v[FinishArtFrame]-1&&age<m.v[Startup]+m.v[Active]) return {4,m.v[FinishArtPose]-1};
         if(m.v[ArtPose]>0&&age<m.v[Startup]+m.v[Active]+(m.v[HitAngle]?8:0))
             return {age<m.v[Startup]?3:4,m.v[ArtPose]-1};
         if(age<m.v[Startup]) return {1,1+m.v[Button]};
@@ -469,10 +534,12 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
         return (f.raw&Down)?Pose{0,11}:ready;
     }
     if(f.y>0) return {0,8};
+    if(f.stance) return ready;
     if(f.raw&Down) return {0,11};
     if(LOCOMOTION_POSES[f.character]) {
         // Distance-driven gait needs no render clock or extra rollback state.
         // It freezes during hitstop, reverses on back-walk and follows acceleration.
+        if(f.dash>0&&f.character==3) return {7,min(7,f.dash_age*8/max(1,mobility[f.character].v[f.dash_direction==f.facing?StepFrames:BackFrames]))};
         if(!f.vx) return ready;
         const int phase=f.running?7:6;
         const auto& profile=mobility[f.character];
@@ -486,8 +553,8 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     return {0,0};
 }
 int Simulation::pose_box_count(int c,int phase,int index) {
-    if(c<0||c>=CHARACTER_COUNT||phase<0||phase>7||index<0) return 0;
-    const int count=phase==0?12:phase<=2?6:phase<=4?SIGNATURE_POSES[c]:LOCOMOTION_POSES[c]?(phase==5?1:8):0;
+    if(c<0||c>=CHARACTER_COUNT||phase<0||phase>8||index<0) return 0;
+    const int count=phase==8?(c==3?4:0):phase==0?12:phase<=2?6:phase<=4?SIGNATURE_POSES[c]:LOCOMOTION_POSES[c]?(phase==5?1:8):0;
     if(index>=count) return 0;
     return HURT_POSES[c][pose_offset(phase,index)].count;
 }
@@ -518,7 +585,9 @@ int Simulation::hurt_mask(const Fighter& f,int tick_offset) const {
         ||(f.guarding&&f.block_reaction>0)) return 15;
     const auto& m=effective_move(f);
     int age=f.age+tick_offset;
-    return m.v[age<m.v[Startup]?HurtMaskWindup:age<m.v[Startup]+m.v[Active]?HurtMaskActive:HurtMaskRecovery];
+    int mask=m.v[age<m.v[Startup]?HurtMaskWindup:age<m.v[Startup]+m.v[Active]?HurtMaskActive:HurtMaskRecovery];
+    if(m.v[HurtWindowStart]>0&&age>=m.v[HurtWindowStart]&&age<=m.v[HurtWindowEnd]) mask&=m.v[HurtWindowMask];
+    return mask;
 }
 Box Simulation::hurt_box(const Fighter& f,int index,int tick_offset) const {
     if(index<0) return {};
@@ -644,7 +713,8 @@ bool Simulation::overlaps(const Fighter& a,const Fighter& b) const {
     return false;
 }
 bool Simulation::blocks(const Fighter& attacker,const Fighter& defender,bool was_stunned,bool was_landing) const {
-    if(defender.reaction!=Free||effective_move(attacker).v[Category]==Throw) return false;
+    if(defender.stance||defender.reaction!=Free||effective_move(attacker).v[Category]==Throw) return false;
+    if(guard_point(defender,effective_move(attacker))) return true;
     if(defender.move>=0||defender.prejump_time||defender.landing_time||was_landing||((defender.stun||was_stunned)&&!defender.guarding)) return false;
     int away=attacker.x<defender.x?Right:Left;
     int toward=away==Left?Right:Left;
@@ -661,9 +731,16 @@ int Simulation::gravity_percent(const Fighter& f) const {
     return min(rules.gravity_cap,100+(f.combo_received-rules.gravity_after)*rules.gravity_step+f.repeat_gravity);
 }
 bool Simulation::throw_invulnerable(const Fighter& f) const {
-    return f.y>0||f.prejump_time>0||f.reaction!=Free||(!f.guard_break&&f.throw_grace>0)||(f.guarding&&!f.guard_break)||(f.stun>0&&!f.guarding);
+    return f.y>0||semi_airborne(f)||f.prejump_time>0||f.reaction!=Free||(!f.guard_break&&f.throw_grace>0)||(f.guarding&&!f.guard_break)||(f.stun>0&&!f.guarding);
 }
 void Simulation::land(Fighter& f) {
+    if(f.reaction==AirReel&&f.bounce_ground>0) {
+        f.y=1; f.vy=f.bounce_ground; f.bounce_ground=0; f.stun=max(f.stun,12); return;
+    }
+    if(f.move>=0&&effective_move(f).v[ActionType]==3&&f.reaction==Free) {
+        f.y=f.vy=f.vx=0; f.age=effective_move(f).v[Startup]-1+effective_move(f).v[Active];
+        f.landing_time=f.air_action=f.air_dash_used=f.air_jump_used=0; return;
+    }
     if(f.reaction==Free)
         f.landing_time=f.air_action?(f.move>=0?effective_move(f).v[LandingRecovery]:rules.air_landing_frames):rules.empty_landing_frames;
     f.air_action=f.air_dash_used=f.air_jump_used=f.dash=f.running=0;
@@ -682,7 +759,7 @@ void Simulation::reel_targets(const bool advances[2]) {
         if(f.reaction!=Reeled||!advances[p]) continue;
         auto& owner=world.players[1-p];
         if(f.pull_time<=0||f.pull_owner!=1-p||owner.reaction!=Free||(owner.stun>0&&!owner.guarding)) {
-            f.pull_time=0; f.pull_owner=-1;
+            f.pull_time=0; f.pull_owner=f.grab_owner=-1;
             f.reaction=f.y>0?AirReel:Free;
             continue;
         }
@@ -692,7 +769,7 @@ void Simulation::reel_targets(const bool advances[2]) {
         f.y+=(owner.y-f.y)/f.pull_time;
         f.vy=0;
         if(--f.pull_time==0) {
-            f.pull_owner=-1;
+            f.pull_owner=f.grab_owner=-1;
             f.reaction=f.y>0?AirReel:Free;
             f.vy=f.y>0?owner.vy:0;
             f.stun=max(f.stun,12);
@@ -711,7 +788,7 @@ void Simulation::finish_wall_break() {
         f.x=(p==actor)==(side>0)?42000:58000;
         f.facing=f.x<50000?1:-1;
         f.move=f.last_move=-1;
-        f.pull_owner=-1;
+        f.pull_owner=f.grab_owner=-1;
         f.combo_proration=f.combo_scale=f.damage_scale=100; f.input_age=-1;
         f.previous=f.raw=saved.raw; // A held transition input cannot become a fresh press.
         f.combo_display=saved.combo_display; f.combo_time=saved.combo_time;
@@ -770,8 +847,8 @@ void Simulation::step(int raw0,int raw1) {
     const int prior_landing[2]={world.players[0].landing_time,world.players[1].landing_time};
     const int prior_grace[2]={world.players[0].throw_grace,world.players[1].throw_grace};
     const bool prior_combo[2]={
-        (prior_stun[0]>0&&!prior_guard[0])||world.players[0].reaction==AirReel||world.players[0].reaction==WallSplat||world.players[0].reaction==Reeled,
-        (prior_stun[1]>0&&!prior_guard[1])||world.players[1].reaction==AirReel||world.players[1].reaction==WallSplat||world.players[1].reaction==Reeled};
+        (prior_stun[0]>0&&!prior_guard[0])||world.players[0].reaction==AirReel||world.players[0].reaction==WallSplat||world.players[0].reaction==Reeled||world.players[0].reaction==Crumpled,
+        (prior_stun[1]>0&&!prior_guard[1])||world.players[1].reaction==AirReel||world.players[1].reaction==WallSplat||world.players[1].reaction==Reeled||world.players[1].reaction==Crumpled};
     const int prior_x[2]={world.players[0].x,world.players[1].x};
     const int previous_order=prior_x[0]<=prior_x[1]?1:-1;
     const bool prior_overlap=vertical_overlap(push_box(world.players[0]),push_box(world.players[1]));
@@ -791,7 +868,7 @@ void Simulation::step(int raw0,int raw1) {
         }
         // Inputs still sample at 60 Hz; only this fighter's action/reaction clock slows.
         if(!advances[p]) continue;
-        if(!prior_combo[p]&&f.reaction==Free) {
+        if(!prior_combo[p]&&f.reaction==Free&&!f.grab_time) {
             f.combo_received=f.repeat_gravity=0;
             f.combo_proration=f.combo_scale=100;
             for(auto& uses:f.move_uses) uses=0;
@@ -803,21 +880,25 @@ void Simulation::step(int raw0,int raw1) {
         if(f.carry_time>0) --f.carry_time;
         f.teleported=0;
         control(f);
+        if(f.move<0&&!f.stun&&f.reaction==Free) f.idle_time=(f.idle_time+1)%1000000;
         spawn_projectile(f);
         move_horizontal(f,prior_stun[p]>0&&!prior_guard[p]);
         if(f.move<0&&!f.teleported&&!prior_stun[p]&&f.reaction==Free&&!faultless_requested(f)) moved[p]=max(0,(f.x-prior_x[p])*f.facing);
-        if(f.y>0&&f.reaction!=WallSplat&&f.reaction!=Reeled) {
+        bool dive=f.move>=0&&effective_move(f).v[ActionType]==3&&f.y>0&&f.reaction==Free;
+        if(dive) f.vy=active(f)?effective_move(f).v[DiveSpeedY]:0;
+        if(f.y>0&&f.reaction!=WallSplat&&f.reaction!=Reeled&&f.reaction!=Captured&&f.reaction!=Crumpled&&!f.grab_time) {
             f.y+=f.vy;
-            if(!(f.dash>0&&(f.dash_kind==HoverDash||f.dash_air))) f.vy-=mobility[f.character].v[Gravity]*gravity_percent(f)/100;
+            if(!dive&&!(f.dash>0&&(f.dash_kind==HoverDash||f.dash_air))) f.vy-=mobility[f.character].v[Gravity]*gravity_percent(f)/100;
             if(f.y<=0) land(f);
         }
         else if(f.y<=0&&f.reaction==AirReel) land(f);
         f.x=clamp_x(f,f.x);
     }
+    tick_grabs(advances);
     Fighter& a=world.players[0]; Fighter& b=world.players[1];
     for(int p=0;p<2;++p) if(advances[p]&&world.players[p].move>=0) trigger_tether(world.players[p]);
     reel_targets(advances);
-    resolve_push(previous_order,prior_overlap&&!a.teleported&&!b.teleported);
+    if(a.reaction!=Captured&&b.reaction!=Captured) resolve_push(previous_order,prior_overlap&&!a.teleported&&!b.teleported);
     // Only actual voluntary approach earns movement meter: no wall/pushbox or knockback farming.
     for(int p=0;p<2;++p) {
         auto& f=world.players[p];
@@ -834,7 +915,7 @@ void Simulation::step(int raw0,int raw1) {
     bool blocked[2]={false,false};
     for(int p=0;p<2;++p) {
         Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
-        if(other.reaction==Downed||other.reaction==Waking
+        if(f.grab_time||f.reaction==Captured||other.grab_time||other.reaction==Captured||other.reaction==Downed||other.reaction==Waking
             ||prior_reaction[1-p]==Downed||prior_reaction[1-p]==Waking) continue;
         bool throwing=f.move>=0&&effective_move(f).v[Category]==Throw;
         bool connects=false;
@@ -843,11 +924,14 @@ void Simulation::step(int raw0,int raw1) {
         if(advances[p]&&active(f)&&!spent&&f.variant!=1) {
             if(throwing) {
                 int separation=PUSH_PROFILES[f.character].half_width+PUSH_PROFILES[other.character].half_width;
-                connects=(f.y==0||(f.variant==2&&f.y<=8000))&&!throw_invulnerable(other)&&!(prior_stun[1-p]>0&&!prior_guard[1-p])
-                    &&(other.x-f.x)*f.facing>=0
-                    &&abs(other.x-f.x)<=separation+effective_move(f).v[ThrowRange];
+                const auto& tm=effective_move(f);
+                if(tm.v[Air]&&f.y>0) connects=other.y>0&&other.reaction==Free&&!other.stun&&!other.throw_grace
+                    &&abs(other.y-f.y)<7000&&abs(other.x-f.x)<=separation+tm.v[ThrowRange];
+                else connects=(f.y==0||(f.variant==2&&f.y<=8000))&&!throw_invulnerable(other)&&!(prior_stun[1-p]>0&&!prior_guard[1-p])
+                    &&(other.x-f.x)*f.facing>=0&&abs(other.x-f.x)<=separation+tm.v[ThrowRange];
             } else if(!effective_move(f).v[ProjectileKind]||effective_move(f).v[ProjectileMelee]) connects=overlaps(f,other);
         }
+        if(connects&&semi_airborne(other)&&effective_move(f).v[HitLevel]==1) connects=false;
         if(connects) {
             hits[p]=f.move; blocked[p]=blocks(f,other,prior_stun[1-p]>0,prior_landing[1-p]>0);
             contacts[p]=blocked[p]?Blocked:NormalHit;
@@ -897,12 +981,15 @@ void Simulation::step(int raw0,int raw1) {
     for(int p=0;p<2;++p) if(advances[p]&&world.players[p].move>=0) {
         auto& f=world.players[p];
         const Move& m=effective_move(f);
+        if(f.grab_time>0) continue;
+        if(m.v[ActionType]==1&&(f.raw&f.guard_button)&&f.age>=m.v[Startup]-1&&f.age<m.v[Startup]-1+m.v[Active]) continue;
+        if(m.v[ActionType]==3&&f.y>0&&active(f)) { f.age=m.v[Startup]; continue; }
         if(++f.age>=m.v[Startup]-1+m.v[Active]+m.v[Recovery]) {
             f.move=-1; f.contact=f.hit_done=0;
         }
     }
     // A back throw is the explicit side-switch exception to movement's anti-tunneling rule.
-    resolve_push(previous_order,prior_overlap&&!a.teleported&&!b.teleported&&!(hits[0]==BACK_THROW||hits[1]==BACK_THROW));
+    if(a.reaction!=Captured&&b.reaction!=Captured) resolve_push(previous_order,prior_overlap&&!a.teleported&&!b.teleported&&!(hits[0]==BACK_THROW||hits[1]==BACK_THROW||hits[0]==AIR_BACK_THROW||hits[1]==AIR_BACK_THROW));
     for(int p=0;p<2;++p) if(advances[p]&&world.players[p].positive_time>0) --world.players[p].positive_time;
     --world.remaining;
     if(world.wall_break_time==0&&(world.remaining<=0||a.health==0||b.health==0))
@@ -1005,7 +1092,8 @@ void Simulation::update_projectiles() {
     for(int i=0;i<MAX_PROJECTILES;++i) {
         auto& q=world.projectiles[i]; if(!q.life||q.cooldown) continue;
         auto& defender=world.players[1-q.owner]; const auto& m=moves[q.character][q.move];
-        if(defender.reaction==Downed||defender.reaction==Waking) continue;
+        if(defender.reaction==Downed||defender.reaction==Waking||defender.reaction==Captured||defender.grab_time
+            ||(semi_airborne(defender)&&m.v[HitLevel]==1)) continue;
         bool hit=false;
         for(int b=0;b<hurt_count(defender,defender.slow_held?0:1);++b) {
             Box target=hurt_box(defender,b,defender.slow_held?0:1);
@@ -1043,9 +1131,40 @@ void Simulation::update_projectiles() {
     }
 }
 
+void Simulation::tick_grabs(const bool advances[2]) {
+    for(int p=0;p<2;++p) {
+        auto& f=world.players[p]; auto& other=world.players[1-p];
+        if(other.reaction!=Captured||other.grab_owner!=p) { f.grab_time=0; continue; }
+        if(f.move<0||f.stun||f.reaction!=Free) { other.reaction=Free; other.grab_owner=-1; f.grab_time=0; continue; }
+        if(!advances[p]) continue;
+        const auto& m=moves[f.character][f.move];
+        other.x=clamp_x(other,f.x+f.facing*6000); other.y=f.y; other.vy=0;
+        if(--f.grab_time<=0) {
+            int move=f.move; Move finish=m; finish.v[GrabFrames]=0;
+            other.reaction=Free; other.grab_owner=-1;
+            apply_contact(p,move,finish,NormalHit,false,Free,f.facing,false);
+            f.age=m.v[Startup]-1+m.v[Active]-1;
+        }
+    }
+}
 void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_combo,int prior_reaction,int facing,bool projectile) {
     Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
     bool blocked=contact==Blocked;
+    bool point=blocked&&guard_point(other,m);
+    bool armor=!blocked&&other.move>=0&&other.reaction==Free&&other.armor_left>0&&m.v[Category]!=Throw&&m.v[HitLevel]!=1
+        &&other.age+1<=moves[other.character][other.move].v[ArmorFrames];
+    if(point||armor) {
+        if(armor) --other.armor_left;
+        int damage=point?m.v[ChipDamage]:m.v[Damage]; other.health=max(0,other.health-damage);
+        f.event=point?Blocked:NormalHit; f.last_damage=damage; f.last_base_damage=m.v[Damage]; f.damage_scale=100;
+        f.contact_count=(f.contact_count+1)%100000000;
+        world.hitstop=max(world.hitstop,m.v[Hitstop]); return;
+    }
+    if(!blocked&&!projectile&&m.v[ActionType]==4&&m.v[GrabFrames]>0) {
+        f.grab_time=m.v[GrabFrames]; f.vx=f.running=f.dash=0; f.event=NormalHit;
+        other.grab_owner=p; other.reaction=Captured; other.move=-1; other.stun=0;
+        other.vx=other.vy=other.knockback_left=other.faultless=other.stance=0; return;
+    }
     const bool cashout=!projectile&&f.variant==2;
     const int cash=(!blocked&&cashout&&other.bleed_source)?other.grey_life:0;
     if(!blocked) clear_owned_status(1-p);
@@ -1090,7 +1209,7 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
                 other.grey_life=min(min(m.v[BleedCap],max(0,other.health-1)),other.grey_life+m.v[BleedInitial]*scale/100);
             }
         }
-        if(!blocked) other.faultless=0;
+        if(!blocked) { other.faultless=other.stance=other.armor_left=0; }
         gain_momentum(f,m.v[Damage]*(blocked?rules.block_attack_gain:rules.attack_gain));
         if(!fd) gain_momentum(other,m.v[Damage]*(blocked?rules.guard_gain:rules.damage_gain));
         if(fd) other.momentum=max(0,other.momentum-mobility_or(other,FdBlockCost,rules.fd_block_cost)-m.v[Damage]*rules.fd_damage_cost-max(0,m.v[AttackLevel])*rules.fd_level_cost);
@@ -1117,12 +1236,14 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
         // FD still creates space at the corner by transferring blocked displacement to the attacker.
         if(!projectile&&blocked&&(fd||rules.corner_push_transfer)) f.x=clamp_x(f,f.x-facing*(push-abs(other.x-old_x)));
         if(!blocked) {
-            if(other.reaction==Reeled) other.reaction=was_airborne?AirReel:Free;
+            if(other.reaction==Reeled||other.reaction==Captured||other.reaction==Crumpled) other.reaction=was_airborne?AirReel:Free;
+            other.bounce_ground=was_airborne?m.v[GroundBounce]:0; other.bounce_wall=was_airborne?m.v[WallBounce]:0;
+            other.grab_owner=-1; other.crumple_time=0;
             other.combo_received=f.combo;
             int uses=other.move_uses[move]=min(1000,other.move_uses[move]+1);
             if(rules.repeat_after>0&&uses>=rules.repeat_after&&f.combo>rules.gravity_after)
                 other.repeat_gravity=min(300,other.repeat_gravity+rules.repeat_gravity_step);
-            other.knockdown=m.v[Knockdown];
+            other.knockdown=was_airborne&&contact==CounterHit&&m.v[AirCounterKnockdown]?m.v[AirCounterKnockdown]:m.v[Knockdown];
             other.down_frames=m.v[KnockdownFrames];
             other.wakeup_frames=m.v[WakeupFrames];
             if(throwing&&m.v[Direction]==4) {
@@ -1132,6 +1253,7 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
                 other.x=clamp_x(other,f.x-facing*(separation+push));
                 f.x=clamp_x(f,other.x+facing*separation);
                 f.facing=-facing; other.facing=-f.facing;
+                f.teleported=other.teleported=1; // Preserve a delayed throw-finisher side swap through push resolution.
             }
             int lift=m.v[was_airborne?AirLaunch:Launch];
             if(was_airborne||lift>0||other.knockdown!=NoKnockdown) {
@@ -1139,6 +1261,10 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
                 other.y=max(1,other.y); other.vy=lift;
                 if(other.knockdown==NoKnockdown) other.knockdown=SoftKnockdown;
             }
+            if(!was_airborne&&m.v[CrumpleFrames]>0) {
+                other.reaction=Crumpled; other.crumple_time=m.v[CrumpleFrames]; other.y=500; other.vy=0; other.stun=m.v[CrumpleFrames];
+            }
+            if(m.v[StanceChange]==1&&!f.stun&&f.reaction==Free) f.stance=1;
             if(m.v[PullFrames]>0) {
                 other.reaction=Reeled; other.pull_time=m.v[PullFrames];
                 other.pull_owner=p; other.pull_gap=m.v[PullGap]; other.vy=0;
@@ -1246,6 +1372,9 @@ int Simulation::get(int player,int field) const {
         case 71:return f.air_jump_used; case 72:return f.teleported; case 73:return f.contact_count;
         case 74:return f.variant; case 75:return f.tether_source; case 76:return f.tether_used;
         case 77:return f.bleed_source; case 78:return f.bleed_time; case 79:return f.bleed_clock; case 80:return f.grey_life;
+        case 81:return f.stance; case 82:return f.guard_button; case 83:return f.armor_left;
+        case 84:return f.bounce_ground; case 85:return f.bounce_wall; case 86:return f.crumple_time;
+        case 87:return f.grab_time; case 88:return f.grab_owner; case 89:return f.idle_time;
         default:return 0;
     }
 }
@@ -1332,6 +1461,32 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case NormalRoutes:case CommandRoutes: low=-1; high=31; break;
         case HitLevel: high=2; break;
         case ChipDamage: high=1000; break;
+        case StanceRequired: low=0; high=2; break;
+        case StanceChange: low=0; high=2; break;
+        case ActionType: low=0; high=4; break;
+        case HoldFollow: low=-1; high=42; break;
+        case HoldFrame: low=0; high=420; break;
+        case HoldButton: low=0; high=4; break;
+        case GuardFollow: low=-1; high=42; break;
+        case ProximityMove: low=-1; high=42; break;
+        case ProximityRange: low=0; high=20000; break;
+        case StartupTravel: low=-2000; high=2000; break;
+        case DiveSpeedX: low=-2000; high=2000; break;
+        case DiveSpeedY: low=-3000; high=0; break;
+        case GroundBounce: low=0; high=3000; break;
+        case WallBounce: low=0; high=3000; break;
+        case CrumpleFrames: low=0; high=180; break;
+        case AirCounterKnockdown: low=0; high=2; break;
+        case HurtWindowStart: low=0; high=420; break;
+        case HurtWindowEnd: low=0; high=420; break;
+        case HurtWindowMask: low=0; high=15; break;
+        case SemiAirStart: low=0; high=420; break;
+        case SemiAirEnd: low=0; high=420; break;
+        case ArmorFrames: low=0; high=120; break;
+        case ArmorHits: low=0; high=8; break;
+        case GrabFrames: low=0; high=120; break;
+        case FinishArtPose: low=0; high=SIGNATURE_POSES[c]; break;
+        case FinishArtFrame: low=0; high=420; break;
         default:return 0;
     }
     if(v<low||v>high) return 0;
@@ -1404,7 +1559,9 @@ int Simulation::preview_place(int p,int x,int y,int momentum) {
 }
 int Simulation::preview_begin(int p,int m) {
     if(p<0||p>1||m<0||m>=MOVE_COUNT||!moves[world.players[p].character][m].v[Enabled]) return 0;
-    begin(world.players[p],m); return 1;
+    auto& f=world.players[p];
+    if(moves[f.character][m].v[StanceRequired]) f.stance=moves[f.character][m].v[StanceRequired]==2;
+    begin(f,m); return 1;
 }
 int Simulation::rule_get(int f) const {
     const int values[RULE_COUNT]={rules.buffer,rules.motion_window,rules.motion_gap,
@@ -1439,7 +1596,14 @@ int Simulation::can_cancel(int c,int from,int to,int contact) const {
     using namespace fight;
     if(c<0||c>=CHARACTER_COUNT||from<0||from>=MOVE_COUNT||to<0||to>=MOVE_COUNT) return 0;
     const auto& target=moves[c][to];
-    if(!moves[c][from].v[Enabled]||!target.v[Enabled]) return 0;
+    const auto& source=moves[c][from];
+    if(source.v[ActionType]==1||source.v[ActionType]==2) return 0;
+    if(source.v[StanceRequired]&&target.v[StanceRequired]&&source.v[StanceRequired]!=target.v[StanceRequired]) return 0;
+    if(!source.v[Enabled]||!target.v[Enabled]) return 0;
+    if(source.v[StanceRequired]==2&&target.v[StanceRequired]==2&&source.v[Category]==Normal) {
+        if(from==to&&!source.v[SelfCancel]) return 0;
+        return (contact||source.v[WhiffCancel])&&(target.v[Category]==Normal||target.v[ActionType]==2||target.v[ActionType]==4);
+    }
     if(target.v[FollowFrom]>=0||target.v[FollowFrom2]>=0)
         return (from==target.v[FollowFrom]||from==target.v[FollowFrom2])&&(!target.v[FollowHit]||contact);
     return cancel_allowed(moves[c][from],moves[c][to],from==to,contact!=0);

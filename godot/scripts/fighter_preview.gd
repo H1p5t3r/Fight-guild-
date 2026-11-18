@@ -67,8 +67,12 @@ func draw_boxes() -> void:
 	var bottom: int = profile.airBottom if airborne else 0
 	preview_box(PackedInt32Array([-profile.halfWidth, bottom, profile.halfWidth, bottom + height]), anchor, scale_factor, Color("9ce56b"))
 	if (phase == "active" and pose in range(1, 6)) or phase == "signature_active":
-		var slot: int = move_slot if move_slot >= 0 else [0, 1, 2, 3, 13][pose - 1]
-		if phase == "signature_active" and move_slot < 0: slot = ([25, 15, 26, 27] if character == 5 else [28, 29, 30, 31])[pose]
+		var slot: int = move_slot if move_slot >= 0 else [0, 1, 2, 3, 13][clampi(pose - 1, 0, 4)]
+		if phase == "signature_active" and move_slot < 0:
+			for candidate in CombatModel.MOVE_IDS.size():
+				if combat_model.move(character, candidate).artPose == pose + 1:
+					slot = candidate
+					break
 		var move := combat_model.move(character, slot)
 		if move.hitAngle:
 			for i in 8:

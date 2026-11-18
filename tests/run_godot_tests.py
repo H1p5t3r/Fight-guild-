@@ -10,6 +10,7 @@ cases = [
     (["--headless", "--script", "tests/model_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/movement_projectile_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/mechanics_test.gd"], "0 failures"),
+    (["--headless", "--script", "tests/tapper_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/hurtbox_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/workshop_batch_test.gd", "--", "--test"], "0 failures"),
     (["--headless", "--script", "tests/hit_timeline_test.gd"], "0 failures"),

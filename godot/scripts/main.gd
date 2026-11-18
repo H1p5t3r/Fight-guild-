@@ -257,13 +257,15 @@ func build_interface() -> void:
 	var mechanic_panel := VBoxContainer.new()
 	editor.add_child(mechanic_panel)
 	mechanic_panel.visible = false
-	button(editor, "Drive mechanics ▾", func(): mechanic_panel.visible = not mechanic_panel.visible)
+	button(editor, "Drive / stance behavior ▾", func(): mechanic_panel.visible = not mechanic_panel.visible)
 	var mechanic_grid := GridContainer.new()
 	mechanic_grid.columns = 2
 	mechanic_panel.add_child(mechanic_grid)
 	var mechanic_rows: Array = JSON.parse_string(FileAccess.get_file_as_string("res://data/mechanic_fields.json"))
+	var stance_rows: Array = JSON.parse_string(FileAccess.get_file_as_string("res://data/stance_fields.json"))
+	for entry in stance_rows: mechanic_rows.append([entry.key, entry.label, entry.default, entry.min, entry.max, entry.help])
 	for row in mechanic_rows:
-		var scale := 100 if row[0] in ["tetherSpeed", "variantRange", "variantSpeed", "variantLift"] else 1
+		var scale := 100 if row[0] in ["tetherSpeed", "variantRange", "variantSpeed", "variantLift", "proximityRange", "startupTravel", "diveSpeedX", "diveSpeedY", "groundBounce", "wallBounce"] else 1
 		add_field(mechanic_grid, [row[0], row[1], float(row[3]) / scale, float(row[4]) / scale, scale])
 		fields[row[0]].control.tooltip_text = row[5]
 	var mechanic_note := label(mechanic_panel, "Mechanic: 0 off · 1 tether/pull · 2 bleed/cash-out. Same input becomes the follow-up. Speeds are px/f, range is px; timing is frames. Getting hit clears your statuses. Cash-out KD: 0 none, 1 soft, 2 hard.", 11, MUTED)
@@ -309,7 +311,7 @@ func build_interface() -> void:
 	var advanced_grid := GridContainer.new()
 	advanced_grid.columns = 2
 	advanced.add_child(advanced_grid)
-	for spec in [["artPose","Signature pose (0–4)",0,4,1],["followFrom","Follow source slot",-1,31,1],["followFrom2","Second source slot",-1,31,1],["travelSpeed","Active travel px/f",-20,20,100],["inertiaPercent","Carry speed %",0,200,1],["pullFrames","Pull duration f",0,60,1],["pullGap","Pull extra gap px",0,100,100],["hitAngle","Hit slope −1/0/+1",-1,1,1],["button","Button (0–4)",0,4,1],["category","Kind (0–4)",0,4,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (0/214/236/623)",0,623,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["simpleDirection","Simple direction",0,9,1],["simpleButton","Simple button",0,4,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
+	for spec in [["artPose","Artwork pose (0–32)",0,32,1],["followFrom","Follow source slot",-1,42,1],["followFrom2","Second source slot",-1,42,1],["travelSpeed","Active travel px/f",-20,20,100],["inertiaPercent","Carry speed %",0,200,1],["pullFrames","Pull duration f",0,60,1],["pullGap","Pull extra gap px",0,100,100],["hitAngle","Hit slope −1/0/+1",-1,1,1],["button","Button (0–4)",0,4,1],["category","Kind (0–4)",0,4,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (0/214/236/623)",0,623,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["simpleDirection","Simple direction",0,9,1],["simpleButton","Simple button",0,4,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
 		add_field(advanced_grid, spec)
 	var note := label(advanced, "Kind: 0 normal, 1 command, 2 special, 3 Drive, 4 throw. Button: P=0 K=1 S=2 Hs=3 D=4. Masks: −1 unified; P=1 K=2 S=4 Hs=8 D=16. Follow source −1 disables the route. Signature slots: 15 up slash, 25 spiral, 26 mid, 27 low, 28/29 hooks, 30/31 stabs. Hook slope ±1 travels at 45°; height is its thickness. Art pose 0 uses button art.", 10, MUTED)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -805,8 +807,8 @@ func show_sprite_review(clip: int = 0) -> void:
 	layout.add_child(pickers)
 	var fighter_picker := option(pickers, "Fighter", CombatModel.CHARACTERS)
 	var button_picker := option(pickers, "Button", CombatModel.BUTTONS)
-	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard", "Signature attack", "Run"])
-	clip_picker.select(clampi(clip, 0, 11))
+	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard", "Dedicated move", "Run / step dash", "Rolling stance"])
+	clip_picker.select(clampi(clip, 0, 12))
 	var signature_picker := option(pickers, "Signature", ["1", "2", "3", "4"])
 	fighter_picker.select(edit_character.selected)
 	var options := row(layout)
@@ -837,16 +839,26 @@ func show_sprite_review(clip: int = 0) -> void:
 		previews.append(preview)
 	var stats := label(layout, "", 12, ACCENT)
 	var update := func(_index: int = 0):
-		clip_picker.set_item_disabled(10, fighter_picker.selected < 4)
-		clip_picker.set_item_disabled(11, fighter_picker.selected < 4)
-		if clip_picker.selected in [10, 11] and fighter_picker.selected < 4: clip_picker.select(0)
-		var locomotion: bool = fighter_picker.selected >= 4 and clip_picker.selected in [5, 11]
+		clip_picker.set_item_disabled(10, fighter_picker.selected < 3)
+		clip_picker.set_item_disabled(11, fighter_picker.selected < 3)
+		if clip_picker.selected in [10, 11] and fighter_picker.selected < 3: clip_picker.select(0)
+		clip_picker.set_item_disabled(12, fighter_picker.selected != 3)
+		if clip_picker.selected == 12 and fighter_picker.selected != 3: clip_picker.select(0)
+		var locomotion: bool = fighter_picker.selected >= 3 and clip_picker.selected in [5, 11, 12]
 		loop_toggle.visible = locomotion
 		frame_picker.visible = locomotion
 		button_picker.disabled = clip_picker.selected != 0
 		signature_picker.visible = clip_picker.selected == 10
 		var signature_slots: Array = [25, 15, 26, 27] if fighter_picker.selected == 5 else [28, 29, 30, 31]
-		for i in 4: signature_picker.set_item_text(i, CombatModel.MOVE_IDS[signature_slots[i]])
+		if fighter_picker.selected == 3:
+			signature_slots = [0,1,32,2,3,4,5,6,7,22,8,9,11,17,18,19,19,20,21,33,34,13,24,41,35,36,37,38,39,40,40,22]
+		var selected_pose := clampi(signature_picker.selected, 0, signature_slots.size() - 1)
+		signature_picker.clear()
+		for i in signature_slots.size():
+			var atlas: Dictionary = FighterArt.sheet(fighter_picker.selected, "signature_active") if fighter_picker.selected >= 3 else {}
+			if not atlas.is_empty(): signature_picker.add_item(atlas.frames[i].get("name", CombatModel.MOVE_IDS[signature_slots[i]]))
+			else: signature_picker.add_item(CombatModel.MOVE_IDS[signature_slots[i]])
+		signature_picker.select(selected_pose)
 		var slot: int = signature_slots[signature_picker.selected] if clip_picker.selected == 10 else [0, 1, 2, 3, 13][button_picker.selected]
 		var move := model.move(fighter_picker.selected, slot)
 		stats.text = "%df startup · %df active · %df recovery · %d damage · %+df on first-frame block" % [move.startup, move.active, move.recovery, move.damage, move.blockstun - (move.active - 1 + move.recovery)] if clip_picker.selected in [0, 10] else "Body hurtboxes follow the displayed pose. Pushboxes keep a stable body width."
@@ -855,12 +867,12 @@ func show_sprite_review(clip: int = 0) -> void:
 			previews[i].facing = -1 if mirror_toggle.button_pressed else 1
 			previews[i].move_slot = slot
 			if locomotion:
-				var motion_phase := "run" if clip_picker.selected == 11 else "walk"
-				var frame := (frame_picker.selected + i) % 8
+				var motion_phase := "stance" if clip_picker.selected == 12 else "run" if clip_picker.selected == 11 else "walk"
+				var frame := (frame_picker.selected + i) % (4 if clip_picker.selected == 12 else 8)
 				captions[i].text = "%s · FRAME %d / 8" % [motion_phase.to_upper(), frame + 1]
 				previews[i].present(fighter_picker.selected, motion_phase, frame, previews[i].facing)
-			elif clip_picker.selected == 4 and fighter_picker.selected >= 4:
-				captions[i].text = "STALKER" if fighter_picker.selected == 5 else "SHOULDER REST"
+			elif clip_picker.selected == 4 and fighter_picker.selected >= 3:
+				captions[i].text = "STALKER" if fighter_picker.selected == 5 else "SHOULDER REST" if fighter_picker.selected == 4 else "TAPPER READY"
 				previews[i].present(fighter_picker.selected, "ready", 0, previews[i].facing)
 			elif clip_picker.selected == 10:
 				captions[i].text = ["WINDUP", "ACTIVE"][i]
@@ -941,6 +953,7 @@ func populate_editor() -> void:
 	editor_title.text += " · DISABLED" if not definition.enabled else ""
 	for key in fields:
 		var control: Control = fields[key].control
+		if key in ["artPose", "finishArtPose"]: control.max_value = FighterArt.catalog().fighters[edit_character.selected].get("signature_active", {}).get("frames", []).size()
 		if control is CheckBox: control.button_pressed = bool(definition[key])
 		elif control is OptionButton: control.selected = int(definition[key])
 		else: control.value = float(definition[key]) / fields[key].scale
