@@ -295,7 +295,7 @@ Tapper's full kit and confirmed **st.236D** are in the [current Tapper guide](ta
 |---|---|
 | Required stance | Any, normal stance only, or rolling stance only. |
 | Stance transition | Enter rolling stance on successful hit, or exit when the action starts. |
-| Action behavior | Strike, held guard, stance exit, stall/dive, or timed grab sequence. |
+| Action behavior | Strike, held guard, stance exit, stall/dive, timed grab, hold-to-charge, or air projectile stall/recoil. |
 | Held-input destination | Move slot entered while holding the source attack button; -1 disables. |
 | Hold transition frame | First move frame on which the held-input transition can start. |
 | Guard hold button | Button to keep held when previewing this guard action. |
@@ -303,8 +303,8 @@ Tapper's full kit and confirmed **st.236D** are in the [current Tapper guide](ta
 | Close-distance move | Alternate move selected when starting this input within the proximity range. |
 | Close-distance range | Root-to-root distance for the close version; checked at move start. |
 | Startup travel | Forward movement per startup tick; retains authored run/dash carry. |
-| Dive horizontal speed | Forward speed during an active stall/dive attack. |
-| Dive vertical speed | Downward speed during the active dive. Startup holds air velocity. |
+| Dive / recoil horizontal speed | Forward speed during an active dive, or velocity on air projectile release. Negative values recoil away from the opponent. |
+| Dive / recoil vertical speed | Downward speed during the active dive or on air projectile release. Startup stalls vertical movement. |
 | Air-hit ground bounce | One bounce upward at ground contact, only when this move hits an airborne target. |
 | Air-hit wall bounce | One rebound away from the wall; velocity still damages wall health and depleted walls splat first. |
 | Grounded floating crumple | Grounded hit enters a vulnerable floating crumple for this many ticks. |
@@ -323,3 +323,11 @@ Tapper's full kit and confirmed **st.236D** are in the [current Tapper guide](ta
 The base block-advantage card is inapplicable to throws, exits and guard holds. Captures pause the move clock and show a separate capture/finish clock. Bounces are one-use reactions on airborne hits. Stance requirements and transitions do not grant invulnerability. Startup/active hitboxes, per-phase hurtbox editing and no more than four body regions remain unchanged.
 
 New contextual slots are disabled when importing an older file; existing values and art notes survive. Local browser drafts take priority over the bundled draft. Back up the current draft, then import `FightGuild-Tapper.json` to load the new kit deliberately.
+
+## Smoke normals and Tapper box corrections — schema 19
+
+The [Smoke guide](smoke-design.md) lists the saved Queen Dizzy timings, attack visuals, source traces and remaining approximations. Leo diagrams only correct Tapper attack boxes; his custom stance and move timing are preserved. Schema19 adds `6[Hs]` and `5[D]` as editable charged follow-ups. Older imports leave these slots disabled.
+
+**Hold to charge** keeps the base attack in anticipation while its button stays held, then enters the **Held-input destination** at **Hold transition frame**. Early release fires the uncharged attack, no earlier than its startup. Disabling the destination falls back to the base strike. **Air projectile recoil** stalls vertical motion before the shot, then applies the editable recoil velocities at emission. The source j.D emission tick is represented as one active tick plus19 recovery ticks.
+
+The block-advantage card now evaluates the first frame of the last distinct hit group, so Smoke f.S reads−7 and5Hs reads−4. Shape-only keys do not improve that estimate; actual air/projectile contact and cancels still change advantage.

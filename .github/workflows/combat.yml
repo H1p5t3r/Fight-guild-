@@ -70,6 +70,8 @@ jobs:
             exports/FightGuild-Movement-Preview.html
             docs/move-workshop.md
             docs/tapper-design.md
+            docs/smoke-design.md
             godot/data/workshop/2026-11-18-tapper/FightGuild-Tapper.json
+            godot/data/workshop/2026-11-18-smoke/FightGuild-Smoke-Tapper.json
             exports/FightGuild-Move-Workshop-Guide.pdf
           if-no-files-found: error

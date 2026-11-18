@@ -41,7 +41,7 @@ static func apply(sprite: Sprite2D, character: int, phase: String, pose: int, wo
 	sprite.texture = texture(character, phase, pose)
 	sprite.centered = false
 	sprite.offset = -Vector2(pivot[0], pivot[1])
-	var factor: float = 150.0 / info.body_height * world_scale
+	var factor: float = 150.0 / info.frames[pose].get("body_height", info.body_height) * world_scale
 	sprite.scale = Vector2(factor * facing, factor)
 	sprite.set_meta("phase", phase)
 	sprite.set_meta("pose", pose)

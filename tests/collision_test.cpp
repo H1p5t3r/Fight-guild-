@@ -117,13 +117,15 @@ static void pushes() {
 static void contact_and_weapons() {
     Simulation s; s.defaults();
     for(int c=0;c<6;++c) for(int slot=0;slot<5;++slot) {
-        int m=slot==4?13:slot; if(c==3&&slot==2)m=CLOSE_SLASH;
+        int m=slot==4?13:slot; if((c==2||c==3)&&slot==2)m=CLOSE_SLASH;
         s.reset(c,(c+1)%6,0,0); flush(s);
         for(int tick=1;tick<=s.moves[c][m].v[Startup];++tick) {
-            s.step(P<<slot,0);
+            s.step(tick==1?P<<slot:0,0);
             if(tick<s.moves[c][m].v[Startup]) { CHECK(s.world.players[1].health==1000); CHECK(s.box_count(0,HitBox)==0); CHECK(s.get(0,29)==(s.moves[c][m].v[ArtPose]?3:1)); }
         }
-        CHECK(s.box_count(0,HitBox)==(s.world.players[0].grab_time?0:1)&&s.get(0,29)==(s.moves[c][m].v[ArtPose]?4:0)&&s.get(0,30)==(s.moves[c][m].v[ArtPose]?s.moves[c][m].v[ArtPose]-1:slot+1));
+        const auto& track=s.move_hit[c][m];
+        const int boxes=track.count&&track.keys[0].frame==1&&track.keys[0].count>=0?track.keys[0].count:1;
+        CHECK(s.box_count(0,HitBox)==(s.world.players[0].grab_time?0:boxes)&&s.get(0,29)==(s.moves[c][m].v[ArtPose]?4:0)&&s.get(0,30)==(s.moves[c][m].v[ArtPose]?s.moves[c][m].v[ArtPose]-1:slot+1));
         for(int n=0;n<s.moves[c][m].v[GrabFrames];++n)s.step(0,0);
         CHECK(s.world.players[1].health==1000-s.moves[c][m].v[Damage]);
     }

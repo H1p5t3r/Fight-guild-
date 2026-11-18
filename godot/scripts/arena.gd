@@ -114,7 +114,15 @@ func draw_projectiles() -> void:
 		var target := Rect2(from, extent)
 		if int(q.facing) < 0: target.position.x += extent.x; target.size.x = -extent.x
 		var source := Rect2(797, 350, 708, 390) if int(q.kind) == 2 else Rect2(28, 326, 695, 432)
-		draw_texture_rect_region(PROJECTILE_ART, target, source)
+		var art: Texture2D = PROJECTILE_ART
+		var custom: Dictionary = FighterArt.catalog().fighters[int(view.players[int(q.owner)].character)].get("projectile", {})
+		if not custom.is_empty():
+			var path: String = FighterArt.DIRECTORY + custom.file
+			if not FighterArt.textures.has(custom.file): FighterArt.textures[custom.file] = load(path)
+			art = FighterArt.textures[custom.file]
+			var r: Array = custom.region
+			source = Rect2(r[0], r[1], r[2], r[3])
+		draw_texture_rect_region(art, target, source)
 
 func screen_point(point: Vector2) -> Vector2:
 	return camera_offset + point * camera_zoom

@@ -11,7 +11,7 @@ func run() -> void:
 	check(model.load_data(source).is_empty(), "Uploaded batch did not import")
 	var actual := model.data()
 	var serialized: Dictionary = JSON.parse_string(JSON.stringify(actual))
-	check(actual.schema == 18, "Batch was not upgraded")
+	check(actual.schema == 19, "Batch was not upgraded")
 	for group in ["inputRules", "momentumRules", "recoveryRules", "tuningRules", "jumpRules"]:
 		for key in source[group]: check(actual[group][key] == source[group][key], "Global rule changed")
 	for c in 6:
@@ -23,7 +23,8 @@ func run() -> void:
 			for key in CombatModel.FIELDS: check(before[key] == after[key], "Uploaded move value changed: %s/%s/%s" % [c,m,key])
 			check(before.hurtboxes == serialized.characters[c].moves[m].hurtboxes, "Authored hurtboxes changed")
 			check(before.hitboxTimeline == serialized.characters[c].moves[m].hitboxTimeline, "Authored hit timeline changed")
-		if c == 3: check(actual.characters[c].moves[8].hurtWindowMask == 1 and actual.characters[c].moves[8].hurtWindowEnd == 14, "Tapper timed anti-air protection missing")
+		if c == 2: check(actual.characters[c].moves[8].hurtWindowMask == 1 and actual.characters[c].moves[8].hurtWindowEnd == 17, "Smoke timed anti-air protection missing")
+		elif c == 3: check(actual.characters[c].moves[8].hurtWindowMask == 1 and actual.characters[c].moves[8].hurtWindowEnd == 14, "Tapper timed anti-air protection missing")
 		else: check(actual.characters[c].moves[8].hurtMaskWindup == 1 and actual.characters[c].moves[8].hurtMaskActive == 1 and actual.characters[c].moves[8].hurtMaskRecovery == 15, "Universal 6P protection missing")
 	var game = load("res://scripts/main.gd").new()
 	root.add_child(game)

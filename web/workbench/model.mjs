@@ -1,3 +1,4 @@
+import {upgradeCharges} from '../charge-data.mjs';
 import {upgradeStances} from '../stance-data.mjs';
 import {upgradeMechanics} from '../mechanics-data.mjs';
 import {upgradeMovement} from '../movement-data.mjs';
@@ -15,8 +16,9 @@ function integer(value, limit, name) {
 }
 export function validate(data, pack) {
   data=upgradeStances(upgradeMechanics(upgradeHurtMasks(upgradeMovement(upgradeHitboxes(data),pack.defaults)),pack.defaults),pack.defaults);
+  data=upgradeCharges(data,pack.defaults);
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15/16/17 workshop exports. Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15/16/17/18 workshop exports. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);
@@ -58,7 +60,21 @@ export function parseField(key, input, limit) {
   return rounded;
 }
 export const totalFrames=m=>m.startup-1+m.active+m.recovery;
-export const blockAdvantage=m=>m.blockstun-(m.active-1+m.recovery);
+export const blockAdvantage=m=>{
+  // Multi-hit advantage starts at the first active frame of the final hit.
+  // Shape-only keys never grant an additional hit or extra advantage.
+  const keys=m.hitboxTimeline?.keys??[];
+  let start=1,stun=m.blockstun;
+  if(m.hitboxTimeline?.multiHit){
+    const seen=new Set([1]);
+    for(const key of keys){
+      if(key.frame>m.active)break;
+      if(key.boxes?.length===0)continue;
+      if(key.hit!==1&&!seen.has(key.hit)){start=key.frame;stun=key.blockstun<0?m.blockstun:key.blockstun;seen.add(key.hit);}
+    }
+  }
+  return stun-(m.active-start+m.recovery);
+};
 export function phaseAt(m,frame) {return frame<m.startup?'windup':frame<m.startup+m.active?'active':'recovery';}
 export function phaseStart(m,phase){return phase==='windup'?1:phase==='active'?m.startup:m.startup+m.active;}
 export function poseAt(m,frame,hasReady=false){
@@ -71,6 +87,9 @@ export function poseAt(m,frame,hasReady=false){
 export function defaultHurtboxes(pack,c,m,frame){const pose=poseAt(m,frame,!!pack.hurtPoses[c].ready);return clone(pack.hurtPoses[c][pose.phase][pose.index]);}
 export function effectiveHurtboxes(pack,c,m,frame){return m.hurtboxes[phaseAt(m,frame)]||defaultHurtboxes(pack,c,m,frame);}
 export function inputName(m) {
+  if(m.id==='6[Hs]'||m.id==='5[D]')return m.id;
+  if(m.id==='c.S')return 'c.S';
+  if(m.id==='5S'&&m.proximityMove===32)return 'f.S';
   const button=m.category===4&&!m.motion?'P+K':['P','K','S','Hs','D'][m.button];
   return `${m.stanceRequired===2?'st.':''}${m.air?'j.':''}${m.motion||m.direction}${button}`;
 }
@@ -149,7 +168,7 @@ export class Workshop {
     const lines=['# Fight Guild — move and animation brief','','Export the companion JSON for authoritative gameplay values.',''];
     for(const {c,m} of this.changes()) {
       const move=this.move(c,m),note=this.note(c,m);
-      lines.push(`## ${CHARACTERS[c]} · ${move.id}${note.label?' — '+note.label:''}`,'',`${move.enabled?'Enabled':'Disabled'}. Input: ${inputName(move)}. Startup ${move.startup}f / active ${move.active}f / recovery ${move.recovery}f. Base damage ${move.damage}. Base first-active block advantage ${blockAdvantage(move)>=0?'+':''}${blockAdvantage(move)}f.`,
+      lines.push(`## ${CHARACTERS[c]} · ${move.id}${note.label?' — '+note.label:''}`,'',`${move.enabled?'Enabled':'Disabled'}. Input: ${inputName(move)}. Startup ${move.startup}f / active ${move.active}f / recovery ${move.recovery}f. Base damage ${move.damage}. Block advantage at first active frame of ${move.hitboxTimeline?.multiHit?'the final hit':'the hit'}: ${blockAdvantage(move)>=0?'+':''}${blockAdvantage(move)}f (air/projectile advantage varies with contact timing).`,
         `Hitbox: back ${move.hitboxBack/100}px, front ${move.reach/100}px, bottom ${move.bottom/100}px, height ${move.height/100}px. Knockdown: ${['none','soft','hard'][move.knockdown]}.`,
         `Ground / air / block push: ${move.pushback/100} / ${move.airPushback/100} / ${move.blockPushback/100}px. Ground / air launch: ${move.launch/100} / ${move.airLaunch/100}px per frame.`, '');
       for(const [key,label] of ART_FIELDS.slice(1)) if(note[key]?.trim())lines.push(`**${label}**`,note[key].trim(),'');

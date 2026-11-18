@@ -149,7 +149,7 @@ int Simulation::requested(Fighter& f,Sample& h) const {
     for(int i=0;i<MOVE_COUNT;++i) {
         const Move& m=moves[f.character][i];
         if(!m.v[Enabled]||!stance_allowed(f,m)||m.v[ActionType]==1||(m.v[Category]==Throw&&!m.v[Motion])) continue;
-        if(i==CLOSE_SLASH||i==GUARD_ATTACK) continue;
+        if(i==CLOSE_SLASH||i==GUARD_ATTACK||i==CHARGED_HS||i==CHARGED_D) continue;
         if(m.v[Air]!=(f.y>0)) continue;
         int priority=0;
         if(m.v[FollowFrom]>=0||m.v[FollowFrom2]>=0) {
@@ -190,6 +190,9 @@ int Simulation::requested(Fighter& f,Sample& h) const {
 }
 Move Simulation::effective_move(const Fighter& f) const {
     Move m=moves[f.character][f.move];
+    // Charge anticipation stays vulnerable and has no active box before release.
+    // The elapsed integer age is also the charge timer, so rollback needs no clock.
+    if(m.v[ActionType]==5&&f.guard_button) m.v[Startup]=max(m.v[Startup],f.age+2);
     if(!f.variant) return m;
     m.v[Startup]=m.v[VariantStartup]; m.v[Active]=m.v[VariantActive]; m.v[Recovery]=m.v[VariantRecovery];
     m.v[Category]=f.variant==2?Throw:Drive;
@@ -252,7 +255,9 @@ void Simulation::begin(Fighter& f,int move) {
     f.move=f.last_move=move;
     f.armor_left=moves[f.character][move].v[ArmorHits];
     if(moves[f.character][move].v[StanceChange]==2) f.stance=0;
+    f.guard_button=0;
     if(moves[f.character][move].v[ActionType]==1) f.guard_button=button_bit(moves[f.character][move].v[HoldButton]);
+    if(moves[f.character][move].v[ActionType]==5) f.guard_button=button_bit(moves[f.character][move].v[Button]);
     f.age=f.contact=f.hit_done=f.dash=0;
     f.projectile_spawned=0; f.attack_serial=(f.attack_serial+1)%100000000;
     f.hit_groups=0;
@@ -263,6 +268,7 @@ void Simulation::begin(Fighter& f,int move) {
     if(f.carry_time>0&&abs(f.carry_vx)>abs(f.vx)) f.vx=f.carry_vx;
     f.carry_vx=f.carry_time=0;
     f.vx=clamp(f.vx*moves[f.character][move].v[InertiaPercent]/100,-4000,4000);
+    if(moves[f.character][move].v[ActionType]==6) { f.vx/=3; f.vy=0; }
     if(!f.variant) f.x+=moves[f.character][move].v[Advance]*f.facing;
     if(f.variant==2&&moves[f.character][move].v[VariantLift]>0) {
         f.y=max(1,f.y); f.vy=moves[f.character][move].v[VariantLift];
@@ -293,7 +299,20 @@ void Simulation::control(Fighter& f) {
     }
     if(f.move>=0&&f.reaction==Free&&!f.stun) {
         const auto& m=moves[f.character][f.move];
-        if(m.v[HoldFollow]>=0&&moves[f.character][m.v[HoldFollow]].v[Enabled]&&stance_allowed(f,moves[f.character][m.v[HoldFollow]])&&m.v[HoldFrame]>0&&f.age+1>=m.v[HoldFrame]&&(f.raw&button_bit(m.v[Button]))) {
+        if(m.v[ActionType]==5&&f.guard_button) {
+            const int target=m.v[HoldFollow];
+            const bool full=f.age+1>=max(m.v[Startup],m.v[HoldFrame]);
+            if(!(f.raw&f.guard_button)||full) {
+                if(full&&(f.raw&f.guard_button)&&target>=0&&target!=f.move&&moves[f.character][target].v[Enabled]&&stance_allowed(f,moves[f.character][target])) {
+                    const int momentum=f.momentum;
+                    begin(f,target);
+                    f.momentum=momentum; // One held input is one move, not two meter-gain events.
+                    f.age=moves[f.character][target].v[Startup]-1;
+                } else f.age=min(f.age,m.v[Startup]-1);
+                f.guard_button=0;
+            }
+        }
+        else if(m.v[ActionType]!=5&&m.v[HoldFollow]>=0&&moves[f.character][m.v[HoldFollow]].v[Enabled]&&stance_allowed(f,moves[f.character][m.v[HoldFollow]])&&m.v[HoldFrame]>0&&f.age+1>=m.v[HoldFrame]&&(f.raw&button_bit(m.v[Button]))) {
             int held=button_bit(m.v[Button]); begin(f,m.v[HoldFollow]); f.guard_button=held;
         }
         const auto& current=moves[f.character][f.move];
@@ -886,9 +905,11 @@ void Simulation::step(int raw0,int raw1) {
         if(f.move<0&&!f.teleported&&!prior_stun[p]&&f.reaction==Free&&!faultless_requested(f)) moved[p]=max(0,(f.x-prior_x[p])*f.facing);
         bool dive=f.move>=0&&effective_move(f).v[ActionType]==3&&f.y>0&&f.reaction==Free;
         if(dive) f.vy=active(f)?effective_move(f).v[DiveSpeedY]:0;
+        bool air_charge=f.move>=0&&effective_move(f).v[ActionType]==6&&!f.projectile_spawned&&f.reaction==Free;
+        if(air_charge) f.vy=0;
         if(f.y>0&&f.reaction!=WallSplat&&f.reaction!=Reeled&&f.reaction!=Captured&&f.reaction!=Crumpled&&!f.grab_time) {
             f.y+=f.vy;
-            if(!dive&&!(f.dash>0&&(f.dash_kind==HoverDash||f.dash_air))) f.vy-=mobility[f.character].v[Gravity]*gravity_percent(f)/100;
+            if(!dive&&!air_charge&&!(f.dash>0&&(f.dash_kind==HoverDash||f.dash_air))) f.vy-=mobility[f.character].v[Gravity]*gravity_percent(f)/100;
             if(f.y<=0) land(f);
         }
         else if(f.y<=0&&f.reaction==AirReel) land(f);
@@ -1034,6 +1055,7 @@ void Simulation::spawn_projectile(Fighter& f) {
     int at=max(MIN_STARTUP,m.v[ProjectileSpawnFrame]?m.v[ProjectileSpawnFrame]:m.v[Startup]);
     if(!m.v[ProjectileKind]||m.v[Category]==Throw||f.age+1!=at) return;
     f.projectile_spawned=1;
+    if(m.v[ActionType]==6) { f.vx=f.facing*m.v[DiveSpeedX]; f.vy=m.v[DiveSpeedY]; }
     int owner=&f==&world.players[0]?0:1,owned=0;
     for(const auto& q:world.projectiles) if(q.life&&q.owner==owner) ++owned;
     if(owned>=MAX_PROJECTILES/2) return; // Fixed, symmetric budget; no allocation in rollback.
@@ -1463,12 +1485,12 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case ChipDamage: high=1000; break;
         case StanceRequired: low=0; high=2; break;
         case StanceChange: low=0; high=2; break;
-        case ActionType: low=0; high=4; break;
-        case HoldFollow: low=-1; high=42; break;
+        case ActionType: low=0; high=6; break;
+        case HoldFollow: low=-1; high=MOVE_COUNT-1; break;
         case HoldFrame: low=0; high=420; break;
         case HoldButton: low=0; high=4; break;
-        case GuardFollow: low=-1; high=42; break;
-        case ProximityMove: low=-1; high=42; break;
+        case GuardFollow: low=-1; high=MOVE_COUNT-1; break;
+        case ProximityMove: low=-1; high=MOVE_COUNT-1; break;
         case ProximityRange: low=0; high=20000; break;
         case StartupTravel: low=-2000; high=2000; break;
         case DiveSpeedX: low=-2000; high=2000; break;

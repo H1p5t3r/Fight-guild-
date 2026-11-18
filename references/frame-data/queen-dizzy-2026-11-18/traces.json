@@ -1,0 +1,844 @@
+{
+  "method": "Manual trace of red rectangles; image pixel origin is top-left. Root estimated at yellow pushbox bottom-center. Normalize yellow push width to a fixed local calibration, not the live gameplay pushbox. Body hurtboxes are authored separately.",
+  "calibrationWidth": 4200,
+  "limits": "Source screenshots do not supply exact numerical engine coordinates. Spatial scaling and unlabeled intra-active transition frames are adaptations. Multi-hit counts and total timing are taken from the saved tables.",
+  "moves": {
+    "5P": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_5P_hitbox.png",
+        "sha256": "6fd634064b7e2108ab0b6c06ebb3f4bb63e8772da52ff93b4bf1a1b091b5f278",
+        "sourcePush": [
+          134,
+          157,
+          205,
+          350
+        ],
+        "origin": [
+          169.5,
+          350
+        ],
+        "unitsPerPixel": 59.15492957746479,
+        "pixelBoxes": [
+          [
+            195,
+            127,
+            349,
+            165
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1508,
+            10944,
+            10618,
+            13192
+          ]
+        ]
+      }
+    ],
+    "5K": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_5K_hitbox.png",
+        "sha256": "1e94029451facd579ec8b959f0720bbc0b36e61888fd4788ac7ee9fc4c6b407d",
+        "sourcePush": [
+          72,
+          76,
+          153,
+          300
+        ],
+        "origin": [
+          112.5,
+          300
+        ],
+        "unitsPerPixel": 51.851851851851855,
+        "pixelBoxes": [
+          [
+            151,
+            62,
+            350,
+            122
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1996,
+            9230,
+            12315,
+            12341
+          ]
+        ]
+      }
+    ],
+    "c.S": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_cS_hitbox.png",
+        "sha256": "71129ef2e39d331dcbc870b432074e3b4e5ef3fc2a57f7cf24026c57e0264de4",
+        "sourcePush": [
+          35,
+          187,
+          128,
+          438
+        ],
+        "origin": [
+          81.5,
+          438
+        ],
+        "unitsPerPixel": 45.16129032258065,
+        "pixelBoxes": [
+          [
+            118,
+            188,
+            350,
+            403
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1648,
+            1581,
+            12126,
+            11290
+          ]
+        ]
+      }
+    ],
+    "f.S": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_f.S_hitbox.png",
+        "sha256": "2c376aa096c1fd2e358f1cb62e4c33826122d01f43bb370dcfeab8b7fc685d3d",
+        "sourcePush": [
+          98,
+          121,
+          156,
+          277
+        ],
+        "origin": [
+          127.0,
+          277
+        ],
+        "unitsPerPixel": 72.41379310344827,
+        "pixelBoxes": [
+          [
+            148,
+            109,
+            358,
+            151
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1521,
+            9124,
+            16728,
+            12166
+          ]
+        ]
+      }
+    ],
+    "5H": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_5H_hitbox.png",
+        "sha256": "c7064a14320ae07b0af7ef38b6f812ad52e94f0dceb9e817bb01b770a799dd9e",
+        "sourcePush": [
+          114,
+          142,
+          164,
+          277
+        ],
+        "origin": [
+          139.0,
+          277
+        ],
+        "unitsPerPixel": 84.0,
+        "pixelBoxes": [
+          [
+            158,
+            159,
+            338,
+            227
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1596,
+            4200,
+            16716,
+            9912
+          ]
+        ]
+      }
+    ],
+    "2P": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_2P_hitbox.png",
+        "sha256": "a9a0d4597314c8871878d7984b18932c408fd8e1ea219a261b0ab950dfd7410b",
+        "sourcePush": [
+          144,
+          80,
+          233,
+          268
+        ],
+        "origin": [
+          188.5,
+          268
+        ],
+        "unitsPerPixel": 47.19101123595506,
+        "pixelBoxes": [
+          [
+            203,
+            102,
+            345,
+            155
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            684,
+            5333,
+            7385,
+            7834
+          ]
+        ]
+      }
+    ],
+    "2K": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_2K_hitbox.png",
+        "sha256": "07c4afc6d593bce6798ce85dd48be0bd1ba8d380c8db6fe0527f70d68fd370c0",
+        "sourcePush": [
+          63,
+          0,
+          167,
+          218
+        ],
+        "origin": [
+          115.0,
+          218
+        ],
+        "unitsPerPixel": 40.38461538461539,
+        "pixelBoxes": [
+          [
+            158,
+            113,
+            349,
+            209
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1737,
+            363,
+            9450,
+            4240
+          ]
+        ]
+      }
+    ],
+    "2S": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_2S_hitbox.png",
+        "sha256": "5e1d4e610e8ee62b2cc773b3047d3139fa5c13460c72563f0f2780329b3a317b",
+        "sourcePush": [
+          92,
+          103,
+          163,
+          250
+        ],
+        "origin": [
+          127.5,
+          250
+        ],
+        "unitsPerPixel": 59.15492957746479,
+        "pixelBoxes": [
+          [
+            157,
+            137,
+            359,
+            221
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1745,
+            1715,
+            13694,
+            6685
+          ]
+        ]
+      }
+    ],
+    "2H": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_2H_Hitbox_1.png",
+        "sha256": "5d21b0043afbe8bc46599d7680c2e003376127ed0de396d13af4de069f7be739",
+        "sourcePush": [
+          121,
+          189,
+          177,
+          332
+        ],
+        "origin": [
+          149.0,
+          332
+        ],
+        "unitsPerPixel": 75.0,
+        "pixelBoxes": [
+          [
+            147,
+            0,
+            285,
+            122
+          ],
+          [
+            188,
+            122,
+            331,
+            332
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": true,
+        "boxes": [
+          [
+            -150,
+            15750,
+            10200,
+            24900
+          ],
+          [
+            2925,
+            0,
+            13650,
+            15750
+          ]
+        ]
+      },
+      {
+        "sourceImage": "GGST_Queen_Dizzy_2H_Hitbox_2.png",
+        "sha256": "1ae59c6dac69706b5529d795c223597be7f2762ae7a8cb6fd38094ecffc47503",
+        "sourcePush": [
+          106,
+          207,
+          173,
+          345
+        ],
+        "origin": [
+          139.5,
+          345
+        ],
+        "unitsPerPixel": 62.6865671641791,
+        "pixelBoxes": [
+          [
+            127,
+            0,
+            262,
+            139
+          ],
+          [
+            168,
+            84,
+            306,
+            157
+          ],
+          [
+            184,
+            145,
+            324,
+            345
+          ]
+        ],
+        "activeFrame": 4,
+        "transitionEstimated": true,
+        "boxes": [
+          [
+            -784,
+            12913,
+            7679,
+            21627
+          ],
+          [
+            1787,
+            11785,
+            10437,
+            16361
+          ],
+          [
+            2790,
+            0,
+            11566,
+            12537
+          ]
+        ]
+      },
+      {
+        "sourceImage": "GGST_Queen_Dizzy_2H_Hitbox_3.png",
+        "sha256": "1c05f05139cd3018ca8226eb13030c2900742701ed1d0693b5526beddff9099d",
+        "sourcePush": [
+          96,
+          213,
+          161,
+          349
+        ],
+        "origin": [
+          128.5,
+          349
+        ],
+        "unitsPerPixel": 64.61538461538461,
+        "pixelBoxes": [
+          [
+            95,
+            0,
+            237,
+            110
+          ],
+          [
+            155,
+            94,
+            293,
+            164
+          ],
+          [
+            172,
+            152,
+            307,
+            349
+          ]
+        ],
+        "activeFrame": 7,
+        "transitionEstimated": true,
+        "boxes": [
+          [
+            -2165,
+            15443,
+            7011,
+            22551
+          ],
+          [
+            1712,
+            11954,
+            10629,
+            16477
+          ],
+          [
+            2811,
+            0,
+            11534,
+            12729
+          ]
+        ]
+      }
+    ],
+    "2D": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_2D_hitbox.png",
+        "sha256": "d165dc6ceb96bbf901c99e919cf5b9251a11fc5cc08af6387605fe9f1d3f8075",
+        "sourcePush": [
+          93,
+          86,
+          147,
+          206
+        ],
+        "origin": [
+          120.0,
+          206
+        ],
+        "unitsPerPixel": 77.77777777777777,
+        "pixelBoxes": [
+          [
+            145,
+            146,
+            342,
+            201
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1944,
+            389,
+            17267,
+            4667
+          ]
+        ]
+      }
+    ],
+    "6P": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_6P_hitbox_2.png",
+        "sha256": "88010eb4b11f9f0d06ba89c119972a9611d01a2d26eef0ffd18f64d725833e97",
+        "sourcePush": [
+          129,
+          125,
+          226,
+          386
+        ],
+        "origin": [
+          177.5,
+          386
+        ],
+        "unitsPerPixel": 43.29896907216495,
+        "pixelBoxes": [
+          [
+            230,
+            19,
+            353,
+            195
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            2273,
+            8270,
+            7599,
+            15891
+          ]
+        ]
+      }
+    ],
+    "6H": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_6H_hitbox_1.png",
+        "sha256": "2c2d0bcb8466978436d9b9e49a677124c0f84e64d61eea0c5605efd2bdd5185e",
+        "sourcePush": [
+          51,
+          180,
+          130,
+          394
+        ],
+        "origin": [
+          90.5,
+          394
+        ],
+        "unitsPerPixel": 53.164556962025316,
+        "pixelBoxes": [
+          [
+            141,
+            35,
+            334,
+            230
+          ],
+          [
+            233,
+            230,
+            305,
+            316
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": true,
+        "boxes": [
+          [
+            2685,
+            8719,
+            12946,
+            19086
+          ],
+          [
+            7576,
+            4147,
+            11404,
+            8719
+          ]
+        ]
+      },
+      {
+        "sourceImage": "GGST_Queen_Dizzy_6H_hitbox_2.png",
+        "sha256": "c5e8ae9b96d0f4ef8398e7b8f233d31030871c4e5280ebdaf2d93a4a3468b287",
+        "sourcePush": [
+          133,
+          63,
+          190,
+          220
+        ],
+        "origin": [
+          161.5,
+          220
+        ],
+        "unitsPerPixel": 73.6842105263158,
+        "pixelBoxes": [
+          [
+            134,
+            116,
+            318,
+            220
+          ]
+        ],
+        "activeFrame": 5,
+        "transitionEstimated": true,
+        "boxes": [
+          [
+            -2026,
+            0,
+            11532,
+            7663
+          ]
+        ]
+      }
+    ],
+    "5D": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_5D_hitbox.png",
+        "sha256": "1411509c7bbefc8afc5e2ff2516350602db65f172873bfb0643e16da88f47fb7",
+        "sourcePush": [
+          152,
+          205,
+          215,
+          375
+        ],
+        "origin": [
+          183.5,
+          375
+        ],
+        "unitsPerPixel": 66.66666666666667,
+        "pixelBoxes": [
+          [
+            206,
+            159,
+            303,
+            358
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1500,
+            1133,
+            7967,
+            14400
+          ]
+        ]
+      }
+    ],
+    "j.P": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_j.P_hitbox.png",
+        "sha256": "10d943626f65ca9e86b439ad89adf29f61999a25da5711a8775f38edd91ecfa6",
+        "sourcePush": [
+          124,
+          204,
+          208,
+          332
+        ],
+        "origin": [
+          166.0,
+          332
+        ],
+        "unitsPerPixel": 50.0,
+        "pixelBoxes": [
+          [
+            211,
+            187,
+            289,
+            264
+          ],
+          [
+            259,
+            218,
+            336,
+            295
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            2250,
+            3400,
+            6150,
+            7250
+          ],
+          [
+            4650,
+            1850,
+            8500,
+            5700
+          ]
+        ]
+      }
+    ],
+    "j.K": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_j.K_hitbox.png",
+        "sha256": "7e1f799dcb336469ac089165293798aa4b89358e1b7dedd538a8f49d8380bfbc",
+        "sourcePush": [
+          61,
+          114,
+          154,
+          254
+        ],
+        "origin": [
+          107.5,
+          254
+        ],
+        "unitsPerPixel": 45.16129032258065,
+        "pixelBoxes": [
+          [
+            191,
+            146,
+            312,
+            240
+          ],
+          [
+            228,
+            184,
+            340,
+            277
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            3771,
+            632,
+            9235,
+            4877
+          ],
+          [
+            5442,
+            -1039,
+            10500,
+            3161
+          ]
+        ]
+      }
+    ],
+    "j.S": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_j.S_hitbox.png",
+        "sha256": "ae8992feb8f39c49c8af0d13fe7217cb0b20a89be508bd3536f2dd1be03a86ba",
+        "sourcePush": [
+          82,
+          95,
+          132,
+          169
+        ],
+        "origin": [
+          107.0,
+          169
+        ],
+        "unitsPerPixel": 84.0,
+        "pixelBoxes": [
+          [
+            166,
+            59,
+            349,
+            87
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            4956,
+            6888,
+            20328,
+            9240
+          ]
+        ]
+      }
+    ],
+    "j.H": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_j.H_hitbox.png",
+        "sha256": "cfc082ad17dc654460aba2199a814a3ba7ed775815b668149528d0cafdf1999a",
+        "sourcePush": [
+          78,
+          194,
+          142,
+          290
+        ],
+        "origin": [
+          110.0,
+          290
+        ],
+        "unitsPerPixel": 65.625,
+        "pixelBoxes": [
+          [
+            174,
+            44,
+            338,
+            203
+          ],
+          [
+            174,
+            203,
+            265,
+            241
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            4200,
+            5709,
+            14962,
+            16144
+          ],
+          [
+            4200,
+            3216,
+            10172,
+            5709
+          ]
+        ]
+      }
+    ],
+    "j.D": [
+      {
+        "sourceImage": "GGST_Queen_Dizzy_j.D_hitbox.png",
+        "sha256": "8a7bcd5c97f78dcf986d1c249192b350bf56e7d5e78e9881bbc7f65be28ca175",
+        "sourcePush": [
+          128,
+          114,
+          173,
+          182
+        ],
+        "origin": [
+          150.5,
+          182
+        ],
+        "unitsPerPixel": 93.33333333333333,
+        "pixelBoxes": [
+          [
+            229,
+            75,
+            321,
+            166
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            7327,
+            1493,
+            15913,
+            9987
+          ]
+        ]
+      }
+    ]
+  }
+}

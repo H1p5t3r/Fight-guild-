@@ -311,7 +311,7 @@ func build_interface() -> void:
 	var advanced_grid := GridContainer.new()
 	advanced_grid.columns = 2
 	advanced.add_child(advanced_grid)
-	for spec in [["artPose","Artwork pose (0–32)",0,32,1],["followFrom","Follow source slot",-1,42,1],["followFrom2","Second source slot",-1,42,1],["travelSpeed","Active travel px/f",-20,20,100],["inertiaPercent","Carry speed %",0,200,1],["pullFrames","Pull duration f",0,60,1],["pullGap","Pull extra gap px",0,100,100],["hitAngle","Hit slope −1/0/+1",-1,1,1],["button","Button (0–4)",0,4,1],["category","Kind (0–4)",0,4,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (0/214/236/623)",0,623,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["simpleDirection","Simple direction",0,9,1],["simpleButton","Simple button",0,4,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
+	for spec in [["artPose","Artwork pose (0–32)",0,32,1],["followFrom","Follow source slot",-1,CombatModel.MOVE_IDS.size()-1,1],["followFrom2","Second source slot",-1,CombatModel.MOVE_IDS.size()-1,1],["travelSpeed","Active travel px/f",-20,20,100],["inertiaPercent","Carry speed %",0,200,1],["pullFrames","Pull duration f",0,60,1],["pullGap","Pull extra gap px",0,100,100],["hitAngle","Hit slope −1/0/+1",-1,1,1],["button","Button (0–4)",0,4,1],["category","Kind (0–4)",0,4,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (0/214/236/623)",0,623,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["simpleDirection","Simple direction",0,9,1],["simpleButton","Simple button",0,4,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
 		add_field(advanced_grid, spec)
 	var note := label(advanced, "Kind: 0 normal, 1 command, 2 special, 3 Drive, 4 throw. Button: P=0 K=1 S=2 Hs=3 D=4. Masks: −1 unified; P=1 K=2 S=4 Hs=8 D=16. Follow source −1 disables the route. Signature slots: 15 up slash, 25 spiral, 26 mid, 27 low, 28/29 hooks, 30/31 stabs. Hook slope ±1 travels at 45°; height is its thickness. Art pose 0 uses button art.", 10, MUTED)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -861,7 +861,7 @@ func show_sprite_review(clip: int = 0) -> void:
 		signature_picker.select(selected_pose)
 		var slot: int = signature_slots[signature_picker.selected] if clip_picker.selected == 10 else [0, 1, 2, 3, 13][button_picker.selected]
 		var move := model.move(fighter_picker.selected, slot)
-		stats.text = "%df startup · %df active · %df recovery · %d damage · %+df on first-frame block" % [move.startup, move.active, move.recovery, move.damage, move.blockstun - (move.active - 1 + move.recovery)] if clip_picker.selected in [0, 10] else "Body hurtboxes follow the displayed pose. Pushboxes keep a stable body width."
+		stats.text = "%df startup · %df active · %df recovery · %d damage · %+df on block (final hit)" % [move.startup, move.active, move.recovery, move.damage, CombatModel.block_advantage(move)] if clip_picker.selected in [0, 10] else "Body hurtboxes follow the displayed pose. Pushboxes keep a stable body width."
 		for i in 2:
 			previews[i].show_collision = collision_toggle.button_pressed
 			previews[i].facing = -1 if mirror_toggle.button_pressed else 1

@@ -21,18 +21,18 @@
     "key": "actionType",
     "default": 0,
     "min": 0,
-    "max": 4,
+    "max": 6,
     "label": "Action behavior",
-    "help": "Strike, held guard, stance exit, stall/dive, or timed grab sequence.",
+    "help": "0 strike; 1 held guard; 2 stance exit; 3 stall/dive; 4 grab sequence; 5 hold to charge; 6 air projectile stall/recoil.",
     "scale": 1
   },
   {
     "key": "holdFollow",
     "default": -1,
     "min": -1,
-    "max": 42,
+    "max": 44,
     "label": "Held-input destination",
-    "help": "Move slot entered while holding the source attack button; -1 disables.",
+    "help": "Move slot entered by holding the button. Charge actions use its active frames at full charge; -1 has no follow-up.",
     "scale": 1
   },
   {
@@ -41,7 +41,7 @@
     "min": 0,
     "max": 420,
     "label": "Hold transition frame",
-    "help": "First move frame on which the held-input transition can start.",
+    "help": "Absolute attack frame at which holding enters the follow-up. For charge attacks, this is the full-charge startup.",
     "scale": 1
   },
   {
@@ -57,7 +57,7 @@
     "key": "guardFollow",
     "default": -1,
     "min": -1,
-    "max": 42,
+    "max": 44,
     "label": "Guard attack destination",
     "help": "Opposite S/Hs input starts this move from held guard; -1 disables.",
     "scale": 1
@@ -66,7 +66,7 @@
     "key": "proximityMove",
     "default": -1,
     "min": -1,
-    "max": 42,
+    "max": 44,
     "label": "Close-distance move",
     "help": "Alternate move selected when starting this input within the proximity range.",
     "scale": 1
@@ -94,8 +94,8 @@
     "default": 0,
     "min": -2000,
     "max": 2000,
-    "label": "Dive horizontal speed",
-    "help": "Forward speed during an active stall/dive attack.",
+    "label": "Dive / recoil horizontal speed",
+    "help": "Local forward velocity for dive or air projectile recoil. Negative recoil moves away from the opponent.",
     "scale": 100
   },
   {
@@ -103,7 +103,7 @@
     "default": -1100,
     "min": -3000,
     "max": 0,
-    "label": "Dive vertical speed",
+    "label": "Dive / recoil vertical speed",
     "help": "Downward speed during the active dive. Startup holds air velocity.",
     "scale": 100
   },

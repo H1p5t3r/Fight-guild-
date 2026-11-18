@@ -2,7 +2,7 @@
   "schema": 1,
   "style_rules": "docs/sprite-production.md",
   "generator": "OpenAI image_gen",
-  "status": "Tapper v1: dedicated normal/stance move windups and active poses, collar/headbutt, tackle/punch, ready/rolling idles, walk and step dash. Generated iteration artwork; no transition smear frames.",
+  "status": "Smoke v1: 20 directed normal windup/active pairs, poison gas / smoke / ignition palette. Tapper custom kit retained. No transition smear frames.",
   "fighters": [
     {
       "id": "anvil",
@@ -975,129 +975,165 @@
       "name": "Smoke",
       "reference": "art/characters/smoke.png",
       "active": {
-        "file": "smoke-active.png",
-        "columns": 6,
+        "file": "smoke-v1/actions-1.png",
+        "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
+        ],
+        "columns": 2,
         "rows": 2,
-        "body_height": 344,
-        "pivot_x": 128,
-        "sha256": "167ffacb593cecbce5017464fd8ab76d5e5e460f4595dbfa864e11cfb724baa4",
-        "generation_file": "exec-56e89254-399c-4ec8-990f-712c20871aad.png",
+        "body_height": 480,
         "frames": [
           {
+            "name": "5P Vapor Check windup",
+            "file": "smoke-v1/actions-1.png",
             "region": [
               0,
               0,
-              245,
+              768,
               512
             ],
             "pivot": [
-              128,
-              447
+              265,
+              490
             ],
             "bounds": [
-              18,
-              98,
-              214,
-              447
-            ]
+              94,
+              11,
+              402,
+              493
+            ],
+            "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+            "generation_file": "exec-e0f76019-7416-4a86-873a-fbf83fa55251.png"
           },
           {
+            "name": "5P Vapor Check active",
+            "file": "smoke-v1/actions-1.png",
             "region": [
-              245,
               0,
-              266,
+              512,
+              768,
               512
             ],
             "pivot": [
-              139,
-              445
+              265,
+              490
+            ],
+            "bounds": [
+              95,
+              9,
+              613,
+              492
+            ],
+            "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+            "generation_file": "exec-e0f76019-7416-4a86-873a-fbf83fa55251.png"
+          },
+          {
+            "name": "5K Caustic Kick active",
+            "file": "smoke-v1/actions-1.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              205,
+              490
+            ],
+            "bounds": [
+              83,
+              10,
+              547,
+              491
+            ],
+            "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+            "generation_file": "exec-e0f76019-7416-4a86-873a-fbf83fa55251.png"
+          },
+          {
+            "name": "f.S Fivefold Fume active",
+            "file": "smoke-v1/actions-2.png",
+            "region": [
+              714,
+              505,
+              822,
+              519
+            ],
+            "pivot": [
+              216,
+              509
             ],
             "bounds": [
               1,
-              117,
-              259,
-              445
-            ]
+              28,
+              800,
+              511
+            ],
+            "sha256": "40f8bf7a25364f9d6c5bffd65607c7879dfe7651fe455054b9c6d3bd063b632a",
+            "generation_file": "exec-1b9d5ed6-63f3-47c4-bd4a-7f4db6639a4c.png"
           },
           {
+            "name": "5Hs Flashover active",
+            "file": "smoke-v1/actions-3.png",
             "region": [
-              511,
               0,
-              243,
+              512,
+              768,
               512
             ],
             "pivot": [
-              129,
-              445
+              265,
+              490
             ],
             "bounds": [
-              0,
-              109,
-              243,
-              446
+              89,
+              8,
+              768,
+              493
             ],
-            "file": "swings-v3/smoke-active.png",
-            "sha256": "de6a6f87214075f4b4429b9be3b3f5cb2172f5f6cb4967ed672c3e5fd7ea6452",
-            "generation_file": "exec-b7ff9f27-823f-4310-9755-e1fdbf73f761.png",
-            "swing_thickness_target": 3
+            "sha256": "d0a5acf9a5a35e04e80b53b4b2924feccaaccee21347de61f5c9139152675a38",
+            "generation_file": "exec-003e8b91-dbdd-48a3-a605-d184089fb21d.png"
           },
           {
+            "name": "5D Fire Veil active",
+            "file": "smoke-v1/actions-7.png",
             "region": [
-              754,
-              0,
-              280,
+              768,
+              512,
+              768,
               512
             ],
             "pivot": [
-              142,
-              445
+              225,
+              490
             ],
             "bounds": [
-              0,
-              142,
-              280,
-              447
+              22,
+              32,
+              568,
+              493
             ],
-            "file": "swings-v3/smoke-s-clean.png",
-            "sha256": "35be3b230ef4207543cf11d395290e462a9aba9bcb1510c0ee9c7c63bcda343f",
-            "generation_file": "exec-851b43e5-1cae-479e-a84f-206594116b8d.png",
-            "swing_thickness_target": 3
-          },
-          {
-            "region": [
-              1022,
-              0,
-              258,
-              512
-            ],
-            "pivot": [
-              130,
-              443
-            ],
-            "bounds": [
-              0,
-              85,
-              258,
-              443
-            ]
-          },
-          {
-            "region": [
-              1280,
-              0,
-              256,
-              512
-            ],
-            "pivot": [
-              128,
-              444
-            ],
-            "bounds": [
-              0,
-              200,
-              244,
-              444
-            ]
+            "sha256": "97f97303d6a8b4758db1d28484a1bde9881920c2b06a8f59a1fae7fe63080268",
+            "generation_file": "exec-25af5246-c2a8-4a5e-8ae1-3e001c327862.png"
           },
           {
             "region": [
@@ -1115,7 +1151,10 @@
               92,
               253,
               440
-            ]
+            ],
+            "file": "smoke-active.png",
+            "body_height": 344,
+            "sha256": "167ffacb593cecbce5017464fd8ab76d5e5e460f4595dbfa864e11cfb724baa4"
           },
           {
             "region": [
@@ -1133,25 +1172,32 @@
               95,
               229,
               439
-            ]
+            ],
+            "file": "smoke-active.png",
+            "body_height": 344,
+            "sha256": "167ffacb593cecbce5017464fd8ab76d5e5e460f4595dbfa864e11cfb724baa4"
           },
           {
+            "name": "j.P Air Check windup",
+            "file": "smoke-v1/actions-8.png",
             "region": [
-              512,
-              512,
-              248,
+              768,
+              0,
+              768,
               512
             ],
             "pivot": [
-              128,
-              303
+              260,
+              480
             ],
             "bounds": [
-              2,
-              42,
-              225,
-              303
-            ]
+              39,
+              27,
+              399,
+              435
+            ],
+            "sha256": "7fcfe7df8f21af23e6321cd55cc43f358e8326c407c7b48fd8fc1f8f5bb062ac",
+            "generation_file": "exec-64fa33f3-f0d8-4f5c-975a-e5ecbfa8189b.png"
           },
           {
             "region": [
@@ -1169,7 +1215,10 @@
               106,
               254,
               438
-            ]
+            ],
+            "file": "smoke-active.png",
+            "body_height": 344,
+            "sha256": "167ffacb593cecbce5017464fd8ab76d5e5e460f4595dbfa864e11cfb724baa4"
           },
           {
             "region": [
@@ -1187,144 +1236,195 @@
               121,
               241,
               438
-            ]
+            ],
+            "file": "smoke-active.png",
+            "body_height": 344,
+            "sha256": "167ffacb593cecbce5017464fd8ab76d5e5e460f4595dbfa864e11cfb724baa4"
           },
           {
+            "name": "2S Soot Ribbon windup",
+            "file": "smoke-v1/actions-4.png",
             "region": [
-              1277,
-              512,
-              259,
+              727,
+              0,
+              809,
               512
             ],
             "pivot": [
-              131,
-              438
+              271,
+              469
             ],
             "bounds": [
               1,
-              201,
-              241,
-              438
-            ]
+              96,
+              371,
+              474
+            ],
+            "sha256": "ee701c9d7e9d7d4bcb543748b6254c7f3343f417b2f99ffed77f6a852606e6b1",
+            "generation_file": "exec-57f9d3c0-9764-40d4-823e-45d32a25d53f.png"
           }
         ]
       },
       "windup": {
-        "file": "smoke-windup.png",
-        "columns": 3,
+        "file": "smoke-v1/actions-1.png",
+        "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
+        ],
+        "columns": 2,
         "rows": 2,
-        "body_height": 476,
-        "pivot_x": 256,
-        "sha256": "2c578b348a0c0c65a8e1adff3899b4c70e72dc9270801bd4125fb5d46bd2b75b",
-        "generation_file": "exec-67ab0ea3-b8d4-4e16-b5ef-5ff9acf0e703.png",
+        "body_height": 480,
         "frames": [
           {
+            "name": "5P Vapor Check windup",
+            "file": "smoke-v1/actions-1.png",
             "region": [
               0,
               0,
-              512,
+              768,
               512
             ],
             "pivot": [
-              256,
-              499
+              265,
+              490
             ],
             "bounds": [
-              122,
-              22,
-              396,
-              499
-            ]
+              94,
+              11,
+              402,
+              493
+            ],
+            "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+            "generation_file": "exec-e0f76019-7416-4a86-873a-fbf83fa55251.png"
           },
           {
-            "region": [
-              512,
-              0,
-              512,
-              512
-            ],
-            "pivot": [
-              256,
-              498
-            ],
-            "bounds": [
-              80,
-              76,
-              409,
-              498
-            ]
-          },
-          {
-            "region": [
-              1024,
-              0,
-              512,
-              512
-            ],
-            "pivot": [
-              256,
-              498
-            ],
-            "bounds": [
-              79,
-              31,
-              348,
-              498
-            ]
-          },
-          {
+            "name": "5P Vapor Check windup",
+            "file": "smoke-v1/actions-1.png",
             "region": [
               0,
-              512,
-              512,
+              0,
+              768,
               512
             ],
             "pivot": [
-              256,
-              459
+              265,
+              490
             ],
             "bounds": [
-              86,
-              65,
-              446,
-              459
-            ]
+              94,
+              11,
+              402,
+              493
+            ],
+            "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+            "generation_file": "exec-e0f76019-7416-4a86-873a-fbf83fa55251.png"
           },
           {
+            "name": "5K Caustic Kick windup",
+            "file": "smoke-v1/actions-1.png",
             "region": [
-              512,
-              512,
-              512,
+              768,
+              0,
+              768,
               512
             ],
             "pivot": [
-              256,
-              461
+              205,
+              490
             ],
             "bounds": [
-              89,
-              64,
-              439,
-              461
-            ]
+              84,
+              11,
+              351,
+              492
+            ],
+            "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+            "generation_file": "exec-e0f76019-7416-4a86-873a-fbf83fa55251.png"
           },
           {
+            "name": "f.S Fivefold Fume windup",
+            "file": "smoke-v1/actions-2.png",
             "region": [
-              1024,
-              512,
-              512,
+              768,
+              0,
+              768,
+              505
+            ],
+            "pivot": [
+              227,
+              490
+            ],
+            "bounds": [
+              34,
+              9,
+              363,
+              491
+            ],
+            "sha256": "40f8bf7a25364f9d6c5bffd65607c7879dfe7651fe455054b9c6d3bd063b632a",
+            "generation_file": "exec-1b9d5ed6-63f3-47c4-bd4a-7f4db6639a4c.png"
+          },
+          {
+            "name": "5Hs Flashover windup",
+            "file": "smoke-v1/actions-3.png",
+            "region": [
+              0,
+              0,
+              768,
               512
             ],
             "pivot": [
-              256,
-              459
+              265,
+              490
             ],
             "bounds": [
-              64,
-              121,
-              383,
-              459
-            ]
+              91,
+              10,
+              404,
+              494
+            ],
+            "sha256": "d0a5acf9a5a35e04e80b53b4b2924feccaaccee21347de61f5c9139152675a38",
+            "generation_file": "exec-003e8b91-dbdd-48a3-a605-d184089fb21d.png"
+          },
+          {
+            "name": "5D Fire Veil windup",
+            "file": "smoke-v1/actions-7.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              220,
+              502
+            ],
+            "bounds": [
+              20,
+              9,
+              399,
+              506
+            ],
+            "sha256": "97f97303d6a8b4758db1d28484a1bde9881920c2b06a8f59a1fae7fe63080268",
+            "generation_file": "exec-25af5246-c2a8-4a5e-8ae1-3e001c327862.png"
           }
         ]
       },
@@ -1452,6 +1552,958 @@
             ]
           }
         ]
+      },
+      "signature_windup": {
+        "file": "smoke-v1/actions-1.png",
+        "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
+        ],
+        "columns": 2,
+        "rows": 2,
+        "body_height": 480,
+        "frames": [
+          {
+            "name": "5P Vapor Check windup",
+            "file": "smoke-v1/actions-1.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              265,
+              490
+            ],
+            "bounds": [
+              94,
+              11,
+              402,
+              493
+            ],
+            "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+            "generation_file": "exec-e0f76019-7416-4a86-873a-fbf83fa55251.png"
+          },
+          {
+            "name": "5K Caustic Kick windup",
+            "file": "smoke-v1/actions-1.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              205,
+              490
+            ],
+            "bounds": [
+              84,
+              11,
+              351,
+              492
+            ],
+            "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+            "generation_file": "exec-e0f76019-7416-4a86-873a-fbf83fa55251.png"
+          },
+          {
+            "name": "c.S Chimney Coil windup",
+            "file": "smoke-v1/actions-2.png",
+            "region": [
+              0,
+              0,
+              768,
+              505
+            ],
+            "pivot": [
+              342,
+              482
+            ],
+            "bounds": [
+              150,
+              88,
+              449,
+              484
+            ],
+            "sha256": "40f8bf7a25364f9d6c5bffd65607c7879dfe7651fe455054b9c6d3bd063b632a",
+            "generation_file": "exec-1b9d5ed6-63f3-47c4-bd4a-7f4db6639a4c.png"
+          },
+          {
+            "name": "f.S Fivefold Fume windup",
+            "file": "smoke-v1/actions-2.png",
+            "region": [
+              768,
+              0,
+              768,
+              505
+            ],
+            "pivot": [
+              227,
+              490
+            ],
+            "bounds": [
+              34,
+              9,
+              363,
+              491
+            ],
+            "sha256": "40f8bf7a25364f9d6c5bffd65607c7879dfe7651fe455054b9c6d3bd063b632a",
+            "generation_file": "exec-1b9d5ed6-63f3-47c4-bd4a-7f4db6639a4c.png"
+          },
+          {
+            "name": "5Hs Flashover windup",
+            "file": "smoke-v1/actions-3.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              265,
+              490
+            ],
+            "bounds": [
+              91,
+              10,
+              404,
+              494
+            ],
+            "sha256": "d0a5acf9a5a35e04e80b53b4b2924feccaaccee21347de61f5c9139152675a38",
+            "generation_file": "exec-003e8b91-dbdd-48a3-a605-d184089fb21d.png"
+          },
+          {
+            "name": "2P Low Pressure windup",
+            "file": "smoke-v1/actions-3.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              248,
+              490
+            ],
+            "bounds": [
+              51,
+              137,
+              380,
+              494
+            ],
+            "sha256": "d0a5acf9a5a35e04e80b53b4b2924feccaaccee21347de61f5c9139152675a38",
+            "generation_file": "exec-003e8b91-dbdd-48a3-a605-d184089fb21d.png"
+          },
+          {
+            "name": "2K Ankle Leak windup",
+            "file": "smoke-v1/actions-4.png",
+            "region": [
+              0,
+              0,
+              727,
+              512
+            ],
+            "pivot": [
+              300,
+              469
+            ],
+            "bounds": [
+              43,
+              98,
+              535,
+              475
+            ],
+            "sha256": "ee701c9d7e9d7d4bcb543748b6254c7f3343f417b2f99ffed77f6a852606e6b1",
+            "generation_file": "exec-57f9d3c0-9764-40d4-823e-45d32a25d53f.png"
+          },
+          {
+            "name": "2S Soot Ribbon windup",
+            "file": "smoke-v1/actions-4.png",
+            "region": [
+              727,
+              0,
+              809,
+              512
+            ],
+            "pivot": [
+              271,
+              469
+            ],
+            "bounds": [
+              1,
+              96,
+              371,
+              474
+            ],
+            "sha256": "ee701c9d7e9d7d4bcb543748b6254c7f3343f417b2f99ffed77f6a852606e6b1",
+            "generation_file": "exec-57f9d3c0-9764-40d4-823e-45d32a25d53f.png"
+          },
+          {
+            "name": "2Hs Backdraft windup",
+            "file": "smoke-v1/launcher.png",
+            "region": [
+              0,
+              0,
+              600,
+              1024
+            ],
+            "pivot": [
+              270,
+              986
+            ],
+            "bounds": [
+              18,
+              17,
+              600,
+              994
+            ],
+            "sha256": "eb88c14cb790fb32ebca5598a72cb87baab81c7cd1991b7c283c9f8bf8f0fafd",
+            "generation_file": "exec-7d69dc1f-d0ea-4050-b648-724dace76269.png"
+          },
+          {
+            "name": "2D Floor Spill windup",
+            "file": "smoke-v1/actions-5.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              247,
+              466
+            ],
+            "bounds": [
+              25,
+              138,
+              452,
+              468
+            ],
+            "sha256": "fc3e07d6ad9e330d2937a2697f7289f14f9a2bb3402119b7d505ed3995e64dd8",
+            "generation_file": "exec-9bf109e1-10d7-4b7d-bbad-e7a6eb0f87ed.png"
+          },
+          {
+            "name": "6P Updraft windup",
+            "file": "smoke-v1/actions-6.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              300,
+              490
+            ],
+            "bounds": [
+              95,
+              95,
+              463,
+              496
+            ],
+            "sha256": "2d649868fa7369f20e5a45c5648199092342df8295a09d126bb87a40743e29e9",
+            "generation_file": "exec-ce437551-70a5-43e5-9b16-fe931f031c96.png"
+          },
+          {
+            "name": "6Hs Smoke Hammer windup",
+            "file": "smoke-v1/actions-6.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              250,
+              490
+            ],
+            "bounds": [
+              54,
+              18,
+              404,
+              496
+            ],
+            "sha256": "2d649868fa7369f20e5a45c5648199092342df8295a09d126bb87a40743e29e9",
+            "generation_file": "exec-ce437551-70a5-43e5-9b16-fe931f031c96.png"
+          },
+          {
+            "name": "6[Hs] Flashpoint Hammer windup",
+            "file": "smoke-v1/actions-7.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              310,
+              502
+            ],
+            "bounds": [
+              90,
+              16,
+              493,
+              507
+            ],
+            "sha256": "97f97303d6a8b4758db1d28484a1bde9881920c2b06a8f59a1fae7fe63080268",
+            "generation_file": "exec-25af5246-c2a8-4a5e-8ae1-3e001c327862.png"
+          },
+          {
+            "name": "5D Fire Veil windup",
+            "file": "smoke-v1/actions-7.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              220,
+              502
+            ],
+            "bounds": [
+              20,
+              9,
+              399,
+              506
+            ],
+            "sha256": "97f97303d6a8b4758db1d28484a1bde9881920c2b06a8f59a1fae7fe63080268",
+            "generation_file": "exec-25af5246-c2a8-4a5e-8ae1-3e001c327862.png"
+          },
+          {
+            "name": "5[D] Rising Ignition windup",
+            "file": "smoke-v1/actions-8.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              355,
+              502
+            ],
+            "bounds": [
+              74,
+              12,
+              543,
+              502
+            ],
+            "sha256": "7fcfe7df8f21af23e6321cd55cc43f358e8326c407c7b48fd8fc1f8f5bb062ac",
+            "generation_file": "exec-64fa33f3-f0d8-4f5c-975a-e5ecbfa8189b.png"
+          },
+          {
+            "name": "j.P Air Check windup",
+            "file": "smoke-v1/actions-8.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              260,
+              480
+            ],
+            "bounds": [
+              39,
+              27,
+              399,
+              435
+            ],
+            "sha256": "7fcfe7df8f21af23e6321cd55cc43f358e8326c407c7b48fd8fc1f8f5bb062ac",
+            "generation_file": "exec-64fa33f3-f0d8-4f5c-975a-e5ecbfa8189b.png"
+          },
+          {
+            "name": "j.K Caustic Heel windup",
+            "file": "smoke-v1/actions-9.png",
+            "region": [
+              0,
+              0,
+              747,
+              512
+            ],
+            "pivot": [
+              320,
+              480
+            ],
+            "bounds": [
+              82,
+              17,
+              429,
+              465
+            ],
+            "sha256": "be7ec14fddd85db54dedfc213602d2781620efdcc60f15ce12fed0a2f003f2da",
+            "generation_file": "exec-7cfcbe6d-0fd9-47d4-9d48-0544c680c681.png"
+          },
+          {
+            "name": "j.S Vapor Lance windup",
+            "file": "smoke-v1/actions-9.png",
+            "region": [
+              747,
+              0,
+              789,
+              512
+            ],
+            "pivot": [
+              241,
+              480
+            ],
+            "bounds": [
+              1,
+              22,
+              343,
+              445
+            ],
+            "sha256": "be7ec14fddd85db54dedfc213602d2781620efdcc60f15ce12fed0a2f003f2da",
+            "generation_file": "exec-7cfcbe6d-0fd9-47d4-9d48-0544c680c681.png"
+          },
+          {
+            "name": "j.Hs Cinder Scythe windup",
+            "file": "smoke-v1/actions-10.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              380,
+              480
+            ],
+            "bounds": [
+              90,
+              13,
+              553,
+              464
+            ],
+            "sha256": "f7ea23ac73920288941d79249229a52f0f875d91a03332106274eaba7a6c1a92",
+            "generation_file": "exec-1806ebc2-4ddf-43af-b197-4a92d9fbfc4d.png"
+          },
+          {
+            "name": "j.D Drifting Ember windup",
+            "file": "smoke-v1/actions-10.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              330,
+              480
+            ],
+            "bounds": [
+              104,
+              13,
+              481,
+              481
+            ],
+            "sha256": "f7ea23ac73920288941d79249229a52f0f875d91a03332106274eaba7a6c1a92",
+            "generation_file": "exec-1806ebc2-4ddf-43af-b197-4a92d9fbfc4d.png"
+          }
+        ]
+      },
+      "signature_active": {
+        "file": "smoke-v1/actions-1.png",
+        "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+        "size": [
+          1536,
+          1024
+        ],
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
+        ],
+        "columns": 2,
+        "rows": 2,
+        "body_height": 480,
+        "frames": [
+          {
+            "name": "5P Vapor Check active",
+            "file": "smoke-v1/actions-1.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              265,
+              490
+            ],
+            "bounds": [
+              95,
+              9,
+              613,
+              492
+            ],
+            "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+            "generation_file": "exec-e0f76019-7416-4a86-873a-fbf83fa55251.png"
+          },
+          {
+            "name": "5K Caustic Kick active",
+            "file": "smoke-v1/actions-1.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              205,
+              490
+            ],
+            "bounds": [
+              83,
+              10,
+              547,
+              491
+            ],
+            "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
+            "generation_file": "exec-e0f76019-7416-4a86-873a-fbf83fa55251.png"
+          },
+          {
+            "name": "c.S Chimney Coil active",
+            "file": "smoke-v1/actions-2.png",
+            "region": [
+              0,
+              505,
+              714,
+              519
+            ],
+            "pivot": [
+              317,
+              509
+            ],
+            "bounds": [
+              118,
+              1,
+              527,
+              511
+            ],
+            "sha256": "40f8bf7a25364f9d6c5bffd65607c7879dfe7651fe455054b9c6d3bd063b632a",
+            "generation_file": "exec-1b9d5ed6-63f3-47c4-bd4a-7f4db6639a4c.png"
+          },
+          {
+            "name": "f.S Fivefold Fume active",
+            "file": "smoke-v1/actions-2.png",
+            "region": [
+              714,
+              505,
+              822,
+              519
+            ],
+            "pivot": [
+              216,
+              509
+            ],
+            "bounds": [
+              1,
+              28,
+              800,
+              511
+            ],
+            "sha256": "40f8bf7a25364f9d6c5bffd65607c7879dfe7651fe455054b9c6d3bd063b632a",
+            "generation_file": "exec-1b9d5ed6-63f3-47c4-bd4a-7f4db6639a4c.png"
+          },
+          {
+            "name": "5Hs Flashover active",
+            "file": "smoke-v1/actions-3.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              265,
+              490
+            ],
+            "bounds": [
+              89,
+              8,
+              768,
+              493
+            ],
+            "sha256": "d0a5acf9a5a35e04e80b53b4b2924feccaaccee21347de61f5c9139152675a38",
+            "generation_file": "exec-003e8b91-dbdd-48a3-a605-d184089fb21d.png"
+          },
+          {
+            "name": "2P Low Pressure active",
+            "file": "smoke-v1/actions-3.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              248,
+              490
+            ],
+            "bounds": [
+              51,
+              137,
+              660,
+              494
+            ],
+            "sha256": "d0a5acf9a5a35e04e80b53b4b2924feccaaccee21347de61f5c9139152675a38",
+            "generation_file": "exec-003e8b91-dbdd-48a3-a605-d184089fb21d.png"
+          },
+          {
+            "name": "2K Ankle Leak active",
+            "file": "smoke-v1/actions-4.png",
+            "region": [
+              0,
+              512,
+              691,
+              512
+            ],
+            "pivot": [
+              230,
+              455
+            ],
+            "bounds": [
+              29,
+              94,
+              658,
+              459
+            ],
+            "sha256": "ee701c9d7e9d7d4bcb543748b6254c7f3343f417b2f99ffed77f6a852606e6b1",
+            "generation_file": "exec-57f9d3c0-9764-40d4-823e-45d32a25d53f.png"
+          },
+          {
+            "name": "2S Soot Ribbon active",
+            "file": "smoke-v1/actions-4.png",
+            "region": [
+              691,
+              512,
+              845,
+              512
+            ],
+            "pivot": [
+              254,
+              455
+            ],
+            "bounds": [
+              1,
+              76,
+              816,
+              458
+            ],
+            "sha256": "ee701c9d7e9d7d4bcb543748b6254c7f3343f417b2f99ffed77f6a852606e6b1",
+            "generation_file": "exec-57f9d3c0-9764-40d4-823e-45d32a25d53f.png"
+          },
+          {
+            "name": "2Hs Backdraft active",
+            "file": "smoke-v1/launcher.png",
+            "region": [
+              600,
+              0,
+              936,
+              1024
+            ],
+            "pivot": [
+              320,
+              986
+            ],
+            "bounds": [
+              0,
+              16,
+              916,
+              996
+            ],
+            "sha256": "eb88c14cb790fb32ebca5598a72cb87baab81c7cd1991b7c283c9f8bf8f0fafd",
+            "generation_file": "exec-7d69dc1f-d0ea-4050-b648-724dace76269.png"
+          },
+          {
+            "name": "2D Floor Spill active",
+            "file": "smoke-v1/actions-5.png",
+            "region": [
+              750,
+              512,
+              786,
+              512
+            ],
+            "pivot": [
+              258,
+              487
+            ],
+            "bounds": [
+              1,
+              151,
+              762,
+              489
+            ],
+            "sha256": "fc3e07d6ad9e330d2937a2697f7289f14f9a2bb3402119b7d505ed3995e64dd8",
+            "generation_file": "exec-9bf109e1-10d7-4b7d-bbad-e7a6eb0f87ed.png"
+          },
+          {
+            "name": "6P Updraft active",
+            "file": "smoke-v1/actions-6.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              290,
+              490
+            ],
+            "bounds": [
+              60,
+              11,
+              708,
+              494
+            ],
+            "sha256": "2d649868fa7369f20e5a45c5648199092342df8295a09d126bb87a40743e29e9",
+            "generation_file": "exec-ce437551-70a5-43e5-9b16-fe931f031c96.png"
+          },
+          {
+            "name": "6Hs Smoke Hammer active",
+            "file": "smoke-v1/actions-6.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              240,
+              490
+            ],
+            "bounds": [
+              13,
+              71,
+              751,
+              495
+            ],
+            "sha256": "2d649868fa7369f20e5a45c5648199092342df8295a09d126bb87a40743e29e9",
+            "generation_file": "exec-ce437551-70a5-43e5-9b16-fe931f031c96.png"
+          },
+          {
+            "name": "6[Hs] Flashpoint Hammer active",
+            "file": "smoke-v1/actions-7.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              270,
+              490
+            ],
+            "bounds": [
+              21,
+              69,
+              756,
+              493
+            ],
+            "sha256": "97f97303d6a8b4758db1d28484a1bde9881920c2b06a8f59a1fae7fe63080268",
+            "generation_file": "exec-25af5246-c2a8-4a5e-8ae1-3e001c327862.png"
+          },
+          {
+            "name": "5D Fire Veil active",
+            "file": "smoke-v1/actions-7.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              225,
+              490
+            ],
+            "bounds": [
+              22,
+              32,
+              568,
+              493
+            ],
+            "sha256": "97f97303d6a8b4758db1d28484a1bde9881920c2b06a8f59a1fae7fe63080268",
+            "generation_file": "exec-25af5246-c2a8-4a5e-8ae1-3e001c327862.png"
+          },
+          {
+            "name": "5[D] Rising Ignition active",
+            "file": "smoke-v1/actions-8.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              502
+            ],
+            "bounds": [
+              58,
+              17,
+              714,
+              499
+            ],
+            "sha256": "7fcfe7df8f21af23e6321cd55cc43f358e8326c407c7b48fd8fc1f8f5bb062ac",
+            "generation_file": "exec-64fa33f3-f0d8-4f5c-975a-e5ecbfa8189b.png"
+          },
+          {
+            "name": "j.P Air Check active",
+            "file": "smoke-v1/actions-8.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              260,
+              480
+            ],
+            "bounds": [
+              38,
+              22,
+              640,
+              423
+            ],
+            "sha256": "7fcfe7df8f21af23e6321cd55cc43f358e8326c407c7b48fd8fc1f8f5bb062ac",
+            "generation_file": "exec-64fa33f3-f0d8-4f5c-975a-e5ecbfa8189b.png"
+          },
+          {
+            "name": "j.K Caustic Heel active",
+            "file": "smoke-v1/actions-9.png",
+            "region": [
+              0,
+              512,
+              718,
+              512
+            ],
+            "pivot": [
+              310,
+              480
+            ],
+            "bounds": [
+              61,
+              13,
+              615,
+              461
+            ],
+            "sha256": "be7ec14fddd85db54dedfc213602d2781620efdcc60f15ce12fed0a2f003f2da",
+            "generation_file": "exec-7cfcbe6d-0fd9-47d4-9d48-0544c680c681.png"
+          },
+          {
+            "name": "j.S Vapor Lance active",
+            "file": "smoke-v1/actions-9.png",
+            "region": [
+              718,
+              512,
+              818,
+              512
+            ],
+            "pivot": [
+              250,
+              480
+            ],
+            "bounds": [
+              1,
+              14,
+              781,
+              449
+            ],
+            "sha256": "be7ec14fddd85db54dedfc213602d2781620efdcc60f15ce12fed0a2f003f2da",
+            "generation_file": "exec-7cfcbe6d-0fd9-47d4-9d48-0544c680c681.png"
+          },
+          {
+            "name": "j.Hs Cinder Scythe active",
+            "file": "smoke-v1/actions-10.png",
+            "region": [
+              0,
+              512,
+              796,
+              512
+            ],
+            "pivot": [
+              330,
+              480
+            ],
+            "bounds": [
+              42,
+              10,
+              796,
+              488
+            ],
+            "sha256": "f7ea23ac73920288941d79249229a52f0f875d91a03332106274eaba7a6c1a92",
+            "generation_file": "exec-1806ebc2-4ddf-43af-b197-4a92d9fbfc4d.png"
+          },
+          {
+            "name": "j.D Drifting Ember active",
+            "file": "smoke-v1/actions-10.png",
+            "region": [
+              796,
+              512,
+              740,
+              512
+            ],
+            "pivot": [
+              302,
+              480
+            ],
+            "bounds": [
+              66,
+              20,
+              658,
+              484
+            ],
+            "sha256": "f7ea23ac73920288941d79249229a52f0f875d91a03332106274eaba7a6c1a92",
+            "generation_file": "exec-1806ebc2-4ddf-43af-b197-4a92d9fbfc4d.png"
+          }
+        ]
+      },
+      "projectile": {
+        "file": "smoke-v1/projectile.png",
+        "region": [
+          159,
+          271,
+          911,
+          675
+        ],
+        "sha256": "762ded94f5bb2d9126d8b5f3089d64146fc1f230288ec54a4b1582c10c281001"
       }
     },
     {

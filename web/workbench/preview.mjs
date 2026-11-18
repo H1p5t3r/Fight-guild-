@@ -58,11 +58,12 @@ export class Preview {
       ctx.fillStyle='#050d12';ctx.beginPath();ctx.ellipse(p.x,ground.y,22*scale,5*scale,0,0,Math.PI*2);ctx.fill();
       for(const q of frame.state.projectiles?.filter(q=>q.owner===i)??[]){
         const box=[q.x-q.width/2,q.y-q.height/2,q.x+q.width/2,q.y+q.height/2],from=point(box[0],box[3]),to=point(box[2],box[1]);
-        const effect=this.image('appearance-v3/projectiles.png'),region=q.kind===2?[797,350,708,390]:[28,326,695,432];
+        const custom=this.pack.art[f.character].projectile;
+        const effect=this.image(custom?.file??'appearance-v3/projectiles.png'),region=custom?.region??(q.kind===2?[797,350,708,390]:[28,326,695,432]);
         if(this.options.art&&effect.complete&&effect.naturalWidth){ctx.save();ctx.translate((from.x+to.x)/2,from.y);ctx.scale(q.facing,1);ctx.drawImage(effect,...region,-Math.abs(to.x-from.x)/2,0,Math.abs(to.x-from.x),Math.abs(to.y-from.y));ctx.restore();}
         if(this.options.hit)rect(box,'#d7a7ff',.15);
       }
-      if(this.options.art&&tile){const img=this.image(tile.file??sheet.file),s=150/sheet.body_height*scale;if(img.complete&&img.naturalWidth){const [sx,sy,sw,sh]=tile.render_region??tile.region;ctx.save();ctx.translate(p.x,p.y);ctx.scale(f.facing,1);ctx.drawImage(img,sx,sy,sw,sh,(sx-tile.region[0]-tile.pivot[0])*s,(sy-tile.region[1]-tile.pivot[1])*s,sw*s,sh*s);ctx.restore();}}
+      if(this.options.art&&tile){const img=this.image(tile.file??sheet.file),s=150/(tile.body_height??sheet.body_height)*scale;if(img.complete&&img.naturalWidth){const [sx,sy,sw,sh]=tile.render_region??tile.region;ctx.save();ctx.translate(p.x,p.y);ctx.scale(f.facing,1);ctx.drawImage(img,sx,sy,sw,sh,(sx-tile.region[0]-tile.pivot[0])*s,(sy-tile.region[1]-tile.pivot[1])*s,sw*s,sh*s);ctx.restore();}}
       if(this.options.push)frame.boxes[i].push.forEach(box=>rect(box,'#a8ba76'));
       const hurt=!i&&moveFrame&&!f.variant&&(record.geometryOnly||m.hurtboxes[phase])?Object.values(enabledHurtboxes(effectiveHurtboxes(this.pack,record.character,m,moveFrame),m,phase)).map(localToWorld):frame.boxes[i].hurt;
       if(this.options.hurt)hurt.forEach(box=>rect(box,'#7bb8d4'));

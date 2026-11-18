@@ -3,12 +3,13 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 18, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 43, FIELD_COUNT = 138;
+constexpr int VERSION = 19, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 45, FIELD_COUNT = 138;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
               STAB_GROUND=30, STAB_AIR=31;
 constexpr int CLOSE_SLASH=32, HELD_GUARD=33, GUARD_ATTACK=34, STANCE_P=35, STANCE_K=36, STANCE_S=37, STANCE_HS=38, STANCE_EXIT=39, STANCE_THROW=40, AIR_BACK_THROW=41, AIR_FORWARD_THROW=42;
+constexpr int CHARGED_HS=43, CHARGED_D=44;
 constexpr int MIN_STARTUP = 5;
 constexpr int MAX_HURTBOXES = 4;
 enum HurtRegion { LegsHurt, TorsoArmsHurt, HeadHurt, ExtensionHurt };

@@ -2,7 +2,22 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 18
+const DATA_VERSION := 19
+
+static func block_advantage(move: Dictionary) -> int:
+	var start := 1
+	var stun := int(move.blockstun)
+	var seen := {1: true}
+	var track: Dictionary = move.get("hitboxTimeline", {})
+	if track.get("multiHit", false):
+		for key in track.get("keys", []):
+			if int(key.frame) > int(move.active): break
+			if key.boxes is Array and key.boxes.is_empty(): continue
+			if not seen.has(int(key.hit)):
+				start = int(key.frame)
+				stun = int(move.blockstun) if int(key.blockstun) < 0 else int(key.blockstun)
+				seen[int(key.hit)] = true
+	return stun - (int(move.active) - start + int(move.recovery))
 const HIT_KEY_FIELDS := 23
 const HIT_TRACK_FIELDS := 738
 const HIT_OVERRIDES := ["damage", "hitstun", "blockstun", "hitstop"]
@@ -12,7 +27,7 @@ const HURT_FIELDS := 17
 const MOMENTUM_MAX := 10000
 const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
-const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D", "2D", "4P+K", "6P+K", "236K", "236S>6S", "236S>2S", "214S", "j.214P", "214S>P", "j.214P>P","c.S","[S/Hs]","[S/Hs]>attack","st.P","st.K","st.S","st.Hs","st.2D","st.236D","j.4P+K","j.6P+K"]
+const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D", "2D", "4P+K", "6P+K", "236K", "236S>6S", "236S>2S", "214S", "j.214P", "214S>P", "j.214P>P","c.S","[S/Hs]","[S/Hs]>attack","st.P","st.K","st.S","st.Hs","st.2D","st.236D","j.4P+K","j.6P+K","6[Hs]","5[D]"]
 # Smear slots are reserved for schema compatibility; transition smearing is removed.
 const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange", "enabled", "artPose", "followFrom", "followFrom2", "followHit", "travelSpeed", "inertiaPercent", "pullFrames", "pullGap", "hitAngle", "normalCancelStart", "normalCancelEnd", "specialCancelStart", "specialCancelEnd", "jumpCancelStart", "jumpCancelEnd", "followCancelStart", "followCancelEnd", "cancelOn", "starterProration", "comboScaling", "minimumDamage", "landingRecovery", "attackLevel", "counterTier", "counterVulnerable", "counterFreezeFrames", "counterSlowFrames", "projectileKind", "projectileSpawnFrame", "projectileSpeedX", "projectileSpeedY", "projectileGravity", "projectileLife", "projectileOffsetX", "projectileOffsetY", "projectileWidth", "projectileHeight", "projectileHits", "projectileRehit", "projectileDurability", "projectilePersist", "projectileMelee", "smearMode", "smearPart", "smearStretch", "smearFrame1", "smearFrame2", "smearFrame3", "smearFrame4", "hurtMaskWindup", "hurtMaskActive", "hurtMaskRecovery","mechanic","tetherSpeed","tetherFrames","bleedInitial","bleedTickDamage","bleedTickFrames","bleedDuration","bleedBlockPercent","bleedCap","variantStartup","variantActive","variantRecovery","variantDamage","variantRange","variantSpeed","variantLift","variantHitstun","variantKnockdown","stanceRequired","stanceChange","actionType","holdFollow","holdFrame","holdButton","guardFollow","proximityMove","proximityRange","startupTravel","diveSpeedX","diveSpeedY","groundBounce","wallBounce","crumpleFrames","airCounterKnockdown","hurtWindowStart","hurtWindowEnd","hurtWindowMask","semiAirStart","semiAirEnd","armorFrames","armorHits","grabFrames","finishArtPose","finishArtFrame"]
 const MOVEMENT_FIELDS := ["forwardStyle", "walkSpeed", "runSpeed", "runAcceleration", "stepSpeed", "stepFrames", "backSpeed", "backFrames", "attackFriction", "backStyle", "backWalkSpeed", "backRunSpeed", "jumpSpeed", "jumpForwardSpeed", "jumpBackSpeed", "gravity", "airJumps", "prejumpFrames", "airDashEnabled", "airBackdashEnabled", "airDashStyle", "airBackdashStyle", "airDashSpeed", "airBackdashSpeed", "airDashFrames", "airBackdashFrames", "airDashUses", "hoverHeight", "hoverRiseSpeed", "teleportDistance", "backTeleportDistance", "teleportStartup", "fdEnabled", "fdPushPercent", "fdDrain", "fdAirDrain", "fdBlockCost", "smearMode", "smearPart", "smearStretch"]
@@ -176,7 +191,7 @@ func load_data(value: Variant) -> String:
 		return "Unsupported move data version."
 	var characters: Variant = value.get("characters")
 	var expected := 2 if version == 1 else CHARACTERS.size()
-	var slots := 22 if version < 6 else 25 if version == 6 else 32 if version < 18 else MOVE_IDS.size()
+	var slots := 22 if version < 6 else 25 if version == 6 else 32 if version < 18 else 43 if version == 18 else MOVE_IDS.size()
 	if not characters is Array or characters.size() != expected:
 		return "Missing characters."
 	# Start with shipped defaults, so older files gain the new universal move slots.
@@ -193,6 +208,8 @@ func load_data(value: Variant) -> String:
 				for field in additions:
 					candidate[(c * MOVE_IDS.size() + slot) * FIELDS.size() + FIELDS.find(field.key)] = int(field.default)
 				if slot >= 32: candidate[(c * MOVE_IDS.size() + slot) * FIELDS.size() + FIELDS.find("enabled")] = 0
+		if version < 19:
+			for slot in range(43, MOVE_IDS.size()): candidate[(c * MOVE_IDS.size() + slot) * FIELDS.size() + FIELDS.find("enabled")] = 0
 		for m in slots:
 			if not definitions[m] is Dictionary or definitions[m].get("id") != MOVE_IDS[m]:
 				return "Move slot IDs must match this build."

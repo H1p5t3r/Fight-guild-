@@ -58,7 +58,7 @@ export class CombatPreview {
       for(let i=0;i<11;++i)step(entry==='forwardJump'?forward:0,'Jump approach');
     }
     const contextual=m.followFrom>=0||m.followFrom2>=0;
-    if(contextual||m.stanceRequired===2||slot===32||slot===33||slot===34){
+    if(contextual||m.stanceRequired===2||slot===32||slot===33||slot===34||slot===43||slot===44){
       // A selected rekka ending can be studied on its own without changing any
       // routes. This explicit isolated mode is identified in the visible result.
       e.api.fg_preview_begin(0,slot);

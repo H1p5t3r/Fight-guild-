@@ -1,11 +1,11 @@
 {
-  "label": "Tapper kit + Batch3 ·18 November2026",
-  "status": "playable provisional tuning",
-  "file": "2026-11-18-tapper/FightGuild-Tapper.json",
-  "sha256": "c8dadb797da5022646dde000e101e11bb37504362dd3f32d941165fa46d769db",
-  "sourceFile": "2026-11-17-batch-03/FightGuild-moves-2026-11-17 _2_.json",
-  "sourceSha256": "21ff7634070015b39289c703ea5bf178300cd40ab6644d13199609a3d1ad6d7c",
-  "baseCommit": "1627395",
-  "previousFile": "2026-11-17-batch-03/FightGuild-moves-2026-11-17 _2_.json",
-  "note": "Preserves all uploaded non-Tapper move values and art notes. Adds editable Tapper Leo normal baseline, custom rolling stance and confirmed236D tackle. Local browser drafts remain untouched."
+  "label": "Smoke normals + Tapper box corrections ·18 November2026",
+  "status": "playable reference-based iteration",
+  "file": "2026-11-18-smoke/FightGuild-Smoke-Tapper.json",
+  "sha256": "72d177c6da714c1557949ef385bad0bf74849ef7e333729022fe19a1bcd29952",
+  "sourceFile": "2026-11-18-tapper/FightGuild-Tapper.json",
+  "sourceSha256": "c8dadb797da5022646dde000e101e11bb37504362dd3f32d941165fa46d769db",
+  "previousFile": "2026-11-18-tapper/FightGuild-Tapper.json",
+  "baseCommit": "7689c65",
+  "note": "Queen Dizzy frame data and traced normal hitboxes for Smoke; Leo diagrams correct Tapper normal hitboxes only. Preserves Tapper custom stance, Fillet/Shark edits and existing artwork notes. Local drafts remain untouched."
 }

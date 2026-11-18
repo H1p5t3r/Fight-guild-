@@ -78,7 +78,7 @@ for(const key of ['tetherSpeed','variantSpeed','variantLift'])speed.add(key);pix
 options.mechanic=[[0,'None'],[1,'Tether → pull'],[2,'Bleed → cash-out grab']];
 options.variantKnockdown=options.knockdown;
 for(const f of STANCE_FIELDS){labels[f.key]=f.label;hints[f.key]=f.help;if(f.scale===100)(/Speed|Travel|Bounce/.test(f.key)?speed:pixel).add(f.key);}
-Object.assign(options,{stanceRequired:[[0,'Any'],[1,'Normal stance'],[2,'Rolling stance']],stanceChange:[[0,'None'],[1,'Enter on hit'],[2,'Exit on start']],actionType:[[0,'Strike'],[1,'Held guard'],[2,'Stance exit'],[3,'Stall and dive'],[4,'Grab sequence']],airCounterKnockdown:options.knockdown,holdButton:options.button});
+Object.assign(options,{stanceRequired:[[0,'Any'],[1,'Normal stance'],[2,'Rolling stance']],stanceChange:[[0,'None'],[1,'Enter on hit'],[2,'Exit on start']],actionType:[[0,'Strike'],[1,'Held guard'],[2,'Stance exit'],[3,'Stall and dive'],[4,'Grab sequence'],[5,'Hold to charge'],[6,'Air projectile recoil']],airCounterKnockdown:options.knockdown,holdButton:options.button});
 masks.hurtWindowMask=['Legs','Torso & arms','Head','Body extension'];
 export const SPECS = Object.fromEntries(Object.entries(labels).map(([key,label])=>[key,{
   key,label,scale:pixel.has(key)||speed.has(key)?100:1,
