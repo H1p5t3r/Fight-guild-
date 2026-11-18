@@ -132,3 +132,7 @@ Attack rectangles come from Queen Dizzy's uploaded diagrams, scaled to project u
 ## Knockdown recovery v1 — 18 November 2026
 
 Every fighter now has a separate six-pose face-down/hard sequence and six-pose face-up/soft sequence, including five get-up drawings. The deterministic recovery timer selects the clip; artwork does not change action timing. Tapper uses calibrated source-batch heights across ready, movement, stance and attacks. See [recovery art and scale rules](recovery-art.md) for registration, provenance and review commands. The original PNGs are preserved and no transition smears are used.
+
+## Smoke approved A/H idle loops
+
+Smoke now uses the approved A / Open Current standing loop and H / Uncoiled Vapor crouch. Four body keys per clip and eight separate rear-vapor keys share the saved action clock; no transition smears are added. See [idle registration and review](smoke-idle.md).

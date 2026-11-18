@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_date": "2026-11-17",
+  "updated_date": "2026-11-18",
   "scope": "Current character-art decisions; not runtime combat configuration.",
   "fighters": {
     "fillet": {
@@ -65,6 +65,34 @@
           "Right hand stabilizes the hooked shaft across / behind the shoulders; hook and butt remain visible.",
           "Left hand holds the separate short triangular blade low.",
           "Retain low-volume long white hair and physical blue sports glasses."
+        ]
+      }
+    },
+    "smoke": {
+      "standard_combat_stance": {
+        "id": "A",
+        "name": "Open Current",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/smoke-idle-v1/standing-options.png",
+        "source_panel": "top-left",
+        "user_instruction": "A and H",
+        "requirements": [
+          "Upright, close legs, open low palms; forefeet lightly contact the ground with lifted heels.",
+          "Keep olive hood, dark hair and ivory alchemist costume.",
+          "Gentle buoyant breathing, trailing cloth/hair and separate gray/olive rear smoke."
+        ]
+      },
+      "crouching_stance": {
+        "id": "H",
+        "name": "Uncoiled Vapor",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/smoke-idle-v1/crouching-options.png",
+        "source_panel": "bottom-right",
+        "user_instruction": "A and H",
+        "requirements": [
+          "Low asymmetric crouch: rear leg folded, leading knee raised, leading hand relaxed over that knee.",
+          "Suspended hips, light forefoot contact, trailing open hand and upward drifting cloth.",
+          "Use fixed anatomy scale; do not enlarge the crouch to standing height."
         ]
       }
     }

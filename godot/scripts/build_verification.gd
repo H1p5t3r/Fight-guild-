@@ -55,6 +55,26 @@ func verify_foreground_draw() -> void:
 		check(game.arena.collision_layer.get_index() > game.arena.weapons[front].get_index() and game.arena.hud_layer.get_index() > game.arena.collision_layer.get_index(), "Foreground fighter covers the HUD or collision overlay")
 	game.arena.refresh(game.model, game.model.state(), true, false)
 
+func verify_smoke_idles() -> void:
+	var previous: int = game.edit_character.selected
+	game.edit_character.select(2)
+	for clip in [4, 8]:
+		game.show_sprite_review(clip)
+		var count := 0
+		for child in game.get_children():
+			if not child is AcceptDialog or child == game.file_dialog: continue
+			for control in child.find_children("*", "Control", true, false):
+				if control is FighterPreview:
+					check(control.phase == ("idle" if clip == 4 else "crouch_idle") and control.pose == count, "Smoke review missed the approved A/H clip")
+					FighterArt.apply(control.sprite, 2, control.phase, count, 1, -1, 15)
+					check(control.sprite.get_node("IdleSmoke0").show_behind_parent, "Smoke vapor covers the body")
+					check(control.sprite.get_node("IdleSmoke0").texture.atlas != null, "Missing packaged rear-vapor texture")
+					count += 1
+			child.queue_free()
+		check(count == 2, "Smoke review must show the current and following idle key")
+		await tree.process_frame
+	game.edit_character.select(previous)
+
 func timing_fixture() -> Dictionary:
 	var data: Dictionary = game.model.data().duplicate(true)
 	for character in data.characters:
@@ -307,6 +327,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	verify_timing_feedback()
 	await verify_signatures()
 	await verify_recovery_art()
+	await verify_smoke_idles()
 	verify_foreground_draw()
 	game.show_controls()
 	check(game.has_open_dialog(), "Controls dialog did not open")

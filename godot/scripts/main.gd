@@ -840,6 +840,7 @@ func show_sprite_review(clip: int = 0) -> void:
 		column.add_child(preview)
 		previews.append(preview)
 	var stats := label(layout, "", 12, ACCENT)
+	var loop_ticks := [0]
 	var update := func(_index: int = 0):
 		clip_picker.set_item_disabled(10, fighter_picker.selected < 3)
 		clip_picker.set_item_disabled(11, fighter_picker.selected < 3)
@@ -848,9 +849,10 @@ func show_sprite_review(clip: int = 0) -> void:
 		if clip_picker.selected == 12 and fighter_picker.selected != 3: clip_picker.select(0)
 		var locomotion: bool = fighter_picker.selected >= 3 and clip_picker.selected in [5, 11, 12]
 		var recovery_clip: bool = clip_picker.selected in [13, 14]
-		var frame_count: int = 6 if recovery_clip else 4 if clip_picker.selected == 12 else 8
-		loop_toggle.visible = locomotion or recovery_clip
-		frame_picker.visible = locomotion or recovery_clip
+		var idle_clip: bool = fighter_picker.selected == 2 and clip_picker.selected in [4, 8]
+		var frame_count: int = 6 if recovery_clip else 4 if clip_picker.selected == 12 or idle_clip else 8
+		loop_toggle.visible = locomotion or recovery_clip or idle_clip
+		frame_picker.visible = locomotion or recovery_clip or idle_clip
 		for frame in frame_picker.item_count: frame_picker.set_item_disabled(frame, frame >= frame_count)
 		if frame_picker.selected >= frame_count: frame_picker.select(0)
 		button_picker.disabled = clip_picker.selected != 0
@@ -872,7 +874,13 @@ func show_sprite_review(clip: int = 0) -> void:
 			previews[i].show_collision = collision_toggle.button_pressed
 			previews[i].facing = -1 if mirror_toggle.button_pressed else 1
 			previews[i].move_slot = slot
-			if recovery_clip:
+			if idle_clip:
+				var idle_phase := "idle" if clip_picker.selected == 4 else "crouch_idle"
+				var frame := (frame_picker.selected + i) % frame_count
+				var ticks: int = frame * 20 + (loop_ticks[0] % 20 if loop_toggle.button_pressed else 0)
+				captions[i].text = "%s · FRAME %d / 4" % ["A / OPEN CURRENT" if clip_picker.selected == 4 else "H / UNCOILED VAPOR", frame + 1]
+				previews[i].present(fighter_picker.selected, idle_phase, frame, previews[i].facing, ticks)
+			elif recovery_clip:
 				var recovery_phase := "knockdown_back" if clip_picker.selected == 13 else "knockdown"
 				var frame := (frame_picker.selected + i) % frame_count
 				var pose_name: String = FighterArt.sheet(fighter_picker.selected, recovery_phase).frames[frame].name
@@ -912,11 +920,14 @@ func show_sprite_review(clip: int = 0) -> void:
 	var loop_timer := Timer.new()
 	dialog.add_child(loop_timer)
 	loop_timer.wait_time = 1.0 / 60.0
-	var loop_ticks := [0]
 	loop_timer.timeout.connect(func():
 		if not loop_toggle.visible or not loop_toggle.button_pressed: return
 		loop_ticks[0] += 1
-		if loop_ticks[0] % (3 if clip_picker.selected == 11 else 5) == 0:
+		var idle_clip: bool = fighter_picker.selected == 2 and clip_picker.selected in [4, 8]
+		if idle_clip:
+			if loop_ticks[0] % 20 == 0: frame_picker.select((frame_picker.selected + 1) % 4)
+			update.call()
+		elif loop_ticks[0] % (3 if clip_picker.selected == 11 else 5) == 0:
 			var frame_count: int = 6 if clip_picker.selected in [13, 14] else 4 if clip_picker.selected == 12 else 8
 			frame_picker.select((frame_picker.selected + 1) % frame_count)
 			update.call())

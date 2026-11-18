@@ -4,6 +4,7 @@ extends Control
 var character := 0
 var phase := "active"
 var pose := 0
+var idle_ticks := -1
 var facing := 1
 var sprite := Sprite2D.new()
 var weapon := HookWeapon.new()
@@ -22,18 +23,19 @@ func _ready() -> void:
 	add_child(overlay)
 	overlay.draw.connect(draw_boxes)
 
-func present(fighter: int, stage: String, frame: int, direction: int = 1) -> void:
+func present(fighter: int, stage: String, frame: int, direction: int = 1, ticks: int = -1) -> void:
 	character = fighter
 	phase = stage
 	pose = frame
 	facing = direction
+	idle_ticks = ticks if ticks >= 0 else frame * 20 if stage in ["idle", "crouch_idle"] else -1
 	queue_redraw()
 	overlay.queue_redraw()
 
 func _draw() -> void:
 	# Normalize both atlases to the same body scale and foot anchor for honest comparison.
 	var scale_factor := preview_scale()
-	FighterArt.apply(sprite, character, phase, pose, scale_factor, facing)
+	FighterArt.apply(sprite, character, phase, pose, scale_factor, facing, idle_ticks)
 	sprite.position = preview_anchor()
 	weapon.visible = false
 	if phase == "signature_active" and character == 4 and pose < 2:
@@ -63,7 +65,7 @@ func draw_boxes() -> void:
 		collision_data = JSON.parse_string(FileAccess.get_file_as_string("res://data/fighter_collision.json"))
 	var profile: Dictionary = collision_data.fighters[character].push
 	var airborne := (phase == "active" and pose == 8) or (character == 4 and phase.begins_with("signature_") and pose in [1, 3])
-	var height: int = profile.airHeight if airborne else profile.crouchingHeight if phase == "active" and pose == 11 else profile.standingHeight
+	var height: int = profile.airHeight if airborne else profile.crouchingHeight if phase == "crouch_idle" or (phase == "active" and pose == 11) else profile.standingHeight
 	var bottom: int = profile.airBottom if airborne else 0
 	preview_box(PackedInt32Array([-profile.halfWidth, bottom, profile.halfWidth, bottom + height]), anchor, scale_factor, Color("9ce56b"))
 	if (phase == "active" and pose in range(1, 6)) or phase == "signature_active":

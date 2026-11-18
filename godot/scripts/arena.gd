@@ -95,7 +95,7 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 		if travel and int(shot.phase) >= 0:
 			phase = FighterArt.PHASES[int(shot.phase)]
 			pose = int(shot.pose)
-		FighterArt.apply(sprite, character, phase, pose, scale_x * (float(shot.scale) if travel else camera_zoom), fighter.facing)
+		FighterArt.apply(sprite, character, phase, pose, scale_x * (float(shot.scale) if travel else camera_zoom), fighter.facing, -1 if travel else int(fighter.idleTime))
 		sprite.position = shot.position if travel else screen_point(Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x))
 		sprite.rotation = float(shot.angle) if travel else 0.0
 		sprite.modulate = Color(1, 1, 1, shot.alpha) if travel else Color("ffa69a") if fighter.stun and not fighter.guarding else Color.WHITE

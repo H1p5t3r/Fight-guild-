@@ -2,7 +2,7 @@ class_name FighterArt
 extends RefCounted
 
 # Atlas pivots/scales also compile into core/combat_data.h. Regenerate combat data after art geometry changes.
-const PHASES := ["active", "windup", "block", "signature_windup", "signature_active", "ready", "walk", "run", "stance", "knockdown", "knockdown_back"]
+const PHASES := ["active", "windup", "block", "signature_windup", "signature_active", "ready", "walk", "run", "stance", "knockdown", "knockdown_back", "idle", "crouch_idle"]
 const DIRECTORY := "res://assets/fighters/"
 static var manifest: Dictionary = {}
 static var textures: Dictionary = {}
@@ -35,7 +35,7 @@ static func texture(character: int, phase: String, pose: int) -> AtlasTexture:
 		regions[key] = result
 	return regions[key]
 
-static func apply(sprite: Sprite2D, character: int, phase: String, pose: int, world_scale: float, facing: int) -> void:
+static func apply(sprite: Sprite2D, character: int, phase: String, pose: int, world_scale: float, facing: int, idle_time: int = -1) -> void:
 	var info := sheet(character, phase)
 	var pivot: Array = info.frames[pose].pivot
 	sprite.texture = texture(character, phase, pose)
@@ -45,6 +45,38 @@ static func apply(sprite: Sprite2D, character: int, phase: String, pose: int, wo
 	sprite.scale = Vector2(factor * facing, factor)
 	sprite.set_meta("phase", phase)
 	sprite.set_meta("pose", pose)
+	apply_idle_smoke(sprite, character, phase, pose, idle_time)
+
+static func apply_idle_smoke(sprite: Sprite2D, character: int, phase: String, pose: int, ticks: int) -> void:
+	var effect: Dictionary = catalog().fighters[character].get("idle_smoke", {})
+	var presentation: Dictionary = effect.get("presentations", {}).get(phase, {})
+	var enabled := ticks >= 0 and not presentation.is_empty()
+	# Children inherit their owner's facing, foot root and foreground order.
+	# show_behind_parent keeps the vapor behind the body without a global z-index.
+	for layer in 2:
+		var node_name := "IdleSmoke%d" % layer
+		var vapor := sprite.get_node_or_null(node_name) as Sprite2D
+		if vapor == null:
+			if not enabled: continue
+			vapor = Sprite2D.new()
+			vapor.name = node_name
+			vapor.show_behind_parent = true
+			vapor.centered = false
+			sprite.add_child(vapor)
+		vapor.visible = enabled
+		if not enabled: continue
+		var interval: int = effect.frame_ticks
+		var index: int = (ticks / interval + layer) % effect.frames.size()
+		var blend := float(ticks % interval) / interval
+		var info := sheet(character, phase)
+		var body_height: float = info.frames[pose].get("body_height", info.body_height)
+		var factor: float = body_height / effect.body_height
+		var pivot: Array = effect.frames[index].pivot
+		vapor.texture = texture(character, "idle_smoke", index)
+		vapor.offset = -Vector2(pivot[0], pivot[1])
+		vapor.scale = Vector2(presentation.scale[0], presentation.scale[1]) * factor
+		vapor.position = Vector2(presentation.offset[0], -presentation.offset[1]) * body_height / 150.0
+		vapor.modulate = Color(1, 1, 1, float(effect.opacity) * (blend if layer else 1.0 - blend))
 
 static func phase_names(character: int) -> Array[String]:
 	var result: Array[String] = []

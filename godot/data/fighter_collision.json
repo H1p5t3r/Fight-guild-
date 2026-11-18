@@ -1865,24 +1865,31 @@
           {
             "hurt": {
               "legs": [
-                152,
+                356,
                 230,
-                383,
-                490
+                449,
+                495
               ],
               "torsoArms": [
-                172,
-                95,
-                341,
-                257
+                278,
+                85,
+                477,
+                250
               ],
               "head": [
-                250,
-                40,
-                294,
-                94
+                389,
+                32,
+                433,
+                85
+              ],
+              "extension": [
+                473,
+                185,
+                537,
+                233
               ]
-            }
+            },
+            "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
           },
           {
             "hurt": {
@@ -2179,24 +2186,31 @@
           {
             "hurt": {
               "legs": [
-                175,
-                272,
-                375,
-                469
+                316,
+                305,
+                645,
+                488
               ],
               "torsoArms": [
-                212,
-                207,
-                362,
-                329
+                298,
+                205,
+                630,
+                364
               ],
               "head": [
-                305,
-                155,
-                347,
-                213
+                410,
+                142,
+                460,
+                207
+              ],
+              "extension": [
+                245,
+                332,
+                319,
+                415
               ]
-            }
+            },
+            "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
           }
         ],
         "windup": [
@@ -3968,6 +3982,242 @@
                 120
               ]
             }
+          }
+        ],
+        "idle": [
+          {
+            "hurt": {
+              "legs": [
+                356,
+                230,
+                449,
+                495
+              ],
+              "torsoArms": [
+                278,
+                85,
+                477,
+                250
+              ],
+              "head": [
+                389,
+                32,
+                433,
+                85
+              ],
+              "extension": [
+                473,
+                185,
+                537,
+                233
+              ]
+            },
+            "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                356,
+                226,
+                449,
+                495
+              ],
+              "torsoArms": [
+                278,
+                81,
+                477,
+                246
+              ],
+              "head": [
+                389,
+                28,
+                433,
+                81
+              ],
+              "extension": [
+                473,
+                181,
+                537,
+                229
+              ]
+            },
+            "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                356,
+                224,
+                449,
+                495
+              ],
+              "torsoArms": [
+                278,
+                79,
+                477,
+                244
+              ],
+              "head": [
+                389,
+                26,
+                433,
+                79
+              ],
+              "extension": [
+                473,
+                179,
+                537,
+                227
+              ]
+            },
+            "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                356,
+                231,
+                449,
+                495
+              ],
+              "torsoArms": [
+                278,
+                86,
+                477,
+                251
+              ],
+              "head": [
+                389,
+                33,
+                433,
+                86
+              ],
+              "extension": [
+                473,
+                186,
+                537,
+                234
+              ]
+            },
+            "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+          }
+        ],
+        "crouch_idle": [
+          {
+            "hurt": {
+              "legs": [
+                316,
+                305,
+                645,
+                488
+              ],
+              "torsoArms": [
+                298,
+                205,
+                630,
+                364
+              ],
+              "head": [
+                410,
+                142,
+                460,
+                207
+              ],
+              "extension": [
+                245,
+                332,
+                319,
+                415
+              ]
+            },
+            "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                316,
+                300,
+                645,
+                488
+              ],
+              "torsoArms": [
+                298,
+                200,
+                630,
+                359
+              ],
+              "head": [
+                410,
+                137,
+                460,
+                202
+              ],
+              "extension": [
+                245,
+                327,
+                319,
+                410
+              ]
+            },
+            "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                316,
+                296,
+                645,
+                488
+              ],
+              "torsoArms": [
+                298,
+                196,
+                630,
+                355
+              ],
+              "head": [
+                410,
+                133,
+                460,
+                198
+              ],
+              "extension": [
+                245,
+                323,
+                319,
+                406
+              ]
+            },
+            "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                316,
+                306,
+                645,
+                488
+              ],
+              "torsoArms": [
+                298,
+                206,
+                630,
+                365
+              ],
+              "head": [
+                410,
+                143,
+                460,
+                208
+              ],
+              "extension": [
+                245,
+                333,
+                319,
+                416
+              ]
+            },
+            "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
           }
         ]
       }

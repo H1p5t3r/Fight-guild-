@@ -1588,8 +1588,7 @@
         "body_height": 480,
         "frames": [
           {
-            "name": "5P Vapor Check windup",
-            "file": "smoke-v1/actions-1.png",
+            "name": "Settle",
             "region": [
               0,
               0,
@@ -1597,17 +1596,18 @@
               512
             ],
             "pivot": [
-              265,
-              490
+              408,
+              495
             ],
             "bounds": [
-              94,
-              11,
-              402,
-              493
+              242,
+              14,
+              535,
+              497
             ],
-            "sha256": "274a7ccec02cd6cb947190cf73b0bb527bda37aafaf49e76cb98db94f58c44c6",
-            "generation_file": "exec-e0f76019-7416-4a86-873a-fbf83fa55251.png"
+            "file": "smoke-idle-v1/idle.png",
+            "body_height": 480,
+            "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d"
           },
           {
             "name": "5P Vapor Check active",
@@ -1826,26 +1826,26 @@
             "sha256": "167ffacb593cecbce5017464fd8ab76d5e5e460f4595dbfa864e11cfb724baa4"
           },
           {
-            "name": "2S Soot Ribbon windup",
-            "file": "smoke-v1/actions-4.png",
+            "name": "Settle",
             "region": [
-              727,
               0,
-              809,
+              0,
+              768,
               512
             ],
             "pivot": [
-              271,
-              469
+              395,
+              487
             ],
             "bounds": [
-              1,
-              96,
-              371,
-              474
+              92,
+              118,
+              646,
+              488
             ],
-            "sha256": "ee701c9d7e9d7d4bcb543748b6254c7f3343f417b2f99ffed77f6a852606e6b1",
-            "generation_file": "exec-57f9d3c0-9764-40d4-823e-45d32a25d53f.png"
+            "file": "smoke-idle-v1/crouch_idle.png",
+            "body_height": 600,
+            "sha256": "597569ca9ec59b5413e410b8cf6afa00564941f51e1ace56ad7f037ad128a002"
           }
         ]
       },
@@ -3380,6 +3380,425 @@
             ]
           }
         ]
+      },
+      "idle": {
+        "file": "smoke-idle-v1/idle.png",
+        "columns": 2,
+        "rows": 2,
+        "body_height": 480,
+        "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d",
+        "generation_file": "exec-1b8dfa99-8564-440e-95ee-6cd27b8d6579.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            767,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Settle",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              242,
+              14,
+              535,
+              497
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              239,
+              10,
+              538,
+              497
+            ]
+          },
+          {
+            "name": "Crest",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              235,
+              8,
+              541,
+              496
+            ]
+          },
+          {
+            "name": "Return",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              243,
+              15,
+              538,
+              496
+            ]
+          }
+        ]
+      },
+      "crouch_idle": {
+        "file": "smoke-idle-v1/crouch_idle.png",
+        "columns": 2,
+        "rows": 2,
+        "body_height": 600,
+        "sha256": "597569ca9ec59b5413e410b8cf6afa00564941f51e1ace56ad7f037ad128a002",
+        "generation_file": "exec-23fbe620-6109-4779-b3bb-02017232664b.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            767,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Settle",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              487
+            ],
+            "bounds": [
+              92,
+              118,
+              646,
+              488
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              487
+            ],
+            "bounds": [
+              98,
+              113,
+              646,
+              488
+            ]
+          },
+          {
+            "name": "Crest",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              487
+            ],
+            "bounds": [
+              104,
+              109,
+              646,
+              489
+            ]
+          },
+          {
+            "name": "Return",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              487
+            ],
+            "bounds": [
+              97,
+              118,
+              646,
+              490
+            ]
+          }
+        ]
+      },
+      "idle_smoke": {
+        "file": "smoke-idle-v1/idle_smoke.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 480,
+        "sha256": "5ee9c5b382a8efa9acd20380ec45df81dbbde2f7c3ce31ffe60e74644d86375c",
+        "generation_file": "exec-4f84fe06-f6d3-4df5-bcaa-f9af4f0aaa35.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            767,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Rear vapor 1",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              57,
+              55,
+              323,
+              470
+            ]
+          },
+          {
+            "name": "Rear vapor 2",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              53,
+              44,
+              323,
+              469
+            ]
+          },
+          {
+            "name": "Rear vapor 3",
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              49,
+              36,
+              322,
+              466
+            ]
+          },
+          {
+            "name": "Rear vapor 4",
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              45,
+              19,
+              325,
+              465
+            ]
+          },
+          {
+            "name": "Rear vapor 5",
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              43,
+              19,
+              329,
+              460
+            ]
+          },
+          {
+            "name": "Rear vapor 6",
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              45,
+              28,
+              327,
+              461
+            ]
+          },
+          {
+            "name": "Rear vapor 7",
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              48,
+              38,
+              326,
+              462
+            ]
+          },
+          {
+            "name": "Rear vapor 8",
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              192,
+              480
+            ],
+            "bounds": [
+              50,
+              48,
+              323,
+              465
+            ]
+          }
+        ],
+        "frame_ticks": 10,
+        "opacity": 0.65,
+        "presentations": {
+          "idle": {
+            "scale": [
+              1.1,
+              1.14
+            ],
+            "offset": [
+              -8,
+              0
+            ]
+          },
+          "crouch_idle": {
+            "scale": [
+              1.35,
+              0.7
+            ],
+            "offset": [
+              -8,
+              0
+            ]
+          }
+        }
+      },
+      "idle_selection": {
+        "standing": "A / Open Current",
+        "crouching": "H / Uncoiled Vapor",
+        "body_frame_ticks": 20,
+        "cycle_ticks": 80,
+        "grounded": true
       }
     },
     {

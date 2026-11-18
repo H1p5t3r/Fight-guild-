@@ -111,6 +111,7 @@ export class CombatPreview {
     for(let tick=0;tick<=150;++tick){
       let input=0,other=0;
       if(tick>0){
+        if(action==='crouch')input=INPUT.down;
         if(action==='walk')input=tick<70?forward:0;
         if(action==='backWalk')input=tick<70?back:0;
         if(action==='forward'||action==='back')input=tick===1||tick>=3&&tick<65?(action==='forward'?forward:back):0;

@@ -65,4 +65,29 @@ static void air_projectile(){
   CHECK(a.move<0);
  }
 }
-int main(){charge_inputs();normals_and_multihits();air_projectile();std::printf("Smoke normals / charge / projectile: %d checks, %d failures\n",checks,failures);return failures?1:0;}
+static void approved_idles(){
+ Simulation s,restored;
+ for(int facing:{1,-1})for(int input:{0,int(Down)}){
+  setup(s,facing);auto& a=s.world.players[0];a.raw=input;
+  const int phase=input?12:11,x=a.x;
+  const Box push=s.box(0,PushBox,0);int seen=0;
+  for(int tick=0;tick<160;++tick){
+   const Pose pose=s.pose(a);CHECK(pose.phase==phase);seen|=1<<pose.index;
+   CHECK(pose.index==(a.idle_time/20)%4);CHECK(a.y==0&&a.x==x);
+   CHECK(s.box_count(0,HurtBox)==4);CHECK(s.box_count(0,HitBox)==0);
+   CHECK(s.box(0,PushBox,0).left==push.left&&s.box(0,PushBox,0).right==push.right);
+   s.step(input,0);
+  }
+  CHECK(seen==15);
+  const int clock=a.idle_time;const Pose frozen=s.pose(a);s.world.hitstop=6;
+  for(int n=0;n<6;++n){s.step(input,0);CHECK(a.idle_time==clock);CHECK(s.pose(a).index==frozen.index);}
+  restored=s;
+  for(int n=0;n<45;++n){s.step(input,0);restored.step(input,0);CHECK(s.checksum()==restored.checksum());CHECK(s.pose(a).index==restored.pose(restored.world.players[0]).index);}
+  s.preview_begin(0,0);CHECK(s.pose(a).phase==3);
+ }
+ CHECK(Simulation::pose_box_count(2,11,4)==0);
+ CHECK(Simulation::pose_box_count(2,12,4)==0);
+ CHECK(Simulation::pose_box_count(3,11,0)==0);
+ CHECK(Simulation::pose_box_count(2,13,0)==0);
+}
+int main(){charge_inputs();normals_and_multihits();air_projectile();approved_idles();std::printf("Smoke normals / charge / projectile / approved idles: %d checks, %d failures\n",checks,failures);return failures?1:0;}

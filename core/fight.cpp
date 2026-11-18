@@ -530,11 +530,14 @@ static Box transform(Box b,const Fighter& f) {
             f.x+(f.facing==1?b.right:-b.left),f.y+b.top};
 }
 static int pose_offset(int phase,int index) {
-    const int offsets[]={0,12,18,24,56,88,89,97,105,109,115};
-    return offsets[phase]+index;
+    return POSE_OFFSETS[phase]+index;
 }
 Pose Simulation::pose(const Fighter& f,int tick_offset) const {
-    const Pose ready=f.stance&&f.character==3?Pose{8,((f.idle_time+tick_offset)/7)%4}:Pose{LOCOMOTION_POSES[f.character]?5:0,0};
+    // Presentation and anatomical boxes share the saved action clock. No render
+    // timer can advance the pose during hitstop or after a rollback restore.
+    const int idle_key=((f.idle_time+tick_offset)/20)%4;
+    const Pose ready=f.stance&&f.character==3?Pose{8,((f.idle_time+tick_offset)/7)%4}:f.character==2?Pose{11,idle_key}:Pose{LOCOMOTION_POSES[f.character]?5:0,0};
+    const Pose crouch=f.character==2?Pose{12,idle_key}:Pose{0,11};
     const int recovery_phase=f.knockdown==HardKnockdown?9:10;
     if(f.reaction==Downed) return {recovery_phase,0};
     if(f.reaction==Waking) {
@@ -559,11 +562,11 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
         if(age<m.v[Startup]) return {1,1+m.v[Button]};
         if(age<m.v[Startup]+m.v[Active]) return {0,1+m.v[Button]};
         if(f.y>0) return {0,8};
-        return (f.raw&Down)?Pose{0,11}:ready;
+        return (f.raw&Down)?crouch:ready;
     }
     if(f.y>0) return {0,8};
     if(f.stance) return ready;
-    if(f.raw&Down) return {0,11};
+    if(f.raw&Down) return crouch;
     if(LOCOMOTION_POSES[f.character]) {
         // Distance-driven gait needs no render clock or extra rollback state.
         // It freezes during hitstop, reverses on back-walk and follows acceleration.
@@ -578,12 +581,11 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     }
     int horizontal=f.raw&(Left|Right);
     if(horizontal==Left||horizontal==Right||(f.raw&Dash)) return {0,6+((world.frame+tick_offset)/(f.running?4:8))%2};
-    return {0,0};
+    return ready;
 }
 int Simulation::pose_box_count(int c,int phase,int index) {
-    if(c<0||c>=CHARACTER_COUNT||phase<0||phase>10||index<0) return 0;
-    const int count=phase>=9?6:phase==8?(c==3?4:0):phase==0?12:phase<=2?6:phase<=4?SIGNATURE_POSES[c]:LOCOMOTION_POSES[c]?(phase==5?1:8):0;
-    if(index>=count) return 0;
+    if(c<0||c>=CHARACTER_COUNT||phase<0||phase>=POSE_PHASE_COUNT||index<0) return 0;
+    if(index>=POSE_COUNTS[c][phase]) return 0;
     return HURT_POSES[c][pose_offset(phase,index)].count;
 }
 Box Simulation::pose_box(int c,int phase,int index,int n) {

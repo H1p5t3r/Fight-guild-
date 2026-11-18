@@ -43,7 +43,7 @@ func _initialize() -> void:
 				var point := Vector2i(sample[0], sample[1])
 				check(source.get_pixelv(point).a < 0.03, "Atlas background is not transparent: " + path)
 			var signatures: int = 32 if c == 3 else 20 if c == 2 else 4
-			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6}[phase]
+			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4}[phase]
 			check(sheet.frames.size() == count, "Missing poses: " + path)
 			for pose in sheet.frames.size():
 				if sheet.frames[pose].has("file"):
@@ -60,5 +60,22 @@ func _initialize() -> void:
 				check(bounds[0] >= 0 and bounds[1] >= 0 and bounds[2] <= texture.get_width() and bounds[3] <= texture.get_height(), "Pose bounds outside frame")
 				check(texture.get_size() == Vector2(sheet.frames[pose].region[2], sheet.frames[pose].region[3]), "Atlas trim changed logical sprite size")
 				check(sheet.frames[pose].pivot[1] > 0 and sheet.frames[pose].pivot[1] <= source.get_height(), "Invalid foot pivot")
-	print("Godot sprite catalog: ", failures, " failures; six fighters, 391 source poses, alpha, regions, provenance")
+	var smoke: Dictionary = fighters[2].idle_smoke
+	check(FileAccess.get_sha256(FighterArt.DIRECTORY + smoke.file) == smoke.sha256, "Rear vapor provenance is stale")
+	var sprite := Sprite2D.new()
+	for phase in ["idle", "crouch_idle"]:
+		for facing in [-1, 1]:
+			for tick in [0, 15, 40, 79, 80]:
+				FighterArt.apply(sprite, 2, phase, (tick / 20) % 4, 1, facing, tick)
+				for layer in 2:
+					var vapor := sprite.get_node("IdleSmoke%d" % layer) as Sprite2D
+					check(vapor.visible and vapor.show_behind_parent, "Vapor must stay behind its fighter")
+					check(vapor.texture.atlas != null, "Missing imported vapor texture")
+					check(vapor.texture == FighterArt.texture(2, "idle_smoke", (tick / 10 + layer) % 8), "Vapor ignored the saved clock")
+	FighterArt.apply(sprite, 2, "signature_active", 0, 1, 1, 10)
+	check(not sprite.get_node("IdleSmoke0").visible and not sprite.get_node("IdleSmoke1").visible, "Idle vapor leaked into an attack")
+	FighterArt.apply(sprite, 5, "ready", 0, 1, 1, 10)
+	check(not sprite.get_node("IdleSmoke0").visible, "Idle vapor leaked into another fighter")
+	sprite.free()
+	print("Godot sprite catalog: ", failures, " failures; six fighters, 399 source poses, alpha, regions, provenance and rear idle vapor")
 	quit(1 if failures else 0)
