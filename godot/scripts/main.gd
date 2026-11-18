@@ -278,9 +278,9 @@ func build_interface() -> void:
 	editor.add_child(reactions)
 	for spec in [["pushback","Ground knockback px",0,200,100],["airPushback","Air knockback px",0,200,100],["blockPushback","Block pushback px",0,200,100],["launch","Ground launch px/f",0,30,100],["airLaunch","Air launch px/f",-30,30,100],["knockdownFrames","Down duration f",1,180,1],["wakeupFrames","Wakeup duration f",0,60,1],["throwRange","Throw reach px",0,200,100]]:
 		add_field(reactions, spec)
-	var knockdown := option(reactions, "Knockdown", ["None", "Soft · auto tech", "Hard"])
+	var knockdown := option(reactions, "Knockdown", ["None", "Soft · on back", "Hard · face down"])
 	fields.knockdown = {"control": knockdown, "scale": 1}
-	var reaction_note := label(editor, "Launch: upward speed; air launch may be negative. Hit knockback travels over 6 action frames; wall impact damage equals the arriving horizontal speed. Soft knockdowns tech in place automatically. 2D and 4P+K / 6P+K cause hard knockdown.", 11, MUTED)
+	var reaction_note := label(editor, "Launch: upward speed; air launch may be negative. Hit knockback travels over 6 action frames; wall impact damage equals the arriving horizontal speed. Soft knockdowns lie on the back; hard knockdowns lie face down. Both get up in place. 2D and 4P+K / 6P+K cause hard knockdown.", 11, MUTED)
 	reaction_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	var guard_break := CheckBox.new()
 	guard_break.text = "Guard break on block"
@@ -809,8 +809,8 @@ func show_sprite_review(clip: int = 0) -> void:
 	layout.add_child(pickers)
 	var fighter_picker := option(pickers, "Fighter", CombatModel.CHARACTERS)
 	var button_picker := option(pickers, "Button", CombatModel.BUTTONS)
-	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard", "Dedicated move", "Run / step dash", "Rolling stance"])
-	clip_picker.select(clampi(clip, 0, 12))
+	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard", "Dedicated move", "Run / step dash", "Rolling stance", "Soft knockdown / get up", "Hard knockdown / get up"])
+	clip_picker.select(clampi(clip, 0, 14))
 	var signature_picker := option(pickers, "Signature", ["1", "2", "3", "4"])
 	fighter_picker.select(edit_character.selected)
 	var options := row(layout)
@@ -847,8 +847,12 @@ func show_sprite_review(clip: int = 0) -> void:
 		clip_picker.set_item_disabled(12, fighter_picker.selected != 3)
 		if clip_picker.selected == 12 and fighter_picker.selected != 3: clip_picker.select(0)
 		var locomotion: bool = fighter_picker.selected >= 3 and clip_picker.selected in [5, 11, 12]
-		loop_toggle.visible = locomotion
-		frame_picker.visible = locomotion
+		var recovery_clip: bool = clip_picker.selected in [13, 14]
+		var frame_count: int = 6 if recovery_clip else 4 if clip_picker.selected == 12 else 8
+		loop_toggle.visible = locomotion or recovery_clip
+		frame_picker.visible = locomotion or recovery_clip
+		for frame in frame_picker.item_count: frame_picker.set_item_disabled(frame, frame >= frame_count)
+		if frame_picker.selected >= frame_count: frame_picker.select(0)
 		button_picker.disabled = clip_picker.selected != 0
 		signature_picker.visible = clip_picker.selected == 10
 		var signature_slots: Array = [25, 15, 26, 27] if fighter_picker.selected == 5 else [28, 29, 30, 31]
@@ -868,10 +872,16 @@ func show_sprite_review(clip: int = 0) -> void:
 			previews[i].show_collision = collision_toggle.button_pressed
 			previews[i].facing = -1 if mirror_toggle.button_pressed else 1
 			previews[i].move_slot = slot
-			if locomotion:
+			if recovery_clip:
+				var recovery_phase := "knockdown_back" if clip_picker.selected == 13 else "knockdown"
+				var frame := (frame_picker.selected + i) % frame_count
+				var pose_name: String = FighterArt.sheet(fighter_picker.selected, recovery_phase).frames[frame].name
+				captions[i].text = "%s · FRAME %d / %d" % [pose_name.to_upper(), frame + 1, frame_count]
+				previews[i].present(fighter_picker.selected, recovery_phase, frame, previews[i].facing)
+			elif locomotion:
 				var motion_phase := "stance" if clip_picker.selected == 12 else "run" if clip_picker.selected == 11 else "walk"
-				var frame := (frame_picker.selected + i) % (4 if clip_picker.selected == 12 else 8)
-				captions[i].text = "%s · FRAME %d / 8" % [motion_phase.to_upper(), frame + 1]
+				var frame := (frame_picker.selected + i) % frame_count
+				captions[i].text = "%s · FRAME %d / %d" % [motion_phase.to_upper(), frame + 1, frame_count]
 				previews[i].present(fighter_picker.selected, motion_phase, frame, previews[i].facing)
 			elif clip_picker.selected == 4 and fighter_picker.selected >= 3:
 				captions[i].text = "STALKER" if fighter_picker.selected == 5 else "SHOULDER REST" if fighter_picker.selected == 4 else "TAPPER READY"
@@ -907,11 +917,12 @@ func show_sprite_review(clip: int = 0) -> void:
 		if not loop_toggle.visible or not loop_toggle.button_pressed: return
 		loop_ticks[0] += 1
 		if loop_ticks[0] % (3 if clip_picker.selected == 11 else 5) == 0:
-			frame_picker.select((frame_picker.selected + 1) % 8)
+			var frame_count: int = 6 if clip_picker.selected in [13, 14] else 4 if clip_picker.selected == 12 else 8
+			frame_picker.select((frame_picker.selected + 1) % frame_count)
 			update.call())
 	loop_timer.start()
 	update.call()
-	label(layout, "Hurt: legs · torso + arms · head · optional extension. Maximum 4 per pose.\nCyan: hurt · green: push · orange: hit. Weapons excluded; startup is at least 5 frames.", 12, MUTED)
+	label(layout, "Hurt: legs · torso + arms · head · optional extension. Maximum 4 per pose.\nCyan: hurt · green: push · orange: hit. Weapons excluded. Startup minimum: throws 2f; P normals 3f; other attacks 5f.", 12, MUTED)
 	dialog.canceled.connect(func(): close_dialog(dialog))
 	dialog.confirmed.connect(func(): close_dialog(dialog))
 	dialog.popup_centered(Vector2i(760, 600))

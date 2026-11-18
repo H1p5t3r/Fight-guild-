@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 # Smear slots are reserved for schema compatibility; transition smearing is removed.
 FIELDS = 'button category direction motion air startup active recovery damage hitstun blockstun hitstop pushback reach bottom height specialCancel jumpCancel whiffCancel selfCancel advance simpleDirection simpleButton normalRoutes commandRoutes hitLevel chipDamage guardBreak counterHitstun counterHitstop reversalEligible hitboxBack airPushback blockPushback launch airLaunch knockdown knockdownFrames wakeupFrames wallDamage throwRange enabled artPose followFrom followFrom2 followHit travelSpeed inertiaPercent pullFrames pullGap hitAngle normalCancelStart normalCancelEnd specialCancelStart specialCancelEnd jumpCancelStart jumpCancelEnd followCancelStart followCancelEnd cancelOn starterProration comboScaling minimumDamage landingRecovery attackLevel counterTier counterVulnerable counterFreezeFrames counterSlowFrames projectileKind projectileSpawnFrame projectileSpeedX projectileSpeedY projectileGravity projectileLife projectileOffsetX projectileOffsetY projectileWidth projectileHeight projectileHits projectileRehit projectileDurability projectilePersist projectileMelee smearMode smearPart smearStretch smearFrame1 smearFrame2 smearFrame3 smearFrame4 hurtMaskWindup hurtMaskActive hurtMaskRecovery mechanic tetherSpeed tetherFrames bleedInitial bleedTickDamage bleedTickFrames bleedDuration bleedBlockPercent bleedCap variantStartup variantActive variantRecovery variantDamage variantRange variantSpeed variantLift variantHitstun variantKnockdown stanceRequired stanceChange actionType holdFollow holdFrame holdButton guardFollow proximityMove proximityRange startupTravel diveSpeedX diveSpeedY groundBounce wallBounce crumpleFrames airCounterKnockdown hurtWindowStart hurtWindowEnd hurtWindowMask semiAirStart semiAirEnd armorFrames armorHits grabFrames finishArtPose finishArtFrame'.split()
 MOBILITY = 'forwardStyle walkSpeed runSpeed runAcceleration stepSpeed stepFrames backSpeed backFrames attackFriction backStyle backWalkSpeed backRunSpeed jumpSpeed jumpForwardSpeed jumpBackSpeed gravity airJumps prejumpFrames airDashEnabled airBackdashEnabled airDashStyle airBackdashStyle airDashSpeed airBackdashSpeed airDashFrames airBackdashFrames airDashUses hoverHeight hoverRiseSpeed teleportDistance backTeleportDistance teleportStartup fdEnabled fdPushPercent fdDrain fdAirDrain fdBlockCost smearMode smearPart smearStretch'.split()
-PHASES = {'active': 12, 'windup': 6, 'block': 6, 'signature_windup': 32, 'signature_active': 32, 'ready': 1, 'walk': 8, 'run': 8, 'stance': 4}
+PHASES = {'active': 12, 'windup': 6, 'block': 6, 'signature_windup': 32, 'signature_active': 32, 'ready': 1, 'walk': 8, 'run': 8, 'stance': 4, 'knockdown': 6, 'knockdown_back': 6}
 HURT_REGIONS = ('legs', 'torsoArms', 'head', 'extension')
 
 
@@ -115,7 +115,7 @@ def compile_data():
     header += f'constexpr unsigned COLLISION_HASH = {digest}u;\n'
     header += 'constexpr int SIGNATURE_POSES[CHARACTER_COUNT] = {' + ','.join(map(str, signatures)) + '};\n'
     header += 'constexpr int LOCOMOTION_POSES[CHARACTER_COUNT] = {' + ','.join(map(str, locomotion)) + '};\n'
-    header += 'constexpr PoseBoxes HURT_POSES[CHARACTER_COUNT][109] = {\n' + ',\n'.join(hurt) + '\n};\n'
+    header += 'constexpr PoseBoxes HURT_POSES[CHARACTER_COUNT][121] = {\n' + ',\n'.join(hurt) + '\n};\n'
     header += 'constexpr Mobility STARTER_MOBILITY[CHARACTER_COUNT] = {\n' + ',\n'.join(mobility) + '\n};\n'
     header += 'constexpr PushProfile PUSH_PROFILES[CHARACTER_COUNT] = {\n' + ',\n'.join(push) + '\n};\n'
     tracks=[]
@@ -144,4 +144,4 @@ if __name__ == '__main__':
                 raise SystemExit(f'Stale generated file: {path.relative_to(ROOT)}; run {Path(__file__).name}')
         else:
             path.write_text(content)
-    print('Combat data verified: 319 poses (3 body boxes + at most 1 extension), 6 movement/push profiles, 270 move slots, startup minimums: throws 2f / P normals 3f / other attacks 5f.')
+    print('Combat data verified: 391 poses (3 body boxes + at most 1 extension), 6 movement/push profiles, 270 move slots, startup minimums: throws 2f / P normals 3f / other attacks 5f.')

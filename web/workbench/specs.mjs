@@ -3,7 +3,7 @@ import {MECHANIC_SPECS} from './mechanics-specs.mjs';
 export const GROUPS = [
   {id:'timing', title:'Frame data', intro:'Tune the pace and reward. One frame is 1/60 of a second.', fields:['startup','active','recovery','damage','hitstun','blockstun','hitstop','chipDamage']},
   {id:'geometry', title:'Hitbox & movement', intro:'Distances use game pixels. The preview keeps the existing artwork while you change its attack geometry.', fields:['hitboxBack','reach','bottom','height','advance','travelSpeed','inertiaPercent','hitAngle','throwRange']},
-  {id:'reaction', title:'Hit & block reaction', intro:'Soft knockdowns automatically tech in place. Hard knockdown is reserved for tools such as 2D and throws.', fields:['hitLevel','guardBreak','knockdown','pushback','airPushback','blockPushback','launch','airLaunch','knockdownFrames','wakeupFrames','landingRecovery','pullFrames','pullGap']},
+  {id:'reaction', title:'Hit & block reaction', intro:'Soft knockdowns lie on the back; hard knockdowns lie face down. Both get up automatically in place, using Down duration and Wakeup duration.', fields:['hitLevel','guardBreak','knockdown','pushback','airPushback','blockPushback','launch','airLaunch','knockdownFrames','wakeupFrames','landingRecovery','pullFrames','pullGap']},
   {id:'cancel', title:'Cancel routes', intro:'Use Unified to follow the shared gatling rules. Custom routes select the destination buttons.', fields:['specialCancel','jumpCancel','whiffCancel','selfCancel','normalRoutes','commandRoutes','cancelOn','normalCancelStart','normalCancelEnd','specialCancelStart','specialCancelEnd','jumpCancelStart','jumpCancelEnd','followCancelStart','followCancelEnd','followFrom','followFrom2','followHit']},
   {id:'input', title:'Inputs & identity', intro:'Move slots keep their IDs for game compatibility. These fields control the actual input and move type.', fields:['enabled','button','category','direction','motion','air','simpleDirection','simpleButton','artPose']},
   {id:'counter', title:'Counter hits & scaling', intro:'Reversal eligibility recognizes first-frame execution; it does not add invulnerability.', fields:['attackLevel','counterTier','counterVulnerable','counterFreezeFrames','counterSlowFrames','counterHitstun','counterHitstop','reversalEligible','starterProration','comboScaling','minimumDamage']},
@@ -44,7 +44,7 @@ const buttons = ['P','K','S','Hs','D'].map((s,i)=>[i,s]);
 const options = {
   button:buttons, simpleButton:buttons, category:[[0,'Normal'],[1,'Command normal'],[2,'Special'],[3,'Drive'],[4,'Throw']],
   direction:directions, simpleDirection:[[0,'No simple mapping'],...directions], motion:[[0,'None'],[236,'236'],[214,'214'],[623,'623']],
-  hitLevel:[[0,'Mid'],[1,'Low'],[2,'Overhead']], knockdown:[[0,'None'],[1,'Soft · auto tech'],[2,'Hard']],
+  hitLevel:[[0,'Mid'],[1,'Low'],[2,'Overhead']], knockdown:[[0,'None'],[1,'Soft · on back'],[2,'Hard · face down']],
   hitAngle:[[-1,'Downward 45° hook'],[0,'Straight strike'],[1,'Upward 45° hook']],
   counterTier:[[-1,'Use attack level'],[0,'Smallest'],[1,'Small'],[2,'Medium'],[3,'Large']],
   attackLevel:[[-1,'Use move type'],[0,'Level 0'],[1,'Level 1'],[2,'Level 2'],[3,'Level 3'],[4,'Level 4']],

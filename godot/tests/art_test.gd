@@ -43,7 +43,7 @@ func _initialize() -> void:
 				var point := Vector2i(sample[0], sample[1])
 				check(source.get_pixelv(point).a < 0.03, "Atlas background is not transparent: " + path)
 			var signatures: int = 32 if c == 3 else 20 if c == 2 else 4
-			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4}[phase]
+			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6}[phase]
 			check(sheet.frames.size() == count, "Missing poses: " + path)
 			for pose in sheet.frames.size():
 				if sheet.frames[pose].has("file"):
@@ -60,5 +60,5 @@ func _initialize() -> void:
 				check(bounds[0] >= 0 and bounds[1] >= 0 and bounds[2] <= texture.get_width() and bounds[3] <= texture.get_height(), "Pose bounds outside frame")
 				check(texture.get_size() == Vector2(sheet.frames[pose].region[2], sheet.frames[pose].region[3]), "Atlas trim changed logical sprite size")
 				check(sheet.frames[pose].pivot[1] > 0 and sheet.frames[pose].pivot[1] <= source.get_height(), "Invalid foot pivot")
-	print("Godot sprite catalog: ", failures, " failures; six fighters, 319 source poses, alpha, regions, provenance")
+	print("Godot sprite catalog: ", failures, " failures; six fighters, 391 source poses, alpha, regions, provenance")
 	quit(1 if failures else 0)

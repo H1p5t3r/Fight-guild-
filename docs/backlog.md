@@ -111,7 +111,7 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Fill each visible wall border with generated solid scenery across its full vertical and horizontal extent.
 - [x] Preserve schema 1–6 move edits and test delayed-input rollback through wall breaks.
 - [ ] Tune Fillet/Shark routes, gravity threshold and wall durability through local playtests.
-- [ ] Author dedicated windup/active sweep and throw art first, then coherent launch/splat/down/wakeup clips under the existing sprite contract. Current reactions reuse existing poses.
+- [ ] Author dedicated windup/active sweep and throw art first, then coherent launch/splat/down/wakeup clips under the existing sprite contract. Prone/hard and supine/soft knockdown/get-up clips are now implemented for all six; launch/splat and remaining action clips are still pending.
 - [x] Generate three layered arenas, independent horizontal parallax, left/right passage cutouts and deterministic wall-break travel. See [stage art](stage-art.md).
 - [ ] Author dedicated character travel/landing animation, environmental loops and sound for the generated stages.
 - [ ] Tune the custom wall-health values and Positive Bonus through playtests. Super-specific break knockdowns wait for super design.

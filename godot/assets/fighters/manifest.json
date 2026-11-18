@@ -2,7 +2,7 @@
   "schema": 1,
   "style_rules": "docs/sprite-production.md",
   "generator": "OpenAI image_gen",
-  "status": "Smoke v1: 20 directed normal windup/active pairs, poison gas / smoke / ignition palette. Tapper custom kit retained. No transition smear frames.",
+  "status": "Recovery v1: six face-down/hard and six supine/soft knockdown/get-up poses per fighter; fixed Tapper source-scale registration. No transition smears.",
   "fighters": [
     {
       "id": "anvil",
@@ -492,6 +492,298 @@
             ]
           }
         ]
+      },
+      "knockdown": {
+        "file": "recovery-v1/anvil.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 330,
+        "sha256": "2e3e146a3fdae1b983f0866d619b0c27455a2fff44dd854b3ada5b591d559f59",
+        "generation_file": "exec-a005aeb3-764f-4e60-a071-fe2632969944.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Prone",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              485
+            ],
+            "bounds": [
+              21,
+              318,
+              508,
+              486
+            ]
+          },
+          {
+            "name": "Brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              483
+            ],
+            "bounds": [
+              34,
+              264,
+              497,
+              484
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              482
+            ],
+            "bounds": [
+              46,
+              206,
+              477,
+              483
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              461
+            ],
+            "bounds": [
+              56,
+              153,
+              481,
+              462
+            ]
+          },
+          {
+            "name": "Ready anticipation",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              461
+            ],
+            "bounds": [
+              51,
+              109,
+              471,
+              462
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              461
+            ],
+            "bounds": [
+              59,
+              84,
+              479,
+              462
+            ]
+          }
+        ]
+      },
+      "knockdown_back": {
+        "file": "recovery-v1/anvil-back.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 330,
+        "sha256": "59e81694f190879773561164582fcdf7904922c17c17389414ab602e63a19f8b",
+        "generation_file": "exec-a1531eaa-873c-4a44-af4c-630c979db2a1.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Supine",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              479
+            ],
+            "bounds": [
+              38,
+              300,
+              468,
+              480
+            ]
+          },
+          {
+            "name": "Elbow brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              25,
+              266,
+              449,
+              481
+            ]
+          },
+          {
+            "name": "Seated",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              479
+            ],
+            "bounds": [
+              31,
+              230,
+              467,
+              480
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              461
+            ],
+            "bounds": [
+              70,
+              156,
+              480,
+              462
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              461
+            ],
+            "bounds": [
+              62,
+              121,
+              474,
+              462
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              461
+            ],
+            "bounds": [
+              79,
+              83,
+              479,
+              462
+            ]
+          }
+        ]
       }
     },
     {
@@ -965,6 +1257,298 @@
               125,
               469,
               473
+            ]
+          }
+        ]
+      },
+      "knockdown": {
+        "file": "recovery-v1/hammer.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 426,
+        "sha256": "2b919bf33f0e3f1902ea8df4e576d6e9da51f8acb6d40e892d643d406b7edd4f",
+        "generation_file": "exec-ea8dade5-da0b-45f7-9042-316b68409d30.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Prone",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              461
+            ],
+            "bounds": [
+              17,
+              331,
+              501,
+              462
+            ]
+          },
+          {
+            "name": "Brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              459
+            ],
+            "bounds": [
+              20,
+              266,
+              491,
+              460
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              460
+            ],
+            "bounds": [
+              41,
+              196,
+              479,
+              461
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              455
+            ],
+            "bounds": [
+              77,
+              138,
+              486,
+              456
+            ]
+          },
+          {
+            "name": "Ready anticipation",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              455
+            ],
+            "bounds": [
+              78,
+              83,
+              458,
+              456
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              455
+            ],
+            "bounds": [
+              81,
+              27,
+              463,
+              456
+            ]
+          }
+        ]
+      },
+      "knockdown_back": {
+        "file": "recovery-v1/hammer-back.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 426,
+        "sha256": "e6c3913f5fe43173cc8b0c7995a0eaf94f275c780de892486635fa85c35dec26",
+        "generation_file": "exec-36ed7514-0816-44c4-be9c-df1dfafb59cf.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Supine",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              461
+            ],
+            "bounds": [
+              22,
+              304,
+              489,
+              462
+            ]
+          },
+          {
+            "name": "Elbow brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              461
+            ],
+            "bounds": [
+              24,
+              257,
+              478,
+              462
+            ]
+          },
+          {
+            "name": "Seated",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              464
+            ],
+            "bounds": [
+              32,
+              208,
+              477,
+              465
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              448
+            ],
+            "bounds": [
+              71,
+              160,
+              489,
+              449
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              455
+            ],
+            "bounds": [
+              62,
+              112,
+              460,
+              456
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              456
+            ],
+            "bounds": [
+              80,
+              26,
+              463,
+              457
             ]
           }
         ]
@@ -2504,6 +3088,298 @@
           675
         ],
         "sha256": "762ded94f5bb2d9126d8b5f3089d64146fc1f230288ec54a4b1582c10c281001"
+      },
+      "knockdown": {
+        "file": "recovery-v1/smoke.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 446,
+        "sha256": "e20a76650e706876a70c5ce382b60dad7f0f80f3e86d56f65392fca9b612aa79",
+        "generation_file": "exec-c1ecc9bb-b1c6-4b54-b66f-9ca072b0093f.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Prone",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              16,
+              380,
+              498,
+              481
+            ]
+          },
+          {
+            "name": "Brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              479
+            ],
+            "bounds": [
+              34,
+              283,
+              469,
+              480
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              479
+            ],
+            "bounds": [
+              54,
+              223,
+              447,
+              480
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              479
+            ],
+            "bounds": [
+              76,
+              187,
+              445,
+              480
+            ]
+          },
+          {
+            "name": "Ready anticipation",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              56,
+              100,
+              409,
+              481
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              87,
+              33,
+              413,
+              481
+            ]
+          }
+        ]
+      },
+      "knockdown_back": {
+        "file": "recovery-v1/smoke-back.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 446,
+        "sha256": "654a91c52ed87e6cd5662c5d45f53d8a9110d2d2764086dd50853a131d7d14f6",
+        "generation_file": "exec-185e744f-2f02-4cf7-a195-7a1549545e04.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Supine",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              489
+            ],
+            "bounds": [
+              34,
+              367,
+              484,
+              490
+            ]
+          },
+          {
+            "name": "Elbow brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              486
+            ],
+            "bounds": [
+              46,
+              308,
+              468,
+              487
+            ]
+          },
+          {
+            "name": "Seated",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              487
+            ],
+            "bounds": [
+              83,
+              256,
+              413,
+              488
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              75,
+              184,
+              447,
+              481
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              79,
+              153,
+              428,
+              481
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              84,
+              35,
+              405,
+              481
+            ]
+          }
+        ]
       }
     },
     {
@@ -2538,7 +3414,8 @@
               18,
               462,
               488
-            ]
+            ],
+            "body_height": 470
           },
           {
             "name": "5P jab active",
@@ -2560,7 +3437,8 @@
               33,
               335,
               457
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "5K kick active",
@@ -2582,7 +3460,8 @@
               33,
               350,
               457
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "f.S long staff active",
@@ -2604,7 +3483,8 @@
               84,
               399,
               457
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "5Hs staff chop active",
@@ -2626,7 +3506,8 @@
               116,
               355,
               449
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Collar capture active",
@@ -2648,7 +3529,8 @@
               40,
               348,
               456
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "walk 1",
@@ -2670,7 +3552,8 @@
               22,
               373,
               474
-            ]
+            ],
+            "body_height": 450
           },
           {
             "name": "walk 5",
@@ -2692,7 +3575,8 @@
               27,
               369,
               480
-            ]
+            ],
+            "body_height": 450
           },
           {
             "name": "j.K kick windup",
@@ -2714,7 +3598,8 @@
               49,
               306,
               413
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "Headbutt active",
@@ -2736,7 +3621,8 @@
               44,
               332,
               457
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Held guard active",
@@ -2758,7 +3644,8 @@
               97,
               322,
               438
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Crouch active",
@@ -2780,7 +3667,8 @@
               157,
               339,
               455
-            ]
+            ],
+            "body_height": 410
           }
         ]
       },
@@ -2812,7 +3700,8 @@
               18,
               462,
               488
-            ]
+            ],
+            "body_height": 470
           },
           {
             "name": "5P jab windup",
@@ -2834,7 +3723,8 @@
               30,
               320,
               458
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "5K kick windup",
@@ -2856,7 +3746,8 @@
               31,
               293,
               459
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "f.S long staff windup",
@@ -2878,7 +3769,8 @@
               81,
               345,
               458
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "5Hs staff chop windup",
@@ -2900,7 +3792,8 @@
               34,
               360,
               465
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Collar capture windup",
@@ -2922,7 +3815,8 @@
               39,
               366,
               463
-            ]
+            ],
+            "body_height": 405
           }
         ]
       },
@@ -3079,7 +3973,8 @@
               30,
               320,
               458
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "5K kick windup",
@@ -3101,7 +3996,8 @@
               31,
               293,
               459
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "c.S close staff windup",
@@ -3123,7 +4019,8 @@
               81,
               297,
               457
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "f.S long staff windup",
@@ -3145,7 +4042,8 @@
               81,
               345,
               458
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "5Hs staff chop windup",
@@ -3167,7 +4065,8 @@
               34,
               360,
               465
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "2P low jab windup",
@@ -3189,7 +4088,8 @@
               58,
               317,
               466
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "2K low kick windup",
@@ -3211,7 +4111,8 @@
               73,
               302,
               466
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "2S low staff windup",
@@ -3233,7 +4134,8 @@
               138,
               339,
               466
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "2Hs launcher windup",
@@ -3261,7 +4163,8 @@
               0,
               384,
               490
-            ]
+            ],
+            "body_height": 425
           },
           {
             "name": "2D sweep windup",
@@ -3283,7 +4186,8 @@
               143,
               369,
               473
-            ]
+            ],
+            "body_height": 425
           },
           {
             "name": "6P anti-air windup",
@@ -3305,7 +4209,8 @@
               126,
               343,
               473
-            ]
+            ],
+            "body_height": 425
           },
           {
             "name": "6K advancing kick windup",
@@ -3327,7 +4232,8 @@
               33,
               318,
               473
-            ]
+            ],
+            "body_height": 425
           },
           {
             "name": "6Hs advancing staff windup",
@@ -3349,7 +4255,8 @@
               38,
               402,
               454
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "j.P jab windup",
@@ -3371,7 +4278,8 @@
               49,
               323,
               383
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "j.K kick windup",
@@ -3393,7 +4301,8 @@
               49,
               306,
               413
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "j.S first hit windup",
@@ -3415,7 +4324,8 @@
               69,
               307,
               397
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "j.S second hit windup",
@@ -3437,7 +4347,8 @@
               99,
               374,
               426
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "j.Hs horizontal windup",
@@ -3459,7 +4370,8 @@
               51,
               316,
               435
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "j.D dive windup",
@@ -3481,7 +4393,8 @@
               56,
               281,
               357
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Held guard windup",
@@ -3503,7 +4416,8 @@
               101,
               324,
               445
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Guard attack windup",
@@ -3525,7 +4439,8 @@
               86,
               359,
               463
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Collar capture windup",
@@ -3547,7 +4462,8 @@
               39,
               366,
               463
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Headbutt windup",
@@ -3569,7 +4485,8 @@
               36,
               329,
               462
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Air throw windup",
@@ -3591,7 +4508,8 @@
               24,
               338,
               412
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Stance P windup",
@@ -3613,7 +4531,8 @@
               26,
               390,
               493
-            ]
+            ],
+            "body_height": 440
           },
           {
             "name": "Stance K low windup",
@@ -3635,7 +4554,8 @@
               26,
               337,
               490
-            ]
+            ],
+            "body_height": 440
           },
           {
             "name": "Stance S hook windup",
@@ -3657,7 +4577,8 @@
               26,
               351,
               490
-            ]
+            ],
+            "body_height": 440
           },
           {
             "name": "Stance Hs overhead windup",
@@ -3679,7 +4600,8 @@
               11,
               359,
               491
-            ]
+            ],
+            "body_height": 440
           },
           {
             "name": "2D stance exit windup",
@@ -3701,7 +4623,8 @@
               45,
               331,
               466
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "Running tackle windup",
@@ -3723,7 +4646,8 @@
               74,
               341,
               466
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "Single punch finish windup",
@@ -3745,7 +4669,8 @@
               135,
               343,
               467
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "Crouch windup",
@@ -3767,7 +4692,8 @@
               132,
               337,
               466
-            ]
+            ],
+            "body_height": 410
           }
         ]
       },
@@ -3799,7 +4725,8 @@
               33,
               335,
               457
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "5K kick active",
@@ -3821,7 +4748,8 @@
               33,
               350,
               457
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "c.S close staff active",
@@ -3843,7 +4771,8 @@
               30,
               299,
               457
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "f.S long staff active",
@@ -3865,7 +4794,8 @@
               84,
               399,
               457
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "5Hs staff chop active",
@@ -3887,7 +4817,8 @@
               116,
               355,
               449
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "2P low jab active",
@@ -3909,7 +4840,8 @@
               61,
               333,
               448
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "2K low kick active",
@@ -3931,7 +4863,8 @@
               68,
               322,
               448
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "2S low staff active",
@@ -3953,7 +4886,8 @@
               150,
               372,
               448
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "2Hs launcher active",
@@ -3975,7 +4909,8 @@
               0,
               369,
               472
-            ]
+            ],
+            "body_height": 425
           },
           {
             "name": "2D sweep active",
@@ -3997,7 +4932,8 @@
               123,
               384,
               463
-            ]
+            ],
+            "body_height": 425
           },
           {
             "name": "6P anti-air active",
@@ -4019,7 +4955,8 @@
               16,
               322,
               471
-            ]
+            ],
+            "body_height": 425
           },
           {
             "name": "6K advancing kick active",
@@ -4041,7 +4978,8 @@
               30,
               402,
               470
-            ]
+            ],
+            "body_height": 425
           },
           {
             "name": "6Hs advancing staff active",
@@ -4063,7 +5001,8 @@
               102,
               402,
               454
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "j.P jab active",
@@ -4085,7 +5024,8 @@
               45,
               343,
               374
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "j.K kick active",
@@ -4107,7 +5047,8 @@
               41,
               363,
               410
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "j.S first hit active",
@@ -4129,7 +5070,8 @@
               72,
               342,
               414
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "j.S second hit active",
@@ -4151,7 +5093,8 @@
               47,
               311,
               419
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "j.Hs horizontal active",
@@ -4173,7 +5116,8 @@
               86,
               349,
               388
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "j.D dive active",
@@ -4195,7 +5139,8 @@
               71,
               346,
               417
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Held guard active",
@@ -4217,7 +5162,8 @@
               97,
               322,
               438
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Guard attack active",
@@ -4239,7 +5185,8 @@
               100,
               375,
               456
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Collar capture active",
@@ -4261,7 +5208,8 @@
               40,
               348,
               456
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Headbutt active",
@@ -4283,7 +5231,8 @@
               44,
               332,
               457
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Air throw active",
@@ -4305,7 +5254,8 @@
               34,
               359,
               394
-            ]
+            ],
+            "body_height": 405
           },
           {
             "name": "Stance P active",
@@ -4327,7 +5277,8 @@
               24,
               407,
               495
-            ]
+            ],
+            "body_height": 440
           },
           {
             "name": "Stance K low active",
@@ -4349,7 +5300,8 @@
               21,
               371,
               493
-            ]
+            ],
+            "body_height": 440
           },
           {
             "name": "Stance S hook active",
@@ -4371,7 +5323,8 @@
               23,
               347,
               495
-            ]
+            ],
+            "body_height": 440
           },
           {
             "name": "Stance Hs overhead active",
@@ -4393,7 +5346,8 @@
               20,
               365,
               494
-            ]
+            ],
+            "body_height": 440
           },
           {
             "name": "2D stance exit active",
@@ -4415,7 +5369,8 @@
               40,
               335,
               455
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "Running tackle active",
@@ -4437,7 +5392,8 @@
               132,
               373,
               455
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "Single punch finish active",
@@ -4459,7 +5415,8 @@
               146,
               346,
               455
-            ]
+            ],
+            "body_height": 410
           },
           {
             "name": "Crouch active",
@@ -4481,7 +5438,8 @@
               157,
               339,
               455
-            ]
+            ],
+            "body_height": 410
           }
         ]
       },
@@ -4513,7 +5471,8 @@
               18,
               462,
               488
-            ]
+            ],
+            "body_height": 470
           }
         ]
       },
@@ -4545,7 +5504,8 @@
               36,
               429,
               488
-            ]
+            ],
+            "body_height": 470
           },
           {
             "name": "idle 4",
@@ -4567,7 +5527,8 @@
               36,
               461,
               489
-            ]
+            ],
+            "body_height": 470
           },
           {
             "name": "idle 5",
@@ -4589,7 +5550,8 @@
               25,
               452,
               489
-            ]
+            ],
+            "body_height": 470
           },
           {
             "name": "idle 6",
@@ -4611,7 +5573,8 @@
               12,
               442,
               489
-            ]
+            ],
+            "body_height": 470
           }
         ]
       },
@@ -4643,7 +5606,8 @@
               22,
               373,
               474
-            ]
+            ],
+            "body_height": 450
           },
           {
             "name": "walk 2",
@@ -4665,7 +5629,8 @@
               25,
               367,
               473
-            ]
+            ],
+            "body_height": 450
           },
           {
             "name": "walk 3",
@@ -4687,7 +5652,8 @@
               27,
               367,
               477
-            ]
+            ],
+            "body_height": 450
           },
           {
             "name": "walk 4",
@@ -4709,7 +5675,8 @@
               26,
               368,
               474
-            ]
+            ],
+            "body_height": 450
           },
           {
             "name": "walk 5",
@@ -4731,7 +5698,8 @@
               27,
               369,
               480
-            ]
+            ],
+            "body_height": 450
           },
           {
             "name": "walk 6",
@@ -4753,7 +5721,8 @@
               25,
               371,
               478
-            ]
+            ],
+            "body_height": 450
           },
           {
             "name": "walk 7",
@@ -4775,7 +5744,8 @@
               23,
               372,
               478
-            ]
+            ],
+            "body_height": 450
           },
           {
             "name": "walk 8",
@@ -4797,7 +5767,8 @@
               23,
               371,
               477
-            ]
+            ],
+            "body_height": 450
           }
         ]
       },
@@ -4829,7 +5800,8 @@
               64,
               340,
               439
-            ]
+            ],
+            "body_height": 430
           },
           {
             "name": "step 2",
@@ -4851,7 +5823,8 @@
               67,
               340,
               439
-            ]
+            ],
+            "body_height": 430
           },
           {
             "name": "step 3",
@@ -4873,7 +5846,8 @@
               76,
               328,
               439
-            ]
+            ],
+            "body_height": 430
           },
           {
             "name": "step 4",
@@ -4895,7 +5869,8 @@
               85,
               343,
               398
-            ]
+            ],
+            "body_height": 430
           },
           {
             "name": "step 5",
@@ -4917,7 +5892,8 @@
               91,
               354,
               437
-            ]
+            ],
+            "body_height": 430
           },
           {
             "name": "step 6",
@@ -4939,7 +5915,8 @@
               95,
               341,
               439
-            ]
+            ],
+            "body_height": 430
           },
           {
             "name": "step 7",
@@ -4961,7 +5938,8 @@
               70,
               326,
               439
-            ]
+            ],
+            "body_height": 430
           },
           {
             "name": "step 8",
@@ -4983,10 +5961,321 @@
               57,
               331,
               439
-            ]
+            ],
+            "body_height": 430
           }
         ],
         "animation": "Non-looping eight-pose step dash, sampled by dash age."
+      },
+      "knockdown": {
+        "file": "recovery-v1/tapper.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 430,
+        "sha256": "8bc880b3d02697315fc07b8075365d7d8a65e17b74d54e56a6e0ab9d6daab85d",
+        "generation_file": "exec-8df7b833-df0a-4108-a3ab-09a486c29eaa.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Prone",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              449
+            ],
+            "bounds": [
+              20,
+              306,
+              493,
+              450
+            ]
+          },
+          {
+            "name": "Brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              448
+            ],
+            "bounds": [
+              29,
+              216,
+              490,
+              449
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              448
+            ],
+            "bounds": [
+              44,
+              167,
+              470,
+              449
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              466
+            ],
+            "bounds": [
+              99,
+              133,
+              465,
+              467
+            ]
+          },
+          {
+            "name": "Ready anticipation",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              466
+            ],
+            "bounds": [
+              94,
+              67,
+              461,
+              467
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              466
+            ],
+            "bounds": [
+              65,
+              37,
+              428,
+              467
+            ]
+          }
+        ]
+      },
+      "scale_calibration": {
+        "reference": "tapper-v1/idle.png / normal ready",
+        "world_standing_height": 150,
+        "method": "Fixed standing-equivalent source scale, shared by every use of a source frame. Bent poses retain smaller silhouettes; weapons are excluded.",
+        "source_body_heights": {
+          "tapper-v1/idle.png": 470,
+          "tapper-v1/walk.png": 450,
+          "tapper-v1/step.png": 430,
+          "tapper-v1/actions-1.png": 405,
+          "tapper-v1/actions-2.png": 405,
+          "tapper-v1/actions-3.png": 425,
+          "tapper-v1/actions-4.png": 410,
+          "tapper-v1/actions-5.png": 405,
+          "tapper-v1/actions-6.png": 405,
+          "tapper-v1/actions-7.png": 440,
+          "tapper-v1/actions-8.png": 410
+        }
+      },
+      "knockdown_back": {
+        "file": "recovery-v1/tapper-back.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 430,
+        "sha256": "65ade877b5568eff023e01cf3b8cbd4e6d221fc7e8a577f73c20dca8b3f29dc7",
+        "generation_file": "exec-0a9caeb6-a2db-41f1-8d05-3d308808338e.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Supine",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              428
+            ],
+            "bounds": [
+              43,
+              280,
+              490,
+              429
+            ]
+          },
+          {
+            "name": "Elbow brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              435
+            ],
+            "bounds": [
+              15,
+              227,
+              497,
+              436
+            ]
+          },
+          {
+            "name": "Seated",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              432
+            ],
+            "bounds": [
+              43,
+              179,
+              436,
+              433
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              463
+            ],
+            "bounds": [
+              96,
+              119,
+              463,
+              464
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              466
+            ],
+            "bounds": [
+              66,
+              112,
+              462,
+              467
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              466
+            ],
+            "bounds": [
+              64,
+              35,
+              427,
+              467
+            ]
+          }
+        ]
       }
     },
     {
@@ -6052,6 +7341,298 @@
             ]
           }
         ]
+      },
+      "knockdown": {
+        "file": "recovery-v1/shark.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 422,
+        "sha256": "c8e47e0b9069cef615328c30b4188cf19cc8848baa228bc1685f2a33933e0570",
+        "generation_file": "exec-90e4cd31-dc19-4c12-8489-4f87ac007072.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Prone",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              480
+            ],
+            "bounds": [
+              20,
+              374,
+              498,
+              481
+            ]
+          },
+          {
+            "name": "Brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              478
+            ],
+            "bounds": [
+              28,
+              307,
+              488,
+              479
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              475
+            ],
+            "bounds": [
+              72,
+              241,
+              452,
+              476
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              467
+            ],
+            "bounds": [
+              89,
+              156,
+              434,
+              468
+            ]
+          },
+          {
+            "name": "Ready anticipation",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              467
+            ],
+            "bounds": [
+              64,
+              77,
+              416,
+              468
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              467
+            ],
+            "bounds": [
+              62,
+              45,
+              420,
+              468
+            ]
+          }
+        ]
+      },
+      "knockdown_back": {
+        "file": "recovery-v1/shark-back.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 422,
+        "sha256": "db1bfe7a0404d1beafa3a9a40142d07e79b96ee94092b6a0dcaf4d811493c12a",
+        "generation_file": "exec-15291b53-4549-4df7-944f-22a977f1976b.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Supine",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              477
+            ],
+            "bounds": [
+              36,
+              335,
+              480,
+              478
+            ]
+          },
+          {
+            "name": "Elbow brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              477
+            ],
+            "bounds": [
+              51,
+              274,
+              431,
+              478
+            ]
+          },
+          {
+            "name": "Seated",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              477
+            ],
+            "bounds": [
+              61,
+              228,
+              423,
+              478
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              473
+            ],
+            "bounds": [
+              71,
+              162,
+              446,
+              474
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              469
+            ],
+            "bounds": [
+              53,
+              111,
+              432,
+              470
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              470
+            ],
+            "bounds": [
+              61,
+              43,
+              421,
+              471
+            ]
+          }
+        ]
       }
     },
     {
@@ -7112,6 +8693,298 @@
           }
         ],
         "appearance_revision": "black-hair-lean-arms-v3"
+      },
+      "knockdown": {
+        "file": "recovery-v1/fillet.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 412,
+        "sha256": "fee48e4bb8c860f4401258761d7e3cd0ae2fcc896c3103b8bf840b875e7fc59c",
+        "generation_file": "exec-1c3bf83e-94d8-4615-8e81-8728ca9a4083.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Prone",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              501
+            ],
+            "bounds": [
+              47,
+              400,
+              507,
+              502
+            ]
+          },
+          {
+            "name": "Brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              498
+            ],
+            "bounds": [
+              51,
+              312,
+              466,
+              499
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              499
+            ],
+            "bounds": [
+              88,
+              248,
+              467,
+              500
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              467
+            ],
+            "bounds": [
+              151,
+              192,
+              438,
+              468
+            ]
+          },
+          {
+            "name": "Ready anticipation",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              467
+            ],
+            "bounds": [
+              97,
+              137,
+              401,
+              468
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              467
+            ],
+            "bounds": [
+              65,
+              128,
+              410,
+              468
+            ]
+          }
+        ]
+      },
+      "knockdown_back": {
+        "file": "recovery-v1/fillet-back.png",
+        "columns": 3,
+        "rows": 2,
+        "body_height": 412,
+        "sha256": "4df0f522b2761736f8f037e9171db3ec6e47209d5e84aaef68f731ca658205c9",
+        "generation_file": "exec-e0488d99-e521-436e-a33f-1849da9f7759.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            511,
+            0
+          ],
+          [
+            1023,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Supine",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              496
+            ],
+            "bounds": [
+              57,
+              362,
+              482,
+              497
+            ]
+          },
+          {
+            "name": "Elbow brace",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              485
+            ],
+            "bounds": [
+              55,
+              288,
+              428,
+              486
+            ]
+          },
+          {
+            "name": "Seated",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              490
+            ],
+            "bounds": [
+              30,
+              232,
+              376,
+              491
+            ]
+          },
+          {
+            "name": "Kneel",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              467
+            ],
+            "bounds": [
+              114,
+              169,
+              433,
+              468
+            ]
+          },
+          {
+            "name": "Rise",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              469
+            ],
+            "bounds": [
+              94,
+              145,
+              406,
+              470
+            ]
+          },
+          {
+            "name": "Ready",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              256,
+              469
+            ],
+            "bounds": [
+              62,
+              127,
+              417,
+              470
+            ]
+          }
+        ]
       }
     }
   ],

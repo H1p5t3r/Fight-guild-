@@ -23,6 +23,26 @@ func ticks(count: int) -> void:
 func release_hitstop() -> void:
 	while game.model.state().hitstop > 0: ticks(1)
 
+func verify_recovery_art() -> void:
+	# Also runs in the exported PCK, where source PNGs cannot hide missing imports.
+	for character in CombatModel.CHARACTERS.size():
+		for phase in ["knockdown_back", "knockdown"]:
+			for pose in 6:
+				var texture := FighterArt.texture(character, phase, pose)
+				check(texture.atlas != null and texture.get_width() > 0, "Missing packaged recovery sprite: %d/%s/%d" % [character, phase, pose])
+	for clip in [13, 14]:
+		game.show_sprite_review(clip)
+		var count := 0
+		for child in game.get_children():
+			if not child is AcceptDialog or child == game.file_dialog: continue
+			for control in child.find_children("*", "Control", true, false):
+				if control is FighterPreview:
+					check(control.phase == ("knockdown_back" if clip == 13 else "knockdown") and control.pose == count, "Recovery review selected the wrong sequence")
+					count += 1
+			child.queue_free()
+		check(count == 2, "Recovery review must show the current and following poses")
+		await tree.process_frame
+
 func timing_fixture() -> Dictionary:
 	var data: Dictionary = game.model.data().duplicate(true)
 	for character in data.characters:
@@ -274,6 +294,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	game.reset_round()
 	verify_timing_feedback()
 	await verify_signatures()
+	await verify_recovery_art()
 	game.show_controls()
 	check(game.has_open_dialog(), "Controls dialog did not open")
 	for child in game.get_children():

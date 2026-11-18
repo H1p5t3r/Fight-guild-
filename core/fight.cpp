@@ -525,13 +525,17 @@ static Box transform(Box b,const Fighter& f) {
             f.x+(f.facing==1?b.right:-b.left),f.y+b.top};
 }
 static int pose_offset(int phase,int index) {
-    const int offsets[]={0,12,18,24,56,88,89,97,105};
+    const int offsets[]={0,12,18,24,56,88,89,97,105,109,115};
     return offsets[phase]+index;
 }
 Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     const Pose ready=f.stance&&f.character==3?Pose{8,((f.idle_time+tick_offset)/7)%4}:Pose{LOCOMOTION_POSES[f.character]?5:0,0};
-    if(f.reaction==Downed) return {0,10};
-    if(f.reaction==Waking) return {0,11};
+    const int recovery_phase=f.knockdown==HardKnockdown?9:10;
+    if(f.reaction==Downed) return {recovery_phase,0};
+    if(f.reaction==Waking) {
+        const int elapsed=clamp(f.wakeup_frames-f.recovery_time+tick_offset,0,max(0,f.wakeup_frames-1));
+        return {recovery_phase,f.wakeup_frames<=1?5:1+elapsed*4/(f.wakeup_frames-1)};
+    }
     if(f.reaction==AirReel||f.reaction==WallSplat||f.reaction==Reeled||f.reaction==Captured||f.reaction==Crumpled) return {0,9};
     if(f.guarding&&f.block_reaction>0) return {2,(f.block_reaction-1)*2+(f.block_age>=4)};
     if(f.stun) return {0,9};
@@ -572,8 +576,8 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     return {0,0};
 }
 int Simulation::pose_box_count(int c,int phase,int index) {
-    if(c<0||c>=CHARACTER_COUNT||phase<0||phase>8||index<0) return 0;
-    const int count=phase==8?(c==3?4:0):phase==0?12:phase<=2?6:phase<=4?SIGNATURE_POSES[c]:LOCOMOTION_POSES[c]?(phase==5?1:8):0;
+    if(c<0||c>=CHARACTER_COUNT||phase<0||phase>10||index<0) return 0;
+    const int count=phase>=9?6:phase==8?(c==3?4:0):phase==0?12:phase<=2?6:phase<=4?SIGNATURE_POSES[c]:LOCOMOTION_POSES[c]?(phase==5?1:8):0;
     if(index>=count) return 0;
     return HURT_POSES[c][pose_offset(phase,index)].count;
 }

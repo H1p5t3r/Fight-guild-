@@ -211,8 +211,30 @@ static void test_stage_routes() {
         s.world=origin; ticks(s,duration,Left|P,Right|K); CHECK(s.checksum()==hash);
     }
 }
+static void test_recovery_poses() {
+    for(int c=0;c<CHARACTER_COUNT;++c) for(int kd:{SoftKnockdown,HardKnockdown}) for(int wake:{0,1,8,21}) {
+        auto s=match();s.reset(c,(c+1)%6,0,0);
+        auto& f=s.world.players[0];f.reaction=Downed;f.knockdown=kd;
+        f.recovery_time=3;f.wakeup_frames=wake;
+        const int phase=kd==HardKnockdown?9:10;
+        CHECK(s.get(0,29)==phase&&s.get(0,30)==0);
+        s.world.hitstop=4;ticks(s,4);
+        CHECK(f.recovery_time==3&&s.get(0,29)==phase&&s.get(0,30)==0);
+        ticks(s,3);
+        CHECK(f.reaction==(wake?Waking:Free));
+        State before=s.world;
+        for(int t=0;t<wake;++t) {
+            CHECK(s.get(0,29)==phase);
+            CHECK(s.get(0,30)==(wake==1?5:1+t*4/(wake-1)));
+            CHECK(Simulation::pose_box_count(c,phase,s.get(0,30))==3);
+            s.step(0,0);
+        }
+        CHECK(f.reaction==Free&&f.recovery_time==0);
+        unsigned hash=s.checksum();s.world=before;ticks(s,wake);CHECK(s.checksum()==hash);
+    }
+}
 int main() {
-    test_universals();test_recovery();test_gravity();test_walls();test_stage_routes();
+    test_universals();test_recovery();test_recovery_poses();test_gravity();test_walls();test_stage_routes();
     std::printf("Recovery / throws / combo gravity / walls: %d checks, %d failures\n",checks,failures);
     return failures?1:0;
 }

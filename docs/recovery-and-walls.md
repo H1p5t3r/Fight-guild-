@@ -82,3 +82,5 @@ Schema 8 adds post-stun throw grace, landing recovery, damage scaling, repeated-
 Schema/core **11** adds captured departure coordinates and the three-area directional route to deterministic snapshots. Schema-10 move saves migrate without changing any authored values, including a saved 90-tick break duration. New configurations use 150 ticks. Online peers must use matching builds.
 
 Schema/core **12** stores independent wall health and remaining hit travel. Authored move distances and wall health/timing values remain intact on migration. The old `wallDamage`, `wallRange`, `wallDecayDelay`, `wallDecay`, `wallMidCap` and `groundedWallPrime` configuration slots are retained only for save compatibility; they have no gameplay effect and are absent from the editor. Online peers need matching builds.
+
+Soft knockdowns now use the **on-the-back** recovery sequence; hard knockdowns use **face-down**. All six fighters have dedicated get-up drawings paced by their existing wakeup duration. See [recovery artwork](recovery-art.md).

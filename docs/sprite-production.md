@@ -17,7 +17,7 @@ The six generated sets are iteration studies. The goal is a repeatable character
 | Smoke | Narrow flowing curves; green hood, long dark hair, ivory coat tails, vials | ivory `#DCD1AA`, brown `#554333`, olive `#778B33`, vapor `#A4CA35` |
 | Tapper | Sturdy rectangle with open circular hooks; blond hair/beard, hooked staff at both ends | brown `#65503A`, ivory `#D8C6A2`, ochre `#C39832`, burgundy `#713A38` |
 | Shark | Lean diagonals; long low-volume white hair close to skull/nape and back, blue sports glasses, bone jaw shoulder, long hook plus short blade | slate `#34454D`, bone `#D9D4BD`, teal `#258A99` |
-| Fillet | Compact angular silhouette; short brown hair, red shoulder/corset, ivory apron, two curved knives | charcoal `#393039`, ivory `#DDD0B1`, crimson `#A63242` |
+| Fillet | Compact angular silhouette; short black hair, slender arms, red shoulder/corset, ivory apron, two curved knives | charcoal `#393039`, ivory `#DDD0B1`, crimson `#A63242` |
 
 ## Fillet and Shark proportion study v2
 
@@ -128,3 +128,7 @@ Runtime idle animation advances on the fighter's deterministic clock and freezes
 The support atlas mixes new standing, crouching, airborne and button poses with the existing walk and reaction drawings. Per-frame body heights keep those retained drawings at their original scale. Each normal selects its own pair through `artPose`; j.D emits the separately rendered ember. There are no added transition smear frames. Full locomotion/reaction consistency and impact/follow-through/recovery drawings remain future passes.
 
 Attack rectangles come from Queen Dizzy's uploaded diagrams, scaled to project units; anatomical vulnerability stays tied to Smoke's own body. Leo diagrams adjust Tapper's normal hitboxes only. See [Smoke's kit and source notes](smoke-design.md) for the trace calibration, missing Leo diagrams and provisional mechanics.
+
+## Knockdown recovery v1 — 18 November 2026
+
+Every fighter now has a separate six-pose face-down/hard sequence and six-pose face-up/soft sequence, including five get-up drawings. The deterministic recovery timer selects the clip; artwork does not change action timing. Tapper uses calibrated source-batch heights across ready, movement, stance and attacks. See [recovery art and scale rules](recovery-art.md) for registration, provenance and review commands. The original PNGs are preserved and no transition smears are used.
