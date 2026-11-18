@@ -388,8 +388,11 @@ func verify_signatures() -> void:
 	check(game.model.move(5, 25).travelSpeed == 1200 and game.model.move(5, 25).inertiaPercent == 80, "Attack travel / inertia editor did not apply")
 	game.movement_fields.runSpeed.control.value = 13
 	game.movement_fields.forwardStyle.control.selected = 1
+	game.movement_fields.airDashPauseFrames.control.value = 6
+	game.movement_fields.airBackdashPauseFrames.control.value = 3
 	game.apply_movement()
 	check(game.model.movement(5).runSpeed == 1300 and game.model.movement(5).forwardStyle == 1, "Per-character movement controls did not apply")
+	check(game.model.movement(5).airDashPauseFrames == 6 and game.model.movement(5).airBackdashPauseFrames == 3, "Air dash pause controls did not apply")
 	game.lock_online(true)
 	check(game.movement_fields.forwardStyle.control.disabled and not game.movement_fields.runSpeed.control.editable and game.fields.enabled.control.disabled, "Signature / movement editor remains editable online")
 	game.lock_online(false)

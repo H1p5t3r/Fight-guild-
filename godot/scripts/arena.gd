@@ -184,7 +184,7 @@ func _draw() -> void:
 			elif fighter.prejumpTime: status = "PREJUMP · %df" % fighter.prejumpTime
 			elif fighter.landingTime: status = "LANDING · %df" % fighter.landingTime
 			elif fighter.running: status = "RUN"
-			elif fighter.dashTicks: status = "STEP"
+			elif fighter.dashTicks: status = "AIR DASH PAUSE" if fighter.y > 0 and fighter.dashAge == 0 else "AIR DASH" if fighter.y > 0 else "STEP"
 			if fighter.counterSlowTime: status += " · ½ SPEED %df" % fighter.counterSlowTime
 			label(status, Vector2(clampf(px + 28, 12, size.x - 165), py - 10), 12, Color("f68b79") if fighter.guardBreak else MUTED)
 		if fighter.faultless or (fighter.guarding and not fighter.guardBreak):

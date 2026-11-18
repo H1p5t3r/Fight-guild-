@@ -6265,7 +6265,9 @@
         "fdBlockCost": -1,
         "smearMode": 0,
         "smearPart": 0,
-        "smearStretch": 150
+        "smearStretch": 150,
+        "airDashPauseFrames": 4,
+        "airBackdashPauseFrames": 4
       }
     },
     {
@@ -12532,7 +12534,9 @@
         "fdBlockCost": -1,
         "smearMode": 0,
         "smearPart": 0,
-        "smearStretch": 150
+        "smearStretch": 150,
+        "airDashPauseFrames": 4,
+        "airBackdashPauseFrames": 4
       }
     },
     {
@@ -12577,7 +12581,9 @@
         "fdBlockCost": -1,
         "smearMode": 1,
         "smearPart": 0,
-        "smearStretch": 150
+        "smearStretch": 150,
+        "airDashPauseFrames": 4,
+        "airBackdashPauseFrames": 4
       },
       "moves": [
         {
@@ -20052,7 +20058,9 @@
         "fdBlockCost": -1,
         "smearMode": 1,
         "smearPart": 0,
-        "smearStretch": 150
+        "smearStretch": 150,
+        "airDashPauseFrames": 4,
+        "airBackdashPauseFrames": 4
       },
       "moves": [
         {
@@ -33654,7 +33662,9 @@
         "fdBlockCost": -1,
         "smearMode": 0,
         "smearPart": 0,
-        "smearStretch": 150
+        "smearStretch": 150,
+        "airDashPauseFrames": 4,
+        "airBackdashPauseFrames": 4
       }
     },
     {
@@ -39921,7 +39931,9 @@
         "fdBlockCost": -1,
         "smearMode": 0,
         "smearPart": 0,
-        "smearStretch": 150
+        "smearStretch": 150,
+        "airDashPauseFrames": 4,
+        "airBackdashPauseFrames": 4
       }
     }
   ]

@@ -3,7 +3,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 21, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 45, FIELD_COUNT = 138;
+constexpr int VERSION = 22, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 45, FIELD_COUNT = 138;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
@@ -36,7 +36,7 @@ enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery
 enum KnockdownKind { NoKnockdown, SoftKnockdown, HardKnockdown };
 enum Reaction { Free, AirReel, Downed, Waking, WallSplat, Reeled, Captured, Crumpled };
 enum MobilityField { ForwardStyle, WalkSpeed, RunSpeed, RunAcceleration, StepSpeed, StepFrames,
-                     BackSpeed, BackFrames, AttackFriction, BackStyle, BackWalkSpeed, BackRunSpeed, JumpSpeed, JumpForwardSpeed, JumpBackSpeed, Gravity, AirJumps, MovePrejumpFrames, AirDashEnabled, AirBackdashEnabled, AirDashStyle, AirBackdashStyle, AirDashSpeed, AirBackdashSpeed, AirDashFrames, AirBackdashFrames, AirDashUses, HoverHeight, HoverRiseSpeed, TeleportDistance, BackTeleportDistance, TeleportStartup, FdEnabled, FdPushPercent, FdDrain, FdAirDrain, FdBlockCost, MoveSmearMode, MoveSmearPart, MoveSmearStretch, MOBILITY_FIELDS };
+                     BackSpeed, BackFrames, AttackFriction, BackStyle, BackWalkSpeed, BackRunSpeed, JumpSpeed, JumpForwardSpeed, JumpBackSpeed, Gravity, AirJumps, MovePrejumpFrames, AirDashEnabled, AirBackdashEnabled, AirDashStyle, AirBackdashStyle, AirDashSpeed, AirBackdashSpeed, AirDashFrames, AirBackdashFrames, AirDashUses, HoverHeight, HoverRiseSpeed, TeleportDistance, BackTeleportDistance, TeleportStartup, FdEnabled, FdPushPercent, FdDrain, FdAirDrain, FdBlockCost, MoveSmearMode, MoveSmearPart, MoveSmearStretch, AirDashPauseFrames, AirBackdashPauseFrames, MOBILITY_FIELDS };
 enum ForwardMovement { ForwardRun, StepDash, HoverDash, Teleport };
 struct Mobility { int v[MOBILITY_FIELDS]; };
 enum BoxKind { HurtBox, PushBox, HitBox, WallBox, ProjectileBox };
@@ -94,6 +94,7 @@ struct Fighter {
     int prejump_time;
     int slow_time, slow_phase, slow_held;
     int dash_kind, dash_age, dash_air, air_dash_used, air_jump_used, teleported;
+    int dash_pause, dash_backwards;
     int attack_serial, projectile_spawned, contact_count;
     int variant, tether_source, tether_used, bleed_source, bleed_time, bleed_clock, grey_life;
     int stance, guard_button, armor_left, bounce_ground, bounce_wall, crumple_time, grab_time, grab_owner, idle_time;

@@ -5,7 +5,7 @@ func check(ok: bool, message: String) -> void:
 func _initialize() -> void:
 	var model := CombatModel.new()
 	var data := model.data()
-	check(data.schema == 21 and data.characters[3].moves.size() == 45, "Tapper schema/slots missing")
+	check(data.schema == 22 and data.characters[3].moves.size() == 45, "Tapper schema/slots missing")
 	check(model.movement(3).forwardStyle == 1, "Tapper must step dash")
 	check(model.core.can_cancel(3, 37, 37, true) and model.core.can_cancel(3, 38, 39, true), "Stance routes missing")
 	model.reset([3, 4])

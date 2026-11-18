@@ -1,5 +1,6 @@
 #include "../core/fight.h"
 #include <cstdio>
+#include <initializer_list>
 using namespace fight;
 static int checks=0,failures=0;
 #define CHECK(x) do {++checks;if(!(x)){++failures;std::fprintf(stderr,"FAIL %d: %s\n",__LINE__,#x);}}while(0)
@@ -14,7 +15,64 @@ static void shot(int owner=0,int kind=1){
  m.v[Hitstop]=0;m.v[Pushback]=m.v[AirPushback]=m.v[Launch]=m.v[AirLaunch]=0;
  sim.preview_begin(owner,0);
 }
+static void air_dash_pause(){
+ // Every captain/style/direction must halt both rising and falling motion first.
+ for(int c=0;c<CHARACTER_COUNT;++c)for(int style=0;style<4;++style)for(int back=0;back<2;++back)for(int facing:{-1,1})for(int vy:{-900,900}){
+  sim.defaults();sim.reset(c,(c+1)%CHARACTER_COUNT,0,0);
+  auto& f=sim.world.players[0];auto& m=sim.mobility[c];
+  f.x=facing==1?40000:60000;f.y=18000;f.vx=-facing*525;f.vy=vy;f.carry_vx=facing*1900;f.carry_time=5;
+  sim.world.players[1].x=facing==1?85000:15000;
+  m.v[AirDashEnabled]=m.v[AirBackdashEnabled]=1;m.v[AirDashUses]=1;
+  m.v[AirDashStyle]=m.v[AirBackdashStyle]=style;
+  m.v[AirDashPauseFrames]=4;m.v[AirBackdashPauseFrames]=6;
+  m.v[AirDashFrames]=8;m.v[AirBackdashFrames]=11;
+  m.v[AirDashSpeed]=1100;m.v[AirBackdashSpeed]=700;
+  m.v[TeleportDistance]=13000;m.v[BackTeleportDistance]=9000;m.v[TeleportStartup]=9;
+  int x=f.x,y=f.y,pause=back?6:4,duration=back?11:8,dir=facing*(back?-1:1);
+  sim.step(Dash|(back?(facing==1?Left:Right):0),0);
+  CHECK(f.x==x&&f.y==y&&f.vx==0&&f.vy==0&&f.carry_vx==0&&f.carry_time==0);
+  CHECK(f.dash_pause==pause-1&&f.dash_age==0&&f.dash==duration&&f.air_dash_used==1);
+  auto saved=sim.world;
+  for(int i=1;i<pause;++i){sim.step(0,0);CHECK(f.x==x&&f.y==y&&f.vx==0&&f.vy==0&&f.carry_vx==0);CHECK(f.dash==duration&&f.dash_age==0);}
+  for(int i=1;i<=duration;++i){
+   sim.step(0,0);
+   CHECK(f.x==x+dir*(style==Teleport?(back?9000:13000):i*(back?700:1100)));
+   CHECK(f.y==y&&f.dash==duration-i&&f.dash_age==i&&f.dash_pause==0);
+  }
+  auto hash=sim.checksum();sim.world=saved;ticks(pause-1+duration);CHECK(sim.checksum()==hash);
+ }
+ // Inputs buffer through the pause. Only the new burst can carry into an attack.
+ fresh();auto& f=sim.world.players[0];auto& m=sim.mobility[5];
+ m.v[AirDashEnabled]=1;m.v[AirDashSpeed]=1100;m.v[AirDashPauseFrames]=4;m.v[AttackFriction]=0;
+ f.y=18000;f.vx=600;f.vy=-300;f.carry_vx=1900;f.carry_time=5;
+ sim.moves[5][17].v[InertiaPercent]=100;
+ int x=f.x;sim.step(Dash,0);sim.step(0,0);sim.step(P,0);CHECK(f.move<0&&f.x==x);
+ sim.step(0,0);CHECK(f.move<0&&f.x==x&&f.dash_pause==0);sim.step(0,0);
+ CHECK(f.move==17&&f.vx==1100&&f.x==x+1100&&f.dash==0&&f.dash_pause==0);
+ // Facing changes during the hold do not reinterpret a backdash as a forward dash.
+ for(int style:{StepDash,Teleport}){
+  fresh();auto& p=sim.mobility[5];p.v[AirBackdashEnabled]=1;p.v[AirBackdashStyle]=style;
+  p.v[AirDashSpeed]=1300;p.v[AirBackdashSpeed]=700;p.v[AirBackdashPauseFrames]=6;
+  p.v[TeleportDistance]=16000;p.v[BackTeleportDistance]=9000;f.y=18000;x=f.x;
+  sim.step(Left|Dash,0);sim.world.players[1].x=10000;ticks(5);CHECK(f.facing==-1&&f.x==x);
+  sim.step(0,0);CHECK(f.x==x-(style==Teleport?9000:700));
+ }
+ // Hitstop freezes the pause, while being hit cancels it without a delayed burst.
+ fresh();m.v[AirDashEnabled]=1;f.y=18000;sim.step(Dash,0);int pause=f.dash_pause;
+ sim.world.hitstop=5;ticks(5);CHECK(f.dash_pause==pause&&f.dash_age==0);
+ auto& other=sim.world.players[1];other.x=f.x+6000;other.y=f.y;
+ auto& hit=sim.moves[4][0];hit.v[Reach]=50000;hit.v[HitboxBack]=0;hit.v[Bottom]=0;hit.v[Height]=50000;hit.v[Hitstop]=0;
+ other.move=0;other.age=hit.v[Startup]-1;sim.step(0,0);
+ CHECK(f.health<1000&&f.dash==0&&f.dash_pause==0);ticks(8);CHECK(f.dash==0&&f.dash_pause==0);
+ // Disabled/used-up dashes cannot freeze a jump for free.
+ fresh();f.y=18000;f.vx=350;f.vy=-200;x=f.x;sim.step(Dash,0);
+ CHECK(f.x==x+350&&f.y==17800&&f.air_dash_used==0&&f.dash_pause==0);
+ fresh();m.v[AirDashEnabled]=1;f.air_dash_used=m.v[AirDashUses];f.y=18000;f.vx=350;f.vy=-200;x=f.x;sim.step(Dash,0);
+ CHECK(f.x==x+350&&f.y==17800&&f.dash==0&&f.dash_pause==0);
+ CHECK(!sim.mobility_set(5,AirDashPauseFrames,0)&&!sim.mobility_set(5,AirBackdashPauseFrames,31));
+}
 int main(){
+ air_dash_pause();
  for(int style=0;style<4;++style){
   fresh();CHECK(sim.mobility_set(5,ForwardStyle,style));
   sim.step(Right,0);sim.step(0,0);sim.step(Right,0);

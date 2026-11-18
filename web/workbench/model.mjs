@@ -2,7 +2,7 @@ import {upgradeCharges} from '../charge-data.mjs';
 import {upgradeStartupRules,moveFieldLimit} from '../startup-rules.mjs';
 import {upgradeStances} from '../stance-data.mjs';
 import {upgradeMechanics} from '../mechanics-data.mjs';
-import {upgradeMovement} from '../movement-data.mjs';
+import {upgradeAirDash,upgradeMovement} from '../movement-data.mjs';
 import {FIELDS, MOVE_IDS, CHARACTERS} from '../engine.mjs';
 import {SPECS, ART_FIELDS} from './specs.mjs';
 import {validateReferences,MAX_REFERENCE_TOTAL,MAX_IMPORT_BYTES,REFERENCE_PHASES} from './references.mjs';
@@ -17,9 +17,9 @@ function integer(value, limit, name) {
 }
 export function validate(data, pack) {
   data=upgradeStances(upgradeMechanics(upgradeHurtMasks(upgradeMovement(upgradeHitboxes(data),pack.defaults)),pack.defaults),pack.defaults);
-  data=upgradeStartupRules(upgradeCharges(data,pack.defaults));
+  data=upgradeAirDash(upgradeStartupRules(upgradeCharges(data,pack.defaults)),pack.defaults);
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15/16/17/18/19/20 workshop exports. Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15/16/17/18/19/20/21 workshop exports. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);

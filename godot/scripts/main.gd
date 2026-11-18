@@ -424,7 +424,7 @@ func build_interface() -> void:
 	movement_panel.add_child(movement_grid)
 	var forward_style := option(movement_grid, "Forward movement", ["Run", "Step dash", "Hover dash", "Teleport"])
 	movement_fields.forwardStyle = {"control": forward_style, "scale": 1}
-	for spec in [["walkSpeed","Walk px/f",0.01,10,100],["runSpeed","Run cap px/f",0.01,20,100],["runAcceleration","Run accel px/f²",0.01,10,100],["stepSpeed","Step px/f",0.01,20,100],["stepFrames","Step duration f",1,60,1],["backSpeed","Backdash px/f",0.01,20,100],["backFrames","Backdash duration f",1,60,1],["attackFriction","Attack drag px/f²",0,5,100]]:
+	for spec in [["walkSpeed","Walk px/f",0.01,10,100],["runSpeed","Run cap px/f",0.01,20,100],["runAcceleration","Run accel px/f²",0.01,10,100],["stepSpeed","Step px/f",0.01,20,100],["stepFrames","Step duration f",1,60,1],["backSpeed","Backdash px/f",0.01,20,100],["backFrames","Backdash duration f",1,60,1],["attackFriction","Attack drag px/f²",0,5,100],["airDashPauseFrames","Air dash pause f",1,30,1],["airBackdashPauseFrames","Air backdash pause f",1,30,1]]:
 		var column := VBoxContainer.new()
 		movement_grid.add_child(column)
 		label(column, spec[1], 10, MUTED)
@@ -434,7 +434,7 @@ func build_interface() -> void:
 		spin.step = 0.01 if spec[4] == 100 else 1
 		column.add_child(spin)
 		movement_fields[spec[0]] = {"control": spin, "scale": spec[4]}
-	var movement_note := label(movement_panel, "Selected fighter only. 66 or Dash starts forward movement. Hold forward or Dash to keep running; back + Dash steps backward. Attacks retain velocity and slow by attack drag. Active travel adds the move's own speed.", 11, MUTED)
+	var movement_note := label(movement_panel, "Selected fighter only. 66 or Dash starts forward movement. Hold forward or Dash to keep running; back + Dash steps backward. Attacks retain velocity and slow by attack drag. Active travel adds the move's own speed. Air dashes stop all velocity and pause before their full burst duration starts.", 11, MUTED)
 	movement_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button(movement_panel, "Apply movement & reset", apply_movement, true, "essential")
 	diagnostics = VBoxContainer.new()

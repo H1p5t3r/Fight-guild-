@@ -104,6 +104,7 @@ public:
                 ||f.positive_time<0||f.positive_time>1800
                 ||f.vx< -4000||f.vx>4000||f.running<0||f.running>1||f.dash<0||f.dash>120
                 ||f.dash_kind<0||f.dash_kind>3||f.dash_age<0||f.dash_age>120
+                ||f.dash_pause<0||f.dash_pause>30||f.dash_backwards<0||f.dash_backwards>1
                 ||f.dash_air<0||f.dash_air>1||f.air_dash_used<0||f.air_dash_used>5||f.air_jump_used<0||f.air_jump_used>5
                 ||f.teleported<0||f.teleported>1||f.attack_serial<0||f.attack_serial>=100000000||f.projectile_spawned<0||f.projectile_spawned>1||f.contact_count<0||f.contact_count>=100000000
                 ||f.dash_direction< -1||f.dash_direction>1||f.pull_time<0||f.pull_time>60

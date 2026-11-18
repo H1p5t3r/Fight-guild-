@@ -127,7 +127,7 @@ export class CombatPreview {
         }
         e.step(input,other);
       }
-      const state=e.state(),frame={state,input,stage:action==='fd'?'Faultless Defense':action.replace(/([A-Z])/g,' $1'),selectedFrame:0,boxes:[0,1].map(p=>({hurt:e.boxes(p,0),push:e.boxes(p,1),hit:e.boxes(p,2),projectiles:e.boxes(p,4)})),contact:null};
+      const state=e.state(),frame={state,input,stage:state.players[0].dashTicks>0&&state.players[0].y>0&&state.players[0].dashAge===0?'Air dash pause':action==='fd'?'Faultless Defense':action.replace(/([A-Z])/g,' $1'),selectedFrame:0,boxes:[0,1].map(p=>({hurt:e.boxes(p,0),push:e.boxes(p,1),hit:e.boxes(p,2),projectiles:e.boxes(p,4)})),contact:null};
       if(state.players[1].contactCount!==lastContact){lastContact=state.players[1].contactCount;frame.contact={tick,event:state.players[1].event,damage:state.players[1].lastDamage,combo:state.players[1].combo,x:state.players[0].x,y:state.players[0].y+7500};result.contacts.push(frame.contact);}
       result.frames.push(frame);
     }

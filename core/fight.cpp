@@ -242,7 +242,7 @@ void Simulation::trigger_tether(Fighter& f) {
     target.stun=m.v[TetherFrames];
     if(target.vy>0) target.y=max(1,target.y);
     target.reaction=target.y>0?AirReel:Free;
-    target.move=-1; target.dash=target.running=target.guarding=target.faultless=0;
+    target.move=-1; target.dash=target.dash_pause=target.running=target.guarding=target.faultless=0;
     target.guard_break=target.block_reaction=target.throw_grace=target.prejump_time=target.landing_time=0;
     target.knockdown=target.down_frames=target.wakeup_frames=target.recovery_time=0;
     target.pull_time=0; target.pull_owner=-1;
@@ -258,7 +258,7 @@ void Simulation::begin(Fighter& f,int move) {
     f.guard_button=0;
     if(moves[f.character][move].v[ActionType]==1) f.guard_button=button_bit(moves[f.character][move].v[HoldButton]);
     if(moves[f.character][move].v[ActionType]==5) f.guard_button=button_bit(moves[f.character][move].v[Button]);
-    f.age=f.contact=f.hit_done=f.dash=0;
+    f.age=f.contact=f.hit_done=f.dash=f.dash_pause=0;
     f.projectile_spawned=0; f.attack_serial=(f.attack_serial+1)%100000000;
     f.hit_groups=0;
     f.running=0;
@@ -291,7 +291,7 @@ bool Simulation::double_forward(const Fighter& f,const Sample& h,int want) const
     return false;
 }
 void Simulation::control(Fighter& f) {
-    if(f.grab_time>0||f.reaction==Captured) { f.vx=f.running=f.dash=0; return; }
+    if(f.grab_time>0||f.reaction==Captured) { f.vx=f.running=f.dash=f.dash_pause=0; return; }
     if(f.reaction==Crumpled) {
         f.vx=0; f.y=500; f.vy=0;
         if(--f.crumple_time<=0) { f.reaction=Free; f.y=f.stun=0; f.throw_grace=rules.throw_grace_frames; }
@@ -329,13 +329,13 @@ void Simulation::control(Fighter& f) {
         }
     }
     if(f.landing_time>0) {
-        --f.landing_time; f.vx=f.running=f.dash=0;
+        --f.landing_time; f.vx=f.running=f.dash=f.dash_pause=0;
         f.carry_vx=f.carry_time=0;
         return;
     }
     if(f.reaction!=Free) {
         if(f.reaction!=AirReel) f.vx=f.knockback_left=0;
-        f.running=f.dash=0;
+        f.running=f.dash=f.dash_pause=0;
         f.carry_vx=f.carry_time=0;
         f.reversal_ready=1;
         f.stun=max(0,f.stun-1);
@@ -360,7 +360,7 @@ void Simulation::control(Fighter& f) {
     }
     if(f.stun>0) {
         if(f.guarding) f.vx=f.knockback_left=0;
-        f.running=f.dash=0;
+        f.running=f.dash=f.dash_pause=0;
         f.carry_vx=f.carry_time=0;
         f.reversal_ready=1;
         if(f.guarding) ++f.block_age;
@@ -380,8 +380,13 @@ void Simulation::control(Fighter& f) {
     bool reversal=f.reversal_ready!=0;
     f.reversal_ready=0;
     f.guarding=f.block_reaction=f.block_age=f.block_advantage=f.guard_break=0;
+    if(f.dash>0&&f.dash_pause>0) { tick_dash(f); return; }
+    // The burst starts after the entire pause. A buffered attack receives this
+    // new velocity through its usual inertia rule, never the pre-dash velocity.
+    if(f.dash>0&&f.dash_air&&f.dash_age==0&&f.dash_kind!=Teleport)
+        f.vx=f.dash_direction*mobility[f.character].v[f.dash_backwards?AirBackdashSpeed:AirDashSpeed];
     if(!f.stance&&faultless_requested(f)&&f.move<0) {
-        f.dash=f.running=0;
+        f.dash=f.dash_pause=f.running=0;
         f.carry_vx=f.carry_time=0;
         if(f.y==0) f.vx=0;
         return;
@@ -397,7 +402,7 @@ void Simulation::control(Fighter& f) {
                 can=m.v[JumpCancel]&&(f.contact||m.v[WhiffCancel])&&cancel_window(f,2);
             }
             if(can) {
-                f.move=-1; f.contact=f.hit_done=f.dash=f.running=0;
+                f.move=-1; f.contact=f.hit_done=f.dash=f.dash_pause=f.running=0;
                 h->consumed|=Up;
                 f.stance=0;
                 bool airborne=f.y>0;
@@ -497,7 +502,7 @@ void Simulation::move_horizontal(Fighter& f,bool was_hitstunned) {
         return;
     }
     if(f.reaction!=Free||f.stun>0) return;
-    if(f.move<0&&(f.running||f.dash)) {
+    if(f.move<0&&(f.running||f.dash)&&(!f.dash_air||f.dash_age>0)) {
         f.carry_vx=f.vx;
         f.carry_time=rules.buffer;
     }
@@ -766,7 +771,7 @@ void Simulation::land(Fighter& f) {
     }
     if(f.reaction==Free)
         f.landing_time=f.air_action?(f.move>=0?effective_move(f).v[LandingRecovery]:rules.air_landing_frames):rules.empty_landing_frames;
-    f.air_action=f.air_dash_used=f.air_jump_used=f.dash=f.running=0;
+    f.air_action=f.air_dash_used=f.air_jump_used=f.dash=f.dash_pause=f.running=0;
     f.y=f.vy=0;
     if(f.move<0||f.variant!=2) { f.move=-1; f.contact=f.hit_done=0; }
     else f.landing_time=0;
@@ -1028,23 +1033,35 @@ int Simulation::mobility_or(const Fighter& f,int field,int fallback) const {
 void Simulation::start_dash(Fighter& f,bool backwards) {
     const auto& m=mobility[f.character];
     f.dash_air=f.y>0;
+    f.dash_backwards=backwards;
+    f.dash_pause=f.dash_air?m.v[backwards?AirBackdashPauseFrames:AirDashPauseFrames]:0;
     f.dash_kind=m.v[f.dash_air?(backwards?AirBackdashStyle:AirDashStyle):(backwards?BackStyle:ForwardStyle)];
     f.dash_direction=f.facing*(backwards?-1:1); f.dash_age=0;
     f.running=!f.dash_air&&f.dash_kind==ForwardRun;
     f.dash=f.running?0:m.v[f.dash_air?(backwards?AirBackdashFrames:AirDashFrames):(backwards?BackFrames:StepFrames)];
-    if(f.dash_kind==Teleport) f.dash=max(f.dash,m.v[TeleportStartup]+1);
-    if(f.dash_air) { ++f.air_dash_used; f.air_action=1; f.vy=0; }
+    if(f.dash_kind==Teleport) f.dash=max(f.dash,f.dash_air?2:m.v[TeleportStartup]+1);
+    if(f.dash_air) {
+        ++f.air_dash_used; f.air_action=1;
+        f.vx=f.vy=f.carry_vx=f.carry_time=f.knockback_left=0;
+        return;
+    }
     if(f.dash_kind==HoverDash&&!f.dash_air) { f.y=1; f.vy=0; }
     if(f.dash_kind==Teleport) f.vx=f.carry_vx=f.carry_time=0;
     else if(!f.running) f.vx=f.dash_direction*m.v[f.dash_air?(backwards?AirBackdashSpeed:AirDashSpeed):(backwards?BackSpeed:StepSpeed)];
 }
 void Simulation::tick_dash(Fighter& f) {
     const auto& m=mobility[f.character];
+    if(f.dash_pause>0) {
+        --f.dash_pause;
+        f.vx=f.vy=f.carry_vx=f.carry_time=0;
+        return; // The burst's duration and age do not advance during the pause.
+    }
     ++f.dash_age;
     if(f.dash_kind==Teleport) {
         f.vx=0; f.vy=0;
-        if(f.dash_age==m.v[TeleportStartup]) {
-            f.x=clamp_x(f,f.x+f.dash_direction*m.v[f.dash_direction==f.facing?TeleportDistance:BackTeleportDistance]);
+        if(f.dash_age==(f.dash_air?1:m.v[TeleportStartup])) {
+            bool backwards=f.dash_air?f.dash_backwards:f.dash_direction!=f.facing;
+            f.x=clamp_x(f,f.x+f.dash_direction*m.v[backwards?BackTeleportDistance:TeleportDistance]);
             f.teleported=1;
         }
     } else if(f.dash_kind==HoverDash) {
@@ -1188,8 +1205,8 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
         world.hitstop=max(world.hitstop,m.v[Hitstop]); return;
     }
     if(!blocked&&!projectile&&m.v[ActionType]==4&&m.v[GrabFrames]>0) {
-        f.grab_time=m.v[GrabFrames]; f.vx=f.running=f.dash=0; f.event=NormalHit;
-        other.grab_owner=p; other.reaction=Captured; other.move=-1; other.stun=0;
+        f.grab_time=m.v[GrabFrames]; f.vx=f.running=f.dash=f.dash_pause=0; f.event=NormalHit;
+        other.grab_owner=p; other.reaction=Captured; other.move=-1; other.stun=0; other.dash=other.dash_pause=0;
         other.vx=other.vy=other.knockback_left=other.faultless=other.stance=0; return;
     }
     const bool cashout=!projectile&&f.variant==2;
@@ -1250,7 +1267,7 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
         other.block_advantage=blocked?m.v[Blockstun]-remaining:0;
         other.block_reaction=!blocked?NoBlock:other.guard_break?BrokenGuard:
             other.block_advantage>0?PressureBlock:StableBlock;
-        other.move=-1; other.dash=other.running=other.vx=other.pull_time=other.knockback_left=0;
+        other.move=-1; other.dash=other.dash_pause=other.running=other.vx=other.pull_time=other.knockback_left=0;
         other.carry_vx=other.carry_time=0;
         other.pull_owner=-1;
         int push=m.v[blocked?BlockPushback:was_airborne?AirPushback:Pushback]*(fd?mobility_or(other,FdPushPercent,rules.fd_push_percent):100)/100;
@@ -1403,6 +1420,7 @@ int Simulation::get(int player,int field) const {
         case 81:return f.stance; case 82:return f.guard_button; case 83:return f.armor_left;
         case 84:return f.bounce_ground; case 85:return f.bounce_wall; case 86:return f.crumple_time;
         case 87:return f.grab_time; case 88:return f.grab_owner; case 89:return f.idle_time;
+        case 90:return f.dash_pause;
         default:return 0;
     }
 }
@@ -1661,8 +1679,8 @@ int Simulation::mobility_get(int c,int field) const {
     return c>=0&&c<CHARACTER_COUNT&&field>=0&&field<MOBILITY_FIELDS?mobility[c].v[field]:-1;
 }
 int Simulation::mobility_set(int c,int field,int value) {
-    const int low[MOBILITY_FIELDS]={0,1,1,1,1,1,1,1,0,0,1,1,100,0,0,1,0,-1,0,0,0,0,1,1,1,1,0,0,1,0,0,1,0,-1,-1,-1,-1,0,0,100};
-    const int high[MOBILITY_FIELDS]={3,1000,2000,1000,2000,120,2000,120,500,3,1000,2000,3000,2000,2000,500,5,30,1,1,3,3,4000,4000,120,120,5,20000,2000,80000,80000,60,1,1000,1000,1000,10000,1,3,400};
+    const int low[MOBILITY_FIELDS]={0,1,1,1,1,1,1,1,0,0,1,1,100,0,0,1,0,-1,0,0,0,0,1,1,1,1,0,0,1,0,0,1,0,-1,-1,-1,-1,0,0,100,1,1};
+    const int high[MOBILITY_FIELDS]={3,1000,2000,1000,2000,120,2000,120,500,3,1000,2000,3000,2000,2000,500,5,30,1,1,3,3,4000,4000,120,120,5,20000,2000,80000,80000,60,1,1000,1000,1000,10000,1,3,400,30,30};
     if(c<0||c>=CHARACTER_COUNT||field<0||field>=MOBILITY_FIELDS||value<low[field]||value>high[field]) return 0;
     mobility[c].v[field]=value;
     return 1;

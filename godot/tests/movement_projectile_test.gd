@@ -37,5 +37,36 @@ func _initialize() -> void:
 	for i in 50: model.step(0, 0)
 	check(model.state_hash() == expected, "Projectile replay desynchronized")
 	check(model.state().players[1].health < 1000, "Projectile did not hit")
+	var previous := data.duplicate(true)
+	previous.schema = 21
+	previous.coreVersion = 21
+	for character in previous.characters:
+		character.movement.erase("airDashPauseFrames")
+		character.movement.erase("airBackdashPauseFrames")
+	previous.characters[5].movement.jumpSpeed = 1875
+	previous.characters[5].moves[24].startup = 7
+	check(model.load_data(previous).is_empty(), "Version-21 movement import failed")
+	check(model.movement(5).airDashPauseFrames == 4 and model.movement(5).airBackdashPauseFrames == 4 and model.movement(5).jumpSpeed == 1875 and model.move(5, 24).startup == 7, "Air pause migration changed existing edits")
+	var airborne := model.data()
+	airborne.characters[5].movement.airDashStyle = 1
+	airborne.characters[5].movement.airDashPauseFrames = 6
+	check(model.load_data(airborne).is_empty(), "Authored air pause rejected")
+	model.reset()
+	model.step(8, 0)
+	for i in 8: model.step(0, 0)
+	model.step(512, 0)
+	var held: Dictionary = model.state().players[0]
+	check(held.dashPause == 5 and held.vx == 0 and held.vy == 0, "Air dash did not clear jump velocity")
+	snapshot = model.core.snapshot()
+	for i in 5:
+		model.step(0, 0)
+		var frame: Dictionary = model.state().players[0]
+		check(frame.x == held.x and frame.y == held.y and frame.vx == 0 and frame.vy == 0, "Air dash drifted during its pause")
+	model.step(0, 0)
+	check(model.state().players[0].x > held.x and model.state().players[0].dashAge == 1, "Air dash burst did not start after pause")
+	expected = model.state_hash()
+	check(model.core.restore(snapshot), "Air pause snapshot rejected")
+	for i in 6: model.step(0, 0)
+	check(model.state_hash() == expected, "Air pause rollback changed burst timing")
 	print("Godot movement, projectiles and schema migration: %d failures" % failures)
 	quit(1 if failures else 0)

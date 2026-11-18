@@ -8,7 +8,7 @@ const pack=await json('build/workbench-pack.json');
 
 test('Smoke source timing, independent hits and charged slots survive workshop/core round trips',()=>{
  const w=new Workshop(pack,pack.draft.data),c=w.data.characters[2];
- assert.equal(w.data.schema,21);assert.equal(c.moves.length,45);
+ assert.equal(w.data.schema,22);assert.equal(c.moves.length,45);
  assert.equal(blockAdvantage(c.moves[2]),-7);assert.equal(blockAdvantage(c.moves[3]),-4);
  assert.equal(blockAdvantage(c.moves[43]),12);
  assert.equal(inputName(c.moves[32]),'c.S');assert.equal(inputName(c.moves[2]),'f.S');assert.equal(inputName(c.moves[43]),'6[Hs]');
@@ -23,14 +23,14 @@ test('Leo corrects Tapper boxes without changing his timing, damage, stance or m
  for(const c of previous.characters)for(const m of c.moves)if(m.category===4&&m.motion===0)m.startup=2;
  const now=pack.draft.data;
  for(const c of [0,1,4,5]){
-  assert.deepEqual(now.characters[c].movement,previous.characters[c].movement);
+  assert.deepEqual(now.characters[c].movement,{...previous.characters[c].movement,airDashPauseFrames:4,airBackdashPauseFrames:4});
   assert.deepEqual(now.characters[c].moves.slice(0,43),previous.characters[c].moves);
  }
  const geometry=new Set(['hitboxBack','bottom','reach','height','hitboxTimeline']);
  for(let i=0;i<43;++i)for(const [key,value] of Object.entries(previous.characters[3].moves[i])){
   if(!geometry.has(key))assert.deepEqual(now.characters[3].moves[i][key],value,`Tapper/${i}/${key}`);
  }
- assert.deepEqual(now.characters[3].movement,previous.characters[3].movement);
+ assert.deepEqual(now.characters[3].movement,{...previous.characters[3].movement,airDashPauseFrames:4,airBackdashPauseFrames:4});
  for(const i of [13,23,24,35,36,37,38,39,40])assert.deepEqual(now.characters[3].moves[i],previous.characters[3].moves[i]);
  const traces=await json('references/frame-data/leo-whitefang-2026-11-18/traces.json');
  assert.deepEqual(now.characters[3].moves[0].hitboxTimeline.keys[0].boxes,traces.moves['5P'][0].boxes);

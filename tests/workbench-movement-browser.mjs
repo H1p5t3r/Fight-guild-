@@ -19,6 +19,14 @@ try{
  await page.locator('#field-movement-airDashEnabled').check();await page.locator('#field-movement-airBackdashEnabled').check();
  await page.locator('#movement-action').selectOption('airBack');await ready();
  assert.ok(await page.evaluate(()=>moveWorkshop.preview().frames.some(f=>f.state.players[0].airDashUsed===1)));
+ await page.locator('#field-movement-airBackdashPauseFrames').fill('7');await ready();
+ const held=await page.evaluate(()=>moveWorkshop.preview().frames.filter(f=>f.stage==='Air dash pause').map(f=>f.state.players[0]));
+ assert.equal(held.length,7);assert.equal(new Set(held.map(f=>`${f.x}/${f.y}`)).size,1);assert.ok(held.every(f=>f.vx===0&&f.vy===0));
+ await page.locator('#field-movement-airDashPauseFrames').fill('2');await ready();
+ await page.locator('#movement-action').selectOption('airForward');await ready();
+ assert.equal(await page.evaluate(()=>moveWorkshop.preview().frames.filter(f=>f.stage==='Air dash pause').length),2);
+ await page.locator('#field-movement-airDashPauseFrames').fill('0');assert.equal(await page.locator('#export').isDisabled(),true);
+ await page.locator('#field-movement-airDashPauseFrames').fill('2');await ready();
  await page.locator('#field-movement-jumpSpeed').fill('19.5');await ready();
  assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].movement.jumpSpeed),1950);
  await page.locator('#field-movement-jumpSpeed').fill('0');assert.equal(await page.locator('#export').isDisabled(),true);await page.locator('#field-movement-jumpSpeed').fill('19.5');

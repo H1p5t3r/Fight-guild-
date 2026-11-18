@@ -5,7 +5,7 @@ func check(ok: bool, message: String) -> void:
 func _initialize() -> void:
 	var model := CombatModel.new()
 	var original := model.data()
-	check(original.schema == 21, "Current schema version missing")
+	check(original.schema == 22, "Current schema version missing")
 	var legacy := original.duplicate(true)
 	legacy.schema = 9
 	legacy.coreVersion = 9

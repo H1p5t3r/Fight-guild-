@@ -11,12 +11,13 @@ func run() -> void:
 	check(model.load_data(source).is_empty(), "Uploaded batch did not import")
 	var actual := model.data()
 	var serialized: Dictionary = JSON.parse_string(JSON.stringify(actual))
-	check(actual.schema == 21, "Batch was not upgraded")
+	check(actual.schema == 22, "Batch was not upgraded")
 	for group in ["inputRules", "momentumRules", "recoveryRules", "tuningRules", "jumpRules"]:
 		for key in source[group]: check(actual[group][key] == source[group][key], "Global rule changed")
 	for c in 6:
-		for key in CombatModel.MOVEMENT_FIELDS:
+		for key in source.characters[c].movement:
 			check(actual.characters[c].movement[key] == source.characters[c].movement[key], "Movement edit lost")
+		check(actual.characters[c].movement.airDashPauseFrames == 4 and actual.characters[c].movement.airBackdashPauseFrames == 4, "Uploaded batch did not gain default air pauses")
 		for m in CombatModel.MOVE_IDS.size():
 			var before: Dictionary = source.characters[c].moves[m]
 			var after: Dictionary = actual.characters[c].moves[m]

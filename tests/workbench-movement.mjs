@@ -5,11 +5,39 @@ import {Engine,FIELDS,MOVEMENT_FIELDS} from '../web/engine.mjs';
 import {Workshop} from '../web/workbench/model.mjs';
 import {CombatPreview} from '../web/workbench/simulation.mjs';
 const pack=JSON.parse(await readFile(new URL('../build/workbench-pack.json',import.meta.url),'utf8'));
+test('Version-21 drafts gain air pauses without changing existing tuning or art briefs',()=>{
+ const old=structuredClone(pack.defaults);old.schema=old.coreVersion=21;
+ for(const c of old.characters){delete c.movement.airDashPauseFrames;delete c.movement.airBackdashPauseFrames;}
+ old.characters[5].movement.airDashSpeed=1475;old.characters[5].moves[24].startup=7;
+ old._moveWorkshop={version:1,notes:{'Fillet/5P':{active:'Keep my existing pose.'}}};
+ const before=structuredClone(old),w=new Workshop(pack,old),expected=structuredClone(old);
+ expected.schema=expected.coreVersion=22;
+ for(const c of expected.characters)Object.assign(c.movement,{airDashPauseFrames:4,airBackdashPauseFrames:4});
+ assert.deepEqual(w.data,expected);assert.deepEqual(old,before);
+ w.changeMovement(5,'airDashPauseFrames',7);w.changeMovement(5,'airBackdashPauseFrames',2);
+ assert.throws(()=>w.changeMovement(5,'airDashPauseFrames',0));
+ const restored=new Workshop(pack,JSON.parse(w.export()));assert.deepEqual(restored.data,w.data);
+});
+test('Air preview freezes in place before the full authored forward/backward burst, including teleports',()=>{
+ const preview=new CombatPreview(pack),data=structuredClone(pack.defaults),p=data.characters[5].movement;
+ Object.assign(p,{airDashEnabled:1,airBackdashEnabled:1,airDashPauseFrames:7,airBackdashPauseFrames:3,airDashFrames:8,airBackdashFrames:6});
+ for(const style of [0,1,2,3])for(const back of [false,true])for(const facing of [-1,1]){
+  p.airDashStyle=p.airBackdashStyle=style;
+  const record=preview.recordMovement(data,5,0,back?'airBack':'airForward',{facing});
+  const pause=record.frames.filter(f=>f.stage==='Air dash pause'),count=back?3:7;
+  assert.equal(pause.length,count);
+  assert.equal(new Set(pause.map(f=>`${f.state.players[0].x}/${f.state.players[0].y}`)).size,1);
+  assert.ok(pause.every(f=>f.state.players[0].vx===0&&f.state.players[0].vy===0&&f.state.players[0].carryVx===0));
+  const burst=record.frames.filter(f=>f.state.players[0].dashAge>0&&f.state.players[0].airDashUsed>0&&f.state.players[0].dashTicks>0);
+  assert.equal(burst.length,(back?6:8)-1); // Last burst tick decrements the remaining count to zero.
+  assert.notEqual(burst[0].state.players[0].x,pause[0].state.players[0].x);
+ }
+});
 test('Schema-14 drafts retain movement, hitbox and art edits while adding new controls',()=>{
  const old=structuredClone(pack.defaults);old.schema=old.coreVersion=14;
  for(const c of old.characters){for(const key of MOVEMENT_FIELDS.slice(9))delete c.movement[key];for(const m of c.moves)for(const key of FIELDS.slice(69))delete m[key];}
  old.characters[5].movement.walkSpeed=321;old.characters[5].moves[0].damage=91;old._moveWorkshop={version:1,notes:{'Fillet/5P':{active:'Keep my pose.'}}};
- const w=new Workshop(pack,old);assert.equal(w.data.schema,21);assert.equal(w.data.characters[5].movement.walkSpeed,321);assert.equal(w.move(5,0).damage,91);assert.equal(w.note(5,0).active,'Keep my pose.');
+ const w=new Workshop(pack,old);assert.equal(w.data.schema,22);assert.equal(w.data.characters[5].movement.walkSpeed,321);assert.equal(w.move(5,0).damage,91);assert.equal(w.note(5,0).active,'Keep my pose.');
  w.changeMovement(5,'airDashEnabled',1);w.changeMovement(5,'forwardStyle',3);w.change(5,0,'projectileKind',2);w.change(5,0,'smearFrame1',8);
  const imported=new Workshop(pack,JSON.parse(w.export()));assert.deepEqual(imported.data,w.data);w.undo();assert.equal(w.move(5,0).smearFrame1,0);w.undo();w.undo();assert.equal(w.data.characters[5].movement.forwardStyle,0);
 });
