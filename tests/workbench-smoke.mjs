@@ -9,8 +9,11 @@ const pack=await json('build/workbench-pack.json');
 test('Latest Smoke upload keeps every tuning value, note and photo except four new art selectors',async()=>{
  const raw=await json('godot/data/workshop/2026-11-18-user-smoke/FightGuild-moves-2026-11-18.json');
  for(const [slot,artPose] of [[14,21],[25,22],[15,23],[16,24]])raw.characters[2].moves[slot].artPose=artPose;
- assert.deepEqual(pack.draft.data,raw);
- const w=new Workshop(pack,pack.draft.data);
+ const archived=await json('godot/data/workshop/2026-11-18-user-smoke/FightGuild-Smoke-Animations.json');
+ assert.deepEqual(archived,raw);
+ assert.deepEqual(pack.draft.data.characters[2],raw.characters[2]);
+ for(const [k,v] of Object.entries(raw._moveWorkshop.notes).filter(([k])=>k.startsWith('Smoke/')))assert.deepEqual(pack.draft.data._moveWorkshop.notes[k],v);
+ const w=new Workshop(pack,raw);
  assert.deepEqual(new Workshop(pack,JSON.parse(w.export())).data,raw);
  const art=pack.art[2];
  assert.deepEqual(art.projectile_variants['14'],art.projectile_variants['25']);

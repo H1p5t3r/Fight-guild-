@@ -1,0 +1,904 @@
+{
+  "calibrationWidth": 4000,
+  "method": "Red rectangles traced in image pixels; root at yellow body pushbox bottom-center. Normalize yellow width to40 local pixels (4000 simulation units). This is a fixed anatomical calibration, not a change to Shark gameplay push width.",
+  "limits": "Spatial coordinates are estimates from cropped diagrams. Air roots, 5Hs outlined region and j.Hs frame3 transition are provisional. Body hurtboxes are fitted separately; source weapon vulnerabilities are not copied.",
+  "moves": {
+    "5P": [
+      {
+        "sourceImage": null,
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/d/d0/GGST_Ky_5P_hitbox.png/180px-GGST_Ky_5P_hitbox.png",
+        "sourcePush": [
+          289,
+          177,
+          455,
+          628
+        ],
+        "origin": [
+          372.0,
+          628
+        ],
+        "unitsPerPixel": 24.096385542168676,
+        "pixelBoxes": [
+          [
+            494,
+            138,
+            737,
+            209
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            2940,
+            10096,
+            8795,
+            11807
+          ]
+        ],
+        "provenance": "supplemental.json: user inline image, 18 November2026"
+      }
+    ],
+    "5K": [
+      {
+        "sourceImage": "GGST_Ky_5K_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/b/b4/GGST_Ky_5K_hitbox.png/180px-GGST_Ky_5K_hitbox.png",
+        "sourcePush": [
+          143,
+          71,
+          222,
+          287
+        ],
+        "origin": [
+          182.5,
+          287
+        ],
+        "unitsPerPixel": 50.63291139240506,
+        "pixelBoxes": [
+          [
+            221,
+            124,
+            290,
+            280
+          ],
+          [
+            290,
+            170,
+            351,
+            280
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1949,
+            354,
+            5443,
+            8253
+          ],
+          [
+            5443,
+            354,
+            8532,
+            5924
+          ]
+        ],
+        "sha256": "5fc25ddfd267d2c6eb88727532ae2229aed6634fd3868969e90cf61a7950f06f"
+      }
+    ],
+    "c.S": [
+      {
+        "sourceImage": "GGST_Ky_c.S_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/d/dd/GGST_Ky_c.S_hitbox.png/180px-GGST_Ky_c.S_hitbox.png",
+        "sourcePush": [
+          102,
+          116,
+          177,
+          323
+        ],
+        "origin": [
+          139.5,
+          323
+        ],
+        "unitsPerPixel": 53.333333333333336,
+        "pixelBoxes": [
+          [
+            178,
+            132,
+            234,
+            336
+          ],
+          [
+            151,
+            186,
+            178,
+            336
+          ],
+          [
+            234,
+            116,
+            330,
+            336
+          ],
+          [
+            330,
+            186,
+            345,
+            336
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            2053,
+            -693,
+            5040,
+            10187
+          ],
+          [
+            613,
+            -693,
+            2053,
+            7307
+          ],
+          [
+            5040,
+            -693,
+            10160,
+            11040
+          ],
+          [
+            10160,
+            -693,
+            10960,
+            7307
+          ]
+        ],
+        "sha256": "5ec27332c950a9e5c66c816bccc690b82bfd9d178577118166f9e88f73e859a3"
+      }
+    ],
+    "f.S": [
+      {
+        "sourceImage": "GGST_Ky_f.S_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/6/6a/GGST_Ky_f.S_hitbox.png/180px-GGST_Ky_f.S_hitbox.png",
+        "sourcePush": [
+          97,
+          54,
+          157,
+          217
+        ],
+        "origin": [
+          127.0,
+          217
+        ],
+        "unitsPerPixel": 66.66666666666667,
+        "pixelBoxes": [
+          [
+            177,
+            88,
+            359,
+            122
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            3333,
+            6333,
+            15467,
+            8600
+          ]
+        ],
+        "sha256": "952c4877dcf7e27119d82f4d394d7d588d71593b2e1f1ed5495ce3d694490e81"
+      }
+    ],
+    "5H": [
+      {
+        "sourceImage": null,
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/a/a7/GGST_Ky_5H_hitbox.png/180px-GGST_Ky_5H_hitbox.png",
+        "sourcePush": [
+          367,
+          117,
+          532,
+          568
+        ],
+        "origin": [
+          449.5,
+          568
+        ],
+        "unitsPerPixel": 24.242424242424242,
+        "pixelBoxes": [
+          [
+            639,
+            205,
+            774,
+            277
+          ],
+          [
+            681,
+            277,
+            1107,
+            312
+          ],
+          [
+            639,
+            312,
+            1107,
+            374
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            4594,
+            7055,
+            7867,
+            8800
+          ],
+          [
+            5612,
+            6206,
+            15939,
+            7055
+          ],
+          [
+            4594,
+            4703,
+            15939,
+            6206
+          ]
+        ],
+        "provenance": "supplemental.json: user inline image, 18 November2026",
+        "note": "Trace follows outlined forward strike; unoutlined solid red/green export artifacts above it are ambiguous and excluded. Provisional geometry."
+      }
+    ],
+    "2P": [
+      {
+        "sourceImage": "GGST_Ky_2P_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/e/ed/GGST_Ky_2P_hitbox.png/180px-GGST_Ky_2P_hitbox.png",
+        "sourcePush": [
+          151,
+          11,
+          226,
+          166
+        ],
+        "origin": [
+          188.5,
+          166
+        ],
+        "unitsPerPixel": 53.333333333333336,
+        "pixelBoxes": [
+          [
+            250,
+            36,
+            350,
+            69
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            3280,
+            5173,
+            8613,
+            6933
+          ]
+        ],
+        "sha256": "c8e4be41bdd7455375e2fcc827def61638c2b27afbec3ddee0b2cc00c038352b"
+      }
+    ],
+    "2K": [
+      {
+        "sourceImage": "GGST_Ky_2K_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/9/97/GGST_Ky_2K_hitbox.png/180px-GGST_Ky_2K_hitbox.png",
+        "sourcePush": [
+          149,
+          28,
+          222,
+          181
+        ],
+        "origin": [
+          185.5,
+          181
+        ],
+        "unitsPerPixel": 54.794520547945204,
+        "pixelBoxes": [
+          [
+            211,
+            92,
+            281,
+            185
+          ],
+          [
+            281,
+            129,
+            352,
+            185
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1397,
+            -219,
+            5233,
+            4877
+          ],
+          [
+            5233,
+            -219,
+            9123,
+            2849
+          ]
+        ],
+        "sha256": "a91c6abe0721baf15bb52fa8826b7b14c9c2a66b6591321b4074058fbfd0a2e6"
+      }
+    ],
+    "2S": [
+      {
+        "sourceImage": "GGST_Ky_2S_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/e/e5/GGST_Ky_2S_hitbox.png/180px-GGST_Ky_2S_hitbox.png",
+        "sourcePush": [
+          112,
+          8,
+          169,
+          126
+        ],
+        "origin": [
+          140.5,
+          126
+        ],
+        "unitsPerPixel": 70.17543859649123,
+        "pixelBoxes": [
+          [
+            173,
+            63,
+            278,
+            123
+          ],
+          [
+            278,
+            91,
+            351,
+            123
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            2281,
+            211,
+            9649,
+            4421
+          ],
+          [
+            9649,
+            211,
+            14772,
+            2456
+          ]
+        ],
+        "sha256": "68201c4181254dd12f66518b04f41b28447fe733fca8753214d3d90691c82964"
+      }
+    ],
+    "2H": [
+      {
+        "sourceImage": null,
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/3/37/GGST_Ky_2H_hitbox1.png/180px-GGST_Ky_2H_hitbox1.png",
+        "sourcePush": [
+          55,
+          133,
+          234,
+          507
+        ],
+        "origin": [
+          144.5,
+          507
+        ],
+        "unitsPerPixel": 22.3463687150838,
+        "pixelBoxes": [
+          [
+            336,
+            113,
+            489,
+            390
+          ],
+          [
+            489,
+            190,
+            643,
+            390
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            4279,
+            2615,
+            7698,
+            8804
+          ],
+          [
+            7698,
+            2615,
+            11140,
+            7084
+          ]
+        ],
+        "provenance": "supplemental.json: user inline image, 18 November2026"
+      },
+      {
+        "sourceImage": null,
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/7/7b/GGST_Ky_2H_hitbox2.png/180px-GGST_Ky_2H_hitbox2.png",
+        "sourcePush": [
+          49,
+          654,
+          286,
+          1148
+        ],
+        "origin": [
+          167.5,
+          1148
+        ],
+        "unitsPerPixel": 16.877637130801688,
+        "pixelBoxes": [
+          [
+            505,
+            31,
+            743,
+            110
+          ],
+          [
+            347,
+            110,
+            743,
+            627
+          ],
+          [
+            347,
+            627,
+            585,
+            706
+          ]
+        ],
+        "activeFrame": 2,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            5696,
+            17519,
+            9713,
+            18852
+          ],
+          [
+            3030,
+            8793,
+            9713,
+            17519
+          ],
+          [
+            3030,
+            7460,
+            7046,
+            8793
+          ]
+        ],
+        "provenance": "supplemental.json: user inline image, 18 November2026"
+      }
+    ],
+    "j.P": [
+      {
+        "sourceImage": "GGST_Ky_j.P_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/4/4a/GGST_Ky_j.P_hitbox.png/180px-GGST_Ky_j.P_hitbox.png",
+        "sourcePush": [
+          140,
+          117,
+          210,
+          223
+        ],
+        "origin": [
+          175.0,
+          223
+        ],
+        "unitsPerPixel": 57.142857142857146,
+        "pixelBoxes": [
+          [
+            224,
+            24,
+            348,
+            73
+          ],
+          [
+            224,
+            73,
+            292,
+            99
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            2800,
+            8571,
+            9886,
+            11371
+          ],
+          [
+            2800,
+            7086,
+            6686,
+            8571
+          ]
+        ],
+        "sha256": "2cd54641b7dc921b62e021641da35f0f0da5b20140d6767c79788f59fb513724"
+      }
+    ],
+    "j.K": [
+      {
+        "sourceImage": "GGST_Ky_j.K_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/c/cd/GGST_Ky_j.K_hitbox.png/180px-GGST_Ky_j.K_hitbox.png",
+        "sourcePush": [
+          147,
+          88,
+          207,
+          178
+        ],
+        "origin": [
+          177.0,
+          178
+        ],
+        "unitsPerPixel": 66.66666666666667,
+        "pixelBoxes": [
+          [
+            193,
+            43,
+            352,
+            86
+          ],
+          [
+            193,
+            86,
+            269,
+            110
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1067,
+            6133,
+            11667,
+            9000
+          ],
+          [
+            1067,
+            4533,
+            6133,
+            6133
+          ]
+        ],
+        "sha256": "518d28d4535f83d00ef1005e712623982ef5f95d110b02b74e6429a14c06737c"
+      }
+    ],
+    "j.S": [
+      {
+        "sourceImage": "GGST_Ky_j.S_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/3/3c/GGST_Ky_j.S_hitbox.png/180px-GGST_Ky_j.S_hitbox.png",
+        "sourcePush": [
+          109,
+          87,
+          161,
+          164
+        ],
+        "origin": [
+          135.0,
+          164
+        ],
+        "unitsPerPixel": 76.92307692307692,
+        "pixelBoxes": [
+          [
+            185,
+            23,
+            285,
+            44
+          ],
+          [
+            165,
+            65,
+            265,
+            116
+          ],
+          [
+            185,
+            44,
+            318,
+            93
+          ],
+          [
+            165,
+            116,
+            230,
+            142
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            3846,
+            9231,
+            11538,
+            10846
+          ],
+          [
+            2308,
+            3692,
+            10000,
+            7615
+          ],
+          [
+            3846,
+            5462,
+            14077,
+            9231
+          ],
+          [
+            2308,
+            1692,
+            7308,
+            3692
+          ]
+        ],
+        "sha256": "8070229ec3e841314eb7a0b2502b02e1654d2c0a9f79ebff8e27236d049c600e"
+      }
+    ],
+    "j.H": [
+      {
+        "sourceImage": "GGST_Ky_j.H_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/c/ca/GGST_Ky_j.H_hitbox.png/180px-GGST_Ky_j.H_hitbox.png",
+        "sourcePush": [
+          90,
+          159,
+          161,
+          269
+        ],
+        "origin": [
+          125.5,
+          269
+        ],
+        "unitsPerPixel": 56.33802816901409,
+        "pixelBoxes": [
+          [
+            178,
+            42,
+            328,
+            66
+          ],
+          [
+            178,
+            66,
+            339,
+            112
+          ],
+          [
+            178,
+            112,
+            351,
+            227
+          ],
+          [
+            176,
+            227,
+            306,
+            272
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": true,
+        "boxes": [
+          [
+            2958,
+            11437,
+            11408,
+            12789
+          ],
+          [
+            2958,
+            8845,
+            12028,
+            11437
+          ],
+          [
+            2958,
+            2366,
+            12704,
+            8845
+          ],
+          [
+            2845,
+            -169,
+            10169,
+            2366
+          ]
+        ],
+        "sha256": "0501eb931ae80f42dd936ad2a27efc8f61d544f38e3f8442acf55a033e74bda1"
+      },
+      {
+        "sourceImage": "GGST_Ky_Kiske_j.H_hitbox_2.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/9/95/GGST_Ky_Kiske_j.H_hitbox_2.png/180px-GGST_Ky_Kiske_j.H_hitbox_2.png",
+        "sourcePush": [
+          112,
+          174,
+          176,
+          270
+        ],
+        "origin": [
+          144.0,
+          270
+        ],
+        "unitsPerPixel": 62.5,
+        "pixelBoxes": [
+          [
+            176,
+            222,
+            285,
+            290
+          ]
+        ],
+        "activeFrame": 3,
+        "transitionEstimated": true,
+        "boxes": [
+          [
+            2000,
+            -1250,
+            8812,
+            3000
+          ]
+        ],
+        "sha256": "55f13a1ef5bc655b901177b42e6aa010cb5f6634896c703b135013f20d0d9e27"
+      }
+    ],
+    "6P": [
+      {
+        "sourceImage": "GGST_Ky_6P_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/f/f0/GGST_Ky_6P_hitbox.png/180px-GGST_Ky_6P_hitbox.png",
+        "sourcePush": [
+          122,
+          32,
+          200,
+          243
+        ],
+        "origin": [
+          161.0,
+          243
+        ],
+        "unitsPerPixel": 51.282051282051285,
+        "pixelBoxes": [
+          [
+            223,
+            0,
+            267,
+            96
+          ],
+          [
+            267,
+            14,
+            359,
+            96
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            3179,
+            7538,
+            5436,
+            12462
+          ],
+          [
+            5436,
+            7538,
+            10154,
+            11744
+          ]
+        ],
+        "sha256": "2a2c23c9b8c565bb6852f0ff6e1e7db2aa059d552b3c65f014ee71fbbbd4f377"
+      }
+    ],
+    "6K": [
+      {
+        "sourceImage": "GGST_Ky_6K_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/6/6a/GGST_Ky_6K_hitbox.png/180px-GGST_Ky_6K_hitbox.png",
+        "sourcePush": [
+          127,
+          55,
+          202,
+          260
+        ],
+        "origin": [
+          164.5,
+          260
+        ],
+        "unitsPerPixel": 53.333333333333336,
+        "pixelBoxes": [
+          [
+            176,
+            55,
+            345,
+            141
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            613,
+            6347,
+            9627,
+            10933
+          ]
+        ],
+        "sha256": "1e22dffc2cf9cb3a454fa94be703994bfe19f06d11862aa18c145e689c0c040c"
+      }
+    ],
+    "6H": [
+      {
+        "sourceImage": "GGST_Ky_6H_hitbox.png",
+        "sourceUrl": "https://www.dustloop.com/wiki/images/thumb/c/c6/GGST_Ky_6H_hitbox.png/180px-GGST_Ky_6H_hitbox.png",
+        "sourcePush": [
+          59,
+          62,
+          118,
+          222
+        ],
+        "origin": [
+          88.5,
+          222
+        ],
+        "unitsPerPixel": 67.79661016949153,
+        "pixelBoxes": [
+          [
+            170,
+            108,
+            249,
+            193
+          ],
+          [
+            249,
+            106,
+            335,
+            193
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            5525,
+            1966,
+            10881,
+            7729
+          ],
+          [
+            10881,
+            1966,
+            16712,
+            7864
+          ]
+        ],
+        "sha256": "96789da0bb431880b7f15b0b7d8df018c89c12583745036c3e4294a381a8fa1c"
+      }
+    ]
+  }
+}

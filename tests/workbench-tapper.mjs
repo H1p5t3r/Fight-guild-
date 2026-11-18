@@ -6,7 +6,8 @@ import {CombatPreview} from '../web/workbench/simulation.mjs';
 const pack=JSON.parse(await readFile('build/workbench-pack.json','utf8'));
 test('Third upload preserves the untouched fighters alongside the new Smoke and Tapper kits',async()=>{
  const original=JSON.parse(await readFile('godot/data/workshop/2026-11-17-batch-03/FightGuild-moves-2026-11-17 _2_.json','utf8'));
- const w=new Workshop(pack,pack.draft.data), data=w.snapshot();
+ const baseline=JSON.parse(await readFile('godot/data/workshop/2026-11-18-user-smoke/FightGuild-Smoke-Animations.json','utf8'));
+ const w=new Workshop(pack,baseline), data=w.snapshot();
  for(let c=0;c<6;++c){if(c===2||c===3)continue;
   assert.deepEqual(data.characters[c].movement,{...original.characters[c].movement,airDashPauseFrames:4,airBackdashPauseFrames:4});
   for(let i=0;i<32;++i)for(const [key,value] of Object.entries(original.characters[c].moves[i])) assert.deepEqual(data.characters[c].moves[i][key],key==='startup'&&original.characters[c].moves[i].category===4&&!original.characters[c].moves[i].motion?2:value,`${c}/${i}/${key}`);

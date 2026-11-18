@@ -26,6 +26,7 @@ func run() -> void:
 			check(before.hitboxTimeline == serialized.characters[c].moves[m].hitboxTimeline, "Authored hit timeline changed")
 		if c == 2: check(actual.characters[c].moves[8].hurtWindowMask == 1 and actual.characters[c].moves[8].hurtWindowEnd == 17, "Smoke timed anti-air protection missing")
 		elif c == 3: check(actual.characters[c].moves[8].hurtWindowMask == 1 and actual.characters[c].moves[8].hurtWindowEnd == 14, "Tapper timed anti-air protection missing")
+		elif c == 4: check(actual.characters[c].moves[8].hurtMaskWindup == 3 and actual.characters[c].moves[8].hurtWindowStart == 4 and actual.characters[c].moves[8].hurtWindowEnd == 13 and actual.characters[c].moves[8].hurtWindowMask == 1, "Shark staged anti-air protection missing")
 		else: check(actual.characters[c].moves[8].hurtMaskWindup == 1 and actual.characters[c].moves[8].hurtMaskActive == 1 and actual.characters[c].moves[8].hurtMaskRecovery == 15, "Universal 6P protection missing")
 	var game = load("res://scripts/main.gd").new()
 	root.add_child(game)

@@ -33,5 +33,5 @@ Ky Kiske's `ky-kiske-2026-11-18` reference contains 16 non-D normal rows for the
 are excluded. There are 14 embedded diagrams covering 13 moves; 5P, 5H and both
 2H diagrams are missing **from the archive**. The user subsequently supplied
 those four diagrams inline; `supplemental.json` records their chat provenance.
-This reference/proposal has not been applied to the
-playable move data. Use `ky-kiske --exclude-dust` when extracting this pass.
+The16 selected normals are applied in the Shark batch; see the linked notes
+for spatial estimates and the provisional floating-crumple adaptation. Use `ky-kiske --exclude-dust` when extracting this pass.

@@ -1,11 +1,11 @@
 {
-  "label": "Smoke specials + attack animations \u00b7 18 November 2026",
-  "status": "user-authored tuning with approved artwork",
-  "file": "2026-11-18-user-smoke/FightGuild-Smoke-Animations.json",
-  "sha256": "1dbb8df032ff8c37c3751ee7c50a7392ccd06bc54577b2248cf4e79d81c09693",
-  "sourceFile": "2026-11-18-user-smoke/FightGuild-moves-2026-11-18.json",
-  "sourceSha256": "7ab58f3cf02d9583b7bdc03d98c978bafffcbc7cfd3b442b6177b37ecf8bed7c",
-  "previousFile": "2026-11-18-startup/FightGuild-Startup.json",
-  "baseCommit": "fe2acc2",
-  "note": "Preserves all submitted move/movement values and embedded references; only Smoke special artPose selectors14/25/15/16 map to new21/22/23/24. P2 shared near/far pillar, Venom Sabre and Furnace Cleaver effects with barehand backhand motion. Normal entries and full2Hs fit existing action timing."
+  "label": "Shark normals + fluid Low Scoop ·18 November2026",
+  "status": "playable source-based iteration",
+  "file": "2026-11-18-shark/FightGuild-Shark-Normals.json",
+  "sha256": "21d4516d39b02b71eef770adbd0f735f0089f0c98971d8d684f0e64297daf1a5",
+  "sourceFile": "2026-11-18-user-smoke/FightGuild-Smoke-Animations.json",
+  "sourceSha256": "1dbb8df032ff8c37c3751ee7c50a7392ccd06bc54577b2248cf4e79d81c09693",
+  "previousFile": "2026-11-18-user-smoke/FightGuild-Smoke-Animations.json",
+  "baseCommit": "9aa0a4d",
+  "note": "Only16 Shark P/K/S/Hs normals and their appended art briefs change. All D moves, throws, specials, movement, other fighters and submitted photo references are preserved.2Hs floating crumple and unlabeled spatial boundaries are documented approximations."
 }

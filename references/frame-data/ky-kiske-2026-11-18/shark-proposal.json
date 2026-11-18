@@ -1,5 +1,5 @@
 {
-  "status": "A / Shoulder Snap and 2 / Low Scoop selected; revised fluid motion study approved; production pending",
+  "status": "implemented in the2026-11-18-shark batch; documented spatial/utility adaptations remain provisional",
   "source": "source.json",
   "preserve": [
     "All D attacks, including 2D, j.D and charged D",
@@ -309,5 +309,6 @@
     "j.Hs contains two geometry diagrams, but is not declared multi-hit. Their exact frame boundary is not supplied.",
     "Air move IAD advantage is contextual, not a universal advantage or hitstun setting.",
     "Ky Shock State, Dragon Install, specials, Dust moves, universal actions, and source-specific gatlings are outside this pass."
-  ]
+  ],
+  "appliedBatch": "godot/data/workshop/2026-11-18-shark/FightGuild-Shark-Normals.json"
 }

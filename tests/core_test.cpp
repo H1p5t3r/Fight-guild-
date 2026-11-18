@@ -356,7 +356,7 @@ static void test_roster() {
         world.players[1].x=45000+(pa.right-pa.left+pb.right-pb.left)/2;
         CHECK(world.players[0].character==c);
         step(P<<button,0);
-        const int selected=(c==2||c==3)&&button==2?CLOSE_SLASH:slots[button];
+        const int selected=(c==2||c==3||c==4)&&button==2?CLOSE_SLASH:slots[button];
         const auto& move=moves[c][selected];
         CHECK(world.players[0].move==selected);
         ticks(move.v[Startup]-1);

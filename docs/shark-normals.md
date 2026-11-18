@@ -1,8 +1,11 @@
 # Shark normals — Ky reference and visual choices
 
-Status: A / Shoulder Snap and 2 / Low Scoop selected. The user rejected stiff
-first production poses and approved the revised [fluid motion study](../art/characters/shark-normal-options-v1/low-scoop-fluidity.png). Production integration follows that revision. No live move, collision,
-art-selector or workshop-batch changes have been applied in this reference step.
+Status: playable iteration. A / Shoulder Snap, 2 / Low Scoop and the revised
+[fluid motion study](../art/characters/shark-normal-options-v1/low-scoop-fluidity.png)
+are approved. The16 selected normals now have source timings, traced attack
+geometry, dedicated windup/active drawings, clean entry keys and body-only
+hurtboxes.2Hs has an eight-key clip with separate contacts on active frames1/2.
+The initial stiff production attempts were rejected and never registered.
 
 The user's saved Dustloop Ky Kiske Frame Data page supplies **16 non-D normals**.
 The [source manifest](../references/frame-data/ky-kiske-2026-11-18/source.json)
@@ -84,8 +87,9 @@ travel. No body/limb smear frames are introduced.
 - 2Hs has two contacts: 14 then 40 raw damage over 1 + 4 active frames. Its
   second hit has a specific floating-crumple sequence: 33f total, airborne
   hitstun 1–19, standing hitstun 20–27, blocking allowed 28–33. The current
-  generic crumple is not automatically equivalent. Resolve that behavior
-  explicitly during the gameplay pass; do not silently claim an exact copy.
+  generic crumple is not equivalent. This iteration uses an ordinary small
+  launch/float with33f final hitstun; the special airborne/standing/guard-only
+  crumple phases remain unimplemented. This is an explicit utility approximation.
 - j.Hs changes geometry but is not listed as a multi-hit. The archive does not
   label the exact frame boundary between its two diagrams.
 - 6Hs lists separate normal/wall-bounce knockdown advantage. That annotation
@@ -94,19 +98,47 @@ travel. No body/limb smear frames are introduced.
   adaptation to this engine's units/rules. Preserve Fight Guild's universal
   gatlings and the existing Momentum system.
 
-## Production sequence
+## Playable assets and tuning
 
-1. A / Shoulder Snap, 2 / Low Scoop and the revised fluid body mechanics are approved.
-2. Generate windup/active sheets and the Low Scoop animation from the revised
-   motion standard; inspect body scale, foot placement and weapon continuity.
-3. Trace reference attack geometry, fit at most four anatomical hurtboxes and
-   integrate one source-preserving normal-data batch into Godot and the browser
-   editor. Verify both facings, action timing, hitstop, import/export and existing moves.
+- `godot/assets/fighters/shark-normals-v1/`:16 unchanged generated PNGs,
+  exact prompts, original generator paths, correction history and hashes.
+- `scripts/register-shark-normals.py`:20 signature pairs (four existing specials
+  preserved plus16 normals),26 action-animation keys, authored foot roots and
+  at most four anatomical hurtboxes. Anatomy scale uses540 source pixels for
+  the normal sheets and850 for the taller Low Scoop sheets, independent of
+  weapon/effect bounds. No automatic body smearing.
+- `scripts/build-shark-hitboxes.py`:18 red-shape traces. Yellow reference width
+  is normalized to40 local pixels; live pushboxes stay unchanged.5Hs follows
+  the outlined strike conservatively because upper solid red/green shapes in
+  the inline export are ambiguous. j.Hs switches geometry on active frame3,
+  an explicit estimate, and remains one hit.
+- `scripts/build-shark-data.py`:derives
+  `2026-11-18-shark/FightGuild-Shark-Normals.json` from the immutable latest
+  Smoke animation batch. Only the16 selected Shark slots and appended brief
+  text change. Submitted art photos and existing prose remain intact.
+
+2Hs has11f startup,5 active frames (1 +4),28 recovery and14/40 raw damage.
+The editor's multi-hit switch can make those geometries one hit. Its second
+hit is taller with less forward reach, so the outer first-hit tip can fail to
+connect again; this depends on opponent body shape. Source picture scaling,
+art-to-box alignment, proximity85px, push/launch and air stun remain provisional.
+The source 6P vulnerability is adapted with head/extension off on1–3 and legs
+only on4–13; these four-region masks do not exactly reproduce source cyan shapes.
+Mid/large counters retain the project's21/31f freeze and25/35f defender slowdown.
+6Hs is a mid with soft knockdown and an air-hit-only wall bounce, not an overhead.
+Its source knockdown-advantage figures are not claimed as exact local timing.
+
+Both native and browser rendering use the saved action clock: hitstop freezes
+these drawings and seeking/replay restores the same pose. The native Sprite
+Review exposes all20 dedicated selectors and a full2Hs animation clip for Shark.
+Existing browser saves keep priority. Export a backup, then import the new batch
+to take its new selectors and source stats; loading the site alone does not
+replace a local draft.
 
 All D attacks (including 2D, j.D and charged D), current hook-pull specials and
 follow-ups, throws, movement tuning and other fighters remain outside this pass.
 No Ky specials, supers, Shock State or Dragon Install are added. No automatic
-transition smear frames are planned. Production will follow the user's choice.
+transition smear frames are planned. Production follows the approved fluid-motion revision.
 
 Exact generation prompts and source paths are retained alongside the boards in
 `art/characters/shark-normal-options-v1/generation.json`. Re-extract the reference

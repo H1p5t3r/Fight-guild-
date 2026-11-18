@@ -1,7 +1,13 @@
 # Sprite production direction — working contract v0.5
 
+Latest Shark pass: [Ky normals and the approved fluid Low Scoop](shark-normals.md).
+The motion standard uses hip-led weight transfer, torso rotation, heel pivots,
+compressed anticipation and a loose follow-through. Fixed anatomy scale must
+not mean a fixed upright torso across drawings. The first stiff attempts were
+rejected; the approved revision drives the new normal sheets.
+
 Latest Smoke pass: [attack animation and approved specials](smoke-attacks.md).
-The catalog now contains 463 body keys. Smoke's new effects are separate layers;
+The catalog now contains 521 body keys. Smoke's new effects are separate layers;
 her backhand casts use no physical sword and her near/far pillars share art.
 
 The six generated sets are iteration studies. The goal is a repeatable character performing a directed action, not a new illustration of that character in every frame. These rules establish the target for the production pipeline in [the backlog](backlog.md); the current images still need a consistency review before becoming approved masters.

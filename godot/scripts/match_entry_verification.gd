@@ -104,6 +104,8 @@ func knockout_data(model: CombatModel, fighters: Array) -> Dictionary:
 		move.startup = 5
 		move.reach = 50000
 		move.hitstop = 0
+		# Match lifecycle fixture uses its authored full-stage probe, not roster hit tracks.
+		move.hitboxTimeline = {"multiHit": false, "keys": []}
 	return data
 
 func verify_local_match() -> void:

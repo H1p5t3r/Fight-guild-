@@ -117,11 +117,11 @@ static void pushes() {
 static void contact_and_weapons() {
     Simulation s; s.defaults();
     for(int c=0;c<6;++c) for(int slot=0;slot<5;++slot) {
-        int m=slot==4?13:slot; if((c==2||c==3)&&slot==2)m=CLOSE_SLASH;
+        int m=slot==4?13:slot; if((c==2||c==3||c==4)&&slot==2)m=CLOSE_SLASH;
         s.reset(c,(c+1)%6,0,0); flush(s);
         for(int tick=1;tick<=s.moves[c][m].v[Startup];++tick) {
             s.step(tick==1?P<<slot:0,0);
-            if(tick<s.moves[c][m].v[Startup]) { CHECK(s.world.players[1].health==1000); CHECK(s.box_count(0,HitBox)==0); const int phase=s.get(0,29); CHECK(c==2?(phase==11||phase==14||phase==3):phase==(s.moves[c][m].v[ArtPose]?3:1)); }
+            if(tick<s.moves[c][m].v[Startup]) { CHECK(s.world.players[1].health==1000); CHECK(s.box_count(0,HitBox)==0); const int phase=s.get(0,29); CHECK(c==2?(phase==11||phase==14||phase==3):c==4&&slot<4?(phase==5||phase==14||phase==3):phase==(s.moves[c][m].v[ArtPose]?3:1)); }
         }
         const auto& track=s.move_hit[c][m];
         const int boxes=track.count&&track.keys[0].frame==1&&track.keys[0].count>=0?track.keys[0].count:1;
@@ -190,7 +190,7 @@ static void phased_hurtbox_toggles() {
         for(int p=0;p<3;++p) CHECK(s.hurt_set(c,8,p,4,body));
         for(int phase=0;phase<3;++phase) {
             f.age=phase==0?1:phase==1?s.moves[c][8].v[Startup]:s.moves[c][8].v[Startup]+s.moves[c][8].v[Active];
-            CHECK(s.box_count(0,HurtBox)==(phase==2?4:1));CHECK(s.box(0,HurtBox,0).top==5000);
+            CHECK(s.box_count(0,HurtBox)==(phase==2?4:c==4&&phase==0?2:1));CHECK(s.box(0,HurtBox,0).top==5000);
             CHECK(s.box_count(0,PushBox)==1);
         }
         s.move_set(c,8,HurtWindowStart,0); // Isolate phase-mask editing from Tapper’s finer move-frame window.

@@ -10104,6 +10104,374 @@
               328,
               422
             ]
+          },
+          {
+            "name": "5P / Windup",
+            "file": "shark-normals-v1/normals_0_fluid.png",
+            "sha256": "4e6386aff7ad7b61f02a5d375338906b953b247662baab19ec4abdfcb3759a18",
+            "generation_file": "exec-917e2f97-1c87-48c6-8d82-09dda614fedd.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              492
+            ],
+            "bounds": [
+              174,
+              18,
+              558,
+              492
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "5K / Windup",
+            "file": "shark-normals-v1/normals_0_fluid.png",
+            "sha256": "4e6386aff7ad7b61f02a5d375338906b953b247662baab19ec4abdfcb3759a18",
+            "generation_file": "exec-917e2f97-1c87-48c6-8d82-09dda614fedd.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              495
+            ],
+            "bounds": [
+              171,
+              0,
+              545,
+              495
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "c.S / Windup",
+            "file": "shark-normals-v1/normals_1_fluid.png",
+            "sha256": "d6485f1a1549ce84617396571d177828e206b41fb8019f68b8317f8fce297beb",
+            "generation_file": "exec-7e27a00c-1baa-463d-acae-b6b32fbe1d64.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              480
+            ],
+            "bounds": [
+              171,
+              85,
+              595,
+              481
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "5S / Windup",
+            "file": "shark-normals-v1/normals_1_fluid.png",
+            "sha256": "d6485f1a1549ce84617396571d177828e206b41fb8019f68b8317f8fce297beb",
+            "generation_file": "exec-7e27a00c-1baa-463d-acae-b6b32fbe1d64.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              480
+            ],
+            "bounds": [
+              136,
+              39,
+              641,
+              481
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "5Hs / Windup",
+            "file": "shark-normals-v1/normals_2_fluid.png",
+            "sha256": "184c7ece34c830f3bee234ffec58b3204f48597b1c266dd46575052e2345df45",
+            "generation_file": "exec-a74f1a83-ad90-47c5-889a-ff0b413ed219.png",
+            "region": [
+              0,
+              0,
+              768,
+              550
+            ],
+            "pivot": [
+              350,
+              506
+            ],
+            "bounds": [
+              123,
+              17,
+              639,
+              506
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "2P / Windup",
+            "file": "shark-normals-v1/normals_2_fluid.png",
+            "sha256": "184c7ece34c830f3bee234ffec58b3204f48597b1c266dd46575052e2345df45",
+            "generation_file": "exec-a74f1a83-ad90-47c5-889a-ff0b413ed219.png",
+            "region": [
+              0,
+              550,
+              768,
+              474
+            ],
+            "pivot": [
+              350,
+              454
+            ],
+            "bounds": [
+              121,
+              34,
+              611,
+              454
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "2K / Windup",
+            "file": "shark-normals-v1/normals_3_fluid.png",
+            "sha256": "93a7c7e6c31acb22c5e3a0ff3a47296791fc8cf32b4b67d73fabf1e2005ebb3c",
+            "generation_file": "exec-afeeafee-3749-4689-abbe-36a74b3de420.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              492
+            ],
+            "bounds": [
+              122,
+              72,
+              651,
+              495
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "2S / Windup",
+            "file": "shark-normals-v1/normals_3_fluid.png",
+            "sha256": "93a7c7e6c31acb22c5e3a0ff3a47296791fc8cf32b4b67d73fabf1e2005ebb3c",
+            "generation_file": "exec-afeeafee-3749-4689-abbe-36a74b3de420.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              473
+            ],
+            "bounds": [
+              123,
+              114,
+              597,
+              475
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "2Hs / Windup",
+            "file": "shark-normals-v1/scoop_0.png",
+            "sha256": "d605e4d0bd8c79ae68db5343e8546a8da58afcd8273f696cdb07eb380a550c21",
+            "generation_file": "exec-6d57808e-30c4-40bc-972d-f95171e929c2.png",
+            "region": [
+              768,
+              0,
+              768,
+              1024
+            ],
+            "pivot": [
+              390,
+              853
+            ],
+            "bounds": [
+              20,
+              261,
+              728,
+              854
+            ],
+            "body_height": 850
+          },
+          {
+            "name": "j.P / Windup",
+            "file": "shark-normals-v1/normals_4_fluid.png",
+            "sha256": "11917da42258d5cc17edc4dda6163e888c08aa505815ffab99d43ae89433d22c",
+            "generation_file": "exec-7fa4507a-8974-4cf7-98ed-1d60cd6fd9ff.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              171,
+              18,
+              574,
+              468
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "j.K / Windup",
+            "file": "shark-normals-v1/normals_4_fluid.png",
+            "sha256": "11917da42258d5cc17edc4dda6163e888c08aa505815ffab99d43ae89433d22c",
+            "generation_file": "exec-7fa4507a-8974-4cf7-98ed-1d60cd6fd9ff.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              112,
+              21,
+              549,
+              484
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "j.S / Windup",
+            "file": "shark-normals-v1/normals_5_fluid.png",
+            "sha256": "c26125deafd5b963806393ed7068edfe69ac2be30bfc360d1e98b80d5db81f6e",
+            "generation_file": "exec-efeb99c9-78e1-438a-8aea-7cc40ab417f4.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              154,
+              15,
+              650,
+              412
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "j.Hs / Windup",
+            "file": "shark-normals-v1/normals_5_fluid.png",
+            "sha256": "c26125deafd5b963806393ed7068edfe69ac2be30bfc360d1e98b80d5db81f6e",
+            "generation_file": "exec-efeb99c9-78e1-438a-8aea-7cc40ab417f4.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              173,
+              3,
+              589,
+              477
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "6P / Windup",
+            "file": "shark-normals-v1/normals_6_fluid.png",
+            "sha256": "b221582a15c574a3119bb7a43a469b07ef3a290fd26d8c998e490e3392255044",
+            "generation_file": "exec-591bf66a-3fc9-4331-bf28-1cec206afb8a.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              485
+            ],
+            "bounds": [
+              108,
+              54,
+              592,
+              486
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "6K / Windup",
+            "file": "shark-normals-v1/normals_6_fluid.png",
+            "sha256": "b221582a15c574a3119bb7a43a469b07ef3a290fd26d8c998e490e3392255044",
+            "generation_file": "exec-591bf66a-3fc9-4331-bf28-1cec206afb8a.png",
+            "region": [
+              0,
+              512,
+              700,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              49,
+              9,
+              628,
+              490
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "6Hs / Windup",
+            "file": "shark-normals-v1/normals_7_fluid.png",
+            "sha256": "bc02433c5641631eea38c55c422dbede2ba351d4223d73e840586d8e4b3d195f",
+            "generation_file": "exec-31403dd1-13ea-4749-8690-33ab840b6ab1.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              485
+            ],
+            "bounds": [
+              107,
+              14,
+              671,
+              486
+            ],
+            "body_height": 540
           }
         ]
       },
@@ -10186,6 +10554,374 @@
               349,
               407
             ]
+          },
+          {
+            "name": "5P / Active",
+            "file": "shark-normals-v1/normals_0_fluid.png",
+            "sha256": "4e6386aff7ad7b61f02a5d375338906b953b247662baab19ec4abdfcb3759a18",
+            "generation_file": "exec-917e2f97-1c87-48c6-8d82-09dda614fedd.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              493
+            ],
+            "bounds": [
+              112,
+              21,
+              622,
+              494
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "5K / Active",
+            "file": "shark-normals-v1/normals_0_fluid.png",
+            "sha256": "4e6386aff7ad7b61f02a5d375338906b953b247662baab19ec4abdfcb3759a18",
+            "generation_file": "exec-917e2f97-1c87-48c6-8d82-09dda614fedd.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              495
+            ],
+            "bounds": [
+              140,
+              36,
+              641,
+              496
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "c.S / Active",
+            "file": "shark-normals-v1/normals_1_fluid.png",
+            "sha256": "d6485f1a1549ce84617396571d177828e206b41fb8019f68b8317f8fce297beb",
+            "generation_file": "exec-7e27a00c-1baa-463d-acae-b6b32fbe1d64.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              480
+            ],
+            "bounds": [
+              174,
+              39,
+              625,
+              480
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "5S / Active",
+            "file": "shark-normals-v1/normals_1_fluid.png",
+            "sha256": "d6485f1a1549ce84617396571d177828e206b41fb8019f68b8317f8fce297beb",
+            "generation_file": "exec-7e27a00c-1baa-463d-acae-b6b32fbe1d64.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              481
+            ],
+            "bounds": [
+              43,
+              63,
+              755,
+              482
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "5Hs / Active",
+            "file": "shark-normals-v1/normals_2_fluid.png",
+            "sha256": "184c7ece34c830f3bee234ffec58b3204f48597b1c266dd46575052e2345df45",
+            "generation_file": "exec-a74f1a83-ad90-47c5-889a-ff0b413ed219.png",
+            "region": [
+              768,
+              0,
+              768,
+              550
+            ],
+            "pivot": [
+              350,
+              506
+            ],
+            "bounds": [
+              47,
+              61,
+              742,
+              505
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "2P / Active",
+            "file": "shark-normals-v1/normals_2_fluid.png",
+            "sha256": "184c7ece34c830f3bee234ffec58b3204f48597b1c266dd46575052e2345df45",
+            "generation_file": "exec-a74f1a83-ad90-47c5-889a-ff0b413ed219.png",
+            "region": [
+              768,
+              550,
+              768,
+              474
+            ],
+            "pivot": [
+              350,
+              454
+            ],
+            "bounds": [
+              84,
+              43,
+              703,
+              455
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "2K / Active",
+            "file": "shark-normals-v1/normals_3_fluid.png",
+            "sha256": "93a7c7e6c31acb22c5e3a0ff3a47296791fc8cf32b4b67d73fabf1e2005ebb3c",
+            "generation_file": "exec-afeeafee-3749-4689-abbe-36a74b3de420.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              492
+            ],
+            "bounds": [
+              29,
+              84,
+              657,
+              495
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "2S / Active",
+            "file": "shark-normals-v1/normals_3_fluid.png",
+            "sha256": "93a7c7e6c31acb22c5e3a0ff3a47296791fc8cf32b4b67d73fabf1e2005ebb3c",
+            "generation_file": "exec-afeeafee-3749-4689-abbe-36a74b3de420.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              473
+            ],
+            "bounds": [
+              8,
+              113,
+              748,
+              475
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "2Hs / Active",
+            "file": "shark-normals-v1/scoop_1.png",
+            "sha256": "657b54b8e97e00d1229377a6a96db942be6907d50df0efd1b60ce1151300310e",
+            "generation_file": "exec-b2ed13ed-c39b-411e-b336-3b7a68c86a56.png",
+            "region": [
+              0,
+              0,
+              768,
+              1024
+            ],
+            "pivot": [
+              390,
+              920
+            ],
+            "bounds": [
+              50,
+              348,
+              756,
+              920
+            ],
+            "body_height": 850
+          },
+          {
+            "name": "j.P / Active",
+            "file": "shark-normals-v1/normals_4_fluid.png",
+            "sha256": "11917da42258d5cc17edc4dda6163e888c08aa505815ffab99d43ae89433d22c",
+            "generation_file": "exec-7fa4507a-8974-4cf7-98ed-1d60cd6fd9ff.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              169,
+              48,
+              641,
+              505
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "j.K / Active",
+            "file": "shark-normals-v1/normals_4_fluid.png",
+            "sha256": "11917da42258d5cc17edc4dda6163e888c08aa505815ffab99d43ae89433d22c",
+            "generation_file": "exec-7fa4507a-8974-4cf7-98ed-1d60cd6fd9ff.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              57,
+              31,
+              679,
+              439
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "j.S / Active",
+            "file": "shark-normals-v1/normals_5_fluid.png",
+            "sha256": "c26125deafd5b963806393ed7068edfe69ac2be30bfc360d1e98b80d5db81f6e",
+            "generation_file": "exec-efeb99c9-78e1-438a-8aea-7cc40ab417f4.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              77,
+              33,
+              733,
+              461
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "j.Hs / Active",
+            "file": "shark-normals-v1/normals_5_fluid.png",
+            "sha256": "c26125deafd5b963806393ed7068edfe69ac2be30bfc360d1e98b80d5db81f6e",
+            "generation_file": "exec-efeb99c9-78e1-438a-8aea-7cc40ab417f4.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              132,
+              27,
+              689,
+              491
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "6P / Active",
+            "file": "shark-normals-v1/normals_6_fluid.png",
+            "sha256": "b221582a15c574a3119bb7a43a469b07ef3a290fd26d8c998e490e3392255044",
+            "generation_file": "exec-591bf66a-3fc9-4331-bf28-1cec206afb8a.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              485
+            ],
+            "bounds": [
+              80,
+              36,
+              694,
+              485
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "6K / Active",
+            "file": "shark-normals-v1/normals_6_fluid.png",
+            "sha256": "b221582a15c574a3119bb7a43a469b07ef3a290fd26d8c998e490e3392255044",
+            "generation_file": "exec-591bf66a-3fc9-4331-bf28-1cec206afb8a.png",
+            "region": [
+              750,
+              512,
+              786,
+              512
+            ],
+            "pivot": [
+              368,
+              489
+            ],
+            "bounds": [
+              17,
+              23,
+              689,
+              490
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "6Hs / Active",
+            "file": "shark-normals-v1/normals_7_fluid.png",
+            "sha256": "bc02433c5641631eea38c55c422dbede2ba351d4223d73e840586d8e4b3d195f",
+            "generation_file": "exec-31403dd1-13ea-4749-8690-33ab840b6ab1.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              486
+            ],
+            "bounds": [
+              102,
+              23,
+              748,
+              487
+            ],
+            "body_height": 540
           }
         ]
       },
@@ -10908,6 +11644,1254 @@
             ]
           }
         ]
+      },
+      "attack_animation": {
+        "file": "shark-normals-v1/scoop_0.png",
+        "sha256": "d605e4d0bd8c79ae68db5343e8546a8da58afcd8273f696cdb07eb380a550c21",
+        "size": [
+          1536,
+          1024
+        ],
+        "columns": 2,
+        "rows": 2,
+        "body_height": 540,
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "2Hs / Coil",
+            "file": "shark-normals-v1/scoop_0.png",
+            "sha256": "d605e4d0bd8c79ae68db5343e8546a8da58afcd8273f696cdb07eb380a550c21",
+            "generation_file": "exec-6d57808e-30c4-40bc-972d-f95171e929c2.png",
+            "region": [
+              0,
+              0,
+              768,
+              1024
+            ],
+            "pivot": [
+              390,
+              856
+            ],
+            "bounds": [
+              30,
+              118,
+              765,
+              857
+            ],
+            "body_height": 850
+          },
+          {
+            "name": "2Hs / Load",
+            "file": "shark-normals-v1/scoop_0.png",
+            "sha256": "d605e4d0bd8c79ae68db5343e8546a8da58afcd8273f696cdb07eb380a550c21",
+            "generation_file": "exec-6d57808e-30c4-40bc-972d-f95171e929c2.png",
+            "region": [
+              768,
+              0,
+              768,
+              1024
+            ],
+            "pivot": [
+              390,
+              853
+            ],
+            "bounds": [
+              20,
+              261,
+              728,
+              854
+            ],
+            "body_height": 850
+          },
+          {
+            "name": "2Hs / Scoop / hit1",
+            "file": "shark-normals-v1/scoop_1.png",
+            "sha256": "657b54b8e97e00d1229377a6a96db942be6907d50df0efd1b60ce1151300310e",
+            "generation_file": "exec-b2ed13ed-c39b-411e-b336-3b7a68c86a56.png",
+            "region": [
+              0,
+              0,
+              768,
+              1024
+            ],
+            "pivot": [
+              390,
+              920
+            ],
+            "bounds": [
+              50,
+              348,
+              756,
+              920
+            ],
+            "body_height": 850
+          },
+          {
+            "name": "2Hs / Rise / hit2",
+            "file": "shark-normals-v1/scoop_1.png",
+            "sha256": "657b54b8e97e00d1229377a6a96db942be6907d50df0efd1b60ce1151300310e",
+            "generation_file": "exec-b2ed13ed-c39b-411e-b336-3b7a68c86a56.png",
+            "region": [
+              768,
+              0,
+              768,
+              1024
+            ],
+            "pivot": [
+              390,
+              920
+            ],
+            "bounds": [
+              25,
+              180,
+              746,
+              921
+            ],
+            "body_height": 850
+          },
+          {
+            "name": "2Hs / Crest / hit2",
+            "file": "shark-normals-v1/scoop_2.png",
+            "sha256": "57df8f0e839a4d2c67c8129ca42a3f5214bc139a623dfc4f5d52e4ee2bc122eb",
+            "generation_file": "exec-5e000b70-c625-4eba-a34b-ebddcda01cde.png",
+            "region": [
+              0,
+              0,
+              790,
+              1024
+            ],
+            "pivot": [
+              390,
+              952
+            ],
+            "bounds": [
+              22,
+              115,
+              782,
+              953
+            ],
+            "body_height": 850
+          },
+          {
+            "name": "2Hs / Release",
+            "file": "shark-normals-v1/scoop_2.png",
+            "sha256": "57df8f0e839a4d2c67c8129ca42a3f5214bc139a623dfc4f5d52e4ee2bc122eb",
+            "generation_file": "exec-5e000b70-c625-4eba-a34b-ebddcda01cde.png",
+            "region": [
+              798,
+              0,
+              738,
+              1024
+            ],
+            "pivot": [
+              360,
+              950
+            ],
+            "bounds": [
+              0,
+              197,
+              712,
+              953
+            ],
+            "body_height": 850
+          },
+          {
+            "name": "2Hs / Recover",
+            "file": "shark-normals-v1/scoop_3.png",
+            "sha256": "41c95160924682c1b60feeba00dd9b546ef87f6366e8af0fec25e805a6bb36c6",
+            "generation_file": "exec-6ee04c30-da4a-4cd1-83d9-8a6310c835c8.png",
+            "region": [
+              0,
+              0,
+              790,
+              1024
+            ],
+            "pivot": [
+              390,
+              935
+            ],
+            "bounds": [
+              50,
+              137,
+              772,
+              937
+            ],
+            "body_height": 850
+          },
+          {
+            "name": "2Hs / Reset",
+            "file": "shark-normals-v1/scoop_3.png",
+            "sha256": "41c95160924682c1b60feeba00dd9b546ef87f6366e8af0fec25e805a6bb36c6",
+            "generation_file": "exec-6ee04c30-da4a-4cd1-83d9-8a6310c835c8.png",
+            "region": [
+              798,
+              0,
+              738,
+              1024
+            ],
+            "pivot": [
+              360,
+              935
+            ],
+            "bounds": [
+              14,
+              100,
+              702,
+              936
+            ],
+            "body_height": 850
+          },
+          {
+            "name": "5P / Entry",
+            "file": "shark-normals-v1/entries_0.png",
+            "sha256": "d444bdabe7c456eecd3ff1c8172c41c7f4d19091109cce114e991a3e1c880a76",
+            "generation_file": "exec-579ad5e6-ffc9-4551-9b86-2f03276fadc6.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              497
+            ],
+            "bounds": [
+              179,
+              18,
+              606,
+              498
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "5K / Entry",
+            "file": "shark-normals-v1/entries_0.png",
+            "sha256": "d444bdabe7c456eecd3ff1c8172c41c7f4d19091109cce114e991a3e1c880a76",
+            "generation_file": "exec-579ad5e6-ffc9-4551-9b86-2f03276fadc6.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              496
+            ],
+            "bounds": [
+              161,
+              19,
+              577,
+              499
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "c.S / Entry",
+            "file": "shark-normals-v1/entries_0.png",
+            "sha256": "d444bdabe7c456eecd3ff1c8172c41c7f4d19091109cce114e991a3e1c880a76",
+            "generation_file": "exec-579ad5e6-ffc9-4551-9b86-2f03276fadc6.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              489
+            ],
+            "bounds": [
+              168,
+              66,
+              590,
+              491
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "5S / Entry",
+            "file": "shark-normals-v1/entries_0.png",
+            "sha256": "d444bdabe7c456eecd3ff1c8172c41c7f4d19091109cce114e991a3e1c880a76",
+            "generation_file": "exec-579ad5e6-ffc9-4551-9b86-2f03276fadc6.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              489
+            ],
+            "bounds": [
+              162,
+              31,
+              601,
+              490
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "5Hs / Entry",
+            "file": "shark-normals-v1/entries_1.png",
+            "sha256": "8704838c134be65fb50777cfbe08991afd573c628dbaf6056115816e2bc4d745",
+            "generation_file": "exec-fffa7c7f-e352-403d-b439-aaa07ad03988.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              495
+            ],
+            "bounds": [
+              112,
+              16,
+              647,
+              496
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "2P / Entry",
+            "file": "shark-normals-v1/entries_1.png",
+            "sha256": "8704838c134be65fb50777cfbe08991afd573c628dbaf6056115816e2bc4d745",
+            "generation_file": "exec-fffa7c7f-e352-403d-b439-aaa07ad03988.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              493
+            ],
+            "bounds": [
+              79,
+              77,
+              526,
+              496
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "2K / Entry",
+            "file": "shark-normals-v1/entries_1.png",
+            "sha256": "8704838c134be65fb50777cfbe08991afd573c628dbaf6056115816e2bc4d745",
+            "generation_file": "exec-fffa7c7f-e352-403d-b439-aaa07ad03988.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              476
+            ],
+            "bounds": [
+              140,
+              100,
+              657,
+              478
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "2S / Entry",
+            "file": "shark-normals-v1/entries_1.png",
+            "sha256": "8704838c134be65fb50777cfbe08991afd573c628dbaf6056115816e2bc4d745",
+            "generation_file": "exec-fffa7c7f-e352-403d-b439-aaa07ad03988.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              474
+            ],
+            "bounds": [
+              96,
+              84,
+              596,
+              476
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "j.P / Entry",
+            "file": "shark-normals-v1/entries_2.png",
+            "sha256": "1b6127372e409100e07dab4de62b6b9598b622fd28ac3e1d0b9e60e76dea8878",
+            "generation_file": "exec-594db44a-b0ca-46b4-aebf-5fdbcf736051.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              172,
+              17,
+              564,
+              500
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "j.K / Entry",
+            "file": "shark-normals-v1/entries_2.png",
+            "sha256": "1b6127372e409100e07dab4de62b6b9598b622fd28ac3e1d0b9e60e76dea8878",
+            "generation_file": "exec-594db44a-b0ca-46b4-aebf-5fdbcf736051.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              97,
+              12,
+              552,
+              486
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "j.S / Entry",
+            "file": "shark-normals-v1/entries_2.png",
+            "sha256": "1b6127372e409100e07dab4de62b6b9598b622fd28ac3e1d0b9e60e76dea8878",
+            "generation_file": "exec-594db44a-b0ca-46b4-aebf-5fdbcf736051.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              91,
+              11,
+              679,
+              481
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "j.Hs / Entry",
+            "file": "shark-normals-v1/entries_2.png",
+            "sha256": "1b6127372e409100e07dab4de62b6b9598b622fd28ac3e1d0b9e60e76dea8878",
+            "generation_file": "exec-594db44a-b0ca-46b4-aebf-5fdbcf736051.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              148,
+              0,
+              546,
+              457
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "6P / Entry",
+            "file": "shark-normals-v1/entries_3.png",
+            "sha256": "1f414f7233056c1bda2656198fd5dd000d205e7838ad9b572e1f1e5056b23dad",
+            "generation_file": "exec-e51fa80f-82f9-47de-a026-bb4f3119650c.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              175,
+              83,
+              611,
+              490
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "6K / Entry",
+            "file": "shark-normals-v1/entries_3.png",
+            "sha256": "1f414f7233056c1bda2656198fd5dd000d205e7838ad9b572e1f1e5056b23dad",
+            "generation_file": "exec-e51fa80f-82f9-47de-a026-bb4f3119650c.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              496
+            ],
+            "bounds": [
+              107,
+              23,
+              635,
+              497
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "normals_7_fluid 3",
+            "file": "shark-normals-v1/normals_7_fluid.png",
+            "sha256": "bc02433c5641631eea38c55c422dbede2ba351d4223d73e840586d8e4b3d195f",
+            "generation_file": "exec-31403dd1-13ea-4749-8690-33ab840b6ab1.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              489
+            ],
+            "bounds": [
+              167,
+              25,
+              607,
+              491
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "normals_7_fluid 4",
+            "file": "shark-normals-v1/normals_7_fluid.png",
+            "sha256": "bc02433c5641631eea38c55c422dbede2ba351d4223d73e840586d8e4b3d195f",
+            "generation_file": "exec-31403dd1-13ea-4749-8690-33ab840b6ab1.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              488
+            ],
+            "bounds": [
+              165,
+              32,
+              618,
+              490
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "entries_3 3",
+            "file": "shark-normals-v1/entries_3.png",
+            "sha256": "1f414f7233056c1bda2656198fd5dd000d205e7838ad9b572e1f1e5056b23dad",
+            "generation_file": "exec-e51fa80f-82f9-47de-a026-bb4f3119650c.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              490
+            ],
+            "bounds": [
+              155,
+              48,
+              728,
+              453
+            ],
+            "body_height": 540
+          },
+          {
+            "name": "entries_3 4",
+            "file": "shark-normals-v1/entries_3.png",
+            "sha256": "1f414f7233056c1bda2656198fd5dd000d205e7838ad9b572e1f1e5056b23dad",
+            "generation_file": "exec-e51fa80f-82f9-47de-a026-bb4f3119650c.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              350,
+              489
+            ],
+            "bounds": [
+              144,
+              65,
+              630,
+              489
+            ],
+            "body_height": 540
+          }
+        ]
+      },
+      "attack_animations": {
+        "0": {
+          "artPose": 5,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 8
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 4
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 4
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 4
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 8
+            }
+          ]
+        },
+        "1": {
+          "artPose": 6,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 9
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 5
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 5
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 5
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 9
+            }
+          ]
+        },
+        "32": {
+          "artPose": 7,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 10
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 6
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 6
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 6
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 10
+            }
+          ]
+        },
+        "2": {
+          "artPose": 8,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 11
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 7
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 7
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 7
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 11
+            }
+          ]
+        },
+        "3": {
+          "artPose": 9,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 12
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 8
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 8
+            },
+            {
+              "start": 25,
+              "phase": "attack_animation",
+              "pose": 25
+            },
+            {
+              "start": 70,
+              "phase": "attack_animation",
+              "pose": 12
+            }
+          ]
+        },
+        "4": {
+          "artPose": 10,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 6
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 13
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 9
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 9
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 9
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 13
+            }
+          ]
+        },
+        "5": {
+          "artPose": 11,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 6
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 14
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 10
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 10
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 10
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 14
+            }
+          ]
+        },
+        "6": {
+          "artPose": 12,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 6
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 15
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 11
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 11
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 11
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 15
+            }
+          ]
+        },
+        "17": {
+          "artPose": 14,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 8
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 16
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 13
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 13
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 13
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 16
+            }
+          ]
+        },
+        "18": {
+          "artPose": 15,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 8
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 17
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 14
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 14
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 14
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 17
+            }
+          ]
+        },
+        "19": {
+          "artPose": 16,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 8
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 18
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 15
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 15
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 15
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 18
+            }
+          ]
+        },
+        "20": {
+          "artPose": 17,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 8
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 19
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 16
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 16
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 16
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 19
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 16
+            },
+            {
+              "start": 50,
+              "phase": "attack_animation",
+              "pose": 24
+            }
+          ]
+        },
+        "8": {
+          "artPose": 18,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 20
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 17
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 17
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 17
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 20
+            }
+          ]
+        },
+        "9": {
+          "artPose": 19,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 21
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 18
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 18
+            },
+            {
+              "start": 25,
+              "phase": "signature_windup",
+              "pose": 18
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 21
+            }
+          ]
+        },
+        "11": {
+          "artPose": 20,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 22
+            },
+            {
+              "start": 60,
+              "phase": "signature_windup",
+              "pose": 19
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "signature_active",
+              "pose": 19
+            },
+            {
+              "start": 25,
+              "phase": "attack_animation",
+              "pose": 23
+            }
+          ]
+        },
+        "7": {
+          "artPose": 13,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 0
+            },
+            {
+              "start": 40,
+              "phase": "attack_animation",
+              "pose": 1
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 2
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 3
+            },
+            {
+              "start": 60,
+              "phase": "attack_animation",
+              "pose": 4
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 5
+            },
+            {
+              "start": 30,
+              "phase": "attack_animation",
+              "pose": 6
+            },
+            {
+              "start": 70,
+              "phase": "attack_animation",
+              "pose": 7
+            }
+          ]
+        }
+      },
+      "normal_selection": {
+        "direction": "A / Shoulder Snap",
+        "launcher": "2 / Low Scoop",
+        "motion": "Approved fluidity study",
+        "source": "references/frame-data/ky-kiske-2026-11-18"
       }
     },
     {

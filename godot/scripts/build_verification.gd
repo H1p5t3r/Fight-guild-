@@ -339,7 +339,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 			var visual: Sprite2D = game.arena.sprites[0]
 			var art: int = game.model.move(character, slots[b]).artPose
 			var expected_pose := art - 1 if art else b + 1
-			check(visual.get_meta("phase") == ("idle" if character == 2 else "signature_windup" if art else "windup") and visual.get_meta("pose") == (0 if character == 2 else expected_pose), "Attack has no entry/windup pose")
+			check(visual.get_meta("phase") == ("idle" if character == 2 else "ready" if character == 4 and art else "signature_windup" if art else "windup") and visual.get_meta("pose") == (0 if character == 2 or (character == 4 and art) else expected_pose), "Attack has no entry/windup pose")
 			var anticipation: Texture2D = visual.texture
 			ticks(game.model.move(character, slots[b]).startup - 1)
 			check(visual.get_meta("phase") == ("signature_active" if art else "active") and visual.get_meta("pose") == expected_pose and visual.texture != anticipation, "Attack did not change to its active image")
