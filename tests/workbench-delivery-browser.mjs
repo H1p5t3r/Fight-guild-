@@ -65,7 +65,9 @@ try{
   }
   if(localAllowed){
     await ready(local);assert.deepEqual(await data(local),initial);
-    await local.locator('#import-file').setInputFiles(exported);await ready(local);
+    await local.locator('#import-file').setInputFiles(exported);
+    await local.waitForFunction(()=>document.getElementById('toast').textContent.startsWith('Move data imported'));
+    await ready(local);
     assert.deepEqual(await data(local),edited);
     await local.locator('#fighter').selectOption('2');await local.locator('[data-move="7"]').click();await ready(local);await seekMoveFrame(local,18);
     await local.evaluate(async()=>{const i=new Image();i.src=FIGHT_WORKSHOP_DATA.images['smoke-v1/launcher.png'];await i.decode();});

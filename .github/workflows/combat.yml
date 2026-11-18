@@ -4,7 +4,7 @@ permissions:
   contents: read
 jobs:
   validate-and-package:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       FIGHT_TOOLS: /tmp/fight-guild-tools
     steps:
@@ -43,7 +43,7 @@ jobs:
             build/FightGuild-Godot-project.zip
           if-no-files-found: error
   portable-core-regression:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       FIGHT_TOOLS: /tmp/fight-guild-web-tools
     steps:

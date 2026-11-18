@@ -29,7 +29,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       FIGHT_TOOLS: /tmp/fight-guild-workshop-tools
     steps:
@@ -41,13 +41,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install the portable compiler
+        run: python -m pip install --target "$FIGHT_TOOLS/python" ziglang==0.14.1
+      - name: Install editor dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install supported browser dependencies
+        run: npx playwright install --with-deps chromium
+      - name: Build the combat core
+        run: bash scripts/build.sh
       - name: Build the browser editor
-        run: |
-          python -m pip install --target "$FIGHT_TOOLS/python" ziglang==0.14.1
-          npm ci --no-audit --no-fund
-          npx playwright install --with-deps chromium
-          bash scripts/build.sh
-          node scripts/build-workbench.mjs
+        run: node scripts/build-workbench.mjs
       - name: Verify hosted and extracted editor
         run: node tests/workbench-delivery-browser.mjs
       - uses: actions/upload-artifact@v4
@@ -60,7 +63,7 @@ jobs:
           path: build/move-workshop
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       pages: write
       id-token: write
