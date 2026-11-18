@@ -1,0 +1,1055 @@
+{
+  "sourceFile": "GGST_Queen Dizzy_Frame Data - Dustloop Wiki.mht",
+  "sha256": "e64295b16ccf60f3304aea5e6c20351ec0797199a684ceee8ed0672aef19e99c",
+  "url": "https://www.dustloop.com/w/GGST/Queen_Dizzy/Frame_Data",
+  "savedAt": "Wed, 18 Nov 2026 08:51:18 +0000",
+  "scope": "Saved normal table and embedded diagrams. Thumbnail diagrams do not include numerical engine coordinates or exact per-frame changes.",
+  "moves": [
+    {
+      "Input": "2D",
+      "Damage": "38",
+      "Guard": "Low",
+      "Startup": "12",
+      "Active": "6",
+      "Recovery": "27",
+      "On-Block": "-16",
+      "On-Hit": "HKD +41",
+      "Level": "3",
+      "Counter Type": "Large",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "1050",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "2D",
+        "38",
+        "Low",
+        "12",
+        "6",
+        "27",
+        "-16",
+        "HKD +41",
+        "3",
+        "Large",
+        "",
+        "90%",
+        "1050",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_2D_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/a/a0/GGST_Queen_Dizzy_2D_hitbox.png/180px-GGST_Queen_Dizzy_2D_hitbox.png",
+          "sha256": "d165dc6ceb96bbf901c99e919cf5b9251a11fc5cc08af6387605fe9f1d3f8075",
+          "size": [
+            360,
+            214
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "2H",
+      "Damage": "64",
+      "Guard": "All",
+      "Startup": "18",
+      "Active": "9",
+      "Recovery": "28",
+      "On-Block": "-18",
+      "On-Hit": "KD +29",
+      "Level": "4",
+      "Counter Type": "Large",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "1700",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "2H",
+        "64",
+        "All",
+        "18",
+        "9",
+        "28",
+        "-18",
+        "KD +29",
+        "4",
+        "Large",
+        "",
+        "90%",
+        "1700",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "500",
+        "OTGType": "Up",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_2H_Hitbox_1.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/b/b9/GGST_Queen_Dizzy_2H_Hitbox_1.png/180px-GGST_Queen_Dizzy_2H_Hitbox_1.png",
+          "sha256": "5d21b0043afbe8bc46599d7680c2e003376127ed0de396d13af4de069f7be739",
+          "size": [
+            360,
+            345
+          ]
+        },
+        {
+          "file": "GGST_Queen_Dizzy_2H_Hitbox_2.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/a/ab/GGST_Queen_Dizzy_2H_Hitbox_2.png/180px-GGST_Queen_Dizzy_2H_Hitbox_2.png",
+          "sha256": "1ae59c6dac69706b5529d795c223597be7f2762ae7a8cb6fd38094ecffc47503",
+          "size": [
+            360,
+            369
+          ]
+        },
+        {
+          "file": "GGST_Queen_Dizzy_2H_Hitbox_3.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/4/49/GGST_Queen_Dizzy_2H_Hitbox_3.png/180px-GGST_Queen_Dizzy_2H_Hitbox_3.png",
+          "sha256": "1c05f05139cd3018ca8226eb13030c2900742701ed1d0693b5526beddff9099d",
+          "size": [
+            360,
+            364
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "2K",
+      "Damage": "23",
+      "Guard": "Low",
+      "Startup": "6",
+      "Active": "4",
+      "Recovery": "11",
+      "On-Block": "-3",
+      "On-Hit": "0",
+      "Level": "1",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "70%",
+      "RISC Gain": "600",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "2K",
+        "23",
+        "Low",
+        "6",
+        "4",
+        "11",
+        "-3",
+        "0",
+        "1",
+        "Small",
+        "",
+        "70%",
+        "600",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_2K_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/f/f0/GGST_Queen_Dizzy_2K_hitbox.png/180px-GGST_Queen_Dizzy_2K_hitbox.png",
+          "sha256": "07c4afc6d593bce6798ce85dd48be0bd1ba8d380c8db6fe0527f70d68fd370c0",
+          "size": [
+            360,
+            251
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "2P",
+      "Damage": "20",
+      "Guard": "All",
+      "Startup": "5",
+      "Active": "3",
+      "Recovery": "8",
+      "On-Block": "-1",
+      "On-Hit": "+2",
+      "Level": "0",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "500",
+      "RISC Loss": "1500",
+      "rawCells": [
+        "2P",
+        "20",
+        "All",
+        "5",
+        "3",
+        "8",
+        "-1",
+        "+2",
+        "0",
+        "Small",
+        "",
+        "80%",
+        "500",
+        "1500"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_2P_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/3/34/GGST_Queen_Dizzy_2P_hitbox.png/180px-GGST_Queen_Dizzy_2P_hitbox.png",
+          "sha256": "a9a0d4597314c8871878d7984b18932c408fd8e1ea219a261b0ab950dfd7410b",
+          "size": [
+            360,
+            283
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "2S",
+      "Damage": "40",
+      "Guard": "All",
+      "Startup": "10",
+      "Active": "6",
+      "Recovery": "15",
+      "On-Block": "-7",
+      "On-Hit": "-4",
+      "Level": "2",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "1100",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "2S",
+        "40",
+        "All",
+        "10",
+        "6",
+        "15",
+        "-7",
+        "-4",
+        "2",
+        "Mid",
+        "",
+        "90%",
+        "1100",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_2S_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/7/7c/GGST_Queen_Dizzy_2S_hitbox.png/180px-GGST_Queen_Dizzy_2S_hitbox.png",
+          "sha256": "5e1d4e610e8ee62b2cc773b3047d3139fa5c13460c72563f0f2780329b3a317b",
+          "size": [
+            360,
+            263
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "5[D]",
+      "Damage": "62",
+      "Guard": "High",
+      "Startup": "28",
+      "Active": "3",
+      "Recovery": "26",
+      "On-Block": "-10",
+      "On-Hit": "KD +36",
+      "Level": "4",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "100%",
+      "RISC Gain": "1275",
+      "RISC Loss": "1500 [1000]",
+      "rawCells": [
+        "5[D]",
+        "62",
+        "High",
+        "28",
+        "3",
+        "26",
+        "-10",
+        "KD +36",
+        "4",
+        "Mid",
+        "",
+        "100%",
+        "1275",
+        "1500 [1000]"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "0 (200)",
+        "OTGType": "Up",
+        "notes": "Hitstop on block: 20F • Hitstop on raw hit: 45F • On Hit/Block gains Tension equivalent to Level 2 despite other Level 4 properties. • R.I.S.C. Loss in [ ] refers to when 5[D] is not the initial hit of a combo. • Wall Damage in ( ) refers to if opponent is touching the wall. • Wall Damage when hit raw is increased to 700 (900). • Applies 5 less Combo Decay on initial hit, for 0 Combo Decay if the first hit of a combo. • Telegraphing orange glow appears on frame 4, and reaches full brightness on frame 5."
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_5D_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/5/5d/GGST_Queen_Dizzy_5D_hitbox.png/180px-GGST_Queen_Dizzy_5D_hitbox.png",
+          "sha256": "1411509c7bbefc8afc5e2ff2516350602db65f172873bfb0643e16da88f47fb7",
+          "size": [
+            360,
+            398
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "5D",
+      "Damage": "50",
+      "Guard": "High",
+      "Startup": "20",
+      "Active": "3",
+      "Recovery": "26",
+      "On-Block": "-15",
+      "On-Hit": "0",
+      "Level": "2",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "825",
+      "RISC Loss": "3000 [1000]",
+      "rawCells": [
+        "5D",
+        "50",
+        "High",
+        "20",
+        "3",
+        "26",
+        "-15",
+        "0",
+        "2",
+        "Mid",
+        "",
+        "80%",
+        "825",
+        "3000 [1000]"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "700 (900)",
+        "OTGType": "Up",
+        "notes": "Hitstop on block: 20F • Hitstop on ground hit: 16F • Floating crumple on ground hit: Total 28F (airborne hitstun 1-11F, standing hitstun 12-18F, can block 19-28F) • R.I.S.C. Loss in [ ] refers to when 5D is not the initial hit of a combo. • Wall Damage in ( ) refers to if opponent is touching the wall. • Has no additional Combo Decay on initial hit, unlike other overheads (usually adding +5 on initial hit for 10 total). • Telegraphing orange glow appears on frame 4, and reaches full brightness on frame 5."
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_5D_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/5/5d/GGST_Queen_Dizzy_5D_hitbox.png/180px-GGST_Queen_Dizzy_5D_hitbox.png",
+          "sha256": "1411509c7bbefc8afc5e2ff2516350602db65f172873bfb0643e16da88f47fb7",
+          "size": [
+            360,
+            398
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "5H",
+      "Damage": "20×3",
+      "Guard": "All",
+      "Startup": "12",
+      "Active": "6,6,6",
+      "Recovery": "15",
+      "On-Block": "-4",
+      "On-Hit": "Freeze +69",
+      "Level": "3",
+      "Counter Type": "Large",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "400×3",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "5H",
+        "20×3",
+        "All",
+        "12",
+        "6,6,6",
+        "15",
+        "-4",
+        "Freeze +69",
+        "3",
+        "Large",
+        "",
+        "90%",
+        "400×3",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "100×3",
+        "OTGType": "Up",
+        "notes": "Listed frame advantange on hit only applies if the third hit connects. The first and second are -13 and -7 on hit respectively."
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_5H_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/3/39/GGST_Queen_Dizzy_5H_hitbox.png/180px-GGST_Queen_Dizzy_5H_hitbox.png",
+          "sha256": "c7064a14320ae07b0af7ef38b6f812ad52e94f0dceb9e817bb01b770a799dd9e",
+          "size": [
+            360,
+            281
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "5K",
+      "Damage": "26",
+      "Guard": "All",
+      "Startup": "7",
+      "Active": "4",
+      "Recovery": "12",
+      "On-Block": "-4",
+      "On-Hit": "-1",
+      "Level": "1",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "800",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "5K",
+        "26",
+        "All",
+        "7",
+        "4",
+        "12",
+        "-4",
+        "-1",
+        "1",
+        "Small",
+        "",
+        "90%",
+        "800",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_5K_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/0/06/GGST_Queen_Dizzy_5K_hitbox.png/180px-GGST_Queen_Dizzy_5K_hitbox.png",
+          "sha256": "1e94029451facd579ec8b959f0720bbc0b36e61888fd4788ac7ee9fc4c6b407d",
+          "size": [
+            360,
+            306
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "5P",
+      "Damage": "25",
+      "Guard": "All",
+      "Startup": "6",
+      "Active": "3",
+      "Recovery": "10",
+      "On-Block": "-3",
+      "On-Hit": "0",
+      "Level": "0",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "500",
+      "RISC Loss": "1500",
+      "rawCells": [
+        "5P",
+        "25",
+        "All",
+        "6",
+        "3",
+        "10",
+        "-3",
+        "0",
+        "0",
+        "Small",
+        "",
+        "80%",
+        "500",
+        "1500"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_5P_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/1/11/GGST_Queen_Dizzy_5P_hitbox.png/180px-GGST_Queen_Dizzy_5P_hitbox.png",
+          "sha256": "6fd634064b7e2108ab0b6c06ebb3f4bb63e8772da52ff93b4bf1a1b091b5f278",
+          "size": [
+            360,
+            356
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "6[H]",
+      "Damage": "77",
+      "Guard": "All (Guard Crush)",
+      "Startup": "36",
+      "Active": "8",
+      "Recovery": "20",
+      "On-Block": "+12",
+      "On-Hit": "KD +37",
+      "Level": "4",
+      "Counter Type": "Large",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "1700",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "6[H]",
+        "77",
+        "All (Guard Crush)",
+        "36",
+        "8",
+        "20",
+        "+12",
+        "KD +37",
+        "4",
+        "Large",
+        "",
+        "90%",
+        "1700",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "500",
+        "OTGType": "Down",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_6H_hitbox_1.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/7/7b/GGST_Queen_Dizzy_6H_hitbox_1.png/180px-GGST_Queen_Dizzy_6H_hitbox_1.png",
+          "sha256": "2c2d0bcb8466978436d9b9e49a677124c0f84e64d61eea0c5605efd2bdd5185e",
+          "size": [
+            360,
+            400
+          ]
+        },
+        {
+          "file": "GGST_Queen_Dizzy_6H_hitbox_2.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/8/8c/GGST_Queen_Dizzy_6H_hitbox_2.png/180px-GGST_Queen_Dizzy_6H_hitbox_2.png",
+          "sha256": "c5e8ae9b96d0f4ef8398e7b8f233d31030871c4e5280ebdaf2d93a4a3468b287",
+          "size": [
+            360,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "6H",
+      "Damage": "57",
+      "Guard": "All",
+      "Startup": "19",
+      "Active": "8",
+      "Recovery": "20",
+      "On-Block": "-9",
+      "On-Hit": "-6",
+      "Level": "4",
+      "Counter Type": "Large",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "1700",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "6H",
+        "57",
+        "All",
+        "19",
+        "8",
+        "20",
+        "-9",
+        "-6",
+        "4",
+        "Large",
+        "",
+        "90%",
+        "1700",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "500",
+        "OTGType": "Down",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_6H_hitbox_1.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/7/7b/GGST_Queen_Dizzy_6H_hitbox_1.png/180px-GGST_Queen_Dizzy_6H_hitbox_1.png",
+          "sha256": "2c2d0bcb8466978436d9b9e49a677124c0f84e64d61eea0c5605efd2bdd5185e",
+          "size": [
+            360,
+            400
+          ]
+        },
+        {
+          "file": "GGST_Queen_Dizzy_6H_hitbox_2.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/8/8c/GGST_Queen_Dizzy_6H_hitbox_2.png/180px-GGST_Queen_Dizzy_6H_hitbox_2.png",
+          "sha256": "c5e8ae9b96d0f4ef8398e7b8f233d31030871c4e5280ebdaf2d93a4a3468b287",
+          "size": [
+            360,
+            232
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "6P",
+      "Damage": "28",
+      "Guard": "All",
+      "Startup": "12",
+      "Active": "6",
+      "Recovery": "20",
+      "On-Block": "-12",
+      "On-Hit": "-9",
+      "Level": "2",
+      "Counter Type": "Mid",
+      "Invuln": "1-3 Below Crouch4-17 Low Profile",
+      "Proration": "90%",
+      "RISC Gain": "1100",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "6P",
+        "28",
+        "All",
+        "12",
+        "6",
+        "20",
+        "-12",
+        "-9",
+        "2",
+        "Mid",
+        "1-3 Below Crouch4-17 Low Profile",
+        "90%",
+        "1100",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "500",
+        "OTGType": "Up",
+        "notes": "If the first hit of a combo, applies an additional +20 Combo Decay."
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_6P_hitbox_1.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/9/94/GGST_Queen_Dizzy_6P_hitbox_1.png/180px-GGST_Queen_Dizzy_6P_hitbox_1.png",
+          "sha256": "65d0239c2829af34d60e8efb69c5e1be64ac76c0d3e34eaf86022a7996ab87db",
+          "size": [
+            360,
+            411
+          ]
+        },
+        {
+          "file": "GGST_Queen_Dizzy_6P_hitbox_2.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/6/60/GGST_Queen_Dizzy_6P_hitbox_2.png/180px-GGST_Queen_Dizzy_6P_hitbox_2.png",
+          "sha256": "88010eb4b11f9f0d06ba89c119972a9611d01a2d26eef0ffd18f64d725833e97",
+          "size": [
+            360,
+            394
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "c.S",
+      "Damage": "43",
+      "Guard": "All",
+      "Startup": "8",
+      "Active": "6",
+      "Recovery": "12",
+      "On-Block": "-1",
+      "On-Hit": "+2",
+      "Level": "3",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "100%",
+      "RISC Gain": "1400",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "c.S",
+        "43",
+        "All",
+        "8",
+        "6",
+        "12",
+        "-1",
+        "+2",
+        "3",
+        "Mid",
+        "",
+        "100%",
+        "1400",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Down",
+        "notes": "Input Proximity Range: 340"
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_cS_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/7/77/GGST_Queen_Dizzy_cS_hitbox.png/180px-GGST_Queen_Dizzy_cS_hitbox.png",
+          "sha256": "71129ef2e39d331dcbc870b432074e3b4e5ef3fc2a57f7cf24026c57e0264de4",
+          "size": [
+            360,
+            447
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "f.S",
+      "Damage": "10×5",
+      "Guard": "All",
+      "Startup": "12",
+      "Active": "2,2,2,2,2",
+      "Recovery": "19",
+      "On-Block": "-7",
+      "On-Hit": "-4",
+      "Level": "2",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "200×5",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "f.S",
+        "10×5",
+        "All",
+        "12",
+        "2,2,2,2,2",
+        "19",
+        "-7",
+        "-4",
+        "2",
+        "Mid",
+        "",
+        "90%",
+        "200×5",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "60×5",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_f.S_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/2/2b/GGST_Queen_Dizzy_f.S_hitbox.png/180px-GGST_Queen_Dizzy_f.S_hitbox.png",
+          "sha256": "2c376aa096c1fd2e358f1cb62e4c33826122d01f43bb370dcfeab8b7fc685d3d",
+          "size": [
+            360,
+            280
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "j.D",
+      "Damage": "36",
+      "Guard": "All",
+      "Startup": "16",
+      "Active": "",
+      "Recovery": "20",
+      "On-Block": "-7 (IAS)",
+      "On-Hit": "-10 (IAS)",
+      "Level": "",
+      "Counter Type": "Very Small",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "500",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "j.D",
+        "36",
+        "All",
+        "16",
+        "",
+        "20",
+        "",
+        "-10 (IAS)",
+        "-7 (IAS)",
+        "Very Small",
+        "",
+        "80%",
+        "500",
+        "1000"
+      ],
+      "tableCorrection": "Malformed saved row has an extra -7 (IAS) cell; attack level is not specified. Raw cells retained.",
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": "Clash Level: 1 • Clash Hits: 1 • Projectile will continue if Purple Roman Canceled on frame 8 at the earliest."
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_j.D_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/2/2c/GGST_Queen_Dizzy_j.D_hitbox.png/180px-GGST_Queen_Dizzy_j.D_hitbox.png",
+          "sha256": "8a7bcd5c97f78dcf986d1c249192b350bf56e7d5e78e9881bbc7f65be28ca175",
+          "size": [
+            360,
+            230
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "j.H",
+      "Damage": "53",
+      "Guard": "High",
+      "Startup": "12",
+      "Active": "4",
+      "Recovery": "15",
+      "On-Block": "+4 (IAD)",
+      "On-Hit": "+7 (IAD)",
+      "Level": "2",
+      "Counter Type": "Large",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "825",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "j.H",
+        "53",
+        "High",
+        "12",
+        "4",
+        "15",
+        "+4 (IAD)",
+        "+7 (IAD)",
+        "2",
+        "Large",
+        "",
+        "80%",
+        "825",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Down",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_j.H_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/f/fe/GGST_Queen_Dizzy_j.H_hitbox.png/180px-GGST_Queen_Dizzy_j.H_hitbox.png",
+          "sha256": "cfc082ad17dc654460aba2199a814a3ba7ed775815b668149528d0cafdf1999a",
+          "size": [
+            360,
+            298
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "j.K",
+      "Damage": "23",
+      "Guard": "High",
+      "Startup": "7",
+      "Active": "4",
+      "Recovery": "12",
+      "On-Block": "-3 (IAD)",
+      "On-Hit": "+0 (IAD)",
+      "Level": "1",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "600",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "j.K",
+        "23",
+        "High",
+        "7",
+        "4",
+        "12",
+        "-3 (IAD)",
+        "+0 (IAD)",
+        "1",
+        "Small",
+        "",
+        "80%",
+        "600",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Down",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_j.K_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/7/78/GGST_Queen_Dizzy_j.K_hitbox.png/180px-GGST_Queen_Dizzy_j.K_hitbox.png",
+          "sha256": "7e1f799dcb336469ac089165293798aa4b89358e1b7dedd538a8f49d8380bfbc",
+          "size": [
+            360,
+            289
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "j.P",
+      "Damage": "18",
+      "Guard": "High",
+      "Startup": "6",
+      "Active": "4",
+      "Recovery": "9",
+      "On-Block": "+4~+6 (IAD j.PPP)",
+      "On-Hit": "+7~+9 (IAD j.PPP)",
+      "Level": "0",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "375",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "j.P",
+        "18",
+        "High",
+        "6",
+        "4",
+        "9",
+        "+4~+6 (IAD j.PPP)",
+        "+7~+9 (IAD j.PPP)",
+        "0",
+        "Small",
+        "",
+        "80%",
+        "375",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Down",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_j.P_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/1/19/GGST_Queen_Dizzy_j.P_hitbox.png/180px-GGST_Queen_Dizzy_j.P_hitbox.png",
+          "sha256": "10d943626f65ca9e86b439ad89adf29f61999a25da5711a8775f38edd91ecfa6",
+          "size": [
+            360,
+            408
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "j.S",
+      "Damage": "38",
+      "Guard": "High",
+      "Startup": "13",
+      "Active": "4",
+      "Recovery": "23",
+      "On-Block": "+5 (IAD)",
+      "On-Hit": "+8 (IAD)",
+      "Level": "2",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "825",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "j.S",
+        "38",
+        "High",
+        "13",
+        "4",
+        "23",
+        "+5 (IAD)",
+        "+8 (IAD)",
+        "2",
+        "Mid",
+        "",
+        "80%",
+        "825",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Queen_Dizzy_j.S_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/a/ae/GGST_Queen_Dizzy_j.S_hitbox.png/180px-GGST_Queen_Dizzy_j.S_hitbox.png",
+          "sha256": "ae8992feb8f39c49c8af0d13fe7217cb0b20a89be508bd3536f2dd1be03a86ba",
+          "size": [
+            360,
+            201
+          ]
+        }
+      ]
+    }
+  ]
+}
