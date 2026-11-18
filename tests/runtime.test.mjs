@@ -50,9 +50,9 @@ test('Move data round-trips, fingerprints change, and invalid imports are atomic
   assert.equal(e.fingerprint(),peer.fingerprint());
   e.loadData(original);assert.equal(e.fingerprint(),hash);
 });
-test('Five-frame floor, schema-4 migration and compiled collision API agree',async()=>{
+test('Conditional startup floors, schema-4 migration and compiled collision API agree',async()=>{
   const e=await create(),original=e.data();e.reset([0,1]);
-  for(let startup=0;startup<5;++startup) {
+  for(let startup=0;startup<3;++startup) {
     assert.throws(()=>e.setMove(0,0,'startup',startup),/startup/);
     assert.equal(e.move(0,0).startup,original.characters[0].moves[0].startup);
   }

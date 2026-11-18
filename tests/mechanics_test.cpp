@@ -88,6 +88,6 @@ static void snapshots(){
  Simulation a,b;setup(a);a.world.players[1].bleed_source=14;a.world.players[1].bleed_time=420;a.world.players[1].grey_life=100;a.step(D,0);ticks(a,8);
  b=a;for(int i=0;i<200;++i){a.step(0,0);b.step(0,0);CHECK(a.checksum()==b.checksum());}
  a.reset(5,4,0,0);CHECK(!a.world.players[1].grey_life&&!a.world.players[1].bleed_source&&!a.world.players[0].variant);
- CHECK(!a.move_set(5,13,VariantStartup,4));CHECK(!a.move_set(5,13,BleedTickFrames,0));CHECK(!a.move_set(5,13,Mechanic,3));
+ CHECK(!a.move_set(5,13,VariantStartup,1));CHECK(!a.move_set(5,13,BleedTickFrames,0));CHECK(!a.move_set(5,13,Mechanic,3));
 }
 int main(){bleed();cashout();tether();edge_cases();snapshots();std::printf("Drive mechanics: %d checks, %d failures\n",checks,failures);return failures?1:0;}

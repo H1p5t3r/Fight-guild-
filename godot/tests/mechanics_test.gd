@@ -28,7 +28,7 @@ func _initialize() -> void:
 	var saved := model.data()
 	saved.characters[5].moves[13].bleedBlockPercent = 35
 	check(model.load_data(saved).is_empty() and model.move(5, 13).bleedBlockPercent == 35, "Mechanic setting did not round trip")
-	saved.characters[5].moves[13].variantStartup = 4
+	saved.characters[5].moves[13].variantStartup = 1
 	check(not model.load_data(saved).is_empty(), "Follow-up bypassed the startup floor")
 	model.reset([4, 5], [false, false])
 	for i in 30: model.step(2, 1)

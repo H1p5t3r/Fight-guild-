@@ -1,6 +1,6 @@
 # Fillet and Shark: first signature moves
 
-These are playable starting values. All attacks retain the five-frame startup floor; none grants invulnerability. The existing normal/Drive buttons and universal 2D / 4P+K / 6P+K remain available.
+These are playable starting values. Startup minimums are 2f for grabs, 3f for P normals, and 5f for other attacks; none grants invulnerability. The existing normal/Drive buttons and universal 2D / 4P+K / 6P+K remain available.
 
 | Fighter | Input | Action | Startup / active / recovery | Damage |
 | --- | --- | --- | --- | --- |

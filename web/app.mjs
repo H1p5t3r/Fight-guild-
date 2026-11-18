@@ -1,3 +1,4 @@
+import {startupMinimum} from './startup-rules.mjs';
 import {loadEngine,CHARACTERS,MOVE_IDS,BUTTONS,FIELDS} from './engine.mjs';
 import {RollbackSession,rollbackTrial,scriptedInput} from './rollback.mjs';
 const $=id=>document.getElementById(id);
@@ -135,7 +136,7 @@ function draw() {
 }
 
 const numericFields=[
-  ['frame-fields','startup','Startup',5,120],['frame-fields','active','Active',1,120],['frame-fields','recovery','Recovery',0,180],
+  ['frame-fields','startup','Startup',2,120],['frame-fields','active','Active',1,120],['frame-fields','recovery','Recovery',0,180],
   ['frame-fields','damage','Damage',0,1000],['frame-fields','hitstun','Hitstun',0,180],['frame-fields','blockstun','Blockstun',0,180],
   ['frame-fields','hitstop','Hitstop',0,30],['frame-fields','pushback','Push (px)',0,200,100],['frame-fields','advance','Advance (px)',-100,100,100],
   ['box-fields','hitboxBack','Back',-500,500,100],['box-fields','reach','Reach',1,500,100],['box-fields','bottom','Bottom',-500,500,100],['box-fields','height','Height',1,500,100],
@@ -152,19 +153,21 @@ function setupEditor() {
     const el=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.id=`field-${key}`;el.append(input,document.createTextNode(label));$('cancel-fields').append(el);
   }
   for(const [key,label,values] of [
-    ['button','Button',BUTTONS.map((b,i)=>[i,b])],['category','Category',[[0,'Normal'],[1,'Command'],[2,'Special'],[3,'Drive']]],
+    ['button','Button',BUTTONS.map((b,i)=>[i,b])],['category','Category',[[0,'Normal'],[1,'Command'],[2,'Special'],[3,'Drive'],[4,'Throw']]],
     ['motion','Motion',[[0,'None'],[236,'236'],[214,'214'],[623,'623']]],['air','State',[[0,'Ground'],[1,'Air']]],
     ['simpleButton','Simple button',BUTTONS.map((b,i)=>[i,b])],['hitLevel','Guard level',[[0,'Mid'],[1,'Low'],[2,'Overhead']]]
   ]) {
     const el=document.createElement('label');el.textContent=label;const select=document.createElement('select');select.id=`field-${key}`;
     values.forEach(([value,text])=>select.add(new Option(text,value)));el.append(select);$('advanced-fields').append(el);
   }
+  for(const key of ['button','category'])$('field-'+key).addEventListener('change',()=>{$('field-startup').min=startupMinimum({button:Number($('field-button').value),category:Number($('field-category').value)});});
   populateEditor();
 }
 function populateEditor() {
   const c=Number($('edit-character').value),id=Number($('edit-move').value),m=engine.move(c,id);
+  $('field-startup').min=startupMinimum(m);
   FIELDS.forEach(key=>{ const input=$(`field-${key}`);if(input) {if(input.type==='checkbox') input.checked=Boolean(m[key]);else input.value=m[key]/Number(input.dataset.scale??1);}});
-  $('move-name').textContent=MOVE_IDS[id];$('move-kind').textContent=['NORMAL','COMMAND','SPECIAL','DRIVE'][m.category];
+  $('move-name').textContent=MOVE_IDS[id];$('move-kind').textContent=['NORMAL','COMMAND','SPECIAL','DRIVE','THROW'][m.category];
   $('move-summary').textContent=`${BUTTONS[m.button]} · ${m.air?'airborne':'grounded'}`;
   const routes=MOVE_IDS.filter((_,to)=>engine.api.fg_can_cancel(c,id,to,1));
   $('cancel-summary').textContent=`On contact → ${routes.join(', ')||'no attack cancels'}${m.jumpCancel?' / jump':''}. State restrictions still apply.`;

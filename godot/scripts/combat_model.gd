@@ -2,7 +2,14 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 19
+const DATA_VERSION := 20
+
+static func startup_minimum(move: Dictionary) -> int:
+	if move.get("category") == 4: return 2
+	return 3 if move.get("button") == 0 and move.get("category") in [0, 1] else 5
+
+static func variant_startup_minimum(move: Dictionary) -> int:
+	return 2 if move.get("mechanic") == 2 else 5
 
 static func block_advantage(move: Dictionary) -> int:
 	var start := 1
@@ -245,13 +252,17 @@ func load_data(value: Variant) -> String:
 			if version < 10:
 				definition.counterFreezeFrames = -1
 				definition.counterSlowFrames = 0
+			if version < 20 and definition.category == 4 and definition.get("motion") == 0:
+				definition.startup = 2
 			for i in FIELDS.size():
 				if (version < 15 and i >= 69) or (version < 16 and i >= 91) or (version < 17 and i >= 94) or (version < 18 and i >= 112): continue
 				var field: String = FIELDS[i]
 				if not valid_integer(definition.get(field)):
 					return "Invalid integer for %s / %s." % [MOVE_IDS[m], field]
-				if field == "startup" and definition[field] < 5:
-					return "%s / %s: startup must be at least 5 frames." % [CHARACTERS[c], MOVE_IDS[m]]
+				if field == "startup" and definition[field] < startup_minimum(definition):
+					return "%s / %s: startup must be at least %d frames." % [CHARACTERS[c], MOVE_IDS[m], startup_minimum(definition)]
+				if field == "variantStartup" and definition[field] < variant_startup_minimum(definition):
+					return "%s / %s: follow-up startup must be at least %d frames." % [CHARACTERS[c], MOVE_IDS[m], variant_startup_minimum(definition)]
 				candidate[(c * MOVE_IDS.size() + m) * FIELDS.size() + i] = int(definition[field])
 			if version >= 13:
 				var hurt_error := load_hurtboxes(definition.get("hurtboxes"), candidate, c, m)

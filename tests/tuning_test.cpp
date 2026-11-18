@@ -152,7 +152,7 @@ static void counters() {
     prime(s);s.step(0,0);CHECK(s.get(0,10)==NormalHit);
     CHECK(s.moves[5][3].v[CounterFreezeFrames]==31&&s.moves[5][3].v[CounterSlowFrames]==35);
     CHECK(s.moves[5][15].v[CounterTier]==0&&s.moves[5][15].v[CounterHitstun]==0);
-    for(int c=0;c<CHARACTER_COUNT;++c) for(const auto& m:s.moves[c]) CHECK(m.v[Startup]>=5);
+    for(int c=0;c<CHARACTER_COUNT;++c) for(const auto& m:s.moves[c]) CHECK(m.v[Startup]>=startup_minimum(m));
 }
 int main() {
     cancel_windows();damage();defense();landing_fd_walls();jumps();counters();

@@ -36,7 +36,7 @@ func _initialize() -> void:
 		check(push[3] - push[1] == source.fighters[character].push.standingHeight, "Push height differs from source")
 		for slot in CombatModel.MOVE_IDS.size():
 			var move := model.move(character, slot)
-			check(move.startup >= 5, "Invalid shipped startup")
+			check(move.startup >= CombatModel.startup_minimum(move), "Invalid shipped startup")
 			check(move.hitboxBack < move.reach and move.height > 0, "Empty shipped hitbox")
 	print("Godot compiled collision: ", failures, " failures; 319 pose mappings, push profiles, 270 move slots")
 	quit(1 if failures else 0)

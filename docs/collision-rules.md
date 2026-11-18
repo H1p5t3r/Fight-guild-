@@ -18,7 +18,7 @@ The browser [Move Workshop](move-workshop.md) now has a **Hurtboxes** tab. Enabl
 
 In **Development**, enable **Hitboxes**, pause and use **+1 frame** to inspect live collision. **Sprite review** covers basic/signature attack pairs, all block reactions, ready, walk, jump, hurt, crouch and the legacy guard pose. Toggle collision or left-facing display there. Each caption shows its hurtbox count out of four. The active preview uses the current edited basic move hitbox and displays its frame data.
 
-The Move editor exposes **Hitbox back**, **Hitbox front**, **Bottom** and **Height** in world pixels. Negative back offsets can extend behind the root. Startup has a hard 5f minimum; importing a faster value rejects the entire edit without changing the live move set. Schema-1 through schema-9 files migrate to schema 10, preserving edits; see the current combat-tuning migration rules. Existing saves retain their old tuning/ranges; use **Restore default move set** to try the new starter kits.
+The Move editor exposes **Hitbox back**, **Hitbox front**, **Bottom** and **Height** in world pixels. Negative back offsets can extend behind the root. Startup has a 2f minimum for throws, 3f for P normals (normal/command category), and 5f for other attacks; importing a faster value rejects the entire edit without changing the live move set. Schema-1 through schema-9 files migrate to schema 10, preserving edits; see the current combat-tuning migration rules. Existing saves retain their old tuning/ranges; use **Restore default move set** to try the new starter kits.
 
 ## Authoring and reproducibility
 

@@ -1,4 +1,5 @@
 import {upgradeCharges} from '../charge-data.mjs';
+import {upgradeStartupRules,moveFieldLimit} from '../startup-rules.mjs';
 import {upgradeStances} from '../stance-data.mjs';
 import {upgradeMechanics} from '../mechanics-data.mjs';
 import {upgradeMovement} from '../movement-data.mjs';
@@ -16,9 +17,9 @@ function integer(value, limit, name) {
 }
 export function validate(data, pack) {
   data=upgradeStances(upgradeMechanics(upgradeHurtMasks(upgradeMovement(upgradeHitboxes(data),pack.defaults)),pack.defaults),pack.defaults);
-  data=upgradeCharges(data,pack.defaults);
+  data=upgradeStartupRules(upgradeCharges(data,pack.defaults));
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15/16/17/18 workshop exports. Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15/16/17/18/19 workshop exports. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);
@@ -31,7 +32,7 @@ export function validate(data, pack) {
     c.moves.forEach((move,j)=>{
       if(!record(move)||move.id!==MOVE_IDS[j]) throw new Error(`Move slot ${MOVE_IDS[j]} is missing or reordered.`);
       FIELDS.forEach(key=>{
-        integer(move[key],pack.limits.moves[i][key],`${c.name} ${move.id} / ${SPECS[key].label}`);
+        integer(move[key],moveFieldLimit(move,key,pack.limits.moves[i]),`${c.name} ${move.id} / ${SPECS[key].label}`);
         if(key==='motion'&&![0,214,236,623].includes(move[key])) throw new Error(`${c.name} ${move.id}: motion must be 0, 214, 236 or 623.`);
       });
       validateHurtboxes(move.hurtboxes);

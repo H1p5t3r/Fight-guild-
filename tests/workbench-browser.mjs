@@ -20,8 +20,18 @@ try {
   const initial=await data(page);assert.equal(initial.characters.length,6);
   assert.equal(await page.locator('#fighter').inputValue(),'5');
   await page.screenshot({path:`${screenshotDir}/desktop.png`,fullPage:true});
+  assert.equal(await page.locator('#field-startup').getAttribute('min'),'3');
+  for(const timing of ['3','4']){await page.locator('#field-startup').fill(timing);assert.equal((await data(page)).characters[5].moves[0].startup,Number(timing));}
+  await page.locator('#field-startup').fill('5');
+  await page.locator('[data-move="24"]').click();
+  assert.equal(await page.locator('#field-startup').getAttribute('min'),'2');
+  assert.equal(await page.locator('#field-startup').inputValue(),'2');
+  await page.locator('#field-startup').fill('1');assert.equal(await page.locator('#export').isDisabled(),true);
+  await page.locator('#field-startup').fill('2');
+  await page.locator('[data-move="1"]').click();assert.equal(await page.locator('#field-startup').getAttribute('min'),'5');
+  await page.locator('[data-move="0"]').click();
   // Incomplete/invalid numeric edits cannot silently disappear on navigation.
-  await page.locator('#field-startup').fill('4');
+  await page.locator('#field-startup').fill('2');
   assert.equal(await page.locator('#export').isDisabled(),true);
   await page.locator('[data-move="1"]').click();assert.equal(await page.locator('#move-title').innerText(),'5P');
   assert.equal(await page.locator('#field-startup').getAttribute('aria-invalid'),'true');

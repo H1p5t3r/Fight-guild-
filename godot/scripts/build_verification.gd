@@ -138,7 +138,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	game.edit_character.select(0)
 	game.populate_editor()
 	verify_recovery_editor()
-	check(game.fields.startup.control.min_value == 5 and game.fields.has("hitboxBack"), "Editor is missing the startup floor or strike origin")
+	check(game.fields.startup.control.min_value == 3 and game.fields.has("hitboxBack"), "Editor is missing the startup floor or strike origin")
 	game.release_focus_from_ui()
 	key(KEY_D, true)
 	ticks(20)

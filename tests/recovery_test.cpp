@@ -25,7 +25,7 @@ static void test_universals() {
         CHECK(s.moves[c][SWEEP].v[Knockdown]==HardKnockdown);
         CHECK(s.moves[c][SWEEP].v[HitLevel]==1);
         for(int slot=BACK_THROW;slot<=FORWARD_THROW;++slot) {
-            CHECK(s.moves[c][slot].v[Startup]>=5);
+            CHECK(s.moves[c][slot].v[Startup]==2);
             CHECK(s.moves[c][slot].v[Knockdown]==HardKnockdown);
             CHECK(!s.can_cancel(c,0,slot,1));
         }
@@ -41,7 +41,7 @@ static void test_universals() {
     }
     for(int direction:{Left,Right}) {
         auto s=match();int slot=direction==Left?BACK_THROW:FORWARD_THROW;
-        ticks(s,4,direction|P|K);CHECK(s.world.players[0].move==slot);
+        ticks(s,1,direction|P|K);CHECK(s.world.players[0].move==slot);
         CHECK(s.world.players[1].health==1000);
         s.step(direction|P|K,0);
         CHECK(s.world.players[1].health==920&&s.world.players[1].knockdown==HardKnockdown);
@@ -67,7 +67,7 @@ static void test_universals() {
     auto clash=match();ticks(clash,5,Right|P|K,Left|P|K);
     CHECK(clash.world.players[0].health==1000&&clash.world.players[1].health==1000);
     CHECK(clash.world.players[0].hit_done&&clash.world.players[1].hit_done);
-    auto strike=match();ticks(strike,5,Right|P|K,P);
+    auto strike=match();prime(strike,0,FORWARD_THROW);prime(strike,1,0);strike.step(0,0);
     CHECK(strike.world.players[0].health<1000&&strike.world.players[1].health==1000);
 }
 static void test_recovery() {

@@ -21,7 +21,7 @@ try{
   await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
   await page.goto(url);await ready(page);await page.evaluate(()=>document.fonts.ready);
   const initial=await data(page),images=await page.evaluate(()=>FIGHT_WORKSHOP_DATA.images);
-  assert.equal(initial.schema,19);assert.equal(initial.characters.length,6);
+  assert.equal(initial.schema,20);assert.equal(initial.characters.length,6);
   assert.ok((await stat('build/move-workshop/index.html')).size<64000,'The entry page must stay small');
   assert.ok(requests.filter(r=>r.url.endsWith('.webp')).length<Object.keys(images).length,'Artwork must load on demand');
   assert.ok(Object.values(images).every(src=>/^assets\/[a-f0-9]{64}\.webp$/.test(src)),'Art URLs must be relative and versioned');

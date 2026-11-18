@@ -58,7 +58,7 @@ Enter **Development** for move editing and sprite review. Training also offers p
 
 - **Pause / +1 frame:** inspect startup, active frames, hitstop and recovery. Generated windup and active images follow simulation timing.
 - **Development workbench:** scroll below the editor controls for the rollback latency check and gatling reference.
-- **Move editor:** choose a fighter/move, adjust values, then Apply & reset. Startup cannot be below **5 frames**. Hitbox back/front, bottom and height control the attack rectangle. Save locally or export/import JSON. Old schema-1–6 saves retain edits and their previous hitbox ranges; Restore default move set loads the new preliminary kits.
+- **Move editor:** choose a fighter/move, adjust values, then Apply & reset. Startup minimums: **2f for grabs, 3f for P normals, 5f for other attacks**. Hitbox back/front, bottom and height control the attack rectangle. Save locally or export/import JSON. Old schema-1–6 saves retain edits and their previous hitbox ranges; Restore default move set loads the new preliminary kits.
 - **Sprite review:** inspect all existing attack, defense and movement poses at the same body scale, with collision and facing toggles. Complete animation sequences are still future work.
 - **Hitboxes:** cyan body hurtboxes, green pushboxes and orange active hitboxes show the actual simulation geometry. Weapons never extend hurtboxes. Walking, dashing and advancing moves respect body spacing; jump-overs require vertical clearance. See [collision rules](collision-rules.md) and [preliminary move stats](move-stats.md).
 

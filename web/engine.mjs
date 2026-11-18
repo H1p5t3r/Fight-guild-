@@ -1,4 +1,5 @@
 import {upgradeCharges} from './charge-data.mjs';
+import {upgradeStartupRules} from './startup-rules.mjs';
 import {upgradeStances} from './stance-data.mjs';
 import {upgradeMechanics} from './mechanics-data.mjs';
 import {upgradeMovement} from './movement-data.mjs';
@@ -72,7 +73,7 @@ export class Engine {
     if(!Number.isInteger(value)||!this.api.fg_move_set(c,m,FIELDS.indexOf(key),value)) throw new Error(`Invalid ${key}: ${value}`);
   }
   data() {
-    return { schema:19, coreVersion:this.api.fg_version(),
+    return { schema:20, coreVersion:this.api.fg_version(),
       inputRules:Object.fromEntries(RULES.map((r,i)=>[r,this.api.fg_rule_get(i)])),
       momentumRules:Object.fromEntries(MOMENTUM_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+3)])),
       recoveryRules:Object.fromEntries(RECOVERY_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+13)])),
@@ -126,8 +127,8 @@ export class Engine {
     }
     data=upgradeMovement(upgradeHitboxes(data),this.defaultData);
     data=upgradeStances(upgradeMechanics(upgradeHurtMasks(data),this.defaultData),this.defaultData);
-    data=upgradeCharges(data,this.defaultData);
-    if(data?.schema!==19||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
+    data=upgradeStartupRules(upgradeCharges(data,this.defaultData));
+    if(data?.schema!==20||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
     const previous=this.data();
     const apply=d=>{
       RULES.forEach((r,i)=>{ if(!Number.isInteger(d.inputRules?.[r])||!this.api.fg_rule_set(i,d.inputRules[r])) throw new Error(`Invalid ${r}`); });
@@ -142,6 +143,8 @@ export class Engine {
         });
         character.moves.forEach((m,i)=>{
           if(m.id!==MOVE_IDS[i]) throw new Error(`Missing move ${MOVE_IDS[i]}`);
+          // Category/button/mechanic precede their timing fields in FIELDS.
+          this.setMove(c,i,'startup',120);this.setMove(c,i,'variantStartup',120);
           FIELDS.forEach(key=>this.setMove(c,i,key,m[key]));
           validateHurtboxes(m.hurtboxes);
           HURT_PHASES.forEach((phase,p)=>{if(!this.api.fg_hurt_set(c,i,p,...packHurtboxes(m.hurtboxes[phase])))throw new Error(`Invalid ${phase} hurtboxes`);});

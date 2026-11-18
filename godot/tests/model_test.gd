@@ -137,5 +137,28 @@ func _initialize() -> void:
 		session.submit(1, frame, 1)
 	check(session.advance(), "Session did not recover")
 	check(not session.submit(1, 0, 2), "Conflicting actual input accepted")
+	var old_startup := model.data()
+	old_startup.schema = 19
+	old_startup.coreVersion = 19
+	for character in old_startup.characters:
+		for move in character.moves:
+			if move.category == 4 and move.motion == 0: move.startup = 9
+	var old_command: int = old_startup.characters[3].moves[40].startup
+	check(model.load_data(old_startup).is_empty(), "Schema-19 startup migration failed")
+	check(model.move(5, 24).startup == 2 and model.move(3, 41).startup == 2, "Standard throw timing did not migrate")
+	check(model.move(3, 40).startup == old_command, "Command grab timing changed")
+	var fast := model.data()
+	fast.characters[5].moves[0].startup = 3
+	fast.characters[5].moves[13].variantStartup = 2
+	check(model.load_data(fast).is_empty(), "Fast P normal / cash-out grab rejected")
+	fast.characters[5].moves[23].category = 0
+	fast.characters[5].moves[23].button = 0
+	fast.characters[5].moves[23].startup = 4
+	fast.characters[5].moves[13].mechanic = 1
+	fast.characters[5].moves[13].variantStartup = 5
+	check(model.load_data(fast).is_empty(), "Reclassification of fast attacks failed during atomic import")
+	var fast_hash := model.fingerprint()
+	fast.characters[5].moves[23].button = 1
+	check(not model.load_data(fast).is_empty() and model.fingerprint() == fast_hash, "Invalid fast kick changed live data")
 	print("Godot data, independent simulations, rollback: ", failures, " failures")
 	quit(1 if failures else 0)

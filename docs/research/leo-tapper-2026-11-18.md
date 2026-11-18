@@ -1,5 +1,7 @@
 # Leo reference → Tapper authoring map
 
+> 18 November 2026 update: the startup-floor decisions below are historical. Standard ground/air throws now start in 2f. Minimums are 2f for grabs, 3f for P normals, and 5f for other attacks; see [current startup rules](../startup-rules.md).
+
 Source: user-supplied **GGST - Leo Whitefang.mht**, captured **18 November 2026 at 01:11:35 UTC**. Saved [article revision 581554](https://www.dustloop.com/wiki/index.php?title=GGST/Leo_Whitefang&oldid=581554) reports last edited **20 October 2026 at 16:48**. This is a verified saved page, not a live fetch or verification of the currently installed Strive patch.
 
 Original archive SHA-256: `7a674b4dbce99f7db24eb5685fefd4070573ca4d21f3748d344a24ef34aa1235`. The [machine-readable source map](../../references/frame-data/leo-whitefang-2026-11-18.json) preserves all normal/throw frame tables and their extended data, with independently written utility notes. It is a reference artifact, **not an importable Move Workshop JSON file**.

@@ -54,7 +54,7 @@ motion briefly, then recoils. Speed, lifetime, recoil and the otherwise
 unspecified attack level remain provisional and editable. The source's Roman
 Cancel interaction is outside this project's current meter-spending scope.
 
-Fight Guild's unified gatlings, 5-frame startup floor, body-only vulnerability,
+Fight Guild's unified gatlings, startup floors (2f grabs / 3f P normals / 5f others), body-only vulnerability,
 four-hurtbox cap and universal hard-knockdown 2D remain authoritative. 6P exposes
 legs only on frames 1–17, then restores the body; this approximates the source's
 two low-profile stages. The kit does not add a universal homing jump. Damage

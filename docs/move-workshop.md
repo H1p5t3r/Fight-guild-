@@ -218,7 +218,7 @@ preserved through import/export, but are not tuning controls in this page.
 
 - One gameplay frame is 1/60 second. Playback defaults to half speed for inspection.
   A 5-frame startup has four windup frames, then its first active frame. Startup
-  cannot be below five frames.
+  minimums are 2 frames for grabs, 3 for P normals (normal/command category), and 5 for other attacks. Older drafts upgrade standard ground/air throws to 2f; schema-20 exports preserve subsequent timing edits.
 - **Base on block** assumes contact on the first active frame, no cancel and no FD.
   A later active-frame hit can change the actual advantage.
 - Positions/distances use game pixels; travel/launch use pixels per frame.

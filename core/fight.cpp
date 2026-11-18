@@ -1052,7 +1052,7 @@ void Simulation::tick_dash(Fighter& f) {
 void Simulation::spawn_projectile(Fighter& f) {
     if(f.move<0||f.projectile_spawned||f.stun||f.reaction!=Free) return;
     const auto& m=effective_move(f);
-    int at=max(MIN_STARTUP,m.v[ProjectileSpawnFrame]?m.v[ProjectileSpawnFrame]:m.v[Startup]);
+    int at=max(startup_minimum(m),m.v[ProjectileSpawnFrame]?m.v[ProjectileSpawnFrame]:m.v[Startup]);
     if(!m.v[ProjectileKind]||m.v[Category]==Throw||f.age+1!=at) return;
     f.projectile_spawned=1;
     if(m.v[ActionType]==6) { f.vx=f.facing*m.v[DiveSpeedX]; f.vy=m.v[DiveSpeedY]; }
@@ -1418,7 +1418,7 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case BleedDuration: low=1; high=3600; break;
         case BleedBlockPercent: low=0; high=100; break;
         case BleedCap: low=0; high=1000; break;
-        case VariantStartup: low=5; high=120; break;
+        case VariantStartup: low=2; high=120; break;
         case VariantActive: low=1; high=120; break;
         case VariantRecovery: low=0; high=180; break;
         case VariantDamage: low=0; high=1000; break;
@@ -1462,7 +1462,7 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case ProjectileRehit: low=1; high=120; break;
         case ProjectilePersist:case ProjectileMelee: high=1; break;
         case SmearStretch: low=100; high=400; break;
-        case Startup: low=MIN_STARTUP; high=120; break;
+        case Startup: low=2; high=120; break;
         case Active: low=1; high=120; break;
         case Recovery:case Hitstun:case Blockstun: high=180; break;
         case Damage: high=1000; break;
@@ -1512,7 +1512,9 @@ int Simulation::move_set(int c,int m,int f,int v) {
         default:return 0;
     }
     if(v<low||v>high) return 0;
-    moves[c][m].v[f]=v;
+    Move next=moves[c][m]; next.v[f]=v;
+    if(next.v[Startup]<startup_minimum(next) || next.v[VariantStartup]<variant_startup_minimum(next)) return 0;
+    moves[c][m]=next;
     return 1;
 }
 int Simulation::hurt_get(int c,int m,int p,int field) const {

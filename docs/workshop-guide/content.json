@@ -296,7 +296,7 @@
           "items": [
             {
               "key": "startup",
-              "text": "The first frame on which the attack can hit. 5 means four windup frames, then contact can start on frame 5. Lower values make the move faster. The project minimum is 5f."
+              "text": "The first frame on which the attack can hit. 5 means four windup frames, then contact can start on frame 5. Lower values make the move faster. Minimums: grabs 2f, P normals 3f, other attacks 5f."
             },
             {
               "key": "active",
@@ -1932,7 +1932,7 @@
           "items": [
             {
               "key": "variantStartup",
-              "text": "Startup of tether pull or cash-out grab. At least 5 frames."
+              "text": "First active frame of the follow-up. Cash-out grabs: minimum 2 frames; tether pulls: minimum 5."
             },
             {
               "key": "variantActive",

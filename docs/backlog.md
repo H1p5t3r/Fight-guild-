@@ -91,12 +91,12 @@ Requested scope: make repeatable character images performing directed actions, w
 - [x] Fit body-only hurtboxes to all 160 existing sprite poses; weapons and effects add no hurt area.
 - [x] Limit each pose to legs, torso-and-arms, head, and one optional extension; enforce the four-hurtbox maximum in authoring and native storage.
 - [x] Add per-fighter pushboxes, wall separation, movement sweeps and airborne crossing/landing checks.
-- [x] Give the original 132 move slots preliminary stats and sprite-derived attack rectangles; enforce startup ≥ 5f in core, editor and imports.
+- [x] Give the original 132 move slots preliminary stats and sprite-derived attack rectangles; enforce startup floors in core, editor and imports (now 2f grabs / 3f P normals / 5f others).
 - [x] Share pose selection between collision and rendering; add live collision colors and all-pose/facing review.
 - [ ] Replace shared button collision with per-move, per-animation-frame geometry as dedicated animations are produced; playtest spacing and matchup balance.
 - [ ] Playtest the basic P/K/S/Hs/D buttons and unified gatlings, then replace provisional move data and Drive behaviors character by character.
 - [ ] Collect repeatable Strive input traces to tune buffer behavior and motion leniency.
-- [x] Add universal 2D sweep and 4P+K / 6P+K throws with hard knockdown and the 5f startup floor.
+- [x] Add universal 2D sweep and 4P+K / 6P+K throws with hard knockdown (now 2f startup).
 - [ ] Design universal overheads and universal anti-air rules with the user.
 - [ ] Broaden native online testing under real network conditions; add Internet connectivity/matchmaking and resilience after local rollback validation.
 - [ ] Validate physical controllers and Windows gameplay; establish the approved PS5 Godot port/tooling path before console delivery.

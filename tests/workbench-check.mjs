@@ -18,6 +18,7 @@ test('Shipped data and each editable field match the current combat core',async(
   assert.equal(Object.keys(SPECS).length,FIELDS.length);
   for(let c=0;c<6;c++){
     for(const [field,key] of FIELDS.entries()){
+      e.api.fg_defaults(); // Coupled startup limits depend on the default classification.
       if(key==='motion') {for(const value of [0,214,236,623])assert.equal(e.api.fg_move_set(c,0,field,value),1);continue;}
       const {min,max}=pack.limits.moves[c][key];
       for(const value of [min,max])assert.equal(e.api.fg_move_set(c,0,field,value),1,`${c} ${key} boundary`);
@@ -52,13 +53,13 @@ test('Invalid imports and edits never partially change a draft',()=>{
     d=>d.characters[0].moves.reverse(),d=>d.momentumRules.fdDrain=0,
     d=>d[META]={version:1,notes:{'Fillet/5P':{windup:47}}}];
   for(const corrupt of corruptions){const data=w.snapshot();corrupt(data);assert.throws(()=>w.import(data));assert.deepEqual(w.snapshot(),saved);assert.equal(w.undoStack.length,history);}
-  assert.throws(()=>w.change(5,0,'startup',4));assert.deepEqual(w.snapshot(),saved);
+  assert.throws(()=>w.change(5,0,'startup',2));assert.deepEqual(w.snapshot(),saved);
 });
 
 test('Fixed-point units and frame convention are exact',()=>{
   const limit=pack.limits.moves[5];assert.equal(parseField('reach','86.13',limit.reach),8613);
   assert.equal(parseField('bottom','-0.01',limit.bottom),-1);
-  for(const input of ['', '4', '5.1','Infinity','5e20'])assert.throws(()=>parseField('startup',input,limit.startup));
+  for(const input of ['', '2', '5.1','Infinity','5e20'])assert.throws(()=>parseField('startup',input,limit.startup));
   assert.throws(()=>parseField('reach','86.131',limit.reach));
   const m=pack.defaults.characters[5].moves[0];assert.equal(totalFrames(m),16);assert.equal(blockAdvantage(m),0);
   assert.equal(phaseAt(m,4),'windup');assert.equal(phaseAt(m,5),'active');assert.equal(phaseAt(m,7),'active');assert.equal(phaseAt(m,8),'recovery');
@@ -99,7 +100,7 @@ test('Per-attack hurtboxes migrate, export, affect the engine and reject invalid
   const w=new Workshop(pack),legacy=w.snapshot();legacy.schema=legacy.coreVersion=12;
   for(const c of legacy.characters)for(const m of c.moves)delete m.hurtboxes;
   legacy.characters[5].moves[0].damage=77;legacy[META]={version:1,notes:{'Fillet/5P':{windup:'Keep these old notes.'}}};
-  const migrated=new Workshop(pack,legacy);assert.equal(migrated.data.schema,19);assert.equal(migrated.move(5,0).damage,77);assert.deepEqual(migrated.move(5,0).hurtboxes,{});assert.equal(migrated.note(5,0).windup,'Keep these old notes.');
+  const migrated=new Workshop(pack,legacy);assert.equal(migrated.data.schema,20);assert.equal(migrated.move(5,0).damage,77);assert.deepEqual(migrated.move(5,0).hurtboxes,{});assert.equal(migrated.note(5,0).windup,'Keep these old notes.');
   const active=defaultHurtboxes(pack,5,w.move(5,0),5);active.torsoArms=[-2000,6000,4000,11000];delete active.extension;
   w.setHurtPhase(5,0,'active',active);assert.equal(w.changed(5,0),true);assert.deepEqual(w.move(5,4).hurtboxes,{});
   const e=await engine(),fingerprint=e.fingerprint();e.loadData(JSON.parse(w.export()));assert.notEqual(e.fingerprint(),fingerprint);

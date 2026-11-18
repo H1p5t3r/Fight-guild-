@@ -66,10 +66,10 @@ static void poses() {
     CHECK(Simulation::pose_box_count(0,6,0)==0);
     for(int c=0;c<6;++c) for(int m=0;m<MOVE_COUNT;++m) {
         for(int field=0;field<FIELD_COUNT;++field) CHECK(s.move_set(c,m,field,s.moves[c][m].v[field]));
-        CHECK(s.moves[c][m].v[Startup]>=5);
+        CHECK(s.moves[c][m].v[Startup]>=startup_minimum(s.moves[c][m]));
         CHECK(s.moves[c][m].v[HitboxBack]<s.moves[c][m].v[Reach]);
         int value=s.moves[c][m].v[Startup];
-        for(int invalid=0;invalid<5;++invalid) CHECK(!s.move_set(c,m,Startup,invalid));
+        for(int invalid=0;invalid<startup_minimum(s.moves[c][m]);++invalid) CHECK(!s.move_set(c,m,Startup,invalid));
         CHECK(s.moves[c][m].v[Startup]==value);
     }
     // Both facings transform the same body rectangles around the exact sprite anchor.

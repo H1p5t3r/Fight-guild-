@@ -62,7 +62,7 @@ Normal startup/active/recovery, grounded block advantage, guard level and main u
 This is a functional translation into Fight Guild, not verified Strive engine parity:
 
 - Normal damage is provisionally twice the source's damage against Fight Guild's 1000 HP. Physical ranges, movement, hitstop and knockdown durations use local tuning.
-- All attacks, including source 2f throws, obey the project's **5f minimum**. Unified normal gatlings remain the baseline; 2D has the source's explicit no-special-cancel exception.
+- Standard ground/air throws now use **2f startup**. Grabs may be as fast as 2f, P normals 3f, other attacks 5f. The stance command grab retains its authored timing. Unified normal gatlings remain the baseline; 2D has the source's explicit no-special-cancel exception.
 - 6P uses a legs-only hurt mask on move frames 1–14, then restores the body. This first pass combines the source's two early low-profile shapes into one timed mask. It crumples grounded targets and hard-knocks-down an airborne counter-hit target.
 - 2D is semi-airborne on frames 5–18 for low-strike/projectile and ground-throw avoidance. This does not convert its input into an air move.
 - c.S/6Hs bounce an airborne target off the ground; 5Hs wall-bounces; j.D can use both. Bounces are consumed once per application. Existing velocity damage and depleted-wall splat rules take priority over a wall bounce.

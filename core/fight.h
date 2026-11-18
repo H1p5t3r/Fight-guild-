@@ -3,7 +3,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 19, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 45, FIELD_COUNT = 138;
+constexpr int VERSION = 20, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 45, FIELD_COUNT = 138;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
@@ -67,6 +67,11 @@ enum Rule { ButtonBuffer, MotionWindow, MotionGap, MoveGain, AttackGain,
             BlockCarryover, ThrowGraceFrames, AirLandingFrames, RepeatAfter, RepeatGravityStep,
             PrejumpFrames, EmptyLandingFrames, RULE_COUNT };
 struct Move { int v[FIELD_COUNT]; };
+inline int startup_minimum(const Move& m) {
+    return m.v[Category]==Throw ? 2
+        : m.v[Button]==0 && (m.v[Category]==Normal || m.v[Category]==Command) ? 3 : MIN_STARTUP;
+}
+inline int variant_startup_minimum(const Move& m) { return m.v[Mechanic]==2 ? 2 : MIN_STARTUP; }
 struct Sample { int frame, direction, pressed, held, consumed; };
 struct Fighter {
     int character, simple, x, y, vy, facing, health;

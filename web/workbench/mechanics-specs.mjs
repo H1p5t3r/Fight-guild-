@@ -75,9 +75,9 @@ export const MECHANIC_SPECS = [
     "variantStartup",
     "Follow-up startup",
     16,
-    5,
+    2,
     120,
-    "Startup of tether pull or cash-out grab. At least 5 frames."
+    "First active frame of the follow-up. Cash-out grabs: minimum 2 frames; tether pulls: minimum 5."
   ],
   [
     "variantActive",

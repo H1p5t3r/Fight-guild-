@@ -152,8 +152,13 @@ public:
         if(data.size()!=fight::CHARACTER_COUNT*(fight::MOVE_COUNT*(fight::FIELD_COUNT+fight::HURT_PHASES*fight::HURT_FIELDS+fight::HIT_TRACK_FIELDS)+fight::MOBILITY_FIELDS)+fight::RULE_COUNT) return false;
         auto candidate=simulation;
         int at=0;
-        for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
+        for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m) {
+            // Validate the incoming classification with safe temporary timings.
+            // The candidate is committed only after every incoming field passes.
+            candidate.move_set(c,m,fight::Startup,120);
+            candidate.move_set(c,m,fight::VariantStartup,120);
             for(int f=0;f<fight::FIELD_COUNT;++f) if(!candidate.move_set(c,m,f,data[at++])) return false;
+        }
         for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int f=0;f<fight::MOBILITY_FIELDS;++f)
             if(!candidate.mobility_set(c,f,data[at++])) return false;
         for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m) for(int p=0;p<fight::HURT_PHASES;++p) {

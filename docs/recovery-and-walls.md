@@ -42,11 +42,11 @@ Defaults: soft down **6f + 8f wakeup**; hard down **36f + 8f wakeup**. `5Hs` and
 Every fighter gains three slots, appended after the original 22 so their IDs remain stable:
 
 - **2D:** low sweep, 12f startup / 3f active / 24f recovery, 65 damage, hard knockdown. Down+D wins over 6D when down-forward is held. This is a normal, so normal special-cancel rules and the universal same-button command route apply.
-- **4P+K / 6P+K:** 5f startup / 2f active / 30f recovery, 80 damage, 20px body-gap range, hard knockdown. Back throw exchanges sides at contact while respecting the stage boundaries; forward throw keeps sides. Throws start from neutral, not from a gatling. They use P artwork until dedicated clips exist.
+- **4P+K / 6P+K:** 2f startup / 2f active / 30f recovery, 80 damage, 20px body-gap range, hard knockdown. Back throw exchanges sides at contact while respecting the stage boundaries; forward throw keeps sides. Throws start from neutral, not from a gatling. They use P artwork until dedicated clips exist.
 
 Throws cannot grab airborne, downed or waking targets, targets in hitstun, or ordinary blockstun. Guard-break blockstun deliberately loses throw immunity. Throws can catch a grounded attack's startup/recovery. If a strike and throw connect on the same tick, the strike wins. Simultaneous connecting throws clash without damage. A manual throw-tech window is not implemented. Throws still have the universal outgoing same-button command route after contact, consistent with the existing all-attacks rule.
 
-All attacks, including throws, retain the **5f minimum startup**. The new sweep uses the existing Drive artwork while dedicated low-sweep art is pending.
+Startup minimums are **2f for throws**, **3f for P normals**, and **5f for other attacks**. All standard ground and air throws now start in 2f; command-grab timing remains individually authored. The new sweep uses the existing Drive artwork while dedicated low-sweep art is pending.
 
 ## Combo gravity
 

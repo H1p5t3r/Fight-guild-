@@ -240,7 +240,7 @@ func build_interface() -> void:
 	grid.add_theme_constant_override("h_separation", 10)
 	grid.add_theme_constant_override("v_separation", 8)
 	editor.add_child(grid)
-	for spec in [["startup","Startup",5,120,1],["active","Active",1,120,1],["recovery","Recovery",0,180,1],["damage","Damage",0,1000,1],["hitstun","Hitstun",0,180,1],["blockstun","Blockstun",0,180,1],["hitstop","Hitstop",0,30,1],["advance","Advance (px)",-100,100,100],["hitboxBack","Hitbox back (px)",-500,500,100],["reach","Hitbox front (px)",1,500,100],["bottom","Bottom (px)",-500,500,100],["height","Height (px)",1,500,100],["chipDamage","Chip damage",0,1000,1],["counterHitstun","Counter +stun",0,60,1],["counterHitstop","Counter +stop",0,30,1]]:
+	for spec in [["startup","Startup",2,120,1],["active","Active",1,120,1],["recovery","Recovery",0,180,1],["damage","Damage",0,1000,1],["hitstun","Hitstun",0,180,1],["blockstun","Blockstun",0,180,1],["hitstop","Hitstop",0,30,1],["advance","Advance (px)",-100,100,100],["hitboxBack","Hitbox back (px)",-500,500,100],["reach","Hitbox front (px)",1,500,100],["bottom","Bottom (px)",-500,500,100],["height","Height (px)",1,500,100],["chipDamage","Chip damage",0,1000,1],["counterHitstun","Counter +stun",0,60,1],["counterHitstop","Counter +stop",0,30,1]]:
 		add_field(grid, spec)
 	var timing_panel := VBoxContainer.new()
 	editor.add_child(timing_panel)
@@ -315,6 +315,8 @@ func build_interface() -> void:
 		add_field(advanced_grid, spec)
 	var note := label(advanced, "Kind: 0 normal, 1 command, 2 special, 3 Drive, 4 throw. Button: P=0 K=1 S=2 Hs=3 D=4. Masks: −1 unified; P=1 K=2 S=4 Hs=8 D=16. Follow source −1 disables the route. Signature slots: 15 up slash, 25 spiral, 26 mid, 27 low, 28/29 hooks, 30/31 stabs. Hook slope ±1 travels at 45°; height is its thickness. Art pose 0 uses button art.", 10, MUTED)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	for key in ["button", "category", "mechanic"]:
+		fields[key].control.value_changed.connect(refresh_startup_limits)
 	button(editor, "Apply & reset", apply_move, true, "essential")
 	var saves := row(editor)
 	button(saves, "Save locally", func(): var error := model.save_file(SAVE_PATH); editor_status.text = "Saved to " + SAVE_PATH if error.is_empty() else error)
@@ -322,7 +324,7 @@ func build_interface() -> void:
 	button(saves, "Import", func(): show_file(true), true)
 	button(editor, "Load latest workshop batch", load_workshop_draft, true)
 	button(editor, "Restore default move set", func(): model.restore_defaults(); populate_editor(); reset_round(); editor_status.text = "Defaults restored. Save locally to keep them.", true, "danger")
-	editor_status = label(editor, "Provisional tuning · startup ≥ 5f · weapons have no hurtbox", 11, ACCENT)
+	editor_status = label(editor, "Provisional tuning · grabs ≥ 2f · P normals ≥ 3f · others ≥ 5f · weapons have no hurtbox", 11, ACCENT)
 	editor_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label(editor, "INPUT BUFFER", 11, MUTED)
 	var buffer_grid := GridContainer.new()
@@ -947,8 +949,18 @@ func show_file(load_mode: bool) -> void:
 	file_dialog.current_file = "fight-guild-moves.json"
 	file_dialog.popup_centered()
 
+func refresh_startup_limits(_value: float = 0) -> void:
+	var definition := {}
+	for key in ["button", "category", "mechanic"]: definition[key] = int(fields[key].control.value)
+	fields.startup.control.min_value = CombatModel.startup_minimum(definition)
+	fields.variantStartup.control.min_value = CombatModel.variant_startup_minimum(definition)
+
 func populate_editor() -> void:
 	var definition := model.move(edit_character.selected, edit_move.selected)
+	# Set classification before timing, so switching away from a slower move
+	# cannot clamp a two-frame throw while loading the controls.
+	for key in ["button", "category", "mechanic"]: fields[key].control.set_value_no_signal(definition[key])
+	refresh_startup_limits()
 	editor_title.text = CombatModel.MOVE_IDS[edit_move.selected] + " / " + ["NORMAL", "COMMAND", "SPECIAL", "DRIVE", "THROW"][definition.category]
 	editor_title.text += " · DISABLED" if not definition.enabled else ""
 	for key in fields:

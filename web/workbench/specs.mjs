@@ -50,7 +50,7 @@ const options = {
   attackLevel:[[-1,'Use move type'],[0,'Level 0'],[1,'Level 1'],[2,'Level 2'],[3,'Level 3'],[4,'Level 4']],
 };
 const hints = {
-  startup:'First active frame; minimum 5. A 5f startup has 4 windup frames.', active:'How many consecutive frames can hit.', recovery:'Time after the last active frame before acting again.',
+  startup:'First active frame. Minimum: throws 2f, P normals 3f, other attacks 5f. A 2f startup has 1 windup frame.', active:'How many consecutive frames can hit.', recovery:'Time after the last active frame before acting again.',
   hitboxBack:'Horizontal offset from the fighter. Weapons can hit without gaining hurtboxes.', reach:'The front edge, measured from the fighter, rather than box width.', bottom:'Height of the lower edge above the fighter’s feet.', height:'Vertical size; for a hook, this controls the moving strike thickness.',
   advance:'Immediate forward displacement when the attack starts.', travelSpeed:'Forward movement per active frame. Negative moves backward.', inertiaPercent:'Velocity carried from a run or step dash into this move.',
   pushback:'Distance budget, applied over six action frames.', airPushback:'Distance budget against an airborne target.', blockPushback:'Immediate separation on block.', launch:'Upward speed when hitting a grounded opponent.', airLaunch:'Upward speed against an airborne opponent. Negative sends them down.',

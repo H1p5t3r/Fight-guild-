@@ -69,6 +69,6 @@ static void multi_dive_and_snapshots(){
  for(int n=0;n<160&&a.y>0;++n){s.step(0,0);}CHECK(a.y==0&&a.move==21);ticks(s,20);CHECK(a.move<0);
  setup(s);a.stance=1;hit(s,STANCE_THROW);ticks(s,7);copy=s;for(int i=0;i<100;++i){s.step(0,0);copy.step(0,0);CHECK(s.checksum()==copy.checksum());}
  s.reset(3,4,0,0);CHECK(!a.stance&&!a.grab_time&&a.grab_owner==-1);
- for(int c=0;c<CHARACTER_COUNT;++c)for(int m=0;m<MOVE_COUNT;++m)CHECK(s.moves[c][m].v[Startup]>=5);
+ for(int c=0;c<CHARACTER_COUNT;++c)for(int m=0;m<MOVE_COUNT;++m)CHECK(s.moves[c][m].v[Startup]>=startup_minimum(s.moves[c][m]));
 }
 int main(){inputs_and_stance();captures();guard_and_reactions();multi_dive_and_snapshots();std::printf("Tapper kit: %d checks, %d failures\n",checks,failures);return failures?1:0;}

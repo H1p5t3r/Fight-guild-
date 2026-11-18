@@ -1,11 +1,11 @@
 {
-  "label": "Smoke normals + Tapper box corrections ·18 November2026",
+  "label": "2-frame standard throws · 18 November 2026",
   "status": "playable reference-based iteration",
-  "file": "2026-11-18-smoke/FightGuild-Smoke-Tapper.json",
-  "sha256": "72d177c6da714c1557949ef385bad0bf74849ef7e333729022fe19a1bcd29952",
-  "sourceFile": "2026-11-18-tapper/FightGuild-Tapper.json",
-  "sourceSha256": "c8dadb797da5022646dde000e101e11bb37504362dd3f32d941165fa46d769db",
-  "previousFile": "2026-11-18-tapper/FightGuild-Tapper.json",
-  "baseCommit": "7689c65",
-  "note": "Queen Dizzy frame data and traced normal hitboxes for Smoke; Leo diagrams correct Tapper normal hitboxes only. Preserves Tapper custom stance, Fillet/Shark edits and existing artwork notes. Local drafts remain untouched."
+  "file": "2026-11-18-startup/FightGuild-Startup.json",
+  "sha256": "9113ecdf94a1715a91245558d6b0b677ece54c1cafde0bbd435624d92a681c5e",
+  "sourceFile": "2026-11-18-smoke/FightGuild-Smoke-Tapper.json",
+  "sourceSha256": "72d177c6da714c1557949ef385bad0bf74849ef7e333729022fe19a1bcd29952",
+  "previousFile": "2026-11-18-smoke/FightGuild-Smoke-Tapper.json",
+  "baseCommit": "fb0cb17",
+  "note": "Standard ground and air throws now start in 2 frames. Command-grab and punch timings, other move fields, artwork notes and references are preserved. Schema 20 allows 2f grabs and 3f P normals; older drafts migrate only standard-throw startup."
 }

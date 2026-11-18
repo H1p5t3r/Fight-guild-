@@ -6,7 +6,7 @@ func _initialize() -> void: call_deferred("run")
 func run() -> void:
 	var model := CombatModel.new()
 	var data := model.data()
-	check(data.schema == 19 and data.characters[2].moves.size() == 45, "Smoke schema missing")
+	check(data.schema == 20 and data.characters[2].moves.size() == 45, "Smoke schema missing")
 	check(model.move(2,43).guardBreak == 1 and model.move(2,43).blockstun == 39, "Charged guard crush missing")
 	for dust in [false,true]:
 		model.reset([2,3])
@@ -24,6 +24,9 @@ func run() -> void:
 	for c in 6:
 		check(model.move(c,43).enabled == 0 and model.move(c,44).enabled == 0, "Legacy import enabled new charge slots")
 		for m in 43:
-			for field in CombatModel.FIELDS: check(upgraded.characters[c].moves[m][field] == old.characters[c].moves[m][field], "Legacy move was overwritten")
+			for field in CombatModel.FIELDS:
+				var before: Dictionary = old.characters[c].moves[m]
+				var expected: int = 2 if field == "startup" and before.category == 4 and before.motion == 0 else int(before[field])
+				check(upgraded.characters[c].moves[m][field] == expected, "Legacy move was overwritten")
 	print("Smoke normals / charge / legacy imports: %d failures" % failures)
 	quit(1 if failures else 0)

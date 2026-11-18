@@ -1,4 +1,5 @@
 import {renderMovement} from './movement-editor.mjs';
+import {moveFieldLimit} from '../startup-rules.mjs';
 import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,phaseStart,effectiveHurtboxes,inputName,geometryWarnings,CHARACTERS,MOVE_IDS,clone,META} from './model.mjs';
 import {HURT_PHASES,HURT_REGIONS,HURT_LABELS,HURT_MASK_FIELDS,regionEnabled,validateHurtboxes} from '../hurtboxes.mjs';
 import {SPECS,GROUPS,TABS,ART_FIELDS,GUILDS,COLORS,KINDS} from './specs.mjs';
@@ -83,16 +84,18 @@ function optionsFor(key){
   return SPECS[key].options;
 }
 function commit(key,value){
-  try{model.change(character,slot,key,value);fieldError(key,'');syncSummary();listMoves();scheduleSave();}
-  catch(error){fieldError(key,error.message);}
+  try{model.change(character,slot,key,value);fieldError(key,'');syncSummary();listMoves();scheduleSave();
+    for(const timing of ['startup','variantStartup'])if($('field-'+timing))$('field-'+timing).min=moveFieldLimit(move(),timing,pack.limits.moves[character]).min;
+    return true;
+  }catch(error){fieldError(key,error.message);return false;}
 }
 function numberField(key){
-  const spec=SPECS[key],limit=pack.limits.moves[character][key],field=el('div',{class:'field'}),id='field-'+key;
+  const spec=SPECS[key],limit=moveFieldLimit(move(),key,pack.limits.moves[character]),field=el('div',{class:'field'}),id='field-'+key;
   const label=el('label',{for:id},spec.label),wrap=el('div',{class:'input-wrap'}),input=el('input',{id,type:'number',min:limit.min/spec.scale,max:limit.max/spec.scale,step:1/spec.scale,inputmode:spec.scale===1?'numeric':'decimal','aria-describedby':`hint-${key} error-${key}`});
   input.value=move()[key]/spec.scale;wrap.append(input);if(spec.unit)wrap.append(el('span',{class:'unit'},spec.unit));field.append(label,wrap);
   if(spec.hint)field.append(el('small',{class:'hint',id:'hint-'+key},spec.hint));
   field.append(el('span',{class:'error',id:'error-'+key,'aria-live':'polite'}));
-  input.addEventListener('input',()=>{try{const value=parseField(key,input.value,limit);commit(key,value);}catch(error){fieldError(key,error.message);}});
+  input.addEventListener('input',()=>{try{const value=parseField(key,input.value,moveFieldLimit(move(),key,pack.limits.moves[character]));commit(key,value);}catch(error){fieldError(key,error.message);}});
   input.addEventListener('change',()=>{if(!errors.has(id))input.value=move()[key]/spec.scale;});
   return field;
 }
@@ -100,7 +103,8 @@ function selectField(key){
   const spec=SPECS[key],field=el('div',{class:'field'}),id='field-'+key,select=el('select',{id});
   select.append(...optionsFor(key).map(([value,label])=>el('option',{value},label)));select.value=move()[key];
   field.append(el('label',{for:id},spec.label),select);if(spec.hint)field.append(el('small',{class:'hint',id:'hint-'+key},spec.hint));
-  select.addEventListener('change',()=>{commit(key,Number(select.value));if(key==='category'||key==='artPose'||key==='air')syncPreview();});return field;
+  field.append(el('span',{class:'error',id:'error-'+key,'aria-live':'polite'}));
+  select.addEventListener('change',()=>{if(commit(key,Number(select.value))&&['category','artPose','air'].includes(key))syncPreview();});return field;
 }
 function flagField(key){
   const spec=SPECS[key],field=el('div',{class:'field flag'}),id='field-'+key,input=el('input',{id,type:'checkbox',checked:!!move()[key]});

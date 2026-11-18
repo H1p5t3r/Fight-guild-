@@ -1,5 +1,7 @@
 # Dustloop study: priorities for the Fillet/Shark build
 
+> 18 November 2026 update: the startup-floor decisions below are historical. Standard ground/air throws now start in 2f. Minimums are 2f for grabs, 3f for P normals, and 5f for other attacks; see [current startup rules](../startup-rules.md).
+
 Research date: 2026-11-15. Implementation compared: `ad103f8` on `feat/godot-combat-lab`.
 
 The three user-supplied MHTML archives are readable sources. This review uses their saved article text and tables; it does not claim a live website search or verification against a running Strive build. Recommendations below are proposals, not new combat rules or implemented features.
