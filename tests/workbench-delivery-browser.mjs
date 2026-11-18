@@ -21,6 +21,13 @@ try{
   await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
   await page.goto(url);await ready(page);await page.evaluate(()=>document.fonts.ready);
   const initial=await data(page),images=await page.evaluate(()=>FIGHT_WORKSHOP_DATA.images);
+  // Resolve the current Backdraft body/effect instead of the retired launcher
+  // atlas. Check the references here even when managed browsers block file://.
+  const backdraftFiles=await page.evaluate(()=>{
+    const art=FIGHT_WORKSHOP_DATA.art[2],sheet=art.attack_animation,frame=sheet.frames[2];
+    return [frame.file??sheet.file,art[frame.effect.sheet].file];
+  });
+  assert.ok(backdraftFiles.every(file=>typeof images[file]==='string'),'Current Backdraft art must be included in the delivery');
   assert.equal(initial.schema,22);assert.equal(initial.characters.length,6);
   assert.ok((await stat('build/move-workshop/index.html')).size<64000,'The entry page must stay small');
   assert.ok(requests.filter(r=>r.url.endsWith('.webp')).length<Object.keys(images).length,'Artwork must load on demand');
@@ -70,7 +77,9 @@ try{
     await ready(local);
     assert.deepEqual(await data(local),edited);
     await local.locator('#fighter').selectOption('2');await local.locator('[data-move="7"]').click();await ready(local);await seekMoveFrame(local,18);
-    await local.evaluate(async()=>{const i=new Image();i.src=FIGHT_WORKSHOP_DATA.images['smoke-v1/launcher.png'];await i.decode();});
+    await local.evaluate(async files=>{
+      await Promise.all(files.map(async file=>{const i=new Image();i.src=FIGHT_WORKSHOP_DATA.images[file];await i.decode();}));
+    },backdraftFiles);
     assert.equal(await local.locator('#preview-empty').isVisible(),false);
   }
   assert.deepEqual(errors,[]);
