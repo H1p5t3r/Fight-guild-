@@ -1,0 +1,817 @@
+{
+  "sourceFile": "GGST_Ky Kiske_Frame Data - Dustloop Wiki.mht",
+  "sha256": "f933278be97b71a26bae9712cbefc46592b331bd037bb2582ed405d3e4c7c30e",
+  "url": "https://www.dustloop.com/w/GGST/Ky_Kiske/Frame_Data",
+  "savedAt": "Wed, 18 Nov 2026 17:23:49 +0000",
+  "scope": "Saved normal table and embedded diagrams. Thumbnail diagrams do not include numerical engine coordinates or exact per-frame changes. D attacks are excluded by request; special, super and universal-action tables are not extracted.",
+  "moves": [
+    {
+      "Input": "5P",
+      "Damage": "26",
+      "Guard": "All",
+      "Startup": "5",
+      "Active": "4",
+      "Recovery": "7",
+      "On-Block": "-1",
+      "On-Hit": "+2",
+      "Level": "0",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "60%",
+      "RISC Gain": "500",
+      "RISC Loss": "1500",
+      "rawCells": [
+        "5P",
+        "26",
+        "All",
+        "5",
+        "4",
+        "7",
+        "-1",
+        "+2",
+        "0",
+        "Small",
+        "",
+        "60%",
+        "500",
+        "1500"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": null,
+          "url": "https://www.dustloop.com/wiki/images/thumb/d/d0/GGST_Ky_5P_hitbox.png/180px-GGST_Ky_5P_hitbox.png",
+          "missing": true
+        }
+      ]
+    },
+    {
+      "Input": "5K",
+      "Damage": "30",
+      "Guard": "Low",
+      "Startup": "7",
+      "Active": "8",
+      "Recovery": "6",
+      "On-Block": "-2",
+      "On-Hit": "+1",
+      "Level": "1",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "70%",
+      "RISC Gain": "600",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "5K",
+        "30",
+        "Low",
+        "7",
+        "8",
+        "6",
+        "-2",
+        "+1",
+        "1",
+        "Small",
+        "",
+        "70%",
+        "600",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_5K_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/b/b4/GGST_Ky_5K_hitbox.png/180px-GGST_Ky_5K_hitbox.png",
+          "sha256": "5fc25ddfd267d2c6eb88727532ae2229aed6634fd3868969e90cf61a7950f06f",
+          "size": [
+            360,
+            300
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "c.S",
+      "Damage": "42",
+      "Guard": "All",
+      "Startup": "7",
+      "Active": "6",
+      "Recovery": "10",
+      "On-Block": "+1",
+      "On-Hit": "+4",
+      "Level": "3",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "100%",
+      "RISC Gain": "1400",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "c.S",
+        "42",
+        "All",
+        "7",
+        "6",
+        "10",
+        "+1",
+        "+4",
+        "3",
+        "Mid",
+        "",
+        "100%",
+        "1400",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Down",
+        "notes": "Input Proximity Range: 270"
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_c.S_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/d/dd/GGST_Ky_c.S_hitbox.png/180px-GGST_Ky_c.S_hitbox.png",
+          "sha256": "5ec27332c950a9e5c66c816bccc690b82bfd9d178577118166f9e88f73e859a3",
+          "size": [
+            360,
+            356
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "f.S",
+      "Damage": "34",
+      "Guard": "All",
+      "Startup": "10",
+      "Active": "3",
+      "Recovery": "20",
+      "On-Block": "-9",
+      "On-Hit": "-6",
+      "Level": "2",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "1100",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "f.S",
+        "34",
+        "All",
+        "10",
+        "3",
+        "20",
+        "-9",
+        "-6",
+        "2",
+        "Mid",
+        "",
+        "90%",
+        "1100",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_f.S_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/6/6a/GGST_Ky_f.S_hitbox.png/180px-GGST_Ky_f.S_hitbox.png",
+          "sha256": "952c4877dcf7e27119d82f4d394d7d588d71593b2e1f1ed5495ce3d694490e81",
+          "size": [
+            360,
+            224
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "5H",
+      "Damage": "48",
+      "Guard": "All",
+      "Startup": "12",
+      "Active": "6",
+      "Recovery": "21",
+      "On-Block": "-8",
+      "On-Hit": "-5",
+      "Level": "4",
+      "Counter Type": "Large",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "1700",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "5H",
+        "48",
+        "All",
+        "12",
+        "6",
+        "21",
+        "-8",
+        "-5",
+        "4",
+        "Large",
+        "",
+        "90%",
+        "1700",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": null,
+          "url": "https://www.dustloop.com/wiki/images/thumb/a/a7/GGST_Ky_5H_hitbox.png/180px-GGST_Ky_5H_hitbox.png",
+          "missing": true
+        }
+      ]
+    },
+    {
+      "Input": "2P",
+      "Damage": "22",
+      "Guard": "All",
+      "Startup": "5",
+      "Active": "4",
+      "Recovery": "8",
+      "On-Block": "-2",
+      "On-Hit": "+1",
+      "Level": "0",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "60%",
+      "RISC Gain": "500",
+      "RISC Loss": "1500",
+      "rawCells": [
+        "2P",
+        "22",
+        "All",
+        "5",
+        "4",
+        "8",
+        "-2",
+        "+1",
+        "0",
+        "Small",
+        "",
+        "60%",
+        "500",
+        "1500"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_2P_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/e/ed/GGST_Ky_2P_hitbox.png/180px-GGST_Ky_2P_hitbox.png",
+          "sha256": "c8e4be41bdd7455375e2fcc827def61638c2b27afbec3ddee0b2cc00c038352b",
+          "size": [
+            360,
+            201
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "2K",
+      "Damage": "26",
+      "Guard": "Low",
+      "Startup": "6",
+      "Active": "4",
+      "Recovery": "10",
+      "On-Block": "-2",
+      "On-Hit": "+1",
+      "Level": "1",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "70%",
+      "RISC Gain": "600",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "2K",
+        "26",
+        "Low",
+        "6",
+        "4",
+        "10",
+        "-2",
+        "+1",
+        "1",
+        "Small",
+        "",
+        "70%",
+        "600",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_2K_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/9/97/GGST_Ky_2K_hitbox.png/180px-GGST_Ky_2K_hitbox.png",
+          "sha256": "a91c6abe0721baf15bb52fa8826b7b14c9c2a66b6591321b4074058fbfd0a2e6",
+          "size": [
+            360,
+            198
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "2S",
+      "Damage": "32",
+      "Guard": "Low",
+      "Startup": "11",
+      "Active": "2",
+      "Recovery": "24",
+      "On-Block": "-12",
+      "On-Hit": "-9",
+      "Level": "2",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "825",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "2S",
+        "32",
+        "Low",
+        "11",
+        "2",
+        "24",
+        "-12",
+        "-9",
+        "2",
+        "Mid",
+        "",
+        "90%",
+        "825",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_2S_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/e/e5/GGST_Ky_2S_hitbox.png/180px-GGST_Ky_2S_hitbox.png",
+          "sha256": "68201c4181254dd12f66518b04f41b28447fe733fca8753214d3d90691c82964",
+          "size": [
+            360,
+            157
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "2H",
+      "Damage": "14, 40",
+      "Guard": "All",
+      "Startup": "11",
+      "Active": "1,4",
+      "Recovery": "28",
+      "On-Block": "-13",
+      "On-Hit": "+2",
+      "Level": "3,4",
+      "Counter Type": "Large×2",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "700, 800",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "2H",
+        "14, 40",
+        "All",
+        "11",
+        "1,4",
+        "28",
+        "-13",
+        "+2",
+        "3,4",
+        "Large×2",
+        "",
+        "90%",
+        "700, 800",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "250×2",
+        "OTGType": "Up",
+        "notes": "Hitstop on ground hit: 16F • Second hit causes Floating crumple on ground hit: Total 33F (airborne hitstun 1-19F, standing hitstun 20-27F, can block 28-33F)"
+      },
+      "hitboxImages": [
+        {
+          "file": null,
+          "url": "https://www.dustloop.com/wiki/images/thumb/3/37/GGST_Ky_2H_hitbox1.png/180px-GGST_Ky_2H_hitbox1.png",
+          "missing": true
+        },
+        {
+          "file": null,
+          "url": "https://www.dustloop.com/wiki/images/thumb/7/7b/GGST_Ky_2H_hitbox2.png/180px-GGST_Ky_2H_hitbox2.png",
+          "missing": true
+        }
+      ]
+    },
+    {
+      "Input": "j.P",
+      "Damage": "20",
+      "Guard": "High",
+      "Startup": "6",
+      "Active": "3",
+      "Recovery": "9",
+      "On-Block": "",
+      "On-Hit": "",
+      "Level": "0",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "375",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "j.P",
+        "20",
+        "High",
+        "6",
+        "3",
+        "9",
+        "",
+        "",
+        "0",
+        "Small",
+        "",
+        "80%",
+        "375",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_j.P_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/4/4a/GGST_Ky_j.P_hitbox.png/180px-GGST_Ky_j.P_hitbox.png",
+          "sha256": "2cd54641b7dc921b62e021641da35f0f0da5b20140d6767c79788f59fb513724",
+          "size": [
+            360,
+            253
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "j.K",
+      "Damage": "26",
+      "Guard": "High",
+      "Startup": "7",
+      "Active": "4",
+      "Recovery": "12",
+      "On-Block": "-1 (IAD)",
+      "On-Hit": "+2 (IAD)",
+      "Level": "1",
+      "Counter Type": "Small",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "600",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "j.K",
+        "26",
+        "High",
+        "7",
+        "4",
+        "12",
+        "-1 (IAD)",
+        "+2 (IAD)",
+        "1",
+        "Small",
+        "",
+        "80%",
+        "600",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_j.K_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/c/cd/GGST_Ky_j.K_hitbox.png/180px-GGST_Ky_j.K_hitbox.png",
+          "sha256": "518d28d4535f83d00ef1005e712623982ef5f95d110b02b74e6429a14c06737c",
+          "size": [
+            360,
+            179
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "j.S",
+      "Damage": "32",
+      "Guard": "High",
+      "Startup": "7",
+      "Active": "3",
+      "Recovery": "21",
+      "On-Block": "-1 (IAD)",
+      "On-Hit": "+2 (IAD)",
+      "Level": "2",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "825",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "j.S",
+        "32",
+        "High",
+        "7",
+        "3",
+        "21",
+        "-1 (IAD)",
+        "+2 (IAD)",
+        "2",
+        "Mid",
+        "",
+        "80%",
+        "825",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_j.S_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/3/3c/GGST_Ky_j.S_hitbox.png/180px-GGST_Ky_j.S_hitbox.png",
+          "sha256": "8070229ec3e841314eb7a0b2502b02e1654d2c0a9f79ebff8e27236d049c600e",
+          "size": [
+            360,
+            185
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "j.H",
+      "Damage": "44",
+      "Guard": "High",
+      "Startup": "13",
+      "Active": "4",
+      "Recovery": "23",
+      "On-Block": "+5 (IAD)",
+      "On-Hit": "+8 (IAD)",
+      "Level": "2",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "80%",
+      "RISC Gain": "825",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "j.H",
+        "44",
+        "High",
+        "13",
+        "4",
+        "23",
+        "+5 (IAD)",
+        "+8 (IAD)",
+        "2",
+        "Mid",
+        "",
+        "80%",
+        "825",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Down",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_j.H_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/c/ca/GGST_Ky_j.H_hitbox.png/180px-GGST_Ky_j.H_hitbox.png",
+          "sha256": "0501eb931ae80f42dd936ad2a27efc8f61d544f38e3f8442acf55a033e74bda1",
+          "size": [
+            360,
+            391
+          ]
+        },
+        {
+          "file": "GGST_Ky_Kiske_j.H_hitbox_2.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/9/95/GGST_Ky_Kiske_j.H_hitbox_2.png/180px-GGST_Ky_Kiske_j.H_hitbox_2.png",
+          "sha256": "55f13a1ef5bc655b901177b42e6aa010cb5f6634896c703b135013f20d0d9e27",
+          "size": [
+            360,
+            377
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "6P",
+      "Damage": "34",
+      "Guard": "All",
+      "Startup": "9",
+      "Active": "5",
+      "Recovery": "22",
+      "On-Block": "-13",
+      "On-Hit": "-10",
+      "Level": "2",
+      "Counter Type": "Mid",
+      "Invuln": "1-3 Below Crouch4-13 Low Profile",
+      "Proration": "90%",
+      "RISC Gain": "1100",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "6P",
+        "34",
+        "All",
+        "9",
+        "5",
+        "22",
+        "-13",
+        "-10",
+        "2",
+        "Mid",
+        "1-3 Below Crouch4-13 Low Profile",
+        "90%",
+        "1100",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "500",
+        "OTGType": "Mid",
+        "notes": "If the first hit of a combo, applies an additional +20 Combo Decay."
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_6P_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/f/f0/GGST_Ky_6P_hitbox.png/180px-GGST_Ky_6P_hitbox.png",
+          "sha256": "2a2c23c9b8c565bb6852f0ff6e1e7db2aa059d552b3c65f014ee71fbbbd4f377",
+          "size": [
+            360,
+            258
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "6K",
+      "Damage": "40",
+      "Guard": "All",
+      "Startup": "25",
+      "Active": "2",
+      "Recovery": "11",
+      "On-Block": "+4",
+      "On-Hit": "+7",
+      "Level": "3",
+      "Counter Type": "Mid",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "1400",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "6K",
+        "40",
+        "All",
+        "25",
+        "2",
+        "11",
+        "+4",
+        "+7",
+        "3",
+        "Mid",
+        "",
+        "90%",
+        "1400",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "300",
+        "OTGType": "Mid",
+        "notes": ""
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_6K_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/6/6a/GGST_Ky_6K_hitbox.png/180px-GGST_Ky_6K_hitbox.png",
+          "sha256": "1e22dffc2cf9cb3a454fa94be703994bfe19f06d11862aa18c145e689c0c040c",
+          "size": [
+            360,
+            269
+          ]
+        }
+      ]
+    },
+    {
+      "Input": "6H",
+      "Damage": "52",
+      "Guard": "All",
+      "Startup": "15",
+      "Active": "4",
+      "Recovery": "26",
+      "On-Block": "-13",
+      "On-Hit": "KD +23 [KD +30]",
+      "Level": "3",
+      "Counter Type": "Large",
+      "Invuln": "",
+      "Proration": "90%",
+      "RISC Gain": "1400",
+      "RISC Loss": "1000",
+      "rawCells": [
+        "6H",
+        "52",
+        "All",
+        "15",
+        "4",
+        "26",
+        "-13",
+        "KD +23 [KD +30]",
+        "3",
+        "Large",
+        "",
+        "90%",
+        "1400",
+        "1000"
+      ],
+      "details": {
+        "inputTension": "",
+        "chipRatio": "",
+        "wallDamage": "500",
+        "OTGType": "Mid",
+        "notes": "Values in [ ] are for the Wall Bounce version."
+      },
+      "hitboxImages": [
+        {
+          "file": "GGST_Ky_6H_hitbox.png",
+          "url": "https://www.dustloop.com/wiki/images/thumb/c/c6/GGST_Ky_6H_hitbox.png/180px-GGST_Ky_6H_hitbox.png",
+          "sha256": "96789da0bb431880b7f15b0b7d8df018c89c12583745036c3e4294a381a8fa1c",
+          "size": [
+            360,
+            232
+          ]
+        }
+      ]
+    }
+  ],
+  "excludedInputs": [
+    "j.D",
+    "2D",
+    "5D",
+    "5[D]"
+  ]
+}

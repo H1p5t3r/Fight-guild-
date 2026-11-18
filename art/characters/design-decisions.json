@@ -66,6 +66,24 @@
           "Left hand holds the separate short triangular blade low.",
           "Retain low-volume long white hair and physical blue sports glasses."
         ]
+      },
+      "normals": {
+        "status": "selected_by_user",
+        "direction": "A / Shoulder Snap",
+        "twoHitLauncher": "2 / Low Scoop",
+        "source_directory": "art/characters/shark-normal-options-v1",
+        "requirements": [
+          "Depart from and return to current F / Shoulder Rest idle.",
+          "Keep blue sports glasses and low-volume long white hair.",
+          "Compact shoulder-led slashes; deeper scoop for two-hit 2Hs.",
+          "Use Ky P/K/S/Hs source normals; exclude all D attacks and specials.",
+          "Preserve right-hand hook, left-hand short blade, fixed anatomy and weapon scale.",
+          "User rejected stiff first production poses; do not use the first normals_0..3 generations.",
+          "Lead with hips and weight transfer, twist shoulders against pelvis, vary spine angle; feet pivot and heels lift naturally.",
+          "Use compressed windup, extended contact, relaxed overshoot and settling recovery; fixed anatomy scale does not mean fixed posture."
+        ],
+        "motionStudy": "art/characters/shark-normal-options-v1/low-scoop-fluidity.png",
+        "motionStudyStatus": "selected_by_user"
       }
     },
     "smoke": {

@@ -1,0 +1,37 @@
+{
+  "source": "Four inline images supplied by the user after selecting A / Shoulder Snap, 18 November 2026",
+  "localBytesAvailable": false,
+  "note": "Visible in conversation; not embedded in the MHT. No local-file hash is asserted. Mapping identified from the supplied move silhouettes.",
+  "images": [
+    {
+      "sourceInput": "2H",
+      "hit": 1,
+      "size": [
+        662,
+        541
+      ]
+    },
+    {
+      "sourceInput": "2H",
+      "hit": 2,
+      "size": [
+        784,
+        1196
+      ]
+    },
+    {
+      "sourceInput": "5H",
+      "size": [
+        1165,
+        591
+      ]
+    },
+    {
+      "sourceInput": "5P",
+      "size": [
+        763,
+        652
+      ]
+    }
+  ]
+}
