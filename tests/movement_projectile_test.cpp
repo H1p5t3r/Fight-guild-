@@ -71,7 +71,44 @@ static void air_dash_pause(){
  CHECK(f.x==x+350&&f.y==17800&&f.dash==0&&f.dash_pause==0);
  CHECK(!sim.mobility_set(5,AirDashPauseFrames,0)&&!sim.mobility_set(5,AirBackdashPauseFrames,31));
 }
+static void shark_movement_art(){
+ for(int facing:{-1,1}){
+  sim.defaults();sim.reset(4,5,0,0);
+  auto& f=sim.world.players[0];auto& m=sim.mobility[4];
+  f.x=50000;sim.world.players[1].x=facing==1?90000:10000;f.facing=facing;
+  const int times[]={0,71,72,83,84,89,90,107,108};
+  const int keys[]={0,0,1,1,2,2,3,3,0};
+  for(int i=0;i<9;++i){f.idle_time=times[i];CHECK(sim.pose(f).phase==11&&sim.pose(f).index==keys[i]);CHECK(sim.box_count(0,HurtBox)==4);}
+  // Walk and run advance through both gait halves. A dedicated retreat cycle
+  // advances in its authored direction while facing stays on the opponent.
+  for(int phase:{6,7,13}){
+   f.running=phase==7;f.vx=facing*(phase==13?-1:1)*m.v[phase==7?RunSpeed:WalkSpeed];
+   const int stride=m.v[phase==7?RunSpeed:WalkSpeed]*(phase==7?3:5);
+   for(int key=0;key<8;++key){
+    f.x=(8+key)*stride*facing*(phase==13?-1:1);
+    CHECK(sim.pose(f).phase==phase&&sim.pose(f).index==key);
+    CHECK(sim.box_count(0,HurtBox)==4);
+   }
+  }
+  f.running=0;f.x=50000;f.vx=0;f.idle_time=0;
+  const int back=facing==1?Left:Right;
+  sim.step(back|Dash,0);
+  CHECK(sim.pose(f).phase==15&&sim.pose(f).index==0);
+  CHECK(f.y==0&&f.vx==-facing*m.v[BackSpeed]);
+  auto saved=sim.world;int visited=1;
+  while(f.dash>0){visited|=1<<sim.pose(f).index;CHECK(sim.pose(f).phase==15);CHECK(f.y==0&&f.facing==facing);sim.step(0,0);}
+  CHECK(visited==63);CHECK(sim.pose(f).phase!=15);
+  auto hash=sim.checksum();sim.world=saved;while(f.dash>0)sim.step(0,0);CHECK(hash==sim.checksum());
+  sim.world=saved;const int age=f.dash_age,pose=sim.pose(f).index;sim.world.hitstop=5;
+  ticks(5);CHECK(f.dash_age==age&&sim.pose(f).index==pose&&sim.pose(f).phase==15);
+  // A stored backdash age cannot cover attacks, reactions or an airborne dash.
+  f.stun=3;CHECK(sim.pose(f).phase==0);f.stun=0;
+  f.y=100;CHECK(sim.pose(f).phase==0);f.y=0;
+  f.dash_kind=Teleport;CHECK(sim.pose(f).phase!=15);
+ }
+}
 int main(){
+ shark_movement_art();
  air_dash_pause();
  for(int style=0;style<4;++style){
   fresh();CHECK(sim.mobility_set(5,ForwardStyle,style));

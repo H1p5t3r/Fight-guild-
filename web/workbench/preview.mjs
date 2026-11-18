@@ -55,7 +55,7 @@ export class Preview {
       const f=frame.state.players[i];
       if(f.tetherSource){const owner=frame.state.players[1-i],from=point(owner.x,owner.y+8500),to=point(f.x,f.y+7000);ctx.strokeStyle='#79d3df';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(from.x,from.y);ctx.lineTo(to.x,to.y);ctx.stroke();}
 
-      const p=point(f.x,f.y),pose=!i&&record.geometryOnly&&moveFrame?poseAt(m,moveFrame,!!this.pack.art[f.character].ready):{phase:['active','windup','block','signature_windup','signature_active','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation'][f.posePhase],index:f.poseIndex};
+      const p=point(f.x,f.y),pose=!i&&record.geometryOnly&&moveFrame?poseAt(m,moveFrame,!!this.pack.art[f.character].ready):{phase:['active','windup','block','signature_windup','signature_active','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation','backdash'][f.posePhase],index:f.poseIndex};
       const sheet=this.pack.art[f.character][pose.phase],tile=sheet?.frames[pose.index];
       ctx.fillStyle='#050d12';ctx.beginPath();ctx.ellipse(p.x,ground.y,22*scale,5*scale,0,0,Math.PI*2);ctx.fill();
       for(const q of frame.state.projectiles?.filter(q=>q.owner===i)??[]){

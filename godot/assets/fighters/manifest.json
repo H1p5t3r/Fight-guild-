@@ -10964,62 +10964,71 @@
         ]
       ],
       "ready": {
-        "file": "locomotion-v1/shark-ready.png",
-        "columns": 1,
-        "rows": 1,
-        "body_height": 1140,
+        "file": "shark-movement-v1/idle.png",
+        "sha256": "3e361ddf48eef682d96f277ddc6aaf633c02d3600060531d5a93c571aef1e4b4",
+        "generation_file": "exec-03987e74-4362-4d9a-b49a-2152406dbf39.png",
+        "columns": 2,
+        "rows": 2,
         "size": [
-          1254,
-          1254
+          1536,
+          1024
         ],
-        "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
-        "generation_file": "exec-e50d387e-ef5b-41fb-ab53-047bb1913d86.png",
+        "body_height": 480,
         "transparent_samples": [
           [
             0,
             0
           ],
           [
-            1253,
+            1535,
             0
           ],
           [
             0,
-            1253
+            1023
+          ],
+          [
+            1535,
+            1023
           ]
         ],
         "frames": [
           {
+            "name": "A / Lazy Tap \u2014 ready",
+            "file": "shark-movement-v1/idle.png",
+            "sha256": "3e361ddf48eef682d96f277ddc6aaf633c02d3600060531d5a93c571aef1e4b4",
+            "generation_file": "exec-03987e74-4362-4d9a-b49a-2152406dbf39.png",
             "region": [
               0,
               0,
-              1254,
-              1254
+              768,
+              512
             ],
             "pivot": [
-              640,
-              1210
+              410,
+              484
             ],
             "bounds": [
-              155,
-              67,
-              1042,
-              1211
-            ]
+              196,
+              10,
+              545,
+              485
+            ],
+            "body_height": 480
           }
         ]
       },
       "walk": {
-        "file": "locomotion-v1/shark-walk.png",
-        "columns": 4,
+        "file": "shark-movement-v1/walk_near.png",
+        "sha256": "ccd648f5fad4f6f510fc82531a476aef6094e324c006d9a64fd1a598d6a41960",
+        "generation_file": "exec-69b315fa-2233-43a6-98f2-8084c980431b.png",
+        "columns": 2,
         "rows": 2,
-        "body_height": 440,
         "size": [
           1536,
           1024
         ],
-        "sha256": "64dac06595246c3a1e65adfe6db7b1ccc41b756b3298ec5fedea200a9816c149",
-        "generation_file": "exec-47d6be33-3da9-496b-a0a7-33cfa3e0eb59.png",
+        "body_height": 480,
         "transparent_samples": [
           [
             0,
@@ -11032,166 +11041,226 @@
           [
             0,
             1023
+          ],
+          [
+            1535,
+            1023
           ]
         ],
         "frames": [
           {
+            "name": "B / Rolling Swagger \u2014 Right contact",
+            "file": "shark-movement-v1/walk_near.png",
+            "sha256": "ccd648f5fad4f6f510fc82531a476aef6094e324c006d9a64fd1a598d6a41960",
+            "generation_file": "exec-69b315fa-2233-43a6-98f2-8084c980431b.png",
             "region": [
               0,
               0,
-              384,
-              512
-            ],
-            "pivot": [
-              208,
-              477
-            ],
-            "bounds": [
-              26,
-              36,
-              358,
-              481
-            ]
-          },
-          {
-            "region": [
-              384,
-              0,
-              384,
-              512
-            ],
-            "pivot": [
-              208,
-              477
-            ],
-            "bounds": [
-              17,
-              36,
-              341,
-              481
-            ]
-          },
-          {
-            "region": [
               768,
-              0,
-              384,
               512
             ],
             "pivot": [
-              208,
-              477
-            ],
-            "bounds": [
-              8,
-              36,
-              340,
-              481
-            ]
-          },
-          {
-            "region": [
-              1152,
-              0,
-              384,
-              512
-            ],
-            "pivot": [
-              208,
-              477
-            ],
-            "bounds": [
-              2,
-              36,
-              339,
-              478
-            ]
-          },
-          {
-            "region": [
-              0,
-              512,
-              384,
-              512
-            ],
-            "pivot": [
-              208,
-              479
-            ],
-            "bounds": [
-              9,
-              35,
-              352,
-              481
-            ]
-          },
-          {
-            "region": [
-              384,
-              512,
-              384,
-              512
-            ],
-            "pivot": [
-              208,
-              479
-            ],
-            "bounds": [
-              7,
-              34,
-              353,
-              481
-            ]
-          },
-          {
-            "region": [
-              768,
-              512,
-              384,
-              512
-            ],
-            "pivot": [
-              208,
-              479
-            ],
-            "bounds": [
-              9,
-              35,
-              349,
+              410,
               480
-            ]
+            ],
+            "bounds": [
+              209,
+              21,
+              612,
+              481
+            ],
+            "body_height": 480,
+            "support_leg": "right",
+            "gait_half": "right"
           },
           {
+            "name": "B / Rolling Swagger \u2014 Right load",
+            "file": "shark-movement-v1/walk_near.png",
+            "sha256": "ccd648f5fad4f6f510fc82531a476aef6094e324c006d9a64fd1a598d6a41960",
+            "generation_file": "exec-69b315fa-2233-43a6-98f2-8084c980431b.png",
             "region": [
-              1152,
-              512,
-              384,
+              768,
+              0,
+              768,
               512
             ],
             "pivot": [
-              208,
+              410,
+              478
+            ],
+            "bounds": [
+              196,
+              22,
+              528,
+              479
+            ],
+            "body_height": 480,
+            "support_leg": "right",
+            "gait_half": "right"
+          },
+          {
+            "name": "B / Rolling Swagger \u2014 Left passing / drive",
+            "file": "shark-movement-v1/walk_near.png",
+            "sha256": "ccd648f5fad4f6f510fc82531a476aef6094e324c006d9a64fd1a598d6a41960",
+            "generation_file": "exec-69b315fa-2233-43a6-98f2-8084c980431b.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
               479
             ],
             "bounds": [
-              10,
-              35,
-              350,
-              475
-            ]
+              213,
+              20,
+              555,
+              480
+            ],
+            "body_height": 480,
+            "support_leg": "right",
+            "gait_half": "right"
+          },
+          {
+            "name": "B / Rolling Swagger \u2014 Left reach / flight",
+            "file": "shark-movement-v1/walk_near.png",
+            "sha256": "ccd648f5fad4f6f510fc82531a476aef6094e324c006d9a64fd1a598d6a41960",
+            "generation_file": "exec-69b315fa-2233-43a6-98f2-8084c980431b.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              479
+            ],
+            "bounds": [
+              195,
+              17,
+              617,
+              480
+            ],
+            "body_height": 480,
+            "support_leg": "right",
+            "gait_half": "right"
+          },
+          {
+            "name": "B / Rolling Swagger \u2014 Left contact",
+            "file": "shark-movement-v1/walk_far.png",
+            "sha256": "fcc237d14ef9e6a842797e9e8aa3a4fa084d35aaf96792da285f66ad2bd379ce",
+            "generation_file": "exec-aedd0ff2-a576-4ac6-abbc-16e13ecc9fcd.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              480
+            ],
+            "bounds": [
+              196,
+              20,
+              618,
+              481
+            ],
+            "body_height": 480,
+            "support_leg": "left",
+            "gait_half": "left"
+          },
+          {
+            "name": "B / Rolling Swagger \u2014 Left load",
+            "file": "shark-movement-v1/walk_far.png",
+            "sha256": "fcc237d14ef9e6a842797e9e8aa3a4fa084d35aaf96792da285f66ad2bd379ce",
+            "generation_file": "exec-aedd0ff2-a576-4ac6-abbc-16e13ecc9fcd.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              480
+            ],
+            "bounds": [
+              173,
+              21,
+              518,
+              481
+            ],
+            "body_height": 480,
+            "support_leg": "left",
+            "gait_half": "left"
+          },
+          {
+            "name": "B / Rolling Swagger \u2014 Right passing / drive",
+            "file": "shark-movement-v1/walk_far.png",
+            "sha256": "fcc237d14ef9e6a842797e9e8aa3a4fa084d35aaf96792da285f66ad2bd379ce",
+            "generation_file": "exec-aedd0ff2-a576-4ac6-abbc-16e13ecc9fcd.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              480
+            ],
+            "bounds": [
+              219,
+              19,
+              577,
+              481
+            ],
+            "body_height": 480,
+            "support_leg": "left",
+            "gait_half": "left"
+          },
+          {
+            "name": "B / Rolling Swagger \u2014 Right reach / flight",
+            "file": "shark-movement-v1/walk_far.png",
+            "sha256": "fcc237d14ef9e6a842797e9e8aa3a4fa084d35aaf96792da285f66ad2bd379ce",
+            "generation_file": "exec-aedd0ff2-a576-4ac6-abbc-16e13ecc9fcd.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              482
+            ],
+            "bounds": [
+              162,
+              19,
+              585,
+              483
+            ],
+            "body_height": 480,
+            "support_leg": "left",
+            "gait_half": "left"
           }
         ]
       },
       "run": {
-        "file": "locomotion-v1/shark-run.png",
-        "columns": 4,
+        "file": "shark-movement-v1/run_near.png",
+        "sha256": "8fc0e1c82ce1f1b56186be1df33f61807fb4d422caadb9690b9a37f33ffcd1d2",
+        "generation_file": "exec-d57d3aec-579a-4bc8-b35e-680e22a07f6c.png",
+        "columns": 2,
         "rows": 2,
-        "body_height": 440,
         "size": [
           1536,
           1024
         ],
-        "sha256": "44c730bbd3008da01f83197f7e13bc8c31d5b6b9d0e62b8f75dd74067e3bd185",
-        "generation_file": "exec-eec61089-f4fa-4e59-84c5-bad9e2f03746.png",
+        "body_height": 480,
         "transparent_samples": [
           [
             0,
@@ -11204,152 +11273,212 @@
           [
             0,
             1023
+          ],
+          [
+            1535,
+            1023
           ]
         ],
         "frames": [
           {
+            "name": "A / Shoulder Cruise \u2014 Right contact",
+            "file": "shark-movement-v1/run_near.png",
+            "sha256": "8fc0e1c82ce1f1b56186be1df33f61807fb4d422caadb9690b9a37f33ffcd1d2",
+            "generation_file": "exec-d57d3aec-579a-4bc8-b35e-680e22a07f6c.png",
             "region": [
               0,
               0,
-              384,
+              768,
               512
             ],
             "pivot": [
-              202,
-              474
+              410,
+              492
             ],
             "bounds": [
-              54,
-              84,
-              358,
-              477
-            ]
+              183,
+              19,
+              576,
+              493
+            ],
+            "body_height": 480,
+            "support_leg": "right",
+            "gait_half": "right"
           },
           {
-            "region": [
-              384,
-              0,
-              384,
-              512
-            ],
-            "pivot": [
-              202,
-              474
-            ],
-            "bounds": [
-              57,
-              111,
-              356,
-              477
-            ]
-          },
-          {
+            "name": "A / Shoulder Cruise \u2014 Right load",
+            "file": "shark-movement-v1/run_near.png",
+            "sha256": "8fc0e1c82ce1f1b56186be1df33f61807fb4d422caadb9690b9a37f33ffcd1d2",
+            "generation_file": "exec-d57d3aec-579a-4bc8-b35e-680e22a07f6c.png",
             "region": [
               768,
               0,
-              384,
+              768,
               512
             ],
             "pivot": [
-              202,
-              474
+              410,
+              493
             ],
             "bounds": [
-              27,
-              80,
-              350,
-              473
-            ]
+              149,
+              34,
+              568,
+              494
+            ],
+            "body_height": 480,
+            "support_leg": "right",
+            "gait_half": "right"
           },
           {
-            "region": [
-              1152,
-              0,
-              384,
-              512
-            ],
-            "pivot": [
-              202,
-              474
-            ],
-            "bounds": [
-              41,
-              68,
-              356,
-              414
-            ]
-          },
-          {
+            "name": "A / Shoulder Cruise \u2014 Left passing / drive",
+            "file": "shark-movement-v1/run_near.png",
+            "sha256": "8fc0e1c82ce1f1b56186be1df33f61807fb4d422caadb9690b9a37f33ffcd1d2",
+            "generation_file": "exec-d57d3aec-579a-4bc8-b35e-680e22a07f6c.png",
             "region": [
               0,
               512,
-              384,
+              768,
               512
             ],
             "pivot": [
-              202,
-              474
+              410,
+              491
             ],
             "bounds": [
-              54,
-              85,
-              358,
-              477
-            ]
+              170,
+              13,
+              595,
+              492
+            ],
+            "body_height": 480,
+            "support_leg": "right",
+            "gait_half": "right"
           },
           {
-            "region": [
-              384,
-              512,
-              384,
-              512
-            ],
-            "pivot": [
-              202,
-              474
-            ],
-            "bounds": [
-              57,
-              112,
-              356,
-              478
-            ]
-          },
-          {
+            "name": "A / Shoulder Cruise \u2014 Left reach / flight",
+            "file": "shark-movement-v1/run_near.png",
+            "sha256": "8fc0e1c82ce1f1b56186be1df33f61807fb4d422caadb9690b9a37f33ffcd1d2",
+            "generation_file": "exec-d57d3aec-579a-4bc8-b35e-680e22a07f6c.png",
             "region": [
               768,
               512,
-              384,
+              768,
               512
             ],
             "pivot": [
-              202,
-              474
+              410,
+              493
             ],
             "bounds": [
-              20,
-              80,
-              352,
-              475
-            ]
+              147,
+              14,
+              582,
+              420
+            ],
+            "body_height": 480,
+            "support_leg": "none",
+            "gait_half": "right"
           },
           {
+            "name": "A / Shoulder Cruise \u2014 Left contact",
+            "file": "shark-movement-v1/run_far.png",
+            "sha256": "d14687c37e7d670b21f575048e16156701c81f24084c57a241357da5cc056673",
+            "generation_file": "exec-14a000a2-4a3b-4158-ac1b-4984305ecdcd.png",
             "region": [
-              1152,
-              512,
-              384,
+              0,
+              0,
+              768,
               512
             ],
             "pivot": [
-              202,
-              474
+              410,
+              492
             ],
             "bounds": [
-              44,
-              69,
-              358,
-              405
-            ]
+              210,
+              15,
+              598,
+              493
+            ],
+            "body_height": 480,
+            "support_leg": "left",
+            "gait_half": "left"
+          },
+          {
+            "name": "A / Shoulder Cruise \u2014 Left load",
+            "file": "shark-movement-v1/run_far.png",
+            "sha256": "d14687c37e7d670b21f575048e16156701c81f24084c57a241357da5cc056673",
+            "generation_file": "exec-14a000a2-4a3b-4158-ac1b-4984305ecdcd.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              492
+            ],
+            "bounds": [
+              144,
+              33,
+              541,
+              493
+            ],
+            "body_height": 480,
+            "support_leg": "left",
+            "gait_half": "left"
+          },
+          {
+            "name": "A / Shoulder Cruise \u2014 Right passing / drive",
+            "file": "shark-movement-v1/run_far.png",
+            "sha256": "d14687c37e7d670b21f575048e16156701c81f24084c57a241357da5cc056673",
+            "generation_file": "exec-14a000a2-4a3b-4158-ac1b-4984305ecdcd.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              492
+            ],
+            "bounds": [
+              193,
+              8,
+              617,
+              493
+            ],
+            "body_height": 480,
+            "support_leg": "left",
+            "gait_half": "left"
+          },
+          {
+            "name": "A / Shoulder Cruise \u2014 Right reach / flight",
+            "file": "shark-movement-v1/run_far.png",
+            "sha256": "d14687c37e7d670b21f575048e16156701c81f24084c57a241357da5cc056673",
+            "generation_file": "exec-14a000a2-4a3b-4158-ac1b-4984305ecdcd.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              493
+            ],
+            "bounds": [
+              114,
+              10,
+              611,
+              406
+            ],
+            "body_height": 480,
+            "support_leg": "none",
+            "gait_half": "left"
           }
         ]
       },
@@ -12892,6 +13021,551 @@
         "launcher": "2 / Low Scoop",
         "motion": "Approved fluidity study",
         "source": "references/frame-data/ky-kiske-2026-11-18"
+      },
+      "idle": {
+        "file": "shark-movement-v1/idle.png",
+        "sha256": "3e361ddf48eef682d96f277ddc6aaf633c02d3600060531d5a93c571aef1e4b4",
+        "generation_file": "exec-03987e74-4362-4d9a-b49a-2152406dbf39.png",
+        "columns": 2,
+        "rows": 2,
+        "size": [
+          1536,
+          1024
+        ],
+        "body_height": 480,
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "A / Lazy Tap \u2014 rest",
+            "file": "shark-movement-v1/idle.png",
+            "sha256": "3e361ddf48eef682d96f277ddc6aaf633c02d3600060531d5a93c571aef1e4b4",
+            "generation_file": "exec-03987e74-4362-4d9a-b49a-2152406dbf39.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              484
+            ],
+            "bounds": [
+              196,
+              10,
+              545,
+              485
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "A / Lazy Tap \u2014 lift",
+            "file": "shark-movement-v1/idle.png",
+            "sha256": "3e361ddf48eef682d96f277ddc6aaf633c02d3600060531d5a93c571aef1e4b4",
+            "generation_file": "exec-03987e74-4362-4d9a-b49a-2152406dbf39.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              484
+            ],
+            "bounds": [
+              158,
+              10,
+              527,
+              485
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "A / Lazy Tap \u2014 tap",
+            "file": "shark-movement-v1/idle.png",
+            "sha256": "3e361ddf48eef682d96f277ddc6aaf633c02d3600060531d5a93c571aef1e4b4",
+            "generation_file": "exec-03987e74-4362-4d9a-b49a-2152406dbf39.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              485
+            ],
+            "bounds": [
+              190,
+              15,
+              547,
+              486
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "A / Lazy Tap \u2014 settle",
+            "file": "shark-movement-v1/idle.png",
+            "sha256": "3e361ddf48eef682d96f277ddc6aaf633c02d3600060531d5a93c571aef1e4b4",
+            "generation_file": "exec-03987e74-4362-4d9a-b49a-2152406dbf39.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              485
+            ],
+            "bounds": [
+              176,
+              10,
+              538,
+              486
+            ],
+            "body_height": 480
+          }
+        ],
+        "frame_ticks": [
+          72,
+          12,
+          6,
+          18
+        ]
+      },
+      "back_walk": {
+        "file": "shark-movement-v1/back_walk_near.png",
+        "sha256": "44c0a77a9c7100a9e648499e83c1adff8b342a8719244c3ec8644889ab2c7e81",
+        "generation_file": "exec-a4f9ce76-7208-44d9-9cbd-a714e170c0ac.png",
+        "columns": 2,
+        "rows": 2,
+        "size": [
+          1536,
+          1024
+        ],
+        "body_height": 480,
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "A / Unbothered Retreat \u2014 Right contact",
+            "file": "shark-movement-v1/back_walk_near.png",
+            "sha256": "44c0a77a9c7100a9e648499e83c1adff8b342a8719244c3ec8644889ab2c7e81",
+            "generation_file": "exec-a4f9ce76-7208-44d9-9cbd-a714e170c0ac.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              483
+            ],
+            "bounds": [
+              206,
+              10,
+              562,
+              484
+            ],
+            "body_height": 480,
+            "support_leg": "right",
+            "gait_half": "right"
+          },
+          {
+            "name": "A / Unbothered Retreat \u2014 Right load",
+            "file": "shark-movement-v1/back_walk_near.png",
+            "sha256": "44c0a77a9c7100a9e648499e83c1adff8b342a8719244c3ec8644889ab2c7e81",
+            "generation_file": "exec-a4f9ce76-7208-44d9-9cbd-a714e170c0ac.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              484
+            ],
+            "bounds": [
+              179,
+              10,
+              533,
+              485
+            ],
+            "body_height": 480,
+            "support_leg": "right",
+            "gait_half": "right"
+          },
+          {
+            "name": "A / Unbothered Retreat \u2014 Left passing / drive",
+            "file": "shark-movement-v1/back_walk_near.png",
+            "sha256": "44c0a77a9c7100a9e648499e83c1adff8b342a8719244c3ec8644889ab2c7e81",
+            "generation_file": "exec-a4f9ce76-7208-44d9-9cbd-a714e170c0ac.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              490
+            ],
+            "bounds": [
+              209,
+              7,
+              561,
+              491
+            ],
+            "body_height": 480,
+            "support_leg": "right",
+            "gait_half": "right"
+          },
+          {
+            "name": "A / Unbothered Retreat \u2014 Left reach / flight",
+            "file": "shark-movement-v1/back_walk_near.png",
+            "sha256": "44c0a77a9c7100a9e648499e83c1adff8b342a8719244c3ec8644889ab2c7e81",
+            "generation_file": "exec-a4f9ce76-7208-44d9-9cbd-a714e170c0ac.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              487
+            ],
+            "bounds": [
+              180,
+              11,
+              536,
+              488
+            ],
+            "body_height": 480,
+            "support_leg": "right",
+            "gait_half": "right"
+          },
+          {
+            "name": "A / Unbothered Retreat \u2014 Left contact",
+            "file": "shark-movement-v1/back_walk_far.png",
+            "sha256": "83fad0c8ccf8259b89524c742e035d1ccbd01ebc61b71170a9acb7766b5c82be",
+            "generation_file": "exec-7b807cc3-8618-48f3-b86a-4922b95fb048.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              486
+            ],
+            "bounds": [
+              201,
+              9,
+              571,
+              487
+            ],
+            "body_height": 480,
+            "support_leg": "left",
+            "gait_half": "left"
+          },
+          {
+            "name": "A / Unbothered Retreat \u2014 Left load",
+            "file": "shark-movement-v1/back_walk_far.png",
+            "sha256": "83fad0c8ccf8259b89524c742e035d1ccbd01ebc61b71170a9acb7766b5c82be",
+            "generation_file": "exec-7b807cc3-8618-48f3-b86a-4922b95fb048.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              487
+            ],
+            "bounds": [
+              178,
+              9,
+              542,
+              488
+            ],
+            "body_height": 480,
+            "support_leg": "left",
+            "gait_half": "left"
+          },
+          {
+            "name": "A / Unbothered Retreat \u2014 Right passing / drive",
+            "file": "shark-movement-v1/back_walk_far.png",
+            "sha256": "83fad0c8ccf8259b89524c742e035d1ccbd01ebc61b71170a9acb7766b5c82be",
+            "generation_file": "exec-7b807cc3-8618-48f3-b86a-4922b95fb048.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              484
+            ],
+            "bounds": [
+              211,
+              8,
+              571,
+              485
+            ],
+            "body_height": 480,
+            "support_leg": "left",
+            "gait_half": "left"
+          },
+          {
+            "name": "A / Unbothered Retreat \u2014 Right reach / flight",
+            "file": "shark-movement-v1/back_walk_far.png",
+            "sha256": "83fad0c8ccf8259b89524c742e035d1ccbd01ebc61b71170a9acb7766b5c82be",
+            "generation_file": "exec-7b807cc3-8618-48f3-b86a-4922b95fb048.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              410,
+              486
+            ],
+            "bounds": [
+              158,
+              9,
+              539,
+              487
+            ],
+            "body_height": 480,
+            "support_leg": "left",
+            "gait_half": "left"
+          }
+        ]
+      },
+      "backdash": {
+        "file": "shark-movement-v1/backdash.png",
+        "sha256": "605ef6fd8842c755d0d2782e5e18231454f0a04b9895929a60cb3574b8efce20",
+        "generation_file": "exec-ddf39ba9-bbd2-4825-9881-6c537f1807d1.png",
+        "columns": 3,
+        "rows": 2,
+        "size": [
+          1536,
+          1024
+        ],
+        "body_height": 480,
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "B / Shoulder Slip \u2014 load",
+            "file": "shark-movement-v1/backdash.png",
+            "sha256": "605ef6fd8842c755d0d2782e5e18231454f0a04b9895929a60cb3574b8efce20",
+            "generation_file": "exec-ddf39ba9-bbd2-4825-9881-6c537f1807d1.png",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              260,
+              474
+            ],
+            "bounds": [
+              78,
+              96,
+              429,
+              475
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "B / Shoulder Slip \u2014 push",
+            "file": "shark-movement-v1/backdash.png",
+            "sha256": "605ef6fd8842c755d0d2782e5e18231454f0a04b9895929a60cb3574b8efce20",
+            "generation_file": "exec-ddf39ba9-bbd2-4825-9881-6c537f1807d1.png",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              476
+            ],
+            "bounds": [
+              28,
+              94,
+              427,
+              477
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "B / Shoulder Slip \u2014 flight",
+            "file": "shark-movement-v1/backdash.png",
+            "sha256": "605ef6fd8842c755d0d2782e5e18231454f0a04b9895929a60cb3574b8efce20",
+            "generation_file": "exec-ddf39ba9-bbd2-4825-9881-6c537f1807d1.png",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              480
+            ],
+            "bounds": [
+              37,
+              22,
+              423,
+              456
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "B / Shoulder Slip \u2014 catch",
+            "file": "shark-movement-v1/backdash.png",
+            "sha256": "605ef6fd8842c755d0d2782e5e18231454f0a04b9895929a60cb3574b8efce20",
+            "generation_file": "exec-ddf39ba9-bbd2-4825-9881-6c537f1807d1.png",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              260,
+              465
+            ],
+            "bounds": [
+              47,
+              30,
+              439,
+              466
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "B / Shoulder Slip \u2014 absorb",
+            "file": "shark-movement-v1/backdash.png",
+            "sha256": "605ef6fd8842c755d0d2782e5e18231454f0a04b9895929a60cb3574b8efce20",
+            "generation_file": "exec-ddf39ba9-bbd2-4825-9881-6c537f1807d1.png",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              250,
+              463
+            ],
+            "bounds": [
+              42,
+              91,
+              408,
+              464
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "B / Shoulder Slip \u2014 reset",
+            "file": "shark-movement-v1/backdash.png",
+            "sha256": "605ef6fd8842c755d0d2782e5e18231454f0a04b9895929a60cb3574b8efce20",
+            "generation_file": "exec-ddf39ba9-bbd2-4825-9881-6c537f1807d1.png",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              245,
+              465
+            ],
+            "bounds": [
+              36,
+              89,
+              400,
+              466
+            ],
+            "body_height": 480
+          }
+        ]
+      },
+      "movement_selection": {
+        "idle": "A / Lazy Tap",
+        "walk": "B / Rolling Swagger",
+        "back_walk": "A / Unbothered Retreat",
+        "backdash": "B / Shoulder Slip",
+        "run": "A / Shoulder Cruise",
+        "status": "selected_by_user",
+        "walk_ticks_at_default_speed": 5,
+        "run_ticks_at_default_speed": 3,
+        "body_height": 480,
+        "idle_cycle_ticks": 108,
+        "grounded": true
       }
     },
     {

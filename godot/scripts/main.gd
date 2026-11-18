@@ -809,8 +809,8 @@ func show_sprite_review(clip: int = 0) -> void:
 	layout.add_child(pickers)
 	var fighter_picker := option(pickers, "Fighter", CombatModel.CHARACTERS)
 	var button_picker := option(pickers, "Button", CombatModel.BUTTONS)
-	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard", "Dedicated move", "Run / step dash", "Rolling stance", "Soft knockdown / get up", "Hard knockdown / get up", "Backward drift", "2Hs / full animation"])
-	clip_picker.select(clampi(clip, 0, 16))
+	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard", "Dedicated move", "Run / step dash", "Rolling stance", "Soft knockdown / get up", "Hard knockdown / get up", "Backward walk", "2Hs / full animation", "Backdash"])
+	clip_picker.select(clampi(clip, 0, 17))
 	var signature_picker := option(pickers, "Signature", ["1", "2", "3", "4"])
 	fighter_picker.select(edit_character.selected)
 	var options := row(layout)
@@ -846,17 +846,19 @@ func show_sprite_review(clip: int = 0) -> void:
 		clip_picker.set_item_disabled(11, fighter_picker.selected < 2)
 		if clip_picker.selected == 10 and fighter_picker.selected < 2: clip_picker.select(0)
 		if clip_picker.selected == 11 and fighter_picker.selected < 2: clip_picker.select(0)
-		clip_picker.set_item_disabled(15, fighter_picker.selected != 2)
-		if clip_picker.selected == 15 and fighter_picker.selected != 2: clip_picker.select(0)
+		clip_picker.set_item_disabled(15, fighter_picker.selected not in [2, 4])
+		if clip_picker.selected == 15 and fighter_picker.selected not in [2, 4]: clip_picker.select(0)
+		clip_picker.set_item_disabled(17, fighter_picker.selected != 4)
+		if clip_picker.selected == 17 and fighter_picker.selected != 4: clip_picker.select(0)
 		clip_picker.set_item_disabled(12, fighter_picker.selected != 3)
 		if clip_picker.selected == 12 and fighter_picker.selected != 3: clip_picker.select(0)
 		clip_picker.set_item_disabled(16, fighter_picker.selected not in [2, 4])
 		if clip_picker.selected == 16 and fighter_picker.selected not in [2, 4]: clip_picker.select(0)
 		var attack_clip: bool = clip_picker.selected == 16
-		var locomotion: bool = fighter_picker.selected >= 2 and clip_picker.selected in [5, 11, 12, 15]
+		var locomotion: bool = fighter_picker.selected >= 2 and clip_picker.selected in [5, 11, 12, 15, 17]
 		var recovery_clip: bool = clip_picker.selected in [13, 14]
-		var idle_clip: bool = fighter_picker.selected == 2 and clip_picker.selected in [4, 8]
-		var frame_count: int = 6 if recovery_clip else 4 if clip_picker.selected == 12 or idle_clip else 8
+		var idle_clip: bool = (fighter_picker.selected == 2 and clip_picker.selected in [4, 8]) or (fighter_picker.selected == 4 and clip_picker.selected == 4)
+		var frame_count: int = 6 if recovery_clip or clip_picker.selected == 17 else 4 if clip_picker.selected == 12 or idle_clip else 8
 		loop_toggle.visible = locomotion or recovery_clip or idle_clip or attack_clip
 		frame_picker.visible = locomotion or recovery_clip or idle_clip or attack_clip
 		for frame in frame_picker.item_count: frame_picker.set_item_disabled(frame, frame >= frame_count)
@@ -892,7 +894,7 @@ func show_sprite_review(clip: int = 0) -> void:
 				var idle_phase := "idle" if clip_picker.selected == 4 else "crouch_idle"
 				var frame := (frame_picker.selected + i) % frame_count
 				var ticks: int = frame * 20 + (loop_ticks[0] % 20 if loop_toggle.button_pressed else 0)
-				captions[i].text = "%s · FRAME %d / 4" % ["A / OPEN CURRENT" if clip_picker.selected == 4 else "H / UNCOILED VAPOR", frame + 1]
+				captions[i].text = "%s · FRAME %d / 4" % [FighterArt.sheet(fighter_picker.selected, idle_phase).frames[frame].name.to_upper(), frame + 1]
 				previews[i].present(fighter_picker.selected, idle_phase, frame, previews[i].facing, ticks)
 			elif recovery_clip:
 				var recovery_phase := "knockdown_back" if clip_picker.selected == 13 else "knockdown"
@@ -901,7 +903,7 @@ func show_sprite_review(clip: int = 0) -> void:
 				captions[i].text = "%s · FRAME %d / %d" % [pose_name.to_upper(), frame + 1, frame_count]
 				previews[i].present(fighter_picker.selected, recovery_phase, frame, previews[i].facing)
 			elif locomotion:
-				var motion_phase := "stance" if clip_picker.selected == 12 else "run" if clip_picker.selected == 11 else "back_walk" if clip_picker.selected == 15 else "walk"
+				var motion_phase := "backdash" if clip_picker.selected == 17 else "stance" if clip_picker.selected == 12 else "run" if clip_picker.selected == 11 else "back_walk" if clip_picker.selected == 15 else "walk"
 				var frame := (frame_picker.selected + i) % frame_count
 				captions[i].text = "%s · FRAME %d / %d" % [motion_phase.to_upper(), frame + 1, frame_count]
 				var interval := 5 if clip_picker.selected == 11 else 10
@@ -941,9 +943,13 @@ func show_sprite_review(clip: int = 0) -> void:
 	loop_timer.timeout.connect(func():
 		if not loop_toggle.visible or not loop_toggle.button_pressed: return
 		loop_ticks[0] += 1
-		var idle_clip: bool = fighter_picker.selected == 2 and clip_picker.selected in [4, 8]
+		var idle_clip: bool = (fighter_picker.selected == 2 and clip_picker.selected in [4, 8]) or (fighter_picker.selected == 4 and clip_picker.selected == 4)
 		if idle_clip:
-			if loop_ticks[0] % 20 == 0: frame_picker.select((frame_picker.selected + 1) % 4)
+			frame_picker.select(FighterArt.idle_pose(fighter_picker.selected, loop_ticks[0]) if clip_picker.selected == 4 else (loop_ticks[0] / 20) % 4)
+			update.call()
+		elif clip_picker.selected == 17:
+			var duration: int = maxi(1, int(model.data().characters[fighter_picker.selected].movement.backFrames) - 1)
+			frame_picker.select(mini(5, int((loop_ticks[0] % duration) * 5 / maxi(1, duration - 1))))
 			update.call()
 		elif fighter_picker.selected == 2 and clip_picker.selected in [5, 11, 15]:
 			var interval := 5 if clip_picker.selected == 11 else 10

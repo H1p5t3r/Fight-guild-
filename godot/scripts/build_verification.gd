@@ -88,6 +88,25 @@ func timing_fixture() -> Dictionary:
 	data.characters[1].moves[3].reach = 100 # Dummy Hs whiffs so its recovery can be punished.
 	return data
 
+func verify_shark_movement() -> void:
+	var previous: int = game.edit_character.selected
+	game.edit_character.select(4)
+	for clip in [4, 5, 15, 17, 11]:
+		game.show_sprite_review(clip)
+		var count := 0
+		for child in game.get_children():
+			if not child is AcceptDialog or child == game.file_dialog: continue
+			for control in child.find_children("*", "Control", true, false):
+				if control is FighterPreview:
+					check(control.phase == {4: "idle", 5: "walk", 15: "back_walk", 17: "backdash", 11: "run"}[clip] and control.pose == count, "Shark review missed a selected movement")
+					for pose in FighterArt.sheet(4, control.phase).frames.size():
+						check(FighterArt.texture(4, control.phase, pose).atlas != null, "Missing packaged Shark movement texture")
+					count += 1
+			child.queue_free()
+		check(count == 2, "Shark movement review needs consecutive keys")
+		await tree.process_frame
+	game.edit_character.select(previous)
+
 func verify_smoke_attacks() -> void:
 	for phase in ["attack_animation", "backdraft_fx", "sword_fx"]:
 		for pose in FighterArt.sheet(2, phase).frames.size():
@@ -350,6 +369,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	await verify_signatures()
 	await verify_recovery_art()
 	await verify_smoke_idles()
+	await verify_shark_movement()
 	await verify_smoke_attacks()
 	verify_foreground_draw()
 	game.show_controls()

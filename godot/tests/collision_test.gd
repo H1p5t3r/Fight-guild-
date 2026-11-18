@@ -38,5 +38,5 @@ func _initialize() -> void:
 			var move := model.move(character, slot)
 			check(move.startup >= CombatModel.startup_minimum(move), "Invalid shipped startup")
 			check(move.hitboxBack < move.reach and move.height > 0, "Empty shipped hitbox")
-	print("Godot compiled collision: ", failures, " failures; 521 pose mappings, push profiles, 270 move slots")
+	print("Godot compiled collision: ", failures, " failures; 539 pose mappings, push profiles, 270 move slots")
 	quit(1 if failures else 0)

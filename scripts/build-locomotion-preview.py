@@ -17,7 +17,8 @@ for character in (5, 4):
         sheet = source[phase]
         fighter['poses'][phase] = sheet
         fighter['hurt'][phase] = collision['fighters'][character]['poses'][phase]
-        images[sheet['file']] = 'data:image/png;base64,' + base64.b64encode((assets / sheet['file']).read_bytes()).decode()
+        for file in {sheet['file'], *(frame.get('file', sheet['file']) for frame in sheet['frames'])}:
+            images[file] = 'data:image/png;base64,' + base64.b64encode((assets / file).read_bytes()).decode()
     fighters.append(fighter)
 
 html = r'''<!doctype html>
@@ -32,15 +33,15 @@ header,main,footer{max-width:1240px;margin:auto}small{color:#ddb778;letter-spaci
 <header><small>FIGHT GUILD / MOVEMENT STUDIES</small><h1>Stalker. Shoulder Rest.</h1><p>Separate eight-frame walk and run loops built from the selected combat stances.</p>
 <div class="tools"><label>Movement <select id="phase"><option value="ready">Combat stance</option><option value="walk" selected>Walk</option><option value="run">Run</option></select></label><button id="play" aria-pressed="true">Pause</button><label>Speed <input id="speed" type="range" min="0.25" max="1.5" value="1" step="0.25"></label><label><input id="mirror" type="checkbox"> Face left</label><label><input id="boxes" type="checkbox"> Hurtboxes</label><label>Frame <input id="frame" type="range" min="0" max="7" step="1" value="0"></label><output id="count">1 / 8</output></div></header>
 <main class="pair"><article><h2>FILLET <span>A / STALKER</span></h2><canvas width="600" height="440" aria-label="Fillet movement preview"></canvas><div class="caption">Low forward pressure · controlled knives · loaded footfalls</div></article><article><h2>SHARK <span>F / SHOULDER REST</span></h2><canvas width="600" height="440" aria-label="Shark movement preview"></canvas><div class="caption">Confident shoulder carry · blue sports glasses · narrow flowing hair</div></article></main>
-<footer><p>Preview loops run in place. The game uses travelled distance to advance the same frames. Blue rectangles show the three body hurtboxes; weapons, hair and clothing trails do not extend them. This file works offline.</p></footer>
+<footer><p>Preview loops run in place. The game uses travelled distance to advance the same frames. Blue rectangles show the fitted body hurtboxes, up to four per pose; weapons, hair and clothing trails do not extend them. This file works offline.</p></footer>
 <script>const pack=__PACK__;
 const $=id=>document.getElementById(id),images={},canvases=[...document.querySelectorAll('canvas')];
 let playing=true,clock=0,frame=0,last=0;
 Promise.all(Object.entries(pack.images).map(async([key,src])=>{const image=new Image();image.src=src;await image.decode();images[key]=image;})).then(()=>requestAnimationFrame(tick));
 function draw(){const phase=$('phase').value;const index=phase==='ready'?0:frame;$('frame').disabled=phase==='ready';$('count').textContent=`${index+1} / ${phase==='ready'?1:8}`;
- pack.fighters.forEach((fighter,i)=>{const ctx=canvases[i].getContext('2d'),sheet=fighter.poses[phase],tile=sheet.frames[index],scale=150/sheet.body_height*2.05,facing=$('mirror').checked?-1:1;
+ pack.fighters.forEach((fighter,i)=>{const ctx=canvases[i].getContext('2d'),sheet=fighter.poses[phase],tile=sheet.frames[index],scale=150/(tile.body_height??sheet.body_height)*2.05,facing=$('mirror').checked?-1:1;
  ctx.clearRect(0,0,600,440);ctx.strokeStyle='#2c3d47';ctx.lineWidth=1;for(let x=0;x<600;x+=50){ctx.beginPath();ctx.moveTo(x,45);ctx.lineTo(x,390);ctx.stroke();}ctx.strokeStyle='#82909a';ctx.beginPath();ctx.moveTo(18,390);ctx.lineTo(582,390);ctx.stroke();
- ctx.save();ctx.translate(300,390);ctx.scale(facing,1);const [x,y,w,h]=tile.region;ctx.drawImage(images[sheet.file],x,y,w,h,-tile.pivot[0]*scale,-tile.pivot[1]*scale,w*scale,h*scale);
+ ctx.save();ctx.translate(300,390);ctx.scale(facing,1);const [x,y,w,h]=tile.region;ctx.drawImage(images[tile.file??sheet.file],x,y,w,h,-tile.pivot[0]*scale,-tile.pivot[1]*scale,w*scale,h*scale);
  if($('boxes').checked){ctx.strokeStyle='#7bd5ef';ctx.fillStyle='#7bd5ef18';for(const b of Object.values(fighter.hurt[phase][index].hurt)){const x=(b[0]-tile.pivot[0])*scale,y=(b[1]-tile.pivot[1])*scale,w=(b[2]-b[0])*scale,h=(b[3]-b[1])*scale;ctx.fillRect(x,y,w,h);ctx.strokeRect(x,y,w,h);}}
  ctx.restore();ctx.fillStyle='#ddb778';ctx.fillRect(297,387,6,6);
  });}
@@ -51,4 +52,4 @@ $('phase').onchange=()=>{frame=0;clock=0;$('frame').value=0;};
 </script></html>'''
 output = ROOT / 'exports/FightGuild-Movement-Preview.html'
 output.write_text(html.replace('__PACK__', json.dumps({'fighters': fighters, 'images': images}, separators=(',', ':'))))
-print(f'{output.relative_to(ROOT)}: {output.stat().st_size / 1024 / 1024:.1f} MiB, six original PNGs, no network dependencies')
+print(f'{output.relative_to(ROOT)}: {output.stat().st_size / 1024 / 1024:.1f} MiB, {len(images)} original PNGs, no network dependencies')

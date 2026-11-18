@@ -36,7 +36,7 @@ static void poses() {
     for(int c=4;c<6;++c) {
         s.reset(c,c,0,0);
         auto& f=s.world.players[0];
-        CHECK(s.pose(f).phase==5);
+        CHECK(s.pose(f).phase==(c==4?11:5));
         s.step(Right,0);
         CHECK(s.pose(f).phase==6);
         const auto saved=s.world;
@@ -54,12 +54,12 @@ static void poses() {
                 f.x=(i+1)*s.mobility[c].v[RunSpeed]*3;
                 CHECK(s.pose(f).index>=0&&s.pose(f).index<8);
                 visited|=1<<s.pose(f).index;
-                CHECK(s.box_count(0,HurtBox)==3);
+                CHECK(s.box_count(0,HurtBox)==(c==4?4:3));
             }
             CHECK(visited==255);
         }
         f.vx=0;
-        CHECK(s.pose(f).phase==5);
+        CHECK(s.pose(f).phase==(c==4?11:5));
         CHECK(Simulation::pose_box_count(c,5,1)==0);
         CHECK(Simulation::pose_box_count(c,8,0)==0);
     }

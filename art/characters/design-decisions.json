@@ -84,6 +84,25 @@
         ],
         "motionStudy": "art/characters/shark-normal-options-v1/low-scoop-fluidity.png",
         "motionStudyStatus": "selected_by_user"
+      },
+      "movement": {
+        "status": "selected_by_user",
+        "source_directory": "art/characters/shark-movement-options-v1",
+        "production_directory": "godot/assets/fighters/shark-movement-v1",
+        "selection": {
+          "idle": "A / Lazy Tap",
+          "walk": "B / Rolling Swagger",
+          "back_walk": "A / Unbothered Retreat",
+          "backdash": "B / Shoulder Slip",
+          "run": "A / Shoulder Cruise"
+        },
+        "user_instruction": "Idle A, walk B, ball walk A, backdash B, and run A (ensure proper leg alternating).",
+        "requirements": [
+          "Idle A taps the wooden hook handle against the shoulder and looks down at the opponent.",
+          "Forward/backward walks and run use both actual gait halves, with alternating support legs.",
+          "Keep Shoulder Rest identity, blue sports glasses, low-volume long white hair and fixed weapon dimensions.",
+          "No transition smear frames."
+        ]
       }
     },
     "smoke": {

@@ -535,9 +535,11 @@ static int pose_offset(int phase,int index) {
 Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     // Presentation and anatomical boxes share the saved action clock. No render
     // timer can advance the pose during hitstop or after a rollback restore.
-    const int idle_key=((f.idle_time+tick_offset)/20)%4;
-    const Pose ready=f.stance&&f.character==3?Pose{8,((f.idle_time+tick_offset)/7)%4}:f.character==2?Pose{11,idle_key}:Pose{LOCOMOTION_POSES[f.character]?5:0,0};
-    const Pose crouch=f.character==2?Pose{12,idle_key}:Pose{0,11};
+    const auto& idle_ticks=IDLE_FRAME_TICKS[f.character];
+    int idle_key=0,idle_elapsed=max(0,f.idle_time+tick_offset)%(idle_ticks[0]+idle_ticks[1]+idle_ticks[2]+idle_ticks[3]);
+    while(idle_key<3&&idle_elapsed>=idle_ticks[idle_key]) idle_elapsed-=idle_ticks[idle_key++];
+    const Pose ready=f.stance&&f.character==3?Pose{8,((f.idle_time+tick_offset)/7)%4}:POSE_COUNTS[f.character][11]?Pose{11,idle_key}:Pose{LOCOMOTION_POSES[f.character]?5:0,0};
+    const Pose crouch=f.character==2?Pose{12,((f.idle_time+tick_offset)/20)%4}:Pose{0,11};
     const int recovery_phase=f.knockdown==HardKnockdown?9:10;
     if(f.reaction==Downed) return {recovery_phase,0};
     if(f.reaction==Waking) {
@@ -582,15 +584,21 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     if(f.stance) return ready;
     if(f.raw&Down) return crouch;
     if(LOCOMOTION_POSES[f.character]) {
+        // Dedicated grounded backdash keys use the saved dash age. They do not
+        // turn the visual hop into a jump, alter its speed, or grant invulnerability.
+        const int backdash_keys=POSE_COUNTS[f.character][15];
+        if(backdash_keys&&f.dash>0&&!f.dash_air&&f.dash_backwards&&f.dash_kind==StepDash)
+            return {15,min(backdash_keys-1,max(0,f.dash_age-1+tick_offset)*(backdash_keys-1)/max(1,mobility[f.character].v[BackFrames]-2))};
         // Distance-driven gait needs no render clock or extra rollback state.
-        // It freezes during hitstop, reverses on back-walk and follows acceleration.
+        // It freezes during hitstop and follows acceleration. Dedicated backward
+        // cycles advance chronologically with retreat, rather than playing in reverse.
         if(f.dash>0&&f.character==3) return {7,min(7,f.dash_age*8/max(1,mobility[f.character].v[f.dash_direction==f.facing?StepFrames:BackFrames]))};
         if(!f.vx) return ready;
-        const int phase=f.running?7:f.character==2&&f.vx*f.facing<0?13:6;
+        const int phase=f.running?7:POSE_COUNTS[f.character][13]&&f.vx*f.facing<0?13:6;
         const auto& profile=mobility[f.character];
         const int cadence=f.character==2?(f.running?5:10):(f.running?3:5);
         const int stride=max(1,profile.v[f.running?RunSpeed:WalkSpeed])*cadence;
-        const int distance=f.facing==1?f.x:-f.x;
+        const int distance=(f.facing==1?f.x:-f.x)*(phase==13?-1:1);
         const int step=distance>=0?distance/stride:-((-distance+stride-1)/stride);
         return {phase,(step%8+8)%8};
     }

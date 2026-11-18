@@ -43,7 +43,7 @@ func _initialize() -> void:
 				var point := Vector2i(sample[0], sample[1])
 				check(source.get_pixelv(point).a < 0.03, "Atlas background is not transparent: " + path)
 			var signatures: int = 32 if c == 3 else 24 if c == 2 else 20 if c == 4 else 4
-			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8, "attack_animation": 26 if c == 4 else 32}[phase]
+			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8, "attack_animation": 26 if c == 4 else 32, "backdash": 6}[phase]
 			check(sheet.frames.size() == count, "Missing poses: " + path)
 			for pose in sheet.frames.size():
 				if sheet.frames[pose].has("file"):
@@ -106,5 +106,5 @@ func _initialize() -> void:
 		check(FighterArt.projectile_art(2, 14, 36-age, age) == FighterArt.projectile_art(2, 25, 120-age, age), "Near/far pillars must use identical art at the same age")
 	check(FighterArt.projectile_art(2, 21, 20).file == "smoke-v1/projectile.png", "j.D lost its ember")
 	sprite.free()
-	print("Godot sprite catalog: ", failures, " failures; six fighters, 521 body keys, alpha, regions, provenance and idle/movement vapor")
+	print("Godot sprite catalog: ", failures, " failures; six fighters, 539 body keys, alpha, regions, provenance and idle/movement vapor")
 	quit(1 if failures else 0)

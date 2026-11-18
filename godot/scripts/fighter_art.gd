@@ -2,7 +2,7 @@ class_name FighterArt
 extends RefCounted
 
 # Atlas pivots/scales also compile into core/combat_data.h. Regenerate combat data after art geometry changes.
-const PHASES := ["active", "windup", "block", "signature_windup", "signature_active", "ready", "walk", "run", "stance", "knockdown", "knockdown_back", "idle", "crouch_idle", "back_walk", "attack_animation"]
+const PHASES := ["active", "windup", "block", "signature_windup", "signature_active", "ready", "walk", "run", "stance", "knockdown", "knockdown_back", "idle", "crouch_idle", "back_walk", "attack_animation", "backdash"]
 const DIRECTORY := "res://assets/fighters/"
 static var manifest: Dictionary = {}
 static var textures: Dictionary = {}
@@ -15,6 +15,16 @@ static func catalog() -> Dictionary:
 
 static func sheet(character: int, phase: String = "active") -> Dictionary:
 	return catalog().fighters[character][phase]
+
+static func idle_pose(character: int, ticks: int) -> int:
+	var durations: Array = sheet(character, "idle").get("frame_ticks", [20, 20, 20, 20])
+	var total := 0
+	for duration in durations: total += int(duration)
+	var elapsed := maxi(0, ticks) % total
+	for index in durations.size():
+		if elapsed < int(durations[index]): return index
+		elapsed -= int(durations[index])
+	return 0
 
 static func texture(character: int, phase: String, pose: int) -> AtlasTexture:
 	var key := "%d/%s/%d" % [character, phase, pose]

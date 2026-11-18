@@ -1,6 +1,6 @@
 # Shark movement options
 
-Status: awaiting the user's choices. These are visual direction studies, with four chronological key poses per option. They are not timed or registered production animation clips.
+Selected: **Idle A, Walk B, Backward walk A, Backdash B, Run A**. The user specifically requires proper leg alternation. Production is in `godot/assets/fighters/shark-movement-v1/`. These are visual direction studies, with four chronological key poses per option. They are not timed or registered production animation clips.
 
 The user's new idle brief is a hook-handle tap on the shoulder while Shark looks down on his opponent. All studies retain his shoulder-rest identity, blue sports glasses, restrained long white hair, and the fluid weight shifts approved in the Low Scoop study.
 

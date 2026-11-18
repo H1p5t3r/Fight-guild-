@@ -30,7 +30,7 @@ try {
   for(const tick of [0,contact,0,contact]){
     const expected=await page.evaluate(async tick=>{
       const frame=moveWorkshop.preview().frames[tick],pack=FIGHT_WORKSHOP_DATA;
-      const phases=['active','windup','block','signature_windup','signature_active','ready','walk','run','stance','knockdown','knockdown_back'];
+      const phases=['active','windup','block','signature_windup','signature_active','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation','backdash'];
       const files=frame.state.players.map(f=>{
         const sheet=pack.art[f.character][phases[f.posePhase]],tile=sheet.frames[f.poseIndex];
         return new URL(pack.images[tile.file??sheet.file],location.href).href;
