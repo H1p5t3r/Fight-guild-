@@ -71,7 +71,7 @@ func state() -> Dictionary:
 	for i in 16:
 		if core.read_value(-2-i, 0) <= 0: continue
 		var projectile := {}
-		var keys := ["life", "owner", "x", "y", "width", "height", "kind", "facing", "move", "vx", "vy"]
+		var keys := ["life", "owner", "x", "y", "width", "height", "kind", "facing", "move", "vx", "vy", "age"]
 		for field in keys.size(): projectile[keys[field]] = core.read_value(-2-i, field)
 		result.projectiles.append(projectile)
 	return result

@@ -42,8 +42,8 @@ func _initialize() -> void:
 			for sample in samples:
 				var point := Vector2i(sample[0], sample[1])
 				check(source.get_pixelv(point).a < 0.03, "Atlas background is not transparent: " + path)
-			var signatures: int = 32 if c == 3 else 20 if c == 2 else 4
-			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8}[phase]
+			var signatures: int = 32 if c == 3 else 24 if c == 2 else 4
+			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8, "attack_animation": 32}[phase]
 			check(sheet.frames.size() == count, "Missing poses: " + path)
 			for pose in sheet.frames.size():
 				if sheet.frames[pose].has("file"):
@@ -89,6 +89,22 @@ func _initialize() -> void:
 	check(not sprite.get_node("IdleSmoke0").visible and not sprite.get_node("IdleSmoke1").visible, "Idle vapor leaked into an attack")
 	FighterArt.apply(sprite, 5, "ready", 0, 1, 1, 10)
 	check(not sprite.get_node("IdleSmoke0").visible, "Idle vapor leaked into another fighter")
+	for phase in ["backdraft_fx", "sword_fx"]:
+		for pose in 4:
+			check(FighterArt.texture(2, phase, pose).atlas != null, "Missing attack effect")
+	for facing in [-1, 1]:
+		for pose in [2, 3, 4, 5]:
+			FighterArt.apply(sprite, 2, "attack_animation", pose, 1, facing)
+			var layer := sprite.get_node("AttackEffect") as Sprite2D
+			check(layer.visible and layer.show_behind_parent, "Backdraft must stay behind its owner")
+			check(signf(sprite.scale.x) == facing, "Effect owner facing changed")
+		FighterArt.apply(sprite, 2, "signature_active", 22, 1, facing)
+		check(sprite.get_node("AttackEffect").visible and not sprite.get_node("AttackEffect").show_behind_parent, "Sword must sweep across the front")
+		FighterArt.apply(sprite, 2, "idle", 0, 1, facing, 0)
+		check(not sprite.get_node("AttackEffect").visible, "Attack effect leaked into idle")
+	for age in [0, 6, 12, 18]:
+		check(FighterArt.projectile_art(2, 14, 36-age, age) == FighterArt.projectile_art(2, 25, 120-age, age), "Near/far pillars must use identical art at the same age")
+	check(FighterArt.projectile_art(2, 21, 20).file == "smoke-v1/projectile.png", "j.D lost its ember")
 	sprite.free()
-	print("Godot sprite catalog: ", failures, " failures; six fighters, 423 body keys, alpha, regions, provenance and idle/movement vapor")
+	print("Godot sprite catalog: ", failures, " failures; six fighters, 463 body keys, alpha, regions, provenance and idle/movement vapor")
 	quit(1 if failures else 0)

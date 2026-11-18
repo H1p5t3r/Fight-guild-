@@ -47,11 +47,39 @@ func _draw() -> void:
 	overlay.queue_redraw()
 
 func preview_scale() -> float:
+	var extent := effect_extent()
+	if extent.has_area(): return minf((size.x - 24.0) / extent.size.x, (size.y - 40.0) / extent.size.y)
 	return minf(size.x / (360.0 if phase.begins_with("signature_") else 260.0), size.y / 320.0) * 1.4
 
 func preview_anchor() -> Vector2:
+	var extent := effect_extent()
+	if extent.has_area():
+		var scale_factor := preview_scale()
+		return Vector2(size.x * 0.5 - extent.get_center().x * scale_factor * facing, size.y - 20.0)
 	var air_hook := character == 4 and phase.begins_with("signature_") and pose == 1
 	return Vector2(size.x * 0.5, size.y - (64.0 if air_hook else 20.0))
+
+func effect_extent() -> Rect2:
+	var info := FighterArt.sheet(character, phase)
+	var frame: Dictionary = info.frames[pose]
+	var frames: Array = []
+	if character == 2 and ((phase == "attack_animation" and pose < 8) or (phase.begins_with("signature_") and pose == 8)):
+		frames = FighterArt.sheet(2, "attack_animation").frames.slice(0, 8)
+	elif frame.has("effect") and phase.begins_with("signature_"):
+		frames = [FighterArt.sheet(character, "signature_windup").frames[pose], FighterArt.sheet(character, "signature_active").frames[pose]]
+	else: return Rect2()
+	# Use a whole-clip envelope so the actor does not shrink when the effect appears.
+	var extent := Rect2()
+	for key in frames:
+		var bounds: Array = key.bounds
+		var root: Array = key.pivot
+		var factor: float = 150.0 / key.get("body_height", info.body_height)
+		var body := Rect2(Vector2(bounds[0] - root[0], bounds[1] - root[1]) * factor, Vector2(bounds[2] - bounds[0], bounds[3] - bounds[1]) * factor)
+		extent = extent.merge(body)
+		if key.has("effect"):
+			var box: Array = key.effect.box
+			extent = extent.merge(Rect2(Vector2(box[0], -box[3]), Vector2(box[2] - box[0], box[3] - box[1])))
+	return extent.expand(Vector2.ZERO)
 
 func draw_boxes() -> void:
 	if not show_collision: return

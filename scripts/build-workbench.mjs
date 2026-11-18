@@ -45,11 +45,12 @@ for(const [group,values] of Object.entries(defaults).filter(([key])=>key.endsWit
 if(JSON.stringify(defaults)!==JSON.stringify(engine.data()))throw new Error('Limit probing changed defaults.');
 const manifest=JSON.parse(await readFile(path('godot/assets/fighters/manifest.json'),'utf8'));
 const collisions=JSON.parse(await readFile(path('godot/data/fighter_collision.json'),'utf8'));
-const phases=['active','windup','block','signature_active','signature_windup','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','idle_smoke','movement_smoke'];
-const art=manifest.fighters.map(f=>Object.fromEntries(['name','projectile',...phases].filter(p=>f[p]).map(p=>[p,f[p]])));
+const phases=['active','windup','block','signature_active','signature_windup','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation','idle_smoke','movement_smoke','backdraft_fx','sword_fx'];
+const art=manifest.fighters.map(f=>Object.fromEntries(['name','projectile','projectile_variants','attack_animations',...phases].filter(p=>f[p]).map(p=>[p,f[p]])));
 const files=[...new Set(art.flatMap(f=>phases.filter(p=>f[p]).flatMap(p=>[f[p].file,...f[p].frames.flatMap(frame=>frame.file?[frame.file]:[])])))];
 files.push("appearance-v3/projectiles.png");
 for(const fighter of art)if(fighter.projectile)files.push(fighter.projectile.file);
+for(const fighter of art)for(const projectile of Object.values(fighter.projectile_variants??{}))if(!files.includes(projectile.file))files.push(projectile.file);
 const images={};await mkdir(path('build/workbench-assets'),{recursive:true});
 let browser,page;
 try {
@@ -72,7 +73,7 @@ try {
     images[file]='data:image/webp;base64,'+(await readFile(cached)).toString('base64');
   }
 } finally {await browser?.close();}
-const regions=['legs','torsoArms','head','extension'],posePhases={active:0,windup:1,block:2,signature_windup:3,signature_active:4,ready:5,walk:6,run:7,stance:8,knockdown:9,knockdown_back:10,idle:11,crouch_idle:12,back_walk:13};
+const regions=['legs','torsoArms','head','extension'],posePhases={active:0,windup:1,block:2,signature_windup:3,signature_active:4,ready:5,walk:6,run:7,stance:8,knockdown:9,knockdown_back:10,idle:11,crouch_idle:12,back_walk:13,attack_animation:14};
 const hurtPoses=art.map((fighter,c)=>Object.fromEntries(Object.entries(posePhases).filter(([phase])=>fighter[phase]).map(([phase,p])=>[phase,fighter[phase].frames.map((_,pose)=>Object.fromEntries(Array.from({length:engine.api.fg_pose_box_count(c,p,pose)},(_,n)=>[regions[n],Array.from({length:4},(_,edge)=>engine.api.fg_pose_box_get(c,p,pose,n,edge))])))])));
 const pack={format:1,defaults,limits,art,collisions:collisions.fighters,hurtPoses,images};
 const manifestPath=path('godot/data/workshop/current.json');

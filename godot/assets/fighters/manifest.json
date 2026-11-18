@@ -2343,26 +2343,27 @@
             "generation_file": "exec-57f9d3c0-9764-40d4-823e-45d32a25d53f.png"
           },
           {
-            "name": "2Hs Backdraft windup",
-            "file": "smoke-v1/launcher.png",
+            "name": "2Hs / Coil",
+            "file": "smoke-attacks-v2/backdraft_body_a.png",
+            "sha256": "b57be591d4e74471bfd508f562ecd903c2ef343c81f46f8ddd6db7032856b6c5",
+            "generation_file": "exec-e01329ca-a1fe-4b60-aa91-63698f63c9fd.png",
             "region": [
+              768,
               0,
-              0,
-              600,
-              1024
+              768,
+              512
             ],
             "pivot": [
-              270,
-              986
+              395,
+              470
             ],
             "bounds": [
-              18,
-              17,
-              600,
-              994
+              37,
+              100,
+              629,
+              470
             ],
-            "sha256": "eb88c14cb790fb32ebca5598a72cb87baab81c7cd1991b7c283c9f8bf8f0fafd",
-            "generation_file": "exec-7d69dc1f-d0ea-4050-b648-724dace76269.png"
+            "body_height": 600
           },
           {
             "name": "2D Floor Spill windup",
@@ -2605,6 +2606,122 @@
             ],
             "sha256": "f7ea23ac73920288941d79249229a52f0f875d91a03332106274eaba7a6c1a92",
             "generation_file": "exec-1806ebc2-4ddf-43af-b197-4a92d9fbfc4d.png"
+          },
+          {
+            "name": "236S / Crystal Pillar Close / Windup",
+            "file": "smoke-attacks-v2/pillar_bodies.png",
+            "sha256": "0ee7cfbd37e999c468929d9121aec748015a79c3b8659c4ae58073570e9e3c12",
+            "generation_file": "exec-2336015d-5a21-449c-b1b4-31f3cc1c95ce.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              235,
+              12,
+              508,
+              497
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "236Hs / Crystal Pillar Far / Windup",
+            "file": "smoke-attacks-v2/pillar_bodies.png",
+            "sha256": "0ee7cfbd37e999c468929d9121aec748015a79c3b8659c4ae58073570e9e3c12",
+            "generation_file": "exec-2336015d-5a21-449c-b1b4-31f3cc1c95ce.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              225,
+              12,
+              465,
+              497
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "214S / Poison Sword / Windup",
+            "file": "smoke-attacks-v2/sword_bodies.png",
+            "sha256": "11305fbdd37a86f5fcf8aac2c618f1b8eeb3148b711d340cc630625083b97213",
+            "generation_file": "exec-78544440-dba2-4f77-a678-f8a037c5b6dd.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              493
+            ],
+            "bounds": [
+              179,
+              16,
+              593,
+              493
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 0,
+              "box": [
+                -30,
+                110,
+                65,
+                134
+              ],
+              "behind": true,
+              "opacity": 1.0
+            }
+          },
+          {
+            "name": "214Hs / Flame Blade / Windup",
+            "file": "smoke-attacks-v2/sword_bodies.png",
+            "sha256": "11305fbdd37a86f5fcf8aac2c618f1b8eeb3148b711d340cc630625083b97213",
+            "generation_file": "exec-78544440-dba2-4f77-a678-f8a037c5b6dd.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              493
+            ],
+            "bounds": [
+              129,
+              15,
+              610,
+              493
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 2,
+              "box": [
+                -42,
+                108,
+                76,
+                136
+              ],
+              "behind": true,
+              "opacity": 1.0
+            }
           }
         ]
       },
@@ -2814,26 +2931,39 @@
             "generation_file": "exec-57f9d3c0-9764-40d4-823e-45d32a25d53f.png"
           },
           {
-            "name": "2Hs Backdraft active",
-            "file": "smoke-v1/launcher.png",
+            "name": "2Hs / Eruption",
+            "file": "smoke-attacks-v2/backdraft_body_a.png",
+            "sha256": "b57be591d4e74471bfd508f562ecd903c2ef343c81f46f8ddd6db7032856b6c5",
+            "generation_file": "exec-e01329ca-a1fe-4b60-aa91-63698f63c9fd.png",
             "region": [
-              600,
               0,
-              936,
-              1024
+              512,
+              768,
+              512
             ],
             "pivot": [
-              320,
-              986
+              395,
+              470
             ],
             "bounds": [
-              0,
-              16,
-              916,
-              996
+              47,
+              29,
+              653,
+              469
             ],
-            "sha256": "eb88c14cb790fb32ebca5598a72cb87baab81c7cd1991b7c283c9f8bf8f0fafd",
-            "generation_file": "exec-7d69dc1f-d0ea-4050-b648-724dace76269.png"
+            "body_height": 600,
+            "effect": {
+              "sheet": "backdraft_fx",
+              "pose": 0,
+              "box": [
+                -2,
+                0,
+                137,
+                249
+              ],
+              "behind": true,
+              "opacity": 1.0
+            }
           },
           {
             "name": "2D Floor Spill active",
@@ -3076,6 +3206,122 @@
             ],
             "sha256": "f7ea23ac73920288941d79249229a52f0f875d91a03332106274eaba7a6c1a92",
             "generation_file": "exec-1806ebc2-4ddf-43af-b197-4a92d9fbfc4d.png"
+          },
+          {
+            "name": "236S / Crystal Pillar Close / Active",
+            "file": "smoke-attacks-v2/pillar_bodies.png",
+            "sha256": "0ee7cfbd37e999c468929d9121aec748015a79c3b8659c4ae58073570e9e3c12",
+            "generation_file": "exec-2336015d-5a21-449c-b1b4-31f3cc1c95ce.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              231,
+              9,
+              536,
+              497
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "236Hs / Crystal Pillar Far / Active",
+            "file": "smoke-attacks-v2/pillar_bodies.png",
+            "sha256": "0ee7cfbd37e999c468929d9121aec748015a79c3b8659c4ae58073570e9e3c12",
+            "generation_file": "exec-2336015d-5a21-449c-b1b4-31f3cc1c95ce.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              223,
+              12,
+              591,
+              497
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "214S / Poison Sword / Active",
+            "file": "smoke-attacks-v2/sword_bodies.png",
+            "sha256": "11305fbdd37a86f5fcf8aac2c618f1b8eeb3148b711d340cc630625083b97213",
+            "generation_file": "exec-78544440-dba2-4f77-a678-f8a037c5b6dd.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              493
+            ],
+            "bounds": [
+              124,
+              16,
+              634,
+              494
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 1,
+              "box": [
+                8,
+                81,
+                250,
+                145
+              ],
+              "behind": false,
+              "opacity": 1.0
+            }
+          },
+          {
+            "name": "214Hs / Flame Blade / Active",
+            "file": "smoke-attacks-v2/sword_bodies.png",
+            "sha256": "11305fbdd37a86f5fcf8aac2c618f1b8eeb3148b711d340cc630625083b97213",
+            "generation_file": "exec-78544440-dba2-4f77-a678-f8a037c5b6dd.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              493
+            ],
+            "bounds": [
+              82,
+              16,
+              638,
+              493
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 3,
+              "box": [
+                6,
+                87,
+                351,
+                139
+              ],
+              "behind": false,
+              "opacity": 1.0
+            }
           }
         ]
       },
@@ -4564,6 +4810,1851 @@
         "walk_drawings": 4,
         "run_drawings": 8,
         "grounded": true
+      },
+      "backdraft_fx": {
+        "file": "smoke-attacks-v2/backdraft_fx.png",
+        "sha256": "ba986d716878ef373e9f0fda33d03fb2228ec3b3ec39b5f8e5522fe9a3272855",
+        "size": [
+          1536,
+          1024
+        ],
+        "columns": 2,
+        "rows": 2,
+        "body_height": 480,
+        "frames": [
+          {
+            "name": "backdraft_fx 1",
+            "file": "smoke-attacks-v2/backdraft_fx.png",
+            "sha256": "ba986d716878ef373e9f0fda33d03fb2228ec3b3ec39b5f8e5522fe9a3272855",
+            "generation_file": "exec-c925e4bf-8e74-42ec-8c2c-ac99a1e652bf.png",
+            "region": [
+              253,
+              21,
+              297,
+              489
+            ],
+            "pivot": [
+              148,
+              489
+            ],
+            "bounds": [
+              0,
+              0,
+              297,
+              489
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "backdraft_fx 2",
+            "file": "smoke-attacks-v2/backdraft_fx.png",
+            "sha256": "ba986d716878ef373e9f0fda33d03fb2228ec3b3ec39b5f8e5522fe9a3272855",
+            "generation_file": "exec-c925e4bf-8e74-42ec-8c2c-ac99a1e652bf.png",
+            "region": [
+              1013,
+              71,
+              269,
+              439
+            ],
+            "pivot": [
+              134,
+              439
+            ],
+            "bounds": [
+              0,
+              0,
+              269,
+              439
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "backdraft_fx 3",
+            "file": "smoke-attacks-v2/backdraft_fx.png",
+            "sha256": "ba986d716878ef373e9f0fda33d03fb2228ec3b3ec39b5f8e5522fe9a3272855",
+            "generation_file": "exec-c925e4bf-8e74-42ec-8c2c-ac99a1e652bf.png",
+            "region": [
+              266,
+              608,
+              229,
+              396
+            ],
+            "pivot": [
+              114,
+              396
+            ],
+            "bounds": [
+              0,
+              0,
+              229,
+              396
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "backdraft_fx 4",
+            "file": "smoke-attacks-v2/backdraft_fx.png",
+            "sha256": "ba986d716878ef373e9f0fda33d03fb2228ec3b3ec39b5f8e5522fe9a3272855",
+            "generation_file": "exec-c925e4bf-8e74-42ec-8c2c-ac99a1e652bf.png",
+            "region": [
+              1036,
+              830,
+              209,
+              172
+            ],
+            "pivot": [
+              104,
+              172
+            ],
+            "bounds": [
+              0,
+              0,
+              209,
+              172
+            ],
+            "body_height": 480
+          }
+        ],
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
+        ]
+      },
+      "attack_animation": {
+        "file": "smoke-attacks-v2/backdraft_body_a.png",
+        "sha256": "b57be591d4e74471bfd508f562ecd903c2ef343c81f46f8ddd6db7032856b6c5",
+        "size": [
+          1536,
+          1024
+        ],
+        "columns": 2,
+        "rows": 2,
+        "body_height": 480,
+        "frames": [
+          {
+            "name": "2Hs / Gather",
+            "file": "smoke-attacks-v2/backdraft_body_a.png",
+            "sha256": "b57be591d4e74471bfd508f562ecd903c2ef343c81f46f8ddd6db7032856b6c5",
+            "generation_file": "exec-e01329ca-a1fe-4b60-aa91-63698f63c9fd.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              470
+            ],
+            "bounds": [
+              44,
+              48,
+              657,
+              469
+            ],
+            "body_height": 600
+          },
+          {
+            "name": "2Hs / Coil",
+            "file": "smoke-attacks-v2/backdraft_body_a.png",
+            "sha256": "b57be591d4e74471bfd508f562ecd903c2ef343c81f46f8ddd6db7032856b6c5",
+            "generation_file": "exec-e01329ca-a1fe-4b60-aa91-63698f63c9fd.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              470
+            ],
+            "bounds": [
+              37,
+              100,
+              629,
+              470
+            ],
+            "body_height": 600
+          },
+          {
+            "name": "2Hs / Eruption",
+            "file": "smoke-attacks-v2/backdraft_body_a.png",
+            "sha256": "b57be591d4e74471bfd508f562ecd903c2ef343c81f46f8ddd6db7032856b6c5",
+            "generation_file": "exec-e01329ca-a1fe-4b60-aa91-63698f63c9fd.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              470
+            ],
+            "bounds": [
+              47,
+              29,
+              653,
+              469
+            ],
+            "body_height": 600,
+            "effect": {
+              "sheet": "backdraft_fx",
+              "pose": 0,
+              "box": [
+                -2,
+                0,
+                137,
+                249
+              ],
+              "behind": true,
+              "opacity": 1.0
+            }
+          },
+          {
+            "name": "2Hs / Twist",
+            "file": "smoke-attacks-v2/backdraft_body_a.png",
+            "sha256": "b57be591d4e74471bfd508f562ecd903c2ef343c81f46f8ddd6db7032856b6c5",
+            "generation_file": "exec-e01329ca-a1fe-4b60-aa91-63698f63c9fd.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              470
+            ],
+            "bounds": [
+              38,
+              11,
+              659,
+              469
+            ],
+            "body_height": 600,
+            "effect": {
+              "sheet": "backdraft_fx",
+              "pose": 1,
+              "box": [
+                -8,
+                0,
+                116,
+                217
+              ],
+              "behind": true,
+              "opacity": 1.0
+            }
+          },
+          {
+            "name": "2Hs / Crest",
+            "file": "smoke-attacks-v2/backdraft_body_b.png",
+            "sha256": "bd69f8f7c0100476edd6263ce7aebd24deddd3935ab64304c62b3ab8ece7836f",
+            "generation_file": "exec-9fdb68c9-d8c1-4c10-a457-104f05eb25b1.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              470
+            ],
+            "bounds": [
+              37,
+              24,
+              689,
+              472
+            ],
+            "body_height": 600,
+            "effect": {
+              "sheet": "backdraft_fx",
+              "pose": 2,
+              "box": [
+                -22,
+                0,
+                116,
+                226
+              ],
+              "behind": true,
+              "opacity": 1.0
+            }
+          },
+          {
+            "name": "2Hs / Follow-through",
+            "file": "smoke-attacks-v2/backdraft_body_b.png",
+            "sha256": "bd69f8f7c0100476edd6263ce7aebd24deddd3935ab64304c62b3ab8ece7836f",
+            "generation_file": "exec-9fdb68c9-d8c1-4c10-a457-104f05eb25b1.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              470
+            ],
+            "bounds": [
+              37,
+              30,
+              689,
+              470
+            ],
+            "body_height": 600,
+            "effect": {
+              "sheet": "backdraft_fx",
+              "pose": 3,
+              "box": [
+                10,
+                0,
+                104,
+                62
+              ],
+              "behind": true,
+              "opacity": 0.65
+            }
+          },
+          {
+            "name": "2Hs / Recover",
+            "file": "smoke-attacks-v2/backdraft_body_b.png",
+            "sha256": "bd69f8f7c0100476edd6263ce7aebd24deddd3935ab64304c62b3ab8ece7836f",
+            "generation_file": "exec-9fdb68c9-d8c1-4c10-a457-104f05eb25b1.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              470
+            ],
+            "bounds": [
+              39,
+              33,
+              689,
+              470
+            ],
+            "body_height": 600
+          },
+          {
+            "name": "2Hs / Settle",
+            "file": "smoke-attacks-v2/backdraft_body_b.png",
+            "sha256": "bd69f8f7c0100476edd6263ce7aebd24deddd3935ab64304c62b3ab8ece7836f",
+            "generation_file": "exec-9fdb68c9-d8c1-4c10-a457-104f05eb25b1.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              395,
+              470
+            ],
+            "bounds": [
+              31,
+              35,
+              689,
+              470
+            ],
+            "body_height": 600
+          },
+          {
+            "name": "5P / Entry",
+            "file": "smoke-attacks-v2/transition_0.png",
+            "sha256": "4de8b95ecdfd7a431ffc51d6bbbd4f83ee1e73e3a0a2005851d1c918d161ea35",
+            "generation_file": "exec-7e9af4f4-2591-4c7f-89f7-1207809bacbb.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              228,
+              11,
+              496,
+              497
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "5K / Entry",
+            "file": "smoke-attacks-v2/transition_0.png",
+            "sha256": "4de8b95ecdfd7a431ffc51d6bbbd4f83ee1e73e3a0a2005851d1c918d161ea35",
+            "generation_file": "exec-7e9af4f4-2591-4c7f-89f7-1207809bacbb.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              498
+            ],
+            "bounds": [
+              221,
+              11,
+              520,
+              497
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "c.S / Entry",
+            "file": "smoke-attacks-v2/transition_0.png",
+            "sha256": "4de8b95ecdfd7a431ffc51d6bbbd4f83ee1e73e3a0a2005851d1c918d161ea35",
+            "generation_file": "exec-7e9af4f4-2591-4c7f-89f7-1207809bacbb.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              489
+            ],
+            "bounds": [
+              200,
+              27,
+              491,
+              487
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "5S / Entry",
+            "file": "smoke-attacks-v2/transition_0.png",
+            "sha256": "4de8b95ecdfd7a431ffc51d6bbbd4f83ee1e73e3a0a2005851d1c918d161ea35",
+            "generation_file": "exec-7e9af4f4-2591-4c7f-89f7-1207809bacbb.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              193,
+              15,
+              524,
+              486
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "5Hs / Entry",
+            "file": "smoke-attacks-v2/transition_1.png",
+            "sha256": "e60f332f76a761734493cf9fc066ec358d567071c9bb1710f7ccb657ad188f52",
+            "generation_file": "exec-20a02c0b-b0e5-472a-b525-13d39d683f97.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              220,
+              8,
+              532,
+              500
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "2P / Entry",
+            "file": "smoke-attacks-v2/transition_1.png",
+            "sha256": "e60f332f76a761734493cf9fc066ec358d567071c9bb1710f7ccb657ad188f52",
+            "generation_file": "exec-20a02c0b-b0e5-472a-b525-13d39d683f97.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              464
+            ],
+            "bounds": [
+              115,
+              102,
+              613,
+              467
+            ],
+            "body_height": 600
+          },
+          {
+            "name": "2K / Entry",
+            "file": "smoke-attacks-v2/transition_1.png",
+            "sha256": "e60f332f76a761734493cf9fc066ec358d567071c9bb1710f7ccb657ad188f52",
+            "generation_file": "exec-20a02c0b-b0e5-472a-b525-13d39d683f97.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              468
+            ],
+            "bounds": [
+              116,
+              102,
+              597,
+              467
+            ],
+            "body_height": 600
+          },
+          {
+            "name": "2S / Entry",
+            "file": "smoke-attacks-v2/transition_1.png",
+            "sha256": "e60f332f76a761734493cf9fc066ec358d567071c9bb1710f7ccb657ad188f52",
+            "generation_file": "exec-20a02c0b-b0e5-472a-b525-13d39d683f97.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              468
+            ],
+            "bounds": [
+              113,
+              105,
+              622,
+              465
+            ],
+            "body_height": 600
+          },
+          {
+            "name": "6P / Entry",
+            "file": "smoke-attacks-v2/transition_2.png",
+            "sha256": "ba4c259a7d9287e224790f6648549b7913adc6c81716a6aac8acf1b1578ab52b",
+            "generation_file": "exec-276b4562-8793-41fb-85b0-eb652acfee55.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              499
+            ],
+            "bounds": [
+              204,
+              17,
+              552,
+              503
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "6Hs / Entry",
+            "file": "smoke-attacks-v2/transition_2.png",
+            "sha256": "ba4c259a7d9287e224790f6648549b7913adc6c81716a6aac8acf1b1578ab52b",
+            "generation_file": "exec-276b4562-8793-41fb-85b0-eb652acfee55.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              500
+            ],
+            "bounds": [
+              205,
+              10,
+              544,
+              503
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "5D / Entry",
+            "file": "smoke-attacks-v2/transition_2.png",
+            "sha256": "ba4c259a7d9287e224790f6648549b7913adc6c81716a6aac8acf1b1578ab52b",
+            "generation_file": "exec-276b4562-8793-41fb-85b0-eb652acfee55.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              503
+            ],
+            "bounds": [
+              204,
+              15,
+              578,
+              503
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "2D / Entry",
+            "file": "smoke-attacks-v2/transition_2.png",
+            "sha256": "ba4c259a7d9287e224790f6648549b7913adc6c81716a6aac8acf1b1578ab52b",
+            "generation_file": "exec-276b4562-8793-41fb-85b0-eb652acfee55.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              469
+            ],
+            "bounds": [
+              98,
+              120,
+              600,
+              469
+            ],
+            "body_height": 600
+          },
+          {
+            "name": "j.P / Entry",
+            "file": "smoke-attacks-v2/transition_3.png",
+            "sha256": "0b41d1b6fe088eaec8983adddddb73e7cddefc3edea39813325e5c96a16138b1",
+            "generation_file": "exec-1485e86d-e562-435a-bb9a-68e139a9230f.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              490
+            ],
+            "bounds": [
+              208,
+              18,
+              523,
+              490
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "j.K / Entry",
+            "file": "smoke-attacks-v2/transition_3.png",
+            "sha256": "0b41d1b6fe088eaec8983adddddb73e7cddefc3edea39813325e5c96a16138b1",
+            "generation_file": "exec-1485e86d-e562-435a-bb9a-68e139a9230f.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              490
+            ],
+            "bounds": [
+              175,
+              18,
+              540,
+              473
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "j.S / Entry",
+            "file": "smoke-attacks-v2/transition_3.png",
+            "sha256": "0b41d1b6fe088eaec8983adddddb73e7cddefc3edea39813325e5c96a16138b1",
+            "generation_file": "exec-1485e86d-e562-435a-bb9a-68e139a9230f.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              490
+            ],
+            "bounds": [
+              173,
+              20,
+              576,
+              479
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "j.Hs / Entry",
+            "file": "smoke-attacks-v2/transition_3.png",
+            "sha256": "0b41d1b6fe088eaec8983adddddb73e7cddefc3edea39813325e5c96a16138b1",
+            "generation_file": "exec-1485e86d-e562-435a-bb9a-68e139a9230f.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              490
+            ],
+            "bounds": [
+              160,
+              3,
+              565,
+              480
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "j.D / Entry",
+            "file": "smoke-attacks-v2/transition_4.png",
+            "sha256": "209bcc0a7ab86dde87141197ad8cc82b7ae71582946bd0e8eb8fbe5b962caedf",
+            "generation_file": "exec-760fe058-e719-460f-bd89-4cc8271e9d3c.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              490
+            ],
+            "bounds": [
+              240,
+              6,
+              529,
+              425
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "6[Hs] / Entry",
+            "file": "smoke-attacks-v2/transition_4.png",
+            "sha256": "209bcc0a7ab86dde87141197ad8cc82b7ae71582946bd0e8eb8fbe5b962caedf",
+            "generation_file": "exec-760fe058-e719-460f-bd89-4cc8271e9d3c.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              498
+            ],
+            "bounds": [
+              241,
+              12,
+              480,
+              500
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "5[D] / Entry",
+            "file": "smoke-attacks-v2/transition_4.png",
+            "sha256": "209bcc0a7ab86dde87141197ad8cc82b7ae71582946bd0e8eb8fbe5b962caedf",
+            "generation_file": "exec-760fe058-e719-460f-bd89-4cc8271e9d3c.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              499
+            ],
+            "bounds": [
+              240,
+              2,
+              536,
+              498
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "4P+K / Entry",
+            "file": "smoke-attacks-v2/transition_4.png",
+            "sha256": "209bcc0a7ab86dde87141197ad8cc82b7ae71582946bd0e8eb8fbe5b962caedf",
+            "generation_file": "exec-760fe058-e719-460f-bd89-4cc8271e9d3c.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              495
+            ],
+            "bounds": [
+              211,
+              31,
+              608,
+              498
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "236S / Entry",
+            "file": "smoke-attacks-v2/special_entries.png",
+            "sha256": "ef59027a26928489dbda7d8aed20523a1694002ccd59c31a89381fc25d90a148",
+            "generation_file": "exec-40e969ba-46ec-4f80-ad93-8b483f6bbd49.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              239,
+              11,
+              538,
+              497
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "236Hs / Entry",
+            "file": "smoke-attacks-v2/special_entries.png",
+            "sha256": "ef59027a26928489dbda7d8aed20523a1694002ccd59c31a89381fc25d90a148",
+            "generation_file": "exec-40e969ba-46ec-4f80-ad93-8b483f6bbd49.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              240,
+              13,
+              488,
+              497
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "214S / Entry",
+            "file": "smoke-attacks-v2/special_entries.png",
+            "sha256": "ef59027a26928489dbda7d8aed20523a1694002ccd59c31a89381fc25d90a148",
+            "generation_file": "exec-40e969ba-46ec-4f80-ad93-8b483f6bbd49.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              233,
+              10,
+              485,
+              496
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "214Hs / Entry",
+            "file": "smoke-attacks-v2/special_entries.png",
+            "sha256": "ef59027a26928489dbda7d8aed20523a1694002ccd59c31a89381fc25d90a148",
+            "generation_file": "exec-40e969ba-46ec-4f80-ad93-8b483f6bbd49.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              229,
+              10,
+              501,
+              496
+            ],
+            "body_height": 480
+          }
+        ],
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
+        ]
+      },
+      "attack_animations": {
+        "0": {
+          "artPose": 1,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 8
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 0
+            }
+          ]
+        },
+        "1": {
+          "artPose": 2,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 9
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 1
+            }
+          ]
+        },
+        "32": {
+          "artPose": 3,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 10
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 2
+            }
+          ]
+        },
+        "2": {
+          "artPose": 4,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 11
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 3
+            }
+          ]
+        },
+        "3": {
+          "artPose": 5,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 12
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 4
+            }
+          ]
+        },
+        "4": {
+          "artPose": 6,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "crouch_idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 13
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 5
+            }
+          ]
+        },
+        "5": {
+          "artPose": 7,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "crouch_idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 14
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 6
+            }
+          ]
+        },
+        "6": {
+          "artPose": 8,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "crouch_idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 15
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 7
+            }
+          ]
+        },
+        "8": {
+          "artPose": 11,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 16
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 10
+            }
+          ]
+        },
+        "11": {
+          "artPose": 12,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 17
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 11
+            }
+          ]
+        },
+        "13": {
+          "artPose": 14,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 18
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 13
+            }
+          ]
+        },
+        "22": {
+          "artPose": 10,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "crouch_idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 19
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 9
+            }
+          ]
+        },
+        "17": {
+          "artPose": 16,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 8
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 20
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 15
+            }
+          ]
+        },
+        "18": {
+          "artPose": 17,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 8
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 21
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 16
+            }
+          ]
+        },
+        "19": {
+          "artPose": 18,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 8
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 22
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 17
+            }
+          ]
+        },
+        "20": {
+          "artPose": 19,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 8
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 23
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 18
+            }
+          ]
+        },
+        "21": {
+          "artPose": 20,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "active",
+              "pose": 8
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 24
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 19
+            }
+          ]
+        },
+        "43": {
+          "artPose": 13,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 25
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 12
+            }
+          ]
+        },
+        "44": {
+          "artPose": 15,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 26
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 14
+            }
+          ]
+        },
+        "23": {
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 27
+            }
+          ]
+        },
+        "24": {
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 27
+            }
+          ]
+        },
+        "7": {
+          "artPose": 9,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "crouch_idle",
+              "pose": 0
+            },
+            {
+              "start": 15,
+              "phase": "attack_animation",
+              "pose": 0
+            },
+            {
+              "start": 55,
+              "phase": "attack_animation",
+              "pose": 1
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 2
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 3
+            },
+            {
+              "start": 66,
+              "phase": "attack_animation",
+              "pose": 4
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 5
+            },
+            {
+              "start": 25,
+              "phase": "attack_animation",
+              "pose": 6
+            },
+            {
+              "start": 65,
+              "phase": "attack_animation",
+              "pose": 7
+            }
+          ]
+        },
+        "14": {
+          "artPose": 21,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 28
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 20
+            }
+          ]
+        },
+        "25": {
+          "artPose": 22,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 29
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 21
+            }
+          ]
+        },
+        "15": {
+          "artPose": 23,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 30
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 22
+            }
+          ]
+        },
+        "16": {
+          "artPose": 24,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 31
+            },
+            {
+              "start": 65,
+              "phase": "signature_windup",
+              "pose": 23
+            }
+          ]
+        }
+      },
+      "sword_fx": {
+        "file": "smoke-attacks-v2/sword_effects.png",
+        "sha256": "b8c479f2bdfbc24c87282620a94e821ffb0d55a4577bead0cf834b2df9c239a4",
+        "size": [
+          1536,
+          1024
+        ],
+        "columns": 2,
+        "rows": 2,
+        "body_height": 480,
+        "frames": [
+          {
+            "name": "sword_effects 1",
+            "file": "smoke-attacks-v2/sword_effects.png",
+            "sha256": "b8c479f2bdfbc24c87282620a94e821ffb0d55a4577bead0cf834b2df9c239a4",
+            "generation_file": "exec-0b7d90d5-d027-414a-992e-9993c3f5d125.png",
+            "region": [
+              78,
+              228,
+              339,
+              91
+            ],
+            "pivot": [
+              169,
+              91
+            ],
+            "bounds": [
+              0,
+              0,
+              339,
+              91
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "sword_effects 2",
+            "file": "smoke-attacks-v2/sword_effects.png",
+            "sha256": "b8c479f2bdfbc24c87282620a94e821ffb0d55a4577bead0cf834b2df9c239a4",
+            "generation_file": "exec-0b7d90d5-d027-414a-992e-9993c3f5d125.png",
+            "region": [
+              547,
+              198,
+              931,
+              157
+            ],
+            "pivot": [
+              465,
+              157
+            ],
+            "bounds": [
+              0,
+              0,
+              931,
+              157
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "sword_effects 3",
+            "file": "smoke-attacks-v2/sword_effects.png",
+            "sha256": "b8c479f2bdfbc24c87282620a94e821ffb0d55a4577bead0cf834b2df9c239a4",
+            "generation_file": "exec-0b7d90d5-d027-414a-992e-9993c3f5d125.png",
+            "region": [
+              92,
+              713,
+              315,
+              101
+            ],
+            "pivot": [
+              157,
+              101
+            ],
+            "bounds": [
+              0,
+              0,
+              315,
+              101
+            ],
+            "body_height": 480
+          },
+          {
+            "name": "sword_effects 4",
+            "file": "smoke-attacks-v2/sword_effects.png",
+            "sha256": "b8c479f2bdfbc24c87282620a94e821ffb0d55a4577bead0cf834b2df9c239a4",
+            "generation_file": "exec-0b7d90d5-d027-414a-992e-9993c3f5d125.png",
+            "region": [
+              521,
+              681,
+              975,
+              164
+            ],
+            "pivot": [
+              487,
+              164
+            ],
+            "bounds": [
+              0,
+              0,
+              975,
+              164
+            ],
+            "body_height": 480
+          }
+        ],
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
+        ]
+      },
+      "projectile_variants": {
+        "14": {
+          "file": "smoke-attacks-v2/pillar_effect.png",
+          "sha256": "8cfb8532855b2f683bbb7ba14dc783e4ce5e46b769e0944d166f0cf148fda26a",
+          "size": [
+            1536,
+            1024
+          ],
+          "columns": 2,
+          "rows": 2,
+          "body_height": 480,
+          "frames": [
+            {
+              "name": "pillar_effect 1",
+              "file": "smoke-attacks-v2/pillar_effect.png",
+              "sha256": "8cfb8532855b2f683bbb7ba14dc783e4ce5e46b769e0944d166f0cf148fda26a",
+              "generation_file": "exec-f872b596-b6c0-4967-8101-de528b2b64c3.png",
+              "region": [
+                157,
+                25,
+                456,
+                447
+              ],
+              "pivot": [
+                228,
+                447
+              ],
+              "bounds": [
+                0,
+                0,
+                456,
+                447
+              ],
+              "body_height": 480
+            },
+            {
+              "name": "pillar_effect 2",
+              "file": "smoke-attacks-v2/pillar_effect.png",
+              "sha256": "8cfb8532855b2f683bbb7ba14dc783e4ce5e46b769e0944d166f0cf148fda26a",
+              "generation_file": "exec-f872b596-b6c0-4967-8101-de528b2b64c3.png",
+              "region": [
+                924,
+                25,
+                461,
+                447
+              ],
+              "pivot": [
+                230,
+                447
+              ],
+              "bounds": [
+                0,
+                0,
+                461,
+                447
+              ],
+              "body_height": 480
+            },
+            {
+              "name": "pillar_effect 3",
+              "file": "smoke-attacks-v2/pillar_effect.png",
+              "sha256": "8cfb8532855b2f683bbb7ba14dc783e4ce5e46b769e0944d166f0cf148fda26a",
+              "generation_file": "exec-f872b596-b6c0-4967-8101-de528b2b64c3.png",
+              "region": [
+                157,
+                537,
+                456,
+                447
+              ],
+              "pivot": [
+                228,
+                447
+              ],
+              "bounds": [
+                0,
+                0,
+                456,
+                447
+              ],
+              "body_height": 480
+            },
+            {
+              "name": "pillar_effect 4",
+              "file": "smoke-attacks-v2/pillar_effect.png",
+              "sha256": "8cfb8532855b2f683bbb7ba14dc783e4ce5e46b769e0944d166f0cf148fda26a",
+              "generation_file": "exec-f872b596-b6c0-4967-8101-de528b2b64c3.png",
+              "region": [
+                931,
+                537,
+                453,
+                447
+              ],
+              "pivot": [
+                226,
+                447
+              ],
+              "bounds": [
+                0,
+                0,
+                453,
+                447
+              ],
+              "body_height": 480
+            }
+          ],
+          "transparent_samples": [
+            [
+              0,
+              0
+            ],
+            [
+              1535,
+              0
+            ],
+            [
+              0,
+              1023
+            ],
+            [
+              1535,
+              1023
+            ]
+          ]
+        },
+        "25": {
+          "file": "smoke-attacks-v2/pillar_effect.png",
+          "sha256": "8cfb8532855b2f683bbb7ba14dc783e4ce5e46b769e0944d166f0cf148fda26a",
+          "size": [
+            1536,
+            1024
+          ],
+          "columns": 2,
+          "rows": 2,
+          "body_height": 480,
+          "frames": [
+            {
+              "name": "pillar_effect 1",
+              "file": "smoke-attacks-v2/pillar_effect.png",
+              "sha256": "8cfb8532855b2f683bbb7ba14dc783e4ce5e46b769e0944d166f0cf148fda26a",
+              "generation_file": "exec-f872b596-b6c0-4967-8101-de528b2b64c3.png",
+              "region": [
+                157,
+                25,
+                456,
+                447
+              ],
+              "pivot": [
+                228,
+                447
+              ],
+              "bounds": [
+                0,
+                0,
+                456,
+                447
+              ],
+              "body_height": 480
+            },
+            {
+              "name": "pillar_effect 2",
+              "file": "smoke-attacks-v2/pillar_effect.png",
+              "sha256": "8cfb8532855b2f683bbb7ba14dc783e4ce5e46b769e0944d166f0cf148fda26a",
+              "generation_file": "exec-f872b596-b6c0-4967-8101-de528b2b64c3.png",
+              "region": [
+                924,
+                25,
+                461,
+                447
+              ],
+              "pivot": [
+                230,
+                447
+              ],
+              "bounds": [
+                0,
+                0,
+                461,
+                447
+              ],
+              "body_height": 480
+            },
+            {
+              "name": "pillar_effect 3",
+              "file": "smoke-attacks-v2/pillar_effect.png",
+              "sha256": "8cfb8532855b2f683bbb7ba14dc783e4ce5e46b769e0944d166f0cf148fda26a",
+              "generation_file": "exec-f872b596-b6c0-4967-8101-de528b2b64c3.png",
+              "region": [
+                157,
+                537,
+                456,
+                447
+              ],
+              "pivot": [
+                228,
+                447
+              ],
+              "bounds": [
+                0,
+                0,
+                456,
+                447
+              ],
+              "body_height": 480
+            },
+            {
+              "name": "pillar_effect 4",
+              "file": "smoke-attacks-v2/pillar_effect.png",
+              "sha256": "8cfb8532855b2f683bbb7ba14dc783e4ce5e46b769e0944d166f0cf148fda26a",
+              "generation_file": "exec-f872b596-b6c0-4967-8101-de528b2b64c3.png",
+              "region": [
+                931,
+                537,
+                453,
+                447
+              ],
+              "pivot": [
+                226,
+                447
+              ],
+              "bounds": [
+                0,
+                0,
+                453,
+                447
+              ],
+              "body_height": 480
+            }
+          ],
+          "transparent_samples": [
+            [
+              0,
+              0
+            ],
+            [
+              1535,
+              0
+            ],
+            [
+              0,
+              1023
+            ],
+            [
+              1535,
+              1023
+            ]
+          ]
+        }
       }
     },
     {

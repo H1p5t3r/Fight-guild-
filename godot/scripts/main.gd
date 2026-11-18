@@ -809,8 +809,8 @@ func show_sprite_review(clip: int = 0) -> void:
 	layout.add_child(pickers)
 	var fighter_picker := option(pickers, "Fighter", CombatModel.CHARACTERS)
 	var button_picker := option(pickers, "Button", CombatModel.BUTTONS)
-	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard", "Dedicated move", "Run / step dash", "Rolling stance", "Soft knockdown / get up", "Hard knockdown / get up", "Backward drift"])
-	clip_picker.select(clampi(clip, 0, 15))
+	var clip_picker := option(pickers, "Clip", ["Attack", "Negative / even block", "Positive block", "Guard break", "Ready", "Walk", "Jump", "Hit reaction", "Crouch", "Legacy guard", "Dedicated move", "Run / step dash", "Rolling stance", "Soft knockdown / get up", "Hard knockdown / get up", "Backward drift", "Smoke / Backdraft animation"])
+	clip_picker.select(clampi(clip, 0, 16))
 	var signature_picker := option(pickers, "Signature", ["1", "2", "3", "4"])
 	fighter_picker.select(edit_character.selected)
 	var options := row(layout)
@@ -842,42 +842,51 @@ func show_sprite_review(clip: int = 0) -> void:
 	var stats := label(layout, "", 12, ACCENT)
 	var loop_ticks := [0]
 	var update := func(_index: int = 0):
-		clip_picker.set_item_disabled(10, fighter_picker.selected < 3)
+		clip_picker.set_item_disabled(10, fighter_picker.selected < 2)
 		clip_picker.set_item_disabled(11, fighter_picker.selected < 2)
-		if clip_picker.selected == 10 and fighter_picker.selected < 3: clip_picker.select(0)
+		if clip_picker.selected == 10 and fighter_picker.selected < 2: clip_picker.select(0)
 		if clip_picker.selected == 11 and fighter_picker.selected < 2: clip_picker.select(0)
 		clip_picker.set_item_disabled(15, fighter_picker.selected != 2)
 		if clip_picker.selected == 15 and fighter_picker.selected != 2: clip_picker.select(0)
 		clip_picker.set_item_disabled(12, fighter_picker.selected != 3)
 		if clip_picker.selected == 12 and fighter_picker.selected != 3: clip_picker.select(0)
+		clip_picker.set_item_disabled(16, fighter_picker.selected != 2)
+		if clip_picker.selected == 16 and fighter_picker.selected != 2: clip_picker.select(0)
+		var attack_clip: bool = clip_picker.selected == 16
 		var locomotion: bool = fighter_picker.selected >= 2 and clip_picker.selected in [5, 11, 12, 15]
 		var recovery_clip: bool = clip_picker.selected in [13, 14]
 		var idle_clip: bool = fighter_picker.selected == 2 and clip_picker.selected in [4, 8]
 		var frame_count: int = 6 if recovery_clip else 4 if clip_picker.selected == 12 or idle_clip else 8
-		loop_toggle.visible = locomotion or recovery_clip or idle_clip
-		frame_picker.visible = locomotion or recovery_clip or idle_clip
+		loop_toggle.visible = locomotion or recovery_clip or idle_clip or attack_clip
+		frame_picker.visible = locomotion or recovery_clip or idle_clip or attack_clip
 		for frame in frame_picker.item_count: frame_picker.set_item_disabled(frame, frame >= frame_count)
 		if frame_picker.selected >= frame_count: frame_picker.select(0)
 		button_picker.disabled = clip_picker.selected != 0
 		signature_picker.visible = clip_picker.selected == 10
 		var signature_slots: Array = [25, 15, 26, 27] if fighter_picker.selected == 5 else [28, 29, 30, 31]
+		if fighter_picker.selected == 2:
+			signature_slots = [0,1,32,2,3,4,5,6,7,22,8,11,43,13,44,17,18,19,20,21,14,25,15,16]
 		if fighter_picker.selected == 3:
 			signature_slots = [0,1,32,2,3,4,5,6,7,22,8,9,11,17,18,19,19,20,21,33,34,13,24,41,35,36,37,38,39,40,40,22]
 		var selected_pose := clampi(signature_picker.selected, 0, signature_slots.size() - 1)
 		signature_picker.clear()
 		for i in signature_slots.size():
-			var atlas: Dictionary = FighterArt.sheet(fighter_picker.selected, "signature_active") if fighter_picker.selected >= 3 else {}
+			var atlas: Dictionary = FighterArt.sheet(fighter_picker.selected, "signature_active") if fighter_picker.selected >= 2 else {}
 			if not atlas.is_empty(): signature_picker.add_item(atlas.frames[i].get("name", CombatModel.MOVE_IDS[signature_slots[i]]))
 			else: signature_picker.add_item(CombatModel.MOVE_IDS[signature_slots[i]])
 		signature_picker.select(selected_pose)
-		var slot: int = signature_slots[signature_picker.selected] if clip_picker.selected == 10 else [0, 1, 2, 3, 13][button_picker.selected]
+		var slot: int = 7 if attack_clip else signature_slots[signature_picker.selected] if clip_picker.selected == 10 else [0, 1, 2, 3, 13][button_picker.selected]
 		var move := model.move(fighter_picker.selected, slot)
 		stats.text = "%df startup · %df active · %df recovery · %d damage · %+df on block (final hit)" % [move.startup, move.active, move.recovery, move.damage, CombatModel.block_advantage(move)] if clip_picker.selected in [0, 10] else "Body hurtboxes follow the displayed pose. Pushboxes keep a stable body width."
 		for i in 2:
 			previews[i].show_collision = collision_toggle.button_pressed
 			previews[i].facing = -1 if mirror_toggle.button_pressed else 1
 			previews[i].move_slot = slot
-			if idle_clip:
+			if attack_clip:
+				var frame := (frame_picker.selected + i) % 8
+				captions[i].text = FighterArt.sheet(2, "attack_animation").frames[frame].name
+				previews[i].present(2, "attack_animation", frame, previews[i].facing)
+			elif idle_clip:
 				var idle_phase := "idle" if clip_picker.selected == 4 else "crouch_idle"
 				var frame := (frame_picker.selected + i) % frame_count
 				var ticks: int = frame * 20 + (loop_ticks[0] % 20 if loop_toggle.button_pressed else 0)

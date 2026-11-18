@@ -1,5 +1,10 @@
 # Smoke — poison, smoke and ignition normals
 
+Current additions: [approved backhand specials, shared Smoked Obsidian pillar,
+eight-key 2Hs and attack entries](smoke-attacks.md). That page identifies the
+latest user-authored batch; the source-table notes below describe the initial
+normal kit.
+
 The new kit uses the user's saved **Queen Dizzy** normal tables and diagrams.
 **Leo's diagrams correct Tapper's attack hitboxes only.** Tapper's frame data,
 custom collar Drive, throws and rolling stance remain intact. Fillet and Shark's

@@ -556,6 +556,20 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
             int art=m.v[FinishArtPose]>0&&m.v[GrabFrames]-f.grab_time>=m.v[FinishArtFrame]?m.v[FinishArtPose]:m.v[ArtPose];
             return art>0?Pose{4,art-1}:Pose{0,1+m.v[Button]};
         }
+        // Animation keys divide the authored phase; they never add startup,
+        // active or recovery ticks. Saved age keeps drawing and anatomy in sync
+        // during hitstop, counter slowdown, edited timing and rollback.
+        const auto& animation=ATTACK_ANIMATIONS[f.character][f.move];
+        if(animation.art_pose==m.v[ArtPose]) {
+            const int stage=age<m.v[Startup]?0:age<m.v[Startup]+m.v[Active]?1:2;
+            const int duration=max(1,stage==0?m.v[Startup]-1:stage==1?m.v[Active]:m.v[Recovery]);
+            const int elapsed=stage==0?age-1:stage==1?age-m.v[Startup]:age-m.v[Startup]-m.v[Active];
+            const int percent=clamp(elapsed,0,duration-1)*100/duration;
+            for(int key=animation.counts[stage]-1;key>=0;--key) {
+                const auto& frame=animation.keys[stage][key];
+                if(percent>=frame.start) return {frame.phase,frame.pose};
+            }
+        }
         if(m.v[FinishArtPose]>0&&m.v[FinishArtFrame]>0&&age>=m.v[Startup]+m.v[FinishArtFrame]-1&&age<m.v[Startup]+m.v[Active]) return {4,m.v[FinishArtPose]-1};
         if(m.v[ArtPose]>0&&age<m.v[Startup]+m.v[Active]+(m.v[HitAngle]?8:0))
             return {age<m.v[Startup]?3:4,m.v[ArtPose]-1};
@@ -1359,8 +1373,8 @@ int Simulation::get(int player,int field) const {
         int index=-player-2; if(index>=MAX_PROJECTILES) return 0;
         const auto& q=world.projectiles[index]; if(!q.life) return 0;
         const auto& m=moves[q.character][q.move];
-        const int values[]={q.life,q.owner,q.x,q.y,m.v[ProjectileWidth],m.v[ProjectileHeight],m.v[ProjectileKind],q.facing,q.move,q.vx,q.vy};
-        return field>=0&&field<11?values[field]:0;
+        const int values[]={q.life,q.owner,q.x,q.y,m.v[ProjectileWidth],m.v[ProjectileHeight],m.v[ProjectileKind],q.facing,q.move,q.vx,q.vy,max(0,m.v[ProjectileLife]-q.life)};
+        return field>=0&&field<int(sizeof(values)/sizeof(values[0]))?values[field]:0;
     }
     if(player<0) {
         switch(field) { case 0:return world.frame; case 1:return world.remaining;

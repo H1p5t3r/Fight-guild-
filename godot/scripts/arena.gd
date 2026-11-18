@@ -121,7 +121,7 @@ func draw_projectiles() -> void:
 		if int(q.facing) < 0: target.position.x += extent.x; target.size.x = -extent.x
 		var source := Rect2(797, 350, 708, 390) if int(q.kind) == 2 else Rect2(28, 326, 695, 432)
 		var art: Texture2D = PROJECTILE_ART
-		var custom: Dictionary = FighterArt.catalog().fighters[int(view.players[int(q.owner)].character)].get("projectile", {})
+		var custom: Dictionary = FighterArt.projectile_art(int(view.players[int(q.owner)].character), int(q.move), int(q.life), int(q.age))
 		if not custom.is_empty():
 			var path: String = FighterArt.DIRECTORY + custom.file
 			if not FighterArt.textures.has(custom.file): FighterArt.textures[custom.file] = load(path)

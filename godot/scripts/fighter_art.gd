@@ -2,7 +2,7 @@ class_name FighterArt
 extends RefCounted
 
 # Atlas pivots/scales also compile into core/combat_data.h. Regenerate combat data after art geometry changes.
-const PHASES := ["active", "windup", "block", "signature_windup", "signature_active", "ready", "walk", "run", "stance", "knockdown", "knockdown_back", "idle", "crouch_idle", "back_walk"]
+const PHASES := ["active", "windup", "block", "signature_windup", "signature_active", "ready", "walk", "run", "stance", "knockdown", "knockdown_back", "idle", "crouch_idle", "back_walk", "attack_animation"]
 const DIRECTORY := "res://assets/fighters/"
 static var manifest: Dictionary = {}
 static var textures: Dictionary = {}
@@ -46,6 +46,38 @@ static func apply(sprite: Sprite2D, character: int, phase: String, pose: int, wo
 	sprite.set_meta("phase", phase)
 	sprite.set_meta("pose", pose)
 	apply_idle_smoke(sprite, character, phase, pose, idle_time)
+	apply_frame_effect(sprite, character, phase, pose)
+
+static func apply_frame_effect(sprite: Sprite2D, character: int, phase: String, pose: int) -> void:
+	var info := sheet(character, phase)
+	var frame: Dictionary = info.frames[pose]
+	var effect: Dictionary = frame.get("effect", {})
+	var layer := sprite.get_node_or_null("AttackEffect") as Sprite2D
+	if layer == null:
+		if effect.is_empty(): return
+		layer = Sprite2D.new()
+		layer.name = "AttackEffect"
+		layer.centered = false
+		sprite.add_child(layer)
+	layer.visible = not effect.is_empty()
+	if effect.is_empty(): return
+	layer.show_behind_parent = effect.get("behind", false)
+	layer.texture = texture(character, effect.sheet, effect.pose)
+	var box: Array = effect.box
+	var factor: float = frame.get("body_height", info.body_height) / 150.0
+	layer.position = Vector2(box[0], -box[3]) * factor
+	layer.scale = Vector2((box[2] - box[0]) / layer.texture.get_width(), (box[3] - box[1]) / layer.texture.get_height()) * factor
+	layer.modulate = Color(1, 1, 1, effect.get("opacity", 1.0))
+
+static func projectile_art(character: int, move: int, life: int, age: int = 0) -> Dictionary:
+	var fighter: Dictionary = catalog().fighters[character]
+	var effect: Dictionary = fighter.get("projectile_variants", {}).get(str(move), fighter.get("projectile", {}))
+	if effect.has("frames"):
+		# Remaining life is saved and freezes with hitstop. Both pillar distances
+		# share the exact same texture and geometry, including expiration art.
+		var index: int = 3 if life <= 6 else (age / 6) % 3
+		return {"file": effect.file, "region": effect.frames[index].region}
+	return effect
 
 static func apply_idle_smoke(sprite: Sprite2D, character: int, phase: String, pose: int, ticks: int) -> void:
 	var fighter: Dictionary = catalog().fighters[character]

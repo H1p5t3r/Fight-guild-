@@ -26,8 +26,10 @@ export class CombatPreview {
     const facing=options.facing===-1?-1:1,e=this.engine;
     e.loadData(data);e.reset([character,target],[simple,false]);
     const separation=this.pack.collisions[character].push.halfWidth+this.pack.collisions[target].push.halfWidth+Math.round(gap*100);
-    e.api.fg_preview_place(0,45000,0,10000);
-    e.api.fg_preview_place(1,45000+facing*separation,behavior==='air'?12000:0,10000);
+    // Keep both roots inside the stage at the full distance range in either facing.
+    const origin=facing===1?45000:55000;
+    e.api.fg_preview_place(0,origin,0,10000);
+    e.api.fg_preview_place(1,origin+facing*separation,behavior==='air'?12000:0,10000);
     const result={frames:[],contacts:[],warnings:[],executed:false,requested:inputName(m),slot,character,target};
     let elapsed=0,quiet=0,lastGroups=0,followed=false;
     const mechanicTest=m.mechanic?(options.mechanic||'single'):'single';

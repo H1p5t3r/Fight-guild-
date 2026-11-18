@@ -34,6 +34,7 @@ for platform in (['Linux', 'Windows'] if target == 'all' else [target]):
         archive.write(root / 'docs/move-stats.md', 'FightGuild/move-stats.md')
         archive.write(root / 'docs/tapper-design.md', 'FightGuild/tapper-design.md')
         archive.write(root / 'docs/smoke-design.md', 'FightGuild/smoke-design.md')
+        archive.write(root / 'docs/smoke-attacks.md', 'FightGuild/smoke-attacks.md')
         archive.write(root / 'docs/menu-flow.md', 'FightGuild/menu-flow.md')
         archive.write(root / 'docs/menu-style.md', 'FightGuild/menu-style.md')
         for file in notices: archive.write(file, 'FightGuild/licenses/' + file.name)

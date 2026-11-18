@@ -120,6 +120,20 @@
           "Quicker cloth and rear vapor than walking; light toe skims.",
           "Retain A/H identity and grounded gameplay; no transition smears."
         ]
+      },
+      "specials": {
+        "status": "selected_by_user",
+        "poison": "Venom Sabre (S2) effect with S1 backhand motion",
+        "fire": "Furnace Cleaver (F2) effect with F1 backhand motion",
+        "pillar": "P2 Smoked Obsidian, identical art and size at close/far placement",
+        "requirements": [
+          "No physical sword, hilt or handle; both hands empty.",
+          "Horizontal arcs parallel with ground; no shot beam.",
+          "Near/far use identical pillar art and size. Perspective size difference on concept board is rejected.",
+          "No transition smears."
+        ],
+        "reference_directory": "art/characters/smoke-special-options-v1",
+        "production_directory": "godot/assets/fighters/smoke-attacks-v2"
       }
     }
   }

@@ -88,6 +88,28 @@ func timing_fixture() -> Dictionary:
 	data.characters[1].moves[3].reach = 100 # Dummy Hs whiffs so its recovery can be punished.
 	return data
 
+func verify_smoke_attacks() -> void:
+	for phase in ["attack_animation", "backdraft_fx", "sword_fx"]:
+		for pose in FighterArt.sheet(2, phase).frames.size():
+			check(FighterArt.texture(2, phase, pose).atlas != null, "Missing packaged Smoke attack sprite")
+	for pose in range(20, 24):
+		for phase in ["signature_windup", "signature_active"]:
+			check(FighterArt.texture(2, phase, pose).atlas != null, "Missing packaged Smoke special")
+	var previous: int = game.edit_character.selected
+	game.edit_character.select(2)
+	game.show_sprite_review(16)
+	var count := 0
+	for child in game.get_children():
+		if not child is AcceptDialog or child == game.file_dialog: continue
+		for control in child.find_children("*", "Control", true, false):
+			if control is FighterPreview:
+				check(control.phase == "attack_animation" and control.pose == count, "Backdraft review selected the wrong key")
+				count += 1
+		child.queue_free()
+	check(count == 2, "Backdraft review must show consecutive keys")
+	game.edit_character.select(previous)
+	await tree.process_frame
+
 func combo_inputs(hits: int = 2) -> void:
 	for hit in hits:
 		if hit > 0: release_hitstop()
@@ -317,7 +339,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 			var visual: Sprite2D = game.arena.sprites[0]
 			var art: int = game.model.move(character, slots[b]).artPose
 			var expected_pose := art - 1 if art else b + 1
-			check(visual.get_meta("phase") == ("signature_windup" if art else "windup") and visual.get_meta("pose") == expected_pose, "Attack has no windup pose")
+			check(visual.get_meta("phase") == ("idle" if character == 2 else "signature_windup" if art else "windup") and visual.get_meta("pose") == (0 if character == 2 else expected_pose), "Attack has no entry/windup pose")
 			var anticipation: Texture2D = visual.texture
 			ticks(game.model.move(character, slots[b]).startup - 1)
 			check(visual.get_meta("phase") == ("signature_active" if art else "active") and visual.get_meta("pose") == expected_pose and visual.texture != anticipation, "Attack did not change to its active image")
@@ -328,6 +350,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	await verify_signatures()
 	await verify_recovery_art()
 	await verify_smoke_idles()
+	await verify_smoke_attacks()
 	verify_foreground_draw()
 	game.show_controls()
 	check(game.has_open_dialog(), "Controls dialog did not open")

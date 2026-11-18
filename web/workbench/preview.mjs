@@ -55,13 +55,13 @@ export class Preview {
       const f=frame.state.players[i];
       if(f.tetherSource){const owner=frame.state.players[1-i],from=point(owner.x,owner.y+8500),to=point(f.x,f.y+7000);ctx.strokeStyle='#79d3df';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(from.x,from.y);ctx.lineTo(to.x,to.y);ctx.stroke();}
 
-      const p=point(f.x,f.y),pose=!i&&record.geometryOnly&&moveFrame?poseAt(m,moveFrame,!!this.pack.art[f.character].ready):{phase:['active','windup','block','signature_windup','signature_active','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk'][f.posePhase],index:f.poseIndex};
+      const p=point(f.x,f.y),pose=!i&&record.geometryOnly&&moveFrame?poseAt(m,moveFrame,!!this.pack.art[f.character].ready):{phase:['active','windup','block','signature_windup','signature_active','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation'][f.posePhase],index:f.poseIndex};
       const sheet=this.pack.art[f.character][pose.phase],tile=sheet?.frames[pose.index];
       ctx.fillStyle='#050d12';ctx.beginPath();ctx.ellipse(p.x,ground.y,22*scale,5*scale,0,0,Math.PI*2);ctx.fill();
       for(const q of frame.state.projectiles?.filter(q=>q.owner===i)??[]){
         const box=[q.x-q.width/2,q.y-q.height/2,q.x+q.width/2,q.y+q.height/2],from=point(box[0],box[3]),to=point(box[2],box[1]);
-        const custom=this.pack.art[f.character].projectile;
-        const effect=this.image(custom?.file??'appearance-v3/projectiles.png'),region=custom?.region??(q.kind===2?[797,350,708,390]:[28,326,695,432]);
+        const custom=this.pack.art[f.character].projectile_variants?.[q.move]??this.pack.art[f.character].projectile;
+        const effect=this.image(custom?.file??'appearance-v3/projectiles.png'),region=custom?.frames?.[q.life<=6?3:Math.floor((q.age??0)/6)%3].region??custom?.region??(q.kind===2?[797,350,708,390]:[28,326,695,432]);
         if(this.options.art&&effect.complete&&effect.naturalWidth){ctx.save();ctx.translate((from.x+to.x)/2,from.y);ctx.scale(q.facing,1);ctx.drawImage(effect,...region,-Math.abs(to.x-from.x)/2,0,Math.abs(to.x-from.x),Math.abs(to.y-from.y));ctx.restore();}
         if(this.options.hit)rect(box,'#d7a7ff',.15);
       }
@@ -82,7 +82,16 @@ export class Preview {
           ctx.restore();
         }
       }
+      const paintEffect=behind=>{
+        const overlay=tile?.effect;if(!this.options.art||!overlay||!!overlay.behind!==behind)return;
+        const info=this.pack.art[f.character][overlay.sheet],frame=info.frames[overlay.pose],img=this.image(frame.file??info.file);
+        if(!img.complete||!img.naturalWidth)return;
+        const [left,bottom,right,top]=overlay.box;ctx.save();ctx.translate(p.x,p.y);ctx.scale(f.facing,1);ctx.globalAlpha=overlay.opacity??1;
+        ctx.drawImage(img,...frame.region,left*scale,-top*scale,(right-left)*scale,(top-bottom)*scale);ctx.restore();
+      };
+      paintEffect(true);
       if(this.options.art&&tile){const img=this.image(tile.file??sheet.file),s=150/(tile.body_height??sheet.body_height)*scale;if(img.complete&&img.naturalWidth){const [sx,sy,sw,sh]=tile.render_region??tile.region;ctx.save();ctx.translate(p.x,p.y);ctx.scale(f.facing,1);ctx.drawImage(img,sx,sy,sw,sh,(sx-tile.region[0]-tile.pivot[0])*s,(sy-tile.region[1]-tile.pivot[1])*s,sw*s,sh*s);ctx.restore();}}
+      paintEffect(false);
       if(this.options.push)frame.boxes[i].push.forEach(box=>rect(box,'#a8ba76'));
       const hurt=!i&&moveFrame&&!f.variant&&(record.geometryOnly||m.hurtboxes[phase])?Object.values(enabledHurtboxes(effectiveHurtboxes(this.pack,record.character,m,moveFrame),m,phase)).map(localToWorld):frame.boxes[i].hurt;
       if(this.options.hurt)hurt.forEach(box=>rect(box,'#7bb8d4'));

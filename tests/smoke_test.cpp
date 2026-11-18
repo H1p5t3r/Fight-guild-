@@ -11,7 +11,7 @@ static void charge_inputs(){
   setup(s,facing);auto& a=s.world.players[0];
   const int base=dust?13:11,charged=dust?CHARGED_D:CHARGED_HS,button=dust?D:Hs;
   const int input=button|(dust?0:(facing==1?Right:Left)),full=dust?28:36;
-  for(int tick=1;tick<full;++tick){s.step(input,0);CHECK(a.move==base);CHECK(s.box_count(0,HitBox)==0);CHECK(s.pose(a).phase==3);}
+  for(int tick=1;tick<full;++tick){s.step(input,0);CHECK(a.move==base);CHECK(s.box_count(0,HitBox)==0);CHECK(s.pose(a).phase==11||s.pose(a).phase==14||s.pose(a).phase==3);}
   const int momentum=a.momentum;copy=s;
   s.step(input,0);copy.step(input,0);CHECK(s.checksum()==copy.checksum());
   CHECK(a.move==charged);CHECK(s.box_count(0,HitBox)>0);CHECK(a.momentum==momentum);
@@ -83,12 +83,12 @@ static void approved_idles(){
   for(int n=0;n<6;++n){s.step(input,0);CHECK(a.idle_time==clock);CHECK(s.pose(a).index==frozen.index);}
   restored=s;
   for(int n=0;n<45;++n){s.step(input,0);restored.step(input,0);CHECK(s.checksum()==restored.checksum());CHECK(s.pose(a).index==restored.pose(restored.world.players[0]).index);}
-  s.preview_begin(0,0);CHECK(s.pose(a).phase==3);
+  s.preview_begin(0,0);CHECK(s.pose(a).phase==11);
  }
  CHECK(Simulation::pose_box_count(2,11,4)==0);
  CHECK(Simulation::pose_box_count(2,12,4)==0);
  CHECK(Simulation::pose_box_count(3,11,0)==0);
- CHECK(Simulation::pose_box_count(2,14,0)==0);
+ CHECK(Simulation::pose_box_count(2,15,0)==0);
 }
 static void approved_movement(){
  Simulation s,restored;
@@ -111,9 +111,33 @@ static void approved_movement(){
   restored=s;
   for(int tick=0;tick<20;++tick){s.step(input,0);restored.step(input,0);CHECK(s.checksum()==restored.checksum());}
   a.vx=0;a.running=false;CHECK(s.pose(a).phase==11);
-  s.preview_begin(0,0);CHECK(s.pose(a).phase==3);
+  s.preview_begin(0,0);CHECK(s.pose(a).phase==11);
  }
  CHECK(Simulation::pose_box_count(2,13,8)==0);
  CHECK(Simulation::pose_box_count(3,13,0)==0);
 }
-int main(){charge_inputs();normals_and_multihits();air_projectile();approved_idles();approved_movement();std::printf("Smoke normals / charge / projectile / approved idles and movement: %d checks, %d failures\n",checks,failures);return failures?1:0;}
+static void attack_animation(){
+ Simulation s,restored;
+ for(int facing:{1,-1})for(int length:{1,2}){
+  setup(s,facing);auto& a=s.world.players[0];auto& m=s.moves[2][7];
+  m.v[Startup]=18*length;m.v[Active]=9*length;m.v[Recovery]=28*length;
+  s.preview_begin(0,7);int seen=0;
+  for(int age=1;age<m.v[Startup]+m.v[Active]+m.v[Recovery];++age){
+   a.age=age;const auto p=s.pose(a);
+   if(p.phase==14)seen|=1<<p.index;
+   CHECK(s.box_count(0,HurtBox)<=4);
+   if(age>=m.v[Startup]&&age<m.v[Startup]+m.v[Active]){
+    CHECK(p.phase==14);CHECK(p.index==2+(age-m.v[Startup])/(3*length));
+   }
+  }
+  CHECK(seen==255);
+  a.age=m.v[Startup];const auto pose=s.pose(a);s.world.hitstop=6;restored=s;
+  for(int tick=0;tick<6;++tick){s.step(0,0);restored.step(0,0);CHECK(s.checksum()==restored.checksum());CHECK(s.pose(a).phase==pose.phase&&s.pose(a).index==pose.index);}
+  // Choosing other art opts out of this slot's clip.
+  m.v[ArtPose]=1;CHECK(s.pose(a).phase==4&&s.pose(a).index==0);
+ }
+ setup(s);auto& a=s.world.players[0];s.preview_begin(0,23);
+ CHECK(s.moves[2][23].v[Startup]==2);a.age=1;CHECK(s.pose(a).phase==14&&s.pose(a).index==27);
+ a.age=2;CHECK(s.pose(a).phase!=14);
+}
+int main(){charge_inputs();normals_and_multihits();air_projectile();approved_idles();approved_movement();attack_animation();std::printf("Smoke normals / charge / projectile / approved animations: %d checks, %d failures\n",checks,failures);return failures?1:0;}
