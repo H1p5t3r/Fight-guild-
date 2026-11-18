@@ -1,7 +1,7 @@
 import {build} from 'esbuild';
 import {isDeepStrictEqual} from 'node:util';
 import {chromium} from 'playwright';
-import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,rm} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
@@ -85,16 +85,50 @@ if(existsSync(manifestPath)){
   if(!isDeepStrictEqual(gameplay,engine.data()))throw new Error('Workshop draft changed during core import.');
 }
 const bundle=await build({entryPoints:[path('web/workbench/app.mjs')],bundle:true,format:'iife',write:false,minify:true,target:'es2022'});
-let css=await readFile(path('web/workbench/style.css'),'utf8');
-for(const [tag,file] of [['BARLOW_REGULAR','BarlowCondensed.woff2'],['BARLOW_SEMIBOLD','BarlowCondensedSemibold.woff2']])css=css.replace(tag,'data:font/woff2;base64,'+(await readFile(path('godot/Content/Fonts/'+file))).toString('base64'));
+const sourceCss=await readFile(path('web/workbench/style.css'),'utf8');
+let css=sourceCss;
+const fonts=[];
+for(const [tag,file] of [['BARLOW_REGULAR','BarlowCondensed.woff2'],['BARLOW_SEMIBOLD','BarlowCondensedSemibold.woff2']]){
+  const bytes=await readFile(path('godot/Content/Fonts/'+file));fonts.push({tag,bytes});
+  css=css.replace(tag,'data:font/woff2;base64,'+bytes.toString('base64'));
+}
 const template=await readFile(path('web/workbench/index.html'),'utf8');
 const license=await readFile(path('godot/Content/Fonts/Barlow-LICENSE.txt'),'utf8');
 const script='globalThis.FIGHT_WORKSHOP_DATA='+JSON.stringify(pack)+';'+bundle.outputFiles[0].text;
 const html=template.replace('<!--WORKSHOP_STYLES-->',()=>'<style>'+css+'</style>')
   .replace('<!--WORKSHOP_SCRIPT-->',()=>'<script>'+script.replace(/<\/script/gi,'<\\/script')+'</script>')
   .replace('<!--FONT_LICENSE-->',()=>`<!-- Bundled Barlow font license:\n${license.replace(/--/g,'—')}\n-->`);
-await mkdir(path('build/move-workshop'),{recursive:true});
 await writeFile(path('build/FightGuild-Move-Workshop.html'),html);
-await writeFile(path('build/move-workshop/index.html'),html);
 await writeFile(path('build/workbench-pack.json'),JSON.stringify({...pack,images:{}}));
 console.log(`Built standalone Move Workshop: ${(Buffer.byteLength(html)/1024/1024).toFixed(1)} MiB, ${files.length} embedded sprite sheets, plain-JS combat preview, no runtime requests or WebAssembly.`);
+
+// The hosted/portable folder loads only the artwork actually shown. Content
+// hashes keep cached assets safe across updates, while index.html stays small.
+// Classic scripts (not modules or fetch) also work when opening index.html locally.
+await rm(path('build/move-workshop'),{recursive:true,force:true});
+await mkdir(path('build/move-workshop/assets'),{recursive:true});
+async function asset(content,extension){
+  const name=createHash('sha256').update(content).digest('hex')+'.'+extension;
+  await writeFile(path('build/move-workshop/assets/'+name),content);return 'assets/'+name;
+}
+const linkedImages={};
+for(const [file,encoded] of Object.entries(images))linkedImages[file]=await asset(Buffer.from(encoded.split(',')[1],'base64'),'webp');
+const linkedPack={...pack,images:linkedImages};
+const dataScript=await asset('globalThis.FIGHT_WORKSHOP_DATA='+JSON.stringify(linkedPack)+';','js');
+const appScript=await asset(bundle.outputFiles[0].text,'js');
+let linkedCss=sourceCss;
+for(const {tag,bytes} of fonts)linkedCss=linkedCss.replace(tag,(await asset(bytes,'woff2')).slice('assets/'.length));
+const stylesheet=await asset(linkedCss,'css');
+const linkedHtml=template.replace('<!--WORKSHOP_STYLES-->',()=>`<link rel="stylesheet" href="${stylesheet}">`)
+  .replace('<!--WORKSHOP_SCRIPT-->',()=>`<script defer src="${dataScript}"></script><script defer src="${appScript}"></script>`)
+  .replace('<!--FONT_LICENSE-->',()=>`<!-- Bundled Barlow font license:\n${license.replace(/--/g,'—')}\n-->`)
+  .replace('The page works offline without installing anything. It makes no network requests.',
+    'The website loads the editor and artwork from this site. Your edits and pose photos stay in this browser; they are not uploaded. The extracted ZIP also works offline without installing anything.');
+await writeFile(path('build/move-workshop/index.html'),linkedHtml);
+await writeFile(path('build/move-workshop/.nojekyll'),'');
+await writeFile(path('build/move-workshop/FightGuild-moves.json'),JSON.stringify(pack.draft?.data??pack.defaults,null,2)+'\n');
+await writeFile(path('build/move-workshop/START_HERE.txt'),`Fight Guild - Move Workshop\n\nExtract this whole folder, then open index.html in Chrome or Edge.\nKeep the assets folder beside index.html. No installation or server is needed.\n\nDownload JSON before closing to keep a portable backup of edits, notes and photos.\nDrafts stay in this browser; they do not sync between PCs or with the old HTML.\nUse Import JSON to carry a saved draft into this version.\nFightGuild-moves.json contains the shipped project draft; importing it replaces\nthe open draft, so download your edits before doing so.\n`);
+const sourceCommit=execFileSync('git',['rev-parse','HEAD'],{cwd:path('.'),encoding:'utf8'}).trim();
+await writeFile(path('build/move-workshop/version.json'),JSON.stringify({sourceCommit,schema:defaults.schema,artSheets:files.length,draft:pack.draft?.label??null},null,2)+'\n');
+execFileSync('python',[path('scripts/package-workshop.py')],{stdio:'inherit'});
+console.log(`Built hosted Move Workshop: ${(Buffer.byteLength(linkedHtml)/1024).toFixed(1)} KiB HTML, artwork loaded on demand, cached assets, local JSON import/export.`);

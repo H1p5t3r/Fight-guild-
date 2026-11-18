@@ -67,6 +67,7 @@ jobs:
           name: FightGuild-Move-Workshop
           path: |
             build/FightGuild-Move-Workshop.html
+            build/FightGuild-Move-Workshop.zip
             exports/FightGuild-Movement-Preview.html
             docs/move-workshop.md
             docs/tapper-design.md

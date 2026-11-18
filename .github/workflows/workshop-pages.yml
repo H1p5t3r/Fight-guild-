@@ -1,0 +1,75 @@
+name: Publish Move Workshop
+
+on:
+  push:
+    branches: [feat/godot-combat-lab]
+    paths:
+      - '.github/workflows/workshop-pages.yml'
+      - 'web/**'
+      - 'core/**'
+      - 'godot/assets/fighters/**'
+      - 'godot/data/**'
+      - 'godot/Content/Fonts/**'
+      - 'scripts/build-workbench.mjs'
+      - 'scripts/build.sh'
+      - 'scripts/generate-combat-data.py'
+      - 'scripts/package-workshop.py'
+      - 'scripts/serve-workbench.mjs'
+      - 'tests/workbench*'
+      - 'package.json'
+      - 'package-lock.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: move-workshop-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      FIGHT_TOOLS: /tmp/fight-guild-workshop-tools
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build the browser editor
+        run: |
+          python -m pip install --target "$FIGHT_TOOLS/python" ziglang==0.14.1
+          npm ci --no-audit --no-fund
+          npx playwright install --with-deps chromium
+          bash scripts/build.sh
+          node scripts/build-workbench.mjs
+      - name: Verify hosted and extracted editor
+        run: node tests/workbench-delivery-browser.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FightGuild-Portable-Editor
+          path: build/FightGuild-Move-Workshop.zip
+          if-no-files-found: error
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/move-workshop
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # GitHub requires an owner/admin to enable Pages once in repository settings.
+      # The workflow token can publish subsequent updates but cannot enable it.
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment

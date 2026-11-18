@@ -1,9 +1,15 @@
 # Move Workshop
 
 Tune attacks in a normal browser without installing or running the game. The
-download is one self-contained **FightGuild-Move-Workshop.html** file (about 19 MB),
-including the current six-fighter data, sprite sheets and fonts. No account,
-server, WebAssembly or network access is needed to use the downloaded page.
+hosted edition uses a small entry page and loads artwork as needed, instead of
+putting every sprite sheet into one large HTML download. It uses the same
+six-fighter data and plain-JavaScript combat preview. No account or WebAssembly
+is needed. Edits, notes and pose references stay in your browser.
+
+The portable **FightGuild-Move-Workshop.zip** contains the same editor and artwork.
+Extract the whole folder and open `index.html`; keep its `assets` folder beside
+it. This version works offline without a server or installation. The larger
+single-file HTML remains available for compatibility.
 
 The [complete control guide (PDF)](../exports/FightGuild-Move-Workshop-Guide.pdf)
 explains every browser editor control, with allowed ranges, worked examples,
@@ -13,12 +19,13 @@ art notes and pose photos, character movement and projectiles.
 
 ## Use it on another PC
 
-1. Download **FightGuild-Move-Workshop.html** from the chat attachment or this
-   branch's **FightGuild-Move-Workshop** GitHub Actions artifact. Extract the
-   artifact ZIP if downloading from Actions.
-2. Open the HTML file in Chrome or Edge. If your workplace disallows local HTML,
-   the same file can be served as `index.html` on an approved static website;
-   this repository does not currently publish that website.
+1. After the one-time Pages setup below, open
+   **https://h1p5t3r.github.io/Fight-guild-/** in Chrome or Edge. Bookmark that URL
+   for future updates.
+2. For offline use, download **FightGuild-Move-Workshop.zip** from the chat or
+   the **FightGuild-Portable-Editor** GitHub Actions artifact. Extract the entire
+   ZIP, then open `FightGuild-Move-Workshop/index.html`. If downloading an Actions
+   artifact, extract the included editor ZIP as well.
 3. Start with Fillet or Shark, choose a move by numpad notation, then edit its
    timing, hitbox, reactions, cancels or inputs. **Import JSON** opens a current
    game export or a previous workshop download.
@@ -37,9 +44,33 @@ JSON is the portable backup. If storage is blocked/full, editing and JSON
 downloads still work; the page shows a reminder. A damaged saved draft can be
 downloaded for recovery before explicitly starting a new one.
 
+## Hosted publishing
+
+The [Publish Move Workshop workflow](../.github/workflows/workshop-pages.yml)
+builds, tests and deploys the editor after changes on `feat/godot-combat-lab`.
+It publishes only `build/move-workshop`, with versioned assets and no backend.
+The hosted data is the committed project draft, never a user's browser save.
+
+One-time repository setup: an owner/admin opens
+[Settings → Pages](https://github.com/H1p5t3r/Fight-guild-/settings/pages), chooses
+**GitHub Actions** under **Build and deployment → Source**, then reruns the
+latest **Publish Move Workshop** workflow if it previously stopped at deployment.
+The standard workflow token can deploy updates, but cannot enable Pages itself.
+The site is live only after that workflow's deployment job succeeds.
+
+Before switching from the old downloaded HTML, use **Download JSON** there and
+**Import JSON** on the website. Browser storage is separate for local files and
+the hosted address. A site update preserves an existing saved draft; import
+`FightGuild-moves.json` from the published folder only when you want to replace
+it with the shipped kit. Download your own draft first.
+
+Build both deliveries with `npm run build:workshop`. `npm run start:workshop`
+serves the hosted folder locally. The portable ZIP opens directly from disk.
+`version.json` records the source commit and schema for deployment verification.
+
 ## What you can tune
 
-- All 258 move slots across six fighters, with unused slots hidden by default.
+- All 270 move slots across six fighters, with unused slots hidden by default.
 - **Attack enabled** beside the move title: turn off unused command normals or
   attacks without deleting their tuning data. Enable **Show unused slots** to
   find them again. Disabled attacks cannot execute or be cancel destinations.
