@@ -58,20 +58,20 @@ func verify_foreground_draw() -> void:
 func verify_smoke_idles() -> void:
 	var previous: int = game.edit_character.selected
 	game.edit_character.select(2)
-	for clip in [4, 8]:
+	for clip in [4, 8, 5, 11, 15]:
 		game.show_sprite_review(clip)
 		var count := 0
 		for child in game.get_children():
 			if not child is AcceptDialog or child == game.file_dialog: continue
 			for control in child.find_children("*", "Control", true, false):
 				if control is FighterPreview:
-					check(control.phase == ("idle" if clip == 4 else "crouch_idle") and control.pose == count, "Smoke review missed the approved A/H clip")
+					check(control.phase == {4: "idle", 8: "crouch_idle", 5: "walk", 11: "run", 15: "back_walk"}[clip] and control.pose == count, "Smoke review missed the approved A/H/G3/R4 clip")
 					FighterArt.apply(control.sprite, 2, control.phase, count, 1, -1, 15)
 					check(control.sprite.get_node("IdleSmoke0").show_behind_parent, "Smoke vapor covers the body")
 					check(control.sprite.get_node("IdleSmoke0").texture.atlas != null, "Missing packaged rear-vapor texture")
 					count += 1
 			child.queue_free()
-		check(count == 2, "Smoke review must show the current and following idle key")
+		check(count == 2, "Smoke review must show the current and following animation key")
 		await tree.process_frame
 	game.edit_character.select(previous)
 

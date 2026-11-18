@@ -572,9 +572,10 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
         // It freezes during hitstop, reverses on back-walk and follows acceleration.
         if(f.dash>0&&f.character==3) return {7,min(7,f.dash_age*8/max(1,mobility[f.character].v[f.dash_direction==f.facing?StepFrames:BackFrames]))};
         if(!f.vx) return ready;
-        const int phase=f.running?7:6;
+        const int phase=f.running?7:f.character==2&&f.vx*f.facing<0?13:6;
         const auto& profile=mobility[f.character];
-        const int stride=max(1,profile.v[f.running?RunSpeed:WalkSpeed])*(f.running?3:5);
+        const int cadence=f.character==2?(f.running?5:10):(f.running?3:5);
+        const int stride=max(1,profile.v[f.running?RunSpeed:WalkSpeed])*cadence;
         const int distance=f.facing==1?f.x:-f.x;
         const int step=distance>=0?distance/stride:-((-distance+stride-1)/stride);
         return {phase,(step%8+8)%8};

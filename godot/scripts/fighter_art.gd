@@ -2,7 +2,7 @@ class_name FighterArt
 extends RefCounted
 
 # Atlas pivots/scales also compile into core/combat_data.h. Regenerate combat data after art geometry changes.
-const PHASES := ["active", "windup", "block", "signature_windup", "signature_active", "ready", "walk", "run", "stance", "knockdown", "knockdown_back", "idle", "crouch_idle"]
+const PHASES := ["active", "windup", "block", "signature_windup", "signature_active", "ready", "walk", "run", "stance", "knockdown", "knockdown_back", "idle", "crouch_idle", "back_walk"]
 const DIRECTORY := "res://assets/fighters/"
 static var manifest: Dictionary = {}
 static var textures: Dictionary = {}
@@ -48,7 +48,10 @@ static func apply(sprite: Sprite2D, character: int, phase: String, pose: int, wo
 	apply_idle_smoke(sprite, character, phase, pose, idle_time)
 
 static func apply_idle_smoke(sprite: Sprite2D, character: int, phase: String, pose: int, ticks: int) -> void:
-	var effect: Dictionary = catalog().fighters[character].get("idle_smoke", {})
+	var fighter: Dictionary = catalog().fighters[character]
+	var movement: Dictionary = fighter.get("movement_smoke", {})
+	var effect_phase := "movement_smoke" if movement.get("presentations", {}).has(phase) else "idle_smoke"
+	var effect: Dictionary = fighter.get(effect_phase, {})
 	var presentation: Dictionary = effect.get("presentations", {}).get(phase, {})
 	var enabled := ticks >= 0 and not presentation.is_empty()
 	# Children inherit their owner's facing, foot root and foreground order.
@@ -65,16 +68,17 @@ static func apply_idle_smoke(sprite: Sprite2D, character: int, phase: String, po
 			sprite.add_child(vapor)
 		vapor.visible = enabled
 		if not enabled: continue
-		var interval: int = effect.frame_ticks
+		var interval: int = presentation.get("frame_ticks", effect.frame_ticks)
 		var index: int = (ticks / interval + layer) % effect.frames.size()
 		var blend := float(ticks % interval) / interval
 		var info := sheet(character, phase)
 		var body_height: float = info.frames[pose].get("body_height", info.body_height)
 		var factor: float = body_height / effect.body_height
 		var pivot: Array = effect.frames[index].pivot
-		vapor.texture = texture(character, "idle_smoke", index)
+		vapor.texture = texture(character, effect_phase, index)
 		vapor.offset = -Vector2(pivot[0], pivot[1])
 		vapor.scale = Vector2(presentation.scale[0], presentation.scale[1]) * factor
+		if presentation.get("flip_x", false): vapor.scale.x *= -1
 		vapor.position = Vector2(presentation.offset[0], -presentation.offset[1]) * body_height / 150.0
 		vapor.modulate = Color(1, 1, 1, float(effect.opacity) * (blend if layer else 1.0 - blend))
 

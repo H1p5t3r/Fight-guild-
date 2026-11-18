@@ -3799,6 +3799,771 @@
         "body_frame_ticks": 20,
         "cycle_ticks": 80,
         "grounded": true
+      },
+      "walk": {
+        "file": "smoke-movement-v1/walk.png",
+        "columns": 2,
+        "rows": 2,
+        "body_height": 480,
+        "sha256": "e6bae1b26349ec7c703cb0cf7a70b83bf91ff32323782e4289d55abb6728d873",
+        "generation_file": "exec-7779f1d3-70b1-470d-b7f5-2e15a8911cac.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            767,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Walk 1",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              409,
+              493
+            ],
+            "bounds": [
+              228,
+              12,
+              551,
+              494
+            ]
+          },
+          {
+            "name": "Walk 2",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              409,
+              493
+            ],
+            "bounds": [
+              161,
+              5,
+              542,
+              493
+            ]
+          },
+          {
+            "name": "Walk 3",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              409,
+              493
+            ],
+            "bounds": [
+              159,
+              4,
+              551,
+              494
+            ]
+          },
+          {
+            "name": "Walk 4",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              409,
+              493
+            ],
+            "bounds": [
+              194,
+              8,
+              543,
+              494
+            ]
+          },
+          {
+            "name": "Walk 5",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              409,
+              493
+            ],
+            "bounds": [
+              194,
+              8,
+              543,
+              494
+            ]
+          },
+          {
+            "name": "Walk 6",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              409,
+              493
+            ],
+            "bounds": [
+              159,
+              4,
+              551,
+              494
+            ]
+          },
+          {
+            "name": "Walk 7",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              409,
+              493
+            ],
+            "bounds": [
+              161,
+              5,
+              542,
+              493
+            ]
+          },
+          {
+            "name": "Walk 8",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              409,
+              493
+            ],
+            "bounds": [
+              228,
+              12,
+              551,
+              494
+            ]
+          }
+        ]
+      },
+      "back_walk": {
+        "file": "smoke-movement-v1/back_walk.png",
+        "columns": 2,
+        "rows": 2,
+        "body_height": 480,
+        "sha256": "33772464045fe9907b5dd2a79bac3fca2f2539d1c4610cdd788f4c83340375e3",
+        "generation_file": "exec-48573b3b-377b-4b82-afcb-a916096b9c4f.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            767,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Back Walk 1",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              463,
+              500
+            ],
+            "bounds": [
+              226,
+              19,
+              605,
+              500
+            ]
+          },
+          {
+            "name": "Back Walk 2",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              463,
+              500
+            ],
+            "bounds": [
+              233,
+              18,
+              617,
+              501
+            ]
+          },
+          {
+            "name": "Back Walk 3",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              463,
+              500
+            ],
+            "bounds": [
+              238,
+              16,
+              619,
+              500
+            ]
+          },
+          {
+            "name": "Back Walk 4",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              463,
+              500
+            ],
+            "bounds": [
+              210,
+              23,
+              583,
+              500
+            ]
+          },
+          {
+            "name": "Back Walk 5",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              463,
+              500
+            ],
+            "bounds": [
+              210,
+              23,
+              583,
+              500
+            ]
+          },
+          {
+            "name": "Back Walk 6",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              463,
+              500
+            ],
+            "bounds": [
+              238,
+              16,
+              619,
+              500
+            ]
+          },
+          {
+            "name": "Back Walk 7",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              463,
+              500
+            ],
+            "bounds": [
+              233,
+              18,
+              617,
+              501
+            ]
+          },
+          {
+            "name": "Back Walk 8",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              463,
+              500
+            ],
+            "bounds": [
+              226,
+              19,
+              605,
+              500
+            ]
+          }
+        ]
+      },
+      "run": {
+        "file": "smoke-movement-v1/run.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 450,
+        "sha256": "15d756d703ae0ffdd4c7e7471ed46b66cee8f4af9803437cf8a365e8f4aa3fcf",
+        "generation_file": "exec-77773ec3-d44f-49fd-89e1-e1218e96d824.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            767,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Run 1",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              224,
+              496
+            ],
+            "bounds": [
+              12,
+              45,
+              379,
+              498
+            ]
+          },
+          {
+            "name": "Run 2",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              224,
+              496
+            ],
+            "bounds": [
+              11,
+              45,
+              378,
+              495
+            ]
+          },
+          {
+            "name": "Run 3",
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              224,
+              496
+            ],
+            "bounds": [
+              10,
+              45,
+              378,
+              483
+            ]
+          },
+          {
+            "name": "Run 4",
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              224,
+              496
+            ],
+            "bounds": [
+              7,
+              45,
+              376,
+              495
+            ]
+          },
+          {
+            "name": "Run 5",
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              224,
+              496
+            ],
+            "bounds": [
+              8,
+              46,
+              377,
+              495
+            ]
+          },
+          {
+            "name": "Run 6",
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              224,
+              496
+            ],
+            "bounds": [
+              7,
+              46,
+              378,
+              495
+            ]
+          },
+          {
+            "name": "Run 7",
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              224,
+              496
+            ],
+            "bounds": [
+              10,
+              46,
+              380,
+              489
+            ]
+          },
+          {
+            "name": "Run 8",
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              224,
+              496
+            ],
+            "bounds": [
+              10,
+              46,
+              378,
+              496
+            ]
+          }
+        ]
+      },
+      "movement_smoke": {
+        "file": "smoke-movement-v1/movement_smoke.png",
+        "columns": 4,
+        "rows": 2,
+        "body_height": 480,
+        "sha256": "0bf7a43def6dbb346fa0e70b76c9bd08a86bb74aa498e4ce820b6a987581513c",
+        "generation_file": "exec-8949e3f1-4121-49f2-8ce2-3580f4e8e52d.png",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            767,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ],
+        "frames": [
+          {
+            "name": "Movement Smoke 1",
+            "region": [
+              0,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              300,
+              450
+            ],
+            "bounds": [
+              51,
+              111,
+              371,
+              450
+            ]
+          },
+          {
+            "name": "Movement Smoke 2",
+            "region": [
+              384,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              300,
+              450
+            ],
+            "bounds": [
+              21,
+              93,
+              357,
+              450
+            ]
+          },
+          {
+            "name": "Movement Smoke 3",
+            "region": [
+              768,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              300,
+              450
+            ],
+            "bounds": [
+              18,
+              81,
+              354,
+              450
+            ]
+          },
+          {
+            "name": "Movement Smoke 4",
+            "region": [
+              1152,
+              0,
+              384,
+              512
+            ],
+            "pivot": [
+              300,
+              450
+            ],
+            "bounds": [
+              3,
+              63,
+              353,
+              451
+            ]
+          },
+          {
+            "name": "Movement Smoke 5",
+            "region": [
+              0,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              300,
+              450
+            ],
+            "bounds": [
+              12,
+              61,
+              363,
+              450
+            ]
+          },
+          {
+            "name": "Movement Smoke 6",
+            "region": [
+              384,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              300,
+              450
+            ],
+            "bounds": [
+              19,
+              73,
+              359,
+              450
+            ]
+          },
+          {
+            "name": "Movement Smoke 7",
+            "region": [
+              768,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              300,
+              450
+            ],
+            "bounds": [
+              23,
+              95,
+              366,
+              450
+            ]
+          },
+          {
+            "name": "Movement Smoke 8",
+            "region": [
+              1152,
+              512,
+              384,
+              512
+            ],
+            "pivot": [
+              300,
+              450
+            ],
+            "bounds": [
+              30,
+              106,
+              359,
+              450
+            ]
+          }
+        ],
+        "frame_ticks": 10,
+        "opacity": 0.55,
+        "presentations": {
+          "walk": {
+            "scale": [
+              1.1,
+              1.15
+            ],
+            "offset": [
+              -6,
+              0
+            ]
+          },
+          "back_walk": {
+            "scale": [
+              1.1,
+              1.15
+            ],
+            "offset": [
+              6,
+              0
+            ],
+            "flip_x": true
+          },
+          "run": {
+            "scale": [
+              1.35,
+              1.15
+            ],
+            "offset": [
+              -6,
+              0
+            ],
+            "frame_ticks": 6
+          }
+        }
+      },
+      "movement_selection": {
+        "walk": "G3 / Suspended Sway",
+        "run": "R4 / Regal Surge",
+        "walk_ticks_at_default_speed": 10,
+        "run_ticks_at_default_speed": 5,
+        "walk_drawings": 4,
+        "run_drawings": 8,
+        "grounded": true
       }
     },
     {

@@ -43,7 +43,7 @@ func _initialize() -> void:
 				var point := Vector2i(sample[0], sample[1])
 				check(source.get_pixelv(point).a < 0.03, "Atlas background is not transparent: " + path)
 			var signatures: int = 32 if c == 3 else 20 if c == 2 else 4
-			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4}[phase]
+			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8}[phase]
 			check(sheet.frames.size() == count, "Missing poses: " + path)
 			for pose in sheet.frames.size():
 				if sheet.frames[pose].has("file"):
@@ -72,10 +72,23 @@ func _initialize() -> void:
 					check(vapor.visible and vapor.show_behind_parent, "Vapor must stay behind its fighter")
 					check(vapor.texture.atlas != null, "Missing imported vapor texture")
 					check(vapor.texture == FighterArt.texture(2, "idle_smoke", (tick / 10 + layer) % 8), "Vapor ignored the saved clock")
+	var movement: Dictionary = fighters[2].movement_smoke
+	check(FileAccess.get_sha256(FighterArt.DIRECTORY + movement.file) == movement.sha256, "Movement vapor provenance is stale")
+	for phase in ["walk", "back_walk", "run"]:
+		for facing in [-1, 1]:
+			for tick in [0, 15, 40, 79, 80]:
+				FighterArt.apply(sprite, 2, phase, 0, 1, facing, tick)
+				var interval: int = movement.presentations[phase].get("frame_ticks", movement.frame_ticks)
+				for layer in 2:
+					var vapor := sprite.get_node("IdleSmoke%d" % layer) as Sprite2D
+					check(vapor.visible and vapor.show_behind_parent, "Movement vapor must stay behind its fighter")
+					check(vapor.texture == FighterArt.texture(2, "movement_smoke", (tick / interval + layer) % 8), "Movement vapor ignored saved clock/cadence")
+					check(signf(sprite.scale.x) == facing, "Retreat changed body facing")
+					check(signf(vapor.scale.x) == (-1 if phase == "back_walk" else 1), "Retreat vapor must trail on the opposite side")
 	FighterArt.apply(sprite, 2, "signature_active", 0, 1, 1, 10)
 	check(not sprite.get_node("IdleSmoke0").visible and not sprite.get_node("IdleSmoke1").visible, "Idle vapor leaked into an attack")
 	FighterArt.apply(sprite, 5, "ready", 0, 1, 1, 10)
 	check(not sprite.get_node("IdleSmoke0").visible, "Idle vapor leaked into another fighter")
 	sprite.free()
-	print("Godot sprite catalog: ", failures, " failures; six fighters, 399 source poses, alpha, regions, provenance and rear idle vapor")
+	print("Godot sprite catalog: ", failures, " failures; six fighters, 423 body keys, alpha, regions, provenance and idle/movement vapor")
 	quit(1 if failures else 0)

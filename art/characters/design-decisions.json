@@ -94,6 +94,32 @@
           "Suspended hips, light forefoot contact, trailing open hand and upward drifting cloth.",
           "Use fixed anatomy scale; do not enlarge the crouch to standing height."
         ]
+      },
+      "walk": {
+        "id": "G3",
+        "name": "Suspended Sway",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/smoke-movement-v1/drift-options.png",
+        "source_panel": "bottom-left pair",
+        "user_instruction": "G3 is good move with that",
+        "requirements": [
+          "Separate forward-leaning advance and backward-leaning retreat; keep facing the opponent.",
+          "Close legs, raised heels and light toe contact without a stepping walk.",
+          "Hair, ivory coat and separate rear vapor trail opposite travel."
+        ]
+      },
+      "run": {
+        "id": "R4",
+        "name": "Regal Surge",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/smoke-movement-v1/run-options.png",
+        "source_panel": "bottom-right",
+        "user_instruction": "R4 for the run. walk cycle should be more of a drift leaning forward or back",
+        "requirements": [
+          "Near-upright modest forward lean, low open palms, compact alternating leg curls.",
+          "Quicker cloth and rear vapor than walking; light toe skims.",
+          "Retain A/H identity and grounded gameplay; no transition smears."
+        ]
       }
     }
   }

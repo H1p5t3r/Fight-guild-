@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 # Smear slots are reserved for schema compatibility; transition smearing is removed.
 FIELDS = 'button category direction motion air startup active recovery damage hitstun blockstun hitstop pushback reach bottom height specialCancel jumpCancel whiffCancel selfCancel advance simpleDirection simpleButton normalRoutes commandRoutes hitLevel chipDamage guardBreak counterHitstun counterHitstop reversalEligible hitboxBack airPushback blockPushback launch airLaunch knockdown knockdownFrames wakeupFrames wallDamage throwRange enabled artPose followFrom followFrom2 followHit travelSpeed inertiaPercent pullFrames pullGap hitAngle normalCancelStart normalCancelEnd specialCancelStart specialCancelEnd jumpCancelStart jumpCancelEnd followCancelStart followCancelEnd cancelOn starterProration comboScaling minimumDamage landingRecovery attackLevel counterTier counterVulnerable counterFreezeFrames counterSlowFrames projectileKind projectileSpawnFrame projectileSpeedX projectileSpeedY projectileGravity projectileLife projectileOffsetX projectileOffsetY projectileWidth projectileHeight projectileHits projectileRehit projectileDurability projectilePersist projectileMelee smearMode smearPart smearStretch smearFrame1 smearFrame2 smearFrame3 smearFrame4 hurtMaskWindup hurtMaskActive hurtMaskRecovery mechanic tetherSpeed tetherFrames bleedInitial bleedTickDamage bleedTickFrames bleedDuration bleedBlockPercent bleedCap variantStartup variantActive variantRecovery variantDamage variantRange variantSpeed variantLift variantHitstun variantKnockdown stanceRequired stanceChange actionType holdFollow holdFrame holdButton guardFollow proximityMove proximityRange startupTravel diveSpeedX diveSpeedY groundBounce wallBounce crumpleFrames airCounterKnockdown hurtWindowStart hurtWindowEnd hurtWindowMask semiAirStart semiAirEnd armorFrames armorHits grabFrames finishArtPose finishArtFrame'.split()
 MOBILITY = 'forwardStyle walkSpeed runSpeed runAcceleration stepSpeed stepFrames backSpeed backFrames attackFriction backStyle backWalkSpeed backRunSpeed jumpSpeed jumpForwardSpeed jumpBackSpeed gravity airJumps prejumpFrames airDashEnabled airBackdashEnabled airDashStyle airBackdashStyle airDashSpeed airBackdashSpeed airDashFrames airBackdashFrames airDashUses hoverHeight hoverRiseSpeed teleportDistance backTeleportDistance teleportStartup fdEnabled fdPushPercent fdDrain fdAirDrain fdBlockCost smearMode smearPart smearStretch airDashPauseFrames airBackdashPauseFrames'.split()
-PHASES = {'active': 12, 'windup': 6, 'block': 6, 'signature_windup': 32, 'signature_active': 32, 'ready': 1, 'walk': 8, 'run': 8, 'stance': 4, 'knockdown': 6, 'knockdown_back': 6, 'idle': 4, 'crouch_idle': 4}
+PHASES = {'active': 12, 'windup': 6, 'block': 6, 'signature_windup': 32, 'signature_active': 32, 'ready': 1, 'walk': 8, 'run': 8, 'stance': 4, 'knockdown': 6, 'knockdown_back': 6, 'idle': 4, 'crouch_idle': 4, 'back_walk': 8}
 HURT_REGIONS = ('legs', 'torsoArms', 'head', 'extension')
 
 
@@ -35,12 +35,12 @@ def compile_data():
         assert body['name'] == fighter['name'] == character['name']
         poses, strikes = [], {}
         signatures.append(len(fighter.get('signature_active',{}).get('frames',[])))
-        has_motion = all(phase in fighter for phase in ('ready', 'walk', 'run'))
-        assert has_motion or not any(phase in fighter for phase in ('ready', 'walk', 'run'))
+        has_motion = all(phase in fighter for phase in ('walk', 'run')) and any(phase in fighter for phase in ('ready', 'idle'))
+        assert has_motion or not any(phase in fighter for phase in ('ready', 'walk', 'run', 'back_walk'))
         locomotion.append(8 if has_motion else 0)
         for phase, count in PHASES.items():
             if phase not in fighter:
-                assert phase.startswith('signature_') or phase in ('ready', 'walk', 'run', 'stance', 'idle', 'crouch_idle')
+                assert phase.startswith('signature_') or phase in ('ready', 'walk', 'run', 'stance', 'idle', 'crouch_idle', 'back_walk')
                 poses.extend(['{0, {}}'] * count)
                 continue
             sheet = fighter[phase]
@@ -149,4 +149,5 @@ if __name__ == '__main__':
                 raise SystemExit(f'Stale generated file: {path.relative_to(ROOT)}; run {Path(__file__).name}')
         else:
             path.write_text(content)
-    print('Combat data verified: 399 poses (3 body boxes + at most 1 extension), 6 movement/push profiles, 270 move slots, startup minimums: throws 2f / P normals 3f / other attacks 5f.')
+    count = sum(len(poses) for fighter in json.loads((ROOT / 'godot/data/fighter_collision.json').read_text())['fighters'] for poses in fighter['poses'].values())
+    print(f'Combat data verified: {count} poses (3 body boxes + at most 1 extension), 6 movement/push profiles, 270 move slots, startup minimums: throws 2f / P normals 3f / other attacks 5f.')

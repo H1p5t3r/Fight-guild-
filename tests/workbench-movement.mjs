@@ -50,6 +50,23 @@ test('The same preview records walk/run, 44, teleports, air actions and FD from 
  profile.airDashEnabled=1;const air=preview.recordMovement(data,5,0,'airForward');assert.ok(air.frames.some(f=>f.state.players[0].airDashUsed===1));assert.equal(air.frames.at(-1).state.players[0].airDashUsed,0);
  const fd=preview.recordMovement(data,5,0,'fd');assert.ok(fd.frames.some(f=>f.state.players[0].faultless));assert.ok(fd.contacts.some(c=>c.event===2));
 });
+test('Smoke G3/R4 poses and fitted boxes agree in WASM and plain JS without changing tuning',async()=>{
+ const data=structuredClone(pack.defaults),before=structuredClone(data),preview=new CombatPreview(pack);
+ const wasm=new Engine((await WebAssembly.instantiate(await readFile(new URL('../web/generated/fight.wasm',import.meta.url)))).instance),plain=preview.engine;
+ for(const facing of [-1,1])for(const [action,phase] of [['walk',6],['backWalk',13],['forward',7]]){
+  const record=preview.recordMovement(data,2,0,action,{facing}),moving=record.frames.filter(f=>f.state.players[0].posePhase===phase);
+  assert.ok(moving.length>10);
+  assert.ok(moving.every(f=>f.state.players[0].y===0&&f.state.players[0].facing===facing&&f.boxes[0].hurt.length===4));
+ }
+ for(const e of [wasm,plain]){e.loadData(data);e.reset([2,4]);e.api.fg_preview_place(0,30000,0,0);e.api.fg_preview_place(1,80000,0,0);}
+ for(let tick=0;tick<100;tick++){
+  const input=tick<20?2:tick<40?1:tick<80?2|512:0;
+  wasm.step(input,0);plain.step(input,0);
+  assert.equal(wasm.hash,plain.hash);
+  assert.deepEqual(wasm.state(),plain.state());
+ }
+ assert.deepEqual(data,before);
+});
 test('Moving shots and traps show real independent contact and persistent geometry',()=>{
  const preview=new CombatPreview(pack),data=structuredClone(pack.defaults),m=data.characters[5].moves[0];
  Object.assign(m,{projectileKind:1,projectileSpeedX:800,projectileOffsetX:3000,projectileWidth:3000,projectileHeight:6000,projectileLife:180});

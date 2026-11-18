@@ -9,7 +9,8 @@ Each body clip has four generated keys, held for 20 action frames each. Eight
 separate gray/olive vapor keys crossfade behind her over the same 80-frame loop.
 The vapor uses her saved `idleTime`, so hitstop freezes it and scrubbing or
 rollback restores it. It stays with her foreground group, hides during attack,
-hit/block, travel and movement poses, and never receives collision boxes.
+hit/block and travel poses, and never receives collision boxes. During G3/R4
+movement it is replaced by a directional wake; see [movement loops](smoke-movement.md).
 
 The two body clips append pose phases 11 and 12. Their anatomical hurtboxes
 use legs, torso/arms, head and one extended-arm region: four boxes maximum.

@@ -55,7 +55,7 @@ export class Preview {
       const f=frame.state.players[i];
       if(f.tetherSource){const owner=frame.state.players[1-i],from=point(owner.x,owner.y+8500),to=point(f.x,f.y+7000);ctx.strokeStyle='#79d3df';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(from.x,from.y);ctx.lineTo(to.x,to.y);ctx.stroke();}
 
-      const p=point(f.x,f.y),pose=!i&&record.geometryOnly&&moveFrame?poseAt(m,moveFrame,!!this.pack.art[f.character].ready):{phase:['active','windup','block','signature_windup','signature_active','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle'][f.posePhase],index:f.poseIndex};
+      const p=point(f.x,f.y),pose=!i&&record.geometryOnly&&moveFrame?poseAt(m,moveFrame,!!this.pack.art[f.character].ready):{phase:['active','windup','block','signature_windup','signature_active','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk'][f.posePhase],index:f.poseIndex};
       const sheet=this.pack.art[f.character][pose.phase],tile=sheet?.frames[pose.index];
       ctx.fillStyle='#050d12';ctx.beginPath();ctx.ellipse(p.x,ground.y,22*scale,5*scale,0,0,Math.PI*2);ctx.fill();
       for(const q of frame.state.projectiles?.filter(q=>q.owner===i)??[]){
@@ -67,16 +67,17 @@ export class Preview {
       }
       // Ambient vapor is inside the owner's draw group, behind their body. It
       // follows the saved action clock, including freeze and backward seeking.
-      const vapor=this.pack.art[f.character].idle_smoke,placement=vapor?.presentations[pose.phase];
+      const fighterArt=this.pack.art[f.character],movement=fighterArt.movement_smoke;
+      const vapor=movement?.presentations[pose.phase]?movement:fighterArt.idle_smoke,placement=vapor?.presentations[pose.phase];
       if(this.options.art&&placement){
-        const img=this.image(vapor.file),ticks=f.idleTime??0,blend=(ticks%vapor.frame_ticks)/vapor.frame_ticks;
+        const img=this.image(vapor.file),ticks=f.idleTime??0,interval=placement.frame_ticks??vapor.frame_ticks,blend=(ticks%interval)/interval;
         if(img.complete&&img.naturalWidth){
           const sx=150/vapor.body_height*scale*placement.scale[0],sy=150/vapor.body_height*scale*placement.scale[1];
-          ctx.save();ctx.translate(p.x,p.y);ctx.scale(f.facing,1);
+          ctx.save();ctx.translate(p.x,p.y);ctx.scale(f.facing,1);ctx.translate(placement.offset[0]*scale,-placement.offset[1]*scale);ctx.scale(placement.flip_x?-1:1,1);
           for(let layer=0;layer<2;layer++){
-            const key=vapor.frames[(Math.floor(ticks/vapor.frame_ticks)+layer)%vapor.frames.length];
+            const key=vapor.frames[(Math.floor(ticks/interval)+layer)%vapor.frames.length];
             ctx.globalAlpha=vapor.opacity*(layer?blend:1-blend);
-            ctx.drawImage(img,...key.region,placement.offset[0]*scale-key.pivot[0]*sx,-placement.offset[1]*scale-key.pivot[1]*sy,key.region[2]*sx,key.region[3]*sy);
+            ctx.drawImage(img,...key.region,-key.pivot[0]*sx,-key.pivot[1]*sy,key.region[2]*sx,key.region[3]*sy);
           }
           ctx.restore();
         }

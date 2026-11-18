@@ -136,3 +136,9 @@ Every fighter now has a separate six-pose face-down/hard sequence and six-pose f
 ## Smoke approved A/H idle loops
 
 Smoke now uses the approved A / Open Current standing loop and H / Uncoiled Vapor crouch. Four body keys per clip and eight separate rear-vapor keys share the saved action clock; no transition smears are added. See [idle registration and review](smoke-idle.md).
+
+Smoke's approved G3 / Suspended Sway has separate advancing and retreating drift
+drawings, with R4 / Regal Surge for running. Four drawings per drift play through
+eight keys; run and rear vapor each have eight distinct drawings. Source PNGs
+are unchanged. Fixed clip scales and four-region anatomical boxes are registered
+alongside the art. See [movement registration and review](smoke-movement.md).
