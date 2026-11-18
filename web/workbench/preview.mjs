@@ -50,7 +50,9 @@ export class Preview {
     for(let x=gridOrigin+Math.floor((b.left-gridOrigin)/50)*50;x<b.right;x+=50){const p=point(x*100,0);ctx.beginPath();ctx.moveTo(p.x,30);ctx.lineTo(p.x,h-25-space);ctx.stroke();}
     const ground=point(0,0);ctx.strokeStyle='#718086';ctx.beginPath();ctx.moveTo(12,ground.y);ctx.lineTo(w-12,ground.y);ctx.stroke();
     const rect=(box,color,alpha=.1,dashed=false)=>{const p=point(box[0],box[3]);ctx.fillStyle=color;ctx.globalAlpha=alpha;ctx.fillRect(p.x,p.y,(box[2]-box[0])/100*scale,(box[3]-box[1])/100*scale);ctx.globalAlpha=1;ctx.strokeStyle=color;ctx.setLineDash(dashed?[4,4]:[]);ctx.strokeRect(p.x,p.y,(box[2]-box[0])/100*scale,(box[3]-box[1])/100*scale);ctx.setLineDash([]);};
-    frame.state.players.forEach((f,i)=>{
+    const drawOrder=frame.state.foregroundPlayer===0?[1,0]:[0,1];
+    drawOrder.forEach(i=>{
+      const f=frame.state.players[i];
       if(f.tetherSource){const owner=frame.state.players[1-i],from=point(owner.x,owner.y+8500),to=point(f.x,f.y+7000);ctx.strokeStyle='#79d3df';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(from.x,from.y);ctx.lineTo(to.x,to.y);ctx.stroke();}
 
       const p=point(f.x,f.y),pose=!i&&record.geometryOnly&&moveFrame?poseAt(m,moveFrame,!!this.pack.art[f.character].ready):{phase:['active','windup','block','signature_windup','signature_active','ready','walk','run','stance','knockdown','knockdown_back'][f.posePhase],index:f.poseIndex};

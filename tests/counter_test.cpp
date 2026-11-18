@@ -17,13 +17,15 @@ static Simulation setup() {
 }
 static void ticks(Simulation& s,int n) { while(n-->0) s.step(0,0); }
 int main() {
-    auto s=setup();s.step(0,0);
+    auto s=setup();CHECK(s.get(-1,21)==-1);s.step(0,0);
+    CHECK(s.get(-1,21)==0);
     CHECK(s.get(0,10)==CounterHit&&s.world.hitstop==31&&s.get(1,63)==35);
     CHECK(s.world.impact_time==84&&s.world.impact_actor==0&&s.world.impact_tier==3);
     int stun=s.world.players[1].stun,age=s.world.players[0].age;
     ticks(s,31);
     CHECK(s.world.players[1].stun==stun&&s.world.players[0].age==age&&s.get(1,63)==35);
     CHECK(s.world.impact_time==53);
+    CHECK(s.get(-1,21)==0); // Order survives shared hitstop and later recovery.
     int held=0;
     for(int i=0;i<35;++i) {
         int before=s.world.players[1].stun;s.step(0,0);
@@ -46,6 +48,7 @@ int main() {
         if(result==1) {b.move=0;b.age=s.moves[4][0].v[Startup]+s.moves[4][0].v[Active];}
         s.step(0,result==2?Right:0);
         CHECK(a.event==(result==0?NormalHit:result==1?PunishHit:Blocked));
+        CHECK(s.get(-1,21)==0);
         CHECK(!b.slow_time&&!s.world.impact_time&&s.world.hitstop==5);
     }
     s=setup();s.moves[5][0].v[CounterFreezeFrames]=-1;s.moves[5][0].v[CounterSlowFrames]=0;
@@ -59,9 +62,11 @@ int main() {
     s.moves[4][0]=s.moves[5][0];s.step(0,0);
     CHECK(a.event==CounterHit&&b.event==CounterHit&&a.slow_time==35&&b.slow_time==35);
     CHECK(s.world.impact_actor==0); // Stable tie for simultaneous cinematic counters.
+    CHECK(s.get(-1,21)==1); // Simultaneous contacts use deterministic resolution order.
     ticks(s,31);int as=a.stun,bs=b.stun;ticks(s,35);CHECK(a.stun==as-17&&b.stun==bs-17);
     CHECK(!s.move_set(5,0,CounterFreezeFrames,61)&&!s.move_set(5,0,CounterSlowFrames,121));
     s.reset(5,4,0,0);CHECK(!s.world.impact_time&&!s.get(0,63)&&!s.get(1,63));
+    CHECK(s.get(-1,21)==-1);
     std::printf("Counter slowdown: %d checks, %d failures\n",checks,failures);
     return failures?1:0;
 }

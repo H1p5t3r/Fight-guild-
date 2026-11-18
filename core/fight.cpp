@@ -1175,6 +1175,7 @@ void Simulation::tick_grabs(const bool advances[2]) {
 }
 void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_combo,int prior_reaction,int facing,bool projectile) {
     Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
+    world.foreground_player=p;
     bool blocked=contact==Blocked;
     bool point=blocked&&guard_point(other,m);
     bool armor=!blocked&&other.move>=0&&other.reaction==Free&&other.armor_left>0&&m.v[Category]!=Throw&&m.v[HitLevel]!=1
@@ -1353,6 +1354,7 @@ int Simulation::get(int player,int field) const {
         case 15:return world.wall_break_x[0]; case 16:return world.wall_break_x[1];
         case 17:return world.wall_break_y[0]; case 18:return world.wall_break_y[1];
         case 19:return world.wall_health[0]; case 20:return world.wall_health[1];
+        case 21:return world.foreground_player;
         default:return 0; }
     }
     if(player>1) return 0;

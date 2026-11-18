@@ -8,10 +8,11 @@ export function moveFieldLimit(move,key,limits) {
     : key==='variantStartup' ? {...limit,min:variantStartupMinimum(move)} : limit;
 }
 export function upgradeStartupRules(data) {
-  if(data?.schema!==19 || data.coreVersion!==19)return data;
+  if(![19,20].includes(data?.schema) || data.coreVersion!==data.schema)return data;
   const next=structuredClone(data);
-  for(const character of next.characters??[])for(const move of character.moves??[])
+  if(data.schema===19)for(const character of next.characters??[])for(const move of character.moves??[])
     if(move.category===4 && move.motion===0)move.startup=2;
-  next.schema=next.coreVersion=20;
+  // Version 21 adds rollback presentation state only; preserve every v20 edit.
+  next.schema=next.coreVersion=21;
   return next;
 }

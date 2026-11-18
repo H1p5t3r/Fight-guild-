@@ -218,12 +218,14 @@ preserved through import/export, but are not tuning controls in this page.
 
 - One gameplay frame is 1/60 second. Playback defaults to half speed for inspection.
   A 5-frame startup has four windup frames, then its first active frame. Startup
-  minimums are 2 frames for grabs, 3 for P normals (normal/command category), and 5 for other attacks. Older drafts upgrade standard ground/air throws to 2f; schema-20 exports preserve subsequent timing edits.
+  minimums are 2 frames for grabs, 3 for P normals (normal/command category), and 5 for other attacks. Drafts older than schema 20 upgrade standard ground/air throws to 2f; schema-20 and later exports preserve subsequent timing edits.
 - **Base on block** assumes contact on the first active frame, no cancel and no FD.
   A later active-frame hit can change the actual advantage.
 - Positions/distances use game pixels; travel/launch use pixels per frame.
   Hundredths are preserved exactly in the core's integer units.
 - Orange is attack geometry, blue is body hurtboxes, and green is the pushbox.
+  The most recent attacker draws in front after a hit or block. Seeking backward
+  restores the draw order from the selected frame.
   On the Hit & movement tab, drag a normal strike's active rectangle or its edge
   handles, or edit a selected custom key box. Numeric fields cover base hook and
   throw geometry. The inherited hook preview draws eight

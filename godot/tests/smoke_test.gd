@@ -6,7 +6,7 @@ func _initialize() -> void: call_deferred("run")
 func run() -> void:
 	var model := CombatModel.new()
 	var data := model.data()
-	check(data.schema == 20 and data.characters[2].moves.size() == 45, "Smoke schema missing")
+	check(data.schema == 21 and data.characters[2].moves.size() == 45, "Smoke schema missing")
 	check(model.move(2,43).guardBreak == 1 and model.move(2,43).blockstun == 39, "Charged guard crush missing")
 	for dust in [false,true]:
 		model.reset([2,3])

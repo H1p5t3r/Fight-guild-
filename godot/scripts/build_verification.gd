@@ -43,6 +43,18 @@ func verify_recovery_art() -> void:
 		check(count == 2, "Recovery review must show the current and following poses")
 		await tree.process_frame
 
+func verify_foreground_draw() -> void:
+	var state: Dictionary = game.model.state()
+	for attacker in [-1, 0, 1, 0]:
+		state.foregroundPlayer = attacker
+		game.arena.refresh(game.model, state, true, false)
+		var front: int = 0 if attacker == 0 else 1
+		check(game.arena.sprites[front].get_index() > game.arena.weapons[1-front].get_index(), "Latest attacker is not in the foreground")
+		for p in 2:
+			check(game.arena.weapons[p].get_index() == game.arena.sprites[p].get_index() + 1, "Detached weapon left its owner's layer")
+		check(game.arena.collision_layer.get_index() > game.arena.weapons[front].get_index() and game.arena.hud_layer.get_index() > game.arena.collision_layer.get_index(), "Foreground fighter covers the HUD or collision overlay")
+	game.arena.refresh(game.model, game.model.state(), true, false)
+
 func timing_fixture() -> Dictionary:
 	var data: Dictionary = game.model.data().duplicate(true)
 	for character in data.characters:
@@ -295,6 +307,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	verify_timing_feedback()
 	await verify_signatures()
 	await verify_recovery_art()
+	verify_foreground_draw()
 	game.show_controls()
 	check(game.has_open_dialog(), "Controls dialog did not open")
 	for child in game.get_children():

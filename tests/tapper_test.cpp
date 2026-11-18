@@ -24,7 +24,7 @@ static void inputs_and_stance(){
 }
 static void captures(){
  Simulation s;setup(s);auto& a=s.world.players[0];auto& b=s.world.players[1];
- hit(s,13);CHECK(b.reaction==Captured&&a.grab_time>0&&b.health==1000);ticks(s,25);
+ hit(s,13);CHECK(b.reaction==Captured&&a.grab_time>0&&b.health==1000&&s.get(-1,21)==0);ticks(s,25);
  CHECK(a.stance==1&&b.health==935&&a.contact_count==1);CHECK(b.knockdown==SoftKnockdown);
  setup(s);s.moves[3][13].v[ArtPose]=s.moves[3][13].v[FinishArtPose]=0;hit(s,13);CHECK(s.get(0,30)>=0&&s.box_count(0,HurtBox)>0);
  setup(s);hit(s,13,Right);CHECK(b.guarding&&!a.stance&&!a.grab_time);
@@ -43,9 +43,9 @@ static void guard_and_reactions(){
  b.x=75000;s.step(S,0);ticks(s,30,S);CHECK(a.move==HELD_GUARD&&a.age==4);s.step(S|Hs,0);CHECK(a.move==GUARD_ATTACK&&a.armor_left==1);
  setup(s);b.x=75000;s.moves[3][HELD_GUARD].v[Enabled]=0;s.step(S,0);ticks(s,30,S);CHECK(a.move==2);
  setup(s);b.x=75000;s.moves[3][GUARD_ATTACK].v[Enabled]=0;s.step(S,0);ticks(s,30,S);s.step(S|Hs,0);CHECK(a.move==HELD_GUARD);
- setup(s);s.preview_begin(0,HELD_GUARD);a.age=4;s.preview_begin(1,0);b.age=s.moves[4][0].v[Startup]-1;s.step(S,0);CHECK(a.move==HELD_GUARD&&a.health==1000&&!a.stun);
+ setup(s);s.preview_begin(0,HELD_GUARD);a.age=4;s.preview_begin(1,0);b.age=s.moves[4][0].v[Startup]-1;s.step(S,0);CHECK(a.move==HELD_GUARD&&a.health==1000&&!a.stun&&s.get(-1,21)==1);
  setup(s);s.moves[4][5].v[HitLevel]=1;s.preview_begin(0,HELD_GUARD);a.age=4;s.preview_begin(1,5);b.age=s.moves[4][5].v[Startup]-1;s.step(S,0);CHECK(a.health<1000&&a.move<0);
- setup(s);s.preview_begin(0,GUARD_ATTACK);s.preview_begin(1,0);b.age=s.moves[4][0].v[Startup]-1;s.step(0,0);CHECK(a.health<1000&&a.move==GUARD_ATTACK&&!a.stun&&a.armor_left==0);
+ setup(s);s.preview_begin(0,GUARD_ATTACK);s.preview_begin(1,0);b.age=s.moves[4][0].v[Startup]-1;s.step(0,0);CHECK(a.health<1000&&a.move==GUARD_ATTACK&&!a.stun&&a.armor_left==0&&s.get(-1,21)==1);
  setup(s);hit(s,8);CHECK(b.reaction==Crumpled&&b.crumple_time==28);
  setup(s);b.y=10000;b.move=0;b.age=0;hit(s,8);CHECK(b.knockdown==HardKnockdown);
  setup(s);s.moves[4][5].v[HitLevel]=1;a.move=22;a.age=8;b.move=5;b.age=s.moves[4][5].v[Startup]-1;s.step(0,0);CHECK(a.health==1000);

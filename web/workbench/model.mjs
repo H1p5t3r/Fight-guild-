@@ -19,7 +19,7 @@ export function validate(data, pack) {
   data=upgradeStances(upgradeMechanics(upgradeHurtMasks(upgradeMovement(upgradeHitboxes(data),pack.defaults)),pack.defaults),pack.defaults);
   data=upgradeStartupRules(upgradeCharges(data,pack.defaults));
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15/16/17/18/19 workshop exports. Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15/16/17/18/19/20 workshop exports. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);

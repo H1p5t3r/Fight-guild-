@@ -9,7 +9,7 @@ test('Batch 2 upgrades without losing any submitted value or art note',async()=>
  const manifest=JSON.parse(await readFile('godot/data/workshop/current.json','utf8'));
  const original=JSON.parse(await readFile('godot/data/workshop/'+manifest.file,'utf8'));
  const w=new Workshop(pack,original), upgraded=w.snapshot();
- assert.equal(upgraded.schema,20);assert.deepEqual(upgraded._moveWorkshop,original._moveWorkshop);
+ assert.equal(upgraded.schema,21);assert.deepEqual(upgraded._moveWorkshop,original._moveWorkshop);
  for(const [c,ch] of original.characters.entries())for(const [i,m] of ch.moves.entries())for(const [k,v] of Object.entries(m))assert.deepEqual(upgraded.characters[c].moves[i][k],v,`${ch.name} ${m.id} ${k}`);
  assert.equal(w.move(4,13).mechanic,1);assert.equal(w.move(4,22).mechanic,1);assert.equal(w.move(5,13).mechanic,2);
  w.change(5,13,'bleedBlockPercent',35);w.change(5,13,'variantStartup',18);

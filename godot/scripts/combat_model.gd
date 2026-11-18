@@ -2,7 +2,7 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 20
+const DATA_VERSION := 21
 
 static func startup_minimum(move: Dictionary) -> int:
 	if move.get("category") == 4: return 2
@@ -61,7 +61,7 @@ func state_hash() -> int:
 	return core.checksum()
 
 func state() -> Dictionary:
-	var result := {"frame": frame(), "remaining": core.read_value(-1, 1), "hitstop": core.read_value(-1, 2), "winner": core.read_value(-1, 3), "wallBreakTime": core.read_value(-1, 4), "wallBreakActor": core.read_value(-1, 5), "wallBreakSide": core.read_value(-1, 6), "stage": core.read_value(-1, 7), "wallBreakDuration": core.read_value(-1, 8), "impactTime": core.read_value(-1, 9), "impactDuration": core.read_value(-1, 10), "impactActor": core.read_value(-1, 11), "impactTier": core.read_value(-1, 12), "impactX": core.read_value(-1, 13), "impactY": core.read_value(-1, 14), "wallBreakX": [core.read_value(-1, 15), core.read_value(-1, 16)], "wallBreakY": [core.read_value(-1, 17), core.read_value(-1, 18)], "wallHealth": [core.read_value(-1, 19), core.read_value(-1, 20)], "players": []}
+	var result := {"frame": frame(), "remaining": core.read_value(-1, 1), "hitstop": core.read_value(-1, 2), "winner": core.read_value(-1, 3), "wallBreakTime": core.read_value(-1, 4), "wallBreakActor": core.read_value(-1, 5), "wallBreakSide": core.read_value(-1, 6), "stage": core.read_value(-1, 7), "wallBreakDuration": core.read_value(-1, 8), "impactTime": core.read_value(-1, 9), "impactDuration": core.read_value(-1, 10), "impactActor": core.read_value(-1, 11), "impactTier": core.read_value(-1, 12), "impactX": core.read_value(-1, 13), "impactY": core.read_value(-1, 14), "wallBreakX": [core.read_value(-1, 15), core.read_value(-1, 16)], "wallBreakY": [core.read_value(-1, 17), core.read_value(-1, 18)], "wallHealth": [core.read_value(-1, 19), core.read_value(-1, 20)], "foregroundPlayer": core.read_value(-1, 21), "players": []}
 	for p in 2:
 		var fighter := {}
 		for i in STATE_FIELDS.size():

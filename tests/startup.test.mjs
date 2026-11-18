@@ -40,7 +40,7 @@ test('Schema 19 migration changes only standard throws and preserves notes; curr
   legacy.futureMetadata={keep:true};
   for(const c of legacy.characters)for(const m of c.moves)if(m.category===4&&!m.motion)m.startup=9;
   const before=structuredClone(legacy),next=upgradeStartupRules(legacy),expected=structuredClone(legacy);
-  expected.schema=expected.coreVersion=20;
+  expected.schema=expected.coreVersion=21;
   for(const c of expected.characters)for(const m of c.moves)if(m.category===4&&!m.motion)m.startup=2;
   assert.deepEqual(next,expected);assert.deepEqual(legacy,before);
   e.loadData(legacy);assert.equal(e.move(5,24).startup,2);

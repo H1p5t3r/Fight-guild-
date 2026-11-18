@@ -71,6 +71,7 @@ public:
         fight::State candidate{};
         std::memcpy(&candidate,bytes.ptr(),sizeof(candidate));
         if(candidate.version!=fight::VERSION||candidate.frame<0||candidate.winner< -1||candidate.winner>2||candidate.hitstop<0||candidate.hitstop>fight::MAX_HITSTOP) return false;
+        if(candidate.foreground_player< -1||candidate.foreground_player>1) return false;
         if(candidate.wall_break_time<0||candidate.wall_break_time>300||candidate.wall_break_actor< -1
             ||candidate.wall_break_actor>1||candidate.wall_break_side< -1||candidate.wall_break_side>1
             ||candidate.stage<0||candidate.stage>=fight::STAGE_COUNT) return false;

@@ -2,6 +2,8 @@
 
 These systems use the same deterministic 60 Hz combat state as attacks and blocking. They do not add a Momentum spend or enable Negative Penalty. Counter tiers, vulnerability masks and bonuses are editable; see [current combat tuning](combat-tuning.md). They do not claim verified GGST parity.
 
+The most recent attacker draws in the foreground on hit or block, including throws and projectiles. [Foreground order](foreground-order.md) follows rollback state in both the game and editor preview.
+
 ## Contact classification
 
 The engine classifies the defender after both players have acted for the tick, before either hit is applied. This makes simultaneous trades symmetric and recognizes a defender who has already canceled recovery into a new attack.

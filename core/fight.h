@@ -3,7 +3,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 20, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 45, FIELD_COUNT = 138;
+constexpr int VERSION = 21, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 45, FIELD_COUNT = 138;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
@@ -107,6 +107,7 @@ struct State {
     int wall_health[2]; // Shared by both fighters, independently for the left/right wall.
     int wall_break_x[2], wall_break_y[2]; // Cinematic origins survive neutral reset and rollback.
     int impact_time, impact_duration, impact_actor, impact_tier, impact_x, impact_y;
+    int foreground_player=-1; // Last confirmed attacker; saved with rollback state.
     Fighter players[2];
     Projectile projectiles[MAX_PROJECTILES];
     int version=VERSION; // Reject snapshots from a different core layout explicitly.

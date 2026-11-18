@@ -8,7 +8,7 @@ const pack=await json('build/workbench-pack.json');
 
 test('Smoke source timing, independent hits and charged slots survive workshop/core round trips',()=>{
  const w=new Workshop(pack,pack.draft.data),c=w.data.characters[2];
- assert.equal(w.data.schema,20);assert.equal(c.moves.length,45);
+ assert.equal(w.data.schema,21);assert.equal(c.moves.length,45);
  assert.equal(blockAdvantage(c.moves[2]),-7);assert.equal(blockAdvantage(c.moves[3]),-4);
  assert.equal(blockAdvantage(c.moves[43]),12);
  assert.equal(inputName(c.moves[32]),'c.S');assert.equal(inputName(c.moves[2]),'f.S');assert.equal(inputName(c.moves[43]),'6[Hs]');

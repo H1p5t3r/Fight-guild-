@@ -61,6 +61,12 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	show_boxes = boxes
 	paused = frozen
 	feedback.refresh(view, size)
+	# Reorder only this arena's fighter children so menus keep their own layering.
+	var draw_order := [1, 0] if int(view.get("foregroundPlayer", -1)) == 0 else [0, 1]
+	for depth in 2:
+		var p: int = draw_order[depth]
+		if sprites[p].get_index() != depth * 2: move_child(sprites[p], depth * 2)
+		if weapons[p].get_index() != depth * 2 + 1: move_child(weapons[p], depth * 2 + 1)
 	var scale_x := size.x / 1000.0
 	var floor_y := ArenaStage.floor_line(size)
 	var travel := int(view.wallBreakTime) > 0
