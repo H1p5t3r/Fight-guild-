@@ -5,13 +5,16 @@ import {measureDistances,distanceSummary,pixels} from './measurements.mjs';
 export class Preview {
   constructor(canvas,pack,onDrag,onHurtDrag){
     Object.assign(this,{canvas,pack,onDrag,onHurtDrag,images:new Map(),options:{hit:true,hurt:true,push:false,art:true,distances:true},handles:[]});
+    this.coarse=matchMedia('(pointer: coarse)');this.touchEditing=false;
+    document.getElementById('touch-edit').onclick=()=>{this.touchEditing=!this.touchEditing;this.syncTouchControls();};
+    this.coarse.addEventListener('change',()=>this.syncTouchControls());
     this.observer=new ResizeObserver(()=>this.draw());this.observer.observe(canvas);
     canvas.addEventListener('pointerdown',event=>this.down(event));
     canvas.addEventListener('pointermove',event=>this.move(event));
-    for(const type of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(type,()=>this.up());
+    for(const type of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(type,event=>this.up(event));
   }
   show(record,index,attack,edit={}){Object.assign(this,{record,index,attack,edit});this.draw();}
-  clear(){this.record=null;this.handles=[];this.boxPixels=null;this.measurements=null;this.measurementLabels=[];document.getElementById('distance-readout').textContent='';this.canvas.getContext('2d').clearRect(0,0,this.canvas.width,this.canvas.height);}
+  clear(){this.record=null;this.handles=[];this.boxPixels=null;this.measurements=null;this.measurementLabels=[];this.syncTouchControls();document.getElementById('distance-readout').textContent='';this.canvas.getContext('2d').clearRect(0,0,this.canvas.width,this.canvas.height);}
   image(file){
     if(!this.images.has(file)){
       const img=new Image();img.onload=()=>{document.getElementById('preview-empty').hidden=true;this.draw();};img.onerror=()=>{document.getElementById('preview-empty').hidden=false;};
@@ -20,23 +23,24 @@ export class Preview {
     return this.images.get(file);
   }
   bounds(){
-    const {record,attack:m}=this,signature=JSON.stringify([m.hitboxBack,m.reach,m.bottom,m.height,m.hitAngle,m.active,m.hurtboxes,m.hitboxTimeline]);
+    const {record,attack:m}=this,signature=record.sequence?'sequence':JSON.stringify([m.hitboxBack,m.reach,m.bottom,m.height,m.hitAngle,m.active,m.hurtboxes,m.hitboxTimeline]);
     if(this.boundsRecord===record&&this.boundsSignature===signature)return this.fittedBounds;
-    const shapes=[...attackBoxes(m,m.startup,this.pack.collisions[record.character].push),...attackBoxes(m,m.startup+m.active-1,this.pack.collisions[record.character].push),...m.hitboxTimeline.keys.flatMap(k=>k.boxes||[]),...Object.values(m.hurtboxes).flatMap(Object.values)];
+    const shapes=record.sequence?[]:[...attackBoxes(m,m.startup,this.pack.collisions[record.character].push),...attackBoxes(m,m.startup+m.active-1,this.pack.collisions[record.character].push),...m.hitboxTimeline.keys.flatMap(k=>k.boxes||[]),...Object.values(m.hurtboxes).flatMap(Object.values)];
     const extent=Math.max(100,...shapes.flatMap(b=>[Math.abs(b[0])/100,Math.abs(b[2])/100])),top=Math.max(180,...shapes.map(b=>b[3]/100)),bottom=Math.min(0,...shapes.map(b=>b[1]/100));
     let left=Infinity,right=-Infinity,high=190,low=-20;
     for(const frame of record.frames)frame.state.players.forEach((p,i)=>{
       left=Math.min(left,p.x/100-(i?100:extent)-20);right=Math.max(right,p.x/100+(i?100:extent)+20);
       high=Math.max(high,p.y/100+(i?180:top)+20);low=Math.min(low,p.y/100+(i?0:bottom)-20);
     });
-    for(const frame of record.frames)for(const boxes of frame.boxes)for(const q of boxes.projectiles??[]){left=Math.min(left,q[0]/100-20);right=Math.max(right,q[2]/100+20);high=Math.max(high,q[3]/100+20);low=Math.min(low,q[1]/100-20);}
+    for(const frame of record.frames)for(const boxes of frame.boxes)for(const q of [...boxes.projectiles??[],...(record.sequence?[...boxes.hit,...boxes.hurt]:[])]){left=Math.min(left,q[0]/100-20);right=Math.max(right,q[2]/100+20);high=Math.max(high,q[3]/100+20);low=Math.min(low,q[1]/100-20);}
     this.boundsRecord=record;this.boundsSignature=signature;return this.fittedBounds={left,right,top:high,bottom:low};
   }
   draw(){
     const {record,index,attack:m}=this,frame=record?.frames[index];if(!frame)return;
-    const canvas=this.canvas,w=canvas.clientWidth,h=canvas.clientHeight;if(w<=40||h<=65+(this.options.distances?72:0))return;
+    const canvas=this.canvas,w=canvas.clientWidth,h=canvas.clientHeight,compact=matchMedia('(max-width: 1000px)').matches;
+    const space=this.options.distances?(compact?44:72):0,topSpace=compact?50:65;if(w<=40||h<=topSpace+space)return;
     const dpr=window.devicePixelRatio||1;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);
-    const space=this.options.distances?72:0,b=this.bounds(),fit=Math.min((w-40)/(b.right-b.left),(h-65-space)/(b.top-b.bottom));
+    const b=this.bounds(),fit=Math.min((w-40)/(b.right-b.left),(h-topSpace-space)/(b.top-b.bottom));
     const {scale=fit,ox=(w-(b.right-b.left)*fit)/2-b.left*fit,oy=h-25-space+b.bottom*fit}=this.drag?.view||{};
     const a=frame.state.players[0],moveFrame=frame.selectedFrame,phase=phaseAt(m,moveFrame),localToWorld=box=>{
       const x1=a.x+a.facing*box[0],x2=a.x+a.facing*box[2];return [Math.min(x1,x2),a.y+box[1],Math.max(x1,x2),a.y+box[3]];
@@ -44,7 +48,7 @@ export class Preview {
     this.view={scale,ox,oy,facing:a.facing};this.hurtEdit=this.edit.hurt;
     const point=(x,y)=>({x:ox+x/100*scale,y:oy-y/100*scale});
     const local=(x,y)=>point(a.x+a.facing*x,a.y+y);
-    const attackLocal=!a.variant&&moveFrame?attackBoxes(m,moveFrame,this.pack.collisions[record.character].push):[];
+    const attackLocal=record.sequence?frame.boxes[0].hit.map(b=>a.facing===1?[b[0]-a.x,b[1]-a.y,b[2]-a.x,b[3]-a.y]:[a.x-b[2],b[1]-a.y,a.x-b[0],b[3]-a.y]):!a.variant&&moveFrame?attackBoxes(m,moveFrame,this.pack.collisions[record.character].push):[];
     ctx.fillStyle='#101b22';ctx.fillRect(0,0,w,h);ctx.strokeStyle='#263941';ctx.lineWidth=1;
     const gridOrigin=this.options.distances?a.x/100:0;
     for(let x=gridOrigin+Math.floor((b.left-gridOrigin)/50)*50;x<b.right;x+=50){const p=point(x*100,0);ctx.beginPath();ctx.moveTo(p.x,30);ctx.lineTo(p.x,h-25-space);ctx.stroke();}
@@ -93,9 +97,9 @@ export class Preview {
       if(this.options.art&&tile){const img=this.image(tile.file??sheet.file),s=150/(tile.body_height??sheet.body_height)*scale;if(img.complete&&img.naturalWidth){const [sx,sy,sw,sh]=tile.render_region??tile.region;ctx.save();ctx.translate(p.x,p.y);ctx.scale(f.facing,1);ctx.drawImage(img,sx,sy,sw,sh,(sx-tile.region[0]-tile.pivot[0])*s,(sy-tile.region[1]-tile.pivot[1])*s,sw*s,sh*s);ctx.restore();}}
       paintEffect(false);
       if(this.options.push)frame.boxes[i].push.forEach(box=>rect(box,'#a8ba76'));
-      const hurt=!i&&moveFrame&&!f.variant&&(record.geometryOnly||m.hurtboxes[phase])?Object.values(enabledHurtboxes(effectiveHurtboxes(this.pack,record.character,m,moveFrame),m,phase)).map(localToWorld):frame.boxes[i].hurt;
+      const hurt=!record.sequence&&!i&&moveFrame&&!f.variant&&(record.geometryOnly||m.hurtboxes[phase])?Object.values(enabledHurtboxes(effectiveHurtboxes(this.pack,record.character,m,moveFrame),m,phase)).map(localToWorld):frame.boxes[i].hurt;
       if(this.options.hurt)hurt.forEach(box=>rect(box,'#7bb8d4'));
-      const authored=!i&&moveFrame&&!f.variant;
+      const authored=!record.sequence&&!i&&moveFrame&&!f.variant;
       const hits=authored?attackLocal.map(localToWorld):frame.boxes[i].hit;
       if(this.options.hit&&(!authored||phase==='active'||this.edit.hit))hits.forEach(box=>rect(box,'#f1aa66',.12,authored&&phase!=='active'));
       if(f.weaponVisible){const start=point(f.weaponBackX,f.weaponBackY),end=point(f.weaponTipX,f.weaponTipY);ctx.strokeStyle='#e3c79b';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(start.x,start.y);ctx.lineTo(end.x,end.y);ctx.stroke();ctx.lineWidth=1;}
@@ -108,7 +112,8 @@ export class Preview {
       selectedBox=box;rect(localToWorld(box),color,.23);const [l,bt,r,t]=box,lc=local(l,(bt+t)/2),rc=local(r,(bt+t)/2),tc=local((l+r)/2,t),bc=local((l+r)/2,bt);
       this.boxPixels={left:Math.min(lc.x,rc.x),right:Math.max(lc.x,rc.x),top:tc.y,bottom:bc.y};
       this.handles=[lc,rc,tc,bc].map((p,i)=>({...p,key:keys[i],cursor:i<2?'ew-resize':'ns-resize',target,...extra}));
-      for(const h of this.handles){ctx.fillStyle=color;ctx.fillRect(h.x-4,h.y-4,8,8);ctx.strokeStyle='#111b20';ctx.strokeRect(h.x-4,h.y-4,8,8);}
+      const size=this.coarse.matches?6:4;
+      for(const h of this.handles){ctx.fillStyle=color;ctx.fillRect(h.x-size,h.y-size,size*2,size*2);ctx.strokeStyle='#111b20';ctx.strokeRect(h.x-size,h.y-size,size*2,size*2);}
     };
     if(moveFrame&&!a.variant&&this.edit.hit&&this.options.hit&&phase==='active'&&m.category!==4){
       const selected=this.edit.hitKey;
@@ -123,10 +128,11 @@ export class Preview {
     if(impact){const p=point(impact.x,impact.y),age=index-impact.tick;ctx.strokeStyle=impact.event===2?'#8bd8ed':'#ffcf89';ctx.globalAlpha=1-age/18;ctx.lineWidth=2;ctx.beginPath();ctx.arc(p.x,p.y,8+age*1.5,0,Math.PI*2);ctx.stroke();ctx.fillStyle=ctx.strokeStyle;ctx.textAlign='center';ctx.font='bold 15px system-ui';ctx.fillText(impact.event===2?'BLOCK':`${impact.damage} DAMAGE`,p.x,p.y-24-age);ctx.globalAlpha=1;ctx.lineWidth=1;}
     this.measurements=measureDistances(frame.state.players,frame.boxes.map(boxes=>boxes.push[0]),this.options.hit&&moveFrame&&(phase==='active'||this.edit.hit)?attackLocal:[],selectedBox);
     const readout=document.getElementById('distance-readout');readout.hidden=!this.options.distances;readout.textContent=distanceSummary(this.measurements);
-    this.measurementLabels=[];if(this.options.distances)this.drawMeasurements(ctx,{w,h,point,ground,a,b,phase,selectedBox,local});
+    this.measurementLabels=[];if(this.options.distances)this.drawMeasurements(ctx,{w,h,point,ground,a,b,phase,selectedBox,local,compact});
     ctx.textAlign='left';ctx.fillStyle='#b9c7ce';ctx.font='11px system-ui';ctx.fillText(record.geometryOnly?'GEOMETRY ONLY':frame.state.hitstop?'IMPACT FREEZE':frame.stage,14,h-10);
+    this.syncTouchControls();
   }
-  drawMeasurements(ctx,{w,h,point,ground,a,b,phase,selectedBox,local}){
+  drawMeasurements(ctx,{w,h,point,ground,a,b,phase,selectedBox,local,compact}){
     const m=this.measurements;this.measurementLabels=[];ctx.save();
     const label=(text,x,y,color)=>{
       ctx.font='11px system-ui';const width=ctx.measureText(text).width+12,height=19;
@@ -151,8 +157,11 @@ export class Preview {
       ctx.strokeStyle=value===0?'#e9c174':'#8099a6';ctx.fillStyle=ctx.strokeStyle;
       ctx.beginPath();ctx.moveTo(p.x,ground.y-3);ctx.lineTo(p.x,ground.y+4);ctx.stroke();ctx.fillText(String(value/100),p.x,ground.y+6);
     }
-    span(m.roots.from,m.roots.to,h-56,`Roots · ${pixels(m.roots.value)}`,'#a8c4d5',true);
-    if(m.body)span(m.body.from,m.body.to,h-30,`${m.body.overlap?'Body overlap':'Body gap'} · ${pixels(m.body.value)}`,m.body.overlap?'#e9ad81':'#8ed0bd',true);
+    if(compact)span(m.roots.from,m.roots.to,h-28,`Roots ${pixels(m.roots.value)}${m.body?' · '+(m.body.overlap?'Overlap ':'Gap ')+pixels(m.body.value):''}`,'#a8c4d5',true);
+    else{
+      span(m.roots.from,m.roots.to,h-56,`Roots · ${pixels(m.roots.value)}`,'#a8c4d5',true);
+      if(m.body)span(m.body.from,m.body.to,h-30,`${m.body.overlap?'Body overlap':'Body gap'} · ${pixels(m.body.value)}`,m.body.overlap?'#e9ad81':'#8ed0bd',true);
+    }
     if(m.reach)span(m.reach.from,m.reach.to,50,`Box front · ${pixels(m.reach.value)}${phase==='active'?'':' · inactive'}`,'#f2c07d');
     if(selectedBox&&m.selected){
       const top=local((selectedBox[0]+selectedBox[2])/2,selectedBox[3]),bottom=local(0,selectedBox[1]);
@@ -162,12 +171,18 @@ export class Preview {
     ctx.restore();
   }
   local(event){const r=this.canvas.getBoundingClientRect();return {x:event.clientX-r.left,y:event.clientY-r.top};}
-  pick(p){const handle=this.handles.find(h=>Math.hypot(h.x-p.x,h.y-p.y)<14);if(handle)return handle;const b=this.boxPixels;if(this.handles.length&&b&&p.x>b.left&&p.x<b.right&&p.y>b.top&&p.y<b.bottom)return {...this.handles[0],key:'move',cursor:'move'};return null;}
-  down(event){if(event.button!==0)return;const p=this.local(event),hit=this.pick(p);if(!hit)return;
-    event.preventDefault();this.drag={...hit,start:p,attack:structuredClone(this.attack),view:structuredClone(this.view),hurt:structuredClone(this.hurtEdit)};
+  syncTouchControls(){
+    const button=document.getElementById('touch-edit');button.hidden=!this.coarse.matches||!this.handles.length;
+    if(button.hidden)this.touchEditing=false;
+    button.setAttribute('aria-pressed',String(this.touchEditing));button.textContent=this.touchEditing?'Done dragging':'Drag boxes';
+    this.canvas.classList.toggle('box-editing',this.coarse.matches&&this.touchEditing);
+  }
+  pick(p){const radius=this.coarse.matches?24:14,handle=this.handles.map(h=>({h,d:Math.hypot(h.x-p.x,h.y-p.y)})).filter(v=>v.d<radius).sort((a,b)=>a.d-b.d)[0]?.h;if(handle)return handle;const b=this.boxPixels;if(this.handles.length&&b&&p.x>b.left&&p.x<b.right&&p.y>b.top&&p.y<b.bottom)return {...this.handles[0],key:'move',cursor:'move'};return null;}
+  down(event){if(event.button!==0||event.isPrimary===false||this.drag||(event.pointerType==='touch'&&!this.touchEditing))return;const p=this.local(event),hit=this.pick(p);if(!hit)return;
+    event.preventDefault();this.drag={...hit,pointerId:event.pointerId,start:p,attack:structuredClone(this.attack),view:structuredClone(this.view),hurt:structuredClone(this.hurtEdit)};
     if((hit.target==='hurt'?this.onHurtDrag:this.onDrag)('start')===false){this.drag=null;return;}this.canvas.setPointerCapture(event.pointerId);
   }
-  move(event){const p=this.local(event);this.canvas.style.cursor=this.drag?.cursor||this.pick(p)?.cursor||'default';if(!this.drag)return;
+  move(event){const p=this.local(event);this.canvas.style.cursor=this.drag?.cursor||this.pick(p)?.cursor||'default';if(!this.drag||this.drag.pointerId!==event.pointerId)return;
     const d=this.drag,m=d.attack,dx=Math.round((p.x-d.start.x)/d.view.scale*100*d.view.facing),dy=Math.round(-(p.y-d.start.y)/d.view.scale*100);let patch={};
     if(d.target==='hurt'||d.target==='hit-key'){
       const box=d.target==='hurt'?m.hurtboxes[d.hurt.phase][d.hurt.region]:m.hitboxTimeline.keys[d.keyIndex].boxes[d.boxIndex],b=[...box];
@@ -180,5 +195,5 @@ export class Preview {
     else patch={[d.key]:m[d.key]+dx};
     this.onDrag('change',patch);
   }
-  up(){if(!this.drag)return;const callback=this.drag.target==='hurt'?this.onHurtDrag:this.onDrag;this.drag=null;callback('end');this.draw();}
+  up(event){if(!this.drag||event&&this.drag.pointerId!==event.pointerId)return;const callback=this.drag.target==='hurt'?this.onHurtDrag:this.onDrag;this.drag=null;callback('end');this.draw();}
 }

@@ -9,6 +9,8 @@ import {validateHitTimeline,keyAt} from '../hitboxes.mjs';
 import {renderHitEditor} from './hit-editor.mjs';
 import {CombatPreview,describeInput} from './simulation.mjs';
 import {cursorAnchor,cursorIndex} from './cursor.mjs';
+import {createLayout} from './layout.mjs';
+import {renderSequence,showSequenceResult} from './sequence-editor.mjs';
 const $=id=>document.getElementById(id),pack=globalThis.FIGHT_WORKSHOP_DATA;
 const STORAGE='fight-guild.move-workshop.v1';
 let model,character=5,slot=0,tab='timing',filter='all',frame=5,playing=false,lastTick=0,saveTimer,toastTimer,dragBefore;
@@ -37,6 +39,7 @@ function fieldError(key,message){const id='field-'+key,node=$(id);if(message)err
 function refreshActions(){
   $('export').disabled=bootLocked||referenceBusy||errors.size>0;$('undo').disabled=bootLocked||referenceBusy||(!model.undoStack.length&&!errors.size);$('redo').disabled=bootLocked||referenceBusy||!model.redoStack.length||errors.size>0;
   $('reset').disabled=tab==='movement'?bootLocked||referenceBusy:bootLocked||referenceBusy||(!move().hitboxTimeline.keys.length&&!move().hitboxTimeline.multiHit&&!Object.keys(move().hurtboxes).length&&!Object.keys(SPECS).filter(key=>!key.startsWith('smear')).some(key=>move()[key]!==pack.defaults.characters[character].moves[slot][key]));
+  if(tab==='sequence')$('reset').disabled=bootLocked||referenceBusy||!model.sequence(character).length;
   $('attack-enabled').disabled=bootLocked||referenceBusy;
   $('import').disabled=referenceBusy;$('fighter').disabled=bootLocked||referenceBusy;
   if(errors.size){$('save-status').textContent='Check the highlighted value';$('save-dot').style.background='var(--danger)';}
@@ -45,13 +48,13 @@ function syncSummary(){
   const m=move(),adv=blockAdvantage(m),note=model.note(character,slot);
   document.documentElement.style.setProperty('--accent',COLORS[character]);
   $('move-context').textContent=`${CHARACTERS[character].toUpperCase()} / ${GUILDS[character].toUpperCase()}`;
-  const movement=tab==='movement';
-  document.querySelector('.attack-toggle').hidden=movement;document.querySelector('.summary').hidden=movement;
+  const movement=tab==='movement',sequence=tab==='sequence';
+  document.querySelector('.attack-toggle').hidden=movement||sequence;document.querySelector('.summary').hidden=movement||sequence;
   for(const id of ['test-behavior','test-entry','test-gap','test-simple','test-mechanic'])$(id).closest('label').hidden=movement;
-  $('test-mechanic').closest('label').hidden=movement||!m.mechanic;
-  $('reset').textContent=movement?'Reset movement':'Reset move';
-  $('move-kind').hidden=movement;$('actual-input').hidden=movement;$('move-enabled').hidden=movement;
-  $('move-title').textContent=movement?'Movement & defense':m.id;$('move-label').textContent=note.label||'';
+  $('test-mechanic').closest('label').hidden=movement||sequence||!m.mechanic;
+  $('reset').textContent=sequence?'Clear queue':movement?'Reset movement':'Reset move';
+  $('move-kind').hidden=movement||sequence;$('actual-input').hidden=movement||sequence;$('move-enabled').hidden=movement||sequence;
+  $('move-title').textContent=sequence?'Sequence test':movement?'Movement & defense':m.id;$('move-label').textContent=movement||sequence?'':note.label||'';
   $('move-kind').textContent=KINDS[m.category];$('actual-input').textContent=`Input ${inputName(m)}`;
   $('move-enabled').textContent=m.enabled?'● Enabled':'○ Unused slot';$('move-enabled').style.color=m.enabled?'#a8cbaa':'var(--muted)';
   $('attack-enabled').checked=!!m.enabled;
@@ -61,6 +64,7 @@ function syncSummary(){
   const profiles=model.data.characters.filter((c,i)=>Object.keys(c.movement).some(key=>!key.startsWith('smear')&&c.movement[key]!==pack.defaults.characters[i].movement[key])).length;
   $('changed-count').textContent=`${model.changes().length} edited move${model.changes().length===1?'':'s'}${profiles?' · '+profiles+' movement profile'+(profiles===1?'':'s'):''}`;
   $('guild').textContent=GUILDS[character];$('roster-count').textContent=`${model.data.characters[character].moves.filter(m=>m.enabled).length} moves`;
+  layout.update(CHARACTERS[character],m.id,model.note(character,slot).label);
   const warnings=geometryWarnings(m);$('move-warnings').replaceChildren(...warnings.map(w=>el('p',{},w)));$('move-warnings').hidden=!warnings.length;
   refreshActions();syncPreview();
 }
@@ -72,7 +76,7 @@ function listMoves(){
     if((!m.enabled&&!$('show-unused').checked&&i!==slot)||!matchesText||!matchesFilter)return;
     const button=el('button',{type:'button',class:'move-row'+(!m.enabled?' off':''),'aria-current':String(i===slot),'data-move':i,'aria-label':`${m.id}${note.label?' '+note.label:''}, ${m.startup} startup, ${m.active} active, ${m.recovery} recovery${!m.enabled?', unused slot':''}`});
     button.append(el('strong',{},m.id),el('span',{class:'move-dots','aria-label':model.changed(character,i)?'Edited':''},model.changed(character,i)?'●':''),el('small',{class:'move-category'},note.label||(!m.enabled?'Unused slot':`${m.air?'Air · ':''}${KINDS[m.category]}`)),el('span',{class:'frames'},`${m.startup} / ${m.active} / ${m.recovery}`));
-    button.addEventListener('click',()=>{if(!validBeforeLeaving())return;slot=i;frame=move().startup;pendingSeek={frame};stop();render();document.querySelector(`[data-move="${i}"]`)?.focus({preventScroll:true});saveSelection();});fragment.append(button);matches++;
+    button.addEventListener('click',()=>{if(!validBeforeLeaving())return;slot=i;frame=move().startup;pendingSeek=tab==='sequence'?{tick:0}:{frame};stop();render();if($('move-dialog').open)layout.closeMoves();else document.querySelector(`[data-move="${i}"]`)?.focus({preventScroll:true});saveSelection();});fragment.append(button);matches++;
   });
   if(!matches)fragment.append(el('p',{class:'empty'},'No moves match. Try another filter or show unused slots.'));
   const scroll=list.scrollTop,left=list.scrollLeft;list.replaceChildren(fragment);list.scrollTop=scroll;list.scrollLeft=left;
@@ -91,7 +95,7 @@ function commit(key,value){
 }
 function numberField(key){
   const spec=SPECS[key],limit=moveFieldLimit(move(),key,pack.limits.moves[character]),field=el('div',{class:'field'}),id='field-'+key;
-  const label=el('label',{for:id},spec.label),wrap=el('div',{class:'input-wrap'}),input=el('input',{id,type:'number',min:limit.min/spec.scale,max:limit.max/spec.scale,step:1/spec.scale,inputmode:spec.scale===1?'numeric':'decimal','aria-describedby':`hint-${key} error-${key}`});
+  const label=el('label',{for:id},spec.label),wrap=el('div',{class:'input-wrap'}),input=el('input',{id,type:'number',min:limit.min/spec.scale,max:limit.max/spec.scale,step:1/spec.scale,inputmode:limit.min<0?'text':spec.scale===1?'numeric':'decimal','aria-describedby':`hint-${key} error-${key}`});
   input.value=move()[key]/spec.scale;wrap.append(input);if(spec.unit)wrap.append(el('span',{class:'unit'},spec.unit));field.append(label,wrap);
   if(spec.hint)field.append(el('small',{class:'hint',id:'hint-'+key},spec.hint));
   field.append(el('span',{class:'error',id:'error-'+key,'aria-live':'polite'}));
@@ -185,7 +189,7 @@ function hurtForm(){
   section.append(el('label',{for:'hurt-region',class:'field-label'},'Selected body box'),region);
   const grid=el('div',{class:'field-grid hurt-grid'}),values=hurtValues(boxes[hurtRegion]);
   for(const [key,label]of [['left','Left position'],['bottom','Bottom position'],['width','Width'],['height','Height']]){
-    const id='field-hurt-'+key,field=el('div',{class:'field'}),wrap=el('div',{class:'input-wrap'}),input=el('input',{id,type:'number',min:key==='width'||key==='height'?1:-500,max:key==='width'||key==='height'?1000:500,step:'0.01',inputmode:'decimal','aria-describedby':'error-hurt-'+key});input.value=values[key];input.disabled=!custom;
+    const id='field-hurt-'+key,field=el('div',{class:'field'}),wrap=el('div',{class:'input-wrap'}),input=el('input',{id,type:'number',min:key==='width'||key==='height'?1:-500,max:key==='width'||key==='height'?1000:500,step:'0.01',inputmode:key==='width'||key==='height'?'decimal':'text','aria-describedby':'error-hurt-'+key});input.value=values[key];input.disabled=!custom;
     wrap.append(input,el('span',{class:'unit'},'px'));field.append(el('label',{for:id},label),wrap,el('span',{id:'error-hurt-'+key,class:'error','aria-live':'polite'}));grid.append(field);
     input.oninput=()=>{
       try{
@@ -213,6 +217,16 @@ function artForm(){
   const exportBrief=el('button',{type:'button',class:'art-export'},'Download art brief');exportBrief.addEventListener('click',()=>download(model.brief(),'FightGuild-art-brief-'+date()+'.md','text/markdown;charset=utf-8'));container.append(grid,exportBrief);return container;
 }
 function renderForm(){
+  if(tab==='sequence'){
+    $('form').setAttribute('aria-labelledby','tab-sequence');
+    $('form').replaceChildren(renderSequence({el,moves:model.data.characters[character].moves,queue:model.sequence(character),slot,valid:validBeforeLeaving,onError:fieldError,
+      onChange:(queue,render=true,group='')=>{
+        try{model.setSequence(character,queue,group);}catch(error){announce(error.message);renderForm();return;}
+        stop();pendingSeek=render?{tick:0}:{tick:testIndex};if(render)renderForm();syncSummary();scheduleSave();
+      },
+      onSeek:i=>{const tick=testRecord?.steps?.[i]?.start;if(tick===undefined)return;stop();testIndex=tick;drawTest();}
+    }));if(matchingRecord())showSequenceResult(testRecord,testIndex);return;
+  }
   if(tab==='movement'){
     $('form').setAttribute('aria-labelledby','tab-movement');
     $('form').replaceChildren(renderMovement({el,profile:model.data.characters[character].movement,limits:pack.limits.movement[character],onError:fieldError,action:movementAction,onAction:value=>{if(!validBeforeLeaving())return;movementAction=value;pendingSeek={tick:0};stop();syncPreview();},onChange:(key,value)=>{model.changeMovement(character,key,value);syncSummary();scheduleSave();}}));return;
@@ -229,9 +243,17 @@ function renderForm(){
     onChange:(track,render=true,group='')=>{model.setHitTimeline(character,slot,track,group);stop();if(render)renderForm();syncSummary();listMoves();scheduleSave();}
   }));form.replaceChildren(...nodes);
 }
+function selectTab(id){
+  if(!validBeforeLeaving()){$('section-picker').value=tab;return;}
+  stop();tab=id;hitKeyFrame=null;if(tab==='sequence')pendingSeek={tick:0};
+  if(tab==='hurt'){preview.options.hurt=true;$('show-hurt').checked=true;}
+  renderTabs();renderForm();syncSummary();saveSelection();
+  (matchMedia('(max-width: 1000px)').matches?$('section-picker'):$('tab-'+tab)).focus({preventScroll:true});
+}
 function renderTabs(){
+  $('section-picker').replaceChildren(...TABS.map(t=>el('option',{value:t.id},t.label)));$('section-picker').value=tab;
   $('tabs').replaceChildren(...TABS.map(t=>{const button=el('button',{id:'tab-'+t.id,type:'button',role:'tab','aria-selected':String(t.id===tab),'aria-controls':'form',tabindex:t.id===tab?'0':'-1'},t.label);
-    button.addEventListener('click',()=>{if(!validBeforeLeaving())return;stop();tab=t.id;hitKeyFrame=null;if(tab==='hurt'){stop();preview.options.hurt=true;$('show-hurt').checked=true;}renderTabs();renderForm();syncSummary();saveSelection();$('tab-'+tab).focus();});
+    button.addEventListener('click',()=>selectTab(t.id));
     button.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const index=TABS.indexOf(t),next=event.key==='Home'?0:event.key==='End'?TABS.length-1:(index+(event.key==='ArrowRight'?1:-1)+TABS.length)%TABS.length;$('tab-'+TABS[next].id).click();});return button;}));
 }
 function render(){hitKeyFrame=null;errors.clear();$('fighter').value=character;listMoves();renderTabs();renderForm();syncSummary();
@@ -244,7 +266,7 @@ function variantMove(m,variant){return variant?{...m,startup:m.variantStartup,ac
 function drawTimeline(m,variant=0){
   $('windup-time').textContent=`Windup ${m.startup-1}f`;$('active-time').textContent=`Active ${m.active}f`;$('recovery-time').textContent=`Recovery ${m.recovery}f`;
   const phases=[['windup',m.startup-1,1],['active',m.active,m.startup],['recovery',m.recovery,m.startup+m.active]];
-  $('timeline').hidden=tab==='movement';
+  $('timeline').hidden=tab==='movement'||tab==='sequence';document.querySelector('.phase-labels').hidden=$('timeline').hidden;
   const key=JSON.stringify([m.startup,m.active,m.recovery,variant]);
   if($('timeline').dataset.timing===key)return;
   $('timeline').dataset.timing=key;
@@ -254,9 +276,9 @@ function syncPreview(){
   const f=matchingRecord()?testRecord.frames[testIndex]:null,variant=f?.selectedFrame?f.state.players[0].variant:0,m=variantMove(move(),variant);
   frame=Math.max(1,Math.min(totalFrames(m),frame));drawTimeline(m,variant);scheduleTest();
 }
-function stop(){playing=false;$('play').setAttribute('aria-label','Play attack');}
-function testOptions(){return {mechanic:$('test-mechanic').value,target:Number($('test-target').value),behavior:$('test-behavior').value,entry:$('test-entry').value,gap:Number($('test-gap').value),facing:Number($('test-facing').value),simple:$('test-simple').value==='1',movement:tab==='movement'?movementAction:null};}
-function matchingRecord(){return testRecord?.character===character&&testRecord?.slot===slot&&!!testRecord.movement===(tab==='movement');}
+function stop(){playing=false;$('play').setAttribute('aria-label',tab==='sequence'?'Play sequence':'Play attack');}
+function testOptions(){return {mechanic:$('test-mechanic').value,target:Number($('test-target').value),behavior:$('test-behavior').value,entry:$('test-entry').value,gap:Number($('test-gap').value),facing:Number($('test-facing').value),simple:$('test-simple').value==='1',movement:tab==='movement'?movementAction:null,sequence:tab==='sequence'?model.sequence(character):null};}
+function matchingRecord(){return testRecord?.character===character&&testRecord?.slot===slot&&!!testRecord.movement===(tab==='movement')&&!!testRecord.sequence===(tab==='sequence');}
 function seekMove(value,variant=0){
   stop();frame=Math.max(1,Math.min(totalFrames(variantMove(move(),variant)),value));pendingSeek={frame,variant};
   renderForm();syncPreview();
@@ -276,19 +298,19 @@ function scheduleTest(){
   $('play').disabled=true;$('test-readout').textContent='Updating exchange…';
   testTimer=setTimeout(()=>{
     try{
-      testRecord=tab==='movement'?combatPreview.recordMovement(model.data,character,slot,movementAction,testOptions()):combatPreview.record(model.data,character,slot,testOptions());recordSignature=signature;
+      testRecord=tab==='sequence'?combatPreview.recordSequence(model.data,character,slot,model.sequence(character),testOptions()):tab==='movement'?combatPreview.recordMovement(model.data,character,slot,movementAction,testOptions()):combatPreview.record(model.data,character,slot,testOptions());recordSignature=signature;
       testIndex=cursorIndex(testRecord,pendingSeek||{frame:move().startup});pendingSeek=null;previewPending=false;drawTest();
     }catch(error){testRecord=null;testSignature='';previewPending=false;preview.clear();$('test-readout').textContent='Preview could not run: '+error.message;}
   },80);
 }
 function drawTest(){
   if(!matchingRecord())return;
-  testIndex=Math.min(testIndex,testRecord.frames.length-1);const f=testRecord.frames[testIndex],a=f.state.players[0],target=f.state.players[1],m=move(),oldFrame=frame;
+  testIndex=Math.min(testIndex,testRecord.frames.length-1);const f=testRecord.frames[testIndex],a=f.state.players[0],target=f.state.players[1],m=testRecord.sequence?testRecord.moves[f.moveSlot]||move():move(),oldFrame=frame;
   if(f.selectedFrame&&!previewPending&&!pendingSeek)frame=f.selectedFrame;
   const displayed=variantMove(m,f.selectedFrame?a.variant:0);drawTimeline(displayed,f.selectedFrame?a.variant:0);
   const phase=phaseAt(displayed,frame),key=keyAt(m,Math.max(1,frame-m.startup+1)),keyIndex=m.hitboxTimeline.keys.indexOf(key);
   if(!previewPending&&!dragBefore&&!hurtDragBefore&&((tab==='hurt'&&hurtPhase!==phase)||(tab==='hit'&&hitKeyFrame===null&&keyAt(m,Math.max(1,oldFrame-m.startup+1))!==key)))renderForm();
-  const editable=!a.variant&&tab!=='movement'&&!playing&&(!previewPending||dragBefore||hurtDragBefore)&&!!f.selectedFrame;
+  const editable=!a.variant&&tab!=='movement'&&tab!=='sequence'&&!playing&&(!previewPending||dragBefore||hurtDragBefore)&&!!f.selectedFrame;
   preview.show(testRecord,testIndex,m,{
     hit:editable&&tab==='hit'&&(hitKeyFrame===null||hitKeyFrame===key?.frame),
     hitKey:key&&key.boxes!==null?{keyIndex,boxIndex:Math.min(hitBox,Math.max(0,key.boxes.length-1))}:null,
@@ -296,12 +318,13 @@ function drawTest(){
   });
   $('frame').max=testRecord.frames.length-1;$('frame').value=testIndex;$('frame-label').textContent=`${testIndex} / ${testRecord.frames.length-1}`;
   $('play').disabled=previewPending||testRecord.frames.length<2;
-  $('preview-title').textContent=testRecord.movement?f.stage:a.grabTime?`${m.finishArtPose&&a.poseIndex===m.finishArtPose-1?'Finish':'Capture'} · ${m.grabFrames-a.grabTime+1} / ${m.grabFrames}f`:f.selectedFrame?`${a.variant===1?'Pull · ':a.variant===2?'Cash-out · ':''}${phase==='windup'?'Windup':phase==='active'?'Active':'Recovery'} · frame ${f.selectedFrame}`:'Attack workspace';
+  $('preview-title').textContent=testRecord.sequence?f.stage:testRecord.movement?f.stage:a.grabTime?`${m.finishArtPose&&a.poseIndex===m.finishArtPose-1?'Finish':'Capture'} · ${m.grabFrames-a.grabTime+1} / ${m.grabFrames}f`:f.selectedFrame?`${a.variant===1?'Pull · ':a.variant===2?'Cash-out · ':''}${phase==='windup'?'Windup':phase==='active'?'Active':'Recovery'} · frame ${f.selectedFrame}`:'Attack workspace';
   $('test-readout').textContent=previewPending?'Updating exchange…':`${testRecord.geometryOnly?'Geometry only':`Input ${describeInput(f.input,a.facing)}`} · ${f.selectedFrame?'move frame '+f.selectedFrame:f.stage}${f.state.hitstop?' · freeze '+f.state.hitstop+'f':''} · target ${target.stun}f stun`;
   const contacts=testRecord.contacts.filter(c=>c.tick<=testIndex),hits=contacts.filter(c=>c.event!==2).length;
   $('test-result').textContent=previewPending?'Recalculating contact…':`${hits} hit${hits===1?'':'s'} · ${contacts.length-hits} blocks · ${1000-target.health} damage · attacker travel ${((a.x-testRecord.frames[0].state.players[0].x)/100).toFixed(1)}px`;
   $('test-warning').textContent=testRecord.warnings.join(' ');$('test-warning').hidden=!testRecord.warnings.length;
-  $('geometry-help').textContent=a.variant&&f.selectedFrame?'Follow-up timing is shown here. Edit its range and movement in Drive mechanics; phase hurtboxes inherit from the applying move.':testRecord.movement?'Play or scrub the movement here. Edit the character profile alongside this preview.':playing?'Pause or scrub to edit boxes directly on the fighter.':!f.selectedFrame?'Use Windup, Active or Recovery to jump to an editable attack frame.':tab==='hurt'?'Enable custom boxes, choose a body region and drag its blue handles. Changes update this same exchange.':tab==='hit'?'On active frames, drag the selected orange box or its edges. Edits keep this move frame while recalculating contact.':'Play, pause or scrub here. Open Hit & movement or Hurtboxes to edit directly on the fighter.';
+  showSequenceResult(testRecord,testIndex);
+  $('geometry-help').textContent=testRecord.sequence?'Play or scrub the full sequence, or tap a step’s frame to inspect its start. Edit each attack in its own section; this test uses its current values.':a.variant&&f.selectedFrame?'Follow-up timing is shown here. Edit its range and movement in Drive mechanics; phase hurtboxes inherit from the applying move.':testRecord.movement?'Play or scrub the movement here. Edit the character profile alongside this preview.':playing?'Pause or scrub to edit boxes directly on the fighter.':!f.selectedFrame?'Use Windup, Active or Recovery to jump to an editable attack frame.':tab==='hurt'?'Enable custom boxes, choose a body region and drag its blue handles. Changes update this same exchange.':tab==='hit'?'On active frames, drag the selected orange box or its edges. Edits keep this move frame while recalculating contact.':'Play, pause or scrub here. Open Hit & movement or Hurtboxes to edit directly on the fighter.';
 }
 function animate(time){
   if(playing&&testRecord&&!previewPending){if(!lastTick)lastTick=time;const step=1000/(60*Number($('test-speed').value)),advance=Math.floor((time-lastTick)/step);if(advance){testIndex=Math.min(testRecord.frames.length-1,testIndex+advance);lastTick+=advance*step;if(testIndex===testRecord.frames.length-1)stop();drawTest();}}
@@ -335,7 +358,7 @@ const preview=new Preview($('preview'),pack,(phase,patch)=>{
 });
 function start(data=pack.draft?.data??pack.defaults,selection={}){
   model=new Workshop(pack,data);character=Number.isInteger(selection.character)&&selection.character>=0&&selection.character<6?selection.character:5;
-  slot=Number.isInteger(selection.slot)&&selection.slot>=0&&selection.slot<32?selection.slot:0;tab=TABS.some(t=>t.id===selection.tab)?selection.tab:'timing';frame=move().startup;pendingSeek={frame};
+  slot=Number.isInteger(selection.slot)&&selection.slot>=0&&selection.slot<MOVE_IDS.length?selection.slot:0;tab=TABS.some(t=>t.id===selection.tab)?selection.tab:'timing';frame=move().startup;pendingSeek=tab==='sequence'?{tick:0}:{frame};
   $('fighter').replaceChildren(...[5,4,0,1,2,3].map(i=>el('option',{value:i},CHARACTERS[i])));$('fighter').disabled=false;render();
   $('save-status').textContent=data===pack.draft?.data?pack.draft.label+' · work in progress':storageOkay?'Saved on this device only':'Download to keep your edits';
 }
@@ -351,21 +374,21 @@ function initialize(){
   }catch{storageOkay=false;}
   start();if(!storageOkay)banner('Browser storage is unavailable. Download JSON to keep your work before closing the page.');
 }
-$('fighter').addEventListener('change',()=>{if(!validBeforeLeaving()){$('fighter').value=character;return;}character=Number($('fighter').value);slot=0;frame=move().startup;pendingSeek={frame};stop();$('search').value='';render();saveSelection();});
+$('fighter').addEventListener('change',()=>{if(!validBeforeLeaving()){$('fighter').value=character;return;}character=Number($('fighter').value);slot=0;frame=move().startup;pendingSeek=tab==='sequence'?{tick:0}:{frame};stop();$('search').value='';render();saveSelection();});
 $('search').addEventListener('input',listMoves);$('show-unused').addEventListener('change',listMoves);
 for(const button of document.querySelectorAll('[data-filter]'))button.addEventListener('click',()=>{filter=button.dataset.filter;for(const b of document.querySelectorAll('[data-filter]')){b.classList.toggle('selected',b===button);b.setAttribute('aria-pressed',String(b===button));}listMoves();});
 $('undo').onclick=()=>{stop();if(errors.size){errors.clear();render();announce('Invalid input discarded.');return;}if(model.undo()){frame=Math.min(frame,totalFrames(move()));render();scheduleSave();announce('Edit undone.');}};
 $('redo').onclick=()=>{if(!validBeforeLeaving())return;if(model.redo()){stop();render();scheduleSave();announce('Edit restored.');}};
-$('reset').onclick=()=>{errors.clear();if(tab==='movement')model.resetMovement(character);else model.resetMove(character,slot);stop();frame=move().startup;pendingSeek={frame};render();scheduleSave();announce('Move stats, hitbox keys and hurtboxes reset. Art notes are kept. Undo is available.');};
+$('reset').onclick=()=>{errors.clear();if(tab==='sequence')model.setSequence(character,[]);else if(tab==='movement')model.resetMovement(character);else model.resetMove(character,slot);stop();frame=move().startup;pendingSeek=tab==='sequence'?{tick:0}:{frame};render();scheduleSave();announce(tab==='sequence'?'Sequence cleared. Undo is available.':'Move stats, hitbox keys and hurtboxes reset. Art notes are kept. Undo is available.');};
 $('import').onclick=()=>{if(validBeforeLeaving())$('import-file').click();};
 $('import-file').onchange=async event=>{
   const file=event.target.files[0];if(!file)return;
-  try{if(file.size>MAX_IMPORT_BYTES)throw new Error('Choose a move JSON file smaller than 32 MB.');const data=JSON.parse(await file.text());model.import(data);bootLocked=false;$('form').inert=false;$('fighter').disabled=false;errors.clear();stop();frame=move().startup;pendingSeek={frame};render();scheduleSave();announce('Move data imported. Undo returns to your previous draft.');}
+  try{if(file.size>MAX_IMPORT_BYTES)throw new Error('Choose a move JSON file smaller than 32 MB.');const data=JSON.parse(await file.text());model.import(data);bootLocked=false;$('form').inert=false;$('fighter').disabled=false;errors.clear();stop();frame=move().startup;pendingSeek=tab==='sequence'?{tick:0}:{frame};render();scheduleSave();announce('Move data imported. Undo returns to your previous draft.');}
   catch(error){announce('Import stopped: '+error.message);}finally{event.target.value='';}
 };
 $('export').onclick=()=>{if(!validBeforeLeaving())return;try{download(model.export(),'FightGuild-moves-'+date()+'.json','application/json');save();unexported=false;announce('JSON downloaded. Import it in the Godot move editor or send it back for the sprite pass.');}catch(error){announce(error.message);}};
 $('frame').addEventListener('input',()=>{if(!validBeforeLeaving()){$('frame').value=testIndex;return;}stop();hitKeyFrame=null;const tick=Number($('frame').value);if(previewPending)pendingSeek={tick};else{testIndex=tick;drawTest();}renderForm();});
-$('play').onclick=()=>{if(!validBeforeLeaving()||!testRecord||previewPending)return;if(testIndex===testRecord.frames.length-1)testIndex=0;playing=!playing;hitKeyFrame=null;lastTick=0;$('play').setAttribute('aria-label',playing?'Pause attack':'Play attack');drawTest();};
+$('play').onclick=()=>{if(!validBeforeLeaving()||!testRecord||previewPending)return;if(testIndex===testRecord.frames.length-1)testIndex=0;playing=!playing;hitKeyFrame=null;lastTick=0;$('play').setAttribute('aria-label',(playing?'Pause ':'Play ')+(tab==='sequence'?'sequence':'attack'));drawTest();};
 $('restart').onclick=()=>{if(!validBeforeLeaving())return;stop();hitKeyFrame=null;pendingSeek={tick:0};syncPreview();renderForm();};
 $('form').addEventListener('focusin',()=>{if(playing){stop();drawTest();}});
 for(const key of ['hit','hurt','push','art','distances'])$('show-'+key).onchange=()=>{preview.options[key]=$('show-'+key).checked;if(key==='distances')$('preview').classList.toggle('with-distances',preview.options.distances);preview.draw();};
@@ -381,8 +404,9 @@ window.addEventListener('storage',event=>{if(event.key===STORAGE&&event.newValue
 globalThis.moveWorkshop={data:()=>model.snapshot(),selection:()=>({character,slot,tab}),version:pack.defaults.coreVersion};
 $('test-target').append(...CHARACTERS.map((name,i)=>el('option',{value:i},name)));$('test-target').value='4';
 $('attack-enabled').onchange=()=>{if(!validBeforeLeaving()){$('attack-enabled').checked=!!move().enabled;return;}commit('enabled',Number($('attack-enabled').checked));if($('field-enabled'))$('field-enabled').checked=!!move().enabled;};
-for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple','test-mechanic'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}testSignature='';scheduleTest();};
+for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple','test-mechanic'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}layout.update(CHARACTERS[character],move().id,model.note(character,slot).label);testSignature='';scheduleTest();};
 globalThis.moveWorkshop.preview=()=>testRecord;
 globalThis.moveWorkshop.cursor=()=>({index:testIndex,frame:testRecord?.frames[testIndex]?.selectedFrame||0,pending:previewPending});
 globalThis.moveWorkshop.geometry=()=>({handles:clone(preview.handles),view:clone(preview.view||{}),measurements:clone(preview.measurements||null),measurementLabels:clone(preview.measurementLabels||[])});
+const layout=createLayout({canNavigate:validBeforeLeaving,onOpenMoves:stop,onSection:selectTab});
 initialize();requestAnimationFrame(animate);

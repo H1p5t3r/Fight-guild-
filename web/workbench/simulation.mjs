@@ -1,6 +1,7 @@
 import {Engine,INPUT,BUTTONS,MOVE_IDS} from '../engine.mjs';
 import {createCombatCore} from '../generated/fight-core.mjs';
 import {inputName,totalFrames} from './model.mjs';
+import {recordSequence} from './sequence-preview.mjs';
 
 export const directionBits=(n,facing=1)=>{
   const x=(n-1)%3-1,y=Math.floor((n-1)/3)-1;
@@ -19,6 +20,7 @@ export function describeInput(bits,facing=1){
 // to plain JS. Preview setup never writes into the user's Workshop draft.
 export class CombatPreview {
   constructor(pack){this.pack=pack;this.engine=new Engine({exports:createCombatCore()});}
+  recordSequence(data,character,slot,queue,options={}){return recordSequence(this,data,character,slot,queue,options,directionBits);}
   record(data,character,slot,options={}){
     const m=data.characters[character].moves[slot],target=Number(options.target??(character===5?4:5));
     const entry=options.entry||'standing',behavior=options.behavior||'hit',simple=!!options.simple;

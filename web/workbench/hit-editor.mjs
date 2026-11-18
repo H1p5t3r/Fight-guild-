@@ -25,7 +25,7 @@ export function renderHitEditor({move:m,frame,pack,character,boxIndex,selectedFr
   if(key.frame>m.active)section.append(node('p',{class:'hint'},'This key is beyond the current Active duration. You can edit or remove it here; it has no collision until Active includes its frame.'));
   const grid=node('div',{class:'field-grid'});
   const field=(name,label,value,min,max,step,callback,disabled=false)=>{
-    const wrap=node('div',{class:'field'}),id='field-hit-key-'+name,input=node('input',{id,type:'number',min,max,step,disabled,'aria-describedby':'error-hit-key-'+name});input.value=value;
+    const wrap=node('div',{class:'field'}),id='field-hit-key-'+name,input=node('input',{id,type:'number',min,max,step,disabled,inputmode:min<0?'text':step===1?'numeric':'decimal','aria-describedby':'error-hit-key-'+name});input.value=value;
     wrap.append(node('label',{for:id},label),input,node('span',{id:'error-hit-key-'+name,class:'error','aria-live':'polite'}));
     const edit=()=>{try{const value=Number(input.value);if(!input.value.trim()||!Number.isFinite(value)||value<min||value>max||Math.abs(value/step-Math.round(value/step))>1e-6)throw new Error(`Use ${min} to ${max}${step===1?', whole numbers.':', up to two decimals.'}`);callback(value);onError('hit-key-'+name,'');}catch(error){onError('hit-key-'+name,error.message);}};
     if(name==='frame')input.onchange=edit;else input.oninput=edit;

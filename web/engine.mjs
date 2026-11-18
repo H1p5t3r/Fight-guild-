@@ -57,6 +57,7 @@ export class Engine {
       players:[0,1].map(p=>Object.fromEntries(keys.map((key,f)=>[key,this.api.fg_get(p,f)])))
     };
   }
+  attackSerial(player=0){return this.api.fg_get(player,91);}
   boxes(player,kind) {
     return Array.from({length:this.api.fg_box_count(player,kind)},(_,i)=>
       Array.from({length:4},(_,edge)=>this.api.fg_box_get(player,kind,i,edge)));

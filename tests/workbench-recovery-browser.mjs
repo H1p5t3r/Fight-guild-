@@ -3,7 +3,7 @@ import {existsSync} from 'node:fs';
 import {readFile,mkdir} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {serveWorkshopSite} from '../scripts/serve-workbench.mjs';
-import {ready} from './workbench-ui-helpers.mjs';
+import {ready,showDisplayOptions} from './workbench-ui-helpers.mjs';
 const server=await serveWorkshopSite(0),url=`http://127.0.0.1:${server.address().port}/`;
 const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
 try {
@@ -18,7 +18,7 @@ try {
   await page.goto(url);await ready(page);
   await page.locator('#test-gap').fill('0');await page.locator('#test-gap').dispatchEvent('change');
   await page.locator('#test-target').selectOption('3');
-  for(const key of ['hit','hurt','distances'])await page.locator('#show-'+key).uncheck();
+  await showDisplayOptions(page);for(const key of ['hit','hurt','distances'])await page.locator('#show-'+key).uncheck();
   await mkdir('build/recovery-review',{recursive:true});
   for(const kind of [1,2])for(const facing of [1,-1]){
     await page.locator('#field-knockdown').selectOption(String(kind));

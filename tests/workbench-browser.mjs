@@ -1,4 +1,4 @@
-import {seedBaseline,ready,seekMoveFrame,dragHandle} from './workbench-ui-helpers.mjs';
+import {seedBaseline,ready,seekMoveFrame,dragHandle,selectSection} from './workbench-ui-helpers.mjs';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
 import {readFile,mkdir} from 'node:fs/promises';
@@ -117,7 +117,7 @@ try {
   assert.deepEqual((await data(page)).characters[5].moves[0].hurtboxes,hurtProfiles);
   // Search/filter controls and keyboard tab navigation remain usable.
   await page.locator('#search').fill('236S');assert.equal(await page.locator('.move-row').count(),3);await page.locator('#search').fill('');
-  await page.locator('#tab-hit').click();await page.keyboard.press('ArrowRight');assert.equal(await page.locator('#tab-routes').getAttribute('aria-selected'),'true');
+  await page.locator('#tab-hit').click();await page.keyboard.press('ArrowRight');assert.equal(await page.locator('#tab-hurt').getAttribute('aria-selected'),'true');
   for(const c of ['0','1','2','3','4','5']){
     await page.locator('#fighter').selectOption(c);await page.locator('#tab-hit').click();
     assert.equal(await page.locator('#preview-empty').isVisible(),false);
@@ -129,10 +129,10 @@ try {
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${label} horizontal overflow`);
     await page.screenshot({path:`${screenshotDir}/${label}.png`,fullPage:true});
   }
-  await page.locator('#fighter').selectOption('5');await page.locator('#tab-art').click();
+  await page.locator('#fighter').selectOption('5');await selectSection(page,'art');
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'Photo-reference mobile overflow');
   await page.screenshot({path:`${screenshotDir}/pose-reference-mobile.png`,fullPage:true});
-  await page.locator('#tab-hurt').click();assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'Hurtbox editor mobile overflow');
+  await selectSection(page,'hurt');assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'Hurtbox editor mobile overflow');
   await page.screenshot({path:`${screenshotDir}/hurtboxes-mobile.png`,fullPage:true});
   await page.locator('#help').click();assert.equal(await page.locator('#help-dialog').isVisible(),true);await page.keyboard.press('Escape');
   // Storage restrictions still allow downloads, with a clear unsaved warning.

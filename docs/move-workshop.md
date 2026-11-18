@@ -4,7 +4,7 @@ Tune attacks in a normal browser without installing or running the game. The
 hosted edition uses a small entry page and loads artwork as needed, instead of
 putting every sprite sheet into one large HTML download. It uses the same
 six-fighter data and plain-JavaScript combat preview. No account or WebAssembly
-is needed. Edits, notes and pose references stay in your browser.
+is needed. Edits, notes, pose references and sequence queues stay in your browser.
 
 The portable **FightGuild-Move-Workshop.zip** contains the same editor and artwork.
 Extract the whole folder and open `index.html`; keep its `assets` folder beside
@@ -14,8 +14,9 @@ single-file HTML remains available for compatibility.
 The [complete control guide (PDF)](../exports/FightGuild-Move-Workshop-Guide.pdf)
 explains every browser editor control, with allowed ranges, worked examples,
 diagrams, clickable contents and an alphabetical field index. It covers the
-current schema-16 build, including combat playback, timed hitboxes, hurtboxes,
-art notes and pose photos, character movement and projectiles.
+schema-16 controls, including combat playback, timed hitboxes, hurtboxes,
+art notes and pose photos, character movement and projectiles. This page also
+documents the newer mobile layout and sequence testing.
 
 ## Use it on another PC
 
@@ -43,6 +44,27 @@ moving/renaming a local HTML file can change access to that draft. Downloaded
 JSON is the portable backup. If storage is blocked/full, editing and JSON
 downloads still work; the page shows a reminder. A damaged saved draft can be
 downloaded for recovery before explicitly starting a new one.
+
+## Phone and desktop layout
+
+On a phone or narrow window, the **Fighter** and **Move** selectors replace the
+long sidebar. Tap **Move** to search, filter or show unused slots in a dialog.
+Choose the editing section with the selector below the preview. Undo, redo,
+reset and save status stay with that selector. **Import** and **Export** in the
+header are the same JSON controls as on desktop.
+
+The shared preview appears before the fields. On taller phone screens it stays
+visible as you scroll through edits. Tap **Minimize** for more editing space;
+playback and the timeline remain available. Short or landscape screens let the
+preview scroll away, and it unpins while a small software-keyboard viewport is
+active. There is still only one preview and one set of editing controls.
+
+**Options** opens test setup, overlays, distances and playback speed on mobile.
+On desktop, **Test setup** and **View & playback** are expandable sections
+below the stage. Swipe across the stage to scroll normally. In a box-editing
+section, tap **Drag boxes** to turn on touch dragging, then **Done dragging** to
+resume scrolling. Mouse dragging works directly. Numeric fields remain an
+alternative for precise geometry.
 
 ## Hosted publishing
 
@@ -131,9 +153,47 @@ input mappings also show a warning. Disabled or unmapped moves remain editable
 in the same scene, labelled **Geometry only**, with no simulated contacts.
 Enable the move or correct the input mapping to test execution.
 
-This is an isolated spacing/reaction test, not an interactive training match.
+This is a recorded spacing/reaction test, not an interactive training match.
 It uses existing artwork, with placeholder recovery poses; it does not generate
-new animation frames. Check full combo routes and match feel in Godot.
+new animation frames. Use **Sequence test** for routes and Godot for match feel.
+
+## Check a sequence of moves
+
+1. Choose a fighter, then open **Sequence test** in the section navigation.
+2. Select a move and press **Add move**. Queue up to 12 attacks. Each row lets
+   you change the move, move it up/down or remove it.
+3. **Delay +f** adds 0–120 simulation frames after the first legal input
+   opportunity for that step. Zero tries the earliest accepted command,
+   including the game's input buffer. Shared hitstop and wall transitions do
+   not consume the added delay. If a delay misses a cancel window, the move
+   waits for its next legal opportunity, such as recovery ending.
+4. Use the shared preview's play, restart and scrub controls. A row's **Frame**
+   button jumps to when that move actually starts. The active row is outlined.
+5. Test different spacing, facing, approach, inputs and defender behavior in
+   **Options → Test setup**. The preview reports hits, blocks and damage; the
+   queue summary adds maximum combo count and any input failures. A queue can
+   execute completely while dropping its combo or missing the target.
+
+The sequence uses real commands and the combat core's cancel rules. It does
+not force a follow-up or manufacture a whiff cancel. Each trial command is
+checked on a copy of the simulation before it is sent to the recorded exchange.
+Repeated presses release the button between attacks. Air attacks insert a real
+jump input when grounded, respecting jump-cancel and takeoff rules. Contextual
+attacks require their real prerequisite: queue Fillet's rekka starter before
+its follow-ups, or Tapper's stance entry before stance normals. An unavailable
+move, disabled slot or conflicting input stops the sequence with an explanation.
+Simple mode uses each mapped modifier command; ordinary normals and directional
+rekka follow-ups still use their regular buttons when no modifier mapping exists.
+
+Queues contain move selections and delays; they are not arbitrary input scripts.
+There is no separate button-hold duration control. Clips are capped at 1,800
+frames and stop after the exchange settles or the target is defeated.
+
+Each fighter has its own queue. Undo/redo and **Clear queue** work normally.
+Queues autosave locally and travel in **Export JSON** under
+`_moveWorkshop.sequences`, alongside artwork notes and references. They do not
+change gameplay tuning. Keep the workshop JSON: the game's gameplay-only export
+does not preserve workshop metadata.
 
 ## Measure spacing and reach
 

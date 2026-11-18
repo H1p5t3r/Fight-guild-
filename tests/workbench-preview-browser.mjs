@@ -1,4 +1,4 @@
-import {seedBaseline,ready,seekMoveFrame,dragHandle} from './workbench-ui-helpers.mjs';
+import {seedBaseline,ready,seekMoveFrame,dragHandle,showDisplayOptions} from './workbench-ui-helpers.mjs';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
 import {mkdir} from 'node:fs/promises';
@@ -13,7 +13,7 @@ try{
   await seedBaseline(page);await page.goto(url);await page.waitForFunction(()=>moveWorkshop.preview()?.contacts.length===1);
   assert.equal(await page.evaluate(()=>typeof WebAssembly),'undefined');
   // Game-pixel measurements share the scene, and hiding them only changes presentation.
-  await ready(page);await page.locator('#restart').click();
+  await ready(page);await page.locator('#restart').click();await showDisplayOptions(page);
   assert.match(await page.locator('#distance-readout').innerText(),/Body gap 24 px/);
   const measuredDraft=await page.evaluate(()=>JSON.stringify(moveWorkshop.data()));
   const measuredCursor=await page.evaluate(()=>moveWorkshop.cursor());

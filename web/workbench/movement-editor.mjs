@@ -15,7 +15,7 @@ export function renderMovement({el,profile,limits,onChange,onError,action,onActi
   for(const [key,label,type]of fields){const field=el('div',{class:'field'}),id='field-movement-'+key,scale=pixels.has(key)?100:1,range=limits[key];let input;
    if(Array.isArray(type)){input=el('select',{id});input.append(...type.map(([v,t])=>el('option',{value:v},t)));input.value=profile[key];}
    else if(type==='flag'){input=el('input',{id,type:'checkbox',checked:!!profile[key]});}
-   else {input=el('input',{id,type:'number',min:range.min/scale,max:range.max/scale,step:1/scale});input.value=profile[key]/scale;}
+   else {input=el('input',{id,type:'number',min:range.min/scale,max:range.max/scale,step:1/scale,inputmode:range.min<0?'text':scale===1?'numeric':'decimal'});input.value=profile[key]/scale;}
    field.append(el('label',{for:id},label),input);
    if(pixels.has(key))field.append(el('small',{class:'hint'},key.includes('Distance')||key==='hoverHeight'?'px':key==='gravity'||key==='runAcceleration'||key==='attackFriction'?'px/f²':'px/f'));
    if(key.endsWith('Frames')||key==='teleportStartup')field.append(el('small',{class:'hint'},'f · 60 frames per second'));

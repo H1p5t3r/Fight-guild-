@@ -13,14 +13,15 @@ GROUPS.push({id:'vulnerability',title:'Vulnerable body regions',intro:'Choose wh
 GROUPS.push({id:'mechanics',title:'Drive mechanics',intro:'Tether and bleed attach on hit. Reuse the applying input for its conditional follow-up. Getting hit clears your statuses. All values below are provisional tuning.',fields:MECHANIC_SPECS.map(row=>row[0])});
 GROUPS.push({id:'stance',title:'Stance & move behavior',intro:'Contextual moves, timed guard and armor, bounces, dives and grab sequences. Tapper stance timings are provisional.',fields:STANCE_FIELDS.map(f=>f.key)});
 export const TABS = [
-  {id:'stance',label:'Stance & behavior',groups:['stance']},
-  {id:'mechanics',label:'Drive mechanics',groups:['mechanics']},
-  {id:'movement',label:'Movement & defense',groups:[]},
-  {id:'projectiles',label:'Projectiles',groups:['projectiles']},
   {id:'timing',label:'Timing',groups:['timing','counter']},
   {id:'hit',label:'Hit & movement',groups:['geometry','reaction']},
-  {id:'routes',label:'Cancels & inputs',groups:['cancel','input']},
   {id:'hurt',label:'Hurtboxes',groups:[]},
+  {id:'sequence',label:'Sequence test',groups:[]},
+  {id:'routes',label:'Cancels & inputs',groups:['cancel','input']},
+  {id:'movement',label:'Movement & defense',groups:[]},
+  {id:'projectiles',label:'Projectiles',groups:['projectiles']},
+  {id:'mechanics',label:'Drive mechanics',groups:['mechanics']},
+  {id:'stance',label:'Stance & behavior',groups:['stance']},
   {id:'art',label:'Art brief',groups:[]},
 ];
 const labels = {

@@ -1,4 +1,4 @@
-import {seedBaseline} from './workbench-ui-helpers.mjs';
+import {seedBaseline,selectSection,showDisplayOptions} from './workbench-ui-helpers.mjs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
@@ -33,7 +33,7 @@ try{
  await page.locator('#movement-action').selectOption('walk');await ready();
  const walkTick=await page.evaluate(()=>moveWorkshop.preview().frames.findIndex(f=>f.state.players[0].poseIndex===3&&f.state.players[0].posePhase===6));
  await page.locator('#frame').evaluate((n,v)=>{n.value=v;n.dispatchEvent(new Event('input',{bubbles:true}));},walkTick);
- await page.locator('#show-hurt').uncheck();await page.screenshot({path:dir+'/movement.png',fullPage:false});
+ await showDisplayOptions(page);await page.locator('#show-hurt').uncheck();await page.screenshot({path:dir+'/movement.png',fullPage:false});
  await page.locator('#tab-projectiles').click();await page.locator('#field-projectileKind').selectOption('1');await page.locator('#test-gap').fill('200');await page.locator('#test-gap').dispatchEvent('change');await ready();
  assert.ok(await page.evaluate(()=>moveWorkshop.preview().contacts.length>0));
  const shotTick=await page.evaluate(()=>moveWorkshop.preview().frames.findIndex(f=>f.state.projectiles.length>0));
@@ -56,6 +56,6 @@ try{
  await page.waitForFunction(()=>document.getElementById('save-status').textContent==='Saved in this browser');
  await page.evaluate(()=>{const key='fight-guild.move-workshop.v1',saved=JSON.parse(localStorage.getItem(key));saved.selection.tab='smears';localStorage.setItem(key,JSON.stringify(saved));});
  await page.reload();await page.locator('#field-startup').waitFor();await ready();assert.equal(await page.evaluate(()=>moveWorkshop.selection().tab),'timing');assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].smearFrame1),3);
- await page.setViewportSize({width:860,height:900});await page.locator('#tab-movement').click();await ready();assert.ok(await page.locator('#preview').isVisible());await page.screenshot({path:dir+'/compact.png',fullPage:false});
+ await page.setViewportSize({width:860,height:900});await selectSection(page,'movement');await ready();assert.ok(await page.locator('#preview').isVisible());await page.screenshot({path:dir+'/compact.png',fullPage:false});
  assert.deepEqual(errors,[]);console.log('PASS browser movement modes, air toggles, validation, projectile contact, direct poses with legacy smear settings ignored, JSON, autosave and compact layout');
 }finally{await browser.close();await new Promise(r=>server.close(r));}

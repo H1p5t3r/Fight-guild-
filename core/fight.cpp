@@ -1446,6 +1446,9 @@ int Simulation::get(int player,int field) const {
         case 84:return f.bounce_ground; case 85:return f.bounce_wall; case 86:return f.crumple_time;
         case 87:return f.grab_time; case 88:return f.grab_owner; case 89:return f.idle_time;
         case 90:return f.dash_pause;
+        // Read-only execution identity for preview sequencing, including a
+        // self-cancel into the same move. No new simulation or snapshot state.
+        case 91:return f.attack_serial;
         default:return 0;
     }
 }

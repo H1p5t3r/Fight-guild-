@@ -1,5 +1,7 @@
 // Keep edits on the same move frame even when contact adds or removes hitstop.
 export function cursorAnchor(record,index){
+  // A sequence contains many moves with the same local frame numbers.
+  if(record?.sequence)return {tick:index};
   const frame=record?.frames[index]?.selectedFrame;
   if(!frame)return {tick:index};
   const variant=record.frames[index].state?.players?.[0]?.variant||0;

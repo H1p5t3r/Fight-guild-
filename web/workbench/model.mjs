@@ -8,6 +8,7 @@ import {SPECS, ART_FIELDS} from './specs.mjs';
 import {validateReferences,MAX_REFERENCE_TOTAL,MAX_IMPORT_BYTES,REFERENCE_PHASES} from './references.mjs';
 import {validateHurtboxes,upgradeHurtMasks,HURT_PHASES,HURT_MASK_FIELDS,regionEnabled} from '../hurtboxes.mjs';
 import {validateHitTimeline,upgradeHitboxes,keyAt} from '../hitboxes.mjs';
+import {validateSequence} from './sequences.mjs';
 export {FIELDS,MOVE_IDS,CHARACTERS};
 export const clone = value => structuredClone(value);
 export const META = '_moveWorkshop';
@@ -41,6 +42,13 @@ export function validate(data, pack) {
   });
   if(data[META]!==undefined) {
     if(!record(data[META])||data[META].version!==1||!record(data[META].notes)) throw new Error('Artwork notes are not in the supported workshop format.');
+    if(data[META].sequences!==undefined){
+      if(!record(data[META].sequences))throw new Error('Malformed move sequences.');
+      for(const [name,queue]of Object.entries(data[META].sequences)){
+        if(!CHARACTERS.includes(name))throw new Error('Unknown sequence fighter.');
+        validateSequence(queue,MOVE_IDS.length);
+      }
+    }
     let referenceBytes=0;
     for(const notes of Object.values(data[META].notes)) {
       if(!record(notes)) throw new Error('Malformed artwork notes.');
@@ -109,6 +117,14 @@ export class Workshop {
   move(c,m){return this.data.characters[c].moves[m];}
   key(c,m){return `${CHARACTERS[c]}/${MOVE_IDS[m]}`;}
   note(c,m){return this.data[META]?.notes?.[this.key(c,m)]||{};}
+  sequence(c){return this.data[META]?.sequences?.[CHARACTERS[c]]||[];}
+  setSequence(c,queue,group=''){
+    validateSequence(queue,MOVE_IDS.length);const before=this.snapshot();
+    this.data[META]??={version:1,notes:{}};this.data[META].sequences??={};
+    this.data[META].sequences[CHARACTERS[c]]=clone(queue);
+    try{validate(this.data,this.pack);}catch(error){this.data=before;throw error;}
+    return this.remember(before,group);
+  }
   snapshot(){return clone(this.data);}
   remember(before,group='') {
     if(JSON.stringify(before)===JSON.stringify(this.data))return false;

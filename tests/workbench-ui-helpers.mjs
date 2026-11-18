@@ -1,6 +1,14 @@
 import {readFile} from 'node:fs/promises';
 export async function seedBaseline(page){const pack=JSON.parse(await readFile('build/workbench-pack.json','utf8'));await page.addInitScript(defaults=>{const key='fight-guild.move-workshop.v1';if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify({format:1,data:defaults,selection:{character:5,slot:0,tab:'timing'}}));},pack.defaults);}
 export async function ready(page){await page.waitForFunction(()=>window.moveWorkshop?.preview()&&!moveWorkshop.cursor().pending);}
+export async function selectSection(page,id){
+  if(await page.locator('#section-picker').isVisible())await page.locator('#section-picker').selectOption(id);
+  else await page.locator('#tab-'+id).click();
+}
+export async function showDisplayOptions(page){
+  if(await page.locator('#preview-options-open').isVisible())await page.locator('#preview-options-open').click();
+  if(!await page.locator('#preview-display').evaluate(node=>node.open))await page.locator('#preview-display>summary').click();
+}
 export async function seekMoveFrame(page,frame){
   await ready(page);
   const tick=await page.evaluate(frame=>moveWorkshop.preview().frames.findIndex(f=>f.selectedFrame===frame),frame);
