@@ -34,7 +34,7 @@ documents the newer mobile layout and sequence testing.
    **Development** mode, choose **Import** in the move editor and select the
    downloaded JSON. The import applies the move set and resets the match.
    Choose **Save locally** in the game to keep those values for the next launch.
-5. You can also attach that JSON in the chat. The move values, **Art brief**
+5. You can also attach that JSON in the chat. The move values, **Art & notes**
    notes and embedded pose photos provide a brief for future sprite and
    hit/block-effect revisions.
 
@@ -53,11 +53,13 @@ Choose the editing section with the selector below the preview. Undo, redo,
 reset and save status stay with that selector. **Import** and **Export** in the
 header are the same JSON controls as on desktop.
 
-The shared preview appears before the fields. On taller phone screens it stays
-visible as you scroll through edits. Tap **Minimize** for more editing space;
-playback and the timeline remain available. Short or landscape screens let the
-preview scroll away, and it unpins while a small software-keyboard viewport is
-active. There is still only one preview and one set of editing controls.
+The shared preview appears before the fields and scrolls away by default so
+the form has room. On taller phone screens, **Pin** keeps it visible while
+editing; tap again to release it. **Preview ↑** returns to the same stage.
+**Minimize** hides the stage while keeping playback and the timeline available.
+Short or landscape screens let the preview scroll away, and it unpins while a
+small software-keyboard viewport is active. There is still only one preview
+and one set of editing controls.
 
 **Options** opens test setup, overlays, distances and playback speed on mobile.
 On desktop, **Test setup** and **View & playback** are expandable sections
@@ -65,6 +67,49 @@ below the stage. Swipe across the stage to scroll normally. In a box-editing
 section, tap **Drag boxes** to turn on touch dragging, then **Done dragging** to
 resume scrolling. Mouse dragging works directly. Numeric fields remain an
 alternative for precise geometry.
+
+## Finding and arranging controls
+
+**Find a setting…** searches field names, groups and help across sections,
+including character movement and art notes. Choose a result to open its group
+and focus the control. Arrow keys also navigate the results.
+
+**Relevant fields** shows controls used by the move's current configuration.
+Inactive groups remain labelled and can be opened to inspect retained values;
+**Show inactive fields** reveals disabled dependencies inside a group. Choose
+**All fields** to inspect everything in the section, with explanations of why
+some values have no effect. Switching views never clears or resets values.
+Invalid edits remain visible and must be fixed before leaving the section.
+
+Tap a group title to collapse or expand it. Those choices are remembered for
+each fighter, move, section and visibility mode. A **?** beside a label opens
+that field's explanation. Help, layout and pin preferences are kept separately
+from gameplay JSON.
+
+Related settings now live together: **Hitboxes & impact** contains attacker
+travel, grounded/airborne reactions, block and knockdown; **Hurtboxes & defense**
+contains body regions, timed protection, low-crush and armor; **Inputs & cancels**
+contains input mapping, proximity replacements and follow-up routes;
+**Move behavior** contains held guards, charging, dive/recoil and grab sequences;
+**Art & notes** contains sprite selection, finisher poses and the art brief.
+
+## Drive system
+
+The overview lists the current fighter's enabled Drive actions. Tap an input to
+edit that move without leaving the section. Tapper's entries (including throws),
+stance attacks and exits are grouped separately. Stance access and transitions
+are edited here, alongside the selected action's behavior.
+
+For Shark and Fillet, **Initial attack** shows the original startup/active/recovery
+and damage in its closed summary. **Applied status** selects tether or bleed.
+Below it, the controls show the current status and its repeat-input follow-up:
+Shark's pull timing and movement, or Fillet's bleed/grey life and cash-out grab.
+Unrelated mechanic controls appear in **All fields** or through setting search.
+
+**Test initial attack**, **Test apply → follow-up** and Fillet's **Test bleed
+timeout** use the same shared preview and test setup. **Open sequence test**
+opens the existing queue editor for longer routes. The overview describes and
+edits the current mechanics; it does not create a new stance or status type.
 
 ## Hosted publishing
 
@@ -100,7 +145,7 @@ serves the hosted folder locally. The portable ZIP opens directly from disk.
 - Active-frame hitbox keys, up to four boxes per key, optional separate hits,
   and damage/stun/hitstop overrides per key.
 - Hitbox edges and height, opening movement, active travel and run/dash carry.
-- Per-attack **Hurtboxes** for windup, active and recovery: three body regions
+- Per-attack **Hurtboxes & defense** for windup, active and recovery: three body regions
   plus one optional extension, with numeric editing and draggable blue handles.
 - Ground/air knockback, block pushback, ground/air launch, soft/hard knockdown,
   down/wakeup durations, landing recovery, hook pull and throw reach.
@@ -111,7 +156,7 @@ serves the hosted folder locally. The portable ZIP opens directly from disk.
 - Per-move nickname, gameplay intent, windup, active/weapon-path, hit/block
   effects, and later follow-through/recovery notes. **Download art brief** also
   produces a readable Markdown companion.
-- **Pose references** in Art brief accepts up to three JPG, PNG or WebP photos
+- **Pose references** in Art & notes accepts up to three JPG, PNG or WebP photos
   or pose sketches per move. Tag each as General pose, Windup or Active, and
   add a caption describing what to borrow. Click a thumbnail to enlarge it.
   Removing a photo is undoable; resetting move stats keeps the references.
@@ -139,7 +184,7 @@ mapped command; air-only attacks jump automatically. Run or step movement comes
 from that fighter’s actual movement profile and carries into attacks.
 
 Play, pause, restart or scrub through the exchange at quarter, half or full
-speed. Open **Hit & movement** or **Hurtboxes** to drag boxes directly on the
+speed. Open **Hitboxes & impact** or **Hurtboxes & defense** to drag boxes directly on the
 attacker in this same scene. The target stays visible, and the handles follow
 the attacker’s position and facing. There is one canvas and one timeline.
 
@@ -218,7 +263,7 @@ whether an attack connects.
 
 ## Change hitboxes during active frames
 
-1. Open **Hit & movement**, then pause or scrub the shared timeline. The attack
+1. Open **Hitboxes & impact**, then pause or scrub the shared timeline. The attack
    and its target stay in the same scene.
 2. Scrub to an active frame and choose **Add key at active …**. Active frame 1 is
    the move’s first possible contact frame, not the start of its windup.
@@ -247,7 +292,7 @@ settings. **Reset move** restores the bundled defaults and clears custom keys.
 
 ## Edit attack hurtboxes
 
-1. Choose the fighter and move, then open **Hurtboxes**.
+1. Choose the fighter and move, then open **Hurtboxes & defense**.
 2. Choose Windup, Active or Recovery. Recovery is available when the move has
    recovery frames. The preview jumps to that phase.
 3. Enable **Custom boxes for this phase** to start from the current sprite's
@@ -286,13 +331,13 @@ preserved through import/export, but are not tuning controls in this page.
 - Orange is attack geometry, blue is body hurtboxes, and green is the pushbox.
   The most recent attacker draws in front after a hit or block. Seeking backward
   restores the draw order from the selected frame.
-  On the Hit & movement tab, drag a normal strike's active rectangle or its edge
+  On the Hitboxes & impact tab, drag a normal strike's active rectangle or its edge
   handles, or edit a selected custom key box. Numeric fields cover base hook and
   throw geometry. The inherited hook preview draws eight
   moving spear segments; the rope is not a hitbox.
 - The shared workspace uses existing pose studies. New hitbox dimensions do not
   automatically refit the art. Recovery uses idle/crouch/air placeholders.
-- The **Hurtboxes** tab edits body coverage while pushboxes remain read-only.
+- The **Hurtboxes & defense** tab edits body coverage while pushboxes remain read-only.
   Weapons have no hurtboxes, and each pose retains at most four body boxes.
   Sprite replacement and body-box refitting remain a coordinated later pass.
 
@@ -352,7 +397,7 @@ determine whether local HTML or a hosted URL is allowed.
 
 ## Movement, defense and projectiles (schema 15)
 
-**Movement & defense** edits the selected character and keeps the shared preview. Choose an idle, walk, 66, 44, jump, air dash or FD demonstration, then play or scrub the actual core simulation. Fillet uses A / Stalker with black hair and lean arms; Shark uses F / Shoulder Rest. Both have eight-frame walk/run cycles.
+**Character movement** edits the selected character and keeps the shared preview. Choose an idle, walk, 66, 44, jump, air dash or FD demonstration, then play or scrub the actual core simulation. Fillet uses A / Stalker with black hair and lean arms; Shark uses F / Shoulder Rest. Both have eight-frame walk/run cycles.
 
 - **66 / 44:** independent Run, Step dash, Hover dash or Teleport. Runs continue while held. Step/hover use speed and duration; a ground hover rises toward its height, while an air hover holds height. Teleports relocate once after startup, clamp to stage boundaries, permit side switches and keep pushboxes separated. Startup/recovery lock actions and do not grant invulnerability.
 - **Air movement:** forward/backward toggles, independent styles/speeds/durations, a shared dash budget, and additional air jumps per character. Every air dash clears existing velocity, pauses in place, then starts its full burst. **Air forward pause** and **Air backward pause** default to 4 frames and accept 1–30; burst duration is separate. Air teleports use this pause as their windup. Budgets refill on landing. Jump speed, directional steering, gravity and prejump are editable. Attacks after the pause can inherit the new burst velocity. See [air-dash rules](air-dash-pause.md).
@@ -365,7 +410,7 @@ Movement and all attack controls support undo, autosave and JSON export/import. 
 
 ## Vulnerable regions (schema 16)
 
-In **Hurtboxes → Regions that can be hit**, turn Legs, Torso & arms, Head and the available Body extension on or off independently for windup, active and recovery. This works on inherited sprite geometry and custom profiles. Turning a region off preserves its coordinates, removes it from collision and the live hurtbox overlay, and supports undo, autosave and JSON. At most four regions still exist. Pushboxes and attacking hitboxes are independent.
+In **Hurtboxes & defense → Regions that can be hit**, turn Legs, Torso & arms, Head and the available Body extension on or off independently for windup, active and recovery. This works on inherited sprite geometry and custom profiles. Turning a region off preserves its coordinates, removes it from collision and the live hurtbox overlay, and supports undo, autosave and JSON. At most four regions still exist. Pushboxes and attacking hitboxes are independent.
 
 Every fighter’s **6P** defaults to legs only during windup and active frames, with all body regions restored in recovery. This is upper-body protection against melee and projectiles; overlapping leg hits and throws remain possible. The three exported fields are `hurtMaskWindup`, `hurtMaskActive` and `hurtMaskRecovery` (bits 1/2/4/8, all = 15). Earlier exports migrate without dropping edited stats, rectangles, timelines or art briefs. No transition smearing is reintroduced.
 
@@ -377,12 +422,12 @@ Godot loads the batch before a locally saved move set. **Development → Load la
 
 ### Drive mechanics (schema 17)
 
-The **Drive mechanics** tab configures status application, bleed amounts/timing, tether velocity, and conditional follow-up startup, active/recovery, grab damage, reach and leap movement. Select **Drive test → Apply → follow-up** to record the applying hit and repeat its input; **Apply → wait for timeout** shows bleed expiry. Grey life and tethers are visible in the shared preview. Older imports retain their prior move values and notes while receiving these new defaults. See [complete behavior and inheritance](character-mechanics-drafts.md).
+The **Drive system** tab configures status application, bleed amounts/timing, tether velocity, and conditional follow-up startup, active/recovery, grab damage, reach and leap movement. Select **Drive test → Apply → follow-up** to record the applying hit and repeat its input; **Apply → wait for timeout** shows bleed expiry. Grey life and tethers are visible in the shared preview. Older imports retain their prior move values and notes while receiving these new defaults. See [complete behavior and inheritance](character-mechanics-drafts.md).
 
 
-### Stance & behavior (schema 18)
+### Additional move behavior (schema 18)
 
-Tapper's full kit and confirmed **st.236D** are in the [current Tapper guide](tapper-design.md). These controls are per move and appear in both editors. Values use frames, world pixels and pixels/frame as labeled; JSON keeps the existing 100-units-per-pixel convention. A timed mask intersects the phase mask; it never enables a region disabled in Hurtboxes. Bits are legs=1, torso/arms=2, head=4, extension=8.
+Tapper's full kit and confirmed **st.236D** are in the [current Tapper guide](tapper-design.md). These controls are per move and appear in both editors. The browser groups them by purpose across Drive system, Move behavior, Hitboxes & impact, Hurtboxes & defense, Inputs & cancels, and Art & notes. Values use frames, world pixels and pixels/frame as labeled; JSON keeps the existing 100-units-per-pixel convention. A timed mask intersects the phase mask; it never enables a region disabled in Hurtboxes. Bits are legs=1, torso/arms=2, head=4, extension=8.
 
 | Control | What it does |
 |---|---|

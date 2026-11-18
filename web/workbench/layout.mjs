@@ -3,6 +3,9 @@
 export function createLayout({canNavigate,onOpenMoves,onSection}){
  const $=id=>document.getElementById(id),compact=matchMedia('(max-width: 1000px)'),dialog=$('move-dialog'),options=$('preview-options-dialog');
  const closeMoves=()=>{if(dialog.open)dialog.close();};
+ let pinned=false;
+ try{pinned=localStorage.getItem('fight-guild.preview-pin')==='true';}catch{}
+ document.documentElement.classList.toggle('preview-pinned',pinned);$('preview-pin').setAttribute('aria-pressed',String(pinned));
  function adapt(){
   closeMoves();
   if(options.open)options.close();
@@ -18,6 +21,7 @@ export function createLayout({canNavigate,onOpenMoves,onSection}){
   const root=document.documentElement;
   root.style.setProperty('--topbar-height',`${document.querySelector('.topbar').getBoundingClientRect().height}px`);
   root.style.setProperty('--preview-height',`${$('preview-core').getBoundingClientRect().height}px`);
+  root.style.setProperty('--editor-nav-height',`${document.querySelector('.editor-navigation').getBoundingClientRect().height}px`);
  }
  $('choose-move').onclick=()=>{
   if(!canNavigate())return;
@@ -37,6 +41,11 @@ export function createLayout({canNavigate,onOpenMoves,onSection}){
   if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)closeMoves();
  });
  $('section-picker').onchange=()=>onSection($('section-picker').value);
+ $('preview-pin').onclick=()=>{
+  pinned=!pinned;document.documentElement.classList.toggle('preview-pinned',pinned);$('preview-pin').setAttribute('aria-pressed',String(pinned));
+  try{localStorage.setItem('fight-guild.preview-pin',String(pinned));}catch{}
+ };
+ $('go-preview').onclick=()=>{if(!canNavigate())return;$('preview-core').scrollIntoView({block:'start'});};
  $('preview-collapse').onclick=()=>{
   const hidden=!$('preview-visual').hidden;$('preview-visual').hidden=hidden;
   $('preview-collapse').textContent=hidden?'Expand':'Minimize';
@@ -51,7 +60,7 @@ export function createLayout({canNavigate,onOpenMoves,onSection}){
  }
  window.visualViewport?.addEventListener('resize',keyboard);
  document.addEventListener('focusin',keyboard);document.addEventListener('focusout',()=>requestAnimationFrame(keyboard));
- const observer=new ResizeObserver(measure);observer.observe(document.querySelector('.topbar'));observer.observe($('preview-core'));
+ const observer=new ResizeObserver(measure);observer.observe(document.querySelector('.topbar'));observer.observe($('preview-core'));observer.observe(document.querySelector('.editor-navigation'));
  compact.addEventListener('change',adapt);adapt();
  return {
   closeMoves,

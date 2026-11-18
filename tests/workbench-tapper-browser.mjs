@@ -9,7 +9,7 @@ try{
  const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
  await page.goto(`http://127.0.0.1:${server.address().port}/`);await page.locator('#field-startup').waitFor();await ready(page);
- await page.locator('#fighter').selectOption('3');await page.locator('[data-move="40"]').click();await page.locator('#tab-stance').click();await ready(page);
+ await page.locator('#fighter').selectOption('3');await page.locator('[data-move="40"]').click();await page.locator('#tab-mechanics').click();await ready(page);
  assert.equal(await page.locator('#field-stanceRequired').inputValue(),'2');assert.equal(await page.locator('#field-grabFrames').inputValue(),'24');
  const record=await page.evaluate(()=>moveWorkshop.preview());assert.equal(record.contacts.length,1);
  const i=record.frames.findIndex(f=>f.state.players[0].poseIndex===30&&f.state.players[0].posePhase===4);assert.ok(i>=0);

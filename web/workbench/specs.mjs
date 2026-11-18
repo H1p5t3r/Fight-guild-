@@ -1,29 +1,12 @@
 import STANCE_FIELDS from '../../godot/data/stance_fields.json' with {type:'json'};
 import {MECHANIC_SPECS} from './mechanics-specs.mjs';
-export const GROUPS = [
-  {id:'timing', title:'Frame data', intro:'Tune the pace and reward. One frame is 1/60 of a second.', fields:['startup','active','recovery','damage','hitstun','blockstun','hitstop','chipDamage']},
-  {id:'geometry', title:'Hitbox & movement', intro:'Distances use game pixels. The preview keeps the existing artwork while you change its attack geometry.', fields:['hitboxBack','reach','bottom','height','advance','travelSpeed','inertiaPercent','hitAngle','throwRange']},
-  {id:'reaction', title:'Hit & block reaction', intro:'Soft knockdowns lie on the back; hard knockdowns lie face down. Both get up automatically in place, using Down duration and Wakeup duration.', fields:['hitLevel','guardBreak','knockdown','pushback','airPushback','blockPushback','launch','airLaunch','knockdownFrames','wakeupFrames','landingRecovery','pullFrames','pullGap']},
-  {id:'cancel', title:'Cancel routes', intro:'Use Unified to follow the shared gatling rules. Custom routes select the destination buttons.', fields:['specialCancel','jumpCancel','whiffCancel','selfCancel','normalRoutes','commandRoutes','cancelOn','normalCancelStart','normalCancelEnd','specialCancelStart','specialCancelEnd','jumpCancelStart','jumpCancelEnd','followCancelStart','followCancelEnd','followFrom','followFrom2','followHit']},
-  {id:'input', title:'Inputs & identity', intro:'Move slots keep their IDs for game compatibility. These fields control the actual input and move type.', fields:['enabled','button','category','direction','motion','air','simpleDirection','simpleButton','artPose']},
-  {id:'counter', title:'Counter hits & scaling', intro:'Reversal eligibility recognizes first-frame execution; it does not add invulnerability.', fields:['attackLevel','counterTier','counterVulnerable','counterFreezeFrames','counterSlowFrames','counterHitstun','counterHitstop','reversalEligible','starterProration','comboScaling','minimumDamage']},
-];
-GROUPS.push({id:'projectiles',title:'Projectile',intro:'Moving shots travel independently; stationary objects stay where they spawn. They use this move’s damage, stun, launch and block rules. No projectile is created until enabled.',fields:["projectileKind", "projectileSpawnFrame", "projectileSpeedX", "projectileSpeedY", "projectileGravity", "projectileLife", "projectileOffsetX", "projectileOffsetY", "projectileWidth", "projectileHeight", "projectileHits", "projectileRehit", "projectileDurability", "projectilePersist", "projectileMelee"]});
-GROUPS.push({id:'vulnerability',title:'Vulnerable body regions',intro:'Choose which regions can receive hits in each attack phase. Disabled regions retain their coordinates.',fields:['hurtMaskWindup','hurtMaskActive','hurtMaskRecovery']});
-GROUPS.push({id:'mechanics',title:'Drive mechanics',intro:'Tether and bleed attach on hit. Reuse the applying input for its conditional follow-up. Getting hit clears your statuses. All values below are provisional tuning.',fields:MECHANIC_SPECS.map(row=>row[0])});
-GROUPS.push({id:'stance',title:'Stance & move behavior',intro:'Contextual moves, timed guard and armor, bounces, dives and grab sequences. Tapper stance timings are provisional.',fields:STANCE_FIELDS.map(f=>f.key)});
-export const TABS = [
-  {id:'timing',label:'Timing',groups:['timing','counter']},
-  {id:'hit',label:'Hit & movement',groups:['geometry','reaction']},
-  {id:'hurt',label:'Hurtboxes',groups:[]},
-  {id:'sequence',label:'Sequence test',groups:[]},
-  {id:'routes',label:'Cancels & inputs',groups:['cancel','input']},
-  {id:'movement',label:'Movement & defense',groups:[]},
-  {id:'projectiles',label:'Projectiles',groups:['projectiles']},
-  {id:'mechanics',label:'Drive mechanics',groups:['mechanics']},
-  {id:'stance',label:'Stance & behavior',groups:['stance']},
-  {id:'art',label:'Art brief',groups:[]},
-];
+import {FIELD_GROUPS} from './field-layout.mjs';
+export const GROUPS=FIELD_GROUPS;
+export const TABS=[
+  ['timing','Timing & damage'],['hit','Hitboxes & impact'],['hurt','Hurtboxes & defense'],
+  ['sequence','Sequence test'],['routes','Inputs & cancels'],['movement','Character movement'],
+  ['projectiles','Projectiles'],['mechanics','Drive system'],['stance','Move behavior'],['art','Art & notes'],
+].map(([id,label])=>({id,label,groups:GROUPS.filter(g=>g.tab===id).map(g=>g.id)}));
 const labels = {
   startup:'Startup', active:'Active', recovery:'Recovery', damage:'Damage', hitstun:'Hitstun', blockstun:'Blockstun', hitstop:'Hitstop', chipDamage:'Chip damage',
   hitboxBack:'Back edge', reach:'Front edge', bottom:'Bottom', height:'Height', advance:'Opening step', travelSpeed:'Active travel', inertiaPercent:'Run / dash carry', hitAngle:'Hook direction', throwRange:'Throw reach',
@@ -59,7 +42,7 @@ const hints = {
   counterFreezeFrames:'−1 uses the move’s normal stop plus Counter extra stop.', counterSlowFrames:'Defender-only alternate-frame slowdown after the shared freeze.',
   attackLevel:'Sets default attack-level behavior when a separate counter tier is not chosen.',
   counterVulnerable:'Attack phases in which this move can receive a counter hit.',
-  artPose:'0 uses button artwork. Signature poses are available only for Fillet and Shark.',
+  artPose:'0 uses button artwork. Other values select this fighter’s existing signature drawings.',
   normalCancelEnd:'0 closes at the end of the move. All window values are move-frame numbers.', specialCancelEnd:'0 closes at the end of the move.', jumpCancelEnd:'0 closes at the end of the move.', followCancelEnd:'0 closes at the end of the move.',
   specialCancel:'All normals are special-cancelable by default unless deliberately opted out.',
 };
@@ -69,13 +52,14 @@ for(const key of ['projectileSpeedX','projectileSpeedY','projectileGravity'])spe
 for(const key of ['projectilePersist','projectileMelee'])flags.add(key);
 percent.add('smearStretch');
 Object.assign(options,{projectileKind:[[0,'None'],[1,'Moving projectile'],[2,'Stationary object']]});
-Object.assign(hints,{"projectileSpawnFrame": "0 spawns on the first active frame. Other values are absolute move frames (earliest 5). Values beyond the move do not spawn; throws do not spawn projectiles.", "projectileSpeedX": "Positive travels forward from the launch facing. Negative travels backward. Stationary objects ignore speed and gravity.", "projectileSpeedY": "Positive rises; negative falls.", "projectileGravity": "Downward acceleration per frame (px/f\u00b2). Negative accelerates upward.", "projectileLife": "Action frames alive; shared hitstop freezes the lifetime.", "projectileRehit": "Minimum action frames between contacts with the same target.", "projectileDurability": "Opposing projectiles subtract durability. Equal strength destroys both.", "projectileMelee": "Enable to retain the attack\u2019s normal hitboxes as well as its projectile.", "projectilePersist": "Otherwise disappears when its owner is hit. All projectiles clear during wall travel and round resets."});
+Object.assign(hints,{"projectileSpawnFrame": "0 spawns on the first active frame. Other values are absolute move frames (clamped to the move’s startup minimum). Values beyond the move do not spawn; throws do not spawn projectiles.", "projectileSpeedX": "Positive travels forward from the launch facing. Negative travels backward. Stationary objects ignore speed and gravity.", "projectileSpeedY": "Positive rises; negative falls.", "projectileGravity": "Downward acceleration per frame (px/f\u00b2). Negative accelerates upward.", "projectileLife": "Action frames alive; shared hitstop freezes the lifetime.", "projectileRehit": "Minimum action frames between contacts with the same target.", "projectileDurability": "Opposing projectiles subtract durability. Equal strength destroys both.", "projectileMelee": "Enable to retain the attack\u2019s normal hitboxes as well as its projectile.", "projectilePersist": "Otherwise disappears when its owner is hit. All projectiles clear during wall travel and round resets."});
 Object.assign(labels,{hurtMaskWindup:'Windup hurtboxes',hurtMaskActive:'Active hurtboxes',hurtMaskRecovery:'Recovery hurtboxes'});
 for(const key of ['hurtMaskWindup','hurtMaskActive','hurtMaskRecovery'])masks[key]=['Legs','Torso & arms','Head','Body extension'];
 // Smear fields are inactive compatibility data; no renderer or editor control uses them.
 for(const key of Object.keys(labels).filter(key=>key.startsWith('smear'))){labels[key]='Legacy '+labels[key].toLowerCase();hints[key]='Retained for older JSON drafts; has no effect.';}
 for(const [key,label,,, ,hint] of MECHANIC_SPECS){labels[key]=label;hints[key]=hint;}
 for(const key of ['tetherSpeed','variantSpeed','variantLift'])speed.add(key);pixel.add('variantRange');percent.add('bleedBlockPercent');
+labels.mechanic='Applied status';
 options.mechanic=[[0,'None'],[1,'Tether → pull'],[2,'Bleed → cash-out grab']];
 options.variantKnockdown=options.knockdown;
 for(const f of STANCE_FIELDS){labels[f.key]=f.label;hints[f.key]=f.help;if(f.scale===100)(/Speed|Travel|Bounce/.test(f.key)?speed:pixel).add(f.key);}

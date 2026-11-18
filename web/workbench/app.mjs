@@ -10,6 +10,9 @@ import {renderHitEditor} from './hit-editor.mjs';
 import {CombatPreview,describeInput} from './simulation.mjs';
 import {cursorAnchor,cursorIndex} from './cursor.mjs';
 import {createLayout} from './layout.mjs';
+import {FieldPanels} from './field-panels.mjs';
+import {renderDrive} from './drive-editor.mjs';
+import {createSettingSearch} from './setting-search.mjs';
 import {renderSequence,showSequenceResult} from './sequence-editor.mjs';
 const $=id=>document.getElementById(id),pack=globalThis.FIGHT_WORKSHOP_DATA;
 const STORAGE='fight-guild.move-workshop.v1';
@@ -88,8 +91,13 @@ function optionsFor(key){
   return SPECS[key].options;
 }
 function commit(key,value){
+  const rebuild=tab==='mechanics'&&['mechanic','actionType','stanceRequired','stanceChange','enabled'].includes(key);
+  if(rebuild&&!validBeforeLeaving()){if($('field-'+key))$('field-'+key).value=move()[key];return false;}
   try{model.change(character,slot,key,value);fieldError(key,'');syncSummary();listMoves();scheduleSave();
     for(const timing of ['startup','variantStartup'])if($('field-'+timing))$('field-'+timing).min=moveFieldLimit(move(),timing,pack.limits.moves[character]).min;
+    if(rebuild){
+      const focus=document.activeElement?.id;renderForm();$(focus)?.focus({preventScroll:true});
+    }else panels.update();
     return true;
   }catch(error){fieldError(key,error.message);return false;}
 }
@@ -120,10 +128,11 @@ function maskField(key){
   if(spec.unified){unified=el('input',{type:'checkbox',id:'field-'+key+'-unified',checked:move()[key]===-1});const label=el('label',{class:'unified-option'},'');label.append(unified,document.createTextNode('Unified'));choices.append(label);unified.addEventListener('change',()=>{commit(key,unified.checked?-1:0);for(const item of inputs){item.disabled=unified.checked;item.checked=false;}});}
   spec.mask.forEach((name,i)=>{const input=el('input',{type:'checkbox',id:`field-${key}-${i}`,checked:move()[key]>=0&&!!(move()[key]&(1<<i))});input.disabled=move()[key]===-1;const label=el('label');label.append(input,document.createTextNode(name));choices.append(label);inputs.push(input);input.addEventListener('change',()=>commit(key,inputs.reduce((mask,n,i)=>mask|(n.checked?1<<i:0),0)));});field.append(choices);if(spec.hint)field.append(el('small',{class:'hint'},spec.hint));return field;
 }
-function section(group){
-  const node=el('section',{class:'form-section','aria-label':group.title});node.append(el('h2',{},group.title),el('p',{},group.intro));const grid=el('div',{class:'field-grid'});
-  for(const key of group.fields){const type=SPECS[key].type;grid.append(type==='number'?numberField(key):type==='select'?selectField(key):type==='flag'?flagField(key):maskField(key));}node.append(grid);return node;
+function fieldControl(key){
+  const type=SPECS[key].type;
+  return type==='number'?numberField(key):type==='select'?selectField(key):type==='flag'?flagField(key):maskField(key);
 }
+
 function referenceSection(){
   const section=el('section',{class:'pose-references field wide','aria-labelledby':'reference-title'}),refs=model.note(character,slot).references||[];
   const heading=el('div',{class:'reference-heading'});heading.append(el('h3',{id:'reference-title'},'Pose references'),el('span',{class:'reference-count'},`${refs.length} / ${MAX_REFERENCES}`));
@@ -176,7 +185,7 @@ function hurtForm(){
   const enable=el('input',{id:'hurt-custom',type:'checkbox',checked:custom}),enableRow=el('div',{class:'hurt-toggle'});enableRow.append(enable,el('label',{for:'hurt-custom'},'Custom boxes for this phase'));
   enable.onchange=()=>{if(!validBeforeLeaving()){enable.checked=custom;return;}stop();model.setHurtPhase(character,slot,hurtPhase,enable.checked?visibleHurtboxes():null);renderForm();syncSummary();listMoves();scheduleSave();};
   section.append(el('label',{for:'hurt-phase',class:'field-label'},'Attack phase'),phase,enableRow,el('p',{class:'hurt-status'},custom?'Custom profile · saved with this move':'Using the sprite pose. Enable custom boxes to make changes.'));
-  const vulnerability=el('fieldset',{class:'hurt-vulnerability'});vulnerability.append(el('legend',{},'Regions that can be hit'));
+  const vulnerability=el('fieldset',{class:'hurt-vulnerability',id:'hurt-vulnerability'});vulnerability.append(el('legend',{},'Regions that can be hit'));
   for(const region of HURT_REGIONS){
     const id='hurt-enabled-'+region,check=el('input',{id,type:'checkbox',checked:regionEnabled(m,hurtPhase,region)}),row=el('div',{class:'hurt-toggle'});
     check.disabled=!boxes[region];row.append(check,el('label',{for:id},HURT_LABELS[region]));vulnerability.append(row);
@@ -217,6 +226,9 @@ function artForm(){
   const exportBrief=el('button',{type:'button',class:'art-export'},'Download art brief');exportBrief.addEventListener('click',()=>download(model.brief(),'FightGuild-art-brief-'+date()+'.md','text/markdown;charset=utf-8'));container.append(grid,exportBrief);return container;
 }
 function renderForm(){
+  panels.begin();buildForm();panels.update();$('field-view').value=panels.all?'all':'relevant';$('field-view').hidden=tab==='sequence';
+}
+function buildForm(){
   if(tab==='sequence'){
     $('form').setAttribute('aria-labelledby','tab-sequence');
     $('form').replaceChildren(renderSequence({el,moves:model.data.characters[character].moves,queue:model.sequence(character),slot,valid:validBeforeLeaving,onError:fieldError,
@@ -229,15 +241,19 @@ function renderForm(){
   }
   if(tab==='movement'){
     $('form').setAttribute('aria-labelledby','tab-movement');
-    $('form').replaceChildren(renderMovement({el,profile:model.data.characters[character].movement,limits:pack.limits.movement[character],onError:fieldError,action:movementAction,onAction:value=>{if(!validBeforeLeaving())return;movementAction=value;pendingSeek={tick:0};stop();syncPreview();},onChange:(key,value)=>{model.changeMovement(character,key,value);syncSummary();scheduleSave();}}));return;
+    $('form').replaceChildren(renderMovement({el,panels,profile:model.data.characters[character].movement,limits:pack.limits.movement[character],onError:fieldError,action:movementAction,onAction:value=>{if(!validBeforeLeaving())return;movementAction=value;pendingSeek={tick:0};stop();syncPreview();},onChange:(key,value)=>{model.changeMovement(character,key,value);syncSummary();panels.update();scheduleSave();}}));return;
   }
   const form=$('form');form.setAttribute('aria-labelledby','tab-'+tab);
-  if(tab==='art'){form.replaceChildren(artForm());return;}
-  if(tab==='hurt'){form.replaceChildren(hurtForm());return;}
-  const groups=TABS.find(t=>t.id===tab).groups.map(id=>GROUPS.find(g=>g.id===id)),nodes=groups.map((group,i)=>{
-    const view=section(group);if(i===0||tab==='hit')return view;
-    const details=el('details',{class:'section-divider'});details.append(el('summary',{},group.title),view);return details;
-  });if(tab==='hit')nodes.unshift(renderHitEditor({move:move(),frame,pack,character,boxIndex:hitBox,selectedFrame:hitKeyFrame,
+  const groups=TABS.find(t=>t.id===tab).groups.map(id=>GROUPS.find(g=>g.id===id));
+  if(tab==='art'){form.replaceChildren(...groups.map(g=>panels.create(g,fieldControl)),artForm());return;}
+  if(tab==='hurt'){form.replaceChildren(hurtForm(),...groups.filter(g=>g.id!=='vulnerability').map(g=>panels.create(g,fieldControl)));return;}
+  if(tab==='mechanics'){
+    form.replaceChildren(renderDrive({el,character:model.data.characters[character],slot,note:index=>model.note(character,index),panels,field:fieldControl,
+      onMove:index=>{if(!validBeforeLeaving())return;slot=index;frame=move().startup;pendingSeek={frame};stop();render();saveSelection();document.querySelector(`[data-drive-move="${index}"]`)?.focus({preventScroll:true});},
+      onTab:selectTab,testMode:$('test-mechanic').value,onTest:mode=>{if(!validBeforeLeaving())return;$('test-mechanic').value=mode;$('test-mechanic').dispatchEvent(new Event('change'));}
+    }));return;
+  }
+  const nodes=groups.map(group=>panels.create(group,fieldControl));if(tab==='hit')nodes.unshift(renderHitEditor({move:move(),frame,pack,character,boxIndex:hitBox,selectedFrame:hitKeyFrame,
     valid:validBeforeLeaving,onError:fieldError,onKey:value=>{hitKeyFrame=value;seekMove(value===null?frame:move().startup+Math.min(Math.max(1,value),move().active)-1);},
     onBox:value=>{hitBox=value;renderForm();syncPreview();},
     onChange:(track,render=true,group='')=>{model.setHitTimeline(character,slot,track,group);stop();if(render)renderForm();syncSummary();listMoves();scheduleSave();}
@@ -404,9 +420,19 @@ window.addEventListener('storage',event=>{if(event.key===STORAGE&&event.newValue
 globalThis.moveWorkshop={data:()=>model.snapshot(),selection:()=>({character,slot,tab}),version:pack.defaults.coreVersion};
 $('test-target').append(...CHARACTERS.map((name,i)=>el('option',{value:i},name)));$('test-target').value='4';
 $('attack-enabled').onchange=()=>{if(!validBeforeLeaving()){$('attack-enabled').checked=!!move().enabled;return;}commit('enabled',Number($('attack-enabled').checked));if($('field-enabled'))$('field-enabled').checked=!!move().enabled;};
-for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple','test-mechanic'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}layout.update(CHARACTERS[character],move().id,model.note(character,slot).label);testSignature='';scheduleTest();};
+for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple','test-mechanic'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}layout.update(CHARACTERS[character],move().id,model.note(character,slot).label);testSignature='';scheduleTest();for(const button of document.querySelectorAll('[data-drive-test]'))button.setAttribute('aria-pressed',String(button.dataset.driveTest===$('test-mechanic').value));};
 globalThis.moveWorkshop.preview=()=>testRecord;
 globalThis.moveWorkshop.cursor=()=>({index:testIndex,frame:testRecord?.frames[testIndex]?.selectedFrame||0,pending:previewPending});
 globalThis.moveWorkshop.geometry=()=>({handles:clone(preview.handles),view:clone(preview.view||{}),measurements:clone(preview.measurements||null),measurementLabels:clone(preview.measurementLabels||[])});
+const panels=new FieldPanels({el,move,character:()=>model.data.characters[character],context:()=>`${character}/${slot}/${tab}`,valid:validBeforeLeaving});
 const layout=createLayout({canNavigate:validBeforeLeaving,onOpenMoves:stop,onSection:selectTab});
+$('field-view').onchange=()=>{if(!validBeforeLeaving()){$('field-view').value=panels.all?'all':'relevant';return;}panels.setAll($('field-view').value==='all');renderForm();};
+createSettingSearch({el,onFind:entry=>{
+  if(!validBeforeLeaving())return false;selectTab(entry.tab);
+  if(entry.key?.startsWith('hurtMask')){const phase=entry.key==='hurtMaskWindup'?'windup':entry.key==='hurtMaskActive'?'active':'recovery';seekMove(phaseStart(move(),phase));}
+  panels.reveal(entry.key);
+  const target=$(entry.id)||document.querySelector(`[data-setting="${entry.key}"] input,[data-setting="${entry.key}"] select`);
+  const box=target?.closest('.field,[data-panel],.hurt-vulnerability')||target;
+  target?.focus({preventScroll:true});box?.scrollIntoView({block:'center'});box?.classList.add('setting-focus');setTimeout(()=>box?.classList.remove('setting-focus'),1800);return true;
+}});
 initialize();requestAnimationFrame(animate);
