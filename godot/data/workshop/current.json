@@ -1,9 +1,9 @@
 {
-  "label": "Batch 2 \u00b7 17 November 2026",
+  "label": "Batch 3 · 17 November 2026",
   "status": "work in progress",
-  "file": "2026-11-17-batch-02/FightGuild-moves-2026-11-17 _1_.json",
-  "sha256": "de5d4de94ad530a4ec77529aa4dcd23ddcbb1adee078746f964103c66b98e672",
-  "baseCommit": "1a42049",
-  "previousFile": "2026-11-17-batch-01/FightGuild-moves-2026-11-17.json",
-  "note": "Work-in-progress batch: preserves all submitted move values, notes and references. Schema 17 migration adds editable Shark tether/pull and Fillet bleed/cash-out mechanics. Existing local drafts still take priority."
+  "file": "2026-11-17-batch-03/FightGuild-moves-2026-11-17 _2_.json",
+  "sha256": "21ff7634070015b39289c703ea5bf178300cd40ab6644d13199609a3d1ad6d7c",
+  "baseCommit": "f7449bb",
+  "previousFile": "2026-11-17-batch-02/FightGuild-moves-2026-11-17 _1_.json",
+  "note": "Original schema-17 upload preserved byte-for-byte; all move tuning and art briefs retained. Tapper implementation is based on this batch."
 }
