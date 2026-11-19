@@ -57,7 +57,8 @@
       "options": [
         "A",
         "B"
-      ]
+      ],
+      "reviewSheet": "normals-batch-02/5hs-timeline.png"
     },
     {
       "id": "2P",
@@ -92,7 +93,8 @@
       "options": [
         "A",
         "B"
-      ]
+      ],
+      "reviewSheet": "normals-batch-02/2s-timeline.png"
     },
     {
       "id": "2Hs",
@@ -105,7 +107,8 @@
       "options": [
         "A",
         "B"
-      ]
+      ],
+      "reviewSheet": "normals-batch-02/2hs-timeline.png"
     },
     {
       "id": "6P",
@@ -118,7 +121,8 @@
       "options": [
         "A",
         "B"
-      ]
+      ],
+      "reviewSheet": "normals-batch-02/6p-timeline.png"
     },
     {
       "id": "6Hs",
@@ -131,7 +135,8 @@
       "options": [
         "A",
         "B"
-      ]
+      ],
+      "reviewSheet": "normals-batch-02/6hs-timeline.png"
     },
     {
       "id": "j.P",
@@ -253,5 +258,19 @@
       "productionStatus": "pending",
       "installed": false
     }
-  ]
+  ],
+  "reviewFormat": {
+    "fromBatch": "normals-batch-02",
+    "poses": [
+      "windup",
+      "contact",
+      "follow-through"
+    ],
+    "arrows": {
+      "red": "blade",
+      "charcoal": "body",
+      "gold": "footwork"
+    },
+    "source": "user request, 2026-11-19"
+  }
 }

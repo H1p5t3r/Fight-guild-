@@ -23,6 +23,12 @@ recommendation. Do not silently substitute the suggested mix.
 4. Remaining air normals, specials and paired actions follow the same review
    process, preserving already selected directions.
 
+From batch 02 onward, present **three poses per option: windup → contact →
+follow-through**, with one move per sheet and A/B on separate rows. Add red
+blade-path arrows, charcoal body-turn arrows and gold footwork/support marks.
+This is the user's requested review format; annotations are not runtime
+effects. Preserve earlier selections when improving their presentation.
+
 Production uses Model Reference 06, black hair, slender arms, fixed long RIGHT /
 short LEFT knives, mature proportions, wide A / Stalker stance and consistent
 cel shading. Existing game timing and collision remain authoritative. Exact

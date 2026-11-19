@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "character": "Fillet",
   "date": "2026-11-19",
   "status": "motion direction review; awaiting user selections; not installed",
@@ -12,51 +12,12 @@
   ],
   "phases": [
     "windup",
-    "active"
+    "contact",
+    "follow-through"
   ],
   "reference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png",
   "stanceReference": "Fillet_Codex_Implementation_v1_0.zip/references/Fillet_cS_Selected_Motion_Direction.png",
   "specSHA256": "796292f71f5af141c91997b983ee223834a0826dbc8d3c7b1b1d7d260445e65d",
-  "boards": {
-    "heavy-options.png": {
-      "rows": [
-        "5Hs",
-        "6Hs"
-      ],
-      "columns": [
-        "A windup",
-        "A active",
-        "B windup",
-        "B active"
-      ],
-      "prompt": "heavy-refinement-prompt.txt",
-      "editSource": "archive/heavy-before-crosscut-refinement.png"
-    },
-    "rising-options.png": {
-      "rows": [
-        "6P",
-        "2Hs"
-      ],
-      "columns": [
-        "A windup",
-        "A active",
-        "B windup",
-        "B active"
-      ],
-      "prompt": "rising-prompt.txt"
-    },
-    "sweep-options.png": {
-      "rows": [
-        "2S-A",
-        "2S-B"
-      ],
-      "columns": [
-        "windup",
-        "active"
-      ],
-      "prompt": "sweep-prompt.txt"
-    }
-  },
   "options": {
     "5Hs": {
       "A": "Cross Snap",
@@ -103,14 +64,164 @@
     "archive/heavy-before-crosscut-refinement.png": {
       "source": "/workspace/generated_images/exec-94ebefae-20fc-4666-b5cb-6169f7248bb3.png",
       "sha256": "be195697052fffd19d8141077cb5c2ac1a35af51733c7ca01922d584105da1ba"
+    },
+    "5hs-timeline.png": {
+      "source": "/workspace/generated_images/exec-9d5230f1-0ee1-44a2-86d6-d8122ec81fb1.png",
+      "sha256": "3f286c30d58cf27325bbc22175ee0878820f02464ffa39f00a73278b0bc91a54"
+    },
+    "2s-timeline.png": {
+      "source": "/workspace/generated_images/exec-17c7c008-0d8d-4386-a424-49e94cdc6724.png",
+      "sha256": "c5048f9d32ea1c8b0ada884d6a3f8425413cf322a98f0c2e6f2747172d2f8d24"
+    },
+    "2hs-timeline.png": {
+      "source": "/workspace/generated_images/exec-e149c400-ab77-44de-96b4-941f1c7d7f3f.png",
+      "sha256": "921865f27a477cd151efea2769275fd43e0643da5c5bfa09d560dedef83a62a9"
+    },
+    "6p-timeline.png": {
+      "source": "/workspace/generated_images/exec-31fc2cc5-2865-46eb-b264-08c63e8691d3.png",
+      "sha256": "347c74333d611734d2c556db9e5e195f79d9db4bc763180a6aed0d150fc74d7e"
+    },
+    "6hs-timeline.png": {
+      "source": "/workspace/generated_images/exec-7be8a0b0-e62f-4adc-b9b8-02624ba78e9c.png",
+      "sha256": "0d9bb1be0c9e6b1f6915e91c2027342e12db38761cd538fffe95e8d7a24f67c7"
     }
   },
   "reviewNotes": [
+    "The user requested three poses per timeline plus motion-direction arrows. The five timeline sheets supersede the two-pose presentation without selecting or changing an A/B direction.",
+    "Timeline poses describe choreography beats, not consecutive simulation frames. Arrows are review annotations only; exact blade/limb paths, handedness and support contacts must be resolved during registered production.",
     "5Hs active drawings refined so the unequal blade paths visibly cross; 6Hs retains its distinct long forward/down cleave.",
     "2S uses the long RIGHT blade close to the floor, unlike the boot-based 2K.",
     "2Hs remains grounded; 6P does not gain a visual shield.",
     "These are direction studies, not registered sprite sheets or playable clips.",
     "Selected poses still need exact scale, anatomy, weapon ownership/lengths, support-foot continuity, collision-corridor fit and both-facing checks.",
     "No runtime sprite, manifest, timing or collision data changed."
-  ]
+  ],
+  "format": {
+    "layout": "one move per sheet; A top row, B bottom row; three columns left to right",
+    "poseCountPerOption": 3,
+    "motionArrows": {
+      "red": "blade path",
+      "charcoal": "body rotation and weight transfer",
+      "gold": "footwork and support"
+    },
+    "requestedBy": "user on 2026-11-19; two poses did not show the motion plan clearly enough",
+    "runtimeEffects": false
+  },
+  "sourceBoards": {
+    "heavy-options.png": {
+      "rows": [
+        "5Hs",
+        "6Hs"
+      ],
+      "columns": [
+        "A windup",
+        "A active",
+        "B windup",
+        "B active"
+      ],
+      "prompt": "heavy-refinement-prompt.txt",
+      "editSource": "archive/heavy-before-crosscut-refinement.png"
+    },
+    "rising-options.png": {
+      "rows": [
+        "6P",
+        "2Hs"
+      ],
+      "columns": [
+        "A windup",
+        "A active",
+        "B windup",
+        "B active"
+      ],
+      "prompt": "rising-prompt.txt"
+    },
+    "sweep-options.png": {
+      "rows": [
+        "2S-A",
+        "2S-B"
+      ],
+      "columns": [
+        "windup",
+        "active"
+      ],
+      "prompt": "sweep-prompt.txt"
+    }
+  },
+  "boards": {
+    "5hs-timeline.png": {
+      "move": "5Hs",
+      "rows": [
+        "A",
+        "B"
+      ],
+      "columns": [
+        "windup",
+        "contact",
+        "follow-through"
+      ],
+      "prompt": "5hs-timeline-prompt.txt",
+      "editSource": "heavy-options.png",
+      "identityReference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png"
+    },
+    "2s-timeline.png": {
+      "move": "2S",
+      "rows": [
+        "A",
+        "B"
+      ],
+      "columns": [
+        "windup",
+        "contact",
+        "follow-through"
+      ],
+      "prompt": "2s-timeline-prompt.txt",
+      "editSource": "sweep-options.png",
+      "identityReference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png"
+    },
+    "2hs-timeline.png": {
+      "move": "2Hs",
+      "rows": [
+        "A",
+        "B"
+      ],
+      "columns": [
+        "windup",
+        "contact",
+        "follow-through"
+      ],
+      "prompt": "2hs-timeline-prompt.txt",
+      "editSource": "rising-options.png",
+      "identityReference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png"
+    },
+    "6p-timeline.png": {
+      "move": "6P",
+      "rows": [
+        "A",
+        "B"
+      ],
+      "columns": [
+        "windup",
+        "contact",
+        "follow-through"
+      ],
+      "prompt": "6p-timeline-prompt.txt",
+      "editSource": "rising-options.png",
+      "identityReference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png"
+    },
+    "6hs-timeline.png": {
+      "move": "6Hs",
+      "rows": [
+        "A",
+        "B"
+      ],
+      "columns": [
+        "windup",
+        "contact",
+        "follow-through"
+      ],
+      "prompt": "6hs-timeline-prompt.txt",
+      "editSource": "heavy-options.png",
+      "identityReference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png"
+    }
+  }
 }
