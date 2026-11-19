@@ -1,10 +1,11 @@
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <cstdio>
 #include <initializer_list>
 using namespace fight;
 static int checks=0,failures=0;
 #define CHECK(x) do { ++checks; if(!(x)) {std::fprintf(stderr,"Wall FAIL %d: %s\n",__LINE__,#x);++failures;} } while(0)
-static Simulation fresh() {Simulation s;s.defaults();s.reset(5,4,0,0);return s;}
+static Simulation fresh() {Simulation s;legacy_fillet::defaults(s);s.reset(5,4,0,0);return s;}
 static void tick(Simulation& s,int n=1) {while(n-->0)s.step(0,0);}
 static int edge(Simulation& s,int p,int side) {
     auto b=s.box(p,PushBox);int half=(b.right-b.left)/2;

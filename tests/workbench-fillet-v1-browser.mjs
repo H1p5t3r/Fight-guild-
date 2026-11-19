@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {existsSync} from 'node:fs';
+import {mkdir,readFile} from 'node:fs/promises';
+import {serveWorkshopSite} from '../scripts/serve-workbench.mjs';
+import {ready,selectSection,seekMoveFrame} from './workbench-ui-helpers.mjs';
+const server=await serveWorkshopSite(0),browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
+try{
+ const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
+ page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(`http://127.0.0.1:${server.address().port}/`);await ready(page);
+ assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].extensions.params.bleedDuration),420);
+ await page.locator('[data-move="13"]').click();await selectSection(page,'mechanics');await ready(page);
+ let record=await page.evaluate(()=>moveWorkshop.preview());assert.ok(record.frames.some(f=>f.state.pairKind===3),'Wound setup reaches the real paired sequence');
+ assert.ok(record.frames.some(f=>f.state.players[1].bleedTime===420),'Wound releases into bleed');
+ await page.getByLabel('Initial grey life',{exact:true}).fill('23');await page.getByLabel('Initial grey life',{exact:true}).blur();await ready(page);
+ assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].extensions.params.bleedInitial),23);
+ await page.locator('[data-capture-move="45"]').click();await ready(page);
+ record=await page.evaluate(()=>moveWorkshop.preview());assert.ok(record.frames.some(f=>f.state.pairKind===2),'Cashout default setup includes owned bleed');
+ assert.equal(record.frames.at(-1).state.players[1].health,925);
+ await page.locator('[data-move="8"]').click();await selectSection(page,'hurt');await ready(page);await seekMoveFrame(page,3);
+ assert.equal(await page.evaluate(()=>moveWorkshop.preview().frames.find(f=>f.selectedFrame===3).boxes[0].hurt.length),1,'6P protection mask leaves only legs on frame 3');
+ const before=await page.evaluate(()=>moveWorkshop.data());
+ await page.getByLabel('head',{exact:true}).uncheck();await ready(page);
+ assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[8].extensions.hurtboxes.findLast(k=>k.frame<=3).boxes.head),undefined);
+ await page.locator('#undo').click();await ready(page);assert.deepEqual(await page.evaluate(()=>moveWorkshop.data()),before);
+ await selectSection(page,'routes');assert.equal(await page.locator('#field-normalRoutes').count(),0,'Ignored legacy gatling masks are absent');
+ await mkdir('build/fillet-v1-review',{recursive:true});await page.screenshot({path:'build/fillet-v1-review/editor-desktop.png'});
+ await page.setViewportSize({width:390,height:844});await selectSection(page,'mechanics');await ready(page);
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No mobile horizontal overflow');
+ await page.screenshot({path:'build/fillet-v1-review/editor-mobile.png',fullPage:true});
+ const download=page.waitForEvent('download');await page.locator('#export').click();await (await download).saveAs('build/fillet-v1-review/export.json');
+ assert.deepEqual(JSON.parse(await readFile('build/fillet-v1-review/export.json','utf8')),await page.evaluate(()=>moveWorkshop.data()));
+ assert.deepEqual(errors,[]);console.log('PASS Fillet v1 controls, exact body keys, paired preview, undo, export and mobile layout');
+}finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

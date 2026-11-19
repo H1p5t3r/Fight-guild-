@@ -1,3 +1,4 @@
+import {seedBaseline} from './workbench-ui-helpers.mjs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
@@ -8,7 +9,7 @@ const server=await serveWorkshop(0),browser=await chromium.launch({headless:true
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];
  page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
- await page.goto(`http://127.0.0.1:${server.address().port}/`);await page.locator('#field-startup').waitFor();await ready(page);
+ await seedBaseline(page);await page.goto(`http://127.0.0.1:${server.address().port}/`);await page.locator('#field-startup').waitFor();await ready(page);
  await page.locator('[data-move="13"]').click();await page.locator('#tab-mechanics').click();await ready(page);
  assert.equal(await page.locator('#field-mechanic').inputValue(),'2');
  await page.locator('#field-bleedInitial').fill('35');await page.locator('#field-bleedInitial').blur();await ready(page);

@@ -1,16 +1,18 @@
 #pragma once
+#include "extensions.h"
 
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 22, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 45, FIELD_COUNT = 138;
+constexpr int VERSION = 23, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 47, FIELD_COUNT = 138;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
               STAB_GROUND=30, STAB_AIR=31;
 constexpr int CLOSE_SLASH=32, HELD_GUARD=33, GUARD_ATTACK=34, STANCE_P=35, STANCE_K=36, STANCE_S=37, STANCE_HS=38, STANCE_EXIT=39, STANCE_THROW=40, AIR_BACK_THROW=41, AIR_FORWARD_THROW=42;
 constexpr int FAR_SLASH=2, SLASH_SWEEP=6; // Saved 5S and 2S slot IDs remain compatible.
-constexpr unsigned RULES_REVISION=1; // Bump for combat behavior changes without a data-layout change.
+constexpr unsigned RULES_REVISION=2; // Named routes, pair captures and shared throw tech.
+constexpr int VAULT_CASHOUT=45, SKIM_CASHOUT=46;
 constexpr int CHARGED_HS=43, CHARGED_D=44;
 constexpr int MIN_STARTUP = 5;
 constexpr int MAX_HURTBOXES = 4;
@@ -100,10 +102,19 @@ struct Fighter {
     int attack_serial, projectile_spawned, contact_count;
     int variant, tether_source, tether_used, bleed_source, bleed_time, bleed_clock, grey_life;
     int stance, guard_button, armor_left, bounce_ground, bounce_wall, crumple_time, grab_time, grab_owner, idle_time;
+    int capture_failed, contact_ticks, pair_recovery, pair_grace_pending, legacy_throw_gate_paid;
+    int dash_speed, coast_pending, coast_mode, root_y;
+    int display_move=-1, display_age, display_tick=-1;
+    int gait_distance, gait_phase;
     Sample history[HISTORY];
 };
 constexpr int MAX_PROJECTILES=16;
 struct Projectile { int life, owner, character, move, serial, x, y, vx, vy, facing, hits, cooldown, durability; };
+struct PairState {
+    int kind, owner, move, clock, origin_x, facing, victim_x, grey, down_pose;
+    int saved_age, ticks, release_freeze, owner_recovery, victim_recovery, grace, track, tech_ticks;
+    Move payload{};
+};
 struct State {
     int frame, remaining, hitstop, winner;
     int wall_break_time, wall_break_actor, wall_break_side, stage;
@@ -113,6 +124,7 @@ struct State {
     int foreground_player=-1; // Last confirmed attacker; saved with rollback state.
     Fighter players[2];
     Projectile projectiles[MAX_PROJECTILES];
+    PairState pair{};
     int version=VERSION; // Reject snapshots from a different core layout explicitly.
 };
 struct Rules {
@@ -135,6 +147,8 @@ public:
     Move moves[CHARACTER_COUNT][MOVE_COUNT]{};
     MoveHurt move_hurt[CHARACTER_COUNT][MOVE_COUNT][HURT_PHASES]{};
     MoveHit move_hit[CHARACTER_COUNT][MOVE_COUNT]{};
+    ActionExtension extensions[CHARACTER_COUNT][MOVE_COUNT]{};
+    CharacterExtension character_extensions[CHARACTER_COUNT]{};
     Mobility mobility[CHARACTER_COUNT]{};
     Rules rules{};
     void defaults();
@@ -150,9 +164,12 @@ public:
     int hit_get(int character, int move, int field) const;
     int hit_clear(int character, int move, int multi);
     int hit_add(int character, int move, const HitKey& key);
+    int extension_get(int character, int move, int field) const;
+    int extension_set(int character, int move, const int* values);
     // Authoring harness setup. Neither helper changes move configuration.
     int preview_place(int player, int x, int y, int momentum);
     int preview_begin(int player, int move);
+    int preview_status(int player, int status, int value);
     int rule_get(int field) const;
     int rule_set(int field, int value);
     int mobility_get(int character, int field) const;
@@ -165,6 +182,23 @@ public:
     static Box pose_box(int character, int phase, int pose, int index);
     static unsigned collision_hash();
 private:
+    bool extended(const Fighter& f) const { return character_extensions[f.character].v[CPolicy]==1; }
+    const int* extension(const Fighter& f) const { return extensions[f.character][f.move < 0 ? 0 : f.move].v; }
+    const int* extended_body(const Fighter& f,int offset=0) const;
+    bool named_route(int c,int from,int to,int route) const;
+    bool has_bleed(const Fighter& f) const;
+    int voluntary_speed(const Fighter& f,int speed,bool air=false) const;
+    bool passing(const Fighter& f) const;
+    bool lifted_action(const Fighter& f) const;
+    bool capture_eligible(const Fighter& f,const Fighter& target,int kind) const;
+    void start_pair(int owner,int kind,const Move& payload);
+    bool tick_pair();
+    void release_pair();
+    void tech_pair();
+    bool tech_input(Fighter& f);
+    void clear_pair_motion(Fighter& f);
+    void place_pair(int owner,int owner_x,int victim_x,int owner_y=0,int victim_y=0);
+    void pay_faultless(Fighter& f);
     Move effective_move(const Fighter& fighter) const;
     bool faultless_requested(const Fighter& fighter) const;
     bool stance_allowed(const Fighter& fighter, const Move& move) const;
@@ -183,7 +217,7 @@ private:
     bool cancel_window(const Fighter& fighter, int group) const;
     void gain_momentum(Fighter& fighter, int amount);
     void update_faultless(Fighter& fighter);
-    Box push_box(const Fighter& fighter) const;
+    Box push_box(const Fighter& fighter, int tick_offset=1) const;
     Box attack_box(const Fighter& fighter, int segment=0, int tick_offset=0) const;
     const HitKey* hit_key(const Fighter& fighter, int tick_offset=0) const;
     int attack_count(const Fighter& fighter, int tick_offset=0) const;
@@ -239,10 +273,14 @@ FG_EXPORT(fg_move_set) int fg_move_set(int character, int move, int field, int v
 FG_EXPORT(fg_hurt_get) int fg_hurt_get(int character, int move, int phase, int field);
 FG_EXPORT(fg_hit_get) int fg_hit_get(int character,int move,int field);
 FG_EXPORT(fg_hit_clear) int fg_hit_clear(int character,int move,int multi);
+FG_EXPORT(fg_extension_get) int fg_extension_get(int character,int move,int field);
+FG_EXPORT(fg_extension_buffer) void* fg_extension_buffer();
+FG_EXPORT(fg_extension_commit) int fg_extension_commit(int character,int move);
 FG_EXPORT(fg_hit_add) int fg_hit_add(int c,int m,int frame,int group,int count,int damage,int hitstun,int blockstun,int hitstop,
     int l0,int b0,int r0,int t0,int l1,int b1,int r1,int t1,int l2,int b2,int r2,int t2,int l3,int b3,int r3,int t3);
 FG_EXPORT(fg_preview_place) int fg_preview_place(int player,int x,int y,int momentum);
 FG_EXPORT(fg_preview_begin) int fg_preview_begin(int player,int move);
+FG_EXPORT(fg_preview_status) int fg_preview_status(int player,int status,int value);
 FG_EXPORT(fg_hurt_set) int fg_hurt_set(int character, int move, int phase, int count,
     int l0,int b0,int r0,int t0,int l1,int b1,int r1,int t1,
     int l2,int b2,int r2,int t2,int l3,int b3,int r3,int t3);

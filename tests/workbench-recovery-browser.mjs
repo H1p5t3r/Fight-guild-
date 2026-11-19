@@ -1,3 +1,5 @@
+import {legacyData} from './legacy-data.mjs';
+import {seedBaseline} from './workbench-ui-helpers.mjs';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
 import {readFile,mkdir} from 'node:fs/promises';
@@ -9,13 +11,13 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 try {
   const page=await browser.newPage({viewport:{width:1440,height:1060}}),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  const data=JSON.parse(await readFile('build/workbench-pack.json','utf8')).defaults;
+  const data=legacyData(JSON.parse(await readFile('build/workbench-pack.json','utf8')).defaults);
   Object.assign(data.characters[5].moves[0],{knockdown:1,knockdownFrames:12,wakeupFrames:20,launch:600,pushback:0,damage:1});
   await page.addInitScript(data=>{
     globalThis.WebAssembly=undefined;
     localStorage.setItem('fight-guild.move-workshop.v1',JSON.stringify({format:1,data,selection:{character:5,slot:0,tab:'hit'}}));
   },data);
-  await page.goto(url);await ready(page);
+  await seedBaseline(page);await page.goto(url);await ready(page);
   await page.locator('#test-gap').fill('0');await page.locator('#test-gap').dispatchEvent('change');
   await page.locator('#test-target').selectOption('3');
   await showDisplayOptions(page);for(const key of ['hit','hurt','distances'])await page.locator('#show-'+key).uncheck();

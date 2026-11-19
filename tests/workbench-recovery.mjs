@@ -1,8 +1,9 @@
+import {legacyPack,legacyData,stripExtensions} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {CombatPreview} from '../web/workbench/simulation.mjs';
-const pack=JSON.parse(await readFile('build/workbench-pack.json','utf8'));
+const shippedPack=JSON.parse(await readFile('build/workbench-pack.json','utf8')),pack=legacyPack(shippedPack);
 
 test('Every fighter uses back/soft and face-down/hard clips through the real preview simulation',()=>{
   const preview=new CombatPreview(pack);

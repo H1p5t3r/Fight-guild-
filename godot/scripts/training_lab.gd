@@ -52,6 +52,7 @@ func inputs(a: int, b: int) -> Vector2i:
 	return Vector2i(a, b)
 
 static func phase(model: CombatModel, fighter: Dictionary) -> String:
+	if fighter.get("pairRecovery", 0): return "RELEASE"
 	if fighter.get("prejumpTime", 0): return "PREJUMP"
 	if fighter.get("landingTime", 0): return "LAND"
 	if fighter.reaction != 0: return "DOWN" if fighter.reaction in [2, 3] else "REEL"
@@ -89,6 +90,7 @@ func observe(model: CombatModel, before: Dictionary, raw: Vector2i) -> void:
 		if incoming: gaps[p] = 0; chains[p] = bool(fighter.guarding)
 		if gaps[p] > TRACE_LENGTH: gaps[p] = 0; chains[p] = false
 		var label := phase(model, fighter)
+		if after.get("pairKind", 0): label = "PAIR"
 		if old.get("landingTime", 0) > 0: label = "LAND"
 		# The final recovery tick has just cleared the move in the core.
 		if fighter.move < 0 and old.move >= 0 and not incoming: label = "RECOVER"
@@ -100,6 +102,7 @@ func observe(model: CombatModel, before: Dictionary, raw: Vector2i) -> void:
 			"cancelMask": fighter.get("cancelMask", 0), "inputAge": fighter.get("inputAge", -1),
 			"damage": fighter.get("lastDamage", 0), "baseDamage": fighter.get("lastBaseDamage", 0), "scaling": fighter.get("damageScale", 100),
 			"gravity": fighter.gravityPercent, "slowHeld": fighter.get("counterSlowHeld", 0), "slowTime": fighter.get("counterSlowTime", 0)})
+		tick.players[-1].merge({"pairKind": after.get("pairKind", 0), "pairClock": after.get("pairClock", 0), "pairRecovery": fighter.get("pairRecovery", 0), "captureFailed": fighter.get("captureFailed", 0), "bleedTime": fighter.bleedTime, "greyLife": fighter.greyLife, "contactTicks": fighter.get("contactTicks", 0)})
 	trace.append(tick)
 	if trace.size() > TRACE_LENGTH: trace.pop_front()
 	if recording_now:

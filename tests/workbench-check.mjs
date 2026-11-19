@@ -1,3 +1,4 @@
+import {legacyPack,legacyData,stripExtensions} from './legacy-data.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
@@ -6,12 +7,12 @@ import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,attackBo
 import {SPECS,GROUPS} from '../web/workbench/specs.mjs';
 import {validateReferences,MAX_REFERENCE_DATA} from '../web/workbench/references.mjs';
 
-const pack=JSON.parse(await readFile(new URL('../build/workbench-pack.json',import.meta.url),'utf8'));
+const shippedPack=JSON.parse(await readFile(new URL('../build/workbench-pack.json',import.meta.url),'utf8')),pack=legacyPack(shippedPack);
 const wasm=await WebAssembly.compile(await readFile(new URL('../web/generated/fight.wasm',import.meta.url)));
 const engine=async()=>new Engine(await WebAssembly.instantiate(wasm));
 
 test('Shipped data and each editable field match the current combat core',async()=>{
-  const e=await engine();assert.deepEqual(pack.defaults,e.data());
+  const e=await engine();assert.deepEqual(shippedPack.defaults,e.data());
   const controls=GROUPS.flatMap(g=>g.fields);
   assert.equal(new Set(controls).size,controls.length);
   assert.deepEqual(FIELDS.filter(k=>!controls.includes(k)),['wallDamage','smearMode','smearPart','smearStretch','smearFrame1','smearFrame2','smearFrame3','smearFrame4']); // inactive compatibility slots
@@ -75,6 +76,23 @@ test('Undo, redo, reset and import keep independent art notes and unknown data',
   assert.match(w.brief(),/literal art notes/);w.undo();assert.equal(w.snapshot().futureMetadata,undefined);
 });
 
+test('Resetting an older Fillet draft cannot install part of the new kit',()=>{
+  const w=new Workshop(shippedPack,legacyData(shippedPack.defaults));
+  const before=w.snapshot();
+  w.change(5,0,'damage',77);w.setNote(5,0,'active','Keep this older pose direction.');
+  w.resetMove(5,0);w.resetMove(5,45);w.resetMovement(5);
+  const data=JSON.parse(w.export()),fillet=data.characters[5];
+  assert.deepEqual(fillet.moves[0],before.characters[5].moves[0]);
+  assert.equal(fillet.extensions,undefined);assert.ok(fillet.moves.every(m=>!m.extensions));
+  assert.ok(fillet.moves.slice(45).every(m=>!m.enabled));
+  assert.deepEqual(fillet.movement,before.characters[5].movement);
+  assert.equal(w.note(5,0).active,'Keep this older pose direction.');
+  const current=new Workshop(shippedPack);
+  current.change(5,0,'damage',77);current.resetMove(5,0);
+  assert.deepEqual(current.move(5,0),shippedPack.defaults.characters[5].moves[0]);
+  assert.ok(current.data.characters[5].extensions);
+});
+
 test('Pose references travel with JSON, count as edits and survive stat resets and history',()=>{
   const w=new Workshop(pack),png='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScLbtAAAAABJRU5ErkJggg==';
   const ref={id:'pose-1',phase:'windup',caption:'Rear foot planted',name:'stance.png',src:png};
@@ -97,10 +115,10 @@ test('Pose references travel with JSON, count as edits and survive stat resets a
 });
 
 test('Per-attack hurtboxes migrate, export, affect the engine and reject invalid profiles atomically',async()=>{
-  const w=new Workshop(pack),legacy=w.snapshot();legacy.schema=legacy.coreVersion=12;
+  const w=new Workshop(pack),legacy=w.snapshot();legacy.schema=legacy.coreVersion=12;stripExtensions(legacy);
   for(const c of legacy.characters)for(const m of c.moves)delete m.hurtboxes;
   legacy.characters[5].moves[0].damage=77;legacy[META]={version:1,notes:{'Fillet/5P':{windup:'Keep these old notes.'}}};
-  const migrated=new Workshop(pack,legacy);assert.equal(migrated.data.schema,22);assert.equal(migrated.move(5,0).damage,77);assert.deepEqual(migrated.move(5,0).hurtboxes,{});assert.equal(migrated.note(5,0).windup,'Keep these old notes.');
+  const migrated=new Workshop(pack,legacy);assert.equal(migrated.data.schema,23);assert.equal(migrated.move(5,0).damage,77);assert.deepEqual(migrated.move(5,0).hurtboxes,{});assert.equal(migrated.note(5,0).windup,'Keep these old notes.');
   const active=defaultHurtboxes(pack,5,w.move(5,0),5);active.torsoArms=[-2000,6000,4000,11000];delete active.extension;
   w.setHurtPhase(5,0,'active',active);assert.equal(w.changed(5,0),true);assert.deepEqual(w.move(5,4).hurtboxes,{});
   const e=await engine(),fingerprint=e.fingerprint();e.loadData(JSON.parse(w.export()));assert.notEqual(e.fingerprint(),fingerprint);
@@ -120,7 +138,7 @@ test('Straight, throw and both diagonal hook previews use the core collision geo
   // Rebind each tested slot to 5P, disabling the other slots. This exercises the
   // real simulation at every active frame without needing test-only core APIs.
   for(const [c,slot] of [[5,0],[5,23],[4,28],[4,29]]){
-    const e=await engine(),data=e.data(),m=data.characters[c].moves[slot];
+    const e=await engine(),data=legacyData(e.data()),m=data.characters[c].moves[slot];
     for(const move of data.characters[c].moves)move.enabled=0;
     Object.assign(m,{enabled:1,button:0,direction:5,motion:0,air:0,category:slot===23?4:2,followFrom:-1,followFrom2:-1});
     e.loadData(data);e.reset([c,0]);e.step(slot===23?INPUT.left|INPUT.P|INPUT.K:INPUT.P,0);assert.equal(e.state().players[0].move,slot);

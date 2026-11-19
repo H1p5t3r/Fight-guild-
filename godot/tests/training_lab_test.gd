@@ -8,7 +8,7 @@ func _initialize() -> void:
 	call_deferred("run")
 
 func run() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	model.reset()
 	var lab := TrainingLab.new()
 	lab.start_recording(model)

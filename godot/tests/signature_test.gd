@@ -7,11 +7,12 @@ func check(ok: bool, message: String) -> void:
 		printerr(message)
 
 func _initialize() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	var original := model.data()
 	var legacy := original.duplicate(true)
 	legacy.schema = 6
 	legacy.coreVersion = 6
+	LegacyFixture.strip_extensions(legacy)
 	for character in legacy.characters:
 		character.moves.resize(25)
 		character.erase("movement")
@@ -29,7 +30,7 @@ func _initialize() -> void:
 	var fingerprint := model.fingerprint()
 	var file := "user://test-signatures.json"
 	check(model.save_file(file).is_empty(), "Signature save failed")
-	model.restore_defaults()
+	LegacyFixture.reset(model)
 	check(model.load_file(file).is_empty() and model.fingerprint() == fingerprint, "Movement / signatures did not round trip")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(file))
 	for field in ["forwardStyle", "runSpeed", "stepFrames"]:
@@ -48,8 +49,8 @@ func _initialize() -> void:
 
 func verify_hook_rollback(air: bool) -> void:
 	for delay in [1, 8, 12]:
-		var reference := CombatModel.new()
-		var predicted := CombatModel.new()
+		var reference := LegacyFixture.create()
+		var predicted := LegacyFixture.create()
 		reference.reset([4, 5])
 		predicted.reset([4, 5])
 		var session := RollbackSession.new(predicted)

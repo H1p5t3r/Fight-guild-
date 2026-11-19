@@ -39,7 +39,7 @@ export function createServer() {
         const msg=JSON.parse(bytes.toString());
         if(msg.type==='host'||msg.type==='join') {
           if(socket.room) throw new Error('Already in a room');
-          if(typeof msg.fingerprint!=='string'||!/^\d+-[0-9a-f]{8}$/.test(msg.fingerprint)) throw new Error('Invalid rules fingerprint');
+          if(typeof msg.fingerprint!=='string'||!/^\d+-[0-9a-f]{8}(?:-[0-9a-f]{8})?$/.test(msg.fingerprint)) throw new Error('Invalid rules fingerprint');
           if(![0,1].includes(msg.character)||typeof msg.simple!=='boolean') throw new Error('Invalid fighter selection');
           if(msg.type==='host') {
             if(rooms.size>=100) throw new Error('Server is full');

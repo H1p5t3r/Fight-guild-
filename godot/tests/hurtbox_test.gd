@@ -7,7 +7,7 @@ func check(condition: bool, description: String) -> void:
 		printerr(description)
 
 func _initialize() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	var original := model.data()
 	var original_hash := model.fingerprint()
 	var edited := original.duplicate(true)
@@ -45,12 +45,13 @@ func _initialize() -> void:
 	check(not model.load_data(invalid).is_empty() and model.fingerprint() == custom_hash, "Subpixel hurtbox accepted")
 	var saved := "user://hurtbox-roundtrip-test.json"
 	check(model.save_file(saved).is_empty(), "Hurtbox save failed")
-	model.restore_defaults()
+	LegacyFixture.reset(model)
 	check(model.load_file(saved).is_empty() and model.fingerprint() == custom_hash, "Hurtbox save/load lost data")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(saved))
 	var legacy := original.duplicate(true)
 	legacy.schema = 12
 	legacy.coreVersion = 12
+	LegacyFixture.strip_extensions(legacy)
 	legacy.characters[5].moves[0].damage = 77
 	for character in legacy.characters:
 		character.moves.resize(32)

@@ -1,10 +1,11 @@
+import {legacyPack} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {Workshop,blockAdvantage,inputName} from '../web/workbench/model.mjs';
 import {CombatPreview} from '../web/workbench/simulation.mjs';
 const json=async p=>JSON.parse(await readFile(p,'utf8'));
-const pack=await json('build/workbench-pack.json');
+const pack=legacyPack(await json('build/workbench-pack.json'));
 
 test('Latest Smoke upload keeps every tuning value, note and photo except four new art selectors',async()=>{
  const raw=await json('godot/data/workshop/2026-11-18-user-smoke/FightGuild-moves-2026-11-18.json');
@@ -14,7 +15,7 @@ test('Latest Smoke upload keeps every tuning value, note and photo except four n
  // This is the historical sprite pass. Current tuning lineage is checked by
  // workbench-slash-sweep, including preserved notes/photos and the changed 2S.
  const w=new Workshop(pack,raw);
- assert.deepEqual(new Workshop(pack,JSON.parse(w.export())).data,raw);
+ assert.deepEqual(new Workshop(pack,JSON.parse(w.export())).data,w.data);
  const art=pack.art[2];
  assert.deepEqual(art.projectile_variants['14'],art.projectile_variants['25']);
  assert.equal(art.attack_animation.frames.length,32);
@@ -44,7 +45,7 @@ test('Backdraft uses all eight keys with one hit; pillar clocks and special art 
 
 test('Smoke source timing, independent hits and charged slots survive workshop/core round trips',()=>{
  const w=new Workshop(pack,pack.draft.data),c=w.data.characters[2];
- assert.equal(w.data.schema,22);assert.equal(c.moves.length,45);
+ assert.equal(w.data.schema,23);assert.equal(c.moves.length,47);
  assert.equal(blockAdvantage(c.moves[2]),-7);assert.equal(blockAdvantage(c.moves[3]),-4);
  assert.equal(blockAdvantage(c.moves[43]),12);
  assert.equal(inputName(c.moves[32]),'c.S');assert.equal(inputName(c.moves[2]),'f.S');assert.equal(inputName(c.moves[43]),'6[Hs]');

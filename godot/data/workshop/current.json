@@ -1,11 +1,11 @@
 {
-  "label": "Close/far Slash + universal 2S sweeps · 19 November 2026",
-  "status": "playable tuning iteration",
-  "file": "2026-11-19-slash-sweeps/FightGuild-Slash-Sweeps.json",
-  "sha256": "694db863a698510ddbedb8fb2ffc1ac20d7c9809be5994da36b503f2b1801510",
+  "label": "Fillet v1 · Wound, bleed and paired cashouts",
+  "status": "mechanics implemented; sprite review in progress",
+  "file": "2026-11-19-fillet-v1/FightGuild-Fillet-v1.json",
+  "sha256": "fa3b022bd32838b13dae908b728a39012afdb2563f8f40968800392bf593c36c",
   "sourceFile": "2026-11-19-user/FightGuild-moves-2026-11-19.json",
   "sourceSha256": "8a0010d12bc4251d2acf6fd5740f75e388e8596c587dcf2c1b43d12eaa1d7042",
-  "previousFile": "2026-11-18-shark/FightGuild-Shark-Normals.json",
-  "baseCommit": "a9b3bad",
-  "note": "Latest user export preserved unchanged. Only standing Slash proximity, previously disabled c.S slots and 2S sweep tuning change; art briefs are appended. Existing c.S tuning, other moves, movement, rules and all pose references are preserved."
+  "previousFile": "2026-11-19-slash-sweeps/FightGuild-Slash-Sweeps.json",
+  "baseCommit": "cd8b0ce",
+  "note": "Complete selected Fillet v1 mechanics. All other fighter tuning, user notes and pose references are preserved; two disabled stable slots appended. Shared ground throw tech and legal jump before FD apply across the cast. New art requires the established review process; f.S direction B selected."
 }

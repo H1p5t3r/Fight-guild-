@@ -1,0 +1,21 @@
+Create a corrected sprite motion study for Fillet's f.S, using B / Hip-led from the supplied motion-options board and the exact character identity from Model Reference 06. The third reference is a rejected first sprite study: it is useful only for the atlas arrangement, NOT the insufficient reach or stiff torso.
+
+Transparent background. Exactly 8 complete full-body poses, in a clean 4-column by 2-row sprite atlas. Large equal cells with generous transparent padding so every knife tip remains fully inside its own cell. No typography, no guides, no arrows, no floor or shadows. All face screen RIGHT at the same orthographic 2D gameplay angle and same scale. Camera and root ground anchor stay constant in every cell.
+
+CRITICAL ART CORRECTIONS: slender arms and wrists, mature athletic adult woman, strong legs, short black windswept hair, red armor on anatomical LEFT shoulder, ivory rolled sleeves, red corset, torn ivory/red apron, charcoal trousers, brown gloves and boots. RIGHT anatomical hand has the long curved butcher knife, LEFT hand has a short knife held close to sternum. The long knife must visibly remain almost twice the short knife length, same fixed weapon in all poses. No limb stretching, no weapon morphing, no smear trails.
+
+Motion must have clearly changing hip and shoulder rotation, natural compression and release, relaxed fingers, and believable weight transfer. Deep wide planted A/Stalker footing, front LEFT foot supporting at reach, rear RIGHT heel releasing slightly as pelvis turns. Do not produce eight near-identical arm poses. The chest twists around the planted pelvis. Head stays roughly over the pelvis, looking toward target, with aggressive intent.
+
+Very important spatial proportions, using character standing stature = 150 units: planted feet span x=-54 to +60 about ground root x=0; torso is roughly x=-36 to +35, head x=+5 to +32; attack hand reaches x=80 and the long RIGHT knife extends horizontally to x=125 at height 90-105. Thus the horizontal root-to-tip reach at full extension is approximately 0.83 of the full standing height (not 0.5 as in the rejected atlas). Reach comes from the right shoulder at x=32, upper arm 24, forearm 24, long knife 43; elbow nearly straight at contact. Keep both limbs slender; the arm reaches FORWARD in the picture plane, not toward the camera. Short left knife stays back near the sternum. Long right blade does not change length.
+
+Pose order:
+1 entry, wide low Stalker stance, long right knife low behind hip, short left guarding;
+2 anticipation, hip compression counterrotates the right shoulder back, right elbow coils beside waist;
+3 pre-contact, hip turns first and long right arm unfolds forward almost to full reach;
+4 contact, fully extended slender right arm AND long blade horizontal to x125, torso twist and forward weight over left foot, head only slightly forward; whole knife shown with wide cell padding;
+5 follow-through, maintain the full forward blade corridor while pelvis and torso finish turning, rear heel lifted, cloth follows;
+6 recovery, right elbow starts to fold, blade remains horizontal but tip retracts modestly;
+7 retract, elbow folds toward waist then wrist lowers, weight rolls back between feet;
+8 return to exact starting Stalker silhouette, with cloth settling.
+
+Crisp dark contour, clean flat cel shading, restrained specular knife highlights, identical crimson/ivory/charcoal palette throughout. Premium anime fighting-game sprite quality, fluid believable body mechanics, grounded camera consistency.

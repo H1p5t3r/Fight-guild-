@@ -1,3 +1,4 @@
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <cstdio>
 #include <cstring>
@@ -19,7 +20,7 @@ static void flush(Simulation& s,bool mirror=false,bool corner=false) {
     s.world.players[0].x=s.world.players[1].x+(mirror?1:-1)*(a+b);
 }
 static void poses() {
-    Simulation s; s.defaults();
+    Simulation s; legacy_fillet::defaults(s);
     CHECK(Simulation::collision_hash()!=0);
     for(int c=0;c<6;++c) for(int phase=0;phase<(c>=4?8:3);++phase) for(int p=0;p<(phase==0?12:phase<=2?6:phase<=4?4:phase==5?1:8);++p) {
         int count=Simulation::pose_box_count(c,phase,p);
@@ -91,7 +92,7 @@ static void poses() {
 }
 static void pushes() {
     for(int c=0;c<6;++c) for(int d=0;d<6;++d) for(int mirror=0;mirror<2;++mirror) {
-        Simulation s; s.defaults(); s.reset(c,d,0,0); flush(s,mirror);
+        Simulation s; legacy_fillet::defaults(s); s.reset(c,d,0,0); flush(s,mirror);
         int toward=mirror?Left:Right,other_toward=mirror?Right:Left;
         for(int i=0;i<80;++i) { s.step(toward|(i%12==0?Dash:0),other_toward); spaced(s); }
         // Largest legal advancing move cannot tunnel, even when it would end past the other center.
@@ -115,7 +116,7 @@ static void pushes() {
     }
 }
 static void contact_and_weapons() {
-    Simulation s; s.defaults();
+    Simulation s; legacy_fillet::defaults(s);
     for(int c=0;c<6;++c) for(int slot=0;slot<5;++slot) {
         int m=slot==4?13:slot; if(slot==2)m=CLOSE_SLASH;
         s.reset(c,(c+1)%6,0,0); flush(s);
@@ -132,7 +133,7 @@ static void contact_and_weapons() {
     // Contact with Anvil's extended P shield alone cannot hurt him. A tiny probe
     // through the head can. Mirror the entire setup to catch anchor/flip mistakes.
     for(int mirror=0;mirror<2;++mirror) for(int body=0;body<2;++body) {
-        s.defaults(); s.reset(1,0,0,0);
+        legacy_fillet::defaults(s); s.reset(1,0,0,0);
         auto& attacker=s.world.players[0]; auto& defender=s.world.players[1];
         attacker.x=mirror?30000:70000; attacker.facing=mirror?1:-1;
         defender.x=50000; defender.facing=mirror?-1:1; defender.move=0; defender.age=6; defender.hit_done=1;
@@ -153,7 +154,7 @@ static void contact_and_weapons() {
     }
 }
 static void edited_attack_hurtboxes() {
-    Simulation s; s.defaults();s.reset(5,0,0,0);
+    Simulation s; legacy_fillet::defaults(s);s.reset(5,0,0,0);
     Box high[4]={{-1000,30000,1000,33000},{-1200,33000,1200,36000},{-800,36000,800,38000},{1000,34000,3000,35000}};
     CHECK(s.hurt_set(5,0,0,3,high));CHECK(s.hurt_set(5,0,1,4,high));CHECK(s.hurt_set(5,0,2,3,high));
     auto& f=s.world.players[0];f.move=0;
@@ -171,7 +172,7 @@ static void edited_attack_hurtboxes() {
     // Collision uses the defender's current action tick, including the exact
     // startup→active boundary. A replay with custom data gives the same result.
     for(int mirror=0;mirror<2;++mirror)for(int enters_active=0;enters_active<2;++enters_active){
-        s.defaults();s.reset(0,5,0,0);auto& a=s.world.players[0];auto& d=s.world.players[1];
+        legacy_fillet::defaults(s);s.reset(0,5,0,0);auto& a=s.world.players[0];auto& d=s.world.players[1];
         a.x=mirror?70000:30000;a.facing=mirror?-1:1;d.x=50000;d.facing=-a.facing;
         CHECK(s.hurt_set(5,0,0,3,high));
         Box low[4]={high[0],high[1],high[2],high[3]};low[0]={-1000,0,1000,6000};
@@ -181,12 +182,12 @@ static void edited_attack_hurtboxes() {
         State before=s.world;s.step(0,0);CHECK((d.health<1000)==bool(enters_active));auto hash=s.checksum();
         s.world=before;s.step(0,0);CHECK(s.checksum()==hash);
     }
-    s.defaults();CHECK(s.hurt_get(5,0,1,0)==0);
+    legacy_fillet::defaults(s);CHECK(s.hurt_get(5,0,1,0)==0);
 }
 static void phased_hurtbox_toggles() {
     const Box body[4]={{-1000,0,1000,5000},{-1200,5000,1200,11000},{-800,11000,800,14000},{1200,7000,3000,9000}};
     for(int c=0;c<CHARACTER_COUNT;++c) {
-        Simulation s;s.defaults();s.reset(c,0,0,0);auto& f=s.world.players[0];f.move=8;
+        Simulation s;legacy_fillet::defaults(s);s.reset(c,0,0,0);auto& f=s.world.players[0];f.move=8;
         for(int p=0;p<3;++p) CHECK(s.hurt_set(c,8,p,4,body));
         for(int phase=0;phase<3;++phase) {
             f.age=phase==0?1:phase==1?s.moves[c][8].v[Startup]:s.moves[c][8].v[Startup]+s.moves[c][8].v[Active];
@@ -201,7 +202,7 @@ static void phased_hurtbox_toggles() {
         CHECK(s.hurt_get(c,8,0,6)==5000); // Disabled coordinates are never erased.
         CHECK(!s.move_set(c,8,HurtMaskWindup,16));CHECK(!s.move_set(c,8,HurtMaskActive,-1));
         for(int phase=0;phase<3;++phase)for(int low=0;low<2;++low)for(int projectile=0;projectile<2;++projectile) {
-            s.defaults();s.reset(0,c,0,0);auto& a=s.world.players[0];auto& d=s.world.players[1];
+            legacy_fillet::defaults(s);s.reset(0,c,0,0);auto& a=s.world.players[0];auto& d=s.world.players[1];
             a.x=30000;d.x=50000;a.facing=1;d.facing=-1;d.move=8;
             for(int p=0;p<3;++p)CHECK(s.hurt_set(c,8,p,4,body));
             auto& defend=s.moves[c][8];defend.v[Advance]=0;defend.v[TravelSpeed]=0;

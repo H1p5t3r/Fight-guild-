@@ -28,7 +28,7 @@ try{
     return [frame.file??sheet.file,art[frame.effect.sheet].file];
   });
   assert.ok(backdraftFiles.every(file=>typeof images[file]==='string'),'Current Backdraft art must be included in the delivery');
-  assert.equal(initial.schema,22);assert.equal(initial.characters.length,6);
+  assert.equal(initial.schema,23);assert.equal(initial.characters.length,6);
   assert.ok((await stat('build/move-workshop/index.html')).size<64000,'The entry page must stay small');
   assert.ok(requests.filter(r=>r.url.endsWith('.webp')).length<Object.keys(images).length,'Artwork must load on demand');
   assert.ok(Object.values(images).every(src=>/^assets\/[a-f0-9]{64}\.webp$/.test(src)),'Art URLs must be relative and versioned');
@@ -40,7 +40,10 @@ try{
   })));
   assert.ok(dimensions.every(([,w,h])=>w>0&&h>0));
   await page.locator('#field-startup').fill('8');await page.locator('#field-startup').blur();await ready(page);
-  await page.locator('#tab-hit').click();await seekMoveFrame(page,8);await dragHandle(page,'base','reach',12);
+  await page.locator('#tab-hit').click();await seekMoveFrame(page,8);
+  const hitTrack=structuredClone((await data(page)).characters[5].moves[0].hitboxTimeline);
+  await dragHandle(page,'hit-key',2,12);
+  assert.notDeepEqual((await data(page)).characters[5].moves[0].hitboxTimeline,hitTrack,'Dragging must edit the shipped active-frame hitbox');
   await page.locator('#tab-art').click();await page.locator('#note-active').fill('Keep the hosted draft and pose reference.');
   await page.locator('#reference-file').setInputFiles('art/characters/fillet.png');await page.locator('.reference-card').waitFor();
   const edited=await data(page);

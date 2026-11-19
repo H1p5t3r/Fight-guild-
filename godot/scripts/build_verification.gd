@@ -467,9 +467,25 @@ func verify_signatures() -> void:
 	key(KEY_D, true); ticks(1)
 	key(KEY_S, false); key(KEY_K, true); ticks(1)
 	key(KEY_K, false); key(KEY_D, false)
-	check(game.model.state().players[0].move == 25 and game.arena.sprites[0].get_meta("phase") == "signature_windup", "Keyboard 236K / signature windup failed")
+	var dedicated_art: bool = game.model.move(5, 25).artPose > 0
+	check(game.model.state().players[0].move == 25 and game.arena.sprites[0].get_meta("phase") == ("signature_windup" if dedicated_art else "windup"), "Keyboard 236K / selected windup failed")
 	ticks(game.model.move(5, 25).startup - 1)
-	check(game.arena.sprites[0].get_meta("phase") == "signature_active", "Signature active art did not follow combat timing")
+	check(game.arena.sprites[0].get_meta("phase") == ("signature_active" if dedicated_art else "active"), "Selected active art did not follow combat timing")
+	game.edit_character.select(5)
+	game.edit_move.select(0)
+	game.populate_editor()
+	game.show_kit_editor()
+	await tree.process_frame
+	var kit_open := false
+	for child in game.get_children():
+		if child is KitEditor:
+			kit_open = true
+			var prior_kit: String = game.model.fingerprint()
+			child.apply_changes()
+			check(game.model.fingerprint() == prior_kit, "Kit dialog changed unchanged parameters or metadata")
+			game.close_dialog(child)
+	check(kit_open, "Native kit controls did not open")
+	await tree.process_frame
 	game.model.reset([4, 5])
 	game.model.step(4, 0); game.model.step(5, 0); game.model.step(65, 0)
 	for _tick in 20: game.model.step(0, 0)

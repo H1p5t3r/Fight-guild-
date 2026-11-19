@@ -1,3 +1,4 @@
+import {legacyPack,legacyData,stripExtensions} from './legacy-data.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -6,7 +7,7 @@ import {FIELD_GROUPS,inactiveReason,groupEnabled} from '../web/workbench/field-l
 import {MOVEMENT_GROUPS,movementInactiveReason} from '../web/workbench/movement-editor.mjs';
 import {driveKit} from '../web/workbench/drive-editor.mjs';
 import {findSettings,SETTING_INDEX} from '../web/workbench/setting-search.mjs';
-const pack=JSON.parse(await readFile(new URL('../build/workbench-pack.json',import.meta.url),'utf8'));
+const shippedPack=JSON.parse(await readFile(new URL('../build/workbench-pack.json',import.meta.url),'utf8')),pack=legacyPack(shippedPack);
 
 test('Every active movement control and relocated move setting stays discoverable',()=>{
  const movement=MOVEMENT_GROUPS.flatMap(([, ,fields])=>fields.map(([key])=>key));

@@ -8,12 +8,13 @@ func _initialize() -> void:
 	call_deferred("run")
 
 func run() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	var defaults := model.data()
-	check(defaults.schema == 22 and model.move(5, 0).starterProration == 70, "New default tuning missing")
+	check(defaults.schema == 23 and model.move(5, 0).starterProration == 70, "New default tuning missing")
 	var legacy := defaults.duplicate(true)
 	legacy.schema = 7
 	legacy.coreVersion = 7
+	LegacyFixture.strip_extensions(legacy)
 	legacy.erase("tuningRules")
 	legacy.momentumRules.fdDrain = 17
 	legacy.characters[5].moves[0].damage = 123
@@ -31,6 +32,7 @@ func run() -> void:
 	var version8 := defaults.duplicate(true)
 	version8.schema = 8
 	version8.coreVersion = 8
+	LegacyFixture.strip_extensions(version8)
 	for character in version8.characters: character.moves.resize(32)
 	version8.erase("jumpRules")
 	version8.tuningRules.throwGraceFrames = 7

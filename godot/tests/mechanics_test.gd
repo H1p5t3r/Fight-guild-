@@ -5,7 +5,7 @@ func check(value: bool, message: String) -> void:
 func _initialize() -> void:
 	var model := CombatModel.new()
 	var batch: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/workshop/current.json"))
-	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/workshop/" + batch.file))
+	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/workshop/2026-11-19-slash-sweeps/FightGuild-Slash-Sweeps.json"))
 	check(model.load_data(source).is_empty(), "Mechanic migration failed")
 	check(model.move(5, 13).mechanic == 2 and model.move(4, 22).mechanic == 1, "Migrated Drives missing")
 	check(model.move(5, 13).bleedDuration == 420, "Bleed timeout default missing")

@@ -7,12 +7,13 @@ func check(ok: bool, message: String) -> void:
 func _initialize() -> void: call_deferred("run")
 
 func run() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	var defaults := model.data()
-	check(defaults.schema == 22 and defaults.recoveryRules.wallBreakFrames == 150, "New wall timing/schema missing")
+	check(defaults.schema == 23 and defaults.recoveryRules.wallBreakFrames == 150, "New wall timing/schema missing")
 	var legacy := defaults.duplicate(true)
 	legacy.schema = 11
 	legacy.coreVersion = 11
+	LegacyFixture.strip_extensions(legacy)
 	for character in legacy.characters: character.moves.resize(32)
 	legacy.recoveryRules.wallBreakFrames = 91
 	legacy.characters[5].moves[0].damage = 133

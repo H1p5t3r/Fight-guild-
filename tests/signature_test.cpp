@@ -1,3 +1,4 @@
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <cstdio>
 #include <initializer_list>
@@ -7,7 +8,7 @@ static int checks=0,failures=0;
 static void ticks(Simulation& s,int n,int a=0,int b=0) { for(int i=0;i<n;++i) s.step(a,b); }
 static void thaw(Simulation& s) { while(s.world.hitstop) s.step(0,0); }
 static void fresh(Simulation& s,int c=5,bool mirror=false) {
-    s.defaults();s.reset(c,c==5?4:5,0,0);
+    legacy_fillet::defaults(s);s.reset(c,c==5?4:5,0,0);
     s.world.players[0].x=mirror?80000:20000;s.world.players[1].x=mirror?20000:80000;
     s.world.players[0].facing=mirror?-1:1;s.world.players[1].facing=mirror?1:-1;
 }
@@ -123,7 +124,7 @@ static void hooks() {
 }
 static void rekka_hits() {
     for(bool skip:{false,true}) {
-        Simulation s;s.defaults();s.reset(5,4,0,0);s.world.players[1].x=48000;
+        Simulation s;legacy_fillet::defaults(s);s.reset(5,4,0,0);s.world.players[1].x=48000;
         motion(s,S);int stage=0,highest=0;
         for(int tick=0;tick<80;++tick) {
             int input=0;
@@ -136,7 +137,7 @@ static void rekka_hits() {
         CHECK(highest==(skip?2:3));CHECK(s.world.players[1].health==(skip?930:911));
     }
     for(bool crouch:{false,true}) {
-        Simulation s;s.defaults();s.reset(5,4,0,0);s.world.players[1].x=48000;
+        Simulation s;legacy_fillet::defaults(s);s.reset(5,4,0,0);s.world.players[1].x=48000;
         auto& a=s.world.players[0];a.move=REKKA_LOW;a.age=s.moves[5][REKKA_LOW].v[Startup]-1;
         s.step(0,Right|(crouch?Down:0));CHECK(bool(s.world.players[1].guarding)==crouch);
         CHECK(s.world.players[1].health==(crouch?997:955));

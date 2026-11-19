@@ -1,0 +1,3606 @@
+{
+  "status": "selected_for_implementation",
+  "purpose": "Authoritative selected movement, body, transition and paired-animation contract for the complete Fillet implementation. The user delegated remaining choices and will review after implementation.",
+  "mobility42": {
+    "forwardStyle": 0,
+    "walkSpeed": 380,
+    "runSpeed": 1120,
+    "runAcceleration": 120,
+    "stepSpeed": 850,
+    "stepFrames": 10,
+    "backSpeed": 850,
+    "backFrames": 10,
+    "attackFriction": 90,
+    "backStyle": 1,
+    "backWalkSpeed": 380,
+    "backRunSpeed": 500,
+    "jumpSpeed": 1450,
+    "jumpForwardSpeed": 380,
+    "jumpBackSpeed": 380,
+    "gravity": 85,
+    "airJumps": 0,
+    "prejumpFrames": 4,
+    "airDashEnabled": 1,
+    "airBackdashEnabled": 0,
+    "airDashStyle": 1,
+    "airBackdashStyle": 1,
+    "airDashSpeed": 2000,
+    "airBackdashSpeed": 700,
+    "airDashFrames": 5,
+    "airBackdashFrames": 12,
+    "airDashUses": 1,
+    "hoverHeight": 1800,
+    "hoverRiseSpeed": 300,
+    "teleportDistance": 20000,
+    "backTeleportDistance": 15000,
+    "teleportStartup": 5,
+    "fdEnabled": 1,
+    "fdPushPercent": 300,
+    "fdDrain": 25,
+    "fdAirDrain": 50,
+    "fdBlockCost": 250,
+    "smearMode": 0,
+    "smearPart": 3,
+    "smearStretch": 150,
+    "airDashPauseFrames": 4,
+    "airBackdashPauseFrames": 4
+  },
+  "mobilityFieldTable": [
+    {
+      "name": "forwardStyle",
+      "unit": "integer enum/count/flag",
+      "starter": 0,
+      "currentSavedBatch": 0,
+      "prototypeTarget": 0,
+      "status": "selected_for_v1_implementation",
+      "notes": "0 = accelerating ground run; 1 step, 2 hover, 3 teleport."
+    },
+    {
+      "name": "walkSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 380,
+      "currentSavedBatch": 380,
+      "prototypeTarget": 380,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "runSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 1120,
+      "currentSavedBatch": 1120,
+      "prototypeTarget": 1120,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "runAcceleration",
+      "unit": "0.01 world pixel per actor action tick squared",
+      "starter": 120,
+      "currentSavedBatch": 120,
+      "prototypeTarget": 120,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "stepSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 850,
+      "currentSavedBatch": 850,
+      "prototypeTarget": 850,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored but unused for Fillet forwardStyle=0."
+    },
+    {
+      "name": "stepFrames",
+      "unit": "actor action ticks; -1 inherits global rule where supported",
+      "starter": 10,
+      "currentSavedBatch": 10,
+      "prototypeTarget": 10,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored but unused for Fillet forwardStyle=0."
+    },
+    {
+      "name": "backSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 850,
+      "currentSavedBatch": 850,
+      "prototypeTarget": 850,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "backFrames",
+      "unit": "actor action ticks; -1 inherits global rule where supported",
+      "starter": 10,
+      "currentSavedBatch": 10,
+      "prototypeTarget": 10,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "attackFriction",
+      "unit": "0.01 world pixel per actor action tick squared",
+      "starter": 45,
+      "currentSavedBatch": 45,
+      "prototypeTarget": 90,
+      "status": "selected_for_v1_implementation",
+      "notes": "Selected rule doubles linear attack drag from 45 to 90; applies after translation on every attack action tick, including airborne attacks."
+    },
+    {
+      "name": "backStyle",
+      "unit": "integer enum/count/flag",
+      "starter": 1,
+      "currentSavedBatch": 1,
+      "prototypeTarget": 1,
+      "status": "selected_for_v1_implementation",
+      "notes": "1 = fixed-distance grounded step backdash."
+    },
+    {
+      "name": "backWalkSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 380,
+      "currentSavedBatch": 380,
+      "prototypeTarget": 380,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "backRunSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 500,
+      "currentSavedBatch": 500,
+      "prototypeTarget": 500,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored but unused for Fillet backStyle=1."
+    },
+    {
+      "name": "jumpSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 1450,
+      "currentSavedBatch": 1450,
+      "prototypeTarget": 1450,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "jumpForwardSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 380,
+      "currentSavedBatch": 380,
+      "prototypeTarget": 380,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "jumpBackSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 380,
+      "currentSavedBatch": 380,
+      "prototypeTarget": 380,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "gravity",
+      "unit": "0.01 world pixel per actor action tick squared",
+      "starter": 85,
+      "currentSavedBatch": 85,
+      "prototypeTarget": 85,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "airJumps",
+      "unit": "integer enum/count/flag",
+      "starter": 0,
+      "currentSavedBatch": 0,
+      "prototypeTarget": 0,
+      "status": "selected_for_v1_implementation",
+      "notes": "0 extra air jumps; ordinary ground jump remains available."
+    },
+    {
+      "name": "prejumpFrames",
+      "unit": "actor action ticks; -1 inherits global rule where supported",
+      "starter": -1,
+      "currentSavedBatch": -1,
+      "prototypeTarget": 4,
+      "status": "selected_for_v1_implementation",
+      "notes": "Selected rule pins inherited value to 4 explicitly."
+    },
+    {
+      "name": "airDashEnabled",
+      "unit": "integer enum/count/flag",
+      "starter": 0,
+      "currentSavedBatch": 1,
+      "prototypeTarget": 1,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "airBackdashEnabled",
+      "unit": "integer enum/count/flag",
+      "starter": 0,
+      "currentSavedBatch": 0,
+      "prototypeTarget": 0,
+      "status": "selected_for_v1_implementation",
+      "notes": "0: request rejected without consuming an air-dash use or resetting velocity."
+    },
+    {
+      "name": "airDashStyle",
+      "unit": "integer enum/count/flag",
+      "starter": 1,
+      "currentSavedBatch": 1,
+      "prototypeTarget": 1,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "airBackdashStyle",
+      "unit": "integer enum/count/flag",
+      "starter": 1,
+      "currentSavedBatch": 1,
+      "prototypeTarget": 1,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored inactive while airBackdashEnabled=0."
+    },
+    {
+      "name": "airDashSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 900,
+      "currentSavedBatch": 2000,
+      "prototypeTarget": 2000,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "airBackdashSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 700,
+      "currentSavedBatch": 700,
+      "prototypeTarget": 700,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored inactive while airBackdashEnabled=0."
+    },
+    {
+      "name": "airDashFrames",
+      "unit": "actor action ticks; -1 inherits global rule where supported",
+      "starter": 15,
+      "currentSavedBatch": 5,
+      "prototypeTarget": 5,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "airBackdashFrames",
+      "unit": "actor action ticks; -1 inherits global rule where supported",
+      "starter": 12,
+      "currentSavedBatch": 12,
+      "prototypeTarget": 12,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored inactive while airBackdashEnabled=0."
+    },
+    {
+      "name": "airDashUses",
+      "unit": "integer enum/count/flag",
+      "starter": 1,
+      "currentSavedBatch": 1,
+      "prototypeTarget": 1,
+      "status": "selected_for_v1_implementation",
+      "notes": "One shared dash use per airtime; resets on actual landing."
+    },
+    {
+      "name": "hoverHeight",
+      "unit": "0.01 world pixel",
+      "starter": 1800,
+      "currentSavedBatch": 1800,
+      "prototypeTarget": 1800,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored inactive with current styles."
+    },
+    {
+      "name": "hoverRiseSpeed",
+      "unit": "0.01 world pixel per actor action tick",
+      "starter": 300,
+      "currentSavedBatch": 300,
+      "prototypeTarget": 300,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored inactive with current styles."
+    },
+    {
+      "name": "teleportDistance",
+      "unit": "0.01 world pixel",
+      "starter": 20000,
+      "currentSavedBatch": 20000,
+      "prototypeTarget": 20000,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored inactive with current styles."
+    },
+    {
+      "name": "backTeleportDistance",
+      "unit": "0.01 world pixel",
+      "starter": 15000,
+      "currentSavedBatch": 15000,
+      "prototypeTarget": 15000,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored inactive with current styles."
+    },
+    {
+      "name": "teleportStartup",
+      "unit": "actor action ticks; -1 inherits global rule where supported",
+      "starter": 5,
+      "currentSavedBatch": 5,
+      "prototypeTarget": 5,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored inactive with current styles."
+    },
+    {
+      "name": "fdEnabled",
+      "unit": "integer enum/count/flag",
+      "starter": 1,
+      "currentSavedBatch": 1,
+      "prototypeTarget": 1,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "fdPushPercent",
+      "unit": "percent",
+      "starter": -1,
+      "currentSavedBatch": -1,
+      "prototypeTarget": 300,
+      "status": "selected_for_v1_implementation",
+      "notes": "Selected rule pins inherited global value to 300."
+    },
+    {
+      "name": "fdDrain",
+      "unit": "meter units (100 = 1 percent meter)",
+      "starter": -1,
+      "currentSavedBatch": -1,
+      "prototypeTarget": 25,
+      "status": "selected_for_v1_implementation",
+      "notes": "Selected rule pins inherited global value to 25."
+    },
+    {
+      "name": "fdAirDrain",
+      "unit": "meter units (100 = 1 percent meter)",
+      "starter": -1,
+      "currentSavedBatch": -1,
+      "prototypeTarget": 50,
+      "status": "selected_for_v1_implementation",
+      "notes": "Selected rule pins inherited global value to 50."
+    },
+    {
+      "name": "fdBlockCost",
+      "unit": "meter units (100 = 1 percent meter)",
+      "starter": -1,
+      "currentSavedBatch": -1,
+      "prototypeTarget": 250,
+      "status": "selected_for_v1_implementation",
+      "notes": "Selected rule pins inherited global base value to 250; global level cost remains 50."
+    },
+    {
+      "name": "smearMode",
+      "unit": "integer enum/count/flag",
+      "starter": 0,
+      "currentSavedBatch": 0,
+      "prototypeTarget": 0,
+      "status": "selected_for_v1_implementation",
+      "notes": "Inert compatibility metadata in current renderer/core; selected rule remains no generated transition smears."
+    },
+    {
+      "name": "smearPart",
+      "unit": "integer enum/count/flag",
+      "starter": 0,
+      "currentSavedBatch": 3,
+      "prototypeTarget": 3,
+      "status": "selected_for_v1_implementation",
+      "notes": "Inert compatibility metadata; does not define an actual weapon/limb layer."
+    },
+    {
+      "name": "smearStretch",
+      "unit": "percent",
+      "starter": 150,
+      "currentSavedBatch": 150,
+      "prototypeTarget": 150,
+      "status": "selected_for_v1_implementation",
+      "notes": "Inert compatibility metadata; never changes collision or reach."
+    },
+    {
+      "name": "airDashPauseFrames",
+      "unit": "actor action ticks; -1 inherits global rule where supported",
+      "starter": 4,
+      "currentSavedBatch": 4,
+      "prototypeTarget": 4,
+      "status": "selected_for_v1_implementation",
+      "notes": "Preserve current saved-batch base value."
+    },
+    {
+      "name": "airBackdashPauseFrames",
+      "unit": "actor action ticks; -1 inherits global rule where supported",
+      "starter": 4,
+      "currentSavedBatch": 4,
+      "prototypeTarget": 4,
+      "status": "selected_for_v1_implementation",
+      "notes": "Stored inactive while airBackdashEnabled=0."
+    }
+  ],
+  "bleedSpeedExtension": {
+    "status": "selected_for_v1_implementation",
+    "predicate": "opponent currently carries Fillet-owned bleed; not Fillet self-status",
+    "groundPercent": 115,
+    "airDashPercent": 110,
+    "groundFields": [
+      "walkSpeed",
+      "backWalkSpeed",
+      "runSpeed",
+      "backRunSpeed",
+      "runAcceleration",
+      "stepSpeed",
+      "backSpeed"
+    ],
+    "scaledActiveRaw": {
+      "walkSpeed": 437,
+      "backWalkSpeed": 437,
+      "runSpeed": 1288,
+      "runAcceleration": 138,
+      "backSpeed": 977,
+      "airDashSpeed": 2200
+    },
+    "rounding": "positive field * percent //100; apply saved direction afterward",
+    "unmodified": [
+      "gravity",
+      "jumpSpeed",
+      "jumpForwardSpeed",
+      "jumpBackSpeed",
+      "prejumpFrames",
+      "all move startup/active/recovery",
+      "authored attack advance/startupTravel/travelSpeed",
+      "throw capture/release geometry",
+      "FD rates",
+      "airDashFrames",
+      "backFrames"
+    ],
+    "activation": "Walk/run recompute effective target every actionable movement tick. Run acceleration grows toward new cap; no direct vx multiplication. Clamp running vx to reduced cap when bleed ends. Ground backdash/airdash snapshot their effective speed on action entry; expiry does not retime a committed action. Run-jump carries existing vx naturally; no additional air multiplier.",
+    "attack": "On attack entry inherit already-boosted velocity once then apply move inertia. Never multiply attack travel or inherited vx again."
+  },
+  "clockContract": [
+    {
+      "clock": "world/input tick",
+      "current": "Increments on every Simulation::step, including hitstop, stage travel and resolved winner. Input edges/facing sampled before hitstop return.",
+      "proposal": "Preserve 60Hz sample/history clock; 5-world-tick button buffer and 20/8-world-tick motion search remain."
+    },
+    {
+      "clock": "global unfrozen combat tick",
+      "current": "Stops during hitstop/stage travel. Bleed timers, projectile simulation and round timer use it; individual counter slowdown does not pause them.",
+      "proposal": "Preserve. Shared paired-action clock also uses this clock; clear pre-existing individual counter slowdown on capture."
+    },
+    {
+      "clock": "actor action tick",
+      "current": "Stops during hitstop and every alternate held counter-slow tick; controls, position, move age, dash pause/age, stun, landing and recovery advance here.",
+      "proposal": "Preserve; all authored move/locomotion/defense clips use saved actor state, never render delta."
+    },
+    {
+      "clock": "FD payment/state",
+      "current": "update_faultless runs before hitstop early return; drains meter and reserves chords even during hitstop/actor slow-held ticks.",
+      "proposal": "Preserve this explicit exception unless a later global defense revision changes it."
+    },
+    {
+      "clock": "render refresh",
+      "current": "Godot _process reads model state; FighterArt selects atlas pose from core. No body render clock or interpolation. Camera impact timer can advance through freeze.",
+      "proposal": "Body poses remain deterministic and simulation-owned. No time-based crossfade or visual-root interpolation that can outrun collision."
+    }
+  ],
+  "collisionProfiles": {
+    "ready": {
+      "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+      "boxesLocalRaw": {
+        "legs": [
+          -5400,
+          0,
+          6000,
+          6200
+        ],
+        "torsoArms": [
+          -3600,
+          5200,
+          3500,
+          11800
+        ],
+        "head": [
+          500,
+          11800,
+          3200,
+          14600
+        ]
+      }
+    },
+    "crouch": {
+      "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+      "boxesLocalRaw": {
+        "legs": [
+          -3200,
+          0,
+          3200,
+          3000
+        ],
+        "torsoArms": [
+          -2900,
+          2600,
+          3300,
+          6700
+        ],
+        "head": [
+          -1400,
+          6400,
+          2500,
+          9100
+        ]
+      }
+    },
+    "air": {
+      "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+      "boxesLocalRaw": {
+        "legs": [
+          -2500,
+          400,
+          2500,
+          5700
+        ],
+        "torsoArms": [
+          -2500,
+          5300,
+          2800,
+          11000
+        ],
+        "head": [
+          -1400,
+          10800,
+          1900,
+          14000
+        ]
+      }
+    },
+    "hit_reel": {
+      "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+      "boxesLocalRaw": {
+        "legs": [
+          -2500,
+          0,
+          2600,
+          5600
+        ],
+        "torsoArms": [
+          -3200,
+          5200,
+          2200,
+          11600
+        ],
+        "head": [
+          -2700,
+          11400,
+          800,
+          14600
+        ]
+      }
+    },
+    "walk_keys": [
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2800,
+            0,
+            2800,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -3300,
+            0,
+            3300,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2200,
+            0,
+            2200,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -1900,
+            0,
+            1900,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2800,
+            0,
+            2800,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -3300,
+            0,
+            3300,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2200,
+            0,
+            2200,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -1900,
+            0,
+            1900,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      }
+    ],
+    "backwalk_keys": [
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -1900,
+            0,
+            1900,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2200,
+            0,
+            2200,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -3300,
+            0,
+            3300,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2800,
+            0,
+            2800,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -1900,
+            0,
+            1900,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2200,
+            0,
+            2200,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -3300,
+            0,
+            3300,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2800,
+            0,
+            2800,
+            5600
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      }
+    ],
+    "run_keys": [
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -3100,
+            0,
+            3100,
+            5500
+          ],
+          "torsoArms": [
+            -2000,
+            4900,
+            3500,
+            10900
+          ],
+          "head": [
+            -800,
+            10600,
+            2500,
+            13700
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -3600,
+            0,
+            3600,
+            5500
+          ],
+          "torsoArms": [
+            -1900,
+            4900,
+            3600,
+            10900
+          ],
+          "head": [
+            -700,
+            10600,
+            2600,
+            13700
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2500,
+            0,
+            2500,
+            5500
+          ],
+          "torsoArms": [
+            -1800,
+            4900,
+            3700,
+            10900
+          ],
+          "head": [
+            -600,
+            10600,
+            2700,
+            13700
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2200,
+            0,
+            2200,
+            5500
+          ],
+          "torsoArms": [
+            -1800,
+            4900,
+            3700,
+            10900
+          ],
+          "head": [
+            -600,
+            10600,
+            2700,
+            13700
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -3100,
+            0,
+            3100,
+            5500
+          ],
+          "torsoArms": [
+            -2000,
+            4900,
+            3500,
+            10900
+          ],
+          "head": [
+            -800,
+            10600,
+            2500,
+            13700
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -3600,
+            0,
+            3600,
+            5500
+          ],
+          "torsoArms": [
+            -1900,
+            4900,
+            3600,
+            10900
+          ],
+          "head": [
+            -700,
+            10600,
+            2600,
+            13700
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2500,
+            0,
+            2500,
+            5500
+          ],
+          "torsoArms": [
+            -1800,
+            4900,
+            3700,
+            10900
+          ],
+          "head": [
+            -600,
+            10600,
+            2700,
+            13700
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2200,
+            0,
+            2200,
+            5500
+          ],
+          "torsoArms": [
+            -1800,
+            4900,
+            3700,
+            10900
+          ],
+          "head": [
+            -600,
+            10600,
+            2700,
+            13700
+          ]
+        }
+      }
+    ],
+    "block_keys": [
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2500,
+            0,
+            2500,
+            5600
+          ],
+          "torsoArms": [
+            -2700,
+            5200,
+            2500,
+            11600
+          ],
+          "head": [
+            -2000,
+            11400,
+            1400,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2500,
+            0,
+            2500,
+            5600
+          ],
+          "torsoArms": [
+            -2700,
+            5200,
+            2500,
+            11600
+          ],
+          "head": [
+            -2000,
+            11400,
+            1400,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2500,
+            0,
+            2500,
+            5600
+          ],
+          "torsoArms": [
+            -2700,
+            5200,
+            2500,
+            11600
+          ],
+          "head": [
+            -2000,
+            11400,
+            1400,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2500,
+            0,
+            2500,
+            5600
+          ],
+          "torsoArms": [
+            -2700,
+            5200,
+            2500,
+            11600
+          ],
+          "head": [
+            -2000,
+            11400,
+            1400,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2500,
+            0,
+            2500,
+            5600
+          ],
+          "torsoArms": [
+            -2700,
+            5200,
+            2500,
+            11600
+          ],
+          "head": [
+            -2000,
+            11400,
+            1400,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -2500,
+            0,
+            2500,
+            5600
+          ],
+          "torsoArms": [
+            -2700,
+            5200,
+            2500,
+            11600
+          ],
+          "head": [
+            -2000,
+            11400,
+            1400,
+            14600
+          ]
+        }
+      }
+    ],
+    "hard_downed": {
+      "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+      "boxesLocalRaw": {
+        "legs": [
+          -4400,
+          0,
+          1600,
+          1800
+        ],
+        "torsoArms": [
+          -1400,
+          0,
+          4800,
+          2700
+        ],
+        "head": [
+          4200,
+          500,
+          6500,
+          2800
+        ]
+      }
+    },
+    "soft_downed": {
+      "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+      "boxesLocalRaw": {
+        "legs": [
+          -4200,
+          0,
+          1800,
+          2000
+        ],
+        "torsoArms": [
+          -1400,
+          0,
+          4500,
+          3100
+        ],
+        "head": [
+          3900,
+          800,
+          6100,
+          3300
+        ]
+      }
+    },
+    "wakeup_keys": [
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -4000,
+            0,
+            2000,
+            2000
+          ],
+          "torsoArms": [
+            -2000,
+            1000,
+            3500,
+            4000
+          ],
+          "head": [
+            2400,
+            3100,
+            5000,
+            5800
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -3100,
+            0,
+            2900,
+            3000
+          ],
+          "torsoArms": [
+            -2500,
+            2600,
+            3100,
+            6800
+          ],
+          "head": [
+            -1400,
+            6400,
+            2400,
+            9300
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      },
+      {
+        "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+        "boxesLocalRaw": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ]
+        }
+      }
+    ],
+    "backdash": {
+      "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+      "boxesLocalRaw": {
+        "legs": [
+          -5400,
+          0,
+          6000,
+          6200
+        ],
+        "torsoArms": [
+          -3600,
+          5200,
+          3500,
+          11800
+        ],
+        "head": [
+          500,
+          11800,
+          3200,
+          14600
+        ]
+      }
+    },
+    "prejump": {
+      "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+      "boxesLocalRaw": {
+        "legs": [
+          -3200,
+          0,
+          3200,
+          3000
+        ],
+        "torsoArms": [
+          -2900,
+          2600,
+          3300,
+          6700
+        ],
+        "head": [
+          -1400,
+          6400,
+          2500,
+          9100
+        ]
+      }
+    },
+    "airdash_pause": {
+      "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+      "boxesLocalRaw": {
+        "legs": [
+          -2500,
+          400,
+          2500,
+          5700
+        ],
+        "torsoArms": [
+          -2500,
+          5300,
+          2800,
+          11000
+        ],
+        "head": [
+          -1400,
+          10800,
+          1900,
+          14000
+        ]
+      }
+    },
+    "airdash_burst": {
+      "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+      "boxesLocalRaw": {
+        "legs": [
+          -2500,
+          400,
+          2500,
+          5700
+        ],
+        "torsoArms": [
+          -2500,
+          5300,
+          2800,
+          11000
+        ],
+        "head": [
+          -1400,
+          10800,
+          1900,
+          14000
+        ]
+      }
+    },
+    "landing": {
+      "basis": "authored v1 implementation anatomy in raw engine units, not a trace of the old sprite",
+      "boxesLocalRaw": {
+        "legs": [
+          -3200,
+          0,
+          3200,
+          3000
+        ],
+        "torsoArms": [
+          -2900,
+          2600,
+          3300,
+          6700
+        ],
+        "head": [
+          -1400,
+          6400,
+          2500,
+          9100
+        ]
+      }
+    }
+  },
+  "pushProfile": {
+    "halfWidth": 2800,
+    "standingHeight": 13800,
+    "crouchingHeight": 8000,
+    "airHeight": 9000,
+    "airBottom": 5000
+  },
+  "locomotionClips": [
+    {
+      "id": "idle",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": 48,
+      "loop": true,
+      "keyRanges": [
+        {
+          "key": "I0",
+          "ticks": [
+            1,
+            12
+          ],
+          "anchor": "A/Stalker exhale"
+        },
+        {
+          "key": "I1",
+          "ticks": [
+            13,
+            24
+          ],
+          "anchor": "small ribcage rise; foot/knife registration fixed"
+        },
+        {
+          "key": "I2",
+          "ticks": [
+            25,
+            36
+          ],
+          "anchor": "return through I0"
+        },
+        {
+          "key": "I3",
+          "ticks": [
+            37,
+            48
+          ],
+          "anchor": "settled low ready"
+        }
+      ],
+      "collisionProfile": "ready",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Reset toI0 on entry; frozen actor tick does not advance; no mandatory transition lock.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "crouch_entry",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": 2,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "CE0",
+          "ticks": [
+            1,
+            1
+          ],
+          "anchor": "lower hips"
+        },
+        {
+          "key": "CE1",
+          "ticks": [
+            2,
+            2
+          ],
+          "anchor": "complete compact crouch"
+        }
+      ],
+      "collisionProfile": "crouch",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Defensive low guard and crouch push shape apply immediately on frame1; attacks/jump may interrupt frame1 without extra startup.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "crouch_hold",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": 32,
+      "loop": true,
+      "keyRanges": [
+        {
+          "key": "CH0",
+          "ticks": [
+            1,
+            16
+          ]
+        },
+        {
+          "key": "CH1",
+          "ticks": [
+            17,
+            32
+          ]
+        }
+      ],
+      "collisionProfile": "crouch",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Entry after crouch_entry; restart atCH0; upward exit/attack immediate.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "crouch_exit",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": 2,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "CX0",
+          "ticks": [
+            1,
+            1
+          ]
+        },
+        {
+          "key": "CX1",
+          "ticks": [
+            2,
+            2
+          ]
+        }
+      ],
+      "collisionProfile": "ready",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Standing guard/push and ready hurt profile apply immediately frame1; transition is presentation-only and interruptible.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "walk_forward",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": true,
+      "keyRanges": [
+        {
+          "key": "WF0",
+          "distanceIntervalRaw": [
+            0,
+            1900
+          ],
+          "sourcePose": "walk:0"
+        },
+        {
+          "key": "WF1",
+          "distanceIntervalRaw": [
+            1900,
+            3800
+          ],
+          "sourcePose": "walk:1"
+        },
+        {
+          "key": "WF2",
+          "distanceIntervalRaw": [
+            3800,
+            5700
+          ],
+          "sourcePose": "walk:2"
+        },
+        {
+          "key": "WF3",
+          "distanceIntervalRaw": [
+            5700,
+            7600
+          ],
+          "sourcePose": "walk:3"
+        },
+        {
+          "key": "WF4",
+          "distanceIntervalRaw": [
+            7600,
+            9500
+          ],
+          "sourcePose": "walk:4"
+        },
+        {
+          "key": "WF5",
+          "distanceIntervalRaw": [
+            9500,
+            11400
+          ],
+          "sourcePose": "walk:5"
+        },
+        {
+          "key": "WF6",
+          "distanceIntervalRaw": [
+            11400,
+            13300
+          ],
+          "sourcePose": "walk:6"
+        },
+        {
+          "key": "WF7",
+          "distanceIntervalRaw": [
+            13300,
+            15200
+          ],
+          "sourcePose": "walk:7"
+        }
+      ],
+      "collisionProfile": "walk_keys",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "One 8-key cycle per152px actual voluntary travel. Save accumulated path and support-leg phase; preserve normalized phase across walk/run; reset after6 idle actor ticks.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "walk_backward",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": true,
+      "keyRanges": [
+        {
+          "key": "WB0",
+          "distanceIntervalRaw": [
+            0,
+            1900
+          ],
+          "sourcePose": "walk:0"
+        },
+        {
+          "key": "WB1",
+          "distanceIntervalRaw": [
+            1900,
+            3800
+          ],
+          "sourcePose": "walk:1"
+        },
+        {
+          "key": "WB2",
+          "distanceIntervalRaw": [
+            3800,
+            5700
+          ],
+          "sourcePose": "walk:2"
+        },
+        {
+          "key": "WB3",
+          "distanceIntervalRaw": [
+            5700,
+            7600
+          ],
+          "sourcePose": "walk:3"
+        },
+        {
+          "key": "WB4",
+          "distanceIntervalRaw": [
+            7600,
+            9500
+          ],
+          "sourcePose": "walk:4"
+        },
+        {
+          "key": "WB5",
+          "distanceIntervalRaw": [
+            9500,
+            11400
+          ],
+          "sourcePose": "walk:5"
+        },
+        {
+          "key": "WB6",
+          "distanceIntervalRaw": [
+            11400,
+            13300
+          ],
+          "sourcePose": "walk:6"
+        },
+        {
+          "key": "WB7",
+          "distanceIntervalRaw": [
+            13300,
+            15200
+          ],
+          "sourcePose": "walk:7"
+        }
+      ],
+      "collisionProfile": "walk_keys",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Dedicated backward clip progresses forward in key order; same152px stride; maintain support-leg phase on directional reversal; no reverse playback.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "run",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": true,
+      "keyRanges": [
+        {
+          "key": "R0",
+          "distanceIntervalRaw": [
+            0,
+            3360
+          ],
+          "sourcePose": "run:0"
+        },
+        {
+          "key": "R1",
+          "distanceIntervalRaw": [
+            3360,
+            6720
+          ],
+          "sourcePose": "run:1"
+        },
+        {
+          "key": "R2",
+          "distanceIntervalRaw": [
+            6720,
+            10080
+          ],
+          "sourcePose": "run:2"
+        },
+        {
+          "key": "R3",
+          "distanceIntervalRaw": [
+            10080,
+            13440
+          ],
+          "sourcePose": "run:3"
+        },
+        {
+          "key": "R4",
+          "distanceIntervalRaw": [
+            13440,
+            16800
+          ],
+          "sourcePose": "run:4"
+        },
+        {
+          "key": "R5",
+          "distanceIntervalRaw": [
+            16800,
+            20160
+          ],
+          "sourcePose": "run:5"
+        },
+        {
+          "key": "R6",
+          "distanceIntervalRaw": [
+            20160,
+            23520
+          ],
+          "sourcePose": "run:6"
+        },
+        {
+          "key": "R7",
+          "distanceIntervalRaw": [
+            23520,
+            26880
+          ],
+          "sourcePose": "run:7"
+        }
+      ],
+      "collisionProfile": "run_keys",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "One 8-key cycle per268.8px actual travel; preserve normalized gait phase from walk; blocked/no movement freezes gait; full stop enters idle immediately.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "backdash",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": 10,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "BD0",
+          "ticks": [
+            1,
+            2
+          ],
+          "anchor": "load rear support leg"
+        },
+        {
+          "key": "BD1",
+          "ticks": [
+            3,
+            4
+          ],
+          "anchor": "withdraw hips with knives guarded"
+        },
+        {
+          "key": "BD2",
+          "ticks": [
+            5,
+            6
+          ],
+          "anchor": "rear plant"
+        },
+        {
+          "key": "BD3",
+          "ticks": [
+            7,
+            8
+          ],
+          "anchor": "front foot follows"
+        },
+        {
+          "key": "BD4",
+          "ticks": [
+            9,
+            10
+          ],
+          "anchor": "settle A/Stalker"
+        }
+      ],
+      "collisionProfile": "ready",
+      "rootAndVisualOffsetPolicy": "Simulation y=0; vx=-850*facing (bleed -977*facing) for10 ticks unless cancelled. No visual hop or visual offset.",
+      "transitionPolicy": "Frames1–4 committed: no attack/jump/guard/FD. Frames5–10 attack/jump/FD cancellable and back-guardable. Movement does not stop for crouch/opposite direction. No invulnerability, semi-air or low crush.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "prejump",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": 4,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "PJ0",
+          "ticks": [
+            1,
+            2
+          ],
+          "anchor": "compression"
+        },
+        {
+          "key": "PJ1",
+          "ticks": [
+            3,
+            4
+          ],
+          "anchor": "leg extension with planted root"
+        }
+      ],
+      "collisionProfile": "crouch",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Jump input tick isPJ1; takeoff is following tick5. Cannot attack/guard/FD; throw-invulnerable by prejump rule. Same-direction run momentum remains and root moves horizontally each tick.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "jump_ascent",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "JA0",
+          "condition": "vy>600"
+        },
+        {
+          "key": "JA1",
+          "condition": "0<vy<=600"
+        }
+      ],
+      "collisionProfile": "air",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Choose by saved vertical velocity; no looping render timer; attack/airdash may interrupt.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "jump_apex",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "JP",
+          "condition": "-85<=vy<=0"
+        }
+      ],
+      "collisionProfile": "air",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "One velocity band; gravity still85 and root remains ballistic.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "jump_descent",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "JD0",
+          "condition": "-600<=vy<-85"
+        },
+        {
+          "key": "JD1",
+          "condition": "vy<-600"
+        }
+      ],
+      "collisionProfile": "air",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Choose by saved velocity; reset upon new jump/airdash/landing.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "airdash_pause",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": 4,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "ADP0",
+          "ticks": [
+            1,
+            2
+          ],
+          "anchor": "compact arrest"
+        },
+        {
+          "key": "ADP1",
+          "ticks": [
+            3,
+            4
+          ],
+          "anchor": "aim body along locked dash direction"
+        }
+      ],
+      "collisionProfile": "air",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Overall f1–4: no attack, jump, ordinary guard orFD. Inputs still sample/buffer; zero velocity/carry and freeze gravity. This adds explicit guard/FD lock support beyond current core.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "airdash_burst",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": 5,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "ADB0",
+          "ticks": [
+            1,
+            2
+          ],
+          "anchor": "forward body drive"
+        },
+        {
+          "key": "ADB1",
+          "ticks": [
+            3,
+            4
+          ],
+          "anchor": "trail legs and knives without stretch"
+        },
+        {
+          "key": "ADB2",
+          "ticks": [
+            5,
+            5
+          ],
+          "anchor": "collect into descent"
+        }
+      ],
+      "collisionProfile": "air",
+      "rootAndVisualOffsetPolicy": "vx2000 or2200*facingSnapshot,vy0; five burst ticks; after final burst gravity resumes, but root does not descend until next tick because integration precedes gravity.",
+      "transitionPolicy": "Overall f5–9. Fromf5 set burst vx before input processing; attacks/FD may interrupt and ordinaryairguard is legal. Natural completion enables coast cap650/715 beforef10 inputs, including carry; no secondairdash orairjump.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "empty_landing",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": 2,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "EL0",
+          "ticks": [
+            1,
+            1
+          ],
+          "anchor": "toe/heel absorb"
+        },
+        {
+          "key": "EL1",
+          "ticks": [
+            2,
+            2
+          ],
+          "anchor": "ready"
+        }
+      ],
+      "collisionProfile": "ready",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "0 gameplay recovery; frame1 can act/guard/jump and interrupt decorative landing. Ground quotas reset on floor contact.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "air_action_landing",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": "max(3,activeAirMove.landingRecovery), or3 if priorairaction already ended",
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "AL0",
+          "condition": "index=floor((t-1)*3/L)=0"
+        },
+        {
+          "key": "AL1",
+          "condition": "index=floor((t-1)*3/L)=1"
+        },
+        {
+          "key": "AL2",
+          "condition": "index=floor((t-1)*3/L)=2"
+        }
+      ],
+      "collisionProfile": "crouch",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "L full actor ticks locked; nexttickL+1 actionable. L=3 forj.P/completedairaction,4 foractivej.K/j.S,6 foractivej.Hs in central v1 implementation. No attack/jump/ordinaryguard/FD. Ordinaryairmove cancelled atfloor contact before hit detection.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate",
+      "exactCurrentPrototypeVariants": {
+        "3": {
+          "AL0": [
+            1,
+            1
+          ],
+          "AL1": [
+            2,
+            2
+          ],
+          "AL2": [
+            3,
+            3
+          ]
+        },
+        "4": {
+          "AL0": [
+            1,
+            2
+          ],
+          "AL1": [
+            3,
+            3
+          ],
+          "AL2": [
+            4,
+            4
+          ]
+        },
+        "6": {
+          "AL0": [
+            1,
+            2
+          ],
+          "AL1": [
+            3,
+            4
+          ],
+          "AL2": [
+            5,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "id": "turn_in_place",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": 2,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "T0",
+          "ticks": [
+            1,
+            1
+          ],
+          "anchor": "hip/shoulder turn; retain anatomical weapon hands"
+        },
+        {
+          "key": "T1",
+          "ticks": [
+            2,
+            2
+          ],
+          "anchor": "new-facing Stalker"
+        }
+      ],
+      "collisionProfile": "ready",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Facing changes immediately on eligible actionable tick; no added gameplay lock; attacks supersede clip. Never flip mid-attack/backdash/airdash/paired capture.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "block_stable",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "B0",
+          "ticks": [
+            1,
+            4
+          ],
+          "sourcePose": "block:0"
+        },
+        {
+          "key": "B1",
+          "ticks": [
+            5,
+            null
+          ],
+          "sourcePose": "block:1"
+        }
+      ],
+      "collisionProfile": "block_keys",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Contact pose counts unfrozen actor block ticks; hitstop freezes it; new block contact resets toB0.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "block_pressure",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "BP0",
+          "ticks": [
+            1,
+            4
+          ],
+          "sourcePose": "block:2"
+        },
+        {
+          "key": "BP1",
+          "ticks": [
+            5,
+            null
+          ],
+          "sourcePose": "block:3"
+        }
+      ],
+      "collisionProfile": "block_keys",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Same reset/clock; pressure silhouette only expresses computed advantage.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "guard_break",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "GB0",
+          "ticks": [
+            1,
+            4
+          ],
+          "sourcePose": "block:4"
+        },
+        {
+          "key": "GB1",
+          "ticks": [
+            5,
+            null
+          ],
+          "sourcePose": "block:5"
+        }
+      ],
+      "collisionProfile": "block_keys",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Cannot backdash-buffer out while broken; no ordinary throw-grace/carryover benefit.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "hit_reel",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "HR",
+          "sourcePose": "active:9"
+        }
+      ],
+      "collisionProfile": "hit_reel",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Immediate interruption; no recovery blend; counter freeze holds exact contact pose; counter slow advances only on actor ticks.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "hard_downed",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "HD",
+          "sourcePose": "knockdown:0"
+        }
+      ],
+      "collisionProfile": "hard_down_wake",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Hold for move-authored down timer; future OTG Wound timing uses remaining real action ticks.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "soft_downed",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "SD",
+          "sourcePose": "knockdown_back:0"
+        }
+      ],
+      "collisionProfile": "soft_down_wake",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Hold for move-authored down timer; no automatic Wound guarantee.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    },
+    {
+      "id": "wakeup",
+      "status": "selected_for_v1_implementation",
+      "durationActorTicks": null,
+      "loop": false,
+      "keyRanges": [
+        {
+          "key": "WK1",
+          "sourceHard": "knockdown:1",
+          "sourceSoft": "knockdown_back:1"
+        },
+        {
+          "key": "WK2",
+          "sourceHard": "knockdown:2",
+          "sourceSoft": "knockdown_back:2"
+        },
+        {
+          "key": "WK3",
+          "sourceHard": "knockdown:3",
+          "sourceSoft": "knockdown_back:3"
+        },
+        {
+          "key": "WK4",
+          "sourceHard": "knockdown:4",
+          "sourceSoft": "knockdown_back:4"
+        },
+        {
+          "key": "WK5",
+          "sourceHard": "knockdown:5",
+          "sourceSoft": "knockdown_back:5"
+        }
+      ],
+      "collisionProfile": "hard_down_wake/soft_down_wake",
+      "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
+      "transitionPolicy": "Map five keys to exact move-authored wake duration by floor((elapsed*4)/(duration-1)); recovery ends on actor clock. Start idle after unlocking; victim throw grace5.",
+      "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
+    }
+  ],
+  "attackTransitionContract": {
+    "status": "selected_for_v1_implementation",
+    "frameConvention": "Action f1 is the input-accepted simulation tick. Windup f1..S-1, active fS..S+A-1, recovery fS+A..S+A+R-1. Inputs can execute on following tick. Each tick has one resolved pose/collision record, saved for rollback.",
+    "entry": "No added ready-to-attack delay. Select first anticipation key on f1 from idle/walk/run/crouch; apply move advance/inertia before integration. Cancel begins new move f1 immediately.",
+    "poseKeyPartition": "Per-action exact keys in Fillet_V1 implementation_v0_2.json supersede a generic percentage partition. Hold resolved pose/geometry keys on actor action clocks.",
+    "recovery": "Author recovery pose keys instead of returning to ready while still recovering. Last recovery tick remains its last pose/boxes; idle begins only on next actionable tick, unless hit/block/landing/cancel supersedes it.",
+    "inertiaApplication": "At begin choose carry velocity only if its magnitude exceeds current vx, consume carry, then truncate toward zero(vx*move.inertiaPercent/100), clamp±4000. No second bleed multiplier. Translate x byvx, then authored startupTravel/activeTravel, then drag90 toward zero each actor tick.",
+    "carryLifetime": "Retain current 5-tick window including source movement tick: timer5 stored after run/step travel; decremented before control; usable for four subsequent action ticks. No repeated restoration on later gatlings.",
+    "perMoveOwnership": "advance, startupTravel, travelSpeed, inertiaPercent, airborne friction exception if any, landingRecovery and any special phase motion must be explicitly filled in the central move table. Suggested normal inertia40–70%; all throws and Wound0%. These suggestions are not approval.",
+    "stopAndRestart": "Walking/stopping/crouching does not automatically resume a prior run; held forward after recovery produces walk unless a fresh dash edge survives buffer. Interrupted clips never resume; attacks increment serial and reset pose phase.",
+    "airAttack": "Dash burst vx is set before attack entry; per-move inertia applies. Base vy continues ballistic unless move explicitly overrides it. Attack friction90 applies horizontally even in air. Air-action landing minimum3 except explicitly approved move branch.",
+    "facing": "Latch action facing at acceptance; only explicitly authored exceptions apply (central236K one update afterf20). Otherwise lockthroughrecovery.",
+    "visualSettle": "Locomotion andpaired global render offsets are0. Central attack notes may author up to4px internalbody settle inside agreed collision envelope; this is drawing deformation, not extra physical root or doubled travel."
+  },
+  "facingPolicy": {
+    "status": "selected_for_v1_implementation",
+    "autoFace": "On beginning of an eligible free actionable tick, before interpreting buffered relative inputs. Lock while attack, backdash, air dash, capture, hitstop, stun, hit reel, knockdown/waking or landing recovery.",
+    "turnAnimation": "2 interruptible actor ticks, no gameplay delay, no weapon hand swap. Air-cross turn allowed on next free airborne actionable tick only.",
+    "airDashDirection": "Snapshot facing/direction at dash accept; cross-under never changes burst direction.",
+    "backThrow": "Explicit exchange atrelease then facing flips once.",
+    "differenceFromCurrent": "Current core auto-faces every world tick whenever move<0, including hitstop/reaction/capture; changing that requires saved lock state.",
+    "perMoveException": "Central236K has exactlyone target-relative update afterframe20, thenlocks again. No other action inherits this exception."
+  },
+  "interruptAndResetPolicy": {
+    "attackOrJump": "Legal input replaces locomotion immediately, discards transition animation, does not append startup. Input order remains jump then attacks then dash.",
+    "hit": "Immediate hurt/reel pose; clear move/run/dash/carry/landing/prejump and buffered locomotion phase resume token; keep history so fresh last5worldtick reversal input works.",
+    "block": "Immediate contact block pose; clear movement and carry; new contact resets4-tick settle timer.",
+    "land": "Reset air quotas exactly once on y-crossing; zero vx on locked air-action landing; empty landing retains current ground steering rules.",
+    "FD": "Ground stops movement and clears carry; air cancels dash, preserves current horizontal vx and resumes gravity. Cannot start during selected committed backdash or airdash pause.",
+    "roundReset": "x420/580px,facing+1/-1,y/vx/vy0; move=-1; all new clip/phase/locks/pair fields0; bleed cleared; quotas0; idle startsI0.",
+    "rollback": "Snapshot every new gait accumulator, clip age, facing lock, dash speed snapshot, pairId/tick/anchors and status multiplier state; replay must reproduce pose and boxes exactly."
+  },
+  "pairedThrowGuide": {
+    "status": "selected_for_implementation",
+    "contracts": [
+      {
+        "id": "wound_otg_restand",
+        "status": "selected_for_v1_implementation",
+        "startup": 24,
+        "active": 2,
+        "whiffRecovery": 20,
+        "captureTicks": 20,
+        "ownerPostReleaseRecovery": 0,
+        "victimPostReleaseRecovery": 0,
+        "ownerAdvantageTicks": 0,
+        "releaseGapRaw": 12000,
+        "releaseGapPixels": 120,
+        "captureClock": "C0 confirmed capture; freeze captureHitstop worldticks; C1..CN shared unfrozen ticks; freeze releaseHitstop worldticks; independent role recovery starts nextunfrozen tick.",
+        "phases": [
+          {
+            "ticks": [
+              1,
+              4
+            ],
+            "ownerAnchor": "kneel alongside victim; right long blade low",
+            "victimAnchor": "prone/supine, preserve actual knockdown orientation",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              5,
+              8
+            ],
+            "ownerAnchor": "short controlled right-blade cut; left forearm steadies torso",
+            "victimAnchor": "wound reaction; no extra hit event",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              9,
+              12
+            ],
+            "ownerAnchor": "lift through hips; short left knife points down away from contact",
+            "victimAnchor": "rise onto knee",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              13,
+              16
+            ],
+            "ownerAnchor": "stand into Stalker; retract blades",
+            "victimAnchor": "regain feet",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              17,
+              20
+            ],
+            "ownerAnchor": "backstep30px while ending grip",
+            "victimAnchor": "move30px away and face attacker",
+            "contactLock": false
+          }
+        ],
+        "rootTrack": [
+          {
+            "C": 0,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": "actual capture-relative grounded root"
+          },
+          {
+            "C": 4,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": [
+              60,
+              0
+            ]
+          },
+          {
+            "C": 16,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": [
+              60,
+              0
+            ]
+          },
+          {
+            "C": 20,
+            "owner": [
+              -30,
+              0
+            ],
+            "victim": [
+              90,
+              0
+            ]
+          }
+        ],
+        "sideSwitch": "retain",
+        "release": "AtCN apply final health event once (if any); status timing follows eventPolicy. Ground both, setvx/vy/carry/knockback0, restore ordinary collision for postrelease recovery. Shared releasehitstop delays both equally; then listed owner/victim counters run. No appended launch/down/wake.",
+        "hitstop": "Capture freeze first, C1..CN then releasefreeze, then role recovery; no additional animation-only freeze.",
+        "releaseThrowGraceVictim": 5,
+        "ownerThrowGrace": 0,
+        "stanceAtRelease": "A/Stalker; grounded. Air dash/jump quotas reset by paired grounded release.",
+        "hitboxWhileCaptured": [],
+        "hurtboxWhileCaptured": [],
+        "pushboxWhileCaptured": "Pair ignores inter-actor push separation; use root track and whole-pair wall clamp. Both actors excluded from incoming melee/projectile targeting until release.",
+        "finalOwnerLocalRaw": [
+          -3000,
+          0
+        ],
+        "finalVictimLocalRaw": [
+          9000,
+          0
+        ],
+        "postReleasePoseKeys": {
+          "owner": [],
+          "victim": []
+        },
+        "centralActionId": "5D",
+        "captureHitstop": 4,
+        "releaseHitstop": 0,
+        "eventPolicy": "Apply owned bleed atC20 release; rejectif alreadyactive.",
+        "damageEvent": 0,
+        "tech": "not techable",
+        "captureEligibility": "only current Downed target with positive downed timer; never AirReel, Waking, wall splat, standing or airborne; require box overlap on either active tick"
+      },
+      {
+        "id": "normal_throw_forward",
+        "status": "selected_for_v1_implementation",
+        "startup": 2,
+        "active": 2,
+        "whiffRecovery": 32,
+        "captureTicks": 24,
+        "ownerPostReleaseRecovery": 12,
+        "victimPostReleaseRecovery": 14,
+        "ownerAdvantageTicks": 2,
+        "releaseGapRaw": 12000,
+        "releaseGapPixels": 120,
+        "captureClock": "C0 confirmed capture; freeze captureHitstop worldticks; C1..CN shared unfrozen ticks; freeze releaseHitstop worldticks; independent role recovery starts nextunfrozen tick.",
+        "phases": [
+          {
+            "ticks": [
+              1,
+              4
+            ],
+            "ownerAnchor": "left forearm/pommel catch; no knife hand swap",
+            "victimAnchor": "upright captured recoil",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              5,
+              8
+            ],
+            "ownerAnchor": "draw opponent toward torso",
+            "victimAnchor": "forward fold",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              9,
+              12
+            ],
+            "ownerAnchor": "hip turn with right blade held clear",
+            "victimAnchor": "controlled turn",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              13,
+              16
+            ],
+            "ownerAnchor": "wind toward release; back throw begins side exchange",
+            "victimAnchor": "turn follows lock",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              17,
+              20
+            ],
+            "ownerAnchor": "open forearm lock; prepare final shove",
+            "victimAnchor": "weight transfers toward release",
+            "contactLock": false
+          },
+          {
+            "ticks": [
+              21,
+              24
+            ],
+            "ownerAnchor": "complete shove/cut accent then disengage",
+            "victimAnchor": "final impact and separation",
+            "contactLock": false
+          }
+        ],
+        "rootTrack": [
+          {
+            "C": 0,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": "actual grounded root"
+          },
+          {
+            "C": 4,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": [
+              60,
+              0
+            ]
+          },
+          {
+            "C": 16,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": [
+              60,
+              0
+            ]
+          },
+          {
+            "C": 20,
+            "owner": [
+              -15,
+              0
+            ],
+            "victim": [
+              75,
+              0
+            ]
+          },
+          {
+            "C": 24,
+            "owner": [
+              -30,
+              0
+            ],
+            "victim": [
+              90,
+              0
+            ]
+          }
+        ],
+        "sideSwitch": "retain",
+        "release": "AtCN apply final health event once (if any); status timing follows eventPolicy. Ground both, setvx/vy/carry/knockback0, restore ordinary collision for postrelease recovery. Shared releasehitstop delays both equally; then listed owner/victim counters run. No appended launch/down/wake.",
+        "hitstop": "Capture freeze first, C1..CN then releasefreeze, then role recovery; no additional animation-only freeze.",
+        "releaseThrowGraceVictim": 5,
+        "ownerThrowGrace": 0,
+        "stanceAtRelease": "A/Stalker; grounded. Air dash/jump quotas reset by paired grounded release.",
+        "hitboxWhileCaptured": [],
+        "hurtboxWhileCaptured": [],
+        "pushboxWhileCaptured": "Pair ignores inter-actor push separation; use root track and whole-pair wall clamp. Both actors excluded from incoming melee/projectile targeting until release.",
+        "finalOwnerLocalRaw": [
+          -3000,
+          0
+        ],
+        "finalVictimLocalRaw": [
+          9000,
+          0
+        ],
+        "postReleasePoseKeys": {
+          "owner": [
+            {
+              "ticks": [
+                1,
+                4
+              ],
+              "pose": "recoil blades inward"
+            },
+            {
+              "ticks": [
+                5,
+                8
+              ],
+              "pose": "recover feet"
+            },
+            {
+              "ticks": [
+                9,
+                12
+              ],
+              "pose": "settle Stalker"
+            }
+          ],
+          "victim": [
+            {
+              "ticks": [
+                1,
+                5
+              ],
+              "pose": "stagger"
+            },
+            {
+              "ticks": [
+                6,
+                10
+              ],
+              "pose": "brace"
+            },
+            {
+              "ticks": [
+                11,
+                14
+              ],
+              "pose": "recover facing"
+            }
+          ]
+        },
+        "centralActionId": "6P+K",
+        "captureHitstop": 6,
+        "releaseHitstop": 8,
+        "eventPolicy": "does not apply, refresh, cash out or remove owned bleed",
+        "damageEvent": "45; one health event at release",
+        "tech": "selected universal 6 completed unfrozen ticks from confirmed capture; same-tick clash remains; global dependency",
+        "captureEligibility": "target Free, grounded, not in valid prejump, not in hitstun/blockstun/throw grace/recovery/capture/knockdown; source on ground at capture",
+        "techBranchRef": "movementContract.pairedThrowGuide.normalThrowTechBranch"
+      },
+      {
+        "id": "normal_throw_backward",
+        "status": "selected_for_v1_implementation",
+        "startup": 2,
+        "active": 2,
+        "whiffRecovery": 32,
+        "captureTicks": 24,
+        "ownerPostReleaseRecovery": 12,
+        "victimPostReleaseRecovery": 14,
+        "ownerAdvantageTicks": 2,
+        "releaseGapRaw": 12000,
+        "releaseGapPixels": 120,
+        "captureClock": "C0 confirmed capture; freeze captureHitstop worldticks; C1..CN shared unfrozen ticks; freeze releaseHitstop worldticks; independent role recovery starts nextunfrozen tick.",
+        "phases": [
+          {
+            "ticks": [
+              1,
+              4
+            ],
+            "ownerAnchor": "left forearm/pommel catch; no knife hand swap",
+            "victimAnchor": "upright captured recoil",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              5,
+              8
+            ],
+            "ownerAnchor": "draw opponent toward torso",
+            "victimAnchor": "forward fold",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              9,
+              12
+            ],
+            "ownerAnchor": "hip turn with right blade held clear",
+            "victimAnchor": "controlled turn",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              13,
+              16
+            ],
+            "ownerAnchor": "wind toward release; back throw begins side exchange",
+            "victimAnchor": "turn follows lock",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              17,
+              20
+            ],
+            "ownerAnchor": "open forearm lock; prepare final shove",
+            "victimAnchor": "weight transfers toward release",
+            "contactLock": false
+          },
+          {
+            "ticks": [
+              21,
+              24
+            ],
+            "ownerAnchor": "complete shove/cut accent then disengage",
+            "victimAnchor": "final impact and separation",
+            "contactLock": false
+          }
+        ],
+        "rootTrack": [
+          {
+            "C": 0,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": "actual grounded root"
+          },
+          {
+            "C": 4,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": [
+              60,
+              0
+            ]
+          },
+          {
+            "C": 12,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": [
+              60,
+              0
+            ]
+          },
+          {
+            "C": 20,
+            "owner": [
+              60,
+              0
+            ],
+            "victim": [
+              0,
+              0
+            ]
+          },
+          {
+            "C": 24,
+            "owner": [
+              90,
+              0
+            ],
+            "victim": [
+              -30,
+              0
+            ]
+          }
+        ],
+        "sideSwitch": "exchange; flip both facing atrelease C24 only",
+        "release": "AtCN apply final health event once (if any); status timing follows eventPolicy. Ground both, setvx/vy/carry/knockback0, restore ordinary collision for postrelease recovery. Shared releasehitstop delays both equally; then listed owner/victim counters run. No appended launch/down/wake.",
+        "hitstop": "Capture freeze first, C1..CN then releasefreeze, then role recovery; no additional animation-only freeze.",
+        "releaseThrowGraceVictim": 5,
+        "ownerThrowGrace": 0,
+        "stanceAtRelease": "A/Stalker; grounded. Air dash/jump quotas reset by paired grounded release.",
+        "hitboxWhileCaptured": [],
+        "hurtboxWhileCaptured": [],
+        "pushboxWhileCaptured": "Pair ignores inter-actor push separation; use root track and whole-pair wall clamp. Both actors excluded from incoming melee/projectile targeting until release.",
+        "finalOwnerLocalRaw": [
+          9000,
+          0
+        ],
+        "finalVictimLocalRaw": [
+          -3000,
+          0
+        ],
+        "postReleasePoseKeys": {
+          "owner": [
+            {
+              "ticks": [
+                1,
+                4
+              ],
+              "pose": "recoil blades inward"
+            },
+            {
+              "ticks": [
+                5,
+                8
+              ],
+              "pose": "recover feet"
+            },
+            {
+              "ticks": [
+                9,
+                12
+              ],
+              "pose": "settle Stalker"
+            }
+          ],
+          "victim": [
+            {
+              "ticks": [
+                1,
+                5
+              ],
+              "pose": "stagger"
+            },
+            {
+              "ticks": [
+                6,
+                10
+              ],
+              "pose": "brace"
+            },
+            {
+              "ticks": [
+                11,
+                14
+              ],
+              "pose": "recover facing"
+            }
+          ]
+        },
+        "centralActionId": "4P+K",
+        "captureHitstop": 6,
+        "releaseHitstop": 8,
+        "eventPolicy": "does not apply, refresh, cash out or remove owned bleed",
+        "damageEvent": "45; one health event at release",
+        "tech": "selected universal 6 completed unfrozen ticks from confirmed capture; same-tick clash remains; global dependency",
+        "captureEligibility": "target Free, grounded, not in valid prejump, not in hitstun/blockstun/throw grace/recovery/capture/knockdown; source on ground at capture",
+        "techBranchRef": "movementContract.pairedThrowGuide.normalThrowTechBranch"
+      },
+      {
+        "id": "236D_hop_cashout",
+        "status": "selected_for_v1_implementation",
+        "startup": 22,
+        "active": 2,
+        "whiffRecovery": 30,
+        "captureTicks": 28,
+        "ownerPostReleaseRecovery": 16,
+        "victimPostReleaseRecovery": 18,
+        "ownerAdvantageTicks": 2,
+        "releaseGapRaw": 17000,
+        "releaseGapPixels": 170,
+        "captureClock": "C0 confirmed capture; freeze captureHitstop worldticks; C1..CN shared unfrozen ticks; freeze releaseHitstop worldticks; independent role recovery starts nextunfrozen tick.",
+        "phases": [
+          {
+            "ticks": [
+              1,
+              4
+            ],
+            "ownerAnchor": "collect landed hop or rising slide into groundedcatch; no additional aerial capture",
+            "victimAnchor": "upright captured flinch",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              5,
+              8
+            ],
+            "ownerAnchor": "left forearm pins near shoulder; right knife remains long",
+            "victimAnchor": "torso compressed toward owner",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              9,
+              12
+            ],
+            "ownerAnchor": "coil torso with two knives kept anatomically correct",
+            "victimAnchor": "captured turn",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              13,
+              16
+            ],
+            "ownerAnchor": "right-blade draw-cut action",
+            "victimAnchor": "strong recoil",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              17,
+              20
+            ],
+            "ownerAnchor": "left-knife accent and release preparation",
+            "victimAnchor": "follow-through held",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              21,
+              24
+            ],
+            "ownerAnchor": "release grip and begin separation",
+            "victimAnchor": "feet recover under body",
+            "contactLock": false
+          },
+          {
+            "ticks": [
+              25,
+              28
+            ],
+            "ownerAnchor": "complete55px retreat into Stalker",
+            "victimAnchor": "complete55px displacement away",
+            "contactLock": false
+          }
+        ],
+        "rootTrack": [
+          {
+            "C": 0,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": "actual grounded capture-relative root"
+          },
+          {
+            "C": 4,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": [
+              60,
+              0
+            ]
+          },
+          {
+            "C": 20,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": [
+              60,
+              0
+            ]
+          },
+          {
+            "C": 24,
+            "owner": [
+              -27.5,
+              0
+            ],
+            "victim": [
+              87.5,
+              0
+            ]
+          },
+          {
+            "C": 28,
+            "owner": [
+              -55,
+              0
+            ],
+            "victim": [
+              115,
+              0
+            ]
+          }
+        ],
+        "sideSwitch": "retain",
+        "release": "AtCN apply final health event once (if any); status timing follows eventPolicy. Ground both, setvx/vy/carry/knockback0, restore ordinary collision for postrelease recovery. Shared releasehitstop delays both equally; then listed owner/victim counters run. No appended launch/down/wake.",
+        "hitstop": "Capture freeze first, C1..CN then releasefreeze, then role recovery; no additional animation-only freeze.",
+        "releaseThrowGraceVictim": 5,
+        "ownerThrowGrace": 0,
+        "stanceAtRelease": "A/Stalker; grounded. Air dash/jump quotas reset by paired grounded release.",
+        "hitboxWhileCaptured": [],
+        "hurtboxWhileCaptured": [],
+        "pushboxWhileCaptured": "Pair ignores inter-actor push separation; use root track and whole-pair wall clamp. Both actors excluded from incoming melee/projectile targeting until release.",
+        "finalOwnerLocalRaw": [
+          -5500,
+          0
+        ],
+        "finalVictimLocalRaw": [
+          11500,
+          0
+        ],
+        "postReleasePoseKeys": {
+          "owner": [
+            {
+              "ticks": [
+                1,
+                4
+              ],
+              "pose": "recoil"
+            },
+            {
+              "ticks": [
+                5,
+                8
+              ],
+              "pose": "collect knives"
+            },
+            {
+              "ticks": [
+                9,
+                12
+              ],
+              "pose": "recover feet"
+            },
+            {
+              "ticks": [
+                13,
+                16
+              ],
+              "pose": "settle Stalker"
+            }
+          ],
+          "victim": [
+            {
+              "ticks": [
+                1,
+                6
+              ],
+              "pose": "stagger"
+            },
+            {
+              "ticks": [
+                7,
+                12
+              ],
+              "pose": "brace"
+            },
+            {
+              "ticks": [
+                13,
+                18
+              ],
+              "pose": "recover facing"
+            }
+          ]
+        },
+        "centralActionId": "236D",
+        "captureHitstop": 6,
+        "releaseHitstop": 8,
+        "eventPolicy": "snapshot and consume on confirmed capture, remove speed boost immediately",
+        "damageEvent": "55 + grey-life snapshot, cap160 grey; one health event at release",
+        "tech": "not techable",
+        "captureEligibility": "target Free, grounded, not in valid prejump, not in hitstun/blockstun/throw grace/recovery/capture/knockdown; source on ground at capture"
+      },
+      {
+        "id": "214D_slide_cashout",
+        "status": "selected_for_v1_implementation",
+        "startup": 22,
+        "active": 2,
+        "whiffRecovery": 30,
+        "captureTicks": 28,
+        "ownerPostReleaseRecovery": 16,
+        "victimPostReleaseRecovery": 18,
+        "ownerAdvantageTicks": 2,
+        "releaseGapRaw": 17000,
+        "releaseGapPixels": 170,
+        "captureClock": "C0 confirmed capture; freeze captureHitstop worldticks; C1..CN shared unfrozen ticks; freeze releaseHitstop worldticks; independent role recovery starts nextunfrozen tick.",
+        "phases": [
+          {
+            "ticks": [
+              1,
+              4
+            ],
+            "ownerAnchor": "collect landed hop or rising slide into groundedcatch; no additional aerial capture",
+            "victimAnchor": "upright captured flinch",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              5,
+              8
+            ],
+            "ownerAnchor": "left forearm pins near shoulder; right knife remains long",
+            "victimAnchor": "torso compressed toward owner",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              9,
+              12
+            ],
+            "ownerAnchor": "coil torso with two knives kept anatomically correct",
+            "victimAnchor": "captured turn",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              13,
+              16
+            ],
+            "ownerAnchor": "right-blade draw-cut action",
+            "victimAnchor": "strong recoil",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              17,
+              20
+            ],
+            "ownerAnchor": "left-knife accent and release preparation",
+            "victimAnchor": "follow-through held",
+            "contactLock": true
+          },
+          {
+            "ticks": [
+              21,
+              24
+            ],
+            "ownerAnchor": "release grip and begin separation",
+            "victimAnchor": "feet recover under body",
+            "contactLock": false
+          },
+          {
+            "ticks": [
+              25,
+              28
+            ],
+            "ownerAnchor": "complete55px retreat into Stalker",
+            "victimAnchor": "complete55px displacement away",
+            "contactLock": false
+          }
+        ],
+        "rootTrack": [
+          {
+            "C": 0,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": "actual grounded capture-relative root"
+          },
+          {
+            "C": 4,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": [
+              60,
+              0
+            ]
+          },
+          {
+            "C": 20,
+            "owner": [
+              0,
+              0
+            ],
+            "victim": [
+              60,
+              0
+            ]
+          },
+          {
+            "C": 24,
+            "owner": [
+              -27.5,
+              0
+            ],
+            "victim": [
+              87.5,
+              0
+            ]
+          },
+          {
+            "C": 28,
+            "owner": [
+              -55,
+              0
+            ],
+            "victim": [
+              115,
+              0
+            ]
+          }
+        ],
+        "sideSwitch": "retain",
+        "release": "AtCN apply final health event once (if any); status timing follows eventPolicy. Ground both, setvx/vy/carry/knockback0, restore ordinary collision for postrelease recovery. Shared releasehitstop delays both equally; then listed owner/victim counters run. No appended launch/down/wake.",
+        "hitstop": "Capture freeze first, C1..CN then releasefreeze, then role recovery; no additional animation-only freeze.",
+        "releaseThrowGraceVictim": 5,
+        "ownerThrowGrace": 0,
+        "stanceAtRelease": "A/Stalker; grounded. Air dash/jump quotas reset by paired grounded release.",
+        "hitboxWhileCaptured": [],
+        "hurtboxWhileCaptured": [],
+        "pushboxWhileCaptured": "Pair ignores inter-actor push separation; use root track and whole-pair wall clamp. Both actors excluded from incoming melee/projectile targeting until release.",
+        "finalOwnerLocalRaw": [
+          -5500,
+          0
+        ],
+        "finalVictimLocalRaw": [
+          11500,
+          0
+        ],
+        "postReleasePoseKeys": {
+          "owner": [
+            {
+              "ticks": [
+                1,
+                4
+              ],
+              "pose": "recoil"
+            },
+            {
+              "ticks": [
+                5,
+                8
+              ],
+              "pose": "collect knives"
+            },
+            {
+              "ticks": [
+                9,
+                12
+              ],
+              "pose": "recover feet"
+            },
+            {
+              "ticks": [
+                13,
+                16
+              ],
+              "pose": "settle Stalker"
+            }
+          ],
+          "victim": [
+            {
+              "ticks": [
+                1,
+                6
+              ],
+              "pose": "stagger"
+            },
+            {
+              "ticks": [
+                7,
+                12
+              ],
+              "pose": "brace"
+            },
+            {
+              "ticks": [
+                13,
+                18
+              ],
+              "pose": "recover facing"
+            }
+          ]
+        },
+        "centralActionId": "214D",
+        "captureHitstop": 6,
+        "releaseHitstop": 8,
+        "eventPolicy": "snapshot and consume on confirmed capture, remove speed boost immediately",
+        "damageEvent": "55 + grey-life snapshot, cap160 grey; one health event at release",
+        "tech": "not techable",
+        "captureEligibility": "target Free, grounded, not in valid prejump, not in hitstun/blockstun/throw grace/recovery/capture/knockdown; source on ground at capture"
+      }
+    ],
+    "coordinates": "Root-track values are world pixels relative to owner root at successful contact, oriented by captured facing; convert exactly *100. Interpolate linearly in raw integers with truncation toward zero at each C tick. Visual offset always[0,0]; these are physical scripted roots during capture, not a render-only teleport.",
+    "wholePairWallClamp": "For each tick compute the two scripted roots including each fighter push halfWidth; translate both by same minimal x correction so both fit[0,100000]. Preserve relative gap and side order. Final120/170px gap must survive either corner.",
+    "roleLocks": "Capture assigns immutable owner/victim/entryFacing/entryRoot. Clear individualcounter slow andmovement/carry; owner/victim cannot act,guard,FD orreceive independent hits while paired. Inputs continue sampling. Normal-throw tech is the sole specialized capture-input exception in C1–6. Ordinary last5worldtick actionedges maybuffer into roleunlock.",
+    "handAndWeaponOwnership": {
+      "rightHand": "Always long knife; may cut or hold clear, never becomes the short knife.",
+      "leftHand": "Always short knife; catches use forearm/pommel/closed-fist structure while blade points down/outward, not an unexplained empty hand.",
+      "handRelease": "Contact lock must turn off at explicit phase boundary (Wound C17, ordinary C17, cashouts C21). Neither victim nor weapon follows a released socket afterward.",
+      "socketRequirement": "Author per-pose right_hand, left_hand, right_knife_root/tip, left_knife_root/tip, left_forearm_contact and victim_contact anchors. Measured coordinates must be filled from approved art; root tracks and exact collision above already define gameplay. These anatomy sockets are not present in current manifest.",
+      "schematicPairedAnchor": "While upright roots are60px apart, owner forearm local[28,88] and victim chest local[32,88] with victim facing-ownerFacing meet at same world point. This is a selected planning anchor, not measured existing anatomy. For prone/rising Wound, author corresponding32/45/68/88px contact-height keys without changing collision or root tracks."
+    },
+    "postRelease": "Grounded ready/crouch-to-ready role clips consume exactly listed recovery counters; no new knockdown/wakeup appended. Restore per-character ready hurt/push geometry on release; during role recovery cannot guard/act. Victim throw grace5 starts on first unlocked tick. No ordinary throw/cashout may chain to Wound solely because this sequence visually tumbles the victim.",
+    "currentContrast": "No Fillet move currently uses captured pair animation. Generic capture uses one fixed60px offset and generic victim hurt pose; current normal throws and conditional5D cashout apply immediately.",
+    "sourceApproach": "236D is grounded before capture (rooty0 byf21); C1–4 normalizes landed hop posture, never adds aerial capture.214D enters from its authored slide/rise. Wound rejects already-owned bleed.",
+    "normalThrowTechBranch": {
+      "status": "selected_for_v1_implementation",
+      "scope": "Universal ordinary ground throws only; not Fillet-only. Wound and command cashouts are not techable.",
+      "acceptWindow": "Check at the start of entering C1..C6, before advancing that tick; completed pair ticks are0..5. C7 is too late. The existing simultaneous legal ground-capture clash at C0 uses the same symmetric break outcome.",
+      "input": "P+K held with at least one new P/K edge, either direction; old held chord does not auto-tech. Specialized pair handler uses ordinary5-world-tick history, so only still-buffered edges from capture freeze can resolve at C1. Consume chord on acceptance.",
+      "freezeTicks": 6,
+      "sharedRecoveryTicks": 12,
+      "advantageTicks": 0,
+      "releaseGapRaw": 12000,
+      "sideSwitch": false,
+      "damage": 0,
+      "statusChange": "None; no apply/refresh/consume/cashout of bleed.",
+      "rootEvent": "At accepted tech T0 preserve current side order and center midpoint, set roots120px apart using whole-pair wall clamp; zero vx/vy/carry. Release contact immediately; then6 shared freeze ticks. This is declared physical push displacement, not visual root drift.",
+      "recovery": "After freeze, T1..T12 equal role-recovery ticks; T13 both actionable. PosesT1..4 recoil/arms disengage,T5..8 plant feet,T9..12 ready. No attack/jump/guard/FD during recovery.",
+      "collision": "Restore ordinary body/push onT1 after shared freeze. Strikes can interrupt a role normally; normal throw/capture eligibility rejects recovery. No new strike invulnerability. On hit clear that role tech recovery and enter ordinary hit state; other role finishes own remaining lock. +0 assumes neither is subsequently hit.",
+      "throwGraceOnUnlock": 5,
+      "throwGraceRoles": "both",
+      "rootYOffsetRaw": 0,
+      "poseOwnership": "Both knives remain in their physical hands; left forearm contact unlocks atT0. No side exchange even if back throw was attempted."
+    }
+  },
+  "acceptedConstraintsPreserved": [
+    {
+      "status": "selected_for_v1_implementation",
+      "item": "Wound restand starts+0; outside ordinary throw range/inside medium poke range."
+    },
+    {
+      "status": "selected_for_v1_implementation",
+      "item": "Same relative spacing for ordinary throw on hit; +0 does not apply to normal throws or cashouts."
+    },
+    {
+      "status": "selected_for_v1_implementation",
+      "item": "Bleed adds speed and enables two evasive lunging command grabs; both lose to valid prejump/jump."
+    },
+    {
+      "status": "selected_for_v1_implementation",
+      "item": "D remains Drive; future2S is universal sweep; c.S->f.S planned before Fillet implementation;2K->2S undecided."
+    },
+    {
+      "status": "selected_for_v1_implementation",
+      "item": "Mechanics/geometry may mix donor moves; custom art may fully replace donor poses while respecting weapon anatomy."
+    }
+  ],
+  "implementationDependencies": [
+    "Explicit bleed movement scaling and speed snapshot, separate from old grey-life-only status.",
+    "Persistent gait accumulator/support-leg phase and explicit locomotion clips.",
+    "Facing lock policy, committed backdash action/guard windows.",
+    "Per-move exact phase animation frames and last-recovery-tick pose retention.",
+    "Minimum3f air-action landing policy and animation/collision synchronization.",
+    "New two-actor paired move state, root tracks, role recovery, wall correction and socket metadata.",
+    "Timing-gated OTG Wound contact branch and+0 restand; current global Downed/Waking collision exclusion must change only for eligible Wound.",
+    "New236D/214D Drive input slots and state-based access; no automatic reinterpretation of current5D conditional cashout.",
+    "Versioned serialized tuning/snapshot/hash extension and native/browser/workshop parity.",
+    "Natural air-dash coast pending/mode,650/715px-per100 cap applied to vxandcarry beforepost-burst input; preserve run-jump speed outsidecoast.",
+    "Explicit air-dash pause guard/FD lock and per-move landingrecovery3/4/6.",
+    "Normal-throw specialized6-tick tech input branch, with separatelyauthored symmetric break outcome."
+  ],
+  "validationStatus": "implementation target; package validation is recorded separately; Codex must execute engine acceptance cases",
+  "centralPrototypeCoordination": {
+    "authoritativeFiles": [
+      "FILLET_SPEC.json",
+      "MOVEMENT_ANIMATION.json",
+      "FRAME_GEOMETRY.jsonl"
+    ],
+    "policy": "These selected v1 files supersede old prototype/review artifacts. Do not seek per-move approval."
+  },
+  "postAirDashCoastExtension": {
+    "status": "selected_for_v1_implementation",
+    "baseCapRaw": 650,
+    "bleedCapRaw": 715,
+    "bleedPercent": 110,
+    "entry": "Only after natural completion of fifth burst tick (overall f9), set airDashCoastPending. Atstart of overall f10 before buffered inputs, clamp abs(vx) and abs(carryVx) to current eligible cap, preserving signs; clear pending and setcoastMode.",
+    "continuedCoast": "No extra free-air drag. Clamp again to650 if bleed expires while coasting; entering bleed does not multiply existing vx. Steering reversal sets ordinary380. Grounding, an attack, hit/block, FD, new dash or reset clears coastMode.",
+    "earlyBurstCancel": "If attack accepted f5..f9 before dash completes, use2000/2200×move inertia and friction90. No coast clamp that tick and no old dash carry afterattack.",
+    "runJump": "Do not apply coast cap to a run jump that has not naturally finished an air dash.",
+    "snapshot": [
+      "airDashCoastPending",
+      "airDashCoastMode",
+      "dashSpeedSnapshot"
+    ]
+  },
+  "exactAirDashStateFrames": {
+    "1-4": {
+      "state": "pause",
+      "vxRaw": 0,
+      "vyRaw": 0,
+      "attack": false,
+      "jump": false,
+      "guard": false,
+      "FD": false,
+      "inputSampling": true,
+      "gravity": false
+    },
+    "5-9": {
+      "state": "burst",
+      "velocityRaw": "2000 or2200 in saved dash direction",
+      "attack": true,
+      "jump": "No extra air jumps for Fillet; a configured future quota would be evaluated normally.",
+      "guard": true,
+      "FD": true,
+      "order": "Set new burst vx, then inspect buffered actions; attack replaces dash before translation and applies inertia. Ordinary air guard is allowed holding back; FD cancels dash.",
+      "gravity": "suppressed while remainingdash>0; finalburst tick resumes gravity after vertical integration"
+    },
+    "10+": {
+      "state": "natural post-burst coast if no earliercancel",
+      "capRaw": "650 or715 applied to vx/carry before inputs",
+      "gravity": true,
+      "controls": "ordinary free-air controls"
+    }
+  },
+  "locomotionPoseIdentity": {
+    "status": "selected_for_v1_implementation",
+    "neutralLeadFoot": "anatomical left foot toward opponent; right foot rear, while retaining selected A/Stalker wide stagger andlow torso",
+    "runningAttackEntry": "Preserve whichever support foot the gait already has; no added preparatory step or hidden startup. Alternate both complete gait halves.",
+    "weaponOwnership": "long RIGHT, short LEFT; no independent weapon mirroring orhand swap."
+  },
+  "reactionPresentationOverlays": [
+    {
+      "state": "AirReel",
+      "pose": "hit_reel",
+      "root": "Budgeted horizontal push + ballistic vertical motion; counter gravity scaling; land Downed unless bounce.",
+      "duration": "Until floor/explicit wall/pull state; not a fixed animation length."
+    },
+    {
+      "state": "WallSplat",
+      "pose": "hit_reel",
+      "root": "Hold actual wall-impact Y, minimum20px; x at wall; vx/vy0.",
+      "duration": "Current global60 actor ticks; retain unless central global changes."
+    },
+    {
+      "state": "Reeled",
+      "pose": "hit_reel",
+      "root": "Core pull follows owner and pullGap over move pullFrames; no ordinary locomotion.",
+      "duration": "Move-authored pullFrames."
+    },
+    {
+      "state": "Crumpled",
+      "pose": "hit_reel",
+      "root": "x held,y5px,vy0.",
+      "duration": "Move-authored crumpleFrames, then Free and throw grace5."
+    },
+    {
+      "state": "Downed/Waking",
+      "pose": "hard/soft down + five wake keys",
+      "root": "y0/vx0; no free locomotion.",
+      "duration": "Move-authored down/wake timers; Wound only explicit timing-gated branch."
+    },
+    {
+      "state": "Captured",
+      "pose": "paired owner/victim guide",
+      "root": "Saved pair track, wall correction and role locks.",
+      "duration": "20/24/28 ticks by contract plus declared freezes."
+    },
+    {
+      "state": "wall-break travel",
+      "pose": "StageTravel override",
+      "root": "Combat paused; cinematic path is screen presentation.",
+      "duration": "Current global150 world ticks; combat reset at remaining50."
+    },
+    {
+      "state": "round resolved",
+      "pose": "Last resolved current pose until scene ceremony",
+      "root": "Current winner branch stops ordinary combat; world/input counter still advances.",
+      "duration": "Scene/match ceremony owns next phase; no new Fillet KO clip selected."
+    }
+  ],
+  "historicalCollisionProfilePolicy": "Exact old sprite anatomy is preserved only in baseline. Final v1 implementation locomotion uses these newly authored profiles; new poses must be drawn to match.",
+  "registeredStandingAnatomy": {
+    "boxesLocalRaw": {
+      "legs": [
+        -5400,
+        0,
+        6000,
+        6200
+      ],
+      "torsoArms": [
+        -3600,
+        5200,
+        3500,
+        11800
+      ],
+      "head": [
+        500,
+        11800,
+        3200,
+        14600
+      ]
+    },
+    "scope": "Ready and exact legacy default standing regions, including standing attack phases. Specialized crouch, air, motion and reaction regions remain explicitly authored.",
+    "supportFootContinuity": "Preserve incoming planted-foot identity/contact using deterministic IK relative to the moving gameplay root; collect the free foot during existing startup. Release support naturally before exceeding fixed limb reach. No root correction, timing extension or pushbox widening."
+  },
+  "stopSettle": {
+    "durationActorTicks": 4,
+    "collisionProfile": "ready",
+    "gameplayLockTicks": 0,
+    "interruptibleFromTick": 1,
+    "rule": "Preserve live carry by the movement contract; torso settles visually; legal input wins immediately."
+  },
+  "wakePoseProfileMapping": {
+    "WK1": 0,
+    "WK2": 1,
+    "WK3": 2,
+    "WK4": 3,
+    "WK5": 3
+  },
+  "inputPriorityExtension": {
+    "legalJumpBeforeGroundFD": true,
+    "trigger": "fresh or still-buffered valid Up edge",
+    "bufferWorldTicks": 5,
+    "heldUpAutojump": false,
+    "rule": "Evaluate a legal jump before grounded FD. FD may continue in air under the shared guard rules. Stun, prejump and action legality still apply."
+  }
+}

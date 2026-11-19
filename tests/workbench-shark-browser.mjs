@@ -1,3 +1,4 @@
+import {seedBaseline} from './workbench-ui-helpers.mjs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
@@ -17,7 +18,7 @@ try{
    return draw.apply(this,args);
   };
  });
- await page.goto(`http://127.0.0.1:${server.address().port}/`);await ready(page);
+ await seedBaseline(page);await page.goto(`http://127.0.0.1:${server.address().port}/`);await ready(page);
  await page.locator('#fighter').selectOption('4');await page.locator('#tab-hit').click();
  await page.locator('#test-gap').fill('70');await page.locator('#test-gap').blur();
  await mkdir('build/shark-review',{recursive:true});

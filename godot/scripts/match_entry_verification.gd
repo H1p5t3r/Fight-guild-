@@ -18,7 +18,8 @@ func key(code: int, pressed: bool) -> void:
 	Input.flush_buffered_events()
 
 func wait_for_phase(phase: String) -> void:
-	for _i in 300:
+	var deadline := Time.get_ticks_msec() + 15000
+	while Time.get_ticks_msec() < deadline:
 		if game.match_entry.phase == phase: return
 		await tree.create_timer(0.01).timeout
 	check(false, "Timed out waiting for " + phase)

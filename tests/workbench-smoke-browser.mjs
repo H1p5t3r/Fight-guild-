@@ -1,3 +1,4 @@
+import {seedBaseline} from './workbench-ui-helpers.mjs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
@@ -9,7 +10,7 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];
  page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
- await page.goto(`http://127.0.0.1:${server.address().port}/`);await ready(page);
+ await seedBaseline(page);await page.goto(`http://127.0.0.1:${server.address().port}/`);await ready(page);
  await mkdir('build/smoke-review',{recursive:true});
  await page.locator('#fighter').selectOption('2');await page.locator('#tab-hit').click();
  await page.locator('#test-gap').fill('100');await page.locator('#test-gap').blur();

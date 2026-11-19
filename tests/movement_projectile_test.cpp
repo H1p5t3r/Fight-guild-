@@ -1,3 +1,4 @@
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <cstdio>
 #include <initializer_list>
@@ -5,7 +6,7 @@ using namespace fight;
 static int checks=0,failures=0;
 #define CHECK(x) do {++checks;if(!(x)){++failures;std::fprintf(stderr,"FAIL %d: %s\n",__LINE__,#x);}}while(0)
 static Simulation sim;
-static void fresh(){sim.defaults();sim.reset(5,4,0,0);sim.preview_place(0,40000,0,10000);sim.preview_place(1,80000,0,10000);}
+static void fresh(){legacy_fillet::defaults(sim);sim.reset(5,4,0,0);sim.preview_place(0,40000,0,10000);sim.preview_place(1,80000,0,10000);}
 static void ticks(int n,int a=0,int b=0){for(int i=0;i<n;++i)sim.step(a,b);}
 static int count(){return sim.box_count(0,ProjectileBox)+sim.box_count(1,ProjectileBox);}
 static void shot(int owner=0,int kind=1){
@@ -18,7 +19,7 @@ static void shot(int owner=0,int kind=1){
 static void air_dash_pause(){
  // Every captain/style/direction must halt both rising and falling motion first.
  for(int c=0;c<CHARACTER_COUNT;++c)for(int style=0;style<4;++style)for(int back=0;back<2;++back)for(int facing:{-1,1})for(int vy:{-900,900}){
-  sim.defaults();sim.reset(c,(c+1)%CHARACTER_COUNT,0,0);
+  legacy_fillet::defaults(sim);sim.reset(c,(c+1)%CHARACTER_COUNT,0,0);
   auto& f=sim.world.players[0];auto& m=sim.mobility[c];
   f.x=facing==1?40000:60000;f.y=18000;f.vx=-facing*525;f.vy=vy;f.carry_vx=facing*1900;f.carry_time=5;
   sim.world.players[1].x=facing==1?85000:15000;
@@ -73,7 +74,7 @@ static void air_dash_pause(){
 }
 static void shark_movement_art(){
  for(int facing:{-1,1}){
-  sim.defaults();sim.reset(4,5,0,0);
+  legacy_fillet::defaults(sim);sim.reset(4,5,0,0);
   auto& f=sim.world.players[0];auto& m=sim.mobility[4];
   f.x=50000;sim.world.players[1].x=facing==1?90000:10000;f.facing=facing;
   const int times[]={0,71,72,83,84,89,90,107,108};

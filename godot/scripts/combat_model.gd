@@ -2,7 +2,7 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 22
+const DATA_VERSION := 23
 
 static func startup_minimum(move: Dictionary) -> int:
 	if move.get("category") == 4: return 2
@@ -34,7 +34,7 @@ const HURT_FIELDS := 17
 const MOMENTUM_MAX := 10000
 const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
-const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D", "2D", "4P+K", "6P+K", "236K", "236S>6S", "236S>2S", "214S", "j.214P", "214S>P", "j.214P>P","c.S","[S/Hs]","[S/Hs]>attack","st.P","st.K","st.S","st.Hs","st.2D","st.236D","j.4P+K","j.6P+K","6[Hs]","5[D]"]
+const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D", "2D", "4P+K", "6P+K", "236K", "236S>6S", "236S>2S", "214S", "j.214P", "214S>P", "j.214P>P","c.S","[S/Hs]","[S/Hs]>attack","st.P","st.K","st.S","st.Hs","st.2D","st.236D","j.4P+K","j.6P+K","6[Hs]","5[D]","236D","214D"]
 # Smear slots are reserved for schema compatibility; transition smearing is removed.
 const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange", "enabled", "artPose", "followFrom", "followFrom2", "followHit", "travelSpeed", "inertiaPercent", "pullFrames", "pullGap", "hitAngle", "normalCancelStart", "normalCancelEnd", "specialCancelStart", "specialCancelEnd", "jumpCancelStart", "jumpCancelEnd", "followCancelStart", "followCancelEnd", "cancelOn", "starterProration", "comboScaling", "minimumDamage", "landingRecovery", "attackLevel", "counterTier", "counterVulnerable", "counterFreezeFrames", "counterSlowFrames", "projectileKind", "projectileSpawnFrame", "projectileSpeedX", "projectileSpeedY", "projectileGravity", "projectileLife", "projectileOffsetX", "projectileOffsetY", "projectileWidth", "projectileHeight", "projectileHits", "projectileRehit", "projectileDurability", "projectilePersist", "projectileMelee", "smearMode", "smearPart", "smearStretch", "smearFrame1", "smearFrame2", "smearFrame3", "smearFrame4", "hurtMaskWindup", "hurtMaskActive", "hurtMaskRecovery","mechanic","tetherSpeed","tetherFrames","bleedInitial","bleedTickDamage","bleedTickFrames","bleedDuration","bleedBlockPercent","bleedCap","variantStartup","variantActive","variantRecovery","variantDamage","variantRange","variantSpeed","variantLift","variantHitstun","variantKnockdown","stanceRequired","stanceChange","actionType","holdFollow","holdFrame","holdButton","guardFollow","proximityMove","proximityRange","startupTravel","diveSpeedX","diveSpeedY","groundBounce","wallBounce","crumpleFrames","airCounterKnockdown","hurtWindowStart","hurtWindowEnd","hurtWindowMask","semiAirStart","semiAirEnd","armorFrames","armorHits","grabFrames","finishArtPose","finishArtFrame"]
 const MOVEMENT_FIELDS := ["forwardStyle", "walkSpeed", "runSpeed", "runAcceleration", "stepSpeed", "stepFrames", "backSpeed", "backFrames", "attackFriction", "backStyle", "backWalkSpeed", "backRunSpeed", "jumpSpeed", "jumpForwardSpeed", "jumpBackSpeed", "gravity", "airJumps", "prejumpFrames", "airDashEnabled", "airBackdashEnabled", "airDashStyle", "airBackdashStyle", "airDashSpeed", "airBackdashSpeed", "airDashFrames", "airBackdashFrames", "airDashUses", "hoverHeight", "hoverRiseSpeed", "teleportDistance", "backTeleportDistance", "teleportStartup", "fdEnabled", "fdPushPercent", "fdDrain", "fdAirDrain", "fdBlockCost", "smearMode", "smearPart", "smearStretch", "airDashPauseFrames", "airBackdashPauseFrames"]
@@ -44,7 +44,8 @@ const RECOVERY_RULES := ["gravityAfter", "gravityStep", "gravityCap", "wallThres
 const TUNING_RULES := ["fdAirDrain", "fdLevelCost", "cornerPushTransfer", "wallMidCap", "groundedWallPrime", "blockCarryover", "throwGraceFrames", "airLandingFrames", "repeatAfter", "repeatGravityStep"]
 const JUMP_RULES := ["prejumpFrames", "emptyLandingFrames"]
 const RULE_COUNT := 38 # Input, Momentum, recovery/walls, tuning, then jump rules.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy", "dashKind", "dashAge", "airDashUsed", "airJumpUsed", "teleported", "contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause"]
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy", "dashKind", "dashAge", "airDashUsed", "airJumpUsed", "teleported", "contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause","attackSerial","pairRecovery","captureFailed","contactTicks","coastPending","coastMode","dashSpeed","displayMove","displayAge"]
+var extension_art: Array = ExtensionData.default_art.duplicate(true)
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
 
@@ -61,7 +62,7 @@ func state_hash() -> int:
 	return core.checksum()
 
 func state() -> Dictionary:
-	var result := {"frame": frame(), "remaining": core.read_value(-1, 1), "hitstop": core.read_value(-1, 2), "winner": core.read_value(-1, 3), "wallBreakTime": core.read_value(-1, 4), "wallBreakActor": core.read_value(-1, 5), "wallBreakSide": core.read_value(-1, 6), "stage": core.read_value(-1, 7), "wallBreakDuration": core.read_value(-1, 8), "impactTime": core.read_value(-1, 9), "impactDuration": core.read_value(-1, 10), "impactActor": core.read_value(-1, 11), "impactTier": core.read_value(-1, 12), "impactX": core.read_value(-1, 13), "impactY": core.read_value(-1, 14), "wallBreakX": [core.read_value(-1, 15), core.read_value(-1, 16)], "wallBreakY": [core.read_value(-1, 17), core.read_value(-1, 18)], "wallHealth": [core.read_value(-1, 19), core.read_value(-1, 20)], "foregroundPlayer": core.read_value(-1, 21), "players": []}
+	var result := {"frame": frame(), "remaining": core.read_value(-1, 1), "hitstop": core.read_value(-1, 2), "winner": core.read_value(-1, 3), "wallBreakTime": core.read_value(-1, 4), "wallBreakActor": core.read_value(-1, 5), "wallBreakSide": core.read_value(-1, 6), "stage": core.read_value(-1, 7), "wallBreakDuration": core.read_value(-1, 8), "impactTime": core.read_value(-1, 9), "impactDuration": core.read_value(-1, 10), "impactActor": core.read_value(-1, 11), "impactTier": core.read_value(-1, 12), "impactX": core.read_value(-1, 13), "impactY": core.read_value(-1, 14), "wallBreakX": [core.read_value(-1, 15), core.read_value(-1, 16)], "wallBreakY": [core.read_value(-1, 17), core.read_value(-1, 18)], "wallHealth": [core.read_value(-1, 19), core.read_value(-1, 20)], "foregroundPlayer": core.read_value(-1, 21), "pairKind": core.read_value(-1,22), "pairClock": core.read_value(-1,23), "pairOwner": core.read_value(-1,24), "pairMove": core.read_value(-1,25), "players": []}
 	for p in 2:
 		var fighter := {}
 		for i in STATE_FIELDS.size():
@@ -82,6 +83,8 @@ func move_name(character: int, slot: int) -> String:
 
 func move(character: int, slot: int) -> Dictionary:
 	var result := {}
+	var extra := extension(character, slot)
+	if not extra.is_empty(): result.extensions = extra
 	for i in FIELDS.size():
 		result[FIELDS[i]] = config[(character * MOVE_IDS.size() + slot) * FIELDS.size() + i]
 	result.hurtboxes = {}
@@ -144,6 +147,9 @@ static func hurt_offset(character: int, slot: int, phase: int) -> int:
 	return CHARACTERS.size() * (MOVE_IDS.size() * FIELDS.size() + MOVEMENT_FIELDS.size()) + ((character * MOVE_IDS.size() + slot) * HURT_PHASES.size() + phase) * HURT_FIELDS
 
 static func load_hurtboxes(value: Variant, candidate: PackedInt32Array, character: int, slot: int) -> String:
+	for phase in HURT_PHASES.size():
+		var offset := hurt_offset(character, slot, phase)
+		for i in HURT_FIELDS: candidate[offset+i] = 0
 	if not value is Dictionary: return "Missing attack hurtbox profiles."
 	for phase in value:
 		if not phase in HURT_PHASES: return "Unknown hurtbox phase."
@@ -170,6 +176,15 @@ func movement(character: int) -> Dictionary:
 	for i in MOVEMENT_FIELDS.size(): result[MOVEMENT_FIELDS[i]] = config[offset + i]
 	return result
 
+func extension_offset(character: int, slot: int) -> int:
+	var base := CHARACTERS.size() * (MOVE_IDS.size() * (FIELDS.size() + HURT_FIELDS * 3 + HIT_TRACK_FIELDS) + MOVEMENT_FIELDS.size())
+	return base + character * (ExtensionData.CHARACTER_WORDS + MOVE_IDS.size() * ExtensionData.ACTION_WORDS) + (0 if slot < 0 else ExtensionData.CHARACTER_WORDS + slot * ExtensionData.ACTION_WORDS)
+
+func extension(character: int, slot: int) -> Dictionary:
+	var start := extension_offset(character, slot)
+	var count := ExtensionData.CHARACTER_WORDS if slot < 0 else ExtensionData.ACTION_WORDS
+	return ExtensionData.unpack(config.slice(start, start+count), slot < 0, extension_art[character].get("character" if slot < 0 else str(slot), {}))
+
 func data() -> Dictionary:
 	var result := {"schema": DATA_VERSION, "coreVersion": DATA_VERSION, "inputRules": {}, "momentumRules": {}, "recoveryRules": {}, "tuningRules": {}, "jumpRules": {}, "characters": []}
 	for i in RULES.size():
@@ -184,6 +199,8 @@ func data() -> Dictionary:
 		result.jumpRules[JUMP_RULES[i]] = config[config.size() - JUMP_RULES.size() + i]
 	for c in CHARACTERS.size():
 		var character := {"name": CHARACTERS[c], "moves": [], "movement": movement(c)}
+		var extra := extension(c, -1)
+		if not extra.is_empty(): character.extensions = extra
 		for m in MOVE_IDS.size():
 			var definition := {"id": MOVE_IDS[m]}
 			definition.merge(move(c, m))
@@ -202,11 +219,40 @@ func load_data(value: Variant) -> String:
 		return "Unsupported move data version."
 	var characters: Variant = value.get("characters")
 	var expected := 2 if version == 1 else CHARACTERS.size()
-	var slots := 22 if version < 6 else 25 if version == 6 else 32 if version < 18 else 43 if version == 18 else MOVE_IDS.size()
+	var slots := 22 if version < 6 else 25 if version == 6 else 32 if version < 18 else 43 if version == 18 else 45 if version < 23 else MOVE_IDS.size()
 	if not characters is Array or characters.size() != expected:
 		return "Missing characters."
+	for character in characters:
+		if not character is Dictionary or not character.get("moves") is Array: return "Malformed character."
+		if version < 23 and character.has("extensions"): return "Older schemas cannot contain extended combat data."
+		for action in character.moves:
+			if not action is Dictionary: return "Malformed move."
+			if version < 23 and action.has("extensions"): return "Older schemas cannot contain extended combat data."
+			if version >= 23 and ((action.has("extensions") and not character.has("extensions")) or (character.has("extensions") and action.get("enabled") and not action.has("extensions"))): return "Incomplete extended kit: enabled actions need both character and action data."
 	# Start with shipped defaults, so older files gain the new universal move slots.
 	var candidate := FightCore.new().configuration()
+	var next_art: Array = [{}, {}, {}, {}, {}, {}]
+	if version < 23:
+		var old_fillet: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/legacy_fillet_v22.json"))
+		for m in 45:
+			for i in FIELDS.size(): candidate[(5 * MOVE_IDS.size() + m) * FIELDS.size() + i] = int(old_fillet.moves[m][FIELDS[i]])
+			load_hurtboxes(old_fillet.moves[m].hurtboxes, candidate, 5, m)
+			load_hitboxes(old_fillet.moves[m].hitboxTimeline, candidate, 5, m)
+		for i in MOVEMENT_FIELDS.size(): candidate[CHARACTERS.size() * MOVE_IDS.size() * FIELDS.size() + 5 * MOVEMENT_FIELDS.size() + i] = int(old_fillet.movement[MOVEMENT_FIELDS[i]])
+	# Schema 22 and older never inherit the new kit implicitly.
+	for c in CHARACTERS.size():
+		for m in range(-1, MOVE_IDS.size()):
+			var ext: Variant = null
+			if c < expected and version >= 23 and characters[c] is Dictionary:
+				if m < 0: ext = characters[c].get("extensions")
+				elif characters[c].get("moves") is Array and m < characters[c].moves.size() and characters[c].moves[m] is Dictionary: ext = characters[c].moves[m].get("extensions")
+			var packed := ExtensionData.pack(ext, m < 0)
+			if packed.is_empty(): return "Malformed extended combat data for %s / %d; draft unchanged." % [CHARACTERS[c], m]
+			var start := extension_offset(c, m)
+			for i in packed.size(): candidate[start+i] = packed[i]
+			if ext is Dictionary and ext.has("art"): next_art[c]["character" if m < 0 else str(m)] = ext.art.duplicate(true)
+		if version < 23:
+			for m in range(45, MOVE_IDS.size()): candidate[(c * MOVE_IDS.size() + m) * FIELDS.size() + FIELDS.find("enabled")] = 0
 	for c in expected:
 		if not characters[c] is Dictionary or characters[c].get("name") != CHARACTERS[c]:
 			return "Character list differs from this build."
@@ -303,10 +349,12 @@ func load_data(value: Variant) -> String:
 		candidate[candidate.size() - JUMP_RULES.size()] = 0 # Preserve legacy instant takeoff.
 	if not core.configure(candidate):
 		return "A move value or rule is outside the supported range."
+	extension_art = next_art
 	config = core.configuration()
 	return ""
 
 func restore_defaults() -> void:
+	extension_art = ExtensionData.default_art.duplicate(true)
 	core.restore_defaults()
 	config = core.configuration()
 

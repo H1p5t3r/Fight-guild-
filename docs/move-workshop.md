@@ -475,3 +475,43 @@ The block-advantage card now evaluates the first frame of the last distinct hit 
 Standing S now selects c.S or f.S by distance for every fighter. The paired controls in Timing & damage and Inputs & cancels let you edit either version and test just inside/outside the threshold using the shared preview. c.S can gatling into f.S or 2S on contact; a second standing S chooses f.S even at close range. Sequence tests use the same contextual input rules. Saved f.S data retains the `5S` ID for compatibility.
 
 Every 2S is a low hard-knockdown sweep, −12 on first-active block and at least −7 on last-active block before cancels. Special cancels remain enabled. See [the batch notes](move-batches/2026-11-19-slash-sweeps.md) for timing, thresholds and importing the latest preset without losing a saved browser draft.
+
+## Fillet v1 kit controls (schema 23)
+
+The bundled working batch now installs the supplied Fillet v1 kit. Existing browser
+saves still take priority. Download your current JSON before choosing the latest
+batch, or import `godot/data/workshop/2026-11-19-fillet-v1/FightGuild-Fillet-v1.json`.
+Opening an older file preserves its old Fillet kit; resetting one move does not
+partially install the new kit. New slots 236D and 214D remain disabled in old files.
+
+- **Drive system** has links to Wound, Vault, Skim and both ordinary throws. Edit
+  bleed duration/growth/cap, movement bonuses, capture and release freeze, paired
+  duration, each fighter's recovery, release spacing, protection and paired roots.
+- **Hurtboxes & defense** edits absolute move-frame keys. Each key holds until the
+  next. Toggle legs, torso/arms, head and the optional extension independently.
+  Timed protection still applies afterward: Fillet 6P retains its authored body
+  geometry but only the legs are vulnerable on frames 3–12.
+- **Hitboxes & impact** includes root travel, vertical keys, pushbox keys, attack
+  friction, low-crush and side-passage timing. Incoming run/dash velocity remains
+  separate from authored travel. Root collision mode 0 resolves ordinary bodies,
+  1 passes through the opponent body, and 2 stops at it; stage walls always remain.
+- **Inputs & cancels** uses exact named destinations for this kit. These replace
+  the old broad gatling masks. Ordinary throws and Wound cannot be cancel targets.
+  Cashout routes additionally require owned bleed and the post-contact delay.
+- **Character movement** includes the natural air-dash coast cap, backdash lock,
+  push dimensions and distance per locomotion key.
+
+In Test setup, **Bleed setup** can supply 20, 59 or 160 grey life, or no bleed.
+Automatic setup gives cashouts 20 grey life and gives Wound a downed target.
+**Reaction → Throw tech** sends the actual P+K chord. The preview readout reports
+pair C ticks, release recovery for both fighters, bleed time, grey life and failed
+capture attempts. Those setups only affect the preview, not your saved combat data.
+
+Godot's development editor has **Body keys, paired captures & kit routes** with
+parameter controls, named destinations and advanced timeline JSON. Native training
+traces also show the paired clock, recovery, bleed and post-contact count. Distances
+in timeline JSON remain integer hundredths of a pixel; visible distance fields use
+pixels. Invalid imports and edits leave the live set intact.
+
+Art/animation briefs remain in the JSON's extension metadata. New Fillet art is
+being reviewed separately; the bundled sprite atlas has not been replaced.

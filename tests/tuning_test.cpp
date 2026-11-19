@@ -1,3 +1,4 @@
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <cstdio>
 #include <initializer_list>
@@ -5,10 +6,11 @@ using namespace fight;
 static int checks=0,failures=0;
 #define CHECK(x) do { ++checks; if(!(x)) { std::fprintf(stderr,"Tuning FAIL %d: %s\n",__LINE__,#x); ++failures; } } while(0)
 static Simulation fresh() {
-    Simulation s;s.defaults();s.reset(5,4,0,0);
+    Simulation s;legacy_fillet::defaults(s);s.reset(5,4,0,0);
     s.world.players[0].x=45000;s.world.players[1].x=51000;
     return s;
 }
+static void commit_throw(Simulation& s){while(s.world.pair.kind||s.world.hitstop)s.step(0,0);}
 static void ticks(Simulation& s,int count,int a=0,int b=0) { while(count-->0) s.step(a,b); }
 static Move& strike(Simulation& s,int slot=0) {
     auto& m=s.moves[5][slot];m.v[Reach]=50000;m.v[HitboxBack]=0;m.v[Bottom]=0;m.v[Height]=50000;
@@ -83,11 +85,11 @@ static void defense() {
         for(int i=0;i<5;++i) {
             prime(s,FORWARD_THROW);s.step(0,0);CHECK(b.health==1000);
         }
-        prime(s,FORWARD_THROW);s.step(0,0);CHECK(b.health==920);
+        prime(s,FORWARD_THROW);s.step(0,0);commit_throw(s);CHECK(b.health==920);
     }
     s=fresh();b.reaction=Waking;b.recovery_time=1;s.step(0,0);CHECK(b.throw_grace==5);
     s=fresh();b.stun=3;b.guarding=b.guard_break=1;b.throw_grace=5;
-    prime(s,FORWARD_THROW);s.step(0,0);CHECK(b.health==920); // Guard break bypasses all throw grace.
+    prime(s,FORWARD_THROW);s.step(0,0);commit_throw(s);CHECK(b.health==920); // Guard break bypasses all throw grace.
     s=fresh();strike(s);b.guarding=1;b.stun=3;s.rules.block_carryover=0;
     prime(s);s.step(0,0);CHECK(b.health==900);
 }

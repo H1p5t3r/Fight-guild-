@@ -1,3 +1,4 @@
+import {packExtension,upgradeExtensions,extensionBody,migrationDefaults} from '../extensions.mjs';
 import {upgradeCharges} from '../charge-data.mjs';
 import {upgradeStartupRules,moveFieldLimit} from '../startup-rules.mjs';
 import {upgradeStances} from '../stance-data.mjs';
@@ -17,10 +18,12 @@ function integer(value, limit, name) {
   if(!Number.isInteger(value)||value<limit.min||value>limit.max) throw new Error(`${name}: use a whole number from ${limit.min} to ${limit.max}.`);
 }
 export function validate(data, pack) {
-  data=upgradeStances(upgradeMechanics(upgradeHurtMasks(upgradeMovement(upgradeHitboxes(data),pack.defaults)),pack.defaults),pack.defaults);
-  data=upgradeAirDash(upgradeStartupRules(upgradeCharges(data,pack.defaults)),pack.defaults);
+  const migration=data?.schema<23?migrationDefaults(pack.defaults):pack.defaults;
+  data=upgradeStances(upgradeMechanics(upgradeHurtMasks(upgradeMovement(upgradeHitboxes(data),migration)),migration),migration);
+  data=upgradeAirDash(upgradeStartupRules(upgradeCharges(data,migration)),migration);
+  data=upgradeExtensions(data,pack.defaults);
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor accepts current Fight Guild moves or version-12/13/14/15/16/17/18/19/20/21 workshop exports. Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves and workshop exports from versions 12–22. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);
@@ -30,7 +33,10 @@ export function validate(data, pack) {
     if(!record(c)||c.name!==CHARACTERS[i]||!Array.isArray(c.moves)||c.moves.length!==MOVE_IDS.length) throw new Error(`Incomplete or reordered move list for ${CHARACTERS[i]}.`);
     if(!record(c.movement)) throw new Error(`Missing movement profile for ${c.name}.`);
     for(const [key,limit] of Object.entries(pack.limits.movement[i])) integer(c.movement[key],limit,`${c.name} / ${key}`);
+    packExtension(c.extensions,true);
     c.moves.forEach((move,j)=>{
+      packExtension(move.extensions);
+      if(move.extensions&&!c.extensions||c.extensions&&move.enabled&&!move.extensions)throw new Error(`${c.name} ${move.id}: an enabled extended-kit move needs both character and move extension data.`);
       if(!record(move)||move.id!==MOVE_IDS[j]) throw new Error(`Move slot ${MOVE_IDS[j]} is missing or reordered.`);
       FIELDS.forEach(key=>{
         integer(move[key],moveFieldLimit(move,key,pack.limits.moves[i]),`${c.name} ${move.id} / ${SPECS[key].label}`);
@@ -94,7 +100,7 @@ export function poseAt(m,frame,hasReady=false){
   return phase==='recovery'?{phase:'active',index:m.air?8:[1,2,3].includes(m.direction)?11:0}:{phase,index:1+m.button};
 }
 export function defaultHurtboxes(pack,c,m,frame){const pose=poseAt(m,frame,!!pack.hurtPoses[c].ready);return clone(pack.hurtPoses[c][pose.phase][pose.index]);}
-export function effectiveHurtboxes(pack,c,m,frame){return m.hurtboxes[phaseAt(m,frame)]||defaultHurtboxes(pack,c,m,frame);}
+export function effectiveHurtboxes(pack,c,m,frame){return extensionBody(m,frame)||m.hurtboxes[phaseAt(m,frame)]||defaultHurtboxes(pack,c,m,frame);}
 export function inputName(m) {
   if(m.id==='6[Hs]'||m.id==='5[D]')return m.id;
   if(m.id==='c.S')return 'c.S';
@@ -141,7 +147,14 @@ export class Workshop {
     const before=this.snapshot();this.data.characters[c].movement[key]=value;
     this.remember(before,`movement/${c}/${key}`);
   }
-  resetMovement(c){const before=this.snapshot();this.data.characters[c].movement=clone(this.pack.defaults.characters[c].movement);this.remember(before);}
+  resetDefaults(c){
+    if(this.data.characters[c].extensions||!this.pack.defaults.characters[c].extensions)return this.pack.defaults.characters[c];
+    this.legacyDefaults??=migrationDefaults(this.pack.defaults);
+    const legacy=this.legacyDefaults.characters[c];
+    if(legacy.moves.length<47)legacy.moves.push(...clone(this.pack.defaults.characters[c].moves.slice(45)).map(m=>{delete m.extensions;return {...m,enabled:0};}));
+    return legacy;
+  }
+  resetMovement(c){const before=this.snapshot();this.data.characters[c].movement=clone(this.resetDefaults(c).movement);this.remember(before);}
   change(c,m,key,value,group=`${c}/${m}/${key}`){
     const before=this.snapshot();
     this.move(c,m)[key]=value;
@@ -177,10 +190,10 @@ export class Workshop {
     return this.remember(before,group);
   }
   import(data){const next=clone(validate(data,this.pack)),before=this.snapshot();this.data=next;this.remember(before);}
-  resetMove(c,m){const before=this.snapshot();this.data.characters[c].moves[m]=clone(this.pack.defaults.characters[c].moves[m]);this.remember(before);}
+  resetMove(c,m){const before=this.snapshot();this.data.characters[c].moves[m]=clone(this.resetDefaults(c).moves[m]);this.remember(before);}
   undo(){if(!this.undoStack.length)return false;const item=this.undoStack.pop();this.redoStack.push({data:this.snapshot()});this.data=item.data;return true;}
   redo(){if(!this.redoStack.length)return false;const item=this.redoStack.pop();this.undoStack.push({data:this.snapshot(),group:'',time:0});this.data=item.data;return true;}
-  changed(c,m){return FIELDS.some(k=>!k.startsWith('smear')&&this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||JSON.stringify(this.move(c,m).hurtboxes)!==JSON.stringify(this.pack.defaults.characters[c].moves[m].hurtboxes)||JSON.stringify(this.move(c,m).hitboxTimeline)!==JSON.stringify(this.pack.defaults.characters[c].moves[m].hitboxTimeline)||!!this.note(c,m).references?.length||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
+  changed(c,m){return JSON.stringify(this.move(c,m).extensions)!==JSON.stringify(this.pack.defaults.characters[c].moves[m].extensions)||FIELDS.some(k=>!k.startsWith('smear')&&this.move(c,m)[k]!==this.pack.defaults.characters[c].moves[m][k])||JSON.stringify(this.move(c,m).hurtboxes)!==JSON.stringify(this.pack.defaults.characters[c].moves[m].hurtboxes)||JSON.stringify(this.move(c,m).hitboxTimeline)!==JSON.stringify(this.pack.defaults.characters[c].moves[m].hitboxTimeline)||!!this.note(c,m).references?.length||Object.values(this.note(c,m)).some(v=>typeof v==='string'&&v.trim());}
   changes(){return this.data.characters.flatMap((c,i)=>c.moves.map((_,m)=>({c:i,m}))).filter(p=>this.changed(p.c,p.m));}
   export(){return JSON.stringify(validate(this.data,this.pack),null,2);}
   brief(){

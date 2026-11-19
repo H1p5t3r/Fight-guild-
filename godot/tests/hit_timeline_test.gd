@@ -5,7 +5,7 @@ func check(value: bool, message: String) -> void:
 		failures += 1
 		push_error(message)
 func _initialize() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	var data := model.data()
 	var move: Dictionary = data.characters[5].moves[0]
 	move.active = 7
@@ -42,11 +42,12 @@ func _initialize() -> void:
 	check(model.state().players[1].health == 980, "Single-hit toggle did not apply")
 	var path := "user://hit-timeline-roundtrip.json"
 	check(model.save_file(path).is_empty(), "Timeline save failed")
-	var loaded := CombatModel.new()
+	var loaded := LegacyFixture.create()
 	check(loaded.load_file(path).is_empty() and loaded.move(5,0).hitboxTimeline == move.hitboxTimeline, "Saved timeline was lost")
 	var legacy: Dictionary = data.duplicate(true)
 	legacy.schema = 13
 	legacy.coreVersion = 13
+	LegacyFixture.strip_extensions(legacy)
 	for c in legacy.characters:
 		c.moves.resize(32)
 		for m in c.moves: m.erase("hitboxTimeline")

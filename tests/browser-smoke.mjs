@@ -17,14 +17,15 @@ async function frames(n){for(let i=0;i<n;++i)await page.locator('#step').click()
 async function pause(){await page.locator('#pause').click();}
 try {
   await page.goto(url);await page.getByRole('button',{name:'Enter training floor'}).click();await pause();
-  await page.keyboard.down('KeyD');await frames(20);await page.keyboard.up('KeyD');
+  const jab=await page.evaluate(()=>window.fightLab.data().characters[0].moves[0]);
+  await page.keyboard.down('KeyD');await frames(30);await page.keyboard.up('KeyD');
   const before=(await state()).players[1].health;
-  await page.keyboard.down('KeyJ');await frames(4);assert.equal((await state()).players[1].health,before);
-  await frames(1);await page.keyboard.up('KeyJ');assert.equal((await state()).players[1].health,before-35);
+  await page.keyboard.down('KeyJ');await frames(jab.startup-1);assert.equal((await state()).players[1].health,before);
+  await frames(1);await page.keyboard.up('KeyJ');assert.equal((await state()).players[1].health,before-jab.damage);
   await page.locator('#field-damage').fill('177');await page.getByRole('button',{name:'Apply & reset',exact:true}).click();
   assert.equal(await page.evaluate(()=>window.fightLab.data().characters[0].moves[0].damage),177);
-  await pause();await page.keyboard.down('KeyD');await frames(20);await page.keyboard.up('KeyD');
-  await page.keyboard.down('KeyJ');await frames(5);await page.keyboard.up('KeyJ');assert.equal((await state()).players[1].health,823);
+  await pause();await page.keyboard.down('KeyD');await frames(30);await page.keyboard.up('KeyD');
+  await page.keyboard.down('KeyJ');await frames(jab.startup);await page.keyboard.up('KeyJ');assert.equal((await state()).players[1].health,823);
   await page.locator('#save').click();
   const downloadPromise=page.waitForEvent('download');await page.locator('#export').click();const download=await downloadPromise;
   assert.equal(JSON.parse(await readFile(await download.path(),'utf8')).characters[0].moves[0].damage,177);

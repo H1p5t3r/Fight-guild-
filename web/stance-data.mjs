@@ -4,7 +4,7 @@ export function upgradeStances(data,defaults) {
   const next=structuredClone(data);
   next.characters?.forEach((c,i)=>{
     c.moves?.forEach((m,j)=>{Object.assign(m,STANCE_DEFAULTS);if(j>=32)m.enabled=0;});
-    if(c.moves?.length===32)c.moves.push(...structuredClone(defaults.characters[i].moves.slice(32)).map(m=>({...m,enabled:0})));
+    if(c.moves?.length===32)c.moves.push(...structuredClone(defaults.characters[i].moves.slice(32,43)).map(m=>({...m,enabled:0})));
   });
   next.schema=next.coreVersion=18;return next;
 }

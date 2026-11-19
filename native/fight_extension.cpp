@@ -13,6 +13,9 @@ class FightCore : public RefCounted {
     fight::Simulation simulation;
 protected:
     static void _bind_methods() {
+        ClassDB::bind_method(D_METHOD("preview_status", "player", "status", "value"), &FightCore::preview_status);
+        ClassDB::bind_method(D_METHOD("preview_place", "player", "x", "y", "momentum"), &FightCore::preview_place);
+        ClassDB::bind_method(D_METHOD("preview_begin", "player", "move"), &FightCore::preview_begin);
         ClassDB::bind_method(D_METHOD("reset", "character0", "character1", "simple0", "simple1"), &FightCore::reset);
         ClassDB::bind_method(D_METHOD("step", "input0", "input1"), &FightCore::step);
         ClassDB::bind_method(D_METHOD("read_value", "player", "field"), &FightCore::read_value);
@@ -30,6 +33,9 @@ protected:
     }
 public:
     FightCore() { simulation.defaults(); simulation.reset(5,4,0,0); }
+    int preview_status(int p,int status,int value) { return simulation.preview_status(p,status,value); }
+    int preview_place(int p,int x,int y,int momentum) { return simulation.preview_place(p,x,y,momentum); }
+    int preview_begin(int p,int move) { return simulation.preview_begin(p,move); }
     void reset(int a,int b,bool simple_a,bool simple_b) { simulation.reset(a,b,simple_a,simple_b); }
     void step(int a,int b) { simulation.step(a,b); }
     int read_value(int p,int f) const { return simulation.get(p,f); }
@@ -123,8 +129,17 @@ public:
                 ||f.bleed_source<0||f.bleed_source>fight::MOVE_COUNT||f.bleed_time<0||f.bleed_time>3600||f.bleed_clock<0||f.bleed_clock>600
                 ||f.grey_life<0||f.grey_life>999
                 ||f.slow_time<0||f.slow_time>120||f.slow_phase<0||f.slow_phase>1||f.slow_held<0||f.slow_held>1) return false;
+            if(f.legacy_throw_gate_paid<0||f.legacy_throw_gate_paid>1||f.capture_failed<0||f.capture_failed>1||f.contact_ticks<0||f.contact_ticks>420||f.pair_recovery<0||f.pair_recovery>120
+              ||f.pair_grace_pending<0||f.pair_grace_pending>30||f.dash_speed<0||f.dash_speed>6000
+              ||f.coast_pending<0||f.coast_pending>1||f.coast_mode<0||f.coast_mode>1||f.root_y<0||f.root_y>50000
+              ||f.display_move< -1||f.display_move>=fight::MOVE_COUNT||f.display_age<0||f.display_age>420
+              ||f.display_tick< -1||f.display_tick>candidate.frame||f.gait_phase<0||f.gait_phase>7||f.gait_distance<0||f.gait_distance>100000) return false;
             for(int uses:f.move_uses) if(uses<0||uses>1000) return false;
         }
+        const auto& pair=candidate.pair;
+        if(pair.kind<0||pair.kind>fight::LegacyCapture||pair.owner<0||pair.owner>1||pair.clock<0||pair.clock>180||pair.grey<0||pair.grey>999) return false;
+        if(pair.kind&&(pair.move<0||pair.move>=fight::MOVE_COUNT||pair.ticks<1||pair.ticks>180||pair.clock>pair.ticks
+          ||(pair.facing!=1&&pair.facing!=-1)||pair.track<0||pair.track>3||pair.tech_ticks<0||pair.tech_ticks>30)) return false;
         for(const auto& q:candidate.projectiles) {
             if(q.life<0||q.life>600) return false;
             if(!q.life) continue;
@@ -147,11 +162,15 @@ public:
                 data.push_back(simulation.hurt_get(c,m,p,f));
         for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m)
             for(int f=0;f<fight::HIT_TRACK_FIELDS;++f) data.push_back(simulation.hit_get(c,m,f));
+        for(int c=0;c<fight::CHARACTER_COUNT;++c) {
+            for(int f=0;f<fight::CHARACTER_EXTENSION_FIELDS;++f)data.push_back(simulation.extension_get(c,-1,f));
+            for(int m=0;m<fight::MOVE_COUNT;++m)for(int f=0;f<fight::EXTENSION_FIELDS;++f)data.push_back(simulation.extension_get(c,m,f));
+        }
         for(int f=0;f<fight::RULE_COUNT;++f) data.push_back(simulation.rule_get(f));
         return data;
     }
     bool configure(const PackedInt32Array& data) {
-        if(data.size()!=fight::CHARACTER_COUNT*(fight::MOVE_COUNT*(fight::FIELD_COUNT+fight::HURT_PHASES*fight::HURT_FIELDS+fight::HIT_TRACK_FIELDS)+fight::MOBILITY_FIELDS)+fight::RULE_COUNT) return false;
+        if(data.size()!=fight::CHARACTER_COUNT*(fight::MOVE_COUNT*(fight::FIELD_COUNT+fight::HURT_PHASES*fight::HURT_FIELDS+fight::HIT_TRACK_FIELDS+fight::EXTENSION_FIELDS)+fight::MOBILITY_FIELDS+fight::CHARACTER_EXTENSION_FIELDS)+fight::RULE_COUNT) return false;
         auto candidate=simulation;
         int at=0;
         for(int c=0;c<fight::CHARACTER_COUNT;++c) for(int m=0;m<fight::MOVE_COUNT;++m) {
@@ -177,6 +196,14 @@ public:
                 key.hitstun=data[at++];key.blockstun=data[at++];key.hitstop=data[at++];
                 for(auto& b:key.boxes) { b.left=data[at++];b.bottom=data[at++];b.right=data[at++];b.top=data[at++]; }
                 if(i<count&&!candidate.hit_add(c,m,key)) return false;
+            }
+        }
+        for(int c=0;c<fight::CHARACTER_COUNT;++c) {
+            if(!candidate.extension_set(c,-1,data.ptr()+at))return false;at+=fight::CHARACTER_EXTENSION_FIELDS;
+            for(int m=0;m<fight::MOVE_COUNT;++m) {if(!candidate.extension_set(c,m,data.ptr()+at))return false;at+=fight::EXTENSION_FIELDS;}
+            for(int m=0;m<fight::MOVE_COUNT;++m) {
+                bool character=candidate.character_extensions[c].v[0],action=candidate.extensions[c][m].v[0];
+                if((action&&!character)||(character&&candidate.moves[c][m].v[fight::Enabled]&&!action))return false;
             }
         }
         for(int f=0;f<fight::RULE_COUNT;++f) if(!candidate.rule_set(f,data[at++])) return false;

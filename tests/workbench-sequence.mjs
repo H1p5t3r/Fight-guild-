@@ -1,3 +1,4 @@
+import {legacyPack,legacyData,stripExtensions} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -5,7 +6,7 @@ import {Workshop} from '../web/workbench/model.mjs';
 import {CombatPreview,directionBits} from '../web/workbench/simulation.mjs';
 import {Engine,INPUT} from '../web/engine.mjs';
 import {cursorAnchor,cursorIndex} from '../web/workbench/cursor.mjs';
-const pack=JSON.parse(await readFile('build/workbench-pack.json','utf8'));
+const shippedPack=JSON.parse(await readFile('build/workbench-pack.json','utf8')),pack=legacyPack(shippedPack);
 const queue=(ids,delay=0)=>ids.map((move,i)=>({move,delay:i===1?delay:0}));
 function fixture(){
  const data=structuredClone(pack.defaults);

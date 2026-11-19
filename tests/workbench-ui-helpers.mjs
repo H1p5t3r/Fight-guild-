@@ -1,5 +1,10 @@
+import {legacyData} from './legacy-data.mjs';
 import {readFile} from 'node:fs/promises';
-export async function seedBaseline(page){const pack=JSON.parse(await readFile('build/workbench-pack.json','utf8'));await page.addInitScript(defaults=>{const key='fight-guild.move-workshop.v1';if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify({format:1,data:defaults,selection:{character:5,slot:0,tab:'timing'}}));},pack.defaults);}
+export async function seedBaseline(page,metadata){
+  const pack=JSON.parse(await readFile('build/workbench-pack.json','utf8')),data=legacyData(pack.defaults);
+  if(metadata!==undefined)data._moveWorkshop=structuredClone(metadata);
+  await page.addInitScript(defaults=>{const key='fight-guild.move-workshop.v1';if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify({format:1,data:defaults,selection:{character:5,slot:0,tab:'timing'}}));},data);
+}
 export async function ready(page){await page.waitForFunction(()=>window.moveWorkshop?.preview()&&!moveWorkshop.cursor().pending);}
 export async function selectSection(page,id){
   if(await page.locator('#section-picker').isVisible())await page.locator('#section-picker').selectOption(id);

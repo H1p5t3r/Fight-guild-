@@ -3,9 +3,9 @@ var failures := 0
 func check(ok: bool, message: String) -> void:
 	if not ok: failures += 1; push_error(message)
 func _initialize() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	var data := model.data()
-	check(data.schema == 22 and data.characters[3].moves.size() == 45, "Tapper schema/slots missing")
+	check(data.schema == 23 and data.characters[3].moves.size() == 47, "Tapper schema/slots missing")
 	check(model.movement(3).forwardStyle == 1, "Tapper must step dash")
 	check(model.core.can_cancel(3, 37, 37, true) and model.core.can_cancel(3, 38, 39, true), "Stance routes missing")
 	model.reset([3, 4])

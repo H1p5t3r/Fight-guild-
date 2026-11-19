@@ -7,12 +7,13 @@ func check(condition: bool, message: String) -> void:
 		printerr(message)
 
 func _initialize() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	check(model.state().players[0].character == 5 and model.state().players[1].character == 4, "Default matchup must be Fillet / Shark")
 	var original := model.data()
 	var legacy := original.duplicate(true)
 	legacy.schema = 5
 	legacy.coreVersion = 5
+	LegacyFixture.strip_extensions(legacy)
 	legacy.erase("recoveryRules")
 	for character in legacy.characters:
 		character.moves.resize(22)
@@ -74,7 +75,7 @@ func _initialize() -> void:
 	var saved := "user://test-recovery.json"
 	check(model.save_file(saved).is_empty(), "Recovery save failed")
 	var data_hash := model.fingerprint()
-	model.restore_defaults()
+	LegacyFixture.reset(model)
 	check(model.load_file(saved).is_empty() and model.fingerprint() == data_hash, "Recovery settings did not survive file round trip")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(saved))
 	print("Godot recovery, walls, focus fighters and migration: ", failures, " failures")
@@ -82,8 +83,8 @@ func _initialize() -> void:
 
 func verify_wall_rollback(settings: Dictionary) -> void:
 	for delay in [1, 8, 12]:
-		var reference := CombatModel.new()
-		var predicted := CombatModel.new()
+		var reference := LegacyFixture.create()
+		var predicted := LegacyFixture.create()
 		reference.load_data(settings)
 		predicted.load_data(settings)
 		reference.reset()

@@ -258,7 +258,7 @@ function bindUI() {
   $('import').onclick=()=>$('import-file').click();
   $('import-file').onchange=async()=>{
     if(net) return;const file=$('import-file').files[0];if(!file)return;
-    try{if(file.size>1000000)throw new Error('Move file exceeds 1 MB');engine.loadData(JSON.parse(await file.text()));populateEditor();reset();status('editor-status','Move set imported. Save locally to keep it.');}catch(e){status('editor-status',`Import failed: ${e.message}`,true);}finally{$('import-file').value='';}
+    try{if(file.size>32*1024**2)throw new Error('Move file exceeds 32 MB');engine.loadData(JSON.parse(await file.text()));populateEditor();reset();status('editor-status','Move set imported. Save locally to keep it.');}catch(e){status('editor-status',`Import failed: ${e.message}`,true);}finally{$('import-file').value='';}
   };
   $('restore').onclick=()=>{if(net)return;engine.api.fg_defaults();populateEditor();reset();status('editor-status','Defaults restored for this session. Save locally to replace the saved set.');};
   $('apply-buffer').onclick=()=>{
@@ -277,6 +277,7 @@ function bindUI() {
 async function main() {
   try {
     engine=await loadEngine();
+    engine.reset(selection.characters,selection.simple);
     try{const saved=localStorage.getItem(STORAGE);if(saved){engine.loadData(JSON.parse(saved));status('editor-status','Loaded your saved move set.');}}catch(error){status('editor-status',`Saved set could not be loaded: ${error.message}`,true);}
     setupEditor();bindUI();$('select-dialog').showModal();draw();
     // Exposes read-only diagnostics for automated smoke checks and bug reports.

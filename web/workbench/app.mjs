@@ -1,3 +1,4 @@
+import {renderExtension} from './extension-editor.mjs';
 import {renderMovement} from './movement-editor.mjs';
 import {moveFieldLimit} from '../startup-rules.mjs';
 import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,phaseStart,effectiveHurtboxes,inputName,moveName,geometryWarnings,CHARACTERS,MOVE_IDS,clone,META} from './model.mjs';
@@ -54,7 +55,8 @@ function syncSummary(){
   const movement=tab==='movement',sequence=tab==='sequence';
   document.querySelector('.attack-toggle').hidden=movement||sequence;document.querySelector('.summary').hidden=movement||sequence;
   for(const id of ['test-behavior','test-entry','test-gap','test-simple','test-mechanic'])$(id).closest('label').hidden=movement;
-  $('test-mechanic').closest('label').hidden=movement||sequence||!m.mechanic;
+  $('test-mechanic').closest('label').hidden=movement||sequence||!m.mechanic||!!m.extensions;
+  $('test-bleed').closest('label').hidden=movement||!model.data.characters[character].extensions;
   $('reset').textContent=sequence?'Clear queue':movement?'Reset movement':'Reset move';
   $('move-kind').hidden=movement||sequence;$('actual-input').hidden=movement||sequence;$('move-enabled').hidden=movement||sequence;
   $('move-title').textContent=sequence?'Sequence test':movement?'Movement & defense':moveName(m);$('move-label').textContent=movement||sequence?'':note.label||'';
@@ -178,6 +180,12 @@ function syncHurtFields(){
   if(tab!=='hurt')return;const rect=visibleHurtboxes()[hurtRegion];if(!rect)return;
   for(const [key,value]of Object.entries(hurtValues(rect))){const input=$('field-hurt-'+key);if(input&&document.activeElement!==input)input.value=value;}
 }
+function extensionForm(section=tab){return renderExtension({el,character:model.data.characters[character],slot,tab:section,frame,
+  onError:fieldError,onSeek:value=>{seekMove(value);renderForm();},
+  onMove:index=>{if(!validBeforeLeaving())return;slot=index;frame=move().startup;pendingSeek={frame};stop();render();saveSelection();},
+  onChange:next=>{model.change(character,slot,'extensions',next,'');stop();renderForm();syncSummary();listMoves();scheduleSave();},
+  onCharacterChange:next=>{const before=model.snapshot();model.data.characters[character].extensions=next;try{validate(model.data,pack);}catch(e){model.data=before;throw e;}model.remember(before);stop();renderForm();syncSummary();scheduleSave();}
+});}
 function hurtForm(){
   const m=move();hurtPhase=phaseAt(m,frame);const custom=!!m.hurtboxes[hurtPhase],boxes=visibleHurtboxes();
   if(!boxes[hurtRegion])hurtRegion='torsoArms';
@@ -265,12 +273,14 @@ function buildForm(){
   }
   if(tab==='movement'){
     $('form').setAttribute('aria-labelledby','tab-movement');
-    $('form').replaceChildren(renderMovement({el,panels,profile:model.data.characters[character].movement,limits:pack.limits.movement[character],onError:fieldError,action:movementAction,onAction:value=>{if(!validBeforeLeaving())return;movementAction=value;pendingSeek={tick:0};stop();syncPreview();},onChange:(key,value)=>{model.changeMovement(character,key,value);syncSummary();panels.update();scheduleSave();}}));return;
+    $('form').replaceChildren(renderMovement({el,panels,profile:model.data.characters[character].movement,limits:pack.limits.movement[character],onError:fieldError,action:movementAction,onAction:value=>{if(!validBeforeLeaving())return;movementAction=value;pendingSeek={tick:0};stop();syncPreview();},onChange:(key,value)=>{model.changeMovement(character,key,value);syncSummary();panels.update();scheduleSave();}}));if(model.data.characters[character].extensions)$('form').append(extensionForm());return;
   }
   const form=$('form');form.setAttribute('aria-labelledby','tab-'+tab);
-  const groups=TABS.find(t=>t.id===tab).groups.map(id=>GROUPS.find(g=>g.id===id));
+  const ignored=move().extensions?['normalRoutes','commandRoutes','specialCancel','whiffCancel','selfCancel','advance','semiAirStart','semiAirEnd']:[];
+  const groups=TABS.find(t=>t.id===tab).groups.map(id=>GROUPS.find(g=>g.id===id)).map(g=>({...g,fields:g.fields.filter(f=>!ignored.includes(f))})).filter(g=>g.fields.length);
   if(tab==='art'){form.replaceChildren(...groups.map(g=>panels.create(g,fieldControl)),artForm());return;}
-  if(tab==='hurt'){form.replaceChildren(hurtForm(),...groups.filter(g=>g.id!=='vulnerability').map(g=>panels.create(g,fieldControl)));return;}
+  if(tab==='hurt'){form.replaceChildren(move().extensions?extensionForm():hurtForm(),...groups.filter(g=>g.id!=='vulnerability').map(g=>panels.create(g,fieldControl)));return;}
+  if(tab==='mechanics'&&model.data.characters[character].extensions){form.replaceChildren(extensionForm());return;}
   if(tab==='mechanics'){
     form.replaceChildren(renderDrive({el,character:model.data.characters[character],slot,note:index=>model.note(character,index),panels,field:fieldControl,
       onMove:index=>{if(!validBeforeLeaving())return;slot=index;frame=move().startup;pendingSeek={frame};stop();render();saveSelection();document.querySelector(`[data-drive-move="${index}"]`)?.focus({preventScroll:true});},
@@ -278,6 +288,7 @@ function buildForm(){
     }));return;
   }
   const nodes=groups.map(group=>panels.create(group,fieldControl));
+  if(move().extensions&&['routes','hit'].includes(tab))nodes.unshift(extensionForm());
   if(['timing','routes'].includes(tab)&&[2,32].includes(slot))nodes.unshift(slashForm());
   if(tab==='hit')nodes.unshift(renderHitEditor({move:move(),frame,pack,character,boxIndex:hitBox,selectedFrame:hitKeyFrame,
     valid:validBeforeLeaving,onError:fieldError,onKey:value=>{hitKeyFrame=value;seekMove(value===null?frame:move().startup+Math.min(Math.max(1,value),move().active)-1);},
@@ -319,7 +330,7 @@ function syncPreview(){
   frame=Math.max(1,Math.min(totalFrames(m),frame));drawTimeline(m,variant);scheduleTest();
 }
 function stop(){playing=false;$('play').setAttribute('aria-label',tab==='sequence'?'Play sequence':'Play attack');}
-function testOptions(){return {mechanic:$('test-mechanic').value,target:Number($('test-target').value),behavior:$('test-behavior').value,entry:$('test-entry').value,gap:Number($('test-gap').value),facing:Number($('test-facing').value),simple:$('test-simple').value==='1',movement:tab==='movement'?movementAction:null,sequence:tab==='sequence'?model.sequence(character):null};}
+function testOptions(){return {bleed:$('test-bleed').value,mechanic:$('test-mechanic').value,target:Number($('test-target').value),behavior:$('test-behavior').value,entry:$('test-entry').value,gap:Number($('test-gap').value),facing:Number($('test-facing').value),simple:$('test-simple').value==='1',movement:tab==='movement'?movementAction:null,sequence:tab==='sequence'?model.sequence(character):null};}
 function matchingRecord(){return testRecord?.character===character&&testRecord?.slot===slot&&!!testRecord.movement===(tab==='movement')&&!!testRecord.sequence===(tab==='sequence');}
 function seekMove(value,variant=0){
   stop();frame=Math.max(1,Math.min(totalFrames(variantMove(move(),variant)),value));pendingSeek={frame,variant};
@@ -356,12 +367,18 @@ function drawTest(){
   preview.show(testRecord,testIndex,m,{
     hit:editable&&tab==='hit'&&(hitKeyFrame===null||hitKeyFrame===key?.frame),
     hitKey:key&&key.boxes!==null?{keyIndex,boxIndex:Math.min(hitBox,Math.max(0,key.boxes.length-1))}:null,
-    hurt:editable&&tab==='hurt'?{phase,region:hurtRegion,custom:!!m.hurtboxes[phase]}:null
+    hurt:editable&&tab==='hurt'?{phase,region:hurtRegion,custom:!!m.extensions||!!m.hurtboxes[phase]}:null
   });
   $('frame').max=testRecord.frames.length-1;$('frame').value=testIndex;$('frame-label').textContent=`${testIndex} / ${testRecord.frames.length-1}`;
   $('play').disabled=previewPending||testRecord.frames.length<2;
   $('preview-title').textContent=testRecord.sequence?f.stage:testRecord.movement?f.stage:a.grabTime?`${m.finishArtPose&&a.poseIndex===m.finishArtPose-1?'Finish':'Capture'} · ${m.grabFrames-a.grabTime+1} / ${m.grabFrames}f`:f.selectedFrame?`${a.variant===1?'Pull · ':a.variant===2?'Cash-out · ':''}${phase==='windup'?'Windup':phase==='active'?'Active':'Recovery'} · frame ${f.selectedFrame}`:'Attack workspace';
   $('test-readout').textContent=previewPending?'Updating exchange…':`${testRecord.geometryOnly?'Geometry only':`Input ${describeInput(f.input,a.facing)}`} · ${f.selectedFrame?'move frame '+f.selectedFrame:f.stage}${f.state.hitstop?' · freeze '+f.state.hitstop+'f':''} · target ${target.stun}f stun`;
+  if(!previewPending){
+    if(f.state.pairKind)$('test-readout').textContent+=` · ${['','Throw','Cashout','Wound','Throw-tech gate'][f.state.pairKind]} C${f.state.pairClock}`;
+    if(a.pairRecovery||target.pairRecovery)$('test-readout').textContent+=` · release recovery ${a.pairRecovery}/${target.pairRecovery}f`;
+    if(target.bleedTime)$('test-readout').textContent+=` · bleed ${target.bleedTime}f / ${target.greyLife} grey`;
+    if(a.captureFailed)$('test-readout').textContent+=' · capture attempt failed';
+  }
   const contacts=testRecord.contacts.filter(c=>c.tick<=testIndex),hits=contacts.filter(c=>c.event!==2).length;
   $('test-result').textContent=previewPending?'Recalculating contact…':`${hits} hit${hits===1?'':'s'} · ${contacts.length-hits} blocks · ${1000-target.health} damage · attacker travel ${((a.x-testRecord.frames[0].state.players[0].x)/100).toFixed(1)}px`;
   $('test-warning').textContent=testRecord.warnings.join(' ');$('test-warning').hidden=!testRecord.warnings.length;
@@ -392,6 +409,7 @@ const preview=new Preview($('preview'),pack,(phase,patch)=>{
 },(stage,patch)=>{
   if(stage==='start'){if(!validBeforeLeaving())return false;hurtDragBefore=model.snapshot();stop();}
   if(stage==='change'&&hurtDragBefore){
+    if(move().extensions){const next=clone(move().extensions),key=next.hurtboxes.findLast(k=>k.frame<=frame);if(!key)return;key.boxes[patch.region]=patch.rect;move().extensions=next;syncHurtFields();syncSummary();return;}
     const next=clone(move().hurtboxes[patch.phase]);next[patch.region]=patch.rect;
     try{validateHurtboxes({[patch.phase]:next});}catch{return;}
     move().hurtboxes[patch.phase]=next;syncHurtFields();syncSummary();
@@ -446,7 +464,7 @@ window.addEventListener('storage',event=>{if(event.key===STORAGE&&event.newValue
 globalThis.moveWorkshop={data:()=>model.snapshot(),selection:()=>({character,slot,tab}),version:pack.defaults.coreVersion};
 $('test-target').append(...CHARACTERS.map((name,i)=>el('option',{value:i},name)));$('test-target').value='4';
 $('attack-enabled').onchange=()=>{if(!validBeforeLeaving()){$('attack-enabled').checked=!!move().enabled;return;}commit('enabled',Number($('attack-enabled').checked));if($('field-enabled'))$('field-enabled').checked=!!move().enabled;};
-for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple','test-mechanic'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}layout.update(CHARACTERS[character],moveName(move()),model.note(character,slot).label);testSignature='';scheduleTest();for(const button of document.querySelectorAll('[data-drive-test]'))button.setAttribute('aria-pressed',String(button.dataset.driveTest===$('test-mechanic').value));};
+for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple','test-mechanic','test-bleed'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}layout.update(CHARACTERS[character],moveName(move()),model.note(character,slot).label);testSignature='';scheduleTest();for(const button of document.querySelectorAll('[data-drive-test]'))button.setAttribute('aria-pressed',String(button.dataset.driveTest===$('test-mechanic').value));};
 globalThis.moveWorkshop.preview=()=>testRecord;
 globalThis.moveWorkshop.cursor=()=>({index:testIndex,frame:testRecord?.frames[testIndex]?.selectedFrame||0,pending:previewPending});
 globalThis.moveWorkshop.geometry=()=>({handles:clone(preview.handles),view:clone(preview.view||{}),measurements:clone(preview.measurements||null),measurementLabels:clone(preview.measurementLabels||[])});

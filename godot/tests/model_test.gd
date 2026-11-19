@@ -7,7 +7,7 @@ func check(condition: bool, description: String) -> void:
 		printerr(description)
 
 func _initialize() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	var original := model.data()
 	check(CombatModel.RULE_COUNT == CombatModel.RULES.size() + CombatModel.MOMENTUM_RULES.size() + CombatModel.RECOVERY_RULES.size() + CombatModel.TUNING_RULES.size() + CombatModel.JUMP_RULES.size(), "Rule layout differs from the adapter")
 	var fingerprint := model.fingerprint()
@@ -25,7 +25,7 @@ func _initialize() -> void:
 	check(not model.load_data(invalid).is_empty(), "Integer overflow accepted")
 	var saved := "user://test-moves.json"
 	check(model.save_file(saved).is_empty(), "Save failed")
-	model.restore_defaults()
+	LegacyFixture.reset(model)
 	check(model.load_file(saved).is_empty() and model.move(0, 0).damage == 177, "Save/load failed")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(saved))
 	check(model.load_data(original).is_empty() and model.fingerprint() == fingerprint, "Round trip changed default data")
@@ -33,6 +33,7 @@ func _initialize() -> void:
 	var legacy := edited.duplicate(true)
 	legacy.schema = 1
 	legacy.coreVersion = 1
+	LegacyFixture.strip_extensions(legacy)
 	legacy.characters.resize(2)
 	legacy.erase("momentumRules")
 	for character in legacy.characters:
@@ -43,10 +44,12 @@ func _initialize() -> void:
 			definition.reserved = 0
 	check(model.load_data(legacy).is_empty() and model.move(0, 0).damage == 177, "Legacy edits lost during migration")
 	var expected_new_move: Dictionary = original.characters[5].moves[0].duplicate()
+	expected_new_move = JSON.parse_string(FileAccess.get_file_as_string("res://data/legacy_fillet_v22.json")).moves[0]
 	expected_new_move.erase("id")
-	check(model.move(5, 0) == expected_new_move, "New fighters missing migration defaults")
+	check(JSON.parse_string(JSON.stringify(model.move(5, 0))) == expected_new_move, "New fighters missing migration defaults")
 	legacy.schema = 2
 	legacy.coreVersion = 2
+	LegacyFixture.strip_extensions(legacy)
 	legacy.characters = edited.characters.duplicate(true)
 	for character in legacy.characters:
 		character.moves.resize(22)
@@ -60,6 +63,7 @@ func _initialize() -> void:
 	var previous := edited.duplicate(true)
 	previous.schema = 3
 	previous.coreVersion = 3
+	LegacyFixture.strip_extensions(previous)
 	previous.momentumRules.fdDrain = 25
 	previous.characters[0].moves[0].guardBreak = 1
 	previous.characters[0].moves[0].chipDamage = 17
@@ -74,6 +78,7 @@ func _initialize() -> void:
 	var v4 := edited.duplicate(true)
 	v4.schema = 4
 	v4.coreVersion = 4
+	LegacyFixture.strip_extensions(v4)
 	v4.characters[0].moves[0].counterHitstun = 19
 	v4.characters[0].moves[0].counterHitstop = 9
 	for character in v4.characters:
@@ -127,7 +132,7 @@ func _initialize() -> void:
 			definition.guardBreak = 1
 			definition.reach = 50000
 	check(RollbackSession.trial(breaking, 8, 4, 1200).get("pass", false), "Guard-break rollback divergence")
-	var session := RollbackSession.new(CombatModel.new())
+	var session := RollbackSession.new(LegacyFixture.create())
 	session.max_prediction = 3
 	for frame in 3:
 		session.submit(0, frame, 2)
@@ -140,7 +145,11 @@ func _initialize() -> void:
 	var old_startup := model.data()
 	old_startup.schema = 19
 	old_startup.coreVersion = 19
+	LegacyFixture.strip_extensions(old_startup)
 	for character in old_startup.characters:
+		character.moves.resize(45)
+		character.erase("extensions")
+		for move in character.moves: move.erase("extensions")
 		for move in character.moves:
 			if move.category == 4 and move.motion == 0: move.startup = 9
 	var old_command: int = old_startup.characters[3].moves[40].startup
@@ -149,6 +158,7 @@ func _initialize() -> void:
 	check(model.move(3, 40).startup == old_command, "Command grab timing changed")
 	var fast := model.data()
 	fast.characters[5].moves[0].startup = 3
+	fast.characters[5].moves[13].mechanic = 2
 	fast.characters[5].moves[13].variantStartup = 2
 	check(model.load_data(fast).is_empty(), "Fast P normal / cash-out grab rejected")
 	fast.characters[5].moves[23].category = 0

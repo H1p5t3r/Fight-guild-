@@ -1,3 +1,4 @@
+import {legacyData,stripExtensions} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -6,7 +7,7 @@ import {upgradeStartupRules} from '../web/startup-rules.mjs';
 const module=await WebAssembly.compile(await readFile('web/generated/fight.wasm'));
 const ticks=(e,n,a=0,b=0)=>{while(n-->0)e.step(a,b);};
 async function setup(){
-  const e=new Engine(await WebAssembly.instantiate(module)),data=e.data();
+  const e=new Engine(await WebAssembly.instantiate(module)),data=legacyData(e.data());
   for(const c of [4,5])Object.assign(data.characters[c].moves[0],{
     startup:3,active:1,recovery:3,hitstun:6,blockstun:6,hitstop:2,damage:1,
     reach:50000,hitboxBack:0,bottom:0,height:50000,pushback:0,airPushback:0,blockPushback:0,
@@ -30,6 +31,7 @@ test('Latest confirmed attacker stays in front through whiffs, hitstop and recov
 
 test('Throws, capture starts and projectile hits select the attacker; projectile clashes do not',async()=>{
   const e=await setup();e.api.fg_preview_begin(0,24);ticks(e,2);
+  while(e.state().pairKind||e.state().hitstop)e.step(0,0);
   assert.ok(e.state().players[1].health<1000);assert.equal(e.state().foregroundPlayer,0);
   e.reset([3,4]);place(e);e.api.fg_preview_begin(0,13);
   for(let i=0;i<40&&e.state().players[1].reaction!==6;i++)e.step(0,0);
@@ -52,10 +54,10 @@ test('Simultaneous trades have a deterministic final contact order',async()=>{
 });
 
 test('Version 20 drafts retain every authored value and art note when upgrading presentation state',async()=>{
-  const e=await setup(),old=e.data();old.schema=old.coreVersion=20;
+  const e=await setup(),old=e.data();old.schema=old.coreVersion=20;stripExtensions(old);
   old.characters[5].moves[24].startup=7;
   old._moveWorkshop={version:1,notes:{'Fillet/6P+K':{active:'Keep this pose.'}}};
   const expected=structuredClone(old);expected.schema=expected.coreVersion=21;
   assert.deepEqual(upgradeStartupRules(old),expected);assert.equal(old.schema,20);
-  e.loadData(old);assert.equal(e.move(5,24).startup,7);assert.equal(e.data().schema,22);
+  e.loadData(old);assert.equal(e.move(5,24).startup,7);assert.equal(e.data().schema,23);
 });

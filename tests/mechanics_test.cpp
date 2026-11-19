@@ -1,3 +1,4 @@
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <cstdio>
 using namespace fight;
@@ -5,7 +6,7 @@ static int checks=0,failures=0;
 #define CHECK(x) do { ++checks; if(!(x)){std::fprintf(stderr,"Mechanics FAIL %d: %s\n",__LINE__,#x);++failures;} } while(0)
 static void ticks(Simulation& s,int n,int a=0,int b=0){while(n-->0)s.step(a,b);}
 static void thaw(Simulation& s){while(s.world.hitstop)s.step(0,0);}
-static void setup(Simulation& s,int c=5){s.defaults();s.reset(c,c==5?4:5,0,0);s.preview_place(0,40000,0,10000);s.preview_place(1,48000,0,10000);}
+static void setup(Simulation& s,int c=5){legacy_fillet::defaults(s);s.reset(c,c==5?4:5,0,0);s.preview_place(0,40000,0,10000);s.preview_place(1,48000,0,10000);}
 static void contact(Simulation& s,int p=0,int move=13,int guard=0){
  auto& f=s.world.players[p];f.stun=f.reaction=f.guarding=f.landing_time=f.throw_grace=0;f.move=-1;
  s.preview_begin(p,move);f.age=s.moves[f.character][move].v[Startup]-1;

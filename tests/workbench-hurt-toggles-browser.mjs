@@ -1,3 +1,5 @@
+import {legacyData} from './legacy-data.mjs';
+import {seedBaseline} from './workbench-ui-helpers.mjs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
@@ -11,8 +13,8 @@ try{
  const page=await browser.newPage({viewport:{width:1440,height:1180}}),errors=[];
  page.on('pageerror',error=>errors.push(error.message));
  await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
- await page.goto(`http://127.0.0.1:${server.address().port}/`);await page.locator('#field-startup').waitFor();await ready(page);
- assert.deepEqual(await page.evaluate(()=>moveWorkshop.data()),pack.draft.data,'A fresh editor opens the submitted working batch');
+ await seedBaseline(page);await page.goto(`http://127.0.0.1:${server.address().port}/`);await page.locator('#field-startup').waitFor();await ready(page);
+ assert.deepEqual(await page.evaluate(()=>moveWorkshop.data()),legacyData(pack.defaults),'The legacy fixture opens without inheriting the new kit');
  await page.locator('#fighter').selectOption('5');await page.locator('[data-move="8"]').click();await page.locator('#tab-hurt').click();await ready(page);
  const coordinates=await page.evaluate(()=>moveWorkshop.data().characters[5].moves[8].hurtboxes);
  const boxes=()=>page.evaluate(()=>moveWorkshop.preview().frames[moveWorkshop.cursor().index].boxes[0]);

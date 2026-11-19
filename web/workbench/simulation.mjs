@@ -33,12 +33,15 @@ export class CombatPreview {
     e.api.fg_preview_place(0,origin,0,10000);
     e.api.fg_preview_place(1,origin+facing*separation,behavior==='air'?12000:0,10000);
     const result={frames:[],contacts:[],warnings:[],executed:false,requested:inputName(m),slot,character,target};
+    if(behavior==='downed'||(m.extensions?.params.contactKind===3&&behavior==='hit')){e.api.fg_preview_status(1,0,56);result.warnings.push('Target begins in a 56-tick hard knockdown for Wound testing.');}
+    const grey=options.bleed==='auto'||options.bleed===undefined?(m.extensions?.params.contactKind===2?20:0):Number(options.bleed);
+    if(grey&&data.characters[character].extensions){e.api.fg_preview_status(1,1,grey);result.warnings.push(`Target begins with ${grey} grey life; owned bleed is an explicit preview setup.`);}
     let elapsed=0,quiet=0,lastGroups=0,followed=false;
-    const mechanicTest=m.mechanic?(options.mechanic||'single'):'single';
+    const mechanicTest=m.mechanic&&!m.extensions?(options.mechanic||'single'):'single';
     const capture=(input,stage)=>{
       const state=e.state(),players=state.players;
       const contact=players[0].contactCount!==lastGroups;
-      const frame={state,input,stage,selectedFrame:players[0].move===slot?players[0].age:0,
+      const frame={state,input,stage,selectedFrame:players[0].move===slot?players[0].age:players[0].displayMove===slot?players[0].displayAge:0,
         boxes:[0,1].map(p=>({hurt:e.boxes(p,0),push:e.boxes(p,1),hit:e.boxes(p,2),projectiles:e.boxes(p,4)})),contact:null};
       if(contact){frame.contact={tick:elapsed,event:players[0].event,damage:players[0].lastDamage,combo:players[0].combo,
         x:players[1].x,y:players[1].y+7500};result.contacts.push(frame.contact);}
@@ -48,7 +51,8 @@ export class CombatPreview {
     };
     const defenderInput=()=>{
       if(mechanicTest!=='single'&&!followed)return 0;
-      const p=e.state().players[1],back=directionBits(4,p.facing);
+      const state=e.state(),p=state.players[1],back=directionBits(4,p.facing);
+      if(behavior==='tech'&&state.pairKind&&!state.hitstop&&state.pairClock<6)return INPUT.P|INPUT.K;
       return behavior==='block'?back:behavior==='crouch'?back|INPUT.down:behavior==='fd'?back|INPUT.faultless:0;
     };
     const step=(input,stage)=>{e.step(input,defenderInput());elapsed++;return capture(input,stage);};
@@ -81,7 +85,7 @@ export class CombatPreview {
     for(let i=0;i<4800;++i){
       state=step(m.actionType===1&&i<40?(INPUT.P<<m.holdButton):0,followed?'Drive follow-up':result.executed?'Attack & reaction':'Waiting for input');
       if(state.winner!==-1)break;
-      const free=state.players.every(p=>p.move<0&&p.stun===0&&p.reaction===0&&p.landingTime===0&&p.y===0)&&state.hitstop===0&&!e.boxes(0,4).length&&!e.boxes(1,4).length;
+      const free=state.players.every(p=>p.move<0&&p.stun===0&&p.reaction===0&&p.landingTime===0&&!p.pairRecovery&&p.y===0)&&!state.pairKind&&state.hitstop===0&&!e.boxes(0,4).length&&!e.boxes(1,4).length;
       quiet=free?quiet+1:0;
       const status=state.players[1].tetherSource||state.players[1].bleedSource;
       if(mechanicTest==='followup'&&!followed&&status&&quiet>=6){

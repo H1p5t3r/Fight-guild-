@@ -17,6 +17,17 @@ The [2026-11-15 source review](research/strive-dustloop-2026-11-15.md) compares 
 
 See [combat tuning](combat-tuning.md) for defaults, migration rules and verified cases.
 
+## Fillet v1 integration and art review
+
+- [x] Import the supplied v1 mechanics into schema 23, preserving the other fighters and older saves. Add Wound, owned bleed, finite Vault/Skim captures, paired recovery and shared ordinary-throw tech.
+- [x] Expose exact body/push/root keys, named routes and paired settings in the Workshop and native development controls; add live state inspection.
+- [x] Verify all 894 canonical action frames in both facings and player slots, plus paired capture/release, real-input pressure and rollback checks.
+- [x] Record **B — Hip-led** as the selected f.S motion direction and generate review studies using model 06.
+- [ ] Approve and register f.S art against its 125px reach, arm/knife lengths, body profile and both facings. The generated studies are not installed.
+- [ ] Offer/select the remaining new Fillet animation directions, then finish paired receiver coverage, interruption/entry/exit clips and the full art acceptance matrix. Keep current sprites until approved replacements are ready.
+
+See [implementation and verification](fillet-v1-implementation.md).
+
 ## Next: consistent sprite and future-character pipeline
 
 Requested scope: make repeatable character images performing directed actions, with one shared art language. See [the working sprite contract](sprite-production.md).

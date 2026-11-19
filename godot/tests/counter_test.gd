@@ -3,12 +3,13 @@ var failures := 0
 func check(ok: bool, message: String) -> void:
 	if not ok: failures += 1; printerr(message)
 func _initialize() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	var original := model.data()
-	check(original.schema == 22, "Current schema version missing")
+	check(original.schema == 23, "Current schema version missing")
 	var legacy := original.duplicate(true)
 	legacy.schema = 9
 	legacy.coreVersion = 9
+	LegacyFixture.strip_extensions(legacy)
 	for character in legacy.characters:
 		character.moves.resize(32)
 		for move in character.moves:

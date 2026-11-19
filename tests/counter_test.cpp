@@ -1,10 +1,11 @@
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <cstdio>
 using namespace fight;
 static int checks=0,failures=0;
 #define CHECK(x) do { ++checks; if(!(x)) { std::fprintf(stderr,"Counter FAIL %d: %s\n",__LINE__,#x); ++failures; } } while(0)
 static Simulation setup() {
-    Simulation s;s.defaults();s.reset(5,4,0,0);
+    Simulation s;legacy_fillet::defaults(s);s.reset(5,4,0,0);
     s.world.players[0].x=45000;s.world.players[1].x=51000;
     auto& m=s.moves[5][0];
     m.v[Reach]=50000;m.v[HitboxBack]=0;m.v[Bottom]=0;m.v[Height]=50000;

@@ -1,3 +1,4 @@
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <cstdio>
 #include <initializer_list>
@@ -5,7 +6,7 @@ using namespace fight;
 static int checks=0, failures=0;
 #define CHECK(x) do {++checks;if(!(x)){++failures;std::fprintf(stderr,"Hit timeline FAIL %d: %s\n",__LINE__,#x);}}while(0)
 static Simulation fresh(bool reverse=false) {
-    Simulation s;s.defaults();s.reset(5,4,0,0);
+    Simulation s;legacy_fillet::defaults(s);s.reset(5,4,0,0);
     s.preview_place(0,reverse?50000:40000,0,0);s.preview_place(1,reverse?40000:50000,0,0);
     auto& m=s.moves[5][0];m.v[Active]=7;m.v[Recovery]=5;m.v[Hitstop]=0;
     m.v[Pushback]=m.v[AirPushback]=0;m.v[Hitstun]=90;m.v[Blockstun]=90;

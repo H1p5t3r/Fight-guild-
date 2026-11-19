@@ -1,16 +1,17 @@
+#include <memory>
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <initializer_list>
 #include <cstdio>
 using namespace fight;
 static int checks=0,failures=0;
 #define CHECK(x) do { ++checks; if(!(x)) { std::fprintf(stderr,"FAIL recovery line %d: %s\n",__LINE__,#x); ++failures; } } while(0)
-static Simulation match() {
-    Simulation s; s.defaults(); s.reset(5,4,0,0);
+static void initialize(Simulation& s) { legacy_fillet::defaults(s); s.reset(5,4,0,0);
     s.world.players[0].x=45000; s.world.players[1].x=51000;
-    return s;
 }
 static void ticks(Simulation& s,int n,int a=0,int b=0) { for(int i=0;i<n;++i) s.step(a,b); }
 static void thaw(Simulation& s) { while(s.world.hitstop&&!s.world.wall_break_time) s.step(0,0); }
+static void commit_throw(Simulation& s){while(s.world.pair.kind||s.world.hitstop)s.step(0,0);}
 static void prime(Simulation& s,int player=0,int slot=0) {
     auto& f=s.world.players[player]; f.move=slot; f.age=s.moves[f.character][slot].v[Startup]-1;
     f.hit_done=0;
@@ -21,7 +22,7 @@ static Move& wide(Simulation& s,int slot=0) {
 }
 static void test_universals() {
     for(int c=0;c<CHARACTER_COUNT;++c) {
-        auto s=match(); s.reset(c,(c+1)%6,0,0);
+        auto s_storage=std::make_unique<Simulation>();auto& s=*s_storage;initialize(s); s.reset(c,(c+1)%6,0,0);
         CHECK(s.moves[c][SWEEP].v[Knockdown]==HardKnockdown);
         CHECK(s.moves[c][SWEEP].v[HitLevel]==1);
         for(int slot=BACK_THROW;slot<=FORWARD_THROW;++slot) {
@@ -34,44 +35,45 @@ static void test_universals() {
         }
     }
     for(int guard:{int(Right),Right|Down}) {
-        auto s=match();wide(s,SWEEP);prime(s,0,SWEEP);s.step(0,guard);
+        auto s_storage=std::make_unique<Simulation>();auto& s=*s_storage;initialize(s);wide(s,SWEEP);prime(s,0,SWEEP);s.step(0,guard);
         CHECK((s.world.players[1].health<1000)==(guard==Right));
         CHECK((s.world.players[1].knockdown==HardKnockdown)==(guard==Right));
         CHECK(s.world.wall_health[0]==1000&&s.world.wall_health[1]==1000);
     }
     for(int direction:{Left,Right}) {
-        auto s=match();int slot=direction==Left?BACK_THROW:FORWARD_THROW;
+        auto s_storage=std::make_unique<Simulation>();auto& s=*s_storage;initialize(s);int slot=direction==Left?BACK_THROW:FORWARD_THROW;
         ticks(s,1,direction|P|K);CHECK(s.world.players[0].move==slot);
         CHECK(s.world.players[1].health==1000);
         s.step(direction|P|K,0);
+        CHECK(s.world.pair.kind==LegacyCapture&&s.world.players[1].health==1000);commit_throw(s);
         CHECK(s.world.players[1].health==920&&s.world.players[1].knockdown==HardKnockdown);
         CHECK((s.world.players[0].x>s.world.players[1].x)==(direction==Left));
         CHECK(s.world.players[0].faultless==0&&s.world.players[0].hit_done==1);
     }
-    auto left=match();ticks(left,5,0,Left|P|K);
+    auto left_storage=std::make_unique<Simulation>();auto& left=*left_storage;initialize(left);ticks(left,5,0,Left|P|K);commit_throw(left);
     CHECK(left.world.players[1].last_move==FORWARD_THROW&&left.world.players[0].health==920);
-    auto backward=match();ticks(backward,5,0,Right|P|K);
+    auto backward_storage=std::make_unique<Simulation>();auto& backward=*backward_storage;initialize(backward);ticks(backward,5,0,Right|P|K);commit_throw(backward);
     CHECK(backward.world.players[1].last_move==BACK_THROW&&backward.world.players[1].x<backward.world.players[0].x);
-    auto fd=match();fd.world.players[0].momentum=1000;fd.step(Left|Faultless|P|K,0);
+    auto fd_storage=std::make_unique<Simulation>();auto& fd=*fd_storage;initialize(fd);fd.world.players[0].momentum=1000;fd.step(Left|Faultless|P|K,0);
     CHECK(fd.world.players[0].faultless&&fd.world.players[0].move==-1);
-    auto whiff=match();whiff.world.players[1].x=65000;ticks(whiff,50,Right|P|K);
+    auto whiff_storage=std::make_unique<Simulation>();auto& whiff=*whiff_storage;initialize(whiff);whiff.world.players[1].x=65000;ticks(whiff,50,Right|P|K);
     CHECK(whiff.world.players[1].health==1000&&whiff.world.players[0].move==-1);
     for(int mode=0;mode<6;++mode) {
-        auto s=match();auto& d=s.world.players[1];
+        auto s_storage=std::make_unique<Simulation>();auto& s=*s_storage;initialize(s);auto& d=s.world.players[1];
         d.stun=20;d.guarding=mode<2;d.guard_break=mode==1;
         if(mode==3) { d.y=5000;d.vy=500; }
         if(mode==4||mode==5) { d.reaction=mode==4?Downed:Waking;d.recovery_time=30; }
-        prime(s,0,FORWARD_THROW);s.step(0,0);
+        prime(s,0,FORWARD_THROW);s.step(0,0);commit_throw(s);
         CHECK((d.health==920)==(mode==1)); // Only guard break removes stun's throw protection.
     }
-    auto clash=match();ticks(clash,5,Right|P|K,Left|P|K);
+    auto clash_storage=std::make_unique<Simulation>();auto& clash=*clash_storage;initialize(clash);ticks(clash,5,Right|P|K,Left|P|K);
     CHECK(clash.world.players[0].health==1000&&clash.world.players[1].health==1000);
-    CHECK(clash.world.players[0].hit_done&&clash.world.players[1].hit_done);
-    auto strike=match();prime(strike,0,FORWARD_THROW);prime(strike,1,0);strike.step(0,0);
+    CHECK(clash.world.players[0].pair_recovery==12&&clash.world.players[1].pair_recovery==12);
+    auto strike_storage=std::make_unique<Simulation>();auto& strike=*strike_storage;initialize(strike);prime(strike,0,FORWARD_THROW);prime(strike,1,0);strike.step(0,0);
     CHECK(strike.world.players[0].health<1000&&strike.world.players[1].health==1000);
 }
 static void test_recovery() {
-    auto s=match();auto& m=wide(s);m.v[Launch]=1200;m.v[Knockdown]=SoftKnockdown;
+    auto s_storage=std::make_unique<Simulation>();auto& s=*s_storage;initialize(s);auto& m=wide(s);m.v[Launch]=1200;m.v[Knockdown]=SoftKnockdown;
     m.v[KnockdownFrames]=6;m.v[WakeupFrames]=8;prime(s);s.step(0,0);
     CHECK(s.world.players[1].reaction==AirReel&&s.world.players[1].vy==1200);
     int y=s.world.players[1].y;ticks(s,3);CHECK(s.world.players[1].y==y);
@@ -88,23 +90,23 @@ static void test_recovery() {
     ticks(s,8,0,Left|Up|Dash);
     CHECK(s.world.players[1].reaction==Free&&s.world.players[1].x==landing_x);
     CHECK(s.world.players[1].combo_received==0&&s.get(1,35)==100);
-    auto hard=match();prime(hard,0,FORWARD_THROW);hard.step(0,0);thaw(hard);
+    auto hard_storage=std::make_unique<Simulation>();auto& hard=*hard_storage;initialize(hard);prime(hard,0,FORWARD_THROW);hard.step(0,0);commit_throw(hard);thaw(hard);
     for(int i=0;i<120&&hard.world.players[1].reaction==AirReel;++i) hard.step(0,0);
     CHECK(hard.world.players[1].reaction==Downed&&hard.world.players[1].recovery_time==36);
     ticks(hard,35,0,Up|Dash);CHECK(hard.world.players[1].reaction==Downed);
     hard.step(0,0);CHECK(hard.world.players[1].reaction==Waking);
-    auto reversal=match();auto& d=reversal.world.players[1];
+    auto reversal_storage=std::make_unique<Simulation>();auto& reversal=*reversal_storage;initialize(reversal);auto& d=reversal.world.players[1];
     d.simple=1;d.reaction=Waking;d.recovery_time=2;d.knockdown=SoftKnockdown;
     ticks(reversal,3,0,Simple|Up|Hs);
     CHECK(d.move==16&&d.reversal_time==NOTICE_TICKS&&d.y==0);
     for(int slot:{0,FORWARD_THROW}) {
-        auto last=match();wide(last);auto& recovering=last.world.players[1];
+        auto last_storage=std::make_unique<Simulation>();auto& last=*last_storage;initialize(last);wide(last);auto& recovering=last.world.players[1];
         recovering.reaction=Waking;recovering.recovery_time=1;
         prime(last,0,slot);last.step(0,0);
         CHECK(recovering.health==1000&&recovering.reaction==Free);
     }
     for(int type=0;type<3;++type) {
-        auto k=match();auto& move=wide(k);move.v[Pushback]=1000;move.v[AirPushback]=5000;move.v[BlockPushback]=7000;
+        auto k_storage=std::make_unique<Simulation>();auto& k=*k_storage;initialize(k);auto& move=wide(k);move.v[Pushback]=1000;move.v[AirPushback]=5000;move.v[BlockPushback]=7000;
         move.v[Launch]=1000;move.v[AirLaunch]=-200;
         auto& target=k.world.players[1];int old=target.x;
         if(type==1) {target.y=5000;target.vy=0;}
@@ -117,7 +119,7 @@ static void test_recovery() {
     }
 }
 static void test_gravity() {
-    auto s=match();auto& d=s.world.players[1];auto& a=s.world.players[0];
+    auto s_storage=std::make_unique<Simulation>();auto& s=*s_storage;initialize(s);auto& d=s.world.players[1];auto& a=s.world.players[0];
     d.y=12000;d.reaction=AirReel;d.combo_received=5;d.stun=20;a.combo=5;
     s.step(0,0);CHECK(d.vy==-85&&s.get(1,35)==100);
     wide(s).v[AirLaunch]=1000;prime(s);s.step(0,0);
@@ -132,7 +134,7 @@ static void test_gravity() {
     CHECK(!s.rule_set(GravityCap,99)&&!s.rule_set(GravityStep,-1));
 }
 static Simulation splat(int actor=0) {
-    auto s=match();s.rules.wall_threshold=100;s.reset(5,4,0,0);
+    auto s_storage=std::make_unique<Simulation>();auto& s=*s_storage;initialize(s);s.rules.wall_threshold=100;s.reset(5,4,0,0);
     auto& m=s.moves[s.world.players[actor].character][0];
     m.v[Reach]=50000;m.v[Bottom]=0;m.v[Height]=50000;m.v[Damage]=20;
     m.v[Launch]=0;m.v[Pushback]=m.v[AirPushback]=1200;m.v[Hitstun]=60;
@@ -170,15 +172,15 @@ static void test_walls() {
     CHECK(timeout.world.players[1].reaction==Free&&timeout.world.stage==0);
     auto last=splat();thaw(last);ticks(last,59);prime(last);last.step(0,0);
     CHECK(last.world.wall_break_time==last.rules.wall_break_frames); // The final splat tick remains a follow-up opportunity.
-    auto block=match();wide(block).v[WallDamage]=5000;prime(block);block.step(0,Right);
+    auto block_storage=std::make_unique<Simulation>();auto& block=*block_storage;initialize(block);wide(block).v[WallDamage]=5000;prime(block);block.step(0,Right);
     CHECK(block.world.wall_health[0]==1000&&block.world.wall_health[1]==1000&&block.world.wall_break_time==0);
-    auto bonus=match();wide(bonus).v[Damage]=20;bonus.world.players[0].positive_time=1;
+    auto bonus_storage=std::make_unique<Simulation>();auto& bonus=*bonus_storage;initialize(bonus);wide(bonus).v[Damage]=20;bonus.world.players[0].positive_time=1;
     prime(bonus);bonus.step(0,0);
     CHECK(bonus.world.players[0].momentum==245&&bonus.world.players[0].positive_time==0);
-    auto fd=match();fd.world.players[0].positive_time=1;fd.world.players[0].momentum=1000;
+    auto fd_storage=std::make_unique<Simulation>();auto& fd=*fd_storage;initialize(fd);fd.world.players[0].positive_time=1;fd.world.players[0].momentum=1000;
     fd.step(Left|Faultless,0);
     CHECK(fd.world.players[0].momentum==1000-fd.rules.fd_drain&&fd.world.players[0].positive_time==0);
-    auto mid=match();wide(mid).v[WallDamage]=400;prime(mid);mid.step(0,0);
+    auto mid_storage=std::make_unique<Simulation>();auto& mid=*mid_storage;initialize(mid);wide(mid).v[WallDamage]=400;prime(mid);mid.step(0,0);
     CHECK(mid.world.wall_health[0]==1000&&mid.world.wall_health[1]==1000&&mid.world.players[1].reaction==Free);
     thaw(mid);ticks(mid,mid.rules.wall_decay_delay+1);
     CHECK(mid.world.wall_health[0]==1000&&mid.world.wall_health[1]==1000);
@@ -213,7 +215,7 @@ static void test_stage_routes() {
 }
 static void test_recovery_poses() {
     for(int c=0;c<CHARACTER_COUNT;++c) for(int kd:{SoftKnockdown,HardKnockdown}) for(int wake:{0,1,8,21}) {
-        auto s=match();s.reset(c,(c+1)%6,0,0);
+        auto s_storage=std::make_unique<Simulation>();auto& s=*s_storage;initialize(s);s.reset(c,(c+1)%6,0,0);
         auto& f=s.world.players[0];f.reaction=Downed;f.knockdown=kd;
         f.recovery_time=3;f.wakeup_frames=wake;
         const int phase=kd==HardKnockdown?9:10;

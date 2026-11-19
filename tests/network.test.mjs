@@ -23,13 +23,14 @@ test('Room relay matches clients, forwards inputs, rejects data mismatch, and cl
   }
   try {
     const response=await fetch(`http://127.0.0.1:${port}/generated/fight.wasm`);assert.equal(response.status,200);assert.equal(response.headers.get('content-type'),'application/wasm');
-    const a=await client(),b=await client(),bad=await client();
-    a.send({type:'host',fingerprint:'1-12345678',character:0,simple:true});const room=await a.next();assert.equal(room.type,'waiting');
-    bad.send({type:'join',code:room.code,fingerprint:'1-87654321',character:1,simple:false});assert.match((await bad.next()).message,/Move data differs/);
-    b.send({type:'join',code:room.code,fingerprint:'1-12345678',character:1,simple:false});
-    assert.equal((await a.next()).player,0);assert.equal((await b.next()).player,1);
     const module=await WebAssembly.compile(await readFile(new URL('../web/generated/fight.wasm',import.meta.url)));
     const engines=await Promise.all([0,1,2].map(async()=>new Engine(await WebAssembly.instantiate(module))));
+    const fingerprint=engines[0].fingerprint(),different=fingerprint.slice(0,-1)+(fingerprint.endsWith('0')?'1':'0');
+    const a=await client(),b=await client(),bad=await client();
+    a.send({type:'host',fingerprint,character:0,simple:true});const room=await a.next();assert.equal(room.type,'waiting');
+    bad.send({type:'join',code:room.code,fingerprint:different,character:1,simple:false});assert.match((await bad.next()).message,/Move data differs/);
+    b.send({type:'join',code:room.code,fingerprint,character:1,simple:false});
+    assert.equal((await a.next()).player,0);assert.equal((await b.next()).player,1);
     engines.forEach(e=>e.reset([0,1],[true,false]));
     const peers=engines.slice(0,2).map(e=>new RollbackSession(e));
     for(let f=0;f<180;++f) {

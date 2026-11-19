@@ -1,10 +1,11 @@
+import {legacyData,stripExtensions} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {Engine,INPUT} from '../web/engine.mjs';
 import {upgradeStartupRules} from '../web/startup-rules.mjs';
 const module=await WebAssembly.compile(await readFile('web/generated/fight.wasm'));
-const create=async()=>new Engine(await WebAssembly.instantiate(module));
+const create=async()=>{const e=new Engine(await WebAssembly.instantiate(module));e.loadData(legacyData(e.data()));return e;};
 
 test('Standard throws connect on frame 2; P normals support 3f/4f; other attacks retain 5f',async()=>{
   const e=await create();
@@ -35,7 +36,7 @@ test('Standard throws connect on frame 2; P normals support 3f/4f; other attacks
 });
 
 test('Schema 19 migration changes only standard throws and preserves notes; current edits round trip atomically',async()=>{
-  const e=await create(),legacy=e.data();legacy.schema=legacy.coreVersion=19;
+  const e=await create(),legacy=e.data();legacy.schema=legacy.coreVersion=19;stripExtensions(legacy);
   legacy._moveWorkshop={version:1,notes:{'Fillet/4P+K':{active:'Keep this collar pose.'}}};
   legacy.futureMetadata={keep:true};
   for(const c of legacy.characters)for(const m of c.moves)if(m.category===4&&!m.motion)m.startup=9;

@@ -1,3 +1,4 @@
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <cstdio>
 #include <cstring>
@@ -8,7 +9,7 @@ static int checks=0,failures=0;
 // Stable mechanics fixture: these explicit values isolate rules from starter balance.
 // The roster/collision suites and cross-runtime trace below exercise shipped defaults.
 static void fresh(int s0=0,int s1=0) {
-    defaults();
+    legacy_fillet::defaults(default_simulation);
     for(int c=0;c<CHARACTER_COUNT;++c) for(int i=0;i<MOVE_COUNT;++i) {
         auto& m=moves[c][i]; int b=m.v[Button];
         bool command=m.v[Category]==Command,special=m.v[Category]==Special;
@@ -350,7 +351,7 @@ static void test_combo_feedback() {
 static void test_roster() {
     const int slots[5]={0,1,2,3,13};
     for(int c=0;c<CHARACTER_COUNT;++c) for(int button=0;button<5;++button) {
-        defaults(); reset(c,(c+1)%CHARACTER_COUNT,0,0);
+        legacy_fillet::defaults(default_simulation); reset(c,(c+1)%CHARACTER_COUNT,0,0);
         auto pa=default_simulation.box(0,PushBox),pb=default_simulation.box(1,PushBox);
         world.players[0].x=45000;
         world.players[1].x=45000+(pa.right-pa.left+pb.right-pb.left)/2;
@@ -393,7 +394,7 @@ static void test_replay() {
 }
 int main(int argc,char** argv) {
     if(argc>1&&std::strcmp(argv[1],"--trace")==0) {
-        defaults(); reset(0,1,0,0); unsigned seed=123456;
+        legacy_fillet::defaults(default_simulation); reset(0,1,0,0); unsigned seed=123456;
         for(int i=0;i<1200;++i) {
             int a=random_input(seed),b=random_input(seed); step(a,b);
             std::printf("%d %d %u\n",a,b,checksum());

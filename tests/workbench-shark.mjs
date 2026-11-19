@@ -1,3 +1,4 @@
+import {legacyPack} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -5,7 +6,7 @@ import {Workshop,blockAdvantage} from '../web/workbench/model.mjs';
 import {CombatPreview} from '../web/workbench/simulation.mjs';
 import {Engine} from '../web/engine.mjs';
 const json=async p=>JSON.parse(await readFile(p,'utf8'));
-const pack=await json('build/workbench-pack.json');
+const pack=legacyPack(await json('build/workbench-pack.json'));
 const sharkBatch=await json('godot/data/workshop/2026-11-18-shark/FightGuild-Shark-Normals.json');
 const slots=[0,1,32,2,3,4,5,6,7,17,18,19,20,8,9,11];
 
@@ -62,7 +63,7 @@ test('Shark batch changes only the16 selected normals and appends briefs without
   assert.deepEqual(data.characters[c].movement,before.characters[c].movement);
   for(let m=0;m<45;++m)if(!slots.includes(m))assert.deepEqual(data.characters[c].moves[m],before.characters[c].moves[m],String(m));
  }
- for(const [k,v] of Object.entries(before).filter(([k])=>!['characters','_moveWorkshop'].includes(k)))assert.deepEqual(data[k],v);
+ for(const [k,v] of Object.entries(before).filter(([k])=>!['characters','_moveWorkshop','schema','coreVersion'].includes(k)))assert.deepEqual(data[k],v);
  for(const [name,note] of Object.entries(before._moveWorkshop.notes)){
   const now=data._moveWorkshop.notes[name];
   for(const [key,value] of Object.entries(note)){

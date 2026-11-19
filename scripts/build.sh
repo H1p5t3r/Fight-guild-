@@ -2,9 +2,12 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p build web/generated
+# Runtime tests retain several independent configuration tables on the stack.
 python scripts/generate-combat-data.py --check
 python tests/combat_data_test.py
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/movement_projectile_test.cpp -o build/movement-projectile-tests
+"${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/fillet_v1_test.cpp -o build/fillet-v1-tests
+"${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/fillet_geometry_test.cpp -o build/fillet-geometry-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/core_test.cpp -o build/core-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/collision_test.cpp -o build/collision-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/hit_timeline_test.cpp -o build/hit-timeline-tests
@@ -29,6 +32,6 @@ export ZIG_GLOBAL_CACHE_DIR="${FIGHT_TOOLS:-/workspace/.fight-guild-tools}/zig-c
 export ZIG_LOCAL_CACHE_DIR="$PWD/build/zig-cache"
 "$fight_zig" c++ -target wasm32-freestanding -std=c++17 -O2 -nostdlib \
   -fno-exceptions -fno-rtti -Wl,--no-entry -rdynamic \
-  -Wl,-z,stack-size=65536 -Wl,--initial-memory=4194304 -Wl,--max-memory=4194304 \
+  -Wl,-z,stack-size=65536 -Wl,--initial-memory=8388608 -Wl,--max-memory=8388608 \
   core/fight.cpp -o web/generated/fight.wasm
 echo 'Built native tests and web/generated/fight.wasm'

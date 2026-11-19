@@ -1,3 +1,4 @@
+import {legacyPack,legacyData,stripExtensions} from './legacy-data.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -7,7 +8,7 @@ import {CombatPreview} from '../web/workbench/simulation.mjs';
 import {Workshop,attackBoxes} from '../web/workbench/model.mjs';
 import {makeHitKey,validateHitTimeline} from '../web/hitboxes.mjs';
 import {cursorAnchor,cursorIndex} from '../web/workbench/cursor.mjs';
-const pack=JSON.parse(await readFile('build/workbench-pack.json','utf8'));
+const shippedPack=JSON.parse(await readFile('build/workbench-pack.json','utf8')),pack=legacyPack(shippedPack);
 const wasm=await WebAssembly.compile(await readFile('web/generated/fight.wasm'));
 const sample=()=>{
   const data=structuredClone(pack.defaults),m=data.characters[5].moves[0];
@@ -49,9 +50,9 @@ test('Multiple boxes remain one hit unless multi-hit is enabled; hit groups are 
   const trace=preview.record(gap,5,0);assert.equal(trace.contacts[0].tick,7);
 });
 test('Timelines migrate and round-trip with notes, undo, per-frame geometry and atomic validation',()=>{
-  const legacy=structuredClone(pack.defaults);legacy.schema=legacy.coreVersion=13;
+  const legacy=structuredClone(pack.defaults);legacy.schema=legacy.coreVersion=13;stripExtensions(legacy);
   for(const c of legacy.characters)for(const m of c.moves)delete m.hitboxTimeline;
-  const w=new Workshop(pack,legacy);assert.equal(w.data.schema,22);w.setNote(5,0,'active','Keep the knife pose.');
+  const w=new Workshop(pack,legacy);assert.equal(w.data.schema,23);w.setNote(5,0,'active','Keep the knife pose.');
   const track=sample().characters[5].moves[0].hitboxTimeline;w.setHitTimeline(5,0,track);
   const imported=new Workshop(pack,JSON.parse(w.export()));assert.deepEqual(imported.move(5,0).hitboxTimeline,track);assert.equal(imported.note(5,0).active,'Keep the knife pose.');
   assert.equal(attackBoxes(imported.move(5,0),5,pack.collisions[5].push).length,2);

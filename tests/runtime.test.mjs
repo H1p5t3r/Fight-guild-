@@ -1,3 +1,4 @@
+import {legacyData,stripExtensions} from './legacy-data.mjs';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -6,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 import {Engine, INPUT} from '../web/engine.mjs';
 import {RollbackSession,rollbackTrial} from '../web/rollback.mjs';
 const module=await WebAssembly.compile(await readFile(new URL('../web/generated/fight.wasm',import.meta.url)));
-const create=async()=>new Engine(await WebAssembly.instantiate(module));
+const create=async()=>{const e=new Engine(await WebAssembly.instantiate(module));e.loadData(legacyData(e.data()));return e;};
 
 test('Native C++ and WebAssembly match every frame of a 1200-frame input trace',async()=>{
   const e=await create();e.reset([0,1]);
@@ -56,7 +57,7 @@ test('Conditional startup floors, schema-4 migration and compiled collision API 
     assert.throws(()=>e.setMove(0,0,'startup',startup),/startup/);
     assert.equal(e.move(0,0).startup,original.characters[0].moves[0].startup);
   }
-  const legacy=structuredClone(original);legacy.schema=legacy.coreVersion=4;
+  const legacy=structuredClone(original);legacy.schema=legacy.coreVersion=4;stripExtensions(legacy);
   legacy.characters[0].moves[0].counterHitstun=19;
   for(const character of legacy.characters) { character.moves.length=22; for(const move of character.moves) delete move.hitboxBack; }
   e.loadData(legacy);
@@ -74,7 +75,7 @@ test('Conditional startup floors, schema-4 migration and compiled collision API 
 
 test('Signature moves, movement profiles and schema-6 migration survive the WASM adapter',async()=>{
   const e=await create(),original=e.data(),legacy=structuredClone(original);
-  legacy.schema=legacy.coreVersion=6;
+  legacy.schema=legacy.coreVersion=6;stripExtensions(legacy);
   for(const character of legacy.characters) {
     character.moves.length=25;delete character.movement;
     for(const move of character.moves) for(const key of ['enabled','artPose','followFrom','followFrom2','followHit','travelSpeed','inertiaPercent','pullFrames','pullGap','hitAngle']) delete move[key];
@@ -113,7 +114,7 @@ test('Jump startup survives snapshots and schema-8 migration preserves instant t
   for(let i=0;i<10;i++) engine.step(0,0);
   assert.equal(engine.hash, expected);
   const legacy = structuredClone(defaults);
-  legacy.schema=legacy.coreVersion=8;
+  legacy.schema=legacy.coreVersion=8;stripExtensions(legacy);
   delete legacy.jumpRules;
   engine.loadData(legacy);
   assert.equal(engine.data().jumpRules.prejumpFrames, 0);

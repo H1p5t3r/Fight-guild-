@@ -3,11 +3,12 @@ var failures := 0
 func check(value: bool, message: String) -> void:
 	if not value: failures += 1; push_error(message)
 func _initialize() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	var data := model.data()
 	var legacy := data.duplicate(true)
 	legacy.schema = 14
 	legacy.coreVersion = 14
+	LegacyFixture.strip_extensions(legacy)
 	for c in legacy.characters:
 		c.moves.resize(32)
 		for key in CombatModel.MOVEMENT_FIELDS.slice(9): c.movement.erase(key)
@@ -40,6 +41,7 @@ func _initialize() -> void:
 	var previous := data.duplicate(true)
 	previous.schema = 21
 	previous.coreVersion = 21
+	LegacyFixture.strip_extensions(previous)
 	for character in previous.characters:
 		character.movement.erase("airDashPauseFrames")
 		character.movement.erase("airBackdashPauseFrames")

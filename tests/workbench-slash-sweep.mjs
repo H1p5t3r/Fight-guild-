@@ -1,3 +1,4 @@
+import {legacyPack} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -5,7 +6,7 @@ import {Workshop,blockAdvantage,moveName} from '../web/workbench/model.mjs';
 import {CombatPreview,directionBits} from '../web/workbench/simulation.mjs';
 import {Engine,INPUT} from '../web/engine.mjs';
 const json=async p=>JSON.parse(await readFile(p,'utf8'));
-const pack=await json('build/workbench-pack.json'),data=pack.draft.data;
+const pack=legacyPack(await json('build/workbench-pack.json')),data=new Workshop(pack,await json('godot/data/workshop/2026-11-19-slash-sweeps/FightGuild-Slash-Sweeps.json')).data;
 const wasm=await WebAssembly.compile(await readFile('web/generated/fight.wasm'));
 const make=async(c,facing=1,distance=data.characters[c].moves[2].proximityRange,source=data)=>{
  const e=new Engine(await WebAssembly.instantiate(wasm));e.loadData(source);e.reset([c,c===4?5:4]);
@@ -13,7 +14,7 @@ const make=async(c,facing=1,distance=data.characters[c].moves[2].proximityRange,
 };
 test('Slash/sweep batch preserves all other tuning, notes, photos and stable slot IDs',async()=>{
  const before=await json('godot/data/workshop/2026-11-19-user/FightGuild-moves-2026-11-19.json');
- for(const key of Object.keys(before).filter(k=>!['characters','_moveWorkshop'].includes(k)))assert.deepEqual(data[key],before[key]);
+ for(const key of Object.keys(before).filter(k=>!['characters','_moveWorkshop','schema','coreVersion'].includes(k)))assert.deepEqual(data[key],before[key]);
  for(let c=0;c<6;c++){
   assert.deepEqual(data.characters[c].movement,before.characters[c].movement);
   for(let slot=0;slot<45;slot++)if(![2,6,32].includes(slot))assert.deepEqual(data.characters[c].moves[slot],before.characters[c].moves[slot]);

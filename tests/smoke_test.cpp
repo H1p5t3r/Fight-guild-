@@ -1,10 +1,11 @@
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <cstdio>
 #include <initializer_list>
 using namespace fight;
 static int checks=0,failures=0;
 #define CHECK(x) do {++checks;if(!(x)){std::fprintf(stderr,"Smoke FAIL %d: %s\n",__LINE__,#x);++failures;}} while(0)
-static void setup(Simulation& s,int facing=1){s.defaults();s.reset(2,3,0,0);s.preview_place(0,facing==1?30000:70000,0,0);s.preview_place(1,facing==1?80000:20000,0,0);}
+static void setup(Simulation& s,int facing=1){legacy_fillet::defaults(s);s.reset(2,3,0,0);s.preview_place(0,facing==1?30000:70000,0,0);s.preview_place(1,facing==1?80000:20000,0,0);}
 static void charge_inputs(){
  Simulation s,copy;
  for(int facing:{1,-1})for(int dust:{0,1}){

@@ -32,6 +32,7 @@ var movement_fields := {}
 var jump_fields := {}
 var tuning_fields := {}
 var training_momentum: OptionButton
+var kit_button: Button
 var editor_title: Label
 var routes: Label
 var pause_button: Button
@@ -234,6 +235,7 @@ func build_interface() -> void:
 	edit_character.item_selected.connect(func(_i: int): populate_editor())
 	edit_move.item_selected.connect(func(_i: int): populate_editor())
 	editor_title = label(editor, "5P / NORMAL", 22, ACCENT)
+	kit_button = button(editor, "Body keys, paired captures & kit routes", show_kit_editor, true)
 	label(editor, "FRAME DATA", 11, MUTED)
 	var grid := GridContainer.new()
 	grid.columns = 3
@@ -1005,8 +1007,19 @@ func refresh_startup_limits(_value: float = 0) -> void:
 	fields.startup.control.min_value = CombatModel.startup_minimum(definition)
 	fields.variantStartup.control.min_value = CombatModel.variant_startup_minimum(definition)
 
+func show_kit_editor() -> void:
+	if connection.active: return
+	held.clear()
+	var dialog := KitEditor.new()
+	add_child(dialog)
+	dialog.confirmed.connect(func(): close_dialog(dialog))
+	dialog.canceled.connect(func(): close_dialog(dialog))
+	dialog.applied.connect(func(): populate_editor(); reset_round())
+	dialog.open_for(model, edit_character.selected, edit_move.selected)
+
 func populate_editor() -> void:
 	var definition := model.move(edit_character.selected, edit_move.selected)
+	kit_button.visible = not model.extension(edit_character.selected, -1).is_empty()
 	# Set classification before timing, so switching away from a slower move
 	# cannot clamp a two-frame throw while loading the controls.
 	for key in ["button", "category", "mechanic"]: fields[key].control.set_value_no_signal(definition[key])

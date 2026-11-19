@@ -1,0 +1,13 @@
+{
+  "package": "Fillet_Codex_Implementation_v1_0.zip",
+  "sha256": "9f23b24d2bdb70ebdb641a5d75b2f2d91ea9174079e2e2c5cfd6a68aa79548a9",
+  "specSha256": "796292f71f5af141c91997b983ee223834a0826dbc8d3c7b1b1d7d260445e65d",
+  "baseline": "cd8b0cedabfd508b0d82be2841d640e37928ef91",
+  "userArtInstruction": "2026-11-19: Follow the current image-generated art review and selection process before replacing sprites or animation. This overrides the package no-approval/procedural-art direction.",
+  "packageValidation": {
+    "checks": 13998,
+    "failures": 0,
+    "actions": 26,
+    "frames": 894
+  }
+}

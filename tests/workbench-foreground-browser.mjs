@@ -1,3 +1,5 @@
+import {legacyData} from './legacy-data.mjs';
+import {seedBaseline} from './workbench-ui-helpers.mjs';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
 import {readFile,mkdir} from 'node:fs/promises';
@@ -9,7 +11,7 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 try {
   const page=await browser.newPage({viewport:{width:1440,height:1060}}),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  const data=JSON.parse(await readFile('build/workbench-pack.json','utf8')).defaults;
+  const data=legacyData(JSON.parse(await readFile('build/workbench-pack.json','utf8')).defaults);
   await page.addInitScript(data=>{
     globalThis.WebAssembly=undefined;
     localStorage.setItem('fight-guild.move-workshop.v1',JSON.stringify({format:1,data,selection:{character:5,slot:0,tab:'hit'}}));
@@ -20,7 +22,7 @@ try {
       return original.apply(this,args);
     };
   },data);
-  await page.goto(url);await ready(page);
+  await seedBaseline(page);await page.goto(url);await ready(page);
   await page.locator('#test-gap').fill('0');await page.locator('#test-gap').dispatchEvent('change');
   await page.locator('#test-target').selectOption('4');
   await page.waitForFunction(()=>!moveWorkshop.cursor().pending&&moveWorkshop.preview().contacts.length>0);

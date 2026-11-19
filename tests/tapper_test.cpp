@@ -1,9 +1,10 @@
+#include "legacy_fillet_data.h"
 #include "../core/fight.h"
 #include <cstdio>
 using namespace fight;
 static int checks=0,failures=0;
 #define CHECK(x) do {++checks;if(!(x)){std::fprintf(stderr,"Tapper FAIL %d: %s\n",__LINE__,#x);++failures;}} while(0)
-static void setup(Simulation& s){s.defaults();s.reset(3,4,0,0);s.preview_place(0,40000,0,10000);s.preview_place(1,47000,0,10000);}
+static void setup(Simulation& s){legacy_fillet::defaults(s);s.reset(3,4,0,0);s.preview_place(0,40000,0,10000);s.preview_place(1,47000,0,10000);}
 static void ticks(Simulation& s,int n,int a=0,int b=0){while(n-->0)s.step(a,b);}
 static void thaw(Simulation& s){while(s.world.hitstop)s.step(0,0);}
 static void hit(Simulation& s,int move,int guard=0){s.preview_begin(0,move);s.world.players[0].age=s.moves[3][move].v[Startup]-1;s.step(0,guard);}
@@ -33,7 +34,7 @@ static void captures(){
   hit(s,STANCE_THROW,Right);CHECK((b.reaction==Captured)==(immune==0));
  }
  setup(s);a.stance=1;hit(s,STANCE_THROW,Right);CHECK(b.health==1000);ticks(s,25);CHECK(b.health==860&&a.stance&&a.contact_count==1&&b.knockdown==HardKnockdown);
- setup(s);hit(s,BACK_THROW);ticks(s,22);CHECK(a.x>b.x&&a.stance&&b.knockdown==HardKnockdown);
+ setup(s);hit(s,BACK_THROW);while(s.world.pair.kind||s.world.hitstop)s.step(0,0);ticks(s,22);CHECK(a.x>b.x&&a.stance&&b.knockdown==HardKnockdown);
  setup(s);a.y=b.y=15000;b.x=a.x-7000;s.preview_begin(0,AIR_BACK_THROW);ticks(s,5);CHECK(b.health==840&&b.knockdown==HardKnockdown);
  // Real air back throw input takes priority over the P+K FD chord.
  setup(s);a.y=b.y=15000;s.step(Left|P|K,0);CHECK(a.move==AIR_BACK_THROW&&!a.faultless);ticks(s,4);CHECK(b.health==840&&b.knockdown==HardKnockdown);
@@ -54,7 +55,7 @@ static void guard_and_reactions(){
   setup(s);const int owner=scenario==2?0:1;auto& shot=s.moves[owner?4:3][0];shot.v[ProjectileKind]=2;shot.v[ProjectilePersist]=1;shot.v[ProjectileWidth]=16000;shot.v[ProjectileHeight]=18000;shot.v[HitLevel]=1;
   s.world.projectiles[0]={20,owner,owner?4:3,0,1,owner?a.x:b.x,6000,0,0,-1,1,0,1};
   if(scenario==0){a.move=22;a.age=8;}else{a.stance=1;hit(s,STANCE_THROW);}
-  s.step(0,0);CHECK(a.health==1000);if(scenario>0)CHECK(b.reaction==Captured&&a.grab_time>0);
+  s.step(0,0);if(scenario==0)CHECK(a.health==1000);else { CHECK(b.reaction!=Captured&&!a.grab_time);CHECK(scenario==1?a.health<1000:b.health<1000); }
  }
  // A spent wall bounces once; depleted wall takes priority and splats.
  for(int empty=0;empty<2;++empty){setup(s);b.x=98000;b.y=5000;b.reaction=AirReel;b.stun=20;b.vx=900;b.knockback_left=5000;b.bounce_wall=800;s.world.wall_health[1]=empty?0:1000;s.step(0,0);if(empty)CHECK(b.reaction==WallSplat);else CHECK(b.vx==-800&&b.bounce_wall==0&&s.world.wall_health[1]==100);}

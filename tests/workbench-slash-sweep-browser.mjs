@@ -1,3 +1,4 @@
+import {seedBaseline} from './workbench-ui-helpers.mjs';
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {existsSync} from 'node:fs';
@@ -12,6 +13,7 @@ try{
  const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
  page.on('pageerror',e=>errors.push(e.message));
  await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
+ await seedBaseline(page,{version:1,notes:{'Fillet/5S':{active:'Preserve the earlier f.S art brief while editing spacing.'}}});
  await page.goto(`http://127.0.0.1:${server.address().port}/`);await ready(page);
  const initial=await page.evaluate(()=>moveWorkshop.data());
  const testSpacing=async index=>{

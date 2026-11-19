@@ -5,7 +5,7 @@ func check(ok: bool, message: String) -> void:
 func _initialize() -> void:
 	var model := CombatModel.new()
 	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/workshop/current.json"))
-	var draft: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/workshop/" + manifest.file))
+	var draft: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/workshop/2026-11-19-slash-sweeps/FightGuild-Slash-Sweeps.json"))
 	check(model.load_data(draft).is_empty(), "Latest Slash/sweep draft must load")
 	for c in 6:
 		check(model.move_name(c, 2) == "f.S" and model.move_name(c, 32) == "c.S", "Close/far names missing")

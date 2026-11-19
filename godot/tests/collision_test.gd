@@ -7,7 +7,7 @@ func check(condition: bool, description: String) -> void:
 		printerr(description)
 
 func _initialize() -> void:
-	var model := CombatModel.new()
+	var model := LegacyFixture.create()
 	var source: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/fighter_collision.json"))
 	check(source.version == 2, "Unsupported hurtbox authoring schema")
 	# Catch stale native binaries, wrong pivots/scale and dropped authored body parts.
