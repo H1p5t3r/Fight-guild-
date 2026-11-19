@@ -16100,21 +16100,21 @@
           {
             "hurt": {
               "legs": [
-                97,
+                98,
                 285,
-                353,
+                354,
                 405
               ],
               "torsoArms": [
-                109,
+                110,
                 137,
-                357,
+                358,
                 301
               ],
               "head": [
-                169,
+                170,
                 41,
-                325,
+                326,
                 149
               ]
             }
@@ -16122,110 +16122,22 @@
           {
             "hurt": {
               "legs": [
-                108,
-                327,
-                400,
-                464
-              ],
-              "torsoArms": [
-                122,
-                159,
-                405,
-                346
-              ],
-              "head": [
-                190,
-                50,
-                368,
-                174
-              ]
-            }
-          },
-          {
-            "hurt": {
-              "legs": [
-                109,
-                327,
-                401,
-                464
-              ],
-              "torsoArms": [
-                123,
-                159,
-                406,
-                346
-              ],
-              "head": [
-                191,
-                50,
-                369,
-                174
-              ]
-            }
-          },
-          {
-            "hurt": {
-              "legs": [
-                97,
+                96,
                 286,
-                353,
+                352,
                 406
               ],
               "torsoArms": [
-                109,
+                108,
                 138,
-                357,
+                356,
                 302
               ],
               "head": [
-                169,
+                168,
                 42,
-                325,
+                324,
                 150
-              ]
-            }
-          },
-          {
-            "hurt": {
-              "legs": [
-                109,
-                327,
-                401,
-                464
-              ],
-              "torsoArms": [
-                123,
-                159,
-                406,
-                346
-              ],
-              "head": [
-                191,
-                50,
-                369,
-                174
-              ]
-            }
-          },
-          {
-            "hurt": {
-              "legs": [
-                109,
-                328,
-                401,
-                465
-              ],
-              "torsoArms": [
-                123,
-                160,
-                406,
-                347
-              ],
-              "head": [
-                191,
-                51,
-                369,
-                175
               ]
             }
           },
@@ -16261,27 +16173,27 @@
           {
             "hurt": {
               "legs": [
-                89,
+                88,
                 310,
-                445,
+                444,
                 406
               ],
               "torsoArms": [
-                109,
+                108,
                 174,
-                337,
+                336,
                 314
               ],
               "head": [
-                173,
+                172,
                 90,
-                321,
+                320,
                 190
               ],
               "extension": [
-                273,
+                272,
                 282,
-                533,
+                532,
                 398
               ]
             },
@@ -16290,337 +16202,147 @@
           {
             "hurt": {
               "legs": [
-                98,
-                355,
-                504,
-                465
-              ],
-              "torsoArms": [
-                121,
-                201,
-                381,
-                361
-              ],
-              "head": [
-                193,
-                105,
-                363,
-                220
-              ],
-              "extension": [
-                307,
-                324,
-                604,
-                456
-              ]
-            },
-            "extensionFor": "Canonical extended limb only; weapons excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                89,
-                311,
-                445,
-                407
-              ],
-              "torsoArms": [
-                109,
-                175,
-                337,
-                315
-              ],
-              "head": [
-                173,
-                91,
-                321,
-                191
-              ],
-              "extension": [
-                273,
-                283,
-                533,
-                399
-              ]
-            },
-            "extensionFor": "Canonical extended limb only; weapons excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                78,
-                311,
-                434,
-                407
-              ],
-              "torsoArms": [
-                98,
-                175,
-                326,
-                315
-              ],
-              "head": [
-                162,
-                91,
+                88,
                 310,
+                444,
+                406
+              ],
+              "torsoArms": [
+                108,
+                174,
+                336,
+                314
+              ],
+              "head": [
+                172,
+                90,
+                320,
+                190
+              ],
+              "extension": [
+                272,
+                282,
+                532,
+                398
+              ]
+            },
+            "extensionFor": "Canonical extended limb only; weapons excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                90,
+                311,
+                446,
+                407
+              ],
+              "torsoArms": [
+                110,
+                175,
+                338,
+                315
+              ],
+              "head": [
+                174,
+                91,
+                322,
                 191
               ],
               "extension": [
-                262,
+                274,
                 283,
-                462,
-                399
-              ]
-            },
-            "extensionFor": "Canonical extended limb only; weapons excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                100,
-                355,
-                506,
-                465
-              ],
-              "torsoArms": [
-                123,
-                201,
-                383,
-                361
-              ],
-              "head": [
-                195,
-                105,
-                365,
-                220
-              ],
-              "extension": [
-                309,
-                324,
-                537,
-                456
-              ]
-            },
-            "extensionFor": "Canonical extended limb only; weapons excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                143,
-                436,
-                622,
-                565
-              ],
-              "torsoArms": [
-                170,
-                253,
-                477,
-                442
-              ],
-              "head": [
-                256,
-                140,
-                455,
-                275
-              ],
-              "extension": [
-                390,
-                398,
-                660,
-                555
-              ]
-            },
-            "extensionFor": "Canonical extended limb only; weapons excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                120,
-                436,
-                599,
-                565
-              ],
-              "torsoArms": [
-                147,
-                253,
-                454,
-                442
-              ],
-              "head": [
-                233,
-                140,
-                432,
-                275
-              ],
-              "extension": [
-                367,
-                398,
-                637,
-                555
-              ]
-            },
-            "extensionFor": "Canonical extended limb only; weapons excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                141,
-                418,
-                620,
-                547
-              ],
-              "torsoArms": [
-                168,
-                235,
-                475,
-                424
-              ],
-              "head": [
-                254,
-                122,
-                453,
-                257
-              ],
-              "extension": [
-                388,
-                380,
-                658,
-                537
-              ]
-            },
-            "extensionFor": "Canonical extended limb only; weapons excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                97,
-                287,
-                353,
-                407
-              ],
-              "torsoArms": [
-                109,
-                139,
-                357,
-                303
-              ],
-              "head": [
-                169,
-                43,
-                325,
-                151
-              ]
-            }
-          },
-          {
-            "hurt": {
-              "legs": [
-                130,
-                385,
-                474,
-                547
-              ],
-              "torsoArms": [
-                146,
-                186,
-                480,
-                408
-              ],
-              "head": [
-                226,
-                58,
-                437,
-                204
-              ]
-            }
-          },
-          {
-            "hurt": {
-              "legs": [
-                158,
-                393,
-                528,
-                567
-              ],
-              "torsoArms": [
-                175,
-                180,
                 534,
-                417
-              ],
-              "head": [
-                262,
-                41,
-                488,
-                198
-              ]
-            }
-          },
-          {
-            "hurt": {
-              "legs": [
-                115,
-                392,
-                485,
-                566
-              ],
-              "torsoArms": [
-                132,
-                179,
-                491,
-                416
-              ],
-              "head": [
-                219,
-                40,
-                445,
-                197
-              ]
-            }
-          },
-          {
-            "hurt": {
-              "legs": [
-                154,
-                375,
-                524,
-                549
-              ],
-              "torsoArms": [
-                171,
-                162,
-                530,
                 399
-              ],
-              "head": [
-                258,
-                23,
-                484,
-                180
               ]
-            }
+            },
+            "extensionFor": "Canonical extended limb only; weapons excluded."
           },
           {
             "hurt": {
               "legs": [
-                122,
-                375,
-                492,
-                549
+                90,
+                311,
+                446,
+                407
               ],
               "torsoArms": [
-                139,
-                162,
-                498,
-                399
+                110,
+                175,
+                338,
+                315
               ],
               "head": [
-                226,
-                23,
-                452,
-                180
+                174,
+                91,
+                322,
+                191
+              ],
+              "extension": [
+                274,
+                283,
+                474,
+                399
               ]
-            }
+            },
+            "extensionFor": "Canonical extended limb only; weapons excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                90,
+                311,
+                446,
+                407
+              ],
+              "torsoArms": [
+                110,
+                175,
+                338,
+                315
+              ],
+              "head": [
+                174,
+                91,
+                322,
+                191
+              ],
+              "extension": [
+                274,
+                283,
+                474,
+                399
+              ]
+            },
+            "extensionFor": "Canonical extended limb only; weapons excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                77,
+                311,
+                433,
+                407
+              ],
+              "torsoArms": [
+                97,
+                175,
+                325,
+                315
+              ],
+              "head": [
+                161,
+                91,
+                309,
+                191
+              ],
+              "extension": [
+                261,
+                283,
+                461,
+                399
+              ]
+            },
+            "extensionFor": "Canonical extended limb only; weapons excluded."
           },
           {
             "hurt": {
@@ -16641,6 +16363,28 @@
                 43,
                 325,
                 151
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                98,
+                285,
+                354,
+                405
+              ],
+              "torsoArms": [
+                110,
+                137,
+                358,
+                301
+              ],
+              "head": [
+                170,
+                41,
+                326,
+                149
               ]
             }
           },

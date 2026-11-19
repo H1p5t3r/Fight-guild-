@@ -49,6 +49,9 @@ const collisions=JSON.parse(await readFile(path('godot/data/fighter_collision.js
 const phases=['active','windup','block','signature_active','signature_windup','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation','backdash','idle_smoke','movement_smoke','backdraft_fx','sword_fx','sweep_fx'];
 const art=manifest.fighters.map(f=>Object.fromEntries(['name','projectile','projectile_variants','attack_animations',...phases].filter(p=>f[p]).map(p=>[p,f[p]])));
 const files=[...new Set(art.flatMap(f=>phases.filter(p=>f[p]).flatMap(p=>[f[p].file,...f[p].frames.flatMap(frame=>frame.file?[frame.file]:[])])))];
+// The comparison retains superseded drawings that are no longer in live clips.
+const reviewBaseline=JSON.parse(await readFile(path('art/characters/fillet-v1/production/sweep-timing/baseline.json'),'utf8'));
+for(const frame of reviewBaseline.frames)if(!files.includes(frame.file))files.push(frame.file);
 files.push("appearance-v3/projectiles.png");
 for(const fighter of art)if(fighter.projectile)files.push(fighter.projectile.file);
 for(const fighter of art)for(const projectile of Object.values(fighter.projectile_variants??{}))if(!files.includes(projectile.file))files.push(projectile.file);
@@ -127,8 +130,8 @@ const linkedHtml=template.replace('<!--WORKSHOP_STYLES-->',()=>`<link rel="style
   .replace('The page works offline without installing anything. It makes no network requests.',
     'The website loads the editor and artwork from this site. Your edits and pose photos stay in this browser; they are not uploaded. The extracted ZIP also works offline without installing anything.');
 await writeFile(path('build/move-workshop/index.html'),linkedHtml);
-await writeFile(path('build/move-workshop/fillet-motion-review.html'),await buildFilletMotionReview({art:manifest.fighters[5],images:linkedImages,engine}));
-await writeFile(path('build/Fillet-Animation-On-Twos.html'),await buildFilletMotionReview({art:manifest.fighters[5],images,engine}));
+await writeFile(path('build/move-workshop/fillet-motion-review.html'),await buildFilletMotionReview({art:manifest.fighters[5],roster:manifest.fighters,images:linkedImages,engine}));
+await writeFile(path('build/Fillet-Attack-Timing.html'),await buildFilletMotionReview({art:manifest.fighters[5],roster:manifest.fighters,images,engine}));
 await writeFile(path('build/move-workshop/.nojekyll'),'');
 await writeFile(path('build/move-workshop/FightGuild-moves.json'),JSON.stringify(pack.draft?.data??pack.defaults,null,2)+'\n');
 await writeFile(path('build/move-workshop/START_HERE.txt'),`Fight Guild - Move Workshop\n\nExtract this whole folder, then open index.html in Chrome or Edge.\nKeep the assets folder beside index.html. No installation or server is needed.\n\nDownload JSON before closing to keep a portable backup of edits, notes and photos.\nDrafts stay in this browser; they do not sync between PCs or with the old HTML.\nUse Import JSON to carry a saved draft into this version.\nFightGuild-moves.json contains the shipped project draft; importing it replaces\nthe open draft, so download your edits before doing so.\n`);

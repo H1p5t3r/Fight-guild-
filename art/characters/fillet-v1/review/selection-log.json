@@ -134,14 +134,12 @@
         "Retain the fixed foot support, authored reach and frame timing; do not turn the motion into a traveling slide or spin."
       ],
       "production": "art/characters/fillet-v1/production/ground-v1",
-      "poseKeys": 22,
+      "poseKeys": 11,
       "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
       "inbetweensProduction": "art/characters/fillet-v1/production/ground-twos",
-      "drawingCadence": {
-        "interval": 2,
-        "phaseEntry": true,
-        "retainApprovedKeys": true
-      }
+      "bodyDrawings": 7,
+      "exposureTiming": "art/characters/fillet-v1/production/sweep-timing/timing.json",
+      "inbetweensStatus": "Superseded by the held exposure plan in sweep-timing; source art retained for comparison."
     },
     {
       "id": "2Hs",

@@ -7,8 +7,9 @@ import {poseAt} from '../web/workbench/model.mjs';
 const spec=JSON.parse(readFileSync('art/characters/fillet-v1/FILLET_SPEC.json'));
 const art=JSON.parse(readFileSync('godot/assets/fighters/manifest.json')).fighters[5];
 const actions=spec.actions.filter(a=>art.attack_animations[String(a.slot)]);
-const refined=new Set(['5P','5K','2S']);
+const refined=new Set(['5P','5K']);
 const expectedTicks=a=>{
+ if(a.id==='2S')return [1,6,11,12,14,15,16,18,20,26,33];
  const ticks=new Set(a.animation.keys.map(k=>k.frame));
  if(refined.has(a.id)){
   const {startup:s,active:h,recovery:r}=a.schema22Scalars;
@@ -20,9 +21,9 @@ const wasm=await WebAssembly.compile(readFileSync('web/generated/fight.wasm'));
 const engine=async()=>new Engine(await WebAssembly.instantiate(wasm));
 const place=(e,facing,gap=40000)=>{e.reset([5,4]);e.api.fg_preview_place(0,50000,0,0);e.api.fg_preview_place(1,50000+facing*gap,0,0);e.step(0,0);};
 
-test('All 116 Fillet ground-normal keys appear on their exact authored ticks in both facings',async()=>{
+test('All 105 Fillet ground-normal keys appear on their exact authored ticks in both facings',async()=>{
  const e=await engine();
- assert.equal(actions.length,11);assert.equal(art.attack_animation.frames.length,116);
+ assert.equal(actions.length,11);assert.equal(art.attack_animation.frames.length,105);
  for(const a of actions)for(const facing of [-1,1]){
   place(e,facing);assert.equal(e.api.fg_preview_begin(0,a.slot),1);
   const seen=new Set();
@@ -38,7 +39,7 @@ test('All 116 Fillet ground-normal keys appear on their exact authored ticks in 
  }
 });
 
-test('5P, 5K and 2S change drawing on every phase entry and never hold longer than two action frames',async()=>{
+test('5P and 5K change drawing on every phase entry and never hold longer than two action frames',async()=>{
  const e=await engine();
  for(const a of actions.filter(a=>refined.has(a.id))){
   place(e,1);e.api.fg_preview_begin(0,a.slot);
@@ -73,6 +74,27 @@ test('2S generated cutting arc reaches the live hitbox in both facings and fades
    }
   }
  }
+});
+
+test('Sweep uses stable held poses, a one-frame release, and its real nine-frame contact freeze',async()=>{
+ const frames=art.attack_animation.frames.filter(k=>k.action_id==='2S');
+ assert.equal(new Set(frames.map(k=>k.file+JSON.stringify(k.region))).size,7);
+ assert.ok(frames.every(k=>k.file==='fillet-ground-v1/2s.png'&&k.body_height===600));
+ for(const k of frames)assert.ok(Math.abs((k.rear_foot_source_x-k.pivot[0])*150/k.body_height+35)<=.125);
+ const entry=frames[0],settle=frames.at(-1);
+ assert.deepEqual([entry.region,entry.pivot],[settle.region,settle.pivot]);
+ const e=await engine();place(e,1);e.api.fg_preview_begin(0,6);
+ const sources=[];
+ for(let tick=1;tick<=38;tick++){e.step(0,0);sources.push(art.attack_animation.frames[e.state().players[0].poseIndex].source_action_frame);}
+ assert.deepEqual(sources.slice(5,12),[6,6,6,6,6,11,12]);
+ assert.deepEqual(sources.slice(11,14),[12,12,12]);
+ place(e,1,10000);e.api.fg_preview_begin(0,6);
+ for(let i=0;i<12;i++)e.step(0,0);
+ assert.equal(e.state().hitstop,9);assert.equal(e.state().players[0].age,12);
+ const pose=e.state().players[0].poseIndex,saved=e.snapshot();
+ for(let i=0;i<9;i++){e.step(0,0);assert.equal(e.state().players[0].age,12);assert.equal(e.state().players[0].poseIndex,pose);}
+ e.step(0,0);assert.equal(e.state().players[0].age,13);
+ const hash=e.hash;e.restore(saved);for(let i=0;i<10;i++)e.step(0,0);assert.equal(e.hash,hash);
 });
 
 test('Edited timings and disabled-move geometry preview use the same phase keys as the simulation',async()=>{

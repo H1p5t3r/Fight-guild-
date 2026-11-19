@@ -5,6 +5,7 @@ Pixels are never cropped, repainted or resampled. Atlas regions, roots and scale
 are metadata. Canonical combat geometry stays in the versioned kit extension.
 """
 import hashlib
+import copy
 import json
 import math
 import shutil
@@ -14,6 +15,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'art/characters/fillet-v1/production/ground-v1'
 INBETWEENS = ROOT / 'art/characters/fillet-v1/production/ground-twos'
+SWEEP_TIMING = ROOT / 'art/characters/fillet-v1/production/sweep-timing'
 DEST = ROOT / 'godot/assets/fighters/fillet-ground-v1'
 load = lambda p: json.loads(p.read_text())
 save = lambda p, value: p.write_text(json.dumps(value, indent=2) + '\n')
@@ -67,6 +69,29 @@ def register_sweep_effect(fighter, frames):
         if frame['action_id'] == '2S' and frame['action_frame'] in placement:
             pose, box, opacity = placement[frame['action_frame']]
             frame['effect'] = dict(sheet='sweep_fx', pose=pose, box=box, opacity=opacity, behind=False)
+
+
+def retime_sweep(records, actions):
+    timing = load(SWEEP_TIMING / 'timing.json')
+    source = {tick: frame for _, tick, frame, _ in records
+              if frame['action_id'] == '2S' and frame['file'] == timing['sourceFile']}
+    result = [r for r in records if r[2]['action_id'] != '2S']
+    for key in timing['keys']:
+        frame = copy.deepcopy(source[key['sourceFrame']])
+        height = timing['bodyHeight']
+        foot = timing['rearFootSourceX'][str(key['sourceFrame'])]
+        frame['pivot'][0] = round(foot - timing['rearFootWorldX'] * height / 150)
+        frame.update(action_frame=key['frame'], source_action_frame=key['sourceFrame'],
+                     name='2S / '+key['cue'], motion_cue=key['cue'], body_height=height,
+                     rear_foot_source_x=foot)
+        root, sole = frame['pivot']
+        canonical = next(k['boxes'] for k in reversed(actions['2S']['hurtboxTimeline']['keys']) if k['frame'] <= key['frame'])
+        fit = dict(hurt={name: [math.floor(root+l*height/15000), math.floor(sole-t*height/15000),
+                               math.ceil(root+r*height/15000), math.ceil(sole-b*height/15000)]
+                        for name, (l,b,r,t) in canonical.items()})
+        if 'extension' in canonical: fit['extensionFor'] = 'Canonical extended limb only; weapons excluded.'
+        result.append((actions['2S']['slot'], key['frame'], frame, fit))
+    return sorted(result, key=lambda r: (r[0], r[1])), timing
 
 
 def main():
@@ -161,6 +186,8 @@ def main():
                                prompt=record['prompt'], references=record['references'], size=list(im.size)))
     frame_records.sort(key=lambda r: (r[0], r[1]))
     assert len(frame_records) == 116
+    frame_records, sweep_timing = retime_sweep(frame_records, actions)
+    assert len(frame_records) == 105
     frames = [row[2] for row in frame_records]
     for action_id in CALIBRATION:
         selected = [f for f in frames if f['action_id'] == action_id]
@@ -170,6 +197,7 @@ def main():
             m = actions[action_id]['schema22Scalars']
             s, a, r = [m[k] for k in ('startup', 'active', 'recovery')]
             expected |= set(range(1, s, 2)) | set(range(s, s+a, 2)) | set(range(s+a, s+a+r, 2))
+        if action_id == '2S': expected = {key['frame'] for key in sweep_timing['keys']}
         assert actual == sorted(expected), f'{action_id}: incorrect phase-entry / two-frame cadence'
         for index, frame in enumerate(selected):
             frame['key_index'] = index
@@ -193,14 +221,19 @@ def main():
             clip[stage].append(dict(start=(tick-start)*100//duration, phase='attack_animation', pose=pose))
         for stage in ('windup', 'active', 'recovery'):
             assert clip[stage][0]['start'] == 0 and len(clip[stage]) <= 16
-        if action_id in cadence['actions']:
+        if action_id == '2S':
+            clip['exposureTiming'] = dict(style='held anticipation / sharp cut / measured recovery',
+                authoredTiming=[startup, active, recovery], bodyDrawings=7,
+                source='art/characters/fillet-v1/production/sweep-timing/timing.json')
+        elif action_id in cadence['actions']:
             clip['drawingCadence'] = dict(interval=2, phaseEntry=True, authoredTiming=[startup, active, recovery])
         clips[str(a['slot'])] = clip
     fighter['attack_animations'] = clips
     fighter['ground_normal_selection'] = dict(version=1, actions=list(CALIBRATION),
         source='art/characters/fillet-v1/review/selection-log.json',
         sweep='B / Hip Reap, second study', antiAir='B / Rib Slip with corrected left arm',
-        drawingCadence=dict(actions=cadence['actions'], interval=2, phaseEntry=True))
+        drawingCadence=dict(actions=[a for a in cadence['actions'] if a != '2S'], interval=2, phaseEntry=True),
+        sweepExposure='art/characters/fillet-v1/production/sweep-timing/timing.json')
     save(ROOT / 'godot/assets/fighters/manifest.json', manifest)
     save(ROOT / 'godot/data/fighter_collision.json', collision)
     save(DEST / 'generation.json', dict(version=1, generations=provenance))
@@ -210,7 +243,7 @@ def main():
                'All phase keys follow the authored clock; edited timings scale within each phase.',
                'Current renderer uses its standard mirrored facing presentation; separate reverse-view drawings remain future art work.',
                'Canonical collision data remains authoritative. First-pass raster alignment is subject to visual refinement; no hitboxes are resized to fit art.']))
-    print(f'Fillet: 11 selected ground normals, {len(frames)} registered pose keys, {len(records)} generated atlases; 5P / 5K / 2S follow phase-entry plus every-second-frame cadence.')
+    print(f'Fillet: 11 ground normals, {len(frames)} registered keys; 2S uses 7 consistent body poses with held anticipation, contact and recovery cues.')
 
 
 if __name__ == '__main__':

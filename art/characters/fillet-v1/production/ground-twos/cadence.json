@@ -16,5 +16,8 @@
   ],
   "preserveExistingKeys": true,
   "excludeHitstop": true,
-  "scope": "Authored default timings; longer edited timings may need additional drawn in-betweens."
+  "scope": "Authored default timings; longer edited timings may need additional drawn in-betweens.",
+  "supersededActions": {
+    "2S": "art/characters/fillet-v1/production/sweep-timing/timing.json"
+  }
 }

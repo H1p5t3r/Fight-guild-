@@ -1,5 +1,10 @@
 # Fillet — phase transitions and animation on twos
 
+**Historical pass:** 5P and 5K still use this cadence. The user subsequently
+requested less jitter and stronger timing for 2S; its current implementation is
+documented in [sweep-timing](../sweep-timing/README.md). Captures in this directory
+preserve the previous version for comparison.
+
 The user's 2026-11-19 photograph sets the cadence: **a new drawing at every phase
 entry, then every second frame within that phase**. This pass expands three
 already selected attacks, keeping their choreography and gameplay timings.
@@ -61,5 +66,5 @@ Finished captures, rendered from that same player without synthesizing poses:
   three cycles at game speed, then three at quarter speed.
 - [2S clean and hitbox comparison](previews/Fillet-Sweep-Reach.gif): quarter speed.
 
-Regenerate captures with `node scripts/capture-fillet-motion-review.mjs` after
-building the Workshop. Outputs go to `build/fillet-twos-review/`.
+These captures belong to commit `a34aba8`. The capture script now records the
+current sweep timing into `build/fillet-sweep-timing-review/`.
