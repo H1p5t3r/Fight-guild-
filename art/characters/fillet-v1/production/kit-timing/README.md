@@ -49,6 +49,19 @@ registrar. `fillet-motion-review.html` includes all 26 attacks, whiff/contact
 selection, before/after, facing, hitboxes and frame stepping. The primary MP4
 plays at 60 fps and 1× game speed. The detail MP4 is explicitly half speed.
 
+Finished review recordings are saved with this pass:
+
+- [Full kit at game speed](previews/Fillet-Full-Kit-60fps.mp4): all 26 actions,
+  before/after, on whiff and on contact or capture.
+- [Motion details at half speed](previews/Fillet-Motion-Details-Half-Speed.mp4):
+  2S, j.K, j.Hs, the low rekka branch, 623Hs, 236D and back throw.
+- [Capture manifest](previews/capture.json): simulation-frame counts for each
+  clip. The videos preserve real hitstop and capture clocks; the slow version
+  duplicates frames instead of generating interpolated poses.
+
+The older `capture-fillet-motion-review.mjs` remains a sweep-only entry point
+and resolves 2S by action ID so roster order cannot select another move.
+
 This remains a first playable raster pass. Separate reverse-view drawings,
 bespoke receiver art for every matchup and further pose/hurtbox refinement
 remain future art work; rendering still uses the established facing mirror.

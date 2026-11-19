@@ -12,19 +12,19 @@ const browser=await chromium.launch({headless:true,executablePath:process.env.CH
 try{
  const page=await browser.newPage();await page.goto(`http://127.0.0.1:${server.address().port}/fillet-motion-review.html`);
  await page.evaluate(()=>filletReview.ready);await page.evaluate(()=>filletReview.seek(1));
- const lengths=await page.evaluate(()=>{const m=filletReview.pack.moves[2];return {whiff:m.timeline.length,hit:m.contactTimeline.length};});
+ const lengths=await page.evaluate(()=>{const m=filletReview.pack.moves.find(m=>m.id==='2S');return {whiff:m.timeline.length,hit:m.contactTimeline.length};});
  for(const slow of [false,true])for(const scenario of ['whiff','hit'])for(let tick=1;tick<=lengths[scenario]+18;tick++){
   const url=await page.evaluate(({tick,slow,scenario})=>{
-   const {pack,paint}=filletReview,m=pack.moves[2],length=(scenario==='hit'?m.contactTimeline:m.timeline).length;
+   const {pack,paint}=filletReview,m=pack.moves.find(m=>m.id==='2S'),length=(scenario==='hit'?m.contactTimeline:m.timeline).length;
    const c=document.createElement('canvas');c.width=1280;c.height=560;const ctx=c.getContext('2d');
    ctx.fillStyle='#0c161c';ctx.fillRect(0,0,c.width,c.height);ctx.fillStyle='#e1b76d';ctx.font='italic 700 28px system-ui';
    ctx.fillText('FILLET / 2S — HOLD, CUT, RECOVER',20,34);ctx.fillStyle='#b9cbd0';ctx.font='17px system-ui';
-   ctx.fillText(`${slow?'½ speed':'1× game speed'} · ${scenario==='hit'?'On hit · actual 9-frame hitstop':'Whiff'} · Startup 12 / Active 4 / Recovery 23`,20,65);
+   ctx.fillText(`${slow?'½ speed':'1× game speed'} · ${scenario==='hit'?`On hit · actual ${m.hitstop}-frame hitstop`:'Whiff'} · Startup ${m.startup} / Active ${m.active} / Recovery ${m.recovery}`,20,65);
    for(let col=0;col<2;col++){
     const scratch=document.createElement('canvas');scratch.width=640;scratch.height=450;
     paint(scratch,m,Math.min(tick,length),col===0,{scenario,mirror:false,boxes:false});
     ctx.drawImage(scratch,col*640,110);ctx.fillStyle=col?'#e1b76d':'#b9cbd0';ctx.font='700 19px system-ui';
-    ctx.fillText(col?'CURRENT · 7 consistent body poses':'PREVIOUS · 22 evenly spaced drawings',col*640+20,96);
+    ctx.fillText(col?`CURRENT · ${m.afterDrawings} body drawings`:`PREVIOUS · ${m.beforeDrawings} body drawings`,col*640+20,96);
     if(tick>length){ctx.fillStyle='#0c161ce8';ctx.fillRect(col*640+10,115,610,62);ctx.fillStyle='#b9cbd0';ctx.font='18px system-ui';ctx.fillText('Move complete · pause between replays',col*640+20,147);}
    }
    return c.toDataURL('image/png').split(',')[1];

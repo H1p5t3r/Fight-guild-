@@ -52,7 +52,7 @@ export async function buildFilletMotionReview({art,roster,images,engine}){
    const count=frames=>new Set(frames.map(f=>f.file+JSON.stringify(f.region))).size;
    moves.push({id,label:action.name,startup,active,recovery,hitstop,total,before:old.frames,after,timeline,contactTimeline,
      beforeDrawings:count(old.frames),afterDrawings:count(after),retimed:true,
-     setup:id==='5D'?'Downed target':id.endsWith('D')&&id!=='5D'?'Target with owned bleed':id.startsWith('j.')?'Both fighters jump':'Standing target'});
+     setup:id==='5D'?'Downed target':id.endsWith('D')&&id!=='5D'?'Target with owned bleed':id==='j.K'?'Jumping kick / grounded target':id.startsWith('j.')?'Both fighters jump':'Standing target'});
   }
  }finally{engine.loadData(saved);}
  const previousCapture=tileFor({character:5,posePhase:0,poseIndex:9});
