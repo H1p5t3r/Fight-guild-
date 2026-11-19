@@ -1,6 +1,6 @@
 {
-  "actions": 27,
-  "poses": 198,
+  "actions": 26,
+  "poses": 191,
   "pairedActions": 2,
   "note": "Source bytes unchanged. Fixed per-atlas body calibration. Max four anatomical roles; weapons/effects excluded."
 }

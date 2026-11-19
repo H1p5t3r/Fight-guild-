@@ -153,7 +153,7 @@ func _draw() -> void:
 	for p in 2:
 		var target: Dictionary = view.players[p]
 		var owner: Dictionary = view.players[1-p]
-		if target.get("tetherSource", 0) > 0 or (target.pullTime > 0 and owner.character == 4 and owner.move == 22) or (owner.get("tetherChase", 0) and owner.move == 12):
+		if target.get("tetherSource", 0) > 0 or target.get("linePullTime", 0) > 0:
 			var start := screen_point(Vector2(owner.x / 100.0 * sx, floor_y - (owner.y / 100.0 + 85) * sx))
 			var end := screen_point(Vector2(target.x / 100.0 * sx, floor_y - (target.y / 100.0 + 70) * sx))
 			if FighterArt.catalog().fighters[owner.character].has("line_fx"):

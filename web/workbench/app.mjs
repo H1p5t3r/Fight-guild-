@@ -65,7 +65,7 @@ function syncSummary(){
   $('move-enabled').textContent=m.enabled?'● Enabled':'○ Unused slot';$('move-enabled').style.color=m.enabled?'#a8cbaa':'var(--muted)';
   $('attack-enabled').checked=!!m.enabled;
   $('stat-startup').replaceChildren(document.createTextNode(m.startup),el('small',{},' f'));
-  $('stat-damage').textContent=m.damage;$('stat-block').textContent=m.category===4||[1,2].includes(m.actionType)?'—':(adv>0?'+':'')+adv+' f';$('stat-block').className=m.category===4||[1,2].includes(m.actionType)?'':adv>0?'positive':adv<0?'negative':'';
+  $('stat-damage').textContent=m.mechanic===4?0:m.damage;$('stat-block').textContent=m.mechanic===4||m.category===4||[1,2].includes(m.actionType)?'—':(adv>0?'+':'')+adv+' f';$('stat-block').className=m.mechanic===4||m.category===4||[1,2].includes(m.actionType)?'':adv>0?'positive':adv<0?'negative':'';
   $('stat-total').replaceChildren(document.createTextNode(totalFrames(m)),el('small',{},' f'));
   const profiles=model.data.characters.filter((c,i)=>Object.keys(c.movement).some(key=>!key.startsWith('smear')&&c.movement[key]!==pack.defaults.characters[i].movement[key])).length;
   $('changed-count').textContent=`${model.changes().length} edited move${model.changes().length===1?'':'s'}${profiles?' · '+profiles+' movement profile'+(profiles===1?'':'s'):''}`;
@@ -291,11 +291,13 @@ function buildForm(){
   const nodes=groups.map(group=>panels.create(group,fieldControl));
   if(move().extensions&&['routes','hit'].includes(tab))nodes.unshift(extensionForm());
   if(['timing','routes'].includes(tab)&&[2,32].includes(slot))nodes.unshift(slashForm());
-  if(tab==='hit')nodes.unshift(renderHitEditor({move:move(),frame,pack,character,boxIndex:hitBox,selectedFrame:hitKeyFrame,
+  if(tab==='hit'&&move().mechanic!==4)nodes.unshift(renderHitEditor({move:move(),frame,pack,character,boxIndex:hitBox,selectedFrame:hitKeyFrame,
     valid:validBeforeLeaving,onError:fieldError,onKey:value=>{hitKeyFrame=value;seekMove(value===null?frame:move().startup+Math.min(Math.max(1,value),move().active)-1);},
     onBox:value=>{hitBox=value;renderForm();syncPreview();},
     onChange:(track,render=true,group='')=>{model.setHitTimeline(character,slot,track,group);stop();if(render)renderForm();syncSummary();listMoves();scheduleSave();}
-  }));form.replaceChildren(...nodes);
+  }));
+  if(move().mechanic===4&&['hit','projectiles'].includes(tab))nodes.unshift(el('p',{class:'panel-intro'},'Reel In has no strike hitbox or projectile. Set its duration, range and stopping gap in Drive system. The opponent can act unless already in hitstun or blockstun.'));
+  form.replaceChildren(...nodes);
 }
 function selectTab(id){
   if(!validBeforeLeaving()){$('section-picker').value=tab;return;}
@@ -378,6 +380,7 @@ function drawTest(){
     if(f.state.pairKind)$('test-readout').textContent+=` · ${['','Throw','Cashout','Wound','Throw-tech gate'][f.state.pairKind]} C${f.state.pairClock}`;
     if(a.pairRecovery||target.pairRecovery)$('test-readout').textContent+=` · release recovery ${a.pairRecovery}/${target.pairRecovery}f`;
     if(target.tetherTime)$('test-readout').textContent+=` · line ${target.tetherTime}f`;
+    if(target.linePullTime)$('test-readout').textContent+=` · pull ${target.linePullTime}f · ${target.linePullHeld?'existing stun held':'free to act'}`;
     if(target.bleedTime)$('test-readout').textContent+=` · bleed ${target.bleedTime}f / ${target.greyLife} grey`;
     if(a.captureFailed)$('test-readout').textContent+=' · capture attempt failed';
   }
@@ -385,7 +388,7 @@ function drawTest(){
   $('test-result').textContent=previewPending?'Recalculating contact…':`${hits} hit${hits===1?'':'s'} · ${contacts.length-hits} blocks · ${1000-target.health} damage · attacker travel ${((a.x-testRecord.frames[0].state.players[0].x)/100).toFixed(1)}px`;
   $('test-warning').textContent=testRecord.warnings.join(' ');$('test-warning').hidden=!testRecord.warnings.length;
   showSequenceResult(testRecord,testIndex);
-  $('geometry-help').textContent=testRecord.sequence?'Play or scrub the full sequence, or tap a step’s frame to inspect its start. Edit each attack in its own section; this test uses its current values.':a.variant&&f.selectedFrame?'Follow-up timing is shown here. Edit its range and movement in Drive mechanics; phase hurtboxes inherit from the applying move.':testRecord.movement?'Play or scrub the movement here. Edit the character profile alongside this preview.':playing?'Pause or scrub to edit boxes directly on the fighter.':!f.selectedFrame?'Use Windup, Active or Recovery to jump to an editable attack frame.':tab==='hurt'?'Enable custom boxes, choose a body region and drag its blue handles. Changes update this same exchange.':tab==='hit'?'On active frames, drag the selected orange box or its edges. Edits keep this move frame while recalculating contact.':'Play, pause or scrub here. Open Hit & movement or Hurtboxes to edit directly on the fighter.';
+  $('geometry-help').textContent=testRecord.sequence?'Play or scrub the full sequence, or tap a step’s frame to inspect its start. Edit each attack in its own section; this test uses its current values.':a.variant&&f.selectedFrame?'Follow-up timing is shown here. Edit its range and movement in Drive mechanics; phase hurtboxes inherit from the applying move.':testRecord.movement?'Play or scrub the movement here. Edit the character profile alongside this preview.':playing?'Pause or scrub to edit boxes directly on the fighter.':!f.selectedFrame?'Use Windup, Active or Recovery to jump to an editable attack frame.':tab==='hurt'?'Enable custom boxes, choose a body region and drag its blue handles. Changes update this same exchange.':tab==='hit'&&m.mechanic===4?'Reel In has no hitbox. Edit pull duration, range and gap in Drive system.':tab==='hit'?'On active frames, drag the selected orange box or its edges. Edits keep this move frame while recalculating contact.':'Play, pause or scrub here. Open Hit & movement or Hurtboxes to edit directly on the fighter.';
 }
 function animate(time){
   if(playing&&testRecord&&!previewPending){if(!lastTick)lastTick=time;const step=1000/(60*Number($('test-speed').value)),advance=Math.floor((time-lastTick)/step);if(advance){testIndex=Math.min(testRecord.frames.length-1,testIndex+advance);lastTick+=advance*step;if(testIndex===testRecord.frames.length-1)stop();drawTest();}}

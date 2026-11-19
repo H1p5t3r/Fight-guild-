@@ -11,7 +11,7 @@ const wasm=await WebAssembly.compile(readFileSync('web/generated/fight.wasm'));
 const create=async()=>new Engine(await WebAssembly.instantiate(wasm));
 const ticks=(e,n,a=0,b=0)=>{while(n--)e.step(a,b);};
 test('Selected Fillet scalars, timelines, named routes and art metadata survive a v23 round trip',async()=>{
- const e=await create(),data=e.data();assert.equal(data.schema,24);assert.equal(data.characters[5].moves.length,47);
+ const e=await create(),data=e.data();assert.equal(data.schema,25);assert.equal(data.characters[5].moves.length,47);
  for(const a of [...spec.actions,...spec.disabledStableSlots]){
   const m=data.characters[5].moves[a.slot];assert.equal(m.id,a.id);
   for(const key of FIELDS)assert.equal(m[key],(a.schema22Scalars[key]??LINE_DEFAULTS[key]),`${a.id}/${key}`);

@@ -60,14 +60,14 @@ for(const key of Object.keys(labels).filter(key=>key.startsWith('smear'))){label
 for(const [key,label,,, ,hint] of MECHANIC_SPECS){labels[key]=label;hints[key]=hint;}
 for(const key of ['tetherSpeed','variantSpeed','variantLift'])speed.add(key);pixel.add('variantRange');pixel.add('tetherRange');pixel.add('tetherGap');percent.add('bleedBlockPercent');
 labels.mechanic='Drive role';
-options.mechanic=[[0,'None'],[1,'Tether → pull'],[2,'Bleed → cash-out grab'],[3,'Attach line'],[4,'Reel In · spend line'],[5,'Chase Line · spend line']];
+options.mechanic=[[0,'None'],[1,'Tether → pull'],[2,'Bleed → cash-out grab'],[3,'Attach line'],[4,'Reel In · spend line']];
 options.variantKnockdown=options.knockdown;
 for(const f of STANCE_FIELDS){labels[f.key]=f.label;hints[f.key]=f.help;if(f.scale===100)(/Speed|Travel|Bounce/.test(f.key)?speed:pixel).add(f.key);}
 Object.assign(options,{stanceRequired:[[0,'Any'],[1,'Normal stance'],[2,'Rolling stance']],stanceChange:[[0,'None'],[1,'Enter on hit'],[2,'Exit on start']],actionType:[[0,'Strike'],[1,'Held guard'],[2,'Stance exit'],[3,'Stall and dive'],[4,'Grab sequence'],[5,'Hold to charge'],[6,'Air projectile recoil']],airCounterKnockdown:options.knockdown,holdButton:options.button});
 masks.hurtWindowMask=['Legs','Torso & arms','Head','Body extension'];
 export const SPECS = Object.fromEntries(Object.entries(labels).map(([key,label])=>[key,{
   key,label,scale:pixel.has(key)||speed.has(key)?100:1,
-  unit:key==='projectileGravity'?'px/f²':['variantStartup','variantActive','variantRecovery','bleedDuration','projectileLife','projectileRehit','projectileSpawnFrame','smearFrame1','smearFrame2','smearFrame3','smearFrame4'].includes(key)?'f':pixel.has(key)?'px':speed.has(key)?'px/f':percent.has(key)?'%': /startup|active|recovery|stun|stop|Frames|Start|End/i.test(key)?'f':'',
+  unit:key==='projectileGravity'?'px/f²':['tetherDuration','variantStartup','variantActive','variantRecovery','bleedDuration','projectileLife','projectileRehit','projectileSpawnFrame','smearFrame1','smearFrame2','smearFrame3','smearFrame4'].includes(key)?'f':pixel.has(key)?'px':speed.has(key)?'px/f':percent.has(key)?'%': /startup|active|recovery|stun|stop|Frames|Start|End/i.test(key)?'f':'',
   type:flags.has(key)?'flag':masks[key]?'mask':options[key]||['followFrom','followFrom2','artPose','finishArtPose','holdFollow','guardFollow','proximityMove'].includes(key)?'select':'number',
   options:options[key],mask:masks[key],unified:key==='normalRoutes'||key==='commandRoutes',hint:hints[key]||''
 }]));

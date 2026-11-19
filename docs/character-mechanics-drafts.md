@@ -2,7 +2,11 @@
 
 Implemented from the user’s [2026-11-17 batch 2](move-batches/2026-11-17-batch-02.md). The original upload and art briefs remain unchanged. Schema 17 adds explicit, editable gameplay settings; prose notes do not execute as code.
 
-## Shark — Hooked!
+## Current Shark — Set the Line
+
+The current [Shark v2 contract](../art/characters/shark-kit-v2/README.md) replaces this original kit: 5D / j.D attach a timed line; **2D Reel In is the only follow-up**. It ignores guard, applies no new stun, and keeps free opponents actionable. Existing hitstun or blockstun pauses until the pull ends. 6D Chase is retired.
+
+## Archived Shark — Hooked!
 
 `5D` and `2D` attach a tether **on hit**. Their original guard level, damage and knockdown remain authored: `2D` still causes hard knockdown. While a tether exists, either applying input becomes its pull. The pull activates once, aims toward Shark’s position at that moment, and gives the target horizontal/vertical velocity. It has no damage, hitstop or hit counter increment, and cannot be guarded. It can lift the target out of knockdown. Direction does not home after activation; ordinary gravity, pushboxes and walls apply.
 

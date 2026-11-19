@@ -38,10 +38,10 @@ try{
  assert.deepEqual(await page.evaluate(()=>moveWorkshop.data()),initial,'Search, help, disclosure and visibility never edit tuning, notes, photos or queues');
  // Fighter-specific Drive controls; each input exists only once even in All fields.
  await page.locator('#fighter').selectOption('4');await page.locator('[data-move="13"]').click();await selectSection(page,'mechanics');await ready(page);
- await visible('tetherSpeed');await hidden('bleedInitial');await hidden('variantDamage');await visible('variantStartup');
- assert.match(await page.locator('.drive-overview').innerText(),/Tether → pull/);
+ await visible('tetherDuration');await hidden('tetherSpeed');await hidden('bleedInitial');await hidden('variantDamage');await hidden('variantStartup');
+ assert.match(await page.locator('.drive-overview').innerText(),/Tag → pull/);
  await page.locator('[data-drive-test="followup"]').click();await ready(page);
- assert.equal(await page.locator('#test-mechanic').inputValue(),'followup');assert.ok((await page.evaluate(()=>moveWorkshop.preview())).frames.some(f=>f.state.players[1].tetherUsed));
+ assert.equal(await page.locator('#test-mechanic').inputValue(),'followup');assert.ok((await page.evaluate(()=>moveWorkshop.preview())).frames.some(f=>f.state.players[1].linePullTime));
  await page.screenshot({path:dir+'/shark-drive.png',fullPage:true});
  await page.locator('#field-view').selectOption('all');await visible('bleedInitial');
  assert.match(await page.locator('[data-setting="bleedInitial"] .inactive-reason').innerText(),/Bleed/);
@@ -52,6 +52,7 @@ try{
  await page.locator('#field-tetherSpeed').fill('99999');await page.locator('#field-mechanic').selectOption('2');
  assert.equal(await page.locator('#field-mechanic').inputValue(),'1');assert.equal(await page.locator('#field-tetherSpeed').inputValue(),'99999');
  await page.locator('#field-tetherSpeed').fill(String(initial.characters[4].moves[13].tetherSpeed/100));
+ await page.locator('#field-tetherSpeed').blur();await page.locator('#field-mechanic').selectOption('3');
  assert.deepEqual(await page.evaluate(()=>moveWorkshop.data()),initial,'Changing the mechanic and restoring it retains every inactive value');
  await page.locator('#fighter').selectOption('5');await page.locator('[data-drive-move="13"]').click();await ready(page);await visible('bleedInitial');await visible('variantDamage');await hidden('tetherSpeed');
  await page.locator('#fighter').selectOption('3');await ready(page);

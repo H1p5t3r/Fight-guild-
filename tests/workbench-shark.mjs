@@ -90,7 +90,7 @@ test('Ky timing and scaled traces survive editor import/export; multi-hit is2Hs 
  assert.deepEqual(w.move(4,7).hitboxTimeline.keys.map(k=>[k.frame,k.hit,k.damage]),[[1,1,14],[2,2,40]]);
  assert.equal(w.move(4,8).hurtMaskWindup,3);assert.equal(w.move(4,8).hurtWindowStart,4);
  assert.equal(w.move(4,8).hurtWindowEnd,13);assert.equal(w.move(4,8).hurtWindowMask,1);
- const art=pack.art[4];assert.equal(art.signature_active.frames.length,20);assert.equal(art.attack_animation.frames.length,198);
+ const art=pack.art[4];assert.equal(art.signature_active.frames.length,20);assert.equal(art.attack_animation.frames.length,191);
 });
 
 test('Low Scoop follows8 saved-clock keys, hits twice and supports the one-hit toggle in both facings',()=>{

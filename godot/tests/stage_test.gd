@@ -9,7 +9,7 @@ func _initialize() -> void: call_deferred("run")
 func run() -> void:
 	var model := LegacyFixture.create()
 	var defaults := model.data()
-	check(defaults.schema == 24 and defaults.recoveryRules.wallBreakFrames == 150, "New wall timing/schema missing")
+	check(defaults.schema == 25 and defaults.recoveryRules.wallBreakFrames == 150, "New wall timing/schema missing")
 	var legacy := defaults.duplicate(true)
 	legacy.schema = 11
 	legacy.coreVersion = 11

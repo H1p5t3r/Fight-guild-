@@ -1,4 +1,4 @@
-import {upgradeLineDrive} from './line-drive.mjs';
+import {upgradeLineDrive,upgradePullDrive} from './line-drive.mjs';
 import {packExtension,unpackExtension,upgradeExtensions,defaultExtensionArt,migrationDefaults} from './extensions.mjs';
 import {upgradeCharges} from './charge-data.mjs';
 import {upgradeStartupRules} from './startup-rules.mjs';
@@ -50,7 +50,7 @@ export class Engine {
     new Uint8Array(this.api.memory.buffer,this.api.fg_state_ptr(),bytes.length).set(bytes);
   }
   state() {
-    const keys=['x','y','facing','health','move','age','stun','guarding','contact','combo','event','lastMove','raw','character','simple','momentum','faultless','blockReaction','blockAge','blockAdvantage','guardBreak','throwInvulnerable','comboDisplay','comboTime','comboAge','hitNotice','hitNoticeTime','reversalTime','reversalInputAge','posePhase','poseIndex','reaction','knockdown','recoveryTime','comboReceived','gravityPercent','wallDamage','wallSplatTime','positiveTime','vx','running','dashTicks','pullTime','pullOwner','weaponBackX','weaponBackY','weaponTipX','weaponTipY','weaponVisible','carryVx','carryTime',"landingTime","throwGrace","cancelMask","inputAge","lastDamage","damageScale","starterProration","comboScale","counterTier","repeatGravity","lastBaseDamage","prejumpTime","counterSlowTime","counterSlowHeld","knockbackLeft","hitGroups","vy","dashKind","dashAge","airDashUsed","airJumpUsed","teleported","contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause","attackSerial","pairRecovery","captureFailed","contactTicks","coastPending","coastMode","dashSpeed","displayMove","displayAge","tetherTime","tetherChase"];
+    const keys=['x','y','facing','health','move','age','stun','guarding','contact','combo','event','lastMove','raw','character','simple','momentum','faultless','blockReaction','blockAge','blockAdvantage','guardBreak','throwInvulnerable','comboDisplay','comboTime','comboAge','hitNotice','hitNoticeTime','reversalTime','reversalInputAge','posePhase','poseIndex','reaction','knockdown','recoveryTime','comboReceived','gravityPercent','wallDamage','wallSplatTime','positiveTime','vx','running','dashTicks','pullTime','pullOwner','weaponBackX','weaponBackY','weaponTipX','weaponTipY','weaponVisible','carryVx','carryTime',"landingTime","throwGrace","cancelMask","inputAge","lastDamage","damageScale","starterProration","comboScale","counterTier","repeatGravity","lastBaseDamage","prejumpTime","counterSlowTime","counterSlowHeld","knockbackLeft","hitGroups","vy","dashKind","dashAge","airDashUsed","airJumpUsed","teleported","contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause","attackSerial","pairRecovery","captureFailed","contactTicks","coastPending","coastMode","dashSpeed","displayMove","displayAge","tetherTime","tetherChase","linePullTime","linePullHeld"];
     return {
       frame:this.frame, pairKind:this.api.fg_get(-1,22),pairClock:this.api.fg_get(-1,23),pairOwner:this.api.fg_get(-1,24),pairMove:this.api.fg_get(-1,25),remaining:this.api.fg_get(-1,1), hitstop:this.api.fg_get(-1,2),winner:this.api.fg_get(-1,3),foregroundPlayer:this.api.fg_get(-1,21),
       wallBreakTime:this.api.fg_get(-1,4),wallBreakActor:this.api.fg_get(-1,5),wallBreakSide:this.api.fg_get(-1,6),stage:this.api.fg_get(-1,7),wallBreakDuration:this.api.fg_get(-1,8),wallBreakX:[this.api.fg_get(-1,15),this.api.fg_get(-1,16)],wallBreakY:[this.api.fg_get(-1,17),this.api.fg_get(-1,18)],wallHealth:[this.api.fg_get(-1,19),this.api.fg_get(-1,20)],
@@ -78,7 +78,7 @@ export class Engine {
     if(!Number.isInteger(value)||!this.api.fg_move_set(c,m,FIELDS.indexOf(key),value)) throw new Error(`Invalid ${key}: ${value}`);
   }
   data() {
-    return { schema:24, coreVersion:this.api.fg_version(),
+    return { schema:25, coreVersion:this.api.fg_version(),
       inputRules:Object.fromEntries(RULES.map((r,i)=>[r,this.api.fg_rule_get(i)])),
       momentumRules:Object.fromEntries(MOMENTUM_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+3)])),
       recoveryRules:Object.fromEntries(RECOVERY_RULES.map((r,i)=>[r,this.api.fg_rule_get(i+13)])),
@@ -134,8 +134,8 @@ export class Engine {
     data=upgradeMovement(upgradeHitboxes(data),migration);
     data=upgradeStances(upgradeMechanics(upgradeHurtMasks(data),migration),migration);
     data=upgradeAirDash(upgradeStartupRules(upgradeCharges(data,migration)),migration);
-    data=upgradeLineDrive(upgradeExtensions(data,this.defaultData));
-    if(data?.schema!==24||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
+    data=upgradePullDrive(upgradeLineDrive(upgradeExtensions(data,this.defaultData)));
+    if(data?.schema!==25||data.coreVersion!==this.api.fg_version()||data.characters?.length!==CHARACTERS.length) throw new Error('Unsupported move-data format');
     const previous=this.data();
     const apply=d=>{
       RULES.forEach((r,i)=>{ if(!Number.isInteger(d.inputRules?.[r])||!this.api.fg_rule_set(i,d.inputRules[r])) throw new Error(`Invalid ${r}`); });

@@ -35,6 +35,6 @@ try{
   ffmpeg.stdin.end();const [code]=await completed;if(code!==0)throw Error(error);console.log('Captured '+file);
  };
  await encode('Shark-Full-Kit-60fps.mp4',moves.map((_,i)=>i));
- await encode('Shark-Drive-and-Hooks-Half-Speed.mp4',['5D','j.D','2D','6D','214S','j.214P','2Hs','6P+K'].map(id=>moves.findIndex(m=>m.id===id)),true);
+ await encode('Shark-Drive-and-Hooks-Half-Speed.mp4',['5D','j.D','2D','214S','j.214P','2Hs','6P+K'].map(id=>moves.findIndex(m=>m.id===id)),true);
  await writeFile(resolve(out,'capture.json'),JSON.stringify({fps:60,moves,note:'Actual simulation poses, roots, hitstop, landing and capture clocks; half-speed file explicitly duplicates each simulation tick.'},null,2)+'\n');
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

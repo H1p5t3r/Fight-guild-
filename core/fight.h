@@ -4,7 +4,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 24, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 47, FIELD_COUNT = 141;
+constexpr int VERSION = 25, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 47, FIELD_COUNT = 141;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
@@ -100,7 +100,8 @@ struct Fighter {
     int dash_kind, dash_age, dash_air, air_dash_used, air_jump_used, teleported;
     int dash_pause, dash_backwards;
     int attack_serial, projectile_spawned, contact_count;
-    int tether_time=0, tether_chase=0;
+    int tether_time=0, tether_chase=0; // Retained chase field is always zero.
+    int line_pull_time=0, line_pull_gap=0, line_pull_side=0, line_pull_hold=0;
     int variant, tether_source, tether_used, bleed_source, bleed_time, bleed_clock, grey_life;
     int stance, guard_button, armor_left, bounce_ground, bounce_wall, crumple_time, grab_time, grab_owner, idle_time;
     int capture_failed, contact_ticks, pair_recovery, pair_grace_pending, legacy_throw_gate_paid;
@@ -237,6 +238,8 @@ private:
     void move_horizontal(Fighter& fighter, bool was_hitstunned);
     void collide_wall(Fighter& fighter, int velocity, bool in_hitstun);
     void reel_targets(const bool advances[2]);
+    void tick_line_pulls(const bool advances[2]);
+    void trigger_line_pull(int player, int prior_stun, int prior_grace, bool new_contact);
     bool double_forward(const Fighter& fighter, const Sample& sample, int direction=6) const;
     void start_dash(Fighter& fighter, bool backwards);
     void tick_dash(Fighter& fighter);

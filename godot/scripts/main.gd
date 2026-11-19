@@ -270,7 +270,7 @@ func build_interface() -> void:
 		var scale := 100 if row[0] in ["tetherSpeed", "variantRange", "tetherRange", "tetherGap", "variantSpeed", "variantLift", "proximityRange", "startupTravel", "diveSpeedX", "diveSpeedY", "groundBounce", "wallBounce"] else 1
 		add_field(mechanic_grid, [row[0], row[1], float(row[3]) / scale, float(row[4]) / scale, scale])
 		fields[row[0]].control.tooltip_text = row[5]
-	var mechanic_note := label(mechanic_panel, "Mechanic: 0 off · 1 legacy tether · 2 bleed/cash-out · 3 attach line · 4 reel · 5 chase. Line actions use separate inputs and normal attack timing. Speeds are px/f, range is px; timing is frames. Getting hit clears your statuses. Cash-out KD: 0 none, 1 soft, 2 hard.", 11, MUTED)
+	var mechanic_note := label(mechanic_panel, "Mechanic: 0 off · 1 legacy tether · 2 bleed/cash-out · 3 attach line · 4 pull. Pull ignores guard, keeps a free target actionable, and pauses existing hitstun/blockstun until it ends. Speeds are px/f, range is px; timing is frames. Getting hit clears your statuses. Cash-out KD: 0 none, 1 soft, 2 hard.", 11, MUTED)
 	mechanic_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label(editor, "HIT REACTIONS", 11, MUTED)
 	var reactions := GridContainer.new()

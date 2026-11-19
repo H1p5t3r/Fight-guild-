@@ -91,7 +91,7 @@ export class CombatPreview {
     for(let i=0;i<4800;++i){
       state=step(m.actionType===1&&i<40?(INPUT.P<<m.holdButton):0,followed?'Drive follow-up':result.executed?'Attack & reaction':'Waiting for input');
       if(state.winner!==-1)break;
-      const free=state.players.every(p=>p.move<0&&p.stun===0&&p.reaction===0&&p.landingTime===0&&!p.pairRecovery&&p.y===0)&&!state.pairKind&&state.hitstop===0&&!e.boxes(0,4).length&&!e.boxes(1,4).length;
+      const free=state.players.every(p=>p.move<0&&p.stun===0&&!p.linePullTime&&p.reaction===0&&p.landingTime===0&&!p.pairRecovery&&p.y===0)&&!state.pairKind&&state.hitstop===0&&!e.boxes(0,4).length&&!e.boxes(1,4).length;
       quiet=free?quiet+1:0;
       const status=state.players[1].tetherSource||state.players[1].bleedSource;
       if(mechanicTest==='followup'&&!followed&&status&&quiet>=6){

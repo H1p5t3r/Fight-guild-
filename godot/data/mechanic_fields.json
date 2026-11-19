@@ -4,16 +4,16 @@
     "Drive mechanic",
     0,
     0,
-    5,
-    "0 off; 1 legacy tether; 2 bleed; 3 attach line on hit; 4 spend line to reel; 5 spend line to chase. Line actions use their own input and normal timing."
+    4,
+    "0 off; 1 legacy tether; 2 bleed; 3 attach line on hit; 4 spend line to pull. Reel In ignores guard and creates no damage, hitstop or new stun. Existing hitstun/blockstun pauses during the pull."
   ],
   [
     "tetherSpeed",
-    "Line chase speed",
+    "Legacy tether speed",
     1800,
     100,
     4000,
-    "Forward pixels per frame for Chase Line, and pull velocity for the legacy tether. Chase stops at the configured root gap."
+    "Pull velocity for the legacy tether. Reel In uses its travel duration and root gap instead."
   ],
   [
     "tetherFrames",
@@ -21,7 +21,7 @@
     12,
     1,
     60,
-    "Frames spent drawing a successfully hit grounded target toward Shark. Blocking stops the pull; jumping avoids it. Also used by legacy tether."
+    "Frames of horizontal pull. A free target remains fully actionable; existing hitstun or blockstun pauses until the pull ends. Shared hitstop pauses the pull. Also used by legacy tether."
   ],
   [
     "bleedInitial",
@@ -157,7 +157,7 @@
     45000,
     1000,
     100000,
-    "Maximum horizontal or vertical root distance in pixels. Escaping the tag\u2019s range breaks it; reel/chase also check their own range."
+    "Maximum horizontal or vertical root distance in pixels. Escaping the tag\u2019s range breaks it; Reel In also checks its own range."
   ],
   [
     "tetherGap",
@@ -165,6 +165,6 @@
     6000,
     0,
     20000,
-    "Desired root-to-root distance after reeling or chasing, clamped by both pushboxes."
+    "Minimum horizontal distance between fighter roots at the end of Reel In, clamped to body spacing. The pull never pushes the target farther away."
   ]
 ]

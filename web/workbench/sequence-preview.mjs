@@ -79,7 +79,7 @@ export function recordSequence(preview,data,character,slot,queue,options,directi
  let quiet=0;
  while(elapsed<MAX_FRAMES&&e.state().winner===-1){
   const s=step(0,'Sequence recovery');
-  const free=s.hitstop===0&&!s.wallBreakTime&&s.players.every(p=>p.move<0&&!p.stun&&!p.reaction&&!p.landingTime&&p.y===0)&&!s.projectiles.length;
+  const free=s.hitstop===0&&!s.wallBreakTime&&s.players.every(p=>p.move<0&&!p.stun&&!p.linePullTime&&!p.reaction&&!p.landingTime&&p.y===0)&&!s.projectiles.length;
   quiet=free?quiet+1:0;if(quiet>=24)break;
  }
  if(elapsed>=MAX_FRAMES)result.warnings.push('Preview stopped at 1,800 frames.');

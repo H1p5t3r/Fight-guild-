@@ -2,7 +2,7 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 24
+const DATA_VERSION := 25
 
 static func startup_minimum(move: Dictionary) -> int:
 	if move.get("category") == 4: return 2
@@ -44,7 +44,7 @@ const RECOVERY_RULES := ["gravityAfter", "gravityStep", "gravityCap", "wallThres
 const TUNING_RULES := ["fdAirDrain", "fdLevelCost", "cornerPushTransfer", "wallMidCap", "groundedWallPrime", "blockCarryover", "throwGraceFrames", "airLandingFrames", "repeatAfter", "repeatGravityStep"]
 const JUMP_RULES := ["prejumpFrames", "emptyLandingFrames"]
 const RULE_COUNT := 38 # Input, Momentum, recovery/walls, tuning, then jump rules.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy", "dashKind", "dashAge", "airDashUsed", "airJumpUsed", "teleported", "contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause","attackSerial","pairRecovery","captureFailed","contactTicks","coastPending","coastMode","dashSpeed","displayMove","displayAge","tetherTime","tetherChase"]
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy", "dashKind", "dashAge", "airDashUsed", "airJumpUsed", "teleported", "contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause","attackSerial","pairRecovery","captureFailed","contactTicks","coastPending","coastMode","dashSpeed","displayMove","displayAge","tetherTime","tetherChase","linePullTime","linePullHeld"]
 var extension_art: Array = ExtensionData.default_art.duplicate(true)
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
@@ -304,6 +304,9 @@ func load_data(value: Variant) -> String:
 				definition.counterSlowFrames = 0
 			if version < 20 and definition.category == 4 and definition.get("motion") == 0:
 				definition.startup = 2
+			if version < 25 and definition.get("mechanic") == 5:
+				definition.mechanic = 0
+				definition.enabled = 0
 			for i in FIELDS.size():
 				if version < 24 and i >= 138: continue
 				if (version < 15 and i >= 69) or (version < 16 and i >= 91) or (version < 17 and i >= 94) or (version < 18 and i >= 112): continue

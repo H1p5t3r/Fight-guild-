@@ -1,7 +1,7 @@
 {
-  "label": "Shark v2 \u00b7 Set the Line",
+  "label": "Shark v2 \u00b7 Actionable pull",
   "file": "2026-11-19-shark-v2/FightGuild-Shark-v2.json",
-  "sha256": "464294c7973f47c1102089e43f07e7e74fc54eb3a5e763aa5d566d1ce1a3e8b7",
+  "sha256": "ce5df46fb3e1e248f3994c01e8e2adc7bbb2c29c4e3ae945bc9ae77816f0582a",
   "sourceFile": "2026-11-19-fillet-v1/FightGuild-Fillet-v1.json",
   "sourceSha256": "fa3b022bd32838b13dae908b728a39012afdb2563f8f40968800392bf593c36c"
 }

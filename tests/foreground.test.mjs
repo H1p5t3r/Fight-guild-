@@ -59,5 +59,5 @@ test('Version 20 drafts retain every authored value and art note when upgrading 
   old._moveWorkshop={version:1,notes:{'Fillet/6P+K':{active:'Keep this pose.'}}};
   const expected=structuredClone(old);expected.schema=expected.coreVersion=21;
   assert.deepEqual(upgradeStartupRules(old),expected);assert.equal(old.schema,20);
-  e.loadData(old);assert.equal(e.move(5,24).startup,7);assert.equal(e.data().schema,24);
+  e.loadData(old);assert.equal(e.move(5,24).startup,7);assert.equal(e.data().schema,25);
 });

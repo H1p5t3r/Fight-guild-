@@ -12,7 +12,7 @@ test('Version-21 drafts gain air pauses without changing existing tuning or art 
  old.characters[5].movement.airDashSpeed=1475;old.characters[5].moves[24].startup=7;
  old._moveWorkshop={version:1,notes:{'Fillet/5P':{active:'Keep my existing pose.'}}};
  const before=structuredClone(old),w=new Workshop(pack,old),expected=structuredClone(old);
- expected.schema=expected.coreVersion=24;
+ expected.schema=expected.coreVersion=25;
  for(let c=0;c<6;++c)expected.characters[c].moves.push(...structuredClone(pack.defaults.characters[c].moves.slice(45)));
  for(const c of expected.characters)Object.assign(c.movement,{airDashPauseFrames:4,airBackdashPauseFrames:4});
  assert.deepEqual(w.data,expected);assert.deepEqual(old,before);
@@ -39,7 +39,7 @@ test('Schema-14 drafts retain movement, hitbox and art edits while adding new co
  const old=structuredClone(pack.defaults);old.schema=old.coreVersion=14;stripExtensions(old);
  for(const c of old.characters){for(const key of MOVEMENT_FIELDS.slice(9))delete c.movement[key];for(const m of c.moves)for(const key of FIELDS.slice(69))delete m[key];}
  old.characters[5].movement.walkSpeed=321;old.characters[5].moves[0].damage=91;old._moveWorkshop={version:1,notes:{'Fillet/5P':{active:'Keep my pose.'}}};
- const w=new Workshop(pack,old);assert.equal(w.data.schema,24);assert.equal(w.data.characters[5].movement.walkSpeed,321);assert.equal(w.move(5,0).damage,91);assert.equal(w.note(5,0).active,'Keep my pose.');
+ const w=new Workshop(pack,old);assert.equal(w.data.schema,25);assert.equal(w.data.characters[5].movement.walkSpeed,321);assert.equal(w.move(5,0).damage,91);assert.equal(w.note(5,0).active,'Keep my pose.');
  w.changeMovement(5,'airDashEnabled',1);w.changeMovement(5,'forwardStyle',3);w.change(5,0,'projectileKind',2);w.change(5,0,'smearFrame1',8);
  const imported=new Workshop(pack,JSON.parse(w.export()));assert.deepEqual(imported.data,w.data);w.undo();assert.equal(w.move(5,0).smearFrame1,0);w.undo();w.undo();assert.equal(w.data.characters[5].movement.forwardStyle,0);
 });

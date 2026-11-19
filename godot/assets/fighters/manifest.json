@@ -14614,236 +14614,6 @@
             "motion_cue": "Settle"
           },
           {
-            "name": "6D / Entry",
-            "file": "shark-movement-v1/idle.png",
-            "sha256": "3e361ddf48eef682d96f277ddc6aaf633c02d3600060531d5a93c571aef1e4b4",
-            "generation_file": "exec-03987e74-4362-4d9a-b49a-2152406dbf39.png",
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "pivot": [
-              410,
-              484
-            ],
-            "bounds": [
-              196,
-              10,
-              545,
-              485
-            ],
-            "body_height": 480,
-            "source_size": [
-              1536,
-              1024
-            ],
-            "action_id": "6D",
-            "action_frame": 1,
-            "motion_cue": "Entry"
-          },
-          {
-            "file": "shark-kit-v2/drive-chase.png",
-            "sha256": "3336357c1b9e60c956e35bdc62f2b6c4e03d5fcf4bc6c249338fb417cfbdcf35",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              512,
-              0,
-              512,
-              512
-            ],
-            "bounds": [
-              70,
-              76,
-              416,
-              475
-            ],
-            "pivot": [
-              220,
-              474
-            ],
-            "body_height": 500,
-            "source_pose": 1,
-            "weapon_ownership": {
-              "right": "hooked polearm",
-              "left": "triangular knife (sheathed during throws)"
-            },
-            "name": "6D / Loaded \u00b7 hold to first active",
-            "action_id": "6D",
-            "action_frame": 2,
-            "motion_cue": "Loaded \u00b7 hold to first active"
-          },
-          {
-            "file": "shark-kit-v2/drive-chase.png",
-            "sha256": "3336357c1b9e60c956e35bdc62f2b6c4e03d5fcf4bc6c249338fb417cfbdcf35",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              1024,
-              0,
-              512,
-              512
-            ],
-            "bounds": [
-              9,
-              113,
-              448,
-              475
-            ],
-            "pivot": [
-              220,
-              474
-            ],
-            "body_height": 500,
-            "source_pose": 2,
-            "weapon_ownership": {
-              "right": "hooked polearm",
-              "left": "triangular knife (sheathed during throws)"
-            },
-            "name": "6D / First-active snap",
-            "action_id": "6D",
-            "action_frame": 8,
-            "motion_cue": "First-active snap"
-          },
-          {
-            "file": "shark-kit-v2/drive-chase.png",
-            "sha256": "3336357c1b9e60c956e35bdc62f2b6c4e03d5fcf4bc6c249338fb417cfbdcf35",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              1024,
-              0,
-              512,
-              512
-            ],
-            "bounds": [
-              9,
-              113,
-              448,
-              475
-            ],
-            "pivot": [
-              220,
-              474
-            ],
-            "body_height": 500,
-            "source_pose": 2,
-            "weapon_ownership": {
-              "right": "hooked polearm",
-              "left": "triangular knife (sheathed during throws)"
-            },
-            "name": "6D / Contact hold",
-            "action_id": "6D",
-            "action_frame": 18,
-            "motion_cue": "Contact hold"
-          },
-          {
-            "file": "shark-kit-v2/drive-chase.png",
-            "sha256": "3336357c1b9e60c956e35bdc62f2b6c4e03d5fcf4bc6c249338fb417cfbdcf35",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              512,
-              512
-            ],
-            "bounds": [
-              94,
-              86,
-              455,
-              475
-            ],
-            "pivot": [
-              220,
-              475
-            ],
-            "body_height": 500,
-            "source_pose": 3,
-            "weapon_ownership": {
-              "right": "hooked polearm",
-              "left": "triangular knife (sheathed during throws)"
-            },
-            "name": "6D / Brake",
-            "action_id": "6D",
-            "action_frame": 20,
-            "motion_cue": "Brake"
-          },
-          {
-            "file": "shark-kit-v2/drive-chase.png",
-            "sha256": "3336357c1b9e60c956e35bdc62f2b6c4e03d5fcf4bc6c249338fb417cfbdcf35",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              512,
-              512,
-              512,
-              512
-            ],
-            "bounds": [
-              100,
-              65,
-              411,
-              475
-            ],
-            "pivot": [
-              220,
-              475
-            ],
-            "body_height": 500,
-            "source_pose": 4,
-            "weapon_ownership": {
-              "right": "hooked polearm",
-              "left": "triangular knife (sheathed during throws)"
-            },
-            "name": "6D / Withdraw",
-            "action_id": "6D",
-            "action_frame": 23,
-            "motion_cue": "Withdraw"
-          },
-          {
-            "name": "6D / Settle",
-            "file": "shark-movement-v1/idle.png",
-            "sha256": "3e361ddf48eef682d96f277ddc6aaf633c02d3600060531d5a93c571aef1e4b4",
-            "generation_file": "exec-03987e74-4362-4d9a-b49a-2152406dbf39.png",
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "pivot": [
-              410,
-              484
-            ],
-            "bounds": [
-              196,
-              10,
-              545,
-              485
-            ],
-            "body_height": 480,
-            "source_size": [
-              1536,
-              1024
-            ],
-            "action_id": "6D",
-            "action_frame": 26,
-            "motion_cue": "Settle"
-          },
-          {
             "name": "5D / Entry",
             "file": "shark-movement-v1/idle.png",
             "sha256": "3e361ddf48eef682d96f277ddc6aaf633c02d3600060531d5a93c571aef1e4b4",
@@ -19127,9 +18897,9 @@
             ]
           }
         },
-        "12": {
+        "13": {
           "artPose": 0,
-          "moveId": "6D",
+          "moveId": "5D",
           "windup": [
             {
               "start": 0,
@@ -19137,7 +18907,7 @@
               "pose": 85
             },
             {
-              "start": 14,
+              "start": 26,
               "phase": "attack_animation",
               "pose": 86
             }
@@ -19156,7 +18926,7 @@
               "pose": 88
             },
             {
-              "start": 20,
+              "start": 16,
               "phase": "attack_animation",
               "pose": 89
             },
@@ -19166,66 +18936,9 @@
               "pose": 90
             },
             {
-              "start": 80,
-              "phase": "attack_animation",
-              "pose": 91
-            }
-          ],
-          "exposureTiming": {
-            "style": "held load / first-active snap / staged withdrawal",
-            "authoredTiming": [
-              8,
-              10,
-              10
-            ],
-            "largestMotionBoundary": [
-              7,
-              8
-            ]
-          }
-        },
-        "13": {
-          "artPose": 0,
-          "moveId": "5D",
-          "windup": [
-            {
-              "start": 0,
-              "phase": "attack_animation",
-              "pose": 92
-            },
-            {
-              "start": 26,
-              "phase": "attack_animation",
-              "pose": 93
-            }
-          ],
-          "active": [
-            {
-              "start": 0,
-              "phase": "attack_animation",
-              "pose": 94
-            }
-          ],
-          "recovery": [
-            {
-              "start": 0,
-              "phase": "attack_animation",
-              "pose": 95
-            },
-            {
-              "start": 16,
-              "phase": "attack_animation",
-              "pose": 96
-            },
-            {
-              "start": 50,
-              "phase": "attack_animation",
-              "pose": 97
-            },
-            {
               "start": 79,
               "phase": "attack_animation",
-              "pose": 98
+              "pose": 91
             }
           ],
           "exposureTiming": {
@@ -19248,41 +18961,41 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 99
+              "pose": 92
             },
             {
               "start": 20,
               "phase": "attack_animation",
-              "pose": 100
+              "pose": 93
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 101
+              "pose": 94
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 102
+              "pose": 95
             },
             {
               "start": 11,
               "phase": "attack_animation",
-              "pose": 103
+              "pose": 96
             },
             {
               "start": 44,
               "phase": "attack_animation",
-              "pose": 104
+              "pose": 97
             },
             {
               "start": 77,
               "phase": "attack_animation",
-              "pose": 105
+              "pose": 98
             }
           ],
           "exposureTiming": {
@@ -19301,6 +19014,63 @@
         "18": {
           "artPose": 15,
           "moveId": "j.K",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 99
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 100
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 101
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 102
+            },
+            {
+              "start": 16,
+              "phase": "attack_animation",
+              "pose": 103
+            },
+            {
+              "start": 50,
+              "phase": "attack_animation",
+              "pose": 104
+            },
+            {
+              "start": 75,
+              "phase": "attack_animation",
+              "pose": 105
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / staged withdrawal",
+            "authoredTiming": [
+              7,
+              4,
+              12
+            ],
+            "largestMotionBoundary": [
+              6,
+              7
+            ]
+          }
+        },
+        "19": {
+          "artPose": 16,
+          "moveId": "j.S",
           "windup": [
             {
               "start": 0,
@@ -19327,76 +19097,19 @@
               "pose": 109
             },
             {
-              "start": 16,
+              "start": 19,
               "phase": "attack_animation",
               "pose": 110
             },
             {
-              "start": 50,
+              "start": 47,
               "phase": "attack_animation",
               "pose": 111
             },
             {
-              "start": 75,
-              "phase": "attack_animation",
-              "pose": 112
-            }
-          ],
-          "exposureTiming": {
-            "style": "held load / first-active snap / staged withdrawal",
-            "authoredTiming": [
-              7,
-              4,
-              12
-            ],
-            "largestMotionBoundary": [
-              6,
-              7
-            ]
-          }
-        },
-        "19": {
-          "artPose": 16,
-          "moveId": "j.S",
-          "windup": [
-            {
-              "start": 0,
-              "phase": "attack_animation",
-              "pose": 113
-            },
-            {
-              "start": 33,
-              "phase": "attack_animation",
-              "pose": 114
-            }
-          ],
-          "active": [
-            {
-              "start": 0,
-              "phase": "attack_animation",
-              "pose": 115
-            }
-          ],
-          "recovery": [
-            {
-              "start": 0,
-              "phase": "attack_animation",
-              "pose": 116
-            },
-            {
-              "start": 19,
-              "phase": "attack_animation",
-              "pose": 117
-            },
-            {
-              "start": 47,
-              "phase": "attack_animation",
-              "pose": 118
-            },
-            {
               "start": 76,
               "phase": "attack_animation",
-              "pose": 119
+              "pose": 112
             }
           ],
           "exposureTiming": {
@@ -19419,46 +19132,46 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 120
+              "pose": 113
             },
             {
               "start": 41,
               "phase": "attack_animation",
-              "pose": 121
+              "pose": 114
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 122
+              "pose": 115
             },
             {
               "start": 50,
               "phase": "attack_animation",
-              "pose": 123
+              "pose": 116
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 124
+              "pose": 117
             },
             {
               "start": 17,
               "phase": "attack_animation",
-              "pose": 125
+              "pose": 118
             },
             {
               "start": 47,
               "phase": "attack_animation",
-              "pose": 126
+              "pose": 119
             },
             {
               "start": 78,
               "phase": "attack_animation",
-              "pose": 127
+              "pose": 120
             }
           ],
           "exposureTiming": {
@@ -19481,41 +19194,41 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 128
+              "pose": 121
             },
             {
               "start": 25,
               "phase": "attack_animation",
-              "pose": 129
+              "pose": 122
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 130
+              "pose": 123
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 131
+              "pose": 124
             },
             {
               "start": 18,
               "phase": "attack_animation",
-              "pose": 132
+              "pose": 125
             },
             {
               "start": 50,
               "phase": "attack_animation",
-              "pose": 133
+              "pose": 126
             },
             {
               "start": 77,
               "phase": "attack_animation",
-              "pose": 134
+              "pose": 127
             }
           ],
           "exposureTiming": {
@@ -19538,36 +19251,36 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 135
+              "pose": 128
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 136
+              "pose": 129
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 137
+              "pose": 130
             },
             {
               "start": 20,
               "phase": "attack_animation",
-              "pose": 138
+              "pose": 131
             },
             {
               "start": 50,
               "phase": "attack_animation",
-              "pose": 139
+              "pose": 132
             },
             {
               "start": 80,
               "phase": "attack_animation",
-              "pose": 140
+              "pose": 133
             }
           ],
           "exposureTiming": {
@@ -19590,31 +19303,31 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 141
+              "pose": 134
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 142
+              "pose": 135
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 143
+              "pose": 136
             },
             {
               "start": 50,
               "phase": "attack_animation",
-              "pose": 144
+              "pose": 137
             },
             {
               "start": 80,
               "phase": "attack_animation",
-              "pose": 145
+              "pose": 138
             }
           ],
           "exposureTiming": {
@@ -19637,31 +19350,31 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 152
+              "pose": 145
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 153
+              "pose": 146
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 154
+              "pose": 147
             },
             {
               "start": 50,
               "phase": "attack_animation",
-              "pose": 155
+              "pose": 148
             },
             {
               "start": 80,
               "phase": "attack_animation",
-              "pose": 156
+              "pose": 149
             }
           ],
           "exposureTiming": {
@@ -19680,6 +19393,63 @@
         "28": {
           "artPose": 1,
           "moveId": "214S",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 156
+            },
+            {
+              "start": 26,
+              "phase": "attack_animation",
+              "pose": 157
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 158
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 159
+            },
+            {
+              "start": 16,
+              "phase": "attack_animation",
+              "pose": 160
+            },
+            {
+              "start": 50,
+              "phase": "attack_animation",
+              "pose": 161
+            },
+            {
+              "start": 79,
+              "phase": "attack_animation",
+              "pose": 162
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / staged withdrawal",
+            "authoredTiming": [
+              20,
+              10,
+              24
+            ],
+            "largestMotionBoundary": [
+              19,
+              20
+            ]
+          }
+        },
+        "29": {
+          "artPose": 2,
+          "moveId": "j.214P",
           "windup": [
             {
               "start": 0,
@@ -19734,9 +19504,9 @@
             ]
           }
         },
-        "29": {
-          "artPose": 2,
-          "moveId": "j.214P",
+        "30": {
+          "artPose": 3,
+          "moveId": "214S>P",
           "windup": [
             {
               "start": 0,
@@ -19744,7 +19514,7 @@
               "pose": 170
             },
             {
-              "start": 26,
+              "start": 14,
               "phase": "attack_animation",
               "pose": 171
             }
@@ -19763,7 +19533,7 @@
               "pose": 173
             },
             {
-              "start": 16,
+              "start": 20,
               "phase": "attack_animation",
               "pose": 174
             },
@@ -19773,7 +19543,7 @@
               "pose": 175
             },
             {
-              "start": 79,
+              "start": 80,
               "phase": "attack_animation",
               "pose": 176
             }
@@ -19781,19 +19551,19 @@
           "exposureTiming": {
             "style": "held load / first-active snap / staged withdrawal",
             "authoredTiming": [
-              20,
-              10,
-              24
+              8,
+              5,
+              20
             ],
             "largestMotionBoundary": [
-              19,
-              20
+              7,
+              8
             ]
           }
         },
-        "30": {
-          "artPose": 3,
-          "moveId": "214S>P",
+        "31": {
+          "artPose": 4,
+          "moveId": "j.214P>P",
           "windup": [
             {
               "start": 0,
@@ -19848,9 +19618,9 @@
             ]
           }
         },
-        "31": {
-          "artPose": 4,
-          "moveId": "j.214P>P",
+        "32": {
+          "artPose": 7,
+          "moveId": "c.S",
           "windup": [
             {
               "start": 0,
@@ -19858,7 +19628,7 @@
               "pose": 184
             },
             {
-              "start": 14,
+              "start": 33,
               "phase": "attack_animation",
               "pose": 185
             }
@@ -19890,63 +19660,6 @@
               "start": 80,
               "phase": "attack_animation",
               "pose": 190
-            }
-          ],
-          "exposureTiming": {
-            "style": "held load / first-active snap / staged withdrawal",
-            "authoredTiming": [
-              8,
-              5,
-              20
-            ],
-            "largestMotionBoundary": [
-              7,
-              8
-            ]
-          }
-        },
-        "32": {
-          "artPose": 7,
-          "moveId": "c.S",
-          "windup": [
-            {
-              "start": 0,
-              "phase": "attack_animation",
-              "pose": 191
-            },
-            {
-              "start": 33,
-              "phase": "attack_animation",
-              "pose": 192
-            }
-          ],
-          "active": [
-            {
-              "start": 0,
-              "phase": "attack_animation",
-              "pose": 193
-            }
-          ],
-          "recovery": [
-            {
-              "start": 0,
-              "phase": "attack_animation",
-              "pose": 194
-            },
-            {
-              "start": 20,
-              "phase": "attack_animation",
-              "pose": 195
-            },
-            {
-              "start": 50,
-              "phase": "attack_animation",
-              "pose": 196
-            },
-            {
-              "start": 80,
-              "phase": "attack_animation",
-              "pose": 197
             }
           ],
           "exposureTiming": {
@@ -20711,12 +20424,12 @@
             {
               "tick": 0,
               "phase": "attack_animation",
-              "pose": 146
+              "pose": 139
             },
             {
               "tick": 3,
               "phase": "attack_animation",
-              "pose": 147
+              "pose": 140
             }
           ]
         },
@@ -20726,12 +20439,12 @@
             {
               "tick": 0,
               "phase": "attack_animation",
-              "pose": 157
+              "pose": 150
             },
             {
               "tick": 3,
               "phase": "attack_animation",
-              "pose": 158
+              "pose": 151
             }
           ]
         }
@@ -20745,31 +20458,31 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 141
+              "pose": 134
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 148
+              "pose": 141
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 149
+              "pose": 142
             },
             {
               "start": 33,
               "phase": "attack_animation",
-              "pose": 150
+              "pose": 143
             },
             {
               "start": 66,
               "phase": "attack_animation",
-              "pose": 151
+              "pose": 144
             }
           ],
           "exposureTiming": {
@@ -20792,31 +20505,31 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 152
+              "pose": 145
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 159
+              "pose": 152
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 160
+              "pose": 153
             },
             {
               "start": 33,
               "phase": "attack_animation",
-              "pose": 161
+              "pose": 154
             },
             {
               "start": 66,
               "phase": "attack_animation",
-              "pose": 162
+              "pose": 155
             }
           ],
           "exposureTiming": {

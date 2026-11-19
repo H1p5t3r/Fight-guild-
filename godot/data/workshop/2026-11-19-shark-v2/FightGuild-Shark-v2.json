@@ -1,6 +1,6 @@
 {
-  "schema": 24,
-  "coreVersion": 24,
+  "schema": 25,
+  "coreVersion": 25,
   "inputRules": {
     "buttonBuffer": 5,
     "motionWindow": 20,
@@ -31432,7 +31432,7 @@
           "wakeupFrames": 8,
           "wallDamage": 320,
           "throwRange": 2000,
-          "enabled": 1,
+          "enabled": 0,
           "artPose": 0,
           "followFrom": -1,
           "followFrom2": -1,
@@ -31485,7 +31485,7 @@
           "hurtMaskWindup": 15,
           "hurtMaskActive": 15,
           "hurtMaskRecovery": 15,
-          "mechanic": 5,
+          "mechanic": 0,
           "tetherSpeed": 1400,
           "tetherFrames": 12,
           "bleedInitial": 20,
@@ -33022,9 +33022,9 @@
           "active": 1,
           "recovery": 20,
           "damage": 0,
-          "hitstun": 22,
-          "blockstun": 12,
-          "hitstop": 6,
+          "hitstun": 0,
+          "blockstun": 0,
+          "hitstop": 0,
           "pushback": 0,
           "reach": 100,
           "bottom": 0,
@@ -64270,7 +64270,7 @@
         "intent": "Grounded mid tag. A successful hit attaches a visible line for 180 unfrozen ticks. Blocking prevents the tag. Line breaks on expiry, range escape, or Shark taking an unblocked hit. Use 2S for the hard-knockdown sweep."
       },
       "Shark/2D": {
-        "intent": "Spend a line to pull a grounded target toward Shark. Blockable; jumping avoids it. A block does not drag, and FD pushes Shark away. Line breaks on expiry, range escape, or Shark taking an unblocked hit. Use 2S for the hard-knockdown sweep.",
+        "intent": "Spend a line to pull the opponent toward Shark horizontally. Unblockable; a free target can attack, jump, dash or guard throughout. Existing hitstun or blockstun pauses until the pull ends; no new stun, damage or hitstop is applied. Line breaks on expiry, range escape, or Shark taking an unblocked hit. Use 2S for the hard-knockdown sweep.",
         "label": "Reel In"
       },
       "Fillet/5D": {
@@ -64874,12 +64874,12 @@
         "intent": "Airborne downward tag. Use it to establish a line from a jump; blocking prevents the tag. Line breaks on expiry, range escape, or Shark taking an unblocked hit. Use 2S for the hard-knockdown sweep."
       },
       "Shark/6D": {
-        "label": "Chase Line",
-        "intent": "Spend a line to burst toward the target. No hitbox or invulnerability. Stops at body spacing, and can be interrupted. Line breaks on expiry, range escape, or Shark taking an unblocked hit. Use 2S for the hard-knockdown sweep."
+        "label": "Retired Chase",
+        "intent": "Disabled. Reel In on 2D is the only line follow-up. Line breaks on expiry, range escape, or Shark taking an unblocked hit. Use 2S for the hard-knockdown sweep."
       }
     },
     "sharkRevision": {
-      "name": "Hook, tether and reposition",
+      "name": "Tag and actionable pull",
       "source": "2026-11-19-fillet-v1/FightGuild-Fillet-v1.json",
       "originalDriveNotes": {
         "Shark/5D": {
@@ -64887,15 +64887,14 @@
           "intent": "Grounded mid tag. A successful hit attaches a visible line for 180 unfrozen ticks. Blocking prevents the tag. Line breaks on expiry, range escape, or Shark taking an unblocked hit. Use 2S for the hard-knockdown sweep."
         },
         "Shark/2D": {
-          "intent": "Spend a line to pull a grounded target toward Shark. Blockable; jumping avoids it. A block does not drag, and FD pushes Shark away. Line breaks on expiry, range escape, or Shark taking an unblocked hit. Use 2S for the hard-knockdown sweep.",
+          "intent": "Spend a line to pull the opponent toward Shark horizontally. Unblockable; a free target can attack, jump, dash or guard throughout. Existing hitstun or blockstun pauses until the pull ends; no new stun, damage or hitstop is applied. Line breaks on expiry, range escape, or Shark taking an unblocked hit. Use 2S for the hard-knockdown sweep.",
           "label": "Reel In"
         }
       },
       "roles": {
         "5D": "Set the Line",
         "j.D": "Cast Down",
-        "2D": "Reel In",
-        "6D": "Chase Line"
+        "2D": "Reel In"
       }
     }
   }

@@ -24,7 +24,7 @@ test('Drive overview uses actual enabled kit entries, stance attacks and exits',
  const data=structuredClone(pack.defaults),before=JSON.stringify(data);
  const shark=driveKit(data.characters[4]),fillet=driveKit(data.characters[5]),tapper=driveKit(data.characters[3]);
  assert.ok(shark.entries.length&&shark.entries.every(e=>e.move.mechanic===3));
- assert.deepEqual(shark.spends.map(e=>e.move.mechanic).sort(),[4,5]);
+ assert.deepEqual(shark.spends.map(e=>e.move.mechanic).sort(),[4]);
  assert.ok(fillet.entries.length&&fillet.entries.every(e=>e.move.mechanic===2));
  assert.ok(tapper.entries.some(e=>e.move.category===4));
  assert.ok(tapper.stance.some(e=>e.slot===40));
@@ -71,4 +71,12 @@ test('Movement relevance keeps shared air-teleport distances and pause/burst tim
  p.airDashStyle=2;assert.ok(movementInactiveReason('hoverHeight',p));assert.ok(movementInactiveReason('teleportDistance',p));
  p.backStyle=2;assert.equal(movementInactiveReason('hoverHeight',p),'');
  p.backStyle=0;p.forwardStyle=1;assert.equal(movementInactiveReason('runAcceleration',p),'');
+});
+
+
+test('Pull controls expose movement and owner defense, with no inert strike payload',()=>{
+ const m=pack.defaults.characters[4].moves[22],before=structuredClone(m);
+ for(const key of ['damage','hitstun','blockstun','hitstop','reach','hitLevel','projectileKind','pushback'])assert.ok(inactiveReason(key,m),key);
+ for(const key of ['startup','active','recovery','tetherFrames','tetherRange','tetherGap','counterVulnerable','hurtMaskActive'])assert.equal(inactiveReason(key,m),'',key);
+ assert.deepEqual(m,before);
 });

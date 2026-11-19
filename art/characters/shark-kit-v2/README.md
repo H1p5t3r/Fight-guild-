@@ -1,8 +1,8 @@
 # Shark v2 — Set the Line
 
-This pass applies the [attack animation standard](../../../docs/attack-animation-standard.md) to all 27 enabled Shark actions. It retains the selected Shoulder Snap normals, Low Scoop 2Hs and movement cycles. New sheets provide braking/withdrawal poses, special attacks, Drive actions and normal-throw captures. The attack library contains 198 registered timing cues, including two paired capture tracks. Cues can hold or reuse drawings; they are not 198 unique pictures.
+This pass applies the [attack animation standard](../../../docs/attack-animation-standard.md) to all 26 enabled Shark actions. It retains the selected Shoulder Snap normals, Low Scoop 2Hs and movement cycles. New sheets provide braking/withdrawal poses, special attacks, Drive actions and normal-throw captures. The attack library contains 191 registered timing cues, including two paired capture tracks. Cues can hold or reuse drawings; they are not 191 unique pictures.
 
-The authoring source is the Shark data in the selected Fillet-v1 workshop batch, archived in `baseline-moves.json`. Every non-Drive scalar, active hitbox timeline, authored hurtbox override, input and disabled slot is preserved. In particular, slots 14–16 stay disabled, 2S stays a hard-knockdown sweep, and the saved aerial hook uses S even though its stable slot ID remains `j.214P`. Other fighters keep their tuning. Schema 24 adds three editable line fields.
+The authoring source is the Shark data in the selected Fillet-v1 workshop batch, archived in `baseline-moves.json`. Every non-Drive scalar, active hitbox timeline, authored hurtbox override, input and disabled slot is preserved. In particular, slots 14–16 stay disabled, 2S stays a hard-knockdown sweep, and the saved aerial hook uses S even though its stable slot ID remains `j.214P`. Other fighters keep their tuning. Schema 24 added three editable line fields. Schema 25 retires Chase and separates pull movement from strike resolution.
 
 ## Drive roles
 
@@ -10,12 +10,13 @@ The authoring source is the Shark data in the selected Fillet-v1 workshop batch,
 | --- | --- | --- | --- |
 | 5D | Set the Line | 16 / 4 / 24 | A grounded hook check. An unblocked hit attaches the line. |
 | j.D | Cast Down | 17 / 4 / 22 | A downward overhead tag from the air. |
-| 2D | Reel In | 12 / 1 / 20 | Spend a line to pull a grounded target toward Shark. Deals no damage. |
-| 6D | Chase Line | 8 / 10 / 10 | Spend a line to move Shark toward the target, up to 140 game pixels. Deals no damage. |
+| 2D | Reel In | 12 / 1 / 20 | Spend a line to pull the target horizontally. Unblockable; no new stun, damage or hitstop. |
 
-A line lasts 180 unfrozen simulation frames and breaks beyond 450 pixels on either axis, when Shark takes a hit, or when spent. Reel is a strike resolved through the regular guard/FD and hurtbox path: blocking prevents the drag, jumping avoids it, and the line is spent on the attempt. Chase has no attack box or invulnerability, keeps its starting direction, and stops at body spacing. It cannot automatically switch sides. Both actions whiff without a line. These are provisional tuning values, editable in the Drive panel.
+A line lasts 180 unfrozen simulation frames and breaks beyond 450 pixels on either axis, when Shark takes a hit, or when spent. **2D is the only line follow-up; 6D Chase is disabled.** Without a line, Reel In whiffs. The line is spent on the attempt.
 
-`Line lifetime` belongs to the tagging move. `Line maximum distance` on the tag limits persistence; on Reel/Chase it limits the action. `Line stopping gap` is root-to-root distance clamped by both pushboxes. `Reel travel duration` controls Reel's pull ticks; `Line chase speed` controls movement during Chase's active span. Positions use 100 raw units per pixel. Older mechanic-1 tether saves retain their original repeat-input behavior.
+Reel In adds horizontal displacement, without registering a strike, counter, combo hit, guard reaction, damage or hitstop. Blocking and Faultless Defense cannot stop it. A free opponent can attack, jump, dash or guard throughout; their own movement and vertical velocity continue. Already-stunned opponents keep their existing hit/block state and remaining stun until the pull ends. For example, 12 frames of remaining blockstun plus a 10-frame pull leaves 12 frames after the pull, not a fresh stun value. An interrupted pull stops extending stun immediately. Downed, waking, captured and wallsplat reactions are excluded rather than rewritten.
+
+`Line lifetime` belongs to the tagging move. `Line maximum distance` on the tag limits persistence; on Reel it limits activation. `Line stopping gap` is root-to-root distance clamped by both pushboxes. `Reel travel duration` controls the horizontal movement and stun hold; shared hitstop pauses both clocks. Positions use 100 raw units per pixel. Older mechanic-1 tether saves retain their original repeat-input behavior. Schema-24 imports disable retired mechanic-5 Chase slots while preserving their other tuning and notes.
 
 ## Animation registration
 
@@ -43,7 +44,7 @@ node tests/workbench-shark-kit-browser.mjs
 node scripts/capture-shark-kit-review.mjs
 ```
 
-The hosted/portable folder includes `shark-motion-review.html`, with all 27 actions, whiff/contact, before/after, hitboxes, mirroring and frame stepping. Earlier drawings are shown on the **current** action clock, not as a historical gameplay simulation. Utility contact examples explicitly start with a line attached. Video output lives in `build/shark-kit-review/` and contains actual 60 Hz simulation frames; the inspection video is labelled half speed.
+The hosted/portable folder includes `shark-motion-review.html`, with all 26 actions, whiff/contact, before/after, hitboxes, mirroring and frame stepping. Earlier drawings are shown on the **current** action clock, not as a historical gameplay simulation. Utility contact examples explicitly start with a line attached. Video output lives in `build/shark-kit-review/` and contains actual 60 Hz simulation frames; the inspection video is labelled half speed.
 
 The editor retains a user's browser-local draft across updates. Export that draft before importing `FightGuild-moves.json` to try this new Drive kit. Importing an older JSON does not silently replace its tuned Shark moves.
 
