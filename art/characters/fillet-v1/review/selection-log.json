@@ -50,15 +50,14 @@
       "id": "5Hs",
       "display": "5Hs",
       "name": "Crosscut",
-      "directionStatus": "options_ready",
+      "directionStatus": "user_selected",
       "productionStatus": "pending",
       "installed": false,
       "batch": "normals-batch-02",
-      "options": [
-        "A",
-        "B"
-      ],
-      "reviewSheet": "normals-batch-02/5hs-timeline.png"
+      "reviewSheet": "normals-batch-02/5hs-timeline.png",
+      "option": "B",
+      "direction": "Hip Cross",
+      "selectedOn": "2026-11-19"
     },
     {
       "id": "2P",
@@ -86,57 +85,56 @@
       "id": "2S",
       "display": "2S",
       "name": "Sweep",
-      "directionStatus": "options_ready",
+      "directionStatus": "revision_requested",
       "productionStatus": "pending",
       "installed": false,
       "batch": "normals-batch-02",
-      "options": [
-        "A",
-        "B"
-      ],
-      "reviewSheet": "normals-batch-02/2s-timeline.png"
+      "reviewSheet": "normals-batch-02/2s-timeline.png",
+      "revisionNote": "User requested new sweep directions on 2026-11-19; no A/B option selected."
     },
     {
       "id": "2Hs",
       "display": "2Hs",
       "name": "Rising scissors",
-      "directionStatus": "options_ready",
+      "directionStatus": "user_selected",
       "productionStatus": "pending",
       "installed": false,
       "batch": "normals-batch-02",
-      "options": [
-        "A",
-        "B"
-      ],
-      "reviewSheet": "normals-batch-02/2hs-timeline.png"
+      "reviewSheet": "normals-batch-02/2hs-timeline.png",
+      "option": "B",
+      "direction": "Rear-Leg Coil",
+      "selectedOn": "2026-11-19"
     },
     {
       "id": "6P",
       "display": "6P",
       "name": "Shoulder guard cut",
-      "directionStatus": "options_ready",
+      "directionStatus": "user_selected",
       "productionStatus": "pending",
       "installed": false,
       "batch": "normals-batch-02",
-      "options": [
-        "A",
-        "B"
-      ],
-      "reviewSheet": "normals-batch-02/6p-timeline.png"
+      "reviewSheet": "normals-batch-02/6p-timeline.png",
+      "option": "B",
+      "direction": "Rib Slip",
+      "selectedOn": "2026-11-19",
+      "productionRequirements": [
+        "Anatomical LEFT red-armored shoulder, upper arm, elbow, wrist and short knife remain one chain in every pose.",
+        "Anatomical RIGHT unarmored shoulder, elbow, wrist and long knife remain one chain; keep it low/back and inactive.",
+        "Check both facing variants and every transition key for swapped shoulders, hands or knives before registering/installing any 6P clip."
+      ]
     },
     {
       "id": "6Hs",
       "display": "6Hs",
       "name": "Chasing cleave",
-      "directionStatus": "options_ready",
+      "directionStatus": "user_selected",
       "productionStatus": "pending",
       "installed": false,
       "batch": "normals-batch-02",
-      "options": [
-        "A",
-        "B"
-      ],
-      "reviewSheet": "normals-batch-02/6hs-timeline.png"
+      "reviewSheet": "normals-batch-02/6hs-timeline.png",
+      "option": "B",
+      "direction": "Rib Whip",
+      "selectedOn": "2026-11-19"
     },
     {
       "id": "j.P",
