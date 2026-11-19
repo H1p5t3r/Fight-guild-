@@ -21,7 +21,7 @@ const beginWhiff=(e,a,facing=1)=>{
 };
 
 test('All 26 attacks use authored phase clocks in both facings; landing interrupts air recovery',async()=>{
- const e=await engine();assert.equal(actions.length,26);assert.equal(art.attack_animation.frames.length,268);
+ const e=await engine();assert.equal(actions.length,26);assert.equal(art.attack_animation.frames.length,270);
  for(const a of actions)for(const facing of [-1,1]){
   beginWhiff(e,a,facing);const seen=new Set();let landed=false;
   for(let step=0;step<160;step++){
@@ -166,4 +166,36 @@ test('Successful throws and Drive captures use their saved pair clock, including
   for(const frame of replay){assert.deepEqual([e.hash,e.state().players[0].poseIndex,e.state().pairClock],frame);e.step(0,0);}
   assert.equal(e.hash,hash);
  }
+});
+
+test('Command grabs keep their first-active latch through capture and use distinct entry choreography',async()=>{
+ const e=await engine(),entries=[];
+ const identity=f=>[f.file,f.region,f.pivot,f.body_height];
+ for(const [id,slot] of [['236D',45],['214D',46]])for(const facing of [-1,1]){
+  const move=e.data().characters[5].moves[slot],clip=art.attack_animations[slot],pair=art.paired_animations[slot];
+  assert.deepEqual([move.startup,move.active,move.recovery],[22,2,30]);
+  const latch=art.attack_animation.frames[poseAt(move,22,true,clip).index];
+  const capture=art.attack_animation.frames[pair.keys[0].pose];
+  assert.deepEqual(identity(capture),identity(latch),'No body/knife jump on '+id+' capture');
+  assert.match(capture.file,/-v2\.png$/);
+  assert.deepEqual(pair.keys.map(k=>k.tick),[0,1,5,9,13,17,21,23,25]);
+  place(e,facing,17000);e.api.fg_preview_status(1,1,20);e.api.fg_preview_begin(0,slot);
+  for(let i=0;i<60&&!e.state().pairKind;i++)e.step(0,0);
+  assert.ok(e.state().pairKind);assert.equal(e.state().pairClock,0);assert.equal(e.state().hitstop,6);
+  const start=e.state(),frozenPose=start.players[0].poseIndex;
+  for(let i=0;i<6;i++){e.step(0,0);assert.equal(e.state().players[0].poseIndex,frozenPose);assert.equal(e.state().pairClock,0);}
+  for(let clock=1;clock<28;clock++){
+   e.step(0,0);const state=e.state(),tile=art.attack_animation.frames[state.players[0].poseIndex];
+   assert.equal(state.pairClock,clock);assert.equal(state.players[1].health,1000,'Knife accents are not extra damage events');
+   assert.equal(state.players[0].y,0);assert.equal(state.players[1].y,0);
+   if(clock===13)assert.equal(tile.source_pose,7,'Long-right cut uses its authored event');
+   if(clock===17)assert.equal(tile.source_pose,8,'Short-left accent keeps contact');
+   if(clock===21)assert.equal(tile.source_pose,9,'Release art starts when the forearm unlocks');
+  }
+  e.step(0,0);const released=e.state();
+  assert.equal(released.pairKind,0);assert.equal(released.hitstop,8);assert.equal(released.players[1].health,925);
+  assert.equal(Math.abs(released.players[0].x-released.players[1].x),17000);
+  if(facing===1)entries.push(identity(capture));
+ }
+ assert.notDeepEqual(entries[0],entries[1],'Hop landing and trailing-foot latch have independent drawings');
 });

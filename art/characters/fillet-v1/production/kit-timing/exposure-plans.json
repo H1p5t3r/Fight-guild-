@@ -1499,7 +1499,7 @@
     "236D": {
       "slot": 45,
       "sourceType": "generated",
-      "sourceId": "236D",
+      "sourceId": "236D-v2",
       "timing": {
         "startup": 22,
         "active": 2,
@@ -1528,27 +1528,27 @@
         },
         {
           "frame": 23,
-          "source": 4,
-          "cue": "Small follow-through"
+          "source": 3,
+          "cue": "Hold unsupported latch on final active tick"
         },
         {
           "frame": 24,
-          "source": 4,
-          "cue": "Commitment hold"
+          "source": 3,
+          "cue": "Missed latch commitment; no capture motion"
         },
         {
           "frame": 31,
-          "source": 5,
+          "source": 9,
           "cue": "Withdraw"
         },
         {
           "frame": 44,
-          "source": 6,
+          "source": 10,
           "cue": "Guard return"
         },
         {
           "frame": 49,
-          "source": 7,
+          "source": 11,
           "cue": "Settled / still recovering"
         }
       ],
@@ -1561,7 +1561,7 @@
     "214D": {
       "slot": 46,
       "sourceType": "generated",
-      "sourceId": "214D",
+      "sourceId": "214D-v2",
       "timing": {
         "startup": 22,
         "active": 2,
@@ -1590,27 +1590,27 @@
         },
         {
           "frame": 23,
-          "source": 4,
-          "cue": "Small follow-through"
+          "source": 3,
+          "cue": "Hold unsupported latch on final active tick"
         },
         {
           "frame": 24,
-          "source": 4,
-          "cue": "Commitment hold"
+          "source": 3,
+          "cue": "Missed latch commitment; no capture motion"
         },
         {
           "frame": 31,
-          "source": 5,
+          "source": 9,
           "cue": "Withdraw"
         },
         {
           "frame": 44,
-          "source": 6,
+          "source": 10,
           "cue": "Guard return"
         },
         {
           "frame": 49,
-          "source": 7,
+          "source": 11,
           "cue": "Settled / still recovering"
         }
       ],

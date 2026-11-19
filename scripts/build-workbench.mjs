@@ -52,6 +52,8 @@ const files=[...new Set(art.flatMap(f=>phases.filter(p=>f[p]).flatMap(p=>[f[p].f
 // The comparison retains superseded drawings that are no longer in live clips.
 const reviewBaseline=JSON.parse(await readFile(path('art/characters/fillet-v1/production/kit-timing/baseline.json'),'utf8'));
 for(const action of Object.values(reviewBaseline.actions))for(const frame of action.frames)if(!files.includes(frame.file))files.push(frame.file);
+const grabBaseline=JSON.parse(await readFile(path('art/characters/fillet-v1/production/command-grabs-v2/before.json'),'utf8'));
+for(const action of Object.values(grabBaseline.actions))for(const entry of [...action.timeline,...action.contactTimeline])for(const frame of [entry.actor,entry.target].filter(Boolean))if(!files.includes(frame.file))files.push(frame.file);
 files.push("appearance-v3/projectiles.png");
 for(const fighter of art)if(fighter.projectile)files.push(fighter.projectile.file);
 for(const fighter of art)for(const projectile of Object.values(fighter.projectile_variants??{}))if(!files.includes(projectile.file))files.push(projectile.file);

@@ -12,7 +12,8 @@
 <footer><a href="index.html">Open Move Workshop</a> · Space to pause; arrow keys to step. Starts at game speed. Use slow motion to inspect the pose changes.</footer>
 <script>
 const pack=__FILLET_REVIEW_PACK__,$=id=>document.getElementById(id),images=new Map();
-let selected=pack.moves.findIndex(m=>m.id==='2S'),cursor=1,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,clock=0,last=0;
+const requestedMove=new URLSearchParams(location.search).get('move')??'2S';
+let selected=Math.max(0,pack.moves.findIndex(m=>m.id===requestedMove)),cursor=1,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,clock=0,last=0;
 const phase=(m,t)=>t<m.startup?'Startup':t<m.startup+m.active?'Active':'Recovery';
 const colors={Startup:'#e1b76d',Active:'#dd7970',Recovery:'#72b6b3'};
 const timeline=(m,scenario=$('scenario').value)=>scenario==='hit'?m.contactTimeline:m.timeline;
@@ -21,13 +22,14 @@ function select(index){
  selected=index;cursor=1;clock=0;const m=pack.moves[index];$('scrub').max=timeline(m).length;
  $('move-select').value=index;$('move-name').textContent=m.label;
  $('before-count').textContent=`${m.beforeDrawings} body drawings`;
- $('after-count').textContent=`${m.afterDrawings} body drawings · ${m.after.length} cues`;
+ $('after-count').textContent=`${m.afterDrawings} body drawings · ${m.afterCues??m.after.length} cues`;
  $('stats').textContent=`Startup ${m.startup}f · Active ${m.active}f · Recovery ${m.recovery}f · Hitstop ${m.hitstop}f`;
  draw();
 }
 function view(m,scenario){
  let left=-75,right=120,top=150;
- for(const e of timeline(m,scenario))for(const b of [{...e.actor,x:e.x,y:e.y,facing:e.facing},...(e.target?[e.target]:[])]){
+ const prior=scenario==='hit'?m.beforeContactTimeline:m.beforeTimeline;
+ for(const e of [...timeline(m,scenario),...(prior??[])])for(const b of [{...e.actor,x:e.x,y:e.y,facing:e.facing},...(e.target?[e.target]:[])]){
   const s=150/b.body_height,[l,t,r]=b.bounds,[px,py]=b.pivot;
   const a=(l-px)*s*b.facing,c=(r-px)*s*b.facing;
   left=Math.min(left,b.x+Math.min(a,c));right=Math.max(right,b.x+Math.max(a,c));top=Math.max(top,b.y+(py-t)*s);
@@ -36,8 +38,9 @@ function view(m,scenario){
  return {scale,origin:320-(right+left)/2*scale};
 }
 function paint(canvas,m,index,before,options={}){
- const scenario=options.scenario??$('scenario').value,entry=timeline(m,scenario)[index-1],t=entry.frame;
- const tile=before?(entry.stage&&!entry.pairKind?entry.actor:entry.pairKind?pack.previousCapture:m.before.findLast(k=>k.action_frame<=t)??m.before[0]):entry.actor;
+ const scenario=options.scenario??$('scenario').value,prior=before?(scenario==='hit'?m.beforeContactTimeline:m.beforeTimeline):null;
+ const entries=prior??timeline(m,scenario),entry=entries[Math.min(index,entries.length)-1],t=entry.frame;
+ const tile=before&&!prior?(entry.stage&&!entry.pairKind?entry.actor:entry.pairKind?pack.previousCapture:m.before.findLast(k=>k.action_frame<=t)??m.before[0]):entry.actor;
  const ctx=canvas.getContext('2d'),mirror=(options.mirror??$('mirror').checked)?-1:1;
  const camera=view(m,scenario),scale=camera.scale,origin=mirror===1?camera.origin:640-camera.origin;
  ctx.fillStyle='#111f28';ctx.fillRect(0,0,640,450);ctx.strokeStyle='#243944';ctx.lineWidth=1;

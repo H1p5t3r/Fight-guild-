@@ -15,15 +15,23 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 PROD = ROOT / 'art/characters/fillet-v1/production/kit-timing'
+GRABS = ROOT / 'art/characters/fillet-v1/production/command-grabs-v2'
 ASSETS = ROOT / 'godot/assets/fighters'
 load = lambda p: json.loads(p.read_text())
 def save(p, value):
     p.write_text(json.dumps(value, indent=2) + '\n')
 
 
+def source_records():
+    records = load(PROD / 'generated-sources.json')
+    if (GRABS / 'sources.json').exists():
+        records += load(GRABS / 'sources.json')
+    return records
+
+
 def generated_bank():
     bank = {}
-    for record in load(PROD / 'generated-sources.json'):
+    for record in source_records():
         dst = ASSETS / 'fillet-kit-v1' / record['file']
         dst.parent.mkdir(parents=True, exist_ok=True)
         src = Path(record['source'])
@@ -138,12 +146,18 @@ def main():
     register_knife_effects(fighter,frames,actions)
     paired={}
     pair_sources={'6P+K':'pair-forward','4P+K':'pair-backward','5D':'pair-wound','236D':'pair-cashout','214D':'pair-cashout'}
-    records={r['id']:r for r in load(PROD/'generated-sources.json')}
+    records={r['id']:r for r in source_records()}
+    grab_plans=load(GRABS/'paired-plans.json') if (GRABS/'paired-plans.json').exists() else {}
     for action_id,source_id in pair_sources.items():
         action=actions[action_id]; keys=[]
-        for tick,source in zip(records[source_id]['ticks'],generated[source_id]):
+        if action_id in grab_plans:
+            plan=grab_plans[action_id]
+            poses=[(k['tick'],generated[plan['sourceId']][k['source']],k['cue']) for k in plan['keys']]
+        else:
+            poses=[(tick,source,'Capture C'+str(tick)) for tick,source in zip(records[source_id]['ticks'],generated[source_id])]
+        for tick,source,cue in poses:
             frame=copy.deepcopy(source)
-            frame.update(name=action_id+' / capture C'+str(tick),action_id=action_id,paired=True,capture_tick=tick,motion_cue='Capture C'+str(tick))
+            frame.update(name=action_id+' / capture C'+str(tick),action_id=action_id,paired=True,capture_tick=tick,motion_cue=cue)
             keys.append(dict(tick=tick,phase='attack_animation',pose=len(frames)))
             frames.append(frame);fits.append(fit(frame,action['hurtboxTimeline']['keys'][0]['boxes']))
         paired[str(action['slot'])]=dict(moveId=action_id,requiresExtendedKit=True,keys=keys)

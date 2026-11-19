@@ -12,11 +12,13 @@ provenance and whole-kit motion reviews. Gameplay data remain authoritative.
 ## Installed pass
 
 All 26 actions now use the shared exposure standard: 234 action/FX cues and
-34 capture cues, for 268 registered entries. Eleven approved ground attacks
+36 capture cues, for 270 registered entries. Eleven approved ground attacks
 reuse their original consistent drawings. Eighteen new source atlases cover
 the remaining fifteen actions and four owner capture sequences; forward/back
 throw attempts share one atlas and the two command captures share their finish.
-One generated effects atlas extends blade motion to the canonical active
+The [command grab replacement](../command-grabs-v2/README.md) now supplies two
+independent twelve-drawing atlases for 236D/214D, replacing their shared owner
+capture art. One generated effects atlas extends blade motion to the canonical active
 corridors. The approved 2S effect remains in use.
 
 `generated-sources.json` records original source paths, checksums, calibration
@@ -49,7 +51,8 @@ registrar. `fillet-motion-review.html` includes all 26 attacks, whiff/contact
 selection, before/after, facing, hitboxes and frame stepping. The primary MP4
 plays at 60 fps and 1× game speed. The detail MP4 is explicitly half speed.
 
-Finished review recordings are saved with this pass:
+The original full-kit review recordings are saved with this pass; the later
+command-grab replacement has its own recordings linked in its README:
 
 - [Full kit at game speed](previews/Fillet-Full-Kit-60fps.mp4): all 26 actions,
   before/after, on whiff and on contact or capture.

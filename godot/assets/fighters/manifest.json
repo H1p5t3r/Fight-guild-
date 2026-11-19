@@ -23259,29 +23259,29 @@
             "motion_cue": "Settled / still recovering"
           },
           {
-            "file": "fillet-kit-v1/236d.png",
-            "sha256": "7d28a74bca7dd3c9f15d3a7d27307088aa764ca89096abe83f945fa4764a1f77",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
               0,
               0,
-              444,
-              444
+              362,
+              362
             ],
             "bounds": [
-              34,
-              84,
-              356,
-              428
+              62,
+              56,
+              319,
+              350
             ],
             "pivot": [
-              230,
-              427
+              180,
+              349
             ],
-            "body_height": 450,
+            "body_height": 350,
             "source_pose": 0,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
@@ -23294,29 +23294,29 @@
             "motion_cue": "Entry"
           },
           {
-            "file": "fillet-kit-v1/236d.png",
-            "sha256": "7d28a74bca7dd3c9f15d3a7d27307088aa764ca89096abe83f945fa4764a1f77",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              444,
+              362,
               0,
-              443,
-              444
+              362,
+              362
             ],
             "bounds": [
-              25,
-              40,
-              344,
-              428
+              72,
+              48,
+              289,
+              335
             ],
             "pivot": [
-              230,
-              427
+              180,
+              334
             ],
-            "body_height": 450,
+            "body_height": 350,
             "source_pose": 1,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
@@ -23329,29 +23329,29 @@
             "motion_cue": "Authored approach"
           },
           {
-            "file": "fillet-kit-v1/236d.png",
-            "sha256": "7d28a74bca7dd3c9f15d3a7d27307088aa764ca89096abe83f945fa4764a1f77",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              887,
+              724,
               0,
-              443,
-              444
+              362,
+              362
             ],
             "bounds": [
-              27,
-              52,
-              372,
-              428
+              45,
+              89,
+              305,
+              350
             ],
             "pivot": [
-              230,
-              427
+              180,
+              349
             ],
-            "body_height": 450,
+            "body_height": 350,
             "source_pose": 2,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
@@ -23364,29 +23364,29 @@
             "motion_cue": "Coiled last-startup approach"
           },
           {
-            "file": "fillet-kit-v1/236d.png",
-            "sha256": "7d28a74bca7dd3c9f15d3a7d27307088aa764ca89096abe83f945fa4764a1f77",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              1330,
               0,
-              444,
-              444
+              362,
+              362,
+              362
             ],
             "bounds": [
-              30,
-              12,
-              399,
-              430
+              63,
+              37,
+              337,
+              332
             ],
             "pivot": [
-              230,
-              429
+              180,
+              332
             ],
-            "body_height": 450,
+            "body_height": 350,
             "source_pose": 3,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
@@ -23399,100 +23399,100 @@
             "motion_cue": "First-active snap / latch"
           },
           {
-            "file": "fillet-kit-v1/236d.png",
-            "sha256": "7d28a74bca7dd3c9f15d3a7d27307088aa764ca89096abe83f945fa4764a1f77",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
               0,
-              444,
-              444,
-              443
+              362,
+              362,
+              362
             ],
             "bounds": [
-              28,
-              11,
-              415,
-              430
+              63,
+              37,
+              337,
+              332
             ],
             "pivot": [
-              230,
-              430
+              180,
+              332
             ],
-            "body_height": 450,
-            "source_pose": 4,
+            "body_height": 350,
+            "source_pose": 3,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
             },
-            "name": "236D / Small follow-through",
+            "name": "236D / Hold unsupported latch on final active tick",
             "action_id": "236D",
             "action_frame": 23,
             "key_index": 4,
-            "motion_cue": "Small follow-through"
+            "motion_cue": "Hold unsupported latch on final active tick"
           },
           {
-            "file": "fillet-kit-v1/236d.png",
-            "sha256": "7d28a74bca7dd3c9f15d3a7d27307088aa764ca89096abe83f945fa4764a1f77",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
               0,
-              444,
-              444,
-              443
+              362,
+              362,
+              362
             ],
             "bounds": [
-              28,
-              11,
-              415,
-              430
+              63,
+              37,
+              337,
+              332
             ],
             "pivot": [
-              230,
-              430
+              180,
+              332
             ],
-            "body_height": 450,
-            "source_pose": 4,
+            "body_height": 350,
+            "source_pose": 3,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
             },
-            "name": "236D / Commitment hold",
+            "name": "236D / Missed latch commitment; no capture motion",
             "action_id": "236D",
             "action_frame": 24,
             "key_index": 5,
-            "motion_cue": "Commitment hold"
+            "motion_cue": "Missed latch commitment; no capture motion"
           },
           {
-            "file": "fillet-kit-v1/236d.png",
-            "sha256": "7d28a74bca7dd3c9f15d3a7d27307088aa764ca89096abe83f945fa4764a1f77",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              444,
-              444,
-              443,
-              443
+              0,
+              1086,
+              362,
+              362
             ],
             "bounds": [
-              21,
-              25,
-              385,
-              430
+              64,
+              3,
+              324,
+              300
             ],
             "pivot": [
-              230,
-              430
+              180,
+              300
             ],
-            "body_height": 450,
-            "source_pose": 5,
+            "body_height": 350,
+            "source_pose": 9,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -23504,30 +23504,30 @@
             "motion_cue": "Withdraw"
           },
           {
-            "file": "fillet-kit-v1/236d.png",
-            "sha256": "7d28a74bca7dd3c9f15d3a7d27307088aa764ca89096abe83f945fa4764a1f77",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              887,
-              444,
-              443,
-              443
+              362,
+              1086,
+              362,
+              362
             ],
             "bounds": [
-              10,
-              48,
-              386,
-              430
+              60,
+              1,
+              310,
+              300
             ],
             "pivot": [
-              230,
-              430
+              180,
+              300
             ],
-            "body_height": 450,
-            "source_pose": 6,
+            "body_height": 350,
+            "source_pose": 10,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -23539,30 +23539,30 @@
             "motion_cue": "Guard return"
           },
           {
-            "file": "fillet-kit-v1/236d.png",
-            "sha256": "7d28a74bca7dd3c9f15d3a7d27307088aa764ca89096abe83f945fa4764a1f77",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              1330,
-              444,
-              444,
-              443
+              724,
+              1086,
+              362,
+              362
             ],
             "bounds": [
-              3,
-              74,
-              364,
-              430
+              43,
+              15,
+              305,
+              300
             ],
             "pivot": [
-              230,
-              430
+              180,
+              300
             ],
-            "body_height": 450,
-            "source_pose": 7,
+            "body_height": 350,
+            "source_pose": 11,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -23574,29 +23574,29 @@
             "motion_cue": "Settled / still recovering"
           },
           {
-            "file": "fillet-kit-v1/214d.png",
-            "sha256": "24c6241a88dcaaaf1af477c75a046316a2a31f47e265ab53e992366c2478826a",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
               0,
               0,
-              442,
-              444
+              362,
+              362
             ],
             "bounds": [
-              19,
-              24,
-              397,
-              421
+              56,
+              50,
+              325,
+              333
             ],
             "pivot": [
-              230,
-              420
+              180,
+              332
             ],
-            "body_height": 450,
+            "body_height": 350,
             "source_pose": 0,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
@@ -23609,29 +23609,29 @@
             "motion_cue": "Entry"
           },
           {
-            "file": "fillet-kit-v1/214d.png",
-            "sha256": "24c6241a88dcaaaf1af477c75a046316a2a31f47e265ab53e992366c2478826a",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              442,
+              362,
               0,
-              445,
-              444
+              362,
+              362
             ],
             "bounds": [
-              3,
-              86,
-              338,
-              421
+              21,
+              213,
+              318,
+              333
             ],
             "pivot": [
-              232,
-              420
+              180,
+              332
             ],
-            "body_height": 450,
+            "body_height": 350,
             "source_pose": 1,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
@@ -23644,29 +23644,29 @@
             "motion_cue": "Authored approach"
           },
           {
-            "file": "fillet-kit-v1/214d.png",
-            "sha256": "24c6241a88dcaaaf1af477c75a046316a2a31f47e265ab53e992366c2478826a",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              887,
+              724,
               0,
-              443,
-              444
+              362,
+              362
             ],
             "bounds": [
-              18,
-              164,
-              382,
-              419
+              8,
+              225,
+              308,
+              334
             ],
             "pivot": [
-              230,
-              419
+              180,
+              333
             ],
-            "body_height": 450,
+            "body_height": 350,
             "source_pose": 2,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
@@ -23679,29 +23679,29 @@
             "motion_cue": "Coiled last-startup approach"
           },
           {
-            "file": "fillet-kit-v1/214d.png",
-            "sha256": "24c6241a88dcaaaf1af477c75a046316a2a31f47e265ab53e992366c2478826a",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              1330,
               0,
-              444,
-              444
+              362,
+              362,
+              362
             ],
             "bounds": [
-              39,
-              9,
-              426,
-              421
+              55,
+              26,
+              338,
+              331
             ],
             "pivot": [
-              230,
-              420
+              180,
+              331
             ],
-            "body_height": 450,
+            "body_height": 350,
             "source_pose": 3,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
@@ -23714,100 +23714,100 @@
             "motion_cue": "First-active snap / latch"
           },
           {
-            "file": "fillet-kit-v1/214d.png",
-            "sha256": "24c6241a88dcaaaf1af477c75a046316a2a31f47e265ab53e992366c2478826a",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
               0,
-              444,
-              444,
-              443
+              362,
+              362,
+              362
             ],
             "bounds": [
-              40,
-              7,
-              425,
-              421
+              55,
+              26,
+              338,
+              331
             ],
             "pivot": [
-              230,
-              420
+              180,
+              331
             ],
-            "body_height": 450,
-            "source_pose": 4,
+            "body_height": 350,
+            "source_pose": 3,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
             },
-            "name": "214D / Small follow-through",
+            "name": "214D / Hold unsupported latch on final active tick",
             "action_id": "214D",
             "action_frame": 23,
             "key_index": 4,
-            "motion_cue": "Small follow-through"
+            "motion_cue": "Hold unsupported latch on final active tick"
           },
           {
-            "file": "fillet-kit-v1/214d.png",
-            "sha256": "24c6241a88dcaaaf1af477c75a046316a2a31f47e265ab53e992366c2478826a",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
               0,
-              444,
-              444,
-              443
+              362,
+              362,
+              362
             ],
             "bounds": [
-              40,
-              7,
-              425,
-              421
+              55,
+              26,
+              338,
+              331
             ],
             "pivot": [
-              230,
-              420
+              180,
+              331
             ],
-            "body_height": 450,
-            "source_pose": 4,
+            "body_height": 350,
+            "source_pose": 3,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
             },
-            "name": "214D / Commitment hold",
+            "name": "214D / Missed latch commitment; no capture motion",
             "action_id": "214D",
             "action_frame": 24,
             "key_index": 5,
-            "motion_cue": "Commitment hold"
+            "motion_cue": "Missed latch commitment; no capture motion"
           },
           {
-            "file": "fillet-kit-v1/214d.png",
-            "sha256": "24c6241a88dcaaaf1af477c75a046316a2a31f47e265ab53e992366c2478826a",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              444,
-              444,
-              443,
-              443
+              0,
+              1086,
+              362,
+              362
             ],
             "bounds": [
-              36,
-              10,
-              394,
-              421
+              84,
+              7,
+              297,
+              316
             ],
             "pivot": [
-              230,
-              420
+              180,
+              315
             ],
-            "body_height": 450,
-            "source_pose": 5,
+            "body_height": 350,
+            "source_pose": 9,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -23819,30 +23819,30 @@
             "motion_cue": "Withdraw"
           },
           {
-            "file": "fillet-kit-v1/214d.png",
-            "sha256": "24c6241a88dcaaaf1af477c75a046316a2a31f47e265ab53e992366c2478826a",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              887,
-              444,
-              443,
-              443
+              362,
+              1086,
+              362,
+              362
             ],
             "bounds": [
-              39,
-              12,
-              394,
-              421
+              63,
+              10,
+              292,
+              315
             ],
             "pivot": [
-              230,
-              420
+              180,
+              315
             ],
-            "body_height": 450,
-            "source_pose": 6,
+            "body_height": 350,
+            "source_pose": 10,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -23854,30 +23854,30 @@
             "motion_cue": "Guard return"
           },
           {
-            "file": "fillet-kit-v1/214d.png",
-            "sha256": "24c6241a88dcaaaf1af477c75a046316a2a31f47e265ab53e992366c2478826a",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              1330,
-              444,
-              444,
-              443
+              724,
+              1086,
+              362,
+              362
             ],
             "bounds": [
-              43,
-              16,
-              395,
-              421
+              20,
+              19,
+              292,
+              315
             ],
             "pivot": [
-              230,
-              420
+              180,
+              315
             ],
-            "body_height": 450,
-            "source_pose": 7,
+            "body_height": 350,
+            "source_pose": 11,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24519,30 +24519,30 @@
             "motion_cue": "Capture C20"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
               0,
-              0,
-              444,
-              444
+              362,
+              362,
+              362
             ],
             "bounds": [
-              51,
-              17,
-              394,
-              428
+              63,
+              37,
+              337,
+              332
             ],
             "pivot": [
-              230,
-              427
+              180,
+              332
             ],
-            "body_height": 450,
-            "source_pose": 0,
+            "body_height": 350,
+            "source_pose": 3,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24551,33 +24551,68 @@
             "action_id": "236D",
             "paired": true,
             "capture_tick": 0,
-            "motion_cue": "Capture C0"
+            "motion_cue": "Grounded first-active latch / capture freeze"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              444,
-              0,
-              443,
-              444
+              362,
+              362,
+              362,
+              362
             ],
             "bounds": [
-              52,
-              59,
-              393,
-              428
+              54,
+              46,
+              334,
+              332
             ],
             "pivot": [
-              230,
-              427
+              180,
+              332
             ],
-            "body_height": 450,
-            "source_pose": 1,
+            "body_height": 350,
+            "source_pose": 4,
+            "weapon_ownership": {
+              "right": "long knife / bare shoulder",
+              "left": "short knife / red shoulder"
+            },
+            "name": "236D / capture C1",
+            "action_id": "236D",
+            "paired": true,
+            "capture_tick": 1,
+            "motion_cue": "Landing legs collect into the forearm hold"
+          },
+          {
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
+            "source_size": [
+              1086,
+              1448
+            ],
+            "region": [
+              724,
+              362,
+              362,
+              362
+            ],
+            "bounds": [
+              41,
+              63,
+              327,
+              332
+            ],
+            "pivot": [
+              180,
+              331
+            ],
+            "body_height": 350,
+            "source_pose": 5,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24586,33 +24621,33 @@
             "action_id": "236D",
             "paired": true,
             "capture_tick": 5,
-            "motion_cue": "Capture C5"
+            "motion_cue": "Left forearm brace"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              887,
               0,
-              443,
-              444
+              724,
+              362,
+              362
             ],
             "bounds": [
-              52,
-              53,
-              395,
-              427
+              54,
+              32,
+              337,
+              306
             ],
             "pivot": [
-              230,
-              427
+              180,
+              306
             ],
-            "body_height": 450,
-            "source_pose": 2,
+            "body_height": 350,
+            "source_pose": 6,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24621,33 +24656,33 @@
             "action_id": "236D",
             "paired": true,
             "capture_tick": 9,
-            "motion_cue": "Capture C9"
+            "motion_cue": "Right knife loaded; left contact held"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              1330,
-              0,
-              444,
-              444
+              362,
+              724,
+              362,
+              362
             ],
             "bounds": [
-              40,
-              41,
-              440,
-              428
+              60,
+              27,
+              332,
+              306
             ],
             "pivot": [
-              230,
-              427
+              180,
+              305
             ],
-            "body_height": 450,
-            "source_pose": 3,
+            "body_height": 350,
+            "source_pose": 7,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24656,33 +24691,33 @@
             "action_id": "236D",
             "paired": true,
             "capture_tick": 13,
-            "motion_cue": "Capture C13"
+            "motion_cue": "Long-right draw-cut accent"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              0,
-              444,
-              444,
-              443
+              724,
+              724,
+              362,
+              362
             ],
             "bounds": [
-              48,
-              26,
-              398,
-              427
+              49,
+              27,
+              327,
+              306
             ],
             "pivot": [
-              230,
-              427
+              180,
+              305
             ],
-            "body_height": 450,
-            "source_pose": 4,
+            "body_height": 350,
+            "source_pose": 8,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24691,33 +24726,33 @@
             "action_id": "236D",
             "paired": true,
             "capture_tick": 17,
-            "motion_cue": "Capture C17"
+            "motion_cue": "Short-left accent; contact still held"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              444,
-              444,
-              443,
-              443
+              0,
+              1086,
+              362,
+              362
             ],
             "bounds": [
-              47,
-              21,
-              396,
-              427
+              64,
+              3,
+              324,
+              300
             ],
             "pivot": [
-              230,
-              426
+              180,
+              300
             ],
-            "body_height": 450,
-            "source_pose": 5,
+            "body_height": 350,
+            "source_pose": 9,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24726,33 +24761,68 @@
             "action_id": "236D",
             "paired": true,
             "capture_tick": 21,
-            "motion_cue": "Capture C21"
+            "motion_cue": "Forearm releases; knives collect"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              887,
-              444,
-              443,
-              443
+              362,
+              1086,
+              362,
+              362
             ],
             "bounds": [
-              50,
-              18,
-              397,
-              427
+              60,
+              1,
+              310,
+              300
             ],
             "pivot": [
-              230,
-              426
+              180,
+              300
             ],
-            "body_height": 450,
-            "source_pose": 6,
+            "body_height": 350,
+            "source_pose": 10,
+            "weapon_ownership": {
+              "right": "long knife / bare shoulder",
+              "left": "short knife / red shoulder"
+            },
+            "name": "236D / capture C23",
+            "action_id": "236D",
+            "paired": true,
+            "capture_tick": 23,
+            "motion_cue": "Smaller withdrawal"
+          },
+          {
+            "file": "fillet-kit-v1/236d-v2.png",
+            "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
+            "source_size": [
+              1086,
+              1448
+            ],
+            "region": [
+              724,
+              1086,
+              362,
+              362
+            ],
+            "bounds": [
+              43,
+              15,
+              305,
+              300
+            ],
+            "pivot": [
+              180,
+              300
+            ],
+            "body_height": 350,
+            "source_pose": 11,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24761,68 +24831,33 @@
             "action_id": "236D",
             "paired": true,
             "capture_tick": 25,
-            "motion_cue": "Capture C25"
+            "motion_cue": "Settle into Stalker for cashout release"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
-            ],
-            "region": [
-              1330,
-              444,
-              444,
-              443
-            ],
-            "bounds": [
-              47,
-              16,
-              399,
-              427
-            ],
-            "pivot": [
-              230,
-              427
-            ],
-            "body_height": 450,
-            "source_pose": 7,
-            "weapon_ownership": {
-              "right": "long knife / bare shoulder",
-              "left": "short knife / red shoulder"
-            },
-            "name": "236D / capture C28",
-            "action_id": "236D",
-            "paired": true,
-            "capture_tick": 28,
-            "motion_cue": "Capture C28"
-          },
-          {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
-            "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
               0,
-              0,
-              444,
-              444
+              362,
+              362,
+              362
             ],
             "bounds": [
-              51,
-              17,
-              394,
-              428
+              55,
+              26,
+              338,
+              331
             ],
             "pivot": [
-              230,
-              427
+              180,
+              331
             ],
-            "body_height": 450,
-            "source_pose": 0,
+            "body_height": 350,
+            "source_pose": 3,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24831,33 +24866,68 @@
             "action_id": "214D",
             "paired": true,
             "capture_tick": 0,
-            "motion_cue": "Capture C0"
+            "motion_cue": "Grounded first-active latch / capture freeze"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              444,
-              0,
-              443,
-              444
+              362,
+              362,
+              362,
+              362
             ],
             "bounds": [
-              52,
-              59,
-              393,
-              428
+              85,
+              29,
+              312,
+              330
             ],
             "pivot": [
-              230,
-              427
+              180,
+              330
             ],
-            "body_height": 450,
-            "source_pose": 1,
+            "body_height": 350,
+            "source_pose": 4,
+            "weapon_ownership": {
+              "right": "long knife / bare shoulder",
+              "left": "short knife / red shoulder"
+            },
+            "name": "214D / capture C1",
+            "action_id": "214D",
+            "paired": true,
+            "capture_tick": 1,
+            "motion_cue": "Trailing foot collects; upright shoulder unwinds"
+          },
+          {
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
+            "source_size": [
+              1086,
+              1448
+            ],
+            "region": [
+              724,
+              362,
+              362,
+              362
+            ],
+            "bounds": [
+              60,
+              32,
+              296,
+              330
+            ],
+            "pivot": [
+              180,
+              329
+            ],
+            "body_height": 350,
+            "source_pose": 5,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24866,33 +24936,33 @@
             "action_id": "214D",
             "paired": true,
             "capture_tick": 5,
-            "motion_cue": "Capture C5"
+            "motion_cue": "Left forearm brace"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              887,
               0,
-              443,
-              444
+              724,
+              362,
+              362
             ],
             "bounds": [
-              52,
-              53,
-              395,
-              427
+              90,
+              15,
+              326,
+              317
             ],
             "pivot": [
-              230,
-              427
+              180,
+              316
             ],
-            "body_height": 450,
-            "source_pose": 2,
+            "body_height": 350,
+            "source_pose": 6,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24901,33 +24971,33 @@
             "action_id": "214D",
             "paired": true,
             "capture_tick": 9,
-            "motion_cue": "Capture C9"
+            "motion_cue": "Right knife loaded; left contact held"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              1330,
-              0,
-              444,
-              444
+              362,
+              724,
+              362,
+              362
             ],
             "bounds": [
-              40,
-              41,
-              440,
-              428
+              69,
+              17,
+              306,
+              317
             ],
             "pivot": [
-              230,
-              427
+              180,
+              317
             ],
-            "body_height": 450,
-            "source_pose": 3,
+            "body_height": 350,
+            "source_pose": 7,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24936,33 +25006,33 @@
             "action_id": "214D",
             "paired": true,
             "capture_tick": 13,
-            "motion_cue": "Capture C13"
+            "motion_cue": "Long-right draw-cut accent"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              0,
-              444,
-              444,
-              443
+              724,
+              724,
+              362,
+              362
             ],
             "bounds": [
-              48,
-              26,
-              398,
-              427
+              53,
+              17,
+              292,
+              319
             ],
             "pivot": [
-              230,
-              427
+              180,
+              318
             ],
-            "body_height": 450,
-            "source_pose": 4,
+            "body_height": 350,
+            "source_pose": 8,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -24971,33 +25041,33 @@
             "action_id": "214D",
             "paired": true,
             "capture_tick": 17,
-            "motion_cue": "Capture C17"
+            "motion_cue": "Short-left accent; contact still held"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              444,
-              444,
-              443,
-              443
+              0,
+              1086,
+              362,
+              362
             ],
             "bounds": [
-              47,
-              21,
-              396,
-              427
+              84,
+              7,
+              297,
+              316
             ],
             "pivot": [
-              230,
-              426
+              180,
+              315
             ],
-            "body_height": 450,
-            "source_pose": 5,
+            "body_height": 350,
+            "source_pose": 9,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -25006,33 +25076,68 @@
             "action_id": "214D",
             "paired": true,
             "capture_tick": 21,
-            "motion_cue": "Capture C21"
+            "motion_cue": "Forearm releases; knives collect"
           },
           {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
             "source_size": [
-              1774,
-              887
+              1086,
+              1448
             ],
             "region": [
-              887,
-              444,
-              443,
-              443
+              362,
+              1086,
+              362,
+              362
             ],
             "bounds": [
-              50,
-              18,
-              397,
-              427
+              63,
+              10,
+              292,
+              315
             ],
             "pivot": [
-              230,
-              426
+              180,
+              315
             ],
-            "body_height": 450,
-            "source_pose": 6,
+            "body_height": 350,
+            "source_pose": 10,
+            "weapon_ownership": {
+              "right": "long knife / bare shoulder",
+              "left": "short knife / red shoulder"
+            },
+            "name": "214D / capture C23",
+            "action_id": "214D",
+            "paired": true,
+            "capture_tick": 23,
+            "motion_cue": "Smaller withdrawal"
+          },
+          {
+            "file": "fillet-kit-v1/214d-v2.png",
+            "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
+            "source_size": [
+              1086,
+              1448
+            ],
+            "region": [
+              724,
+              1086,
+              362,
+              362
+            ],
+            "bounds": [
+              20,
+              19,
+              292,
+              315
+            ],
+            "pivot": [
+              180,
+              315
+            ],
+            "body_height": 350,
+            "source_pose": 11,
             "weapon_ownership": {
               "right": "long knife / bare shoulder",
               "left": "short knife / red shoulder"
@@ -25041,42 +25146,7 @@
             "action_id": "214D",
             "paired": true,
             "capture_tick": 25,
-            "motion_cue": "Capture C25"
-          },
-          {
-            "file": "fillet-kit-v1/pair-cashout.png",
-            "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
-            "source_size": [
-              1774,
-              887
-            ],
-            "region": [
-              1330,
-              444,
-              444,
-              443
-            ],
-            "bounds": [
-              47,
-              16,
-              399,
-              427
-            ],
-            "pivot": [
-              230,
-              427
-            ],
-            "body_height": 450,
-            "source_pose": 7,
-            "weapon_ownership": {
-              "right": "long knife / bare shoulder",
-              "left": "short knife / red shoulder"
-            },
-            "name": "214D / capture C28",
-            "action_id": "214D",
-            "paired": true,
-            "capture_tick": 28,
-            "motion_cue": "Capture C28"
+            "motion_cue": "Settle into Stalker for cashout release"
           }
         ]
       },
@@ -27107,39 +27177,44 @@
               "pose": 252
             },
             {
-              "tick": 5,
+              "tick": 1,
               "phase": "attack_animation",
               "pose": 253
             },
             {
-              "tick": 9,
+              "tick": 5,
               "phase": "attack_animation",
               "pose": 254
             },
             {
-              "tick": 13,
+              "tick": 9,
               "phase": "attack_animation",
               "pose": 255
             },
             {
-              "tick": 17,
+              "tick": 13,
               "phase": "attack_animation",
               "pose": 256
             },
             {
-              "tick": 21,
+              "tick": 17,
               "phase": "attack_animation",
               "pose": 257
             },
             {
-              "tick": 25,
+              "tick": 21,
               "phase": "attack_animation",
               "pose": 258
             },
             {
-              "tick": 28,
+              "tick": 23,
               "phase": "attack_animation",
               "pose": 259
+            },
+            {
+              "tick": 25,
+              "phase": "attack_animation",
+              "pose": 260
             }
           ]
         },
@@ -27150,42 +27225,47 @@
             {
               "tick": 0,
               "phase": "attack_animation",
-              "pose": 260
-            },
-            {
-              "tick": 5,
-              "phase": "attack_animation",
               "pose": 261
             },
             {
-              "tick": 9,
+              "tick": 1,
               "phase": "attack_animation",
               "pose": 262
             },
             {
-              "tick": 13,
+              "tick": 5,
               "phase": "attack_animation",
               "pose": 263
             },
             {
-              "tick": 17,
+              "tick": 9,
               "phase": "attack_animation",
               "pose": 264
             },
             {
-              "tick": 21,
+              "tick": 13,
               "phase": "attack_animation",
               "pose": 265
             },
             {
-              "tick": 25,
+              "tick": 17,
               "phase": "attack_animation",
               "pose": 266
             },
             {
-              "tick": 28,
+              "tick": 21,
               "phase": "attack_animation",
               "pose": 267
+            },
+            {
+              "tick": 23,
+              "phase": "attack_animation",
+              "pose": 268
+            },
+            {
+              "tick": 25,
+              "phase": "attack_animation",
+              "pose": 269
             }
           ]
         }

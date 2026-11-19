@@ -8,6 +8,7 @@ const phases=['active','windup','block','signature_windup','signature_active','r
 // substitutes old drawings only; it never invents movement or collision events.
 export async function buildFilletMotionReview({art,roster,images,engine}){
  const baseline=JSON.parse(await readFile(path('art/characters/fillet-v1/production/kit-timing/baseline.json'),'utf8'));
+ const grabBaseline=JSON.parse(await readFile(path('art/characters/fillet-v1/production/command-grabs-v2/before.json'),'utf8'));
  const source=JSON.parse(await readFile(path('art/characters/fillet-v1/FILLET_SPEC.json'),'utf8'));
  const moves=[],files=new Set(),saved=engine.data();
  const tileFor=f=>{
@@ -20,6 +21,7 @@ export async function buildFilletMotionReview({art,roster,images,engine}){
   engine.api.fg_defaults();
   for(const [id,old] of Object.entries(baseline.actions)){
    const action=source.actions.find(a=>a.id===id),after=art.attack_animation.frames.filter(f=>f.action_id===id&&!f.paired);
+   const captureFrames=art.attack_animation.frames.filter(f=>f.action_id===id&&f.paired);
    const move=engine.data().characters[5].moves[old.slot];
    const {startup,active,recovery,hitstop}=move,total=startup+active+recovery-1;
    const record=contact=>{
@@ -48,10 +50,14 @@ export async function buildFilletMotionReview({art,roster,images,engine}){
     return result;
    };
    const timeline=record(false),contactTimeline=record(true);
+   const priorGrab=grabBaseline.actions[id];
+   if(priorGrab)for(const entry of [...priorGrab.timeline,...priorGrab.contactTimeline])for(const frame of [entry.actor,entry.target].filter(Boolean))files.add(frame.file);
    for(const f of [...after,...old.frames]){files.add(f.file);if(f.effect)files.add(art[f.effect.sheet].file);}
    const count=frames=>new Set(frames.map(f=>f.file+JSON.stringify(f.region))).size;
    moves.push({id,label:action.name,startup,active,recovery,hitstop,total,before:old.frames,after,timeline,contactTimeline,
-     beforeDrawings:count(old.frames),afterDrawings:count(after),retimed:true,
+     beforeDrawings:count(priorGrab?[...priorGrab.frames,...priorGrab.contactTimeline.filter(k=>k.pairKind).map(k=>k.actor)]:old.frames),
+     afterDrawings:count([...after,...captureFrames]),afterCues:after.length+captureFrames.length,retimed:true,
+     ...(priorGrab?{beforeTimeline:priorGrab.timeline,beforeContactTimeline:priorGrab.contactTimeline}:{}),
      setup:id==='5D'?'Downed target':id.endsWith('D')&&id!=='5D'?'Target with owned bleed':id==='j.K'?'Jumping kick / grounded target':id.startsWith('j.')?'Both fighters jump':'Standing target'});
   }
  }finally{engine.loadData(saved);}

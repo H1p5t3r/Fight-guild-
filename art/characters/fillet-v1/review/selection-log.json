@@ -340,20 +340,28 @@
       "display": "236D",
       "name": "Vault cashout",
       "directionStatus": "authorized-implementation-pack",
-      "productionStatus": "installed-attack-timing-pass",
+      "productionStatus": "installed-command-grab-v2",
       "installed": true,
       "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
-      "timingStandard": "docs/attack-animation-standard.md"
+      "timingStandard": "docs/attack-animation-standard.md",
+      "production": "art/characters/fillet-v1/production/command-grabs-v2",
+      "poseKeys": 12,
+      "captureCues": 9,
+      "revisionReason": "User requested new command-grab animations; use previously authorized implementation-pack choreography."
     },
     {
       "id": "214D",
       "display": "214D",
       "name": "Skim cashout",
       "directionStatus": "authorized-implementation-pack",
-      "productionStatus": "installed-attack-timing-pass",
+      "productionStatus": "installed-command-grab-v2",
       "installed": true,
       "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
-      "timingStandard": "docs/attack-animation-standard.md"
+      "timingStandard": "docs/attack-animation-standard.md",
+      "production": "art/characters/fillet-v1/production/command-grabs-v2",
+      "poseKeys": 12,
+      "captureCues": 9,
+      "revisionReason": "User requested new command-grab animations; use previously authorized implementation-pack choreography."
     }
   ],
   "reviewFormat": {

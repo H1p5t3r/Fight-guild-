@@ -35,6 +35,18 @@ try{
  assert.equal(report.find(r=>r.id==='2S').freeze,9);
  assert.ok(report.find(r=>r.id==='j.Hs').landed,'Long airborne recovery is interrupted by actual landing');
  assert.ok(report.every(r=>r.damage>0||r.id==='5D'),'On-hit examples must connect');
+ for(const id of ['236D','214D']){
+  const comparison=await page.evaluate(id=>{
+   const m=filletReview.pack.moves.find(m=>m.id===id);
+   const gameplay=k=>[k.frame,k.x,k.y,k.facing,k.hitstop,k.pairKind,k.pairClock,k.damage,k.target?.x,k.target?.y];
+   return {before:m.beforeContactTimeline.map(gameplay),after:m.contactTimeline.map(gameplay),
+    priorCapture:m.beforeContactTimeline.find(k=>k.pairKind)?.actor.file,
+    capture:m.contactTimeline.find(k=>k.pairKind)?.actor.file};
+  },id);
+  assert.deepEqual(comparison.after,comparison.before,id+' keeps real capture timing, roots and damage');
+  assert.match(comparison.priorCapture,/pair-cashout\.png$/);
+  assert.match(comparison.capture,/-v2\.png$/);
+ }
  await page.locator('#scenario').selectOption('whiff');
  await page.setViewportSize({width:390,height:844});
  await page.locator('#move-select').selectOption(String(ids.indexOf('236S>2S')));await page.locator('#compare').uncheck();await page.locator('#mirror').check();
@@ -43,6 +55,9 @@ try{
  assert.equal(await page.locator('.old').isVisible(),false);
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No mobile horizontal overflow');
  await page.screenshot({path:'build/fillet-kit-timing-review/review-mobile.png',fullPage:true});
+ await page.goto(`http://127.0.0.1:${server.address().port}/Fight-guild-/fillet-motion-review.html?move=214D`);
+ await page.evaluate(()=>filletReview.ready);
+ assert.equal(await page.evaluate(()=>filletReview.pack.moves[filletReview.state().selected].id),'214D');
  assert.deepEqual(errors,[]);assert.deepEqual(bad,[]);
  console.log('PASS 26-attack hosted review: actual contacts, five capture tracks, landing, freeze, frame stepping and mobile layout');
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

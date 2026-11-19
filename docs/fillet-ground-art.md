@@ -10,7 +10,7 @@ during recovery. The effect carries no hurtbox.
 
 The user approved the [attack-timing standard](attack-animation-standard.md)
 and its application to the full kit. The [whole-kit pass](../art/characters/fillet-v1/production/kit-timing/README.md)
-now covers **26 actions and five successful capture tracks**, with 268 registered
+now covers **26 actions and five successful capture tracks**, with 270 registered
 action/effect/capture cues. The last startup pose stays loaded; the first active
 frame receives the strongest attacking change. The 2S pre-contact drawing is
 omitted, leaving six consistent body drawings and its approved knife arc.
@@ -60,6 +60,6 @@ pose slots per fighter. Captures have separate saved-clock pose tracks.
 - `tests/workbench-fillet-motion-review-browser.mjs`: every real contact example,
   the five successful captures, nine-frame sweep freeze, landing and mobile UI.
 - Godot validates PNG provenance, alpha, atlas regions and effect transforms in
-  both facings across the 807 body/cue entries in the six-character catalog.
+  both facings across the 809 body/cue entries in the six-character catalog.
 
 See the whole-kit production README for remaining raster-art limitations.
