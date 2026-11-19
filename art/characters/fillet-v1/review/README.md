@@ -13,6 +13,7 @@ or installed in the game.
 | 2P | B — Shoulder Slip |
 | 5K | A — Heel Drive |
 | 2K | B — Ankle Snap |
+| 2S | B — Hip Reap, from the second sweep study |
 | 5Hs | B — Hip Cross |
 | 2Hs | B — Rear-Leg Coil |
 | 6P | B — Rib Slip; correct arm ownership is required in final poses |
@@ -23,7 +24,8 @@ recommendation. Do not silently substitute the suggested mix.
 
 1. [Batch 01](normals-batch-01/README.md): approved P/K choices.
 2. [Batch 02](normals-batch-02/README.md): B selected for 5Hs, 2Hs, 6P and 6Hs;
-   the user requested new 2S sweep options.
+   B / Hip Reap from the second study selected for 2S. All 11 ground-normal
+   directions are now approved for production.
 3. Produce/register the selected ground-normal pose set together for consistency.
 4. Remaining air normals, specials and paired actions follow the same review
    process, preserving already selected directions.

@@ -1,8 +1,8 @@
 # Fillet ground normals — batch 02
 
 Three-pose motion timelines for the remaining **5Hs, 2S, 2Hs, 6P and 6Hs** directions.
-The user selected **B for 5Hs, 2Hs, 6P and 6Hs** and requested new **2S** options.
-Sprite production and registration remain pending.
+The user selected **B for all five moves**, with **2S using B / Hip Reap from
+the second study**. Sprite production and registration remain pending.
 
 Each move has its own sheet: **A on top, B below**, read left to right as
 **windup → contact → follow-through**. These are successive motion beats, not
@@ -12,7 +12,7 @@ arrows because two poses did not explain the motion clearly enough.
 | Sheet | Motion |
 |---|---|
 | [5Hs](5hs-timeline.png) | Crosscut |
-| [2S](2s-timeline.png) | Low sweep |
+| [2S — second study](2s-revision-02.png) | B / Hip Reap selected; replaces the original sweep sheet |
 | [2Hs](2hs-timeline.png) | Grounded rising scissors |
 | [6P](6p-timeline.png) | Short-knife shoulder guard cut |
 | [6Hs](6hs-timeline.png) | Advancing cleave |
@@ -25,7 +25,7 @@ single advancing plant; the other four use grounded support and pivots.
 | Move | A | B | User choice |
 |---|---|---|---|
 | 5Hs — Crosscut | Cross Snap: compact crossing gesture | Hip Cross: larger hip/rib turn | B |
-| 2S — Sweep | Compact Draw: economical low motion | Hip Sweep: deeper body turn | Redo requested; neither selected |
+| 2S — Sweep, second study | Low Draw: compact cross-body sweep | Hip Reap: deeper crouch and continued torso turn | B — Hip Reap |
 | 2Hs — Rising scissors | Center Open: balanced rise | Rear-Leg Coil: deeper rear-leg preparation | B |
 | 6P — Shoulder guard cut | Shoulder Snap: compact shoulder/forearm motion | Rib Slip: larger ribcage coil | B; correct arms in final poses |
 | 6Hs — Chasing cleave | Plant & Cleave: deliberate planted weight | Rib Whip: stronger torso sequencing | B |
@@ -41,18 +41,24 @@ shoulder → right elbow/wrist → LONG knife held low/back**. Correct the B stu
 arm ambiguity during production; check every key and both facings before
 registration. The motion selection does not approve swapped arms or knives.
 
+The original 2S sheet was rejected. The second study's **B / Hip Reap** keeps
+the body much lower and continues the knife and torso across the front after
+contact. Its long RIGHT blade performs the sweep. During production, keep the
+inactive LEFT hand and short knife readable through that turn, with fixed
+support feet and the authored low strike corridor.
+
 These images explore movement quality under the supplied frame/geometry brief.
 They do not certify exact pixel registration or gameplay collision fit. Production
 must preserve scale, weapon lengths and ownership, actual root travel, support
 feet, both facings and the existing timings. No smears were added.
 
 The prior selections remain **5P-A, 2P-B, 5K-A, 2K-B**, plus **f.S-B** and the
-packet's short-LEFT rising c.S. **2S is the only ground-normal direction still
-unselected.** Once its replacement is chosen, the ground-normal directions can
-be produced as one consistent pose set.
+packet's short-LEFT rising c.S. **All 11 ground-normal directions are selected**
+for production as one consistent pose set.
 
 `review.json` records prompts, references, hashes and pending selections.
 The original two-pose `heavy-options.png`, `rising-options.png` and
 `sweep-options.png` are retained as source inputs; use the five timeline sheets
-for the current review. `archive/` retains the earlier heavy-board refinement
+for the current review, replacing `2s-timeline.png` with `2s-revision-02.png`.
+`archive/` retains the earlier heavy-board refinement
 input. Every generated PNG is preserved unchanged.

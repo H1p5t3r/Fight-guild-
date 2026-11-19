@@ -70,10 +70,16 @@ clauses. New character art must be selected and checked before it replaces sprit
 The approved master remains model 06 / A Stalker, black hair, slender arms, short
 LEFT knife for c.S and long RIGHT knife for f.S. No transition smears were added.
 
-The user selected **B — Hip-led** for f.S. Motion-option and eight-key study images,
-prompts and provenance are in `art/characters/fillet-v1/review/`. The refinement is
-still a review image, not a registered gameplay clip. Exact 125px reach, body fit,
-slender anatomy, clear handedness, both facings and atlas padding require review.
+The user has selected all 11 ground-normal directions: **5P-A, 2P-B, 5K-A,
+2K-B, f.S-B, 5Hs-B, 2Hs-B, 6P-B, 6Hs-B**, the packet's short-LEFT **c.S**, and
+**2S-B / Hip Reap from the second sweep study**. The original 2S options were
+rejected. Motion studies, prompts, provenance and per-action production states
+are in [`review/`](../art/characters/fillet-v1/review/README.md). These are selected
+directions, not registered gameplay clips. Exact reach, body fit, slender
+anatomy, clear handedness, both facings and atlas padding still need production
+checks. The user's explicit 6P condition is to keep the red LEFT shoulder/arm
+with the SHORT knife and the unarmored RIGHT arm with the LONG knife held back
+through every final pose.
 
 No new playable sprite files or sprite-manifest entries are installed by this
 mechanics step. Existing art can therefore visibly differ from the new authored
@@ -81,6 +87,7 @@ collision poses. Source animation curves/phase keys are preserved as metadata;
 complete new pose playback, paired receiver drawings for the cast, all entry/exit
 bridges and animation-specific acceptance remain pending the review process.
 
-Next: approve/register f.S, prepare choices for the remaining new motions, then
-install reviewed clips and repeat the game-size/collision review. Do not mark the
-complete Fillet art package finished until that work passes.
+Next: produce/register the selected ground normals as a consistent set, then
+continue the air-normal, special and paired-action motion reviews. Install
+checked clips and repeat the game-size/collision review. Do not mark the complete
+Fillet art package finished until that work passes.
