@@ -596,6 +596,24 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     while(idle_key<3&&idle_elapsed>=idle_ticks[idle_key]) idle_elapsed-=idle_ticks[idle_key++];
     const Pose ready=f.stance&&f.character==3?Pose{8,((f.idle_time+tick_offset)/7)%4}:POSE_COUNTS[f.character][11]?Pose{11,idle_key}:Pose{LOCOMOTION_POSES[f.character]?5:0,0};
     const Pose crouch=f.character==2?Pose{12,((f.idle_time+tick_offset)/20)%4}:Pose{0,11};
+    // Successful captures use the saved paired clock, not the cleared move age.
+    // This is presentation only: capture timing, roots, damage and immunity are
+    // still owned by the existing pair contract and rollback state.
+    if(world.pair.kind&&f.reaction==Captured) {
+        if(&f==&world.players[world.pair.owner]&&extended(f)) {
+            const auto& animation=PAIRED_ANIMATIONS[f.character][world.pair.move];
+            for(int key=animation.count-1;key>=0;--key) {
+                const auto& frame=animation.keys[key];
+                if(world.pair.clock+tick_offset>=frame.start) return {frame.phase,frame.pose};
+            }
+        } else if(world.pair.kind==WoundCapture) {
+            const int phase=world.pair.down_pose==HardKnockdown?9:10;
+            const int age=world.pair.clock+tick_offset;
+            if(age<9) return {phase,0};
+            if(age<17) return {phase,1+min(4,(age-9)/2)};
+            return ready;
+        }
+    }
     const int recovery_phase=f.knockdown==HardKnockdown?9:10;
     if(f.reaction==Downed) return {recovery_phase,0};
     if(f.reaction==Waking) {

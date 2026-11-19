@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 # Smear slots are reserved for schema compatibility; transition smearing is removed.
 FIELDS = 'button category direction motion air startup active recovery damage hitstun blockstun hitstop pushback reach bottom height specialCancel jumpCancel whiffCancel selfCancel advance simpleDirection simpleButton normalRoutes commandRoutes hitLevel chipDamage guardBreak counterHitstun counterHitstop reversalEligible hitboxBack airPushback blockPushback launch airLaunch knockdown knockdownFrames wakeupFrames wallDamage throwRange enabled artPose followFrom followFrom2 followHit travelSpeed inertiaPercent pullFrames pullGap hitAngle normalCancelStart normalCancelEnd specialCancelStart specialCancelEnd jumpCancelStart jumpCancelEnd followCancelStart followCancelEnd cancelOn starterProration comboScaling minimumDamage landingRecovery attackLevel counterTier counterVulnerable counterFreezeFrames counterSlowFrames projectileKind projectileSpawnFrame projectileSpeedX projectileSpeedY projectileGravity projectileLife projectileOffsetX projectileOffsetY projectileWidth projectileHeight projectileHits projectileRehit projectileDurability projectilePersist projectileMelee smearMode smearPart smearStretch smearFrame1 smearFrame2 smearFrame3 smearFrame4 hurtMaskWindup hurtMaskActive hurtMaskRecovery mechanic tetherSpeed tetherFrames bleedInitial bleedTickDamage bleedTickFrames bleedDuration bleedBlockPercent bleedCap variantStartup variantActive variantRecovery variantDamage variantRange variantSpeed variantLift variantHitstun variantKnockdown stanceRequired stanceChange actionType holdFollow holdFrame holdButton guardFollow proximityMove proximityRange startupTravel diveSpeedX diveSpeedY groundBounce wallBounce crumpleFrames airCounterKnockdown hurtWindowStart hurtWindowEnd hurtWindowMask semiAirStart semiAirEnd armorFrames armorHits grabFrames finishArtPose finishArtFrame'.split()
 MOBILITY = 'forwardStyle walkSpeed runSpeed runAcceleration stepSpeed stepFrames backSpeed backFrames attackFriction backStyle backWalkSpeed backRunSpeed jumpSpeed jumpForwardSpeed jumpBackSpeed gravity airJumps prejumpFrames airDashEnabled airBackdashEnabled airDashStyle airBackdashStyle airDashSpeed airBackdashSpeed airDashFrames airBackdashFrames airDashUses hoverHeight hoverRiseSpeed teleportDistance backTeleportDistance teleportStartup fdEnabled fdPushPercent fdDrain fdAirDrain fdBlockCost smearMode smearPart smearStretch airDashPauseFrames airBackdashPauseFrames'.split()
-PHASES = {'active': 12, 'windup': 6, 'block': 6, 'signature_windup': 32, 'signature_active': 32, 'ready': 1, 'walk': 8, 'run': 8, 'stance': 4, 'knockdown': 6, 'knockdown_back': 6, 'idle': 4, 'crouch_idle': 4, 'back_walk': 8, 'attack_animation': 128, 'backdash': 6}
+PHASES = {'active': 12, 'windup': 6, 'block': 6, 'signature_windup': 32, 'signature_active': 32, 'ready': 1, 'walk': 8, 'run': 8, 'stance': 4, 'knockdown': 6, 'knockdown_back': 6, 'idle': 4, 'crouch_idle': 4, 'back_walk': 8, 'attack_animation': 320, 'backdash': 6}
 HURT_REGIONS = ('legs', 'torsoArms', 'head', 'extension')
 
 
@@ -138,9 +138,23 @@ def compile_data():
                 stages.append('{' + ','.join(values) + '}')
             entries.append('{%d,%d,{%s},{%s}}' % (art_pose, requires_extended, ','.join(counts), ','.join(stages)))
         animations.append('{' + ','.join(entries) + '}')
+    paired_data = [fighter.get('paired_animations', {}) for fighter in art['fighters']]
+    paired_animations = []
+    for fighter, clips in zip(art['fighters'], paired_data):
+        entries = []
+        for slot in range(47):
+            keys = clips.get(str(slot), {}).get('keys', [])
+            assert len(keys) <= 16 and (not keys or keys[0]['tick'] == 0)
+            assert all(a['tick'] < b['tick'] for a,b in zip(keys,keys[1:]))
+            values = []
+            for key in keys:
+                assert 0 <= key['pose'] < len(fighter[key['phase']]['frames'])
+                values.append('{%d,%d,%d}' % (key['tick'], list(PHASES).index(key['phase']), key['pose']))
+            entries.append('{%d,{%s}}' % (len(keys), ','.join(values)))
+        paired_animations.append('{' + ','.join(entries) + '}')
     idle_ticks = [fighter.get('idle', {}).get('frame_ticks', [20, 20, 20, 20]) for fighter in art['fighters']]
     assert all(len(ticks) == 4 and all(type(t) is int and 1 <= t <= 600 for t in ticks) for ticks in idle_ticks)
-    digest = int.from_bytes(hashlib.sha256(json.dumps([collision, geometry, animation_data, idle_ticks, [[c.get("extensions"), [m.get("extensions") for m in c["moves"]]] for c in tuning["characters"]]], sort_keys=True).encode()).digest()[:4], 'big')
+    digest = int.from_bytes(hashlib.sha256(json.dumps([collision, geometry, animation_data, paired_data, idle_ticks, [[c.get("extensions"), [m.get("extensions") for m in c["moves"]]] for c in tuning["characters"]]], sort_keys=True).encode()).digest()[:4], 'big')
     header = '// Generated by scripts/generate-combat-data.py; edit godot/data sources.\n#pragma once\nnamespace fight {\n'
     header += 'struct PoseBoxes { int count; Box boxes[MAX_HURTBOXES]; };\nstruct PushProfile { int half_width, standing, crouching, air, air_bottom; };\n'
     header += f'constexpr unsigned COLLISION_HASH = {digest}u;\n'
@@ -149,6 +163,8 @@ def compile_data():
     header += 'constexpr int IDLE_FRAME_TICKS[CHARACTER_COUNT][4] = {' + ','.join('{' + ','.join(map(str, ticks)) + '}' for ticks in idle_ticks) + '};\n'
     header += 'struct AttackAnimationKey { int start, phase, pose; };\nstruct AttackAnimation { int art_pose, requires_extended; int counts[3]; AttackAnimationKey keys[3][16]; };\n'
     header += 'constexpr AttackAnimation ATTACK_ANIMATIONS[CHARACTER_COUNT][MOVE_COUNT] = {' + ','.join(animations) + '};\n'
+    header += 'struct PairedAnimation { int count; AttackAnimationKey keys[16]; };\n'
+    header += 'constexpr PairedAnimation PAIRED_ANIMATIONS[CHARACTER_COUNT][MOVE_COUNT] = {' + ','.join(paired_animations) + '};\n'
     offsets = [sum(list(PHASES.values())[:i]) for i in range(len(PHASES))]
     counts = [','.join(str(len(f.get(p, {}).get('frames', []))) for p in PHASES) for f in art['fighters']]
     header += f'constexpr int POSE_PHASE_COUNT = {len(PHASES)};\n'

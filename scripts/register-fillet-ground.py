@@ -247,4 +247,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    if (ROOT / 'art/characters/fillet-v1/production/kit-timing/generated-sources.json').exists():
+        import runpy
+        runpy.run_path(str(ROOT / 'scripts/register-fillet-kit.py'), run_name='__main__')
+    else:
+        main()

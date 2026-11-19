@@ -46,12 +46,12 @@ for(const [group,values] of Object.entries(defaults).filter(([key])=>key.endsWit
 if(JSON.stringify(defaults)!==JSON.stringify(engine.data()))throw new Error('Limit probing changed defaults.');
 const manifest=JSON.parse(await readFile(path('godot/assets/fighters/manifest.json'),'utf8'));
 const collisions=JSON.parse(await readFile(path('godot/data/fighter_collision.json'),'utf8'));
-const phases=['active','windup','block','signature_active','signature_windup','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation','backdash','idle_smoke','movement_smoke','backdraft_fx','sword_fx','sweep_fx'];
-const art=manifest.fighters.map(f=>Object.fromEntries(['name','projectile','projectile_variants','attack_animations',...phases].filter(p=>f[p]).map(p=>[p,f[p]])));
+const phases=['active','windup','block','signature_active','signature_windup','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation','backdash','idle_smoke','movement_smoke','backdraft_fx','sword_fx','sweep_fx','knife_fx'];
+const art=manifest.fighters.map(f=>Object.fromEntries(['name','projectile','projectile_variants','attack_animations','paired_animations',...phases].filter(p=>f[p]).map(p=>[p,f[p]])));
 const files=[...new Set(art.flatMap(f=>phases.filter(p=>f[p]).flatMap(p=>[f[p].file,...f[p].frames.flatMap(frame=>frame.file?[frame.file]:[])])))];
 // The comparison retains superseded drawings that are no longer in live clips.
-const reviewBaseline=JSON.parse(await readFile(path('art/characters/fillet-v1/production/sweep-timing/baseline.json'),'utf8'));
-for(const frame of reviewBaseline.frames)if(!files.includes(frame.file))files.push(frame.file);
+const reviewBaseline=JSON.parse(await readFile(path('art/characters/fillet-v1/production/kit-timing/baseline.json'),'utf8'));
+for(const action of Object.values(reviewBaseline.actions))for(const frame of action.frames)if(!files.includes(frame.file))files.push(frame.file);
 files.push("appearance-v3/projectiles.png");
 for(const fighter of art)if(fighter.projectile)files.push(fighter.projectile.file);
 for(const fighter of art)for(const projectile of Object.values(fighter.projectile_variants??{}))if(!files.includes(projectile.file))files.push(projectile.file);

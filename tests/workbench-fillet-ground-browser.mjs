@@ -28,14 +28,18 @@ try{
  let keys=0;
  for(const action of actions){
   await page.locator(`[data-move="${action.slot}"]`).click();await ready(page);
-  for(const expected of art.attack_animation.frames.filter(f=>f.action_id===action.id)){
+  // Geometry inspection exposes late air recovery and missed-grab poses even
+  // when a real jump lands early or an eligible target starts a paired capture.
+  await page.locator('#attack-enabled').uncheck();await ready(page);
+  for(const expected of art.attack_animation.frames.filter(f=>f.action_id===action.id&&!f.paired)){
    await page.evaluate(()=>{window.filletDraws=[];});
    await seekMoveFrame(page,expected.action_frame);
    await page.waitForFunction(({file,region,size})=>window.filletDraws.some(d=>d.source===new URL(FIGHT_WORKSHOP_DATA.images[file],location.href).href&&JSON.stringify(d.region)===JSON.stringify(region)&&JSON.stringify(d.size)===JSON.stringify(size)),{file:expected.file,region:expected.region,size:expected.source_size});
    keys++;
   }
+  await page.locator('#attack-enabled').check();await ready(page);
  }
- assert.equal(keys,105);
+ assert.equal(keys,234);
  await mkdir('build/fillet-ground-review',{recursive:true});
  await page.locator('[data-move="6"]').click();await ready(page);await seekMoveFrame(page,12);
  await page.waitForFunction(file=>window.filletDraws.some(d=>d.source===new URL(FIGHT_WORKSHOP_DATA.images[file],location.href).href),art.sweep_fx.file);
@@ -47,5 +51,5 @@ try{
  await page.locator('#preview').scrollIntoViewIfNeeded();
  await page.screenshot({path:'build/fillet-ground-review/anti-air-mobile.png'});
  assert.deepEqual(errors,[]);
- console.log('PASS all 105 Fillet pose keys draw from their registered atlases in the hosted editor, plus desktop/mobile preview');
+ console.log('PASS all 234 Fillet action-pose keys draw from their registered atlases in the hosted editor, plus desktop/mobile preview');
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

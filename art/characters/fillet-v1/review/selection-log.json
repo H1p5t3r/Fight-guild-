@@ -1,14 +1,14 @@
 {
   "version": 1,
   "character": "Fillet",
-  "scope": "26-action sprite replacement pass; direction selection is separate from production and installation",
+  "scope": "All 26 Fillet v1 actions; approved ground choreography and directly authorized packet choreography for the remaining kit.",
   "actions": [
     {
       "id": "5P",
       "display": "5P",
       "name": "Short check",
       "directionStatus": "user_selected",
-      "productionStatus": "registered_first_pass",
+      "productionStatus": "installed-attack-timing-pass",
       "installed": true,
       "option": "A",
       "direction": "Elbow Snap",
@@ -21,14 +21,15 @@
         "interval": 2,
         "phaseEntry": true,
         "retainApprovedKeys": true
-      }
+      },
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "5K",
       "display": "5K",
       "name": "Step kick",
       "directionStatus": "user_selected",
-      "productionStatus": "registered_first_pass",
+      "productionStatus": "installed-attack-timing-pass",
       "installed": true,
       "option": "A",
       "direction": "Heel Drive",
@@ -41,41 +42,44 @@
         "interval": 2,
         "phaseEntry": true,
         "retainApprovedKeys": true
-      }
+      },
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "c.S",
       "display": "c.S",
       "name": "Inside cut",
       "directionStatus": "selected_in_supplied_packet",
-      "productionStatus": "registered_first_pass",
+      "productionStatus": "installed-attack-timing-pass",
       "installed": true,
       "direction": "Short LEFT reverse-grip rising cut",
       "reference": "Fillet_cS_Selected_Motion_Direction.png",
       "production": "art/characters/fillet-v1/production/ground-v1",
       "poseKeys": 12,
-      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json"
+      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "5S",
       "display": "f.S",
       "name": "Long knife",
       "directionStatus": "user_selected",
-      "productionStatus": "registered_first_pass",
+      "productionStatus": "installed-attack-timing-pass",
       "installed": true,
       "option": "B",
       "direction": "Hip-led",
       "selectedOn": "2026-11-19",
       "production": "art/characters/fillet-v1/production/ground-v1",
       "poseKeys": 8,
-      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json"
+      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "5Hs",
       "display": "5Hs",
       "name": "Crosscut",
       "directionStatus": "user_selected",
-      "productionStatus": "registered_first_pass",
+      "productionStatus": "installed-attack-timing-pass",
       "installed": true,
       "batch": "normals-batch-02",
       "reviewSheet": "normals-batch-02/5hs-timeline.png",
@@ -84,42 +88,45 @@
       "selectedOn": "2026-11-19",
       "production": "art/characters/fillet-v1/production/ground-v1",
       "poseKeys": 8,
-      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json"
+      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "2P",
       "display": "2P",
       "name": "Low stance check",
       "directionStatus": "user_selected",
-      "productionStatus": "registered_first_pass",
+      "productionStatus": "installed-attack-timing-pass",
       "installed": true,
       "option": "B",
       "direction": "Shoulder Slip",
       "selectedOn": "2026-11-19",
       "production": "art/characters/fillet-v1/production/ground-v1",
       "poseKeys": 8,
-      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json"
+      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "2K",
       "display": "2K",
       "name": "Ankle check",
       "directionStatus": "user_selected",
-      "productionStatus": "registered_first_pass",
+      "productionStatus": "installed-attack-timing-pass",
       "installed": true,
       "option": "B",
       "direction": "Ankle Snap",
       "selectedOn": "2026-11-19",
       "production": "art/characters/fillet-v1/production/ground-v1",
       "poseKeys": 8,
-      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json"
+      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "2S",
       "display": "2S",
       "name": "Sweep",
       "directionStatus": "user_selected",
-      "productionStatus": "registered_first_pass",
+      "productionStatus": "installed-attack-timing-pass",
       "installed": true,
       "batch": "normals-batch-02",
       "reviewSheet": "normals-batch-02/2s-revision-02.png",
@@ -139,14 +146,15 @@
       "inbetweensProduction": "art/characters/fillet-v1/production/ground-twos",
       "bodyDrawings": 7,
       "exposureTiming": "art/characters/fillet-v1/production/sweep-timing/timing.json",
-      "inbetweensStatus": "Superseded by the held exposure plan in sweep-timing; source art retained for comparison."
+      "inbetweensStatus": "Superseded by the held exposure plan in sweep-timing; source art retained for comparison.",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "2Hs",
       "display": "2Hs",
       "name": "Rising scissors",
       "directionStatus": "user_selected",
-      "productionStatus": "registered_first_pass",
+      "productionStatus": "installed-attack-timing-pass",
       "installed": true,
       "batch": "normals-batch-02",
       "reviewSheet": "normals-batch-02/2hs-timeline.png",
@@ -155,14 +163,15 @@
       "selectedOn": "2026-11-19",
       "production": "art/characters/fillet-v1/production/ground-v1",
       "poseKeys": 8,
-      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json"
+      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "6P",
       "display": "6P",
       "name": "Shoulder guard cut",
       "directionStatus": "user_selected",
-      "productionStatus": "registered_first_pass",
+      "productionStatus": "installed-attack-timing-pass",
       "installed": true,
       "batch": "normals-batch-02",
       "reviewSheet": "normals-batch-02/6p-timeline.png",
@@ -176,14 +185,15 @@
       ],
       "production": "art/characters/fillet-v1/production/ground-v1",
       "poseKeys": 8,
-      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json"
+      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "6Hs",
       "display": "6Hs",
       "name": "Chasing cleave",
       "directionStatus": "user_selected",
-      "productionStatus": "registered_first_pass",
+      "productionStatus": "installed-attack-timing-pass",
       "installed": true,
       "batch": "normals-batch-02",
       "reviewSheet": "normals-batch-02/6hs-timeline.png",
@@ -192,127 +202,158 @@
       "selectedOn": "2026-11-19",
       "production": "art/characters/fillet-v1/production/ground-v1",
       "poseKeys": 8,
-      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json"
+      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "j.P",
       "display": "j.P",
       "name": "Air check",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "j.K",
       "display": "j.K",
       "name": "Descending kick",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "j.S",
       "display": "j.S",
       "name": "Falling knife",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "j.Hs",
       "display": "j.Hs",
       "name": "Turning scissors",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "236P",
       "display": "236P",
       "name": "Needle check",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "236S",
       "display": "236S",
       "name": "Opening cut",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "236S>6S",
       "display": "236S > 6S",
       "name": "Crown cut",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "236S>2S",
       "display": "236S > 2S",
       "name": "Heel cut",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "236K",
       "display": "236K",
       "name": "Passing cut",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "623Hs",
       "display": "623Hs",
       "name": "Rising carve",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "4P+K",
       "display": "4P+K",
       "name": "Back throw",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "6P+K",
       "display": "6P+K",
       "name": "Forward throw",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "5D",
       "display": "D / 5D",
       "name": "Wound",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "236D",
       "display": "236D",
       "name": "Vault cashout",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     },
     {
       "id": "214D",
       "display": "214D",
       "name": "Skim cashout",
-      "directionStatus": "queued",
-      "productionStatus": "pending",
-      "installed": false
+      "directionStatus": "authorized-implementation-pack",
+      "productionStatus": "installed-attack-timing-pass",
+      "installed": true,
+      "directionSource": "User selected implementation-pack choreography for remaining attacks, 2026-11-19",
+      "timingStandard": "docs/attack-animation-standard.md"
     }
   ],
   "reviewFormat": {

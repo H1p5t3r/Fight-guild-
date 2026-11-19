@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "actions": 26,
+  "pairedActions": 5,
+  "poses": 268,
+  "sourceSpecSHA256": "796292f71f5af141c91997b983ee223834a0826dbc8d3c7b1b1d7d260445e65d",
+  "note": "Unchanged generated pixels; saved action/capture clocks; collision and gameplay timing remain authoritative."
+}
