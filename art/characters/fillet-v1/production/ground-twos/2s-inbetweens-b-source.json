@@ -1,0 +1,105 @@
+{
+  "id": "2S",
+  "file": "2s-inbetweens-b.png",
+  "columns": 2,
+  "rows": 2,
+  "frames": [
+    20,
+    22,
+    24,
+    28
+  ],
+  "source": "/workspace/generated_images/exec-68309f12-1339-4f5f-99c6-c36549be8a53.png",
+  "references": [
+    "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/2s.png"
+  ],
+  "prompt": "2s-inbetweens-b-prompt.txt",
+  "sha256": "99add9b507166f7ad3011b09b7b7ed2dacb46377f3409004be2b41f38b02c709",
+  "body_height": 806,
+  "roots": [
+    326,
+    303,
+    324,
+    302
+  ],
+  "keys": [
+    {
+      "frame": 20,
+      "label": "in-between"
+    },
+    {
+      "frame": 22,
+      "label": "in-between"
+    },
+    {
+      "frame": 24,
+      "label": "in-between"
+    },
+    {
+      "frame": 28,
+      "label": "in-between"
+    }
+  ],
+  "calibration": {
+    "method": "One fixed scale per sheet; planted-foot roots interpolate the neighboring approved keys.",
+    "scaleMeasure": "planted foot separation",
+    "measurements": [
+      {
+        "frame": 20,
+        "pixels": {
+          "left": 137.0,
+          "span": 390.5,
+          "height": 467
+        },
+        "target": {
+          "left": -35.15,
+          "span": 72.675,
+          "height": 82.7
+        },
+        "height": 805.9855521155831
+      },
+      {
+        "frame": 22,
+        "pixels": {
+          "left": 114.5,
+          "span": 391.0,
+          "height": 467
+        },
+        "target": {
+          "left": -35.1,
+          "span": 72.7,
+          "height": 83.8
+        },
+        "height": 806.7400275103163
+      },
+      {
+        "frame": 24,
+        "pixels": {
+          "left": 136.0,
+          "span": 393.5,
+          "height": 478
+        },
+        "target": {
+          "left": -35.05,
+          "span": 72.725,
+          "height": 84.9
+        },
+        "height": 811.6191130972843
+      },
+      {
+        "frame": 28,
+        "pixels": {
+          "left": 114.0,
+          "span": 390.0,
+          "height": 480
+        },
+        "target": {
+          "left": -34.979166666666664,
+          "span": 72.70833333333333,
+          "height": 86.5
+        },
+        "height": 804.5845272206304
+      }
+    ]
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "id": "2S",
+  "file": "2s-inbetweens-a.png",
+  "columns": 3,
+  "rows": 2,
+  "frames": [
+    3,
+    5,
+    7,
+    9,
+    14,
+    18
+  ],
+  "source": "/workspace/generated_images/exec-d804a7b2-7527-42fd-a646-8a2d0f20fc15.png",
+  "references": [
+    "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/2s.png",
+    "/workspace/generated_images/exec-b4fffecd-75e2-4c0b-87ee-d0fa50b76449.png"
+  ],
+  "prompt": "2s-inbetweens-a-quality-prompt.txt",
+  "sha256": "eaa79c871a12d66e112f4530fc1e56206b0f76c7999f8c9f13771813b2463864",
+  "body_height": 682,
+  "roots": [
+    254,
+    255,
+    255,
+    255,
+    253,
+    255
+  ],
+  "keys": [
+    {
+      "frame": 3,
+      "label": "in-between"
+    },
+    {
+      "frame": 5,
+      "label": "in-between"
+    },
+    {
+      "frame": 7,
+      "label": "in-between"
+    },
+    {
+      "frame": 9,
+      "label": "in-between"
+    },
+    {
+      "frame": 14,
+      "label": "in-between"
+    },
+    {
+      "frame": 18,
+      "label": "in-between"
+    }
+  ],
+  "calibration": {
+    "method": "One fixed scale per sheet; planted-foot roots interpolate the neighboring approved keys.",
+    "scaleMeasure": "planted foot separation",
+    "measurements": [
+      {
+        "frame": 3,
+        "pixels": {
+          "left": 95.0,
+          "span": 329.5,
+          "height": 422
+        },
+        "target": {
+          "left": -35.025,
+          "span": 72.4,
+          "height": 88.3
+        },
+        "height": 682.6657458563535
+      },
+      {
+        "frame": 5,
+        "pixels": {
+          "left": 95.5,
+          "span": 329.0,
+          "height": 406
+        },
+        "target": {
+          "left": -35.175,
+          "span": 72.55,
+          "height": 87.6
+        },
+        "height": 680.2205375603032
+      },
+      {
+        "frame": 7,
+        "pixels": {
+          "left": 95.0,
+          "span": 331.5,
+          "height": 388
+        },
+        "target": {
+          "left": -35.2,
+          "span": 72.6,
+          "height": 86.55
+        },
+        "height": 684.9173553719008
+      },
+      {
+        "frame": 9,
+        "pixels": {
+          "left": 95.0,
+          "span": 329.5,
+          "height": 382
+        },
+        "target": {
+          "left": -35.1,
+          "span": 72.55,
+          "height": 85.15
+        },
+        "height": 681.2543073742247
+      },
+      {
+        "frame": 14,
+        "pixels": {
+          "left": 94.5,
+          "span": 330.5,
+          "height": 349
+        },
+        "target": {
+          "left": -34.958333333333336,
+          "span": 72.29166666666667,
+          "height": 76.58333333333333
+        },
+        "height": 685.7636887608069
+      },
+      {
+        "frame": 18,
+        "pixels": {
+          "left": 94.5,
+          "span": 330.0,
+          "height": 353
+        },
+        "target": {
+          "left": -35.2,
+          "span": 72.65,
+          "height": 81.6
+        },
+        "height": 681.3489332415692
+      }
+    ]
+  }
+}
