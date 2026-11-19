@@ -1,4 +1,4 @@
-import {Engine,INPUT,BUTTONS,MOVE_IDS} from '../engine.mjs';
+import {Engine,INPUT,BUTTONS} from '../engine.mjs';
 import {createCombatCore} from '../generated/fight-core.mjs';
 import {inputName,totalFrames} from './model.mjs';
 import {recordSequence} from './sequence-preview.mjs';
@@ -62,7 +62,8 @@ export class CombatPreview {
       for(let i=0;i<11;++i)step(entry==='forwardJump'?forward:0,'Jump approach');
     }
     const contextual=m.followFrom>=0||m.followFrom2>=0;
-    if(contextual||m.stanceRequired===2||slot===32||slot===33||slot===34||slot===43||slot===44){
+    const command=slot===32?data.characters[character].moves[2]:m;
+    if(contextual||m.stanceRequired===2||slot===33||slot===34||slot===43||slot===44){
       // A selected rekka ending can be studied on its own without changing any
       // routes. This explicit isolated mode is identified in the visible result.
       e.api.fg_preview_begin(0,slot);
@@ -70,11 +71,11 @@ export class CombatPreview {
     }else if(m.category===4&&!m.motion){
       step(directionBits(m.direction===4?4:6,facing)|INPUT.P|INPUT.K,'Throw input');
     }else if(simple){
-      if(!m.simpleDirection){result.warnings.push('This attack has no simple-input mapping. Showing editable geometry only.');return this.geometryRecord(result,m);}
-      step(directionBits(m.simpleDirection,facing)|INPUT.simple|(INPUT.P<<m.simpleButton),'Simple input');
+      if(!command.simpleDirection){result.warnings.push('This attack has no simple-input mapping. Showing editable geometry only.');return this.geometryRecord(result,m);}
+      step(directionBits(command.simpleDirection,facing)|INPUT.simple|(INPUT.P<<command.simpleButton),'Simple input');
     }else{
-      const sequence=m.motion?String(m.motion).split('').map(Number):[m.direction];
-      sequence.forEach((direction,index)=>step(directionBits(direction,facing)|(index===sequence.length-1?INPUT.P<<m.button:0),'Move input'));
+      const sequence=command.motion?String(command.motion).split('').map(Number):[command.direction];
+      sequence.forEach((direction,index)=>step(directionBits(direction,facing)|(index===sequence.length-1?INPUT.P<<command.button:0),'Move input'));
     }
     let state=e.state();
     for(let i=0;i<4800;++i){
@@ -92,7 +93,7 @@ export class CombatPreview {
     }
     if(!result.executed){
       const actual=state.players[0].lastMove;
-      result.warnings.push(actual>=0?`Input selected ${MOVE_IDS[actual]}, not ${m.id}. Check mappings, airborne state and competing moves.`:'The selected input did not start this attack. Check its mapping and grounded/airborne requirement.');
+      result.warnings.push(actual>=0?`Input selected ${inputName(data.characters[character].moves[actual])}, not ${inputName(m)}. Check spacing, mappings and airborne state.`:'The selected input did not start this attack. Check its mapping and grounded/airborne requirement.');
     }
     if(!result.executed){result.warnings.push('Showing the selected move’s geometry only; no contacts are simulated.');return this.geometryRecord(result,m);}
     if(result.frames.length>=4800)result.warnings.push('Preview stopped at the recording limit.');

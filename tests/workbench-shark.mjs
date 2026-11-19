@@ -6,6 +6,7 @@ import {CombatPreview} from '../web/workbench/simulation.mjs';
 import {Engine} from '../web/engine.mjs';
 const json=async p=>JSON.parse(await readFile(p,'utf8'));
 const pack=await json('build/workbench-pack.json');
+const sharkBatch=await json('godot/data/workshop/2026-11-18-shark/FightGuild-Shark-Normals.json');
 const slots=[0,1,32,2,3,4,5,6,7,17,18,19,20,8,9,11];
 
 test('Shark selected movement uses both gait halves, dedicated retreat/dash, and weighted idle without editing a draft',()=>{
@@ -55,7 +56,7 @@ test('Shark movement clocks, anatomical poses and rollback agree in WASM and pla
 
 test('Shark batch changes only the16 selected normals and appends briefs without losing uploaded data',async()=>{
  const before=await json('godot/data/workshop/2026-11-18-user-smoke/FightGuild-Smoke-Animations.json');
- const data=pack.draft.data;
+ const data=sharkBatch;
  for(let c=0;c<6;++c){
   if(c!==4){assert.deepEqual(data.characters[c],before.characters[c]);continue;}
   assert.deepEqual(data.characters[c].movement,before.characters[c].movement);
@@ -73,7 +74,7 @@ test('Shark batch changes only the16 selected normals and appends briefs without
 });
 
 test('Ky timing and scaled traces survive editor import/export; multi-hit is2Hs only',async()=>{
- const w=new Workshop(pack,pack.draft.data),source=await json('references/frame-data/ky-kiske-2026-11-18/source.json');
+ const w=new Workshop(pack,sharkBatch),source=await json('references/frame-data/ky-kiske-2026-11-18/source.json');
  const traces=await json('references/frame-data/ky-kiske-2026-11-18/traces.json');
  source.moves.forEach((r,i)=>{
   const m=w.move(4,slots[i]);assert.equal(m.startup,Number(r.Startup));assert.equal(m.recovery,Number(r.Recovery));

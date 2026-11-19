@@ -164,8 +164,8 @@ int Simulation::requested(Fighter& f,Sample& h) const {
             priority=50+m.v[Button];
         } else {
             if(!(presses&button_bit(m.v[Button]))) continue;
-            if((i==SWEEP||m.v[ActionType]==2)&&dir_matches(2,h.direction)) priority=45;
-            else if(i==SWEEP||m.v[ActionType]==2) continue;
+            if((i==SWEEP||i==SLASH_SWEEP||m.v[ActionType]==2)&&dir_matches(2,h.direction)) priority=45;
+            else if(i==SWEEP||i==SLASH_SWEEP||m.v[ActionType]==2) continue;
             else if(m.v[Motion]) {
                 if(!motion_matches(f,h.frame,m.v[Motion])) continue;
                 priority=m.v[Motion]==623?40:30;
@@ -183,7 +183,11 @@ int Simulation::requested(Fighter& f,Sample& h) const {
     if(best>=0) {
         const auto& m=moves[f.character][best]; int close=m.v[ProximityMove];
         const auto& other=world.players[1-(&f-world.players)];
-        if(close>=0&&close<MOVE_COUNT&&moves[f.character][close].v[Enabled]
+        // A second standing S chains c.S into f.S even while still close.
+        // Resolve distance at execution (also for buffered input), not at press time.
+        const bool close_to_far=best==FAR_SLASH&&f.move==CLOSE_SLASH;
+        if(!close_to_far&&close>=0&&close<MOVE_COUNT&&moves[f.character][close].v[Enabled]
+           &&moves[f.character][close].v[Air]==m.v[Air]
            &&stance_allowed(f,moves[f.character][close])&&abs(other.x-f.x)<=m.v[ProximityRange]) best=close;
     }
     return best;
@@ -615,7 +619,9 @@ Box Simulation::pose_box(int c,int phase,int index,int n) {
     if(n<0||n>=pose_box_count(c,phase,index)) return {};
     return HURT_POSES[c][pose_offset(phase,index)].boxes[n];
 }
-unsigned Simulation::collision_hash() { return COLLISION_HASH; }
+// The existing peer fingerprint includes this signature. Reject older rule
+// implementations even when their imported move JSON and pose geometry match.
+unsigned Simulation::collision_hash() { return COLLISION_HASH ^ (RULES_REVISION * 0x9e3779b9u); }
 const MoveHurt* Simulation::hurt_override(const Fighter& f,int tick_offset) const {
     if(f.move<0||f.reaction!=Free||f.stun||f.prejump_time||f.faultless
         ||(f.guarding&&f.block_reaction>0)) return nullptr;
@@ -1682,6 +1688,12 @@ int Simulation::can_cancel(int c,int from,int to,int contact) const {
     }
     if(target.v[FollowFrom]>=0||target.v[FollowFrom2]>=0)
         return (from==target.v[FollowFrom]||from==target.v[FollowFrom2])&&(!target.v[FollowHit]||contact);
+    // Only close Slash adds these same-button normal routes to the unified tree.
+    // An authored NormalRoutes mask still overrides the unified destinations.
+    if(from==CLOSE_SLASH&&(to==FAR_SLASH||to==SLASH_SWEEP)
+       &&source.v[NormalRoutes]==-1&&source.v[Category]==Normal&&target.v[Category]==Normal
+       &&source.v[Button]==2&&target.v[Button]==2&&!source.v[Air]&&!target.v[Air])
+        return contact||source.v[WhiffCancel];
     return cancel_allowed(moves[c][from],moves[c][to],from==to,contact!=0);
 }
 bool Simulation::cancel_window(const Fighter& f,int group) const {

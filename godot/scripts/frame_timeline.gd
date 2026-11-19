@@ -41,7 +41,7 @@ func _draw() -> void:
 	draw_line(Vector2(35+index*width, 28), Vector2(35+index*width, 82), Color.WHITE)
 	for p in 2:
 		var item: Dictionary = tick.players[p]
-		var move: String = CombatModel.MOVE_IDS[item.move] if item.move >= 0 else "—"
+		var move: String = item.get("moveName", CombatModel.MOVE_IDS[item.move] if item.move >= 0 else "—")
 		var details := "P%d · %s %s · age %df · input %s · stun %df · spacing %.1fpx" % [p+1, move, item.phase, item.age, item.notation, item.stun, item.spacing]
 		if item.get("slowTime", 0): details += " · ½ SPEED %df" % item.slowTime
 		if item.gap >= 0: details += " · gap %df" % item.gap

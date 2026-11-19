@@ -1,6 +1,7 @@
 import {Engine,INPUT} from '../engine.mjs';
 import {createCombatCore} from '../generated/fight-core.mjs';
 import {validateSequence} from './sequences.mjs';
+import {moveName} from './model.mjs';
 
 const MAX_FRAMES=1800,MAX_WAIT=360;
 export function recordSequence(preview,data,character,slot,queue,options,directionBits){
@@ -30,7 +31,7 @@ export function recordSequence(preview,data,character,slot,queue,options,directi
  // Probe a copy of the actual state. Failed commands never alter the visible
  // simulation, consume its buffer, force a move, or manufacture a cancel.
  function candidate(wanted){
-  const m=moves[wanted];probe.restore(e.snapshot());const serial=probe.attackSerial(),inputs=[];let unexpected=-1;
+  const m=wanted===32?moves[2]:moves[wanted];probe.restore(e.snapshot());const serial=probe.attackSerial(),inputs=[];let unexpected=-1;
   const advance=input=>{
    probe.step(input,defend(probe));inputs.push(input);const state=probe.state(),p=state.players[0];
    if(probe.attackSerial()!==serial){if(p.move===wanted)return {inputs:[...inputs],success:true};return {success:false,unexpected:p.move};}
@@ -54,7 +55,7 @@ export function recordSequence(preview,data,character,slot,queue,options,directi
   const row=result.steps[i],m=moves[row.move];let remaining=null,wait=0,started=false,unexpected=-1;
   if(!m.enabled)row.error='Move is disabled.';
   else if(simple&&m.motion&&!m.simpleDirection)row.error='No simple-input mapping.';
-  if(row.error){result.warnings.push(`Step ${i+1} (${m.id}): ${row.error}`);break;}
+  if(row.error){result.warnings.push(`Step ${i+1} (${moveName(m)}): ${row.error}`);break;}
   while(wait<MAX_WAIT&&elapsed<MAX_FRAMES&&e.state().winner===-1){
    const state=e.state();
    if(state.hitstop||state.wallBreakTime){step(0,'Freeze / transition');continue;}
@@ -63,17 +64,17 @@ export function recordSequence(preview,data,character,slot,queue,options,directi
    if(remaining!==null&&remaining>0){step(0,`Step ${i+1} delay`);remaining--;wait++;continue;}
    if(remaining===0&&attempt.success){
     const previousMove=state.players[0].move,serial=e.attackSerial();currentStep=i;row.input=elapsed+1;
-    for(const input of attempt.inputs){const after=step(input,`Step ${i+1} · ${m.id}`);if(e.attackSerial()!==serial&&after.players[0].move===row.move){row.start=elapsed;break;}}
+    for(const input of attempt.inputs){const after=step(input,`Step ${i+1} · ${moveName(m)}`);if(e.attackSerial()!==serial&&after.players[0].move===row.move){row.start=elapsed;break;}}
     if(row.start!==undefined){row.route=i===0?'opener':m.air&&state.players[0].y<=0?'jump input':previousMove>=0?'cancel / buffered link':'after recovery';started=true;result.executed=true;break;}
    }
    // Once fully free, a conflicting or unavailable contextual mapping cannot
    // improve by waiting in place. Report it instead of silently using another move.
    if(!attempt.success&&state.players[0].move<0&&!state.players[0].stun&&!state.players[0].reaction&&!state.players[0].landingTime&&state.players[0].y===0&&!state.players[0].prejumpTime){
-    row.error=unexpected>=0?`Input starts ${moves[unexpected].id} at this spacing or stance.`:'Input unavailable in this state. Check its mapping and prerequisites.';break;
+    row.error=unexpected>=0?`Input starts ${moveName(moves[unexpected])} at this spacing or stance.`:'Input unavailable in this state. Check its mapping and prerequisites.';break;
    }
-   step(0,`Waiting for ${m.id}`);wait++;
+   step(0,`Waiting for ${moveName(m)}`);wait++;
   }
-  if(!started){row.error??=e.state().winner!==-1?'The target was defeated.':'No legal input within the preview limit.';result.warnings.push(`Step ${i+1} (${m.id}): ${row.error}`);break;}
+  if(!started){row.error??=e.state().winner!==-1?'The target was defeated.':'No legal input within the preview limit.';result.warnings.push(`Step ${i+1} (${moveName(m)}): ${row.error}`);break;}
  }
  let quiet=0;
  while(elapsed<MAX_FRAMES&&e.state().winner===-1){

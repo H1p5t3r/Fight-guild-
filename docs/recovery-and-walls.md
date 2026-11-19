@@ -11,7 +11,7 @@ Directions are relative to facing, never keyboard bindings:
 | **4 back** | **5 neutral** | **6 forward** |
 | **1 down-back** | **2 down** | **3 down-forward** |
 
-`j.` means airborne; `+` means simultaneous buttons; `236P` is a motion followed by P. P/K/S/Hs/D remain button names. The universal sweep is **2D** (also accepted on 1D/3D), and ground throws are **4P+K** / **6P+K**. The exact grounded back+P+K chord now belongs to back throw. FD still uses away + its macro or another pair of P/K/S/Hs. Down-back+P+K and airborne away+P+K still permit FD. The dedicated FD macro wins if also held.
+`j.` means airborne; `+` means simultaneous buttons; `236P` is a motion followed by P. P/K/S/Hs/D remain button names. The universal sweep is **2S** (also accepted on 1S/3S), and ground throws are **4P+K** / **6P+K**. The exact grounded back+P+K chord now belongs to back throw. FD still uses away + its macro or another pair of P/K/S/Hs. Down-back+P+K and airborne away+P+K still permit FD. The dedicated FD macro wins if also held.
 
 ## Move editor
 
@@ -35,18 +35,18 @@ A launched or airborne hit enters air reel and cannot block, jump, dash or air-t
 
 Soft knockdown automatically techs **in place**: down duration, protected wakeup, then control. Hard knockdown uses the longer authored down duration. Neither requires a button; movement during down/wakeup does not choose a tech direction. Both are immune to strikes and throws while down/waking; OTG attacks and manual techs are not implemented. The first actionable tick after wakeup uses the existing buffered reversal check. Reversal eligibility itself adds no invulnerability.
 
-Defaults: soft down **6f + 8f wakeup**; hard down **36f + 8f wakeup**. `5Hs` and `623Hs` are provisional soft launchers. Most other grounded normals cause standing hitstun. All other airborne hits default to soft recovery. Only `2D`, `4P+K` and `6P+K` have hard knockdown in the shipped move set.
+Defaults: soft down **6f + 8f wakeup**; hard down **36f + 8f wakeup**. `5Hs` and `623Hs` are provisional soft launchers. Most other grounded normals cause standing hitstun. All other airborne hits default to soft recovery. Every `2S` now has hard knockdown. Existing `2D`, throws and explicitly authored character tools retain their knockdown settings.
 
 ## Sweep and throws
 
 Every fighter gains three slots, appended after the original 22 so their IDs remain stable:
 
-- **2D:** low sweep, 12f startup / 3f active / 24f recovery, 65 damage, hard knockdown. Down+D wins over 6D when down-forward is held. This is a normal, so normal special-cancel rules and the universal same-button command route apply.
+- **2S:** dedicated low hard-knockdown sweep on every fighter. It is −12 on first-active block and at least −7 on last-active block before cancels. No jump cancel; special cancels and the normal same-button command rule remain. [Per-fighter timing](move-batches/2026-11-19-slash-sweeps.md). The old 2D/Drive definitions are retained.
 - **4P+K / 6P+K:** 2f startup / 2f active / 30f recovery, 80 damage, 20px body-gap range, hard knockdown. Back throw exchanges sides at contact while respecting the stage boundaries; forward throw keeps sides. Throws start from neutral, not from a gatling. They use P artwork until dedicated clips exist.
 
 Throws cannot grab airborne, downed or waking targets, targets in hitstun, or ordinary blockstun. Guard-break blockstun deliberately loses throw immunity. Throws can catch a grounded attack's startup/recovery. If a strike and throw connect on the same tick, the strike wins. Simultaneous connecting throws clash without damage. A manual throw-tech window is not implemented. Throws still have the universal outgoing same-button command route after contact, consistent with the existing all-attacks rule.
 
-Startup minimums are **2f for throws**, **3f for P normals**, and **5f for other attacks**. All standard ground and air throws now start in 2f; command-grab timing remains individually authored. The new sweep uses the existing Drive artwork while dedicated low-sweep art is pending.
+Startup minimums are **2f for throws**, **3f for P normals**, and **5f for other attacks**. All standard ground and air throws now start in 2f; command-grab timing remains individually authored. The 2S sweep reuses current Slash artwork while dedicated low-sweep art is pending.
 
 ## Combo gravity
 

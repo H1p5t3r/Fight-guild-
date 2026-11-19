@@ -76,6 +76,10 @@ func state() -> Dictionary:
 		result.projectiles.append(projectile)
 	return result
 
+func move_name(character: int, slot: int) -> String:
+	if slot == 2 and config[(character * MOVE_IDS.size() + slot) * FIELDS.size() + FIELDS.find("proximityMove")] == 32: return "f.S"
+	return MOVE_IDS[slot]
+
 func move(character: int, slot: int) -> Dictionary:
 	var result := {}
 	for i in FIELDS.size():

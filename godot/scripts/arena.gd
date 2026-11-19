@@ -170,7 +170,7 @@ func _draw() -> void:
 		elif fighter.get("tetherSource", 0) > 0:
 			label("TETHER · PULLED" if fighter.tetherUsed else "TETHER", Vector2(px - 40, py - 185 * sx * camera_zoom), 13, Color("79d3df"))
 		if fighter.move >= 0:
-			if diagnostics: label("%s · %df" % [CombatModel.MOVE_IDS[fighter.move], fighter.age], Vector2(px + 28, py - 10), 12)
+			if diagnostics: label("%s · %df" % [model.move_name(fighter.character, fighter.move), fighter.age], Vector2(px + 28, py - 10), 12)
 		elif diagnostics:
 			var status := "HITSTUN" if fighter.stun else "READY"
 			if fighter.guarding:

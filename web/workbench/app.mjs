@@ -1,6 +1,6 @@
 import {renderMovement} from './movement-editor.mjs';
 import {moveFieldLimit} from '../startup-rules.mjs';
-import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,phaseStart,effectiveHurtboxes,inputName,geometryWarnings,CHARACTERS,MOVE_IDS,clone,META} from './model.mjs';
+import {Workshop,validate,parseField,totalFrames,blockAdvantage,phaseAt,phaseStart,effectiveHurtboxes,inputName,moveName,geometryWarnings,CHARACTERS,MOVE_IDS,clone,META} from './model.mjs';
 import {HURT_PHASES,HURT_REGIONS,HURT_LABELS,HURT_MASK_FIELDS,regionEnabled,validateHurtboxes} from '../hurtboxes.mjs';
 import {SPECS,GROUPS,TABS,ART_FIELDS,GUILDS,COLORS,KINDS} from './specs.mjs';
 import {Preview} from './preview.mjs';
@@ -57,7 +57,7 @@ function syncSummary(){
   $('test-mechanic').closest('label').hidden=movement||sequence||!m.mechanic;
   $('reset').textContent=sequence?'Clear queue':movement?'Reset movement':'Reset move';
   $('move-kind').hidden=movement||sequence;$('actual-input').hidden=movement||sequence;$('move-enabled').hidden=movement||sequence;
-  $('move-title').textContent=sequence?'Sequence test':movement?'Movement & defense':m.id;$('move-label').textContent=movement||sequence?'':note.label||'';
+  $('move-title').textContent=sequence?'Sequence test':movement?'Movement & defense':moveName(m);$('move-label').textContent=movement||sequence?'':note.label||'';
   $('move-kind').textContent=KINDS[m.category];$('actual-input').textContent=`Input ${inputName(m)}`;
   $('move-enabled').textContent=m.enabled?'● Enabled':'○ Unused slot';$('move-enabled').style.color=m.enabled?'#a8cbaa':'var(--muted)';
   $('attack-enabled').checked=!!m.enabled;
@@ -67,7 +67,9 @@ function syncSummary(){
   const profiles=model.data.characters.filter((c,i)=>Object.keys(c.movement).some(key=>!key.startsWith('smear')&&c.movement[key]!==pack.defaults.characters[i].movement[key])).length;
   $('changed-count').textContent=`${model.changes().length} edited move${model.changes().length===1?'':'s'}${profiles?' · '+profiles+' movement profile'+(profiles===1?'':'s'):''}`;
   $('guild').textContent=GUILDS[character];$('roster-count').textContent=`${model.data.characters[character].moves.filter(m=>m.enabled).length} moves`;
-  layout.update(CHARACTERS[character],m.id,model.note(character,slot).label);
+  layout.update(CHARACTERS[character],moveName(m),model.note(character,slot).label);
+  if($('slash-description'))$('slash-description').textContent=slashDescription();
+  if($('slash-warning'))$('slash-warning').hidden=!!model.move(character,32).enabled&&model.move(character,2).proximityMove===32;
   const warnings=geometryWarnings(m);$('move-warnings').replaceChildren(...warnings.map(w=>el('p',{},w)));$('move-warnings').hidden=!warnings.length;
   refreshActions();syncPreview();
 }
@@ -77,8 +79,8 @@ function listMoves(){
     const note=model.note(character,i),matchesText=`${m.id} ${inputName(m)} ${note.label||''}`.toLowerCase().includes(text);
     const matchesFilter=filter==='all'||filter==='normal'&&[0,1,3,4].includes(m.category)&&!m.air||filter==='special'&&m.category===2||filter==='air'&&m.air;
     if((!m.enabled&&!$('show-unused').checked&&i!==slot)||!matchesText||!matchesFilter)return;
-    const button=el('button',{type:'button',class:'move-row'+(!m.enabled?' off':''),'aria-current':String(i===slot),'data-move':i,'aria-label':`${m.id}${note.label?' '+note.label:''}, ${m.startup} startup, ${m.active} active, ${m.recovery} recovery${!m.enabled?', unused slot':''}`});
-    button.append(el('strong',{},m.id),el('span',{class:'move-dots','aria-label':model.changed(character,i)?'Edited':''},model.changed(character,i)?'●':''),el('small',{class:'move-category'},note.label||(!m.enabled?'Unused slot':`${m.air?'Air · ':''}${KINDS[m.category]}`)),el('span',{class:'frames'},`${m.startup} / ${m.active} / ${m.recovery}`));
+    const button=el('button',{type:'button',class:'move-row'+(!m.enabled?' off':''),'aria-current':String(i===slot),'data-move':i,'aria-label':`${moveName(m)}${note.label?' '+note.label:''}, ${m.startup} startup, ${m.active} active, ${m.recovery} recovery${!m.enabled?', unused slot':''}`});
+    button.append(el('strong',{},moveName(m)),el('span',{class:'move-dots','aria-label':model.changed(character,i)?'Edited':''},model.changed(character,i)?'●':''),el('small',{class:'move-category'},note.label||(!m.enabled?'Unused slot':`${m.air?'Air · ':''}${KINDS[m.category]}`)),el('span',{class:'frames'},`${m.startup} / ${m.active} / ${m.recovery}`));
     button.addEventListener('click',()=>{if(!validBeforeLeaving())return;slot=i;frame=move().startup;pendingSeek=tab==='sequence'?{tick:0}:{frame};stop();render();if($('move-dialog').open)layout.closeMoves();else document.querySelector(`[data-move="${i}"]`)?.focus({preventScroll:true});saveSelection();});fragment.append(button);matches++;
   });
   if(!matches)fragment.append(el('p',{class:'empty'},'No moves match. Try another filter or show unused slots.'));
@@ -86,7 +88,7 @@ function listMoves(){
 }
 function saveSelection(){if(storageOkay&&!bootLocked){clearTimeout(saveTimer);saveTimer=setTimeout(save,200);}}
 function optionsFor(key){
-  if(['followFrom','followFrom2','holdFollow','guardFollow','proximityMove'].includes(key))return [[-1,'None'],...MOVE_IDS.map((name,i)=>[i,`${name}${!model.move(character,i).enabled?' · unused':''}`])];
+  if(['followFrom','followFrom2','holdFollow','guardFollow','proximityMove'].includes(key))return [[-1,'None'],...MOVE_IDS.map((name,i)=>[i,`${moveName(model.move(character,i))}${!model.move(character,i).enabled?' · unused':''}`])];
   if(key==='artPose'||key==='finishArtPose')return [[0,key==='artPose'?'Button poses':'Same pose'],...Array.from({length:pack.limits.moves[character].artPose.max},(_,i)=>[i+1,`${i+1} · ${pack.art[character].signature_active?.frames[i]?.name??'Action '+(i+1)}`])];
   return SPECS[key].options;
 }
@@ -228,6 +230,28 @@ function artForm(){
 function renderForm(){
   panels.begin();buildForm();panels.update();$('field-view').value=panels.all?'all':'relevant';$('field-view').hidden=tab==='sequence';
 }
+function slashDescription(){return `c.S at root spacing ≤ ${model.move(character,2).proximityRange/100} px; f.S beyond it. c.S → f.S or 2S on contact with unified routes. The close attack must be enabled.`;}
+function slashForm(){
+  const far=model.move(character,2),close=model.move(character,32),view=el('section',{class:'slash-pair form-section','aria-label':'Close and far Slash'});
+  view.append(el('h2',{},'Standing S · close / far'),el('p',{id:'slash-description'},slashDescription()));
+  const actions=el('div',{class:'track-actions slash-actions'});
+  const choose=index=>{slot=index;frame=move().startup;pendingSeek={frame};stop();render();saveSelection();};
+  for(const [index,name]of [[32,'c.S'],[2,'f.S']]){
+    const edit=el('button',{type:'button','data-slash-edit':index},`Edit ${name}`);edit.onclick=()=>{if(validBeforeLeaving())choose(index);};actions.append(edit);
+    const test=el('button',{type:'button','data-slash-test':index},`Test ${name} spacing`);test.onclick=()=>{
+      if(!validBeforeLeaving())return;
+      const target=Number($('test-target').value),body=pack.collisions[character].push.halfWidth+pack.collisions[target].push.halfWidth;
+      const gap=(far.proximityRange-body)/100;
+      $('test-gap').value=Math.max(0,index===32?Math.floor(gap)-1:Math.floor(gap)+1);
+      $('test-entry').value='standing';choose(index);$('test-gap').dispatchEvent(new Event('change'));
+    };actions.append(test);
+  }
+  view.append(actions);
+  const warning=el('p',{id:'slash-warning',class:'hint'},'Enable c.S and select it as the close-distance version of f.S to use the pair.');
+  warning.hidden=!!close.enabled&&far.proximityMove===32;view.append(warning);
+  if(slot===32)view.append(el('p',{class:'hint'},'The proximity threshold belongs to f.S under Inputs & cancels → Close-distance version.'));
+  return view;
+}
 function buildForm(){
   if(tab==='sequence'){
     $('form').setAttribute('aria-labelledby','tab-sequence');
@@ -253,7 +277,9 @@ function buildForm(){
       onTab:selectTab,testMode:$('test-mechanic').value,onTest:mode=>{if(!validBeforeLeaving())return;$('test-mechanic').value=mode;$('test-mechanic').dispatchEvent(new Event('change'));}
     }));return;
   }
-  const nodes=groups.map(group=>panels.create(group,fieldControl));if(tab==='hit')nodes.unshift(renderHitEditor({move:move(),frame,pack,character,boxIndex:hitBox,selectedFrame:hitKeyFrame,
+  const nodes=groups.map(group=>panels.create(group,fieldControl));
+  if(['timing','routes'].includes(tab)&&[2,32].includes(slot))nodes.unshift(slashForm());
+  if(tab==='hit')nodes.unshift(renderHitEditor({move:move(),frame,pack,character,boxIndex:hitBox,selectedFrame:hitKeyFrame,
     valid:validBeforeLeaving,onError:fieldError,onKey:value=>{hitKeyFrame=value;seekMove(value===null?frame:move().startup+Math.min(Math.max(1,value),move().active)-1);},
     onBox:value=>{hitBox=value;renderForm();syncPreview();},
     onChange:(track,render=true,group='')=>{model.setHitTimeline(character,slot,track,group);stop();if(render)renderForm();syncSummary();listMoves();scheduleSave();}
@@ -420,7 +446,7 @@ window.addEventListener('storage',event=>{if(event.key===STORAGE&&event.newValue
 globalThis.moveWorkshop={data:()=>model.snapshot(),selection:()=>({character,slot,tab}),version:pack.defaults.coreVersion};
 $('test-target').append(...CHARACTERS.map((name,i)=>el('option',{value:i},name)));$('test-target').value='4';
 $('attack-enabled').onchange=()=>{if(!validBeforeLeaving()){$('attack-enabled').checked=!!move().enabled;return;}commit('enabled',Number($('attack-enabled').checked));if($('field-enabled'))$('field-enabled').checked=!!move().enabled;};
-for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple','test-mechanic'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}layout.update(CHARACTERS[character],move().id,model.note(character,slot).label);testSignature='';scheduleTest();for(const button of document.querySelectorAll('[data-drive-test]'))button.setAttribute('aria-pressed',String(button.dataset.driveTest===$('test-mechanic').value));};
+for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple','test-mechanic'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}layout.update(CHARACTERS[character],moveName(move()),model.note(character,slot).label);testSignature='';scheduleTest();for(const button of document.querySelectorAll('[data-drive-test]'))button.setAttribute('aria-pressed',String(button.dataset.driveTest===$('test-mechanic').value));};
 globalThis.moveWorkshop.preview=()=>testRecord;
 globalThis.moveWorkshop.cursor=()=>({index:testIndex,frame:testRecord?.frames[testIndex]?.selectedFrame||0,pending:previewPending});
 globalThis.moveWorkshop.geometry=()=>({handles:clone(preview.handles),view:clone(preview.view||{}),measurements:clone(preview.measurements||null),measurementLabels:clone(preview.measurementLabels||[])});

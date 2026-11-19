@@ -92,7 +92,7 @@ func observe(model: CombatModel, before: Dictionary, raw: Vector2i) -> void:
 		if old.get("landingTime", 0) > 0: label = "LAND"
 		# The final recovery tick has just cleared the move in the core.
 		if fighter.move < 0 and old.move >= 0 and not incoming: label = "RECOVER"
-		tick.players.append({"phase": label, "move": fighter.move, "age": fighter.age,
+		tick.players.append({"phase": label, "move": fighter.move, "moveName": model.move_name(fighter.character, fighter.move) if fighter.move >= 0 else "—", "age": fighter.age,
 			"input": raw.x if p == 0 else raw.y, "contact": contact, "gap": gap,
 			"notation": notation(raw.x if p == 0 else raw.y, old.facing),
 			"stun": fighter.stun, "advantage": fighter.blockAdvantage if fighter.guarding else null,

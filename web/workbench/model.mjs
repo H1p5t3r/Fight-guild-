@@ -102,6 +102,8 @@ export function inputName(m) {
   const button=m.category===4&&!m.motion?'P+K':['P','K','S','Hs','D'][m.button];
   return `${m.stanceRequired===2?'st.':''}${m.air?'j.':''}${m.motion||m.direction}${button}`;
 }
+// Keep stable JSON slot IDs while naming the two standing Slash attacks clearly.
+export function moveName(m){return m.id==='5S'&&m.proximityMove===32?'f.S':m.id;}
 export function geometryWarnings(m) {
   const notes=[];
   if(m.hitboxTimeline.keys.some(k=>k.frame>m.active))notes.push('Some hitbox keys are beyond the current active duration. They are retained but cannot hit until Active is extended.');

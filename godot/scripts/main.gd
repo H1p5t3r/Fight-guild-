@@ -280,7 +280,7 @@ func build_interface() -> void:
 		add_field(reactions, spec)
 	var knockdown := option(reactions, "Knockdown", ["None", "Soft · on back", "Hard · face down"])
 	fields.knockdown = {"control": knockdown, "scale": 1}
-	var reaction_note := label(editor, "Launch: upward speed; air launch may be negative. Hit knockback travels over 6 action frames; wall impact damage equals the arriving horizontal speed. Soft knockdowns lie on the back; hard knockdowns lie face down. Both get up in place. 2D and 4P+K / 6P+K cause hard knockdown.", 11, MUTED)
+	var reaction_note := label(editor, "Launch: upward speed; air launch may be negative. Hit knockback travels over 6 action frames; wall impact damage equals the arriving horizontal speed. Soft knockdowns lie on the back; hard knockdowns lie face down. Both get up in place. 2S is a low hard-knockdown sweep with punishable block recovery. 4P+K / 6P+K cause hard knockdown.", 11, MUTED)
 	reaction_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	var guard_break := CheckBox.new()
 	guard_break.text = "Guard break on block"
@@ -448,7 +448,7 @@ func build_interface() -> void:
 	trial_status = label(test_row, "6–9 frames of delay", 11, MUTED)
 	var route_panel := panel(diagnostics)
 	label(route_panel, "Unified gatlings", 17)
-	label(route_panel, "P → P / K\nK → jump / command\nS → jump / Hs / command\nHs → command", 12, MUTED)
+	label(route_panel, "P → P / K\nK → jump / command\nc.S → f.S / 2S / jump / Hs / command\nf.S → jump / Hs / command\n2S → Hs / command / special\nHs → command", 12, MUTED)
 	label(route_panel, "All attacks → same-button command", 10, ACCENT)
 	build_dialogs()
 	build_frame_lab()
@@ -1011,7 +1011,8 @@ func populate_editor() -> void:
 	# cannot clamp a two-frame throw while loading the controls.
 	for key in ["button", "category", "mechanic"]: fields[key].control.set_value_no_signal(definition[key])
 	refresh_startup_limits()
-	editor_title.text = CombatModel.MOVE_IDS[edit_move.selected] + " / " + ["NORMAL", "COMMAND", "SPECIAL", "DRIVE", "THROW"][definition.category]
+	for slot in CombatModel.MOVE_IDS.size(): edit_move.set_item_text(slot, model.move_name(edit_character.selected, slot))
+	editor_title.text = model.move_name(edit_character.selected, edit_move.selected) + " / " + ["NORMAL", "COMMAND", "SPECIAL", "DRIVE", "THROW"][definition.category]
 	editor_title.text += " · DISABLED" if not definition.enabled else ""
 	for key in fields:
 		var control: Control = fields[key].control
@@ -1021,7 +1022,7 @@ func populate_editor() -> void:
 		else: control.value = float(definition[key]) / fields[key].scale
 	var destinations: Array[String] = []
 	for to in CombatModel.MOVE_IDS.size():
-		if model.core.can_cancel(edit_character.selected, edit_move.selected, to, true): destinations.append(CombatModel.MOVE_IDS[to])
+		if model.core.can_cancel(edit_character.selected, edit_move.selected, to, true): destinations.append(model.move_name(edit_character.selected, to))
 	routes.text = "On hit → " + ", ".join(destinations) + (" / jump" if definition.jumpCancel else "")
 	for rule in movement_fields:
 		var entry: Dictionary = movement_fields[rule]
@@ -1255,7 +1256,7 @@ func _process(_delta: float) -> void:
 		finish_scrum(state)
 	input_label.text = "INPUT HISTORY   " + ("   ".join(history) if not history.is_empty() else "—")
 	var fighter: Dictionary = state.players[connection.player if connection.active else 0]
-	action_label.text = "READY" if fighter.lastMove < 0 else CombatModel.MOVE_IDS[fighter.lastMove] + (" / CONTACT" if fighter.contact else "")
+	action_label.text = "READY" if fighter.lastMove < 0 else model.move_name(fighter.character, fighter.lastMove) + (" / CONTACT" if fighter.contact else "")
 	if lab.recording_now: action_label.text = "REC · %d / 1800f" % lab.recording.size()
 	elif lab.playback: action_label.text = "REPLAY · %d / %df" % [lab.cursor, lab.recording.size()]
 	lab_status.text = lab.message

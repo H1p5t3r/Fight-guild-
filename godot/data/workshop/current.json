@@ -1,11 +1,11 @@
 {
-  "label": "Shark normals + fluid Low Scoop ·18 November2026",
-  "status": "playable source-based iteration",
-  "file": "2026-11-18-shark/FightGuild-Shark-Normals.json",
-  "sha256": "21d4516d39b02b71eef770adbd0f735f0089f0c98971d8d684f0e64297daf1a5",
-  "sourceFile": "2026-11-18-user-smoke/FightGuild-Smoke-Animations.json",
-  "sourceSha256": "1dbb8df032ff8c37c3751ee7c50a7392ccd06bc54577b2248cf4e79d81c09693",
-  "previousFile": "2026-11-18-user-smoke/FightGuild-Smoke-Animations.json",
-  "baseCommit": "9aa0a4d",
-  "note": "Only16 Shark P/K/S/Hs normals and their appended art briefs change. All D moves, throws, specials, movement, other fighters and submitted photo references are preserved.2Hs floating crumple and unlabeled spatial boundaries are documented approximations."
+  "label": "Close/far Slash + universal 2S sweeps · 19 November 2026",
+  "status": "playable tuning iteration",
+  "file": "2026-11-19-slash-sweeps/FightGuild-Slash-Sweeps.json",
+  "sha256": "694db863a698510ddbedb8fb2ffc1ac20d7c9809be5994da36b503f2b1801510",
+  "sourceFile": "2026-11-19-user/FightGuild-moves-2026-11-19.json",
+  "sourceSha256": "8a0010d12bc4251d2acf6fd5740f75e388e8596c587dcf2c1b43d12eaa1d7042",
+  "previousFile": "2026-11-18-shark/FightGuild-Shark-Normals.json",
+  "baseCommit": "a9b3bad",
+  "note": "Latest user export preserved unchanged. Only standing Slash proximity, previously disabled c.S slots and 2S sweep tuning change; art briefs are appended. Existing c.S tuning, other moves, movement, rules and all pose references are preserved."
 }

@@ -713,7 +713,7 @@
             {
               "key": "knockdown",
               "range": "None / Soft · auto tech / Hard",
-              "text": "Selects the knockdown classification. Soft is the normal automatic in-place ground recovery. Hard is reserved by design for tools such as 2D and throws. Actual lockout is authored with Down/Wakeup duration; choosing Hard alone does not add a hidden longer timer. Air reel without an explicit type receives Soft."
+              "text": "Selects the knockdown classification. Soft is the normal automatic in-place ground recovery. Hard is reserved by design for tools such as the universal 2S sweep and throws. Actual lockout is authored with Down/Wakeup duration; choosing Hard alone does not add a hidden longer timer. Air reel without an explicit type receives Soft."
             },
             {
               "key": "knockdownFrames",

@@ -48,7 +48,8 @@ static void normals_and_multihits(){
  setup(s);s.step(Right|P,0);
  for(int n=1;n<17;++n){CHECK(s.box_count(0,HurtBox)==1);s.step(0,0);}
  s.step(0,0);CHECK(s.box_count(0,HurtBox)>=3);
- CHECK(s.moves[2][6].v[HitLevel]==0&&s.moves[2][11].v[HitLevel]==0);
+ CHECK(s.moves[2][6].v[HitLevel]==1&&s.moves[2][6].v[Knockdown]==HardKnockdown); // Universal 2S sweep.
+ CHECK(s.moves[2][11].v[HitLevel]==0);
  CHECK(s.moves[2][CHARGED_HS].v[GuardBreak]==1&&s.moves[2][CHARGED_HS].v[Blockstun]==39);
  CHECK(!s.moves[2][9].v[Enabled]&&!s.moves[2][10].v[Enabled]&&!s.moves[2][12].v[Enabled]);
  CHECK(s.moves[2][22].v[Knockdown]==HardKnockdown);

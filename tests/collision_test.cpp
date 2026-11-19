@@ -117,7 +117,7 @@ static void pushes() {
 static void contact_and_weapons() {
     Simulation s; s.defaults();
     for(int c=0;c<6;++c) for(int slot=0;slot<5;++slot) {
-        int m=slot==4?13:slot; if((c==2||c==3||c==4)&&slot==2)m=CLOSE_SLASH;
+        int m=slot==4?13:slot; if(slot==2)m=CLOSE_SLASH;
         s.reset(c,(c+1)%6,0,0); flush(s);
         for(int tick=1;tick<=s.moves[c][m].v[Startup];++tick) {
             s.step(tick==1?P<<slot:0,0);

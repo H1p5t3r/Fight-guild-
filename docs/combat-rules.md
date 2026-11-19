@@ -10,14 +10,16 @@ Attack buttons are **P, K, S, Hs, D**; their names do not dictate each character
 | --- | --- |
 | P | P, K |
 | K | Jump, command normals |
-| S | Jump, Hs, command normals |
+| c.S | f.S, 2S, jump, Hs, command normals |
+| f.S | Jump, Hs, command normals |
+| 2S | Hs, command normals; no jump cancel |
 | Hs | Command normals |
 
 All normals, including command normals, are special cancelable by default, with explicit per-move exceptions. Drive occupies the special-move level of the cancel system, with character-specific incoming and outgoing behavior.
 
 **Every attack can cancel into a command normal on the same button.** This includes specials and Drive attacks. It is an additional route, so P gains same-button command normals without gaining every command normal. The implementation preserves this universal rule even when a move has custom cancel masks.
 
-**Weapons do not extend hurtboxes. Every attack has at least 5 frames of startup.** Each pose uses at most **four hurtboxes**: legs, torso and arms together, head, and one optional extension for an extended limb or complex pose. Separate pushboxes maintain body spacing. See [collision rules](collision-rules.md).
+**Weapons do not extend hurtboxes. Startup floors are 2f for throws, 3f for P normals, and 5f for other attacks.** Each pose uses at most **four hurtboxes**: legs, torso and arms together, head, and one optional extension for an extended limb or complex pose. Separate pushboxes maintain body spacing. See [collision rules](collision-rules.md).
 
 ## Provisional implementation choices
 
@@ -28,7 +30,7 @@ These are useful prototype defaults, not additional approved design requirements
 - Command normals use the unified normal rules for their outgoing routes. The editor can override normal/command route masks, special cancelability, and jump cancelability.
 - Jump cancels require a grounded fighter. Air moves are separate definitions. Attack routes still require the target's ground/air condition.
 - Walking, a single jump, grounded runs/step dashes, ground/air blocking, per-fighter pushboxes, hitstop, hitstun, blockstun, health, first-to-two Scrums with a 99-count timer, and reset are present. Momentum and Faultless Defense are present. Launch, automatic soft/hard recovery, throws, combo gravity and walls are present. Damage scaling, cancel windows, prejump, landing recovery, block carryover and post-stun throw protection are present. Dash invulnerability remains deferred. See [current combat tuning](combat-tuning.md).
-- Fillet’s rekka finisher and the universal 2D sweep are low attacks; other starter strikes are mids. The editor can assign low/overhead guard levels for later experiments; no universal overhead or anti-air kit has been selected.
+- Fillet’s rekka finisher and the universal 2S sweep are low attacks; other starter strikes are mids. The editor can assign low/overhead guard levels for later experiments; no universal overhead or anti-air kit has been selected.
 - Simplified execution has no damage penalty, and traditional inputs remain available when enabled. Holding the modifier reserves mapped inputs; unmapped modifier chords do not become ordinary attacks. Up with the modifier is a special input direction, not a jump request.
 - Default motions: 236P, 236S, 623Hs. Default command normals: 6P, 6K, 6S, 6Hs, 6D. There are standing and crouching P/K/S/Hs, a grounded Drive starter, and five provisional air attacks.
 - All six fighters have 25 base slots plus reserved signature slots; Fillet/Shark are the first focused matchup. Anvil is slower and slightly stronger; Hammer advances on specials/Drive. Reach follows each button’s current sprite; Shark/Fillet move faster and their Drive starters advance. Smoke has a stationary Drive attack. See [all preliminary stats](move-stats.md). These are testing values: shield armor, smoke status and bleed remain unimplemented. Fillet’s knife spiral/rekka and Shark’s hook pull/stab have dedicated art and behavior; see [signature moves and movement](signature-moves.md).
@@ -59,8 +61,10 @@ Startup includes the first active frame: startup 5 means the attack becomes acti
 
 Positions use hundredths of a pixel. The editor displays hitbox, pushback, and advance values in pixels and converts them to integers. Ordinary hitboxes are rectangles between authored back/front offsets, with a bottom offset and height. Hook hitboxes are eight narrow rectangles along a moving diagonal weapon; the rope does not hit. Defaults follow the current active artwork; weapons never add hurt area. A single hit per move instance is supported.
 
-Move-data changes reset the local simulation. Save locally persists the complete set in Godot's user data directory; JSON export/import is portable. Invalid imports leave the prior set unchanged. Schema-1/2/3/4/5 saves migrate old edits, retain their previous 12px hitbox origin, supply new defensive/meter/timing defaults and add any missing fighters. Schema 6 also adds recovery/wall settings and the three universal move slots while retaining previous pushback values. Schema 7 adds signature slots, contextual follow-ups, motion carry and per-character movement profiles while preserving schema 1–6 tuning. Schema 8 adds cancel windows, damage scaling, landing recovery, counter profiles and defensive/wall tuning. Schema 9 adds editable prejump and empty-jump landing recovery while preserving old jump behavior; [migration details](combat-tuning.md#persistence-and-verification) distinguish preserved saves from the new default balance. Imports with startup below 5 frames are rejected. Restore defaults changes the working set; saving afterward replaces the saved set. Online peers require matching data and lock editing during play.
+Move-data changes reset the local simulation. Save locally persists the complete set in Godot's user data directory; JSON export/import is portable. Invalid imports leave the prior set unchanged. Schema-1/2/3/4/5 saves migrate old edits, retain their previous 12px hitbox origin, supply new defensive/meter/timing defaults and add any missing fighters. Schema 6 also adds recovery/wall settings and the three universal move slots while retaining previous pushback values. Schema 7 adds signature slots, contextual follow-ups, motion carry and per-character movement profiles while preserving schema 1–6 tuning. Schema 8 adds cancel windows, damage scaling, landing recovery, counter profiles and defensive/wall tuning. Schema 9 adds editable prejump and empty-jump landing recovery while preserving old jump behavior; [migration details](combat-tuning.md#persistence-and-verification) distinguish preserved saves from the new default balance. Imports below the conditional startup floors are rejected. Restore defaults changes the working set; saving afterward replaces the saved set. Online peers require matching data and lock editing during play.
 
 ## Recovery and walls
 
-Move definitions use facing-relative numpad notation. **2D** is the universal hard-knockdown sweep; **4P+K / 6P+K** are back/forward hard-knockdown throws. Other knockdowns normally auto-tech in place. [Recovery and walls](recovery-and-walls.md) defines the editable ground/air/block displacement, launch, knockdown timings, delayed combo-gravity scaling and Strive-style splat/break/Positive Bonus sequence.
+Move definitions use facing-relative numpad notation. **2S** is the universal low hard-knockdown sweep with punishable uncancelled block recovery; **4P+K / 6P+K** are back/forward hard-knockdown throws. Other knockdowns normally auto-tech in place. [Recovery and walls](recovery-and-walls.md) defines the editable ground/air/block displacement, launch, knockdown timings, delayed combo-gravity scaling and Strive-style splat/break/Positive Bonus sequence.
+
+Standing S chooses **c.S** inside the fighter’s editable root-distance threshold and **f.S** beyond it. A second S after c.S contact gatlings into f.S even at close range. Existing 2D/Drive behavior is retained. See [Slash and sweep tuning](move-batches/2026-11-19-slash-sweeps.md) for all six thresholds, sweep block disadvantage and data compatibility.

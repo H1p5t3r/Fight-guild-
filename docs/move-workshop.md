@@ -439,7 +439,7 @@ Tapper's full kit and confirmed **st.236D** are in the [current Tapper guide](ta
 | Guard hold button | Button to keep held when previewing this guard action. |
 | Guard attack destination | Opposite S/Hs input starts this move from held guard; -1 disables. |
 | Close-distance move | Alternate move selected when starting this input within the proximity range. |
-| Close-distance range | Root-to-root distance for the close version; checked at move start. |
+| Close-distance range | Root-to-root distance for the close version; checked when the input executes. Standing S uses c.S at or inside the threshold and f.S outside it. Edit this on f.S. |
 | Startup travel | Forward movement per startup tick; retains authored run/dash carry. |
 | Dive / recoil horizontal speed | Forward speed during an active dive, or velocity on air projectile release. Negative values recoil away from the opponent. |
 | Dive / recoil vertical speed | Downward speed during the active dive or on air projectile release. Startup stalls vertical movement. |
@@ -469,3 +469,9 @@ The [Smoke guide](smoke-design.md) lists the saved Queen Dizzy timings, attack v
 **Hold to charge** keeps the base attack in anticipation while its button stays held, then enters the **Held-input destination** at **Hold transition frame**. Early release fires the uncharged attack, no earlier than its startup. Disabling the destination falls back to the base strike. **Air projectile recoil** stalls vertical motion before the shot, then applies the editable recoil velocities at emission. The source j.D emission tick is represented as one active tick plus19 recovery ticks.
 
 The block-advantage card now evaluates the first frame of the last distinct hit group, so Smoke f.S reads−7 and5Hs reads−4. Shape-only keys do not improve that estimate; actual air/projectile contact and cancels still change advantage.
+
+## Close/far Slash and universal sweep
+
+Standing S now selects c.S or f.S by distance for every fighter. The paired controls in Timing & damage and Inputs & cancels let you edit either version and test just inside/outside the threshold using the shared preview. c.S can gatling into f.S or 2S on contact; a second standing S chooses f.S even at close range. Sequence tests use the same contextual input rules. Saved f.S data retains the `5S` ID for compatibility.
+
+Every 2S is a low hard-knockdown sweep, −12 on first-active block and at least −7 on last-active block before cancels. Special cancels remain enabled. See [the batch notes](move-batches/2026-11-19-slash-sweeps.md) for timing, thresholds and importing the latest preset without losing a saved browser draft.

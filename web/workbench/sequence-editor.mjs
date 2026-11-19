@@ -1,10 +1,10 @@
 import {MAX_SEQUENCE_STEPS,MAX_SEQUENCE_DELAY} from './sequences.mjs';
-import {inputName} from './model.mjs';
+import {inputName,moveName} from './model.mjs';
 
 export function renderSequence({el,moves,queue,slot,valid,onChange,onError,onSeek}){
  const section=el('section',{class:'form-section sequence-editor'});
  section.append(el('h2',{},'Sequence test'),el('p',{},'Queue moves to test real cancels, links and spacing. Each input uses the first legal opportunity, plus your delay. Hitstop does not consume delay frames.'));
- const choices=selected=>moves.flatMap((m,i)=>m.enabled||i===selected?[el('option',{value:i},`${m.id}${inputName(m)!==m.id?' · '+inputName(m):''}${m.enabled?'':' · disabled'}`)]:[]);
+ const choices=selected=>moves.flatMap((m,i)=>m.enabled||i===selected?[el('option',{value:i},`${moveName(m)}${inputName(m)!==moveName(m)?' · '+inputName(m):''}${m.enabled?'':' · disabled'}`)]:[]);
  const list=el('ol',{class:'sequence-list',id:'sequence-list','aria-label':'Queued moves'});
  queue.forEach((step,i)=>{
   const row=el('li',{'data-sequence-step':i,class:'sequence-row'}),controls=el('div',{class:'sequence-fields'});
