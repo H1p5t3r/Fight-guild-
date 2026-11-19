@@ -2,7 +2,7 @@
   "version": 4,
   "character": "Fillet",
   "date": "2026-11-19",
-  "status": "all five motion directions selected; sprite production and registration pending",
+  "status": "directions selected; separate first production pass registered in Godot and Move Workshop",
   "scope": [
     "5Hs",
     "2S",
@@ -105,7 +105,8 @@
     "2Hs remains grounded; 6P does not gain a visual shield.",
     "These are direction studies, not registered sprite sheets or playable clips.",
     "Selected poses still need exact scale, anatomy, weapon ownership/lengths, support-foot continuity, collision-corridor fit and both-facing checks.",
-    "No runtime sprite, manifest, timing or collision data changed."
+    "No runtime sprite, manifest, timing or collision data changed.",
+    "The no-runtime-change notes above describe the original direction-review step. Selected directions now have separate registered production atlases; see the production README for scope and remaining refinement."
   ],
   "format": {
     "layout": "one move per sheet; A top row, B bottom row; three columns left to right",
@@ -292,5 +293,6 @@
       },
       "status": "rejected; replaced by second study"
     }
-  }
+  },
+  "production": "art/characters/fillet-v1/production/ground-v1"
 }

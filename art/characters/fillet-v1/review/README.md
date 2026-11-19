@@ -3,7 +3,10 @@
 Direction selection and playable installation are tracked separately in
 [`selection-log.json`](selection-log.json). A selected option is permission to
 produce that motion; it does not mean the generated study is already registered
-or installed in the game.
+or installed in the game. The selected 11 ground normals now have a separate
+[first production pass](../production/ground-v1/README.md): 92 registered keys
+used by Godot and the Move Workshop. The direction boards below remain review
+references, not runtime textures.
 
 | Moves | Current direction |
 |---|---|
@@ -26,7 +29,8 @@ recommendation. Do not silently substitute the suggested mix.
 2. [Batch 02](normals-batch-02/README.md): B selected for 5Hs, 2Hs, 6P and 6Hs;
    B / Hip Reap from the second study selected for 2S. All 11 ground-normal
    directions are now approved for production.
-3. Produce/register the selected ground-normal pose set together for consistency.
+3. Ground-normal production pass 1 is installed; refine anatomical fit, weapon
+   paths and transitions against the existing canonical geometry.
 4. Remaining air normals, specials and paired actions follow the same review
    process, preserving already selected directions.
 

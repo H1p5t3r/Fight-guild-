@@ -74,20 +74,17 @@ The user has selected all 11 ground-normal directions: **5P-A, 2P-B, 5K-A,
 2K-B, f.S-B, 5Hs-B, 2Hs-B, 6P-B, 6Hs-B**, the packet's short-LEFT **c.S**, and
 **2S-B / Hip Reap from the second sweep study**. The original 2S options were
 rejected. Motion studies, prompts, provenance and per-action production states
-are in [`review/`](../art/characters/fillet-v1/review/README.md). These are selected
-directions, not registered gameplay clips. Exact reach, body fit, slender
-anatomy, clear handedness, both facings and atlas padding still need production
-checks. The user's explicit 6P condition is to keep the red LEFT shoulder/arm
-with the SHORT knife and the unarmored RIGHT arm with the LONG knife held back
-through every final pose.
+are in [`review/`](../art/characters/fillet-v1/review/README.md).
 
-No new playable sprite files or sprite-manifest entries are installed by this
-mechanics step. Existing art can therefore visibly differ from the new authored
-collision poses. Source animation curves/phase keys are preserved as metadata;
-complete new pose playback, paired receiver drawings for the cast, all entry/exit
-bridges and animation-specific acceptance remain pending the review process.
+[Ground-normal production pass 1](fillet-ground-art.md) installs **92 pose keys
+across those 11 moves** in Godot and the browser Workshop. The 6P drawings use
+the short knife on the red LEFT shoulder/arm and hold the long RIGHT knife back.
+Playback follows the authored frame keys, scales within phases when timings
+are edited, and freezes/replays with the simulation. Legacy kits retain their
+existing presentation. The generated source pixels and combat data are preserved.
 
-Next: produce/register the selected ground normals as a consistent set, then
-continue the air-normal, special and paired-action motion reviews. Install
-checked clips and repeat the game-size/collision review. Do not mark the complete
-Fillet art package finished until that work passes.
+This is a first playable art pass. Exact anatomical/weapon fit, support-foot
+entry variants and continuous entry/exit clips still need refinement. Rendering
+uses the game's existing mirrored facing presentation, not separate reverse-view
+drawings. The remaining 15 air, special and paired actions still require motion
+reviews before production; the full 26-action art acceptance matrix is unfinished.

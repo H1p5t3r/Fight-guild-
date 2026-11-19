@@ -43,20 +43,23 @@ func _initialize() -> void:
 				var point := Vector2i(sample[0], sample[1])
 				check(source.get_pixelv(point).a < 0.03, "Atlas background is not transparent: " + path)
 			var signatures: int = 32 if c == 3 else 24 if c == 2 else 20 if c == 4 else 4
-			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8, "attack_animation": 26 if c == 4 else 32, "backdash": 6}[phase]
+			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8, "attack_animation": 92 if c == 5 else 26 if c == 4 else 32, "backdash": 6}[phase]
 			check(sheet.frames.size() == count, "Missing poses: " + path)
 			for pose in sheet.frames.size():
+				var frame_size := source.get_size()
 				if sheet.frames[pose].has("file"):
 					var alternate: String = FighterArt.DIRECTORY + sheet.frames[pose].file
 					check(FileAccess.get_sha256(alternate) == sheet.frames[pose].sha256, "Swing frame checksum is stale: " + alternate)
 					var alternate_image := Image.new()
 					check(alternate_image.load_png_from_buffer(FileAccess.get_file_as_bytes(alternate)) == OK, "Cannot decode swing frame")
-					check(alternate_image.get_size() == source.get_size() and alternate_image.get_pixel(0, 0).a < 0.03, "Invalid swing atlas dimensions/alpha")
+					var expected_size: Array = sheet.frames[pose].get("source_size", dimensions)
+					frame_size = Vector2i(expected_size[0], expected_size[1])
+					check(alternate_image.get_size() == frame_size and alternate_image.get_pixel(0, 0).a < 0.03, "Invalid swing atlas dimensions/alpha")
 				var texture := FighterArt.texture(c, phase, pose)
 				var bounds: Array = sheet.frames[pose].bounds
 				check(bounds[2] - bounds[0] > 30 and bounds[3] - bounds[1] > 80, "Empty/tiny pose: " + path)
-				check(texture.region.position.x >= 0 and texture.region.end.x <= source.get_width(), "Atlas region outside image")
-				check(texture.region.position.y >= 0 and texture.region.end.y <= source.get_height(), "Atlas row outside image")
+				check(texture.region.position.x >= 0 and texture.region.end.x <= frame_size.x, "Atlas region outside image")
+				check(texture.region.position.y >= 0 and texture.region.end.y <= frame_size.y, "Atlas row outside image")
 				check(bounds[0] >= 0 and bounds[1] >= 0 and bounds[2] <= texture.get_width() and bounds[3] <= texture.get_height(), "Pose bounds outside frame")
 				check(texture.get_size() == Vector2(sheet.frames[pose].region[2], sheet.frames[pose].region[3]), "Atlas trim changed logical sprite size")
 				check(sheet.frames[pose].pivot[1] > 0 and sheet.frames[pose].pivot[1] <= source.get_height(), "Invalid foot pivot")
@@ -106,5 +109,5 @@ func _initialize() -> void:
 		check(FighterArt.projectile_art(2, 14, 36-age, age) == FighterArt.projectile_art(2, 25, 120-age, age), "Near/far pillars must use identical art at the same age")
 	check(FighterArt.projectile_art(2, 21, 20).file == "smoke-v1/projectile.png", "j.D lost its ember")
 	sprite.free()
-	print("Godot sprite catalog: ", failures, " failures; six fighters, 539 body keys, alpha, regions, provenance and idle/movement vapor")
+	print("Godot sprite catalog: ", failures, " failures; six fighters, 631 body keys, alpha, regions, provenance and idle/movement vapor")
 	quit(1 if failures else 0)

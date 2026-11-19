@@ -2,7 +2,7 @@
   "version": 1,
   "character": "Fillet",
   "date": "2026-11-19",
-  "status": "motion directions approved by user; sprite production and registration pending",
+  "status": "directions selected; separate first production pass registered in Godot and Move Workshop",
   "scope": [
     "5P",
     "2P",
@@ -100,11 +100,13 @@
     "These are direction boards, not registered sprite sheets or a validated playable animation.",
     "Selected drawings still require exact body/weapon/foot registration, anatomical leg/hand checks in both facings, active corridor fit and transition continuity.",
     "No runtime art, frame data, hit/hurt/push boxes or sprite manifest changed.",
-    "Existing f.S B direction remains selected independently of this batch."
+    "Existing f.S B direction remains selected independently of this batch.",
+    "The no-runtime-change notes above describe the original direction-review step. Selected directions now have separate registered production atlases; see the production README for scope and remaining refinement."
   ],
   "approval": {
     "date": "2026-11-19",
     "source": "User: 5p-A, 2P-B, 5K-A, 2K-B",
     "scope": "Selected direction for each windup/active pair. Existing f.S B remains selected."
-  }
+  },
+  "production": "art/characters/fillet-v1/production/ground-v1"
 }

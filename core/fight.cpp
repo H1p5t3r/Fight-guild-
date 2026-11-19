@@ -618,7 +618,7 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
         // active or recovery ticks. Saved age keeps drawing and anatomy in sync
         // during hitstop, counter slowdown, edited timing and rollback.
         const auto& animation=ATTACK_ANIMATIONS[f.character][f.move];
-        if(animation.art_pose==m.v[ArtPose]) {
+        if(animation.art_pose==m.v[ArtPose]&&(!animation.requires_extended||extended(f))) {
             const int stage=age<m.v[Startup]?0:age<m.v[Startup]+m.v[Active]?1:2;
             const int duration=max(1,stage==0?m.v[Startup]-1:stage==1?m.v[Active]:m.v[Recovery]);
             const int elapsed=stage==0?age-1:stage==1?age-m.v[Startup]:age-m.v[Startup]-m.v[Active];

@@ -2,7 +2,8 @@
 
 Three-pose motion timelines for the remaining **5Hs, 2S, 2Hs, 6P and 6Hs** directions.
 The user selected **B for all five moves**, with **2S using B / Hip Reap from
-the second study**. Sprite production and registration remain pending.
+the second study**. Each selected move now has eight registered keys in
+[ground-normal production pass 1](../../production/ground-v1/README.md).
 
 Each move has its own sheet: **A on top, B below**, read left to right as
 **windup → contact → follow-through**. These are successive motion beats, not
@@ -56,7 +57,7 @@ The prior selections remain **5P-A, 2P-B, 5K-A, 2K-B**, plus **f.S-B** and the
 packet's short-LEFT rising c.S. **All 11 ground-normal directions are selected**
 for production as one consistent pose set.
 
-`review.json` records prompts, references, hashes and pending selections.
+`review.json` records prompts, references, hashes and selections.
 The original two-pose `heavy-options.png`, `rising-options.png` and
 `sweep-options.png` are retained as source inputs; use the five timeline sheets
 for the current review, replacing `2s-timeline.png` with `2s-revision-02.png`.

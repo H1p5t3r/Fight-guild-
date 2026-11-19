@@ -92,8 +92,14 @@ export const blockAdvantage=m=>{
 };
 export function phaseAt(m,frame) {return frame<m.startup?'windup':frame<m.startup+m.active?'active':'recovery';}
 export function phaseStart(m,phase){return phase==='windup'?1:phase==='active'?m.startup:m.startup+m.active;}
-export function poseAt(m,frame,hasReady=false){
+export function poseAt(m,frame,hasReady=false,clip=null){
   const phase=phaseAt(m,frame);
+  if(clip?.artPose===m.artPose&&(!clip.requiresExtendedKit||m.extensions)){
+    const duration=Math.max(1,phase==='windup'?m.startup-1:phase==='active'?m.active:m.recovery);
+    const percent=Math.max(0,Math.min(duration-1,frame-phaseStart(m,phase)))*100/duration;
+    const key=clip[phase]?.findLast(k=>k.start<=Math.floor(percent));
+    if(key)return {phase:key.phase,index:key.pose};
+  }
   if(m.finishArtPose&&m.finishArtFrame&&phase==='active'&&frame>=m.startup+m.finishArtFrame-1)return {phase:'signature_active',index:m.finishArtPose-1};
   if(m.artPose&&(phase!=='recovery'||m.hitAngle&&frame<m.startup+m.active+8))return {phase:frame<m.startup?'signature_windup':'signature_active',index:m.artPose-1};
   if(phase==='recovery'&&hasReady&&!m.air&&![1,2,3].includes(m.direction))return {phase:'ready',index:0};

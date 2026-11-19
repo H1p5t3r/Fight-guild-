@@ -31,7 +31,8 @@ were introduced. Existing c.S direction and selected f.S B remain separate.
 status. `archive/` keeps intermediate inputs for the refinement prompts; those
 images are superseded by the two final boards above.
 
-After selection: refine the chosen windup/active keys, register exact scale,
-weapon identity and reach, verify support feet and both facings, then integrate
-reviewed frames. These boards do not certify collision fit or complete the attack
-animation clips. No gameplay data or runtime sprite manifest was changed.
+The selected directions now have eight registered production keys per move in
+[ground-normal production pass 1](../../production/ground-v1/README.md).
+These review boards remain unchanged. The production pass adds playback across
+windup, active and recovery while preserving gameplay data. Exact anatomical
+fit, weapon paths and transition continuity remain art refinement work.

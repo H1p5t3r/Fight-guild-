@@ -81,4 +81,6 @@ Fillet f.S direction **B — Hip-led** is recorded in
 images, not playable atlas replacements. Precise registration, anatomy, handedness,
 both-facing checks, the remaining action choices and paired receiver art are
 unfinished. Existing sprites may visibly differ from the new collision poses.
-No new playable sprite or manifest entries were installed in this step.
+No new playable sprite or manifest entries were installed in that mechanics
+step. The subsequent [ground-normal production pass](fillet-ground-art.md)
+adds 92 keys across the 11 selected moves, with its own playback and art checks.
