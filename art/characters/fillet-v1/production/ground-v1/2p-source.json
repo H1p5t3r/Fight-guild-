@@ -1,0 +1,47 @@
+{
+  "id": "2P",
+  "file": "2p.png",
+  "source": "/workspace/generated_images/exec-71a0494e-d674-449a-b03d-8e47abe950d6.png",
+  "keys": [
+    {
+      "frame": 1,
+      "label": "entry"
+    },
+    {
+      "frame": 2,
+      "label": "anticipation"
+    },
+    {
+      "frame": 4,
+      "label": "pre-contact"
+    },
+    {
+      "frame": 5,
+      "label": "active"
+    },
+    {
+      "frame": 6,
+      "label": "follow-through"
+    },
+    {
+      "frame": 7,
+      "label": "recovery"
+    },
+    {
+      "frame": 11,
+      "label": "retract"
+    },
+    {
+      "frame": 16,
+      "label": "last locked"
+    }
+  ],
+  "columns": 4,
+  "keyStart": 0,
+  "references": [
+    "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+    "/workspace/Fight-guild-/art/characters/fillet-v1/review/normals-batch-01/p-options.png"
+  ],
+  "prompt": "2p-prompt.txt",
+  "sha256": "8ee986379fb22f6c2330081ecaea4e32bd2e32469c60b830d52c8dfd255a37bf"
+}

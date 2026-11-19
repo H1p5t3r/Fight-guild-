@@ -1,0 +1,47 @@
+{
+  "id": "6Hs",
+  "file": "6hs.png",
+  "source": "/workspace/generated_images/exec-f8833924-895c-4e88-b44c-8fa1afe4d22c.png",
+  "keys": [
+    {
+      "frame": 1,
+      "label": "entry"
+    },
+    {
+      "frame": 9,
+      "label": "anticipation"
+    },
+    {
+      "frame": 17,
+      "label": "pre-contact"
+    },
+    {
+      "frame": 18,
+      "label": "active"
+    },
+    {
+      "frame": 21,
+      "label": "follow-through"
+    },
+    {
+      "frame": 22,
+      "label": "recovery"
+    },
+    {
+      "frame": 33,
+      "label": "retract"
+    },
+    {
+      "frame": 46,
+      "label": "last locked"
+    }
+  ],
+  "columns": 4,
+  "keyStart": 0,
+  "references": [
+    "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+    "/workspace/Fight-guild-/art/characters/fillet-v1/review/normals-batch-02/6hs-timeline.png"
+  ],
+  "prompt": "6hs-refinement-prompt.txt",
+  "sha256": "2831c59c8e3f7ce080fa474458e08d8289c07f0eb6d5bc427b8341c76df4ab2f"
+}

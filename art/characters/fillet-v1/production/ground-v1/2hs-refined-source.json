@@ -1,0 +1,46 @@
+{
+  "id": "2Hs",
+  "file": "2hs.png",
+  "source": "/workspace/generated_images/exec-bbccb3ab-bff1-4dfc-84c8-d5d9f95f2469.png",
+  "keys": [
+    {
+      "frame": 1,
+      "label": "entry"
+    },
+    {
+      "frame": 7,
+      "label": "anticipation"
+    },
+    {
+      "frame": 13,
+      "label": "pre-contact"
+    },
+    {
+      "frame": 14,
+      "label": "active"
+    },
+    {
+      "frame": 18,
+      "label": "follow-through"
+    },
+    {
+      "frame": 19,
+      "label": "recovery"
+    },
+    {
+      "frame": 30,
+      "label": "retract"
+    },
+    {
+      "frame": 42,
+      "label": "last locked"
+    }
+  ],
+  "columns": 4,
+  "keyStart": 0,
+  "references": [
+    "/workspace/generated_images/exec-12b72480-6e6e-43f2-a823-5af22a99f549.png"
+  ],
+  "prompt": "2hs-refinement-prompt.txt",
+  "sha256": "e03eaad7ca0022d7f8bc9cb5538688e2d9c384689184dbbad4bc37a5ae3f8a8e"
+}
