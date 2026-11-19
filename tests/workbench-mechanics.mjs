@@ -9,17 +9,17 @@ const shippedPack=JSON.parse(await readFile('build/workbench-pack.json','utf8'))
 test('Batch 2 upgrades without losing any submitted value or art note',async()=>{
  const original=JSON.parse(await readFile('godot/data/workshop/2026-11-19-slash-sweeps/FightGuild-Slash-Sweeps.json','utf8'));
  const w=new Workshop(pack,original), upgraded=w.snapshot();
- assert.equal(upgraded.schema,23);assert.deepEqual(upgraded._moveWorkshop,original._moveWorkshop);
+ assert.equal(upgraded.schema,24);assert.deepEqual(upgraded._moveWorkshop,original._moveWorkshop);
  for(const [c,ch] of original.characters.entries())for(const [i,m] of ch.moves.entries())for(const [k,v] of Object.entries(m))assert.deepEqual(upgraded.characters[c].moves[i][k],v,`${ch.name} ${m.id} ${k}`);
  assert.equal(w.move(4,13).mechanic,1);assert.equal(w.move(4,22).mechanic,1);assert.equal(w.move(5,13).mechanic,2);
  w.change(5,13,'bleedBlockPercent',35);w.change(5,13,'variantStartup',18);
  assert.equal(new Workshop(pack,w.snapshot()).move(5,13).bleedBlockPercent,35);
  const invalid=w.snapshot();invalid.characters[5].moves[13].variantStartup=1;assert.throws(()=>new Workshop(pack,invalid));
 });
-test('Preview simulates application, pull, cash-out and timeout with real core state',()=>{
- const preview=new CombatPreview(pack);
+test('Preview simulates application, pull, cash-out and timeout with real core state',async()=>{
+ const preview=new CombatPreview(pack),legacy=new Workshop(pack,JSON.parse(await readFile('godot/data/workshop/2026-11-19-slash-sweeps/FightGuild-Slash-Sweeps.json','utf8'))).data;
  for(const face of [1,-1]){
-  const pull=preview.record(pack.draft.data,4,13,{mechanic:'followup',facing:face});
+  const pull=preview.record(legacy,4,13,{mechanic:'followup',facing:face});
   assert.equal(pull.contacts.length,1,'Pull does not manufacture a second hit');
   const active=pull.frames.find(f=>f.state.players[1].tetherUsed);
   assert.ok(active);assert.equal(active.state.players[0].variant,1);assert.ok(active.state.players[1].vx*face<0);

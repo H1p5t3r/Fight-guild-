@@ -28,7 +28,7 @@ try{
     return [frame.file??sheet.file,art[frame.effect.sheet].file];
   });
   assert.ok(backdraftFiles.every(file=>typeof images[file]==='string'),'Current Backdraft art must be included in the delivery');
-  assert.equal(initial.schema,23);assert.equal(initial.characters.length,6);
+  assert.equal(initial.schema,24);assert.equal(initial.characters.length,6);
   assert.ok((await stat('build/move-workshop/index.html')).size<64000,'The entry page must stay small');
   assert.ok(requests.filter(r=>r.url.endsWith('.webp')).length<Object.keys(images).length,'Artwork must load on demand');
   assert.ok(Object.values(images).every(src=>/^assets\/[a-f0-9]{64}\.webp$/.test(src)),'Art URLs must be relative and versioned');

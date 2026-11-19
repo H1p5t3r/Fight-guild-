@@ -1,3 +1,4 @@
+import {upgradeLineDrive} from '../line-drive.mjs';
 import {packExtension,upgradeExtensions,extensionBody,migrationDefaults} from '../extensions.mjs';
 import {upgradeCharges} from '../charge-data.mjs';
 import {upgradeStartupRules,moveFieldLimit} from '../startup-rules.mjs';
@@ -21,9 +22,9 @@ export function validate(data, pack) {
   const migration=data?.schema<23?migrationDefaults(pack.defaults):pack.defaults;
   data=upgradeStances(upgradeMechanics(upgradeHurtMasks(upgradeMovement(upgradeHitboxes(data),migration)),migration),migration);
   data=upgradeAirDash(upgradeStartupRules(upgradeCharges(data,migration)),migration);
-  data=upgradeExtensions(data,pack.defaults);
+  data=upgradeLineDrive(upgradeExtensions(data,pack.defaults));
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor accepts current Fight Guild moves and workshop exports from versions 12–22. Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves and workshop exports from versions 12–23. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);

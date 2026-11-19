@@ -1,0 +1,475 @@
+[
+  {
+    "id": "recovery-0",
+    "file": "recovery-0.png",
+    "source": "/workspace/generated_images/exec-f13e0d1f-516d-4598-8c31-c1915c186f8e.png",
+    "moves": [
+      "5P",
+      "5K"
+    ],
+    "columns": 2,
+    "rows": 2,
+    "root": 350,
+    "body_height": 540,
+    "poseLabels": [
+      "brake top",
+      "collect top",
+      "brake bottom",
+      "collect bottom"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_0_fluid.png"
+    ],
+    "sha256": "84abf5c6bd3a7c092401b14bf89f555ec45adca88d8d5a8094997b13ecb531c8"
+  },
+  {
+    "id": "recovery-1",
+    "file": "recovery-1.png",
+    "source": "/workspace/generated_images/exec-60f87de3-d628-41d5-958d-aaca53469231.png",
+    "moves": [
+      "c.S",
+      "5S"
+    ],
+    "columns": 2,
+    "rows": 2,
+    "root": 350,
+    "body_height": 540,
+    "poseLabels": [
+      "brake top",
+      "collect top",
+      "brake bottom",
+      "collect bottom"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "58156f5a83e82d5c2d5a9851cc6e6502fc341584d474736b5695e0e50aa55251"
+  },
+  {
+    "id": "recovery-2",
+    "file": "recovery-2.png",
+    "source": "/workspace/generated_images/exec-f1c4ba2f-137d-4940-985c-6f08b460d739.png",
+    "moves": [
+      "5Hs",
+      "2P"
+    ],
+    "columns": 2,
+    "rows": 2,
+    "root": 350,
+    "body_height": 540,
+    "poseLabels": [
+      "brake top",
+      "collect top",
+      "brake bottom",
+      "collect bottom"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_2_fluid.png"
+    ],
+    "sha256": "e095aaf88f77aa7cc9a6ce45bc8ce1822c9562577aa5ef3f2b1d8b564a937d95"
+  },
+  {
+    "id": "recovery-3",
+    "file": "recovery-3.png",
+    "source": "/workspace/generated_images/exec-4279c615-3418-45cd-bf65-073584f65b40.png",
+    "moves": [
+      "2K",
+      "2S"
+    ],
+    "columns": 2,
+    "rows": 2,
+    "root": 350,
+    "body_height": 540,
+    "poseLabels": [
+      "brake top",
+      "collect top",
+      "brake bottom",
+      "collect bottom"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_3_fluid.png"
+    ],
+    "sha256": "245cf7000c64799c43e37d35ef22e23dffd4fa1265b01c7b11312cc8192e0d98"
+  },
+  {
+    "id": "recovery-4",
+    "file": "recovery-4.png",
+    "source": "/workspace/generated_images/exec-2332432d-d871-4d02-802a-9135e07b146b.png",
+    "moves": [
+      "j.P",
+      "j.K"
+    ],
+    "columns": 2,
+    "rows": 2,
+    "root": 350,
+    "body_height": 540,
+    "poseLabels": [
+      "brake top",
+      "collect top",
+      "brake bottom",
+      "collect bottom"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_4_fluid.png"
+    ],
+    "sha256": "98acb91b0d62cc42340a1666291d8df602f5d3686386ec136ca80fba9fc91984"
+  },
+  {
+    "id": "recovery-5",
+    "file": "recovery-5.png",
+    "source": "/workspace/generated_images/exec-f9350c74-7fc4-47f7-94a0-53a38a3e071a.png",
+    "moves": [
+      "j.S",
+      "j.Hs"
+    ],
+    "columns": 2,
+    "rows": 2,
+    "root": 350,
+    "body_height": 540,
+    "poseLabels": [
+      "brake top",
+      "collect top",
+      "brake bottom",
+      "collect bottom"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_5_fluid.png"
+    ],
+    "sha256": "297b054baf0dfd4d63e12e2dd458e70f3e0a51ac3cac05e8d9fbcd26928464b7"
+  },
+  {
+    "id": "recovery-6",
+    "file": "recovery-6.png",
+    "source": "/workspace/generated_images/exec-f1f86292-5d95-40fd-9e30-27717c650c66.png",
+    "moves": [
+      "6P",
+      "6K"
+    ],
+    "columns": 2,
+    "rows": 2,
+    "root": 350,
+    "body_height": 540,
+    "poseLabels": [
+      "brake top",
+      "collect top",
+      "brake bottom",
+      "collect bottom"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_6_fluid.png"
+    ],
+    "sha256": "1fbabac603f39acab48d6405c2e79c55b0bd12ffe09c717d1a07ac11770d45ce"
+  },
+  {
+    "id": "command-slash",
+    "file": "command-slash.png",
+    "source": "/workspace/generated_images/exec-e931b770-142a-4095-a2b8-b7640712dce1.png",
+    "moves": [
+      "6S"
+    ],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "da813173a502c2dca2dc6b2a64fb0c6ba8c251dcf0faf94fcac047eff4b7a416"
+  },
+  {
+    "id": "cast-ground",
+    "file": "cast-ground.png",
+    "source": "/workspace/generated_images/exec-84bb9977-35e2-4684-8e16-3b2c8ab3dbda.png",
+    "moves": [
+      "214S"
+    ],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "9a2666077694985a093f23a3b756a5757fa32832a4799dfc7193020060468521"
+  },
+  {
+    "id": "cast-air",
+    "file": "cast-air.png",
+    "source": "/workspace/generated_images/exec-1c7d8f2f-df34-4ffc-a7d7-ebcb9bb0c2c4.png",
+    "moves": [
+      "j.214P"
+    ],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "8f2c3efabbdbaea7bbb8a5abad17db616739e08aa9e0933b2854a4b02e470988"
+  },
+  {
+    "id": "stab-ground",
+    "file": "stab-ground.png",
+    "source": "/workspace/generated_images/exec-7aa61195-4426-413a-9a18-f9846bd35689.png",
+    "moves": [
+      "214S>P"
+    ],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "0ba39a248c28b23f9917ac4f048f8c05d14c2ecac765a38a6ff794ed9200bc94"
+  },
+  {
+    "id": "stab-air",
+    "file": "stab-air.png",
+    "source": "/workspace/generated_images/exec-dc9ead1b-5644-4721-af1b-c7de0027b0fe.png",
+    "moves": [
+      "j.214P>P"
+    ],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "162f554b57c0368460f9b9f25671355f8624c10a51273d0b6ef08124e269410f"
+  },
+  {
+    "id": "drive-tag",
+    "file": "drive-tag.png",
+    "source": "/workspace/generated_images/exec-9b025b24-8be0-404c-b62a-3a92e331dc35.png",
+    "moves": [
+      "5D"
+    ],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "f707a62ed6351b33342c441e3bfc53836ddc6f3fcee0dbe44f38b85035731190",
+    "background_cleanup_source": {
+      "path": "/workspace/generated_images/exec-8b40e5b0-ec15-4906-97e5-2d4f845c08d9.png",
+      "sha256": "aa0326739405fd0f18a8e1ca54438223453324ee9ecf7851d7f7661b4730dbfa"
+    },
+    "cleanup_note": "Image generator alpha cleanup. Source bytes retained unchanged; original generation preserved in background_cleanup_source."
+  },
+  {
+    "id": "drive-air",
+    "file": "drive-air.png",
+    "source": "/workspace/generated_images/exec-a420618b-8820-4cab-89e2-f4439123758a.png",
+    "moves": [
+      "j.D"
+    ],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "815175381c3573ad76d9bc17977a221d7a8cc6a4f7808dd95483fb186533a9ab"
+  },
+  {
+    "id": "drive-reel",
+    "file": "drive-reel.png",
+    "source": "/workspace/generated_images/exec-2909a141-1d0c-4d6e-8d09-fcec1df942cc.png",
+    "moves": [
+      "2D"
+    ],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "93ab9579c58d9231bb968ebeed36d322abb5e8ee321b922c78fa82d7c7ce69ed",
+    "background_cleanup_source": {
+      "path": "/workspace/generated_images/exec-449c1fb4-6783-46e2-bee8-599a711b5cc4.png",
+      "sha256": "d1eb18b13239c68e3fe7949c0e2bd9967d2306cda1bea3f65dbb419ae4dbce83"
+    },
+    "cleanup_note": "Image generator alpha cleanup. Source bytes retained unchanged; original generation preserved in background_cleanup_source."
+  },
+  {
+    "id": "drive-chase",
+    "file": "drive-chase.png",
+    "source": "/workspace/generated_images/exec-77db2601-0316-4449-8359-c46c1a8a0e83.png",
+    "moves": [
+      "6D"
+    ],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "3336357c1b9e60c956e35bdc62f2b6c4e03d5fcf4bc6c249338fb417cfbdcf35"
+  },
+  {
+    "id": "throw-forward",
+    "file": "throw-forward.png",
+    "source": "/workspace/generated_images/exec-a359133e-82c3-4887-bb71-e16ca704c56c.png",
+    "moves": [
+      "6P+K"
+    ],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "2a0a696e38a08adda1122d508c5d7e2f796ec10167c7d6f3341c07a595ee208b"
+  },
+  {
+    "id": "throw-back",
+    "file": "throw-back.png",
+    "source": "/workspace/generated_images/exec-f81fbae1-f43e-4485-b449-d215f769c665.png",
+    "moves": [
+      "4P+K"
+    ],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [
+      "art/characters/shark.png",
+      "godot/assets/fighters/shark-normals-v1/normals_1_fluid.png"
+    ],
+    "sha256": "bc62a2dbf90e872fdc7d965582dbb96355a50370a2f1476e4e65e743b5944999"
+  },
+  {
+    "id": "line-effects",
+    "file": "line-effects.png",
+    "source": "/workspace/generated_images/exec-8392a8a3-499a-451b-bce1-3c039d6f8617.png",
+    "moves": [],
+    "columns": 3,
+    "rows": 2,
+    "root": 220,
+    "body_height": 500,
+    "poseLabels": [
+      "entry",
+      "loaded",
+      "contact",
+      "brake",
+      "withdraw",
+      "settle"
+    ],
+    "references": [],
+    "sha256": "91a5779e1641206b546c46c0e7a0c6925c95cc06faf08ed820c3ec2272ae9580"
+  }
+]

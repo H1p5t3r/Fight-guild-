@@ -5,7 +5,7 @@ func check(ok: bool, message: String) -> void:
 func _initialize() -> void:
 	var model := LegacyFixture.create()
 	var original := model.data()
-	check(original.schema == 23, "Current schema version missing")
+	check(original.schema == 24, "Current schema version missing")
 	var legacy := original.duplicate(true)
 	legacy.schema = 9
 	legacy.coreVersion = 9

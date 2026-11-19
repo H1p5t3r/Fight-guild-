@@ -1,3 +1,4 @@
+import {LINE_DEFAULTS} from '../web/line-drive.mjs';
 import {legacyPack} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -14,6 +15,7 @@ const make=async(c,facing=1,distance=data.characters[c].moves[2].proximityRange,
 };
 test('Slash/sweep batch preserves all other tuning, notes, photos and stable slot IDs',async()=>{
  const before=await json('godot/data/workshop/2026-11-19-user/FightGuild-moves-2026-11-19.json');
+ for(const c of before.characters)for(const m of c.moves)Object.assign(m,LINE_DEFAULTS);
  for(const key of Object.keys(before).filter(k=>!['characters','_moveWorkshop','schema','coreVersion'].includes(k)))assert.deepEqual(data[key],before[key]);
  for(let c=0;c<6;c++){
   assert.deepEqual(data.characters[c].movement,before.characters[c].movement);

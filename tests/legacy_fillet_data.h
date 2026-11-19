@@ -300,6 +300,7 @@ inline void defaults(Simulation& s) {
     s.defaults();
     s.character_extensions[5]={};s.mobility[5]=LEGACY_STARTER_MOBILITY[5];
     for(int m=0;m<45;++m){s.moves[5][m]=LEGACY_STARTER_MOVES[5][m];s.move_hit[5][m]=LEGACY_STARTER_HITS[5][m];s.extensions[5][m]={};for(auto& h:s.move_hurt[5][m])h={};}
+    for(int m=0;m<45;++m){s.moves[5][m].v[TetherDuration]=180;s.moves[5][m].v[TetherRange]=45000;s.moves[5][m].v[TetherGap]=6000;}
     s.moves[5][45].v[Enabled]=s.moves[5][46].v[Enabled]=0;
 }
 }

@@ -11797,6 +11797,1329 @@
           {
             "hurt": {
               "legs": [
+                242,
+                245,
+                552,
+                497
+              ],
+              "torsoArms": [
+                267,
+                96,
+                535,
+                260
+              ],
+              "head": [
+                393,
+                35,
+                450,
+                107
+              ],
+              "extension": [
+                510,
+                194,
+                578,
+                262
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                195,
+                250,
+                555,
+                492
+              ],
+              "torsoArms": [
+                258,
+                94,
+                506,
+                257
+              ],
+              "head": [
+                394,
+                30,
+                450,
+                109
+              ],
+              "extension": [
+                467,
+                122,
+                529,
+                185
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                126,
+                255,
+                521,
+                493
+              ],
+              "torsoArms": [
+                225,
+                100,
+                466,
+                271
+              ],
+              "head": [
+                375,
+                47,
+                433,
+                124
+              ],
+              "extension": [
+                450,
+                116,
+                582,
+                168
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                126,
+                255,
+                521,
+                493
+              ],
+              "torsoArms": [
+                225,
+                100,
+                466,
+                271
+              ],
+              "head": [
+                375,
+                47,
+                433,
+                124
+              ],
+              "extension": [
+                450,
+                116,
+                582,
+                168
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                209,
+                281,
+                509,
+                493
+              ],
+              "torsoArms": [
+                299,
+                92,
+                479,
+                301
+              ],
+              "head": [
+                390,
+                36,
+                438,
+                104
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                209,
+                281,
+                509,
+                493
+              ],
+              "torsoArms": [
+                299,
+                92,
+                479,
+                301
+              ],
+              "head": [
+                390,
+                36,
+                438,
+                104
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                242,
+                245,
+                552,
+                497
+              ],
+              "torsoArms": [
+                267,
+                96,
+                535,
+                260
+              ],
+              "head": [
+                393,
+                35,
+                450,
+                107
+              ],
+              "extension": [
+                510,
+                194,
+                578,
+                262
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                239,
+                245,
+                520,
+                496
+              ],
+              "torsoArms": [
+                228,
+                93,
+                531,
+                261
+              ],
+              "head": [
+                333,
+                33,
+                398,
+                109
+              ],
+              "extension": [
+                489,
+                211,
+                553,
+                274
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                265,
+                181,
+                539,
+                495
+              ],
+              "torsoArms": [
+                256,
+                83,
+                442,
+                261
+              ],
+              "head": [
+                351,
+                15,
+                412,
+                91
+              ],
+              "extension": [
+                248,
+                185,
+                305,
+                263
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                198,
+                224,
+                639,
+                495
+              ],
+              "torsoArms": [
+                262,
+                101,
+                464,
+                266
+              ],
+              "head": [
+                363,
+                52,
+                427,
+                126
+              ],
+              "extension": [
+                201,
+                192,
+                294,
+                268
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                198,
+                224,
+                639,
+                495
+              ],
+              "torsoArms": [
+                262,
+                101,
+                464,
+                266
+              ],
+              "head": [
+                363,
+                52,
+                427,
+                126
+              ],
+              "extension": [
+                201,
+                192,
+                294,
+                268
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                137,
+                279,
+                437,
+                489
+              ],
+              "torsoArms": [
+                227,
+                99,
+                407,
+                299
+              ],
+              "head": [
+                310,
+                37,
+                374,
+                111
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                137,
+                279,
+                437,
+                489
+              ],
+              "torsoArms": [
+                227,
+                99,
+                407,
+                299
+              ],
+              "head": [
+                310,
+                37,
+                374,
+                111
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                239,
+                245,
+                520,
+                496
+              ],
+              "torsoArms": [
+                228,
+                93,
+                531,
+                261
+              ],
+              "head": [
+                333,
+                33,
+                398,
+                109
+              ],
+              "extension": [
+                489,
+                211,
+                553,
+                274
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                169,
+                278,
+                520,
+                489
+              ],
+              "torsoArms": [
+                284,
+                94,
+                531,
+                297
+              ],
+              "head": [
+                403,
+                49,
+                468,
+                122
+              ],
+              "extension": [
+                505,
+                238,
+                547,
+                292
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                138,
+                266,
+                552,
+                480
+              ],
+              "torsoArms": [
+                246,
+                114,
+                501,
+                290
+              ],
+              "head": [
+                414,
+                54,
+                476,
+                127
+              ],
+              "extension": [
+                217,
+                157,
+                297,
+                245
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                43,
+                272,
+                510,
+                481
+              ],
+              "torsoArms": [
+                236,
+                147,
+                520,
+                303
+              ],
+              "head": [
+                386,
+                80,
+                451,
+                151
+              ],
+              "extension": [
+                462,
+                165,
+                569,
+                204
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                43,
+                272,
+                510,
+                481
+              ],
+              "torsoArms": [
+                236,
+                147,
+                520,
+                303
+              ],
+              "head": [
+                386,
+                80,
+                451,
+                151
+              ],
+              "extension": [
+                462,
+                165,
+                569,
+                204
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                234,
+                273,
+                534,
+                479
+              ],
+              "torsoArms": [
+                324,
+                93,
+                504,
+                293
+              ],
+              "head": [
+                410,
+                30,
+                468,
+                105
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                234,
+                273,
+                534,
+                479
+              ],
+              "torsoArms": [
+                324,
+                93,
+                504,
+                293
+              ],
+              "head": [
+                410,
+                30,
+                468,
+                105
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                169,
+                278,
+                520,
+                489
+              ],
+              "torsoArms": [
+                284,
+                94,
+                531,
+                297
+              ],
+              "head": [
+                403,
+                49,
+                468,
+                122
+              ],
+              "extension": [
+                505,
+                238,
+                547,
+                292
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                171,
+                258,
+                573,
+                495
+              ],
+              "torsoArms": [
+                211,
+                91,
+                540,
+                284
+              ],
+              "head": [
+                381,
+                27,
+                439,
+                102
+              ],
+              "extension": [
+                510,
+                228,
+                580,
+                295
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                147,
+                259,
+                561,
+                506
+              ],
+              "torsoArms": [
+                247,
+                89,
+                547,
+                293
+              ],
+              "head": [
+                409,
+                30,
+                479,
+                110
+              ],
+              "extension": [
+                523,
+                242,
+                587,
+                301
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                66,
+                283,
+                585,
+                506
+              ],
+              "torsoArms": [
+                265,
+                133,
+                536,
+                316
+              ],
+              "head": [
+                398,
+                83,
+                465,
+                158
+              ],
+              "extension": [
+                487,
+                175,
+                587,
+                249
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                66,
+                283,
+                585,
+                506
+              ],
+              "torsoArms": [
+                265,
+                133,
+                536,
+                316
+              ],
+              "head": [
+                398,
+                83,
+                465,
+                158
+              ],
+              "extension": [
+                487,
+                175,
+                587,
+                249
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                230,
+                283,
+                530,
+                497
+              ],
+              "torsoArms": [
+                320,
+                110,
+                500,
+                303
+              ],
+              "head": [
+                405,
+                50,
+                465,
+                122
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                230,
+                283,
+                530,
+                497
+              ],
+              "torsoArms": [
+                320,
+                110,
+                500,
+                303
+              ],
+              "head": [
+                405,
+                50,
+                465,
+                122
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                171,
+                258,
+                573,
+                495
+              ],
+              "torsoArms": [
+                211,
+                91,
+                540,
+                284
+              ],
+              "head": [
+                381,
+                27,
+                439,
+                102
+              ],
+              "extension": [
+                510,
+                228,
+                580,
+                295
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                148,
+                286,
+                517,
+                493
+              ],
+              "torsoArms": [
+                204,
+                139,
+                510,
+                308
+              ],
+              "head": [
+                414,
+                107,
+                479,
+                182
+              ],
+              "extension": [
+                407,
+                243,
+                477,
+                298
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                129,
+                298,
+                519,
+                454
+              ],
+              "torsoArms": [
+                222,
+                127,
+                529,
+                311
+              ],
+              "head": [
+                445,
+                103,
+                508,
+                174
+              ],
+              "extension": [
+                497,
+                192,
+                549,
+                241
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                85,
+                300,
+                529,
+                454
+              ],
+              "torsoArms": [
+                199,
+                126,
+                512,
+                316
+              ],
+              "head": [
+                448,
+                119,
+                514,
+                194
+              ],
+              "extension": [
+                495,
+                171,
+                638,
+                230
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                85,
+                300,
+                529,
+                454
+              ],
+              "torsoArms": [
+                199,
+                126,
+                512,
+                316
+              ],
+              "head": [
+                448,
+                119,
+                514,
+                194
+              ],
+              "extension": [
+                495,
+                171,
+                638,
+                230
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                272,
+                344,
+                572,
+                492
+              ],
+              "torsoArms": [
+                362,
+                171,
+                542,
+                364
+              ],
+              "head": [
+                445,
+                110,
+                510,
+                183
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                272,
+                344,
+                572,
+                492
+              ],
+              "torsoArms": [
+                362,
+                171,
+                542,
+                364
+              ],
+              "head": [
+                445,
+                110,
+                510,
+                183
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                148,
+                286,
+                517,
+                493
+              ],
+              "torsoArms": [
+                204,
+                139,
+                510,
+                308
+              ],
+              "head": [
+                414,
+                107,
+                479,
+                182
+              ],
+              "extension": [
+                407,
+                243,
+                477,
+                298
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                194,
+                303,
+                656,
+                476
+              ],
+              "torsoArms": [
+                243,
+                169,
+                554,
+                320
+              ],
+              "head": [
+                457,
+                137,
+                521,
+                215
+              ],
+              "extension": [
+                519,
+                255,
+                566,
+                302
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                139,
+                299,
+                523,
+                492
+              ],
+              "torsoArms": [
+                249,
+                161,
+                553,
+                331
+              ],
+              "head": [
+                469,
+                134,
+                535,
+                212
+              ],
+              "extension": [
+                535,
+                309,
+                608,
+                379
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                136,
+                335,
+                657,
+                492
+              ],
+              "torsoArms": [
+                180,
+                168,
+                428,
+                352
+              ],
+              "head": [
+                405,
+                179,
+                468,
+                253
+              ],
+              "extension": [
+                123,
+                209,
+                261,
+                277
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                136,
+                335,
+                657,
+                492
+              ],
+              "torsoArms": [
+                180,
+                168,
+                428,
+                352
+              ],
+              "head": [
+                405,
+                179,
+                468,
+                253
+              ],
+              "extension": [
+                123,
+                209,
+                261,
+                277
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                292,
+                347,
+                592,
+                496
+              ],
+              "torsoArms": [
+                382,
+                195,
+                562,
+                367
+              ],
+              "head": [
+                465,
+                130,
+                530,
+                207
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                292,
+                347,
+                592,
+                496
+              ],
+              "torsoArms": [
+                382,
+                195,
+                562,
+                367
+              ],
+              "head": [
+                465,
+                130,
+                530,
+                207
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                194,
+                303,
+                656,
+                476
+              ],
+              "torsoArms": [
+                243,
+                169,
+                554,
+                320
+              ],
+              "head": [
+                457,
+                137,
+                521,
+                215
+              ],
+              "extension": [
+                519,
+                255,
+                566,
+                302
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                99,
+                277,
+                523,
+                474
+              ],
+              "torsoArms": [
+                251,
+                167,
+                489,
+                326
+              ],
+              "head": [
+                435,
+                132,
+                501,
+                203
+              ],
+              "extension": [
+                183,
+                132,
+                299,
+                189
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                127,
+                273,
+                536,
+                473
+              ],
+              "torsoArms": [
+                248,
+                188,
+                474,
+                344
+              ],
+              "head": [
+                448,
+                154,
+                515,
+                227
+              ],
+              "extension": [
+                226,
+                120,
+                348,
+                181
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                11,
+                277,
+                411,
+                473
+              ],
+              "torsoArms": [
+                244,
+                190,
+                489,
+                320
+              ],
+              "head": [
+                398,
+                160,
+                461,
+                234
+              ],
+              "extension": [
+                461,
+                271,
+                567,
+                349
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                11,
+                277,
+                411,
+                473
+              ],
+              "torsoArms": [
+                244,
+                190,
+                489,
+                320
+              ],
+              "head": [
+                398,
+                160,
+                461,
+                234
+              ],
+              "extension": [
+                461,
+                271,
+                567,
+                349
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                255,
+                320,
+                555,
+                457
+              ],
+              "torsoArms": [
+                345,
+                189,
+                525,
+                340
+              ],
+              "head": [
+                428,
+                125,
+                493,
+                201
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                255,
+                320,
+                555,
+                457
+              ],
+              "torsoArms": [
+                345,
+                189,
+                525,
+                340
+              ],
+              "head": [
+                428,
+                125,
+                493,
+                201
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                99,
+                277,
+                523,
+                474
+              ],
+              "torsoArms": [
+                251,
+                167,
+                489,
+                326
+              ],
+              "head": [
+                435,
+                132,
+                501,
+                203
+              ],
+              "extension": [
+                183,
+                132,
+                299,
+                189
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
                 90,
                 480,
                 667,
@@ -12029,350 +13352,162 @@
           {
             "hurt": {
               "legs": [
-                242,
-                245,
-                552,
-                497
-              ],
-              "torsoArms": [
-                267,
-                96,
-                535,
-                260
-              ],
-              "head": [
-                393,
-                35,
-                450,
-                107
-              ],
-              "extension": [
-                510,
-                194,
-                578,
-                262
-              ]
-            },
-            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                239,
-                245,
-                520,
-                496
-              ],
-              "torsoArms": [
-                228,
-                93,
-                531,
-                261
-              ],
-              "head": [
-                333,
-                33,
-                398,
-                109
-              ],
-              "extension": [
-                489,
-                211,
-                553,
-                274
-              ]
-            },
-            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                176,
-                280,
-                588,
-                489
-              ],
-              "torsoArms": [
-                287,
-                132,
-                500,
-                301
-              ],
-              "head": [
-                450,
-                92,
-                515,
-                159
-              ],
-              "extension": [
-                206,
-                121,
-                327,
-                202
-              ]
-            },
-            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                169,
-                278,
-                520,
-                489
-              ],
-              "torsoArms": [
-                284,
-                94,
-                531,
-                297
-              ],
-              "head": [
-                403,
-                49,
-                468,
-                122
-              ],
-              "extension": [
-                505,
-                238,
-                547,
-                292
-              ]
-            },
-            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                171,
-                258,
-                573,
-                495
-              ],
-              "torsoArms": [
-                211,
-                91,
-                540,
-                284
-              ],
-              "head": [
-                381,
-                27,
-                439,
-                102
-              ],
-              "extension": [
-                510,
-                228,
-                580,
-                295
-              ]
-            },
-            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                148,
+                177,
                 286,
-                517,
-                493
-              ],
-              "torsoArms": [
-                204,
-                139,
-                510,
-                308
-              ],
-              "head": [
-                414,
-                107,
-                479,
-                182
-              ],
-              "extension": [
-                407,
-                243,
-                477,
-                298
-              ]
-            },
-            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                194,
-                303,
-                656,
-                476
-              ],
-              "torsoArms": [
-                243,
-                169,
-                554,
-                320
-              ],
-              "head": [
-                457,
-                137,
-                521,
-                215
-              ],
-              "extension": [
-                519,
-                255,
-                566,
-                302
-              ]
-            },
-            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                99,
-                277,
-                523,
-                474
-              ],
-              "torsoArms": [
-                251,
-                167,
-                489,
-                326
-              ],
-              "head": [
-                435,
-                132,
-                501,
-                203
-              ],
-              "extension": [
-                183,
-                132,
-                299,
-                189
-              ]
-            },
-            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                276,
-                195,
-                530,
-                498
-              ],
-              "torsoArms": [
-                263,
-                91,
-                564,
-                218
-              ],
-              "head": [
-                415,
-                30,
-                476,
-                106
-              ],
-              "extension": [
-                474,
-                134,
-                534,
-                180
-              ]
-            },
-            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                268,
-                150,
-                553,
-                483
-              ],
-              "torsoArms": [
-                195,
-                99,
-                428,
-                216
-              ],
-              "head": [
-                315,
-                29,
-                378,
-                100
-              ],
-              "extension": [
-                199,
-                164,
-                264,
-                265
-              ]
-            },
-            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                262,
-                230,
-                584,
-                479
-              ],
-              "torsoArms": [
-                288,
-                95,
-                595,
-                240
-              ],
-              "head": [
-                401,
-                28,
-                467,
-                97
-              ],
-              "extension": [
-                200,
-                129,
-                326,
-                205
-              ]
-            },
-            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
-          },
-          {
-            "hurt": {
-              "legs": [
-                355,
-                175,
-                552,
-                456
+                545,
+                490
               ],
               "torsoArms": [
                 267,
-                73,
-                519,
-                199
+                147,
+                564,
+                296
               ],
               "head": [
-                475,
-                85,
-                536,
-                157
+                451,
+                106,
+                512,
+                180
               ],
               "extension": [
-                301,
-                27,
-                433,
-                151
+                518,
+                124,
+                567,
+                199
               ]
             },
             "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                123,
+                271,
+                530,
+                485
+              ],
+              "torsoArms": [
+                239,
+                136,
+                546,
+                282
+              ],
+              "head": [
+                454,
+                103,
+                514,
+                178
+              ],
+              "extension": [
+                509,
+                146,
+                555,
+                198
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                92,
+                274,
+                526,
+                485
+              ],
+              "torsoArms": [
+                223,
+                147,
+                465,
+                291
+              ],
+              "head": [
+                407,
+                120,
+                470,
+                196
+              ],
+              "extension": [
+                460,
+                59,
+                595,
+                154
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                92,
+                274,
+                526,
+                485
+              ],
+              "torsoArms": [
+                223,
+                147,
+                465,
+                291
+              ],
+              "head": [
+                407,
+                120,
+                470,
+                196
+              ],
+              "extension": [
+                460,
+                59,
+                595,
+                154
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                246,
+                276,
+                546,
+                485
+              ],
+              "torsoArms": [
+                336,
+                165,
+                516,
+                296
+              ],
+              "head": [
+                420,
+                100,
+                482,
+                177
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                246,
+                276,
+                546,
+                485
+              ],
+              "torsoArms": [
+                336,
+                165,
+                516,
+                296
+              ],
+              "head": [
+                420,
+                100,
+                482,
+                177
+              ]
+            }
           },
           {
             "hurt": {
@@ -12435,6 +13570,348 @@
           {
             "hurt": {
               "legs": [
+                260,
+                120,
+                541,
+                490
+              ],
+              "torsoArms": [
+                183,
+                93,
+                454,
+                247
+              ],
+              "head": [
+                335,
+                24,
+                399,
+                95
+              ],
+              "extension": [
+                514,
+                199,
+                585,
+                258
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                272,
+                152,
+                690,
+                489
+              ],
+              "torsoArms": [
+                165,
+                100,
+                421,
+                269
+              ],
+              "head": [
+                275,
+                43,
+                340,
+                112
+              ],
+              "extension": [
+                118,
+                191,
+                234,
+                285
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                272,
+                152,
+                690,
+                489
+              ],
+              "torsoArms": [
+                165,
+                100,
+                421,
+                269
+              ],
+              "head": [
+                275,
+                43,
+                340,
+                112
+              ],
+              "extension": [
+                118,
+                191,
+                234,
+                285
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                137,
+                279,
+                437,
+                489
+              ],
+              "torsoArms": [
+                227,
+                99,
+                407,
+                299
+              ],
+              "head": [
+                310,
+                37,
+                374,
+                111
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                137,
+                279,
+                437,
+                489
+              ],
+              "torsoArms": [
+                227,
+                99,
+                407,
+                299
+              ],
+              "head": [
+                310,
+                37,
+                374,
+                111
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                247,
+                179,
+                538,
+                496
+              ],
+              "torsoArms": [
+                232,
+                91,
+                513,
+                226
+              ],
+              "head": [
+                309,
+                30,
+                371,
+                108
+              ],
+              "extension": [
+                487,
+                131,
+                575,
+                186
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                256,
+                250,
+                532,
+                484
+              ],
+              "torsoArms": [
+                280,
+                91,
+                501,
+                265
+              ],
+              "head": [
+                386,
+                27,
+                434,
+                96
+              ],
+              "extension": [
+                474,
+                224,
+                524,
+                282
+              ]
+            },
+            "extensionFor": "Knife hand/forearm only; blade, hook, pole, hair and cloth excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                132,
+                274,
+                432,
+                481
+              ],
+              "torsoArms": [
+                222,
+                141,
+                402,
+                294
+              ],
+              "head": [
+                308,
+                82,
+                366,
+                153
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                157,
+                274,
+                457,
+                481
+              ],
+              "torsoArms": [
+                247,
+                144,
+                427,
+                294
+              ],
+              "head": [
+                335,
+                88,
+                390,
+                156
+              ],
+              "extension": [
+                370,
+                161,
+                487,
+                221
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                157,
+                274,
+                457,
+                481
+              ],
+              "torsoArms": [
+                247,
+                144,
+                427,
+                294
+              ],
+              "head": [
+                335,
+                88,
+                390,
+                156
+              ],
+              "extension": [
+                370,
+                161,
+                487,
+                221
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                107,
+                275,
+                407,
+                482
+              ],
+              "torsoArms": [
+                197,
+                146,
+                377,
+                295
+              ],
+              "head": [
+                283,
+                82,
+                342,
+                158
+              ],
+              "extension": [
+                322,
+                163,
+                447,
+                223
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                93,
+                274,
+                393,
+                481
+              ],
+              "torsoArms": [
+                183,
+                113,
+                363,
+                294
+              ],
+              "head": [
+                270,
+                48,
+                326,
+                125
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                73,
+                275,
+                373,
+                482
+              ],
+              "torsoArms": [
+                163,
+                105,
+                343,
+                295
+              ],
+              "head": [
+                251,
+                41,
+                306,
+                117
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
                 181,
                 282,
                 541,
@@ -12457,6 +13934,93 @@
                 231,
                 564,
                 288
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                174,
+                282,
+                599,
+                485
+              ],
+              "torsoArms": [
+                302,
+                149,
+                607,
+                300
+              ],
+              "head": [
+                395,
+                74,
+                450,
+                143
+              ],
+              "extension": [
+                266,
+                39,
+                403,
+                195
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                105,
+                277,
+                502,
+                486
+              ],
+              "torsoArms": [
+                235,
+                163,
+                529,
+                300
+              ],
+              "head": [
+                460,
+                119,
+                518,
+                191
+              ],
+              "extension": [
+                503,
+                234,
+                615,
+                302
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                105,
+                277,
+                502,
+                486
+              ],
+              "torsoArms": [
+                235,
+                163,
+                529,
+                300
+              ],
+              "head": [
+                460,
+                119,
+                518,
+                191
+              ],
+              "extension": [
+                503,
+                234,
+                615,
+                302
               ]
             },
             "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
@@ -12493,6 +14057,1075 @@
           {
             "hurt": {
               "legs": [
+                181,
+                282,
+                541,
+                489
+              ],
+              "torsoArms": [
+                264,
+                105,
+                547,
+                301
+              ],
+              "head": [
+                394,
+                43,
+                456,
+                118
+              ],
+              "extension": [
+                510,
+                231,
+                564,
+                288
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                181,
+                282,
+                541,
+                489
+              ],
+              "torsoArms": [
+                264,
+                105,
+                547,
+                301
+              ],
+              "head": [
+                394,
+                43,
+                456,
+                118
+              ],
+              "extension": [
+                510,
+                231,
+                564,
+                288
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                256,
+                250,
+                532,
+                484
+              ],
+              "torsoArms": [
+                280,
+                91,
+                501,
+                265
+              ],
+              "head": [
+                386,
+                27,
+                434,
+                96
+              ],
+              "extension": [
+                474,
+                224,
+                524,
+                282
+              ]
+            },
+            "extensionFor": "Knife hand/forearm only; blade, hook, pole, hair and cloth excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                153,
+                270,
+                453,
+                474
+              ],
+              "torsoArms": [
+                243,
+                131,
+                423,
+                290
+              ],
+              "head": [
+                329,
+                69,
+                387,
+                143
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                199,
+                270,
+                494,
+                474
+              ],
+              "torsoArms": [
+                289,
+                161,
+                469,
+                290
+              ],
+              "head": [
+                375,
+                98,
+                434,
+                173
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                199,
+                270,
+                494,
+                474
+              ],
+              "torsoArms": [
+                289,
+                161,
+                469,
+                290
+              ],
+              "head": [
+                375,
+                98,
+                434,
+                173
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                142,
+                271,
+                442,
+                475
+              ],
+              "torsoArms": [
+                232,
+                151,
+                412,
+                291
+              ],
+              "head": [
+                318,
+                90,
+                376,
+                163
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                136,
+                271,
+                436,
+                475
+              ],
+              "torsoArms": [
+                226,
+                140,
+                406,
+                291
+              ],
+              "head": [
+                313,
+                78,
+                370,
+                152
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                256,
+                250,
+                532,
+                484
+              ],
+              "torsoArms": [
+                280,
+                91,
+                501,
+                265
+              ],
+              "head": [
+                386,
+                27,
+                434,
+                96
+              ],
+              "extension": [
+                474,
+                224,
+                524,
+                282
+              ]
+            },
+            "extensionFor": "Knife hand/forearm only; blade, hook, pole, hair and cloth excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                256,
+                250,
+                532,
+                484
+              ],
+              "torsoArms": [
+                280,
+                91,
+                501,
+                265
+              ],
+              "head": [
+                386,
+                27,
+                434,
+                96
+              ],
+              "extension": [
+                474,
+                224,
+                524,
+                282
+              ]
+            },
+            "extensionFor": "Knife hand/forearm only; blade, hook, pole, hair and cloth excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                85,
+                271,
+                385,
+                475
+              ],
+              "torsoArms": [
+                175,
+                150,
+                355,
+                291
+              ],
+              "head": [
+                262,
+                88,
+                319,
+                162
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                67,
+                271,
+                367,
+                475
+              ],
+              "torsoArms": [
+                157,
+                144,
+                337,
+                291
+              ],
+              "head": [
+                243,
+                81,
+                301,
+                156
+              ],
+              "extension": [
+                281,
+                161,
+                406,
+                221
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                67,
+                271,
+                367,
+                475
+              ],
+              "torsoArms": [
+                157,
+                144,
+                337,
+                291
+              ],
+              "head": [
+                243,
+                81,
+                301,
+                156
+              ],
+              "extension": [
+                281,
+                161,
+                406,
+                221
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                47,
+                269,
+                347,
+                472
+              ],
+              "torsoArms": [
+                137,
+                132,
+                317,
+                289
+              ],
+              "head": [
+                223,
+                69,
+                282,
+                144
+              ],
+              "extension": [
+                262,
+                149,
+                387,
+                209
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                58,
+                269,
+                358,
+                472
+              ],
+              "torsoArms": [
+                148,
+                127,
+                328,
+                289
+              ],
+              "head": [
+                234,
+                65,
+                292,
+                139
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                256,
+                250,
+                532,
+                484
+              ],
+              "torsoArms": [
+                280,
+                91,
+                501,
+                265
+              ],
+              "head": [
+                386,
+                27,
+                434,
+                96
+              ],
+              "extension": [
+                474,
+                224,
+                524,
+                282
+              ]
+            },
+            "extensionFor": "Knife hand/forearm only; blade, hook, pole, hair and cloth excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                276,
+                195,
+                530,
+                498
+              ],
+              "torsoArms": [
+                263,
+                91,
+                564,
+                218
+              ],
+              "head": [
+                415,
+                30,
+                476,
+                106
+              ],
+              "extension": [
+                474,
+                134,
+                534,
+                180
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                328,
+                227,
+                537,
+                468
+              ],
+              "torsoArms": [
+                252,
+                94,
+                527,
+                246
+              ],
+              "head": [
+                397,
+                32,
+                457,
+                106
+              ],
+              "extension": [
+                470,
+                125,
+                527,
+                178
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                239,
+                277,
+                529,
+                505
+              ],
+              "torsoArms": [
+                252,
+                122,
+                540,
+                291
+              ],
+              "head": [
+                438,
+                71,
+                501,
+                146
+              ],
+              "extension": [
+                531,
+                192,
+                609,
+                254
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                239,
+                277,
+                529,
+                505
+              ],
+              "torsoArms": [
+                252,
+                122,
+                540,
+                291
+              ],
+              "head": [
+                438,
+                71,
+                501,
+                146
+              ],
+              "extension": [
+                531,
+                192,
+                609,
+                254
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                273,
+                279,
+                508,
+                479
+              ],
+              "torsoArms": [
+                318,
+                99,
+                498,
+                299
+              ],
+              "head": [
+                400,
+                38,
+                467,
+                111
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                273,
+                279,
+                508,
+                479
+              ],
+              "torsoArms": [
+                318,
+                99,
+                498,
+                299
+              ],
+              "head": [
+                400,
+                38,
+                467,
+                111
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                276,
+                195,
+                530,
+                498
+              ],
+              "torsoArms": [
+                263,
+                91,
+                564,
+                218
+              ],
+              "head": [
+                415,
+                30,
+                476,
+                106
+              ],
+              "extension": [
+                474,
+                134,
+                534,
+                180
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                268,
+                150,
+                553,
+                483
+              ],
+              "torsoArms": [
+                195,
+                99,
+                428,
+                216
+              ],
+              "head": [
+                315,
+                29,
+                378,
+                100
+              ],
+              "extension": [
+                199,
+                164,
+                264,
+                265
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                331,
+                143,
+                546,
+                483
+              ],
+              "torsoArms": [
+                201,
+                91,
+                452,
+                265
+              ],
+              "head": [
+                305,
+                36,
+                370,
+                101
+              ],
+              "extension": [
+                147,
+                179,
+                241,
+                285
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                288,
+                179,
+                680,
+                439
+              ],
+              "torsoArms": [
+                180,
+                93,
+                413,
+                250
+              ],
+              "head": [
+                281,
+                47,
+                345,
+                114
+              ],
+              "extension": [
+                98,
+                193,
+                211,
+                278
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                288,
+                179,
+                680,
+                439
+              ],
+              "torsoArms": [
+                180,
+                93,
+                413,
+                250
+              ],
+              "head": [
+                281,
+                47,
+                345,
+                114
+              ],
+              "extension": [
+                98,
+                193,
+                211,
+                278
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                273,
+                279,
+                508,
+                479
+              ],
+              "torsoArms": [
+                318,
+                99,
+                498,
+                299
+              ],
+              "head": [
+                400,
+                38,
+                467,
+                111
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                273,
+                279,
+                508,
+                479
+              ],
+              "torsoArms": [
+                318,
+                99,
+                498,
+                299
+              ],
+              "head": [
+                400,
+                38,
+                467,
+                111
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                268,
+                150,
+                553,
+                483
+              ],
+              "torsoArms": [
+                195,
+                99,
+                428,
+                216
+              ],
+              "head": [
+                315,
+                29,
+                378,
+                100
+              ],
+              "extension": [
+                199,
+                164,
+                264,
+                265
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                262,
+                230,
+                584,
+                479
+              ],
+              "torsoArms": [
+                288,
+                95,
+                595,
+                240
+              ],
+              "head": [
+                401,
+                28,
+                467,
+                97
+              ],
+              "extension": [
+                200,
+                129,
+                326,
+                205
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                360,
+                185,
+                535,
+                408
+              ],
+              "torsoArms": [
+                262,
+                81,
+                547,
+                218
+              ],
+              "head": [
+                410,
+                30,
+                472,
+                95
+              ],
+              "extension": [
+                538,
+                184,
+                598,
+                247
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                76,
+                201,
+                443,
+                461
+              ],
+              "torsoArms": [
+                256,
+                97,
+                522,
+                225
+              ],
+              "head": [
+                397,
+                48,
+                457,
+                115
+              ],
+              "extension": [
+                492,
+                125,
+                555,
+                168
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                76,
+                201,
+                443,
+                461
+              ],
+              "torsoArms": [
+                256,
+                97,
+                522,
+                225
+              ],
+              "head": [
+                397,
+                48,
+                457,
+                115
+              ],
+              "extension": [
+                492,
+                125,
+                555,
+                168
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                269,
+                279,
+                504,
+                479
+              ],
+              "torsoArms": [
+                314,
+                101,
+                494,
+                299
+              ],
+              "head": [
+                398,
+                40,
+                461,
+                113
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                269,
+                279,
+                504,
+                479
+              ],
+              "torsoArms": [
+                314,
+                101,
+                494,
+                299
+              ],
+              "head": [
+                398,
+                40,
+                461,
+                113
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                262,
+                230,
+                584,
+                479
+              ],
+              "torsoArms": [
+                288,
+                95,
+                595,
+                240
+              ],
+              "head": [
+                401,
+                28,
+                467,
+                97
+              ],
+              "extension": [
+                200,
+                129,
+                326,
+                205
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                355,
+                175,
+                552,
+                456
+              ],
+              "torsoArms": [
+                267,
+                73,
+                519,
+                199
+              ],
+              "head": [
+                475,
+                85,
+                536,
+                157
+              ],
+              "extension": [
+                301,
+                27,
+                433,
+                151
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                400,
+                199,
+                591,
+                474
+              ],
+              "torsoArms": [
+                260,
+                132,
+                476,
+                279
+              ],
+              "head": [
+                336,
+                70,
+                398,
+                132
+              ],
+              "extension": [
+                301,
+                11,
+                436,
+                134
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                236,
+                245,
+                514,
+                489
+              ],
+              "torsoArms": [
+                240,
+                142,
+                484,
+                280
+              ],
+              "head": [
+                420,
+                134,
+                479,
+                201
+              ],
+              "extension": [
+                427,
+                241,
+                507,
+                333
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
                 234,
                 193,
                 586,
@@ -12522,28 +15155,1837 @@
           {
             "hurt": {
               "legs": [
-                143,
-                290,
-                540,
+                234,
+                193,
+                586,
+                372
+              ],
+              "torsoArms": [
+                287,
+                107,
+                479,
+                250
+              ],
+              "head": [
+                426,
+                91,
+                494,
+                165
+              ],
+              "extension": [
+                208,
+                65,
+                343,
+                111
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                275,
+                279,
+                510,
+                479
+              ],
+              "torsoArms": [
+                320,
+                176,
+                500,
+                299
+              ],
+              "head": [
+                405,
+                113,
+                465,
+                188
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                269,
+                279,
+                504,
+                479
+              ],
+              "torsoArms": [
+                314,
+                101,
+                494,
+                299
+              ],
+              "head": [
+                398,
+                40,
+                461,
+                113
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                355,
+                175,
+                552,
+                456
+              ],
+              "torsoArms": [
+                267,
+                73,
+                519,
+                199
+              ],
+              "head": [
+                475,
+                85,
+                536,
+                157
+              ],
+              "extension": [
+                301,
+                27,
+                433,
+                151
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                174,
+                136,
+                293,
+                251
+              ],
+              "torsoArms": [
+                104,
+                70,
+                281,
+                178
+              ],
+              "head": [
+                236,
+                58,
+                267,
+                94
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                131,
+                274,
+                366,
+                474
+              ],
+              "torsoArms": [
+                176,
+                139,
+                356,
+                294
+              ],
+              "head": [
+                262,
+                79,
+                320,
+                151
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                139,
+                274,
+                374,
+                474
+              ],
+              "torsoArms": [
+                184,
+                174,
+                364,
+                294
+              ],
+              "head": [
+                270,
+                112,
+                329,
+                186
+              ],
+              "extension": [
+                309,
+                191,
+                434,
+                251
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                139,
+                274,
+                374,
+                474
+              ],
+              "torsoArms": [
+                184,
+                174,
+                364,
+                294
+              ],
+              "head": [
+                270,
+                112,
+                329,
+                186
+              ],
+              "extension": [
+                309,
+                191,
+                434,
+                251
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                135,
+                274,
+                370,
+                474
+              ],
+              "torsoArms": [
+                180,
+                134,
+                360,
+                294
+              ],
+              "head": [
+                267,
+                71,
+                324,
+                146
+              ],
+              "extension": [
+                304,
+                151,
+                429,
+                211
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                135,
+                274,
+                370,
+                474
+              ],
+              "torsoArms": [
+                180,
+                108,
+                360,
+                294
+              ],
+              "head": [
+                267,
+                43,
+                324,
+                120
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                174,
+                136,
+                293,
+                251
+              ],
+              "torsoArms": [
+                104,
+                70,
+                281,
+                178
+              ],
+              "head": [
+                236,
+                58,
+                267,
+                94
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                119,
+                337,
+                419,
+                482
+              ],
+              "torsoArms": [
+                209,
+                139,
+                389,
+                357
+              ],
+              "head": [
+                296,
+                77,
+                353,
+                151
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                33,
+                337,
+                333,
+                482
+              ],
+              "torsoArms": [
+                123,
+                109,
+                303,
+                357
+              ],
+              "head": [
+                210,
+                48,
+                267,
+                121
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                33,
+                337,
+                333,
+                482
+              ],
+              "torsoArms": [
+                123,
+                109,
+                303,
+                357
+              ],
+              "head": [
+                210,
+                48,
+                267,
+                121
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                68,
+                343,
+                368,
+                490
+              ],
+              "torsoArms": [
+                158,
+                108,
+                338,
+                363
+              ],
+              "head": [
+                245,
+                45,
+                302,
+                120
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                45,
+                342,
+                345,
+                488
+              ],
+              "torsoArms": [
+                135,
+                108,
+                315,
+                362
+              ],
+              "head": [
+                222,
+                48,
+                278,
+                120
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                67,
+                343,
+                367,
+                490
+              ],
+              "torsoArms": [
+                157,
+                99,
+                337,
+                363
+              ],
+              "head": [
+                245,
+                36,
+                300,
+                111
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                72,
+                271,
+                372,
+                476
+              ],
+              "torsoArms": [
+                162,
+                109,
+                342,
+                291
+              ],
+              "head": [
+                249,
+                43,
+                305,
+                121
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                94,
+                271,
+                394,
+                476
+              ],
+              "torsoArms": [
+                184,
+                132,
+                364,
+                291
+              ],
+              "head": [
+                271,
+                68,
+                328,
+                144
+              ],
+              "extension": [
+                308,
+                149,
+                433,
+                209
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                89,
+                271,
+                389,
+                476
+              ],
+              "torsoArms": [
+                179,
+                118,
+                359,
+                291
+              ],
+              "head": [
+                266,
+                55,
+                323,
+                130
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                90,
+                271,
+                390,
+                476
+              ],
+              "torsoArms": [
+                180,
+                127,
+                360,
+                291
+              ],
+              "head": [
+                267,
+                63,
+                324,
+                139
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                256,
+                250,
+                532,
+                484
+              ],
+              "torsoArms": [
+                280,
+                91,
+                501,
+                265
+              ],
+              "head": [
+                386,
+                27,
+                434,
+                96
+              ],
+              "extension": [
+                474,
+                224,
+                524,
+                282
+              ]
+            },
+            "extensionFor": "Knife hand/forearm only; blade, hook, pole, hair and cloth excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                94,
+                271,
+                394,
+                476
+              ],
+              "torsoArms": [
+                184,
+                132,
+                364,
+                291
+              ],
+              "head": [
+                271,
+                68,
+                328,
+                144
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                81,
+                271,
+                381,
+                476
+              ],
+              "torsoArms": [
+                171,
+                115,
+                351,
+                291
+              ],
+              "head": [
+                258,
+                51,
+                315,
+                127
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                104,
+                271,
+                404,
+                476
+              ],
+              "torsoArms": [
+                194,
+                127,
+                374,
+                291
+              ],
+              "head": [
+                280,
+                63,
+                338,
+                139
+              ],
+              "extension": [
+                318,
+                144,
+                443,
+                204
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                104,
+                271,
+                404,
+                476
+              ],
+              "torsoArms": [
+                194,
+                127,
+                374,
+                291
+              ],
+              "head": [
+                280,
+                63,
+                338,
+                139
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                89,
+                271,
+                389,
+                476
+              ],
+              "torsoArms": [
+                179,
+                118,
+                359,
+                291
+              ],
+              "head": [
+                266,
+                55,
+                323,
+                130
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                90,
+                271,
+                390,
+                476
+              ],
+              "torsoArms": [
+                180,
+                127,
+                360,
+                291
+              ],
+              "head": [
+                267,
+                63,
+                324,
+                139
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                78,
+                276,
+                378,
+                484
+              ],
+              "torsoArms": [
+                168,
+                92,
+                348,
+                296
+              ],
+              "head": [
+                255,
+                26,
+                312,
+                104
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                99,
+                276,
+                399,
+                484
+              ],
+              "torsoArms": [
+                189,
+                109,
+                369,
+                296
+              ],
+              "head": [
+                275,
+                45,
+                334,
+                121
+              ],
+              "extension": [
+                314,
+                126,
+                439,
+                186
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                100,
+                275,
+                400,
+                482
+              ],
+              "torsoArms": [
+                190,
+                110,
+                370,
+                295
+              ],
+              "head": [
+                276,
+                45,
+                335,
+                122
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                81,
+                275,
+                381,
+                482
+              ],
+              "torsoArms": [
+                171,
+                99,
+                351,
+                295
+              ],
+              "head": [
+                258,
+                34,
+                315,
+                111
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                256,
+                250,
+                532,
+                484
+              ],
+              "torsoArms": [
+                280,
+                91,
+                501,
+                265
+              ],
+              "head": [
+                386,
+                27,
+                434,
+                96
+              ],
+              "extension": [
+                474,
+                224,
+                524,
+                282
+              ]
+            },
+            "extensionFor": "Knife hand/forearm only; blade, hook, pole, hair and cloth excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                99,
+                276,
+                399,
+                484
+              ],
+              "torsoArms": [
+                189,
+                109,
+                369,
+                296
+              ],
+              "head": [
+                275,
+                45,
+                334,
+                121
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                127,
+                276,
+                427,
+                484
+              ],
+              "torsoArms": [
+                217,
+                135,
+                397,
+                296
+              ],
+              "head": [
+                302,
+                70,
+                363,
+                147
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                111,
+                275,
+                411,
+                482
+              ],
+              "torsoArms": [
+                201,
+                165,
+                381,
+                295
+              ],
+              "head": [
+                286,
+                100,
+                346,
+                177
+              ],
+              "extension": [
+                326,
+                182,
+                451,
+                242
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                111,
+                275,
+                411,
+                482
+              ],
+              "torsoArms": [
+                201,
+                165,
+                381,
+                295
+              ],
+              "head": [
+                286,
+                100,
+                346,
+                177
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                100,
+                275,
+                400,
+                482
+              ],
+              "torsoArms": [
+                190,
+                110,
+                370,
+                295
+              ],
+              "head": [
+                276,
+                45,
+                335,
+                122
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                81,
+                275,
+                381,
+                482
+              ],
+              "torsoArms": [
+                171,
+                99,
+                351,
+                295
+              ],
+              "head": [
+                258,
+                34,
+                315,
+                111
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                256,
+                250,
+                532,
+                484
+              ],
+              "torsoArms": [
+                280,
+                91,
+                501,
+                265
+              ],
+              "head": [
+                386,
+                27,
+                434,
+                96
+              ],
+              "extension": [
+                474,
+                224,
+                524,
+                282
+              ]
+            },
+            "extensionFor": "Knife hand/forearm only; blade, hook, pole, hair and cloth excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                125,
+                274,
+                425,
+                480
+              ],
+              "torsoArms": [
+                215,
+                152,
+                395,
+                294
+              ],
+              "head": [
+                301,
+                94,
+                359,
+                164
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                116,
+                274,
+                416,
+                480
+              ],
+              "torsoArms": [
+                206,
+                122,
+                386,
+                294
+              ],
+              "head": [
+                293,
+                64,
+                350,
+                134
+              ],
+              "extension": [
+                330,
+                139,
+                455,
+                199
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                116,
+                274,
+                416,
+                480
+              ],
+              "torsoArms": [
+                206,
+                122,
+                386,
+                294
+              ],
+              "head": [
+                293,
+                64,
+                350,
+                134
+              ],
+              "extension": [
+                330,
+                139,
+                455,
+                199
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                116,
+                274,
+                416,
+                480
+              ],
+              "torsoArms": [
+                206,
+                122,
+                386,
+                294
+              ],
+              "head": [
+                293,
+                64,
+                350,
+                134
+              ],
+              "extension": [
+                330,
+                139,
+                455,
+                199
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                80,
+                274,
+                380,
+                480
+              ],
+              "torsoArms": [
+                170,
+                124,
+                350,
+                294
+              ],
+              "head": [
+                258,
+                65,
+                313,
+                136
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                75,
+                274,
+                375,
+                480
+              ],
+              "torsoArms": [
+                165,
+                120,
+                345,
+                294
+              ],
+              "head": [
+                254,
+                62,
+                307,
+                132
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                174,
+                136,
+                293,
+                251
+              ],
+              "torsoArms": [
+                104,
+                70,
+                281,
+                178
+              ],
+              "head": [
+                236,
+                58,
+                267,
+                94
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                179,
+                274,
+                414,
+                474
+              ],
+              "torsoArms": [
+                224,
+                126,
+                404,
+                294
+              ],
+              "head": [
+                312,
+                64,
+                367,
+                138
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                177,
+                274,
+                412,
+                474
+              ],
+              "torsoArms": [
+                222,
+                148,
+                402,
+                294
+              ],
+              "head": [
+                309,
+                83,
+                366,
+                160
+              ],
+              "extension": [
+                346,
+                165,
+                471,
+                225
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                177,
+                274,
+                412,
+                474
+              ],
+              "torsoArms": [
+                222,
+                148,
+                402,
+                294
+              ],
+              "head": [
+                309,
+                83,
+                366,
+                160
+              ],
+              "extension": [
+                346,
+                165,
+                471,
+                225
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                138,
+                274,
+                373,
+                474
+              ],
+              "torsoArms": [
+                183,
+                139,
+                363,
+                294
+              ],
+              "head": [
+                269,
+                76,
+                327,
+                151
+              ],
+              "extension": [
+                307,
+                156,
+                432,
+                216
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                138,
+                274,
+                373,
+                474
+              ],
+              "torsoArms": [
+                183,
+                119,
+                363,
+                294
+              ],
+              "head": [
+                270,
+                57,
+                327,
+                131
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                135,
+                274,
+                370,
+                474
+              ],
+              "torsoArms": [
+                180,
+                123,
+                360,
+                294
+              ],
+              "head": [
+                268,
+                61,
+                323,
+                135
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                256,
+                250,
+                532,
+                484
+              ],
+              "torsoArms": [
+                280,
+                91,
+                501,
+                265
+              ],
+              "head": [
+                386,
+                27,
+                434,
+                96
+              ],
+              "extension": [
+                474,
+                224,
+                524,
+                282
+              ]
+            },
+            "extensionFor": "Knife hand/forearm only; blade, hook, pole, hair and cloth excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                77,
+                270,
+                377,
+                474
+              ],
+              "torsoArms": [
+                167,
+                120,
+                347,
+                290
+              ],
+              "head": [
+                255,
+                61,
+                310,
+                132
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                89,
+                270,
+                389,
+                473
+              ],
+              "torsoArms": [
+                179,
+                112,
+                359,
+                290
+              ],
+              "head": [
+                267,
+                52,
+                322,
+                124
+              ],
+              "extension": [
+                302,
+                129,
+                427,
+                189
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                89,
+                270,
+                389,
+                473
+              ],
+              "torsoArms": [
+                179,
+                112,
+                359,
+                290
+              ],
+              "head": [
+                267,
+                52,
+                322,
+                124
+              ],
+              "extension": [
+                302,
+                129,
+                427,
+                189
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                63,
+                270,
+                363,
+                474
+              ],
+              "torsoArms": [
+                153,
+                131,
+                333,
+                290
+              ],
+              "head": [
+                240,
+                70,
+                296,
+                143
+              ],
+              "extension": [
+                276,
+                148,
+                401,
+                208
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                74,
+                270,
+                374,
+                474
+              ],
+              "torsoArms": [
+                164,
+                107,
+                344,
+                290
+              ],
+              "head": [
+                251,
+                47,
+                308,
+                119
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                73,
+                270,
+                373,
+                474
+              ],
+              "torsoArms": [
+                163,
+                101,
+                343,
+                290
+              ],
+              "head": [
+                250,
+                40,
+                307,
+                113
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                174,
+                136,
+                293,
+                251
+              ],
+              "torsoArms": [
+                104,
+                70,
+                281,
+                178
+              ],
+              "head": [
+                236,
+                58,
+                267,
+                94
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                139,
+                274,
+                374,
+                474
+              ],
+              "torsoArms": [
+                184,
+                153,
+                364,
+                294
+              ],
+              "head": [
+                270,
+                93,
+                328,
+                165
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                141,
+                274,
+                376,
+                474
+              ],
+              "torsoArms": [
+                186,
+                140,
+                366,
+                294
+              ],
+              "head": [
+                272,
+                79,
+                330,
+                152
+              ],
+              "extension": [
+                310,
+                157,
+                435,
+                217
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                141,
+                274,
+                376,
+                474
+              ],
+              "torsoArms": [
+                186,
+                140,
+                366,
+                294
+              ],
+              "head": [
+                272,
+                79,
+                330,
+                152
+              ],
+              "extension": [
+                310,
+                157,
+                435,
+                217
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                132,
+                274,
+                367,
+                474
+              ],
+              "torsoArms": [
+                177,
+                125,
+                357,
+                294
+              ],
+              "head": [
+                263,
+                64,
+                321,
+                137
+              ],
+              "extension": [
+                301,
+                142,
+                426,
+                202
+              ]
+            },
+            "extensionFor": "Extended forearm/hand only. Hook, knife, rope, cloth and effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                139,
+                274,
+                374,
+                474
+              ],
+              "torsoArms": [
+                184,
+                113,
+                364,
+                294
+              ],
+              "head": [
+                271,
+                53,
+                327,
+                125
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                127,
+                274,
+                362,
+                474
+              ],
+              "torsoArms": [
+                172,
+                111,
+                352,
+                294
+              ],
+              "head": [
+                259,
+                48,
+                316,
+                123
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                176,
+                280,
+                588,
                 489
               ],
               "torsoArms": [
-                306,
-                105,
-                561,
-                305
+                287,
+                132,
+                500,
+                301
               ],
               "head": [
-                462,
+                450,
                 92,
-                530,
-                166
+                515,
+                159
               ],
               "extension": [
-                530,
-                220,
-                594,
-                307
+                206,
+                121,
+                327,
+                202
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                174,
+                277,
+                567,
+                480
+              ],
+              "torsoArms": [
+                266,
+                132,
+                508,
+                340
+              ],
+              "head": [
+                464,
+                100,
+                529,
+                177
+              ],
+              "extension": [
+                244,
+                125,
+                349,
+                198
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                174,
+                263,
+                533,
+                480
+              ],
+              "torsoArms": [
+                274,
+                108,
+                522,
+                287
+              ],
+              "head": [
+                408,
+                51,
+                469,
+                122
+              ],
+              "extension": [
+                485,
+                167,
+                525,
+                224
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                174,
+                263,
+                533,
+                480
+              ],
+              "torsoArms": [
+                274,
+                108,
+                522,
+                287
+              ],
+              "head": [
+                408,
+                51,
+                469,
+                122
+              ],
+              "extension": [
+                485,
+                167,
+                525,
+                224
+              ]
+            },
+            "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."
+          },
+          {
+            "hurt": {
+              "legs": [
+                234,
+                276,
+                534,
+                485
+              ],
+              "torsoArms": [
+                324,
+                93,
+                504,
+                296
+              ],
+              "head": [
+                410,
+                30,
+                468,
+                105
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                234,
+                276,
+                534,
+                485
+              ],
+              "torsoArms": [
+                324,
+                93,
+                504,
+                296
+              ],
+              "head": [
+                410,
+                30,
+                468,
+                105
+              ]
+            }
+          },
+          {
+            "hurt": {
+              "legs": [
+                176,
+                280,
+                588,
+                489
+              ],
+              "torsoArms": [
+                287,
+                132,
+                500,
+                301
+              ],
+              "head": [
+                450,
+                92,
+                515,
+                159
+              ],
+              "extension": [
+                206,
+                121,
+                327,
+                202
               ]
             },
             "extensionFor": "Extended arm/hand only. Hook, knife, hair, cloth and weapon effects excluded."

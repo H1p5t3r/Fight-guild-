@@ -12,6 +12,8 @@ on:
       - 'godot/Content/Fonts/**'
       - 'scripts/build-workbench.mjs'
       - 'scripts/build-fillet-motion-review.mjs'
+      - 'scripts/build-shark-motion-review.mjs'
+      - 'art/characters/shark-kit-v2/**'
       - 'art/characters/fillet-v1/production/ground-twos/*.json'
       - 'art/characters/fillet-v1/production/sweep-timing/*.json'
       - 'art/characters/fillet-v1/production/kit-timing/*.json'
@@ -60,6 +62,11 @@ jobs:
         run: node tests/workbench-delivery-browser.mjs
       - name: Verify all Fillet animation review clips
         run: node tests/workbench-fillet-motion-review-browser.mjs
+      - name: Verify Shark kit and Drive
+        run: |
+          ./build/shark-drive-tests
+          node tests/workbench-shark-kit.mjs
+          node tests/workbench-shark-kit-browser.mjs
       - uses: actions/upload-artifact@v4
         with:
           name: FightGuild-Portable-Editor

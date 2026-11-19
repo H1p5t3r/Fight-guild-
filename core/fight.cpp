@@ -177,7 +177,7 @@ int Simulation::requested(Fighter& f,Sample& h) const {
             else if(m.v[Motion]) {
                 if(!motion_matches(f,h.frame,m.v[Motion])) continue;
                 priority=m.v[Motion]==623?40:30;
-            } else if(m.v[Category]==Command) {
+            } else if(m.v[Category]==Command||(m.v[Category]==Drive&&m.v[Direction]!=5)) {
                 if(!dir_matches(m.v[Direction],h.direction)) continue;
                 priority=20;
             } else if(m.v[Direction]==2) {
@@ -225,12 +225,19 @@ Move Simulation::effective_move(const Fighter& f) const {
 }
 void Simulation::clear_owned_status(int owner) {
     auto& target=world.players[1-owner];
-    target.tether_source=target.tether_used=0;
+    target.tether_source=target.tether_used=target.tether_time=0;
     target.bleed_source=target.bleed_time=target.bleed_clock=target.grey_life=0;
 }
 void Simulation::tick_statuses() {
     for(int p=0;p<2;++p) {
         auto& target=world.players[p];
+        if(target.tether_source&&target.tether_time>0) {
+            const auto& owner=world.players[1-p];
+            const auto& source=moves[owner.character][target.tether_source-1];
+            if(--target.tether_time<=0||abs(target.x-owner.x)>source.v[TetherRange]
+               ||abs(target.y-owner.y)>source.v[TetherRange])
+                target.tether_source=target.tether_used=target.tether_time=0;
+        }
         if(!target.bleed_source) continue;
         const auto& m=moves[world.players[1-p].character][target.bleed_source-1];
         if(--target.bleed_time<=0) {
@@ -270,6 +277,7 @@ void Simulation::begin(Fighter& f,int move) {
     const auto& target=world.players[1-(&f-world.players)];
     int mechanic=moves[f.character][move].v[Mechanic];
     f.variant=extended(f)?0:mechanic==1&&target.tether_source?1:mechanic==2&&target.bleed_source?2:0;
+    f.tether_chase=0;
     f.capture_failed=target.y>0||target.prejump_time>0;f.contact_ticks=0;
     f.coast_pending=f.coast_mode=0;f.root_y=0;
     f.move=f.last_move=move;
@@ -566,6 +574,20 @@ void Simulation::move_horizontal(Fighter& f,bool was_hitstunned) {
             if(active(f)) f.x+=f.facing*effective_move(f).v[DiveSpeedX];
             f.vx=0;
         }
+        else if(effective_move(f).v[Mechanic]==5) {
+            const auto& m=effective_move(f);auto& target=world.players[1-(&f-world.players)];
+            if(f.age+1==m.v[Startup]) {
+                f.tether_chase=target.tether_source&&target.tether_time>0&&f.y==0
+                    &&(target.x-f.x)*f.facing>0&&abs(target.x-f.x)<=m.v[TetherRange];
+                if(f.tether_chase)target.tether_source=target.tether_used=target.tether_time=0;
+                f.vx=f.carry_vx=f.carry_time=0;
+            }
+            if(active(f)&&f.tether_chase) {
+                int space=max(m.v[TetherGap],PUSH_PROFILES[f.character].half_width+PUSH_PROFILES[target.character].half_width);
+                int distance=max(0,(target.x-f.x)*f.facing-space);
+                f.x+=f.facing*min(m.v[TetherSpeed],distance);
+            }
+        }
         else if(active(f)) f.x+=f.facing*effective_move(f).v[TravelSpeed];
         else if(f.age+1<effective_move(f).v[Startup]) f.x+=f.facing*effective_move(f).v[StartupTravel];
         int drag=extended(f)?extension(f)[XFriction]:mobility[f.character].v[AttackFriction];
@@ -600,7 +622,7 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     // This is presentation only: capture timing, roots, damage and immunity are
     // still owned by the existing pair contract and rollback state.
     if(world.pair.kind&&f.reaction==Captured) {
-        if(&f==&world.players[world.pair.owner]&&extended(f)) {
+        if(&f==&world.players[world.pair.owner]&&(extended(f)||f.character==4)) {
             const auto& animation=PAIRED_ANIMATIONS[f.character][world.pair.move];
             for(int key=animation.count-1;key>=0;--key) {
                 const auto& frame=animation.keys[key];
@@ -635,7 +657,8 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
         // Animation keys divide the authored phase; they never add startup,
         // active or recovery ticks. Saved age keeps drawing and anatomy in sync
         // during hitstop, counter slowdown, edited timing and rollback.
-        const auto& animation=ATTACK_ANIMATIONS[f.character][f.move];
+        const auto& connected=CONTACT_ANIMATIONS[f.character][f.move];
+        const auto& animation=f.contact&&connected.art_pose==m.v[ArtPose]?connected:ATTACK_ANIMATIONS[f.character][f.move];
         if(animation.art_pose==m.v[ArtPose]&&(!animation.requires_extended||extended(f))) {
             const int stage=age<m.v[Startup]?0:age<m.v[Startup]+m.v[Active]?1:2;
             const int duration=max(1,stage==0?m.v[Startup]-1:stage==1?m.v[Active]:m.v[Recovery]);
@@ -764,6 +787,7 @@ Box Simulation::weapon_span(const Fighter& f,int tick_offset) const {
 }
 const HitKey* Simulation::hit_key(const Fighter& f,int tick_offset) const {
     if(f.move<0||f.variant||effective_move(f).v[Category]==Throw) return nullptr;
+    if(effective_move(f).v[Mechanic]>=4)return nullptr;
     int frame=f.age+tick_offset-effective_move(f).v[Startup]+1;
     const auto& track=move_hit[f.character][f.move];
     const HitKey* result=nullptr;
@@ -774,13 +798,21 @@ unsigned Simulation::hit_bit(const Fighter& f,int tick_offset) const {
     const auto* key=hit_key(f,tick_offset);
     return 1u<<(key?key->group-1:0);
 }
-int Simulation::attack_count(const Fighter& f,int tick_offset) const {
+int Simulation::attack_count(const Fighter& f,const Fighter& target,int tick_offset) const {
     if(f.variant==1) return 0;
+    const auto& m=effective_move(f);
+    if(m.v[Mechanic]==5)return 0;
+    if(m.v[Mechanic]==4) {
+        return f.age+tick_offset==m.v[Startup]&&target.tether_source&&target.tether_time>0
+            &&target.y==0&&!target.prejump_time&&(target.x-f.x)*f.facing>0
+            &&abs(target.x-f.x)<=m.v[TetherRange]?1:0;
+    }
     const auto* key=hit_key(f,tick_offset);
     return key&&key->count>=0?key->count:effective_move(f).v[HitAngle]?8:1;
 }
-Box Simulation::attack_box(const Fighter& f,int segment,int tick_offset) const {
+Box Simulation::attack_box(const Fighter& f,const Fighter& target,int segment,int tick_offset) const {
     const auto& m=effective_move(f);
+    if(m.v[Mechanic]==4)return push_box(target);
     if(m.v[Category]==Throw) return transform({0,0,
         PUSH_PROFILES[f.character].half_width+m.v[ThrowRange],PUSH_PROFILES[f.character].standing},f);
     const auto* key=hit_key(f,tick_offset);
@@ -810,7 +842,7 @@ int Simulation::box_count(int player,int kind) const {
         if(extended(f)&&(extension(f)[XContactKind]==NormalCapture||extension(f)[XContactKind]==CommandCapture))return 0;
         const auto& m=effective_move(f);
         if(m.v[ProjectileKind]&&!m.v[ProjectileMelee]) return 0;
-        return f.age>=m.v[Startup]&&f.age<m.v[Startup]+m.v[Active]?attack_count(f):0;
+        return f.age>=m.v[Startup]&&f.age<m.v[Startup]+m.v[Active]?attack_count(f,world.players[1-player]):0;
     }
     return 0;
 }
@@ -826,7 +858,7 @@ Box Simulation::box(int player,int kind,int index) const {
     Fighter shown=world.players[player];
     if(extended(shown)&&shown.move<0&&shown.display_move>=0&&shown.reaction==Free&&!shown.stun&&shown.display_tick==world.frame-1){shown.move=shown.display_move;shown.age=shown.display_age;}
     const auto& f=shown;
-    return kind==HurtBox?hurt_box(f,index):kind==PushBox?push_box(f,0):attack_box(f,index);
+    return kind==HurtBox?hurt_box(f,index):kind==PushBox?push_box(f,0):attack_box(f,world.players[1-player],index);
 }
 int Simulation::clamp_x(const Fighter& f,int x) const {
     int half=extended(f)?character_extensions[f.character].v[CHalfWidth]:PUSH_PROFILES[f.character].half_width;
@@ -857,9 +889,9 @@ void Simulation::resolve_push(int previous_order,bool preserve_order) {
 }
 bool Simulation::overlaps(const Fighter& a,const Fighter& b) const {
     // Hits are evaluated before age increments. Use the pose that this tick shows.
-    int count=attack_count(a,1);
+    int count=attack_count(a,b,1);
     for(int segment=0;segment<count;++segment) for(int i=0;i<hurt_count(b,1);++i)
-        if(intersects(attack_box(a,segment,1),hurt_box(b,i,1))) return true;
+        if(intersects(attack_box(a,b,segment,1),hurt_box(b,i,1))) return true;
     return false;
 }
 bool Simulation::blocks(const Fighter& attacker,const Fighter& defender,bool was_stunned,bool was_landing) const {
@@ -1155,6 +1187,15 @@ void Simulation::step(int raw0,int raw1) {
         f.hit_done=f.contact=1;
         apply_contact(p,hits[p],m,contacts[p],prior_combo[1-p],prior_reaction[1-p],f.facing,false);
     }
+    // A reel spends its line on the first active tick, including guard or jump.
+    // Contact detection above stays simultaneous, so strikes can interrupt/trade.
+    for(int p=0;p<2;++p) {
+        const auto& old=contact_fighters[p];
+        if(advances[p]&&old.move>=0&&moves[old.character][old.move].v[Mechanic]==4
+           &&old.age+1==moves[old.character][old.move].v[Startup]) {
+            auto& target=world.players[1-p];target.tether_source=target.tether_used=target.tether_time=0;
+        }
+    }
     update_projectiles();
     const bool strike_connected=hits[0]>=0||hits[1]>=0||a.contact_count!=prior_contacts[0]||b.contact_count!=prior_contacts[1];
     if(!strike_connected) {
@@ -1386,7 +1427,7 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
     const bool cashout=!projectile&&f.variant==2;
     const int cash=(!blocked&&cashout&&other.bleed_source)?other.grey_life:0;
     if(!blocked) {clear_owned_status(1-p);other.pair_recovery=other.pair_grace_pending=0;}
-    for(auto& target:world.players) if(target.tether_used) target.tether_source=target.tether_used=0;
+    for(auto& target:world.players) if(target.tether_used) target.tether_source=target.tether_used=target.tether_time=0;
     f.contact_count=(f.contact_count+1)%100000000;
         f.event=contact;
         f.combo=blocked?0:(prior_combo?min(1000,f.combo+1):1);
@@ -1428,6 +1469,7 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
         // reattach a status cleared by that same hit/trade.
         if(!blocked&&!cashout&&!(f.stun>0&&!f.guarding)&&f.reaction==Free) {
             if(m.v[Mechanic]==1) { other.tether_source=move+1; other.tether_used=0; }
+            if(m.v[Mechanic]==3) { other.tether_source=move+1;other.tether_used=0;other.tether_time=m.v[TetherDuration]; }
             if(m.v[Mechanic]==2&&!extended(f)) {
                 other.bleed_source=move+1; other.bleed_time=m.v[BleedDuration]; other.bleed_clock=0;
                 other.grey_life=min(min(m.v[BleedCap],max(0,other.health-1)),other.grey_life+m.v[BleedInitial]*scale/100);
@@ -1494,6 +1536,11 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
                 other.pull_owner=p; other.pull_gap=m.v[PullGap]; other.vy=0;
                 other.knockdown=SoftKnockdown;
                 other.vx=other.knockback_left=0;
+            }
+            if(m.v[Mechanic]==4&&!(f.stun>0&&!f.guarding)&&f.reaction==Free) {
+                other.reaction=Reeled;other.pull_time=m.v[TetherFrames];other.pull_owner=p;
+                other.pull_gap=max(0,m.v[TetherGap]-PUSH_PROFILES[f.character].half_width-PUSH_PROFILES[other.character].half_width);
+                other.vx=other.vy=other.knockback_left=0;
             }
             if(was_splatted&&!throwing) {
                 other.health=max(0,other.health-rules.wall_break_damage);
@@ -1597,6 +1644,7 @@ int Simulation::get(int player,int field) const {
         case 68:return f.dash_kind; case 69:return f.dash_age; case 70:return f.air_dash_used;
         case 71:return f.air_jump_used; case 72:return f.teleported; case 73:return f.contact_count;
         case 74:return f.variant; case 75:return f.tether_source; case 76:return f.tether_used;
+        case 100:return f.tether_time;case 101:return f.tether_chase;
         case 77:return f.bleed_source; case 78:return f.bleed_time; case 79:return f.bleed_clock; case 80:return f.grey_life;
         case 81:return f.stance; case 82:return f.guard_button; case 83:return f.armor_left;
         case 84:return f.bounce_ground; case 85:return f.bounce_wall; case 86:return f.crumple_time;
@@ -1622,7 +1670,10 @@ int Simulation::move_set(int c,int m,int f,int v) {
     if(c<0||c>=CHARACTER_COUNT||m<0||m>=MOVE_COUNT||f<0||f>=FIELD_COUNT) return 0;
     int low=0,high=0;
     switch(f) {
-        case Mechanic: low=0; high=2; break;
+        case Mechanic: low=0; high=5; break;
+        case TetherDuration: low=1; high=1200; break;
+        case TetherRange: low=1000; high=100000; break;
+        case TetherGap: low=0; high=20000; break;
         case TetherSpeed: low=100; high=4000; break;
         case TetherFrames: low=1; high=60; break;
         case BleedInitial: low=0; high=1000; break;
@@ -1803,6 +1854,10 @@ int Simulation::preview_status(int p,int status,int value) {
     }else if(status==1) {
         if(!extended(owner)||value<0||value>character_extensions[owner.character].v[CBleedCap])return 0;
         f.bleed_source=value?14:0;f.bleed_time=value?character_extensions[owner.character].v[CBleedDuration]:0;f.bleed_clock=0;f.grey_life=min(value,max(0,f.health-1));
+    }else if(status==2) {
+        if(value<0||value>MOVE_COUNT)return 0;
+        if(value&&moves[owner.character][value-1].v[Mechanic]!=3)return 0;
+        f.tether_source=value;f.tether_used=0;f.tether_time=value?moves[owner.character][value-1].v[TetherDuration]:0;
     }else return 0;
     return 1;
 }

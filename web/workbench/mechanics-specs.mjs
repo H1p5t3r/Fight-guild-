@@ -4,24 +4,24 @@ export const MECHANIC_SPECS = [
     "Drive mechanic",
     0,
     0,
-    2,
-    "0 off; 1 tether; 2 bleed. The same input becomes its follow-up while the opponent has this status."
+    5,
+    "0 off; 1 legacy tether; 2 bleed; 3 attach line on hit; 4 spend line to reel; 5 spend line to chase. Line actions use their own input and normal timing."
   ],
   [
     "tetherSpeed",
-    "Tether pull speed",
+    "Line chase speed",
     1800,
     100,
     4000,
-    "Velocity toward the owner\u2019s position when the pull activates. Direction is captured once; it does not home."
+    "Forward pixels per frame for Chase Line, and pull velocity for the legacy tether. Chase stops at the configured root gap."
   ],
   [
     "tetherFrames",
-    "Tether pull duration",
+    "Reel travel duration",
     12,
     1,
     60,
-    "Hitstun and travel budget for the pull. Pull once; the next hit or block breaks the tether."
+    "Frames spent drawing a successfully hit grounded target toward Shark. Blocking stops the pull; jumping avoids it. Also used by legacy tether."
   ],
   [
     "bleedInitial",
@@ -142,5 +142,29 @@ export const MECHANIC_SPECS = [
     0,
     2,
     "0 none, 1 soft, 2 hard. Down and wake durations inherit the applying move\u2019s settings."
+  ],
+  [
+    "tetherDuration",
+    "Line lifetime",
+    180,
+    1,
+    1200,
+    "Unfrozen simulation ticks before an attached line expires. Taking an unblocked hit clears the owner\u2019s line."
+  ],
+  [
+    "tetherRange",
+    "Line maximum distance",
+    45000,
+    1000,
+    100000,
+    "Maximum horizontal or vertical root distance in pixels. Escaping the tag\u2019s range breaks it; reel/chase also check their own range."
+  ],
+  [
+    "tetherGap",
+    "Line stopping gap",
+    6000,
+    0,
+    20000,
+    "Desired root-to-root distance after reeling or chasing, clamped by both pushboxes."
   ]
 ];

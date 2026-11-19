@@ -23,8 +23,8 @@ static Move& wide(Simulation& s,int slot=0) {
 static void test_universals() {
     for(int c=0;c<CHARACTER_COUNT;++c) {
         auto s_storage=std::make_unique<Simulation>();auto& s=*s_storage;initialize(s); s.reset(c,(c+1)%6,0,0);
-        CHECK(s.moves[c][SWEEP].v[Knockdown]==HardKnockdown);
-        CHECK(s.moves[c][SWEEP].v[HitLevel]==1);
+        CHECK(s.moves[c][SLASH_SWEEP].v[Knockdown]==HardKnockdown);
+        CHECK(s.moves[c][SLASH_SWEEP].v[HitLevel]==1);
         for(int slot=BACK_THROW;slot<=FORWARD_THROW;++slot) {
             CHECK(s.moves[c][slot].v[Startup]==2);
             CHECK(s.moves[c][slot].v[Knockdown]==HardKnockdown);
@@ -96,7 +96,7 @@ static void test_recovery() {
     ticks(hard,35,0,Up|Dash);CHECK(hard.world.players[1].reaction==Downed);
     hard.step(0,0);CHECK(hard.world.players[1].reaction==Waking);
     auto reversal_storage=std::make_unique<Simulation>();auto& reversal=*reversal_storage;initialize(reversal);auto& d=reversal.world.players[1];
-    d.simple=1;d.reaction=Waking;d.recovery_time=2;d.knockdown=SoftKnockdown;
+    reversal.moves[4][16].v[Enabled]=1;d.simple=1;d.reaction=Waking;d.recovery_time=2;d.knockdown=SoftKnockdown;
     ticks(reversal,3,0,Simple|Up|Hs);
     CHECK(d.move==16&&d.reversal_time==NOTICE_TICKS&&d.y==0);
     for(int slot:{0,FORWARD_THROW}) {

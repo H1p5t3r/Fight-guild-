@@ -15,6 +15,10 @@ static func reset(model: CombatModel) -> void:
 		action.enabled = 0
 	data.characters[5] = JSON.parse_string(FileAccess.get_file_as_string("res://data/legacy_fillet_v22.json"))
 	data.characters[5].moves.append_array(additions)
+	for action in data.characters[5].moves:
+		action.tetherDuration = 180
+		action.tetherRange = 45000
+		action.tetherGap = 6000
 	assert(model.load_data(data).is_empty())
 static func create() -> CombatModel:
 	var model := CombatModel.new()

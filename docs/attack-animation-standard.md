@@ -47,3 +47,5 @@ branches preserve their common entry until the authored divergence frame.
 
 Reference implementation: [Fillet 2S timing](../art/characters/fillet-v1/production/sweep-timing/README.md).
 Current whole-kit plan: [Fillet kit timing](../art/characters/fillet-v1/production/kit-timing/README.md).
+
+Shark's full-kit application is documented in [Shark v2](../art/characters/shark-kit-v2/README.md). A normal-throw capture must have separate whiff and connected recovery tracks: latch/load follows the capture clock, and the release pose only begins after capture succeeds. Include separate weapon endpoints and effect extents when framing an animation review so long attacks stay visible. Validate atlas alpha in the runtime as well as in the image preview; image-tool previews can conceal translucent background haze.

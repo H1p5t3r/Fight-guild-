@@ -90,7 +90,7 @@ test('Ky timing and scaled traces survive editor import/export; multi-hit is2Hs 
  assert.deepEqual(w.move(4,7).hitboxTimeline.keys.map(k=>[k.frame,k.hit,k.damage]),[[1,1,14],[2,2,40]]);
  assert.equal(w.move(4,8).hurtMaskWindup,3);assert.equal(w.move(4,8).hurtWindowStart,4);
  assert.equal(w.move(4,8).hurtWindowEnd,13);assert.equal(w.move(4,8).hurtWindowMask,1);
- const art=pack.art[4];assert.equal(art.signature_active.frames.length,20);assert.equal(art.attack_animation.frames.length,26);
+ const art=pack.art[4];assert.equal(art.signature_active.frames.length,20);assert.equal(art.attack_animation.frames.length,198);
 });
 
 test('Low Scoop follows8 saved-clock keys, hits twice and supports the one-hit toggle in both facings',()=>{
@@ -99,11 +99,11 @@ test('Low Scoop follows8 saved-clock keys, hits twice and supports the one-hit t
   const clip=p.record(data,4,7,{gap:70,facing});
   assert.ok(clip.executed);assert.equal(clip.contacts.length,2);
   const keys=[...new Set(clip.frames.filter(f=>f.state.players[0].posePhase===14).map(f=>f.state.players[0].poseIndex))].sort((a,b)=>a-b);
-  assert.deepEqual(keys,[0,1,2,3,4,5,6,7]);
+  assert.deepEqual(keys,pack.art[4].attack_animation.frames.map((f,i)=>f.action_id==='2Hs'?i:-1).filter(i=>i>=0));
   assert.deepEqual(p.record(data,4,7,{gap:70,facing}),clip,'Deterministic saved frames');
   const once=structuredClone(data);once.characters[4].moves[7].hitboxTimeline.multiHit=false;
   assert.equal(p.record(once,4,7,{gap:70,facing}).contacts.length,1);
   const air=p.record(data,4,20,{gap:70,facing});
-  assert.ok(air.frames.some(f=>f.state.players[0].posePhase===14&&f.state.players[0].poseIndex===24));
+  assert.ok(air.frames.some(f=>f.state.players[0].posePhase===14&&pack.art[4].attack_animation.frames[f.state.players[0].poseIndex].motion_cue==='Downward cut'));
  }
 });

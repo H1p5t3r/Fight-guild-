@@ -1,3 +1,4 @@
+import {drawLineEffect} from './line-effects.mjs';
 import {phaseAt,attackBoxes,poseAt,effectiveHurtboxes} from './model.mjs';
 import {HURT_LABELS,enabledHurtboxes,regionEnabled} from '../hurtboxes.mjs';
 import {measureDistances,distanceSummary,pixels} from './measurements.mjs';
@@ -48,7 +49,7 @@ export class Preview {
     this.view={scale,ox,oy,facing:a.facing};this.hurtEdit=this.edit.hurt;
     const point=(x,y)=>({x:ox+x/100*scale,y:oy-y/100*scale});
     const local=(x,y)=>point(a.x+a.facing*x,a.y+y);
-    const attackLocal=record.sequence?frame.boxes[0].hit.map(b=>a.facing===1?[b[0]-a.x,b[1]-a.y,b[2]-a.x,b[3]-a.y]:[a.x-b[2],b[1]-a.y,a.x-b[0],b[3]-a.y]):!a.variant&&moveFrame?attackBoxes(m,moveFrame,this.pack.collisions[record.character].push):[];
+    const attackLocal=record.sequence?frame.boxes[0].hit.map(b=>a.facing===1?[b[0]-a.x,b[1]-a.y,b[2]-a.x,b[3]-a.y]:[a.x-b[2],b[1]-a.y,a.x-b[0],b[3]-a.y]):m.mechanic>=4?[]:!a.variant&&moveFrame?attackBoxes(m,moveFrame,this.pack.collisions[record.character].push):[];
     ctx.fillStyle='#101b22';ctx.fillRect(0,0,w,h);ctx.strokeStyle='#263941';ctx.lineWidth=1;
     const gridOrigin=this.options.distances?a.x/100:0;
     for(let x=gridOrigin+Math.floor((b.left-gridOrigin)/50)*50;x<b.right;x+=50){const p=point(x*100,0);ctx.beginPath();ctx.moveTo(p.x,30);ctx.lineTo(p.x,h-25-space);ctx.stroke();}
@@ -57,7 +58,7 @@ export class Preview {
     const drawOrder=frame.state.foregroundPlayer===0?[1,0]:[0,1];
     drawOrder.forEach(i=>{
       const f=frame.state.players[i];
-      if(f.tetherSource){const owner=frame.state.players[1-i],from=point(owner.x,owner.y+8500),to=point(f.x,f.y+7000);ctx.strokeStyle='#79d3df';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(from.x,from.y);ctx.lineTo(to.x,to.y);ctx.stroke();}
+      const owner=frame.state.players[1-i];drawLineEffect(ctx,{owner,target:f,art:this.pack.art[owner.character],image:file=>this.image(file),point,scale});
 
       const clip=Object.values(this.pack.art[f.character].attack_animations??{}).find(c=>c.moveId===m.id);
       const p=point(f.x,f.y),pose=!i&&record.geometryOnly&&moveFrame?poseAt(m,moveFrame,!!this.pack.art[f.character].ready,clip):{phase:['active','windup','block','signature_windup','signature_active','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation','backdash'][f.posePhase],index:f.poseIndex};
@@ -103,10 +104,12 @@ export class Preview {
       const authored=!record.sequence&&!i&&moveFrame&&!f.variant;
       const hits=authored?attackLocal.map(localToWorld):frame.boxes[i].hit;
       if(this.options.hit&&(!authored||phase==='active'||this.edit.hit))hits.forEach(box=>rect(box,'#f1aa66',.12,authored&&phase!=='active'));
-      if(f.weaponVisible){const start=point(f.weaponBackX,f.weaponBackY),end=point(f.weaponTipX,f.weaponTipY);ctx.strokeStyle='#e3c79b';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(start.x,start.y);ctx.lineTo(end.x,end.y);ctx.stroke();ctx.lineWidth=1;}
+      if(f.weaponVisible){const start=point(f.weaponBackX,f.weaponBackY),end=point(f.weaponTipX,f.weaponTipY),sheet=this.pack.art[f.character].hook_weapon,img=sheet&&this.image(sheet.file);
+        if(this.options.art&&img?.complete&&img.naturalWidth){const [bx,by]=sheet.butt,[tx,ty]=sheet.tip;ctx.save();ctx.translate(start.x,start.y);ctx.rotate(Math.atan2(end.y-start.y,end.x-start.x)-Math.atan2(ty-by,tx-bx));const ratio=Math.hypot(end.x-start.x,end.y-start.y)/Math.hypot(tx-bx,ty-by);ctx.scale(ratio,ratio);ctx.drawImage(img,-bx,-by);ctx.restore();}
+      }
       ctx.fillStyle=i?'#80d2dc':'#e0ba76';ctx.font='12px system-ui';ctx.textAlign=i?'right':'left';ctx.fillText(`${this.pack.art[f.character].name.toUpperCase()} · ${f.health} HP`,i?w-14:14,18);
       const barX=i?w-174:14;ctx.fillStyle='#36464e';ctx.fillRect(barX,24,160,4);ctx.fillStyle='#c4bdbe';ctx.fillRect(barX,24,160*f.health/1000,4);ctx.fillStyle=i?'#80d2dc':'#e0ba76';ctx.fillRect(barX,24,160*(f.health-f.greyLife)/1000,4);
-      const status=f.bleedTime?`BLEED · ${f.greyLife} grey · ${(f.bleedTime/60).toFixed(1)}s`:f.tetherSource?f.tetherUsed?'TETHER · PULLED':'TETHER':f.variant&&f.move>=0?f.variant===1?'TETHER PULL':'CASH-OUT GRAB':'';ctx.font='11px system-ui';ctx.fillText(status,i?w-14:14,42);
+      const status=f.bleedTime?`BLEED · ${f.greyLife} grey · ${(f.bleedTime/60).toFixed(1)}s`:f.tetherSource?f.tetherTime?`LINE · ${(f.tetherTime/60).toFixed(1)}s`:f.tetherUsed?'TETHER · PULLED':'TETHER':f.variant&&f.move>=0?f.variant===1?'TETHER PULL':'CASH-OUT GRAB':'';ctx.font='11px system-ui';ctx.fillText(status,i?w-14:14,42);
     });
     this.handles=[];this.boxPixels=null;let selectedBox=null;
     const handles=(box,color,target,extra={},keys=[0,2,3,1])=>{

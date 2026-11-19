@@ -140,7 +140,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5K",
@@ -278,7 +281,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5S",
@@ -416,7 +422,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5Hs",
@@ -554,7 +563,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2P",
@@ -692,7 +704,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2K",
@@ -830,7 +845,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2S",
@@ -978,7 +996,10 @@
           "hitboxTimeline": {
             "multiHit": false,
             "keys": []
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2Hs",
@@ -1116,7 +1137,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6P",
@@ -1254,7 +1278,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6K",
@@ -1392,7 +1419,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6S",
@@ -1530,7 +1560,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6Hs",
@@ -1668,7 +1701,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6D",
@@ -1806,7 +1842,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5D",
@@ -1944,7 +1983,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236P",
@@ -2082,7 +2124,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S",
@@ -2220,7 +2265,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "623Hs",
@@ -2358,7 +2406,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.P",
@@ -2496,7 +2547,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.K",
@@ -2634,7 +2688,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.S",
@@ -2772,7 +2829,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.Hs",
@@ -2910,7 +2970,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.D",
@@ -3048,7 +3111,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2D",
@@ -3186,7 +3252,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "4P+K",
@@ -3324,7 +3393,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6P+K",
@@ -3462,7 +3534,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236K",
@@ -3600,7 +3675,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S>6S",
@@ -3738,7 +3816,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S>2S",
@@ -3876,7 +3957,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214S",
@@ -4014,7 +4098,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.214P",
@@ -4152,7 +4239,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214S>P",
@@ -4290,7 +4380,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.214P>P",
@@ -4428,7 +4521,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "c.S",
@@ -4576,7 +4672,10 @@
             4000,
             8500,
             11500
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "[S/Hs]",
@@ -4714,7 +4813,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "[S/Hs]>attack",
@@ -4852,7 +4954,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.P",
@@ -4990,7 +5095,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.K",
@@ -5128,7 +5236,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.S",
@@ -5266,7 +5377,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.Hs",
@@ -5404,7 +5518,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.2D",
@@ -5542,7 +5659,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.236D",
@@ -5680,7 +5800,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.4P+K",
@@ -5818,7 +5941,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.6P+K",
@@ -5956,7 +6082,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6[Hs]",
@@ -6099,7 +6228,10 @@
           "hitboxTimeline": {
             "multiHit": false,
             "keys": []
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5[D]",
@@ -6242,7 +6374,10 @@
           "hitboxTimeline": {
             "multiHit": false,
             "keys": []
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236D",
@@ -6385,7 +6520,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214D",
@@ -6528,7 +6666,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         }
       ],
       "movement": {
@@ -6715,7 +6856,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5K",
@@ -6853,7 +6997,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5S",
@@ -6991,7 +7138,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5Hs",
@@ -7129,7 +7279,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2P",
@@ -7267,7 +7420,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2K",
@@ -7405,7 +7561,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2S",
@@ -7553,7 +7712,10 @@
           "hitboxTimeline": {
             "multiHit": false,
             "keys": []
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2Hs",
@@ -7691,7 +7853,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6P",
@@ -7829,7 +7994,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6K",
@@ -7967,7 +8135,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6S",
@@ -8105,7 +8276,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6Hs",
@@ -8243,7 +8417,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6D",
@@ -8381,7 +8558,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5D",
@@ -8519,7 +8699,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236P",
@@ -8657,7 +8840,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S",
@@ -8795,7 +8981,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "623Hs",
@@ -8933,7 +9122,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.P",
@@ -9071,7 +9263,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.K",
@@ -9209,7 +9404,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.S",
@@ -9347,7 +9545,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.Hs",
@@ -9485,7 +9686,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.D",
@@ -9623,7 +9827,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2D",
@@ -9761,7 +9968,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "4P+K",
@@ -9899,7 +10109,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6P+K",
@@ -10037,7 +10250,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236K",
@@ -10175,7 +10391,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S>6S",
@@ -10313,7 +10532,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S>2S",
@@ -10451,7 +10673,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214S",
@@ -10589,7 +10814,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.214P",
@@ -10727,7 +10955,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214S>P",
@@ -10865,7 +11096,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.214P>P",
@@ -11003,7 +11237,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "c.S",
@@ -11151,7 +11388,10 @@
             4000,
             7500,
             11500
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "[S/Hs]",
@@ -11289,7 +11529,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "[S/Hs]>attack",
@@ -11427,7 +11670,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.P",
@@ -11565,7 +11811,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.K",
@@ -11703,7 +11952,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.S",
@@ -11841,7 +12093,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.Hs",
@@ -11979,7 +12234,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.2D",
@@ -12117,7 +12375,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.236D",
@@ -12255,7 +12516,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.4P+K",
@@ -12393,7 +12657,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.6P+K",
@@ -12531,7 +12798,10 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6[Hs]",
@@ -12674,7 +12944,10 @@
           "hitboxTimeline": {
             "multiHit": false,
             "keys": []
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5[D]",
@@ -12817,7 +13090,10 @@
           "hitboxTimeline": {
             "multiHit": false,
             "keys": []
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236D",
@@ -12960,7 +13236,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214D",
@@ -13103,7 +13382,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         }
       ],
       "movement": {
@@ -13366,7 +13648,10 @@
             10618,
             13192
           ],
-          "hitPose": 1
+          "hitPose": 1,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5K",
@@ -13536,7 +13821,10 @@
             12315,
             12341
           ],
-          "hitPose": 2
+          "hitPose": 2,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5S",
@@ -13770,7 +14058,10 @@
             16728,
             12166
           ],
-          "hitPose": 3
+          "hitPose": 3,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5Hs",
@@ -13972,7 +14263,10 @@
             16716,
             9912
           ],
-          "hitPose": 4
+          "hitPose": 4,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2P",
@@ -14142,7 +14436,10 @@
             7385,
             7834
           ],
-          "hitPose": 1
+          "hitPose": 1,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2K",
@@ -14312,7 +14609,10 @@
             9450,
             4240
           ],
-          "hitPose": 2
+          "hitPose": 2,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2S",
@@ -14482,7 +14782,10 @@
             13694,
             3500
           ],
-          "hitPose": 3
+          "hitPose": 3,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2Hs",
@@ -14714,7 +15017,10 @@
             13650,
             24900
           ],
-          "hitPose": 4
+          "hitPose": 4,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6P",
@@ -14884,7 +15190,10 @@
             7599,
             15891
           ],
-          "hitPose": 1
+          "hitPose": 1,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6K",
@@ -15037,7 +15346,10 @@
             8895,
             5407,
             11643
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6S",
@@ -15190,7 +15502,10 @@
             7281,
             5974,
             11599
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6Hs",
@@ -15382,7 +15697,10 @@
             12946,
             19086
           ],
-          "hitPose": 4
+          "hitPose": 4,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6D",
@@ -15535,7 +15853,10 @@
             43,
             5407,
             4579
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5D",
@@ -15705,7 +16026,10 @@
             7967,
             14400
           ],
-          "hitPose": 5
+          "hitPose": 5,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236P",
@@ -15858,7 +16182,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S",
@@ -16011,7 +16338,10 @@
             7281,
             5974,
             11599
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "623Hs",
@@ -16164,7 +16494,10 @@
             7892,
             5538,
             15393
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.P",
@@ -16340,7 +16673,10 @@
             8500,
             7250
           ],
-          "hitPose": 1
+          "hitPose": 1,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.K",
@@ -16516,7 +16852,10 @@
             10500,
             4877
           ],
-          "hitPose": 2
+          "hitPose": 2,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.S",
@@ -16686,7 +17025,10 @@
             20328,
             9240
           ],
-          "hitPose": 3
+          "hitPose": 3,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.Hs",
@@ -16862,7 +17204,10 @@
             14962,
             16144
           ],
-          "hitPose": 4
+          "hitPose": 4,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.D",
@@ -17015,7 +17360,10 @@
             15913,
             9987
           ],
-          "hitPose": 5
+          "hitPose": 5,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2D",
@@ -17185,7 +17533,10 @@
             17267,
             4667
           ],
-          "hitPose": 5
+          "hitPose": 5,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "4P+K",
@@ -17338,7 +17689,10 @@
             0,
             4600,
             14000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6P+K",
@@ -17491,7 +17845,10 @@
             0,
             4600,
             14000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236K",
@@ -17644,7 +18001,10 @@
             8895,
             5407,
             11643
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S>6S",
@@ -17797,7 +18157,10 @@
             7281,
             5974,
             11599
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S>2S",
@@ -17950,7 +18313,10 @@
             7281,
             5974,
             11599
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214S",
@@ -18103,7 +18469,10 @@
             7281,
             5974,
             11599
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.214P",
@@ -18256,7 +18625,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214S>P",
@@ -18409,7 +18781,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.214P>P",
@@ -18562,7 +18937,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "c.S",
@@ -18732,7 +19110,10 @@
             12126,
             11290
           ],
-          "hitPose": 3
+          "hitPose": 3,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "[S/Hs]",
@@ -18885,7 +19266,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "[S/Hs]>attack",
@@ -19038,7 +19422,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.P",
@@ -19191,7 +19578,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.K",
@@ -19344,7 +19734,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.S",
@@ -19497,7 +19890,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.Hs",
@@ -19650,7 +20046,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.2D",
@@ -19803,7 +20202,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.236D",
@@ -19956,7 +20358,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.4P+K",
@@ -20109,7 +20514,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.6P+K",
@@ -20262,7 +20670,10 @@
             10116,
             5538,
             12820
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6[Hs]",
@@ -20454,7 +20865,10 @@
             12946,
             19086
           ],
-          "hitPose": 4
+          "hitPose": 4,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5[D]",
@@ -20624,7 +21038,10 @@
             7967,
             14400
           ],
-          "hitPose": 5
+          "hitPose": 5,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236D",
@@ -20771,7 +21188,10 @@
           "grabFrames": 0,
           "finishArtPose": 0,
           "finishArtFrame": 0,
-          "hitPose": 5
+          "hitPose": 5,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214D",
@@ -20918,7 +21338,10 @@
           "grabFrames": 0,
           "finishArtPose": 0,
           "finishArtFrame": 0,
-          "hitPose": 5
+          "hitPose": 5,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         }
       ]
     },
@@ -21143,7 +21566,10 @@
             10018,
             9161,
             14893
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5K",
@@ -21319,7 +21745,10 @@
             6158,
             6987,
             12375
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5S",
@@ -21472,7 +21901,10 @@
             7500,
             14000,
             11000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5Hs",
@@ -21642,7 +22074,10 @@
             5000,
             15000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2P",
@@ -21812,7 +22247,10 @@
             4850,
             7231,
             8083
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2K",
@@ -21988,7 +22426,10 @@
             240,
             11670,
             5340
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2S",
@@ -22164,7 +22605,10 @@
             0,
             11607,
             3500
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2Hs",
@@ -22380,7 +22824,10 @@
             2986,
             7702,
             16615
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6P",
@@ -22533,7 +22980,10 @@
             7000,
             6500,
             15000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6K",
@@ -22709,7 +23159,10 @@
             5298,
             9798,
             11540
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6S",
@@ -22862,7 +23315,10 @@
             8240,
             6316,
             11300
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6Hs",
@@ -23050,7 +23506,10 @@
             514,
             14657,
             13629
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6D",
@@ -23203,7 +23662,10 @@
             5279,
             6514,
             8685
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5D",
@@ -23356,7 +23818,10 @@
             4000,
             7000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236P",
@@ -23509,7 +23974,10 @@
             9868,
             5823,
             12089
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S",
@@ -23662,7 +24130,10 @@
             8240,
             6316,
             11300
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "623Hs",
@@ -23815,7 +24286,10 @@
             5476,
             5971,
             17813
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.P",
@@ -24003,7 +24477,10 @@
             2114,
             9895,
             8620
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.K",
@@ -24179,7 +24656,10 @@
             3169,
             13278,
             8366
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.S",
@@ -24380,7 +24860,10 @@
             2199,
             9256,
             9460
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.Hs",
@@ -24550,7 +25033,10 @@
             5694,
             16393,
             14235
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.D",
@@ -24703,7 +25189,10 @@
             -1000,
             9000,
             6000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "2D",
@@ -24856,7 +25345,10 @@
             0,
             10500,
             3500
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "4P+K",
@@ -25009,7 +25501,10 @@
             4000,
             7000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6P+K",
@@ -25162,7 +25657,10 @@
             4000,
             7000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236K",
@@ -25315,7 +25813,10 @@
             3996,
             6070,
             7204
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S>6S",
@@ -25468,7 +25969,10 @@
             8240,
             6316,
             11300
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236S>2S",
@@ -25621,7 +26125,10 @@
             8240,
             6316,
             11300
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214S",
@@ -25774,7 +26281,10 @@
             8240,
             6316,
             11300
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.214P",
@@ -25927,7 +26437,10 @@
             9868,
             5823,
             12089
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214S>P",
@@ -26080,7 +26593,10 @@
             9868,
             5823,
             12089
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.214P>P",
@@ -26233,7 +26749,10 @@
             9868,
             5823,
             12089
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "c.S",
@@ -26409,7 +26928,10 @@
             4980,
             10230,
             12180
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "[S/Hs]",
@@ -26572,7 +27094,10 @@
             4000,
             7000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "[S/Hs]>attack",
@@ -26748,7 +27273,10 @@
             4030,
             15549,
             14373
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.P",
@@ -26901,7 +27429,10 @@
             4000,
             7000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.K",
@@ -27054,7 +27585,10 @@
             0,
             8000,
             3500
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.S",
@@ -27207,7 +27741,10 @@
             4000,
             7000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.Hs",
@@ -27360,7 +27897,10 @@
             4000,
             9000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.2D",
@@ -27523,7 +28063,10 @@
             4000,
             7000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "st.236D",
@@ -27676,7 +28219,10 @@
             4000,
             7000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.4P+K",
@@ -27829,7 +28375,10 @@
             4000,
             7000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "j.6P+K",
@@ -27982,7 +28531,10 @@
             4000,
             7000,
             12000
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "6[Hs]",
@@ -28135,7 +28687,10 @@
             9000,
             6000,
             12500
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "5[D]",
@@ -28288,7 +28843,10 @@
             9000,
             6000,
             12500
-          ]
+          ],
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "236D",
@@ -28435,7 +28993,10 @@
           "grabFrames": 0,
           "finishArtPose": 0,
           "finishArtFrame": 0,
-          "hitPose": 5
+          "hitPose": 5,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "id": "214D",
@@ -28582,16 +29143,62 @@
           "grabFrames": 0,
           "finishArtPose": 0,
           "finishArtFrame": 0,
-          "hitPose": 5
+          "hitPose": 5,
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         }
       ]
     },
     {
       "name": "Shark",
+      "movement": {
+        "forwardStyle": 0,
+        "walkSpeed": 390,
+        "runSpeed": 1150,
+        "runAcceleration": 120,
+        "stepSpeed": 850,
+        "stepFrames": 10,
+        "backSpeed": 850,
+        "backFrames": 10,
+        "attackFriction": 45,
+        "backStyle": 1,
+        "backWalkSpeed": 390,
+        "backRunSpeed": 500,
+        "jumpSpeed": 1450,
+        "jumpForwardSpeed": 390,
+        "jumpBackSpeed": 390,
+        "gravity": 85,
+        "airJumps": 0,
+        "prejumpFrames": -1,
+        "airDashEnabled": 0,
+        "airBackdashEnabled": 0,
+        "airDashStyle": 1,
+        "airBackdashStyle": 1,
+        "airDashSpeed": 900,
+        "airBackdashSpeed": 700,
+        "airDashFrames": 15,
+        "airBackdashFrames": 12,
+        "airDashUses": 1,
+        "hoverHeight": 1800,
+        "hoverRiseSpeed": 300,
+        "teleportDistance": 20000,
+        "backTeleportDistance": 15000,
+        "teleportStartup": 5,
+        "fdEnabled": 1,
+        "fdPushPercent": -1,
+        "fdDrain": -1,
+        "fdAirDrain": -1,
+        "fdBlockCost": -1,
+        "smearMode": 0,
+        "smearPart": 3,
+        "smearStretch": 150,
+        "airDashPauseFrames": 4,
+        "airBackdashPauseFrames": 4
+      },
       "moves": [
         {
           "id": "5P",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
@@ -28673,7 +29280,7 @@
           "projectilePersist": 0,
           "projectileMelee": 0,
           "smearMode": 0,
-          "smearPart": 0,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -28727,10 +29334,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 2940,
-          "bottom": 10096,
-          "reach": 8795,
-          "height": 1711,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -28752,6 +29355,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
           "geometry": [
             2940,
             10096,
@@ -28761,7 +29368,6 @@
         },
         {
           "id": "5K",
-          "hitPose": 2,
           "button": 1,
           "category": 0,
           "direction": 5,
@@ -28897,10 +29503,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 1949,
-          "bottom": 354,
-          "reach": 8532,
-          "height": 7899,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -28928,6 +29530,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 2,
           "geometry": [
             1949,
             354,
@@ -28937,7 +29543,6 @@
         },
         {
           "id": "5S",
-          "hitPose": 3,
           "button": 2,
           "category": 0,
           "direction": 5,
@@ -29073,10 +29678,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 3333,
-          "bottom": 6333,
-          "reach": 15467,
-          "height": 2267,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -29098,6 +29699,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 3,
           "geometry": [
             3333,
             6333,
@@ -29107,7 +29712,6 @@
         },
         {
           "id": "5Hs",
-          "hitPose": 4,
           "button": 3,
           "category": 0,
           "direction": 5,
@@ -29243,10 +29847,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 4594,
-          "bottom": 4703,
-          "reach": 15939,
-          "height": 4097,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -29280,6 +29880,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 4,
           "geometry": [
             4594,
             4703,
@@ -29289,7 +29893,6 @@
         },
         {
           "id": "2P",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 2,
@@ -29425,10 +30028,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 3280,
-          "bottom": 5173,
-          "reach": 8613,
-          "height": 1760,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -29450,6 +30049,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
           "geometry": [
             3280,
             5173,
@@ -29459,7 +30062,6 @@
         },
         {
           "id": "2K",
-          "hitPose": 2,
           "button": 1,
           "category": 0,
           "direction": 2,
@@ -29595,10 +30197,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 1397,
-          "bottom": -219,
-          "reach": 9123,
-          "height": 5096,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -29626,6 +30224,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 2,
           "geometry": [
             1397,
             -219,
@@ -29635,7 +30237,6 @@
         },
         {
           "id": "2S",
-          "hitPose": 3,
           "button": 2,
           "category": 0,
           "direction": 2,
@@ -29771,10 +30372,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 2281,
-          "bottom": 211,
-          "reach": 14772,
-          "height": 4210,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -29802,6 +30399,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 3,
           "geometry": [
             2281,
             0,
@@ -29811,7 +30412,6 @@
         },
         {
           "id": "2Hs",
-          "hitPose": 4,
           "button": 3,
           "category": 0,
           "direction": 2,
@@ -29947,10 +30547,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 4279,
-          "bottom": 2615,
-          "reach": 11140,
-          "height": 6189,
           "hitboxTimeline": {
             "multiHit": true,
             "keys": [
@@ -30006,6 +30602,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 4,
           "geometry": [
             4279,
             2615,
@@ -30015,7 +30615,6 @@
         },
         {
           "id": "6P",
-          "hitPose": 1,
           "button": 0,
           "category": 1,
           "direction": 6,
@@ -30151,10 +30750,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 3179,
-          "bottom": 7538,
-          "reach": 10154,
-          "height": 4924,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -30182,6 +30777,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
           "geometry": [
             3179,
             7538,
@@ -30191,7 +30790,6 @@
         },
         {
           "id": "6K",
-          "hitPose": 2,
           "button": 1,
           "category": 1,
           "direction": 6,
@@ -30327,10 +30925,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 613,
-          "bottom": 6347,
-          "reach": 9627,
-          "height": 4586,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -30352,6 +30946,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 2,
           "geometry": [
             613,
             6347,
@@ -30361,7 +30959,6 @@
         },
         {
           "id": "6S",
-          "hitPose": 3,
           "button": 2,
           "category": 1,
           "direction": 6,
@@ -30442,7 +31039,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -30495,11 +31092,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 3,
+          "geometry": [
+            3843,
+            6140,
+            8813,
+            8250
+          ]
         },
         {
           "id": "6Hs",
-          "hitPose": 4,
           "button": 3,
           "category": 1,
           "direction": 6,
@@ -30635,10 +31246,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 5525,
-          "bottom": 1966,
-          "reach": 16712,
-          "height": 5898,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -30666,6 +31273,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 4,
           "geometry": [
             5525,
             1966,
@@ -30675,39 +31286,38 @@
         },
         {
           "id": "6D",
-          "hitPose": 5,
           "button": 4,
-          "category": 1,
+          "category": 3,
           "direction": 6,
           "motion": 0,
           "air": 0,
-          "startup": 19,
-          "active": 5,
-          "recovery": 26,
-          "damage": 80,
-          "hitstun": 35,
-          "blockstun": 22,
-          "hitstop": 9,
-          "pushback": 1800,
-          "specialCancel": 1,
+          "startup": 8,
+          "active": 10,
+          "recovery": 10,
+          "damage": 0,
+          "hitstun": 0,
+          "blockstun": 0,
+          "hitstop": 0,
+          "pushback": 0,
+          "specialCancel": 0,
           "jumpCancel": 0,
           "whiffCancel": 0,
           "selfCancel": 0,
           "advance": 0,
           "simpleDirection": 0,
           "simpleButton": 4,
-          "normalRoutes": -1,
-          "commandRoutes": -1,
+          "normalRoutes": 0,
+          "commandRoutes": 0,
           "hitLevel": 0,
           "chipDamage": 0,
           "guardBreak": 0,
           "counterHitstun": 0,
           "counterHitstop": 0,
           "reversalEligible": 0,
-          "airPushback": 2100,
+          "airPushback": 0,
           "blockPushback": 1800,
           "launch": 0,
-          "airLaunch": 850,
+          "airLaunch": 0,
           "knockdown": 0,
           "knockdownFrames": 6,
           "wakeupFrames": 8,
@@ -30719,7 +31329,7 @@
           "followFrom2": -1,
           "followHit": 0,
           "travelSpeed": 0,
-          "inertiaPercent": 100,
+          "inertiaPercent": 0,
           "pullFrames": 0,
           "pullGap": 1000,
           "hitAngle": 0,
@@ -30733,14 +31343,14 @@
           "followCancelEnd": 0,
           "cancelOn": 7,
           "starterProration": 100,
-          "comboScaling": 8,
+          "comboScaling": 0,
           "minimumDamage": 10,
           "landingRecovery": 0,
-          "attackLevel": 3,
-          "counterTier": 3,
+          "attackLevel": -1,
+          "counterTier": 1,
           "counterVulnerable": 3,
-          "counterFreezeFrames": 31,
-          "counterSlowFrames": 35,
+          "counterFreezeFrames": -1,
+          "counterSlowFrames": 0,
           "projectileKind": 0,
           "projectileSpawnFrame": 0,
           "projectileSpeedX": 600,
@@ -30756,7 +31366,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -30766,8 +31376,8 @@
           "hurtMaskWindup": 15,
           "hurtMaskActive": 15,
           "hurtMaskRecovery": 15,
-          "mechanic": 0,
-          "tetherSpeed": 1800,
+          "mechanic": 5,
+          "tetherSpeed": 1400,
           "tetherFrames": 12,
           "bleedInitial": 20,
           "bleedTickDamage": 2,
@@ -30809,43 +31419,57 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 5,
+          "geometry": [
+            0,
+            0,
+            100,
+            100
+          ]
         },
         {
           "id": "5D",
-          "hitPose": 5,
           "button": 4,
           "category": 3,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 16,
-          "active": 5,
-          "recovery": 23,
-          "damage": 70,
-          "hitstun": 32,
-          "blockstun": 19,
+          "active": 4,
+          "recovery": 24,
+          "damage": 36,
+          "hitstun": 24,
+          "blockstun": 16,
           "hitstop": 9,
-          "pushback": 1800,
-          "specialCancel": 1,
+          "pushback": 1200,
+          "specialCancel": 0,
           "jumpCancel": 0,
           "whiffCancel": 0,
           "selfCancel": 0,
-          "advance": 1600,
+          "advance": 0,
           "simpleDirection": 0,
           "simpleButton": 4,
-          "normalRoutes": -1,
-          "commandRoutes": -1,
+          "normalRoutes": 0,
+          "commandRoutes": 0,
           "hitLevel": 0,
-          "chipDamage": 7,
+          "chipDamage": 0,
           "guardBreak": 0,
           "counterHitstun": 0,
           "counterHitstop": 0,
           "reversalEligible": 1,
-          "airPushback": 2100,
+          "airPushback": 1200,
           "blockPushback": 1800,
           "launch": 0,
-          "airLaunch": 850,
+          "airLaunch": 0,
           "knockdown": 0,
           "knockdownFrames": 6,
           "wakeupFrames": 8,
@@ -30857,7 +31481,7 @@
           "followFrom2": -1,
           "followHit": 0,
           "travelSpeed": 0,
-          "inertiaPercent": 100,
+          "inertiaPercent": 0,
           "pullFrames": 0,
           "pullGap": 1000,
           "hitAngle": 0,
@@ -30875,10 +31499,10 @@
           "minimumDamage": 10,
           "landingRecovery": 0,
           "attackLevel": 3,
-          "counterTier": 3,
+          "counterTier": 1,
           "counterVulnerable": 3,
-          "counterFreezeFrames": 31,
-          "counterSlowFrames": 35,
+          "counterFreezeFrames": -1,
+          "counterSlowFrames": 0,
           "projectileKind": 0,
           "projectileSpawnFrame": 0,
           "projectileSpeedX": 600,
@@ -30894,7 +31518,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -30904,9 +31528,9 @@
           "hurtMaskWindup": 15,
           "hurtMaskActive": 15,
           "hurtMaskRecovery": 15,
-          "mechanic": 1,
-          "tetherSpeed": 1800,
-          "tetherFrames": 24,
+          "mechanic": 3,
+          "tetherSpeed": 2500,
+          "tetherFrames": 15,
           "bleedInitial": 20,
           "bleedTickDamage": 2,
           "bleedTickFrames": 30,
@@ -30947,11 +31571,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 5,
+          "geometry": [
+            2500,
+            5500,
+            19500,
+            10500
+          ]
         },
         {
           "id": "236P",
-          "hitPose": 1,
           "button": 0,
           "category": 2,
           "direction": 5,
@@ -30989,7 +31627,7 @@
           "wakeupFrames": 8,
           "wallDamage": 242,
           "throwRange": 2000,
-          "enabled": 1,
+          "enabled": 0,
           "artPose": 0,
           "followFrom": -1,
           "followFrom2": -1,
@@ -31032,7 +31670,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -31085,11 +31723,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            4218,
+            9843,
+            7922,
+            11297
+          ]
         },
         {
           "id": "236S",
-          "hitPose": 3,
           "button": 2,
           "category": 2,
           "direction": 5,
@@ -31127,7 +31779,7 @@
           "wakeupFrames": 8,
           "wallDamage": 314,
           "throwRange": 2000,
-          "enabled": 1,
+          "enabled": 0,
           "artPose": 0,
           "followFrom": -1,
           "followFrom2": -1,
@@ -31170,7 +31822,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -31223,11 +31875,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 3,
+          "geometry": [
+            3843,
+            6140,
+            8813,
+            8250
+          ]
         },
         {
           "id": "623Hs",
-          "hitPose": 4,
           "button": 3,
           "category": 2,
           "direction": 5,
@@ -31265,7 +31931,7 @@
           "wakeupFrames": 8,
           "wallDamage": 380,
           "throwRange": 2000,
-          "enabled": 1,
+          "enabled": 0,
           "artPose": 0,
           "followFrom": -1,
           "followFrom2": -1,
@@ -31308,7 +31974,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -31361,11 +32027,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 4,
+          "geometry": [
+            -2063,
+            7546,
+            5579,
+            14344
+          ]
         },
         {
           "id": "j.P",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
@@ -31501,10 +32181,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 2800,
-          "bottom": 7086,
-          "reach": 9886,
-          "height": 4285,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -31532,6 +32208,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
           "geometry": [
             2800,
             7086,
@@ -31541,7 +32221,6 @@
         },
         {
           "id": "j.K",
-          "hitPose": 2,
           "button": 1,
           "category": 0,
           "direction": 5,
@@ -31677,10 +32356,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 1067,
-          "bottom": 4533,
-          "reach": 11667,
-          "height": 4467,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -31708,6 +32383,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 2,
           "geometry": [
             1067,
             4533,
@@ -31717,7 +32396,6 @@
         },
         {
           "id": "j.S",
-          "hitPose": 3,
           "button": 2,
           "category": 0,
           "direction": 5,
@@ -31853,10 +32531,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 2308,
-          "bottom": 1692,
-          "reach": 14077,
-          "height": 9154,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -31896,6 +32570,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 3,
           "geometry": [
             2308,
             1692,
@@ -31905,7 +32583,6 @@
         },
         {
           "id": "j.Hs",
-          "hitPose": 4,
           "button": 3,
           "category": 0,
           "direction": 5,
@@ -32041,10 +32718,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 2845,
-          "bottom": -169,
-          "reach": 12704,
-          "height": 12958,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -32100,6 +32773,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 4,
           "geometry": [
             2845,
             -169,
@@ -32109,39 +32786,38 @@
         },
         {
           "id": "j.D",
-          "hitPose": 5,
           "button": 4,
           "category": 3,
           "direction": 5,
           "motion": 0,
           "air": 1,
-          "startup": 16,
-          "active": 5,
-          "recovery": 23,
-          "damage": 70,
-          "hitstun": 32,
-          "blockstun": 19,
+          "startup": 17,
+          "active": 4,
+          "recovery": 22,
+          "damage": 32,
+          "hitstun": 25,
+          "blockstun": 14,
           "hitstop": 9,
-          "pushback": 1800,
-          "specialCancel": 1,
+          "pushback": 1200,
+          "specialCancel": 0,
           "jumpCancel": 0,
           "whiffCancel": 0,
           "selfCancel": 0,
           "advance": 0,
           "simpleDirection": 0,
           "simpleButton": 4,
-          "normalRoutes": -1,
-          "commandRoutes": -1,
-          "hitLevel": 0,
-          "chipDamage": 7,
+          "normalRoutes": 0,
+          "commandRoutes": 0,
+          "hitLevel": 2,
+          "chipDamage": 0,
           "guardBreak": 0,
           "counterHitstun": 0,
           "counterHitstop": 0,
           "reversalEligible": 1,
-          "airPushback": 2100,
+          "airPushback": 1200,
           "blockPushback": 1800,
           "launch": 0,
-          "airLaunch": 850,
+          "airLaunch": 0,
           "knockdown": 0,
           "knockdownFrames": 6,
           "wakeupFrames": 8,
@@ -32153,7 +32829,7 @@
           "followFrom2": -1,
           "followHit": 0,
           "travelSpeed": 0,
-          "inertiaPercent": 100,
+          "inertiaPercent": 0,
           "pullFrames": 0,
           "pullGap": 1000,
           "hitAngle": 0,
@@ -32171,10 +32847,10 @@
           "minimumDamage": 10,
           "landingRecovery": 3,
           "attackLevel": 3,
-          "counterTier": 3,
+          "counterTier": 1,
           "counterVulnerable": 3,
-          "counterFreezeFrames": 31,
-          "counterSlowFrames": 35,
+          "counterFreezeFrames": -1,
+          "counterSlowFrames": 0,
           "projectileKind": 0,
           "projectileSpawnFrame": 0,
           "projectileSpeedX": 600,
@@ -32190,7 +32866,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -32200,7 +32876,7 @@
           "hurtMaskWindup": 15,
           "hurtMaskActive": 15,
           "hurtMaskRecovery": 15,
-          "mechanic": 0,
+          "mechanic": 3,
           "tetherSpeed": 1800,
           "tetherFrames": 12,
           "bleedInitial": 20,
@@ -32243,44 +32919,58 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 5,
+          "geometry": [
+            2000,
+            -8000,
+            15000,
+            5000
+          ]
         },
         {
           "id": "2D",
-          "hitPose": 5,
           "button": 4,
-          "category": 0,
+          "category": 3,
           "direction": 2,
           "motion": 0,
           "air": 0,
           "startup": 12,
-          "active": 3,
-          "recovery": 24,
-          "damage": 65,
-          "hitstun": 24,
-          "blockstun": 16,
-          "hitstop": 9,
-          "pushback": 1800,
-          "specialCancel": 1,
+          "active": 1,
+          "recovery": 20,
+          "damage": 0,
+          "hitstun": 22,
+          "blockstun": 12,
+          "hitstop": 6,
+          "pushback": 0,
+          "specialCancel": 0,
           "jumpCancel": 0,
           "whiffCancel": 0,
           "selfCancel": 0,
           "advance": 0,
           "simpleDirection": 0,
           "simpleButton": 4,
-          "normalRoutes": -1,
-          "commandRoutes": -1,
-          "hitLevel": 1,
+          "normalRoutes": 0,
+          "commandRoutes": 0,
+          "hitLevel": 0,
           "chipDamage": 0,
           "guardBreak": 0,
           "counterHitstun": 0,
           "counterHitstop": 0,
           "reversalEligible": 0,
-          "airPushback": 2100,
+          "airPushback": 0,
           "blockPushback": 1800,
-          "launch": 600,
-          "airLaunch": 500,
-          "knockdown": 2,
+          "launch": 0,
+          "airLaunch": 0,
+          "knockdown": 0,
           "knockdownFrames": 36,
           "wakeupFrames": 8,
           "wallDamage": 290,
@@ -32291,7 +32981,7 @@
           "followFrom2": -1,
           "followHit": 0,
           "travelSpeed": 0,
-          "inertiaPercent": 100,
+          "inertiaPercent": 0,
           "pullFrames": 0,
           "pullGap": 1000,
           "hitAngle": 0,
@@ -32305,14 +32995,14 @@
           "followCancelEnd": 0,
           "cancelOn": 7,
           "starterProration": 80,
-          "comboScaling": 8,
+          "comboScaling": 0,
           "minimumDamage": 10,
           "landingRecovery": 0,
-          "attackLevel": 4,
-          "counterTier": 3,
+          "attackLevel": -1,
+          "counterTier": 1,
           "counterVulnerable": 3,
-          "counterFreezeFrames": 31,
-          "counterSlowFrames": 35,
+          "counterFreezeFrames": -1,
+          "counterSlowFrames": 0,
           "projectileKind": 0,
           "projectileSpawnFrame": 0,
           "projectileSpeedX": 600,
@@ -32328,7 +33018,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -32338,9 +33028,9 @@
           "hurtMaskWindup": 15,
           "hurtMaskActive": 15,
           "hurtMaskRecovery": 15,
-          "mechanic": 1,
+          "mechanic": 4,
           "tetherSpeed": 1800,
-          "tetherFrames": 24,
+          "tetherFrames": 10,
           "bleedInitial": 20,
           "bleedTickDamage": 2,
           "bleedTickFrames": 30,
@@ -32381,11 +33071,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 5,
+          "geometry": [
+            0,
+            0,
+            100,
+            100
+          ]
         },
         {
           "id": "4P+K",
-          "hitPose": 1,
           "button": 0,
           "category": 4,
           "direction": 4,
@@ -32466,7 +33170,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -32519,11 +33223,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            0,
+            0,
+            5000,
+            13700
+          ]
         },
         {
           "id": "6P+K",
-          "hitPose": 1,
           "button": 0,
           "category": 4,
           "direction": 6,
@@ -32604,7 +33322,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -32657,11 +33375,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            0,
+            0,
+            5000,
+            13700
+          ]
         },
         {
           "id": "236K",
-          "hitPose": 2,
           "button": 1,
           "category": 2,
           "direction": 5,
@@ -32742,7 +33474,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -32795,11 +33527,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 2,
+          "geometry": [
+            4968,
+            4125,
+            8907,
+            6985
+          ]
         },
         {
           "id": "236S>6S",
-          "hitPose": 3,
           "button": 2,
           "category": 2,
           "direction": 5,
@@ -32880,7 +33626,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -32933,11 +33679,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 3,
+          "geometry": [
+            3843,
+            6140,
+            8813,
+            8250
+          ]
         },
         {
           "id": "236S>2S",
-          "hitPose": 3,
           "button": 2,
           "category": 2,
           "direction": 5,
@@ -33018,7 +33778,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -33071,19 +33831,33 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 3,
+          "geometry": [
+            3843,
+            6140,
+            8813,
+            8250
+          ]
         },
         {
           "id": "214S",
-          "hitPose": 3,
           "button": 2,
           "category": 2,
           "direction": 5,
           "motion": 214,
           "air": 0,
           "startup": 20,
-          "active": 8,
-          "recovery": 26,
+          "active": 10,
+          "recovery": 24,
           "damage": 25,
           "hitstun": 40,
           "blockstun": 14,
@@ -33093,7 +33867,7 @@
           "jumpCancel": 0,
           "whiffCancel": 0,
           "selfCancel": 0,
-          "advance": 0,
+          "advance": 2000,
           "simpleDirection": 4,
           "simpleButton": 2,
           "normalRoutes": 0,
@@ -33105,7 +33879,7 @@
           "counterHitstop": 0,
           "reversalEligible": 1,
           "airPushback": 0,
-          "blockPushback": 800,
+          "blockPushback": 2000,
           "launch": 0,
           "airLaunch": 850,
           "knockdown": 0,
@@ -33118,17 +33892,11 @@
           "followFrom": -1,
           "followFrom2": -1,
           "followHit": 0,
-          "travelSpeed": 0,
+          "travelSpeed": 500,
           "inertiaPercent": 100,
           "pullFrames": 10,
           "pullGap": 500,
           "hitAngle": 1,
-          "path": [
-            3200,
-            10400,
-            25000,
-            11600
-          ],
           "normalCancelStart": 1,
           "normalCancelEnd": 0,
           "specialCancelStart": 1,
@@ -33137,7 +33905,7 @@
           "jumpCancelEnd": 0,
           "followCancelStart": 1,
           "followCancelEnd": 43,
-          "cancelOn": 7,
+          "cancelOn": 1,
           "starterProration": 70,
           "comboScaling": 12,
           "minimumDamage": 10,
@@ -33162,7 +33930,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -33215,19 +33983,39 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 3,
+          "geometry": [
+            3200,
+            11000,
+            20000,
+            13000
+          ],
+          "path": [
+            3200,
+            11000,
+            20000,
+            13000
+          ]
         },
         {
           "id": "j.214P",
-          "hitPose": 1,
-          "button": 0,
+          "button": 2,
           "category": 2,
           "direction": 5,
           "motion": 214,
           "air": 1,
-          "startup": 18,
-          "active": 8,
-          "recovery": 26,
+          "startup": 20,
+          "active": 10,
+          "recovery": 24,
           "damage": 25,
           "hitstun": 40,
           "blockstun": 14,
@@ -33267,12 +34055,6 @@
           "pullFrames": 10,
           "pullGap": 500,
           "hitAngle": -1,
-          "path": [
-            3200,
-            5800,
-            25000,
-            7000
-          ],
           "normalCancelStart": 1,
           "normalCancelEnd": 0,
           "specialCancelStart": 1,
@@ -33281,7 +34063,7 @@
           "jumpCancelEnd": 0,
           "followCancelStart": 1,
           "followCancelEnd": 41,
-          "cancelOn": 7,
+          "cancelOn": 1,
           "starterProration": 70,
           "comboScaling": 12,
           "minimumDamage": 10,
@@ -33306,7 +34088,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -33359,11 +34141,31 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 3,
+          "geometry": [
+            3200,
+            5800,
+            25000,
+            7000
+          ],
+          "path": [
+            3200,
+            5800,
+            25000,
+            7000
+          ]
         },
         {
           "id": "214S>P",
-          "hitPose": 1,
           "button": 0,
           "category": 2,
           "direction": 5,
@@ -33419,7 +34221,7 @@
           "jumpCancelEnd": 0,
           "followCancelStart": 1,
           "followCancelEnd": 28,
-          "cancelOn": 7,
+          "cancelOn": 0,
           "starterProration": 90,
           "comboScaling": 8,
           "minimumDamage": 10,
@@ -33444,7 +34246,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -33497,11 +34299,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            5108,
+            9608,
+            8352,
+            11230
+          ]
         },
         {
           "id": "j.214P>P",
-          "hitPose": 1,
           "button": 0,
           "category": 2,
           "direction": 5,
@@ -33557,7 +34373,7 @@
           "jumpCancelEnd": 0,
           "followCancelStart": 1,
           "followCancelEnd": 28,
-          "cancelOn": 7,
+          "cancelOn": 0,
           "starterProration": 90,
           "comboScaling": 8,
           "minimumDamage": 10,
@@ -33582,7 +34398,7 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
+          "smearMode": 1,
           "smearPart": 0,
           "smearStretch": 150,
           "smearFrame1": 0,
@@ -33635,11 +34451,25 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            3040,
+            7013,
+            6528,
+            8757
+          ]
         },
         {
           "id": "c.S",
-          "hitPose": 3,
           "button": 2,
           "category": 0,
           "direction": 5,
@@ -33721,7 +34551,7 @@
           "projectilePersist": 0,
           "projectileMelee": 0,
           "smearMode": 0,
-          "smearPart": 0,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -33775,10 +34605,6 @@
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
-          "hitboxBack": 613,
-          "bottom": -693,
-          "reach": 10960,
-          "height": 11733,
           "hitboxTimeline": {
             "multiHit": false,
             "keys": [
@@ -33818,6 +34644,10 @@
               }
             ]
           },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 3,
           "geometry": [
             613,
             -693,
@@ -33827,18 +34657,17 @@
         },
         {
           "id": "[S/Hs]",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -33908,8 +34737,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -33961,22 +34790,36 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "[S/Hs]>attack",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -34046,8 +34889,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -34099,22 +34942,36 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "st.P",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -34184,8 +35041,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -34237,22 +35094,36 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "st.K",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -34322,8 +35193,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -34375,22 +35246,36 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "st.S",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -34460,8 +35345,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -34513,22 +35398,36 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "st.Hs",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -34598,8 +35497,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -34651,22 +35550,36 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "st.2D",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -34736,8 +35649,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -34789,22 +35702,36 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "st.236D",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -34874,8 +35801,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -34927,22 +35854,36 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "j.4P+K",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -35012,8 +35953,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -35065,22 +36006,36 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "j.6P+K",
-          "hitPose": 1,
           "button": 0,
           "category": 0,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -35150,8 +36105,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -35203,22 +36158,36 @@
           "armorHits": 0,
           "grabFrames": 0,
           "finishArtPose": 0,
-          "finishArtFrame": 0
+          "finishArtFrame": 0,
+          "hurtboxes": {},
+          "hitboxTimeline": {
+            "multiHit": false,
+            "keys": []
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 1,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "6[Hs]",
-          "hitPose": 4,
           "button": 3,
           "category": 1,
           "direction": 6,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -35288,8 +36257,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -35346,22 +36315,31 @@
           "hitboxTimeline": {
             "multiHit": false,
             "keys": []
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 4,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "5[D]",
-          "hitPose": 5,
           "button": 4,
           "category": 3,
           "direction": 5,
           "motion": 0,
           "air": 0,
           "startup": 5,
-          "active": 3,
+          "active": 2,
           "recovery": 10,
           "damage": 32,
-          "hitstun": 22,
-          "blockstun": 11,
+          "hitstun": 10,
+          "blockstun": 9,
           "hitstop": 6,
           "pushback": 600,
           "specialCancel": 1,
@@ -35431,8 +36409,8 @@
           "projectileDurability": 1,
           "projectilePersist": 0,
           "projectileMelee": 0,
-          "smearMode": 0,
-          "smearPart": 0,
+          "smearMode": 1,
+          "smearPart": 3,
           "smearStretch": 150,
           "smearFrame1": 0,
           "smearFrame2": 0,
@@ -35489,11 +36467,20 @@
           "hitboxTimeline": {
             "multiHit": false,
             "keys": []
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 5,
+          "geometry": [
+            3250,
+            8730,
+            7482,
+            12083
+          ]
         },
         {
           "id": "236D",
-          "hitPose": 5,
           "button": 4,
           "category": 4,
           "direction": 6,
@@ -35628,15 +36615,24 @@
           "grabFrames": 0,
           "finishArtPose": 0,
           "finishArtFrame": 0,
+          "hurtboxes": {},
           "hitboxTimeline": {
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 5,
+          "geometry": [
+            0,
+            0,
+            5000,
+            13700
+          ]
         },
         {
           "id": "214D",
-          "hitPose": 5,
           "button": 4,
           "category": 4,
           "direction": 6,
@@ -35771,57 +36767,23 @@
           "grabFrames": 0,
           "finishArtPose": 0,
           "finishArtFrame": 0,
+          "hurtboxes": {},
           "hitboxTimeline": {
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000,
+          "hitPose": 5,
+          "geometry": [
+            0,
+            0,
+            5000,
+            13700
+          ]
         }
-      ],
-      "movement": {
-        "forwardStyle": 0,
-        "walkSpeed": 390,
-        "runSpeed": 1150,
-        "runAcceleration": 120,
-        "stepSpeed": 850,
-        "stepFrames": 10,
-        "backSpeed": 850,
-        "backFrames": 10,
-        "attackFriction": 45,
-        "backStyle": 1,
-        "backWalkSpeed": 390,
-        "backRunSpeed": 500,
-        "jumpSpeed": 1450,
-        "jumpForwardSpeed": 390,
-        "jumpBackSpeed": 390,
-        "gravity": 85,
-        "airJumps": 0,
-        "prejumpFrames": -1,
-        "airDashEnabled": 0,
-        "airBackdashEnabled": 0,
-        "airDashStyle": 1,
-        "airBackdashStyle": 1,
-        "airDashSpeed": 900,
-        "airBackdashSpeed": 700,
-        "airDashFrames": 15,
-        "airBackdashFrames": 12,
-        "airDashUses": 1,
-        "hoverHeight": 1800,
-        "hoverRiseSpeed": 300,
-        "teleportDistance": 20000,
-        "backTeleportDistance": 15000,
-        "teleportStartup": 5,
-        "fdEnabled": 1,
-        "fdPushPercent": -1,
-        "fdDrain": -1,
-        "fdAirDrain": -1,
-        "fdBlockCost": -1,
-        "smearMode": 0,
-        "smearPart": 0,
-        "smearStretch": 150,
-        "airDashPauseFrames": 4,
-        "airBackdashPauseFrames": 4
-      }
+      ]
     },
     {
       "name": "Fillet",
@@ -36422,7 +37384,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 1,
@@ -37020,7 +37985,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 2,
@@ -37620,7 +38588,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 3,
@@ -38240,7 +39211,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -38838,7 +39812,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 1,
@@ -39436,7 +40413,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 2,
@@ -40012,7 +40992,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 3,
@@ -40622,7 +41605,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -41208,7 +42194,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 1,
@@ -41361,7 +42350,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 2,
@@ -41514,7 +42506,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 3,
@@ -42130,7 +43125,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 4,
@@ -42283,7 +43281,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 4,
@@ -42865,7 +43866,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -43441,7 +44445,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 2,
@@ -44032,7 +45039,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 3,
@@ -44632,7 +45642,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -45215,7 +46228,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 1,
@@ -45796,7 +46812,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 2,
@@ -46401,7 +47420,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 3,
@@ -47002,7 +48024,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 4,
@@ -47155,7 +48180,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 4,
@@ -47308,7 +48336,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -47779,7 +48810,10 @@
                 "keys": []
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -48250,7 +49284,10 @@
                 "keys": []
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 1,
@@ -48834,7 +49871,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 2,
@@ -49445,7 +50485,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 2,
@@ -50074,7 +51117,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 2,
@@ -50227,7 +51273,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -50380,7 +51429,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -50533,7 +51585,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -50686,7 +51741,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 2,
@@ -55798,7 +56856,10 @@
                 ]
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -55951,7 +57012,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -56104,7 +57168,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -56257,7 +57324,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -56410,7 +57480,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -56563,7 +57636,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -56716,7 +57792,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -56869,7 +57948,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -57022,7 +58104,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -57175,7 +58260,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 0,
@@ -57328,7 +58416,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 3,
@@ -57481,7 +58572,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 4,
@@ -57634,7 +58728,10 @@
             "multiHit": false,
             "keys": []
           },
-          "hurtboxes": {}
+          "hurtboxes": {},
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 4,
@@ -58148,7 +59245,10 @@
                 "keys": []
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         },
         {
           "button": 4,
@@ -58688,7 +59788,10 @@
                 "keys": []
               }
             }
-          }
+          },
+          "tetherDuration": 180,
+          "tetherRange": 45000,
+          "tetherGap": 6000
         }
       ],
       "movement": {

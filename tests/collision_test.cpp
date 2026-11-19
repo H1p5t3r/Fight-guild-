@@ -122,11 +122,11 @@ static void contact_and_weapons() {
         s.reset(c,(c+1)%6,0,0); flush(s);
         for(int tick=1;tick<=s.moves[c][m].v[Startup];++tick) {
             s.step(tick==1?P<<slot:0,0);
-            if(tick<s.moves[c][m].v[Startup]) { CHECK(s.world.players[1].health==1000); CHECK(s.box_count(0,HitBox)==0); const int phase=s.get(0,29); CHECK(c==2?(phase==11||phase==14||phase==3):c==4&&slot<4?(phase==5||phase==14||phase==3):phase==(s.moves[c][m].v[ArtPose]?3:1)); }
+            if(tick<s.moves[c][m].v[Startup]) { CHECK(s.world.players[1].health==1000); CHECK(s.box_count(0,HitBox)==0); const int phase=s.get(0,29); CHECK(c==2?(phase==11||phase==14||phase==3):c==4?(phase==5||phase==14||phase==3):phase==(s.moves[c][m].v[ArtPose]?3:1)); }
         }
         const auto& track=s.move_hit[c][m];
         const int boxes=track.count&&track.keys[0].frame==1&&track.keys[0].count>=0?track.keys[0].count:1;
-        CHECK(s.box_count(0,HitBox)==(s.world.players[0].grab_time?0:boxes)&&s.get(0,29)==(s.moves[c][m].v[ArtPose]?4:0)&&s.get(0,30)==(s.moves[c][m].v[ArtPose]?s.moves[c][m].v[ArtPose]-1:slot+1));
+        CHECK(s.box_count(0,HitBox)==(s.world.players[0].grab_time?0:boxes)&&(c==4?s.get(0,29)==14:s.get(0,29)==(s.moves[c][m].v[ArtPose]?4:0)&&s.get(0,30)==(s.moves[c][m].v[ArtPose]?s.moves[c][m].v[ArtPose]-1:slot+1)));
         for(int n=0;n<s.moves[c][m].v[GrabFrames];++n)s.step(0,0);
         CHECK(s.world.players[1].health==1000-s.moves[c][m].v[Damage]);
     }

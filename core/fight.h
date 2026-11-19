@@ -4,7 +4,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 23, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 47, FIELD_COUNT = 138;
+constexpr int VERSION = 24, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 47, FIELD_COUNT = 141;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
@@ -36,7 +36,7 @@ enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery
              NormalCancelStart, NormalCancelEnd, SpecialCancelStart, SpecialCancelEnd,
              JumpCancelStart, JumpCancelEnd, FollowCancelStart, FollowCancelEnd, CancelOn,
              StarterProration, ComboScaling, MinimumDamage, LandingRecovery, AttackLevel,
-             CounterTier, CounterVulnerable, CounterFreezeFrames, CounterSlowFrames, ProjectileKind, ProjectileSpawnFrame, ProjectileSpeedX, ProjectileSpeedY, ProjectileGravity, ProjectileLife, ProjectileOffsetX, ProjectileOffsetY, ProjectileWidth, ProjectileHeight, ProjectileHits, ProjectileRehit, ProjectileDurability, ProjectilePersist, ProjectileMelee, SmearMode, SmearPart, SmearStretch, SmearFrame1, SmearFrame2, SmearFrame3, SmearFrame4, HurtMaskWindup, HurtMaskActive, HurtMaskRecovery, Mechanic, TetherSpeed, TetherFrames, BleedInitial, BleedTickDamage, BleedTickFrames, BleedDuration, BleedBlockPercent, BleedCap, VariantStartup, VariantActive, VariantRecovery, VariantDamage, VariantRange, VariantSpeed, VariantLift, VariantHitstun, VariantKnockdown, StanceRequired, StanceChange, ActionType, HoldFollow, HoldFrame, HoldButton, GuardFollow, ProximityMove, ProximityRange, StartupTravel, DiveSpeedX, DiveSpeedY, GroundBounce, WallBounce, CrumpleFrames, AirCounterKnockdown, HurtWindowStart, HurtWindowEnd, HurtWindowMask, SemiAirStart, SemiAirEnd, ArmorFrames, ArmorHits, GrabFrames, FinishArtPose, FinishArtFrame };
+             CounterTier, CounterVulnerable, CounterFreezeFrames, CounterSlowFrames, ProjectileKind, ProjectileSpawnFrame, ProjectileSpeedX, ProjectileSpeedY, ProjectileGravity, ProjectileLife, ProjectileOffsetX, ProjectileOffsetY, ProjectileWidth, ProjectileHeight, ProjectileHits, ProjectileRehit, ProjectileDurability, ProjectilePersist, ProjectileMelee, SmearMode, SmearPart, SmearStretch, SmearFrame1, SmearFrame2, SmearFrame3, SmearFrame4, HurtMaskWindup, HurtMaskActive, HurtMaskRecovery, Mechanic, TetherSpeed, TetherFrames, BleedInitial, BleedTickDamage, BleedTickFrames, BleedDuration, BleedBlockPercent, BleedCap, VariantStartup, VariantActive, VariantRecovery, VariantDamage, VariantRange, VariantSpeed, VariantLift, VariantHitstun, VariantKnockdown, StanceRequired, StanceChange, ActionType, HoldFollow, HoldFrame, HoldButton, GuardFollow, ProximityMove, ProximityRange, StartupTravel, DiveSpeedX, DiveSpeedY, GroundBounce, WallBounce, CrumpleFrames, AirCounterKnockdown, HurtWindowStart, HurtWindowEnd, HurtWindowMask, SemiAirStart, SemiAirEnd, ArmorFrames, ArmorHits, GrabFrames, FinishArtPose, FinishArtFrame, TetherDuration, TetherRange, TetherGap };
 enum KnockdownKind { NoKnockdown, SoftKnockdown, HardKnockdown };
 enum Reaction { Free, AirReel, Downed, Waking, WallSplat, Reeled, Captured, Crumpled };
 enum MobilityField { ForwardStyle, WalkSpeed, RunSpeed, RunAcceleration, StepSpeed, StepFrames,
@@ -100,6 +100,7 @@ struct Fighter {
     int dash_kind, dash_age, dash_air, air_dash_used, air_jump_used, teleported;
     int dash_pause, dash_backwards;
     int attack_serial, projectile_spawned, contact_count;
+    int tether_time=0, tether_chase=0;
     int variant, tether_source, tether_used, bleed_source, bleed_time, bleed_clock, grey_life;
     int stance, guard_button, armor_left, bounce_ground, bounce_wall, crumple_time, grab_time, grab_owner, idle_time;
     int capture_failed, contact_ticks, pair_recovery, pair_grace_pending, legacy_throw_gate_paid;
@@ -218,9 +219,9 @@ private:
     void gain_momentum(Fighter& fighter, int amount);
     void update_faultless(Fighter& fighter);
     Box push_box(const Fighter& fighter, int tick_offset=1) const;
-    Box attack_box(const Fighter& fighter, int segment=0, int tick_offset=0) const;
+    Box attack_box(const Fighter& fighter, const Fighter& target, int segment=0, int tick_offset=0) const;
     const HitKey* hit_key(const Fighter& fighter, int tick_offset=0) const;
-    int attack_count(const Fighter& fighter, int tick_offset=0) const;
+    int attack_count(const Fighter& fighter, const Fighter& target, int tick_offset=0) const;
     unsigned hit_bit(const Fighter& fighter, int tick_offset=0) const;
     Box weapon_span(const Fighter& fighter, int tick_offset=0) const;
     Box hurt_box(const Fighter& fighter, int index, int tick_offset=0) const;

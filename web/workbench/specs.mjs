@@ -58,9 +58,9 @@ for(const key of ['hurtMaskWindup','hurtMaskActive','hurtMaskRecovery'])masks[ke
 // Smear fields are inactive compatibility data; no renderer or editor control uses them.
 for(const key of Object.keys(labels).filter(key=>key.startsWith('smear'))){labels[key]='Legacy '+labels[key].toLowerCase();hints[key]='Retained for older JSON drafts; has no effect.';}
 for(const [key,label,,, ,hint] of MECHANIC_SPECS){labels[key]=label;hints[key]=hint;}
-for(const key of ['tetherSpeed','variantSpeed','variantLift'])speed.add(key);pixel.add('variantRange');percent.add('bleedBlockPercent');
-labels.mechanic='Applied status';
-options.mechanic=[[0,'None'],[1,'Tether → pull'],[2,'Bleed → cash-out grab']];
+for(const key of ['tetherSpeed','variantSpeed','variantLift'])speed.add(key);pixel.add('variantRange');pixel.add('tetherRange');pixel.add('tetherGap');percent.add('bleedBlockPercent');
+labels.mechanic='Drive role';
+options.mechanic=[[0,'None'],[1,'Tether → pull'],[2,'Bleed → cash-out grab'],[3,'Attach line'],[4,'Reel In · spend line'],[5,'Chase Line · spend line']];
 options.variantKnockdown=options.knockdown;
 for(const f of STANCE_FIELDS){labels[f.key]=f.label;hints[f.key]=f.help;if(f.scale===100)(/Speed|Travel|Bounce/.test(f.key)?speed:pixel).add(f.key);}
 Object.assign(options,{stanceRequired:[[0,'Any'],[1,'Normal stance'],[2,'Rolling stance']],stanceChange:[[0,'None'],[1,'Enter on hit'],[2,'Exit on start']],actionType:[[0,'Strike'],[1,'Held guard'],[2,'Stance exit'],[3,'Stall and dive'],[4,'Grab sequence'],[5,'Hold to charge'],[6,'Air projectile recoil']],airCounterKnockdown:options.knockdown,holdButton:options.button});

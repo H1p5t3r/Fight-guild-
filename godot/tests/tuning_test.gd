@@ -10,7 +10,7 @@ func _initialize() -> void:
 func run() -> void:
 	var model := LegacyFixture.create()
 	var defaults := model.data()
-	check(defaults.schema == 23 and model.move(5, 0).starterProration == 70, "New default tuning missing")
+	check(defaults.schema == 24 and model.move(5, 0).starterProration == 70, "New default tuning missing")
 	var legacy := defaults.duplicate(true)
 	legacy.schema = 7
 	legacy.coreVersion = 7

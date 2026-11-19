@@ -56,6 +56,7 @@ function syncSummary(){
   document.querySelector('.attack-toggle').hidden=movement||sequence;document.querySelector('.summary').hidden=movement||sequence;
   for(const id of ['test-behavior','test-entry','test-gap','test-simple','test-mechanic'])$(id).closest('label').hidden=movement;
   $('test-mechanic').closest('label').hidden=movement||sequence||!m.mechanic||!!m.extensions;
+  for(const option of $('test-mechanic').options){option.textContent=m.mechanic>=4?({single:'Without a line',followup:'With an attached line',expire:'Without a line'})[option.value]:m.mechanic===3?({single:'Tag only',followup:'Tag → Reel In',expire:'Tag → timeout'})[option.value]:({single:'Apply status',followup:'Apply → follow-up',expire:'Apply → wait for timeout'})[option.value];option.hidden=m.mechanic>=4&&option.value==='expire';}
   $('test-bleed').closest('label').hidden=movement||!model.data.characters[character].extensions;
   $('reset').textContent=sequence?'Clear queue':movement?'Reset movement':'Reset move';
   $('move-kind').hidden=movement||sequence;$('actual-input').hidden=movement||sequence;$('move-enabled').hidden=movement||sequence;
@@ -365,7 +366,7 @@ function drawTest(){
   if(!previewPending&&!dragBefore&&!hurtDragBefore&&((tab==='hurt'&&hurtPhase!==phase)||(tab==='hit'&&hitKeyFrame===null&&keyAt(m,Math.max(1,oldFrame-m.startup+1))!==key)))renderForm();
   const editable=!a.variant&&tab!=='movement'&&tab!=='sequence'&&!playing&&(!previewPending||dragBefore||hurtDragBefore)&&!!f.selectedFrame;
   preview.show(testRecord,testIndex,m,{
-    hit:editable&&tab==='hit'&&(hitKeyFrame===null||hitKeyFrame===key?.frame),
+    hit:editable&&m.mechanic<4&&tab==='hit'&&(hitKeyFrame===null||hitKeyFrame===key?.frame),
     hitKey:key&&key.boxes!==null?{keyIndex,boxIndex:Math.min(hitBox,Math.max(0,key.boxes.length-1))}:null,
     hurt:editable&&tab==='hurt'?{phase,region:hurtRegion,custom:!!m.extensions||!!m.hurtboxes[phase]}:null
   });
@@ -376,6 +377,7 @@ function drawTest(){
   if(!previewPending){
     if(f.state.pairKind)$('test-readout').textContent+=` · ${['','Throw','Cashout','Wound','Throw-tech gate'][f.state.pairKind]} C${f.state.pairClock}`;
     if(a.pairRecovery||target.pairRecovery)$('test-readout').textContent+=` · release recovery ${a.pairRecovery}/${target.pairRecovery}f`;
+    if(target.tetherTime)$('test-readout').textContent+=` · line ${target.tetherTime}f`;
     if(target.bleedTime)$('test-readout').textContent+=` · bleed ${target.bleedTime}f / ${target.greyLife} grey`;
     if(a.captureFailed)$('test-readout').textContent+=' · capture attempt failed';
   }

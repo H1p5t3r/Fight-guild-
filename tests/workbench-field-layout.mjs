@@ -23,7 +23,8 @@ test('Every active movement control and relocated move setting stays discoverabl
 test('Drive overview uses actual enabled kit entries, stance attacks and exits',()=>{
  const data=structuredClone(pack.defaults),before=JSON.stringify(data);
  const shark=driveKit(data.characters[4]),fillet=driveKit(data.characters[5]),tapper=driveKit(data.characters[3]);
- assert.ok(shark.entries.length&&shark.entries.every(e=>e.move.mechanic===1));
+ assert.ok(shark.entries.length&&shark.entries.every(e=>e.move.mechanic===3));
+ assert.deepEqual(shark.spends.map(e=>e.move.mechanic).sort(),[4,5]);
  assert.ok(fillet.entries.length&&fillet.entries.every(e=>e.move.mechanic===2));
  assert.ok(tapper.entries.some(e=>e.move.category===4));
  assert.ok(tapper.stance.some(e=>e.slot===40));
@@ -36,8 +37,8 @@ test('Drive overview uses actual enabled kit entries, stance attacks and exits',
 test('Visibility follows status, projectile and action behavior without rewriting retained values',()=>{
  const move=structuredClone(pack.defaults.characters[4].moves[13]);
  const before=JSON.stringify(move);
- assert.equal(inactiveReason('tetherSpeed',move),'');assert.ok(inactiveReason('bleedInitial',move));
- assert.ok(inactiveReason('variantDamage',move));assert.equal(inactiveReason('variantStartup',move),'');
+ assert.ok(inactiveReason('tetherSpeed',move));assert.equal(inactiveReason('tetherDuration',move),'');assert.ok(inactiveReason('bleedInitial',move));
+ assert.ok(inactiveReason('variantDamage',move));assert.ok(inactiveReason('variantStartup',move));
  assert.equal(JSON.stringify(move),before);
  move.mechanic=2;assert.equal(inactiveReason('bleedInitial',move),'');assert.ok(inactiveReason('tetherSpeed',move));
  move.projectileKind=2;assert.ok(inactiveReason('projectileSpeedX',move));assert.equal(inactiveReason('projectileLife',move),'');

@@ -6,7 +6,7 @@ func _initialize() -> void: call_deferred("run")
 func run() -> void:
 	var model := LegacyFixture.create()
 	var data := model.data()
-	check(data.schema == 23 and data.characters[2].moves.size() == 47, "Smoke schema missing")
+	check(data.schema == 24 and data.characters[2].moves.size() == 47, "Smoke schema missing")
 	check(model.move(2,43).guardBreak == 1 and model.move(2,43).blockstun == 39, "Charged guard crush missing")
 	for dust in [false,true]:
 		model.reset([2,3])
@@ -26,6 +26,7 @@ func run() -> void:
 		for m in 43:
 			for field in CombatModel.FIELDS:
 				var before: Dictionary = old.characters[c].moves[m]
+				if not before.has(field): continue
 				var expected: int = 2 if field == "startup" and before.category == 4 and before.motion == 0 else int(before[field])
 				check(upgraded.characters[c].moves[m][field] == expected, "Legacy move was overwritten")
 	print("Smoke normals / charge / legacy imports: %d failures" % failures)

@@ -35,7 +35,7 @@ static void routes() {
         fresh(s,5,mirror);s.step(Down|S,0);CHECK(s.world.players[0].move==6);
         fresh(s,4,mirror);motion(s,S,true,mirror);CHECK(s.world.players[0].move==HOOK_GROUND);
         fresh(s,4,mirror);s.world.players[0].y=22000;s.world.players[0].vy=100;
-        motion(s,P,true,mirror);CHECK(s.world.players[0].move==HOOK_AIR);
+        motion(s,S,true,mirror);CHECK(s.world.players[0].move==HOOK_AIR);
     }
     fresh(s);s.reset(5,4,1,1);s.step(Simple|Right|K,0);CHECK(s.world.players[0].move==KNIFE_SPIRAL);
     s.reset(4,5,1,0);s.step(Simple|Left|S,0);CHECK(s.world.players[0].move==HOOK_GROUND);
@@ -89,15 +89,15 @@ static void mobility() {
 }
 static bool hook(Simulation& s,bool air,bool mirror,bool hittable) {
     fresh(s,4,mirror);auto& a=s.world.players[0];auto& b=s.world.players[1];
-    a.x=mirror?65000:35000;b.x=a.x+(mirror?-24000:24000);
-    a.y=air?22000:0;a.vy=0;b.y=air||!hittable?0:26000;b.vy=0;
+    a.x=mirror?65000:35000;b.x=a.x+(mirror?-16000:16000);
+    a.y=air?22000:0;a.vy=0;b.y=air||!hittable?0:14500;b.vy=0;
     a.move=air?HOOK_AIR:HOOK_GROUND;a.age=s.moves[4][a.move].v[Startup]-1;
     int initial=b.health;
-    for(int i=0;i<8&&b.health==initial;++i) {
+    for(int i=0;i<s.moves[4][a.move].v[Active]&&b.health==initial;++i) {
         s.step(0,0);
         CHECK(s.box_count(0,HitBox)==8&&s.get(0,48));
         int extent=s.get(0,46)-s.get(0,44);CHECK(extent==(mirror?-8000:8000));
-        for(int n=0;n<8;++n) {auto box=s.box(0,HitBox,n);CHECK(box.right-box.left==1000&&box.top-box.bottom==2200);}
+        for(int n=0;n<8;++n) {auto box=s.box(0,HitBox,n);CHECK(box.right-box.left==1000&&box.top-box.bottom==1000+s.moves[4][a.move].v[Height]);}
     }
     return b.health<initial;
 }

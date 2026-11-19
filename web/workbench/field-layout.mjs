@@ -34,6 +34,7 @@ export const FIELD_GROUPS=[
  group('projectile-contact','projectiles','Contact & clashes','Hit limits, clashes and persistence after the owner is hit.',['projectileHits','projectileRehit','projectileDurability','projectilePersist','projectileMelee']),
  group('drive-type','mechanics','Applied status','A status can change what this same input does on its next use.',['mechanic']),
  group('tether','mechanics','Tether pull','The pull moves the opponent toward the owner without dealing damage.',['tetherSpeed','tetherFrames']),
+ group('line','mechanics','Line behavior','Tag on hit, then spend it with a separate reel or chase input.',['tetherDuration','tetherRange','tetherGap'],true),
  group('bleed','mechanics','Bleed & grey life','Grey life is stored damage. It is paid out by a successful cash-out grab.',['bleedInitial','bleedTickDamage','bleedTickFrames','bleedDuration','bleedBlockPercent','bleedCap']),
  group('variant-timing','mechanics','Conditional follow-up timing','These frames replace the original attack while its status is on the opponent.',['variantStartup','variantActive','variantRecovery']),
  group('cash-out','mechanics','Cash-out grab','Base damage plus stored grey life, with its own reach and leap.',['variantDamage','variantRange','variantSpeed','variantLift','variantHitstun','variantKnockdown']),
@@ -47,9 +48,13 @@ export const FIELD_GROUPS=[
 ];
 
 export function inactiveReason(key,m){
- if(['tetherSpeed','tetherFrames'].includes(key)&&m.mechanic!==1)return 'Used by Tether → pull.';
+ if(key==='tetherSpeed'&&![1,5].includes(m.mechanic))return 'Used by Chase Line or legacy tether.';
+ if(key==='tetherFrames'&&![1,4].includes(m.mechanic))return 'Used by Reel In or legacy tether.';
+ if(key==='tetherDuration'&&m.mechanic!==3)return 'Used by Attach line.';
+ if(key==='tetherRange'&&m.mechanic<3)return 'Used by line actions.';
+ if(key==='tetherGap'&&![4,5].includes(m.mechanic))return 'Used by Reel In and Chase Line.';
  if(key.startsWith('bleed')&&m.mechanic!==2)return 'Used by Bleed → cash-out grab.';
- if(['variantStartup','variantActive','variantRecovery'].includes(key)&&!m.mechanic)return 'Enable an applied status to use conditional follow-up timing.';
+ if(['variantStartup','variantActive','variantRecovery'].includes(key)&&![1,2].includes(m.mechanic))return 'Enable an applied status to use conditional follow-up timing.';
  if(['variantDamage','variantRange','variantSpeed','variantLift','variantHitstun','variantKnockdown'].includes(key)&&m.mechanic!==2)return 'Used by the bleed cash-out grab; tether pulls deal no damage.';
  if(key.startsWith('projectile')&&key!=='projectileKind'){
   if(!m.projectileKind)return 'Choose a projectile type first.';

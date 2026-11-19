@@ -1,3 +1,4 @@
+import {LINE_DEFAULTS} from '../web/line-drive.mjs';
 import {legacyPack} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -45,7 +46,7 @@ test('Backdraft uses all eight keys with one hit; pillar clocks and special art 
 
 test('Smoke source timing, independent hits and charged slots survive workshop/core round trips',()=>{
  const w=new Workshop(pack,pack.draft.data),c=w.data.characters[2];
- assert.equal(w.data.schema,23);assert.equal(c.moves.length,47);
+ assert.equal(w.data.schema,24);assert.equal(c.moves.length,47);
  assert.equal(blockAdvantage(c.moves[2]),-7);assert.equal(blockAdvantage(c.moves[3]),-4);
  assert.equal(blockAdvantage(c.moves[43]),12);
  assert.equal(inputName(c.moves[32]),'c.S');assert.equal(inputName(c.moves[2]),'f.S');assert.equal(inputName(c.moves[43]),'6[Hs]');
@@ -57,6 +58,7 @@ test('Smoke source timing, independent hits and charged slots survive workshop/c
 });
 test('Leo corrects Tapper boxes without changing his timing, damage, stance or movement',async()=>{
  const previous=await json('godot/data/workshop/2026-11-18-tapper/FightGuild-Tapper.json');
+ for(const c of previous.characters)for(const m of c.moves)Object.assign(m,LINE_DEFAULTS);
  for(const c of previous.characters)for(const m of c.moves)if(m.category===4&&m.motion===0)m.startup=2;
  const now=new Workshop(pack,await json('godot/data/workshop/2026-11-18-startup/FightGuild-Startup.json')).data;
  for(const c of [0,1,4,5]){

@@ -153,10 +153,21 @@ func _draw() -> void:
 	for p in 2:
 		var target: Dictionary = view.players[p]
 		var owner: Dictionary = view.players[1-p]
-		if target.get("tetherSource", 0) > 0:
+		if target.get("tetherSource", 0) > 0 or (target.pullTime > 0 and owner.character == 4 and owner.move == 22) or (owner.get("tetherChase", 0) and owner.move == 12):
 			var start := screen_point(Vector2(owner.x / 100.0 * sx, floor_y - (owner.y / 100.0 + 85) * sx))
 			var end := screen_point(Vector2(target.x / 100.0 * sx, floor_y - (target.y / 100.0 + 70) * sx))
-			draw_line(start, end, Color("57bcca", 0.8), 2.5, true)
+			if FighterArt.catalog().fighters[owner.character].has("line_fx"):
+				var cord := FighterArt.texture(owner.character, "line_fx", 4)
+				draw_set_transform(start, (end - start).angle())
+				var thickness := 3.3 * sx * camera_zoom
+				draw_texture_rect(cord, Rect2(0, -thickness / 2, start.distance_to(end), thickness), false)
+				draw_set_transform(Vector2.ZERO)
+				if target.tetherSource > 0:
+					var seal := FighterArt.texture(owner.character, "line_fx", 3)
+					var diameter := 26 * sx * camera_zoom
+					draw_texture_rect(seal, Rect2(end - Vector2.ONE * diameter / 2, Vector2.ONE * diameter), false, Color(1, 1, 1, 0.86))
+			else:
+				draw_line(start, end, Color("57bcca", 0.8), 2.5, true)
 	# Draw in the stage background before the HUD and before child fighter sprites.
 	feedback.draw(self)
 	draw_walls()
@@ -168,7 +179,7 @@ func _draw() -> void:
 		if fighter.get("bleedTime", 0) > 0:
 			label("BLEED · %d GREY" % fighter.greyLife, Vector2(px - 52, py - 185 * sx * camera_zoom), 13, Color("eba4b6"))
 		elif fighter.get("tetherSource", 0) > 0:
-			label("TETHER · PULLED" if fighter.tetherUsed else "TETHER", Vector2(px - 40, py - 185 * sx * camera_zoom), 13, Color("79d3df"))
+			label("LINE · %.1fs" % (fighter.get("tetherTime", 0) / 60.0) if fighter.get("tetherTime", 0) > 0 else "TETHER · PULLED" if fighter.tetherUsed else "TETHER", Vector2(px - 40, py - 185 * sx * camera_zoom), 13, Color("79d3df"))
 		if fighter.move >= 0:
 			if diagnostics: label("%s · %df" % [model.move_name(fighter.character, fighter.move), fighter.age], Vector2(px + 28, py - 10), 12)
 		elif diagnostics:

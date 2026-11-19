@@ -43,7 +43,7 @@ static void test_routes() {
         const auto& source=moves[c][from];
         if(!source.v[Enabled]||source.v[StanceRequired]==2||source.v[ActionType]==1||source.v[ActionType]==2) continue;
         int command=8+source.v[Button];
-        if(from!=command&&moves[c][command].v[Enabled]) CHECK(fg_can_cancel(c,from,command,1));
+        if(from!=command&&moves[c][command].v[Enabled]&&moves[c][command].v[Category]==Command) CHECK(fg_can_cancel(c,from,command,1));
         CHECK(!fg_can_cancel(c,from,command,0));
         CHECK(bool(fg_can_cancel(c,from,from,1))==bool(source.v[SelfCancel]));
     }
@@ -366,7 +366,7 @@ static void test_roster() {
         CHECK(world.players[1].health==1000-move.v[Damage]);
         CHECK(world.players[0].contact==1);
         thaw(); ticks(1,Right|(P<<button));
-        if(moves[c][8+button].v[Enabled]&&!world.players[0].stance) CHECK(world.players[0].move==8+button); // Same-button command route for every fighter/button.
+        if(moves[c][8+button].v[Enabled]&&moves[c][8+button].v[Category]==Command&&!world.players[0].stance) CHECK(world.players[0].move==8+button); // Same-button command route for every fighter/button.
     }
     CHECK(fg_move_get(CHARACTER_COUNT,0,Damage)==-999);
     CHECK(!fg_move_set(-1,0,Damage,1));

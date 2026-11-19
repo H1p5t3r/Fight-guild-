@@ -38,6 +38,12 @@ export class CombatPreview {
     if(grey&&data.characters[character].extensions){e.api.fg_preview_status(1,1,grey);result.warnings.push(`Target begins with ${grey} grey life; owned bleed is an explicit preview setup.`);}
     let elapsed=0,quiet=0,lastGroups=0,followed=false;
     const mechanicTest=m.mechanic&&!m.extensions?(options.mechanic||'single'):'single';
+    const separateLine=m.mechanic>=3;
+    if(m.mechanic>=4&&mechanicTest==='followup'){
+      const tag=data.characters[character].moves.findIndex(a=>a.enabled&&a.mechanic===3);
+      if(tag>=0){e.api.fg_preview_status(1,2,tag+1);followed=true;result.warnings.push('Target begins with an attached line. This is an explicit preview setup.');}
+      else result.warnings.push('This fighter has no enabled Attach line action.');
+    }
     const capture=(input,stage)=>{
       const state=e.state(),players=state.players;
       const contact=players[0].contactCount!==lastGroups;
@@ -57,7 +63,7 @@ export class CombatPreview {
     };
     const step=(input,stage)=>{e.step(input,defenderInput());elapsed++;return capture(input,stage);};
     capture(0,'Ready');
-    if(mechanicTest!=='single')result.warnings.push('Status setup uses an unguarded hit. The selected guard behavior is used for the follow-up.');
+    if(mechanicTest!=='single'&&m.mechanic<4)result.warnings.push('Status setup uses an unguarded hit. The selected guard behavior is used for the follow-up.');
     if(!m.enabled){result.warnings.push('Attack disabled: geometry only. You can edit its boxes here; enable it to test movement and contact.');return this.geometryRecord(result,m);}
     const forward=directionBits(6,facing);
     if(entry==='walk'||entry==='run')for(let i=0;i<12;++i)step(forward|(entry==='run'&&i===0?INPUT.dash:0),entry==='run'?'Run / step approach':'Walk approach');
@@ -91,9 +97,11 @@ export class CombatPreview {
       if(mechanicTest==='followup'&&!followed&&status&&quiet>=6){
         followed=true;quiet=0;
         const dir=state.players[0].facing;
-        if(simple)step(directionBits(m.simpleDirection,dir)|INPUT.simple|(INPUT.P<<m.simpleButton),'Follow-up input');
-        else {const sequence=m.motion?String(m.motion).split('').map(Number):[m.direction];sequence.forEach((d,j)=>step(directionBits(d,dir)|(j===sequence.length-1?INPUT.P<<m.button:0),'Follow-up input'));}
-      }else if(quiet>=24&&!(mechanicTest==='expire'&&state.players[1].bleedTime))break;
+        const follow=separateLine?data.characters[character].moves.find(a=>a.enabled&&a.mechanic===4):m;
+        if(!follow){result.warnings.push('No Reel In action is enabled.');break;}
+        if(simple&&follow.simpleDirection)step(directionBits(follow.simpleDirection,dir)|INPUT.simple|(INPUT.P<<follow.simpleButton),'Follow-up input');
+        else {const sequence=follow.motion?String(follow.motion).split('').map(Number):[follow.direction];sequence.forEach((d,j)=>step(directionBits(d,dir)|(j===sequence.length-1?INPUT.P<<follow.button:0),'Follow-up input'));}
+      }else if(quiet>=24&&!(mechanicTest==='expire'&&(state.players[1].bleedTime||state.players[1].tetherTime)))break;
     }
     if(!result.executed){
       const actual=state.players[0].lastMove;

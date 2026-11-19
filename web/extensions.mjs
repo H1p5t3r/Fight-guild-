@@ -1,3 +1,4 @@
+import {LINE_DEFAULTS} from './line-drive.mjs';
 import {LAYOUT,DEFAULT_ART,LEGACY_FILLET} from './extension-layout.mjs';
 export const ACTION_EXTENSION_FIELDS=714,CHARACTER_EXTENSION_FIELDS=947;
 export const REGIONS=['legs','torsoArms','head','extension'];
@@ -88,4 +89,4 @@ export function defaultExtensionArt(c,m=-1){return DEFAULT_ART[c]?.[m<0?'charact
 export function extensionBody(move,frame){const track=move.extensions?.hurtboxes;if(!track?.length)return null;return track.findLast(k=>k.frame<=frame)?.boxes??null;}
 export {LAYOUT};
 
-export function migrationDefaults(defaults){const next=structuredClone(defaults);next.characters[5]=structuredClone(LEGACY_FILLET);for(const c of next.characters){c.moves=c.moves.slice(0,45);delete c.extensions;for(const m of c.moves)delete m.extensions;}return next;}
+export function migrationDefaults(defaults){const next=structuredClone(defaults);next.characters[5]=structuredClone(LEGACY_FILLET);if(defaults.schema>=24)for(const m of next.characters[5].moves)Object.assign(m,LINE_DEFAULTS);for(const c of next.characters){c.moves=c.moves.slice(0,45);delete c.extensions;for(const m of c.moves)delete m.extensions;}return next;}
