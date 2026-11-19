@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "character": "Fillet",
+  "scope": "26-action sprite replacement pass; direction selection is separate from production and installation",
+  "actions": [
+    {
+      "id": "5P",
+      "display": "5P",
+      "name": "Short check",
+      "directionStatus": "user_selected",
+      "productionStatus": "pending",
+      "installed": false,
+      "option": "A",
+      "direction": "Elbow Snap",
+      "selectedOn": "2026-11-19"
+    },
+    {
+      "id": "5K",
+      "display": "5K",
+      "name": "Step kick",
+      "directionStatus": "user_selected",
+      "productionStatus": "pending",
+      "installed": false,
+      "option": "A",
+      "direction": "Heel Drive",
+      "selectedOn": "2026-11-19"
+    },
+    {
+      "id": "c.S",
+      "display": "c.S",
+      "name": "Inside cut",
+      "directionStatus": "selected_in_supplied_packet",
+      "productionStatus": "pending",
+      "installed": false,
+      "direction": "Short LEFT reverse-grip rising cut",
+      "reference": "Fillet_cS_Selected_Motion_Direction.png"
+    },
+    {
+      "id": "5S",
+      "display": "f.S",
+      "name": "Long knife",
+      "directionStatus": "user_selected",
+      "productionStatus": "pending",
+      "installed": false,
+      "option": "B",
+      "direction": "Hip-led",
+      "selectedOn": "2026-11-19"
+    },
+    {
+      "id": "5Hs",
+      "display": "5Hs",
+      "name": "Crosscut",
+      "directionStatus": "options_ready",
+      "productionStatus": "pending",
+      "installed": false,
+      "batch": "normals-batch-02",
+      "options": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "2P",
+      "display": "2P",
+      "name": "Low stance check",
+      "directionStatus": "user_selected",
+      "productionStatus": "pending",
+      "installed": false,
+      "option": "B",
+      "direction": "Shoulder Slip",
+      "selectedOn": "2026-11-19"
+    },
+    {
+      "id": "2K",
+      "display": "2K",
+      "name": "Ankle check",
+      "directionStatus": "user_selected",
+      "productionStatus": "pending",
+      "installed": false,
+      "option": "B",
+      "direction": "Ankle Snap",
+      "selectedOn": "2026-11-19"
+    },
+    {
+      "id": "2S",
+      "display": "2S",
+      "name": "Sweep",
+      "directionStatus": "options_ready",
+      "productionStatus": "pending",
+      "installed": false,
+      "batch": "normals-batch-02",
+      "options": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "2Hs",
+      "display": "2Hs",
+      "name": "Rising scissors",
+      "directionStatus": "options_ready",
+      "productionStatus": "pending",
+      "installed": false,
+      "batch": "normals-batch-02",
+      "options": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "6P",
+      "display": "6P",
+      "name": "Shoulder guard cut",
+      "directionStatus": "options_ready",
+      "productionStatus": "pending",
+      "installed": false,
+      "batch": "normals-batch-02",
+      "options": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "6Hs",
+      "display": "6Hs",
+      "name": "Chasing cleave",
+      "directionStatus": "options_ready",
+      "productionStatus": "pending",
+      "installed": false,
+      "batch": "normals-batch-02",
+      "options": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "id": "j.P",
+      "display": "j.P",
+      "name": "Air check",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "j.K",
+      "display": "j.K",
+      "name": "Descending kick",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "j.S",
+      "display": "j.S",
+      "name": "Falling knife",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "j.Hs",
+      "display": "j.Hs",
+      "name": "Turning scissors",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "236P",
+      "display": "236P",
+      "name": "Needle check",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "236S",
+      "display": "236S",
+      "name": "Opening cut",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "236S>6S",
+      "display": "236S > 6S",
+      "name": "Crown cut",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "236S>2S",
+      "display": "236S > 2S",
+      "name": "Heel cut",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "236K",
+      "display": "236K",
+      "name": "Passing cut",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "623Hs",
+      "display": "623Hs",
+      "name": "Rising carve",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "4P+K",
+      "display": "4P+K",
+      "name": "Back throw",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "6P+K",
+      "display": "6P+K",
+      "name": "Forward throw",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "5D",
+      "display": "D / 5D",
+      "name": "Wound",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "236D",
+      "display": "236D",
+      "name": "Vault cashout",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    },
+    {
+      "id": "214D",
+      "display": "214D",
+      "name": "Skim cashout",
+      "directionStatus": "queued",
+      "productionStatus": "pending",
+      "installed": false
+    }
+  ]
+}

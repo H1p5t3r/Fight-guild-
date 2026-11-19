@@ -1,20 +1,22 @@
 # Fillet normal attacks — batch 01
 
+Approved directions: **5P-A, 2P-B, 5K-A, 2K-B** (2026-11-19).
+
 Review options for **5P, 2P, 5K and 2K**. Each option contains a windup and an
 active drawing. These are motion-direction studies, not installed sprites.
 
 - [P options: 5P and 2P](p-options.png)
 - [K options: 5K and 2K, corrected standing-kick height](k-options.png)
 
-Each sheet reads **A windup → A active | B windup → B active**. Choose separately
-for each move; mixing A and B is expected.
+Each sheet reads **A windup → A active | B windup → B active**. The user's choices
+below supersede the initial suggested mix.
 
-| Move | A | B | Suggested starting choice |
+| Move | A | B | Selected |
 |---|---|---|---|
-| 5P — Short check | Elbow Snap: compact preparation | Rib Turn: coil and shoulder release | A, for the five-frame check |
+| 5P — Short check | Elbow Snap: compact preparation | Rib Turn: coil and shoulder release | A |
 | 2P — Low stance check | Low Snap: stable crouching check | Shoulder Slip: lower head and diagonal torso motion | B |
-| 5K — Step kick | Heel Drive: toe-up extension | Hip Snap: pelvis rotation and angled boot | B |
-| 2K — Ankle check | Heel Piston: direct low extension | Ankle Snap: more hip opening | A |
+| 5K — Step kick | Heel Drive: toe-up extension | Hip Snap: pelvis rotation and angled boot | A |
+| 2K — Ankle check | Heel Piston: direct low extension | Ankle Snap: more hip opening | B |
 
 The P moves use the short anatomical LEFT knife. The long RIGHT knife stays low
 and separate. K moves use the RIGHT boot while both knives remain inactive.

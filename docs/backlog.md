@@ -23,7 +23,8 @@ See [combat tuning](combat-tuning.md) for defaults, migration rules and verified
 - [x] Expose exact body/push/root keys, named routes and paired settings in the Workshop and native development controls; add live state inspection.
 - [x] Verify all 894 canonical action frames in both facings and player slots, plus paired capture/release, real-input pressure and rollback checks.
 - [x] Record **B — Hip-led** as the selected f.S motion direction and generate review studies using model 06.
-- [x] Generate [batch 01 options for 5P, 2P, 5K and 2K](../art/characters/fillet-v1/review/normals-batch-01/README.md): two directions per move, each with windup and active poses. Refine P-option differences and lower 5K contact height. Selections remain pending.
+- [x] Generate [batch 01 options for 5P, 2P, 5K and 2K](../art/characters/fillet-v1/review/normals-batch-01/README.md), refine P-option differences and lower 5K contact height. User selected **5P-A, 2P-B, 5K-A, 2K-B**; production/registration remains pending.
+- [x] Generate [batch 02 options for 5Hs, 2S, 2Hs, 6P and 6Hs](../art/characters/fillet-v1/review/normals-batch-02/README.md), including a corrected crossed-blade silhouette for 5Hs. User selections remain pending; all 26 action directions/production states are tracked in the review selection log.
 - [ ] Approve and register f.S art against its 125px reach, arm/knife lengths, body profile and both facings. The generated studies are not installed.
 - [ ] Offer/select the remaining new Fillet animation directions, then finish paired receiver coverage, interruption/entry/exit clips and the full art acceptance matrix. Keep current sprites until approved replacements are ready.
 

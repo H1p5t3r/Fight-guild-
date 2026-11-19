@@ -2,7 +2,7 @@
   "version": 1,
   "character": "Fillet",
   "date": "2026-11-19",
-  "status": "motion direction review; awaiting user selections; not installed",
+  "status": "motion directions approved by user; sprite production and registration pending",
   "scope": [
     "5P",
     "2P",
@@ -70,7 +70,12 @@
     "5K": "B",
     "2K": "A"
   },
-  "selections": {},
+  "selections": {
+    "5P": "A",
+    "2P": "B",
+    "5K": "A",
+    "2K": "B"
+  },
   "provenance": {
     "p-options.png": {
       "source": "/workspace/generated_images/exec-0226ce67-a718-4725-9ef6-34aaad406c43.png",
@@ -96,5 +101,10 @@
     "Selected drawings still require exact body/weapon/foot registration, anatomical leg/hand checks in both facings, active corridor fit and transition continuity.",
     "No runtime art, frame data, hit/hurt/push boxes or sprite manifest changed.",
     "Existing f.S B direction remains selected independently of this batch."
-  ]
+  ],
+  "approval": {
+    "date": "2026-11-19",
+    "source": "User: 5p-A, 2P-B, 5K-A, 2K-B",
+    "scope": "Selected direction for each windup/active pair. Existing f.S B remains selected."
+  }
 }

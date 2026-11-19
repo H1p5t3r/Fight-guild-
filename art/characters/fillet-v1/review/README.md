@@ -1,0 +1,30 @@
+# Fillet v1 sprite direction review
+
+Direction selection and playable installation are tracked separately in
+[`selection-log.json`](selection-log.json). A selected option is permission to
+produce that motion; it does not mean the generated study is already registered
+or installed in the game.
+
+| Moves | Current direction |
+|---|---|
+| c.S | Short LEFT reverse-grip rising cut, selected in the supplied implementation packet |
+| f.S | B — Hip-led |
+| 5P | A — Elbow Snap |
+| 2P | B — Shoulder Slip |
+| 5K | A — Heel Drive |
+| 2K | B — Ankle Snap |
+
+The user's 2026-11-19 choice of **5K-A and 2K-B** supersedes the opposite initial
+recommendation. Do not silently substitute the suggested mix.
+
+1. [Batch 01](normals-batch-01/README.md): approved P/K choices.
+2. [Batch 02](normals-batch-02/README.md): 5Hs, 2S, 2Hs, 6P and 6Hs options.
+3. Produce/register the selected ground-normal pose set together for consistency.
+4. Remaining air normals, specials and paired actions follow the same review
+   process, preserving already selected directions.
+
+Production uses Model Reference 06, black hair, slender arms, fixed long RIGHT /
+short LEFT knives, mature proportions, wide A / Stalker stance and consistent
+cel shading. Existing game timing and collision remain authoritative. Exact
+registration, blade identity, support-foot continuity, both facings and gameplay
+preview checks come before sprite installation. No transition smears.
