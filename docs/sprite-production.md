@@ -1,4 +1,8 @@
-# Sprite production direction — working contract v0.5
+# Sprite production direction — working contract v0.6
+
+Attack timing now follows the user-approved [held-pose production standard](attack-animation-standard.md):
+hold the load through startup, put the largest attacking motion at first active,
+and use deliberate follow-through/recovery holds tied to the actual move data.
 
 Latest Shark pass: [selected idle, walk, backward walk, backdash and run](shark-movement.md),
 following [Ky normals and the approved fluid Low Scoop](shark-normals.md).

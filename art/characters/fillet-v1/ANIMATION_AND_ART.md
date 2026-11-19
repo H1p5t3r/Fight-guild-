@@ -1,5 +1,10 @@
 # Fillet v1.0 — animation, movement and art implementation contract
 
+Current exposure policy: [approved attack animation standard](../../../docs/attack-animation-standard.md).
+The user approved held poses and a sharp last-startup → first-active transition
+on 2026-11-19. This overrides evenly spaced exposure or near-extended startup
+poses while preserving this packet's mechanics and selected choreography.
+
 ## Deliver the complete playable character
 
 Implement the complete Fillet animation set in this document. These are selected v1.0 production decisions. Author all 26 actions, their legal transfers, every locomotion/reaction state, five paired success sequences, and the normal-throw tech branch. Finish the playable procedural version in the same implementation pass if polished raster production is slower. Do not stop for another pose-selection round, leave attacks with only one generic active drawing, or make finished raster art a prerequisite for delivering the functioning moveset.
