@@ -26,7 +26,7 @@ export async function serveWorkshopSite(port=8081,host='127.0.0.1',mount='/') {
     const relative=pathname.startsWith(mount)?pathname.slice(mount.length):null;
     const name=relative===''?'index.html':relative;
     const hashed=/^assets\/[a-f0-9]{64}\.(?:webp|woff2|css|js)$/.test(name??'');
-    if(!hashed&&!['index.html','version.json','FightGuild-moves.json','START_HERE.txt'].includes(name)){response.writeHead(404);response.end();return;}
+    if(!hashed&&!['index.html','fillet-motion-review.html','version.json','FightGuild-moves.json','START_HERE.txt'].includes(name)){response.writeHead(404);response.end();return;}
     try{
       const body=await readFile(new URL(name,folder));
       response.writeHead(200,{'Content-Type':types[name.split('.').at(-1)],'Content-Length':body.length,'Cache-Control':hashed?'public, max-age=31536000, immutable':'no-cache','X-Content-Type-Options':'nosniff'});

@@ -11,6 +11,8 @@ on:
       - 'godot/data/**'
       - 'godot/Content/Fonts/**'
       - 'scripts/build-workbench.mjs'
+      - 'scripts/build-fillet-motion-review.mjs'
+      - 'art/characters/fillet-v1/production/ground-twos/*.json'
       - 'scripts/build.sh'
       - 'scripts/generate-combat-data.py'
       - 'scripts/package-workshop.py'

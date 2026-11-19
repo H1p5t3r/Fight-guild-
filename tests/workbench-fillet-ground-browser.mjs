@@ -28,17 +28,17 @@ try{
  let keys=0;
  for(const action of actions){
   await page.locator(`[data-move="${action.slot}"]`).click();await ready(page);
-  for(const key of action.animation.keys){
-   const expected=art.attack_animation.frames.find(f=>f.action_id===action.id&&f.action_frame===key.frame);
+  for(const expected of art.attack_animation.frames.filter(f=>f.action_id===action.id)){
    await page.evaluate(()=>{window.filletDraws=[];});
-   await seekMoveFrame(page,key.frame);
+   await seekMoveFrame(page,expected.action_frame);
    await page.waitForFunction(({file,region,size})=>window.filletDraws.some(d=>d.source===new URL(FIGHT_WORKSHOP_DATA.images[file],location.href).href&&JSON.stringify(d.region)===JSON.stringify(region)&&JSON.stringify(d.size)===JSON.stringify(size)),{file:expected.file,region:expected.region,size:expected.source_size});
    keys++;
   }
  }
- assert.equal(keys,92);
+ assert.equal(keys,116);
  await mkdir('build/fillet-ground-review',{recursive:true});
  await page.locator('[data-move="6"]').click();await ready(page);await seekMoveFrame(page,12);
+ await page.waitForFunction(file=>window.filletDraws.some(d=>d.source===new URL(FIGHT_WORKSHOP_DATA.images[file],location.href).href),art.sweep_fx.file);
  await page.screenshot({path:'build/fillet-ground-review/sweep-desktop.png'});
  await page.setViewportSize({width:390,height:844});
  await page.locator('#choose-move').click();
@@ -47,5 +47,5 @@ try{
  await page.locator('#preview').scrollIntoViewIfNeeded();
  await page.screenshot({path:'build/fillet-ground-review/anti-air-mobile.png'});
  assert.deepEqual(errors,[]);
- console.log('PASS all 92 Fillet pose keys draw from their registered atlases in the hosted editor, plus desktop/mobile preview');
+ console.log('PASS all 116 Fillet pose keys draw from their registered atlases in the hosted editor, plus desktop/mobile preview');
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

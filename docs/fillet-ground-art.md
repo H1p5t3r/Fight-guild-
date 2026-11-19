@@ -1,9 +1,19 @@
 # Fillet ground normals — first playable art pass
 
-The eleven selected ground normals now use **92 generated pose keys** in Godot
+The original eleven ground normals used **92 generated pose keys** in Godot
 and the browser Move Workshop: eight keys per move and twelve for c.S. The new
 drawings cover windup, contact, follow-through and recovery. Review arrows and
-transition smears are absent from the gameplay art.
+automatic limb smears are absent from the gameplay art. The follow-up 2S pass
+adds an explicitly requested generated knife arc: its bright edge reaches the
+live hitbox at 116 px on action frames 12–14 and 108 px on frame 15, then fades
+during recovery. The effect carries no hurtbox.
+
+The [animation-on-twos follow-up](../art/characters/fillet-v1/production/ground-twos/README.md)
+adds 24 drawings to 5P, 5K and 2S, bringing the installed total to **116**. Those
+three moves now change drawing at each phase entry and every second action
+frame, retaining the additional approved keys. The other eight clips keep their
+first-pass cadence. See `fillet-motion-review.html` beside the hosted Workshop
+for before/after playback, slow motion and frame stepping.
 
 | Move | Selected motion |
 |---|---|
@@ -33,23 +43,28 @@ move's last displayed frame. Disabled/contextual geometry previews use the same
 phase mapping. Older imported Fillet kits keep their existing art selection.
 
 No move stats, canonical hitboxes, hurtboxes, pushboxes or root-motion keys change.
-The shared animation table now supports eight keys per phase and 128 pose slots
-per fighter. This accommodates c.S's five active keys and Fillet's 92 drawings.
+The shared animation table supports sixteen keys per phase and 128 pose slots
+per fighter. This accommodates 2S's twelve recovery drawings and Fillet's 116 keys.
 
 ## Verification
 
 - Native combat regressions, including all 3,576 canonical Fillet geometry
   comparisons, passed after the animation integration.
-- `tests/fillet-ground-art.test.mjs` verifies all 92 keys on authored ticks in
+- `tests/fillet-ground-art.test.mjs` verifies all 116 keys on authored ticks in
   both facing directions, edited timings, real hitstop, replay and legacy imports.
 - `tests/workbench-fillet-ground-browser.mjs` verifies the actual browser canvas
-  draws all 92 keys from the correct source file and region, plus desktop/mobile
+  draws all 116 keys from the correct source file and region, plus desktop/mobile
   previews. It writes review captures to `build/fillet-ground-review/`.
 - The Godot art catalog validates transparency, image hashes, regions and pose
-  counts across all six fighters, now 631 body keys. Source atlas dimensions are
+  counts across all six fighters, now 655 body keys. Source atlas dimensions are
   checked per frame because c.S uses larger cells than the other moves.
 - Atlas boundary inspection found no dense body or weapon pixels crossing the
   final registered edges. The native game and both editor delivery formats build.
+- The follow-up tests compare the sweep effect envelope with the actual native
+  hitbox in both facings and check Godot layer transforms. The hosted review
+  supports slow playback, frame stepping and a live hitbox overlay on mobile.
+  Direct offline `file://` opening is blocked by this cloud browser's administrator
+  policy; that portion of delivery verification remains a CI check.
 
 ## Remaining art work
 

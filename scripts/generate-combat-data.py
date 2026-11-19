@@ -126,7 +126,7 @@ def compile_data():
             counts, stages = [], []
             for stage in ('windup', 'active', 'recovery'):
                 keys = clip.get(stage, [])
-                assert len(keys) <= 8
+                assert len(keys) <= 16
                 assert not keys or keys[0]['start'] == 0
                 assert all(a['start'] < b['start'] for a, b in zip(keys, keys[1:]))
                 values = []
@@ -147,7 +147,7 @@ def compile_data():
     header += 'constexpr int SIGNATURE_POSES[CHARACTER_COUNT] = {' + ','.join(map(str, signatures)) + '};\n'
     header += 'constexpr int LOCOMOTION_POSES[CHARACTER_COUNT] = {' + ','.join(map(str, locomotion)) + '};\n'
     header += 'constexpr int IDLE_FRAME_TICKS[CHARACTER_COUNT][4] = {' + ','.join('{' + ','.join(map(str, ticks)) + '}' for ticks in idle_ticks) + '};\n'
-    header += 'struct AttackAnimationKey { int start, phase, pose; };\nstruct AttackAnimation { int art_pose, requires_extended; int counts[3]; AttackAnimationKey keys[3][8]; };\n'
+    header += 'struct AttackAnimationKey { int start, phase, pose; };\nstruct AttackAnimation { int art_pose, requires_extended; int counts[3]; AttackAnimationKey keys[3][16]; };\n'
     header += 'constexpr AttackAnimation ATTACK_ANIMATIONS[CHARACTER_COUNT][MOVE_COUNT] = {' + ','.join(animations) + '};\n'
     offsets = [sum(list(PHASES.values())[:i]) for i in range(len(PHASES))]
     counts = [','.join(str(len(f.get(p, {}).get('frames', []))) for p in PHASES) for f in art['fighters']]

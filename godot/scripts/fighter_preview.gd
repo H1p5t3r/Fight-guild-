@@ -67,6 +67,9 @@ func effect_extent() -> Rect2:
 		frames = FighterArt.sheet(2, "attack_animation").frames.slice(0, 8)
 	elif character == 4 and ((phase == "attack_animation" and pose < 8) or (phase.begins_with("signature_") and pose == 12)):
 		frames = FighterArt.sheet(4, "attack_animation").frames.slice(0, 8)
+	elif character == 5 and phase == "attack_animation" and frame.get("action_id", "") == "2S":
+		for key in info.frames:
+			if key.get("action_id", "") == "2S": frames.append(key)
 	elif frame.has("effect") and phase.begins_with("signature_"):
 		frames = [FighterArt.sheet(character, "signature_windup").frames[pose], FighterArt.sheet(character, "signature_active").frames[pose]]
 	else: return Rect2()

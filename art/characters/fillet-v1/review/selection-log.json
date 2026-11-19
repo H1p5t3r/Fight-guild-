@@ -14,8 +14,14 @@
       "direction": "Elbow Snap",
       "selectedOn": "2026-11-19",
       "production": "art/characters/fillet-v1/production/ground-v1",
-      "poseKeys": 8,
-      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json"
+      "poseKeys": 12,
+      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
+      "inbetweensProduction": "art/characters/fillet-v1/production/ground-twos",
+      "drawingCadence": {
+        "interval": 2,
+        "phaseEntry": true,
+        "retainApprovedKeys": true
+      }
     },
     {
       "id": "5K",
@@ -28,8 +34,14 @@
       "direction": "Heel Drive",
       "selectedOn": "2026-11-19",
       "production": "art/characters/fillet-v1/production/ground-v1",
-      "poseKeys": 8,
-      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json"
+      "poseKeys": 14,
+      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
+      "inbetweensProduction": "art/characters/fillet-v1/production/ground-twos",
+      "drawingCadence": {
+        "interval": 2,
+        "phaseEntry": true,
+        "retainApprovedKeys": true
+      }
     },
     {
       "id": "c.S",
@@ -122,8 +134,14 @@
         "Retain the fixed foot support, authored reach and frame timing; do not turn the motion into a traveling slide or spin."
       ],
       "production": "art/characters/fillet-v1/production/ground-v1",
-      "poseKeys": 8,
-      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json"
+      "poseKeys": 22,
+      "registration": "godot/assets/fighters/fillet-ground-v1/registration.json",
+      "inbetweensProduction": "art/characters/fillet-v1/production/ground-twos",
+      "drawingCadence": {
+        "interval": 2,
+        "phaseEntry": true,
+        "retainApprovedKeys": true
+      }
     },
     {
       "id": "2Hs",

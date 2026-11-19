@@ -43,7 +43,7 @@ func _initialize() -> void:
 				var point := Vector2i(sample[0], sample[1])
 				check(source.get_pixelv(point).a < 0.03, "Atlas background is not transparent: " + path)
 			var signatures: int = 32 if c == 3 else 24 if c == 2 else 20 if c == 4 else 4
-			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8, "attack_animation": 92 if c == 5 else 26 if c == 4 else 32, "backdash": 6}[phase]
+			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8, "attack_animation": 116 if c == 5 else 26 if c == 4 else 32, "backdash": 6}[phase]
 			check(sheet.frames.size() == count, "Missing poses: " + path)
 			for pose in sheet.frames.size():
 				var frame_size := source.get_size()
@@ -108,6 +108,29 @@ func _initialize() -> void:
 	for age in [0, 6, 12, 18]:
 		check(FighterArt.projectile_art(2, 14, 36-age, age) == FighterArt.projectile_art(2, 25, 120-age, age), "Near/far pillars must use identical art at the same age")
 	check(FighterArt.projectile_art(2, 21, 20).file == "smoke-v1/projectile.png", "j.D lost its ember")
+	var sweep: Dictionary = fighters[5].sweep_fx
+	check(FileAccess.get_sha256(FighterArt.DIRECTORY + sweep.file) == sweep.sha256, "Sweep effect provenance is stale")
+	for pose in 4:
+		check(FighterArt.texture(5, "sweep_fx", pose).atlas != null, "Missing generated knife arc")
+	for facing in [-1, 1]:
+		var keys: Array = fighters[5].attack_animation.frames
+		for index in keys.size():
+			var key: Dictionary = keys[index]
+			if key.action_id != "2S": continue
+			FighterArt.apply(sprite, 5, "attack_animation", index, 1, facing)
+			var arc := sprite.get_node("AttackEffect") as Sprite2D
+			check(arc.visible == key.has("effect"), "Knife arc leaked outside its authored frames")
+			if not key.has("effect"): continue
+			check(not arc.show_behind_parent, "Knife arc must sweep across the foreground")
+			var box: Array = key.effect.box
+			var near := sprite.transform * (arc.transform * Vector2.ZERO)
+			var far := sprite.transform * (arc.transform * arc.texture.get_size())
+			check(near.is_equal_approx(Vector2(box[0] * facing, -box[3])), "Knife arc origin differs from strike corridor")
+			check(far.is_equal_approx(Vector2(box[2] * facing, -box[1])), "Knife arc reach differs from strike corridor")
+			if key.action_frame >= 12 and key.action_frame <= 15:
+				check(is_equal_approx(arc.modulate.a, 1.0), "Active knife edge must stay visible")
+		FighterArt.apply(sprite, 5, "ready", 0, 1, facing)
+		check(not sprite.get_node("AttackEffect").visible, "Knife arc leaked into ready stance")
 	sprite.free()
-	print("Godot sprite catalog: ", failures, " failures; six fighters, 631 body keys, alpha, regions, provenance and idle/movement vapor")
+	print("Godot sprite catalog: ", failures, " failures; six fighters, 655 body keys, alpha, regions, provenance and idle/movement vapor")
 	quit(1 if failures else 0)

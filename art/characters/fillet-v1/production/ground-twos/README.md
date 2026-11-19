@@ -45,3 +45,21 @@ The packaged browser review is `fillet-motion-review.html`, with before/after,
 normal/half/quarter speed, facing flip and frame stepping. A self-contained copy
 is built as `build/Fillet-Animation-On-Twos.html`. The review's updated animation
 keys and root positions are sampled from the compiled combat simulation.
+
+The follow-up sweep correction adds a separately generated four-key weapon arc,
+using the user's dark crescent / bright cutting-rim reference. `sweep-arc-generation.json`
+records its source and hash. Its active envelope matches the canonical 2S hitbox:
+`[19, 0, 116, 27]` on frames 12–14, then `[19, 0, 108, 27]` on frame 15.
+It fades on recovery frames 16–19 and disappears at 20. This is an explicitly
+requested weapon effect, not a stretched or morphed body drawing. It never adds
+hurtboxes or changes reach, timing, damage or root motion. The review's Hitbox
+toggle displays the actual collision boxes sampled from the simulation.
+
+Finished captures, rendered from that same player without synthesizing poses:
+
+- [5P / 5K / 2S before and after](previews/Fillet-Animation-Comparison.mp4):
+  three cycles at game speed, then three at quarter speed.
+- [2S clean and hitbox comparison](previews/Fillet-Sweep-Reach.gif): quarter speed.
+
+Regenerate captures with `node scripts/capture-fillet-motion-review.mjs` after
+building the Workshop. Outputs go to `build/fillet-twos-review/`.

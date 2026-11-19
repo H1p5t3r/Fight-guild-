@@ -15011,6 +15011,39 @@
             }
           },
           {
+            "name": "5P / in-between",
+            "file": "fillet-ground-twos/5p-inbetweens.png",
+            "sha256": "b8fcd24c09bbc065ba0028b847e7f0f88b5cb8805ee7ef2a99f50ea6c851f123",
+            "region": [
+              0,
+              0,
+              631,
+              623
+            ],
+            "pivot": [
+              341,
+              574
+            ],
+            "bounds": [
+              64,
+              18,
+              579,
+              575
+            ],
+            "body_height": 623,
+            "source_size": [
+              1262,
+              1246
+            ],
+            "action_id": "5P",
+            "action_frame": 3,
+            "key_index": 2,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
             "name": "5P / pre-contact",
             "file": "fillet-ground-v1/5p.png",
             "sha256": "12b1b722f170659ff7bae859ea73e30b88429aa8a29ce2c0bf624f86004e0268",
@@ -15037,7 +15070,7 @@
             ],
             "action_id": "5P",
             "action_frame": 4,
-            "key_index": 2,
+            "key_index": 3,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -15070,7 +15103,7 @@
             ],
             "action_id": "5P",
             "action_frame": 5,
-            "key_index": 3,
+            "key_index": 4,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -15103,7 +15136,7 @@
             ],
             "action_id": "5P",
             "action_frame": 7,
-            "key_index": 4,
+            "key_index": 5,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -15136,7 +15169,40 @@
             ],
             "action_id": "5P",
             "action_frame": 8,
-            "key_index": 5,
+            "key_index": 6,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "5P / in-between",
+            "file": "fillet-ground-twos/5p-inbetweens.png",
+            "sha256": "b8fcd24c09bbc065ba0028b847e7f0f88b5cb8805ee7ef2a99f50ea6c851f123",
+            "region": [
+              631,
+              0,
+              631,
+              623
+            ],
+            "pivot": [
+              316,
+              573
+            ],
+            "bounds": [
+              42,
+              19,
+              557,
+              574
+            ],
+            "body_height": 623,
+            "source_size": [
+              1262,
+              1246
+            ],
+            "action_id": "5P",
+            "action_frame": 10,
+            "key_index": 7,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -15169,7 +15235,73 @@
             ],
             "action_id": "5P",
             "action_frame": 11,
-            "key_index": 6,
+            "key_index": 8,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "5P / in-between",
+            "file": "fillet-ground-twos/5p-inbetweens.png",
+            "sha256": "b8fcd24c09bbc065ba0028b847e7f0f88b5cb8805ee7ef2a99f50ea6c851f123",
+            "region": [
+              0,
+              623,
+              631,
+              623
+            ],
+            "pivot": [
+              343,
+              578
+            ],
+            "bounds": [
+              70,
+              22,
+              581,
+              578
+            ],
+            "body_height": 623,
+            "source_size": [
+              1262,
+              1246
+            ],
+            "action_id": "5P",
+            "action_frame": 12,
+            "key_index": 9,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "5P / in-between",
+            "file": "fillet-ground-twos/5p-inbetweens.png",
+            "sha256": "b8fcd24c09bbc065ba0028b847e7f0f88b5cb8805ee7ef2a99f50ea6c851f123",
+            "region": [
+              631,
+              623,
+              631,
+              623
+            ],
+            "pivot": [
+              321,
+              578
+            ],
+            "bounds": [
+              47,
+              22,
+              561,
+              579
+            ],
+            "body_height": 623,
+            "source_size": [
+              1262,
+              1246
+            ],
+            "action_id": "5P",
+            "action_frame": 14,
+            "key_index": 10,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -15202,7 +15334,7 @@
             ],
             "action_id": "5P",
             "action_frame": 16,
-            "key_index": 7,
+            "key_index": 11,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -15275,6 +15407,39 @@
             }
           },
           {
+            "name": "5K / in-between",
+            "file": "fillet-ground-twos/5k-inbetweens.png",
+            "sha256": "af009ae95cca2c44072a524fbfd0a9e90dca22d76af4c079cdeb8dce405a1a77",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              236,
+              491
+            ],
+            "bounds": [
+              42,
+              11,
+              468,
+              492
+            ],
+            "body_height": 528,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "5K",
+            "action_frame": 5,
+            "key_index": 2,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
             "name": "5K / pre-contact",
             "file": "fillet-ground-v1/5k.png",
             "sha256": "1f90da93a8f189eaa58c1bcd97bbcb72635df55c6b9142191b4f69cfab60a48d",
@@ -15301,7 +15466,7 @@
             ],
             "action_id": "5K",
             "action_frame": 6,
-            "key_index": 2,
+            "key_index": 3,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -15334,7 +15499,7 @@
             ],
             "action_id": "5K",
             "action_frame": 7,
-            "key_index": 3,
+            "key_index": 4,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -15367,7 +15532,7 @@
             ],
             "action_id": "5K",
             "action_frame": 9,
-            "key_index": 4,
+            "key_index": 5,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -15400,7 +15565,73 @@
             ],
             "action_id": "5K",
             "action_frame": 10,
-            "key_index": 5,
+            "key_index": 6,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "5K / in-between",
+            "file": "fillet-ground-twos/5k-inbetweens.png",
+            "sha256": "af009ae95cca2c44072a524fbfd0a9e90dca22d76af4c079cdeb8dce405a1a77",
+            "region": [
+              512,
+              0,
+              503,
+              512
+            ],
+            "pivot": [
+              231,
+              492
+            ],
+            "bounds": [
+              26,
+              12,
+              455,
+              492
+            ],
+            "body_height": 528,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "5K",
+            "action_frame": 12,
+            "key_index": 7,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "5K / in-between",
+            "file": "fillet-ground-twos/5k-inbetweens.png",
+            "sha256": "af009ae95cca2c44072a524fbfd0a9e90dca22d76af4c079cdeb8dce405a1a77",
+            "region": [
+              1015,
+              0,
+              521,
+              512
+            ],
+            "pivot": [
+              210,
+              493
+            ],
+            "bounds": [
+              4,
+              11,
+              402,
+              494
+            ],
+            "body_height": 528,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "5K",
+            "action_frame": 14,
+            "key_index": 8,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -15433,7 +15664,106 @@
             ],
             "action_id": "5K",
             "action_frame": 15,
-            "key_index": 6,
+            "key_index": 9,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "5K / in-between",
+            "file": "fillet-ground-twos/5k-inbetweens.png",
+            "sha256": "af009ae95cca2c44072a524fbfd0a9e90dca22d76af4c079cdeb8dce405a1a77",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              276,
+              491
+            ],
+            "bounds": [
+              70,
+              11,
+              427,
+              492
+            ],
+            "body_height": 528,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "5K",
+            "action_frame": 16,
+            "key_index": 10,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "5K / in-between",
+            "file": "fillet-ground-twos/5k-inbetweens.png",
+            "sha256": "af009ae95cca2c44072a524fbfd0a9e90dca22d76af4c079cdeb8dce405a1a77",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              272,
+              491
+            ],
+            "bounds": [
+              54,
+              11,
+              416,
+              492
+            ],
+            "body_height": 528,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "5K",
+            "action_frame": 18,
+            "key_index": 11,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "5K / in-between",
+            "file": "fillet-ground-twos/5k-inbetweens.png",
+            "sha256": "af009ae95cca2c44072a524fbfd0a9e90dca22d76af4c079cdeb8dce405a1a77",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              253,
+              491
+            ],
+            "bounds": [
+              22,
+              11,
+              384,
+              492
+            ],
+            "body_height": 528,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "5K",
+            "action_frame": 20,
+            "key_index": 12,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -15466,7 +15796,7 @@
             ],
             "action_id": "5K",
             "action_frame": 22,
-            "key_index": 7,
+            "key_index": 13,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -16562,6 +16892,72 @@
             }
           },
           {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-a.png",
+            "sha256": "eaa79c871a12d66e112f4530fc1e56206b0f76c7999f8c9f13771813b2463864",
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              254,
+              464
+            ],
+            "bounds": [
+              24,
+              42,
+              480,
+              465
+            ],
+            "body_height": 682,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "2S",
+            "action_frame": 3,
+            "key_index": 1,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-a.png",
+            "sha256": "eaa79c871a12d66e112f4530fc1e56206b0f76c7999f8c9f13771813b2463864",
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              255,
+              464
+            ],
+            "bounds": [
+              17,
+              58,
+              480,
+              467
+            ],
+            "body_height": 682,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "2S",
+            "action_frame": 5,
+            "key_index": 2,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
             "name": "2S / anticipation",
             "file": "fillet-ground-v1/2s.png",
             "sha256": "afc7e82f9e4c538cf09662b85066bfa4e541de1db81ed6fd80779b195a49648c",
@@ -16588,7 +16984,73 @@
             ],
             "action_id": "2S",
             "action_frame": 6,
-            "key_index": 1,
+            "key_index": 3,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-a.png",
+            "sha256": "eaa79c871a12d66e112f4530fc1e56206b0f76c7999f8c9f13771813b2463864",
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "pivot": [
+              255,
+              464
+            ],
+            "bounds": [
+              15,
+              75,
+              480,
+              468
+            ],
+            "body_height": 682,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "2S",
+            "action_frame": 7,
+            "key_index": 4,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-a.png",
+            "sha256": "eaa79c871a12d66e112f4530fc1e56206b0f76c7999f8c9f13771813b2463864",
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              255,
+              465
+            ],
+            "bounds": [
+              22,
+              83,
+              479,
+              466
+            ],
+            "body_height": 682,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "2S",
+            "action_frame": 9,
+            "key_index": 5,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -16621,7 +17083,7 @@
             ],
             "action_id": "2S",
             "action_frame": 11,
-            "key_index": 2,
+            "key_index": 6,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -16654,10 +17116,67 @@
             ],
             "action_id": "2S",
             "action_frame": 12,
-            "key_index": 3,
+            "key_index": 7,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
+            },
+            "effect": {
+              "sheet": "sweep_fx",
+              "pose": 0,
+              "box": [
+                19,
+                0,
+                116,
+                27
+              ],
+              "opacity": 1.0,
+              "behind": false
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-a.png",
+            "sha256": "eaa79c871a12d66e112f4530fc1e56206b0f76c7999f8c9f13771813b2463864",
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              253,
+              465
+            ],
+            "bounds": [
+              7,
+              115,
+              498,
+              466
+            ],
+            "body_height": 682,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "2S",
+            "action_frame": 14,
+            "key_index": 8,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            },
+            "effect": {
+              "sheet": "sweep_fx",
+              "pose": 1,
+              "box": [
+                19,
+                0,
+                116,
+                27
+              ],
+              "opacity": 1.0,
+              "behind": false
             }
           },
           {
@@ -16687,10 +17206,22 @@
             ],
             "action_id": "2S",
             "action_frame": 15,
-            "key_index": 4,
+            "key_index": 9,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
+            },
+            "effect": {
+              "sheet": "sweep_fx",
+              "pose": 2,
+              "box": [
+                19,
+                0,
+                108,
+                27
+              ],
+              "opacity": 1.0,
+              "behind": false
             }
           },
           {
@@ -16720,7 +17251,163 @@
             ],
             "action_id": "2S",
             "action_frame": 16,
-            "key_index": 5,
+            "key_index": 10,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            },
+            "effect": {
+              "sheet": "sweep_fx",
+              "pose": 3,
+              "box": [
+                28,
+                0,
+                100,
+                24
+              ],
+              "opacity": 0.5,
+              "behind": false
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-a.png",
+            "sha256": "eaa79c871a12d66e112f4530fc1e56206b0f76c7999f8c9f13771813b2463864",
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "pivot": [
+              255,
+              465
+            ],
+            "bounds": [
+              8,
+              112,
+              479,
+              466
+            ],
+            "body_height": 682,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "action_id": "2S",
+            "action_frame": 18,
+            "key_index": 11,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            },
+            "effect": {
+              "sheet": "sweep_fx",
+              "pose": 3,
+              "box": [
+                35,
+                2,
+                80,
+                20
+              ],
+              "opacity": 0.22,
+              "behind": false
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-b.png",
+            "sha256": "99add9b507166f7ad3011b09b7b7ed2dacb46377f3409004be2b41f38b02c709",
+            "region": [
+              0,
+              0,
+              627,
+              627
+            ],
+            "pivot": [
+              326,
+              565
+            ],
+            "bounds": [
+              58,
+              98,
+              592,
+              570
+            ],
+            "body_height": 806,
+            "source_size": [
+              1254,
+              1254
+            ],
+            "action_id": "2S",
+            "action_frame": 20,
+            "key_index": 12,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-b.png",
+            "sha256": "99add9b507166f7ad3011b09b7b7ed2dacb46377f3409004be2b41f38b02c709",
+            "region": [
+              627,
+              0,
+              627,
+              627
+            ],
+            "pivot": [
+              303,
+              565
+            ],
+            "bounds": [
+              29,
+              98,
+              571,
+              568
+            ],
+            "body_height": 806,
+            "source_size": [
+              1254,
+              1254
+            ],
+            "action_id": "2S",
+            "action_frame": 22,
+            "key_index": 13,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-b.png",
+            "sha256": "99add9b507166f7ad3011b09b7b7ed2dacb46377f3409004be2b41f38b02c709",
+            "region": [
+              0,
+              627,
+              627,
+              627
+            ],
+            "pivot": [
+              324,
+              547
+            ],
+            "bounds": [
+              57,
+              69,
+              595,
+              549
+            ],
+            "body_height": 806,
+            "source_size": [
+              1254,
+              1254
+            ],
+            "action_id": "2S",
+            "action_frame": 24,
+            "key_index": 14,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -16753,7 +17440,172 @@
             ],
             "action_id": "2S",
             "action_frame": 26,
-            "key_index": 6,
+            "key_index": 15,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-b.png",
+            "sha256": "99add9b507166f7ad3011b09b7b7ed2dacb46377f3409004be2b41f38b02c709",
+            "region": [
+              627,
+              627,
+              627,
+              627
+            ],
+            "pivot": [
+              302,
+              547
+            ],
+            "bounds": [
+              29,
+              67,
+              569,
+              553
+            ],
+            "body_height": 806,
+            "source_size": [
+              1254,
+              1254
+            ],
+            "action_id": "2S",
+            "action_frame": 28,
+            "key_index": 16,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-c.png",
+            "sha256": "101019c663fa1db01dfb5ffaf9d5445a0470cc022b123a96605c864b0ea8e342",
+            "region": [
+              0,
+              0,
+              627,
+              627
+            ],
+            "pivot": [
+              343,
+              567
+            ],
+            "bounds": [
+              58,
+              98,
+              601,
+              574
+            ],
+            "body_height": 866,
+            "source_size": [
+              1254,
+              1254
+            ],
+            "action_id": "2S",
+            "action_frame": 30,
+            "key_index": 17,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-c.png",
+            "sha256": "101019c663fa1db01dfb5ffaf9d5445a0470cc022b123a96605c864b0ea8e342",
+            "region": [
+              627,
+              0,
+              627,
+              627
+            ],
+            "pivot": [
+              300,
+              566
+            ],
+            "bounds": [
+              15,
+              97,
+              559,
+              573
+            ],
+            "body_height": 866,
+            "source_size": [
+              1254,
+              1254
+            ],
+            "action_id": "2S",
+            "action_frame": 32,
+            "key_index": 18,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-c.png",
+            "sha256": "101019c663fa1db01dfb5ffaf9d5445a0470cc022b123a96605c864b0ea8e342",
+            "region": [
+              0,
+              627,
+              627,
+              627
+            ],
+            "pivot": [
+              339,
+              549
+            ],
+            "bounds": [
+              56,
+              64,
+              603,
+              553
+            ],
+            "body_height": 866,
+            "source_size": [
+              1254,
+              1254
+            ],
+            "action_id": "2S",
+            "action_frame": 34,
+            "key_index": 19,
+            "weapon_ownership": {
+              "left": "short knife / red shoulder",
+              "right": "long knife / bare shoulder"
+            }
+          },
+          {
+            "name": "2S / in-between",
+            "file": "fillet-ground-twos/2s-inbetweens-c.png",
+            "sha256": "101019c663fa1db01dfb5ffaf9d5445a0470cc022b123a96605c864b0ea8e342",
+            "region": [
+              627,
+              627,
+              627,
+              627
+            ],
+            "pivot": [
+              307,
+              549
+            ],
+            "bounds": [
+              22,
+              60,
+              569,
+              553
+            ],
+            "body_height": 866,
+            "source_size": [
+              1254,
+              1254
+            ],
+            "action_id": "2S",
+            "action_frame": 36,
+            "key_index": 20,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -16786,7 +17638,7 @@
             ],
             "action_id": "2S",
             "action_frame": 38,
-            "key_index": 7,
+            "key_index": 21,
             "weapon_ownership": {
               "left": "short knife / red shoulder",
               "right": "long knife / bare shoulder"
@@ -17999,40 +18851,69 @@
               "pose": 1
             },
             {
-              "start": 75,
+              "start": 50,
               "phase": "attack_animation",
               "pose": 2
+            },
+            {
+              "start": 75,
+              "phase": "attack_animation",
+              "pose": 3
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 3
+              "pose": 4
             },
             {
               "start": 66,
               "phase": "attack_animation",
-              "pose": 4
+              "pose": 5
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 5
+              "pose": 6
+            },
+            {
+              "start": 22,
+              "phase": "attack_animation",
+              "pose": 7
             },
             {
               "start": 33,
               "phase": "attack_animation",
-              "pose": 6
+              "pose": 8
+            },
+            {
+              "start": 44,
+              "phase": "attack_animation",
+              "pose": 9
+            },
+            {
+              "start": 66,
+              "phase": "attack_animation",
+              "pose": 10
             },
             {
               "start": 88,
               "phase": "attack_animation",
-              "pose": 7
+              "pose": 11
             }
-          ]
+          ],
+          "drawingCadence": {
+            "interval": 2,
+            "phaseEntry": true,
+            "authoredTiming": [
+              5,
+              3,
+              9
+            ]
+          }
         },
         "1": {
           "artPose": 0,
@@ -18042,48 +18923,87 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 8
+              "pose": 12
             },
             {
               "start": 33,
               "phase": "attack_animation",
-              "pose": 9
+              "pose": 13
+            },
+            {
+              "start": 66,
+              "phase": "attack_animation",
+              "pose": 14
             },
             {
               "start": 83,
               "phase": "attack_animation",
-              "pose": 10
+              "pose": 15
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 11
+              "pose": 16
             },
             {
               "start": 66,
               "phase": "attack_animation",
-              "pose": 12
+              "pose": 17
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 13
+              "pose": 18
+            },
+            {
+              "start": 15,
+              "phase": "attack_animation",
+              "pose": 19
+            },
+            {
+              "start": 30,
+              "phase": "attack_animation",
+              "pose": 20
             },
             {
               "start": 38,
               "phase": "attack_animation",
-              "pose": 14
+              "pose": 21
+            },
+            {
+              "start": 46,
+              "phase": "attack_animation",
+              "pose": 22
+            },
+            {
+              "start": 61,
+              "phase": "attack_animation",
+              "pose": 23
+            },
+            {
+              "start": 76,
+              "phase": "attack_animation",
+              "pose": 24
             },
             {
               "start": 92,
               "phase": "attack_animation",
-              "pose": 15
+              "pose": 25
             }
-          ]
+          ],
+          "drawingCadence": {
+            "interval": 2,
+            "phaseEntry": true,
+            "authoredTiming": [
+              7,
+              3,
+              13
+            ]
+          }
         },
         "32": {
           "artPose": 0,
@@ -18093,66 +19013,66 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 80
+              "pose": 104
             },
             {
               "start": 33,
               "phase": "attack_animation",
-              "pose": 81
+              "pose": 105
             },
             {
               "start": 66,
               "phase": "attack_animation",
-              "pose": 82
+              "pose": 106
             },
             {
               "start": 83,
               "phase": "attack_animation",
-              "pose": 83
+              "pose": 107
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 84
+              "pose": 108
             },
             {
               "start": 20,
               "phase": "attack_animation",
-              "pose": 85
+              "pose": 109
             },
             {
               "start": 40,
               "phase": "attack_animation",
-              "pose": 86
+              "pose": 110
             },
             {
               "start": 60,
               "phase": "attack_animation",
-              "pose": 87
+              "pose": 111
             },
             {
               "start": 80,
               "phase": "attack_animation",
-              "pose": 88
+              "pose": 112
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 89
+              "pose": 113
             },
             {
               "start": 41,
               "phase": "attack_animation",
-              "pose": 90
+              "pose": 114
             },
             {
               "start": 91,
               "phase": "attack_animation",
-              "pose": 91
+              "pose": 115
             }
           ]
         },
@@ -18164,46 +19084,46 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 16
+              "pose": 26
             },
             {
               "start": 37,
               "phase": "attack_animation",
-              "pose": 17
+              "pose": 27
             },
             {
               "start": 87,
               "phase": "attack_animation",
-              "pose": 18
+              "pose": 28
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 19
+              "pose": 29
             },
             {
               "start": 66,
               "phase": "attack_animation",
-              "pose": 20
+              "pose": 30
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 21
+              "pose": 31
             },
             {
               "start": 44,
               "phase": "attack_animation",
-              "pose": 22
+              "pose": 32
             },
             {
               "start": 94,
               "phase": "attack_animation",
-              "pose": 23
+              "pose": 33
             }
           ]
         },
@@ -18215,46 +19135,46 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 24
+              "pose": 34
             },
             {
               "start": 41,
               "phase": "attack_animation",
-              "pose": 25
+              "pose": 35
             },
             {
               "start": 91,
               "phase": "attack_animation",
-              "pose": 26
+              "pose": 36
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 27
+              "pose": 37
             },
             {
               "start": 75,
               "phase": "attack_animation",
-              "pose": 28
+              "pose": 38
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 29
+              "pose": 39
             },
             {
               "start": 45,
               "phase": "attack_animation",
-              "pose": 30
+              "pose": 40
             },
             {
               "start": 95,
               "phase": "attack_animation",
-              "pose": 31
+              "pose": 41
             }
           ]
         },
@@ -18266,46 +19186,46 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 32
+              "pose": 42
             },
             {
               "start": 25,
               "phase": "attack_animation",
-              "pose": 33
+              "pose": 43
             },
             {
               "start": 75,
               "phase": "attack_animation",
-              "pose": 34
+              "pose": 44
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 35
+              "pose": 45
             },
             {
               "start": 50,
               "phase": "attack_animation",
-              "pose": 36
+              "pose": 46
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 37
+              "pose": 47
             },
             {
               "start": 40,
               "phase": "attack_animation",
-              "pose": 38
+              "pose": 48
             },
             {
               "start": 90,
               "phase": "attack_animation",
-              "pose": 39
+              "pose": 49
             }
           ]
         },
@@ -18317,46 +19237,46 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 40
+              "pose": 50
             },
             {
               "start": 40,
               "phase": "attack_animation",
-              "pose": 41
+              "pose": 51
             },
             {
               "start": 80,
               "phase": "attack_animation",
-              "pose": 42
+              "pose": 52
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 43
+              "pose": 53
             },
             {
               "start": 66,
               "phase": "attack_animation",
-              "pose": 44
+              "pose": 54
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 45
+              "pose": 55
             },
             {
               "start": 36,
               "phase": "attack_animation",
-              "pose": 46
+              "pose": 56
             },
             {
               "start": 90,
               "phase": "attack_animation",
-              "pose": 47
+              "pose": 57
             }
           ]
         },
@@ -18368,48 +19288,127 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 48
+              "pose": 58
+            },
+            {
+              "start": 18,
+              "phase": "attack_animation",
+              "pose": 59
+            },
+            {
+              "start": 36,
+              "phase": "attack_animation",
+              "pose": 60
             },
             {
               "start": 45,
               "phase": "attack_animation",
-              "pose": 49
+              "pose": 61
+            },
+            {
+              "start": 54,
+              "phase": "attack_animation",
+              "pose": 62
+            },
+            {
+              "start": 72,
+              "phase": "attack_animation",
+              "pose": 63
             },
             {
               "start": 90,
               "phase": "attack_animation",
-              "pose": 50
+              "pose": 64
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 51
+              "pose": 65
+            },
+            {
+              "start": 50,
+              "phase": "attack_animation",
+              "pose": 66
             },
             {
               "start": 75,
               "phase": "attack_animation",
-              "pose": 52
+              "pose": 67
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 53
+              "pose": 68
+            },
+            {
+              "start": 8,
+              "phase": "attack_animation",
+              "pose": 69
+            },
+            {
+              "start": 17,
+              "phase": "attack_animation",
+              "pose": 70
+            },
+            {
+              "start": 26,
+              "phase": "attack_animation",
+              "pose": 71
+            },
+            {
+              "start": 34,
+              "phase": "attack_animation",
+              "pose": 72
             },
             {
               "start": 43,
               "phase": "attack_animation",
-              "pose": 54
+              "pose": 73
+            },
+            {
+              "start": 52,
+              "phase": "attack_animation",
+              "pose": 74
+            },
+            {
+              "start": 60,
+              "phase": "attack_animation",
+              "pose": 75
+            },
+            {
+              "start": 69,
+              "phase": "attack_animation",
+              "pose": 76
+            },
+            {
+              "start": 78,
+              "phase": "attack_animation",
+              "pose": 77
+            },
+            {
+              "start": 86,
+              "phase": "attack_animation",
+              "pose": 78
             },
             {
               "start": 95,
               "phase": "attack_animation",
-              "pose": 55
+              "pose": 79
             }
-          ]
+          ],
+          "drawingCadence": {
+            "interval": 2,
+            "phaseEntry": true,
+            "authoredTiming": [
+              12,
+              4,
+              23
+            ]
+          }
         },
         "7": {
           "artPose": 0,
@@ -18419,46 +19418,46 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 56
+              "pose": 80
             },
             {
               "start": 46,
               "phase": "attack_animation",
-              "pose": 57
+              "pose": 81
             },
             {
               "start": 92,
               "phase": "attack_animation",
-              "pose": 58
+              "pose": 82
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 59
+              "pose": 83
             },
             {
               "start": 80,
               "phase": "attack_animation",
-              "pose": 60
+              "pose": 84
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 61
+              "pose": 85
             },
             {
               "start": 45,
               "phase": "attack_animation",
-              "pose": 62
+              "pose": 86
             },
             {
               "start": 95,
               "phase": "attack_animation",
-              "pose": 63
+              "pose": 87
             }
           ]
         },
@@ -18470,46 +19469,46 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 64
+              "pose": 88
             },
             {
               "start": 37,
               "phase": "attack_animation",
-              "pose": 65
+              "pose": 89
             },
             {
               "start": 87,
               "phase": "attack_animation",
-              "pose": 66
+              "pose": 90
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 67
+              "pose": 91
             },
             {
               "start": 75,
               "phase": "attack_animation",
-              "pose": 68
+              "pose": 92
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 69
+              "pose": 93
             },
             {
               "start": 45,
               "phase": "attack_animation",
-              "pose": 70
+              "pose": 94
             },
             {
               "start": 95,
               "phase": "attack_animation",
-              "pose": 71
+              "pose": 95
             }
           ]
         },
@@ -18521,46 +19520,46 @@
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 72
+              "pose": 96
             },
             {
               "start": 47,
               "phase": "attack_animation",
-              "pose": 73
+              "pose": 97
             },
             {
               "start": 94,
               "phase": "attack_animation",
-              "pose": 74
+              "pose": 98
             }
           ],
           "active": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 75
+              "pose": 99
             },
             {
               "start": 75,
               "phase": "attack_animation",
-              "pose": 76
+              "pose": 100
             }
           ],
           "recovery": [
             {
               "start": 0,
               "phase": "attack_animation",
-              "pose": 77
+              "pose": 101
             },
             {
               "start": 44,
               "phase": "attack_animation",
-              "pose": 78
+              "pose": 102
             },
             {
               "start": 96,
               "phase": "attack_animation",
-              "pose": 79
+              "pose": 103
             }
           ]
         }
@@ -18582,7 +19581,104 @@
         ],
         "source": "art/characters/fillet-v1/review/selection-log.json",
         "sweep": "B / Hip Reap, second study",
-        "antiAir": "B / Rib Slip with corrected left arm"
+        "antiAir": "B / Rib Slip with corrected left arm",
+        "drawingCadence": {
+          "actions": [
+            "5P",
+            "5K",
+            "2S"
+          ],
+          "interval": 2,
+          "phaseEntry": true
+        }
+      },
+      "sweep_fx": {
+        "file": "fillet-ground-twos/sweep-arc.png",
+        "sha256": "e910c9447931bcb090a8fdb06bd4fb912acbdf9cf1b2f1a1c7579ca086efda73",
+        "size": [
+          1844,
+          853
+        ],
+        "columns": 2,
+        "rows": 2,
+        "frames": [
+          {
+            "name": "outward cut",
+            "region": [
+              23,
+              167,
+              878,
+              211
+            ],
+            "bounds": [
+              0,
+              0,
+              878,
+              211
+            ],
+            "pivot": [
+              0,
+              211
+            ]
+          },
+          {
+            "name": "across-front cut",
+            "region": [
+              942,
+              174,
+              867,
+              195
+            ],
+            "bounds": [
+              0,
+              0,
+              867,
+              195
+            ],
+            "pivot": [
+              0,
+              195
+            ]
+          },
+          {
+            "name": "last active cut",
+            "region": [
+              74,
+              581,
+              775,
+              155
+            ],
+            "bounds": [
+              0,
+              0,
+              775,
+              155
+            ],
+            "pivot": [
+              0,
+              155
+            ]
+          },
+          {
+            "name": "recovery trail",
+            "region": [
+              1009,
+              601,
+              707,
+              125
+            ],
+            "bounds": [
+              0,
+              0,
+              707,
+              125
+            ],
+            "pivot": [
+              0,
+              125
+            ]
+          }
+        ]
       }
     }
   ],

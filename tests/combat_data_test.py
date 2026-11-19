@@ -45,7 +45,7 @@ class HurtboxContract(unittest.TestCase):
             for phase, poses in fighter['poses'].items():
                 for index, pose in enumerate(poses):
                     counts.append(len(generator.hurt_rectangles(copy.deepcopy(pose), f"{fighter['name']} {phase} {index}")))
-        self.assertEqual(len(counts), 631)  # Includes Fillet's 92 ground-normal keys.
+        self.assertEqual(len(counts), 655)  # Includes Fillet's 116 ground-normal keys.
         self.assertEqual(set(counts), {3, 4})
 
 
