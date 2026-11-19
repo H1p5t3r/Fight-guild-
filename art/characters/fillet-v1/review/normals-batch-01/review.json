@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "character": "Fillet",
+  "date": "2026-11-19",
+  "status": "motion direction review; awaiting user selections; not installed",
+  "scope": [
+    "5P",
+    "2P",
+    "5K",
+    "2K"
+  ],
+  "phases": [
+    "windup",
+    "active"
+  ],
+  "reference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png",
+  "stanceReference": "Fillet_Codex_Implementation_v1_0.zip/references/Fillet_cS_Selected_Motion_Direction.png",
+  "specSHA256": "796292f71f5af141c91997b983ee223834a0826dbc8d3c7b1b1d7d260445e65d",
+  "boards": {
+    "p-options.png": {
+      "rows": [
+        "5P",
+        "2P"
+      ],
+      "columns": [
+        "A windup",
+        "A active",
+        "B windup",
+        "B active"
+      ],
+      "prompt": "p-refinement-prompt.txt",
+      "editSource": "archive/p-initial.png"
+    },
+    "k-options.png": {
+      "rows": [
+        "5K",
+        "2K"
+      ],
+      "columns": [
+        "A windup",
+        "A active",
+        "B windup",
+        "B active"
+      ],
+      "prompt": "k-height-correction-prompt.txt",
+      "editSource": "archive/k-before-height-correction.png"
+    }
+  },
+  "options": {
+    "5P": {
+      "A": "Elbow Snap",
+      "B": "Rib Turn"
+    },
+    "2P": {
+      "A": "Low Snap",
+      "B": "Shoulder Slip"
+    },
+    "5K": {
+      "A": "Heel Drive",
+      "B": "Hip Snap"
+    },
+    "2K": {
+      "A": "Heel Piston",
+      "B": "Ankle Snap"
+    }
+  },
+  "suggestedMix": {
+    "5P": "A",
+    "2P": "B",
+    "5K": "B",
+    "2K": "A"
+  },
+  "selections": {},
+  "provenance": {
+    "p-options.png": {
+      "source": "/workspace/generated_images/exec-0226ce67-a718-4725-9ef6-34aaad406c43.png",
+      "sha256": "4c90edd018a95865d31e1ecac5184cfdee756a23a70cba180edfea5dd4de339e"
+    },
+    "k-options.png": {
+      "source": "/workspace/generated_images/exec-3ae275b8-afb6-4ae2-96b6-436000721ca2.png",
+      "sha256": "ea439cc523faec06f54066766bf31737b8f360d0da0f1c52a443878e76a78fef"
+    },
+    "archive/p-initial.png": {
+      "source": "/workspace/generated_images/exec-af149128-16f9-4027-b4d4-b534aae4270f.png",
+      "sha256": "34134be9d196e133a33bc202515429489254addac1283692fd0660a0bd80e0f3"
+    },
+    "archive/k-before-height-correction.png": {
+      "source": "/workspace/generated_images/exec-1a8d42e3-f85c-4e27-9e26-3a8588fa32a8.png",
+      "sha256": "6eea7562bd2b96a4d832c39f8438916e20b4ecbcb811ad9bc3ae3bf8b551451a"
+    }
+  },
+  "reviewNotes": [
+    "P B-options revised to distinguish torso/shoulder action from the compact A options.",
+    "5K active boot height lowered after the initial K board rendered the standing kicks too high.",
+    "These are direction boards, not registered sprite sheets or a validated playable animation.",
+    "Selected drawings still require exact body/weapon/foot registration, anatomical leg/hand checks in both facings, active corridor fit and transition continuity.",
+    "No runtime art, frame data, hit/hurt/push boxes or sprite manifest changed.",
+    "Existing f.S B direction remains selected independently of this batch."
+  ]
+}
