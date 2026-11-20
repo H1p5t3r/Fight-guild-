@@ -12,6 +12,67 @@ static void ticks(int n,int a=0,int b=0){while(n--)sim.step(a,b);}
 static void bleed(int time=420,int grey=20){auto& b=sim.world.players[1];b.bleed_source=14;b.bleed_time=time;b.grey_life=grey;}
 static void begin(int m){check(sim.preview_begin(0,m),"preview start");}
 static void unfreeze(){while(sim.world.hitstop)sim.step(0,0);}
+static void otg_routes(){
+    // Roots only: every knockdown and Wound uses normal inputs. Test the new
+    // recovery cancels with a six-tick confirmation delay, not a staged Downed.
+    for(int receiver=0;receiver<CHARACTER_COUNT;++receiver)for(int owner:{0,1})for(int facing:{-1,1})
+    for(int source:{SLASH_SWEEP,26,27})for(int delay:{0,6})for(int gap:{6200,10000}){
+        setup(owner?receiver:5,owner?5:receiver);
+        auto& a=sim.world.players[owner];auto& b=sim.world.players[1-owner];
+        a.x=50000;b.x=50000+facing*gap;a.facing=facing;b.facing=-facing;
+        auto step=[&](int input=0){sim.step(owner?0:input,owner?input:0);};
+        const int forward=facing>0?Right:Left;
+        if(source==SLASH_SWEEP)step(Down|S);
+        else{
+            step(Down);step(Down|forward);step(forward|S);
+            for(int n=0;n<80&&!a.contact_count;++n)step();
+            check(a.contact_count==1,"Opening connects through ordinary inputs");
+            while(sim.world.hitstop)step();
+            step((source==26?forward:Down)|S);
+        }
+        check(a.move==source,"input selects knockdown finisher");
+        const int contacts=source==SLASH_SWEEP?1:2;
+        for(int n=0;n<80&&a.contact_count<contacts;++n)step();
+        check(a.contact_count==contacts,"finisher connects");
+        while(sim.world.hitstop)step();
+        // A D press buffered during the landing must wait for Downed.
+        for(int n=0;n<delay;++n)step();
+        check(a.move==source,"confirmation still inside finisher recovery");
+        const int health=b.health,momentum=a.momentum,defender_momentum=b.momentum;
+        step(D);
+        for(int n=0;n<5&&a.move==source;++n)step();
+        check(a.move==13,"hit-only Wound cancels finisher recovery");
+        const auto saved=sim.world;const int frame=sim.world.frame;
+        for(int n=0;n<40&&!sim.world.pair.kind;++n)step();
+        check(sim.world.pair.kind==WoundCapture,"Wound reaches natural knockdown before wakeup");
+        for(int n=0;n<40&&(sim.world.pair.kind||sim.world.hitstop);++n)step();
+        check(b.bleed_time==420&&b.grey_life==20&&b.reaction==Free,"Wound releases into owned bleed");
+        check(b.health==health&&a.momentum==momentum&&b.momentum==defender_momentum,"Wound adds no damage or meter");
+        const unsigned hash=sim.checksum();const int elapsed=sim.world.frame-frame;
+        sim.world=saved;for(int n=0;n<elapsed;++n)step();
+        check(sim.checksum()==hash,"OTG cancel and release replay identically");
+    }
+    for(int source:{SLASH_SWEEP,26,27})for(bool whiff:{false,true}){
+        setup(5,4,whiff?35000:6200);
+        // Keep standing guard from walking out of Crown's reach before impact.
+        if(!whiff){sim.world.players[0].x=90000;sim.world.players[1].x=96200;}
+        begin(source);const int guard=source==26?Right:Right|Down;
+        for(int n=0;n<sim.moves[5][source].v[Startup];++n)sim.step(0,guard);
+        auto& a=sim.world.players[0];auto& b=sim.world.players[1];
+        check(whiff?!a.contact:a.event==Blocked,"negative fixture whiffs or blocks");
+        if(!whiff&&source==SLASH_SWEEP)check(b.block_advantage==-8,"sweep retains its punishable -8 block advantage");
+        while(sim.world.hitstop)sim.step(0,guard);
+        sim.step(D,guard);for(int n=0;n<6;++n)sim.step(0,guard);
+        check(a.move==source&&!sim.world.pair.kind&&!b.bleed_time,"Wound cannot cancel block or whiff recovery");
+    }
+    setup();
+    check(sim.can_cancel(5,6,13,1)&&sim.can_cancel(5,26,13,1)&&sim.can_cancel(5,27,13,1),"three explicit Wound destinations");
+    check(!sim.can_cancel(5,6,13,0)&&!sim.can_cancel(5,0,13,1)&&!sim.can_cancel(5,7,13,1),"no implicit or whiff Wound route");
+    sim.extensions[5][6].v[XRoutes+2]=0;
+    check(!sim.can_cancel(5,6,13,1),"removing authored route disables cancel");
+    setup();sim.moves[5][6].v[Knockdown]=NoKnockdown;
+    check(!sim.can_cancel(5,6,13,1),"Wound route requires knockdown property");
+}
 static void capture_boundaries(){
     // Real normal-throw inputs, mirrored roles and sides. C6 remains techable;
     // C7 is committed. The setup changes roots only, never the input resolver.
@@ -75,5 +136,6 @@ int main(){
     setup(4,5,7000);begin(FORWARD_THROW);ticks(2);check(sim.world.pair.kind==LegacyCapture,"other fighters get precommit gate");unfreeze();sim.step(0,P|K);check(sim.world.players[1].health==1000&&!sim.world.pair.kind,"legacy throw tech preserves health");
     setup(5,4,7000);begin(FORWARD_THROW);sim.preview_begin(1,FORWARD_THROW);ticks(2);check(!sim.world.pair.kind&&sim.world.players[0].pair_recovery==12,"simultaneous captures tech symmetrically");
     capture_boundaries();
+    otg_routes();
     std::printf("Fillet v1: %d runtime checks passed\n",checks);
 }

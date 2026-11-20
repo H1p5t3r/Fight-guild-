@@ -50,14 +50,17 @@ func open_for(source: CombatModel, fighter: int, action: int) -> void:
 			grid.add_child(spin)
 			values.append({"object": extra.params, "key": key, "input": spin, "scale": scale})
 		if extra.has("routes"):
+			add_label(column, "Wound (5D): select under Special for a hit-only knockdown cancel. It cannot cancel block or whiff recovery and must connect before wakeup.")
 			for group in extra.routes:
 				add_label(column, String(group).capitalize() + " cancel destinations")
 				var routes := HFlowContainer.new()
 				column.add_child(routes)
 				for target in fighter_data.moves.size():
 					if not fighter_data.moves[target].enabled: continue
+					var wound: bool = fighter_data.moves[target].get("extensions", {}).get("params", {}).get("contactKind", 0) == 3
+					if wound and (group != "special" or fighter_data.moves[slot].knockdown == 0) and not target in extra.routes[group]: continue
 					var check := CheckBox.new()
-					check.text = model.move_name(character, target)
+					check.text = model.move_name(character, target) + (" · OTG bleed (hit only)" if wound else "")
 					check.button_pressed = target in extra.routes[group]
 					routes.add_child(check)
 					check.toggled.connect(func(enabled: bool):

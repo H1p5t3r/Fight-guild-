@@ -31,5 +31,25 @@ func _initialize() -> void:
 	check(model.core.restore(snapshot), "Paired snapshot accepted")
 	for i in 65: model.step(0,0)
 	check(model.state_hash() == checksum, "Paired snapshot replay identical")
+	model.restore_defaults()
+	model.reset([5,4])
+	model.core.preview_place(0,40000,0,0)
+	model.core.preview_place(1,50000,0,0)
+	model.step(4 | 64, 0) # 2S via ordinary input (Down | S).
+	for i in 80:
+		if model.state().players[0].contactCount: break
+		model.step(0,0)
+	check(model.state().players[0].contactCount == 1, "Sweep connects")
+	for i in 40:
+		if not model.state().hitstop: break
+		model.step(0,0)
+	for i in 6: model.step(0,0)
+	model.step(256,0) # D confirms before sweep recovery ends.
+	check(model.state().players[0].move == 13, "Hit-only sweep to Wound cancel")
+	var captured := false
+	for i in 70:
+		model.step(0,0)
+		captured = captured or model.state().pairKind == 3
+	check(captured and model.state().players[1].bleedTime > 0, "Natural knockdown into owned bleed")
 	print("Godot Fillet v1 data, migration, paired capture and rollback: %d failures" % failures)
 	quit(1 if failures else 0)

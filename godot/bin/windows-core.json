@@ -3,13 +3,13 @@
   "libraries": {
     "template_debug": {
       "file": "godot/bin/libfight_core.windows.template_debug.x86_64.dll",
-      "sha256": "9fc395fb80ac22b3d303ad67ac7aa98f3ce90a3b21675d77fd1f2f483b12edc3",
+      "sha256": "baf3c5957de05d62ed932797ccf370b4c9eb55d123855dea3e0203e02881e31d",
       "coreVersion": 25,
       "godotCppRevision": "e83fd0904c13356ed1d4c3d09f8bb9132bdc6b77",
       "sourceSha256": {
-        "core/fight.cpp": "614f9fd4b10432bfdf369b70990d8a88447e804b3895d6880378ba383889b527",
+        "core/fight.cpp": "7924bf3836e95635b2bfdcb7d6ca74b1c6f349831a9e3613962028ad1aa1faf0",
         "core/fight.h": "45ef7e10482c9fe2760eb97a61e1e6d1b1e7a0c43613da0bd09a370ecd662b8a",
-        "core/combat_data.h": "2020224bf1f1a3a5dfe2b7689668da4f254b390b8facad1ca6121898b50630cb",
+        "core/combat_data.h": "099df4ac2ad801ee89ec7710a8feee2856f144efbfb619c8db2a9ff8f12f31fb",
         "core/extensions.h": "c31ef3bb240cba37959c55505850f915803f0c2f6b657a19a10ae3e23730fb66",
         "core/extension_tables.inc": "786f26b8328ec143907c968f5949627cbaedb5d197df7af8b86734e3c7c51cca",
         "core/fillet_v1.inc": "de7083ff0492dd474d02096b1785f0533270122a85c9d7ffc447e6febc42a470",
@@ -21,13 +21,13 @@
     },
     "template_release": {
       "file": "godot/bin/libfight_core.windows.template_release.x86_64.dll",
-      "sha256": "ff9d445adecae9cbe1f8a997ad3518cbb01664cef93ab8a49cf9654a5e526c17",
+      "sha256": "0130a438420dad31a89cf3e487d77ad55f7da90351a2960a8f66defe15cbfae4",
       "coreVersion": 25,
       "godotCppRevision": "e83fd0904c13356ed1d4c3d09f8bb9132bdc6b77",
       "sourceSha256": {
-        "core/fight.cpp": "614f9fd4b10432bfdf369b70990d8a88447e804b3895d6880378ba383889b527",
+        "core/fight.cpp": "7924bf3836e95635b2bfdcb7d6ca74b1c6f349831a9e3613962028ad1aa1faf0",
         "core/fight.h": "45ef7e10482c9fe2760eb97a61e1e6d1b1e7a0c43613da0bd09a370ecd662b8a",
-        "core/combat_data.h": "2020224bf1f1a3a5dfe2b7689668da4f254b390b8facad1ca6121898b50630cb",
+        "core/combat_data.h": "099df4ac2ad801ee89ec7710a8feee2856f144efbfb619c8db2a9ff8f12f31fb",
         "core/extensions.h": "c31ef3bb240cba37959c55505850f915803f0c2f6b657a19a10ae3e23730fb66",
         "core/extension_tables.inc": "786f26b8328ec143907c968f5949627cbaedb5d197df7af8b86734e3c7c51cca",
         "core/fillet_v1.inc": "de7083ff0492dd474d02096b1785f0533270122a85c9d7ffc447e6febc42a470",

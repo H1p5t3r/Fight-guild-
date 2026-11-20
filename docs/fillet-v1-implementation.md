@@ -30,9 +30,46 @@ submitted values and notes, with those two new slots disabled.
 
 The packet intentionally replaces the previous Fillet rekka: Opening can branch
 into Crown or Heel; Crown does not itself route into Heel. Fillet's 2S is a hard
-knockdown sweep without special cancels. Her successful ordinary throws now use
+knockdown sweep. The November 20 playtest revision adds a hit-only 5D cancel from
+2S and both rekka finishers; other special cancels from these moves remain absent.
+Her successful ordinary throws now use
 the packet's standing release and +2 independent recovery. These are selected
 Fillet changes; other fighters retain their authored throw outcomes and sweeps.
+
+## November 20 OTG setup revision
+
+Use **2S → 5D**, **236S → 6S → 5D**, or **236S → 2S → 5D**. Press D after
+the knockdown connects, during the finisher's recovery. The original sweep left
+only 8 downed ticks after recovery against a grounded Shark; 24-frame Wound could
+not link in time. This revision adds named recovery cancels instead of reducing
+Wound startup or lengthening knockdown. All frame data, geometry and animations
+remain the same.
+
+Wound cancels require an explicitly listed Special destination, a knockdown move,
+an unblocked hit and an opponent who has landed in Downed. Block and whiff recovery
+cannot cancel into Wound. The ordinary input buffer can hold D until landing.
+Wound still needs to connect within reach before wakeup; it cannot recapture an
+opponent already carrying owned bleed. It releases into the existing neutral
+restand, with no extra health damage or meter.
+
+Both editors expose **5D · OTG bleed (hit only)** in the finisher's named special
+routes. The browser path is **Inputs & cancels → Special & Drive attacks**.
+The Special window opens/closes fields govern this route. The native path is
+**Body keys, paired captures & kit routes → Special cancel destinations**.
+
+`scripts/update-fillet-otg.py` applies just these three routes to defaults and the
+current workshop batch, preserving notes, photos, sequences and the other kits.
+The canonical packet remains unchanged; `scripts/fillet-v1-data.py` reapplies the
+documented tuning after an explicit canonical reimport. Existing saved drafts
+are preserved: use **Load latest workshop batch** in Godot, import the revised
+JSON in the browser, or add these destinations to a custom draft yourself.
+
+Verified with 288 natural-input setup cases (all six receivers, both player slots
+and facings, 62/100 px initial spacing, immediate/six-tick delayed confirms),
+block/whiff rejection, route removal and snapshot replay. Native/WASM regressions,
+Godot batch loading, browser sequence playback, route editing, undo/export and
+mobile layout pass. Windows debug/release DLLs are rebuilt and the source-ZIP
+repair bundle is refreshed; native execution was checked on Linux Godot 4.6.3.
 
 Implementation sources: `core/fillet_v1.inc`, `core/extensions.h`,
 `core/extension_tables.inc`, `scripts/fillet-v1-data.py`, `web/extensions.mjs`,

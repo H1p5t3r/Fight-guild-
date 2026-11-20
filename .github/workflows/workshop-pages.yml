@@ -61,7 +61,11 @@ jobs:
       - name: Verify hosted and extracted editor
         run: node tests/workbench-delivery-browser.mjs
       - name: Verify all Fillet animation review clips
-        run: node tests/workbench-fillet-motion-review-browser.mjs
+        run: |
+          ./build/fillet-v1-tests
+          node --test tests/fillet-otg.test.mjs tests/workbench-fillet-otg.mjs
+          node tests/workbench-fillet-v1-browser.mjs
+          node tests/workbench-fillet-motion-review-browser.mjs
       - name: Verify Shark kit and Drive
         run: |
           ./build/shark-drive-tests

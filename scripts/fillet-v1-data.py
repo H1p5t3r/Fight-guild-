@@ -81,6 +81,14 @@ def pack(ext,char=False):
         keys=ext[name];out += [len(keys)]+[v for k in keys for v in convert(k)]+[0]*((max_count-len(keys))*width)
     return out
 
+def apply_playtest_routes(fillet):
+    """November 20 tuning: explicit OTG confirms, without rewriting the v1 packet."""
+    for slot in (6, 26, 27):
+        action = fillet['moves'][slot]
+        assert action['knockdown'] == 2 and fillet['moves'][13]['extensions']['params']['contactKind'] == 3
+        action['extensions']['routes']['special'] = sorted(set(action['extensions']['routes']['special']) | {13})
+
+
 def install():
     spec=json.loads((ROOT/'art/characters/fillet-v1/FILLET_SPEC.json').read_text())
     src=ROOT/'godot/data/starter_moves.json';data=json.loads(src.read_text())
@@ -98,6 +106,7 @@ def install():
         m['hitboxTimeline']=a['hitboxTimeline'];m['hurtboxes']=a.get('legacyHurtPhaseFallback',a.get('hurtboxes',{}))
         if a in spec['actions']:m['extensions']=action_ext(a,ids)
         fillet['moves'][i]=m
+    apply_playtest_routes(fillet)
     src.write_text(json.dumps(data,indent=2)+'\n')
     (ROOT/'godot/data/extension_layout.json').write_text(json.dumps(layout(),indent=2)+'\n')
     print('Imported 26 enabled Fillet actions, 21 disabled stable slots; other 5 fighters preserved.')

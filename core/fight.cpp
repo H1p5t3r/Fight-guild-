@@ -470,7 +470,12 @@ void Simulation::control(Fighter& f) {
         bool chain=target>=0&&(moves[f.character][target].v[FollowFrom]>=0||moves[f.character][target].v[FollowFrom2]>=0);
         bool chain_window=!chain||(f.move>=0&&(f.contact||f.age>=effective_move(f).v[Startup]-1+effective_move(f).v[Active]));
         int group=extended(f)&&target>=0&&extensions[f.character][target].v[XContactKind]==CommandCapture?4:chain?3:target>=0&&(moves[f.character][target].v[Category]==Special||moves[f.character][target].v[Category]==Drive)?1:0;
-        if(target>=0&&chain_window&&(f.move<0||(!f.variant&&can_cancel(f.character,f.move,target,f.contact!=0)&&cancel_window(f,group)))) {
+        // Wound is an authored knockdown confirm, never a way to cancel unsafe
+        // block recovery. Wait for the landing before consuming the buffered D.
+        const auto& other=world.players[1-(&f-world.players)];
+        bool wound_cancel=f.move>=0&&extended(f)&&target>=0&&extensions[f.character][target].v[XContactKind]==WoundCapture;
+        bool wound_confirm=!wound_cancel||(f.contact&&f.event!=Blocked&&other.reaction==Downed&&other.recovery_time>0);
+        if(target>=0&&chain_window&&wound_confirm&&(f.move<0||(!f.variant&&can_cancel(f.character,f.move,target,f.contact!=0)&&cancel_window(f,group)))) {
             if(reversal&&f.move<0&&moves[f.character][target].v[ReversalEligible]) {
                 f.reversal_time=NOTICE_TICKS;
                 f.reversal_input_age=world.frame-h->frame;
@@ -1919,7 +1924,8 @@ int Simulation::can_cancel(int c,int from,int to,int contact) const {
     if(character_extensions[c].v[CPolicy]) {
         if(!source.v[Enabled]||!target.v[Enabled]||!contact)return 0;
         const int capture=extensions[c][to].v[XContactKind];
-        if(capture==NormalCapture||capture==WoundCapture||(target.v[Category]==Throw&&capture!=CommandCapture))return 0;
+        if(capture==WoundCapture)return source.v[Knockdown]!=NoKnockdown&&named_route(c,from,to,1);
+        if(capture==NormalCapture||(target.v[Category]==Throw&&capture!=CommandCapture))return 0;
         for(int r=0;r<4;++r)if(named_route(c,from,to,r))return 1;
         return 0;
     }

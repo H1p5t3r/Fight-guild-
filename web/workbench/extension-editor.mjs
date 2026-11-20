@@ -33,15 +33,17 @@ export function renderExtension({el,character,slot,tab,frame,onChange,onCharacte
  if(tab==='hurt'&&x){trackEditor('hurtboxes','Body hurtboxes over time',{frame:1,boxes:c.profiles.ready},true);}
  if(tab==='routes'&&x){
   root.append(el('h2',{},'Named cancel routes'),el('p',{},'These exact destinations replace broad button gatlings for this kit. Contact is required. The timing windows below use completed source frames.'));
-  for(const [name,label]of [['normal','Normal attacks'],['special','Special attacks'],['follow','Rekka follow-ups'],['bleed','Bleed cashouts']]){const group=el('fieldset',{class:'extension-routes'});group.append(el('legend',{},label));
+  root.append(el('p',{class:'hint'},'Wound (5D) routes are hit-only: the source must cause knockdown and the opponent must have landed. Blocking or whiffing never allows this cancel. Wound still needs to reach before wakeup.'));
+  for(const [name,label]of [['normal','Normal attacks'],['special','Special & Drive attacks'],['follow','Rekka follow-ups'],['bleed','Bleed cashouts']]){const group=el('fieldset',{class:'extension-routes'});group.append(el('legend',{},label));
    character.moves.forEach((move,i)=>{const linked=move.followFrom===slot||move.followFrom2===slot,follow=move.followFrom>=0||move.followFrom2>=0,kind=move.extensions?.params.contactKind||0;
-    const eligible=name==='bleed'?kind===2&&!m.air:name==='follow'?linked:name==='special'?move.category===2&&!follow&&move.air===m.air:move.category<=1&&!follow&&move.air===m.air;
-    if((!move.enabled||!eligible)&&!x.routes[name].includes(i))return;const row=el('label',{class:'hurt-toggle'}),check=el('input',{type:'checkbox',checked:x.routes[name].includes(i)});row.append(check,document.createTextNode(moveName(move)));group.append(row);check.onchange=()=>{const next=structuredClone(x);next.routes[name]=check.checked?[...next.routes[name],i].sort((a,b)=>a-b):next.routes[name].filter(v=>v!==i);commit(next);};});
+    const eligible=kind===3?name==='special'&&m.knockdown>0&&!m.air:name==='bleed'?kind===2&&!m.air:name==='follow'?linked:name==='special'?[2,3].includes(move.category)&&!follow&&move.air===m.air:move.category<=1&&!follow&&move.air===m.air;
+    if((!move.enabled||!eligible)&&!x.routes[name].includes(i))return;const row=el('label',{class:'hurt-toggle'}),check=el('input',{type:'checkbox',checked:x.routes[name].includes(i)});row.append(check,document.createTextNode(moveName(move)+(kind===3?' · OTG bleed (hit only)':'')));group.append(row);check.onchange=()=>{const next=structuredClone(x);next.routes[name]=check.checked?[...next.routes[name],i].sort((a,b)=>a-b):next.routes[name].filter(v=>v!==i);commit(next);};});
    if(group.children.length===1)group.append(el('p',{class:'hint'},'No destinations for this move.'));root.append(group);}
   params(x,['bleedDelay','bleedWindowStart','bleedWindowEnd']);
  }
  if(tab==='mechanics'&&c){
   root.append(el('h2',{},'Wound → owned bleed → cashout'),el('p',{},'5D captures a downed opponent and applies bleed when the pair releases. 236D / 214D spend that bleed on a confirmed grounded capture. Ordinary throws preserve bleed.'));
+  root.append(el('p',{class:'hint'},'Default setups: 2S → 5D, 236S → 6S → 5D, or 236S → 2S → 5D. Press D after the knockdown connects to cancel recovery. These routes are edited on the finisher under Inputs & cancels → Special & Drive attacks.'));
   const navigation=el('div',{class:'track-actions'});for(const index of [13,45,46,23,24]){const button=el('button',{type:'button','data-capture-move':index,'aria-pressed':String(index===slot)},`${moveName(character.moves[index])} · ${character.moves[index].extensions?.art?.name||'Capture'}`);button.onclick=()=>onMove(index);navigation.append(button);}root.append(navigation);
   params(c,['bleedDuration','bleedInitial','bleedGrowth','bleedInterval','bleedBlockPercent','bleedCap','groundSpeedPercent','airSpeedPercent'],true);
   if(x?.params.contactKind){root.append(el('h2',{},`${moveName(m)} · paired capture`));params(x,['captureFreeze','pairTicks','releaseFreeze','ownerRecovery','victimRecovery','releaseGap','throwGrace','techTicks']);

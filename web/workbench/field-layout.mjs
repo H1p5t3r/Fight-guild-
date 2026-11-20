@@ -66,7 +66,7 @@ export function inactiveReason(key,m){
  if(key==='throwRange'&&m.category!==4)return 'Used by throw moves. Cash-out grabs have their own range.';
  if(key==='simpleButton'&&!m.simpleDirection)return 'Choose a simple-input direction first.';
  if(key==='proximityRange'&&m.proximityMove<0)return 'Choose a close-distance move first.';
- if(['specialCancelStart','specialCancelEnd'].includes(key)&&!m.specialCancel)return 'Enable Special cancel to use this window.';
+ if(['specialCancelStart','specialCancelEnd'].includes(key)&&!m.specialCancel&&!m.extensions)return 'Enable Special cancel to use this window.';
  if(['jumpCancelStart','jumpCancelEnd'].includes(key)&&!m.jumpCancel)return 'Enable Jump cancel to use this window.';
  if(key==='followHit'&&m.followFrom<0&&m.followFrom2<0)return 'Choose at least one previous move first.';
  if(key==='holdFrame'&&m.holdFollow<0&&m.actionType!==5)return 'Choose a held-input destination or Hold to charge behavior.';

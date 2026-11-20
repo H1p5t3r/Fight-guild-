@@ -25,6 +25,13 @@ try{
  assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[8].extensions.hurtboxes.findLast(k=>k.frame<=3).boxes.head),undefined);
  await page.locator('#undo').click();await ready(page);assert.deepEqual(await page.evaluate(()=>moveWorkshop.data()),before);
  await selectSection(page,'routes');assert.equal(await page.locator('#field-normalRoutes').count(),0,'Ignored legacy gatling masks are absent');
+ await page.locator('[data-move="6"]').click();await ready(page);
+ const woundRoute=page.getByLabel('5D · OTG bleed (hit only)',{exact:true});
+ assert.equal(await woundRoute.isChecked(),true,'Sweep has its named Wound route');
+ assert.equal(await page.locator('#field-specialCancelStart').isVisible(),true,'Named special window is editable');
+ await woundRoute.uncheck();await ready(page);
+ assert.deepEqual(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[6].extensions.routes.special),[]);
+ await page.locator('#undo').click();await ready(page);assert.equal(await woundRoute.isChecked(),true,'Undo restores the route');
  await mkdir('build/fillet-v1-review',{recursive:true});await page.screenshot({path:'build/fillet-v1-review/editor-desktop.png'});
  await page.setViewportSize({width:390,height:844});await selectSection(page,'mechanics');await ready(page);
  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'No mobile horizontal overflow');
