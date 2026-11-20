@@ -57,3 +57,11 @@ follow-through from the projectile's saved lifetime. A body may settle during
 its existing action lock, but art must never shorten that lock. Check the source
 against the moving hand as well as the feet; a recovery jump should not be larger
 than the first-active strike. Record unresolved readability issues explicitly.
+
+The [Fillet guide audit](fillet-animation-audit-2026-11-20.md) adds two source
+registration checks: inspect transparent atlas gutters at runtime (generated
+figures need not occupy equal-width cells), and compare anatomical anchors
+across source columns before assigning pivots. A narrow swept strike must lose
+its low trail when its later active geometry becomes high-only. Validate the
+actual pixels with effects hidden; a detached effect cannot substitute for
+missing arm/weapon reach.

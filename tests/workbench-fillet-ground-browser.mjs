@@ -39,7 +39,7 @@ try{
   }
   await page.locator('#attack-enabled').check();await ready(page);
  }
- assert.equal(keys,234);
+ assert.equal(keys,235);
  await mkdir('build/fillet-ground-review',{recursive:true});
  await page.locator('[data-move="6"]').click();await ready(page);await seekMoveFrame(page,12);
  await page.waitForFunction(file=>window.filletDraws.some(d=>d.source===new URL(FIGHT_WORKSHOP_DATA.images[file],location.href).href),art.sweep_fx.file);
@@ -51,5 +51,5 @@ try{
  await page.locator('#preview').scrollIntoViewIfNeeded();
  await page.screenshot({path:'build/fillet-ground-review/anti-air-mobile.png'});
  assert.deepEqual(errors,[]);
- console.log('PASS all 234 Fillet action-pose keys draw from their registered atlases in the hosted editor, plus desktop/mobile preview');
+ console.log('PASS all 235 Fillet action-pose keys draw from their registered atlases in the hosted editor, plus desktop/mobile preview');
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

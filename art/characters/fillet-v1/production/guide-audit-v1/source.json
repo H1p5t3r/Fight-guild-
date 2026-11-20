@@ -1,0 +1,8 @@
+{
+  "sourceGuide": "art/characters/smoke-specials-v3/source.json",
+  "baselineCommit": "dd9b7b2",
+  "baselineCapture": "before.json",
+  "reviewScope": "26 Fillet actions; actual simulation whiff/contact/guard recordings; targeted c.S, j.K and 623Hs refinements.",
+  "sourcePolicy": "Generator PNG bytes copied unchanged. Regions, pivots, scale calibration and exposure keys are metadata. No blended or stretched body animation.",
+  "workshopManifestSHA256": "74ee43fa5b692c62a53741e1c158aa9549e38dc1f8b12d0da16ec70087fd28b0"
+}

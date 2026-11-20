@@ -1,0 +1,590 @@
+{
+  "623Hs": [
+    {
+      "frame": 1,
+      "cue": "Entry / compressed preparation",
+      "file": "fillet-kit-v1/623hs.png",
+      "region": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        270,
+        498
+      ],
+      "body_height": 535,
+      "effect": null
+    },
+    {
+      "frame": 4,
+      "cue": "Hold load through final startup",
+      "file": "fillet-kit-v1/623hs.png",
+      "region": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        270,
+        498
+      ],
+      "body_height": 535,
+      "effect": null
+    },
+    {
+      "frame": 11,
+      "cue": "First-active snap / latch",
+      "file": "fillet-kit-v1/623hs.png",
+      "region": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        270,
+        498
+      ],
+      "body_height": 535,
+      "effect": {
+        "sheet": "knife_fx",
+        "pose": 3,
+        "box": [
+          12.0,
+          44.0,
+          92.0,
+          198.0
+        ],
+        "opacity": 1,
+        "behind": false
+      }
+    },
+    {
+      "frame": 15,
+      "cue": "Small follow-through",
+      "file": "fillet-kit-v1/623hs.png",
+      "region": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        270,
+        498
+      ],
+      "body_height": 535,
+      "effect": {
+        "sheet": "knife_fx",
+        "pose": 3,
+        "box": [
+          12.0,
+          44.0,
+          84.0,
+          198.0
+        ],
+        "opacity": 1,
+        "behind": false
+      }
+    },
+    {
+      "frame": 16,
+      "cue": "Commitment hold",
+      "file": "fillet-kit-v1/623hs.png",
+      "region": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        270,
+        498
+      ],
+      "body_height": 535,
+      "effect": {
+        "sheet": "knife_fx",
+        "pose": 3,
+        "box": [
+          12.0,
+          44.0,
+          84.0,
+          198.0
+        ],
+        "opacity": 0.35,
+        "behind": false
+      }
+    },
+    {
+      "frame": 18,
+      "cue": "Trail fades",
+      "file": "fillet-kit-v1/623hs.png",
+      "region": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        270,
+        498
+      ],
+      "body_height": 535,
+      "effect": {
+        "sheet": "knife_fx",
+        "pose": 3,
+        "box": [
+          12.0,
+          44.0,
+          84.0,
+          198.0
+        ],
+        "opacity": 0.12,
+        "behind": false
+      }
+    },
+    {
+      "frame": 20,
+      "cue": "Trail ends",
+      "file": "fillet-kit-v1/623hs.png",
+      "region": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        270,
+        498
+      ],
+      "body_height": 535,
+      "effect": null
+    },
+    {
+      "frame": 23,
+      "cue": "Check high / fold elbow",
+      "file": "fillet-guide-audit-v1/rising-recovery.png",
+      "region": [
+        0,
+        0,
+        630,
+        624
+      ],
+      "pivot": [
+        317,
+        583
+      ],
+      "body_height": 640,
+      "effect": null
+    },
+    {
+      "frame": 29,
+      "cue": "Lower the elbow",
+      "file": "fillet-guide-audit-v1/rising-recovery.png",
+      "region": [
+        630,
+        0,
+        631,
+        624
+      ],
+      "pivot": [
+        297,
+        582
+      ],
+      "body_height": 640,
+      "effect": null
+    },
+    {
+      "frame": 35,
+      "cue": "Collect the long knife low",
+      "file": "fillet-guide-audit-v1/rising-recovery.png",
+      "region": [
+        0,
+        624,
+        630,
+        623
+      ],
+      "pivot": [
+        314,
+        571
+      ],
+      "body_height": 640,
+      "effect": null
+    },
+    {
+      "frame": 40,
+      "cue": "Stalker settle / still locked",
+      "file": "fillet-guide-audit-v1/rising-recovery.png",
+      "region": [
+        630,
+        624,
+        631,
+        623
+      ],
+      "pivot": [
+        303,
+        569
+      ],
+      "body_height": 640,
+      "effect": null
+    }
+  ],
+  "c.S": [
+    {
+      "frame": 1,
+      "cue": "Entry",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        223,
+        480
+      ],
+      "body_height": 520,
+      "effect": null
+    },
+    {
+      "frame": 2,
+      "cue": "Hold load through final startup",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        255,
+        480
+      ],
+      "body_height": 520,
+      "effect": null
+    },
+    {
+      "frame": 7,
+      "cue": "Active blade path",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        223,
+        480
+      ],
+      "body_height": 520,
+      "effect": {
+        "sheet": "knife_fx",
+        "pose": 6,
+        "box": [
+          60,
+          64,
+          72,
+          130
+        ],
+        "opacity": 0.8,
+        "behind": false
+      }
+    },
+    {
+      "frame": 8,
+      "cue": "Active blade path",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        223,
+        480
+      ],
+      "body_height": 520,
+      "effect": null
+    },
+    {
+      "frame": 9,
+      "cue": "Active blade path",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        223,
+        480
+      ],
+      "body_height": 520,
+      "effect": null
+    },
+    {
+      "frame": 10,
+      "cue": "Active blade path",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        223,
+        480
+      ],
+      "body_height": 520,
+      "effect": null
+    },
+    {
+      "frame": 11,
+      "cue": "Active blade path",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        223,
+        480
+      ],
+      "body_height": 520,
+      "effect": null
+    },
+    {
+      "frame": 12,
+      "cue": "Commitment hold",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        223,
+        480
+      ],
+      "body_height": 520,
+      "effect": null
+    },
+    {
+      "frame": 14,
+      "cue": "Withdraw",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        255,
+        480
+      ],
+      "body_height": 520,
+      "effect": null
+    },
+    {
+      "frame": 16,
+      "cue": "Trail ends",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        255,
+        480
+      ],
+      "body_height": 520,
+      "effect": null
+    },
+    {
+      "frame": 17,
+      "cue": "Return to guard",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        223,
+        480
+      ],
+      "body_height": 520,
+      "effect": null
+    },
+    {
+      "frame": 21,
+      "cue": "Settled / still recovering",
+      "file": "fillet-guide-audit-v1/inside-cut.png",
+      "region": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        223,
+        480
+      ],
+      "body_height": 520,
+      "effect": null
+    }
+  ],
+  "j.K": [
+    {
+      "frame": 1,
+      "cue": "Entry / compressed preparation",
+      "file": "fillet-kit-v1/jk.png",
+      "region": [
+        0,
+        0,
+        500,
+        512
+      ],
+      "pivot": [
+        140,
+        489
+      ],
+      "body_height": 535,
+      "effect": null
+    },
+    {
+      "frame": 2,
+      "cue": "Hold load through final startup",
+      "file": "fillet-kit-v1/jk.png",
+      "region": [
+        500,
+        0,
+        445,
+        512
+      ],
+      "pivot": [
+        150,
+        483
+      ],
+      "body_height": 535,
+      "effect": null
+    },
+    {
+      "frame": 7,
+      "cue": "First-active snap / latch",
+      "file": "fillet-kit-v1/jk.png",
+      "region": [
+        945,
+        0,
+        591,
+        512
+      ],
+      "pivot": [
+        155,
+        473
+      ],
+      "body_height": 535,
+      "effect": null
+    },
+    {
+      "frame": 10,
+      "cue": "Small follow-through",
+      "file": "fillet-kit-v1/jk.png",
+      "region": [
+        0,
+        512,
+        500,
+        512
+      ],
+      "pivot": [
+        150,
+        485
+      ],
+      "body_height": 535,
+      "effect": null
+    },
+    {
+      "frame": 11,
+      "cue": "Commitment hold",
+      "file": "fillet-kit-v1/jk.png",
+      "region": [
+        0,
+        512,
+        500,
+        512
+      ],
+      "pivot": [
+        150,
+        485
+      ],
+      "body_height": 535,
+      "effect": null
+    },
+    {
+      "frame": 14,
+      "cue": "Withdraw",
+      "file": "fillet-kit-v1/jk.png",
+      "region": [
+        500,
+        512,
+        445,
+        512
+      ],
+      "pivot": [
+        150,
+        491
+      ],
+      "body_height": 535,
+      "effect": null
+    },
+    {
+      "frame": 19,
+      "cue": "Guard return",
+      "file": "fillet-kit-v1/jk.png",
+      "region": [
+        945,
+        512,
+        591,
+        512
+      ],
+      "pivot": [
+        155,
+        483
+      ],
+      "body_height": 535,
+      "effect": null
+    },
+    {
+      "frame": 21,
+      "cue": "Settled / still recovering",
+      "file": "fillet-kit-v1/jk.png",
+      "region": [
+        0,
+        0,
+        500,
+        512
+      ],
+      "pivot": [
+        140,
+        489
+      ],
+      "body_height": 535,
+      "effect": null
+    }
+  ]
+}

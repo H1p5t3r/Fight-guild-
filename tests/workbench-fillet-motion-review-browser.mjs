@@ -10,8 +10,12 @@ try{
  page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)bad.push(r.url());});
  await page.goto(`http://127.0.0.1:${server.address().port}/Fight-guild-/fillet-motion-review.html`);
  await page.evaluate(()=>filletReview.ready);
+ const movie=await page.request.get(`http://127.0.0.1:${server.address().port}/Fight-guild-/fillet-animation-audit-60fps.mp4`);
+ assert.equal(movie.status(),200);assert.equal(movie.headers()['content-type'],'video/mp4');
+ assert.ok(Number(movie.headers()['content-length'])>1000);
  const ids=await page.evaluate(()=>filletReview.pack.moves.map(m=>m.id));
  assert.equal(ids.length,26);assert.equal(new Set(ids).size,26);
+ assert.deepEqual(await page.evaluate(()=>filletReview.pack.moves.filter(m=>m.changed).map(m=>m.id).sort()),['623Hs','c.S','j.K']);
  assert.equal(await page.locator('#speed').inputValue(),'1');
  assert.equal(await page.evaluate(()=>filletReview.pack.moves[filletReview.state().selected].id),'2S');
  assert.ok(await page.evaluate(()=>filletReview.pack.moves.every(m=>[...m.before,...m.after].every(k=>typeof filletReview.pack.images[k.file]==='string'))));
@@ -35,6 +39,18 @@ try{
  assert.equal(report.find(r=>r.id==='2S').freeze,9);
  assert.ok(report.find(r=>r.id==='j.Hs').landed,'Long airborne recovery is interrupted by actual landing');
  assert.ok(report.every(r=>r.damage>0||r.id==='5D'),'On-hit examples must connect');
+ // Every comparison is an actual pre-audit recording. Artwork changes must
+ // not alter action duration, movement, contact, collision or capture clocks.
+ for(const id of ids){
+  for(const key of ['timeline','contactTimeline','blockTimeline']){
+   const compared=await page.evaluate(({id,key})=>{
+    const m=filletReview.pack.moves.find(m=>m.id===id),prior='before'+key[0].toUpperCase()+key.slice(1);
+    const gameplay=k=>[k.tick,k.frame,k.x,k.y,k.facing,k.hitstop,k.stopped,k.pairKind,k.pairClock,k.damage,k.landingTime,k.guarding,k.contact,k.hits,k.hurt,k.target?.x,k.target?.y,k.target?.facing];
+    return {before:m[prior].map(gameplay),after:m[key].map(gameplay)};
+   },{id,key});
+   assert.deepEqual(compared.after,compared.before,id+' / '+key+' preserves gameplay');
+  }
+ }
  for(const id of ['236D','214D']){
   const comparison=await page.evaluate(id=>{
    const m=filletReview.pack.moves.find(m=>m.id===id);
@@ -44,9 +60,23 @@ try{
     capture:m.contactTimeline.find(k=>k.pairKind)?.actor.file};
   },id);
   assert.deepEqual(comparison.after,comparison.before,id+' keeps real capture timing, roots and damage');
-  assert.match(comparison.priorCapture,/pair-cashout\.png$/);
+  assert.match(comparison.priorCapture,/-v2\.png$/);
   assert.match(comparison.capture,/-v2\.png$/);
  }
+ const cs=await page.evaluate(()=>{
+  const m=filletReview.pack.moves.find(m=>m.id==='c.S');
+  return {first:m.timeline.find(k=>k.frame===7).actor,next:m.timeline.find(k=>k.frame===8).actor};
+ });
+ assert.match(cs.first.file,/fillet-guide-audit-v1\/inside-cut\.png$/);
+ assert.equal(cs.first.effect.pose,6);
+ assert.equal(cs.next.effect,undefined,'The low c.S swept trail vanishes after first active');
+ await page.locator('#move-select').selectOption(String(ids.indexOf('c.S')));
+ await page.locator('#scenario').selectOption('block');
+ await page.locator('#hurt').check();await page.locator('#effects').uncheck();await page.locator('#silhouette').check();
+ await page.evaluate(()=>filletReview.seek(7));
+ assert.equal(await page.evaluate(()=>filletReview.state().scenario),'block');
+ await page.screenshot({path:'build/fillet-kit-timing-review/inside-cut-silhouette.png',fullPage:true});
+ await page.locator('#silhouette').uncheck();await page.locator('#effects').check();
  await page.locator('#scenario').selectOption('whiff');
  await page.setViewportSize({width:390,height:844});
  await page.locator('#move-select').selectOption(String(ids.indexOf('236S>2S')));await page.locator('#compare').uncheck();await page.locator('#mirror').check();

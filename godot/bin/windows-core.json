@@ -3,13 +3,13 @@
   "libraries": {
     "template_debug": {
       "file": "godot/bin/libfight_core.windows.template_debug.x86_64.dll",
-      "sha256": "ad77c1d6e1060d9e2b1042a56c75615ff009e8d4902ceb449181eed5945ebd29",
+      "sha256": "c63e460ee8c1472f3930c92822163fee652cd406e3dd2c0e42b8c595264d58be",
       "coreVersion": 26,
       "godotCppRevision": "e83fd0904c13356ed1d4c3d09f8bb9132bdc6b77",
       "sourceSha256": {
         "core/fight.cpp": "d310df9935f540025e533fea559d074febdd582ab281c05b853b28bb34c82def",
         "core/fight.h": "c866d1d98bdcc8b424272139646ced57619d32303b84fa1fe462a3caff793a1f",
-        "core/combat_data.h": "6501d91fd24dd9d11350c73c3a65c5b0e771c3874a6ea6f7e9a841e0a835102f",
+        "core/combat_data.h": "f64121f350a07ed6a44f88985d245100fd57e84a46076afb1bb7edd191985ca0",
         "core/extensions.h": "c31ef3bb240cba37959c55505850f915803f0c2f6b657a19a10ae3e23730fb66",
         "core/extension_tables.inc": "786f26b8328ec143907c968f5949627cbaedb5d197df7af8b86734e3c7c51cca",
         "core/fillet_v1.inc": "d8e115504e2247615432044c045316418122106122cdfad3d1bee233d431f0fa",
@@ -21,13 +21,13 @@
     },
     "template_release": {
       "file": "godot/bin/libfight_core.windows.template_release.x86_64.dll",
-      "sha256": "4b280b123474acd633be9fc10d19c6437c507d82b8571e829a8f729e11ff58d9",
+      "sha256": "9d640aaa09cb4b22ad61a84a2dfd49a38b11e62c2c029d6745315db54eff7d99",
       "coreVersion": 26,
       "godotCppRevision": "e83fd0904c13356ed1d4c3d09f8bb9132bdc6b77",
       "sourceSha256": {
         "core/fight.cpp": "d310df9935f540025e533fea559d074febdd582ab281c05b853b28bb34c82def",
         "core/fight.h": "c866d1d98bdcc8b424272139646ced57619d32303b84fa1fe462a3caff793a1f",
-        "core/combat_data.h": "6501d91fd24dd9d11350c73c3a65c5b0e771c3874a6ea6f7e9a841e0a835102f",
+        "core/combat_data.h": "f64121f350a07ed6a44f88985d245100fd57e84a46076afb1bb7edd191985ca0",
         "core/extensions.h": "c31ef3bb240cba37959c55505850f915803f0c2f6b657a19a10ae3e23730fb66",
         "core/extension_tables.inc": "786f26b8328ec143907c968f5949627cbaedb5d197df7af8b86734e3c7c51cca",
         "core/fillet_v1.inc": "d8e115504e2247615432044c045316418122106122cdfad3d1bee233d431f0fa",

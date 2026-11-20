@@ -1,0 +1,36 @@
+{
+  "fps": 60,
+  "clips": [
+    {
+      "id": "c.S",
+      "whiff": 35,
+      "hit": 43,
+      "block": 43
+    },
+    {
+      "id": "j.K",
+      "whiff": 35,
+      "hit": 41,
+      "block": 41
+    },
+    {
+      "id": "623Hs",
+      "whiff": 56,
+      "hit": 66,
+      "block": 66
+    },
+    {
+      "id": "2S",
+      "whiff": 50,
+      "hit": 59,
+      "block": 59
+    },
+    {
+      "id": "236D",
+      "whiff": 65,
+      "hit": 67,
+      "block": 67
+    }
+  ],
+  "note": "Actual isolated-action simulation. Final inspection repeats each tick twice. End cards hold for18 video frames after the simulation ends."
+}

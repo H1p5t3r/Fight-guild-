@@ -45,7 +45,7 @@ class HurtboxContract(unittest.TestCase):
             for phase, poses in fighter['poses'].items():
                 for index, pose in enumerate(poses):
                     counts.append(len(generator.hurt_rectangles(copy.deepcopy(pose), f"{fighter['name']} {phase} {index}")))
-        self.assertEqual(len(counts), 1011)  # Includes Smoke's 69, Fillet's 270 and Shark's 191 action/capture cues.
+        self.assertEqual(len(counts), 1012)  # Smoke 69, Fillet 271 (guide audit), Shark 191 action/capture cues.
         self.assertEqual(set(counts), {3, 4})
 
 

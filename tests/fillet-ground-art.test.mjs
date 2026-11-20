@@ -8,7 +8,8 @@ const spec=JSON.parse(readFileSync('art/characters/fillet-v1/FILLET_SPEC.json'))
 const art=JSON.parse(readFileSync('godot/assets/fighters/manifest.json')).fighters[5];
 const actions=spec.actions.filter(a=>art.attack_animations[String(a.slot)]);
 const plans=JSON.parse(readFileSync('art/characters/fillet-v1/production/kit-timing/exposure-plans.json')).actions;
-const expectedTicks=a=>plans[a.id].keys.map(k=>k.frame);
+const audited=JSON.parse(readFileSync('art/characters/fillet-v1/production/guide-audit-v1/exposure-plans.json'));
+const expectedTicks=a=>(audited[a.id]??plans[a.id].keys).map(k=>k.frame);
 const wasm=await WebAssembly.compile(readFileSync('web/generated/fight.wasm'));
 const engine=async()=>new Engine(await WebAssembly.instantiate(wasm));
 const place=(e,facing,gap=40000)=>{e.reset([5,4]);e.api.fg_preview_place(0,50000,0,0);e.api.fg_preview_place(1,50000+facing*gap,0,0);e.step(0,0);};
@@ -21,7 +22,7 @@ const beginWhiff=(e,a,facing=1)=>{
 };
 
 test('All 26 attacks use authored phase clocks in both facings; landing interrupts air recovery',async()=>{
- const e=await engine();assert.equal(actions.length,26);assert.equal(art.attack_animation.frames.length,270);
+ const e=await engine();assert.equal(actions.length,26);assert.equal(art.attack_animation.frames.length,271);
  for(const a of actions)for(const facing of [-1,1]){
   beginWhiff(e,a,facing);const seen=new Set();let landed=false;
   for(let step=0;step<160;step++){
@@ -125,6 +126,11 @@ test('Generated blade arcs follow active geometry and disappear after the short 
   const a=actions.find(a=>a.id===id),m=e.data().characters[5].moves[a.slot],clip=art.attack_animations[a.slot];
   for(let t=1;t<m.startup+m.active+m.recovery;t++){
    const tile=art.attack_animation.frames[poseAt(m,t,true,clip).index];
+   if(id==='c.S'){
+    if(t===m.startup){assert.equal(tile.effect.pose,6);assert.deepEqual(tile.effect.box,[60,64,72,130]);}
+    else assert.equal(tile.effect,undefined,'c.S low trail exists only during its actual swept contact');
+    continue;
+   }
    if(t<m.startup||t>=m.startup+m.active+4){assert.equal(tile.effect,undefined,id+'/'+t);continue;}
    assert.equal(tile.effect.sheet,'knife_fx');
    if(t<m.startup+m.active){

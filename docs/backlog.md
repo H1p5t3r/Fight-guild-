@@ -19,6 +19,11 @@ See [combat tuning](combat-tuning.md) for defaults, migration rules and verified
 
 ## Fillet v1 integration and art review
 
+- [x] Apply the supplied animation-guide audit across all 26 enabled Fillet actions; refine c.S short-knife reach/trail, j.K atlas/pelvis registration and 623Hs staged lowering. Preserve actual pre-audit recordings and add hit/guard/whiff, silhouette/effect controls and a 60fps comparison. See [guide audit](fillet-animation-audit-2026-11-20.md).
+- [ ] Replace the legacy neutral-air artwork with an approved common air tuck and landing-entry family; reconcile j.P/j.K/j.S/j.Hs release silhouettes without changing airborne momentum or landing lockout.
+- [ ] Author paired receiver poses for Fillet's throws and cashouts so collar/forearm contact stays physically connected across the roster's sizes. Keep the existing confirmed-capture clocks and release events.
+- [ ] Refine the shared broad crescents on f.S/5Hs/236S and the late shoulder lowering on 2Hs. Check silhouettes with VFX hidden, preserve current reach and hit groups, and use the current approval process for new motion directions.
+
 - [x] Import the supplied v1 mechanics into schema 23, preserving the other fighters and older saves. Add Wound, owned bleed, finite Vault/Skim captures, paired recovery and shared ordinary-throw tech.
 - [x] Expose exact body/push/root keys, named routes and paired settings in the Workshop and native development controls; add live state inspection.
 - [x] Verify all 894 canonical action frames in both facings and player slots, plus paired capture/release, real-input pressure and rollback checks.
@@ -27,10 +32,10 @@ See [combat tuning](combat-tuning.md) for defaults, migration rules and verified
 - [x] Generate [batch 02 options for 5Hs, 2S, 2Hs, 6P and 6Hs](../art/characters/fillet-v1/review/normals-batch-02/README.md), then expand them to one sheet per move with **windup, contact and follow-through**, plus blade/body/footwork direction arrows. User selected **5Hs-B, 2Hs-B, 6P-B, 6Hs-B** and **2S-B / Hip Reap from the second study**. For 6P, correct LEFT-short/RIGHT-long arm ownership in every final pose and both facings is an explicit production requirement. All 11 ground-normal directions are selected; all 26 action directions/production states are tracked in the review selection log.
 - [x] Generate and register the selected 11 ground normals as [92 playable pose keys](fillet-ground-art.md), with correct 6P arm ownership, second-study Hip Reap sweep, authored timing, edited-timing playback, hitstop and rollback checks. Preserve source pixels and canonical combat geometry.
 - [x] Expand 5P, 5K and 2S with 24 drawn in-betweens: phase-entry drawing plus every second action frame, following the user's photographed rule. Add an inspectable before/after browser player and recorded preview; keep move timing and combat geometry unchanged.
-- [ ] Review the sweep's held anticipation, contact and recovery timing before applying per-attack exposure plans to more moves.
+- [x] Review the sweep's held anticipation, contact and recovery timing, then apply the approved exposure process across the full kit.
 - [x] Rework 2S after timing review: seven consistent body poses, a fixed support foot, held load, sharp first active frame and deliberate recovery. Preserve 12/4/23 timing and actual 9-frame hitstop; provide game-speed whiff/contact comparisons.
 - [ ] Refine exact ground-normal anatomical/weapon fit against canonical geometry, including f.S's 125px reach, support-foot entry variants, continuous entry/exit clips and separate reverse-view artwork. First production pass uses the existing mirrored renderer.
-- [ ] Offer/select the remaining new Fillet animation directions, then finish paired receiver coverage, interruption/entry/exit clips and the full art acceptance matrix. Keep current sprites until approved replacements are ready.
+- [ ] Finish paired receiver coverage, interruption/entry/exit clips and the full art acceptance matrix within the approved implementation-pack choreography. New motion directions still go through the options stage.
 
 See [implementation and verification](fillet-v1-implementation.md).
 

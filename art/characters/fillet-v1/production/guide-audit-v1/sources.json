@@ -1,0 +1,115 @@
+[
+  {
+    "id": "inside-cut",
+    "file": "inside-cut.png",
+    "source": "/workspace/generated_images/exec-d4e09c4c-d5d0-4c98-b34d-5e343e0ce911.png",
+    "columns": 3,
+    "rows": 2,
+    "body_height": 520,
+    "pivots": [
+      [
+        255,
+        480
+      ],
+      [
+        223,
+        480
+      ],
+      [
+        223,
+        480
+      ],
+      [
+        255,
+        480
+      ],
+      [
+        223,
+        480
+      ],
+      [
+        223,
+        480
+      ]
+    ],
+    "prompt": "cs-reach-correction-prompt.txt",
+    "references": [
+      "art/characters/fillet-v1/production/guide-audit-v1/sources/inside-cut-first-pass.png"
+    ],
+    "initialPrompt": "cs-prompt.txt",
+    "initialReferences": [
+      "godot/assets/fighters/fillet-ground-v1/cs-1.png",
+      "godot/assets/fighters/fillet-ground-v1/cs-2.png"
+    ],
+    "sha256": "6f98afa325c3b539677ddb3ee071d8912f31d54ac4507cb053f2bcddb1a42b62",
+    "size": [
+      1536,
+      1024
+    ],
+    "intermediate": {
+      "file": "art/characters/fillet-v1/production/guide-audit-v1/sources/inside-cut-first-pass.png",
+      "source": "/workspace/generated_images/exec-3219e26e-69f5-48ad-a882-f417c1f31f43.png",
+      "sha256": "4521119ba771aad53fae6a90cae74eacbb1564d593e984022d3c04e70820dca4",
+      "reason": "Reach still short; corrected by final image edit."
+    }
+  },
+  {
+    "id": "rising-recovery",
+    "file": "rising-recovery.png",
+    "source": "/workspace/generated_images/exec-9e81949e-2eac-442d-92af-e6f3e562dc52.png",
+    "columns": 2,
+    "rows": 2,
+    "body_height": 640,
+    "pivots": [
+      [
+        317,
+        583
+      ],
+      [
+        297,
+        582
+      ],
+      [
+        314,
+        571
+      ],
+      [
+        303,
+        569
+      ]
+    ],
+    "prompt": "rising-recovery-prompt.txt",
+    "references": [
+      "godot/assets/fighters/fillet-kit-v1/623hs.png",
+      "godot/assets/fighters/appearance-v3/fillet-ready.png"
+    ],
+    "sha256": "835a0adf59547ce156056cde2ecd862c1a313214321b49e259c2868475c79bfd",
+    "size": [
+      1261,
+      1247
+    ]
+  },
+  {
+    "id": "inside-cut-effect",
+    "file": "inside-cut-effect.png",
+    "source": "/workspace/generated_images/exec-aae405ca-b35f-4bcd-b95f-cf2ca06e29dc.png",
+    "columns": 1,
+    "rows": 1,
+    "body_height": 150,
+    "pivots": [
+      [
+        0,
+        0
+      ]
+    ],
+    "prompt": "inside-cut-effect-prompt.txt",
+    "references": [
+      "godot/assets/fighters/fillet-kit-v1/knife-effects.png"
+    ],
+    "sha256": "90bf071ea48e25b3895c57bbaa31a13e8349b7d787189c1d58e8bc36b952f658",
+    "size": [
+      756,
+      2079
+    ]
+  }
+]

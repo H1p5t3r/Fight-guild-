@@ -57,6 +57,9 @@ const reviewBaseline=JSON.parse(await readFile(path('art/characters/fillet-v1/pr
 for(const action of Object.values(reviewBaseline.actions))for(const frame of action.frames)if(!files.includes(frame.file))files.push(frame.file);
 const grabBaseline=JSON.parse(await readFile(path('art/characters/fillet-v1/production/command-grabs-v2/before.json'),'utf8'));
 for(const action of Object.values(grabBaseline.actions))for(const entry of [...action.timeline,...action.contactTimeline])for(const frame of [entry.actor,entry.target].filter(Boolean))if(!files.includes(frame.file))files.push(frame.file);
+const filletAudit=JSON.parse(await readFile(path('art/characters/fillet-v1/production/guide-audit-v1/before.json'),'utf8'));
+for(const move of filletAudit.moves)for(const key of ['timeline','contactTimeline','blockTimeline'])for(const entry of move[key])for(const frame of [entry.actor,entry.target].filter(Boolean))if(!files.includes(frame.file))files.push(frame.file);
+for(const sheet of Object.values(filletAudit.effects))for(const file of [sheet.file,...sheet.frames.map(f=>f.file).filter(Boolean)])if(!files.includes(file))files.push(file);
 files.push("appearance-v3/projectiles.png");
 for(const fighter of art)if(fighter.projectile)files.push(fighter.projectile.file);
 for(const fighter of art)for(const projectile of Object.values(fighter.projectile_variants??{}))if(!files.includes(projectile.file))files.push(projectile.file);
@@ -129,13 +132,14 @@ const appScript=await asset(bundle.outputFiles[0].text,'js');
 let linkedCss=sourceCss;
 for(const {tag,bytes} of fonts)linkedCss=linkedCss.replace(tag,(await asset(bytes,'woff2')).slice('assets/'.length));
 const stylesheet=await asset(linkedCss,'css');
-const linkedHtml=template.replace('<!--WORKSHOP_REVIEWS-->', '<p>Animation reviews: <a href="smoke-motion-review.html">Smoke · specials &amp; attack audit</a> · <a href="shark-motion-review.html">Shark · full kit &amp; Drive</a> · <a href="fillet-motion-review.html">Fillet · full kit</a></p><p><a href="FightGuild-moves.json" download>Download the shipped move data</a>. Export your current draft before importing this file.</p>').replace('<!--WORKSHOP_STYLES-->',()=>`<link rel="stylesheet" href="${stylesheet}">`)
+const linkedHtml=template.replace('<!--WORKSHOP_REVIEWS-->', '<p>Animation reviews: <a href="smoke-motion-review.html">Smoke · specials &amp; attack audit</a> · <a href="shark-motion-review.html">Shark · full kit &amp; Drive</a> · <a href="fillet-motion-review.html">Fillet · animation audit</a></p><p><a href="FightGuild-moves.json" download>Download the shipped move data</a>. Export your current draft before importing this file.</p>').replace('<!--WORKSHOP_STYLES-->',()=>`<link rel="stylesheet" href="${stylesheet}">`)
   .replace('<!--WORKSHOP_SCRIPT-->',()=>`<script defer src="${dataScript}"></script><script defer src="${appScript}"></script>`)
   .replace('<!--FONT_LICENSE-->',()=>`<!-- Bundled Barlow font license:\n${license.replace(/--/g,'—')}\n-->`)
   .replace('The page works offline without installing anything. It makes no network requests.',
     'The website loads the editor and artwork from this site. Your edits and pose photos stay in this browser; they are not uploaded. The extracted ZIP also works offline without installing anything.');
 await writeFile(path('build/move-workshop/index.html'),linkedHtml);
 await writeFile(path('build/move-workshop/fillet-motion-review.html'),await buildFilletMotionReview({art:manifest.fighters[5],roster:manifest.fighters,images:linkedImages,engine}));
+await writeFile(path('build/move-workshop/fillet-animation-audit-60fps.mp4'),await readFile(path('art/characters/fillet-v1/production/guide-audit-v1/previews/Fillet-Animation-Audit-60fps.mp4')));
 await writeFile(path('build/Fillet-Attack-Timing.html'),await buildFilletMotionReview({art:manifest.fighters[5],roster:manifest.fighters,images,engine}));
 await writeFile(path('build/move-workshop/shark-motion-review.html'),await buildSharkMotionReview({art:manifest.fighters[4],roster:manifest.fighters,images:linkedImages,engine}));
 await writeFile(path('build/move-workshop/smoke-motion-review.html'),await buildSmokeMotionReview({pack,images:linkedImages,engine}));

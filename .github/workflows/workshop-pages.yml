@@ -20,6 +20,7 @@ on:
       - 'art/characters/fillet-v1/production/sweep-timing/*.json'
       - 'art/characters/fillet-v1/production/kit-timing/*.json'
       - 'art/characters/fillet-v1/production/command-grabs-v2/*.json'
+      - 'art/characters/fillet-v1/production/guide-audit-v1/**'
       - 'scripts/build.sh'
       - 'scripts/generate-combat-data.py'
       - 'scripts/package-workshop.py'

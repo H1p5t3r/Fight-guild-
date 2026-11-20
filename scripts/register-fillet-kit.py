@@ -173,6 +173,13 @@ def main():
         sourceSpecSHA256=hashlib.sha256((ROOT/'art/characters/fillet-v1/FILLET_SPEC.json').read_bytes()).hexdigest(),
         note='Unchanged generated pixels; saved action/capture clocks; collision and gameplay timing remain authoritative.'))
     print(f'Fillet: {len(clips)} attacks, {len(paired)} capture tracks, {len(frames)} registered timing cues.')
+    # Apply the later focused guide audit after rebuilding the approved base.
+    audit = ROOT / 'art/characters/fillet-v1/production/guide-audit-v1/sources.json'
+    if audit.exists():
+        audit_spec = importlib.util.spec_from_file_location('fillet_guide_audit', ROOT / 'scripts/register-fillet-guide-audit.py')
+        audit_module = importlib.util.module_from_spec(audit_spec)
+        audit_spec.loader.exec_module(audit_module)
+        audit_module.main()
 
 
 if __name__=='__main__': main()
