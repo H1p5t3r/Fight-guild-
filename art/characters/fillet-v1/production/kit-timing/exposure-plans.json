@@ -1,0 +1,1624 @@
+{
+  "version": 1,
+  "standard": "docs/attack-animation-standard.md",
+  "actions": {
+    "5P": {
+      "slot": 0,
+      "sourceType": "ground",
+      "sourceId": "5P",
+      "timing": {
+        "startup": 5,
+        "active": 3,
+        "recovery": 9
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry"
+        },
+        {
+          "frame": 2,
+          "source": 2,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 5,
+          "source": 5,
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 7,
+          "source": 7,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 8,
+          "source": 7,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 10,
+          "source": 8,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 11,
+          "source": 11,
+          "cue": "Return to guard"
+        },
+        {
+          "frame": 14,
+          "source": 1,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        4,
+        5
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "5K": {
+      "slot": 1,
+      "sourceType": "ground",
+      "sourceId": "5K",
+      "timing": {
+        "startup": 7,
+        "active": 3,
+        "recovery": 13
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry"
+        },
+        {
+          "frame": 2,
+          "source": 3,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 7,
+          "source": 7,
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 9,
+          "source": 9,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 10,
+          "source": 9,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 12,
+          "source": 10,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 15,
+          "source": 15,
+          "cue": "Return to guard"
+        },
+        {
+          "frame": 19,
+          "source": 1,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        6,
+        7
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "c.S": {
+      "slot": 32,
+      "sourceType": "ground",
+      "sourceId": "c.S",
+      "timing": {
+        "startup": 7,
+        "active": 5,
+        "recovery": 12
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry"
+        },
+        {
+          "frame": 2,
+          "source": 3,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 7,
+          "source": 7,
+          "cue": "Active blade path"
+        },
+        {
+          "frame": 8,
+          "source": 8,
+          "cue": "Active blade path"
+        },
+        {
+          "frame": 9,
+          "source": 9,
+          "cue": "Active blade path"
+        },
+        {
+          "frame": 10,
+          "source": 10,
+          "cue": "Active blade path"
+        },
+        {
+          "frame": 11,
+          "source": 11,
+          "cue": "Active blade path"
+        },
+        {
+          "frame": 12,
+          "source": 11,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 14,
+          "source": 12,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 16,
+          "source": 12,
+          "cue": "Trail ends"
+        },
+        {
+          "frame": 17,
+          "source": 17,
+          "cue": "Return to guard"
+        },
+        {
+          "frame": 21,
+          "source": 1,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        6,
+        7
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "5S": {
+      "slot": 2,
+      "sourceType": "ground",
+      "sourceId": "5S",
+      "timing": {
+        "startup": 9,
+        "active": 3,
+        "recovery": 18
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry"
+        },
+        {
+          "frame": 3,
+          "source": 4,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 9,
+          "source": 9,
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 11,
+          "source": 11,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 12,
+          "source": 11,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 14,
+          "source": 11,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 15,
+          "source": 12,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 16,
+          "source": 12,
+          "cue": "Trail ends"
+        },
+        {
+          "frame": 20,
+          "source": 20,
+          "cue": "Return to guard"
+        },
+        {
+          "frame": 25,
+          "source": 1,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        8,
+        9
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "5Hs": {
+      "slot": 3,
+      "sourceType": "ground",
+      "sourceId": "5Hs",
+      "timing": {
+        "startup": 13,
+        "active": 4,
+        "recovery": 22
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry"
+        },
+        {
+          "frame": 5,
+          "source": 6,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 13,
+          "source": 13,
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 16,
+          "source": 16,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 17,
+          "source": 16,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 19,
+          "source": 16,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 21,
+          "source": 17,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 27,
+          "source": 27,
+          "cue": "Return to guard"
+        },
+        {
+          "frame": 33,
+          "source": 1,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        12,
+        13
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "2P": {
+      "slot": 4,
+      "sourceType": "ground",
+      "sourceId": "2P",
+      "timing": {
+        "startup": 5,
+        "active": 2,
+        "recovery": 10
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry"
+        },
+        {
+          "frame": 2,
+          "source": 2,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 5,
+          "source": 5,
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 6,
+          "source": 6,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 7,
+          "source": 6,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 9,
+          "source": 7,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 11,
+          "source": 11,
+          "cue": "Return to guard"
+        },
+        {
+          "frame": 14,
+          "source": 1,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        4,
+        5
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "2K": {
+      "slot": 5,
+      "sourceType": "ground",
+      "sourceId": "2K",
+      "timing": {
+        "startup": 6,
+        "active": 3,
+        "recovery": 11
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry"
+        },
+        {
+          "frame": 2,
+          "source": 3,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 6,
+          "source": 6,
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 8,
+          "source": 8,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 9,
+          "source": 8,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 11,
+          "source": 9,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 13,
+          "source": 13,
+          "cue": "Return to guard"
+        },
+        {
+          "frame": 17,
+          "source": 1,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        5,
+        6
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "2S": {
+      "slot": 6,
+      "sourceType": "ground",
+      "sourceId": "2S",
+      "timing": {
+        "startup": 12,
+        "active": 4,
+        "recovery": 23
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Settle low"
+        },
+        {
+          "frame": 6,
+          "source": 6,
+          "cue": "Hold the load"
+        },
+        {
+          "frame": 12,
+          "source": 12,
+          "cue": "Cut / contact"
+        },
+        {
+          "frame": 14,
+          "source": 12,
+          "cue": "Cutting arc crosses"
+        },
+        {
+          "frame": 15,
+          "source": 15,
+          "cue": "Finish the cut"
+        },
+        {
+          "frame": 16,
+          "source": 15,
+          "cue": "Commitment / fading arc"
+        },
+        {
+          "frame": 18,
+          "source": 15,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 20,
+          "source": 16,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 26,
+          "source": 26,
+          "cue": "Return to guard"
+        },
+        {
+          "frame": 33,
+          "source": 1,
+          "cue": "Settle / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        11,
+        12
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "2Hs": {
+      "slot": 7,
+      "sourceType": "ground",
+      "sourceId": "2Hs",
+      "timing": {
+        "startup": 14,
+        "active": 5,
+        "recovery": 24
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry"
+        },
+        {
+          "frame": 5,
+          "source": 7,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 14,
+          "source": 14,
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 18,
+          "source": 18,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 19,
+          "source": 18,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 21,
+          "source": 18,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 23,
+          "source": 19,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 30,
+          "source": 30,
+          "cue": "Return to guard"
+        },
+        {
+          "frame": 37,
+          "source": 1,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        13,
+        14
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "6P": {
+      "slot": 8,
+      "sourceType": "ground",
+      "sourceId": "6P",
+      "timing": {
+        "startup": 9,
+        "active": 4,
+        "recovery": 20
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry"
+        },
+        {
+          "frame": 3,
+          "source": 4,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 9,
+          "source": 9,
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 12,
+          "source": 12,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 13,
+          "source": 12,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 17,
+          "source": 13,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 22,
+          "source": 22,
+          "cue": "Return to guard"
+        },
+        {
+          "frame": 28,
+          "source": 1,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        8,
+        9
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "6Hs": {
+      "slot": 11,
+      "sourceType": "ground",
+      "sourceId": "6Hs",
+      "timing": {
+        "startup": 18,
+        "active": 4,
+        "recovery": 25
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry"
+        },
+        {
+          "frame": 7,
+          "source": 9,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 18,
+          "source": 18,
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 21,
+          "source": 21,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 22,
+          "source": 21,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 24,
+          "source": 21,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 26,
+          "source": 21,
+          "cue": "Trail ends"
+        },
+        {
+          "frame": 27,
+          "source": 22,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 33,
+          "source": 33,
+          "cue": "Return to guard"
+        },
+        {
+          "frame": 40,
+          "source": 1,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        17,
+        18
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "j.P": {
+      "slot": 17,
+      "sourceType": "generated",
+      "sourceId": "j.P",
+      "timing": {
+        "startup": 5,
+        "active": 3,
+        "recovery": 10
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 0,
+          "cue": "Entry / compressed preparation"
+        },
+        {
+          "frame": 2,
+          "source": 1,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 5,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 7,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 8,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 10,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 14,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 16,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        4,
+        5
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "j.K": {
+      "slot": 18,
+      "sourceType": "generated",
+      "sourceId": "j.K",
+      "timing": {
+        "startup": 7,
+        "active": 4,
+        "recovery": 13
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 0,
+          "cue": "Entry / compressed preparation"
+        },
+        {
+          "frame": 2,
+          "source": 1,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 7,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 10,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 11,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 14,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 19,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 21,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        6,
+        7
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "j.S": {
+      "slot": 19,
+      "sourceType": "generated",
+      "sourceId": "j.S",
+      "timing": {
+        "startup": 10,
+        "active": 4,
+        "recovery": 17
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 0,
+          "cue": "Entry / compressed preparation"
+        },
+        {
+          "frame": 4,
+          "source": 1,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 10,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 13,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 14,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 16,
+          "source": 3,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 18,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 25,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 28,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        9,
+        10
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "j.Hs": {
+      "slot": 20,
+      "sourceType": "generated",
+      "sourceId": "j.Hs",
+      "timing": {
+        "startup": 13,
+        "active": 5,
+        "recovery": 22
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 0,
+          "cue": "Entry / compressed preparation"
+        },
+        {
+          "frame": 5,
+          "source": 3,
+          "cue": "Hold coiled rear turn until first active"
+        },
+        {
+          "frame": 13,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 15,
+          "source": 4,
+          "cue": "Cross the torso before the rear finish"
+        },
+        {
+          "frame": 17,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 18,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 20,
+          "source": 3,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 22,
+          "source": 3,
+          "cue": "Trail ends"
+        },
+        {
+          "frame": 23,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 32,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 36,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        12,
+        13
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "236P": {
+      "slot": 14,
+      "sourceType": "generated",
+      "sourceId": "236P",
+      "timing": {
+        "startup": 12,
+        "active": 3,
+        "recovery": 16
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 0,
+          "cue": "Entry / compressed preparation"
+        },
+        {
+          "frame": 4,
+          "source": 1,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 12,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 14,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 15,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 17,
+          "source": 3,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 19,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 25,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 28,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        11,
+        12
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "236S": {
+      "slot": 15,
+      "sourceType": "generated",
+      "sourceId": "236S",
+      "timing": {
+        "startup": 9,
+        "active": 3,
+        "recovery": 18
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 0,
+          "cue": "Entry / compressed preparation"
+        },
+        {
+          "frame": 3,
+          "source": 1,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 9,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 11,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 12,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 14,
+          "source": 3,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 16,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 24,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 27,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        8,
+        9
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "236S>6S": {
+      "slot": 26,
+      "sourceType": "generated",
+      "sourceId": "236S>6S",
+      "timing": {
+        "startup": 21,
+        "active": 3,
+        "recovery": 22
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": {
+            "action": "236S",
+            "pose": 3
+          },
+          "cue": "Shared rekka load"
+        },
+        {
+          "frame": 6,
+          "source": 1,
+          "cue": "Branch-specific load held to contact"
+        },
+        {
+          "frame": 21,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 23,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 24,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 26,
+          "source": 3,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 28,
+          "source": 3,
+          "cue": "Trail ends"
+        },
+        {
+          "frame": 29,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 38,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 42,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        20,
+        21
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "236S>2S": {
+      "slot": 27,
+      "sourceType": "generated",
+      "sourceId": "236S>2S",
+      "timing": {
+        "startup": 16,
+        "active": 3,
+        "recovery": 24
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": {
+            "action": "236S",
+            "pose": 3
+          },
+          "cue": "Shared rekka load"
+        },
+        {
+          "frame": 6,
+          "source": 1,
+          "cue": "Branch-specific load held to contact"
+        },
+        {
+          "frame": 16,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 18,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 19,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 21,
+          "source": 3,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 23,
+          "source": 3,
+          "cue": "Trail ends"
+        },
+        {
+          "frame": 25,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 35,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 39,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        15,
+        16
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "236K": {
+      "slot": 25,
+      "sourceType": "generated",
+      "sourceId": "236K",
+      "timing": {
+        "startup": 27,
+        "active": 3,
+        "recovery": 24
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 0,
+          "cue": "Entry / compressed preparation"
+        },
+        {
+          "frame": 10,
+          "source": 1,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 27,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 29,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 30,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 32,
+          "source": 3,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 34,
+          "source": 3,
+          "cue": "Trail ends"
+        },
+        {
+          "frame": 36,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 46,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 50,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        26,
+        27
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "623Hs": {
+      "slot": 16,
+      "sourceType": "generated",
+      "sourceId": "623Hs",
+      "timing": {
+        "startup": 11,
+        "active": 5,
+        "recovery": 29
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 0,
+          "cue": "Entry / compressed preparation"
+        },
+        {
+          "frame": 4,
+          "source": 1,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 11,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 15,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 16,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 18,
+          "source": 3,
+          "cue": "Trail fades"
+        },
+        {
+          "frame": 20,
+          "source": 3,
+          "cue": "Trail ends"
+        },
+        {
+          "frame": 23,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 35,
+          "source": 1,
+          "cue": "Lower elbow halfway before settling"
+        },
+        {
+          "frame": 40,
+          "source": 5,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        10,
+        11
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "4P+K": {
+      "slot": 23,
+      "sourceType": "generated",
+      "sourceId": "6P+K",
+      "timing": {
+        "startup": 2,
+        "active": 2,
+        "recovery": 32
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry / compressed preparation"
+        },
+        {
+          "frame": 2,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 3,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 4,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 12,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 25,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 30,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        1,
+        2
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "6P+K": {
+      "slot": 24,
+      "sourceType": "generated",
+      "sourceId": "6P+K",
+      "timing": {
+        "startup": 2,
+        "active": 2,
+        "recovery": 32
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 1,
+          "cue": "Entry / compressed preparation"
+        },
+        {
+          "frame": 2,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 3,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 4,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 12,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 25,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 30,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        1,
+        2
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "5D": {
+      "slot": 13,
+      "sourceType": "generated",
+      "sourceId": "5D",
+      "timing": {
+        "startup": 24,
+        "active": 2,
+        "recovery": 20
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 0,
+          "cue": "Entry / compressed preparation"
+        },
+        {
+          "frame": 9,
+          "source": 1,
+          "cue": "Hold load through final startup"
+        },
+        {
+          "frame": 24,
+          "source": 2,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 25,
+          "source": 3,
+          "cue": "Small follow-through"
+        },
+        {
+          "frame": 26,
+          "source": 3,
+          "cue": "Commitment hold"
+        },
+        {
+          "frame": 31,
+          "source": 4,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 39,
+          "source": 5,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 42,
+          "source": 0,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        23,
+        24
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "236D": {
+      "slot": 45,
+      "sourceType": "generated",
+      "sourceId": "236D-v2",
+      "timing": {
+        "startup": 22,
+        "active": 2,
+        "recovery": 30
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 0,
+          "cue": "Entry"
+        },
+        {
+          "frame": 4,
+          "source": 1,
+          "cue": "Authored approach"
+        },
+        {
+          "frame": 12,
+          "source": 2,
+          "cue": "Coiled last-startup approach"
+        },
+        {
+          "frame": 22,
+          "source": 3,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 23,
+          "source": 3,
+          "cue": "Hold unsupported latch on final active tick"
+        },
+        {
+          "frame": 24,
+          "source": 3,
+          "cue": "Missed latch commitment; no capture motion"
+        },
+        {
+          "frame": 31,
+          "source": 9,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 44,
+          "source": 10,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 49,
+          "source": 11,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        21,
+        22
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    },
+    "214D": {
+      "slot": 46,
+      "sourceType": "generated",
+      "sourceId": "214D-v2",
+      "timing": {
+        "startup": 22,
+        "active": 2,
+        "recovery": 30
+      },
+      "keys": [
+        {
+          "frame": 1,
+          "source": 0,
+          "cue": "Entry"
+        },
+        {
+          "frame": 6,
+          "source": 1,
+          "cue": "Authored approach"
+        },
+        {
+          "frame": 10,
+          "source": 2,
+          "cue": "Coiled last-startup approach"
+        },
+        {
+          "frame": 22,
+          "source": 3,
+          "cue": "First-active snap / latch"
+        },
+        {
+          "frame": 23,
+          "source": 3,
+          "cue": "Hold unsupported latch on final active tick"
+        },
+        {
+          "frame": 24,
+          "source": 3,
+          "cue": "Missed latch commitment; no capture motion"
+        },
+        {
+          "frame": 31,
+          "source": 9,
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 44,
+          "source": 10,
+          "cue": "Guard return"
+        },
+        {
+          "frame": 49,
+          "source": 11,
+          "cue": "Settled / still recovering"
+        }
+      ],
+      "largestMotionBoundary": [
+        21,
+        22
+      ],
+      "policy": "Hold attacking extension until first active. Actual hitstop, root motion, landing and legal cancels own playback."
+    }
+  }
+}

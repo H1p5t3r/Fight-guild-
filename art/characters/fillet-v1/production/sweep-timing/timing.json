@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "move": "2S",
+  "source": "User requested less frame jitter and a punchier animation timed to the attack stats, 2026-11-19.",
+  "replaces": "Uniform phase-entry / every-second-frame exposure for 2S only.",
+  "timing": {
+    "startup": 12,
+    "active": 4,
+    "recovery": 23
+  },
+  "totalActionFrames": 38,
+  "normalHitstop": 9,
+  "sourceFile": "fillet-ground-v1/2s.png",
+  "bodyHeight": 600,
+  "rearFootWorldX": -35,
+  "rearFootSourceX": {
+    "1": 85.5,
+    "6": 84,
+    "11": 85,
+    "12": 84.5,
+    "15": 85.5,
+    "16": 73,
+    "26": 85
+  },
+  "keys": [
+    {
+      "frame": 1,
+      "sourceFrame": 1,
+      "cue": "Settle low"
+    },
+    {
+      "frame": 6,
+      "sourceFrame": 6,
+      "cue": "Hold the load"
+    },
+    {
+      "frame": 11,
+      "sourceFrame": 11,
+      "cue": "Release"
+    },
+    {
+      "frame": 12,
+      "sourceFrame": 12,
+      "cue": "Cut / contact"
+    },
+    {
+      "frame": 14,
+      "sourceFrame": 12,
+      "cue": "Cutting arc crosses"
+    },
+    {
+      "frame": 15,
+      "sourceFrame": 15,
+      "cue": "Finish the cut"
+    },
+    {
+      "frame": 16,
+      "sourceFrame": 15,
+      "cue": "Commitment / fading arc"
+    },
+    {
+      "frame": 18,
+      "sourceFrame": 15,
+      "cue": "Trail fades"
+    },
+    {
+      "frame": 20,
+      "sourceFrame": 16,
+      "cue": "Withdraw"
+    },
+    {
+      "frame": 26,
+      "sourceFrame": 26,
+      "cue": "Return to guard"
+    },
+    {
+      "frame": 33,
+      "sourceFrame": 1,
+      "cue": "Settle / still recovering"
+    }
+  ],
+  "policy": "Hold identical pixels between keys. A single release frame precedes first active on 12. Three active ticks share one body drawing; weapon arc changes separately. Same body pixels at entry and final settle. Phase-relative exposure adapts to edited timing; hitstop freezes the saved action clock. No movement, hitbox, hurtbox, damage or frame-data change."
+}

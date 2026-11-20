@@ -17,7 +17,7 @@ These are working translations discussed during planning, not finalized movesets
 | --- | --- | --- |
 | Anvil | Defensive powerhouse | Holds ground and punishes commitments; his original shield supports this identity. |
 | Smoke | Setplay / okizeme specialist | Uses knockdown time to establish cloud setups, then exploits them through teleport positioning and timed threats. |
-| Tapper | Close-range brawling grappler | Threatens throws and sustained close pressure; retain his hooked staff in the kit. |
+| Tapper | Stance-based brawling grappler | Uses a Strive Leo normal-kit baseline and collar-grab/headbutt entries into a Dempsey-style stance with no blocking and looping high/low/throw pressure. |
 | Shark | Mobile hit-and-run fighter | Creates openings through movement and evasive positioning. |
 | Fillet | Bleed-driven rushdown | Opens a wound and sustains aggressive offense. |
 | Hammer | Advancing bruiser | Takes ground and converts clean hits into forceful knockdowns. |
@@ -32,11 +32,23 @@ Proposed loop: earn a knockdown → place clouds → threaten a wake-up mixup th
 
 Her neutral and defense, teleport restrictions, cloud activation timing, and defensive counterplay are still to be designed. Avoid treating fullscreen fog or generic keep-away zoning as her core identity.
 
+## Implementation decisions
+
+Tapper's updated [design specification](tapper-design.md) records the 2026-11-18 decisions: non-stance Leo frame data/utility, specials deferred, free stance gatlings, S self-pressure, Hs overhead, 2D stance exit, and a running tackle/punch command throw. The supplied Leo archive now provides a [verified normal timing/utility map](research/leo-tapper-2026-11-18.md); the normal kit and custom stance are now playable, including confirmed 236D, with editable provisional tuning.
+
+- Target platforms: PC and PS5. The current executable prototype runs natively in Godot on PC.
+- Start with 2D sprites; later use 3D models on a 2D gameplay plane.
+- Five attack buttons: P, K, S, Hs, D, plus a dash macro and a simplified-input modifier.
+- Traditional motions are the original control design. Simple input mappings are per move, enabled independently at character select.
+- Unified gatlings and the universal same-button command-normal cancel rule are specified in [combat-rules.md](combat-rules.md).
+- Rollback is an architectural requirement. The initial core includes complete snapshots and is exercised with delayed inputs and a room relay.
+- A move editor inside the playable training interface supports direct tuning and JSON import/export.
+
 ## Still open
 
-- Universal movement, buttons, cancel rules, meter, defense, round format, and damage model.
+- Final movement tuning, meter, defensive mechanics, round format, damage scaling, and combo restrictions.
 - Exact character moves, resources, matchups, and frame data.
-- Engine, platform, networking, asset pipeline, and implementation plan.
+- Unreal integration, console access, production online infrastructure, and the art/animation pipeline.
 - Final visual approval, orthographic model sheets, and animation specifications.
 
-No game implementation has been commissioned or saved here yet; the work to date is planning and visual development.
+The current lab uses portable C++ through a Godot GDExtension, with generated 2D sprites for all six fighters. Each has playable basic buttons, windup/active poses and provisional move data. The simulation remains independent of presentation for eventual 3D models on the 2D plane. A repeatable sprite and future-character pipeline is tracked in the backlog.

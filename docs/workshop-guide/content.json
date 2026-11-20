@@ -1,0 +1,2035 @@
+{
+  "title": "Move Workshop — Complete Control Guide",
+  "edition": "17 November 2026",
+  "schema": 17,
+  "source_revision": "schema-17 tether, bleed and conditional Drive follow-ups",
+  "pages": [
+    {
+      "id": "cover",
+      "section": "FIELD GUIDE",
+      "title": "Build the move.\nDefine the moment.",
+      "intro": "Fight Guild · Move Workshop\nA complete reference for the browser attack editor.",
+      "blocks": [
+        {
+          "type": "image",
+          "path": "editor-overview.png",
+          "width": 495,
+          "caption": "The current browser editor, shown with Fillet’s 5P. Screenshots are examples, not changes to your draft."
+        },
+        {
+          "type": "callout",
+          "title": "Every control, in plain language",
+          "text": "Covers all 104 effective move settings plus 40 movement and defense settings, combat playback, timed hitboxes and multi-hit controls, phase hurtboxes, art notes and photos, navigation, history and files."
+        },
+        {
+          "type": "text",
+          "text": "Use the contents and alphabetical field index to find a control. The PDF is searchable; search the exact label shown in the editor. Units and allowed ranges are printed beside each field."
+        },
+        {
+          "type": "text",
+          "text": "Verified against browser editor / combat schema 17, shared workspace and distance guides edition. This describes Fight Guild’s implementation; Strive-inspired systems are not a claim of exact Guilty Gear behavior."
+        }
+      ]
+    },
+    {
+      "id": "contents",
+      "section": "START HERE",
+      "title": "Find what you need",
+      "intro": "The guide follows the tabs in the browser editor. Expand the small section headings inside Timing and Cancels & inputs to reach their additional controls.",
+      "blocks": [
+        {
+          "type": "contents",
+          "start": 0,
+          "count": 20
+        },
+        {
+          "type": "callout",
+          "title": "Three different boxes",
+          "text": "HITBOX · where an attack can connect. HURTBOX · where a fighter can be struck. PUSHBOX · the body space that keeps fighters apart. Only the first two are editable here."
+        }
+      ]
+    },
+    {
+      "id": "contents-2",
+      "section": "START HERE",
+      "title": "Find what you need · continued",
+      "blocks": [
+        {
+          "type": "contents",
+          "start": 20,
+          "count": 100
+        }
+      ]
+    },
+    {
+      "id": "workflow",
+      "section": "START HERE",
+      "title": "Your editing workflow",
+      "intro": "The workshop is a self-contained HTML page. You can use it without installing or launching the game, subject to your workplace’s browser policy.",
+      "blocks": [
+        {
+          "type": "steps",
+          "items": [
+            "Open FightGuild-Move-Workshop.html in a current browser. Choose your fighter and attack. Import your latest workshop JSON if you are continuing earlier work.",
+            "Tune Timing first, then Hit & movement. Use Cancels & inputs for routes and execution. Changes take effect in the draft immediately; there is no Apply button in this browser editor.",
+            "Use Hurtboxes to fit the body during windup, active and recovery. Use Art brief to describe the desired pose, weapon path and effects; attach reference photos if useful.",
+            "Download JSON before leaving the page. It contains the complete move set, all fighters, custom hurtboxes, notes and embedded reference photos.",
+            "At home, use the updated Godot build: Development → move editor → Import. Import resets the current match. Test the move, then use Save locally to keep it for the next launch.",
+            "Keep the workshop JSON as the master art brief. You can send it back in chat for sprite revisions. A later Godot export contains gameplay data only, without your art notes or photos."
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Unit / convention",
+            "Meaning"
+          ],
+          "rows": [
+            [
+              "f",
+              "One gameplay frame is 1/60 second. 6f = 0.1 seconds; 30f = 0.5 seconds. Hitstop and defender slowdown can extend real elapsed time."
+            ],
+            [
+              "px",
+              "Game-space pixels, not screen pixels. Camera zoom does not change a value. Distance fields accept two decimal places."
+            ],
+            [
+              "px/f",
+              "Game-space pixels per advancing action frame. Used for active travel and launch speed."
+            ],
+            [
+              "%",
+              "Whole percentages. Some fields multiply a value; Scaling cost instead subtracts percentage points from remaining combo scale."
+            ],
+            [
+              "Facing",
+              "Inputs and attack coordinates are relative to the fighter. Editing and playback share the selected facing. Shapes and handles mirror with the fighter."
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Test contact, then play the matchup",
+          "text": "One attack workspace runs movement, contact, hitstop and reactions. Pause or scrub to edit boxes on the fighter in that same scene. Existing art is reused. Test full combo routes and match feel in Godot."
+        }
+      ]
+    },
+    {
+      "id": "navigation",
+      "section": "WORKSPACE",
+      "title": "Selection, files & history",
+      "blocks": [
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Attack enabled",
+              "text": "The checkbox below the move title controls whether this attack can execute or be canceled into. Turn it off for unused command normals. Data stays intact; Show unused slots reveals disabled moves for re-enabling. This is the same value as Move enabled in Inputs & identity."
+            },
+            {
+              "label": "Choose your fighter",
+              "text": "Selects which fighter’s 32 move slots you are editing. All six fighters remain in the draft. Switching fighters does not discard valid edits."
+            },
+            {
+              "label": "Find a move · 236S",
+              "text": "Searches slot notation, the current input mapping and your move nickname. Clear the search to restore the full list."
+            },
+            {
+              "label": "All / Normals / Specials / Air",
+              "text": "Filters the list. All shows every matching move; Specials shows Special-type moves; Air shows airborne moves. The current Normals filter also includes grounded command normals, Drive attacks and throws."
+            },
+            {
+              "label": "Show unused slots",
+              "text": "Reveals disabled move slots. Selecting a slot does not enable it; use Move enabled under Inputs & identity. A selected disabled slot can remain visible even with this filter off."
+            },
+            {
+              "label": "Move list row",
+              "text": "Selects an attack. The three numbers mean startup / active / recovery. A dot marks an edit relative to the workshop’s bundled defaults, including notes, photos or hurtboxes. The edited-move count is not an unsaved-change count."
+            },
+            {
+              "label": "Movement & defense / Projectiles / Timing / Hit & movement / Cancels & inputs / Hurtboxes / Art brief",
+              "text": "Switches editor sections. Inside Timing, expand Counter hits & scaling; inside Cancels & inputs, expand Inputs & identity. Narrow screens may require horizontal scrolling to reach a tab."
+            },
+            {
+              "label": "Import JSON",
+              "text": "Replaces the complete current draft with a valid file; it does not merge just one move. A successful import is undoable. Invalid files leave the existing draft intact."
+            },
+            {
+              "label": "Download JSON",
+              "text": "Downloads the complete portable draft, including notes and embedded photos. Nothing is uploaded. This is the file to move between PCs or import into Godot."
+            },
+            {
+              "label": "Undo ↶ / Redo ↷",
+              "text": "Reverses or restores edits, drags, imports, resets and photo removal. Up to 40 undo groups are held in this open session; history is not restored after reload. With invalid text present, Undo first discards that invalid input."
+            },
+            {
+              "label": "Reset move",
+              "text": "Restores the selected slot’s bundled default values and removes its custom hitbox keys and hurtboxes. It does not restore the most recent imported version. Art notes and photos stay. Undo can restore the reset move."
+            },
+            {
+              "label": "? / × / FG brand link",
+              "text": "? opens the short help dialog; × closes it. Escape also closes a modal dialog. The FG brand link jumps to the main editor area."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "preview",
+      "section": "WORKSPACE",
+      "title": "Read, play & edit the same attack",
+      "blocks": [
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Move title, nickname & badges",
+              "text": "The large notation is the fixed slot ID. Your nickname comes from Art brief. Input shows the mapping built from the current fields; changing a mapping does not rename the slot. The other badges show move type and enabled status."
+            },
+            {
+              "label": "STARTUP / BASE DAMAGE / BASE ON BLOCK / TOTAL",
+              "text": "Base values, excluding key overrides. Base on block = blockstun − (active − 1 + recovery): first-active contact, no cancel or FD. Positive favors the attacker. Total = startup − 1 + active + recovery, excluding hitstop."
+            },
+            {
+              "label": "Hit / Hurt / Push / Art",
+              "text": "Shows or hides orange attack geometry, blue body hurtboxes, green pushbox and sprite artwork. These are preview visibility toggles; hiding a box never disables it in gameplay."
+            },
+            {
+              "label": "Distances",
+              "text": "Shows horizontal guides and a numeric readout. Values update in game pixels as you play, scrub or edit. Hiding the guides keeps the same scene scale and selected frame; it does not change gameplay or saved move data."
+            },
+            {
+              "label": "Play / Pause",
+              "text": "Plays the exchange from the current tick and stops at the end. Play at the end starts again. Pause to edit boxes directly on the attacker while the target remains visible."
+            },
+            {
+              "label": "Attack timeline / tick count",
+              "text": "Scrubs the exchange and pauses playback. The count is elapsed tick / total ticks, including approach and hitstop. Move frame is shown separately. Box controls follow the selected attack frame and phase."
+            },
+            {
+              "label": "Windup / Active / Recovery timeline",
+              "text": "Click a colored segment to jump to that attack phase in the shared exchange. Widths show authored durations. Zero-length recovery has no segment. Dashed orange boxes outside active frames are reference outlines."
+            },
+            {
+              "label": "Orange box center & handles",
+              "text": "Open Hit & movement and pause on an active frame. Drag a custom key box or ordinary straight strike to move it; drag an edge to resize it. Handles follow position and facing. Base hooks and throws use numeric geometry."
+            },
+            {
+              "label": "Blue box center & handles",
+              "text": "On Hurtboxes, enable a custom profile and select a body region. Drag the selected box to move it or its edge handles to resize it. One drag is one undo group."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Frame example: 5 / 3 / 9",
+          "text": "Frames 1–4 are windup, 5–7 are active, and 8–16 are recovery. The first ordinary actionable frame is 17. With 11f blockstun, the first-active On block estimate is 11 − (2 + 9) = 0f. Contact two active frames later improves it by 2f."
+        },
+        {
+          "type": "text",
+          "text": "Keyboard: Ctrl/Cmd+S downloads JSON. Ctrl/Cmd+Z and Ctrl/Cmd+Shift+Z undo/redo workshop history when focus is outside a text, number or select field. In a field, normal browser text undo applies. With a tab focused, Left/Right changes tab; Home/End selects the first/last tab. Tab moves focus through controls."
+        }
+      ]
+    },
+    {
+      "id": "combat-preview",
+      "section": "WORKSPACE",
+      "title": "Test contact & input movement",
+      "intro": "The attack workspace records an isolated exchange using the game’s combat rules. Editing and playback share one canvas and timeline; no view switch is needed.",
+      "blocks": [
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Shared attack workspace",
+              "text": "Keep the target in view while tuning. Open Hit & movement for orange attack handles, or Hurtboxes for blue body handles. Pause or scrub to edit. Opening a tab keeps the scene and selected tick."
+            },
+            {
+              "label": "Target / Reaction",
+              "text": "Choose any fighter. Take the hit stands idle. Standing guard holds back; Crouching guard holds down-back. Faultless Defense holds FD with a filled meter. Airborne starts the target above ground and lets gravity act."
+            },
+            {
+              "label": "Approach",
+              "text": "Standing, Walking forward, Running, Jumping or Forward jump. Approach inputs run for 12 ticks. Running uses the fighter’s run or step behavior. Air-only attacks jump automatically."
+            },
+            {
+              "label": "Starting body gap · px",
+              "text": "0–450 whole game pixels between the initial pushbox edges. Movement and command directions may change this distance before contact."
+            },
+            {
+              "label": "Facing / Inputs",
+              "text": "Face Right or Left. Traditional enters the mapped direction or motion plus button. Simple uses the move’s simple modifier mapping. These test settings do not rewrite the move."
+            },
+            {
+              "label": "Restart",
+              "text": "Returns to tick 0, including any approach or command inputs, without changing the draft. Windup, Active and Recovery jump directly to the corresponding move frames."
+            },
+            {
+              "label": "Playback speed / edit continuity",
+              "text": "Quarter, half (default), or full speed affects playback only. After edits, the exchange recalculates at 60 ticks per second and keeps the selected move frame even if hitstop or approach changes elapsed time."
+            },
+            {
+              "label": "Distance values / ground ruler",
+              "text": "Root spacing measures between fighter roots. Body gap measures between pushbox edges; Body overlap means their horizontal projections overlap. Box front is the farthest forward hitbox edge from the attacker’s root. Selected box shows width × height. The ruler is 0 at the attacker, positive forward. All spacing is horizontal. Inactive outlines are labelled; range alone does not guarantee contact."
+            },
+            {
+              "label": "Input, frame, stun & result readouts",
+              "text": "Shows actual input, move frame/stage, shared freeze and target stun. Totals count hits, blocks, scaled damage and attacker displacement. Updating exchange means new contact results are being calculated."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Read the preview warning",
+          "text": "Disabled or unmapped attacks show editable geometry only, with no simulated contacts. Enable or fix their mapping to test execution. Context-only follow-ups start in isolation; entry routes are not tested. Existing sprites and recovery placeholders are reused."
+        }
+      ]
+    },
+    {
+      "id": "timing",
+      "section": "TIMING",
+      "title": "Frame data",
+      "intro": "These are the ordinary hit values. Counter-hit bonuses are added or substituted separately. Higher damage does not automatically change hitstun, knockback or hit effects.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "startup",
+              "text": "The first frame on which the attack can hit. 5 means four windup frames, then contact can start on frame 5. Lower values make the move faster. Minimums: grabs 2f, P normals 3f, other attacks 5f."
+            },
+            {
+              "key": "active",
+              "text": "Length of the active phase. More frames can catch movement or connect later. Hitbox keys can change geometry or create gaps. One hit is the default; use Allow multiple hits and distinct hit numbers for repeated hits."
+            },
+            {
+              "key": "recovery",
+              "text": "Frames after the final active frame before the fighter can act normally again. Longer recovery increases whiff and block commitment. An allowed cancel can replace recovery before it ends."
+            },
+            {
+              "key": "damage",
+              "text": "Base health damage on a clean hit before combo scaling. A combo starter deals this value in full. 0 creates a non-damaging hit; changing damage alone does not change chip damage."
+            },
+            {
+              "key": "hitstun",
+              "text": "How long a normally hit defender is unable to act, measured in their advancing frames. More hitstun can make links and combos possible. Shared hitstop pauses this countdown; counter slowdown can slow it."
+            },
+            {
+              "key": "blockstun",
+              "text": "How long a blocking defender remains locked in guard. More blockstun improves block advantage and can close pressure gaps. Guard break uses this duration too."
+            },
+            {
+              "key": "hitstop",
+              "text": "Shared impact pause when this move connects on hit or block. Both fighters’ actions stop while input sampling continues. Extra shared pause adds impact emphasis, not ordinary frame advantage by itself."
+            },
+            {
+              "key": "chipDamage",
+              "text": "Health damage on ordinary block, separate from Damage and not combo-scaled. Faultless Defense prevents chip. In the current build, chip can reduce health to zero."
+            }
+          ]
+        },
+        {
+          "type": "diagram",
+          "kind": "timeline"
+        },
+        {
+          "type": "text",
+          "text": "Design sequence: choose the startup and commitment first; then test hitstun and blockstun against the intended follow-up. A mathematically positive move can still leave the attacker too far away to continue pressure."
+        }
+      ]
+    },
+    {
+      "id": "counter",
+      "section": "TIMING · COUNTER HITS & SCALING",
+      "title": "Counter-hit timing & presentation",
+      "intro": "Counter vulnerability belongs to the move being interrupted. The freeze, slowdown and bonus fields belong to the attack that scores the counter hit. They do not apply to ordinary blocked hits.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "attackLevel",
+              "range": "Use move type (−1), or Level 0–4",
+              "text": "An attack-level classification. In the live core, levels 0–4 contribute to the defender’s FD contact cost using the global per-level rate; −1 adds no level surcharge. Changing this dropdown in the browser does not fill timing fields or choose a counter tier."
+            },
+            {
+              "key": "counterTier",
+              "range": "Use attack level (−1), Smallest, Small, Medium, Large",
+              "text": "Selects counter-hit presentation strength. Medium/Large enable the large counter treatment; Large also allows the camera push. Timing remains controlled by the fields below. The current −1 label does not resolve a tier automatically in this browser/core; use an explicit tier for predictable presentation."
+            },
+            {
+              "key": "counterVulnerable",
+              "range": "Startup / Active / Recovery checkboxes",
+              "text": "Selects when this move can RECEIVE a counter hit if interrupted. Most moves allow startup and active. Recovery not marked here still allows a punish. No boxes checked removes this move’s counter-vulnerable phases, but does not make the fighter invulnerable."
+            },
+            {
+              "key": "counterFreezeFrames",
+              "text": "Total shared freeze when this attack scores a counter hit. −1 uses Hitstop + Counter extra stop. Any nonnegative value replaces that calculation; 0 means no shared counter freeze."
+            },
+            {
+              "key": "counterSlowFrames",
+              "text": "Defender-only half-speed duration after shared freeze. The defender advances every other tick; the attacker resumes normally. 25 ticks produce 13 held defender ticks; 35 produce 18. Follow-up hitstop pauses the slowdown timer."
+            },
+            {
+              "key": "counterHitstun",
+              "text": "Extra hitstun added on counter hit. 4 gives four more defender action frames of stun. This increases the time available to follow up; it is separate from shared freeze."
+            },
+            {
+              "key": "counterHitstop",
+              "text": "Extra shared freeze used only when Counter freeze is −1. 3 adds three frames to normal Hitstop. It is ignored when an explicit Counter freeze value is set."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Tier changes do not copy presets in the browser",
+          "text": "For a medium-style result, set Medium, freeze 21, slowdown 25, extra stun 0 and extra stop 0. For large: Large, 31, 35, 0, 0. These are the current Fight Guild preset values. The Godot editor has a separate preset-copy action; this browser page does not."
+        }
+      ]
+    },
+    {
+      "id": "scaling",
+      "section": "TIMING · COUNTER HITS & SCALING",
+      "title": "Reversals & combo damage",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "reversalEligible",
+              "text": "Allows REVERSAL timing recognition when this move starts on the first actionable frame after hitstun, blockstun, guard break or wakeup. It grants no invulnerability and does not shorten startup. Unchecked moves can still be executed at that timing; they simply do not get reversal credit."
+            },
+            {
+              "key": "starterProration",
+              "text": "Despite the label, this does not reduce the opening hit. If this move starts a combo, it sets the percentage used for LATER hits before ongoing scaling. 60 means later hits begin from 60%; 100 adds no starter penalty. It is ignored when this move appears later in an existing combo."
+            },
+            {
+              "key": "comboScaling",
+              "text": "Subtracts this many percentage points from remaining combo scale AFTER the move hits. 9 changes a fresh 100% remaining scale to 91%. Repeated hits keep subtracting their costs, down to zero. It affects subsequent hits, not this hit’s own calculation."
+            },
+            {
+              "key": "minimumDamage",
+              "text": "The minimum effective percentage for this move when combo scaling would otherwise reduce it further. 10 means at least 10% of its base damage before integer rounding. Positive base damage has an absolute minimum of 1; zero base damage stays zero."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Worked example: the values in your screenshot",
+          "text": "Suppose the starter has 100 Damage, Starter damage 60 and Scaling cost 9. The opening hit deals 100. Remaining scale becomes 91. A follow-up with 100 base damage and a 10% minimum uses floor(60 × 91 / 100) = 54%, so it deals 54. If that follow-up costs 9, the next hit uses remaining scale 82 and a 49% effective multiplier."
+        },
+        {
+          "type": "formula",
+          "text": "Later-hit % = max(this move’s minimum %, floor(starter % × remaining scale / 100))\nDamage = max(1, floor(base damage × later-hit % / 100))\nAfter the hit: remaining scale = max(0, remaining scale − this move’s scaling cost)"
+        },
+        {
+          "type": "text",
+          "text": "The first hit is exempt from the percentage formula. Damage rounding uses whole-number truncation. Scaling resets when the combo ends, including the neutral reset after a wall break. Chip damage is separate. These settings do not control combo gravity."
+        },
+        {
+          "type": "text",
+          "text": "Reversal input leniency comes from the global button buffer, not this checkbox. Finishing your own attack recovery, canceling a move or finishing landing recovery does not create a reversal opportunity. A late attack may still be legal without receiving the callout."
+        }
+      ]
+    },
+    {
+      "id": "hitbox",
+      "section": "HIT & MOVEMENT",
+      "title": "Attack shape & reach",
+      "intro": "Coordinates are relative to the fighter’s root: positive X forward and positive Y upward. The scene and editing handles mirror when facing changes. Moving the fighter does not change a box’s local coordinates.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "hitboxBack",
+              "text": "Horizontal position of the strike’s rear edge. Negative values extend behind the fighter. For a hook, this is the starting back position of the moving spear segment."
+            },
+            {
+              "key": "reach",
+              "text": "Horizontal position of the front edge, measured from the fighter, not the rectangle’s width. Back 20 and Front 100 makes an 80px-wide straight hitbox. For hooks, this determines the path’s farthest forward extent."
+            },
+            {
+              "key": "bottom",
+              "text": "Height of the straight rectangle’s lower edge above the fighter root. For an airborne fighter, it travels with the fighter rather than staying at floor height. On hooks it locates the start of the diagonal path."
+            },
+            {
+              "key": "height",
+              "text": "Vertical size of a straight hitbox. Top = Bottom + Height. On hooks, this controls the thickness around the diagonal spear path rather than the height of one large rectangle."
+            },
+            {
+              "key": "throwRange",
+              "text": "Extra grounded grab distance beyond the two fighters’ pushbox half-widths. Only Throw-type attacks use it. Ordinary strike edges do not define a throw’s reach. The orange throw preview is an aid; live grabs use range and throw-eligibility checks."
+            }
+          ]
+        },
+        {
+          "type": "diagram",
+          "kind": "geometry"
+        },
+        {
+          "type": "text",
+          "text": "Back edge and Bottom can be negative. Front edge and Height must be positive. Numeric input allows reversed horizontal edges; the game sorts them and the editor warns. Use Back < Front for clear intent. A zero-width result cannot connect."
+        },
+        {
+          "type": "callout",
+          "title": "Weapon rule",
+          "text": "A knife or spear may extend the orange hitbox without adding a blue hurtbox. Body hurtboxes should cover flesh and clothing that represent the fighter, not weapon reach."
+        }
+      ]
+    },
+    {
+      "id": "hit-keys",
+      "section": "HIT & MOVEMENT",
+      "title": "Author the active-frame timeline",
+      "intro": "Each key holds its shapes and impact data until the next key. Active frame 1 is the move’s first possible contact frame, after windup. Before the first key, base geometry and hit number 1 apply.",
+      "blocks": [
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Allow multiple hits",
+              "text": "Off by default: every key and box shares one contact per attack. On: distinct hit numbers can connect separately. Turning it off keeps your hit numbers and geometry for later."
+            },
+            {
+              "label": "Hitbox key selector",
+              "text": "Choose a saved key, including keys beyond the current Active duration. Base geometry · before first key shows inherited settings. Scrubbing the pose slider follows the key at that frame."
+            },
+            {
+              "label": "Add key at active … / Remove key",
+              "text": "Add copies the current key, or inherits base geometry if none exists. It starts at the active frame under the shared timeline cursor. Remove deletes the selected key. Both are undoable. Up to 32 keys per move."
+            },
+            {
+              "label": "Key starts at active frame",
+              "text": "Whole frames 1–120, unique per move. Commit with Tab, Enter or leaving the field. Keys sort by start frame. A key beyond Active is retained and editable but cannot hit until the active phase includes it."
+            },
+            {
+              "label": "Hit number",
+              "text": "Whole numbers 1–32; editable only with multiple hits on. Each number can hit or be blocked once per attack execution. Overlapping boxes or later keys with the same number cannot add another contact. A gap does not reset it."
+            },
+            {
+              "label": "Hit damage / Hit hitstun / Hit blockstun / Hit hitstop",
+              "text": "−1 inherits the move’s base value. Otherwise: damage 0–1000, hitstun and blockstun 0–180f, hitstop 0–30f. Values apply to every box in this key. Combo scaling and counter bonuses still apply."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Two-hit example",
+          "text": "Set Active to 7. Add a key at active 1 with hit number 1, then a key at active 4 with hit number 2. Turn on Allow multiple hits. If both contact, there are two hits. Turn the toggle off: the same shapes now share one contact. Reusing hit number 1 on both keys also gives only one contact."
+        },
+        {
+          "type": "text",
+          "text": "Keys can change late-hit damage or stun without creating another hit. A previously connected single-hit move does not hit again merely because a later key has different values."
+        }
+      ]
+    },
+    {
+      "id": "hit-key-boxes",
+      "section": "HIT & MOVEMENT",
+      "title": "Shape each active-frame key",
+      "blocks": [
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Use base geometry",
+              "text": "Inherit the ordinary strike or moving hook shape at this point in the attack. The key still supplies its hit number and any impact overrides. This is not a copy: later edits to base geometry apply."
+            },
+            {
+              "label": "No hitboxes · gap",
+              "text": "No attack collision until the next key or end of Active. The move remains in its active phase, and movement continues. A gap does not end the attack or clear consumed hit numbers."
+            },
+            {
+              "label": "Add hitbox",
+              "text": "Starts a custom profile from the current base shape, or duplicates the selected custom box. Up to four boxes per key. Custom boxes replace base geometry, including the moving spear on a hook attack."
+            },
+            {
+              "label": "Selected hitbox / Remove selected hitbox",
+              "text": "Choose the rectangle to edit. All boxes in a key share its hit number and impact values. Removing the last rectangle creates a gap. Undo restores removed boxes."
+            },
+            {
+              "label": "Hitbox left / bottom · px",
+              "text": "Position relative to the fighter root: positive X forward, positive Y upward. Moving left or bottom shifts the whole box, keeping its size. All edges must stay within −500 to 500px."
+            },
+            {
+              "label": "Hitbox width / height · px",
+              "text": "Sizes of the selected rectangle, at least 1px. Fields allow up to 1000px if both edges stay in bounds. Up to two decimal places. Width extends rightward; height extends upward."
+            },
+            {
+              "label": "Orange center / edge handles",
+              "text": "Pause on an active frame where this key applies, with Hit visibility on. Drag the center to move the box or an edge to resize it. The selected box is brighter. One drag is one Undo step. Out-of-range changes are rejected."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Attack boxes and body boxes stay separate",
+          "text": "This timeline authors where the attack can strike. Hurtboxes still use windup, active and recovery body profiles with at most four body boxes. Weapon reach never adds a body hurtbox. Throws use Throw reach and remain single-hit; hitbox keys do not replace the throw resolver."
+        },
+        {
+          "type": "text",
+          "text": "Download JSON retains timelines, multi-hit flags and per-key values. Import into the current schema-15 Godot build. The Markdown art brief lists the key timings and boxes too. Reset move removes custom keys and restores bundled move defaults; notes and photos stay."
+        }
+      ]
+    },
+    {
+      "id": "movement",
+      "section": "HIT & MOVEMENT",
+      "title": "Attack motion & hook pulls",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "advance",
+              "text": "Immediate horizontal step when the move begins. Positive moves forward; negative moves backward. It happens once, rather than being spread over startup. Stage limits and pushboxes still constrain the result."
+            },
+            {
+              "key": "travelSpeed",
+              "text": "Additional forward displacement on each advancing active frame. Negative moves backward. For example, 3px/f across four active frames requests 12px of active travel before collision constraints. This is separate from inherited run velocity."
+            },
+            {
+              "key": "inertiaPercent",
+              "text": "Percentage of existing run/dash or carried attack velocity kept at move start. 0 removes it, 100 retains it, 200 doubles it before the core’s velocity cap. Character attack friction then reduces it. It does not change Opening step or Active travel."
+            },
+            {
+              "key": "hitAngle",
+              "range": "Downward 45° hook / Straight strike / Upward 45° hook",
+              "text": "Selects strike geometry. Straight uses one rectangle. Hooks use eight small moving spear boxes along an upward/downward diagonal; the dotted path and rope do not hit. The setting changes geometry, not your input or whether the move is airborne."
+            },
+            {
+              "key": "pullFrames",
+              "text": "On an unblocked hit, pulls the defender toward the attacker over this many defender action frames. 0 disables the pull. It pulls both horizontally and toward the attacker’s height, using a soft-reel reaction. It does not activate on block."
+            },
+            {
+              "key": "pullGap",
+              "text": "Extra horizontal gap left beyond the two fighters’ combined pushbox half-widths when the pull finishes. 0 brings their pushboxes together; larger values leave more room. It has no effect while Hook pull duration is 0."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Shark’s two hooks",
+          "text": "Ground hook: 214S, grounded, upward 45°. Air hook: j.214P, airborne, downward 45°. Use the source move’s follow-up window and the stab’s follow-up source/contact fields to permit the P follow-up. Geometry alone does not create a follow-up route."
+        },
+        {
+          "type": "text",
+          "text": "Hook pull is a special reaction: it can override ordinary launch/knockdown behavior. When a pull completes, the defender retains at least 12f of hitstun. Interruption of the pulling fighter can end the reel. Test combined launch, pull and knockback values in the game."
+        },
+        {
+          "type": "text",
+          "text": "These fields control movement DURING an attack. The character’s normal walk, run, step-dash speed, dash duration and attack friction belong to movement profiles preserved in the file but not editable on this page."
+        }
+      ]
+    },
+    {
+      "id": "blocking",
+      "section": "HIT & MOVEMENT · HIT & BLOCK REACTION",
+      "title": "Guard rules & pressure",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "hitLevel",
+              "range": "Mid / Low / Overhead",
+              "text": "Mid can be blocked standing or crouching. Low requires crouching guard; Overhead requires standing guard. Air guard currently has no high/low distinction. Throws bypass normal guard regardless of this setting."
+            },
+            {
+              "key": "guardBreak",
+              "text": "On a blocked hit, uses the guard-break reaction for the move’s Blockstun duration. During guard break, the defender cannot backdash and ordinary blockstun throw immunity does not apply. It does not automatically make the attack unblockable or add extra damage."
+            },
+            {
+              "key": "blockPushback",
+              "text": "Immediate horizontal separation when the move is blocked. Larger values create more space. FD multiplies the displacement using global rules. If a wall prevents defender movement, corner-transfer rules can move the attacker backward instead."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Related control",
+            "How it interacts"
+          ],
+          "rows": [
+            [
+              "Blockstun",
+              "Controls how long the defender stays locked. Guard break borrows this timer; it has no separate duration field."
+            ],
+            [
+              "Recovery + Active",
+              "Together with Blockstun, these determine the first-active On block estimate. Cancels and later contact can change the actual outcome."
+            ],
+            [
+              "Chip damage",
+              "Controls blocked health damage independently of guard level. FD prevents it."
+            ],
+            [
+              "Attack level",
+              "Can add to FD’s Momentum contact cost. It does not automatically change Blockstun in the browser."
+            ],
+            [
+              "Cancel events: Block",
+              "Permits the corresponding cancel windows after the move is blocked, provided its route and permission also allow the destination."
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "The three block poses are selected by the result",
+          "text": "The live game chooses a stable block pose for an attacker at 0 or negative advantage, a pressure pose for positive advantage, and a guard-break pose when Guard break on block is enabled with nonzero blockstun. There is no separate pose selector in this editor."
+        },
+        {
+          "type": "text",
+          "text": "Ordinary uninterrupted blockstun can carry guard when back is released, while preserving the high/low requirement. Guard break requires an actual guard direction, allows throws during the state and does not grant the usual post-stun throw grace. These are existing global combat rules, not additional checkboxes here."
+        }
+      ]
+    },
+    {
+      "id": "reactions",
+      "section": "HIT & MOVEMENT · HIT & BLOCK REACTION",
+      "title": "Knockback, launch & recovery",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "pushback",
+              "text": "Horizontal travel budget when hitting a grounded target. Strikes distribute it across six action frames; throws apply it immediately. More strike knockback can separate the fighters and increase wall-collision speed."
+            },
+            {
+              "key": "airPushback",
+              "text": "Horizontal travel budget when the target is already airborne at contact. It replaces Ground knockback in that case. It does not decide whether the attack launches a grounded target."
+            },
+            {
+              "key": "launch",
+              "text": "Initial upward speed applied to a grounded target on hit. 0 adds no upward launch; positive values enter an air-reel reaction. Height depends on gravity, later hits and stage constraints."
+            },
+            {
+              "key": "airLaunch",
+              "text": "Vertical speed set when the target is already airborne. Positive launches upward, 0 clears upward/downward speed, and negative sends them down. It replaces their current vertical velocity; it is not an additive boost."
+            },
+            {
+              "key": "knockdown",
+              "range": "None / Soft · auto tech / Hard",
+              "text": "Selects the knockdown classification. Soft is the normal automatic in-place ground recovery. Hard is reserved by design for tools such as the universal 2S sweep and throws. Actual lockout is authored with Down/Wakeup duration; choosing Hard alone does not add a hidden longer timer. Air reel without an explicit type receives Soft."
+            },
+            {
+              "key": "knockdownFrames",
+              "text": "Time spent down after landing in the knockdown reaction, before wakeup begins. Both soft and hard knockdowns recover automatically in this build. Longer values keep the defender down longer."
+            },
+            {
+              "key": "wakeupFrames",
+              "text": "Additional waking-up duration after Down duration. 0 skips the extra waking stage. Control returns after both stages finish; reversal timing can then be recognized."
+            },
+            {
+              "key": "landingRecovery",
+              "text": "Lockout when the fighter lands while this aerial attack is still in progress. It prevents movement, attacks, guarding and FD during the lockout. Landing after the attack has fully finished instead uses the global recovered-air-action setting."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Wall damage comes from collision speed",
+          "text": "A fighter in hitstun moving into a wall damages that wall by their horizontal velocity, then loses that velocity. The collision that empties wall health does not splat; the next qualifying collision does. There is no effective per-move Wall damage control in this editor."
+        },
+        {
+          "type": "text",
+          "text": "Combo gravity scaling, including its hit threshold, is global. It is preserved in your JSON but is not changed by these launch or knockdown fields. Aerial knockback and launch still need in-game testing against the growing gravity of a long combo."
+        }
+      ]
+    },
+    {
+      "id": "routes",
+      "section": "CANCELS & INPUTS · CANCEL ROUTES",
+      "title": "Which moves can cancel into which?",
+      "intro": "A cancel replaces the current move before ordinary recovery ends. A route, an allowed event and an open timing window must all agree. A checked permission alone is not a complete route.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "specialCancel",
+              "text": "Allows this source attack to cancel into a Special or Drive move during its special window and allowed events. Normals are intended to have this enabled unless a deliberate exception is authored."
+            },
+            {
+              "key": "jumpCancel",
+              "text": "Allows a grounded jump cancel during the jump window and allowed events. Startup before the jump still follows the global prejump rules. This does not grant an extra aerial jump."
+            },
+            {
+              "key": "whiffCancel",
+              "text": "Allows ordinary cancels before the attack has connected, when Whiff is also checked under Cancel events. It does not enable every destination or ignore windows. Contextual follow-ups have their separate post-active whiff rule."
+            },
+            {
+              "key": "selfCancel",
+              "text": "Allows a normal route back into the exact same move slot, if its destination rules, event and window also allow it. Without this, a P-to-P route can still go to a different P move, but not repeat that same slot."
+            },
+            {
+              "key": "normalRoutes",
+              "range": "Unified, or P / K / S / Hs / D",
+              "text": "Unified uses the shared normal gatlings. Uncheck Unified to select destination buttons manually; unchecking starts with no custom buttons selected. These are destination BUTTONS, not specific move IDs. Special/Drive permissions and throw restrictions still apply."
+            },
+            {
+              "key": "commandRoutes",
+              "range": "Unified, or P / K / S / Hs / D",
+              "text": "Selects command-normal destination buttons. Unified follows the common rules. The same-button command-normal exception remains available for all attack categories, even if the custom list omits it; normal cancel timing and event requirements still apply."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Source normal button",
+            "Unified destinations / project rule"
+          ],
+          "rows": [
+            [
+              "P",
+              "P or K normals; same-button P command normal."
+            ],
+            [
+              "K",
+              "Command normals; jump cancel when enabled."
+            ],
+            [
+              "S",
+              "Hs normals or command normals; jump cancel when enabled."
+            ],
+            [
+              "Hs",
+              "Command normals."
+            ],
+            [
+              "Every attack",
+              "Same-button command normal within the normal window. Special/Drive routes require Special cancel. Throws cannot be ordinary cancel destinations."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows",
+      "section": "CANCELS & INPUTS · CANCEL ROUTES",
+      "title": "When a cancel can happen",
+      "intro": "Window numbers refer to the SOURCE attack’s completed frame. Bounds are inclusive: an opening of 5 allows the next action after frame 5. Closing at 0 means through the end of the move, not frame zero.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "cancelOn",
+              "range": "Hit / Block / Whiff checkboxes",
+              "text": "Selects the contact situations that permit all cancel groups. Hit includes normal, counter and punish hits. Block allows blocked contact. Whiff means no connection yet. No checks disables these cancels. Ordinary whiff routes also need Cancel on whiff."
+            },
+            {
+              "key": "normalCancelStart",
+              "text": "First completed frame that may lead into an allowed normal or command normal. Also governs the universal same-button command-normal route."
+            },
+            {
+              "key": "normalCancelEnd",
+              "text": "Last completed frame that may lead into a normal/command normal. 0 leaves this window open through the end."
+            },
+            {
+              "key": "specialCancelStart",
+              "text": "First completed frame for Special or Drive destinations. Requires Special cancel and an allowed contact event."
+            },
+            {
+              "key": "specialCancelEnd",
+              "text": "Last completed frame for Special or Drive destinations. 0 means through the end."
+            },
+            {
+              "key": "jumpCancelStart",
+              "text": "First completed frame from which a grounded jump cancel may start. Requires Jump cancel and the corresponding contact event."
+            },
+            {
+              "key": "jumpCancelEnd",
+              "text": "Last completed frame for a jump cancel. 0 means through the end."
+            },
+            {
+              "key": "followCancelStart",
+              "text": "First completed frame for a move that names this attack as a follow-up source. On whiff, a contextual follow-up must also wait until the source’s active phase finishes."
+            },
+            {
+              "key": "followCancelEnd",
+              "text": "Last completed frame for an eligible contextual follow-up. 0 means through the end. This controls the source’s opportunity; the destination supplies its required input."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Example: allow early special cancels only",
+          "text": "For a 5f startup / 3f active move, active frames are 5–7. Set Special window opens 5, closes 7, enable Special cancel, and select Hit and/or Block. A valid buffered special can replace the following frame after a contact during that window."
+        },
+        {
+          "type": "text",
+          "text": "A nonzero close value earlier than its open value creates an unusable window and a warning. Opening after the move has ended also cannot help. Hitstop holds the source frame; buffered inputs still age, so a very early press may expire before a cancel executes."
+        }
+      ]
+    },
+    {
+      "id": "followups",
+      "section": "CANCELS & INPUTS · CANCEL ROUTES",
+      "title": "Rekkas & contextual follow-ups",
+      "intro": "Set these on the DESTINATION move. Once either source is assigned, the move becomes a contextual follow-up and is not available as an ordinary neutral attack.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "followFrom",
+              "range": "None, or one of the fighter’s 32 move slots",
+              "text": "First move that is allowed to lead into this destination. The source must still be the fighter’s current move. The source’s follow-up window and Cancel events decide when the transition can occur."
+            },
+            {
+              "key": "followFrom2",
+              "range": "None, or one of the fighter’s 32 move slots",
+              "text": "An alternative source for the same destination. This allows a shared ending to branch from either an opener or a middle attack. Both source entries may be None for an ordinary independently executable move."
+            },
+            {
+              "key": "followHit",
+              "text": "Despite the word contact, this requires an UNBLOCKED HIT from the source. A block or whiff does not unlock the destination. With this off, blocked or post-active whiff follow-ups may be possible if the source’s event and window allow them."
+            }
+          ]
+        },
+        {
+          "type": "diagram",
+          "kind": "rekka"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Destination",
+            "How to author its source relationship"
+          ],
+          "rows": [
+            [
+              "Fillet’s middle stab",
+              "First follow-up source = 236S; Button = S; Direction = 6."
+            ],
+            [
+              "Fillet’s low ending",
+              "First source = 236S; second source = the middle stab slot (236S>6S); Button = S; Direction = 2. This permits both 236S>2S and 236S>6S>2S."
+            ],
+            [
+              "Shark’s ground stab",
+              "Source = 214S; Button = P; Direction = 5; Follow-up requires contact enabled."
+            ],
+            [
+              "Shark’s air stab",
+              "Source = j.214P; Button = P; Direction = 5; Airborne move enabled; Follow-up requires contact enabled."
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Follow-ups use Button + Direction",
+          "text": "Contextual follow-ups bypass the ordinary Motion and simplified-input mapping checks. Direction 5 means no extra direction restriction here; Direction 2 accepts down-back, down and down-forward. Source windows must be authored on each source move, not just on the destination."
+        },
+        {
+          "type": "text",
+          "text": "A listed unused source does not become enabled automatically. Follow-ups cannot begin after the source has fully returned to neutral. A hit-confirmed hook follow-up still needs enough time and suitable spacing to connect."
+        }
+      ]
+    },
+    {
+      "id": "inputs",
+      "section": "CANCELS & INPUTS · INPUTS & IDENTITY",
+      "title": "Move inputs & identity",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "enabled",
+              "text": "Makes the slot available to the move-request system. Off marks it unused; its data remains in the JSON. A valid input, stance and route are still required to perform an enabled move."
+            },
+            {
+              "key": "button",
+              "range": "P / K / S / Hs / D",
+              "text": "Attack button used by normal execution and contextual follow-ups. It also identifies the move’s button for gatling rules and default button artwork. These names do not dictate the character’s actual limb or weapon action."
+            },
+            {
+              "key": "category",
+              "range": "Normal / Command normal / Special / Drive / Throw",
+              "text": "Classifies the move for input selection and cancel rules. Special and Drive destinations use special cancels and global special-start Momentum gain. Changing this alone does not create invulnerability, projectiles or a new throw binding."
+            },
+            {
+              "key": "direction",
+              "range": "1–9, relative numpad directions",
+              "text": "Required direction for command normals and directional follow-ups; 2 also selects crouching inputs. It is not a strict direction gate for every ordinary normal. Motion moves are recognized from Motion instead. Reserved sweep/throw slots have dedicated handling."
+            },
+            {
+              "key": "motion",
+              "range": "None / 236 / 214 / 623",
+              "text": "Traditional motion sequence for an ordinary executable move. 236 is quarter-circle forward; 214 quarter-circle back; 623 forward/down/down-forward. The global motion buffer controls acceptance. Follow-up destinations use their source relationship and Button/Direction instead."
+            },
+            {
+              "key": "air",
+              "text": "Requires the fighter to be airborne when requesting the move; off requires grounded execution. It does not launch the attacker or automatically give the move air movement. It also changes default preview pose assumptions."
+            },
+            {
+              "key": "simpleDirection",
+              "range": "No simple mapping / directions 1–9",
+              "text": "Direction used while holding the simple-input modifier, provided simple controls were enabled at character select. No simple mapping disables this shortcut for the move. Simple mappings require the exact selected direction."
+            },
+            {
+              "key": "simpleButton",
+              "range": "P / K / S / Hs / D",
+              "text": "Button paired with Simple direction while holding the modifier. It can differ from the traditional Button. It has no shortcut effect when Simple direction is disabled."
+            },
+            {
+              "key": "artPose",
+              "range": "Button poses, plus fighter-specific signature poses",
+              "text": "Chooses existing artwork. Button poses follows Button; Fillet offers knife spiral and three rekka poses, Shark ground/air hook and ground/air stab. It does not change hitboxes or generate art. Inherited hurtboxes follow the selected pose; existing custom profiles stay authored."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Slot IDs are fixed for compatibility. A slot titled 236P can be remapped while retaining that title. Check the Input badge as well as the fields, and test reserved moves and conflicting inputs in the game."
+        }
+      ]
+    },
+    {
+      "id": "notation",
+      "section": "INPUT REFERENCE",
+      "title": "Numpad notation & reserved inputs",
+      "intro": "Directions describe a fighter facing right. Facing left mirrors forward/back automatically; the move is still called 236S, not 214S.",
+      "blocks": [
+        {
+          "type": "diagram",
+          "kind": "numpad"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Notation",
+            "Read it as"
+          ],
+          "rows": [
+            [
+              "5P",
+              "P from neutral input; 5 is the center of the numpad."
+            ],
+            [
+              "2S / 6S",
+              "Down + S / forward + S. For command normals, 2 accepts any downward diagonal; 6 also accepts forward diagonals."
+            ],
+            [
+              "236K",
+              "Down → down-forward → forward + K."
+            ],
+            [
+              "214S / j.214P",
+              "Quarter-circle back + S on the ground / quarter-circle back + P in the air. j. indicates an aerial move."
+            ],
+            [
+              "236S > 6S > 2S",
+              "A sequence of moves. > means then/cancel into; it is not a physical button."
+            ],
+            [
+              "4P+K / 6P+K",
+              "Back or forward plus the P+K chord. The current throw system reserves these grounded inputs."
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Reserved sweep and throws",
+          "text": "The 2D slot has universal downward-input handling. Throws are selected through the reserved 4P+K and 6P+K slots, using only the P+K attack chord without the simple/FD modifier. Relabeling another slot as Throw does not give it a new executable chord. Current universal grabs are grounded; throws cannot be ordinary gatling destinations."
+        },
+        {
+          "type": "text",
+          "text": "Normal direction matching is intentionally lenient: ordinary standing normals can serve as fallback requests, while command, crouching, motion and follow-up moves receive priority. Two moves sharing an input may compete. The Input badge is a readable mapping summary, not a full depiction of every priority or leniency rule."
+        },
+        {
+          "type": "text",
+          "text": "Simple controls are an additional character-select option. Editing Simple direction/Button here does not enable that option for a match, remap the physical controller, or change the global buffer. Button and motion buffer controls live in the game’s broader tuning tools."
+        }
+      ]
+    },
+    {
+      "id": "hurtboxes",
+      "section": "HURTBOXES",
+      "title": "Fit the vulnerable body",
+      "intro": "Each attack can override its body coverage separately for windup, active and recovery. Other moves sharing the same sprite keep their own profiles.",
+      "blocks": [
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Attack phase",
+              "text": "Select Windup, Active or Recovery. The preview jumps to that phase. Recovery is unavailable for a move with 0 recovery. A profile applies to the entire selected phase, not one individual animation frame."
+            },
+            {
+              "label": "Custom boxes for this phase",
+              "text": "On copies the current inherited sprite-body profile so you can edit it. Off removes the override and restores the sprite’s body boxes for just this phase. You can undo either action."
+            },
+            {
+              "label": "Selected body box",
+              "text": "Choose Legs, Torso & arms, Head, or the optional Body extension. This selects the blue rectangle to edit; it does not hide or disable the other boxes."
+            },
+            {
+              "label": "Left position / Bottom position",
+              "text": "Moves the selected box horizontally or vertically while preserving its width and height. Values are relative to the fighter’s root in game pixels; positive X is forward and positive Y is up."
+            },
+            {
+              "label": "Width / Height",
+              "text": "Changes size while keeping the left/bottom edge fixed. Each dimension must be at least 1px. Values accept two decimal places; all resulting edges must stay between −500 and +500px."
+            },
+            {
+              "label": "Include body extension · fourth box",
+              "text": "Adds or removes one extra body rectangle. A new extension starts over the torso and becomes selected; move it to an extended limb or complex body shape. Legs, torso/arms and head remain required."
+            },
+            {
+              "label": "Blue handles and center",
+              "text": "With custom boxes enabled and playback paused, drag an edge to resize or the center to move. Invalid sizes/positions are refused. This changes the game’s actual hurtboxes, not just the preview."
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "path": "hurtbox-preview.png",
+          "width": 220,
+          "caption": "Selected torso/arms box in the active phase. Blue = body; orange = attack."
+        },
+        {
+          "type": "callout",
+          "title": "Three required regions, one optional extension",
+          "text": "Keep boxes on the body; weapons add no hurtbox. The editor cannot create invulnerability by deleting every box. Custom recovery coverage stays fixed through that phase; inherited recovery coverage can follow live crouching or landing poses. Pushboxes remain separate and read-only."
+        }
+      ]
+    },
+    {
+      "id": "hurt-toggles",
+      "section": "HURTBOXES",
+      "title": "Choose which regions can be hit",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "In Hurtboxes, Regions that can be hit has a switch for Legs, Torso & arms, Head, and an available Body extension. Each attack phase has its own settings. These switches work with the sprite profile or your custom rectangles."
+        },
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "hurtMaskWindup",
+              "text": "Controls vulnerable regions before the first active frame. Default 6P leaves only Legs enabled."
+            },
+            {
+              "key": "hurtMaskActive",
+              "text": "Controls vulnerable regions while the attack is active. Default 6P leaves only Legs enabled. The move’s attacking hitboxes still work."
+            },
+            {
+              "key": "hurtMaskRecovery",
+              "text": "Controls vulnerable regions during recovery. Default 6P restores all regions so missed anti-airs can be punished."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Turning a region off removes it from hit detection and the live cyan overlay. Its coordinates remain saved, so turning it back on restores the same shape. Disabled custom rectangles can still be adjusted using their numeric controls. At most four body regions exist per pose; the extension switch is available when that region exists."
+        },
+        {
+          "type": "text",
+          "text": "The switches do not change pushboxes, movement, throw eligibility, damage-dealing hitboxes, or the sprite art. Attacks can still connect anywhere a remaining hurtbox overlaps. Protection applies against both melee attacks and projectiles. Hitstun and blocking use their usual body profiles."
+        },
+        {
+          "type": "text",
+          "text": "JSON stores each phase as a mask: Legs = 1, Torso & arms = 2, Head = 4, Body extension = 8. All on = 15; legs only = 1; all off = 0. Use the checkboxes instead of editing these values by hand. Version-15 exports import automatically, retaining your edits and adding the universal 6P defaults."
+        }
+      ]
+    },
+    {
+      "id": "art",
+      "section": "ART BRIEF",
+      "title": "Describe the action you want",
+      "intro": "Art notes are instructions for a future sprite/effects pass. Editing these fields does not alter combat numbers or immediately redraw the character.",
+      "blocks": [
+        {
+          "type": "artfields",
+          "items": [
+            {
+              "key": "label",
+              "text": "Optional human-readable title, shown beside the fixed slot ID and in search results. It does not rename the slot or change the input. Up to 100 characters."
+            },
+            {
+              "key": "intent",
+              "text": "Describe the tool’s purpose, strengths and intended counterplay. For example: a long poke that controls the ground but can be jumped and punished on whiff."
+            },
+            {
+              "key": "windup",
+              "text": "Describe the preparation: weight shift, shoulder/hip position, weapon ready pose, silhouette and visual warning. Tie it to the current startup without requiring the old sprite to remain."
+            },
+            {
+              "key": "active",
+              "text": "Describe the contact pose and path: where the weapon travels, facing, body extension, target height and strongest silhouette. This is the main reference for fitting the attack’s active art to its authored geometry."
+            },
+            {
+              "key": "effects",
+              "text": "Describe hit sparks, block effects, smear shapes, colors, opacity and impact emphasis. Keep the shared art rules consistent across fighters. This text does not set counter freeze or damage."
+            },
+            {
+              "key": "recovery",
+              "text": "Describe where the movement ends, the follow-through and how the fighter returns to stance. These are notes for the later animation pass; current artwork primarily studies windup and active poses."
+            }
+          ]
+        },
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Download art brief",
+              "text": "Downloads a readable Markdown document for all edited/noted moves, not just the selected move. It includes key move values, notes, custom hurtbox coordinates and photo names/phases/captions. Photo pixels remain in the companion JSON; the Markdown file is not a gameplay import."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "A useful brief connects mechanics and pose",
+          "text": "Example: “Active pose: Fillet’s right shoulder leads the upward slash, rear foot planted, torso turned. Keep the blade outside the body hurtboxes. Use a narrow red crescent smear aligned with the upward path; preserve the hand position between windup and active.”"
+        },
+        {
+          "type": "text",
+          "text": "Each long text field accepts up to 3,000 characters. Notes autosave with the browser draft and are embedded in Download JSON. Reset move keeps them. A full JSON import replaces the draft, so import the version containing the notes you want to keep."
+        }
+      ]
+    },
+    {
+      "id": "photos",
+      "section": "ART BRIEF · POSE REFERENCES",
+      "title": "Attach a pose photo",
+      "blocks": [
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "+ Add pose photo",
+              "text": "Choose one or more JPG, PNG or WebP images. Up to three references are allowed per move; the button disables at three. The file picker accepts local photos or pose sketches, not a website URL."
+            },
+            {
+              "label": "Use for",
+              "text": "Tag each reference General pose, Windup or Active. This labels its intended use in the brief. It does not switch the attack phase or change the preview artwork."
+            },
+            {
+              "label": "Pose notes",
+              "text": "A caption of up to 1,000 characters explaining what to borrow: shoulder angle, hand placement, stance, camera angle or weight distribution. The caption travels with the photo in JSON."
+            },
+            {
+              "label": "Photo thumbnail / ×",
+              "text": "Click a thumbnail to enlarge the reference and read its caption. × or Escape closes the enlarged view. This is a viewer, not a crop or pose-editing tool."
+            },
+            {
+              "label": "Remove photo",
+              "text": "Removes that reference from the current move’s brief. Undo restores it. The original photo on your computer is unaffected."
+            },
+            {
+              "label": "Reference count / preparation status",
+              "text": "The count shows used slots out of three. During Preparing your pose reference, wait for processing to finish before changing moves or exporting. A failure message explains an unsupported, unreadable or oversized file."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Limit / behavior",
+            "Current value"
+          ],
+          "rows": [
+            [
+              "References per move",
+              "3"
+            ],
+            [
+              "Accepted source formats",
+              "JPG/JPEG, PNG, WebP"
+            ],
+            [
+              "Maximum source file",
+              "20 MB per photo"
+            ],
+            [
+              "Prepared copy",
+              "Up to 1,200px on its longest edge, locally converted to a smaller WebP copy. The original file is untouched."
+            ],
+            [
+              "Embedded-copy limit",
+              "Each encoded image must fit the editor’s 700 KiB allowance; it tries lower quality if needed."
+            ],
+            [
+              "Total reference allowance",
+              "12 MB of encoded reference data across the full draft"
+            ],
+            [
+              "Whole JSON import/export",
+              "32 MB maximum"
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "The JSON contains the image itself",
+          "text": "No photo is uploaded by the workshop. Exporting and importing the workshop JSON on another PC restores the image, phase and caption. The smaller copy has no source-camera EXIF metadata. The Markdown art brief lists the references but does not embed their images."
+        },
+        {
+          "type": "text",
+          "text": "A large photo draft may exceed browser storage even while it remains within the JSON limits. If the storage warning appears, Download JSON before closing. Adding a photo does not change any combat value or existing sprite sheet."
+        }
+      ]
+    },
+    {
+      "id": "save",
+      "section": "FILES & RECOVERY",
+      "title": "Keep your work portable",
+      "blocks": [
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Saving draft… / Saved in this browser",
+              "text": "The editor saves valid edits to this browser’s local storage after a short delay. This is local to the current browser/profile and location, not a cloud sync or a file written back into the HTML."
+            },
+            {
+              "label": "Check the highlighted value",
+              "text": "An input is incomplete, out of range or invalid. Correct it, or use Undo to discard the invalid text. Export and navigation that could lose it are blocked until resolved. The previous valid value remains in the data."
+            },
+            {
+              "label": "Download to keep your edits",
+              "text": "Browser storage is unavailable or full. Editing still works in memory. Use Download JSON before closing; a page reload can otherwise lose the session."
+            },
+            {
+              "label": "Download saved draft",
+              "text": "Appears only when a saved browser draft cannot be opened. Downloads the raw saved text for recovery before you replace it. It may need repair before normal import."
+            },
+            {
+              "label": "Start a new draft",
+              "text": "Appears beside recovery download after a damaged draft. Starts from bundled defaults and saves over that browser draft. Download the old draft first if you need to retain it; its old undo history is unavailable."
+            },
+            {
+              "label": "Another-tab warning",
+              "text": "Indicates another tab saved to the same draft storage. Download the current tab’s JSON before switching so both versions can be kept. The editor does not merge simultaneous edits."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "headers": [
+            "File or destination",
+            "What survives"
+          ],
+          "rows": [
+            [
+              "Workshop JSON",
+              "All fighters’ gameplay data, global/movement settings, per-attack hitbox keys and hurtboxes, notes and embedded photos. Unknown JSON properties are preserved."
+            ],
+            [
+              "Godot import + Save locally",
+              "Gameplay values, hitbox keys and hurtboxes are used and retained. Imported art metadata is ignored."
+            ],
+            [
+              "A subsequent Godot export",
+              "Gameplay data only. It does not bring workshop notes/photos back out."
+            ],
+            [
+              "Markdown art brief",
+              "Readable selected move facts and instructions for every edited/noted move. Reference names/captions only; it is not a substitute for JSON."
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Schema 14 is current. Version-12/13 files and drafts migrate automatically, keeping notes/photos and body profiles; missing timelines inherit base single-hit geometry. Use the current Godot build for older save migrations. Imports require six fighters and 32 slots each."
+        },
+        {
+          "type": "callout",
+          "title": "Keep two clearly named backups",
+          "text": "Keep the last known-good workshop JSON and the current working JSON. Browser data clearing, private windows, a different browser, or moving/renaming a local HTML file can change access to the local draft. Downloaded JSON is the portable copy."
+        }
+      ]
+    },
+    {
+      "id": "troubleshooting",
+      "section": "QUICK DIAGNOSIS",
+      "title": "When a setting seems to do nothing",
+      "blocks": [
+        {
+          "type": "table",
+          "headers": [
+            "What you see",
+            "What to check"
+          ],
+          "rows": [
+            [
+              "Cannot find a field",
+              "Expand Counter hits & scaling inside Timing, or Inputs & identity inside Cancels & inputs. Scroll the editor panel and the tab strip on narrow windows."
+            ],
+            [
+              "Cannot drag the orange box",
+              "Open Hit & movement and pause on an active frame. Enable Hit visibility and choose a key box or straight strike."
+            ],
+            [
+              "Cannot edit blue boxes",
+              "Open Hurtboxes, enable Custom boxes for this phase, select a body box and pause. Keep every edge within ±500px and dimensions at least 1px."
+            ],
+            [
+              "More Active did not add hits",
+              "Enable Allow multiple hits and use distinct hit numbers. More active time or overlapping boxes alone cannot add hits."
+            ],
+            [
+              "Higher counter tier did not add slowdown",
+              "Enter Counter freeze, Counter slowdown and bonuses directly. The browser tier dropdown changes classification/presentation, not timing values."
+            ],
+            [
+              "Extra stop seems ignored",
+              "It is used only when Counter freeze is −1. Any explicit nonnegative freeze value overrides the additive calculation."
+            ],
+            [
+              "Starter damage did not reduce the first hit",
+              "That is expected. It scales later hits only when this attack starts the combo."
+            ],
+            [
+              "A cancel will not happen",
+              "Check destination enabled/air state, route permissions, Cancel events, source opening/closing frames and the buffered input. Whiff normally needs both whiff controls. Same-slot repeat needs Repeat this move."
+            ],
+            [
+              "Follow-up works on hit but not block",
+              "Check Follow-up requires contact on the destination: it specifically means an unblocked hit. Also check the source’s Block event and follow-up window."
+            ],
+            [
+              "Launch or movement does not appear in preview",
+              "Play the timeline. Check approach, spacing and warnings. Disabled or unmapped moves show geometry only."
+            ],
+            [
+              "Sprite stayed unchanged",
+              "Geometry edits and art notes do not regenerate art. Artwork pose chooses an existing pose; a new sprite pass is separate work."
+            ],
+            [
+              "Changes vanished on another PC",
+              "Local drafts do not sync. Import the JSON you downloaded from the original PC. Notes/photos require the workshop copy, not a later Godot export."
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Outside this browser editor’s scope",
+          "text": "Movement profiles, global rules, buffers, Momentum/FD rates, combo gravity, wall health and pushboxes are handled elsewhere. Projectile authoring/immunity/clashing and per-animation-frame hurtboxes are not controls here."
+        },
+        {
+          "type": "text",
+          "text": "The retired wallDamage JSON field is preserved but has no effect. Online peers must use matching gameplay data."
+        }
+      ]
+    },
+    {
+      "id": "movement-preview",
+      "section": "MOVEMENT & DEFENSE",
+      "title": "Test movement in the same workspace",
+      "blocks": [
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Preview action",
+              "text": "Idle uses the selected Stalker / Shoulder Rest pose. Walk forward/backward, 66, 44, neutral/forward/backward jump, air dash, air backdash, additional air jump, and Pushblock/FD play actual simulation inputs. Air actions obey the selected character’s budget and toggles. Use Play, Restart, speed, facing and the frame scrubber in the shared preview."
+            },
+            {
+              "label": "Movement edits and history",
+              "text": "Changes are per character, undoable, autosaved and included in Download JSON. Reset on this tab restores that character’s movement profile. Attack values, notes and pose photos stay intact."
+            },
+            {
+              "label": "New artwork",
+              "text": "Fillet and Shark use the selected idle stances and eight-frame walk/run cycles. Fillet has black hair and leaner arms. Attacks and movement share the same sprites, coordinate system and collision preview."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projectiles-0",
+      "section": "AUTHORING",
+      "title": "Projectile · 1",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Moving shots travel independently; stationary objects stay where they spawn. They use this move’s damage, stun, launch and block rules. No projectile is created until enabled."
+        },
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "projectileKind",
+              "text": "None disables spawning. Moving uses velocity and gravity. Stationary creates a fixed object and ignores velocity/gravity. Existing move damage, guard level, stun, knockback, launch and knockdown apply. Up to eight live objects per owner."
+            },
+            {
+              "key": "projectileSpawnFrame",
+              "text": "0 spawns on the first active frame. Other values are absolute move frames (earliest 5). Values beyond the move do not spawn; throws do not spawn projectiles."
+            },
+            {
+              "key": "projectileSpeedX",
+              "text": "Positive travels forward from the launch facing. Negative travels backward. Stationary objects ignore speed and gravity."
+            },
+            {
+              "key": "projectileSpeedY",
+              "text": "Positive rises; negative falls."
+            },
+            {
+              "key": "projectileGravity",
+              "text": "Downward acceleration per frame (px/f²). Negative accelerates upward."
+            },
+            {
+              "key": "projectileLife",
+              "text": "Action frames alive; shared hitstop freezes the lifetime."
+            },
+            {
+              "key": "projectileOffsetX",
+              "text": "Forward offset from the owner at spawn. This is mirrored by the launch facing, then remains in world space."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projectiles-7",
+      "section": "AUTHORING",
+      "title": "Projectile · 2",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Moving shots travel independently; stationary objects stay where they spawn. They use this move’s damage, stun, launch and block rules. No projectile is created until enabled."
+        },
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "projectileOffsetY",
+              "text": "Upward offset from the owner at spawn; airborne spawn height includes the owner’s height."
+            },
+            {
+              "key": "projectileWidth",
+              "text": "Width of the independent projectile hitbox, centered on its position. This is separate from the body strike."
+            },
+            {
+              "key": "projectileHeight",
+              "text": "Height of the independent projectile hitbox. Weapons and projectiles do not gain body hurtboxes."
+            },
+            {
+              "key": "projectileHits",
+              "text": "Number of successful hit or block contacts before the object disappears. Separate hitbox keys do not create extra projectiles."
+            },
+            {
+              "key": "projectileRehit",
+              "text": "Minimum action frames between contacts with the same target."
+            },
+            {
+              "key": "projectileDurability",
+              "text": "Opposing projectiles subtract durability. Equal strength destroys both."
+            },
+            {
+              "key": "projectilePersist",
+              "text": "Otherwise disappears when its owner is hit. All projectiles clear during wall travel and round resets."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projectiles-14",
+      "section": "AUTHORING",
+      "title": "Projectile · 3",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Moving shots travel independently; stationary objects stay where they spawn. They use this move’s damage, stun, launch and block rules. No projectile is created until enabled."
+        },
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "projectileMelee",
+              "text": "Enable to retain the attack’s normal hitboxes as well as its projectile."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "movement-0-0",
+      "section": "MOVEMENT & DEFENSE",
+      "title": "Walk & run",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Walking uses the new walk cycle; sustained runs use the run cycle."
+        },
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Forward walk speed",
+              "text": "Ground movement toward the opponent while holding 6. Range: 0.01–10 px/f."
+            },
+            {
+              "label": "Backward walk speed",
+              "text": "Ground movement away while holding 4. Range: 0.01–10 px/f."
+            },
+            {
+              "label": "Forward run speed",
+              "text": "Maximum speed of a forward run. Range: 0.01–20 px/f."
+            },
+            {
+              "label": "Backward run speed",
+              "text": "Maximum speed of a backward run when 44 uses Run. Range: 0.01–20 px/f."
+            },
+            {
+              "label": "Run acceleration",
+              "text": "Speed gained per advancing frame while sustaining a run. Range: 0.01–10 px/f²."
+            },
+            {
+              "label": "Attack friction",
+              "text": "Horizontal speed lost per attack frame after run/dash momentum carries into a move. Range: 0–5 px/f²."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "movement-1-0",
+      "section": "MOVEMENT & DEFENSE",
+      "title": "66 / 44 movement",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Double-tap a direction, or use the dash macro. Teleports have startup and recovery, with no added invulnerability."
+        },
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "66 style",
+              "text": "66 or forward Dash macro. Run continues while held; Step is a timed ground burst; Hover rises and suspends gravity; Teleport relocates after startup. Range: 0–3."
+            },
+            {
+              "label": "44 style",
+              "text": "44 or back + Dash macro; independent of 66. Guard break prevents buffered backward dash escapes. Range: 0–3."
+            },
+            {
+              "label": "66 burst speed",
+              "text": "Speed of ground 66 step/hover movement. A run uses Run speed instead. Range: 0.01–20 px/f."
+            },
+            {
+              "label": "66 burst duration",
+              "text": "Duration of ground 66 step/hover/teleport. Teleport lasts at least startup + 1 frame. Range: 1–120."
+            },
+            {
+              "label": "44 burst speed",
+              "text": "Speed of ground 44 step/hover movement. Range: 0.01–20 px/f."
+            },
+            {
+              "label": "44 burst duration",
+              "text": "Duration of ground 44 step/hover/teleport. Range: 1–120."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "movement-1-6",
+      "section": "MOVEMENT & DEFENSE",
+      "title": "66 / 44 movement",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Double-tap a direction, or use the dash macro. Teleports have startup and recovery, with no added invulnerability."
+        },
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Ground hover height",
+              "text": "Height approached by a hover begun on the ground. An air hover holds its current height. Range: 0–200 px."
+            },
+            {
+              "label": "Hover rise speed",
+              "text": "Height gained per frame until the ground hover reaches its set height. Range: 0.01–20 px/f."
+            },
+            {
+              "label": "66 teleport distance",
+              "text": "Distance of forward teleports, on the ground or in the air. Clamped to stage edges; can change sides without overlapping pushboxes. Range: 0–800 px."
+            },
+            {
+              "label": "44 teleport distance",
+              "text": "Distance of backward teleports. Range: 0–800 px."
+            },
+            {
+              "label": "Teleport startup",
+              "text": "Delay before the one-time relocation. The whole teleport duration locks actions; there is no invulnerability. Range: 1–60."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "movement-2-0",
+      "section": "MOVEMENT & DEFENSE",
+      "title": "Jumps & air movement",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Forward momentum carries into jumps and attacks. Air action counts reset on landing. A run selected in the air is a timed horizontal burst."
+        },
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Jump upward speed",
+              "text": "Upward speed at takeoff and at an additional air jump. Range: 1–30 px/f."
+            },
+            {
+              "label": "Forward jump steering",
+              "text": "Forward steering speed when starting from rest or reversing horizontal motion. Existing faster run/dash momentum is retained. Range: 0–20 px/f."
+            },
+            {
+              "label": "Backward jump steering",
+              "text": "Backward steering speed, with the same momentum retention rule. Range: 0–20 px/f."
+            },
+            {
+              "label": "Gravity",
+              "text": "Downward acceleration per frame. Combo gravity scaling multiplies this value; timed air dashes and hovers suspend it. Range: 0.01–5 px/f²."
+            },
+            {
+              "label": "Prejump override (−1 uses match rule)",
+              "text": "−1 inherits the global prejump rule. 0 takes off instantly. Other values are grounded startup frames; no guarding during prejump. Range: -1–30."
+            },
+            {
+              "label": "Additional air jumps",
+              "text": "Number of additional jump presses allowed before landing. Zero allows only the ground jump. Range: 0–5."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "movement-2-6",
+      "section": "MOVEMENT & DEFENSE",
+      "title": "Jumps & air movement",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Forward momentum carries into jumps and attacks. Air action counts reset on landing. A run selected in the air is a timed horizontal burst."
+        },
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Enable air dash",
+              "text": "Allows a forward air dash for this character. Range: 0–1."
+            },
+            {
+              "label": "Enable air backdash",
+              "text": "Allows a backward air dash independently. Range: 0–1."
+            },
+            {
+              "label": "Air dash uses per jump",
+              "text": "Shared budget for both air dash directions before landing. Landing restores the budget. Range: 0–5."
+            },
+            {
+              "label": "Air forward style",
+              "text": "Run/Step are timed horizontal bursts in the air; Hover holds height; Teleport relocates after startup. Range: 0–3."
+            },
+            {
+              "label": "Air backward style",
+              "text": "Independent backward air movement style. Range: 0–3."
+            },
+            {
+              "label": "Air forward speed",
+              "text": "Horizontal speed of forward air movement, except teleport. Range: 0.01–40 px/f."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "movement-2-12",
+      "section": "MOVEMENT & DEFENSE",
+      "title": "Jumps & air movement",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Forward momentum carries into jumps and attacks. Air action counts reset on landing. A run selected in the air is a timed horizontal burst."
+        },
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Air backward speed",
+              "text": "Horizontal speed of backward air movement, except teleport. Range: 0.01–40 px/f."
+            },
+            {
+              "label": "Air forward duration",
+              "text": "Duration of forward air movement. Range: 1–120."
+            },
+            {
+              "label": "Air backward duration",
+              "text": "Duration of backward air movement. Range: 1–120."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "movement-3-0",
+      "section": "MOVEMENT & DEFENSE",
+      "title": "Pushblock / Faultless Defense",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Hold back + FD. Overrides use −1 to inherit match rules. Costs are meter units: 100 units = 1% Momentum."
+        },
+        {
+          "type": "controls",
+          "items": [
+            {
+              "label": "Enable Faultless Defense",
+              "text": "Enables the existing Faultless Defense shield. Disabled FD inputs fall back to ordinary guard. Range: 0–1."
+            },
+            {
+              "label": "Pushback multiplier (%)",
+              "text": "−1 inherits the match multiplier. Otherwise sets block separation as a percentage of the move’s Block pushback. Corner separation still applies. Range: -1–1000."
+            },
+            {
+              "label": "Ground drain per frame",
+              "text": "−1 inherits the match drain. Otherwise Momentum units drained per grounded FD frame; 100 units = 1%. Range: -1–1000."
+            },
+            {
+              "label": "Air drain per frame",
+              "text": "Airborne FD drain, with the same units and −1 inheritance. Range: -1–1000."
+            },
+            {
+              "label": "Base cost per blocked hit",
+              "text": "Base cost per blocked hit, with −1 inheritance. Existing damage and attack-level surcharges still apply. Range: -1–10000."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drive-overview",
+      "section": "DRIVE MECHANICS",
+      "title": "Attach. Transform. Cash out.",
+      "intro": "Shark and Fillet now have persistent Drive mechanics. Open the Drive mechanics tab to edit them; the preview and controls stay together.",
+      "blocks": [
+        {
+          "type": "text",
+          "text": "Shark: 5D and 2D attach a tether only on hit. While tethered, either input becomes a one-use pull toward Shark’s current position. The pull itself does no damage and cannot be blocked. Any subsequent hit or block consumes a used tether. Shark being hit clears it at any time. Initial 2D remains a hard knockdown."
+        },
+        {
+          "type": "text",
+          "text": "Fillet: 5D applies bleed. Grey life marks possible future cash-out damage; normal HP is not removed by its buildup. Initial grey life uses combo scaling, periodic ticks add more, and blocked attacks add the configured percentage of on-hit damage. FD prevents chip, but not this grey-life buildup."
+        },
+        {
+          "type": "text",
+          "text": "While bleeding, Fillet’s 5D becomes a leaping ground command grab. A successful grab deals its base damage plus stored grey life, then clears the status. It beats standing guard but respects blockstun, wakeup throw immunity and jumping; guard break still removes ordinary blockstun throw immunity. A whiff keeps the remaining bleed."
+        },
+        {
+          "type": "text",
+          "text": "Bleed clears if Fillet is hit or if she goes 420 action frames (7 seconds, excluding shared hitstop) without landing an unblocked hit. Blocks do not refresh the timer. Grey life is capped at current HP minus one, but a cash-out may KO. Both statuses clear at a round reset or wall-break stage transition."
+        },
+        {
+          "type": "controls",
+          "items": [
+            {
+              "text": "Plays the selected move using the chosen target behavior. A blocked applying attack does not attach its status.",
+              "label": "Drive test — Apply status"
+            },
+            {
+              "text": "First lands the applying move unguarded, waits until both fighters recover, then repeats its input. The chosen target behavior applies to the follow-up. Whiffs remain whiffs; the test does not reposition fighters or force contact.",
+              "label": "Drive test — Apply → follow-up"
+            },
+            {
+              "text": "Applies the move unguarded and lets the bleed expire. Tethers have no timeout, so their recording ends once both fighters are idle.",
+              "label": "Drive test — Apply → wait for timeout"
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Existing art, real simulation",
+          "text": "The follow-ups currently reuse the move’s existing art and hurtbox phase profiles. Their startup, active and recovery timing is independent. Cash-out uses ground throw reach; base strike hitbox keys and multi-hit settings do not affect it. New dedicated animation can follow your final tuning."
+        }
+      ]
+    },
+    {
+      "id": "drive-fields-0",
+      "section": "DRIVE MECHANICS",
+      "title": "Status application",
+      "intro": "Settings apply only when this move has the corresponding Drive mechanic enabled. Distances use game pixels; one action frame is 1/60 second.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "mechanic",
+              "text": "0 off; 1 tether; 2 bleed. The same input becomes its follow-up while the opponent has this status."
+            },
+            {
+              "key": "tetherSpeed",
+              "text": "Velocity toward the owner’s position when the pull activates. Direction is captured once; it does not home."
+            },
+            {
+              "key": "tetherFrames",
+              "text": "Hitstun and travel budget for the pull. Pull once; the next hit or block breaks the tether."
+            },
+            {
+              "key": "bleedInitial",
+              "text": "Grey life added on the applying hit, multiplied by that hit’s combo damage scale."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drive-fields-4",
+      "section": "DRIVE MECHANICS",
+      "title": "Bleed economy",
+      "intro": "Settings apply only when this move has the corresponding Drive mechanic enabled. Distances use game pixels; one action frame is 1/60 second.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "bleedTickDamage",
+              "text": "Grey life added each tick interval. It does not remove health."
+            },
+            {
+              "key": "bleedTickFrames",
+              "text": "Action frames between grey-life ticks; pauses during shared hitstop."
+            },
+            {
+              "key": "bleedDuration",
+              "text": "Frames without an unblocked hit from the owner. Blocks do not refresh. 420 = 7 seconds at 60 Hz, excluding shared hitstop."
+            },
+            {
+              "key": "bleedBlockPercent",
+              "text": "Percentage of the blocked move’s unscaled on-hit damage added as grey life, including Faultless Defense."
+            },
+            {
+              "key": "bleedCap",
+              "text": "Maximum stored grey life, also limited to current health minus one. Grey life cannot kill."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drive-fields-9",
+      "section": "DRIVE MECHANICS",
+      "title": "Follow-up timing & reward",
+      "intro": "Settings apply only when this move has the corresponding Drive mechanic enabled. Distances use game pixels; one action frame is 1/60 second.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "variantStartup",
+              "text": "First active frame of the follow-up. Cash-out grabs: minimum 2 frames; tether pulls: minimum 5."
+            },
+            {
+              "key": "variantActive",
+              "text": "Active duration. Pull happens once on its first active frame; grab can connect throughout."
+            },
+            {
+              "key": "variantRecovery",
+              "text": "Recovery after the conditional follow-up."
+            },
+            {
+              "key": "variantDamage",
+              "text": "Base grab damage before scaling; stored grey life is added unscaled on a successful grab."
+            },
+            {
+              "key": "variantRange",
+              "text": "Extra ground throw reach beyond both pushbox half-widths. Opponent can jump or use throw immunity."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drive-fields-14",
+      "section": "DRIVE MECHANICS",
+      "title": "Cash-out movement & reaction",
+      "intro": "Settings apply only when this move has the corresponding Drive mechanic enabled. Distances use game pixels; one action frame is 1/60 second.",
+      "blocks": [
+        {
+          "type": "fields",
+          "items": [
+            {
+              "key": "variantSpeed",
+              "text": "Forward speed throughout startup and active frames. Existing run inertia is added."
+            },
+            {
+              "key": "variantLift",
+              "text": "Initial upward velocity. Uses this character’s gravity; landing does not cut the grab short."
+            },
+            {
+              "key": "variantHitstun",
+              "text": "Hitstun on a successful cash-out grab."
+            },
+            {
+              "key": "variantKnockdown",
+              "text": "0 none, 1 soft, 2 hard. Down and wake durations inherit the applying move’s settings."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "index-a",
+      "section": "CONTROL INDEX",
+      "title": "Gameplay fields · A–C",
+      "blocks": [
+        {
+          "type": "index",
+          "start": "A",
+          "end": "C"
+        }
+      ]
+    },
+    {
+      "id": "index-df",
+      "section": "CONTROL INDEX",
+      "title": "Gameplay fields · D–F",
+      "blocks": [
+        {
+          "type": "index",
+          "start": "D",
+          "end": "F"
+        }
+      ]
+    },
+    {
+      "id": "index-b",
+      "section": "CONTROL INDEX",
+      "title": "Gameplay fields · G–P",
+      "blocks": [
+        {
+          "type": "index",
+          "start": "G",
+          "end": "P"
+        }
+      ]
+    },
+    {
+      "id": "index-c",
+      "section": "CONTROL INDEX",
+      "title": "Gameplay fields · Q–Z",
+      "blocks": [
+        {
+          "type": "index",
+          "start": "Q",
+          "end": "Z"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2434 @@
+{
+  "actions": {
+    "5P": {
+      "slot": 0,
+      "timing": [
+        5,
+        4,
+        7
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_0.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 2,
+          "source": "shark-normals-v1/normals_0_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 5,
+          "source": "shark-normals-v1/normals_0_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 9,
+          "source": "shark-normals-v1/normals_0_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 10,
+          "source": "shark-kit-v2/recovery-0.png",
+          "sourcePose": 0,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 12,
+          "source": "shark-kit-v2/recovery-0.png",
+          "sourcePose": 1,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 14,
+          "source": "shark-normals-v1/entries_0.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "5K": {
+      "slot": 1,
+      "timing": [
+        7,
+        8,
+        6
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_0.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 3,
+          "source": "shark-normals-v1/normals_0_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 7,
+          "source": "shark-normals-v1/normals_0_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 15,
+          "source": "shark-normals-v1/normals_0_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 16,
+          "source": "shark-kit-v2/recovery-6.png",
+          "sourcePose": 2,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 18,
+          "source": "shark-kit-v2/recovery-6.png",
+          "sourcePose": 3,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 19,
+          "source": "shark-normals-v1/entries_0.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "5S": {
+      "slot": 2,
+      "timing": [
+        10,
+        3,
+        20
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_0.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 4,
+          "source": "shark-normals-v1/normals_1_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 10,
+          "source": "shark-normals-v1/normals_1_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 13,
+          "source": "shark-normals-v1/normals_1_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 17,
+          "source": "shark-kit-v2/recovery-1.png",
+          "sourcePose": 2,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 23,
+          "source": "shark-kit-v2/recovery-1.png",
+          "sourcePose": 3,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 29,
+          "source": "shark-normals-v1/entries_0.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "5Hs": {
+      "slot": 3,
+      "timing": [
+        12,
+        6,
+        21
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_1.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 5,
+          "source": "shark-normals-v1/normals_2_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            550
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 12,
+          "source": "shark-normals-v1/normals_2_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            550
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 18,
+          "source": "shark-normals-v1/normals_2_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            550
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 22,
+          "source": "shark-kit-v2/recovery-2.png",
+          "sourcePose": 0,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 28,
+          "source": "shark-kit-v2/recovery-2.png",
+          "sourcePose": 1,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 34,
+          "source": "shark-normals-v1/entries_1.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "2P": {
+      "slot": 4,
+      "timing": [
+        5,
+        4,
+        8
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_1.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 2,
+          "source": "shark-normals-v1/normals_2_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            550,
+            768,
+            474
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 5,
+          "source": "shark-normals-v1/normals_2_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            550,
+            768,
+            474
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 9,
+          "source": "shark-normals-v1/normals_2_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            550,
+            768,
+            474
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 10,
+          "source": "shark-kit-v2/recovery-2.png",
+          "sourcePose": 2,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 13,
+          "source": "shark-kit-v2/recovery-2.png",
+          "sourcePose": 3,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 15,
+          "source": "shark-normals-v1/entries_1.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "2K": {
+      "slot": 5,
+      "timing": [
+        6,
+        4,
+        10
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_1.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 2,
+          "source": "shark-normals-v1/normals_3_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 6,
+          "source": "shark-normals-v1/normals_3_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 10,
+          "source": "shark-normals-v1/normals_3_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 12,
+          "source": "shark-kit-v2/recovery-3.png",
+          "sourcePose": 0,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 15,
+          "source": "shark-kit-v2/recovery-3.png",
+          "sourcePose": 1,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 18,
+          "source": "shark-normals-v1/entries_1.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "2S": {
+      "slot": 6,
+      "timing": [
+        11,
+        2,
+        24
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_1.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 5,
+          "source": "shark-normals-v1/normals_3_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 11,
+          "source": "shark-normals-v1/normals_3_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 13,
+          "source": "shark-normals-v1/normals_3_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 17,
+          "source": "shark-kit-v2/recovery-3.png",
+          "sourcePose": 2,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 25,
+          "source": "shark-kit-v2/recovery-3.png",
+          "sourcePose": 3,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 32,
+          "source": "shark-normals-v1/entries_1.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "2Hs": {
+      "slot": 7,
+      "timing": [
+        11,
+        5,
+        28
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/scoop_0.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            1024
+          ],
+          "cue": "Coil"
+        },
+        {
+          "frame": 5,
+          "source": "shark-normals-v1/scoop_0.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            1024
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 11,
+          "source": "shark-normals-v1/scoop_1.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            1024
+          ],
+          "cue": "First-active scoop"
+        },
+        {
+          "frame": 12,
+          "source": "shark-normals-v1/scoop_1.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            1024
+          ],
+          "cue": "Second hit \u00b7 rise"
+        },
+        {
+          "frame": 14,
+          "source": "shark-normals-v1/scoop_2.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            790,
+            1024
+          ],
+          "cue": "Crest"
+        },
+        {
+          "frame": 16,
+          "source": "shark-normals-v1/scoop_2.png",
+          "sourcePose": null,
+          "region": [
+            798,
+            0,
+            738,
+            1024
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 25,
+          "source": "shark-normals-v1/scoop_3.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            790,
+            1024
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 34,
+          "source": "shark-normals-v1/scoop_3.png",
+          "sourcePose": null,
+          "region": [
+            798,
+            0,
+            738,
+            1024
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "6P": {
+      "slot": 8,
+      "timing": [
+        9,
+        5,
+        22
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_3.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 4,
+          "source": "shark-normals-v1/normals_6_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 9,
+          "source": "shark-normals-v1/normals_6_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 14,
+          "source": "shark-normals-v1/normals_6_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 18,
+          "source": "shark-kit-v2/recovery-6.png",
+          "sourcePose": 0,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 25,
+          "source": "shark-kit-v2/recovery-6.png",
+          "sourcePose": 1,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 31,
+          "source": "shark-normals-v1/entries_3.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "6K": {
+      "slot": 9,
+      "timing": [
+        25,
+        2,
+        11
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_3.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 12,
+          "source": "shark-normals-v1/normals_6_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            700,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 25,
+          "source": "shark-normals-v1/normals_6_fluid.png",
+          "sourcePose": null,
+          "region": [
+            750,
+            512,
+            786,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 27,
+          "source": "shark-normals-v1/normals_6_fluid.png",
+          "sourcePose": null,
+          "region": [
+            750,
+            512,
+            786,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 29,
+          "source": "shark-kit-v2/recovery-6.png",
+          "sourcePose": 2,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 32,
+          "source": "shark-kit-v2/recovery-6.png",
+          "sourcePose": 3,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 35,
+          "source": "shark-normals-v1/entries_3.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "6S": {
+      "slot": 10,
+      "timing": [
+        13,
+        4,
+        19
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-movement-v1/idle.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 4,
+          "source": "shark-kit-v2/command-slash.png",
+          "sourcePose": 1,
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 13,
+          "source": "shark-kit-v2/command-slash.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 17,
+          "source": "shark-kit-v2/command-slash.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 20,
+          "source": "shark-kit-v2/command-slash.png",
+          "sourcePose": 3,
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 26,
+          "source": "shark-kit-v2/command-slash.png",
+          "sourcePose": 4,
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 32,
+          "source": "shark-kit-v2/command-slash.png",
+          "sourcePose": 5,
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "6Hs": {
+      "slot": 11,
+      "timing": [
+        15,
+        4,
+        26
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/normals_7_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 7,
+          "source": "shark-normals-v1/normals_7_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 15,
+          "source": "shark-normals-v1/normals_7_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 19,
+          "source": "shark-normals-v1/normals_7_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 24,
+          "source": "shark-normals-v1/normals_7_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 32,
+          "source": "shark-normals-v1/normals_7_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 39,
+          "source": "shark-normals-v1/normals_7_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "5D": {
+      "slot": 13,
+      "timing": [
+        16,
+        4,
+        24
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-movement-v1/idle.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 5,
+          "source": "shark-kit-v2/drive-tag.png",
+          "sourcePose": 1,
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 16,
+          "source": "shark-kit-v2/drive-tag.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 20,
+          "source": "shark-kit-v2/drive-tag.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 24,
+          "source": "shark-kit-v2/drive-tag.png",
+          "sourcePose": 3,
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 32,
+          "source": "shark-kit-v2/drive-tag.png",
+          "sourcePose": 4,
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 39,
+          "source": "shark-movement-v1/idle.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "j.P": {
+      "slot": 17,
+      "timing": [
+        6,
+        3,
+        9
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_2.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 2,
+          "source": "shark-normals-v1/normals_4_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 6,
+          "source": "shark-normals-v1/normals_4_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 9,
+          "source": "shark-normals-v1/normals_4_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 10,
+          "source": "shark-kit-v2/recovery-4.png",
+          "sourcePose": 0,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 13,
+          "source": "shark-kit-v2/recovery-4.png",
+          "sourcePose": 1,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 16,
+          "source": "shark-normals-v1/entries_2.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "j.K": {
+      "slot": 18,
+      "timing": [
+        7,
+        4,
+        12
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_2.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 3,
+          "source": "shark-normals-v1/normals_4_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 7,
+          "source": "shark-normals-v1/normals_4_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 11,
+          "source": "shark-normals-v1/normals_4_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 13,
+          "source": "shark-kit-v2/recovery-4.png",
+          "sourcePose": 2,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 17,
+          "source": "shark-kit-v2/recovery-4.png",
+          "sourcePose": 3,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 20,
+          "source": "shark-normals-v1/entries_2.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "j.S": {
+      "slot": 19,
+      "timing": [
+        7,
+        3,
+        21
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_2.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 3,
+          "source": "shark-normals-v1/normals_5_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 7,
+          "source": "shark-normals-v1/normals_5_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 10,
+          "source": "shark-normals-v1/normals_5_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 14,
+          "source": "shark-kit-v2/recovery-5.png",
+          "sourcePose": 0,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 20,
+          "source": "shark-kit-v2/recovery-5.png",
+          "sourcePose": 1,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 26,
+          "source": "shark-normals-v1/entries_2.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "j.Hs": {
+      "slot": 20,
+      "timing": [
+        13,
+        4,
+        23
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_2.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 6,
+          "source": "shark-normals-v1/normals_5_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 13,
+          "source": "shark-normals-v1/normals_5_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 15,
+          "source": "shark-normals-v1/entries_3.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Downward cut"
+        },
+        {
+          "frame": 17,
+          "source": "shark-normals-v1/entries_3.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 21,
+          "source": "shark-kit-v2/recovery-5.png",
+          "sourcePose": 2,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 28,
+          "source": "shark-kit-v2/recovery-5.png",
+          "sourcePose": 3,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 35,
+          "source": "shark-normals-v1/entries_2.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            512,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "j.D": {
+      "slot": 21,
+      "timing": [
+        17,
+        4,
+        22
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "proportions-v2/shark-active.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            682,
+            384,
+            342
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 5,
+          "source": "shark-kit-v2/drive-air.png",
+          "sourcePose": 1,
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 17,
+          "source": "shark-kit-v2/drive-air.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 21,
+          "source": "shark-kit-v2/drive-air.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 25,
+          "source": "shark-kit-v2/drive-air.png",
+          "sourcePose": 3,
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 32,
+          "source": "shark-kit-v2/drive-air.png",
+          "sourcePose": 4,
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 38,
+          "source": "proportions-v2/shark-active.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            682,
+            384,
+            342
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "2D": {
+      "slot": 22,
+      "timing": [
+        12,
+        1,
+        20
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-kit-v2/drive-reel.png",
+          "sourcePose": 1,
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 12,
+          "source": "shark-kit-v2/drive-reel.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 13,
+          "source": "shark-kit-v2/drive-reel.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 17,
+          "source": "shark-kit-v2/drive-reel.png",
+          "sourcePose": 3,
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 23,
+          "source": "shark-kit-v2/drive-reel.png",
+          "sourcePose": 4,
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 29,
+          "source": "shark-kit-v2/drive-reel.png",
+          "sourcePose": 5,
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "4P+K": {
+      "slot": 23,
+      "timing": [
+        2,
+        2,
+        30
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-kit-v2/throw-back.png",
+          "sourcePose": 0,
+          "region": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "cue": "Loaded"
+        },
+        {
+          "frame": 2,
+          "source": "shark-kit-v2/throw-back.png",
+          "sourcePose": 1,
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "cue": "Reach / latch attempt"
+        },
+        {
+          "frame": 4,
+          "source": "shark-kit-v2/throw-back.png",
+          "sourcePose": 4,
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "cue": "Withdraw on whiff"
+        },
+        {
+          "frame": 19,
+          "source": "shark-kit-v2/throw-back.png",
+          "sourcePose": 5,
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "cue": "Recover weapon"
+        },
+        {
+          "frame": 28,
+          "source": "shark-movement-v1/idle.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "6P+K": {
+      "slot": 24,
+      "timing": [
+        2,
+        2,
+        30
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-kit-v2/throw-forward.png",
+          "sourcePose": 0,
+          "region": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "cue": "Loaded"
+        },
+        {
+          "frame": 2,
+          "source": "shark-kit-v2/throw-forward.png",
+          "sourcePose": 1,
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "cue": "Reach / latch attempt"
+        },
+        {
+          "frame": 4,
+          "source": "shark-kit-v2/throw-forward.png",
+          "sourcePose": 4,
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "cue": "Withdraw on whiff"
+        },
+        {
+          "frame": 19,
+          "source": "shark-kit-v2/throw-forward.png",
+          "sourcePose": 5,
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "cue": "Recover weapon"
+        },
+        {
+          "frame": 28,
+          "source": "shark-movement-v1/idle.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "214S": {
+      "slot": 28,
+      "timing": [
+        20,
+        10,
+        24
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-movement-v1/idle.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 6,
+          "source": "shark-kit-v2/cast-ground.png",
+          "sourcePose": 1,
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 20,
+          "source": "shark-kit-v2/cast-ground.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 30,
+          "source": "shark-kit-v2/cast-ground.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 34,
+          "source": "shark-kit-v2/cast-ground.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 42,
+          "source": "shark-kit-v2/cast-ground.png",
+          "sourcePose": 4,
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 49,
+          "source": "shark-kit-v2/cast-ground.png",
+          "sourcePose": 5,
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "cue": "Catch / shoulder rest"
+        }
+      ]
+    },
+    "j.214P": {
+      "slot": 29,
+      "timing": [
+        20,
+        10,
+        24
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "proportions-v2/shark-active.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            682,
+            384,
+            342
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 6,
+          "source": "shark-kit-v2/cast-air.png",
+          "sourcePose": 1,
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 20,
+          "source": "shark-kit-v2/cast-air.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 30,
+          "source": "shark-kit-v2/cast-air.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 34,
+          "source": "shark-kit-v2/cast-air.png",
+          "sourcePose": 3,
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 42,
+          "source": "shark-kit-v2/cast-air.png",
+          "sourcePose": 4,
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 49,
+          "source": "shark-kit-v2/cast-air.png",
+          "sourcePose": 5,
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "cue": "Catch / shoulder rest"
+        }
+      ]
+    },
+    "214S>P": {
+      "slot": 30,
+      "timing": [
+        8,
+        5,
+        20
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-movement-v1/idle.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 2,
+          "source": "shark-kit-v2/stab-ground.png",
+          "sourcePose": 1,
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 8,
+          "source": "shark-kit-v2/stab-ground.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 13,
+          "source": "shark-kit-v2/stab-ground.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 17,
+          "source": "shark-kit-v2/stab-ground.png",
+          "sourcePose": 3,
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 23,
+          "source": "shark-kit-v2/stab-ground.png",
+          "sourcePose": 4,
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 29,
+          "source": "shark-kit-v2/stab-ground.png",
+          "sourcePose": 5,
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "j.214P>P": {
+      "slot": 31,
+      "timing": [
+        8,
+        5,
+        20
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "proportions-v2/shark-active.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            682,
+            384,
+            342
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 2,
+          "source": "shark-kit-v2/stab-air.png",
+          "sourcePose": 1,
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 8,
+          "source": "shark-kit-v2/stab-air.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 13,
+          "source": "shark-kit-v2/stab-air.png",
+          "sourcePose": 2,
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 17,
+          "source": "shark-kit-v2/stab-air.png",
+          "sourcePose": 3,
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 23,
+          "source": "shark-kit-v2/stab-air.png",
+          "sourcePose": 4,
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 29,
+          "source": "shark-kit-v2/stab-air.png",
+          "sourcePose": 5,
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    },
+    "c.S": {
+      "slot": 32,
+      "timing": [
+        7,
+        6,
+        10
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "source": "shark-normals-v1/entries_0.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Entry"
+        },
+        {
+          "frame": 3,
+          "source": "shark-normals-v1/normals_1_fluid.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Loaded \u00b7 hold to first active"
+        },
+        {
+          "frame": 7,
+          "source": "shark-normals-v1/normals_1_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "First-active snap"
+        },
+        {
+          "frame": 13,
+          "source": "shark-normals-v1/normals_1_fluid.png",
+          "sourcePose": null,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Contact hold"
+        },
+        {
+          "frame": 15,
+          "source": "shark-kit-v2/recovery-1.png",
+          "sourcePose": 0,
+          "region": [
+            0,
+            0,
+            768,
+            512
+          ],
+          "cue": "Brake"
+        },
+        {
+          "frame": 18,
+          "source": "shark-kit-v2/recovery-1.png",
+          "sourcePose": 1,
+          "region": [
+            768,
+            0,
+            768,
+            512
+          ],
+          "cue": "Withdraw"
+        },
+        {
+          "frame": 21,
+          "source": "shark-normals-v1/entries_0.png",
+          "sourcePose": null,
+          "region": [
+            0,
+            512,
+            768,
+            512
+          ],
+          "cue": "Settle"
+        }
+      ]
+    }
+  },
+  "excluded": {
+    "recovery-0": [
+      2,
+      3
+    ],
+    "cast-ground": [
+      3
+    ],
+    "drive-tag": [
+      0,
+      5
+    ],
+    "drive-air": [
+      0,
+      5
+    ],
+    "drive-chase": [
+      0,
+      5
+    ]
+  },
+  "note": "Excluded malformed candidate anatomy or weapon swaps; approved entry/reset poses reused."
+}

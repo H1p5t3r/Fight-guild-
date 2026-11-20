@@ -1,0 +1,349 @@
+{
+  "revision": "swings-v3",
+  "created_date": "2026-11-17",
+  "generator": "OpenAI image_gen",
+  "generator_version": "Not exposed by the tool",
+  "pixel_processing": "Generated PNGs copied byte-for-byte. Packing, roots and body-only collision are metadata.",
+  "jobs": [
+    {
+      "id": "anvil-swing-3x",
+      "prompt": "Precision edit ONLY the colored SWING TRAIL thickness in this existing transparent fighting-game sprite atlas. Preserve the exact 1536x1024 canvas, grid, ALL character pixels/poses/anatomy/weapon lengths and locations, pivots and transparent background. Do not restage, relayout or redraw the fighter. Every existing swing crescent or directional smear must have THREE TIMES its current perpendicular band thickness (3x width, not 3x length or arc radius). Example: a 6-pixel band becomes 18 pixels thick, a 10-pixel band becomes 30. Retain each original centerline, curvature, tips, length, original guild hue and crisp cel-shaded tapered shape language. Widen inward where needed to keep its existing reach and avoid crossing cell edges; keep the fighter silhouette readable in front of the effects. Contact impact stars, shield bursts, smoke clouds, weapon geometry and body outlines are not swing bands and stay unchanged. No added swings on poses that currently have none. No text, checkerboard or floor shadow. Genuine transparent RGBA, preserve empty gutters.\nSix columns by two rows. The two GOLDEN crescents above the sword swings in the top row columns4 and5 are the swing trails: thicken both3x. Retain the P, K and shield contact stars as-is.",
+      "references": [
+        "godot/assets/fighters/anvil-active.png"
+      ],
+      "path": "godot/assets/fighters/swings-v3/anvil-active.png",
+      "generated": "exec-210d12e3-7ce0-4978-bfd3-761920bc2a09.png",
+      "transparent_background": true,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "godot/assets/fighters/swings-v3/anvil-active.png",
+        "sha256": "a33b59f7ffc53dd6243041f997929eee65a77debfcbd63b3f753bcf53d10bb87",
+        "bytes": 2233382,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/anvil-active.png",
+          "sha256": "13a88271ba7a6e7ef9798cd65db740996cbadc75b8c1d0a7bc60126b64cdfb6c",
+          "bytes": 2317156,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "promoted_frames": {
+        "fighter": 0,
+        "phase": "active",
+        "indices": [
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": "tapper-swing-3x",
+      "prompt": "Precision edit ONLY the colored SWING TRAIL thickness in this existing transparent fighting-game sprite atlas. Preserve the exact 1536x1024 canvas, grid, ALL character pixels/poses/anatomy/weapon lengths and locations, pivots and transparent background. Do not restage, relayout or redraw the fighter. Every existing swing crescent or directional smear must have THREE TIMES its current perpendicular band thickness (3x width, not 3x length or arc radius). Example: a 6-pixel band becomes 18 pixels thick, a 10-pixel band becomes 30. Retain each original centerline, curvature, tips, length, original guild hue and crisp cel-shaded tapered shape language. Widen inward where needed to keep its existing reach and avoid crossing cell edges; keep the fighter silhouette readable in front of the effects. Contact impact stars, shield bursts, smoke clouds, weapon geometry and body outlines are not swing bands and stay unchanged. No added swings on poses that currently have none. No text, checkerboard or floor shadow. Genuine transparent RGBA, preserve empty gutters.\nSix columns by two rows. The GOLDEN curved trail around the raised club in the top row column5 is the main swing band: thicken it3x. Any existing short swing streaks near club strikes should use the same thicker treatment; do not thicken the club or impact stars.",
+      "references": [
+        "godot/assets/fighters/tapper-active.png"
+      ],
+      "path": "godot/assets/fighters/swings-v3/tapper-active.png",
+      "generated": "exec-6f3557e7-e109-4965-8a8c-d65f1625fa89.png",
+      "transparent_background": true,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "godot/assets/fighters/swings-v3/tapper-active.png",
+        "sha256": "96ebd496acd411398dded0bc2d13fd7f3eb66f202be39a094ad1ffcd1f95bb9f",
+        "bytes": 2297717,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/tapper-active.png",
+          "sha256": "a71aa38116800a2db028195a7fdd12d28585dd28976115b1d43aa7ee2de1f431",
+          "bytes": 2324397,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "promoted_frames": {
+        "fighter": 3,
+        "phase": "active",
+        "indices": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "smoke-swing-3x",
+      "prompt": "Precision edit ONLY the colored SWING TRAIL thickness in this existing transparent fighting-game sprite atlas. Preserve the exact 1536x1024 canvas, grid, ALL character pixels/poses/anatomy/weapon lengths and locations, pivots and transparent background. Do not restage, relayout or redraw the fighter. Every existing swing crescent or directional smear must have THREE TIMES its current perpendicular band thickness (3x width, not 3x length or arc radius). Example: a 6-pixel band becomes 18 pixels thick, a 10-pixel band becomes 30. Retain each original centerline, curvature, tips, length, original guild hue and crisp cel-shaded tapered shape language. Widen inward where needed to keep its existing reach and avoid crossing cell edges; keep the fighter silhouette readable in front of the effects. Contact impact stars, shield bursts, smoke clouds, weapon geometry and body outlines are not swing bands and stay unchanged. No added swings on poses that currently have none. No text, checkerboard or floor shadow. Genuine transparent RGBA, preserve empty gutters.\nSix columns by two rows. Thicken the GREEN curved trailing bands behind the top-row column3 kick and column4 knife swing3x. Keep all vapor clouds, flask glows and contact bursts unchanged.",
+      "references": [
+        "godot/assets/fighters/smoke-active.png"
+      ],
+      "path": "godot/assets/fighters/swings-v3/smoke-active.png",
+      "generated": "exec-b7ff9f27-823f-4310-9755-e1fdbf73f761.png",
+      "transparent_background": true,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "godot/assets/fighters/swings-v3/smoke-active.png",
+        "sha256": "de6a6f87214075f4b4429b9be3b3f5cb2172f5f6cb4967ed672c3e5fd7ea6452",
+        "bytes": 2274356,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/smoke-active.png",
+          "sha256": "167ffacb593cecbce5017464fd8ab76d5e5e460f4595dbfa864e11cfb724baa4",
+          "bytes": 2251637,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "promoted_frames": {
+        "fighter": 2,
+        "phase": "active",
+        "indices": [
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "id": "fillet-swing-3x",
+      "prompt": "Precision edit ONLY the colored SWING TRAIL thickness in this existing transparent fighting-game sprite atlas. Preserve the exact 1536x1024 canvas, grid, ALL character pixels/poses/anatomy/weapon lengths and locations, pivots and transparent background. Do not restage, relayout or redraw the fighter. Every existing swing crescent or directional smear must have THREE TIMES its current perpendicular band thickness (3x width, not 3x length or arc radius). Example: a 6-pixel band becomes 18 pixels thick, a 10-pixel band becomes 30. Retain each original centerline, curvature, tips, length, original guild hue and crisp cel-shaded tapered shape language. Widen inward where needed to keep its existing reach and avoid crossing cell edges; keep the fighter silhouette readable in front of the effects. Contact impact stars, shield bursts, smoke clouds, weapon geometry and body outlines are not swing bands and stay unchanged. No added swings on poses that currently have none. No text, checkerboard or floor shadow. Genuine transparent RGBA, preserve empty gutters.\nFour columns by three rows. The RED angular knife-motion smear in row2 column1 (Heavy Slash) is the swing trail; make that3x thicker. All other eleven poses and their weapons remain identical.",
+      "references": [
+        "godot/assets/fighters/proportions-v2/fillet-active.png"
+      ],
+      "path": "godot/assets/fighters/swings-v3/fillet-active.png",
+      "generated": "exec-f069a19e-4d40-451f-8a1c-2c2591d49cb4.png",
+      "transparent_background": true,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "godot/assets/fighters/swings-v3/fillet-active.png",
+        "sha256": "24529aef354746a5a4a373528dcf5b0e31144c5abef2ec4a7be17a84b9853b0c",
+        "bytes": 2230380,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/proportions-v2/fillet-active.png",
+          "sha256": "73ea8b6a4213e8b11341d70b9898079538b878bb1b2ec49255c2500459bdc0eb",
+          "bytes": 2199170,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "promoted_frames": {
+        "fighter": 5,
+        "phase": "active",
+        "indices": [
+          4
+        ]
+      }
+    },
+    {
+      "id": "fillet-signatures-swing-3x",
+      "prompt": "Precision edit ONLY the colored SWING TRAIL thickness in this existing transparent fighting-game sprite atlas. Preserve the exact 1536x1024 canvas, grid, ALL character pixels/poses/anatomy/weapon lengths and locations, pivots and transparent background. Do not restage, relayout or redraw the fighter. Every existing swing crescent or directional smear must have THREE TIMES its current perpendicular band thickness (3x width, not 3x length or arc radius). Example: a 6-pixel band becomes 18 pixels thick, a 10-pixel band becomes 30. Retain each original centerline, curvature, tips, length, original guild hue and crisp cel-shaded tapered shape language. Widen inward where needed to keep its existing reach and avoid crossing cell edges; keep the fighter silhouette readable in front of the effects. Contact impact stars, shield bursts, smoke clouds, weapon geometry and body outlines are not swing bands and stay unchanged. No added swings on poses that currently have none. No text, checkerboard or floor shadow. Genuine transparent RGBA, preserve empty gutters.\nFour columns by two rows. The entire TOP windup row stays unchanged. In all FOUR BOTTOM active panels thicken the RED motion bands3x: both spiral crescents in col1, the rising vertical slash col2, the horizontal stab wedge col3, and the low slicing crescent col4. No increase of reach, no larger characters, keep cell gutters.",
+      "references": [
+        "godot/assets/fighters/proportions-v2/fillet-signatures.png"
+      ],
+      "path": "godot/assets/fighters/swings-v3/fillet-signatures.png",
+      "generated": "exec-7eb69300-5b3c-4aa1-9660-b4d8cf09369c.png",
+      "transparent_background": true,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "godot/assets/fighters/swings-v3/fillet-signatures.png",
+        "sha256": "50a354bbca4e6719832fdae7d6f93536eee4f87853d25bdd13e25f67573bdec8",
+        "bytes": 2040996,
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/proportions-v2/fillet-signatures.png",
+          "sha256": "0ef16679c855695300d79b561c41c939158791c8fd4d9a45e37019400807f619",
+          "bytes": 2032896,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "promoted_frames": {
+        "fighter": 5,
+        "phase": "signature_active",
+        "indices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "id": "anvil-hs-clean",
+      "path": "art/archive/swing-v3-studies/anvil-hs-clean.png",
+      "references": [
+        "godot/assets/fighters/swings-v3/anvil-active.png"
+      ],
+      "prompt": "TARGETED SPRITE-ATLAS CLEANUP. Keep this exact 1536x1024 transparent RGBA atlas, the exact original layout and ALL original pose positions, scales, colors and linework. Do not zoom, crop, recenter, relayout or turn it into a single centered character. Only erase the specifically identified tiny neighboring-pose fragments to transparent. No new art, no resizing, no changed swings. Preserve the thick 3x swing treatment. Output the SAME full atlas with only the local erasures.\nTarget: top-row column5, the overhead heavy hammer swing. It begins at x1024. There is an unwanted thin GOLDEN vertical crescent fragment along its LEFT edge, x1024–1037, y285–404, belonging to the preceding column4 horizontal swing. Erase that stray fragment to transparent ONLY within x1024–1037. Leave the complete overhead GOLDEN swing arc, hammer, fighter and shield exactly intact. It is okay that this trims a few pixels of the adjacent column4 effect: that adjacent frame is NOT used from this correction. The overhead fighter's own silhouette begins to the right of that stray strip. No glow filling the erased strip.",
+      "prompt_status": "exact",
+      "transparent_background": true,
+      "generated": "exec-8e85267f-6d3c-4f65-945a-32ae49455797.png",
+      "output_metadata": {
+        "path": "art/archive/swing-v3-studies/anvil-hs-clean.png",
+        "bytes": 2394354,
+        "sha256": "394b7f0f627cf5b4983cce6492b76b2f79540c2a3b00c1f9243198a1dd5d1c56",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/swings-v3/anvil-active.png",
+          "bytes": 2233382,
+          "sha256": "a33b59f7ffc53dd6243041f997929eee65a77debfcbd63b3f753bcf53d10bb87",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "review": "Cleanup introduced an opaque rectangular haze. Use the initial transparent output with a registered texture trim instead; do not promote this candidate.",
+      "status": "rejected"
+    },
+    {
+      "id": "tapper-hs-clean",
+      "path": "art/archive/swing-v3-studies/tapper-hs-clean.png",
+      "references": [
+        "godot/assets/fighters/swings-v3/tapper-active.png"
+      ],
+      "prompt": "TARGETED SPRITE-ATLAS CLEANUP. Keep this exact 1536x1024 transparent RGBA atlas, the exact original layout and ALL original pose positions, scales, colors and linework. Do not zoom, crop, recenter, relayout or turn it into a single centered character. Only erase the specifically identified tiny neighboring-pose fragments to transparent. No new art, no resizing, no changed swings. Preserve the thick 3x swing treatment. Output the SAME full atlas with only the local erasures.\nTarget: top-row column5, the raised staff heavy swing with the large gold crescent. An unwanted small GOLD/BROWN hooked-weapon fragment from column6 intrudes into its RIGHT edge around x1266–1280, y300–375. Erase this small neighboring fragment to transparent, retaining the ENTIRE intended column5 fighter, his staff with both hooks, and the thick overhead golden crescent. Do not erase his own staff hook which is immediately left of the fragment. It is okay to trim the adjacent column6 art because it is NOT used from this correction.",
+      "prompt_status": "exact",
+      "transparent_background": true,
+      "generated": "exec-3489d214-7280-4d01-a7de-9da58dc084df.png",
+      "output_metadata": {
+        "path": "art/archive/swing-v3-studies/tapper-hs-clean.png",
+        "bytes": 2465459,
+        "sha256": "2d6c4730b0c47c306437017742bf6acf0d0bd29264c2ab424fb36002675b5111",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/swings-v3/tapper-active.png",
+          "bytes": 2297717,
+          "sha256": "96ebd496acd411398dded0bc2d13fd7f3eb66f202be39a094ad1ffcd1f95bb9f",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "review": "Cleanup introduced an opaque rectangular haze. Use the initial transparent output with a registered texture trim instead; do not promote this candidate.",
+      "status": "rejected"
+    },
+    {
+      "id": "smoke-s-clean",
+      "path": "godot/assets/fighters/swings-v3/smoke-s-clean.png",
+      "references": [
+        "godot/assets/fighters/swings-v3/smoke-active.png"
+      ],
+      "prompt": "TARGETED SPRITE-ATLAS CLEANUP. Keep this exact 1536x1024 transparent RGBA atlas, the exact original layout and ALL original pose positions, scales, colors and linework. Do not zoom, crop, recenter, relayout or turn it into a single centered character. Only erase the specifically identified tiny neighboring-pose fragments to transparent. No new art, no resizing, no changed swings. Preserve the thick 3x swing treatment. Output the SAME full atlas with only the local erasures.\nTarget: top-row column4, the forward hand/knife slash with the thick GREEN crescent. Erase ONLY two intruding pieces of neighboring characters: (1) the tiny brown toe fragment from column3 at x752–763, y170–234, and (2) the narrow ivory coat-tail fragment from column5 at x1019–1038, y300–430. Preserve the column4 fighter's own flowing coat, front boot, hands, face and the entire green crescent exactly. Her own leading boot ends around x1008 and her green crescent occupies the area above y300, so do NOT trim the whole right edge vertically. Only remove the isolated coat fragment below the crescent. It is okay that those erasures trim the neighboring columns because they are NOT used from this correction.",
+      "prompt_status": "exact",
+      "transparent_background": true,
+      "generated": "exec-851b43e5-1cae-479e-a84f-206594116b8d.png",
+      "output_metadata": {
+        "path": "godot/assets/fighters/swings-v3/smoke-s-clean.png",
+        "bytes": 2249006,
+        "sha256": "35be3b230ef4207543cf11d395290e462a9aba9bcb1510c0ee9c7c63bcda343f",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "godot/assets/fighters/swings-v3/smoke-active.png",
+          "bytes": 2274356,
+          "sha256": "de6a6f87214075f4b4429b9be3b3f5cb2172f5f6cb4967ed672c3e5fd7ea6452",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "promoted_frames": {
+        "fighter": 2,
+        "phase": "active",
+        "indices": [
+          3
+        ]
+      },
+      "review": "Targeted removal of neighboring-pose fragments observed at gameplay size; original generated result retained."
+    },
+    {
+      "id": "tapper-hs-alpha",
+      "path": "godot/assets/fighters/swings-v3/tapper-hs-alpha.png",
+      "references": [
+        "art/archive/swing-v3-studies/tapper-hs-clean.png"
+      ],
+      "prompt": "Remove the entire colored brown/yellow background and glow haze from this exact sprite atlas, replacing it with REAL FULL TRANSPARENCY (alpha zero). Preserve the twelve fighters and their held weapons, sharp gold swing crescent in the top row fifth column, and small contact spark shapes. Preserve their exact pixel positions, body scale, 1536x1024 canvas and all six-column/two-row spacing; do NOT move, crop, enlarge, restage or redraw any figure. The gold swing crescent itself is solid cel-shaded yellow, but ALL diffuse yellow radiance beyond its hard edge must disappear, as must ALL brown/tan haze behind and between the bodies. Empty space inside the crescent is also transparent; no filled colored rectangle or halo may remain behind it. Preserve the already-clean gap between the fifth and sixth top-row fighters, with no stray hooked-weapon fragment from the sixth figure. Output only the identical full atlas as a clean transparent-background cutout, no checkerboard or replacement solid color.",
+      "prompt_status": "exact",
+      "transparent_background": true,
+      "generated": "exec-7cc73bd1-7766-45f4-9234-d7f58a2c8ea0.png",
+      "output_metadata": {
+        "path": "godot/assets/fighters/swings-v3/tapper-hs-alpha.png",
+        "bytes": 2340528,
+        "sha256": "9b73611c5b336092635742a4baa1c61f77b5986e4d0522c5b92f29514e1c9d44",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/archive/swing-v3-studies/tapper-hs-clean.png",
+          "bytes": 2465459,
+          "sha256": "2d6c4730b0c47c306437017742bf6acf0d0bd29264c2ab424fb36002675b5111",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "promoted_frames": {
+        "fighter": 3,
+        "phase": "active",
+        "indices": [
+          4
+        ]
+      },
+      "review": "Removed opaque haze from the local fragment cleanup while preserving the complete thick crescent and its clear neighboring gap."
+    }
+  ],
+  "review": "Promote only edited swing frames; unedited poses and signature windups continue using their original files. 3x is the visual generation target; no pixel-dilation filter is used. Body scale, root pivots, strike geometry, reach and timing are retained."
+}

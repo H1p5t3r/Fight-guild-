@@ -1,0 +1,14 @@
+[
+  {
+    "name": "charter-wall",
+    "prompt": "Create one opaque full-bleed wall surface for the boundary of this side-view 2D fighting-game arena, using the attached reference for the exact painted anime/cel-shaded style, ink outlines, materials, colors and top-left afternoon lighting. 1536x1024 landscape. The ENTIRE canvas must be solid architecture, no openings, no sky, no floor, no pillars isolated in empty space, no transparency. Close-up stadium enclosure wall: dark weathered red brick, heavy blue-black iron vertical buttresses with rivets, broad limestone reinforcement bands, a hanging burgundy cloth panel near the center. This is a continuous vertical barrier extending beyond all four canvas edges, not a finished freestanding object. Medium-scale readable surfaces, restrained texture, no text, no characters, no doors or windows. It will be cropped to fill screen-height boundary strips; keep solid detailed masonry at both left and right edges."
+  },
+  {
+    "name": "foundry-wall",
+    "prompt": "Create one opaque full-bleed wall surface for the boundary of this side-view 2D fighting-game arena, using the attached reference for the exact painted anime/cel-shaded style, ink outlines, materials, colors and top-left afternoon lighting. 1536x1024 landscape. The ENTIRE canvas must be solid architecture, no openings, no sky, no floor, no isolated objects, no transparency. Close-up foundry enclosure: soot-dark red brick and charcoal iron blast-wall plates, brass rivets and heavy vertical reinforcement girders, subtle warm amber reflected forge light along the iron edges, narrow burgundy pennant cloth bolted onto the wall. This is a continuous vertical barrier extending beyond all four canvas edges, not a freestanding object. Medium-scale readable surfaces, restrained texture, no text, no characters, no doors or windows. It will be cropped into screen-height boundary strips; keep solid masonry/iron at both left and right edges."
+  },
+  {
+    "name": "quay-wall",
+    "prompt": "Create one opaque full-bleed wall surface for the boundary of this side-view 2D fighting-game arena, using the attached reference for the exact painted anime/cel-shaded style, ink outlines, materials, colors and top-left afternoon lighting. 1536x1024 landscape. The ENTIRE canvas must be solid architecture, no openings, no sky, no floor, no isolated objects, no transparency. Close-up harbor enclosure bulkhead: massive weathered dark timber planks, muted teal painted iron reinforcement bands with brass rivets and thick hemp rope fastened against the solid wall, restrained ivory markings without writing. This is a continuous vertical barrier extending beyond all four canvas edges, not a freestanding object. Medium-scale readable surfaces, restrained texture, no text, no characters, no doors or windows. It will be cropped into screen-height boundary strips; keep solid timber and iron at both left and right edges."
+  }
+]

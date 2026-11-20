@@ -1,0 +1,257 @@
+{
+  "version": 1,
+  "generations": [
+    {
+      "file": "2hs.png",
+      "asset": "fillet-ground-v1/2hs.png",
+      "sha256": "e03eaad7ca0022d7f8bc9cb5538688e2d9c384689184dbbad4bc37a5ae3f8a8e",
+      "source": "/workspace/generated_images/exec-bbccb3ab-bff1-4dfc-84c8-d5d9f95f2469.png",
+      "prompt": "2hs-refinement-prompt.txt",
+      "references": [
+        "/workspace/generated_images/exec-12b72480-6e6e-43f2-a823-5af22a99f549.png"
+      ],
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "2k.png",
+      "asset": "fillet-ground-v1/2k.png",
+      "sha256": "12e5dbcdaa06501703385bbc22bf2b5054b61dcf47fd1c92cc33676942dbca52",
+      "source": "/workspace/generated_images/exec-11027db9-dfc4-4f73-8c46-63eb90e18549.png",
+      "prompt": "2k-prompt.txt",
+      "references": [
+        "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+        "/workspace/Fight-guild-/art/characters/fillet-v1/review/normals-batch-01/k-options.png"
+      ],
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "2p.png",
+      "asset": "fillet-ground-v1/2p.png",
+      "sha256": "8ee986379fb22f6c2330081ecaea4e32bd2e32469c60b830d52c8dfd255a37bf",
+      "source": "/workspace/generated_images/exec-71a0494e-d674-449a-b03d-8e47abe950d6.png",
+      "prompt": "2p-prompt.txt",
+      "references": [
+        "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+        "/workspace/Fight-guild-/art/characters/fillet-v1/review/normals-batch-01/p-options.png"
+      ],
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "2s.png",
+      "asset": "fillet-ground-v1/2s.png",
+      "sha256": "afc7e82f9e4c538cf09662b85066bfa4e541de1db81ed6fd80779b195a49648c",
+      "source": "/workspace/generated_images/exec-db98aa00-9e19-4433-a0cf-be76c57bffa6.png",
+      "prompt": "2s-prompt.txt",
+      "references": [
+        "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+        "/workspace/Fight-guild-/art/characters/fillet-v1/review/normals-batch-02/2s-revision-02.png"
+      ],
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "5hs.png",
+      "asset": "fillet-ground-v1/5hs.png",
+      "sha256": "fb3172e14a4ca45b56e80cfb2b309773eb88b4e47adb68d09b039fea9152ba69",
+      "source": "/workspace/generated_images/exec-447f1801-1ad3-4fa5-b07f-79ba15a19d51.png",
+      "prompt": "5hs-prompt.txt",
+      "references": [
+        "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+        "/workspace/Fight-guild-/art/characters/fillet-v1/review/normals-batch-02/5hs-timeline.png"
+      ],
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "5k.png",
+      "asset": "fillet-ground-v1/5k.png",
+      "sha256": "1f90da93a8f189eaa58c1bcd97bbcb72635df55c6b9142191b4f69cfab60a48d",
+      "source": "/workspace/generated_images/exec-aab4d7d2-5acc-4f10-839c-a87f66fc944e.png",
+      "prompt": "5k-prompt.txt",
+      "references": [
+        "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+        "/workspace/Fight-guild-/art/characters/fillet-v1/review/normals-batch-01/k-options.png"
+      ],
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "5p.png",
+      "asset": "fillet-ground-v1/5p.png",
+      "sha256": "12b1b722f170659ff7bae859ea73e30b88429aa8a29ce2c0bf624f86004e0268",
+      "source": "/workspace/generated_images/exec-98ddc144-3a6e-4b2e-8d18-b127ce6e041c.png",
+      "prompt": "5p-prompt.txt",
+      "references": [
+        "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+        "/workspace/Fight-guild-/art/characters/fillet-v1/review/normals-batch-01/p-options.png"
+      ],
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "5s.png",
+      "asset": "fillet-ground-v1/5s.png",
+      "sha256": "2b85a4b5672bb97066bbba6aa96dcbaac2eaeddc02b901ee8f4e1db7ede95a68",
+      "source": "/workspace/generated_images/exec-536a63bb-9cb3-4f09-83ac-3fb8983adb1b.png",
+      "prompt": "5s-prompt.txt",
+      "references": [
+        "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+        "/workspace/Fight-guild-/art/characters/fillet-v1/review/fs-hip-led-refined.png"
+      ],
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "6hs.png",
+      "asset": "fillet-ground-v1/6hs.png",
+      "sha256": "2831c59c8e3f7ce080fa474458e08d8289c07f0eb6d5bc427b8341c76df4ab2f",
+      "source": "/workspace/generated_images/exec-f8833924-895c-4e88-b44c-8fa1afe4d22c.png",
+      "prompt": "6hs-refinement-prompt.txt",
+      "references": [
+        "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+        "/workspace/Fight-guild-/art/characters/fillet-v1/review/normals-batch-02/6hs-timeline.png"
+      ],
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "6p.png",
+      "asset": "fillet-ground-v1/6p.png",
+      "sha256": "02c6cf66cce4dc828051e71b25b0241639bbff19db1688ad3a1ba5cc3b930657",
+      "source": "/workspace/generated_images/exec-27b71ae7-7123-4bed-8ea4-d0e58df0c80d.png",
+      "prompt": "6p-prompt.txt",
+      "references": [
+        "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+        "/workspace/Fight-guild-/art/characters/fillet-v1/review/normals-batch-02/6p-timeline.png"
+      ],
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "cs-1.png",
+      "asset": "fillet-ground-v1/cs-1.png",
+      "sha256": "3a96aeb7d9332ef3eba4b3c930a2ae4195dc6d11c02a3e5cf934df1e15da5f79",
+      "source": "/workspace/generated_images/exec-7857b517-7c77-4db9-8937-436dcd543d86.png",
+      "prompt": "cs-1-prompt.txt",
+      "references": [
+        "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+        "/workspace/fillet-art-reference/Fillet_cS_Selected_Motion_Direction.png"
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "file": "cs-2.png",
+      "asset": "fillet-ground-v1/cs-2.png",
+      "sha256": "fb06351756ef11f556f8e3db118381f19f16be24e41c2f47e7ad9e6dea57e7f9",
+      "source": "/workspace/generated_images/exec-675daf75-4d2a-4a43-bae5-219c623932f1.png",
+      "prompt": "cs-2-prompt.txt",
+      "references": [
+        "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+        "/workspace/fillet-art-reference/Fillet_cS_Selected_Motion_Direction.png"
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "file": "2s-inbetweens-a.png",
+      "asset": "fillet-ground-twos/2s-inbetweens-a.png",
+      "sha256": "eaa79c871a12d66e112f4530fc1e56206b0f76c7999f8c9f13771813b2463864",
+      "source": "/workspace/generated_images/exec-d804a7b2-7527-42fd-a646-8a2d0f20fc15.png",
+      "prompt": "2s-inbetweens-a-quality-prompt.txt",
+      "references": [
+        "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/2s.png",
+        "/workspace/generated_images/exec-b4fffecd-75e2-4c0b-87ee-d0fa50b76449.png"
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "file": "2s-inbetweens-b.png",
+      "asset": "fillet-ground-twos/2s-inbetweens-b.png",
+      "sha256": "99add9b507166f7ad3011b09b7b7ed2dacb46377f3409004be2b41f38b02c709",
+      "source": "/workspace/generated_images/exec-68309f12-1339-4f5f-99c6-c36549be8a53.png",
+      "prompt": "2s-inbetweens-b-prompt.txt",
+      "references": [
+        "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/2s.png"
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "file": "2s-inbetweens-c.png",
+      "asset": "fillet-ground-twos/2s-inbetweens-c.png",
+      "sha256": "101019c663fa1db01dfb5ffaf9d5445a0470cc022b123a96605c864b0ea8e342",
+      "source": "/workspace/generated_images/exec-cfab0232-84b5-4a5a-8772-dc01f47d5a53.png",
+      "prompt": "2s-inbetweens-c-refinement-prompt.txt",
+      "references": [
+        "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/2s.png",
+        "/workspace/generated_images/exec-68309f12-1339-4f5f-99c6-c36549be8a53.png"
+      ],
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "file": "5k-inbetweens.png",
+      "asset": "fillet-ground-twos/5k-inbetweens.png",
+      "sha256": "af009ae95cca2c44072a524fbfd0a9e90dca22d76af4c079cdeb8dce405a1a77",
+      "source": "/workspace/generated_images/exec-a2cabaf7-302e-4e20-8607-a6c777f3461b.png",
+      "prompt": "5k-inbetweens-quality-prompt.txt",
+      "references": [
+        "/workspace/generated_images/exec-3fe7b927-eab9-48a4-8584-bfa0a6b91223.png",
+        "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5k.png"
+      ],
+      "size": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "file": "5p-inbetweens.png",
+      "asset": "fillet-ground-twos/5p-inbetweens.png",
+      "sha256": "b8fcd24c09bbc065ba0028b847e7f0f88b5cb8805ee7ef2a99f50ea6c851f123",
+      "source": "/workspace/generated_images/exec-d2796db5-1593-4a81-9951-95f3134298c0.png",
+      "prompt": "5p-inbetweens-prompt.txt",
+      "references": [
+        "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5p.png"
+      ],
+      "size": [
+        1262,
+        1246
+      ]
+    }
+  ]
+}

@@ -1,0 +1,385 @@
+{
+  "version": 1,
+  "created_date": "2026-11-18",
+  "generator": "OpenAI image_gen",
+  "generator_version": "Not exposed by tool",
+  "pixel_processing": "Generated PNGs copied byte-for-byte. Roots, crops, anatomical fits and clocks are metadata only.",
+  "selection": {
+    "idle": "A / Lazy Tap",
+    "walk": "B / Rolling Swagger",
+    "back_walk": "A / Unbothered Retreat",
+    "backdash": "B / Shoulder Slip",
+    "run": "A / Shoulder Cruise"
+  },
+  "user_instruction": "Idle A, walk B, ball walk A, backdash B, and run A (ensure proper leg alternating).",
+  "interpretation": "ball walk is backward walk.",
+  "generations": [
+    {
+      "id": "idle",
+      "phase": "idle",
+      "selection": "A / Lazy Tap",
+      "sheet": "idle",
+      "detail": "Use ONLY row A / LAZY TAP from the idle reference. Four chronological keys of one slow looping shoulder tap, NOT four alternatives. Feet remain identically planted in relaxed stagger, rear leg weighted, front knee loose. Chin proud, eyes/glasses angled DOWN toward the opponent at right, quietly condescending smirk. 01 REST: wooden handle resting on right shoulder, relaxed chest. 02 LIFT: right wrist lifts the wooden handle a few centimeters off shoulder; slight inhalation and collarbone rise. 03 TAP: wrapped wooden handle touches right shoulder, small shoulder dip and head tilt down. 04 SETTLE: subtle relaxed overshoot, then returns naturally toward01. Hook's SHARP METAL end stays safely behind him LEFT, not against his body. Left knife remains loose and low. Small real wrist/shoulder changes clearly drawn; no excessive whole-body sway, no walking, no foot lift. Preserve fixed length of hook pole through all four positions.",
+      "prompt": "Create a PRODUCTION fighting-game sprite atlas of SHARK using the references. TRUE TRANSPARENT RGBA background; no background color, checkerboard painted into image, ground, shadows, text, labels, grids, arrows, effects, or smears. Exactly FOUR different full-body sequential frames arranged TWO columns by TWO rows, 1536x1024 canvas, each nominal cell 768x512. Whole body, both boots, all hair and both weapons visible inside each cell with transparent gutters. In-place fixed side/three-quarter gameplay camera, all figures face RIGHT throughout. Body upright reference height is 420 source pixels; pelvis horizontally at local x410 and virtual floor at y480. Do not auto-scale each pose to its own bounding box. Same anatomy and equipment size every frame. Camera never changes.\n\nDesign lock: tall lean-muscular adult swimmer with small angular face, eight-head proportions, low-volume LONG WHITE loose hair following nape/back, no big mane. Physical cobalt BLUE SPORTS GLASSES with lenses/bridge/arms, NO face paint. Teal scale sleeveless vest, bone shark-jaw pauldron on anatomical LEFT shoulder, brown leather bracers, tan rope waist belt/net at hip, long torn teal sash with ivory zigzag, loose slate trousers, large brown strapped boots. Right hand carries ONE full-length wooden rope-wrapped pole with ONE open silver J-hook at the back/left end and butt ring at the forward/right end. Total hook pole length remains about 0.8 standing height. LEFT hand holds separate short triangular knife low, pointed away from legs. Exactly two arms and two legs. Hook pole rests across/behind shoulders in the right hand unless action specifically lowers/lifts it. No weapon swaps, missing pole, shortening, duplicated hook or spear point.\n\nCrisp dark outer ink, clean flat anime cel shadows, neutral upper-left light. The reference options sheet chooses motion only; preserve model costume. Bodies must articulate through ribs versus hips, bent knees, heel/toe rolls, and opposing shoulder rotation. Long hair/sash have restrained delayed follow-through. This is not four independent mannequin poses.\n\nLEG IDENTIFICATION matters: anatomical RIGHT leg is the NEAR leg, foreground silhouette, normally lit warm-brown boot with clearly visible straps. Anatomical LEFT leg is FAR, behind the near leg where they overlap, shaded a modest darker cool brown. Both boots same physical design. Keep that depth identity stable even when the left leg advances ahead of the right leg. Do not make whichever leg is forward automatically be the near leg. Show knee origins connected to correct hips.\n\nUse ONLY row A / LAZY TAP from the idle reference. Four chronological keys of one slow looping shoulder tap, NOT four alternatives. Feet remain identically planted in relaxed stagger, rear leg weighted, front knee loose. Chin proud, eyes/glasses angled DOWN toward the opponent at right, quietly condescending smirk. 01 REST: wooden handle resting on right shoulder, relaxed chest. 02 LIFT: right wrist lifts the wooden handle a few centimeters off shoulder; slight inhalation and collarbone rise. 03 TAP: wrapped wooden handle touches right shoulder, small shoulder dip and head tilt down. 04 SETTLE: subtle relaxed overshoot, then returns naturally toward01. Hook's SHARP METAL end stays safely behind him LEFT, not against his body. Left knife remains loose and low. Small real wrist/shoulder changes clearly drawn; no excessive whole-body sway, no walking, no foot lift. Preserve fixed length of hook pole through all four positions.",
+      "references": [
+        "/workspace/Fight-guild-/art/characters/shark.png",
+        "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/idle.png"
+      ],
+      "transparent_background": true,
+      "source": "/workspace/generated_images/exec-03987e74-4362-4d9a-b49a-2152406dbf39.png",
+      "initial_source": "/workspace/generated_images/exec-03987e74-4362-4d9a-b49a-2152406dbf39.png",
+      "path": "godot/assets/fighters/shark-movement-v1/idle.png",
+      "corrections": [],
+      "sha256": "3e361ddf48eef682d96f277ddc6aaf633c02d3600060531d5a93c571aef1e4b4",
+      "size": [
+        1536,
+        1024
+      ],
+      "reference_metadata": [
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50"
+        },
+        {
+          "path": "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0"
+        },
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/idle.png",
+          "sha256": "a9f20241f63f0131b031015d9c256f2ec934c5fcd39734385c671277a68d2199"
+        }
+      ]
+    },
+    {
+      "id": "walk_near",
+      "phase": "walk",
+      "selection": "B / Rolling Swagger",
+      "sheet": "walk",
+      "detail": "Use ONLY row B / ROLLING SWAGGER from forward walk reference. This is FIRST HALF of an EIGHT-frame walk, chronological frames01-04; do NOT draw second-half contact yet. Relaxed upright rolling swagger with hips and shoulders counter-rotating, hook on shoulder and knife low. Facing and traveling RIGHT, drawn IN PLACE. At least one foot always on virtual floor. Hair/sash gently follow left.\n01 NEAR CONTACT: anatomical RIGHT/NEAR lit leg reaches forward RIGHT, heel landing; LEFT/FAR shadowed leg extends behind LEFT on toe.\n02 NEAR DOWN: RIGHT/NEAR leg planted flat near pelvis and knee absorbing weight; LEFT/FAR foot lifts from behind and begins moving forward, still behind support leg. Torso dips.\n03 FAR PASSING: RIGHT/NEAR stance foot now just behind pelvis LEFT, heel beginning to rise; LEFT/FAR knee passes forward beneath hip and LEFT boot swings RIGHT. Near leg must visibly occlude the far leg when paths overlap.\n04 FAR REACH: LEFT/FAR shadowed leg extends forward RIGHT to prepare its next heel contact; RIGHT/NEAR lit leg is now stretched backward LEFT on toe. Ribcage rises/turns against hip; no jump.\nIMPORTANT: by04 the forward leg has CHANGED from NEAR to FAR. Keep far-left leg shaded and behind at crossover. Do not simply duplicate01 in04. No near boot jumping from front to back without intermediate passing keys. Powerful quiet leg articulation, not stiff marching.",
+      "prompt": "Create a PRODUCTION fighting-game sprite atlas of SHARK using the references. TRUE TRANSPARENT RGBA background; no background color, checkerboard painted into image, ground, shadows, text, labels, grids, arrows, effects, or smears. Exactly FOUR different full-body sequential frames arranged TWO columns by TWO rows, 1536x1024 canvas, each nominal cell 768x512. Whole body, both boots, all hair and both weapons visible inside each cell with transparent gutters. In-place fixed side/three-quarter gameplay camera, all figures face RIGHT throughout. Body upright reference height is 420 source pixels; pelvis horizontally at local x410 and virtual floor at y480. Do not auto-scale each pose to its own bounding box. Same anatomy and equipment size every frame. Camera never changes.\n\nDesign lock: tall lean-muscular adult swimmer with small angular face, eight-head proportions, low-volume LONG WHITE loose hair following nape/back, no big mane. Physical cobalt BLUE SPORTS GLASSES with lenses/bridge/arms, NO face paint. Teal scale sleeveless vest, bone shark-jaw pauldron on anatomical LEFT shoulder, brown leather bracers, tan rope waist belt/net at hip, long torn teal sash with ivory zigzag, loose slate trousers, large brown strapped boots. Right hand carries ONE full-length wooden rope-wrapped pole with ONE open silver J-hook at the back/left end and butt ring at the forward/right end. Total hook pole length remains about 0.8 standing height. LEFT hand holds separate short triangular knife low, pointed away from legs. Exactly two arms and two legs. Hook pole rests across/behind shoulders in the right hand unless action specifically lowers/lifts it. No weapon swaps, missing pole, shortening, duplicated hook or spear point.\n\nCrisp dark outer ink, clean flat anime cel shadows, neutral upper-left light. The reference options sheet chooses motion only; preserve model costume. Bodies must articulate through ribs versus hips, bent knees, heel/toe rolls, and opposing shoulder rotation. Long hair/sash have restrained delayed follow-through. This is not four independent mannequin poses.\n\nLEG IDENTIFICATION matters: anatomical RIGHT leg is the NEAR leg, foreground silhouette, normally lit warm-brown boot with clearly visible straps. Anatomical LEFT leg is FAR, behind the near leg where they overlap, shaded a modest darker cool brown. Both boots same physical design. Keep that depth identity stable even when the left leg advances ahead of the right leg. Do not make whichever leg is forward automatically be the near leg. Show knee origins connected to correct hips.\n\nUse ONLY row B / ROLLING SWAGGER from forward walk reference. This is FIRST HALF of an EIGHT-frame walk, chronological frames01-04; do NOT draw second-half contact yet. Relaxed upright rolling swagger with hips and shoulders counter-rotating, hook on shoulder and knife low. Facing and traveling RIGHT, drawn IN PLACE. At least one foot always on virtual floor. Hair/sash gently follow left.\n01 NEAR CONTACT: anatomical RIGHT/NEAR lit leg reaches forward RIGHT, heel landing; LEFT/FAR shadowed leg extends behind LEFT on toe.\n02 NEAR DOWN: RIGHT/NEAR leg planted flat near pelvis and knee absorbing weight; LEFT/FAR foot lifts from behind and begins moving forward, still behind support leg. Torso dips.\n03 FAR PASSING: RIGHT/NEAR stance foot now just behind pelvis LEFT, heel beginning to rise; LEFT/FAR knee passes forward beneath hip and LEFT boot swings RIGHT. Near leg must visibly occlude the far leg when paths overlap.\n04 FAR REACH: LEFT/FAR shadowed leg extends forward RIGHT to prepare its next heel contact; RIGHT/NEAR lit leg is now stretched backward LEFT on toe. Ribcage rises/turns against hip; no jump.\nIMPORTANT: by04 the forward leg has CHANGED from NEAR to FAR. Keep far-left leg shaded and behind at crossover. Do not simply duplicate01 in04. No near boot jumping from front to back without intermediate passing keys. Powerful quiet leg articulation, not stiff marching.",
+      "references": [
+        "/workspace/Fight-guild-/art/characters/shark.png",
+        "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/walk.png"
+      ],
+      "transparent_background": true,
+      "source": "/workspace/generated_images/exec-69b315fa-2233-43a6-98f2-8084c980431b.png",
+      "initial_source": "/workspace/generated_images/exec-69b315fa-2233-43a6-98f2-8084c980431b.png",
+      "path": "godot/assets/fighters/shark-movement-v1/walk_near.png",
+      "corrections": [],
+      "sha256": "ccd648f5fad4f6f510fc82531a476aef6094e324c006d9a64fd1a598d6a41960",
+      "size": [
+        1536,
+        1024
+      ],
+      "reference_metadata": [
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50"
+        },
+        {
+          "path": "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0"
+        },
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/walk.png",
+          "sha256": "6aa820f243c2c6729278ac45b9e883c681d8f7ee318216b2fdcb7f1cc8185aac"
+        }
+      ]
+    },
+    {
+      "id": "back_walk_near",
+      "phase": "back_walk",
+      "selection": "A / Unbothered Retreat",
+      "sheet": "back-walk",
+      "detail": "Use ONLY row A / UNBOTHERED RETREAT from backward walk reference. FIRST HALF of an EIGHT-frame BACKWARD WALK, frames01-04. Faces RIGHT watching opponent but travels LEFT, drawn in place. Upright unbothered chest, hook resting behind right shoulder, left knife loosely low, chin confident. Rearward toe contacts instead of a forward heel strike. Hair/net/sash mild lag toward RIGHT, no dramatic wind.\n01 NEAR REAR CONTACT: RIGHT/NEAR lit leg reaches back LEFT and lands toe-first; LEFT/FAR shadow leg is forward RIGHT, supporting old weight.\n02 NEAR LOAD: weight rolls onto RIGHT/NEAR planted rear-left boot, knee softly bends; LEFT/FAR boot lifts at front right.\n03 FAR PASS BACK: RIGHT/NEAR boot supports under hip; LEFT/FAR knee/boot travels backward LEFT beneath pelvis, behind near leg at crossover.\n04 FAR REACH BACK: LEFT/FAR shadowed leg reaches rear LEFT toe-first to take next step; RIGHT/NEAR lit leg now appears forward RIGHT, heel lifting to leave.\nAt least one foot always grounded. This is backward footwork facing right, not forward walking facing left, not a backwards run. Distinguish which leg is foreground; near leg goes from rear-left in01 to front-right in04. Ribcage/pelvis oppose gently.",
+      "prompt": "Create a PRODUCTION fighting-game sprite atlas of SHARK using the references. TRUE TRANSPARENT RGBA background; no background color, checkerboard painted into image, ground, shadows, text, labels, grids, arrows, effects, or smears. Exactly FOUR different full-body sequential frames arranged TWO columns by TWO rows, 1536x1024 canvas, each nominal cell 768x512. Whole body, both boots, all hair and both weapons visible inside each cell with transparent gutters. In-place fixed side/three-quarter gameplay camera, all figures face RIGHT throughout. Body upright reference height is 420 source pixels; pelvis horizontally at local x410 and virtual floor at y480. Do not auto-scale each pose to its own bounding box. Same anatomy and equipment size every frame. Camera never changes.\n\nDesign lock: tall lean-muscular adult swimmer with small angular face, eight-head proportions, low-volume LONG WHITE loose hair following nape/back, no big mane. Physical cobalt BLUE SPORTS GLASSES with lenses/bridge/arms, NO face paint. Teal scale sleeveless vest, bone shark-jaw pauldron on anatomical LEFT shoulder, brown leather bracers, tan rope waist belt/net at hip, long torn teal sash with ivory zigzag, loose slate trousers, large brown strapped boots. Right hand carries ONE full-length wooden rope-wrapped pole with ONE open silver J-hook at the back/left end and butt ring at the forward/right end. Total hook pole length remains about 0.8 standing height. LEFT hand holds separate short triangular knife low, pointed away from legs. Exactly two arms and two legs. Hook pole rests across/behind shoulders in the right hand unless action specifically lowers/lifts it. No weapon swaps, missing pole, shortening, duplicated hook or spear point.\n\nCrisp dark outer ink, clean flat anime cel shadows, neutral upper-left light. The reference options sheet chooses motion only; preserve model costume. Bodies must articulate through ribs versus hips, bent knees, heel/toe rolls, and opposing shoulder rotation. Long hair/sash have restrained delayed follow-through. This is not four independent mannequin poses.\n\nLEG IDENTIFICATION matters: anatomical RIGHT leg is the NEAR leg, foreground silhouette, normally lit warm-brown boot with clearly visible straps. Anatomical LEFT leg is FAR, behind the near leg where they overlap, shaded a modest darker cool brown. Both boots same physical design. Keep that depth identity stable even when the left leg advances ahead of the right leg. Do not make whichever leg is forward automatically be the near leg. Show knee origins connected to correct hips.\n\nUse ONLY row A / UNBOTHERED RETREAT from backward walk reference. FIRST HALF of an EIGHT-frame BACKWARD WALK, frames01-04. Faces RIGHT watching opponent but travels LEFT, drawn in place. Upright unbothered chest, hook resting behind right shoulder, left knife loosely low, chin confident. Rearward toe contacts instead of a forward heel strike. Hair/net/sash mild lag toward RIGHT, no dramatic wind.\n01 NEAR REAR CONTACT: RIGHT/NEAR lit leg reaches back LEFT and lands toe-first; LEFT/FAR shadow leg is forward RIGHT, supporting old weight.\n02 NEAR LOAD: weight rolls onto RIGHT/NEAR planted rear-left boot, knee softly bends; LEFT/FAR boot lifts at front right.\n03 FAR PASS BACK: RIGHT/NEAR boot supports under hip; LEFT/FAR knee/boot travels backward LEFT beneath pelvis, behind near leg at crossover.\n04 FAR REACH BACK: LEFT/FAR shadowed leg reaches rear LEFT toe-first to take next step; RIGHT/NEAR lit leg now appears forward RIGHT, heel lifting to leave.\nAt least one foot always grounded. This is backward footwork facing right, not forward walking facing left, not a backwards run. Distinguish which leg is foreground; near leg goes from rear-left in01 to front-right in04. Ribcage/pelvis oppose gently.",
+      "references": [
+        "/workspace/Fight-guild-/art/characters/shark.png",
+        "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/back-walk.png"
+      ],
+      "transparent_background": true,
+      "source": "/workspace/generated_images/exec-a4f9ce76-7208-44d9-9cbd-a714e170c0ac.png",
+      "initial_source": "/workspace/generated_images/exec-a4f9ce76-7208-44d9-9cbd-a714e170c0ac.png",
+      "path": "godot/assets/fighters/shark-movement-v1/back_walk_near.png",
+      "corrections": [],
+      "sha256": "44c0a77a9c7100a9e648499e83c1adff8b342a8719244c3ec8644889ab2c7e81",
+      "size": [
+        1536,
+        1024
+      ],
+      "reference_metadata": [
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50"
+        },
+        {
+          "path": "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0"
+        },
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/back-walk.png",
+          "sha256": "8edf1ba03d69799359a47ba6b7bfba7f9122e60203e31ed8cf4456aff481ca4b"
+        }
+      ]
+    },
+    {
+      "id": "run_near",
+      "phase": "run",
+      "selection": "A / Shoulder Cruise",
+      "sheet": "run",
+      "detail": "Use ONLY row A / SHOULDER CRUISE from run reference. FIRST HALF of an EIGHT-frame forward RUN, chronological frames01-04, ending just before FAR leg landing. Hook balanced on shoulder throughout, left knife low. Upright relaxed pursuit with modest forward lean (10-15 degrees), elastic powerful legs, chest twisting against pelvis. No deep crouch sprint, no high hook overhead. Hair/sash lag LEFT.\n01 NEAR CONTACT: RIGHT/NEAR lit leg lands forward RIGHT, knee slightly bent, heel/forefoot meets floor. LEFT/FAR shadow leg folded behind LEFT, heel recovering toward butt. Near boot foreground.\n02 NEAR COMPRESSION: RIGHT/NEAR knee bends more with foot now under forward pelvis, body lower; LEFT/FAR knee drives forward under hips, LEFT heel tucked. Distinct compressed silhouette.\n03 NEAR TOE-OFF / FAR DRIVE: RIGHT/NEAR lit leg extends backward LEFT, toe still touching floor and pushing; LEFT/FAR shadow knee now high and FORWARD RIGHT with boot tucked below. Torso extends upward slightly, pelvis rotates.\n04 FAR REACH / FLIGHT: BOTH BOOTS airborne. LEFT/FAR shadowed leg reaches forward RIGHT ready to land next, RIGHT/NEAR lit leg trails backward LEFT with knee bent and heel tucked. Body slightly rises but anatomical size unchanged. This far leg's landing will be next sheet's01.\nCRITICAL: the NEAR right leg moves from FRONT in01 to BACK in04. Draw actual alternation within this half cycle, not four near-knee-forward poses. The FAR left leg moves from back to front. Clear separation of boots, knee origins, and over/under occlusion. Maintain natural bone lengths and right-hand shoulder hook, no limb smears.",
+      "prompt": "Create a PRODUCTION fighting-game sprite atlas of SHARK using the references. TRUE TRANSPARENT RGBA background; no background color, checkerboard painted into image, ground, shadows, text, labels, grids, arrows, effects, or smears. Exactly FOUR different full-body sequential frames arranged TWO columns by TWO rows, 1536x1024 canvas, each nominal cell 768x512. Whole body, both boots, all hair and both weapons visible inside each cell with transparent gutters. In-place fixed side/three-quarter gameplay camera, all figures face RIGHT throughout. Body upright reference height is 420 source pixels; pelvis horizontally at local x410 and virtual floor at y480. Do not auto-scale each pose to its own bounding box. Same anatomy and equipment size every frame. Camera never changes.\n\nDesign lock: tall lean-muscular adult swimmer with small angular face, eight-head proportions, low-volume LONG WHITE loose hair following nape/back, no big mane. Physical cobalt BLUE SPORTS GLASSES with lenses/bridge/arms, NO face paint. Teal scale sleeveless vest, bone shark-jaw pauldron on anatomical LEFT shoulder, brown leather bracers, tan rope waist belt/net at hip, long torn teal sash with ivory zigzag, loose slate trousers, large brown strapped boots. Right hand carries ONE full-length wooden rope-wrapped pole with ONE open silver J-hook at the back/left end and butt ring at the forward/right end. Total hook pole length remains about 0.8 standing height. LEFT hand holds separate short triangular knife low, pointed away from legs. Exactly two arms and two legs. Hook pole rests across/behind shoulders in the right hand unless action specifically lowers/lifts it. No weapon swaps, missing pole, shortening, duplicated hook or spear point.\n\nCrisp dark outer ink, clean flat anime cel shadows, neutral upper-left light. The reference options sheet chooses motion only; preserve model costume. Bodies must articulate through ribs versus hips, bent knees, heel/toe rolls, and opposing shoulder rotation. Long hair/sash have restrained delayed follow-through. This is not four independent mannequin poses.\n\nLEG IDENTIFICATION matters: anatomical RIGHT leg is the NEAR leg, foreground silhouette, normally lit warm-brown boot with clearly visible straps. Anatomical LEFT leg is FAR, behind the near leg where they overlap, shaded a modest darker cool brown. Both boots same physical design. Keep that depth identity stable even when the left leg advances ahead of the right leg. Do not make whichever leg is forward automatically be the near leg. Show knee origins connected to correct hips.\n\nUse ONLY row A / SHOULDER CRUISE from run reference. FIRST HALF of an EIGHT-frame forward RUN, chronological frames01-04, ending just before FAR leg landing. Hook balanced on shoulder throughout, left knife low. Upright relaxed pursuit with modest forward lean (10-15 degrees), elastic powerful legs, chest twisting against pelvis. No deep crouch sprint, no high hook overhead. Hair/sash lag LEFT.\n01 NEAR CONTACT: RIGHT/NEAR lit leg lands forward RIGHT, knee slightly bent, heel/forefoot meets floor. LEFT/FAR shadow leg folded behind LEFT, heel recovering toward butt. Near boot foreground.\n02 NEAR COMPRESSION: RIGHT/NEAR knee bends more with foot now under forward pelvis, body lower; LEFT/FAR knee drives forward under hips, LEFT heel tucked. Distinct compressed silhouette.\n03 NEAR TOE-OFF / FAR DRIVE: RIGHT/NEAR lit leg extends backward LEFT, toe still touching floor and pushing; LEFT/FAR shadow knee now high and FORWARD RIGHT with boot tucked below. Torso extends upward slightly, pelvis rotates.\n04 FAR REACH / FLIGHT: BOTH BOOTS airborne. LEFT/FAR shadowed leg reaches forward RIGHT ready to land next, RIGHT/NEAR lit leg trails backward LEFT with knee bent and heel tucked. Body slightly rises but anatomical size unchanged. This far leg's landing will be next sheet's01.\nCRITICAL: the NEAR right leg moves from FRONT in01 to BACK in04. Draw actual alternation within this half cycle, not four near-knee-forward poses. The FAR left leg moves from back to front. Clear separation of boots, knee origins, and over/under occlusion. Maintain natural bone lengths and right-hand shoulder hook, no limb smears.",
+      "references": [
+        "/workspace/Fight-guild-/art/characters/shark.png",
+        "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/run.png"
+      ],
+      "transparent_background": true,
+      "source": "/workspace/generated_images/exec-d57d3aec-579a-4bc8-b35e-680e22a07f6c.png",
+      "initial_source": "/workspace/generated_images/exec-eb607363-bf21-4542-83b3-0c40ec2a5ccf.png",
+      "path": "godot/assets/fighters/shark-movement-v1/run_near.png",
+      "corrections": [
+        {
+          "id": "run_near",
+          "detail": "FIRST HALF OF RUN (frames1-4): TOP LEFT and TOP RIGHT: forward/right grounded support leg is NEAR, bright pants/boot; folded backward/left leg is FAR, dark from hip through boot. BOTTOM LEFT and BOTTOM RIGHT: backward/left extended leg is NEAR and bright; forward/right raised knee and boot belong to FAR leg and are dark. Make each leg connect to correct hip and retain this depth at crossing. Lower-left keeps back-left NEAR toe pushing off ground. Lower-right is FLIGHT: far/dark front-right leg should reach its boot farther forward to prepare its next landing, near/bright back-left heel folds toward rear. The left/FAR dark leg therefore visibly travels from behind in top-left to ahead in bottom-right. Keep only two legs in all four frames.",
+          "prompt": "Edit this FOUR-frame, 2x2 transparent sprite atlas without changing framing, character scale, upper-body design, hook-on-shoulder carry, blue glasses, long white hair, palette, or frame locations. Keep TRUE TRANSPARENT background and all body/weapon outlines crisp. No text or labels. This is a necessary LEG OWNERSHIP / OCCLUSION correction for an eight-frame gait, not new character concepts.\n\nMake the two anatomical legs unmistakable through cel lighting and overlap: RIGHT/NEAR leg is foreground with normal lighter slate pants and warm medium-brown boot. LEFT/FAR leg is behind it, a clear single flat DARK SLATE/BROWN shadow (roughly 45% darker), from hip to the toe, keeping visible strap outlines. This is lighting, NOT different costume pieces. The SAME LEG keeps that identity as it moves from in front of hips to behind them. Exactly TWO legs and TWO boots, continuously connected to the two hips. Do not add a new leg without removing the old one. Revise thigh and shin overlaps where necessary so near limb occludes far limb at any crossover. Both feet point RIGHT; do not flip the whole sprite or switch the weapon arms.\n\nFIRST HALF OF RUN (frames1-4): TOP LEFT and TOP RIGHT: forward/right grounded support leg is NEAR, bright pants/boot; folded backward/left leg is FAR, dark from hip through boot. BOTTOM LEFT and BOTTOM RIGHT: backward/left extended leg is NEAR and bright; forward/right raised knee and boot belong to FAR leg and are dark. Make each leg connect to correct hip and retain this depth at crossing. Lower-left keeps back-left NEAR toe pushing off ground. Lower-right is FLIGHT: far/dark front-right leg should reach its boot farther forward to prepare its next landing, near/bright back-left heel folds toward rear. The left/FAR dark leg therefore visibly travels from behind in top-left to ahead in bottom-right. Keep only two legs in all four frames.",
+          "references": [
+            "/workspace/generated_images/exec-eb607363-bf21-4542-83b3-0c40ec2a5ccf.png"
+          ],
+          "transparent_background": true,
+          "reason": "Correct anatomical leg ownership and occlusion; remove extra boot from backward-walk far passing key.",
+          "source": "/workspace/generated_images/exec-d57d3aec-579a-4bc8-b35e-680e22a07f6c.png"
+        }
+      ],
+      "sha256": "8fc0e1c82ce1f1b56186be1df33f61807fb4d422caadb9690b9a37f33ffcd1d2",
+      "size": [
+        1536,
+        1024
+      ],
+      "reference_metadata": [
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50"
+        },
+        {
+          "path": "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0"
+        },
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/run.png",
+          "sha256": "57c869151487045f819d664e8d8b722a557d8ee40fefb89755be02a177280992"
+        }
+      ]
+    },
+    {
+      "id": "backdash",
+      "phase": "backdash",
+      "selection": "B / Shoulder Slip",
+      "sheet": "backdash",
+      "detail": "OVERRIDE layout: exactly SIX chronological full bodies in THREE columns by TWO rows, 1536x1024, nominal512x512 cells; body upright height420, local root x280 floor480, transparent gutters. Use ONLY row B / SHOULDER SLIP in the backdash reference. Faces RIGHT throughout, moves BACKWARD LEFT, in-place animation with whole body visible. Strong backward ribcage lean and hip-led leftward escape, right shoulder rolls away. Keep both weapons correct full size: right-hand hooked pole lifts diagonally above/back from shoulder during slip, left knife low and safe. Never make pole a toy short hook. 01 LOAD: shoulder rest and knees bend, weight gathers into front foot. 02 PUSH: front/rightward planted foot extends to propel hips backward LEFT, head/shoulders start leaning back. 03 SLIP/FLIGHT: both feet off ground in low backwards scissors step, torso leans and twists backwards with eyes to right, right arm lifts FULL hook diagonally clear of shoulder. 04 CATCH: rear/leftward boot reaches toe to virtual floor, front knee still raised, chest starts unwinding. 05 LAND/ABSORB: both knees bend and torso returns toward upright, hook descends behind shoulder. 06 RESET: relaxed shoulder-rest stagger closely matching original idle.\nDuring02-04 the LOOSE WHITE HAIR tips and TEAL SASH must visibly trail RIGHT toward opponent, opposite leftward movement. Curve hair from nape round far shoulder, tips near upper chest, eyes unobscured. Teal sash ends sweep RIGHT across front thigh; do NOT stream left as for a forward run. On landing05 ends swing back left as braking. Body remains human and hips lead retreat; no somersault, teleport effects, sliding rigid standing pose or smear. Different limb silhouettes each key.",
+      "prompt": "Create a PRODUCTION fighting-game sprite atlas of SHARK using the references. TRUE TRANSPARENT RGBA background; no background color, checkerboard painted into image, ground, shadows, text, labels, grids, arrows, effects, or smears. Exactly FOUR different full-body sequential frames arranged TWO columns by TWO rows, 1536x1024 canvas, each nominal cell 768x512. Whole body, both boots, all hair and both weapons visible inside each cell with transparent gutters. In-place fixed side/three-quarter gameplay camera, all figures face RIGHT throughout. Body upright reference height is 420 source pixels; pelvis horizontally at local x410 and virtual floor at y480. Do not auto-scale each pose to its own bounding box. Same anatomy and equipment size every frame. Camera never changes.\n\nDesign lock: tall lean-muscular adult swimmer with small angular face, eight-head proportions, low-volume LONG WHITE loose hair following nape/back, no big mane. Physical cobalt BLUE SPORTS GLASSES with lenses/bridge/arms, NO face paint. Teal scale sleeveless vest, bone shark-jaw pauldron on anatomical LEFT shoulder, brown leather bracers, tan rope waist belt/net at hip, long torn teal sash with ivory zigzag, loose slate trousers, large brown strapped boots. Right hand carries ONE full-length wooden rope-wrapped pole with ONE open silver J-hook at the back/left end and butt ring at the forward/right end. Total hook pole length remains about 0.8 standing height. LEFT hand holds separate short triangular knife low, pointed away from legs. Exactly two arms and two legs. Hook pole rests across/behind shoulders in the right hand unless action specifically lowers/lifts it. No weapon swaps, missing pole, shortening, duplicated hook or spear point.\n\nCrisp dark outer ink, clean flat anime cel shadows, neutral upper-left light. The reference options sheet chooses motion only; preserve model costume. Bodies must articulate through ribs versus hips, bent knees, heel/toe rolls, and opposing shoulder rotation. Long hair/sash have restrained delayed follow-through. This is not four independent mannequin poses.\n\nLEG IDENTIFICATION matters: anatomical RIGHT leg is the NEAR leg, foreground silhouette, normally lit warm-brown boot with clearly visible straps. Anatomical LEFT leg is FAR, behind the near leg where they overlap, shaded a modest darker cool brown. Both boots same physical design. Keep that depth identity stable even when the left leg advances ahead of the right leg. Do not make whichever leg is forward automatically be the near leg. Show knee origins connected to correct hips.\n\nOVERRIDE layout: exactly SIX chronological full bodies in THREE columns by TWO rows, 1536x1024, nominal512x512 cells; body upright height420, local root x280 floor480, transparent gutters. Use ONLY row B / SHOULDER SLIP in the backdash reference. Faces RIGHT throughout, moves BACKWARD LEFT, in-place animation with whole body visible. Strong backward ribcage lean and hip-led leftward escape, right shoulder rolls away. Keep both weapons correct full size: right-hand hooked pole lifts diagonally above/back from shoulder during slip, left knife low and safe. Never make pole a toy short hook. 01 LOAD: shoulder rest and knees bend, weight gathers into front foot. 02 PUSH: front/rightward planted foot extends to propel hips backward LEFT, head/shoulders start leaning back. 03 SLIP/FLIGHT: both feet off ground in low backwards scissors step, torso leans and twists backwards with eyes to right, right arm lifts FULL hook diagonally clear of shoulder. 04 CATCH: rear/leftward boot reaches toe to virtual floor, front knee still raised, chest starts unwinding. 05 LAND/ABSORB: both knees bend and torso returns toward upright, hook descends behind shoulder. 06 RESET: relaxed shoulder-rest stagger closely matching original idle.\nDuring02-04 the LOOSE WHITE HAIR tips and TEAL SASH must visibly trail RIGHT toward opponent, opposite leftward movement. Curve hair from nape round far shoulder, tips near upper chest, eyes unobscured. Teal sash ends sweep RIGHT across front thigh; do NOT stream left as for a forward run. On landing05 ends swing back left as braking. Body remains human and hips lead retreat; no somersault, teleport effects, sliding rigid standing pose or smear. Different limb silhouettes each key.",
+      "references": [
+        "/workspace/Fight-guild-/art/characters/shark.png",
+        "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/backdash.png"
+      ],
+      "transparent_background": true,
+      "source": "/workspace/generated_images/exec-ddf39ba9-bbd2-4825-9881-6c537f1807d1.png",
+      "initial_source": "/workspace/generated_images/exec-ddf39ba9-bbd2-4825-9881-6c537f1807d1.png",
+      "path": "godot/assets/fighters/shark-movement-v1/backdash.png",
+      "corrections": [],
+      "sha256": "605ef6fd8842c755d0d2782e5e18231454f0a04b9895929a60cb3574b8efce20",
+      "size": [
+        1536,
+        1024
+      ],
+      "reference_metadata": [
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50"
+        },
+        {
+          "path": "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0"
+        },
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/backdash.png",
+          "sha256": "140cb67a48507039ca82d75bda4e21eed8cff6231d0e657fdee4c6ea0a9f010c"
+        }
+      ]
+    },
+    {
+      "id": "walk_far",
+      "from": "walk_near",
+      "detail": "The FIRST reference is the completed FIRST HALF of this walk (frames01-04). Draw the complementary SECOND HALF, frames05-08, with the SAME body/costume scale, lighting, fixed camera, full hook on shoulder, forward facing RIGHT and Rolling Swagger attitude. DO NOT repeat the existing leg arrangement and DO NOT mirror the whole character or swap weapons. ONLY the gait phase advances. Pelvis rotates against ribs.\n05 FAR CONTACT: LEFT/FAR leg is FORWARD RIGHT, heel landing; RIGHT/NEAR leg stretches BACK LEFT on toe. The back-left NEAR leg overlaps IN FRONT of the other thigh at hip/crossover. Far front boot has visibly darker cel shadow; near back boot lit.\n06 FAR DOWN: LEFT/FAR foot planted under forward pelvis, knee absorbs weight. RIGHT/NEAR foot lifts behind LEFT and swings toward the hip. Near swinging thigh is in FOREGROUND, far support thigh behind it. Body lower.\n07 NEAR PASSING: RIGHT/NEAR lit knee travels FORWARD RIGHT past LEFT/FAR support leg; RIGHT boot moving forward just above ground. Far left stance foot is behind pelvis with heel rising. Draw foreground near thigh/boot clearly over far leg at overlap.\n08 NEAR REACH: RIGHT/NEAR lit leg extends forward RIGHT ready for01 contact; LEFT/FAR shadow leg stretched back LEFT on toe. Pose flows into top-left of FIRST reference. Always one foot grounded, a walk not a jump. Leg depth identity must genuinely alternate from first-half contact.",
+      "phase": "walk",
+      "selection": "B / Rolling Swagger",
+      "prompt": "Create a PRODUCTION fighting-game sprite atlas of SHARK using the references. TRUE TRANSPARENT RGBA background; no background color, checkerboard painted into image, ground, shadows, text, labels, grids, arrows, effects, or smears. Exactly FOUR different full-body sequential frames arranged TWO columns by TWO rows, 1536x1024 canvas, each nominal cell 768x512. Whole body, both boots, all hair and both weapons visible inside each cell with transparent gutters. In-place fixed side/three-quarter gameplay camera, all figures face RIGHT throughout. Body upright reference height is 420 source pixels; pelvis horizontally at local x410 and virtual floor at y480. Do not auto-scale each pose to its own bounding box. Same anatomy and equipment size every frame. Camera never changes.\n\nDesign lock: tall lean-muscular adult swimmer with small angular face, eight-head proportions, low-volume LONG WHITE loose hair following nape/back, no big mane. Physical cobalt BLUE SPORTS GLASSES with lenses/bridge/arms, NO face paint. Teal scale sleeveless vest, bone shark-jaw pauldron on anatomical LEFT shoulder, brown leather bracers, tan rope waist belt/net at hip, long torn teal sash with ivory zigzag, loose slate trousers, large brown strapped boots. Right hand carries ONE full-length wooden rope-wrapped pole with ONE open silver J-hook at the back/left end and butt ring at the forward/right end. Total hook pole length remains about 0.8 standing height. LEFT hand holds separate short triangular knife low, pointed away from legs. Exactly two arms and two legs. Hook pole rests across/behind shoulders in the right hand unless action specifically lowers/lifts it. No weapon swaps, missing pole, shortening, duplicated hook or spear point.\n\nCrisp dark outer ink, clean flat anime cel shadows, neutral upper-left light. The reference options sheet chooses motion only; preserve model costume. Bodies must articulate through ribs versus hips, bent knees, heel/toe rolls, and opposing shoulder rotation. Long hair/sash have restrained delayed follow-through. This is not four independent mannequin poses.\n\nLEG IDENTIFICATION matters: anatomical RIGHT leg is the NEAR leg, foreground silhouette, normally lit warm-brown boot with clearly visible straps. Anatomical LEFT leg is FAR, behind the near leg where they overlap, shaded a modest darker cool brown. Both boots same physical design. Keep that depth identity stable even when the left leg advances ahead of the right leg. Do not make whichever leg is forward automatically be the near leg. Show knee origins connected to correct hips.\n\nThe FIRST reference is the completed FIRST HALF of this walk (frames01-04). Draw the complementary SECOND HALF, frames05-08, with the SAME body/costume scale, lighting, fixed camera, full hook on shoulder, forward facing RIGHT and Rolling Swagger attitude. DO NOT repeat the existing leg arrangement and DO NOT mirror the whole character or swap weapons. ONLY the gait phase advances. Pelvis rotates against ribs.\n05 FAR CONTACT: LEFT/FAR leg is FORWARD RIGHT, heel landing; RIGHT/NEAR leg stretches BACK LEFT on toe. The back-left NEAR leg overlaps IN FRONT of the other thigh at hip/crossover. Far front boot has visibly darker cel shadow; near back boot lit.\n06 FAR DOWN: LEFT/FAR foot planted under forward pelvis, knee absorbs weight. RIGHT/NEAR foot lifts behind LEFT and swings toward the hip. Near swinging thigh is in FOREGROUND, far support thigh behind it. Body lower.\n07 NEAR PASSING: RIGHT/NEAR lit knee travels FORWARD RIGHT past LEFT/FAR support leg; RIGHT boot moving forward just above ground. Far left stance foot is behind pelvis with heel rising. Draw foreground near thigh/boot clearly over far leg at overlap.\n08 NEAR REACH: RIGHT/NEAR lit leg extends forward RIGHT ready for01 contact; LEFT/FAR shadow leg stretched back LEFT on toe. Pose flows into top-left of FIRST reference. Always one foot grounded, a walk not a jump. Leg depth identity must genuinely alternate from first-half contact.",
+      "references": [
+        "/workspace/generated_images/exec-69b315fa-2233-43a6-98f2-8084c980431b.png",
+        "/workspace/Fight-guild-/art/characters/shark.png",
+        "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/walk.png"
+      ],
+      "transparent_background": true,
+      "source": "/workspace/generated_images/exec-aedd0ff2-a576-4ac6-abbc-16e13ecc9fcd.png",
+      "initial_source": "/workspace/generated_images/exec-1db198ab-fbec-42df-881a-14b8f4ffffe8.png",
+      "path": "godot/assets/fighters/shark-movement-v1/walk_far.png",
+      "corrections": [
+        {
+          "id": "walk_far",
+          "detail": "SECOND HALF OF WALK (frames5-8): TOP LEFT and TOP RIGHT: forward/right grounded support leg is FAR/DARK, behind the other thigh. Backward/left trailing or swinging leg is NEAR/BRIGHT and connected to foreground hip. BOTTOM LEFT: near/right leg swings across IN FRONT toward screen-right; its lifted leg and boot are BRIGHT; far/left grounded supporting leg is DARK. BOTTOM RIGHT: forward/right reaching leg is NEAR/BRIGHT, backward/left toe-contact leg FAR/DARK. Preserve relaxed rolling hip sway and planted contact levels. Exactly two boots, no residual ghost boot where previous version had a leg.",
+          "prompt": "Edit this FOUR-frame, 2x2 transparent sprite atlas without changing framing, character scale, upper-body design, hook-on-shoulder carry, blue glasses, long white hair, palette, or frame locations. Keep TRUE TRANSPARENT background and all body/weapon outlines crisp. No text or labels. This is a necessary LEG OWNERSHIP / OCCLUSION correction for an eight-frame gait, not new character concepts.\n\nMake the two anatomical legs unmistakable through cel lighting and overlap: RIGHT/NEAR leg is foreground with normal lighter slate pants and warm medium-brown boot. LEFT/FAR leg is behind it, a clear single flat DARK SLATE/BROWN shadow (roughly 45% darker), from hip to the toe, keeping visible strap outlines. This is lighting, NOT different costume pieces. The SAME LEG keeps that identity as it moves from in front of hips to behind them. Exactly TWO legs and TWO boots, continuously connected to the two hips. Do not add a new leg without removing the old one. Revise thigh and shin overlaps where necessary so near limb occludes far limb at any crossover. Both feet point RIGHT; do not flip the whole sprite or switch the weapon arms.\n\nSECOND HALF OF WALK (frames5-8): TOP LEFT and TOP RIGHT: forward/right grounded support leg is FAR/DARK, behind the other thigh. Backward/left trailing or swinging leg is NEAR/BRIGHT and connected to foreground hip. BOTTOM LEFT: near/right leg swings across IN FRONT toward screen-right; its lifted leg and boot are BRIGHT; far/left grounded supporting leg is DARK. BOTTOM RIGHT: forward/right reaching leg is NEAR/BRIGHT, backward/left toe-contact leg FAR/DARK. Preserve relaxed rolling hip sway and planted contact levels. Exactly two boots, no residual ghost boot where previous version had a leg.",
+          "references": [
+            "/workspace/generated_images/exec-1db198ab-fbec-42df-881a-14b8f4ffffe8.png"
+          ],
+          "transparent_background": true,
+          "reason": "Correct anatomical leg ownership and occlusion; remove extra boot from backward-walk far passing key.",
+          "source": "/workspace/generated_images/exec-7fa76ef2-33ab-4336-815d-458e789f15b8.png"
+        },
+        {
+          "id": "walk_far_contact",
+          "references": [
+            "/workspace/Fight-guild-/godot/assets/fighters/shark-movement-v1/walk_far.png"
+          ],
+          "prompt": "Correct ONLY LEG SHADING AND OVERLAP in the TOP TWO sprites of this transparent 2x2 walking atlas. Keep the bottom two sprites, faces, upper bodies, hook/knife, proportions and framing unchanged. Top-left AND top-right currently still make the leg grounded in FRONT/RIGHT look like the near leg. It must be the FAR leg in this half cycle. Make the entire forward/right grounded trouser leg and boot DARK SLATE / DARK BROWN, visibly behind the opposite thigh. Make the backward/left trailing or lifted leg the NEAR leg: lighter slate trousers and warm light brown straps/boot, in front at the pelvis/crossover. The lifted boot to LEFT in the TOP-RIGHT sprite must be light warm brown, while the straight planted boot to its RIGHT must be dark brown, like the dark support boot in bottom-left. TOP-LEFT forward toe-right boot and full leg must be dark; back-left leg and boot must be lighter foreground. Exactly TWO boots per character. The same right/near leg now moves from behind in the top row to ahead in the bottom row. Keep all four figures facing right, no whole-body mirroring. Preserve true transparent RGBA background and complete 1536x1024 sheet.",
+          "source": "/workspace/generated_images/exec-aedd0ff2-a576-4ac6-abbc-16e13ecc9fcd.png",
+          "reference_metadata": [
+            {
+              "path": "/workspace/Fight-guild-/godot/assets/fighters/shark-movement-v1/walk_far.png",
+              "sha256": "15dc4ae26aac010f54fdf22ba6e1e83ed606317dd1c1535dc23d71a5fcae41e8"
+            }
+          ]
+        }
+      ],
+      "sha256": "fcc237d14ef9e6a842797e9e8aa3a4fa084d35aaf96792da285f66ad2bd379ce",
+      "size": [
+        1536,
+        1024
+      ],
+      "reference_metadata": [
+        {
+          "path": "/workspace/generated_images/exec-69b315fa-2233-43a6-98f2-8084c980431b.png",
+          "sha256": "ccd648f5fad4f6f510fc82531a476aef6094e324c006d9a64fd1a598d6a41960"
+        },
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50"
+        },
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/walk.png",
+          "sha256": "6aa820f243c2c6729278ac45b9e883c681d8f7ee318216b2fdcb7f1cc8185aac"
+        }
+      ]
+    },
+    {
+      "id": "back_walk_far",
+      "from": "back_walk_near",
+      "detail": "The FIRST reference is frames01-04 of this BACKWARD WALK. Produce complementary frames05-08, SAME scale/camera/equipment and Unbothered Retreat attitude, still facing RIGHT and traveling LEFT. Do NOT copy the same support leg from first half. Do NOT mirror the whole body, face or weapons. Gait should wrap to first reference top-left smoothly.\n05 FAR REAR CONTACT: LEFT/FAR shadow leg reaches rear LEFT toe-first, RIGHT/NEAR lit leg forward RIGHT leaving old contact. The lit near/front thigh overlaps IN FRONT of far thigh at pelvis.\n06 FAR LOAD: LEFT/FAR foot supports under/rear pelvis; RIGHT/NEAR leg lifts from front RIGHT with knee bent, light boot clearly foreground. Torso settles.\n07 NEAR PASS BACK: RIGHT/NEAR lit boot travels backward LEFT below pelvis IN FRONT OF far support shin. LEFT/FAR shadow foot holds ground near pelvis. Keep obvious fore/background leg separation.\n08 NEAR REACH BACK: RIGHT/NEAR lit leg extends back LEFT with toe approaching ground; LEFT/FAR shadow leg forward RIGHT. This flows into first-reference01. All toes point RIGHT, body gaze right, never turn around. Upright relaxed shoulders, hook resting on right shoulder, left knife low. Toe-first rear landings, one foot always grounded.",
+      "phase": "back_walk",
+      "selection": "A / Unbothered Retreat",
+      "prompt": "Create a PRODUCTION fighting-game sprite atlas of SHARK using the references. TRUE TRANSPARENT RGBA background; no background color, checkerboard painted into image, ground, shadows, text, labels, grids, arrows, effects, or smears. Exactly FOUR different full-body sequential frames arranged TWO columns by TWO rows, 1536x1024 canvas, each nominal cell 768x512. Whole body, both boots, all hair and both weapons visible inside each cell with transparent gutters. In-place fixed side/three-quarter gameplay camera, all figures face RIGHT throughout. Body upright reference height is 420 source pixels; pelvis horizontally at local x410 and virtual floor at y480. Do not auto-scale each pose to its own bounding box. Same anatomy and equipment size every frame. Camera never changes.\n\nDesign lock: tall lean-muscular adult swimmer with small angular face, eight-head proportions, low-volume LONG WHITE loose hair following nape/back, no big mane. Physical cobalt BLUE SPORTS GLASSES with lenses/bridge/arms, NO face paint. Teal scale sleeveless vest, bone shark-jaw pauldron on anatomical LEFT shoulder, brown leather bracers, tan rope waist belt/net at hip, long torn teal sash with ivory zigzag, loose slate trousers, large brown strapped boots. Right hand carries ONE full-length wooden rope-wrapped pole with ONE open silver J-hook at the back/left end and butt ring at the forward/right end. Total hook pole length remains about 0.8 standing height. LEFT hand holds separate short triangular knife low, pointed away from legs. Exactly two arms and two legs. Hook pole rests across/behind shoulders in the right hand unless action specifically lowers/lifts it. No weapon swaps, missing pole, shortening, duplicated hook or spear point.\n\nCrisp dark outer ink, clean flat anime cel shadows, neutral upper-left light. The reference options sheet chooses motion only; preserve model costume. Bodies must articulate through ribs versus hips, bent knees, heel/toe rolls, and opposing shoulder rotation. Long hair/sash have restrained delayed follow-through. This is not four independent mannequin poses.\n\nLEG IDENTIFICATION matters: anatomical RIGHT leg is the NEAR leg, foreground silhouette, normally lit warm-brown boot with clearly visible straps. Anatomical LEFT leg is FAR, behind the near leg where they overlap, shaded a modest darker cool brown. Both boots same physical design. Keep that depth identity stable even when the left leg advances ahead of the right leg. Do not make whichever leg is forward automatically be the near leg. Show knee origins connected to correct hips.\n\nThe FIRST reference is frames01-04 of this BACKWARD WALK. Produce complementary frames05-08, SAME scale/camera/equipment and Unbothered Retreat attitude, still facing RIGHT and traveling LEFT. Do NOT copy the same support leg from first half. Do NOT mirror the whole body, face or weapons. Gait should wrap to first reference top-left smoothly.\n05 FAR REAR CONTACT: LEFT/FAR shadow leg reaches rear LEFT toe-first, RIGHT/NEAR lit leg forward RIGHT leaving old contact. The lit near/front thigh overlaps IN FRONT of far thigh at pelvis.\n06 FAR LOAD: LEFT/FAR foot supports under/rear pelvis; RIGHT/NEAR leg lifts from front RIGHT with knee bent, light boot clearly foreground. Torso settles.\n07 NEAR PASS BACK: RIGHT/NEAR lit boot travels backward LEFT below pelvis IN FRONT OF far support shin. LEFT/FAR shadow foot holds ground near pelvis. Keep obvious fore/background leg separation.\n08 NEAR REACH BACK: RIGHT/NEAR lit leg extends back LEFT with toe approaching ground; LEFT/FAR shadow leg forward RIGHT. This flows into first-reference01. All toes point RIGHT, body gaze right, never turn around. Upright relaxed shoulders, hook resting on right shoulder, left knife low. Toe-first rear landings, one foot always grounded.",
+      "references": [
+        "/workspace/generated_images/exec-a4f9ce76-7208-44d9-9cbd-a714e170c0ac.png",
+        "/workspace/Fight-guild-/art/characters/shark.png",
+        "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/back-walk.png"
+      ],
+      "transparent_background": true,
+      "source": "/workspace/generated_images/exec-7b807cc3-8618-48f3-b86a-4922b95fb048.png",
+      "initial_source": "/workspace/generated_images/exec-c4f4e5ea-857f-466a-9a55-bb58471029a4.png",
+      "path": "godot/assets/fighters/shark-movement-v1/back_walk_far.png",
+      "corrections": [
+        {
+          "id": "back_walk_far",
+          "detail": "SECOND HALF OF BACKWARD WALK (frames5-8), faces RIGHT traveling LEFT: TOP LEFT: backward/left toe-contact leg FAR/DARK, forward/right leg NEAR/BRIGHT. TOP RIGHT: backward/left grounded support FAR/DARK; forward/right raised knee/boot NEAR/BRIGHT. BOTTOM LEFT currently has an ERROR: THREE BOOTS. REMOVE that extra large planted foreground center boot and reconstruct the lower body with EXACTLY TWO connected legs: FAR/DARK leg supports on ground under/right of pelvis; NEAR/BRIGHT leg bends and swings backward LEFT with its boot slightly lifted, in front of far leg at overlap. There must be only one grounded boot and one lifted boot in this cell, not three feet. BOTTOM RIGHT: backward/left reaching toe-contact leg NEAR/BRIGHT, forward/right leg FAR/DARK, preparing the first-half rear right-leg contact. Keep chest, hook, knife and costume unchanged. Clean readable near/far thigh overlap, not an added boot painted over existing limbs.",
+          "prompt": "Edit this FOUR-frame, 2x2 transparent sprite atlas without changing framing, character scale, upper-body design, hook-on-shoulder carry, blue glasses, long white hair, palette, or frame locations. Keep TRUE TRANSPARENT background and all body/weapon outlines crisp. No text or labels. This is a necessary LEG OWNERSHIP / OCCLUSION correction for an eight-frame gait, not new character concepts.\n\nMake the two anatomical legs unmistakable through cel lighting and overlap: RIGHT/NEAR leg is foreground with normal lighter slate pants and warm medium-brown boot. LEFT/FAR leg is behind it, a clear single flat DARK SLATE/BROWN shadow (roughly 45% darker), from hip to the toe, keeping visible strap outlines. This is lighting, NOT different costume pieces. The SAME LEG keeps that identity as it moves from in front of hips to behind them. Exactly TWO legs and TWO boots, continuously connected to the two hips. Do not add a new leg without removing the old one. Revise thigh and shin overlaps where necessary so near limb occludes far limb at any crossover. Both feet point RIGHT; do not flip the whole sprite or switch the weapon arms.\n\nSECOND HALF OF BACKWARD WALK (frames5-8), faces RIGHT traveling LEFT: TOP LEFT: backward/left toe-contact leg FAR/DARK, forward/right leg NEAR/BRIGHT. TOP RIGHT: backward/left grounded support FAR/DARK; forward/right raised knee/boot NEAR/BRIGHT. BOTTOM LEFT currently has an ERROR: THREE BOOTS. REMOVE that extra large planted foreground center boot and reconstruct the lower body with EXACTLY TWO connected legs: FAR/DARK leg supports on ground under/right of pelvis; NEAR/BRIGHT leg bends and swings backward LEFT with its boot slightly lifted, in front of far leg at overlap. There must be only one grounded boot and one lifted boot in this cell, not three feet. BOTTOM RIGHT: backward/left reaching toe-contact leg NEAR/BRIGHT, forward/right leg FAR/DARK, preparing the first-half rear right-leg contact. Keep chest, hook, knife and costume unchanged. Clean readable near/far thigh overlap, not an added boot painted over existing limbs.",
+          "references": [
+            "/workspace/generated_images/exec-c4f4e5ea-857f-466a-9a55-bb58471029a4.png"
+          ],
+          "transparent_background": true,
+          "reason": "Correct anatomical leg ownership and occlusion; remove extra boot from backward-walk far passing key.",
+          "source": "/workspace/generated_images/exec-7b807cc3-8618-48f3-b86a-4922b95fb048.png"
+        }
+      ],
+      "sha256": "83fad0c8ccf8259b89524c742e035d1ccbd01ebc61b71170a9acb7766b5c82be",
+      "size": [
+        1536,
+        1024
+      ],
+      "reference_metadata": [
+        {
+          "path": "/workspace/generated_images/exec-a4f9ce76-7208-44d9-9cbd-a714e170c0ac.png",
+          "sha256": "44c0a77a9c7100a9e648499e83c1adff8b342a8719244c3ec8644889ab2c7e81"
+        },
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50"
+        },
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/back-walk.png",
+          "sha256": "8edf1ba03d69799359a47ba6b7bfba7f9122e60203e31ed8cf4456aff481ca4b"
+        }
+      ]
+    },
+    {
+      "id": "run_far",
+      "from": "run_near",
+      "detail": "The FIRST reference is the approved FIRST HALF (frames01-04) of this RUN. Draw the complementary SECOND HALF (frames05-08). SAME body scale, rendering, modest forward lean, Shoulder Cruise swagger, full hook carried across shoulder in right hand and left triangular knife low. Faces and travels RIGHT. DO NOT mirror whole character. DO NOT repeat four poses with same leg in front. The important requirement is ACTUAL LEFT / RIGHT LEG ALTERNATION. RIGHT leg is the NEAR foreground limb with lit boot; LEFT leg FAR shadowed behind near at overlaps.\n05 FAR CONTACT: LEFT/FAR shadowed leg lands FORWARD RIGHT on ground. RIGHT/NEAR lit leg is visibly curled BACK LEFT, heel tucked toward butt. The RIGHT thigh passes in front of left thigh at pelvis, and backward-left RIGHT boot is warm/lit; forward-right LEFT support boot clearly shaded. This MUST be opposite leg ownership to first reference top-left.\n06 FAR COMPRESSION: LEFT/FAR knee bends absorbing weight, support foot under forward pelvis. RIGHT/NEAR knee swings forward beneath hip IN FRONT of supporting far thigh, RIGHT heel tucked. Torso lowers.\n07 FAR TOE-OFF / NEAR DRIVE: LEFT/FAR shadow leg extends backward LEFT, toe pushing against ground. RIGHT/NEAR lit knee drives FORWARD RIGHT with boot tucked below, clearly in foreground. Torso extends up, opposite shoulder/pelvis twist to first-half03.\n08 NEAR REACH / FLIGHT: BOTH feet airborne. RIGHT/NEAR lit leg reaches forward RIGHT to next landing, LEFT/FAR shadow leg bent trailing back LEFT. It flows into first reference01. Show distinct anatomical legs throughout, not two duplicate foreground legs, not a reverse/ping-pong of the first sheet. Clear near thigh overlaps, far leg shading, natural hip/knee connections. Normal fixed bone lengths and visible ground contact in05-07.",
+      "phase": "run",
+      "selection": "A / Shoulder Cruise",
+      "prompt": "Create a PRODUCTION fighting-game sprite atlas of SHARK using the references. TRUE TRANSPARENT RGBA background; no background color, checkerboard painted into image, ground, shadows, text, labels, grids, arrows, effects, or smears. Exactly FOUR different full-body sequential frames arranged TWO columns by TWO rows, 1536x1024 canvas, each nominal cell 768x512. Whole body, both boots, all hair and both weapons visible inside each cell with transparent gutters. In-place fixed side/three-quarter gameplay camera, all figures face RIGHT throughout. Body upright reference height is 420 source pixels; pelvis horizontally at local x410 and virtual floor at y480. Do not auto-scale each pose to its own bounding box. Same anatomy and equipment size every frame. Camera never changes.\n\nDesign lock: tall lean-muscular adult swimmer with small angular face, eight-head proportions, low-volume LONG WHITE loose hair following nape/back, no big mane. Physical cobalt BLUE SPORTS GLASSES with lenses/bridge/arms, NO face paint. Teal scale sleeveless vest, bone shark-jaw pauldron on anatomical LEFT shoulder, brown leather bracers, tan rope waist belt/net at hip, long torn teal sash with ivory zigzag, loose slate trousers, large brown strapped boots. Right hand carries ONE full-length wooden rope-wrapped pole with ONE open silver J-hook at the back/left end and butt ring at the forward/right end. Total hook pole length remains about 0.8 standing height. LEFT hand holds separate short triangular knife low, pointed away from legs. Exactly two arms and two legs. Hook pole rests across/behind shoulders in the right hand unless action specifically lowers/lifts it. No weapon swaps, missing pole, shortening, duplicated hook or spear point.\n\nCrisp dark outer ink, clean flat anime cel shadows, neutral upper-left light. The reference options sheet chooses motion only; preserve model costume. Bodies must articulate through ribs versus hips, bent knees, heel/toe rolls, and opposing shoulder rotation. Long hair/sash have restrained delayed follow-through. This is not four independent mannequin poses.\n\nLEG IDENTIFICATION matters: anatomical RIGHT leg is the NEAR leg, foreground silhouette, normally lit warm-brown boot with clearly visible straps. Anatomical LEFT leg is FAR, behind the near leg where they overlap, shaded a modest darker cool brown. Both boots same physical design. Keep that depth identity stable even when the left leg advances ahead of the right leg. Do not make whichever leg is forward automatically be the near leg. Show knee origins connected to correct hips.\n\nThe FIRST reference is the approved FIRST HALF (frames01-04) of this RUN. Draw the complementary SECOND HALF (frames05-08). SAME body scale, rendering, modest forward lean, Shoulder Cruise swagger, full hook carried across shoulder in right hand and left triangular knife low. Faces and travels RIGHT. DO NOT mirror whole character. DO NOT repeat four poses with same leg in front. The important requirement is ACTUAL LEFT / RIGHT LEG ALTERNATION. RIGHT leg is the NEAR foreground limb with lit boot; LEFT leg FAR shadowed behind near at overlaps.\n05 FAR CONTACT: LEFT/FAR shadowed leg lands FORWARD RIGHT on ground. RIGHT/NEAR lit leg is visibly curled BACK LEFT, heel tucked toward butt. The RIGHT thigh passes in front of left thigh at pelvis, and backward-left RIGHT boot is warm/lit; forward-right LEFT support boot clearly shaded. This MUST be opposite leg ownership to first reference top-left.\n06 FAR COMPRESSION: LEFT/FAR knee bends absorbing weight, support foot under forward pelvis. RIGHT/NEAR knee swings forward beneath hip IN FRONT of supporting far thigh, RIGHT heel tucked. Torso lowers.\n07 FAR TOE-OFF / NEAR DRIVE: LEFT/FAR shadow leg extends backward LEFT, toe pushing against ground. RIGHT/NEAR lit knee drives FORWARD RIGHT with boot tucked below, clearly in foreground. Torso extends up, opposite shoulder/pelvis twist to first-half03.\n08 NEAR REACH / FLIGHT: BOTH feet airborne. RIGHT/NEAR lit leg reaches forward RIGHT to next landing, LEFT/FAR shadow leg bent trailing back LEFT. It flows into first reference01. Show distinct anatomical legs throughout, not two duplicate foreground legs, not a reverse/ping-pong of the first sheet. Clear near thigh overlaps, far leg shading, natural hip/knee connections. Normal fixed bone lengths and visible ground contact in05-07.",
+      "references": [
+        "/workspace/generated_images/exec-eb607363-bf21-4542-83b3-0c40ec2a5ccf.png",
+        "/workspace/Fight-guild-/art/characters/shark.png",
+        "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/run.png"
+      ],
+      "transparent_background": true,
+      "source": "/workspace/generated_images/exec-14a000a2-4a3b-4158-ac1b-4984305ecdcd.png",
+      "initial_source": "/workspace/generated_images/exec-3079de30-e3bb-4b38-afd9-ef55a664d098.png",
+      "path": "godot/assets/fighters/shark-movement-v1/run_far.png",
+      "corrections": [
+        {
+          "id": "run_far",
+          "detail": "SECOND HALF OF RUN (frames5-8): TOP LEFT: forward/right grounded landing leg is FAR, DARK from hip to boot, visually behind the lit near thigh; folded backward/left recovery leg is NEAR, BRIGHT and in foreground. TOP RIGHT: support leg under/right of pelvis is FAR/DARK; forward-lifting knee with boot still tucked to left is NEAR/BRIGHT and overlaps in front of far support thigh. BOTTOM LEFT: backward/left leg with toe pushing off is FAR/DARK; forward/right lifted knee/boot is NEAR/BRIGHT in foreground. BOTTOM RIGHT: forward/right reaching leg is NEAR/BRIGHT; trailing backward/left leg is FAR/DARK. Both boots airborne. This is OPPOSITE anatomical leg ownership to first half. Keep the whole figure facing right and fixed body proportions. Do not merely darken whichever boot happens to be behind in screen space.",
+          "prompt": "Edit this FOUR-frame, 2x2 transparent sprite atlas without changing framing, character scale, upper-body design, hook-on-shoulder carry, blue glasses, long white hair, palette, or frame locations. Keep TRUE TRANSPARENT background and all body/weapon outlines crisp. No text or labels. This is a necessary LEG OWNERSHIP / OCCLUSION correction for an eight-frame gait, not new character concepts.\n\nMake the two anatomical legs unmistakable through cel lighting and overlap: RIGHT/NEAR leg is foreground with normal lighter slate pants and warm medium-brown boot. LEFT/FAR leg is behind it, a clear single flat DARK SLATE/BROWN shadow (roughly 45% darker), from hip to the toe, keeping visible strap outlines. This is lighting, NOT different costume pieces. The SAME LEG keeps that identity as it moves from in front of hips to behind them. Exactly TWO legs and TWO boots, continuously connected to the two hips. Do not add a new leg without removing the old one. Revise thigh and shin overlaps where necessary so near limb occludes far limb at any crossover. Both feet point RIGHT; do not flip the whole sprite or switch the weapon arms.\n\nSECOND HALF OF RUN (frames5-8): TOP LEFT: forward/right grounded landing leg is FAR, DARK from hip to boot, visually behind the lit near thigh; folded backward/left recovery leg is NEAR, BRIGHT and in foreground. TOP RIGHT: support leg under/right of pelvis is FAR/DARK; forward-lifting knee with boot still tucked to left is NEAR/BRIGHT and overlaps in front of far support thigh. BOTTOM LEFT: backward/left leg with toe pushing off is FAR/DARK; forward/right lifted knee/boot is NEAR/BRIGHT in foreground. BOTTOM RIGHT: forward/right reaching leg is NEAR/BRIGHT; trailing backward/left leg is FAR/DARK. Both boots airborne. This is OPPOSITE anatomical leg ownership to first half. Keep the whole figure facing right and fixed body proportions. Do not merely darken whichever boot happens to be behind in screen space.",
+          "references": [
+            "/workspace/generated_images/exec-3079de30-e3bb-4b38-afd9-ef55a664d098.png"
+          ],
+          "transparent_background": true,
+          "reason": "Correct anatomical leg ownership and occlusion; remove extra boot from backward-walk far passing key.",
+          "source": "/workspace/generated_images/exec-130cb78f-930d-48a8-9d62-5d56b2abd37d.png"
+        },
+        {
+          "id": "run_far_contact",
+          "references": [
+            "/workspace/generated_images/exec-130cb78f-930d-48a8-9d62-5d56b2abd37d.png"
+          ],
+          "transparent_background": true,
+          "prompt": "Edit ONLY the LOWER BODY of the TOP-LEFT sprite in this four-sprite transparent atlas. Keep all other three sprites EXACTLY as shown, same dimensions and transparent background. This top-left pose has the wrong near/far leg shading for its running phase. In TOP-LEFT: the grounded boot at the RIGHT near x530,y470 and its entire supporting trouser leg must be the FAR leg: deep dark slate pants, dark brown leather like the grounded leg in the TOP-RIGHT sprite. The folded airborne boot at the LEFT near x280,y320 and its thigh must instead be the NEAR leg: normal lighter slate pants and warm light brown leather like the raised boot in TOP-RIGHT. Rebuild the thigh overlap at the pelvis so that this folded back-left bright thigh is IN FRONT of the grounded front-right dark thigh. This is not a whole-image mirror: all four figures still face RIGHT, and the right-hand shoulder hook and left-hand knife are unchanged. Exactly two legs, same poses and anatomy lengths. Match the established light-versus-dark leg palette of the other three cells. Do not recolor the upper body, clothing sash, or the other cells. Output complete 1536x1024 RGBA sheet.",
+          "source": "/workspace/generated_images/exec-14a000a2-4a3b-4158-ac1b-4984305ecdcd.png"
+        }
+      ],
+      "sha256": "d14687c37e7d670b21f575048e16156701c81f24084c57a241357da5cc056673",
+      "size": [
+        1536,
+        1024
+      ],
+      "reference_metadata": [
+        {
+          "path": "/workspace/generated_images/exec-eb607363-bf21-4542-83b3-0c40ec2a5ccf.png",
+          "sha256": "7567b66a6824593c19d16b53f74087f1ce57ea8ad6a98317eb20391fdb859666"
+        },
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50"
+        },
+        {
+          "path": "/workspace/Fight-guild-/art/characters/shark-movement-options-v1/run.png",
+          "sha256": "57c869151487045f819d664e8d8b722a557d8ee40fefb89755be02a177280992"
+        }
+      ]
+    }
+  ]
+}

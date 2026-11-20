@@ -1,0 +1,8 @@
+import os
+
+bindings = os.environ.get("GODOT_CPP", "/workspace/.fight-guild-tools/godot-cpp")
+env = SConscript(os.path.join(bindings, "SConstruct"))
+env.Append(CPPPATH=["../core"])
+sources = ["fight_extension.cpp", "../core/fight.cpp"]
+library = env.SharedLibrary("../godot/bin/libfight_core" + env["suffix"] + env["SHLIBSUFFIX"], source=sources)
+Default(library)

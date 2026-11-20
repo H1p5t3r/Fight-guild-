@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shark · Attack timing · Fight Guild</title>
+<style>
+:root{color-scheme:dark;--ink:#0c161c;--paper:#f3eadc;--muted:#a9bbc1;--gold:#e1b76d;--line:#31454f}*{box-sizing:border-box}body{margin:0;padding:clamp(16px,3vw,38px);background:var(--ink);color:var(--paper);font:16px/1.45 system-ui,sans-serif}header,main,footer{max-width:1280px;margin:auto}header>small{color:var(--gold);letter-spacing:.2em;font-weight:700}h1{font-size:clamp(30px,5vw,58px);line-height:1;margin:16px 0;font-style:italic;text-transform:uppercase}p{color:var(--muted);max-width:850px;margin:12px 0}a{color:var(--gold)}button,select{font:inherit;color:inherit;background:#1c303a;border:1px solid #55707d;border-radius:5px;min-height:44px;padding:8px 14px;cursor:pointer}button:hover{background:#2b4651}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}button[aria-pressed=true]{background:var(--gold);color:#141e22;border-color:var(--gold)}.moves,.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0}.moves select{max-width:100%;min-width:0}.moves{align-items:center}.moves button{min-width:140px;text-align:left}.moves strong{font-size:23px;display:block}.moves small{display:block;font-size:12px}.controls label{display:flex;gap:8px;align-items:center}input{accent-color:var(--gold)}input[type=checkbox]{width:18px;height:18px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{min-width:0;background:#111f28;border:1px solid var(--line);border-top:3px solid #748791;border-radius:5px;overflow:hidden}.card.new{border-top-color:var(--gold)}.card h2{font-size:16px;display:flex;justify-content:space-between;gap:8px;margin:0;padding:14px 18px;border-bottom:1px solid var(--line)}.card h2 span{font-weight:400;color:var(--muted);font-size:13px}canvas{display:block;width:100%;height:auto}.timeline{padding:18px;border:1px solid var(--line);border-radius:5px;margin:18px 0}#scrub{display:block;width:100%;min-height:36px;margin:12px 0}.legend{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:var(--muted)}.legend span:before{content:'';display:inline-block;width:9px;height:9px;background:var(--c);margin-right:7px}.status{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums}#readout{color:var(--gold);font-weight:700}.note{font-size:14px}.pair.solo{grid-template-columns:1fr;max-width:750px;margin:auto}.pair.solo .old{display:none}footer{margin-top:25px;font-size:14px}.error{color:#ffb09e}@media(max-width:650px){.pair{grid-template-columns:1fr}.card.new{order:-1}.moves button{flex:1;min-width:80px;padding:9px}.moves small{font-size:11px}.controls{gap:8px}.card h2{padding:12px}body{padding:14px}h1{font-size:34px}.status{font-size:14px}}
+</style>
+<header><small>FIGHT GUILD / SHARK</small><h1>Hold. Strike.<br>Recover.</h1><p>All 26 enabled attacks use a held load, a sharp first-active change and staged recovery. Review the full kit at game speed, including actual movement, hitstop and throws. Drive tags the opponent, then Reel In pulls them without creating stun. Free opponents can act throughout; existing hitstun or blockstun pauses until the pull ends.</p><nav class="moves" aria-label="Choose an attack"><label for="move-select">Attack</label><select id="move-select" aria-label="Choose an attack"></select><span id="move-name"></span></nav></header>
+<main><div class="controls"><button id="play" aria-pressed="true">Pause</button><button id="previous" aria-label="Previous action frame">← Frame</button><button id="next" aria-label="Next action frame">Frame →</button><label>Playback <select id="speed"><option value="1" selected>1× · game speed</option><option value="0.5">½ speed</option><option value="0.25">¼ speed</option></select></label><label>Contact <select id="scenario"><option value="whiff">Whiff</option><option value="hit">Contact / with line</option></select></label><label><input id="compare" type="checkbox" checked> Before / after</label><label><input id="mirror" type="checkbox"> Face left</label><label><input id="boxes" type="checkbox"> Hitbox</label></div>
+<div class="pair"><article class="card old"><h2>PREVIOUS <span id="before-count"></span></h2><canvas id="before" width="640" height="450" aria-label="Original attack animation"></canvas></article><article class="card new"><h2>CURRENT <span id="after-count"></span></h2><canvas id="after" width="640" height="450" aria-label="Current attack animation"></canvas></article></div>
+<section class="timeline" aria-label="Animation timeline"><div class="status"><output id="readout">Loading drawings…</output><span id="drawing"></span><span id="stats"></span></div><input id="scrub" aria-label="Action frame" type="range" min="1" max="16" value="1" step="1"><canvas id="track" width="1200" height="66" aria-label="Drawing changes across startup, active, and recovery"></canvas><div class="legend"><span style="--c:#e1b76d">Startup</span><span style="--c:#dd7970">Active</span><span style="--c:#72b6b3">Recovery</span><span style="--c:#f3eadc">Phase entry</span></div></section>
+<p class="note">Solid timeline marks are pose or effect cues; dim ticks hold the same pixels. The strongest attacking change is reserved for the last startup → first active boundary. On hit uses actual combat freeze and the paired capture clock. Air clips use real jumps; landing can interrupt their recovery. Saved timings and geometry are retained outside the four redesigned Drive actions. Previous drawings are compared on the current clock.</p></main>
+<footer><a href="index.html">Open Move Workshop</a> · Space to pause; arrow keys to step. Starts at game speed. Use slow motion to inspect the pose changes.</footer>
+<script>
+const pack=__SHARK_REVIEW_PACK__,$=id=>document.getElementById(id),images=new Map();
+const requestedMove=new URLSearchParams(location.search).get('move')??'5D';
+let selected=Math.max(0,pack.moves.findIndex(m=>m.id===requestedMove)),cursor=1,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,clock=0,last=0;
+const phase=(m,t)=>t<m.startup?'Startup':t<m.startup+m.active?'Active':'Recovery';
+const colors={Startup:'#e1b76d',Active:'#dd7970',Recovery:'#72b6b3'};
+const timeline=(m,scenario=$('scenario').value)=>scenario==='hit'?m.contactTimeline:m.timeline;
+function pause(value=true){playing=!value;$('play').textContent=playing?'Pause':'Play';$('play').setAttribute('aria-pressed',String(playing));clock=0;}
+function select(index){
+ selected=index;cursor=1;clock=0;const m=pack.moves[index];$('scrub').max=timeline(m).length;
+ $('move-select').value=index;$('move-name').textContent=m.label;
+ $('before-count').textContent=`${m.beforeDrawings} body drawings`;
+ $('after-count').textContent=`${m.afterDrawings} body drawings · ${m.afterCues??m.after.length} cues`;
+ $('stats').textContent=`Startup ${m.startup}f · Active ${m.active}f · Recovery ${m.recovery}f · Hitstop ${m.hitstop}f`;
+ draw();
+}
+function view(m,scenario){
+ let left=-75,right=120,top=150;
+ const prior=scenario==='hit'?m.beforeContactTimeline:m.beforeTimeline;
+ for(const e of [...timeline(m,scenario),...(prior??[])])for(const b of [{...e.actor,x:e.x,y:e.y,facing:e.facing},...(e.target?[e.target]:[])]){
+  const s=150/b.body_height,[l,t,r]=b.bounds,[px,py]=b.pivot;
+  const a=(l-px)*s*b.facing,c=(r-px)*s*b.facing;
+  left=Math.min(left,b.x+Math.min(a,c));right=Math.max(right,b.x+Math.max(a,c));top=Math.max(top,b.y+(py-t)*s);
+ }
+ for(const e of timeline(m,scenario)){
+  for(const b of m.before){const s=150/b.body_height,[l,t,r]=b.bounds,[px,py]=b.pivot;left=Math.min(left,e.x+Math.min((l-px)*s*e.facing,(r-px)*s*e.facing));right=Math.max(right,e.x+Math.max((l-px)*s*e.facing,(r-px)*s*e.facing));top=Math.max(top,e.y+(py-t)*s);}
+  if(e.weapon)for(const [x,y]of [e.weapon.back,e.weapon.tip]){left=Math.min(left,x-20);right=Math.max(right,x+20);top=Math.max(top,y+20);}
+  if(e.actor.effect){const [l,b,r,t]=e.actor.effect.box;left=Math.min(left,e.x+Math.min(l*e.facing,r*e.facing));right=Math.max(right,e.x+Math.max(l*e.facing,r*e.facing));top=Math.max(top,e.y+t);}
+ }
+ const scale=Math.min(2.15,580/(right-left),310/top);
+ return {scale,origin:320-(right+left)/2*scale};
+}
+function paint(canvas,m,index,before,options={}){
+ const scenario=options.scenario??$('scenario').value,prior=before?(scenario==='hit'?m.beforeContactTimeline:m.beforeTimeline):null;
+ const entries=prior??timeline(m,scenario),entry=entries[Math.min(index,entries.length)-1],t=entry.frame;
+ const tile=before&&!prior?(entry.stage&&!entry.pairKind?entry.actor:entry.pairKind?pack.previousCapture:m.before.findLast(k=>k.action_frame<=t)??m.before[0]):entry.actor;
+ const ctx=canvas.getContext('2d'),mirror=(options.mirror??$('mirror').checked)?-1:1;
+ const camera=view(m,scenario),scale=camera.scale,origin=mirror===1?camera.origin:640-camera.origin;
+ ctx.fillStyle='#111f28';ctx.fillRect(0,0,640,450);ctx.strokeStyle='#243944';ctx.lineWidth=1;
+ for(let x=30;x<640;x+=47){ctx.beginPath();ctx.moveTo(x,65);ctx.lineTo(x,385);ctx.stroke();}
+ ctx.strokeStyle='#6e828b';ctx.beginPath();ctx.moveTo(20,385);ctx.lineTo(620,385);ctx.stroke();
+ ctx.fillStyle=entry.stopped?'#f3eadc':colors[phase(m,t)];ctx.font='600 16px system-ui';
+ const label=entry.pairKind?`Capture · C${entry.pairClock}`:entry.stage??`${phase(m,t)} · ${t} / ${m.total}`;
+ ctx.fillText(`${m.id} · ${label}${entry.stopped?' · HITSTOP':''}`,20,34);
+ ctx.fillStyle='#a9bbc1';ctx.font='13px system-ui';
+ ctx.fillText(entry.stopped?'CONTACT HOLD · simulation clock paused':tile.motion_cue??entry.stage??`Held cue from frame ${tile.action_frame}`,20,56);
+ function body(key,x,y,facing){
+  const image=images.get(key.file),s=150/key.body_height*scale;if(!image)return;
+  ctx.save();ctx.translate(origin+x*scale*mirror,385-y*scale);ctx.scale(mirror*facing,1);
+  ctx.drawImage(image,...key.region,-key.pivot[0]*s,-key.pivot[1]*s,key.region[2]*s,key.region[3]*s);ctx.restore();
+ }
+ if(!before&&entry.line){
+  const sheet=pack.effects.line_fx,img=images.get(sheet.file),cord=sheet.frames[4],seal=sheet.frames[3];
+  const from={x:origin+entry.x*scale*mirror,y:385-(entry.y+85)*scale},to={x:origin+entry.line.x*scale*mirror,y:385-entry.line.y*scale};
+  ctx.save();ctx.translate(from.x,from.y);ctx.rotate(Math.atan2(to.y-from.y,to.x-from.x));ctx.drawImage(img,...cord.region,0,-1.8*scale,Math.hypot(to.x-from.x,to.y-from.y),3.6*scale);ctx.restore();
+  if(entry.line.marked)ctx.drawImage(img,...seal.region,to.x-13*scale,to.y-13*scale,26*scale,26*scale);
+ }
+ if(entry.target)body(entry.target,entry.target.x,entry.target.y,entry.target.facing);
+ body(tile,entry.x,entry.y,entry.facing);
+ if(tile.effect){
+  const effect=tile.effect,sheet=pack.effects[effect.sheet],key=sheet.frames[effect.pose],image=images.get(key.file??sheet.file),[l,b,r,top]=effect.box;
+  if(image){ctx.save();ctx.translate(origin+entry.x*scale*mirror,385-entry.y*scale);ctx.scale(mirror*entry.facing,1);ctx.globalAlpha=effect.opacity??1;ctx.drawImage(image,...key.region,l*scale,-top*scale,(r-l)*scale,(top-b)*scale);ctx.restore();}
+ }
+ if(entry.weapon){
+  const {back,tip}=entry.weapon,from={x:origin+back[0]*scale*mirror,y:385-back[1]*scale},to={x:origin+tip[0]*scale*mirror,y:385-tip[1]*scale};
+  const sheet=pack.hookWeapon,img=images.get(sheet.file),[bx,by]=sheet.butt,[tx,ty]=sheet.tip;
+  ctx.save();ctx.translate(from.x,from.y);ctx.rotate(Math.atan2(to.y-from.y,to.x-from.x)-Math.atan2(ty-by,tx-bx));const ratio=Math.hypot(to.x-from.x,to.y-from.y)/Math.hypot(tx-bx,ty-by);ctx.scale(ratio,ratio);ctx.drawImage(img,-bx,-by);ctx.restore();
+ }
+ if(options.boxes??$('boxes').checked){
+  ctx.save();ctx.translate(origin,385);ctx.scale(mirror,1);ctx.lineWidth=1.5;ctx.strokeStyle='#ffce8a';ctx.fillStyle='#ffce8a15';
+  for(const [l,b,r,top] of entry.hits){ctx.fillRect(l*scale,-top*scale,(r-l)*scale,(top-b)*scale);ctx.strokeRect(l*scale,-top*scale,(r-l)*scale,(top-b)*scale);}ctx.restore();
+ }
+ ctx.fillStyle=before?'#92a4af':'#e1b76d';ctx.fillRect(origin-3,382,6,6);ctx.font='14px system-ui';
+ ctx.fillText(before?'Previous drawings / current clock':'Held load → first-active snap → staged reset',20,414);
+ ctx.font='12px system-ui';ctx.fillStyle='#a9bbc1';ctx.fillText(scenario==='hit'?`${m.setup} · ${entry.damage} damage`:'Whiff · actual movement / landing',20,437);
+}
+function draw(){
+ const m=pack.moves[selected],entry=timeline(m)[cursor-1],t=entry.frame,key=entry.actor;
+ paint($('before'),m,cursor,true);paint($('after'),m,cursor,false);$('scrub').value=cursor;
+ $('readout').textContent=`${m.id} · ${entry.pairKind?'Capture C'+entry.pairClock:entry.stage??phase(m,t)+' · Frame '+t+' / '+m.total}${entry.stopped?' · contact freeze':''}`;
+ $('drawing').textContent=key.motion_cue??entry.stage??'Held pose';
+ const c=$('track').getContext('2d'),w=1200/m.total,starts=new Set([1,m.startup,m.startup+m.active]);c.clearRect(0,0,1200,66);
+ for(let tick=1;tick<=m.total;tick++){
+  const fresh=m.after.some(k=>k.action_frame===tick);c.globalAlpha=fresh?1:.22;c.fillStyle=colors[phase(m,tick)];c.fillRect((tick-1)*w+2,6,w-4,30);c.globalAlpha=1;
+  if(starts.has(tick)){c.strokeStyle='#f3eadc';c.lineWidth=2;c.strokeRect((tick-1)*w+2,6,w-4,30);}
+  c.fillStyle=tick===t?'#fff':'#a9bbc1';c.font='15px system-ui';c.textAlign='center';c.fillText(tick,(tick-.5)*w,57);
+ }
+ c.strokeStyle='#fff';c.lineWidth=3;c.strokeRect((t-1)*w+1,3,w-2,36);
+}
+function seek(t){pause();cursor=Math.max(1,Math.min(timeline(pack.moves[selected]).length,t));draw();}
+const groups=new Map();
+pack.moves.forEach((m,i)=>{
+ const name=m.slot>=28&&m.slot<=31?'Specials':m.id.endsWith('D')?'Drive':m.id.startsWith('j.')?'Air normals':m.id.includes('P+K')?'Throws':'Ground normals';
+ if(!groups.has(name)){const g=document.createElement('optgroup');g.label=name;groups.set(name,g);$('move-select').append(g);}
+ const o=document.createElement('option');o.value=i;o.textContent=`${m.input??m.id} · ${m.label}`;groups.get(name).append(o);
+});
+$('move-select').onchange=e=>select(Number(e.target.value));
+$('play').onclick=()=>pause(playing);$('previous').onclick=()=>seek(cursor-1);$('next').onclick=()=>seek(cursor+1);
+$('scrub').oninput=e=>seek(Number(e.target.value));$('speed').onchange=()=>{clock=0;};
+$('scenario').onchange=()=>select(selected);$('mirror').onchange=draw;$('boxes').onchange=draw;
+$('compare').onchange=()=>document.querySelector('.pair').classList.toggle('solo',!$('compare').checked);
+document.addEventListener('keydown',e=>{
+ if(['INPUT','SELECT','BUTTON'].includes(e.target.tagName))return;
+ if(e.code==='Space'){e.preventDefault();pause(playing);}if(e.code==='ArrowRight'){e.preventDefault();seek(cursor+1);}if(e.code==='ArrowLeft'){e.preventDefault();seek(cursor-1);}
+});
+const ready=Promise.all(Object.entries(pack.images).map(async([file,src])=>{const image=new Image();image.src=src;await image.decode();images.set(file,image);}));
+ready.then(()=>{
+ select(selected);pause(!playing);
+ requestAnimationFrame(function tick(time){
+  if(last&&playing){clock+=Math.min(100,time-last)*60/1000*Number($('speed').value);while(clock>=1){clock--;cursor=cursor%timeline(pack.moves[selected]).length+1;}draw();}
+  last=time;requestAnimationFrame(tick);
+ });
+}).catch(()=>{$('readout').classList.add('error');$('readout').textContent='Drawings could not load. Refresh this page, or keep the assets folder beside the downloaded HTML.';});
+window.sharkReview={ready,select,seek,pack,state:()=>({selected,frame:timeline(pack.moves[selected])[cursor-1].frame,tick:cursor,playing,scenario:$('scenario').value}),paint};
+</script></html>

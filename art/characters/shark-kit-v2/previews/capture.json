@@ -1,0 +1,136 @@
+{
+  "fps": 60,
+  "moves": [
+    {
+      "id": "5P",
+      "whiff": 26,
+      "hit": 34
+    },
+    {
+      "id": "5K",
+      "whiff": 31,
+      "hit": 39
+    },
+    {
+      "id": "f.S",
+      "whiff": 43,
+      "hit": 51
+    },
+    {
+      "id": "5Hs",
+      "whiff": 49,
+      "hit": 59
+    },
+    {
+      "id": "2P",
+      "whiff": 27,
+      "hit": 35
+    },
+    {
+      "id": "2K",
+      "whiff": 30,
+      "hit": 38
+    },
+    {
+      "id": "2S",
+      "whiff": 47,
+      "hit": 55
+    },
+    {
+      "id": "2Hs",
+      "whiff": 54,
+      "hit": 86
+    },
+    {
+      "id": "6P",
+      "whiff": 46,
+      "hit": 54
+    },
+    {
+      "id": "6K",
+      "whiff": 48,
+      "hit": 58
+    },
+    {
+      "id": "6S",
+      "whiff": 46,
+      "hit": 54
+    },
+    {
+      "id": "6Hs",
+      "whiff": 55,
+      "hit": 65
+    },
+    {
+      "id": "5D",
+      "whiff": 54,
+      "hit": 63
+    },
+    {
+      "id": "j.P",
+      "whiff": 28,
+      "hit": 36
+    },
+    {
+      "id": "j.K",
+      "whiff": 33,
+      "hit": 41
+    },
+    {
+      "id": "j.S",
+      "whiff": 41,
+      "hit": 49
+    },
+    {
+      "id": "j.Hs",
+      "whiff": 44,
+      "hit": 52
+    },
+    {
+      "id": "j.D",
+      "whiff": 44,
+      "hit": 53
+    },
+    {
+      "id": "2D",
+      "whiff": 43,
+      "hit": 43
+    },
+    {
+      "id": "4P+K",
+      "whiff": 44,
+      "hit": 58
+    },
+    {
+      "id": "6P+K",
+      "whiff": 44,
+      "hit": 58
+    },
+    {
+      "id": "214S",
+      "whiff": 64,
+      "hit": 70
+    },
+    {
+      "id": "j.214P",
+      "whiff": 44,
+      "hit": 38
+    },
+    {
+      "id": "214S>P",
+      "whiff": 43,
+      "hit": 49
+    },
+    {
+      "id": "j.214P>P",
+      "whiff": 43,
+      "hit": 49
+    },
+    {
+      "id": "c.S",
+      "whiff": 33,
+      "hit": 43
+    }
+  ],
+  "note": "Actual simulation poses, roots, hitstop, landing and capture clocks; half-speed file explicitly duplicates each simulation tick."
+}

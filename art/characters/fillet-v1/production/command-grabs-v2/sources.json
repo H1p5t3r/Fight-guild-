@@ -1,0 +1,82 @@
+[
+  {
+    "id": "236D-v2",
+    "file": "236d-v2.png",
+    "columns": 3,
+    "rows": 4,
+    "source": "/workspace/generated_images/exec-0552c160-4870-46cc-be2e-cb60031ca681.png",
+    "sha256": "d8d3e330c4b705bc2d90031005412d21158b2c0f908543652bbe2481d90ff287",
+    "prompt": "vault-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "godot/assets/fighters/fillet-kit-v1/pair-cashout.png"
+    ],
+    "initialSource": "/workspace/generated_images/exec-044046e1-97e8-425c-99cd-acda31c30189.png",
+    "corrections": [
+      {
+        "source": "/workspace/generated_images/exec-6bca1d28-7a68-4243-945d-d31535b0c450.png",
+        "prompt": "transparency-cleanup-prompt.txt"
+      },
+      {
+        "source": "/workspace/generated_images/exec-0552c160-4870-46cc-be2e-cb60031ca681.png",
+        "prompt": "vault-refinement-prompt.txt"
+      }
+    ],
+    "body_height": 350,
+    "root": 180,
+    "poseLabels": [
+      "Stalker entry",
+      "Hop / low-slide approach",
+      "Last-startup load",
+      "Grounded left latch",
+      "Distinct foot collection",
+      "Left forearm brace",
+      "Right knife loaded",
+      "Long-right draw-cut",
+      "Short-left accent",
+      "Release and collect",
+      "Smaller withdrawal",
+      "Stalker settle"
+    ]
+  },
+  {
+    "id": "214D-v2",
+    "file": "214d-v2.png",
+    "columns": 3,
+    "rows": 4,
+    "source": "/workspace/generated_images/exec-972aef9c-4699-4d50-8c43-c67c0b9fd188.png",
+    "sha256": "18308c4d38541d2b65fd0f31e3f7e8037bf5804eb0a39d0e36bb99062ad34835",
+    "prompt": "skim-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "godot/assets/fighters/fillet-kit-v1/pair-cashout.png"
+    ],
+    "initialSource": "/workspace/generated_images/exec-817269c8-7022-4b0f-99cf-7ae57e06c2e4.png",
+    "corrections": [
+      {
+        "source": "/workspace/generated_images/exec-862a0e52-6f20-4ea8-bbb7-2f316612530f.png",
+        "prompt": "transparency-cleanup-prompt.txt"
+      },
+      {
+        "source": "/workspace/generated_images/exec-972aef9c-4699-4d50-8c43-c67c0b9fd188.png",
+        "prompt": "skim-refinement-prompt.txt"
+      }
+    ],
+    "body_height": 350,
+    "root": 180,
+    "poseLabels": [
+      "Stalker entry",
+      "Hop / low-slide approach",
+      "Last-startup load",
+      "Grounded left latch",
+      "Distinct foot collection",
+      "Left forearm brace",
+      "Right knife loaded",
+      "Long-right draw-cut",
+      "Short-left accent",
+      "Release and collect",
+      "Smaller withdrawal",
+      "Stalker settle"
+    ]
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "id": "c.S",
+  "file": "cs-1.png",
+  "source": "/workspace/generated_images/exec-7857b517-7c77-4db9-8937-436dcd543d86.png",
+  "keys": [
+    {
+      "frame": 1,
+      "label": "entry"
+    },
+    {
+      "frame": 3,
+      "label": "anticipation"
+    },
+    {
+      "frame": 5,
+      "label": "anticipation"
+    },
+    {
+      "frame": 6,
+      "label": "pre_contact"
+    },
+    {
+      "frame": 7,
+      "label": "active"
+    },
+    {
+      "frame": 8,
+      "label": "active_path"
+    }
+  ],
+  "columns": 3,
+  "keyStart": 0,
+  "references": [
+    "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+    "/workspace/fillet-art-reference/Fillet_cS_Selected_Motion_Direction.png"
+  ],
+  "prompt": "cs-1-prompt.txt",
+  "sha256": "3a96aeb7d9332ef3eba4b3c930a2ae4195dc6d11c02a3e5cf934df1e15da5f79"
+}

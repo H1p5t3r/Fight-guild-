@@ -1,0 +1,20 @@
+[
+  {
+    "file": "5k-inbetweens.png",
+    "source": "/workspace/generated_images/exec-a2cabaf7-302e-4e20-8607-a6c777f3461b.png",
+    "prompt": "5k-inbetweens-quality-prompt.txt",
+    "references": [
+      "/workspace/generated_images/exec-3fe7b927-eab9-48a4-8584-bfa0a6b91223.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5k.png"
+    ]
+  },
+  {
+    "file": "2s-inbetweens-a.png",
+    "source": "/workspace/generated_images/exec-d804a7b2-7527-42fd-a646-8a2d0f20fc15.png",
+    "prompt": "2s-inbetweens-a-quality-prompt.txt",
+    "references": [
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/2s.png",
+      "/workspace/generated_images/exec-b4fffecd-75e2-4c0b-87ee-d0fa50b76449.png"
+    ]
+  }
+]

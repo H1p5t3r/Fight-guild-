@@ -1,0 +1,23 @@
+{
+  "generated": "2026-11-16",
+  "generator": "image_gen.imagegen",
+  "source_file": "exec-a1a603aa-a386-4c01-b6f5-f0e46c023da7.png",
+  "runtime_file": "fighter-portraits.png",
+  "sha256": "aa51b86260ec2a1b930446023a0c6c1c7331d51c8286f2cb7f0c7918f70556b6",
+  "size": [
+    1536,
+    1024
+  ],
+  "transparent_background": true,
+  "references": [
+    {
+      "path": "godot/assets/fighters/proportions-v2/fillet-windup.png",
+      "sha256": "9c0063ed076e43a0acf79044987b43c0f1b9bd0a09b0a62989568fd3ebff8292"
+    },
+    {
+      "path": "godot/assets/fighters/proportions-v2/shark-windup.png",
+      "sha256": "0ad0f01e6a198a78258ee90b5d3fb14f3ad1e237efe649702323afa0871e110a"
+    }
+  ],
+  "brief": "Two separate head-and-shoulder HUD portraits, Fillet left and Shark right, both facing right. Preserve identity, costumes, palettes, strong ink contours, cel shading and competitive expressions from the supplied windup sheets. Transparent canvas; no weapons, hands, labels, frames or scenery. Clean diagonal chest crops. Runtime regions are in FightHud.portrait; source image copied unchanged."
+}

@@ -1,0 +1,119 @@
+{
+  "created": "2026-11-18",
+  "tool": "OpenAI image_gen",
+  "reference": "art/characters/tapper.png",
+  "rules": "docs/sprite-production.md",
+  "notes": [
+    "Original generated PNG files are copied without pixel edits. Atlas crops, root pivots and body-only hurtboxes are metadata.",
+    "No transition smears. Windup and active poses are studies; recovery returns to the appropriate idle.",
+    "Step dash first attempt was corrected to repair the outer-right crop.",
+    "See repairs.json for subsequent image-generated gutter corrections; before versions are archived."
+  ],
+  "generations": [
+    {
+      "key": "idle",
+      "prompt": "Create a production fighting game sprite atlas for TAPPER from the supplied character reference. Keep his exact identity: mature broad muscular blond bearded brewer captain, long blond hair, burgundy scarf and tabard with ochre trim, dark brown leather waistcoat, rolled ivory sleeves, dark trousers, thick strapped boots, small tankard on belt, gold-tipped staff with an open circular hook at BOTH ends. Mature 7.5-head anatomy, small adult head, powerful broad torso; sophisticated crisp anime fighting game cel shading, bold dark contours, neutral top-left light and flat shadow masses. No photorealism. This is a NEW POSE atlas, not a reference poster. Exactly SIX fully separated full-body sprites in a strict 3-column by 2-row grid, landscape 1536x1024. Each 512x512 cell contains one entire body and entire weapon, same character scale, feet at y=470 within its cell, root centered x=256. ALL face RIGHT, gameplay 3/4 side view. Top row: (1) neutral combat ready, wide confident planted stance, staff held diagonal across front; (2) same ready with subtle exhale/weight shift; (3) Dempsey rolling stance left-weight bob, fists raised near chin, knees bent. Bottom row: (4) Dempsey center-low bob, (5) Dempsey right-weight bob with rolled shoulders, (6) Dempsey rising to center. For all four Dempsey frames staff is secured diagonally across his back and both fists are FREE. Clearly rhythmic boxing bob and weave, no punching yet. Costume, face, height, staff design identical between cells. Generous transparent gutters; nothing crosses a cell boundary. True transparent background, no scenery, no floor, NO ground shadow, NO text, NO numbers, NO grid lines, NO smear frames, NO weapon trails or FX. Use the attached identity sheet ONLY for character design, not its layout."
+    },
+    {
+      "key": "walk",
+      "prompt": "Create an eight-frame WALK CYCLE sprite atlas for the exact TAPPER in the supplied new ready/rolling atlas. Match face, mature muscular proportions, blond beard and hair, brown vest, rolled ivory sleeves, burgundy scarf/tabard, gold trim, belt tankard, heavy boots and gold double-hook staff EXACTLY. Sharp polished anime cel shading, neutral top-left light, no gradients or independent lighting. Landscape 1536x1024, strict FOUR columns by TWO rows, eight frames in row-major order, each cell 384x512. One entire character facing RIGHT in each cell, game side/3-4 view, body upright height about 440px, feet baseline y480 within each row, root center x192. Staff held diagonally compactly across his front with both hooks fully inside cell. Heavy confident advancing walk with distinct footfall animation: 1 left heel contact forward, 2 left flat/down weight, 3 right passing under hips, 4 left toe-off/right swinging forward, 5 right heel contact, 6 right flat/down weight, 7 left passing, 8 right toe-off/left swinging. Natural subtle opposite shoulder/pelvis shifts; hair/tabard follow stride; no sliding duplicates. Constant body size, consistent staff, camera and palette. Entire sprites strictly within own cells with generous transparent gutters. TRUE transparent background, no scenery, no floor shadows, no text/numbers/lines, no FX or smear frames. Use supplied design as reference, NOT its six-pose layout."
+    },
+    {
+      "key": "step",
+      "prompt": "Production fighting-game STEP DASH animation atlas for exact Tapper in attached new ready/stance reference: blond bearded broad mature brewer, burgundy scarf/tabard, ochre trim, ivory rolled sleeves, dark brown vest, dark trousers, tankard belt, heavy boots, long staff with gold circular hooks at BOTH ends. Match anatomy, face, costume and crisp cel shading. Exactly EIGHT full-body sprites facing RIGHT, FOUR columns TWO rows, landscape1536x1024. Each384x512 cell with constant character size (upright body440px), ground/root baseline480, rootx192, spacious gutters. Row-major ONE short grounded explosive step dash, NOT a sustained running cycle: 1 deep back-leg load;2 shoulder leans forward and front foot releases;3 forceful push off rear toe;4 long low traveling stride feet briefly skim above ground;5 lead heel catches;6 low compressed landing;7 rear foot gathers beneath hips;8 recovers planted combat ready. Staff held compact diagonal across front throughout, both hands keep same grips; no thrust/attack. Whole body and both hooks fit within every individual cell. Hair and cloth trail naturally. Consistent neutral upper-left light, mature small-head strong-body proportions, bold ink outlines, flat cel shadows. TRUE TRANSPARENT background, absolutely no floor shadows, no scenery, no FX, no streaks or smear frames, no text, labels or drawn grid. Use design from reference, not its layout."
+    },
+    {
+      "key": "step_fix",
+      "prompt": "Correct ONLY the atlas packing of this Tapper eight-frame step dash. Preserve EXACTLY the same eight poses, face, costume, drawing style, proportions, colors and 4-column2-row order. The top-right traveling step currently crowds/crops the right image boundary; redraw its boot and hook fully, move that whole pose left slightly so BOTH staff hook and boot are complete with at least20px transparent margin before outer edge. Likewise leave clear transparent gutters between neighboring poses, shifting each pose inside its own area if necessary WITHOUT scaling heads or bodies. 1536x1024. No new animation frames, no FX or smears, no text. Preserve real background transparency; transparent RGB may be arbitrary but alpha must be zero around sprites. No ground shadows."
+    },
+    {
+      "key": "attacks1",
+      "prompt": "Draw production sprite atlas for Tapper, identical to the attached new ready/rolling sprites: mature tall broad blond bearded brewer, brown leather vest, ivory rolled sleeves, burgundy scarf and tabard with ochre, dark trousers, heavy boots, tankard at belt, gold DOUBLE-HOOK staff. Match exact palette, solid anatomy, face, equipment and crisp cel-shaded fighting-game ink style. Eight isolated FULL BODY sprites, ALL facing RIGHT, strict FOUR columns TWO rows in1536x1024. Each384x512 cell, body upright reference440px, feet baseline480, no crossing cells. TOP ROW is windup for four different normals; BOTTOM ROW is corresponding ACTIVE contact pose in same column. Col1:5P quick upward bare-fist jab at face height, nonpunching hand keeps staff upright behind; top fist drawn back, bottom extended diagonally upward. Col2:5K advancing front kick to opponent midsection, top knee chambers, bottom boot extended horizontally, staff kept behind torso. Col3:close Slash short powerful upward staff butt strike near chest, top coil compact, bottom sharp rising hook immediately in front. Col4:far Slash long horizontal staff thrust at chest height, top staff drawn back, bottom full forward thrust reaching right with both hands on same shaft. Keep staff correct fixed length and open round hooks at BOTH ends. Maintain generous transparent gutters and complete unclipped weapon and feet in every cell; a pose may be horizontally compacted by perspective but NEVER scale entire character. No opponent. TRUE transparent background, no scenery/floor/shadows, no text/numbers/grid, NO smear frames, NO glow/weapon trails. Weight-loaded windup visibly differs from extended active. Reference only for design, not layout."
+    },
+    {
+      "key": "attacks2",
+      "prompt": "Production fighting game sprites, exact Tapper identity/anatomy/costume/palette from attached ready atlas. Blond long hair and beard, broad mature muscular brewer, burgundy scarf/tabard, ivory rolled sleeves, brown leather vest, dark pants and boots, tankard, gold double-hook staff. Crisp anime cel-shading, neutral top-left lighting, bold ink. Transparent PNG1536x1024, FOUR columns TWO rows, eight separate full-body poses facing RIGHT. Each cell384x512; fixed upright height440, planted feet near480; broad clear gutters, entire weapon and body contained. Top row WINDUPS, bottom row matching ACTIVE poses. No text/grid/floor/shadows/background, NO smear or FX; no opponent. Four attacks: col1 standing Heavy Slash, a big two-handed downward-diagonal hook-staff chop finishing low in front, top staff raised back behind shoulder, bottom deep planted forward downward finish. Col2 crouching Punch, top fist chambered beside chest, bottom straight low fist jab with other hand keeping staff vertical behind. Col3 crouching Kick, top compressed crouch, bottom front boot extended along ground to strike shin, staff stable behind. Col4 crouching Slash, top both hands pull staff back by waist while crouched, bottom horizontal low sweeping/thrusting shaft at knee height. Constant staff length, gold round hook at each end, not an axe or sword. Use compact perspective so the complete reach stays comfortably inside each cell. Preserve adult head and muscular body sizes while crouching, never shrink a whole sprite."
+    },
+    {
+      "key": "attacks3",
+      "prompt": "Production fighting game sprites, exact Tapper identity/anatomy/costume/palette from attached ready atlas. Blond long hair and beard, broad mature muscular brewer, burgundy scarf/tabard, ivory rolled sleeves, brown leather vest, dark pants and boots, tankard, gold double-hook staff. Crisp anime cel-shading, neutral top-left lighting, bold ink. Transparent PNG1536x1024, FOUR columns TWO rows, eight separate full-body poses facing RIGHT. Each cell384x512; fixed upright height440, planted feet near480; broad clear gutters, entire weapon and body contained. Top row WINDUPS, bottom row matching ACTIVE poses. No text/grid/floor/shadows/background, NO smear or FX; no opponent. Four attacks: col1 crouching Heavy Slash launcher, top very low coil with staff behind hip, bottom drives the front hook sharply upward above head while rising from legs. Col2 universal sweep2D, top lowers body with shaft drawn back, bottom low semi-airborne spinning shin sweep using extended boot and staff kept across his own shoulders, low readable attack near ground. Col3 forward Punch6P anti-air, top ducks chin and upper body behind raised forearm, bottom rising bare-fist uppercut reaching diagonally forward/up, other hand holds staff behind; compressed low body with pronounced upward fist. Col4 forward Kick6K, top knee lifts in advancing step, bottom forceful forward knee/boot strike chest height, staff held behind in off hand. Full feet and both gold hooks inside each cell, generous edge margins. Do not let staff, boot or hair touch an image edge. Large windup-to-contact changes, no repeated neutral poses."
+    },
+    {
+      "key": "attacks4",
+      "prompt": "Production fighting game sprites, exact Tapper identity/anatomy/costume/palette from attached ready atlas. Blond long hair and beard, broad mature muscular brewer, burgundy scarf/tabard, ivory rolled sleeves, brown leather vest, dark pants and boots, tankard, gold double-hook staff. Crisp anime cel-shading, neutral top-left lighting, bold ink. Transparent PNG1536x1024, FOUR columns TWO rows, eight separate full-body poses facing RIGHT. Each cell384x512; fixed upright height440, planted feet near480; broad clear gutters, entire weapon and body contained. Top row WINDUPS, bottom row matching ACTIVE poses. No text/grid/floor/shadows/background, NO smear or FX; no opponent. Four attacks: col1 forward Heavy Slash6Hs, top whole torso coils and takes a long step with staff behind shoulder, bottom huge two-hand horizontal mid-height staff swing/lunge forward, NOT an overhead. Col2 jumping Punch, top airborne fist chamber with knees softly tucked and staff in off hand, bottom short fast forward jab chest height in air. Col3 jumping Kick, top airborne knee chamber, bottom rightward outstretched boot with other knee tucked, staff held to rear. Col4 jumping Slash FIRST HIT, top tucked jumping body winds hooked staff left/back, bottom sweeps front hook horizontally across chest. All aerial poses remain full scale but feet end about60px above their cell baseline, leaving clear space beneath. No jumping platform/shadow. Consistent hooked staff not swords, hands and boots same size, entire long weapon contained inside each cell with margins."
+    },
+    {
+      "key": "attacks5",
+      "prompt": "Production fighting game sprites, exact Tapper identity/anatomy/costume/palette from attached ready atlas. Blond long hair and beard, broad mature muscular brewer, burgundy scarf/tabard, ivory rolled sleeves, brown leather vest, dark pants and boots, tankard, gold double-hook staff. Crisp anime cel-shading, neutral top-left lighting, bold ink. Transparent PNG1536x1024, FOUR columns TWO rows, eight separate full-body poses facing RIGHT. Each cell384x512; fixed upright height440, planted feet near480; broad clear gutters, entire weapon and body contained. Top row WINDUPS, bottom row matching ACTIVE poses. No text/grid/floor/shadows/background, NO smear or FX; no opponent. Four actions: col1 jumping Slash SECOND HIT, top begins from horizontal hook sweep, bottom redirects staff sharply UPWARD in front of head while airborne; body and boots tucked above baseline. Col2 jumping Heavy Slash, top shoulders coil staff behind, bottom strong long horizontal airborne shaft/hook swing to right with legs tucked. Col3 jumping Drive stall-and-dive, top suspended coiled body with BOTH knees raised and staff secured diagonally at back, bottom forceful diagonal-down-forward double-boot dive, body leaning back and feet pointing right/down, clear falling vector. Col4 HELD GUARD, grounded front-facing ready stance, top draws the staff across chest defensively, bottom stable planted body behind horizontal braced staff; both gold hook ends present, tightly closed silhouette. Air sprites have feet raised60px above cell baseline. Whole sprites and BOTH hooks fit inside their cells, margins20px at outer edges. Do not crop limbs. Transparent alpha, no effects."
+    },
+    {
+      "key": "attacks6",
+      "prompt": "Production fighting game sprites, exact Tapper identity/anatomy/costume/palette from attached ready atlas. Blond long hair and beard, broad mature muscular brewer, burgundy scarf/tabard, ivory rolled sleeves, brown leather vest, dark pants and boots, tankard, gold double-hook staff. Crisp anime cel-shading, neutral top-left lighting, bold ink. Transparent PNG1536x1024, FOUR columns TWO rows, eight separate full-body poses facing RIGHT. Each cell384x512; fixed upright height440, planted feet near480; broad clear gutters, entire weapon and body contained. Top row WINDUPS, bottom row matching ACTIVE poses. No text/grid/floor/shadows/background, NO smear or FX; no opponent. Four distinct actions: col1 armored guard follow-up, top compact brace behind horizontal double-hook staff, bottom forceful short forward two-handed shaft smash from guard with planted advancing shoulders. Col2 collar-grab entry for Drive/throw, top open forward hand reaches toward opponent collar with rear fist cocked, bottom grasping forward hand draws an invisible collar close while forehead pulled back ready to headbutt; staff secured diagonally across BACK and both hands free. Col3 HEADBUTT finish, top both fists gripping invisible collar chest high, head pulled back, bottom strong forward headbutt with brow/forehead leading and elbows pulling opponent inward; staff secured across back, NOT punching. Col4 AIR THROW, top airborne reaching both open hands forward, bottom airborne torso rotates and both hands sling imaginary opponent down forward, legs tucked; staff secured to back. Draw ONLY Tapper, no opponent, no floating hands. This is reusable character sprite art. Dedicated anticipation above and contact below. Hooks remain visible on the back during unarmed actions. Every body/weapon fits its cell, keep20px outer margins."
+    },
+    {
+      "key": "attacks7",
+      "prompt": "Production fighting game sprites, exact Tapper identity/anatomy/costume/palette from attached ready atlas. Blond long hair and beard, broad mature muscular brewer, burgundy scarf/tabard, ivory rolled sleeves, brown leather vest, dark pants and boots, tankard, gold double-hook staff. Crisp anime cel-shading, neutral top-left lighting, bold ink. Transparent PNG1536x1024, FOUR columns TWO rows, eight separate full-body poses facing RIGHT. Each cell384x512; fixed upright height440, planted feet near480; broad clear gutters, entire weapon and body contained. Top row WINDUPS, bottom row matching ACTIVE poses. No text/grid/floor/shadows/background, NO smear or FX; no opponent. This sheet contains FOUR UNARMED ROLLING-STANCE normals. Staff is secured diagonally across his BACK in every pose, both fists completely FREE; gold hooks visible near shoulder and opposite hip. Col1 stance Punch: windup compact boxer's loaded fist near chin, active short stiff left jab forward. Col2 stance Kick LOW: windup dips hips with knee chambered, active snaps front boot toward opponent shin, both fists remain guarding chest. Col3 stance Slash FAST HOOK MID: windup winds torso with elbow tucked, active strong horizontal close-range hook fist at ribs/chest, not an uppercut and not an overhead. Col4 stance Heavy Slash OVERHEAD: windup raises rear elbow/fist HIGH above his head, active forceful downward overhand punch with fist descending in front of head. Broad rhythmic Dempsey shoulder rotation, springy bent knees, weight transfer, fierce focused face; distinctive windup/active silhouette for each. Consistent mature anatomy and exact costume. All fully inside own cells, no character shrinking, no staff in his hands and no extra weapons."
+    },
+    {
+      "key": "attacks8",
+      "prompt": "Production fighting game sprites, exact Tapper identity/anatomy/costume/palette from attached ready atlas. Blond long hair and beard, broad mature muscular brewer, burgundy scarf/tabard, ivory rolled sleeves, brown leather vest, dark pants and boots, tankard, gold double-hook staff. Crisp anime cel-shading, neutral top-left lighting, bold ink. Transparent PNG1536x1024, FOUR columns TWO rows, eight separate full-body poses facing RIGHT. Each cell384x512; fixed upright height440, planted feet near480; broad clear gutters, entire weapon and body contained. Top row WINDUPS, bottom row matching ACTIVE poses. No text/grid/floor/shadows/background, NO smear or FX; no opponent. Four actions: col1 stance EXIT, top low Dempsey stance fists near chin and staff on back, bottom upright normal combat ready with hands bringing hooked staff across front, deliberate shoulder reset. Col2 RUNNING TACKLE: top forward-running loaded step, fists/arms free and double-hook staff strapped to back; bottom explosive low shoulder tackle to RIGHT, one forward knee near ground, arms reaching to clamp opponent waist, whole body strongly leaning forward. Col3 SINGLE STRONG PUNCH after tackle: top low kneeling mount posture, rear fist cocked HIGH, other hand braces near front knee; bottom same kneeling posture with one powerful downward-forward fist punch at a low opponent, only one fist extended. NO opponent drawn; staff remains secured across back in both tackle and punch. Col4 neutral CROUCH/support: top ready body lowers with hooked staff held across chest; bottom compact grounded crouch, staff horizontal, eyes forward. All facing right. This is full-body character sprite only. Keep exact adult proportions, root registration and consistent costume. Every entire limb and gold hook fits within384px-wide cell with20px gutters. Do not draw a floor, opponent, FX, smears or labels."
+    }
+  ],
+  "accepted_files": [
+    {
+      "file": "tapper-v1/idle.png",
+      "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e",
+      "generation_file": "exec-9f0f9e06-3a52-46d9-a49f-540df49f784d.png"
+    },
+    {
+      "file": "tapper-v1/actions-1.png",
+      "sha256": "06974717c67b0255aa8fd291e5ba13a6eb603365ab68011af8ce8e072e18dbd8",
+      "generation_file": "exec-e6e12039-e8f9-427e-96f3-42a8d34fc586.png"
+    },
+    {
+      "file": "tapper-v1/actions-2.png",
+      "sha256": "5b9343bd570d7677e379bd1db24b82ce735012454bd1e305688a4cc392c3c388",
+      "generation_file": "exec-6f8f9032-9199-4573-98b9-0b3f4ba86c0b.png"
+    },
+    {
+      "file": "tapper-v1/actions-6.png",
+      "sha256": "32e2c74b0be6f6710eb775028dca894a08aa25eac8a22e8f91266e7d33aea094",
+      "generation_file": "exec-de0ffa9c-178e-43d6-a5b4-e40215eb430e.png"
+    },
+    {
+      "file": "tapper-v1/walk.png",
+      "sha256": "e3a83174f986cfaa7ea281d1591dc9bcafec25d14bd35b9929e3d6894cb25b12",
+      "generation_file": "exec-67852ea1-711f-4dff-a6d0-e40a9d7ba434.png"
+    },
+    {
+      "file": "tapper-v1/actions-4.png",
+      "sha256": "6f10e8c4d56ad688ec11c2bf8bd1288f2a49d50e9856f685b31f0530b1b53793",
+      "generation_file": "exec-8fe17627-d1c3-4cc9-95f6-8f483570e349.png"
+    },
+    {
+      "file": "tapper-v1/actions-5.png",
+      "sha256": "24599d1747f98dc1f298a90d01671b6d93e547b00c984473548f802effaa3a4d",
+      "generation_file": "exec-59c7fc2c-7287-4e16-ba8e-c1f8d5770222.png"
+    },
+    {
+      "file": "tapper-v1/actions-8.png",
+      "sha256": "10068af5b9afb0edf567ec8ea00d4f1f15843a362d1fab17bf7a63d0be193579",
+      "generation_file": "exec-ed6630a6-c872-4439-a1fd-9b76a6dc0fa5.png"
+    },
+    {
+      "file": "tapper-v1/actions-3.png",
+      "sha256": "798fbfe551209542c4a5c9f407524bb4ef8fd24eef67d75cc1c48ae3a3d87d79",
+      "generation_file": "exec-e0ef7cff-e7d8-4611-acfb-d615bf69a461.png"
+    },
+    {
+      "file": "tapper-v1/actions-7.png",
+      "sha256": "35bc5f23b35323208b137b394b0157c17f2278b35d628aeca3396ce174fbcedd",
+      "generation_file": "exec-5265475a-a22e-41c6-8e77-43a3a3d7aca0.png"
+    },
+    {
+      "file": "tapper-v1/step.png",
+      "sha256": "b8d3bbcee89c16e5618c7b9fc149fd2d9dc0bf89a130b91c5bbf5a90a6208cad",
+      "generation_file": "exec-1383c375-6467-4b87-b3cd-aca5bf69ce84.png"
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "version": 4,
+  "character": "Fillet",
+  "date": "2026-11-19",
+  "status": "directions selected; separate first production pass registered in Godot and Move Workshop",
+  "scope": [
+    "5Hs",
+    "2S",
+    "2Hs",
+    "6P",
+    "6Hs"
+  ],
+  "phases": [
+    "windup",
+    "contact",
+    "follow-through"
+  ],
+  "reference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png",
+  "stanceReference": "Fillet_Codex_Implementation_v1_0.zip/references/Fillet_cS_Selected_Motion_Direction.png",
+  "specSHA256": "796292f71f5af141c91997b983ee223834a0826dbc8d3c7b1b1d7d260445e65d",
+  "options": {
+    "5Hs": {
+      "A": "Cross Snap",
+      "B": "Hip Cross"
+    },
+    "2S": {
+      "A": "Low Draw",
+      "B": "Hip Reap"
+    },
+    "2Hs": {
+      "A": "Center Open",
+      "B": "Rear-Leg Coil"
+    },
+    "6P": {
+      "A": "Shoulder Snap",
+      "B": "Rib Slip"
+    },
+    "6Hs": {
+      "A": "Plant & Cleave",
+      "B": "Rib Whip"
+    }
+  },
+  "suggestedMix": {
+    "5Hs": "B",
+    "2S": "B",
+    "2Hs": "B",
+    "6P": "A",
+    "6Hs": "B"
+  },
+  "selections": {
+    "6P": "B",
+    "6Hs": "B",
+    "5Hs": "B",
+    "2Hs": "B",
+    "2S": "B"
+  },
+  "provenance": {
+    "heavy-options.png": {
+      "source": "/workspace/generated_images/exec-4ecd7283-f167-45ee-9263-2861493bca38.png",
+      "sha256": "0b06b59808d6fed0ab14b39c88127556c6f0c06afff5a361ba503cede71e99d5"
+    },
+    "rising-options.png": {
+      "source": "/workspace/generated_images/exec-41a579f2-f915-4a27-808b-97c658562a21.png",
+      "sha256": "1c59dcb4194f8d428d9f28ebe5d87dd564895c12b78a2dc3752a2e7dd9f53c20"
+    },
+    "sweep-options.png": {
+      "source": "/workspace/generated_images/exec-cc579fc4-68f0-4f60-9a37-34646f1fa198.png",
+      "sha256": "0515046dadb12f9872d9fbdad99f5af50cb71f64df15bb43a7d68fe7ef5d2d6b"
+    },
+    "archive/heavy-before-crosscut-refinement.png": {
+      "source": "/workspace/generated_images/exec-94ebefae-20fc-4666-b5cb-6169f7248bb3.png",
+      "sha256": "be195697052fffd19d8141077cb5c2ac1a35af51733c7ca01922d584105da1ba"
+    },
+    "5hs-timeline.png": {
+      "source": "/workspace/generated_images/exec-9d5230f1-0ee1-44a2-86d6-d8122ec81fb1.png",
+      "sha256": "3f286c30d58cf27325bbc22175ee0878820f02464ffa39f00a73278b0bc91a54"
+    },
+    "2s-timeline.png": {
+      "source": "/workspace/generated_images/exec-17c7c008-0d8d-4386-a424-49e94cdc6724.png",
+      "sha256": "c5048f9d32ea1c8b0ada884d6a3f8425413cf322a98f0c2e6f2747172d2f8d24"
+    },
+    "2hs-timeline.png": {
+      "source": "/workspace/generated_images/exec-e149c400-ab77-44de-96b4-941f1c7d7f3f.png",
+      "sha256": "921865f27a477cd151efea2769275fd43e0643da5c5bfa09d560dedef83a62a9"
+    },
+    "6p-timeline.png": {
+      "source": "/workspace/generated_images/exec-31fc2cc5-2865-46eb-b264-08c63e8691d3.png",
+      "sha256": "347c74333d611734d2c556db9e5e195f79d9db4bc763180a6aed0d150fc74d7e"
+    },
+    "6hs-timeline.png": {
+      "source": "/workspace/generated_images/exec-7be8a0b0-e62f-4adc-b9b8-02624ba78e9c.png",
+      "sha256": "0d9bb1be0c9e6b1f6915e91c2027342e12db38761cd538fffe95e8d7a24f67c7"
+    },
+    "2s-revision-02.png": {
+      "source": "/workspace/generated_images/exec-a8850775-4707-46a8-a5cd-0ef16eb3a0a8.png",
+      "sha256": "81a36bfe0126af550290b4def0b27c0188119f669b7dc50e885424f059b17c49"
+    }
+  },
+  "reviewNotes": [
+    "All five B directions are selected. 2S specifically uses B / Hip Reap from the second study, not the rejected original B / Hip Sweep.",
+    "The revised 2S study increases the difference between contact and follow-through; production still needs a continuously readable inactive left hand/short knife and exact registration.",
+    "Timeline poses describe choreography beats, not consecutive simulation frames. Arrows are review annotations only; exact blade/limb paths, handedness and support contacts must be resolved during registered production.",
+    "5Hs active drawings refined so the unequal blade paths visibly cross; 6Hs retains its distinct long forward/down cleave.",
+    "2S uses the long RIGHT blade close to the floor, unlike the boot-based 2K.",
+    "2Hs remains grounded; 6P does not gain a visual shield.",
+    "These are direction studies, not registered sprite sheets or playable clips.",
+    "Selected poses still need exact scale, anatomy, weapon ownership/lengths, support-foot continuity, collision-corridor fit and both-facing checks.",
+    "No runtime sprite, manifest, timing or collision data changed.",
+    "The no-runtime-change notes above describe the original direction-review step. Selected directions now have separate registered production atlases; see the production README for scope and remaining refinement."
+  ],
+  "format": {
+    "layout": "one move per sheet; A top row, B bottom row; three columns left to right",
+    "poseCountPerOption": 3,
+    "motionArrows": {
+      "red": "blade path",
+      "charcoal": "body rotation and weight transfer",
+      "gold": "footwork and support"
+    },
+    "requestedBy": "user on 2026-11-19; two poses did not show the motion plan clearly enough",
+    "runtimeEffects": false
+  },
+  "sourceBoards": {
+    "heavy-options.png": {
+      "rows": [
+        "5Hs",
+        "6Hs"
+      ],
+      "columns": [
+        "A windup",
+        "A active",
+        "B windup",
+        "B active"
+      ],
+      "prompt": "heavy-refinement-prompt.txt",
+      "editSource": "archive/heavy-before-crosscut-refinement.png"
+    },
+    "rising-options.png": {
+      "rows": [
+        "6P",
+        "2Hs"
+      ],
+      "columns": [
+        "A windup",
+        "A active",
+        "B windup",
+        "B active"
+      ],
+      "prompt": "rising-prompt.txt"
+    },
+    "sweep-options.png": {
+      "rows": [
+        "2S-A",
+        "2S-B"
+      ],
+      "columns": [
+        "windup",
+        "active"
+      ],
+      "prompt": "sweep-prompt.txt"
+    }
+  },
+  "boards": {
+    "5hs-timeline.png": {
+      "move": "5Hs",
+      "rows": [
+        "A",
+        "B"
+      ],
+      "columns": [
+        "windup",
+        "contact",
+        "follow-through"
+      ],
+      "prompt": "5hs-timeline-prompt.txt",
+      "editSource": "heavy-options.png",
+      "identityReference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png"
+    },
+    "2hs-timeline.png": {
+      "move": "2Hs",
+      "rows": [
+        "A",
+        "B"
+      ],
+      "columns": [
+        "windup",
+        "contact",
+        "follow-through"
+      ],
+      "prompt": "2hs-timeline-prompt.txt",
+      "editSource": "rising-options.png",
+      "identityReference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png"
+    },
+    "6p-timeline.png": {
+      "move": "6P",
+      "rows": [
+        "A",
+        "B"
+      ],
+      "columns": [
+        "windup",
+        "contact",
+        "follow-through"
+      ],
+      "prompt": "6p-timeline-prompt.txt",
+      "editSource": "rising-options.png",
+      "identityReference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png"
+    },
+    "6hs-timeline.png": {
+      "move": "6Hs",
+      "rows": [
+        "A",
+        "B"
+      ],
+      "columns": [
+        "windup",
+        "contact",
+        "follow-through"
+      ],
+      "prompt": "6hs-timeline-prompt.txt",
+      "editSource": "heavy-options.png",
+      "identityReference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png"
+    },
+    "2s-revision-02.png": {
+      "move": "2S",
+      "rows": [
+        "A",
+        "B"
+      ],
+      "columns": [
+        "windup",
+        "contact",
+        "follow-through"
+      ],
+      "prompt": "2s-revision-02-prompt.txt",
+      "identityReference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png",
+      "selection": "B"
+    }
+  },
+  "approval": {
+    "date": "2026-11-19",
+    "source": "user message",
+    "scope": "6P B, 6Hs B, 5Hs B, 2Hs B; revised 2S B / Hip Reap",
+    "inputAliases": {
+      "5H": "5Hs",
+      "2H": "2Hs"
+    },
+    "notes": [
+      "6P approval is for the B / Rib Slip motion. Correct anatomical arm ownership in final poses is an explicit user condition.",
+      "The original 2S directions were rejected. The user subsequently selected B / Hip Reap from 2s-revision-02.png: Absolutely B on this version of 2S."
+    ]
+  },
+  "productionRequirements": {
+    "6P": [
+      "Anatomical LEFT red-armored shoulder, upper arm, elbow, wrist and short knife remain one chain in every pose.",
+      "Anatomical RIGHT unarmored shoulder, elbow, wrist and long knife remain one chain; keep it low/back and inactive.",
+      "Check both facing variants and every transition key for swapped shoulders, hands or knives before registering/installing any 6P clip."
+    ],
+    "2S": [
+      "Keep the selected B deep crouch, hip-led low crescent and distinct across-front follow-through.",
+      "Preserve the long RIGHT sweeping knife and short LEFT knife; keep the inactive short knife and its hand readable throughout the torso turn.",
+      "Retain the fixed foot support, authored reach and frame timing; do not turn the motion into a traveling slide or spin."
+    ]
+  },
+  "revisionRequests": {
+    "2S": {
+      "date": "2026-11-19",
+      "source": "user: 2s try again",
+      "rejectedSheet": "2s-timeline.png",
+      "status": "replacement B selected by user",
+      "selection": "B",
+      "replacementSheet": "2s-revision-02.png",
+      "selectedOn": "2026-11-19"
+    }
+  },
+  "supersededBoards": {
+    "2s-timeline.png": {
+      "move": "2S",
+      "rows": [
+        "A",
+        "B"
+      ],
+      "columns": [
+        "windup",
+        "contact",
+        "follow-through"
+      ],
+      "prompt": "2s-timeline-prompt.txt",
+      "editSource": "sweep-options.png",
+      "identityReference": "Fillet_Codex_Implementation_v1_0.zip/references/fillet_model_reference_06.png",
+      "options": {
+        "A": "Compact Draw",
+        "B": "Hip Sweep"
+      },
+      "status": "rejected; replaced by second study"
+    }
+  },
+  "production": "art/characters/fillet-v1/production/ground-v1"
+}

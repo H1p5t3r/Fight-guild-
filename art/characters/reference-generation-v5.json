@@ -1,0 +1,200 @@
+{
+  "revision": "reference-05",
+  "created_date": "2026-11-17",
+  "generator": "OpenAI image_gen",
+  "generator_version": "Not exposed by the tool",
+  "status": "User selected Shark F / Shoulder Rest; blue sports glasses and lower-volume long hair are current direction.",
+  "pixel_processing": "Original generated PNGs copied byte-for-byte; PDFs embed original image pixels.",
+  "jobs": [
+    {
+      "id": "shark-blue-sports-glasses",
+      "path": "art/archive/reference-v5-studies/shark-before-stance-selection.png",
+      "references": [
+        "art/archive/reference-guides-v4/shark.png"
+      ],
+      "prompt": "Make a targeted character-design edit to this exact SHARK model-reference sheet for FIGHT GUILD. Replace his teal painted/mask-like eye marking with clearly physical BLUE SPORTS GLASSES in EVERY character view: front, right side, back where the temple arm is visible, both expression close-ups and the small ready pose. The user explicitly requested sports glasses instead of face paint. The hair was just revised and MUST stay as it is here: LONG WHITE HAIR, low crown, reduced volume, slim controlled locks down the back. Do not bring back the old spiky mane.\n\nEYEWEAR DESIGN: fitted wraparound athletic running/cycling sunglasses, a slim cobalt-blue frame with blue-tinted curved lenses, a small visible nose bridge and distinct temple arms extending over the ears. The glasses sit IN FRONT of the face and cast a tiny crisp contact shadow; show rim thickness and a sharp pale-blue lens reflection so they cannot be mistaken for painted skin. Prefer two connected lens shapes with a clear bridge, sleek and practical, not huge ski goggles, swimming goggles, a visor helmet or a superhero eye mask. No straps, brands or logos. Completely remove the old teal skin paint underneath and around the glasses: cheekbones, temples and skin bordering the lenses return to his natural skin color. The mask and the glasses must never coexist. Cobalt blue is the eyewear accent; keep the costume's guild teal unchanged.\n\nKeep the ENTIRE REST of the sheet intact: same mature face and expression, eight-head athletic anatomy, broad shoulders and lean waist, teal scale vest, anatomical LEFT bone jaw shoulder, rope belt and hip net, split teal sash, slate-gray trousers, brown wrapped boots. Same RIGHT-hand long hooked shaft with one continuously connected open metal J-hook and separate LEFT-hand short triangular blade. No weapon changes. Same front/right-side/back poses and tiny ready stance, alignment, palette chips, equipment drawings, separate FX samples, text and panel layout. Same top-left neutral lighting, hard cel shadows and dark graphic contours.\n\nChange 'MODEL REFERENCE 04' to 'MODEL REFERENCE 05'. In the free lower-right note area, retain the 'BODY / WEAPON / FX' heading and show a small isolated three-quarter object study of the new blue sports glasses below it, with visible temples and nose bridge, labeled 'BLUE SPORTS GLASSES'. Retain the 'HOOK + TETHER SEPARATE' note in small text below that. This small eyewear inset is the only layout addition. The expression close-ups should make the new framed lenses and bare surrounding skin unmistakable.\n\nPreserve the warm neutral opaque background and landscape dimensions. This is an eyewear replacement and a model-sheet consistency pass, not a body, hair or costume redesign. Output only the completed reference sheet.",
+      "generated": "exec-a9b7ee28-ca12-4e7c-b14c-3785e3c751bf.png",
+      "transparent_background": false,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "art/archive/reference-v5-studies/shark-before-stance-selection.png",
+        "bytes": 2208563,
+        "sha256": "d7ddb43fdc14b43353d9fd1418f4ada40d6e21a7e7313e05750d18106490d09f",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/archive/reference-guides-v4/shark.png",
+          "bytes": 2168641,
+          "sha256": "0d4685fac4bf030ce86b6aa36b908d9c0dafca10858e0be8b92e484af66c305a",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shark-actions-blue-sports-glasses",
+      "path": "art/archive/reference-guides-v5/shark-actions.png",
+      "references": [
+        "art/archive/reference-guides-v4/shark-actions.png",
+        "art/archive/reference-v5-studies/shark-before-stance-selection.png"
+      ],
+      "prompt": "Make an EYEWEAR-ONLY edit to the SHARK ACTION REFERENCE sheet in image1, using image2's updated MODEL REFERENCE 05 as the exact eyewear authority. Replace the teal face-paint/eye-mask appearance in ALL EIGHT full-body drawings with the same physical blue wraparound SPORTS GLASSES shown in image2. Slim cobalt frame, blue lenses with a small hard highlight, nose bridge, and visible side arms reaching over his ears. Restore natural skin around and underneath the glasses; NO remaining face paint, NO teal mask, NO glasses painted onto skin. Do not add a head strap or turn them into goggles. Hair stays exactly as image1: LONG white hair with low crown, reduced volume and slim flowing locks.\n\nPreserve every action pose, body proportion, anatomical left bone shoulder, costume, long hooked shaft in right hand, separate short left blade, input labels, trajectories, eight windup/active panels, notes and FX samples. The two released hooked shafts/tethers remain separate from the throwing hands. Do not change the hook shape or any weapon, foot position, airborne height, hand pose, camera, colors or layout. Same matte cel shading and top-left light. Change the header from 'ACTION REFERENCE 04' to 'ACTION REFERENCE 05'. This is a small consistency update to eyewear across eight poses, not a redraw of the actions. Output the finished landscape opaque reference sheet only.",
+      "generated": "exec-92183878-ae03-46ff-a9c5-de5892988005.png",
+      "transparent_background": false,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "art/archive/reference-guides-v5/shark-actions.png",
+        "bytes": 2090220,
+        "sha256": "16f9d32f3ac3e1ffaa2ae2a18adc0ec2110473568f76b4f545a5822599a57514",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/archive/reference-guides-v4/shark-actions.png",
+          "bytes": 2107784,
+          "sha256": "30abe1d8e520dc159081e92f247ecd95c37142d959fd98022170ea77c2e1db5a",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "art/archive/reference-v5-studies/shark-before-stance-selection.png",
+          "bytes": 2208563,
+          "sha256": "d7ddb43fdc14b43353d9fd1418f4ada40d6e21a7e7313e05750d18106490d09f",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shark-ready-stance-options",
+      "path": "art/characters/stance-studies/shark-01.png",
+      "references": [
+        "art/archive/reference-v5-studies/shark-before-stance-selection.png"
+      ],
+      "prompt": "Create a polished SIX-OPTION COMBAT STANCE comparison sheet for SHARK in FIGHT GUILD. The supplied MODEL REFERENCE 05 is the exact authority for his identity, mature athletic anatomy, reduced-volume long white hair, new BLUE SPORTS GLASSES, costume, weapons, palette and crisp cel shading. Six alternative neutral IDLE/READY poses of the SAME fighter, not attack frames and not different characters.\n\nLAYOUT: landscape about1536x1024 or larger, THREE COLUMNS by TWO ROWS. Header 'SHARK / COMBAT STANCES', smaller 'READY POSE EXPLORATION'. Match reference's warm light-gray background, dark condensed italic type, teal section rules and clean artbook finish. Six clear labels in reading order: 'A / CAPTAIN', 'B / LONG GUARD', 'C / LOW TIDE', 'D / CAST READY', 'E / CROSS GUARD', 'F / SHOULDER REST'. One full-body figure per panel, with both boots, both hands, complete hooked shaft and complete short blade visible within generous gutters. Constant anatomical scale/head size, source facing RIGHT, same side/three-quarter gameplay camera in every panel. Feet aligned to a thin ground baseline per row. No body size change to accommodate a pose; direct the hook diagonally so it fits. No equipment inset or portraits; maximize space for the six fighters.\n\nLOCK CHARACTER: mature adult male swimmer/athlete, roughly8 anatomical skull-heads tall, broad powerful shoulders/upper back, narrow waist, strong long limbs, substantial hands and boots. LONG WHITE HAIR with FLAT LOW CROWN and SLIM grouped locks following the nape/back, exactly as reference. No huge spiky mane or short haircut. Physical COBALT-BLUE WRAPAROUND SPORTS GLASSES with blue reflective lenses, visible frame, bridge and temple arms; natural skin around them, absolutely no face paint or teal eye mask. Sleeveless teal scale vest; bone jaw pauldron on anatomical LEFT shoulder only (far shoulder for right-facing camera); rope belt and hip net; slate trousers; split teal sash; brown wrapped boots. Same wardrobe, face, asymmetry and proportion in every option. Neutral top-left key light, hard two/three-tone cel shadows, bold outer contour, fine internal lines, muted teal/slate/bone with blue eyewear.\n\nFIX EQUIPMENT: EXACTLY TWO WEAPONS in each panel. RIGHT hand holds the LONG rope-wrapped wooden hooked shaft/gaff, same length as the reference, with one continuous attached open silver J-hook and a small butt ring. LEFT hand holds a SEPARATE SHORT BROAD TRIANGULAR stabbing blade. Never turn the pole into a scythe/trident/sword, detach the hook, put a spearhead on its butt, or combine the short blade with the pole. No weapon duplication, wrong hand swap or missing offhand knife. Hook metal, shaft and wraps stay the same proportions. All weapons are at rest and gripped, never thrown.\n\nSIX CLEARLY DISTINCT READY SILHOUETTES:\nA / CAPTAIN: tall relaxed narrow-to-medium stagger, chin level, broad shoulders relaxed with confident alert gaze. Main right hook hangs diagonally down and back beside the right leg, its head clear of the boot; shorter left blade held loosely forward at belt height. Calm authority and open chest. Both feet grounded, no crouch or attack.\nB / LONG GUARD: athletic middle-height stagger, softly bent knees, body slightly side-on and centered. Right hand presents the hooked pole forward across lower-chest/waist height, hook to the RIGHT toward the opponent, right elbow flexed so this is a probing guard rather than a full thrust. Left short blade stays close to ribs/chest ready to parry. The shaft makes a strong forward line; do not use both hands on it.\nC / LOW TIDE: low wide forward-weighted crouch, front knee bent and rear leg stretched, torso inclining forward, head watching RIGHT. Long right hook trails low BEHIND the hip toward the left, roughly parallel to the floor with its hook clear of the ground; left short blade leads forward at torso level. Low sweeping silhouette with clear space between weapons, poised for a running approach, not an executed stab.\nD / CAST READY: rear-weighted medium stagger, torso coiled but stable, feet planted. Right elbow bent with the hooked shaft lifted beside/behind RIGHT shoulder at a steep upward diagonal, hooked end up/back and butt near gripping hand, ready to cast. LEFT short blade held forward at waist height. Distinct high weapon, readable face, restrained poised readiness rather than throwing or jumping.\nE / CROSS GUARD: centered moderately broad base, knees softly bent, torso upright in same three-quarter view. Right hand holds hooked shaft diagonally across front of torso, hook toward upper-right and butt toward lower-left; short left blade guards the opposite lower line in front of ribs. Two distinct crossing guard lines with hands and weapons kept visibly separate, not a merged two-headed weapon. Defensive and compact without blocking reaction or hit effects.\nF / SHOULDER REST: relaxed upright stagger, weight casually on rear leg, front knee loose, faint confident smirk. Right hand balances the long hooked shaft across/just behind the shoulders at a shallow diagonal; the hook remains visible off one side and the butt off the other, held clear of hair/face and the bone pauldron. LEFT short blade hangs low beside left thigh. This is a cocky sustainable ready pose with one high hand and one low, not a walking frame or attack. Same slim long hair, not flared to fill the space.\n\nSilhouette differences must be obvious: A low weapons/tall, B forward pole, C low/trailing, D high cast preparation, E diagonal center guard, F casual shoulder carry. Preserve consistent lenses and blue frames on ALL SIX. No smears, speed lines, sparks, water powers, dust, impact, motion arrows, blood, scenery, enemies or hitboxes. Use posture alone. All poses should support later breathing/weight-shift animation. Produce only the finished comparison board.",
+      "generated": "exec-ed22fa53-a904-4655-b0fe-077f654a6da3.png",
+      "transparent_background": false,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "art/characters/stance-studies/shark-01.png",
+        "bytes": 2123930,
+        "sha256": "d5cdbc5dec12567dc8127d59ed1f19bd05f2848095243bb58fef98989568fcf3",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/archive/reference-v5-studies/shark-before-stance-selection.png",
+          "bytes": 2208563,
+          "sha256": "d7ddb43fdc14b43353d9fd1418f4ada40d6e21a7e7313e05750d18106490d09f",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shark-standard-shoulder-rest",
+      "path": "art/archive/reference-guides-v5/shark.png",
+      "references": [
+        "art/archive/reference-v5-studies/shark-before-stance-selection.png",
+        "art/characters/stance-studies/shark-01.png"
+      ],
+      "prompt": "Edit the FIRST reference, Shark's MODEL REFERENCE05 sheet, in only the small lower-left READY panel. Replace its placeholder ready pose with the exact selected F / SHOULDER REST pose from the BOTTOM-RIGHT of the SECOND reference: upright relaxed stagger, right hand balancing the whole long hooked shaft across/behind his shoulders, left short blade held low, confident posture. Label this small panel 'STANDARD / F: SHOULDER REST'. Use the complete full-body pose and both weapons inside the same panel with clean margins. Preserve his new blue sports glasses with visible frames, long reduced-volume white hair, exact clothing/palette, bone left shoulder, and the hooked shaft/short blade shapes. Preserve EVERYTHING ELSE in the model sheet, including all three turnarounds, expression closeups, eyewear object study, equipment, palettes, FX examples and MODEL REFERENCE05 title. No other pose changes or new art panels. Opaque neutral page.",
+      "generated": "exec-b2831e08-f6ed-4adf-8c8d-f7a8fdacee0f.png",
+      "transparent_background": false,
+      "prompt_status": "exact",
+      "output_metadata": {
+        "path": "art/archive/reference-guides-v5/shark.png",
+        "bytes": 2201584,
+        "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/archive/reference-v5-studies/shark-before-stance-selection.png",
+          "bytes": 2208563,
+          "sha256": "d7ddb43fdc14b43353d9fd1418f4ada40d6e21a7e7313e05750d18106490d09f",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "art/characters/stance-studies/shark-01.png",
+          "bytes": 2123930,
+          "sha256": "d5cdbc5dec12567dc8127d59ed1f19bd05f2848095243bb58fef98989568fcf3",
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ]
+    }
+  ],
+  "carried_forward": [
+    {
+      "path": "art/archive/reference-guides-v5/fillet.png",
+      "source": "art/archive/reference-guides-v4/fillet.png",
+      "output_metadata": {
+        "path": "art/archive/reference-guides-v5/fillet.png",
+        "bytes": 2034541,
+        "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "source_metadata": {
+        "path": "art/archive/reference-guides-v4/fillet.png",
+        "bytes": 2034541,
+        "sha256": "4c824e4d098ba8313777e6310473608a987f659ddb05b8273de3d5e7852f94f4",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      }
+    },
+    {
+      "path": "art/archive/reference-guides-v5/fillet-actions.png",
+      "source": "art/archive/reference-guides-v4/fillet-actions.png",
+      "output_metadata": {
+        "path": "art/archive/reference-guides-v5/fillet-actions.png",
+        "bytes": 2044825,
+        "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      },
+      "source_metadata": {
+        "path": "art/archive/reference-guides-v4/fillet-actions.png",
+        "bytes": 2044825,
+        "sha256": "65d19f775de3ee83259599d4678ba7179df9a042dbd6a7202a2d9100c60ea6dd",
+        "dimensions": [
+          1536,
+          1024
+        ]
+      }
+    }
+  ]
+}

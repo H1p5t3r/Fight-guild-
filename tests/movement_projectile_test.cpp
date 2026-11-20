@@ -1,0 +1,151 @@
+#include "legacy_fillet_data.h"
+#include "../core/fight.h"
+#include <cstdio>
+#include <initializer_list>
+using namespace fight;
+static int checks=0,failures=0;
+#define CHECK(x) do {++checks;if(!(x)){++failures;std::fprintf(stderr,"FAIL %d: %s\n",__LINE__,#x);}}while(0)
+static Simulation sim;
+static void fresh(){legacy_fillet::defaults(sim);sim.reset(5,4,0,0);sim.preview_place(0,40000,0,10000);sim.preview_place(1,80000,0,10000);}
+static void ticks(int n,int a=0,int b=0){for(int i=0;i<n;++i)sim.step(a,b);}
+static int count(){return sim.box_count(0,ProjectileBox)+sim.box_count(1,ProjectileBox);}
+static void shot(int owner=0,int kind=1){
+ int c=sim.world.players[owner].character;auto& m=sim.moves[c][0];
+ m.v[ProjectileKind]=kind;m.v[ProjectileOffsetX]=5000;m.v[ProjectileOffsetY]=8000;
+ m.v[ProjectileSpeedX]=1000;m.v[ProjectileWidth]=4000;m.v[ProjectileHeight]=6000;
+ m.v[Hitstop]=0;m.v[Pushback]=m.v[AirPushback]=m.v[Launch]=m.v[AirLaunch]=0;
+ sim.preview_begin(owner,0);
+}
+static void air_dash_pause(){
+ // Every captain/style/direction must halt both rising and falling motion first.
+ for(int c=0;c<CHARACTER_COUNT;++c)for(int style=0;style<4;++style)for(int back=0;back<2;++back)for(int facing:{-1,1})for(int vy:{-900,900}){
+  legacy_fillet::defaults(sim);sim.reset(c,(c+1)%CHARACTER_COUNT,0,0);
+  auto& f=sim.world.players[0];auto& m=sim.mobility[c];
+  f.x=facing==1?40000:60000;f.y=18000;f.vx=-facing*525;f.vy=vy;f.carry_vx=facing*1900;f.carry_time=5;
+  sim.world.players[1].x=facing==1?85000:15000;
+  m.v[AirDashEnabled]=m.v[AirBackdashEnabled]=1;m.v[AirDashUses]=1;
+  m.v[AirDashStyle]=m.v[AirBackdashStyle]=style;
+  m.v[AirDashPauseFrames]=4;m.v[AirBackdashPauseFrames]=6;
+  m.v[AirDashFrames]=8;m.v[AirBackdashFrames]=11;
+  m.v[AirDashSpeed]=1100;m.v[AirBackdashSpeed]=700;
+  m.v[TeleportDistance]=13000;m.v[BackTeleportDistance]=9000;m.v[TeleportStartup]=9;
+  int x=f.x,y=f.y,pause=back?6:4,duration=back?11:8,dir=facing*(back?-1:1);
+  sim.step(Dash|(back?(facing==1?Left:Right):0),0);
+  CHECK(f.x==x&&f.y==y&&f.vx==0&&f.vy==0&&f.carry_vx==0&&f.carry_time==0);
+  CHECK(f.dash_pause==pause-1&&f.dash_age==0&&f.dash==duration&&f.air_dash_used==1);
+  auto saved=sim.world;
+  for(int i=1;i<pause;++i){sim.step(0,0);CHECK(f.x==x&&f.y==y&&f.vx==0&&f.vy==0&&f.carry_vx==0);CHECK(f.dash==duration&&f.dash_age==0);}
+  for(int i=1;i<=duration;++i){
+   sim.step(0,0);
+   CHECK(f.x==x+dir*(style==Teleport?(back?9000:13000):i*(back?700:1100)));
+   CHECK(f.y==y&&f.dash==duration-i&&f.dash_age==i&&f.dash_pause==0);
+  }
+  auto hash=sim.checksum();sim.world=saved;ticks(pause-1+duration);CHECK(sim.checksum()==hash);
+ }
+ // Inputs buffer through the pause. Only the new burst can carry into an attack.
+ fresh();auto& f=sim.world.players[0];auto& m=sim.mobility[5];
+ m.v[AirDashEnabled]=1;m.v[AirDashSpeed]=1100;m.v[AirDashPauseFrames]=4;m.v[AttackFriction]=0;
+ f.y=18000;f.vx=600;f.vy=-300;f.carry_vx=1900;f.carry_time=5;
+ sim.moves[5][17].v[InertiaPercent]=100;
+ int x=f.x;sim.step(Dash,0);sim.step(0,0);sim.step(P,0);CHECK(f.move<0&&f.x==x);
+ sim.step(0,0);CHECK(f.move<0&&f.x==x&&f.dash_pause==0);sim.step(0,0);
+ CHECK(f.move==17&&f.vx==1100&&f.x==x+1100&&f.dash==0&&f.dash_pause==0);
+ // Facing changes during the hold do not reinterpret a backdash as a forward dash.
+ for(int style:{StepDash,Teleport}){
+  fresh();auto& p=sim.mobility[5];p.v[AirBackdashEnabled]=1;p.v[AirBackdashStyle]=style;
+  p.v[AirDashSpeed]=1300;p.v[AirBackdashSpeed]=700;p.v[AirBackdashPauseFrames]=6;
+  p.v[TeleportDistance]=16000;p.v[BackTeleportDistance]=9000;f.y=18000;x=f.x;
+  sim.step(Left|Dash,0);sim.world.players[1].x=10000;ticks(5);CHECK(f.facing==-1&&f.x==x);
+  sim.step(0,0);CHECK(f.x==x-(style==Teleport?9000:700));
+ }
+ // Hitstop freezes the pause, while being hit cancels it without a delayed burst.
+ fresh();m.v[AirDashEnabled]=1;f.y=18000;sim.step(Dash,0);int pause=f.dash_pause;
+ sim.world.hitstop=5;ticks(5);CHECK(f.dash_pause==pause&&f.dash_age==0);
+ auto& other=sim.world.players[1];other.x=f.x+6000;other.y=f.y;
+ auto& hit=sim.moves[4][0];hit.v[Reach]=50000;hit.v[HitboxBack]=0;hit.v[Bottom]=0;hit.v[Height]=50000;hit.v[Hitstop]=0;
+ other.move=0;other.age=hit.v[Startup]-1;sim.step(0,0);
+ CHECK(f.health<1000&&f.dash==0&&f.dash_pause==0);ticks(8);CHECK(f.dash==0&&f.dash_pause==0);
+ // Disabled/used-up dashes cannot freeze a jump for free.
+ fresh();f.y=18000;f.vx=350;f.vy=-200;x=f.x;sim.step(Dash,0);
+ CHECK(f.x==x+350&&f.y==17800&&f.air_dash_used==0&&f.dash_pause==0);
+ fresh();m.v[AirDashEnabled]=1;f.air_dash_used=m.v[AirDashUses];f.y=18000;f.vx=350;f.vy=-200;x=f.x;sim.step(Dash,0);
+ CHECK(f.x==x+350&&f.y==17800&&f.dash==0&&f.dash_pause==0);
+ CHECK(!sim.mobility_set(5,AirDashPauseFrames,0)&&!sim.mobility_set(5,AirBackdashPauseFrames,31));
+}
+static void shark_movement_art(){
+ for(int facing:{-1,1}){
+  legacy_fillet::defaults(sim);sim.reset(4,5,0,0);
+  auto& f=sim.world.players[0];auto& m=sim.mobility[4];
+  f.x=50000;sim.world.players[1].x=facing==1?90000:10000;f.facing=facing;
+  const int times[]={0,71,72,83,84,89,90,107,108};
+  const int keys[]={0,0,1,1,2,2,3,3,0};
+  for(int i=0;i<9;++i){f.idle_time=times[i];CHECK(sim.pose(f).phase==11&&sim.pose(f).index==keys[i]);CHECK(sim.box_count(0,HurtBox)==4);}
+  // Walk and run advance through both gait halves. A dedicated retreat cycle
+  // advances in its authored direction while facing stays on the opponent.
+  for(int phase:{6,7,13}){
+   f.running=phase==7;f.vx=facing*(phase==13?-1:1)*m.v[phase==7?RunSpeed:WalkSpeed];
+   const int stride=m.v[phase==7?RunSpeed:WalkSpeed]*(phase==7?3:5);
+   for(int key=0;key<8;++key){
+    f.x=(8+key)*stride*facing*(phase==13?-1:1);
+    CHECK(sim.pose(f).phase==phase&&sim.pose(f).index==key);
+    CHECK(sim.box_count(0,HurtBox)==4);
+   }
+  }
+  f.running=0;f.x=50000;f.vx=0;f.idle_time=0;
+  const int back=facing==1?Left:Right;
+  sim.step(back|Dash,0);
+  CHECK(sim.pose(f).phase==15&&sim.pose(f).index==0);
+  CHECK(f.y==0&&f.vx==-facing*m.v[BackSpeed]);
+  auto saved=sim.world;int visited=1;
+  while(f.dash>0){visited|=1<<sim.pose(f).index;CHECK(sim.pose(f).phase==15);CHECK(f.y==0&&f.facing==facing);sim.step(0,0);}
+  CHECK(visited==63);CHECK(sim.pose(f).phase!=15);
+  auto hash=sim.checksum();sim.world=saved;while(f.dash>0)sim.step(0,0);CHECK(hash==sim.checksum());
+  sim.world=saved;const int age=f.dash_age,pose=sim.pose(f).index;sim.world.hitstop=5;
+  ticks(5);CHECK(f.dash_age==age&&sim.pose(f).index==pose&&sim.pose(f).phase==15);
+  // A stored backdash age cannot cover attacks, reactions or an airborne dash.
+  f.stun=3;CHECK(sim.pose(f).phase==0);f.stun=0;
+  f.y=100;CHECK(sim.pose(f).phase==0);f.y=0;
+  f.dash_kind=Teleport;CHECK(sim.pose(f).phase!=15);
+ }
+}
+int main(){
+ shark_movement_art();
+ air_dash_pause();
+ for(int style=0;style<4;++style){
+  fresh();CHECK(sim.mobility_set(5,ForwardStyle,style));
+  sim.step(Right,0);sim.step(0,0);sim.step(Right,0);
+  CHECK(style==0?sim.world.players[0].running:sim.world.players[0].dash>0);
+  int before=sim.world.players[0].x;ticks(8,Right);
+  CHECK(sim.world.players[0].x>before);
+  if(style==HoverDash)CHECK(sim.world.players[0].y>0);
+  if(style==Teleport)CHECK(sim.world.players[0].vx==0);
+ }
+ fresh();sim.step(Left,0);sim.step(0,0);sim.step(Left,0);CHECK(sim.world.players[0].dash>0);CHECK(sim.world.players[0].vx<0);
+ fresh();sim.mobility_set(5,BackStyle,ForwardRun);sim.step(Left|Dash,0);ticks(8,Left);CHECK(sim.world.players[0].running);CHECK(sim.world.players[0].vx<0);
+ fresh();auto& f=sim.world.players[0];f.stun=3;f.guarding=f.guard_break=1;
+ sim.step(Left,0);sim.step(0,0);sim.step(Left|Dash,0);sim.step(0,0);CHECK(f.dash==0);
+ fresh();sim.preview_place(1,50000,0,10000);sim.mobility_set(5,ForwardStyle,Teleport);sim.mobility_set(5,TeleportDistance,20000);
+ sim.step(Dash,0);ticks(5);CHECK(sim.world.players[0].x>sim.world.players[1].x);CHECK(sim.world.players[0].momentum==10000);
+ fresh();sim.step(Up,0);ticks(7);int uses=sim.world.players[0].air_dash_used;sim.step(Dash,0);CHECK(sim.world.players[0].air_dash_used==uses);
+ sim.mobility_set(5,AirDashEnabled,1);sim.step(0,0);sim.step(Dash,0);CHECK(sim.world.players[0].air_dash_used==1);
+ ticks(18);sim.step(Dash,0);CHECK(sim.world.players[0].air_dash_used==1);ticks(100);CHECK(sim.world.players[0].air_dash_used==0);
+ fresh();sim.mobility_set(5,AirJumps,1);sim.step(Up,0);ticks(10);sim.step(Up,0);CHECK(sim.world.players[0].air_jump_used==1);CHECK(sim.world.players[0].vy>1200);
+ fresh();sim.mobility_set(5,JumpSpeed,2000);sim.step(Up,0);ticks(5);CHECK(sim.world.players[0].vy>1700);
+ fresh();sim.mobility_set(5,FdDrain,100);sim.step(Left|Faultless,0);CHECK(sim.world.players[0].momentum==9900);
+ sim.mobility_set(5,FdEnabled,0);sim.step(Left|Faultless,0);CHECK(!sim.world.players[0].faultless);CHECK(sim.world.players[0].momentum==9900);
+ fresh();shot();ticks(5);CHECK(count()==1);CHECK(sim.box_count(0,HitBox)==0);int x=sim.world.projectiles[0].x;ticks(1);CHECK(sim.world.projectiles[0].x>x);
+ ticks(45);CHECK(sim.world.players[1].health<1000);CHECK(sim.world.players[0].contact_count==1);CHECK(count()==0);
+ fresh();shot(0,2);ticks(5);x=sim.world.projectiles[0].x;int y=sim.world.projectiles[0].y;ticks(15);CHECK(count()==1);CHECK(sim.world.projectiles[0].x==x&&sim.world.projectiles[0].y==y);
+ fresh();shot();ticks(5);sim.world.hitstop=8;x=sim.world.projectiles[0].x;int life=sim.world.projectiles[0].life;ticks(8);CHECK(sim.world.projectiles[0].x==x&&sim.world.projectiles[0].life==life);
+ auto snapshot=sim.world;ticks(35);auto expected=sim.checksum();sim.world=snapshot;ticks(35);CHECK(sim.checksum()==expected);
+ fresh();shot();ticks(5);sim.world.players[0].stun=10;ticks(1);CHECK(count()==0);
+ fresh();sim.moves[5][0].v[ProjectilePersist]=1;shot();ticks(5);sim.world.players[0].stun=10;ticks(1);CHECK(count()==1);
+ fresh();sim.preview_place(1,54000,0,10000);shot();shot(1);ticks(5);CHECK(count()==0);CHECK(sim.world.players[0].health==1000&&sim.world.players[1].health==1000);
+ fresh();sim.preview_place(1,50000,0,10000);shot(0,2);auto& m=sim.moves[5][0];m.v[ProjectileOffsetX]=10000;m.v[ProjectileHits]=3;m.v[ProjectileRehit]=10;m.v[Hitstun]=30;
+ ticks(40);CHECK(sim.world.players[0].contact_count==3);CHECK(sim.world.players[0].combo==3);CHECK(count()==0);
+ fresh();shot();ticks(5);sim.world.wall_break_time=60;ticks(1);CHECK(count()==0);
+ fresh();sim.preview_place(1,46000,0,10000);shot();auto& fast=sim.moves[5][0];fast.v[ProjectileWidth]=100;fast.v[ProjectileHeight]=100;fast.v[ProjectileOffsetX]=3000;fast.v[ProjectileSpeedX]=4000;fast.v[ProjectileOffsetY]=13000;ticks(5);CHECK(sim.world.players[1].health<1000);
+ fresh();sim.preview_place(1,46000,0,10000);sim.mobility_set(4,BackWalkSpeed,1);shot();auto& fast_block=sim.moves[5][0];fast_block.v[ProjectileWidth]=100;fast_block.v[ProjectileHeight]=100;fast_block.v[ProjectileOffsetX]=3000;fast_block.v[ProjectileSpeedX]=4000;fast_block.v[ProjectileOffsetY]=13000;ticks(5,0,Right);CHECK(sim.world.players[1].health==1000);CHECK(sim.world.players[0].event==Blocked);
+ fresh();sim.preview_place(1,60000,0,10000);shot();ticks(5);sim.world.projectiles[0].x=59500;sim.world.projectiles[1]=sim.world.projectiles[0];ticks(1);CHECK(sim.world.players[0].combo==2);CHECK(sim.world.players[0].contact_count==2);
+ std::printf("Movement / projectiles: %d checks, %d failures\n",checks,failures);return failures?1:0;
+}

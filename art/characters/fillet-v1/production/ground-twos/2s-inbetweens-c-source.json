@@ -1,0 +1,106 @@
+{
+  "id": "2S",
+  "file": "2s-inbetweens-c.png",
+  "columns": 2,
+  "rows": 2,
+  "frames": [
+    30,
+    32,
+    34,
+    36
+  ],
+  "source": "/workspace/generated_images/exec-cfab0232-84b5-4a5a-8772-dc01f47d5a53.png",
+  "references": [
+    "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/2s.png",
+    "/workspace/generated_images/exec-68309f12-1339-4f5f-99c6-c36549be8a53.png"
+  ],
+  "prompt": "2s-inbetweens-c-refinement-prompt.txt",
+  "sha256": "101019c663fa1db01dfb5ffaf9d5445a0470cc022b123a96605c864b0ea8e342",
+  "body_height": 866,
+  "roots": [
+    343,
+    300,
+    339,
+    307
+  ],
+  "keys": [
+    {
+      "frame": 30,
+      "label": "in-between"
+    },
+    {
+      "frame": 32,
+      "label": "in-between"
+    },
+    {
+      "frame": 34,
+      "label": "in-between"
+    },
+    {
+      "frame": 36,
+      "label": "in-between"
+    }
+  ],
+  "calibration": {
+    "method": "One fixed scale per sheet; planted-foot roots interpolate the neighboring approved keys.",
+    "scaleMeasure": "planted foot separation",
+    "measurements": [
+      {
+        "frame": 30,
+        "pixels": {
+          "left": 141.5,
+          "span": 419.0,
+          "height": 469
+        },
+        "target": {
+          "left": -34.958333333333336,
+          "span": 72.66666666666667,
+          "height": 87.0
+        },
+        "height": 864.9082568807339
+      },
+      {
+        "frame": 32,
+        "pixels": {
+          "left": 98.5,
+          "span": 419.5,
+          "height": 468
+        },
+        "target": {
+          "left": -34.9375,
+          "span": 72.625,
+          "height": 87.5
+        },
+        "height": 866.4371772805508
+      },
+      {
+        "frame": 34,
+        "pixels": {
+          "left": 137.5,
+          "span": 424.5,
+          "height": 485
+        },
+        "target": {
+          "left": -34.916666666666664,
+          "span": 72.58333333333333,
+          "height": 88.0
+        },
+        "height": 877.2675086107922
+      },
+      {
+        "frame": 36,
+        "pixels": {
+          "left": 105.5,
+          "span": 395.0,
+          "height": 489
+        },
+        "target": {
+          "left": -34.895833333333336,
+          "span": 72.54166666666667,
+          "height": 88.5
+        },
+        "height": 816.771970132108
+      }
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "revision": "fillet-stance-exploration-02",
+  "created_date": "2026-11-17",
+  "generator": "OpenAI image_gen",
+  "generator_version": "Not exposed by the tool",
+  "status": "Four refinement candidates; preferred leg spacing recorded, no complete ready stance selected",
+  "user_feedback": {
+    "quote": "I like the leg spacing of B and F",
+    "source": "art/characters/stance-studies/fillet-01.png",
+    "selected_component": "Narrower natural foot spacing from original options B and F",
+    "still_open": [
+      "Upper-body posture",
+      "Knife placement",
+      "Complete idle pose and animation"
+    ],
+    "interpretation": "Use the B/F lower-body spacing as a consistent base for further upper-body comparisons; this is not approval of either complete stance."
+  },
+  "prompt": "Continue Fillet's combat-stance exploration for FIGHT GUILD using the user's specific feedback: \"I like the leg spacing of B and F.\" Make a new comparison sheet with FOUR upper-body/knife-position options, ALL using the narrower natural staggered foot spacing of B / DUELIST and F / UNBOTHERED in reference image 1. This is a focused refinement of the lower-body preference, not a new character design. Reference image 2 is the model authority for costume, anatomy, weapon shape and colors.\n\nMOST IMPORTANT CONSTRAINT: the pelvis, two legs, boot positions, ground line, upright body scale and camera must be effectively identical across ALL FOUR panels. Copy the natural narrow stagger of B and F in image 1: one foot moderately ahead of the other, knees gently unlocked, hips near upright, legs mostly under the body. In screen projection ankle centers are separated by about one-quarter of upright crown-to-sole height (roughly0.25–0.29H), much less than A/D/E's wide lunge. This is an illustrative composition guideline, not printed measurement text. Keep both boots fully planted; do not spread the feet for a dramatic guard, squat, deep crouch, lunge, cross the legs, stand feet touching or change to a frontal horse stance. Do not copy the wide ready pose at the bottom of reference 2. The lower body of B/F is the source. The user selected ONLY leg spacing, not a final full-body pose.\n\nPAGE: landscape ~1536x1024 or larger, TWO COLUMNS by TWO ROWS, one complete fighter per panel. Use same warm light-gray paper, crimson rules, dark condensed italic typography and crisp cel style as the previous sheet. Heading 'FILLET / STANCE REFINEMENT', small subheading 'B + F FOOT SPACING'. Four readable labels in reading order:\n'G / LOW READY'\n'H / CLOSE GUARD'\n'I / HIGH KNIFE'\n'J / FORWARD GUARD'\nUse G–J so the user cannot confuse these with original A–F. Match figure scale, feet spacing and baseline exactly between panels. Each full figure including hair, both hands, boots and both knives must fit with generous margins; avoid enormous unused space. No new wardrobe, face closeups or equipment insets.\n\nCHARACTER: the exact adult athletic Fillet from reference 2, about7.5–8 skull-heads upright, smaller mature angular face, strong athletic limbs, substantial gloves and broad boots. Short swept dark-brown hair. Crimson armor ONLY on anatomical LEFT shoulder; ivory cloth at near anatomical RIGHT shoulder for this right-facing side/three-quarter camera. Ivory rolled-sleeve blouse, crimson buckled corset, brown belt/pouches, split ivory apron with graphic crimson markings, charcoal loose trousers, forearm wraps, dark fingerless gloves, brown three-buckle boots. Same anatomy, asymmetrical clothing, boot shape, cloth length and head size in every panel. Camera fixed right-facing side/three-quarter, never swap to front view to fit arms. Upper-left light, hard two/three-tone cel shadows, confident dark contour, thinner interior lines. Palette crimson #A63242, ivory #DDD0B1, charcoal #393039 with muted brown leather/hair and silver knives. No gradients or soft painterly rendering.\n\nEQUIPMENT: exactly two broad CURVED single-edge butcher knives with brown riveted handles. Longer main knife always in RIGHT hand, shorter companion always in LEFT. Preserve reference2's blade profiles and relative lengths, no triangular daggers/swords. Conventional forward grips for all four; blades extend from thumb/index side of closed fist, never reverse grips. No extra hands, crossed hand anatomy or fused weapon silhouettes.\n\nFOUR UPPER-BODY OPTIONS, SAME LEGS:\nG / LOW READY: quiet predatory confidence. Shoulders relaxed with a subtle forward torso inclination, chin lowered, eyes on opponent. Main right knife carried down beside rear/right thigh, tip slanting down-forward clear of leg; short left knife held low near belt level pointed forward. Both elbows relaxed, clean low-hand silhouette. Narrow B/F feet remain planted and unchanged.\nH / CLOSE GUARD: precise compact pressure. Spine nearly upright, shoulders slightly rounded forward. Main right forearm lifted in front of lower chest, long knife angled up-forward below face; short left knife held close to ribs on a different height so blades do not overlap. Elbows in, head unobstructed, both hands visibly ready. Do not cross the arms or rotate chest front-on. Identical lower body to G.\nI / HIGH KNIFE: self-assured and assertive. Main right hand raised beside right temple/shoulder, right elbow opens sideways; long blade angles upward/back, clear of hair and face. Short left knife held low at waist angled forward. Restrained knowing half-smile, not screaming mid-attack. Torso stays upright with the exact same narrow B/F legs, no wide planted swing posture. One high arm, one low gives a clear angular silhouette.\nJ / FORWARD GUARD: efficient probing ready stance. Main right knife reaches moderately forward at lower-chest height, elbow still bent (not a stab); short left knife protects close to chin/ribs but not across face. Very slight forward torso pitch, eyes locked forward. No step or lunge. Preserve EXACT same pelvis, knees and boot placements as the other three.\n\nThese are idle-ready options, no attacks, no movement streaks, no smears, sparks, blood spray, ground dust, opponents, scenery or hitboxes. All figures remain standing at the same anatomical size; body pose alone conveys intent. Priority order: B/F LEG SPACING AND SAME LOWER BODY ACROSS THE FOUR, readable different upper-body choices, then consistent character details. Produce only the finished four-option comparison board.",
+  "prompt_status": "exact",
+  "transparent_background": false,
+  "generated_file": "exec-0476f039-d52e-4a51-930d-8da44710a0cc.png",
+  "path": "art/characters/stance-studies/fillet-02.png",
+  "references": [
+    "art/characters/stance-studies/fillet-01.png",
+    "art/archive/reference-guides-v3/fillet.png"
+  ],
+  "options": [
+    {
+      "id": "G",
+      "name": "Low Ready",
+      "direction": "Narrow B/F base with low hands and a relaxed forward gaze."
+    },
+    {
+      "id": "H",
+      "name": "Close Guard",
+      "direction": "Narrow B/F base with knives close to the torso at different heights."
+    },
+    {
+      "id": "I",
+      "name": "High Knife",
+      "direction": "Narrow B/F base with the main knife raised beside the head and the offhand low."
+    },
+    {
+      "id": "J",
+      "name": "Forward Guard",
+      "direction": "Narrow B/F base with the main knife presented forward and the offhand near the face."
+    }
+  ],
+  "review": {
+    "completed": "Visual check: all four full figures keep the narrower upright stagger; labels G–J, both boots and distinct upper-body options are visible. Costume palette and shoulder identity follow the reference.",
+    "remaining": "These are selection drawings, not registered animation frames. When a complete pose is selected, match exact pivots, anatomical scale and weapon geometry. J's near-face offhand needs clearer blade/grip separation before runtime production.",
+    "pixel_processing": "Generated PNG copied byte-for-byte without painting, compositing, recoloring or resampling.",
+    "runtime_changes": "None; no sprite atlas, move, hurtbox or pushbox dimensions changed."
+  },
+  "output_metadata": {
+    "path": "art/characters/stance-studies/fillet-02.png",
+    "bytes": 1819344,
+    "sha256": "ef5a1d017c44084ec58e356bac42671e631eeb2a3c05d1cbf5233889106522fb",
+    "dimensions": [
+      1536,
+      1024
+    ]
+  },
+  "reference_metadata": [
+    {
+      "path": "art/characters/stance-studies/fillet-01.png",
+      "bytes": 1992871,
+      "sha256": "9f9b6c7500a73cf51a3d8b7b15fb8fc0acc51b7d32c97d01f1370d86466b54f0",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "path": "art/archive/reference-guides-v3/fillet.png",
+      "bytes": 2001946,
+      "sha256": "8601720ab2f3ea59f0321e9b07259affc21a0670633cea6cb27e4e51329de5c8",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    }
+  ],
+  "reference_relocation_note": "Reference-03 image snapshots moved to art/archive/reference-guides-v3 on 2026-11-17; original prompts and all image checksums retained."
+}

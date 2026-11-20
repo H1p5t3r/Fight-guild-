@@ -1,0 +1,19 @@
+{
+  "fps": 60,
+  "repeats": 2,
+  "clips": [
+    {
+      "id": "236D",
+      "index": 24,
+      "whiff": 65,
+      "hit": 67
+    },
+    {
+      "id": "214D",
+      "index": 25,
+      "whiff": 65,
+      "hit": 67
+    }
+  ],
+  "note": "Saved simulation clocks; before is commit 6f46a36. No invented hits, pose interpolation or altered timing."
+}

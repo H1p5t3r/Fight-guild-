@@ -1,0 +1,24 @@
+{
+  "source": "/workspace/generated_images/exec-c1522706-0de1-4dd9-81d4-fe137878d9ed.png",
+  "file": "knife-effects.png",
+  "sha256": "4042c9e992873a85986a9f80f64bbb873b9ccf63868868d8ba2731f987c61e69",
+  "columns": 3,
+  "rows": 2,
+  "prompt": "knife-effects-prompt.txt",
+  "reference": "godot/assets/fighters/fillet-ground-twos/sweep-arc.png",
+  "actions": {
+    "5S": 1,
+    "c.S": 1,
+    "5Hs": 1,
+    "2Hs": 3,
+    "6Hs": 2,
+    "j.S": 2,
+    "j.Hs": 4,
+    "236P": 0,
+    "236S": 1,
+    "236S>6S": 2,
+    "236S>2S": 1,
+    "236K": 1,
+    "623Hs": 3
+  }
+}

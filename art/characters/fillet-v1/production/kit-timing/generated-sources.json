@@ -1,0 +1,487 @@
+[
+  {
+    "id": "j.P",
+    "file": "jp.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "jp-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-64d96f0b-4527-47a6-8e0d-591d9d100d89.png",
+    "sha256": "5391c1da7224a496adce2553feaff629ecf31c26cddc0cb2c5e2be5613936937",
+    "body_height": 535,
+    "root": 250,
+    "soles": [
+      490,
+      490,
+      490,
+      490,
+      490,
+      490
+    ]
+  },
+  {
+    "id": "j.K",
+    "file": "jk.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "jk-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-758dd65b-b91e-4772-b8bd-0c18cc3d0307.png",
+    "sha256": "21ce2c9dfa9be763be590747cad81c80ba4cf5e2781eb8ba89bc2650c29fd45f",
+    "body_height": 535,
+    "root": 140,
+    "soles": [
+      490,
+      490,
+      490,
+      490,
+      490,
+      490
+    ],
+    "correctionPrompts": [
+      "jk-extension-correction-prompt.txt",
+      "jk-down-correction-prompt.txt"
+    ],
+    "anchor": "Air pelvis, fixed vertical origin, no sole re-registration while the leg extends."
+  },
+  {
+    "id": "j.S",
+    "file": "js.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "js-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-48183ba0-9fb4-4772-9c8e-7ef936abbdf2.png",
+    "sha256": "acbd1dddb81d3b5c427e9dfb602807956e7839d3370c590cd1532e76a44d513a",
+    "body_height": 535,
+    "root": 250,
+    "soles": [
+      490,
+      490,
+      490,
+      490,
+      490,
+      490
+    ]
+  },
+  {
+    "id": "j.Hs",
+    "file": "jhs.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "jhs-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-333f417b-0a96-4193-aee1-ab493afea267.png",
+    "sha256": "d1406e3d8b2fe2ebac3584199779c6a25d173fb8183781e2d4386427042976e8",
+    "body_height": 535,
+    "root": 250,
+    "soles": [
+      490,
+      490,
+      490,
+      490,
+      490,
+      490
+    ]
+  },
+  {
+    "id": "236P",
+    "file": "236p.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "236p-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-8f434a91-035d-4121-b67f-0b714763f4af.png",
+    "sha256": "1296a25d5b270070f3c18f909882bcf97557cf5215d2eb682d9bbf5b860505ba",
+    "body_height": 535,
+    "root": 270
+  },
+  {
+    "id": "236S",
+    "file": "236s.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "236s-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-451ba89a-a9a5-4502-a22f-0790803decae.png",
+    "sha256": "d23f74002a27f354119b4212c3900ee3676e30bd81c98bc3bd9fb129dab62ec6",
+    "body_height": 535,
+    "root": 270
+  },
+  {
+    "id": "236S>6S",
+    "file": "236s-6s.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "236s-6s-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-6658f42f-b3e9-407d-adac-eaa5648e5f9c.png",
+    "sha256": "605443044ace188cf1ff403e02205b131608e6eedd1ca7367be5c8127610b271",
+    "body_height": 535,
+    "root": 270
+  },
+  {
+    "id": "236S>2S",
+    "file": "236s-2s.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "236s-2s-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-2239829a-b460-4c16-a323-8e9e2c342e01.png",
+    "sha256": "49df5dbbe75a6b706a1cb5284e95cd7495ebf579de07e0cd492417560e9f65d9",
+    "body_height": 535,
+    "root": 270,
+    "correctionPrompt": "low-branch-correction-prompt.txt"
+  },
+  {
+    "id": "236K",
+    "file": "236k.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "236k-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-6f2cec50-2e18-43f8-9d86-0d259a967bc9.png",
+    "sha256": "370882f2a46f68dd9d9b1866e804f1c020dd2b73785cbece535ec5a7b5ff847d",
+    "body_height": 535,
+    "root": 270
+  },
+  {
+    "id": "623Hs",
+    "file": "623hs.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "623hs-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-71a4410f-6bbe-48de-a812-5200f547d150.png",
+    "sha256": "e8b6fb4b6467e23440b11b1ad35e3dc964fb15a62eca22bfb905830e5a33cc2f",
+    "body_height": 535,
+    "root": 270
+  },
+  {
+    "id": "6P+K",
+    "file": "6pk.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "6pk-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [
+      "4P+K"
+    ],
+    "source": "/workspace/generated_images/exec-ae6bdafe-03e1-464b-96cd-ab47a2cd9297.png",
+    "sha256": "eaf5f8170d3733e7d3f2dfaa685f05712b2af4e5ed0bf6d482569e34c89dfb24",
+    "body_height": 535,
+    "root": 270
+  },
+  {
+    "id": "5D",
+    "file": "5d.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "5d-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Entry / balanced guard",
+      "Compact loaded anticipation held until the final startup tick",
+      "First ACTIVE: forceful fully projected contact",
+      "Smaller active finish / committed follow-through",
+      "Withdraw the attacking limb part way",
+      "Return toward the same guard silhouette"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-fca6455f-f296-4574-9d4f-156d0b992dcb.png",
+    "sha256": "d2116ecba399333faa99c061ee808b0ddefdd754d9571d9b155d5ed29a40124b",
+    "body_height": 555,
+    "root": 250,
+    "correctionPrompt": "transparency-correction-prompt.txt"
+  },
+  {
+    "id": "236D",
+    "file": "236d.png",
+    "columns": 4,
+    "rows": 2,
+    "prompt": "236d-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Ordinary entry guard / compress",
+      "Approach preparation",
+      "Final startup approach posture: keep leading LEFT forearm COILED, no reach yet",
+      "First ACTIVE grounded upright LEFT-forearm latch: greatest movement from cell3 to cell4",
+      "Unsupported reach / active finish",
+      "Partial withdrawal",
+      "Guard recovery",
+      "Settled guard"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-be85ca87-6362-4709-adce-0c970224f01e.png",
+    "sha256": "7d28a74bca7dd3c9f15d3a7d27307088aa764ca89096abe83f945fa4764a1f77",
+    "body_height": 450,
+    "root": 230,
+    "correctionPrompt": "transparency-correction-prompt.txt"
+  },
+  {
+    "id": "214D",
+    "file": "214d.png",
+    "columns": 4,
+    "rows": 2,
+    "prompt": "214d-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "poseLabels": [
+      "Ordinary entry guard / compress",
+      "Approach preparation",
+      "Final startup approach posture: keep leading LEFT forearm COILED, no reach yet",
+      "First ACTIVE grounded upright LEFT-forearm latch: greatest movement from cell3 to cell4",
+      "Unsupported reach / active finish",
+      "Partial withdrawal",
+      "Guard recovery",
+      "Settled guard"
+    ],
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-b403dcbe-8168-48d5-a094-050f2ba53b85.png",
+    "sha256": "24c6241a88dcaaaf1af477c75a046316a2a31f47e265ab53e992366c2478826a",
+    "body_height": 450,
+    "root": 230
+  },
+  {
+    "id": "pair-forward",
+    "file": "pair-forward.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "pair-forward-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "ticks": [
+      0,
+      5,
+      9,
+      13,
+      17,
+      21
+    ],
+    "paired": true,
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-64916b47-2567-4c75-a570-a2deaa114afd.png",
+    "sha256": "2d521d00c801670108f6322ed55dbf3cda9538790b2ff4861752f450291b6df0",
+    "body_height": 535,
+    "root": 270,
+    "correctionPrompt": "forward-grip-correction-prompt.txt"
+  },
+  {
+    "id": "pair-backward",
+    "file": "pair-backward.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "pair-backward-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "ticks": [
+      0,
+      5,
+      9,
+      13,
+      17,
+      21
+    ],
+    "paired": true,
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-68ce240d-cfa4-44ca-bef4-9ed07fa64240.png",
+    "sha256": "9bd55283c86a46538af559e37b91ea21cf1d7e36620b203a33ac61744cab62fb",
+    "body_height": 535,
+    "root": 270
+  },
+  {
+    "id": "pair-wound",
+    "file": "pair-wound.png",
+    "columns": 3,
+    "rows": 2,
+    "prompt": "pair-wound-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "ticks": [
+      0,
+      5,
+      9,
+      13,
+      17,
+      20
+    ],
+    "paired": true,
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-8608ff86-dcf9-439f-bdc4-e4a014fcedde.png",
+    "sha256": "e72d6831b4c1a40a4b69889032a30a841bf31aea0da8185b62088a6794859fc8",
+    "body_height": 535,
+    "root": 240
+  },
+  {
+    "id": "pair-cashout",
+    "file": "pair-cashout.png",
+    "columns": 4,
+    "rows": 2,
+    "prompt": "pair-cashout-prompt.txt",
+    "references": [
+      "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5s.png"
+    ],
+    "ticks": [
+      0,
+      5,
+      9,
+      13,
+      17,
+      21,
+      25,
+      28
+    ],
+    "paired": true,
+    "aliases": [],
+    "source": "/workspace/generated_images/exec-0bb6bf70-7ad7-4e11-9d4f-9797ffa263c6.png",
+    "sha256": "5815b13cb478383c1d5814b773bb8f8f1079bab1e45c8b5163bd1818d45097b8",
+    "body_height": 450,
+    "root": 230
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "id": "5S",
+  "file": "5s.png",
+  "source": "/workspace/generated_images/exec-536a63bb-9cb3-4f09-83ac-3fb8983adb1b.png",
+  "keys": [
+    {
+      "frame": 1,
+      "label": "entry"
+    },
+    {
+      "frame": 4,
+      "label": "anticipation"
+    },
+    {
+      "frame": 8,
+      "label": "pre-contact"
+    },
+    {
+      "frame": 9,
+      "label": "active"
+    },
+    {
+      "frame": 11,
+      "label": "follow-through"
+    },
+    {
+      "frame": 12,
+      "label": "recovery"
+    },
+    {
+      "frame": 20,
+      "label": "retract"
+    },
+    {
+      "frame": 29,
+      "label": "last locked"
+    }
+  ],
+  "columns": 4,
+  "keyStart": 0,
+  "references": [
+    "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+    "/workspace/Fight-guild-/art/characters/fillet-v1/review/fs-hip-led-refined.png"
+  ],
+  "prompt": "5s-prompt.txt",
+  "sha256": "2b85a4b5672bb97066bbba6aa96dcbaac2eaeddc02b901ee8f4e1db7ede95a68"
+}

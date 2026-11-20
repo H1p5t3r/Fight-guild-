@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "updated_date": "2026-11-18",
+  "scope": "Current character-art decisions; not runtime combat configuration.",
+  "fighters": {
+    "fillet": {
+      "standard_combat_stance": {
+        "id": "A",
+        "name": "Stalker",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/stance-studies/fillet-01.png",
+        "source_panel": "top-left",
+        "model_reference": "art/characters/fillet.png",
+        "user_instruction": "Let's actually do A / stalker pose from the last set of options for her standard combat stance.",
+        "requirements": [
+          "Use A as drawn: wide staggered feet, front knee bent, rear leg extended, forward-loaded low torso.",
+          "Keep the longer right-hand knife low and the shorter left-hand knife close to the chest, pointing down.",
+          "Preserve the selected pose's shoulder side, weapon identities and mature anatomy."
+        ],
+        "supersedes": "Earlier B/F narrow-leg preference and G\u2013J upper-body refinements; do not create an A/B/F hybrid."
+      },
+      "appearance": {
+        "status": "user_requested_direction",
+        "reference": "art/characters/fillet.png",
+        "requirements": [
+          "Black swept hair (#111318, cool charcoal highlights); preserve cut and volume.",
+          "Lean athletic arms, about 20\u201325% slimmer; preserve arm length, joints and hands.",
+          "Keep A / Stalker stance, costume, strong legs and fixed knife geometry."
+        ]
+      }
+    },
+    "shark": {
+      "hair": {
+        "status": "user_requested_direction",
+        "model_reference": "art/characters/shark.png",
+        "action_reference": "art/characters/shark-actions.png",
+        "user_instruction": "He should keep his long hair but reduce the volume of it",
+        "requirements": [
+          "Keep long white hair reaching the upper-to-mid back.",
+          "Lower the crown and narrow the outward fan; hair follows the skull, nape and back.",
+          "Use fewer grouped locks and restrained ends instead of a radiating spiky mane.",
+          "Retain loose hair; no added tie, braid, shaved side or shortened cut.",
+          "Carry the slimmer silhouette into motion without inflating it back into the old mane."
+        ]
+      },
+      "eyewear": {
+        "status": "user_requested_direction",
+        "model_reference": "art/characters/shark.png",
+        "requirements": [
+          "Physical cobalt-blue sports glasses with blue lenses, visible bridge and temple arms.",
+          "Natural skin around the glasses; remove all teal face paint / eye mask.",
+          "Keep guild-teal costume colors separate from the blue eyewear accent."
+        ]
+      },
+      "standard_combat_stance": {
+        "id": "F",
+        "name": "Shoulder Rest",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/stance-studies/shark-01.png",
+        "source_panel": "bottom-right",
+        "model_reference": "art/characters/shark.png",
+        "user_instruction": "F shoulder rest is definitely the right one.",
+        "requirements": [
+          "Relaxed upright stagger and confident expression.",
+          "Right hand stabilizes the hooked shaft across / behind the shoulders; hook and butt remain visible.",
+          "Left hand holds the separate short triangular blade low.",
+          "Retain low-volume long white hair and physical blue sports glasses."
+        ]
+      },
+      "normals": {
+        "status": "selected_by_user",
+        "direction": "A / Shoulder Snap",
+        "twoHitLauncher": "2 / Low Scoop",
+        "source_directory": "art/characters/shark-normal-options-v1",
+        "requirements": [
+          "Depart from and return to current F / Shoulder Rest idle.",
+          "Keep blue sports glasses and low-volume long white hair.",
+          "Compact shoulder-led slashes; deeper scoop for two-hit 2Hs.",
+          "Use Ky P/K/S/Hs source normals; exclude all D attacks and specials.",
+          "Preserve right-hand hook, left-hand short blade, fixed anatomy and weapon scale.",
+          "User rejected stiff first production poses; do not use the first normals_0..3 generations.",
+          "Lead with hips and weight transfer, twist shoulders against pelvis, vary spine angle; feet pivot and heels lift naturally.",
+          "Use compressed windup, extended contact, relaxed overshoot and settling recovery; fixed anatomy scale does not mean fixed posture."
+        ],
+        "motionStudy": "art/characters/shark-normal-options-v1/low-scoop-fluidity.png",
+        "motionStudyStatus": "selected_by_user"
+      },
+      "movement": {
+        "status": "selected_by_user",
+        "source_directory": "art/characters/shark-movement-options-v1",
+        "production_directory": "godot/assets/fighters/shark-movement-v1",
+        "selection": {
+          "idle": "A / Lazy Tap",
+          "walk": "B / Rolling Swagger",
+          "back_walk": "A / Unbothered Retreat",
+          "backdash": "B / Shoulder Slip",
+          "run": "A / Shoulder Cruise"
+        },
+        "user_instruction": "Idle A, walk B, ball walk A, backdash B, and run A (ensure proper leg alternating).",
+        "requirements": [
+          "Idle A taps the wooden hook handle against the shoulder and looks down at the opponent.",
+          "Forward/backward walks and run use both actual gait halves, with alternating support legs.",
+          "Keep Shoulder Rest identity, blue sports glasses, low-volume long white hair and fixed weapon dimensions.",
+          "No transition smear frames."
+        ]
+      }
+    },
+    "smoke": {
+      "standard_combat_stance": {
+        "id": "A",
+        "name": "Open Current",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/smoke-idle-v1/standing-options.png",
+        "source_panel": "top-left",
+        "user_instruction": "A and H",
+        "requirements": [
+          "Upright, close legs, open low palms; forefeet lightly contact the ground with lifted heels.",
+          "Keep olive hood, dark hair and ivory alchemist costume.",
+          "Gentle buoyant breathing, trailing cloth/hair and separate gray/olive rear smoke."
+        ]
+      },
+      "crouching_stance": {
+        "id": "H",
+        "name": "Uncoiled Vapor",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/smoke-idle-v1/crouching-options.png",
+        "source_panel": "bottom-right",
+        "user_instruction": "A and H",
+        "requirements": [
+          "Low asymmetric crouch: rear leg folded, leading knee raised, leading hand relaxed over that knee.",
+          "Suspended hips, light forefoot contact, trailing open hand and upward drifting cloth.",
+          "Use fixed anatomy scale; do not enlarge the crouch to standing height."
+        ]
+      },
+      "walk": {
+        "id": "G3",
+        "name": "Suspended Sway",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/smoke-movement-v1/drift-options.png",
+        "source_panel": "bottom-left pair",
+        "user_instruction": "G3 is good move with that",
+        "requirements": [
+          "Separate forward-leaning advance and backward-leaning retreat; keep facing the opponent.",
+          "Close legs, raised heels and light toe contact without a stepping walk.",
+          "Hair, ivory coat and separate rear vapor trail opposite travel."
+        ]
+      },
+      "run": {
+        "id": "R4",
+        "name": "Regal Surge",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/smoke-movement-v1/run-options.png",
+        "source_panel": "bottom-right",
+        "user_instruction": "R4 for the run. walk cycle should be more of a drift leaning forward or back",
+        "requirements": [
+          "Near-upright modest forward lean, low open palms, compact alternating leg curls.",
+          "Quicker cloth and rear vapor than walking; light toe skims.",
+          "Retain A/H identity and grounded gameplay; no transition smears."
+        ]
+      },
+      "specials": {
+        "status": "selected_by_user",
+        "poison": "Venom Sabre (S2) effect with S1 backhand motion",
+        "fire": "Furnace Cleaver (F2) effect with F1 backhand motion",
+        "pillar": "P2 Smoked Obsidian, identical art and size at close/far placement",
+        "requirements": [
+          "No physical sword, hilt or handle; both hands empty.",
+          "Horizontal arcs parallel with ground; no shot beam.",
+          "Near/far use identical pillar art and size. Perspective size difference on concept board is rejected.",
+          "No transition smears."
+        ],
+        "reference_directory": "art/characters/smoke-special-options-v1",
+        "production_directory": "godot/assets/fighters/smoke-attacks-v2"
+      }
+    }
+  }
+}

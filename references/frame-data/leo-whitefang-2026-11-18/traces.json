@@ -1,0 +1,803 @@
+{
+  "method": "Manual trace of red rectangles; image pixel origin is top-left. Root estimated at yellow pushbox bottom-center. Normalize yellow push width to a fixed local calibration, not the live gameplay pushbox. Body hurtboxes are authored separately.",
+  "calibrationWidth": 4500,
+  "limits": "Source screenshots do not supply exact numerical engine coordinates. Spatial scaling and unlabeled intra-active transition frames are adaptations. Multi-hit counts and total timing are taken from the saved tables.",
+  "moves": {
+    "5P": [
+      {
+        "sourceImage": "GGST_Leo_5P_Hitbox.png",
+        "sha256": "41a6ec74178410c1f73f6ce16a1a4a083533cc5d8a4153ddd107d0b65fa16f6e",
+        "sourcePush": [
+          114,
+          81,
+          198,
+          309
+        ],
+        "origin": [
+          156.0,
+          309
+        ],
+        "unitsPerPixel": 53.57142857142857,
+        "pixelBoxes": [
+          [
+            237,
+            31,
+            327,
+            85
+          ],
+          [
+            237,
+            85,
+            291,
+            122
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            4339,
+            12000,
+            9161,
+            14893
+          ],
+          [
+            4339,
+            10018,
+            7232,
+            12000
+          ]
+        ]
+      }
+    ],
+    "5K": [
+      {
+        "sourceImage": "GGST_Leo_5K_Hitbox.png",
+        "sha256": "996fde0b04df2895e1a2a12ad7b949212f200f0df80dc9cf281a3ed13a65cb32",
+        "sourcePush": [
+          195,
+          116,
+          271,
+          324
+        ],
+        "origin": [
+          233.0,
+          324
+        ],
+        "unitsPerPixel": 59.21052631578947,
+        "pixelBoxes": [
+          [
+            281,
+            115,
+            351,
+            196
+          ],
+          [
+            281,
+            196,
+            318,
+            220
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            2842,
+            7579,
+            6987,
+            12375
+          ],
+          [
+            2842,
+            6158,
+            5033,
+            7579
+          ]
+        ]
+      }
+    ],
+    "c.S": [
+      {
+        "sourceImage": "GGST_Leo_cS_Hitbox.png",
+        "sha256": "e67fa552ca16faefd3c616d5e7fe725cd5ea92d01d5593b01b2c335ffef4a1c1",
+        "sourcePush": [
+          143,
+          81,
+          218,
+          283
+        ],
+        "origin": [
+          180.5,
+          283
+        ],
+        "unitsPerPixel": 60.0,
+        "pixelBoxes": [
+          [
+            233,
+            80,
+            351,
+            180
+          ],
+          [
+            233,
+            180,
+            324,
+            200
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            3150,
+            6180,
+            10230,
+            12180
+          ],
+          [
+            3150,
+            4980,
+            8610,
+            6180
+          ]
+        ]
+      }
+    ],
+    "2P": [
+      {
+        "sourceImage": "GGST_Leo_2P_Hitbox.png",
+        "sha256": "f1020c4bc47e2c33f467212e910336a8b5f1c69c96bc649a5a669677081e6d33",
+        "sourcePush": [
+          99,
+          28,
+          202,
+          240
+        ],
+        "origin": [
+          150.5,
+          240
+        ],
+        "unitsPerPixel": 43.689320388349515,
+        "pixelBoxes": [
+          [
+            226,
+            55,
+            316,
+            129
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            3299,
+            4850,
+            7231,
+            8083
+          ]
+        ]
+      }
+    ],
+    "2K": [
+      {
+        "sourceImage": "GGST_Leo_2K_Hitbox.png",
+        "sha256": "0798591ac25af2abd21a23245432a3185a11fca148ba4d6cf49cf88100436a2f",
+        "sourcePush": [
+          116,
+          71,
+          191,
+          229
+        ],
+        "origin": [
+          153.5,
+          229
+        ],
+        "unitsPerPixel": 60.0,
+        "pixelBoxes": [
+          [
+            199,
+            140,
+            262,
+            225
+          ],
+          [
+            262,
+            175,
+            348,
+            225
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            2730,
+            240,
+            6510,
+            5340
+          ],
+          [
+            6510,
+            240,
+            11670,
+            3240
+          ]
+        ]
+      }
+    ],
+    "2S": [
+      {
+        "sourceImage": "GGST_Leo_2S_Hitbox.png",
+        "sha256": "6f2140711d7a2bda43cba14101123a45f1b3dc0c3a747e0f206c961f85fd8be8",
+        "sourcePush": [
+          165,
+          9,
+          228,
+          141
+        ],
+        "origin": [
+          196.5,
+          141
+        ],
+        "unitsPerPixel": 71.42857142857143,
+        "pixelBoxes": [
+          [
+            242,
+            67,
+            317,
+            141
+          ],
+          [
+            317,
+            108,
+            359,
+            141
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            3250,
+            0,
+            8607,
+            5286
+          ],
+          [
+            8607,
+            0,
+            11607,
+            2357
+          ]
+        ]
+      }
+    ],
+    "2H": [
+      {
+        "sourceImage": "GGST_Leo_2H1_Hitbox.png",
+        "sha256": "aeae50a81f679d6ec5795bd1bc491637f58dfc116b7fdbfac0c4167e5b7ed547",
+        "sourcePush": [
+          115,
+          348,
+          219,
+          564
+        ],
+        "origin": [
+          167.0,
+          564
+        ],
+        "unitsPerPixel": 43.26923076923077,
+        "pixelBoxes": [
+          [
+            111,
+            180,
+            337,
+            230
+          ],
+          [
+            111,
+            230,
+            271,
+            248
+          ],
+          [
+            241,
+            246,
+            345,
+            408
+          ],
+          [
+            241,
+            408,
+            294,
+            495
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": true,
+        "boxes": [
+          [
+            -2423,
+            14452,
+            7356,
+            16615
+          ],
+          [
+            -2423,
+            13673,
+            4500,
+            14452
+          ],
+          [
+            3202,
+            6750,
+            7702,
+            13760
+          ],
+          [
+            3202,
+            2986,
+            5495,
+            6750
+          ]
+        ]
+      },
+      {
+        "sourceImage": "GGST_Leo_2H2_Hitbox.png",
+        "sha256": "d8c2ba4dabcdc8d75e022168206208772da138fbe9cce93ad59beffc232e3443",
+        "sourcePush": [
+          106,
+          358,
+          215,
+          585
+        ],
+        "origin": [
+          160.5,
+          585
+        ],
+        "unitsPerPixel": 41.28440366972477,
+        "pixelBoxes": [
+          [
+            102,
+            140,
+            303,
+            236
+          ],
+          [
+            102,
+            236,
+            339,
+            253
+          ],
+          [
+            303,
+            181,
+            339,
+            236
+          ]
+        ],
+        "activeFrame": 5,
+        "transitionEstimated": true,
+        "boxes": [
+          [
+            -2415,
+            14408,
+            5883,
+            18372
+          ],
+          [
+            -2415,
+            13706,
+            7369,
+            14408
+          ],
+          [
+            5883,
+            14408,
+            7369,
+            16679
+          ]
+        ]
+      }
+    ],
+    "j.P": [
+      {
+        "sourceImage": "GGST_Leo_jP_Hitbox.png",
+        "sha256": "3ded3c6fc7004cd7b14d1af81afa735568c5cd8a9a96778b5a111dabbbc73cb4",
+        "sourcePush": [
+          121,
+          146,
+          204,
+          270
+        ],
+        "origin": [
+          162.5,
+          270
+        ],
+        "unitsPerPixel": 54.21686746987952,
+        "pixelBoxes": [
+          [
+            228,
+            111,
+            312,
+            139
+          ],
+          [
+            228,
+            139,
+            328,
+            164
+          ],
+          [
+            246,
+            164,
+            345,
+            205
+          ],
+          [
+            263,
+            205,
+            345,
+            231
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            3551,
+            7102,
+            8105,
+            8620
+          ],
+          [
+            3551,
+            5747,
+            8973,
+            7102
+          ],
+          [
+            4527,
+            3524,
+            9895,
+            5747
+          ],
+          [
+            5449,
+            2114,
+            9895,
+            3524
+          ]
+        ]
+      }
+    ],
+    "j.K": [
+      {
+        "sourceImage": "GGST_Leo_jK_Hitbox.png",
+        "sha256": "9301110389508a33943c815218d8bb2d47f090c8ee365c7b0757afd273ea46fb",
+        "sourcePush": [
+          106,
+          213,
+          177,
+          316
+        ],
+        "origin": [
+          141.5,
+          316
+        ],
+        "unitsPerPixel": 63.38028169014085,
+        "pixelBoxes": [
+          [
+            185,
+            184,
+            268,
+            266
+          ],
+          [
+            268,
+            212,
+            351,
+            266
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            2757,
+            3169,
+            8018,
+            8366
+          ],
+          [
+            8018,
+            3169,
+            13278,
+            6592
+          ]
+        ]
+      }
+    ],
+    "j.S": [
+      {
+        "sourceImage": "GGST_Leo_jS1_Hitbox.png",
+        "sha256": "06a9a7195a3b5a5a210717d93c4f60a2ce3b28cdb77e2a9dc9ca8d88ff060f1e",
+        "sourcePush": [
+          124,
+          245,
+          212,
+          376
+        ],
+        "origin": [
+          168.0,
+          376
+        ],
+        "unitsPerPixel": 51.13636363636363,
+        "pixelBoxes": [
+          [
+            261,
+            191,
+            349,
+            333
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            4756,
+            2199,
+            9256,
+            9460
+          ]
+        ]
+      },
+      {
+        "sourceImage": "GGST_Leo_jS2_Hitbox.png",
+        "sha256": "9190c6fc23464298242a6c48c58bc21739f698da47570ceaf81ea6602dd936fc",
+        "sourcePush": [
+          126,
+          231,
+          211,
+          360
+        ],
+        "origin": [
+          168.5,
+          360
+        ],
+        "unitsPerPixel": 52.94117647058823,
+        "pixelBoxes": [
+          [
+            217,
+            11,
+            303,
+            148
+          ],
+          [
+            259,
+            63,
+            344,
+            198
+          ]
+        ],
+        "activeFrame": 7,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            2568,
+            11224,
+            7121,
+            18476
+          ],
+          [
+            4791,
+            8576,
+            9291,
+            15724
+          ]
+        ]
+      }
+    ],
+    "j.H": [
+      {
+        "sourceImage": "GGST_Leo_jH_Hitbox.png",
+        "sha256": "f0aa0830a3cd9af1ebad1de0395b5b482a78ed7b05f718d37eb4c69e1badee41",
+        "sourcePush": [
+          134,
+          92,
+          183,
+          165
+        ],
+        "origin": [
+          158.5,
+          165
+        ],
+        "unitsPerPixel": 91.83673469387755,
+        "pixelBoxes": [
+          [
+            208,
+            10,
+            337,
+            103
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            4546,
+            5694,
+            16393,
+            14235
+          ]
+        ]
+      }
+    ],
+    "6K": [
+      {
+        "sourceImage": "GGST_Leo_6K_Hitbox.png",
+        "sha256": "d54b6702ee4184e6845990181e9b33a4781f4086dda3f54d4f3ed47d14b16808",
+        "sourcePush": [
+          187,
+          37,
+          249,
+          203
+        ],
+        "origin": [
+          218.0,
+          203
+        ],
+        "unitsPerPixel": 72.58064516129032,
+        "pixelBoxes": [
+          [
+            237,
+            44,
+            353,
+            98
+          ],
+          [
+            237,
+            98,
+            263,
+            130
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            1379,
+            7621,
+            9798,
+            11540
+          ],
+          [
+            1379,
+            5298,
+            3266,
+            7621
+          ]
+        ]
+      }
+    ],
+    "6H": [
+      {
+        "sourceImage": "GGST_Leo_6H_Hitbox.png",
+        "sha256": "11f69f23a77b63342bbe28ff06dc802e1d2163f835d6679e33364fb499f96900",
+        "sourcePush": [
+          80,
+          152,
+          150,
+          342
+        ],
+        "origin": [
+          115.0,
+          342
+        ],
+        "unitsPerPixel": 64.28571428571429,
+        "pixelBoxes": [
+          [
+            177,
+            157,
+            215,
+            334
+          ],
+          [
+            215,
+            143,
+            254,
+            334
+          ],
+          [
+            254,
+            130,
+            343,
+            280
+          ],
+          [
+            254,
+            280,
+            292,
+            334
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            3986,
+            514,
+            6429,
+            11893
+          ],
+          [
+            6429,
+            514,
+            8936,
+            12793
+          ],
+          [
+            8936,
+            3986,
+            14657,
+            13629
+          ],
+          [
+            8936,
+            514,
+            11379,
+            3986
+          ]
+        ]
+      }
+    ],
+    "[s/h] h/s": [
+      {
+        "sourceImage": "GGST_Leo_S-H_Hitbox.png",
+        "sha256": "fd39c575d55d3b4d4f9c8e0b81e9969971b6d49114f0561d1db8680b567d6abb",
+        "sourcePush": [
+          94,
+          55,
+          161,
+          239
+        ],
+        "origin": [
+          127.5,
+          239
+        ],
+        "unitsPerPixel": 67.16417910447761,
+        "pixelBoxes": [
+          [
+            175,
+            25,
+            359,
+            137
+          ],
+          [
+            175,
+            137,
+            267,
+            179
+          ]
+        ],
+        "activeFrame": 1,
+        "transitionEstimated": false,
+        "boxes": [
+          [
+            3190,
+            6851,
+            15549,
+            14373
+          ],
+          [
+            3190,
+            4030,
+            9369,
+            6851
+          ]
+        ]
+      }
+    ]
+  }
+}

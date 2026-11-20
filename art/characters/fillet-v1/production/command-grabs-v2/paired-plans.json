@@ -1,0 +1,102 @@
+{
+  "236D": {
+    "sourceId": "236D-v2",
+    "keys": [
+      {
+        "tick": 0,
+        "source": 3,
+        "cue": "Grounded first-active latch / capture freeze"
+      },
+      {
+        "tick": 1,
+        "source": 4,
+        "cue": "Landing legs collect into the forearm hold"
+      },
+      {
+        "tick": 5,
+        "source": 5,
+        "cue": "Left forearm brace"
+      },
+      {
+        "tick": 9,
+        "source": 6,
+        "cue": "Right knife loaded; left contact held"
+      },
+      {
+        "tick": 13,
+        "source": 7,
+        "cue": "Long-right draw-cut accent"
+      },
+      {
+        "tick": 17,
+        "source": 8,
+        "cue": "Short-left accent; contact still held"
+      },
+      {
+        "tick": 21,
+        "source": 9,
+        "cue": "Forearm releases; knives collect"
+      },
+      {
+        "tick": 23,
+        "source": 10,
+        "cue": "Smaller withdrawal"
+      },
+      {
+        "tick": 25,
+        "source": 11,
+        "cue": "Settle into Stalker for cashout release"
+      }
+    ]
+  },
+  "214D": {
+    "sourceId": "214D-v2",
+    "keys": [
+      {
+        "tick": 0,
+        "source": 3,
+        "cue": "Grounded first-active latch / capture freeze"
+      },
+      {
+        "tick": 1,
+        "source": 4,
+        "cue": "Trailing foot collects; upright shoulder unwinds"
+      },
+      {
+        "tick": 5,
+        "source": 5,
+        "cue": "Left forearm brace"
+      },
+      {
+        "tick": 9,
+        "source": 6,
+        "cue": "Right knife loaded; left contact held"
+      },
+      {
+        "tick": 13,
+        "source": 7,
+        "cue": "Long-right draw-cut accent"
+      },
+      {
+        "tick": 17,
+        "source": 8,
+        "cue": "Short-left accent; contact still held"
+      },
+      {
+        "tick": 21,
+        "source": 9,
+        "cue": "Forearm releases; knives collect"
+      },
+      {
+        "tick": 23,
+        "source": 10,
+        "cue": "Smaller withdrawal"
+      },
+      {
+        "tick": 25,
+        "source": 11,
+        "cue": "Settle into Stalker for cashout release"
+      }
+    ]
+  }
+}

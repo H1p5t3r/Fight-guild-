@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-19",
+  "revision": "Actionable pull; Chase retired; schema 25",
+  "native": "All 15 native suites passed; Shark Drive 659 assertions, collision/sprite geometry 68532 assertions.",
+  "sanitizers": "Shark Drive passed all 659 assertions under AddressSanitizer and UndefinedBehaviorSanitizer.",
+  "parity": "33 runtime tests passed, including native/WASM parity, snapshot restore, rollback, relay, startup floors and existing Fillet animation clocks.",
+  "migration": "64 editor regression tests passed, including schema-24 Chase retirement with tuning/notes preserved, free-target pull preview and block/FD behavior.",
+  "godot": "Shark pull/state adapter and schema-24 migration, art atlas alpha/regions/provenance, workshop batch, Fillet v1, tuning, Smoke and Tapper tests passed.",
+  "browser": "All 26 Shark simulated contact clips and mobile Drive controls passed. Field organization passed at 320\u20131440px, including unique control IDs. Hosted delivery passed with 155 decoded sheets, editing, photos, autosave and local JSON round trip.",
+  "limitation": "The extracted ZIP file:// check was skipped only after managed Chromium returned ERR_BLOCKED_BY_ADMINISTRATOR. Hosted editor operation was verified; direct file opening remains for standard-browser CI.",
+  "files": {
+    "Shark-Full-Kit-60fps.mp4": "d824db9edf29bc857e36ae98ef0c38d6146b97658167289f9748c53e568769ef",
+    "Shark-Drive-and-Hooks-Half-Speed.mp4": "8ba1e4e9c6d0381ec6d3e730242a2aeea06fdc8cc9904c119866031fee79df62",
+    "capture.json": "775f920807bbc110014d4f88f521f1ecfad86845467f882284a1f5c22c74adb5",
+    "review-desktop.png": "dd45f5ba2bae42e058a087478b422ef91971b2be1b5a73a0c6a2a8597398ca7e",
+    "review-mobile.png": "957b6fb28f2c86bc9ad46be99bc1ac2cb627138193f975d1e805e57a7327a028",
+    "editor-mobile.png": "92ddc97b8b021b606d3f196e952ffe62a3146f2f766e9623a4ccb0464aa9cafd"
+  }
+}

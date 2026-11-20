@@ -1,0 +1,146 @@
+{
+  "id": "5K",
+  "file": "5k-inbetweens.png",
+  "columns": 3,
+  "rows": 2,
+  "frames": [
+    5,
+    12,
+    14,
+    16,
+    18,
+    20
+  ],
+  "source": "/workspace/generated_images/exec-a2cabaf7-302e-4e20-8607-a6c777f3461b.png",
+  "references": [
+    "/workspace/generated_images/exec-3fe7b927-eab9-48a4-8584-bfa0a6b91223.png",
+    "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5k.png"
+  ],
+  "prompt": "5k-inbetweens-quality-prompt.txt",
+  "sha256": "af009ae95cca2c44072a524fbfd0a9e90dca22d76af4c079cdeb8dce405a1a77",
+  "body_height": 528,
+  "roots": [
+    236,
+    231,
+    201,
+    276,
+    272,
+    253
+  ],
+  "keys": [
+    {
+      "frame": 5,
+      "label": "in-between"
+    },
+    {
+      "frame": 12,
+      "label": "in-between"
+    },
+    {
+      "frame": 14,
+      "label": "in-between"
+    },
+    {
+      "frame": 16,
+      "label": "in-between"
+    },
+    {
+      "frame": 18,
+      "label": "in-between"
+    },
+    {
+      "frame": 20,
+      "label": "in-between"
+    }
+  ],
+  "calibration": {
+    "method": "One fixed scale per sheet; planted-foot roots interpolate the neighboring approved keys.",
+    "scaleMeasure": "standing head-to-sole height",
+    "measurements": [
+      {
+        "frame": 5,
+        "pixels": {
+          "left": 166.5,
+          "span": 0.0,
+          "height": 479
+        },
+        "target": {
+          "left": -19.666666666666664,
+          "span": 0.0,
+          "height": 136.0
+        },
+        "height": 528.3088235294117
+      },
+      {
+        "frame": 12,
+        "pixels": {
+          "left": 160.0,
+          "span": 0.0,
+          "height": 479
+        },
+        "target": {
+          "left": -20.066666666666666,
+          "span": 0.0,
+          "height": 135.9333333333333
+        },
+        "height": 528.5679254536539
+      },
+      {
+        "frame": 14,
+        "pixels": {
+          "left": 130.5,
+          "span": 0.0,
+          "height": 481
+        },
+        "target": {
+          "left": -20.133333333333333,
+          "span": 0.0,
+          "height": 136.2
+        },
+        "height": 529.7356828193833
+      },
+      {
+        "frame": 16,
+        "pixels": {
+          "left": 198.0,
+          "span": 0.0,
+          "height": 479
+        },
+        "target": {
+          "left": -22.190476190476186,
+          "span": 10.476190476190474,
+          "height": 136.2380952380952
+        },
+        "height": 527.3855295351277
+      },
+      {
+        "frame": 18,
+        "pixels": {
+          "left": 180.0,
+          "span": 0.0,
+          "height": 479
+        },
+        "target": {
+          "left": -26.238095238095234,
+          "span": 31.428571428571423,
+          "height": 136.04761904761904
+        },
+        "height": 528.1239061953098
+      },
+      {
+        "frame": 20,
+        "pixels": {
+          "left": 146.0,
+          "span": 0.0,
+          "height": 480
+        },
+        "target": {
+          "left": -30.28571428571428,
+          "span": 52.38095238095238,
+          "height": 135.85714285714283
+        },
+        "height": 529.9684542586751
+      }
+    ]
+  }
+}

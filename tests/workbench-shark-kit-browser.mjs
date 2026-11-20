@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {existsSync} from 'node:fs';
+import {mkdir} from 'node:fs/promises';
+import {serveWorkshopSite} from '../scripts/serve-workbench.mjs';
+import {ready,seekMoveFrame} from './workbench-ui-helpers.mjs';
+const server=await serveWorkshopSite(0,'127.0.0.1','/Fight-guild-/'),browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
+try{
+ const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[],bad=[];
+ page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)bad.push(r.url());});
+ await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
+ const base=`http://127.0.0.1:${server.address().port}/Fight-guild-/`;
+ await page.goto(base+'shark-motion-review.html');await page.evaluate(()=>sharkReview.ready);
+ const ids=await page.evaluate(()=>sharkReview.pack.moves.map(m=>m.id));assert.equal(ids.length,26);assert.equal(new Set(ids).size,26);
+ assert.equal(await page.locator('#speed').inputValue(),'1');
+ const report=await page.evaluate(()=>sharkReview.pack.moves.map(m=>({id:m.id,damage:m.contactTimeline.at(-1).damage,capture:m.contactTimeline.some(f=>f.pairKind&&f.actor.paired),line:m.contactTimeline.some(f=>f.line),motion:Math.max(...m.contactTimeline.map(f=>f.x))-Math.min(...m.contactTimeline.map(f=>f.x))})));
+ for(const r of report)if(!['2D'].includes(r.id))assert.ok(r.damage>0,r.id+' contact example must actually connect');
+ for(const id of ['4P+K','6P+K'])assert.ok(report.find(r=>r.id===id).capture,id+' capture artwork');
+ for(const id of ['5D','j.D','2D'])assert.ok(report.find(r=>r.id===id).line,id+' line artwork');
+ assert.ok(!ids.includes('6D'));
+ await mkdir('build/shark-kit-review',{recursive:true});
+ for(const id of ids){await page.locator('#move-select').selectOption(String(ids.indexOf(id)));await page.locator('#scenario').selectOption('hit');await page.evaluate(()=>{const r=sharkReview,m=r.pack.moves[r.state().selected];r.seek(m.contactTimeline.findIndex(f=>f.frame===m.startup)+1);});assert.ok((await page.locator('#readout').textContent()).startsWith(id));}
+ await page.locator('#move-select').selectOption(String(ids.indexOf('5D')));await page.evaluate(()=>sharkReview.seek(23));
+ await page.screenshot({path:'build/shark-kit-review/review-desktop.png',fullPage:true});
+ await page.locator('#mirror').check();await page.setViewportSize({width:390,height:844});await page.locator('#compare').uncheck();
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:'build/shark-kit-review/review-mobile.png',fullPage:true});
+ await page.goto(base);await ready(page);await page.locator('#fighter').selectOption('4');await page.locator('#choose-move').click();await page.locator('[data-move="13"]').click();await page.locator('#section-picker').selectOption('mechanics');await ready(page);
+ assert.match(await page.locator('.drive-overview').textContent(),/Tag → pull/);assert.equal(await page.locator('.drive-action-list button').count(),3);
+ await page.locator('[data-drive-test="followup"]').click();await ready(page);
+ assert.ok(await page.evaluate(()=>moveWorkshop.preview().frames.some(f=>f.state.players[1].linePullTime>0)));
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+ await page.locator('[data-drive-move="22"]').click();await ready(page);await seekMoveFrame(page,12);
+ assert.match(await page.locator('.drive-behavior').innerText(),/free target can attack, jump, dash and guard/);
+ assert.match(await page.locator('#test-readout').innerText(),/free to act/);
+ assert.equal(await page.locator('#stat-block').innerText(),'—');
+ const idsInForm=await page.locator('#form [id]').evaluateAll(nodes=>nodes.map(n=>n.id));assert.equal(new Set(idsInForm).size,idsInForm.length,'Drive controls must not have duplicate IDs');
+ await page.screenshot({path:'build/shark-kit-review/editor-mobile.png',fullPage:true});
+ await page.locator('#help').click();assert.equal(await page.locator('a[href="shark-motion-review.html"]').count(),1);
+ assert.deepEqual(errors,[]);assert.deepEqual(bad,[]);
+ console.log('PASS Shark: all 26 simulated contact clips, paired throws, Drive tag/pull, hosted subpath, mobile controls, import entry, zero console/resource errors.');
+}finally{await browser.close();await new Promise(r=>server.close(r));}

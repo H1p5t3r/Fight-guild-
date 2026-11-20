@@ -1,0 +1,21 @@
+{
+  "opening": [
+    "The stands hunger for legends.",
+    "Let the guilds give them names."
+  ],
+  "roundName": "Scrum",
+  "releaseCall": "Break the line!",
+  "beatSeconds": [
+    3.0,
+    3.0,
+    1.8
+  ],
+  "introSeconds": 3.5,
+  "releaseSeconds": 1.65,
+  "intermissionSeconds": 3.5,
+  "roundCalls": [
+    "1st Scrum",
+    "2nd Scrum",
+    "Final Down"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "source": "User photograph and request, 2026-11-19",
+  "rule": "A drawing at the first frame of each phase, then every second simulation frame within that phase; retain additional approved keys.",
+  "simulationFps": 60,
+  "interval": 2,
+  "actions": [
+    "5P",
+    "5K",
+    "2S"
+  ],
+  "phaseStart": [
+    "1",
+    "startup",
+    "startup + active"
+  ],
+  "preserveExistingKeys": true,
+  "excludeHitstop": true,
+  "scope": "Authored default timings; longer edited timings may need additional drawn in-betweens.",
+  "supersededActions": {
+    "2S": "art/characters/fillet-v1/production/sweep-timing/timing.json"
+  }
+}

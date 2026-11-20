@@ -1,0 +1,47 @@
+{
+  "id": "5K",
+  "file": "5k.png",
+  "source": "/workspace/generated_images/exec-aab4d7d2-5acc-4f10-839c-a87f66fc944e.png",
+  "keys": [
+    {
+      "frame": 1,
+      "label": "entry"
+    },
+    {
+      "frame": 3,
+      "label": "anticipation"
+    },
+    {
+      "frame": 6,
+      "label": "pre-contact"
+    },
+    {
+      "frame": 7,
+      "label": "active"
+    },
+    {
+      "frame": 9,
+      "label": "follow-through"
+    },
+    {
+      "frame": 10,
+      "label": "recovery"
+    },
+    {
+      "frame": 15,
+      "label": "retract"
+    },
+    {
+      "frame": 22,
+      "label": "last locked"
+    }
+  ],
+  "columns": 4,
+  "keyStart": 0,
+  "references": [
+    "/workspace/fillet-art-reference/fillet_model_reference_06.png",
+    "/workspace/Fight-guild-/art/characters/fillet-v1/review/normals-batch-01/k-options.png"
+  ],
+  "prompt": "5k-prompt.txt",
+  "sha256": "1f90da93a8f189eaa58c1bcd97bbcb72635df55c6b9142191b4f69cfab60a48d"
+}

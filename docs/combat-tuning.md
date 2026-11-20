@@ -1,0 +1,90 @@
+# Combat tuning: schema 10
+
+This implements the approved priorities from the [saved Dustloop review](research/strive-dustloop-2026-11-15.md). Values are editable Fight Guild defaults, not a claim of exact Strive parity. The user clarified that block carryover and post-stun throw protection are wanted; **Just Guard / Instant Block timing mechanics are not**.
+
+## Cancel windows
+
+Each move now has separate opening/closing frames for **normal/command**, **special/Drive**, **jump**, and **contextual follow-up** cancels. Bounds are inclusive and refer to the source frame just completed. A close frame of zero means through the end of the move. A valid cancel replaces the following tick. Hitstop freezes the source frame; input sampling and the existing input-buffer aging continue.
+
+`cancelOn` selects eligible events: hit = 1, block = 2, whiff = 4; add the values for combinations. Ordinary whiff cancels also require the existing whiff-cancel setting. Contextual whiff follow-ups retain their separate post-active rule. Shark's stab still requires an unblocked hook hit. Timing never grants a route that the unified gatlings do not allow, and every attack retains its same-button command-normal route within its normal-cancel window.
+
+Default P/K special windows close on their last active frame. K normal/command cancels and enabled K/S jump cancels do likewise. Other ordinary windows remain open through recovery. Fillet's starter and middle rekka follow-up windows close 12 frames after their final active frame. Shark's hook follow-ups close 16 frames after their final active frame. These settings allow immediate and delayed routes without granting a follow-up throughout every recovery frame.
+
+The frame lab reports which windows are open, the age of the executed attack input, actual contact advantage, and gaps. **Use selected timing presets** changes fields in the editor; **Apply move** commits them to the working simulation.
+
+## Damage and repeated moves
+
+Each move has **Starter %**, **Scaling cost %**, and **Minimum damage %**. The opening hit deals its authored damage. Later hits use the starter's percentage and the remaining combo scale:
+
+`effectivePercent = max(thisMove.minimumDamage, starterPercent * remainingScale / 100)`
+
+`damage = max(1, baseDamage * effectivePercent / 100)`
+
+Integer divisions truncate. A move with zero base damage still deals zero. The remaining scale begins at 100 and loses each move's scaling cost after that hit, with a floor of zero. Chip is separate and is not combo-scaled. Combo damage scaling resets when the defender leaves the combo, including the wall-break neutral reset. Air reel, hook reel and splat preserve it even if the numeric hitstun timer expires.
+
+Defaults give P starters 70%, K starters 80%, and most other normals 100%; authored special cases can differ. Most moves cost 8 percentage points. Shark's hooks start at 70% and cost 12 points. Most moves have a 10% damage floor.
+
+| Default route | Damage against the current 1,000 HP fighters |
+| --- | --- |
+| Fillet `236S > 6S > 2S` | 35 + 23 + 31 = **89** |
+| Fillet `236S > 2S` | 35 + 35 = **70** |
+| Shark `214S > P` or `j.214P > P` | 25 + 27 = **52** |
+
+Gravity remains a separate system. The first X hits are unchanged (default five). After that threshold, each use of a move from its third use onward adds another 15 percentage points of gravity, on top of the existing per-hit increment, bounded by the existing gravity cap. Repeat threshold and increment are editable; zero disables the relevant repeat penalty. Normal jumps are unaffected. The frame lab shows last-hit base/final damage, effective percentage and current gravity.
+
+## Blocking and throw protection
+
+Ordinary blockstun carries guard through uninterrupted strikes, even if back is released while entering a reversal. Low attacks still require a downward input; overheads still require standing guard. Carryover ends with the first gap. There is no timed-block bonus, parry, Just Guard or Instant Block action.
+
+Normal blockstun, hitstun and completed knockdown recovery grant **five unfrozen ticks of throw protection** after control returns. The timer freezes in hitstop. It is editable from zero to thirty frames. It protects against throws only, not strikes.
+
+Guard break continues to require an actual guard direction, forbids buffered backward dash and allows throws **during** the state. It bypasses throw grace and does not grant grace on recovery. It retains correct high/low guarding and FD. This intentionally differs from the saved Strive guard-crush rule.
+
+## Jump startup and landing recovery
+
+Jumps begin with **four grounded startup ticks** before takeoff, editable from zero to thirty frames. These ticks are vulnerable to strikes and immune to throws; blocking, FD and attacks cannot interrupt them. Input buffering continues, run/step inertia carries through takeoff, and hitstop freezes the startup timer. The frame lab labels this state **PREJUMP**. Its current art reuses the crouching pose.
+
+Landing during an aerial attack clears the attack and enters its authored landing recovery. Shark's air hook defaults to **12f**, its air stab to **10f**, and other air attacks to **3f**. If an aerial attack has already recovered before landing, the global recovered-air-action landing duration applies (default **3f**). Empty-jump landing recovery is separately editable and defaults to **0f**, retaining immediate empty-jump recovery.
+
+During landing recovery the fighter cannot attack, move, block or FD. A strike can score a punish. Inputs can buffer into the first free tick. Landing is not knockdown/wakeup and does not create reversal eligibility or throw immunity. Dedicated recovery artwork remains part of the sprite pipeline.
+
+## FD and corner spacing
+
+Default FD holding drain is **0.25% per grounded tick** and **0.50% per airborne tick**. A full gauge lasts 400/200 ticks before contact costs. Ground/air drain are independently editable. Contact cost is:
+
+`fdBlockCost + baseDamage * fdDamageCost + max(0, attackLevel) * fdLevelCost`
+
+Defaults are 250 units + 50 units per attack level, where 100 units = 1% Momentum; the base-damage coefficient defaults to zero. Holding drain applies in addition, including during hitstop. FD still prevents chip, uses 300% block displacement, and falls back to ordinary guard when empty.
+
+Ordinary block pushback now transfers the displacement blocked by a corner to the attacker, as FD already did. This gives FD a consistent spacing baseline in the corner. No attack hurtboxes or pushbox sizes were enlarged. Momentum still has three visual sections, FD is its only spend, and Negative Penalty remains deferred.
+
+## Counter and attack presets
+
+Attack level 0–4 selects the per-level FD cost and can populate hitstop/hitstun/blockstun from the source's standard table. The editable timing values remain authoritative. Level −1 uses custom timing and no extra per-level FD charge.
+
+Counter tiers select presentation strength and can populate these presets:
+
+| Tier | Extra stun / stop | Total counter freeze | Defender half-speed duration |
+| --- | --- | --- | --- |
+| 0: minimal | 0 / 0 | Base hitstop | 0 |
+| 1: small | 4 / 3 | Base hitstop + 3 | 0 |
+| 2: medium | 0 / 0 | 21 ticks | 25 ticks |
+| 3: large | 0 / 0 | 31 ticks | 35 ticks |
+
+Counter freeze −1 uses base hitstop + extra stop; 0–60 overrides the total. Counter slowdown is 0–120 ticks. The defender holds every other tick after shared freeze, giving 13/18 held ticks in the medium/large presets. Additional shared hitstop pauses the slowdown. Small counters retain the existing Fight Guild tuning. Direct edits override presets; tier −1 retains custom timing. Heavy counters use a larger word and brief camera zoom. Rekka and hook follow-up families use minimal effects by default. Button names do not enforce a preset.
+
+Counter vulnerability is a separate mask on the interrupted move: startup = 1, active = 2, recovery = 4. Most moves default to startup + active; throw whiffs also permit recovery counter hits. A non-counterable startup/active interruption is an ordinary hit, while recovery remains punishable. Throws do not inflict counter hits. See [counter clock and presentation rules](combat-feedback.md) for follow-up, input and reduced-motion behavior.
+
+## Collision-driven wall health
+
+Each wall owns a hidden, independent pool. Only a player colliding with it during hitstun and with outward horizontal velocity can damage it. Damage equals absolute incoming speed, and the collision clears that speed and the remaining knockback travel. The collision that empties the pool does not splat; the next qualifying collision does. The same rule applies in the air and on the ground. There is no passive healing or midscreen wall-damage accumulation. A new round or stage arrival restores both pools. See [recovery and walls](recovery-and-walls.md) for values, units and examples.
+
+The previous midscreen-cap and grounded-priming controls have been superseded and removed from the editor. Their JSON slots remain inert for compatibility. Block carryover, throw protection, FD costs and corner block pushback are unchanged.
+
+## Persistence and verification
+
+Schema/core 12 retains 69 move fields, nine movement fields per fighter and 38 global rules. Per-fighter timers, remaining hit travel, combo factors, move-use counts, independent wall health and diagnostic values are integer rollback state. Snapshots carry an explicit core-version marker. Online fingerprints include all tuning; editing is locked online.
+
+Schema 1–7 saves preserve authored damage, counter bonuses, movement and existing global rates. Existing moves migrate with unrestricted legacy windows, unscaled legacy combo damage and zero authored landing recovery. Their saved FD holding/contact costs and original combo-gravity increment are preserved. New defensive carryover, throw grace and wall rules are supplied as editable defaults. Schema 8–9 tuning is preserved when moving to schema 10. Pre-schema-10 saves keep additive counter freeze and no defender slowdown, preserving their authored counter bonuses. All pre-schema-9 saves retain immediate jump takeoff and zero empty-jump landing recovery. **Restore default move set** opts into the complete new starter balance; export existing edits first if you want to keep both versions.
+
+Verification includes inclusive cancel-window boundaries and buffered entry, hit/block conditions, same-button routes, proration/floors/reset, repetition after X, prejump duration/strike vulnerability/throw immunity/inertia, landing input lock/buffering, high/low carryover and gaps, five-frame throw grace, guard-break exceptions, ground/air FD costs, ordinary corner transfer, both wall states, counter masks, old-save migration, editor application and delayed-input rollback.

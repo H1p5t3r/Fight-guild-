@@ -1,0 +1,418 @@
+{
+  "version": 1,
+  "created_date": "2026-11-18",
+  "generator": "OpenAI image_gen",
+  "generator_version": "Not exposed by tool",
+  "status": "selected_by_user",
+  "scope": "Four visual directions each for idle, forward walk, backward walk, backdash, and run. Four drawn key poses per option; not registered, timed production animation.",
+  "user_brief": "Give me 4 versions of an idle pose, walk, back walk, back dash, and run cycle. For the idle I was imagining him tapping his hook handle on his shoulder and looking down on the opponent.",
+  "design_rules": [
+    "Current F / Shoulder Rest identity, low-volume long white hair and physical cobalt sports glasses.",
+    "Wooden hook-handle tap on shoulder; hooked blade kept clear of body. Downward glance at opponent.",
+    "Opposed hips and shoulders, soft knees, heel articulation and clear load/release from approved Low Scoop study.",
+    "One right-hand hooked pole and one left-hand short triangular knife; no body smears.",
+    "Facing right during all studies. Forward movements travel right; retreats travel left.",
+    "A-D are independent options on each sheet; choices can be mixed."
+  ],
+  "pixel_processing": "Generated PNGs copied byte-for-byte; no crop, paint, filter, warp, rescale or compositing.",
+  "production_follow_up": [
+    "After selection, make clean individually registered cycle frames with measured fixed weapon dimensions.",
+    "Resolve any concept-sheet foreshortening and verify alternating leg identity and planted contacts during timed playback.",
+    "Set loop timing, holds, foot roots and secondary-motion offsets after selecting movement character; these boards do not change gameplay speed, reach or invulnerability."
+  ],
+  "jobs": [
+    {
+      "id": "idle",
+      "title": "SHARK / IDLE OPTIONS",
+      "options": [
+        "A \u2014 Lazy Tap",
+        "B \u2014 Double Beat",
+        "C \u2014 Looming",
+        "D \u2014 Side-Eye"
+      ],
+      "status": "selected_by_user",
+      "path": "art/characters/shark-movement-options-v1/idle.png",
+      "source": "/workspace/generated_images/exec-080e31c7-c3bc-4b5e-bbd0-4e2b35736afd.png",
+      "prompt": "Create a polished ANIMATION DIRECTION COMPARISON SHEET for SHARK, the exact original Fight Guild fighter in the supplied references. This is a visual options study for a fighting game, with real drawn movement progression. Reference 1 locks his design and fixed weapon geometry. Reference 2 is his approved F / Shoulder Rest neutral. Reference 3 shows the approved fluid acting, torso twist, grounded weight shifts and articulated ankles: match that quality, not stiff mannequin posing.\n\nLAYOUT: large portrait illustration approximately 1536 x 2048. Exactly FOUR horizontal option rows A, B, C, D. FOUR chronological full-body key poses in each row: 16 drawings total, no extra character portraits. Give each row its own pale ivory horizontal band and a narrow dark-teal title strip with its option letter and short name; four spacious equal columns beneath it. Clear small 01,02,03,04 over each pose. Thin quiet separators. All figures rendered at identical anatomical scale, NOT normalized to bounding boxes; leave enough room for the entire pole, hook, hair and boots. Clean ivory background with sparse charcoal typography and teal accents, very faint ground guide only. No stage, no opponent, no decorations, no water or attack effects. Broad readable silhouettes and clean negative space matter more than costume microdetail.\n\nCHARACTER LOCK: mature tall athletic swimmer, eight-head anatomy, broad shoulders and narrow waist, long muscular legs, small angular adult face. LONG WHITE HAIR with low crown and slim locks following his nape/back, no gigantic mane, no ponytail. Physical COBALT BLUE SPORTS GLASSES (bridge, lenses, arms), natural skin, no face paint. Sleeveless teal scale vest, bone shark-jaw armor on anatomical LEFT shoulder, leather bracers, rope waist belt with hip net, torn teal sash, slate loose trousers, brown strapped heavy boots. RIGHT hand holds ONE continuous rope-wrapped wooden pole with a SINGLE OPEN SILVER J-HOOK at one end and small ring at butt; left hand holds his separate short triangular knife, pointed safely away from body. Fixed weapon dimensions across all poses, total hooked shaft about 0.9 of standing body height, no added spear point, no second hook. Exactly two arms, two legs, one right-hand hook, one left-hand knife. The hook MUST remain supported by his right hand; no floating or disappearing weapon.\n\nRENDER: confident anime fighting-game animation key drawings, thick dark outer ink, finer interiors, strong two-value cel shadows, restrained upper-left light. All poses face screen RIGHT with the opponent imagined to the right; keep eyes directed toward that opponent, never turn the whole character left. Three-quarter SIDE GAMEPLAY CAMERA, no foreshortened camera tricks. Pose through the hips, ribcage and shoulder opposition, flexed feet, clear heel pivots and knees. Allow compression, extension, delayed hair/sash settling. No body/weapon smears, no stretched rubber limbs, no duplicate limbs, no speed streaks. Do not just rotate a rigid torso or repeat identical legs. Anatomical size consistency MUST NOT suppress posture changes. Four keys must show a real connected action in every row.\n\nTITLE: SHARK / IDLE OPTIONS\nAll FOUR options follow the user's specific idea: Shark taps the ROPE-WRAPPED WOODEN HANDLE of his hook on his RIGHT SHOULDER and looks down his nose at his opponent. The METAL HOOK stays safely behind him on screen left; he does NOT hit himself with the sharp end. Right hand loosely lifts the supported shaft a few centimeters then lets its wrapped section touch the shoulder, with a visible settling response in chest/shoulder. Left-hand short knife hangs low and idle, never waves across his body. Eyes angled down through his blue glasses while chin carries a superior attitude.\nA / LAZY TAP: relaxed tall rear-leg-weighted stagger, chest open, front knee loose. 01 shoulder rest, 02 wrist lifts handle while ribcage inhales and head inclines down, 03 soft shoulder tap with slight clavicle dip, 04 long relaxed settle with a small smirk. Single unhurried beat.\nB / DOUBLE BEAT: looser asymmetric stance and rolling shoulders, knees soft, rhythm through hip sway. 01 left-hip settle and handle raised, 02 first shoulder contact, 03 tiny rebound and weight shift toward center, 04 second tap and amused downward glance. Distinct springy double-tap mannerism; the last pose easily flows into first.\nC / LOOMING: wider planted base, torso slightly inclined toward opponent, head low but gaze condescending. 01 compressed right hip, 02 rear leg slowly extends to raise the chest above opponent with handle lifted, 03 deliberate tap and forward ribcage settle, 04 return into lower hip with shoulder still relaxed. A dangerous measured weight shift, no attack windup.\nD / SIDE-EYE: most theatrical S-curve: hips forward, ribcage leaned back, hooked pole relaxed over rear shoulder, leading boot toe cocked. 01 chin up, 02 head turns a few degrees down toward opponent while handle lifts, 03 dismissive tap with wrist drop and shoulder bounce, 04 head canted with half-smile and toe returning. Still combat-ready, not a dance or caricature.\nMake neck/head/wrist differences legible, with nuanced whole-body support, not four copies of one pose. Small curved arrows at handle and shoulder are allowed to clarify the tap, but no cartoon impact star.",
+      "references": [
+        "art/characters/shark.png",
+        "godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "art/characters/shark-normal-options-v1/low-scoop-fluidity.png"
+      ],
+      "transparent_background": false,
+      "corrections": [],
+      "output_metadata": {
+        "sha256": "a9f20241f63f0131b031015d9c256f2ec934c5fcd39734385c671277a68d2199",
+        "bytes": 2473822,
+        "dimensions": [
+          1086,
+          1448
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+          "bytes": 2201584,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
+          "bytes": 924505,
+          "dimensions": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "art/characters/shark-normal-options-v1/low-scoop-fluidity.png",
+          "sha256": "4d750de3c2fa5977aac7d9c922fa38b52fcf24f7b93a7ba1022d7013a3083c3f",
+          "bytes": 2232401,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "selected": "A / Lazy Tap"
+    },
+    {
+      "id": "walk",
+      "title": "SHARK / FORWARD WALK",
+      "options": [
+        "A \u2014 Captain's Stride",
+        "B \u2014 Rolling Swagger",
+        "C \u2014 Measuring Step",
+        "D \u2014 Spring Step"
+      ],
+      "status": "selected_by_user",
+      "path": "art/characters/shark-movement-options-v1/walk.png",
+      "source": "/workspace/generated_images/exec-6d52a856-3082-4686-9049-4e573c827d33.png",
+      "prompt": "Create a polished ANIMATION DIRECTION COMPARISON SHEET for SHARK, the exact original Fight Guild fighter in the supplied references. This is a visual options study for a fighting game, with real drawn movement progression. Reference 1 locks his design and fixed weapon geometry. Reference 2 is his approved F / Shoulder Rest neutral. Reference 3 shows the approved fluid acting, torso twist, grounded weight shifts and articulated ankles: match that quality, not stiff mannequin posing.\n\nLAYOUT: large portrait illustration approximately 1536 x 2048. Exactly FOUR horizontal option rows A, B, C, D. FOUR chronological full-body key poses in each row: 16 drawings total, no extra character portraits. Give each row its own pale ivory horizontal band and a narrow dark-teal title strip with its option letter and short name; four spacious equal columns beneath it. Clear small 01,02,03,04 over each pose. Thin quiet separators. All figures rendered at identical anatomical scale, NOT normalized to bounding boxes; leave enough room for the entire pole, hook, hair and boots. Clean ivory background with sparse charcoal typography and teal accents, very faint ground guide only. No stage, no opponent, no decorations, no water or attack effects. Broad readable silhouettes and clean negative space matter more than costume microdetail.\n\nCHARACTER LOCK: mature tall athletic swimmer, eight-head anatomy, broad shoulders and narrow waist, long muscular legs, small angular adult face. LONG WHITE HAIR with low crown and slim locks following his nape/back, no gigantic mane, no ponytail. Physical COBALT BLUE SPORTS GLASSES (bridge, lenses, arms), natural skin, no face paint. Sleeveless teal scale vest, bone shark-jaw armor on anatomical LEFT shoulder, leather bracers, rope waist belt with hip net, torn teal sash, slate loose trousers, brown strapped heavy boots. RIGHT hand holds ONE continuous rope-wrapped wooden pole with a SINGLE OPEN SILVER J-HOOK at one end and small ring at butt; left hand holds his separate short triangular knife, pointed safely away from body. Fixed weapon dimensions across all poses, total hooked shaft about 0.9 of standing body height, no added spear point, no second hook. Exactly two arms, two legs, one right-hand hook, one left-hand knife. The hook MUST remain supported by his right hand; no floating or disappearing weapon.\n\nRENDER: confident anime fighting-game animation key drawings, thick dark outer ink, finer interiors, strong two-value cel shadows, restrained upper-left light. All poses face screen RIGHT with the opponent imagined to the right; keep eyes directed toward that opponent, never turn the whole character left. Three-quarter SIDE GAMEPLAY CAMERA, no foreshortened camera tricks. Pose through the hips, ribcage and shoulder opposition, flexed feet, clear heel pivots and knees. Allow compression, extension, delayed hair/sash settling. No body/weapon smears, no stretched rubber limbs, no duplicate limbs, no speed streaks. Do not just rotate a rigid torso or repeat identical legs. Anatomical size consistency MUST NOT suppress posture changes. Four keys must show a real connected action in every row.\n\nTITLE: SHARK / FORWARD WALK\nExactly four alternative FORWARD WALK cycles, traveling RIGHT, while posed in place for comparison. Each row shows one complete gait's four landmark keys: 01 near-foot forward CONTACT / far foot behind; 02 near leg SUPPORT while far leg passes; 03 far-foot forward CONTACT / near foot behind; 04 far leg SUPPORT while near leg passes to repeat 01. Draw genuinely ALTERNATING NEAR/FAR LEG ownership, sensible heel-to-toe contacts and no permanently airborne walk. Ribcage counter-rotates gently against hips and hair/net lag a fraction behind. Add one small rightward travel arrow per row.\nA / CAPTAIN'S STRIDE: long easy upright walk, hook balanced across shoulder in right hand, left knife loose and low. Rear-loaded swagger at contact, soft knee absorption, shoulder rolling with each planted step. Relaxed authority, not a military march.\nB / ROLLING SWAGGER: exaggerated but believable side-to-side pelvic sway, narrow fluid steps with near foot passing CLOSE across the far foot's line, chest opposes hips and right elbow loosely counters the hook. Keep body oriented toward screen right, show a graceful S-curve through supporting leg and spine; knees never rigidly locked. Hook stays behind shoulder.\nC / MEASURING STEP: lower watchful advance, wide combat base, bent knees, shoulders slightly forward, hook supported just above and behind right shoulder as if ready to drop. Quiet gliding pelvis with clear ankle/foot work; cautious predatory heel placement, no kneeling or crawling. Compress at contact, lengthen at passing.\nD / SPRING STEP: athlete's light, confident advance, springier ankle roll and a small vertical rise through passing, hook diagonally sloped over rear shoulder, short blade at side. Most buoyant of the walks, but always at least one boot touching ground. Fuller chest twist and loose elbow, never a run or airborne hop.\nPreserve fixed full character scale across all rows; stepping means body articulates, no sliding rigid paper cutouts.",
+      "references": [
+        "art/characters/shark.png",
+        "godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "art/characters/shark-normal-options-v1/low-scoop-fluidity.png"
+      ],
+      "transparent_background": false,
+      "corrections": [],
+      "output_metadata": {
+        "sha256": "6aa820f243c2c6729278ac45b9e883c681d8f7ee318216b2fdcb7f1cc8185aac",
+        "bytes": 2298628,
+        "dimensions": [
+          1086,
+          1448
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+          "bytes": 2201584,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
+          "bytes": 924505,
+          "dimensions": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "art/characters/shark-normal-options-v1/low-scoop-fluidity.png",
+          "sha256": "4d750de3c2fa5977aac7d9c922fa38b52fcf24f7b93a7ba1022d7013a3083c3f",
+          "bytes": 2232401,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "selected": "B / Rolling Swagger"
+    },
+    {
+      "id": "back-walk",
+      "title": "SHARK / BACKWARD WALK",
+      "options": [
+        "A \u2014 Unbothered Retreat",
+        "B \u2014 Angled Sway",
+        "C \u2014 Guarded Withdraw",
+        "D \u2014 Toe-Roll Retreat"
+      ],
+      "status": "selected_by_user",
+      "path": "art/characters/shark-movement-options-v1/back-walk.png",
+      "source": "/workspace/generated_images/exec-92dc35b8-d45f-459f-80ca-2233465ee4af.png",
+      "prompt": "Create a polished ANIMATION DIRECTION COMPARISON SHEET for SHARK, the exact original Fight Guild fighter in the supplied references. This is a visual options study for a fighting game, with real drawn movement progression. Reference 1 locks his design and fixed weapon geometry. Reference 2 is his approved F / Shoulder Rest neutral. Reference 3 shows the approved fluid acting, torso twist, grounded weight shifts and articulated ankles: match that quality, not stiff mannequin posing.\n\nLAYOUT: large portrait illustration approximately 1536 x 2048. Exactly FOUR horizontal option rows A, B, C, D. FOUR chronological full-body key poses in each row: 16 drawings total, no extra character portraits. Give each row its own pale ivory horizontal band and a narrow dark-teal title strip with its option letter and short name; four spacious equal columns beneath it. Clear small 01,02,03,04 over each pose. Thin quiet separators. All figures rendered at identical anatomical scale, NOT normalized to bounding boxes; leave enough room for the entire pole, hook, hair and boots. Clean ivory background with sparse charcoal typography and teal accents, very faint ground guide only. No stage, no opponent, no decorations, no water or attack effects. Broad readable silhouettes and clean negative space matter more than costume microdetail.\n\nCHARACTER LOCK: mature tall athletic swimmer, eight-head anatomy, broad shoulders and narrow waist, long muscular legs, small angular adult face. LONG WHITE HAIR with low crown and slim locks following his nape/back, no gigantic mane, no ponytail. Physical COBALT BLUE SPORTS GLASSES (bridge, lenses, arms), natural skin, no face paint. Sleeveless teal scale vest, bone shark-jaw armor on anatomical LEFT shoulder, leather bracers, rope waist belt with hip net, torn teal sash, slate loose trousers, brown strapped heavy boots. RIGHT hand holds ONE continuous rope-wrapped wooden pole with a SINGLE OPEN SILVER J-HOOK at one end and small ring at butt; left hand holds his separate short triangular knife, pointed safely away from body. Fixed weapon dimensions across all poses, total hooked shaft about 0.9 of standing body height, no added spear point, no second hook. Exactly two arms, two legs, one right-hand hook, one left-hand knife. The hook MUST remain supported by his right hand; no floating or disappearing weapon.\n\nRENDER: confident anime fighting-game animation key drawings, thick dark outer ink, finer interiors, strong two-value cel shadows, restrained upper-left light. All poses face screen RIGHT with the opponent imagined to the right; keep eyes directed toward that opponent, never turn the whole character left. Three-quarter SIDE GAMEPLAY CAMERA, no foreshortened camera tricks. Pose through the hips, ribcage and shoulder opposition, flexed feet, clear heel pivots and knees. Allow compression, extension, delayed hair/sash settling. No body/weapon smears, no stretched rubber limbs, no duplicate limbs, no speed streaks. Do not just rotate a rigid torso or repeat identical legs. Anatomical size consistency MUST NOT suppress posture changes. Four keys must show a real connected action in every row.\n\nTITLE: SHARK / BACKWARD WALK\nFour BACKWARD WALK cycles: Shark ALWAYS faces and watches screen RIGHT but travels screen LEFT. He must NOT turn around, and this must NOT look like forward walking toward the left. Rearward foot reaches LEFT and lands FOREFOOT FIRST behind the hips; weight rolls into that foot before the other foot passes backward. Four keys per row: 01 near foot reaches backward left / toe contact while far foot stays forward right; 02 weight settles over near foot while far foot passes backward; 03 far foot reaches backward left / toe contact, near foot forward right; 04 weight settles over far foot while near foot passes. Show genuine left/right leg alternation and weight transfer, not four duplicates. Leftward travel arrow per row. Hair and sash gently trail toward RIGHT, opposite retreat.\nA / UNBOTHERED RETREAT: chin slightly raised with dismissive downward gaze, upright chest and hook idly on shoulder, loose left knife. Long smooth backsteps with toe-first landings, calm hips, slight chest counter-rotation. Confidently invites pursuit.\nB / ANGLED SWAY: shoulders turn to a narrower side-on silhouette while face remains toward opponent, supple hip twist and narrow diagonal-looking backsteps within the 2D plane; trailing legs pass naturally under pelvis. Hook lightly rocks behind shoulder, left knife low outside thigh. Avoid literal turning back or movement into camera.\nC / GUARDED WITHDRAW: low bent-knee retreat, hips back and chest slightly forward toward opponent, broad ready base. Right hand lowers the hook off shoulder to a diagonal close to his side, metal hook safely behind him left, the same pole always visible. Deliberate compact toe-to-heel steps and springy ankles; guarded measured pressure awareness.\nD / TOE-ROLL RETREAT: relaxed upper back leans slightly away from opponent, lively calf/ankle articulation, leading knee soft and rear foot feeling for ground. Small vertical rebound between measured backward steps, hook rests behind right shoulder, short knife at hip. Energetic and playful, but no airborne skipping: at least one boot stays grounded.",
+      "references": [
+        "art/characters/shark.png",
+        "godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "art/characters/shark-normal-options-v1/low-scoop-fluidity.png"
+      ],
+      "transparent_background": false,
+      "corrections": [],
+      "output_metadata": {
+        "sha256": "8edf1ba03d69799359a47ba6b7bfba7f9122e60203e31ed8cf4456aff481ca4b",
+        "bytes": 2296107,
+        "dimensions": [
+          1086,
+          1448
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+          "bytes": 2201584,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
+          "bytes": 924505,
+          "dimensions": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "art/characters/shark-normal-options-v1/low-scoop-fluidity.png",
+          "sha256": "4d750de3c2fa5977aac7d9c922fa38b52fcf24f7b93a7ba1022d7013a3083c3f",
+          "bytes": 2232401,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "selected": "A / Unbothered Retreat"
+    },
+    {
+      "id": "backdash",
+      "title": "SHARK / BACKDASH",
+      "options": [
+        "A \u2014 Short Hop",
+        "B \u2014 Shoulder Slip",
+        "C \u2014 Low Skim",
+        "D \u2014 Vaulting Retreat"
+      ],
+      "status": "selected_by_user",
+      "path": "art/characters/shark-movement-options-v1/backdash.png",
+      "source": "/workspace/generated_images/exec-461b430e-ab01-4456-8043-8f6239c56f12.png",
+      "prompt": "Create a polished ANIMATION DIRECTION COMPARISON SHEET for SHARK, the exact original Fight Guild fighter in the supplied references. This is a visual options study for a fighting game, with real drawn movement progression. Reference 1 locks his design and fixed weapon geometry. Reference 2 is his approved F / Shoulder Rest neutral. Reference 3 shows the approved fluid acting, torso twist, grounded weight shifts and articulated ankles: match that quality, not stiff mannequin posing.\n\nLAYOUT: large portrait illustration approximately 1536 x 2048. Exactly FOUR horizontal option rows A, B, C, D. FOUR chronological full-body key poses in each row: 16 drawings total, no extra character portraits. Give each row its own pale ivory horizontal band and a narrow dark-teal title strip with its option letter and short name; four spacious equal columns beneath it. Clear small 01,02,03,04 over each pose. Thin quiet separators. All figures rendered at identical anatomical scale, NOT normalized to bounding boxes; leave enough room for the entire pole, hook, hair and boots. Clean ivory background with sparse charcoal typography and teal accents, very faint ground guide only. No stage, no opponent, no decorations, no water or attack effects. Broad readable silhouettes and clean negative space matter more than costume microdetail.\n\nCHARACTER LOCK: mature tall athletic swimmer, eight-head anatomy, broad shoulders and narrow waist, long muscular legs, small angular adult face. LONG WHITE HAIR with low crown and slim locks following his nape/back, no gigantic mane, no ponytail. Physical COBALT BLUE SPORTS GLASSES (bridge, lenses, arms), natural skin, no face paint. Sleeveless teal scale vest, bone shark-jaw armor on anatomical LEFT shoulder, leather bracers, rope waist belt with hip net, torn teal sash, slate loose trousers, brown strapped heavy boots. RIGHT hand holds ONE continuous rope-wrapped wooden pole with a SINGLE OPEN SILVER J-HOOK at one end and small ring at butt; left hand holds his separate short triangular knife, pointed safely away from body. Fixed weapon dimensions across all poses, total hooked shaft about 0.9 of standing body height, no added spear point, no second hook. Exactly two arms, two legs, one right-hand hook, one left-hand knife. The hook MUST remain supported by his right hand; no floating or disappearing weapon.\n\nRENDER: confident anime fighting-game animation key drawings, thick dark outer ink, finer interiors, strong two-value cel shadows, restrained upper-left light. All poses face screen RIGHT with the opponent imagined to the right; keep eyes directed toward that opponent, never turn the whole character left. Three-quarter SIDE GAMEPLAY CAMERA, no foreshortened camera tricks. Pose through the hips, ribcage and shoulder opposition, flexed feet, clear heel pivots and knees. Allow compression, extension, delayed hair/sash settling. No body/weapon smears, no stretched rubber limbs, no duplicate limbs, no speed streaks. Do not just rotate a rigid torso or repeat identical legs. Anatomical size consistency MUST NOT suppress posture changes. Four keys must show a real connected action in every row.\n\nTITLE: SHARK / BACKDASH\nFour distinct finite BACKDASH animations, not a forward dash or looping walk. Shark keeps face and attention RIGHT while escaping LEFT. Every row has 01 LOAD with supporting knee compression, 02 PUSH with planted foot actively extending, 03 RETREAT/FLIGHT moving LEFT, 04 LAND AND CATCH balance to return to shoulder-rest idle. Show a leftward travel arrow per row. Hair/sash trail to RIGHT during backward travel and begin to catch up on landing. Normal human anatomy, no magically telescoping legs. Both boots, pole and knife visible.\nA / SHORT HOP: compact fast backwards hop with upright chest, hook still resting on right shoulder. Load through ankles and one knee; rearward hip leads the small flight, free foot tucks under body; toe-first landing absorbs into bent knees. Cocky head angle even while moving.\nB / SHOULDER SLIP: evade with a pronounced backward head-and-ribcage lean and torso twist, hips moving left first, right shoulder rolling away from imagined hit. Hook lifts clear of shoulder briefly in right hand to permit rotation, blade remains low. Near/far feet exchange through a low airborne scissors step, then regain the relaxed shoulder-rest shape. This is a real articulated backdash, not identical standing poses sliding.\nC / LOW SKIM: strongest knee/hip compression, compact torso forward while hips shoot backward LEFT close to ground. Long drive from front foot, very low flight with legs extending then gathering underneath for a crouched landing. Hook carried one-handed close and almost horizontal at hip level, not across his throat; knife low outboard. No kneeling or hands on floor, no teleport.\nD / VAULTING RETREAT: most expressive backward bound. Deep counter-coil, forceful front-foot push, higher airborne reverse arc with front knee lifting and other leg trailing, then wide soft landing. Chest opens while head continues tracking the opponent RIGHT. Hook tilts upward from right shoulder during jump and settles back after landing. Keep athletic and believable: no somersault, no flip, no upside-down pose.\nClear silhouette contrast among the four styles and all action stages; bodies must rise/fall naturally without artificial auto-fit rescaling.",
+      "references": [
+        "art/characters/shark.png",
+        "godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "art/characters/shark-normal-options-v1/low-scoop-fluidity.png"
+      ],
+      "transparent_background": false,
+      "corrections": [
+        {
+          "id": "backdash-correction",
+          "references": [
+            "/workspace/generated_images/exec-390408ec-bbcc-4de1-93e3-033db766e9d1.png",
+            "/workspace/Fight-guild-/art/characters/shark.png",
+            "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png"
+          ],
+          "transparent_background": false,
+          "prompt": "Edit the first supplied SHARK BACKDASH sheet. Keep its beautiful clean cel art, exact FOUR rows A SHORT HOP, B SHOULDER SLIP, C LOW SKIM, D VAULTING RETREAT, FOUR chronological drawings per row, typography, character identity, blue sports glasses, outfit, and four distinct body-motion concepts. This is a correction to motion and equipment, not a new design. Use second reference for the hook's fixed equipment geometry and third for shoulder-rest construction.\n\nCORRECT BACKWARD INERTIA: Shark faces RIGHT but accelerates and travels LEFT, as shown by arrows. In PUSH and FLIGHT columns 02 and 03, the LONG WHITE HAIR and the trailing tips of TEAL SASH and loose NET must therefore lag toward screen RIGHT relative to his hips. The current sheet wrongly streams every strand and sash LEFT, implying a forward run. Redraw the secondary motion: hair stems still emerge at back of head, but loose locks curve over or around the far shoulder with tips sweeping RIGHT toward his front. Do not cover his face or blue glasses. Draw sash and loose belt/net tails swept to the RIGHT of his belt, away from his leftward path. In LOAD column01 hair falls mostly down his back; in LAND column04 let tips swing back LEFT as he brakes, then settle. No windstorm, giant hair volume, motion smears or extra limbs.\n\nCORRECT WEAPON LENGTH especially row B columns02,03 and rowD: one continuous rope-wrapped wooden hook pole in his RIGHT hand, a SINGLE large OPEN SILVER J-HOOK at one end and small butt ring at the other. Restore the full pole construction: same physical length in every cell, approximately 80% of Shark's upright head-to-sole height. Do NOT shrink it into a one-handed toy hook or chop off half the handle when lifted. The length stays visible and legible in the gameplay plane, not foreshortened into camera. The shaft rotates naturally around his grip to clear head/shoulder. If needed allow it diagonal within the panel and slightly reduce the scale of ALL figures consistently to give full equipment space. It must not touch adjacent character or cross row separators. LEFT hand continues to carry separate triangular dagger in every drawing.\n\nAlso clarify rowsA/D PUSH: the front/rightward boot is the driving contact that extends to send the hips LEFT. During flight pelvis leads backward left while chest and gaze track right. RowB keeps its expressive backward lean and torso twist. RowC stays low. This sheet should unambiguously read as a backward escape even without the arrows.\n\nKeep exactly 16 complete full bodies, no character crop, no additional pose, no attack effects, no afterimages, no foot sliding. Do not change any text content beyond shortening descriptive copy if space is needed. Ivory background, teal row titles, dark clean cel outlines.",
+          "source": "/workspace/generated_images/exec-12f93019-68af-43c1-8909-9714d05f7feb.png",
+          "supersedes": "/workspace/generated_images/exec-390408ec-bbcc-4de1-93e3-033db766e9d1.png",
+          "reason": "Backdash secondary motion initially streamed left; raised hook was shortened.",
+          "output_metadata": {
+            "sha256": "bb40aa6b552053aef5f63784f3aadf9bcf06473bb742ffdcd65fffbfc5eb494c",
+            "bytes": 2248541,
+            "dimensions": [
+              1086,
+              1448
+            ]
+          },
+          "reference_metadata": [
+            {
+              "path": "/workspace/generated_images/exec-390408ec-bbcc-4de1-93e3-033db766e9d1.png",
+              "sha256": "358162b6bedb69407910a6c3e7eee7bc1fc40b7b716ac47927f019d983675361",
+              "bytes": 2367676,
+              "dimensions": [
+                1086,
+                1448
+              ]
+            },
+            {
+              "path": "/workspace/Fight-guild-/art/characters/shark.png",
+              "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+              "bytes": 2201584,
+              "dimensions": [
+                1536,
+                1024
+              ]
+            },
+            {
+              "path": "/workspace/Fight-guild-/godot/assets/fighters/locomotion-v1/shark-ready.png",
+              "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
+              "bytes": 924505,
+              "dimensions": [
+                1254,
+                1254
+              ]
+            }
+          ]
+        },
+        {
+          "id": "backdash-follow-through",
+          "references": [
+            "/workspace/generated_images/exec-12f93019-68af-43c1-8909-9714d05f7feb.png",
+            "/workspace/Fight-guild-/art/characters/shark.png"
+          ],
+          "transparent_background": false,
+          "prompt": "Correct this backdash animation comparison sheet. Keep the exact four rows, four full-body poses per row, all headings, character, weapons, camera, cel style and body poses. Change ONLY loose HAIR and TEAL FABRIC behavior in columns 02 and 03, which are BACKWARD MOVEMENT toward the LEFT.\n\nCritical visible correction: the current drawing still has the BIG TEAL SASH streaming LEFT behind his hip, which is wrong. Completely erase those leftward-pointing loose teal strips in columns02/03. Redraw the SAME loose teal sash with its long pointed ends sweeping to SCREEN RIGHT across or just outside the FRONT thigh. The bone zigzag design stays on that sash. It must visually point toward his facing direction (RIGHT), opposite backward travel (LEFT). A rightward-curving cloth shape ending near his front/right knee is wanted; do not leave even one dominant long teal trail pointing left in these two middle columns. Rope/net loose ends also lag right, with belt loops remaining attached.\n\nLikewise redraw the majority of his long white hair mass in those middle two columns: start at the nape, sag in a low soft curve behind the shoulder, then swing forward around the far shoulder with ends toward RIGHT near his upper chest. Do not just add two wisps near the face while leaving the whole mane flowing LEFT. Natural low-volume long hair and clear glasses, no hair covering face. This is a brief inertial toss forward during backward movement, NOT a new haircut.\n\nColumns01 LOAD and04 LAND may retain natural hair down the back and leftward settling cloth. All 16 bodies remain present; do not alter the four backdash styles or scale. Right hand keeps fixed-length J-hook pole, left hand keeps short triangular knife. No new effects, words, afterimages, or smears. Output full corrected portrait sheet, not a crop.",
+          "source": "/workspace/generated_images/exec-461b430e-ab01-4456-8043-8f6239c56f12.png",
+          "reason": "Focused correction of rightward hair and sash lag during leftward travel.",
+          "output_metadata": {
+            "sha256": "140cb67a48507039ca82d75bda4e21eed8cff6231d0e657fdee4c6ea0a9f010c",
+            "bytes": 2236645,
+            "dimensions": [
+              1086,
+              1448
+            ]
+          },
+          "reference_metadata": [
+            {
+              "path": "/workspace/generated_images/exec-12f93019-68af-43c1-8909-9714d05f7feb.png",
+              "sha256": "bb40aa6b552053aef5f63784f3aadf9bcf06473bb742ffdcd65fffbfc5eb494c",
+              "bytes": 2248541,
+              "dimensions": [
+                1086,
+                1448
+              ]
+            },
+            {
+              "path": "/workspace/Fight-guild-/art/characters/shark.png",
+              "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+              "bytes": 2201584,
+              "dimensions": [
+                1536,
+                1024
+              ]
+            }
+          ]
+        }
+      ],
+      "output_metadata": {
+        "sha256": "140cb67a48507039ca82d75bda4e21eed8cff6231d0e657fdee4c6ea0a9f010c",
+        "bytes": 2236645,
+        "dimensions": [
+          1086,
+          1448
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+          "bytes": 2201584,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
+          "bytes": 924505,
+          "dimensions": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "art/characters/shark-normal-options-v1/low-scoop-fluidity.png",
+          "sha256": "4d750de3c2fa5977aac7d9c922fa38b52fcf24f7b93a7ba1022d7013a3083c3f",
+          "bytes": 2232401,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "selected": "B / Shoulder Slip"
+    },
+    {
+      "id": "run",
+      "title": "SHARK / RUN CYCLES",
+      "options": [
+        "A \u2014 Shoulder Cruise",
+        "B \u2014 Loose Pursuit",
+        "C \u2014 Hunting Drive",
+        "D \u2014 Breakaway"
+      ],
+      "status": "selected_by_user",
+      "path": "art/characters/shark-movement-options-v1/run.png",
+      "source": "/workspace/generated_images/exec-21ffabc3-7ad4-49ec-b746-b6101787d396.png",
+      "prompt": "Create a polished ANIMATION DIRECTION COMPARISON SHEET for SHARK, the exact original Fight Guild fighter in the supplied references. This is a visual options study for a fighting game, with real drawn movement progression. Reference 1 locks his design and fixed weapon geometry. Reference 2 is his approved F / Shoulder Rest neutral. Reference 3 shows the approved fluid acting, torso twist, grounded weight shifts and articulated ankles: match that quality, not stiff mannequin posing.\n\nLAYOUT: large portrait illustration approximately 1536 x 2048. Exactly FOUR horizontal option rows A, B, C, D. FOUR chronological full-body key poses in each row: 16 drawings total, no extra character portraits. Give each row its own pale ivory horizontal band and a narrow dark-teal title strip with its option letter and short name; four spacious equal columns beneath it. Clear small 01,02,03,04 over each pose. Thin quiet separators. All figures rendered at identical anatomical scale, NOT normalized to bounding boxes; leave enough room for the entire pole, hook, hair and boots. Clean ivory background with sparse charcoal typography and teal accents, very faint ground guide only. No stage, no opponent, no decorations, no water or attack effects. Broad readable silhouettes and clean negative space matter more than costume microdetail.\n\nCHARACTER LOCK: mature tall athletic swimmer, eight-head anatomy, broad shoulders and narrow waist, long muscular legs, small angular adult face. LONG WHITE HAIR with low crown and slim locks following his nape/back, no gigantic mane, no ponytail. Physical COBALT BLUE SPORTS GLASSES (bridge, lenses, arms), natural skin, no face paint. Sleeveless teal scale vest, bone shark-jaw armor on anatomical LEFT shoulder, leather bracers, rope waist belt with hip net, torn teal sash, slate loose trousers, brown strapped heavy boots. RIGHT hand holds ONE continuous rope-wrapped wooden pole with a SINGLE OPEN SILVER J-HOOK at one end and small ring at butt; left hand holds his separate short triangular knife, pointed safely away from body. Fixed weapon dimensions across all poses, total hooked shaft about 0.9 of standing body height, no added spear point, no second hook. Exactly two arms, two legs, one right-hand hook, one left-hand knife. The hook MUST remain supported by his right hand; no floating or disappearing weapon.\n\nRENDER: confident anime fighting-game animation key drawings, thick dark outer ink, finer interiors, strong two-value cel shadows, restrained upper-left light. All poses face screen RIGHT with the opponent imagined to the right; keep eyes directed toward that opponent, never turn the whole character left. Three-quarter SIDE GAMEPLAY CAMERA, no foreshortened camera tricks. Pose through the hips, ribcage and shoulder opposition, flexed feet, clear heel pivots and knees. Allow compression, extension, delayed hair/sash settling. No body/weapon smears, no stretched rubber limbs, no duplicate limbs, no speed streaks. Do not just rotate a rigid torso or repeat identical legs. Anatomical size consistency MUST NOT suppress posture changes. Four keys must show a real connected action in every row.\n\nTITLE: SHARK / RUN CYCLES\nFour actual FORWARD RUN cycles traveling RIGHT, posed in place for comparison. Every row's four keys show 01 near-foot CONTACT and compression with far heel folded behind; 02 PUSH/FLIGHT as near leg extends back and far knee drives forward; 03 far-foot CONTACT and compression with near heel folded behind; 04 opposite PUSH/FLIGHT as far leg extends back and near knee drives forward. Clear alternating near/far leg ownership, both a grounded contact and real aerial stride, pelvis rising on launch and lowering on landing. No four identical lunges. Hair and teal sash stream naturally LEFT, restrained volume; no speed-line effects. Small rightward travel arrow per row.\nA / SHOULDER CRUISE: confident upright bounding jog/run with hook on right shoulder, right elbow loose, left knife carried low close to hip. Long powerful stride and a modest forward chest lean; weight comes down through bent contact leg, then lifts into flight. Easy pursuit with swagger, not stiff parade marching.\nB / LOOSE PURSUIT: relaxed rolling sprint, hook removed from shoulder and carried in right hand diagonally behind hip with hook tip trailing left. Chest and pelvis visibly counter-rotate through each step, shoulders loose, free left knife arm bent close and counterbalancing. Strong lateral S rhythm and elastic long legs, no uncontrolled weapon swing.\nC / HUNTING DRIVE: lowest forward lean, driven from ankles with spine long and head raised to track right. Explosive rear-leg extension and compact high recovering knees; hook held almost horizontal behind right hip, knife held close to left ribs pointed down/outward. Strong compressed contacts followed by long reaching airborne strides. Athletic pursuit, not crouch crawling or identical windup lunges.\nD / BREAKAWAY: maximal sports sprint, pronounced knee drive and heel recovery, open hips and powerful opposing shoulder rotation. Hook in right hand angled up behind the right shoulder, butt forward, supporting elbow bends and extends modestly with gait. Left knife arm counters close to ribs. Bigger vertical spring than C, tall extended push-off contrasting deep landing compression; joyous competitive speed with confident expression.\nMake the support leg and airborne leg distinct on every key. One hook and one knife stay continuously attached to correct hands. No body smears or afterimages.",
+      "references": [
+        "art/characters/shark.png",
+        "godot/assets/fighters/locomotion-v1/shark-ready.png",
+        "art/characters/shark-normal-options-v1/low-scoop-fluidity.png"
+      ],
+      "transparent_background": false,
+      "corrections": [],
+      "output_metadata": {
+        "sha256": "57c869151487045f819d664e8d8b722a557d8ee40fefb89755be02a177280992",
+        "bytes": 2301019,
+        "dimensions": [
+          1086,
+          1448
+        ]
+      },
+      "reference_metadata": [
+        {
+          "path": "art/characters/shark.png",
+          "sha256": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50",
+          "bytes": 2201584,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        },
+        {
+          "path": "godot/assets/fighters/locomotion-v1/shark-ready.png",
+          "sha256": "b0cb4de4c5c7f5a425435e401485f21d7c00141e24709d532a11a243c7bc67a0",
+          "bytes": 924505,
+          "dimensions": [
+            1254,
+            1254
+          ]
+        },
+        {
+          "path": "art/characters/shark-normal-options-v1/low-scoop-fluidity.png",
+          "sha256": "4d750de3c2fa5977aac7d9c922fa38b52fcf24f7b93a7ba1022d7013a3083c3f",
+          "bytes": 2232401,
+          "dimensions": [
+            1536,
+            1024
+          ]
+        }
+      ],
+      "selected": "A / Shoulder Cruise"
+    }
+  ],
+  "selection": {
+    "idle": "A / Lazy Tap",
+    "walk": "B / Rolling Swagger",
+    "back_walk": "A / Unbothered Retreat",
+    "backdash": "B / Shoulder Slip",
+    "run": "A / Shoulder Cruise"
+  },
+  "selection_instruction": "Idle A, walk B, ball walk A, backdash B, and run A (ensure proper leg alternating)."
+}

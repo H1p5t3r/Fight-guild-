@@ -1,0 +1,10 @@
+[
+  {
+    "name": "wall-kit",
+    "prompt": "Edit this exact six-prop sprite atlas. Preserve all six designs, their exact sizes and placement in the 3-column by 2-row grid on a 1536 x 1024 canvas. Remove the entire white background and ALL glow, shadow haze or backdrop around each prop: pure fully transparent alpha outside the six solid isolated objects, including between rows and columns. Crisp inked silhouettes, no white matting. Do not add any new scenery or text. These are separate cutout sprites for a game, not a presentation board."
+  },
+  {
+    "name": "forge-breach",
+    "prompt": "Edit this exact image for use as a game foreground cutout. Preserve the broken brick arch, iron braces, lantern and burgundy pennant around the outer edges. Remove ALL white, gray, black, smoke, gradient and vignette inside the opening and around the arch: the entire huge central opening must be fully transparent alpha, with crisp hard rubble and brick silhouettes at its edges. No atmospheric blur, no clouds, no glow, no background image. Only the solid broken architecture at the outer edges remains. Keep 1536 x 1024 landscape and the same composition. This will overlay a separate game scene."
+  }
+]

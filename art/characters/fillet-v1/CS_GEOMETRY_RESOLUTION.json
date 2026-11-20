@@ -1,0 +1,6848 @@
+{
+  "schema": "fight-guild-cs-selected-production-resolution-v1",
+  "date": "2026-11-19",
+  "status": "selected_for_codex_implementation_under_user_complete_package_instruction",
+  "approvalMeaning": "User accepted7f/+1/6px and refined short-left pose direction; remaining exact geometry here is the assistant-selected final handoff decision authorized by the request to finish the entire moveset. Not a claim every coordinate was individually approved or engine-tested.",
+  "action": {
+    "id": "c.S",
+    "slot": 32,
+    "name": "Inside Cut",
+    "weapon": "short LEFT knife, reverse grip; long RIGHT blade passive and reserved for f.S",
+    "hitLevel": 0,
+    "startup": 7,
+    "active": 5,
+    "recovery": 12,
+    "blockstun": 17,
+    "hitstun": 24,
+    "damage": 44,
+    "blockPushback": 600,
+    "hitstop": 8,
+    "firstActiveBlockAdvantage": 1,
+    "lastActiveBlockAdvantageWhenContactOccurs": 5,
+    "totalWhiffTicks": 23,
+    "nextNeutralTick": 24,
+    "entryInertiaPercent": 65,
+    "attackFriction": 90,
+    "advance": 0,
+    "startupTravel": 0,
+    "activeTravel": 0,
+    "rootTrack": [],
+    "counterAndCancelPolicy": "Retain central final-moveset values unless that owner explicitly supersedes them; this resolution changes collision,production staging and close-selector only."
+  },
+  "scalarPatch": {
+    "startup": 7,
+    "active": 5,
+    "recovery": 12,
+    "blockstun": 17,
+    "blockPushback": 600,
+    "hitboxBack": 5600,
+    "bottom": 6400,
+    "reach": 7200,
+    "height": 6600,
+    "inertiaPercent": 65,
+    "advance": 0,
+    "startupTravel": 0,
+    "travelSpeed": 0,
+    "hitLevel": 0
+  },
+  "proximityPatch": {
+    "sourceAction": "5S / f.S",
+    "proximityMove": 32,
+    "proximityRange": 9000,
+    "distanceTest": "absolute root-center separation <=9000 at request acceptance, existing enabled/stance/ground gates retained",
+    "replacesRange": 10500,
+    "guaranteeScope": "First-active positive-area overlap for stationary baseline standing/crouching targets at any legal ground push separation through90px, both facings by exact mirroring. Movement, jump,invulnerability and state changes during7f startup can still evade. Not a guaranteed hit or a claim that every later active key hits every crouch."
+  },
+  "hitboxTimeline": {
+    "basis": "active-relative frames1..5 (absolute actionframes7..11)",
+    "multiHit": false,
+    "keys": [
+      {
+        "frame": 1,
+        "actionFrame": 7,
+        "hit": 1,
+        "boxes": [
+          [
+            6000,
+            6400,
+            7200,
+            10600
+          ],
+          [
+            6000,
+            10200,
+            7200,
+            13000
+          ]
+        ],
+        "damage": -1,
+        "hitstun": -1,
+        "blockstun": -1,
+        "hitstop": -1
+      },
+      {
+        "frame": 2,
+        "actionFrame": 8,
+        "hit": 1,
+        "boxes": [
+          [
+            6000,
+            10600,
+            7200,
+            13000
+          ]
+        ],
+        "damage": -1,
+        "hitstun": -1,
+        "blockstun": -1,
+        "hitstop": -1
+      },
+      {
+        "frame": 3,
+        "actionFrame": 9,
+        "hit": 1,
+        "boxes": [
+          [
+            5900,
+            10500,
+            7200,
+            13000
+          ]
+        ],
+        "damage": -1,
+        "hitstun": -1,
+        "blockstun": -1,
+        "hitstop": -1
+      },
+      {
+        "frame": 4,
+        "actionFrame": 10,
+        "hit": 1,
+        "boxes": [
+          [
+            5800,
+            10300,
+            7100,
+            12900
+          ]
+        ],
+        "damage": -1,
+        "hitstun": -1,
+        "blockstun": -1,
+        "hitstop": -1
+      },
+      {
+        "frame": 5,
+        "actionFrame": 11,
+        "hit": 1,
+        "boxes": [
+          [
+            5600,
+            10000,
+            7000,
+            12700
+          ]
+        ],
+        "damage": -1,
+        "hitstun": -1,
+        "blockstun": -1,
+        "hitstop": -1
+      }
+    ],
+    "sweptContactRule": "First-active boxes represent the real fixed blade path from endf6 to endf7. Later boxes cover only current/previous active steel path, not a lingering full-height trail. Each rectangle remains one hit group; no repeat hit from crossing both boxes.",
+    "laterLowProfileBehavior": "Only first active tick includes the low part of the rising sweep. Later high blade positions may miss low crouching bodies; intentional and visually honest. On first-active contact every baseline crouching pose tested is hit or blocks normally."
+  },
+  "hurtboxTimeline": {
+    "basis": "absolute actionframe, one record per tick; body boxes always on, extension covers previous-to-current anatomical arm sweep including glove, never weapon",
+    "keys": [
+      {
+        "frame": 1,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            9000,
+            4900,
+            11900
+          ]
+        }
+      },
+      {
+        "frame": 2,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            1500,
+            7900,
+            4900,
+            11900
+          ]
+        }
+      },
+      {
+        "frame": 3,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            800,
+            7900,
+            4100,
+            11100
+          ]
+        }
+      },
+      {
+        "frame": 4,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            800,
+            7900,
+            4900,
+            11100
+          ]
+        }
+      },
+      {
+        "frame": 5,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            1600,
+            7900,
+            5700,
+            11100
+          ]
+        }
+      },
+      {
+        "frame": 6,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            7900,
+            6400,
+            11100
+          ]
+        }
+      },
+      {
+        "frame": 7,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8100,
+            6400,
+            13400
+          ]
+        }
+      },
+      {
+        "frame": 8,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            10300,
+            6400,
+            13400
+          ]
+        }
+      },
+      {
+        "frame": 9,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            10300,
+            6400,
+            13400
+          ]
+        }
+      },
+      {
+        "frame": 10,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            10000,
+            6300,
+            13300
+          ]
+        }
+      },
+      {
+        "frame": 11,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            9700,
+            6200,
+            13100
+          ]
+        }
+      },
+      {
+        "frame": 12,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            9200,
+            6000,
+            12800
+          ]
+        }
+      },
+      {
+        "frame": 13,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            9000,
+            5500,
+            12400
+          ]
+        }
+      },
+      {
+        "frame": 14,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8900,
+            5300,
+            12300
+          ]
+        }
+      },
+      {
+        "frame": 15,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8700,
+            5000,
+            12200
+          ]
+        }
+      },
+      {
+        "frame": 16,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8600,
+            4700,
+            12000
+          ]
+        }
+      },
+      {
+        "frame": 17,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8500,
+            4600,
+            11900
+          ]
+        }
+      },
+      {
+        "frame": 18,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8500,
+            4500,
+            11800
+          ]
+        }
+      },
+      {
+        "frame": 19,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8500,
+            4600,
+            11800
+          ]
+        }
+      },
+      {
+        "frame": 20,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8600,
+            4700,
+            11800
+          ]
+        }
+      },
+      {
+        "frame": 21,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8700,
+            4800,
+            11900
+          ]
+        }
+      },
+      {
+        "frame": 22,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8800,
+            4800,
+            11900
+          ]
+        }
+      },
+      {
+        "frame": 23,
+        "boxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8900,
+            4900,
+            11900
+          ]
+        }
+      }
+    ],
+    "resetOnFrame24": "Return to current chosen locomotion/ready collision; do not retain this attack extension after move ends.",
+    "reasonForBodyRefit": "Old generic narrow legs/behind-center head did not fit the selected wide Stalker stance or forward head; explicit production body envelopes now cover planted boots,passive arm,torso,head and attacking arm."
+  },
+  "pushbox": {
+    "ground": [
+      -2800,
+      0,
+      2800,
+      13800
+    ],
+    "unchanged": true
+  },
+  "productionRig": {
+    "units": "all coordinates raw hundredths of world pixel, local to physical root, facingright; mirror whole rig for facingleft",
+    "standingReferenceWorldPixels": 150,
+    "posedEnvelopeTopWorldPixels": 146,
+    "anatomicalHandOwnership": "LEFT short blade; RIGHT long blade; screen side never reassigns knives.",
+    "armSegmentLengthRaw": 2400,
+    "leftHandToGripOffset": [
+      200,
+      -100
+    ],
+    "leftWristToBladeHeelOffset": [
+      300,
+      -200
+    ],
+    "shortBladeNominalLengthRaw": 2200,
+    "shortBladeFixedTipVector": [
+      800,
+      -2049
+    ],
+    "shortBladeQuantizedLengthRaw": 2199.6365608890937,
+    "shortBladePolygonLocalToHeel": [
+      [
+        -140,
+        -55
+      ],
+      [
+        160,
+        -1150
+      ],
+      [
+        800,
+        -2049
+      ],
+      [
+        660,
+        -1000
+      ],
+      [
+        140,
+        55
+      ]
+    ],
+    "longBladeNominalLengthRaw": 4300,
+    "rightPassiveBladeVector": [
+      -1200,
+      -4129
+    ],
+    "fixedGeometryPolicy": "Blade templates/vectors never scale, morph,swaphands or flipgrip between keys. Integer rounding is less than0.01worldpixel in blade length and bone placement. Production art follows this rig rather than literal concept-image pixels.",
+    "elbowSolve": "Both arm segments2400. Given shoulderS,wristW,d=W-S,h=sqrt(2400^2-|d|^2/4), elbow=(S+W)/2 + (dy,-dx)/|d|*h; round each coordinate to nearest raw integer. This chooses same elbow-down branch.",
+    "wristControlKeys": [
+      {
+        "frame": 1,
+        "leftWrist": [
+          3200,
+          11500
+        ]
+      },
+      {
+        "frame": 3,
+        "leftWrist": [
+          3600,
+          9000
+        ]
+      },
+      {
+        "frame": 5,
+        "leftWrist": [
+          5200,
+          8800
+        ]
+      },
+      {
+        "frame": 6,
+        "leftWrist": [
+          5900,
+          8800
+        ]
+      },
+      {
+        "frame": 7,
+        "leftWrist": [
+          5900,
+          13000
+        ]
+      },
+      {
+        "frame": 8,
+        "leftWrist": [
+          5900,
+          13000
+        ]
+      },
+      {
+        "frame": 9,
+        "leftWrist": [
+          5800,
+          12900
+        ]
+      },
+      {
+        "frame": 10,
+        "leftWrist": [
+          5700,
+          12700
+        ]
+      },
+      {
+        "frame": 11,
+        "leftWrist": [
+          5500,
+          12400
+        ]
+      },
+      {
+        "frame": 12,
+        "leftWrist": [
+          5000,
+          12000
+        ]
+      },
+      {
+        "frame": 17,
+        "leftWrist": [
+          3600,
+          11300
+        ]
+      },
+      {
+        "frame": 23,
+        "leftWrist": [
+          3200,
+          11500
+        ]
+      }
+    ],
+    "inbetween": "Linear integer interpolation of wrist control keys per actor tick; solve elbow each tick; fixed heel/grip offsets; do not interpolate or stretch bone length.",
+    "firstActivePath": "From f6 heel(62,86),tip(70,65.51) to f7 heel(62,128),tip(70,107.51), in worldpx. This is one fast upward cut with point still down. Source concepts are pose-direction references; this registered extension supplies the selected72px effective reach.",
+    "rootPolicy": "All production localroot offsets[0,0]. Run entry uses65% inherited velocity and90 friction, not an additional drawing lunge. Foot support may follow underlying run entry; neutral entry uses declared planted feet.",
+    "perFrame": [
+      {
+        "frame": 1,
+        "phase": "windup",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4449,
+          9451
+        ],
+        "leftWrist": [
+          3200,
+          11500
+        ],
+        "leftGrip": [
+          3400,
+          11400
+        ],
+        "leftBladeHeel": [
+          3500,
+          11300
+        ],
+        "leftBladeTip": [
+          4300,
+          9251
+        ],
+        "leftBladePolygon": [
+          [
+            3360,
+            11245
+          ],
+          [
+            3660,
+            10150
+          ],
+          [
+            4300,
+            9251
+          ],
+          [
+            4160,
+            10300
+          ],
+          [
+            3640,
+            11355
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            9000,
+            4900,
+            11900
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 2,
+        "phase": "windup",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          1941,
+          8344
+        ],
+        "leftWrist": [
+          3400,
+          10250
+        ],
+        "leftGrip": [
+          3600,
+          10150
+        ],
+        "leftBladeHeel": [
+          3700,
+          10050
+        ],
+        "leftBladeTip": [
+          4500,
+          8001
+        ],
+        "leftBladePolygon": [
+          [
+            3560,
+            9995
+          ],
+          [
+            3860,
+            8900
+          ],
+          [
+            4500,
+            8001
+          ],
+          [
+            4360,
+            9050
+          ],
+          [
+            3840,
+            10105
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            1500,
+            7900,
+            4900,
+            11900
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 3,
+        "phase": "windup",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          1233,
+          8603
+        ],
+        "leftWrist": [
+          3600,
+          9000
+        ],
+        "leftGrip": [
+          3800,
+          8900
+        ],
+        "leftBladeHeel": [
+          3900,
+          8800
+        ],
+        "leftBladeTip": [
+          4700,
+          6751
+        ],
+        "leftBladePolygon": [
+          [
+            3760,
+            8745
+          ],
+          [
+            4060,
+            7650
+          ],
+          [
+            4700,
+            6751
+          ],
+          [
+            4560,
+            7800
+          ],
+          [
+            4040,
+            8855
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            800,
+            7900,
+            4100,
+            11100
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 4,
+        "phase": "windup",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          2070,
+          8323
+        ],
+        "leftWrist": [
+          4400,
+          8900
+        ],
+        "leftGrip": [
+          4600,
+          8800
+        ],
+        "leftBladeHeel": [
+          4700,
+          8700
+        ],
+        "leftBladeTip": [
+          5500,
+          6651
+        ],
+        "leftBladePolygon": [
+          [
+            4560,
+            8645
+          ],
+          [
+            4860,
+            7550
+          ],
+          [
+            5500,
+            6651
+          ],
+          [
+            5360,
+            7700
+          ],
+          [
+            4840,
+            8755
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            800,
+            7900,
+            4900,
+            11100
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 5,
+        "phase": "windup",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          2844,
+          8341
+        ],
+        "leftWrist": [
+          5200,
+          8800
+        ],
+        "leftGrip": [
+          5400,
+          8700
+        ],
+        "leftBladeHeel": [
+          5500,
+          8600
+        ],
+        "leftBladeTip": [
+          6300,
+          6551
+        ],
+        "leftBladePolygon": [
+          [
+            5360,
+            8545
+          ],
+          [
+            5660,
+            7450
+          ],
+          [
+            6300,
+            6551
+          ],
+          [
+            6160,
+            7600
+          ],
+          [
+            5640,
+            8655
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            1600,
+            7900,
+            5700,
+            11100
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 6,
+        "phase": "windup",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          3511,
+          8573
+        ],
+        "leftWrist": [
+          5900,
+          8800
+        ],
+        "leftGrip": [
+          6100,
+          8700
+        ],
+        "leftBladeHeel": [
+          6200,
+          8600
+        ],
+        "leftBladeTip": [
+          7000,
+          6551
+        ],
+        "leftBladePolygon": [
+          [
+            6060,
+            8545
+          ],
+          [
+            6360,
+            7450
+          ],
+          [
+            7000,
+            6551
+          ],
+          [
+            6860,
+            7600
+          ],
+          [
+            6340,
+            8655
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            7900,
+            6400,
+            11100
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 7,
+        "phase": "active",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4794,
+          10870
+        ],
+        "leftWrist": [
+          5900,
+          13000
+        ],
+        "leftGrip": [
+          6100,
+          12900
+        ],
+        "leftBladeHeel": [
+          6200,
+          12800
+        ],
+        "leftBladeTip": [
+          7000,
+          10751
+        ],
+        "leftBladePolygon": [
+          [
+            6060,
+            12745
+          ],
+          [
+            6360,
+            11650
+          ],
+          [
+            7000,
+            10751
+          ],
+          [
+            6860,
+            11800
+          ],
+          [
+            6340,
+            12855
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8100,
+            6400,
+            13400
+          ]
+        },
+        "hitboxes": [
+          [
+            6000,
+            6400,
+            7200,
+            10600
+          ],
+          [
+            6000,
+            10200,
+            7200,
+            13000
+          ]
+        ],
+        "singleHitGroup": 1
+      },
+      {
+        "frame": 8,
+        "phase": "active",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4794,
+          10870
+        ],
+        "leftWrist": [
+          5900,
+          13000
+        ],
+        "leftGrip": [
+          6100,
+          12900
+        ],
+        "leftBladeHeel": [
+          6200,
+          12800
+        ],
+        "leftBladeTip": [
+          7000,
+          10751
+        ],
+        "leftBladePolygon": [
+          [
+            6060,
+            12745
+          ],
+          [
+            6360,
+            11650
+          ],
+          [
+            7000,
+            10751
+          ],
+          [
+            6860,
+            11800
+          ],
+          [
+            6340,
+            12855
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            10300,
+            6400,
+            13400
+          ]
+        },
+        "hitboxes": [
+          [
+            6000,
+            10600,
+            7200,
+            13000
+          ]
+        ],
+        "singleHitGroup": 1
+      },
+      {
+        "frame": 9,
+        "phase": "active",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4800,
+          10718
+        ],
+        "leftWrist": [
+          5800,
+          12900
+        ],
+        "leftGrip": [
+          6000,
+          12800
+        ],
+        "leftBladeHeel": [
+          6100,
+          12700
+        ],
+        "leftBladeTip": [
+          6900,
+          10651
+        ],
+        "leftBladePolygon": [
+          [
+            5960,
+            12645
+          ],
+          [
+            6260,
+            11550
+          ],
+          [
+            6900,
+            10651
+          ],
+          [
+            6760,
+            11700
+          ],
+          [
+            6240,
+            12755
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            10300,
+            6400,
+            13400
+          ]
+        },
+        "hitboxes": [
+          [
+            5900,
+            10500,
+            7200,
+            13000
+          ]
+        ],
+        "singleHitGroup": 1
+      },
+      {
+        "frame": 10,
+        "phase": "active",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4790,
+          10479
+        ],
+        "leftWrist": [
+          5700,
+          12700
+        ],
+        "leftGrip": [
+          5900,
+          12600
+        ],
+        "leftBladeHeel": [
+          6000,
+          12500
+        ],
+        "leftBladeTip": [
+          6800,
+          10451
+        ],
+        "leftBladePolygon": [
+          [
+            5860,
+            12445
+          ],
+          [
+            6160,
+            11350
+          ],
+          [
+            6800,
+            10451
+          ],
+          [
+            6660,
+            11500
+          ],
+          [
+            6140,
+            12555
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            10000,
+            6300,
+            13300
+          ]
+        },
+        "hitboxes": [
+          [
+            5800,
+            10300,
+            7100,
+            12900
+          ]
+        ],
+        "singleHitGroup": 1
+      },
+      {
+        "frame": 11,
+        "phase": "active",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4731,
+          10127
+        ],
+        "leftWrist": [
+          5500,
+          12400
+        ],
+        "leftGrip": [
+          5700,
+          12300
+        ],
+        "leftBladeHeel": [
+          5800,
+          12200
+        ],
+        "leftBladeTip": [
+          6600,
+          10151
+        ],
+        "leftBladePolygon": [
+          [
+            5660,
+            12145
+          ],
+          [
+            5960,
+            11050
+          ],
+          [
+            6600,
+            10151
+          ],
+          [
+            6460,
+            11200
+          ],
+          [
+            5940,
+            12255
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            9700,
+            6200,
+            13100
+          ]
+        },
+        "hitboxes": [
+          [
+            5600,
+            10000,
+            7000,
+            12700
+          ]
+        ],
+        "singleHitGroup": 1
+      },
+      {
+        "frame": 12,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4554,
+          9642
+        ],
+        "leftWrist": [
+          5000,
+          12000
+        ],
+        "leftGrip": [
+          5200,
+          11900
+        ],
+        "leftBladeHeel": [
+          5300,
+          11800
+        ],
+        "leftBladeTip": [
+          6100,
+          9751
+        ],
+        "leftBladePolygon": [
+          [
+            5160,
+            11745
+          ],
+          [
+            5460,
+            10650
+          ],
+          [
+            6100,
+            9751
+          ],
+          [
+            5960,
+            10800
+          ],
+          [
+            5440,
+            11855
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            9200,
+            6000,
+            12800
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 13,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4463,
+          9474
+        ],
+        "leftWrist": [
+          4720,
+          11860
+        ],
+        "leftGrip": [
+          4920,
+          11760
+        ],
+        "leftBladeHeel": [
+          5020,
+          11660
+        ],
+        "leftBladeTip": [
+          5820,
+          9611
+        ],
+        "leftBladePolygon": [
+          [
+            4880,
+            11605
+          ],
+          [
+            5180,
+            10510
+          ],
+          [
+            5820,
+            9611
+          ],
+          [
+            5680,
+            10660
+          ],
+          [
+            5160,
+            11715
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            9000,
+            5500,
+            12400
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 14,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4364,
+          9321
+        ],
+        "leftWrist": [
+          4440,
+          11720
+        ],
+        "leftGrip": [
+          4640,
+          11620
+        ],
+        "leftBladeHeel": [
+          4740,
+          11520
+        ],
+        "leftBladeTip": [
+          5540,
+          9471
+        ],
+        "leftBladePolygon": [
+          [
+            4600,
+            11465
+          ],
+          [
+            4900,
+            10370
+          ],
+          [
+            5540,
+            9471
+          ],
+          [
+            5400,
+            10520
+          ],
+          [
+            4880,
+            11575
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8900,
+            5300,
+            12300
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 15,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4259,
+          9182
+        ],
+        "leftWrist": [
+          4160,
+          11580
+        ],
+        "leftGrip": [
+          4360,
+          11480
+        ],
+        "leftBladeHeel": [
+          4460,
+          11380
+        ],
+        "leftBladeTip": [
+          5260,
+          9331
+        ],
+        "leftBladePolygon": [
+          [
+            4320,
+            11325
+          ],
+          [
+            4620,
+            10230
+          ],
+          [
+            5260,
+            9331
+          ],
+          [
+            5120,
+            10380
+          ],
+          [
+            4600,
+            11435
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8700,
+            5000,
+            12200
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 16,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4148,
+          9055
+        ],
+        "leftWrist": [
+          3880,
+          11440
+        ],
+        "leftGrip": [
+          4080,
+          11340
+        ],
+        "leftBladeHeel": [
+          4180,
+          11240
+        ],
+        "leftBladeTip": [
+          4980,
+          9191
+        ],
+        "leftBladePolygon": [
+          [
+            4040,
+            11185
+          ],
+          [
+            4340,
+            10090
+          ],
+          [
+            4980,
+            9191
+          ],
+          [
+            4840,
+            10240
+          ],
+          [
+            4320,
+            11295
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8600,
+            4700,
+            12000
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 17,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4031,
+          8939
+        ],
+        "leftWrist": [
+          3600,
+          11300
+        ],
+        "leftGrip": [
+          3800,
+          11200
+        ],
+        "leftBladeHeel": [
+          3900,
+          11100
+        ],
+        "leftBladeTip": [
+          4700,
+          9051
+        ],
+        "leftBladePolygon": [
+          [
+            3760,
+            11045
+          ],
+          [
+            4060,
+            9950
+          ],
+          [
+            4700,
+            9051
+          ],
+          [
+            4560,
+            10100
+          ],
+          [
+            4040,
+            11155
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8500,
+            4600,
+            11900
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 18,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4093,
+          8999
+        ],
+        "leftWrist": [
+          3534,
+          11333
+        ],
+        "leftGrip": [
+          3734,
+          11233
+        ],
+        "leftBladeHeel": [
+          3834,
+          11133
+        ],
+        "leftBladeTip": [
+          4634,
+          9084
+        ],
+        "leftBladePolygon": [
+          [
+            3694,
+            11078
+          ],
+          [
+            3994,
+            9983
+          ],
+          [
+            4634,
+            9084
+          ],
+          [
+            4494,
+            10133
+          ],
+          [
+            3974,
+            11188
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8500,
+            4500,
+            11800
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 19,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4160,
+          9068
+        ],
+        "leftWrist": [
+          3467,
+          11366
+        ],
+        "leftGrip": [
+          3667,
+          11266
+        ],
+        "leftBladeHeel": [
+          3767,
+          11166
+        ],
+        "leftBladeTip": [
+          4567,
+          9117
+        ],
+        "leftBladePolygon": [
+          [
+            3627,
+            11111
+          ],
+          [
+            3927,
+            10016
+          ],
+          [
+            4567,
+            9117
+          ],
+          [
+            4427,
+            10166
+          ],
+          [
+            3907,
+            11221
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8500,
+            4600,
+            11800
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 20,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4231,
+          9148
+        ],
+        "leftWrist": [
+          3400,
+          11400
+        ],
+        "leftGrip": [
+          3600,
+          11300
+        ],
+        "leftBladeHeel": [
+          3700,
+          11200
+        ],
+        "leftBladeTip": [
+          4500,
+          9151
+        ],
+        "leftBladePolygon": [
+          [
+            3560,
+            11145
+          ],
+          [
+            3860,
+            10050
+          ],
+          [
+            4500,
+            9151
+          ],
+          [
+            4360,
+            10200
+          ],
+          [
+            3840,
+            11255
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8600,
+            4700,
+            11800
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 21,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4303,
+          9237
+        ],
+        "leftWrist": [
+          3334,
+          11433
+        ],
+        "leftGrip": [
+          3534,
+          11333
+        ],
+        "leftBladeHeel": [
+          3634,
+          11233
+        ],
+        "leftBladeTip": [
+          4434,
+          9184
+        ],
+        "leftBladePolygon": [
+          [
+            3494,
+            11178
+          ],
+          [
+            3794,
+            10083
+          ],
+          [
+            4434,
+            9184
+          ],
+          [
+            4294,
+            10233
+          ],
+          [
+            3774,
+            11288
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8700,
+            4800,
+            11900
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 22,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4376,
+          9337
+        ],
+        "leftWrist": [
+          3267,
+          11466
+        ],
+        "leftGrip": [
+          3467,
+          11366
+        ],
+        "leftBladeHeel": [
+          3567,
+          11266
+        ],
+        "leftBladeTip": [
+          4367,
+          9217
+        ],
+        "leftBladePolygon": [
+          [
+            3427,
+            11211
+          ],
+          [
+            3727,
+            10116
+          ],
+          [
+            4367,
+            9217
+          ],
+          [
+            4227,
+            10266
+          ],
+          [
+            3707,
+            11321
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8800,
+            4800,
+            11900
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      },
+      {
+        "frame": 23,
+        "phase": "recovery",
+        "rootOffset": [
+          0,
+          0
+        ],
+        "pelvis": [
+          0,
+          7400
+        ],
+        "sternum": [
+          1200,
+          10300
+        ],
+        "neck": [
+          1800,
+          11900
+        ],
+        "headCenter": [
+          1900,
+          13300
+        ],
+        "anatomicalSkullGuide": [
+          800,
+          12300,
+          3100,
+          14500
+        ],
+        "leftShoulder": [
+          2400,
+          10700
+        ],
+        "leftElbow": [
+          4449,
+          9451
+        ],
+        "leftWrist": [
+          3200,
+          11500
+        ],
+        "leftGrip": [
+          3400,
+          11400
+        ],
+        "leftBladeHeel": [
+          3500,
+          11300
+        ],
+        "leftBladeTip": [
+          4300,
+          9251
+        ],
+        "leftBladePolygon": [
+          [
+            3360,
+            11245
+          ],
+          [
+            3660,
+            10150
+          ],
+          [
+            4300,
+            9251
+          ],
+          [
+            4160,
+            10300
+          ],
+          [
+            3640,
+            11355
+          ]
+        ],
+        "rightShoulder": [
+          -200,
+          10500
+        ],
+        "rightElbow": [
+          -2484,
+          9764
+        ],
+        "rightWrist": [
+          -2900,
+          7400
+        ],
+        "rightGrip": [
+          -3000,
+          7300
+        ],
+        "rightBladeHeel": [
+          -3100,
+          7100
+        ],
+        "rightBladeTip": [
+          -4300,
+          2971
+        ],
+        "rearHip": [
+          -800,
+          7300
+        ],
+        "rearKnee": [
+          -2800,
+          3500
+        ],
+        "rearAnkle": [
+          -4200,
+          700
+        ],
+        "rearFootPlant": [
+          -4300,
+          0
+        ],
+        "frontHip": [
+          900,
+          7300
+        ],
+        "frontKnee": [
+          3300,
+          3800
+        ],
+        "frontAnkle": [
+          4300,
+          700
+        ],
+        "frontFootPlant": [
+          4400,
+          0
+        ],
+        "hurtboxes": {
+          "legs": [
+            -5400,
+            0,
+            6000,
+            6200
+          ],
+          "torsoArms": [
+            -3600,
+            5200,
+            3500,
+            11800
+          ],
+          "head": [
+            500,
+            11800,
+            3200,
+            14600
+          ],
+          "extension": [
+            2000,
+            8900,
+            4900,
+            11900
+          ]
+        },
+        "hitboxes": [],
+        "singleHitGroup": null
+      }
+    ]
+  },
+  "castGeometryVerification": {
+    "method": "Read pinned manifest and fighter_collision; reproduce generator outward integer rounding. For each standing/idle and crouching pose, enumerate every legal integer root separation from both pushhalfwidths to9000. Opponent faces attacker; strictpositive overlap of rectangles required. Mirroring preserves these conditions.",
+    "sourceCommit": "a9b3bada78b1047a8693023b193ee6a15e53cba9",
+    "latestBranchAwareness": "Root confirmed neutral anatomy is unchanged through cd8b0cedabfd508b0d82be2841d640e37928ef91. This calculation reads the exact source files/hashes listed; no claim of executing the latest native core.",
+    "sourceFiles": [
+      {
+        "path": "godot/assets/fighters/manifest.json",
+        "sha256": "b392fd083eead4e92aff1fe43d37ce63965cdbd12e8f1535972ea397f3a41d1d"
+      },
+      {
+        "path": "godot/data/fighter_collision.json",
+        "sha256": "781097fbdb36a610099e989a48cf9f3aeb0599536cc79ff19ffd80a8470308f8"
+      }
+    ],
+    "poseCount": 21,
+    "integerDistancesChecked": 66021,
+    "allFirstActiveContactsPass": true,
+    "worstBoundaryPose": {
+      "character": "Hammer",
+      "posture": "crouching",
+      "phase": "active",
+      "pose": 11,
+      "outerContactBoundaryRawExclusive": 9717,
+      "boundaryMarginAbove90Raw": 717
+    },
+    "results": [
+      {
+        "character": "Anvil",
+        "posture": "standing",
+        "phase": "active",
+        "pose": 0,
+        "pushMinimumCenterRaw": 7200,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 10638,
+        "boundaryMarginAbove90Raw": 1638,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "legs",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 1225
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1013,
+            "overlapHeightRaw": 4200
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1013,
+            "overlapHeightRaw": 2738
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -6250,
+            0,
+            3438,
+            7625
+          ],
+          "torsoArms": [
+            -5125,
+            5625,
+            2813,
+            12938
+          ],
+          "head": [
+            -2063,
+            12125,
+            688,
+            15125
+          ]
+        }
+      },
+      {
+        "character": "Anvil",
+        "posture": "crouching",
+        "phase": "active",
+        "pose": 11,
+        "pushMinimumCenterRaw": 7200,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 13200,
+        "boundaryMarginAbove90Raw": 4200,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "legs",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 225
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 3725
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "head",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 1288
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "head",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 2113
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -6938,
+            187,
+            6000,
+            6625
+          ],
+          "torsoArms": [
+            -4625,
+            4312,
+            3938,
+            10125
+          ],
+          "head": [
+            437,
+            9312,
+            3188,
+            12313
+          ]
+        }
+      },
+      {
+        "character": "Hammer",
+        "posture": "standing",
+        "phase": "active",
+        "pose": 0,
+        "pushMinimumCenterRaw": 6000,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 10588,
+        "boundaryMarginAbove90Raw": 1588,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "legs",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 1778
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 910,
+            "overlapHeightRaw": 3875
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 910,
+            "overlapHeightRaw": 2800
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -5033,
+            193,
+            3388,
+            8178
+          ],
+          "torsoArms": [
+            -3097,
+            6725,
+            2710,
+            13500
+          ],
+          "head": [
+            -1500,
+            12919,
+            -48,
+            14952
+          ]
+        }
+      },
+      {
+        "character": "Hammer",
+        "posture": "crouching",
+        "phase": "active",
+        "pose": 11,
+        "pushMinimumCenterRaw": 6000,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 9717,
+        "boundaryMarginAbove90Raw": 717,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 717,
+            "overlapHeightRaw": 3520
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -5420,
+            193,
+            3823,
+            5807
+          ],
+          "torsoArms": [
+            -2565,
+            3435,
+            2517,
+            9920
+          ],
+          "head": [
+            -242,
+            9338,
+            1210,
+            11371
+          ]
+        }
+      },
+      {
+        "character": "Smoke",
+        "posture": "standing",
+        "phase": "idle",
+        "pose": 0,
+        "pushMinimumCenterRaw": 5400,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 11232,
+        "boundaryMarginAbove90Raw": 2232,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 357,
+            "overlapHeightRaw": 2944
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "extension",
+            "overlapWidthRaw": 969,
+            "overlapHeightRaw": 1501
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 357,
+            "overlapHeightRaw": 2613
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -1625,
+            0,
+            1282,
+            8282
+          ],
+          "torsoArms": [
+            -4063,
+            7656,
+            2157,
+            12813
+          ],
+          "head": [
+            -594,
+            12812,
+            782,
+            14469
+          ],
+          "extension": [
+            2031,
+            8187,
+            4032,
+            9688
+          ]
+        }
+      },
+      {
+        "character": "Smoke",
+        "posture": "standing",
+        "phase": "idle",
+        "pose": 1,
+        "pushMinimumCenterRaw": 5400,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 11232,
+        "boundaryMarginAbove90Raw": 2232,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 357,
+            "overlapHeightRaw": 2819
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "extension",
+            "overlapWidthRaw": 969,
+            "overlapHeightRaw": 1501
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 357,
+            "overlapHeightRaw": 2738
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -1625,
+            0,
+            1282,
+            8407
+          ],
+          "torsoArms": [
+            -4063,
+            7781,
+            2157,
+            12938
+          ],
+          "head": [
+            -594,
+            12937,
+            782,
+            14594
+          ],
+          "extension": [
+            2031,
+            8312,
+            4032,
+            9813
+          ]
+        }
+      },
+      {
+        "character": "Smoke",
+        "posture": "standing",
+        "phase": "idle",
+        "pose": 2,
+        "pushMinimumCenterRaw": 5400,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 11232,
+        "boundaryMarginAbove90Raw": 2232,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 357,
+            "overlapHeightRaw": 2757
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "extension",
+            "overlapWidthRaw": 969,
+            "overlapHeightRaw": 1500
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 357,
+            "overlapHeightRaw": 2800
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -1625,
+            0,
+            1282,
+            8469
+          ],
+          "torsoArms": [
+            -4063,
+            7843,
+            2157,
+            13000
+          ],
+          "head": [
+            -594,
+            13000,
+            782,
+            14657
+          ],
+          "extension": [
+            2031,
+            8375,
+            4032,
+            9875
+          ]
+        }
+      },
+      {
+        "character": "Smoke",
+        "posture": "standing",
+        "phase": "idle",
+        "pose": 3,
+        "pushMinimumCenterRaw": 5400,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 11232,
+        "boundaryMarginAbove90Raw": 2232,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 357,
+            "overlapHeightRaw": 2975
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "extension",
+            "overlapWidthRaw": 969,
+            "overlapHeightRaw": 1501
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 357,
+            "overlapHeightRaw": 2582
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -1625,
+            0,
+            1282,
+            8250
+          ],
+          "torsoArms": [
+            -4063,
+            7625,
+            2157,
+            12782
+          ],
+          "head": [
+            -594,
+            12781,
+            782,
+            14438
+          ],
+          "extension": [
+            2031,
+            8156,
+            4032,
+            9657
+          ]
+        }
+      },
+      {
+        "character": "Smoke",
+        "posture": "crouching",
+        "phase": "crouch_idle",
+        "pose": 0,
+        "pushMinimumCenterRaw": 5400,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 13075,
+        "boundaryMarginAbove90Raw": 4075,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 650
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -1975,
+            -25,
+            6250,
+            4550
+          ],
+          "torsoArms": [
+            -2425,
+            3075,
+            5875,
+            7050
+          ],
+          "head": [
+            375,
+            7000,
+            1625,
+            8625
+          ],
+          "extension": [
+            -3750,
+            1800,
+            -1900,
+            3875
+          ]
+        }
+      },
+      {
+        "character": "Smoke",
+        "posture": "crouching",
+        "phase": "crouch_idle",
+        "pose": 1,
+        "pushMinimumCenterRaw": 5400,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 13075,
+        "boundaryMarginAbove90Raw": 4075,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 775
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -1975,
+            -25,
+            6250,
+            4675
+          ],
+          "torsoArms": [
+            -2425,
+            3200,
+            5875,
+            7175
+          ],
+          "head": [
+            375,
+            7125,
+            1625,
+            8750
+          ],
+          "extension": [
+            -3750,
+            1925,
+            -1900,
+            4000
+          ]
+        }
+      },
+      {
+        "character": "Smoke",
+        "posture": "crouching",
+        "phase": "crouch_idle",
+        "pose": 2,
+        "pushMinimumCenterRaw": 5400,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 13075,
+        "boundaryMarginAbove90Raw": 4075,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 875
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -1975,
+            -25,
+            6250,
+            4775
+          ],
+          "torsoArms": [
+            -2425,
+            3300,
+            5875,
+            7275
+          ],
+          "head": [
+            375,
+            7225,
+            1625,
+            8850
+          ],
+          "extension": [
+            -3750,
+            2025,
+            -1900,
+            4100
+          ]
+        }
+      },
+      {
+        "character": "Smoke",
+        "posture": "crouching",
+        "phase": "crouch_idle",
+        "pose": 3,
+        "pushMinimumCenterRaw": 5400,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 13075,
+        "boundaryMarginAbove90Raw": 4075,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 625
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -1975,
+            -25,
+            6250,
+            4525
+          ],
+          "torsoArms": [
+            -2425,
+            3050,
+            5875,
+            7025
+          ],
+          "head": [
+            375,
+            6975,
+            1625,
+            8600
+          ],
+          "extension": [
+            -3750,
+            1775,
+            -1900,
+            3850
+          ]
+        }
+      },
+      {
+        "character": "Tapper",
+        "posture": "standing",
+        "phase": "ready",
+        "pose": 0,
+        "pushMinimumCenterRaw": 6600,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 9913,
+        "boundaryMarginAbove90Raw": 913,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 913,
+            "overlapHeightRaw": 4200
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 913,
+            "overlapHeightRaw": 1609
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "head",
+            "overlapWidthRaw": 179,
+            "overlapHeightRaw": 1511
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -2713,
+            0,
+            2873,
+            5745
+          ],
+          "torsoArms": [
+            -2713,
+            4946,
+            2713,
+            11809
+          ],
+          "head": [
+            -64,
+            11489,
+            1979,
+            13245
+          ]
+        }
+      },
+      {
+        "character": "Tapper",
+        "posture": "crouching",
+        "phase": "active",
+        "pose": 11,
+        "pushMinimumCenterRaw": 6600,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 10310,
+        "boundaryMarginAbove90Raw": 1310,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 2015
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "head",
+            "overlapWidthRaw": 469,
+            "overlapHeightRaw": 2013
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -3110,
+            0,
+            3293,
+            4574
+          ],
+          "torsoArms": [
+            -3110,
+            3658,
+            3110,
+            8415
+          ],
+          "head": [
+            -74,
+            8048,
+            2269,
+            10061
+          ]
+        }
+      },
+      {
+        "character": "Shark",
+        "posture": "standing",
+        "phase": "idle",
+        "pose": 0,
+        "pushMinimumCenterRaw": 5800,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 11013,
+        "boundaryMarginAbove90Raw": 2013,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "legs",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 913
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1044,
+            "overlapHeightRaw": 3757
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "extension",
+            "overlapWidthRaw": 1000,
+            "overlapHeightRaw": 1725
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1044,
+            "overlapHeightRaw": 2082
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -4813,
+            0,
+            3813,
+            7313
+          ],
+          "torsoArms": [
+            -4063,
+            6843,
+            2844,
+            12282
+          ],
+          "head": [
+            -750,
+            12125,
+            750,
+            14282
+          ],
+          "extension": [
+            2000,
+            6312,
+            3563,
+            8125
+          ]
+        }
+      },
+      {
+        "character": "Shark",
+        "posture": "standing",
+        "phase": "idle",
+        "pose": 1,
+        "pushMinimumCenterRaw": 5800,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 10575,
+        "boundaryMarginAbove90Raw": 1575,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "legs",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 882
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 700,
+            "overlapHeightRaw": 3819
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "extension",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 1757
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 700,
+            "overlapHeightRaw": 2457
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -5063,
+            0,
+            3375,
+            7282
+          ],
+          "torsoArms": [
+            -4500,
+            6781,
+            2500,
+            12657
+          ],
+          "head": [
+            -1094,
+            12156,
+            469,
+            14344
+          ],
+          "extension": [
+            1781,
+            6343,
+            3313,
+            8157
+          ]
+        }
+      },
+      {
+        "character": "Shark",
+        "posture": "standing",
+        "phase": "idle",
+        "pose": 2,
+        "pushMinimumCenterRaw": 5800,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 10982,
+        "boundaryMarginAbove90Raw": 1982,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "legs",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 850
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1107,
+            "overlapHeightRaw": 3850
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "extension",
+            "overlapWidthRaw": 938,
+            "overlapHeightRaw": 1632
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1107,
+            "overlapHeightRaw": 1925
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -4844,
+            0,
+            3782,
+            7250
+          ],
+          "torsoArms": [
+            -4094,
+            6750,
+            2907,
+            12125
+          ],
+          "head": [
+            -500,
+            11812,
+            1094,
+            13969
+          ],
+          "extension": [
+            2062,
+            6281,
+            3625,
+            8032
+          ]
+        }
+      },
+      {
+        "character": "Shark",
+        "posture": "standing",
+        "phase": "idle",
+        "pose": 3,
+        "pushMinimumCenterRaw": 5800,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 10544,
+        "boundaryMarginAbove90Raw": 1544,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "legs",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 913
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 763,
+            "overlapHeightRaw": 3819
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "extension",
+            "overlapWidthRaw": 1157,
+            "overlapHeightRaw": 1725
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 763,
+            "overlapHeightRaw": 2113
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -5063,
+            0,
+            3344,
+            7313
+          ],
+          "torsoArms": [
+            -4407,
+            6781,
+            2563,
+            12313
+          ],
+          "head": [
+            -875,
+            12062,
+            750,
+            14282
+          ],
+          "extension": [
+            1843,
+            6343,
+            3344,
+            8125
+          ]
+        }
+      },
+      {
+        "character": "Shark",
+        "posture": "crouching",
+        "phase": "active",
+        "pose": 11,
+        "pushMinimumCenterRaw": 5800,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 10294,
+        "boundaryMarginAbove90Raw": 1294,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 819
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "head",
+            "overlapWidthRaw": 919,
+            "overlapHeightRaw": 1641
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -5438,
+            46,
+            5391,
+            4829
+          ],
+          "torsoArms": [
+            -6235,
+            3000,
+            3094,
+            7219
+          ],
+          "head": [
+            1312,
+            6656,
+            2719,
+            8297
+          ]
+        }
+      },
+      {
+        "character": "Fillet",
+        "posture": "standing",
+        "phase": "ready",
+        "pose": 0,
+        "pushMinimumCenterRaw": 5600,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 13448,
+        "boundaryMarginAbove90Raw": 4448,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "legs",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 227
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 4140
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "head",
+            "overlapWidthRaw": 614,
+            "overlapHeightRaw": 1353
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 340
+          },
+          {
+            "attackBox": 1,
+            "bodyRegion": "head",
+            "overlapWidthRaw": 614,
+            "overlapHeightRaw": 966
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -6327,
+            13,
+            6248,
+            6627
+          ],
+          "torsoArms": [
+            -3457,
+            5386,
+            4618,
+            10540
+          ],
+          "head": [
+            2386,
+            9247,
+            4057,
+            11166
+          ]
+        }
+      },
+      {
+        "character": "Fillet",
+        "posture": "crouching",
+        "phase": "active",
+        "pose": 11,
+        "pushMinimumCenterRaw": 5600,
+        "testedThroughRaw": 9000,
+        "firstActiveContactAt90px": true,
+        "outerContactBoundaryRawExclusive": 11894,
+        "boundaryMarginAbove90Raw": 2894,
+        "overlapsAt90": [
+          {
+            "attackBox": 0,
+            "bodyRegion": "legs",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 84
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "torsoArms",
+            "overlapWidthRaw": 620,
+            "overlapHeightRaw": 2697
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "head",
+            "overlapWidthRaw": 630,
+            "overlapHeightRaw": 2081
+          },
+          {
+            "attackBox": 0,
+            "bodyRegion": "extension",
+            "overlapWidthRaw": 1200,
+            "overlapHeightRaw": 36
+          }
+        ],
+        "baselineHurtboxesLocalRaw": {
+          "legs": [
+            -4646,
+            48,
+            4694,
+            6484
+          ],
+          "torsoArms": [
+            -5517,
+            4790,
+            2420,
+            9097
+          ],
+          "head": [
+            2370,
+            7887,
+            3871,
+            9968
+          ],
+          "extension": [
+            1741,
+            2080,
+            3726,
+            6436
+          ]
+        }
+      }
+    ],
+    "notGameplayValidation": "This is exact static geometry validation. Does not execute core behavior,blockadvantage,inputrouting,rollback or production sprites."
+  },
+  "fS125Framework": {
+    "decision": "Accept125px far-slash reach as production framework; it is distinct from72px c.S.",
+    "handedness": "Long RIGHT knife43px; shortLEFT retracts toguard.",
+    "criticalClarification": "80–82px is hand/heel position measured from root, not an80px anatomical arm.",
+    "exampleWorldPixels": {
+      "rightShoulder": [
+        30,
+        104
+      ],
+      "rightElbow": [
+        54,
+        104
+      ],
+      "rightWrist": [
+        78,
+        104
+      ],
+      "rightBladeHeel": [
+        82,
+        104
+      ],
+      "rightBladeTip": [
+        125,
+        104
+      ]
+    },
+    "geometry": "24px upperarm+24px forearm,4px hand/grip offset,43px blade. Torso lean/rotation places rightshoulder30px forward; root does not gain an unlisted lunge.",
+    "requiredWeakness": "Extend arm hurt geometry through actual wrist/glove nearx82–86; weapon-only area beyond hand hasnohurtbox. Do not keep c.S compact armhurt on f.S. Preserve central f.S startup/recovery risks; separate final hit/hurt timeline remains owned by main moveset."
+  },
+  "implementationNotes": [
+    "Replace old c.S long-right staging and old x85/y145 hitboxes with this selected short-left rig/timeline.",
+    "Use dedicated c.S animation mapping, not generic S/f.S atlas pose.",
+    "Support exact absolute-frame hurt timeline and active-relative hit timeline; do not flatten to generic phase boxes.",
+    "Keep neutral and running entries distinct only through existing root velocity/supportfoot; all local attackpath and knives remain identical.",
+    "Apply proximity9000 on f.S slot2 selecting c.S slot32; preserve planned c.S->f.S named cancel.",
+    "No questions remain for this resolution; implement and validate the complete package, flag only actual engine contradictions."
+  ],
+  "legacyHitFallback": {
+    "box": [
+      5600,
+      6400,
+      7200,
+      13000
+    ],
+    "semantics": "Conservative union of all actual active rectangles. Scalar geometry is derived from this envelope. The complete hit timeline overrides it on every active tick; do not use it as one persistent full-height attack."
+  },
+  "legacyHurtPhaseFallback": {
+    "windup": {
+      "legs": [
+        -5400,
+        0,
+        6000,
+        6200
+      ],
+      "torsoArms": [
+        -3600,
+        5200,
+        3500,
+        11800
+      ],
+      "head": [
+        500,
+        11800,
+        3200,
+        14600
+      ],
+      "extension": [
+        800,
+        7900,
+        6400,
+        11900
+      ]
+    },
+    "active": {
+      "legs": [
+        -5400,
+        0,
+        6000,
+        6200
+      ],
+      "torsoArms": [
+        -3600,
+        5200,
+        3500,
+        11800
+      ],
+      "head": [
+        500,
+        11800,
+        3200,
+        14600
+      ],
+      "extension": [
+        2000,
+        8100,
+        6400,
+        13400
+      ]
+    },
+    "recovery": {
+      "legs": [
+        -5400,
+        0,
+        6000,
+        6200
+      ],
+      "torsoArms": [
+        -3600,
+        5200,
+        3500,
+        11800
+      ],
+      "head": [
+        500,
+        11800,
+        3200,
+        14600
+      ],
+      "extension": [
+        2000,
+        8500,
+        6000,
+        12800
+      ]
+    }
+  },
+  "legacyFallbackPolicy": "Phase union is only a compatibility fallback/preview. Exact absolute-frame hurt track is the final runtime contract. All four body regions are enabled; weapons remain excluded.",
+  "replacementMovePatch": {
+    "schema22Scalars": {
+      "startup": 7,
+      "active": 5,
+      "recovery": 12,
+      "blockstun": 17,
+      "blockPushback": 600,
+      "hitboxBack": 5600,
+      "bottom": 6400,
+      "reach": 7200,
+      "height": 6600,
+      "inertiaPercent": 65,
+      "advance": 0,
+      "startupTravel": 0,
+      "travelSpeed": 0,
+      "hitLevel": 0
+    },
+    "hitboxTimeline": {
+      "multiHit": false,
+      "keys": [
+        {
+          "frame": 1,
+          "hit": 1,
+          "boxes": [
+            [
+              6000,
+              6400,
+              7200,
+              10600
+            ],
+            [
+              6000,
+              10200,
+              7200,
+              13000
+            ]
+          ],
+          "damage": -1,
+          "hitstun": -1,
+          "blockstun": -1,
+          "hitstop": -1
+        },
+        {
+          "frame": 2,
+          "hit": 1,
+          "boxes": [
+            [
+              6000,
+              10600,
+              7200,
+              13000
+            ]
+          ],
+          "damage": -1,
+          "hitstun": -1,
+          "blockstun": -1,
+          "hitstop": -1
+        },
+        {
+          "frame": 3,
+          "hit": 1,
+          "boxes": [
+            [
+              5900,
+              10500,
+              7200,
+              13000
+            ]
+          ],
+          "damage": -1,
+          "hitstun": -1,
+          "blockstun": -1,
+          "hitstop": -1
+        },
+        {
+          "frame": 4,
+          "hit": 1,
+          "boxes": [
+            [
+              5800,
+              10300,
+              7100,
+              12900
+            ]
+          ],
+          "damage": -1,
+          "hitstun": -1,
+          "blockstun": -1,
+          "hitstop": -1
+        },
+        {
+          "frame": 5,
+          "hit": 1,
+          "boxes": [
+            [
+              5600,
+              10000,
+              7000,
+              12700
+            ]
+          ],
+          "damage": -1,
+          "hitstun": -1,
+          "blockstun": -1,
+          "hitstop": -1
+        }
+      ]
+    },
+    "hurtboxTimeline": {
+      "basis": "absolute actionframe, one record per tick; body boxes always on, extension covers previous-to-current anatomical arm sweep including glove, never weapon",
+      "keys": [
+        {
+          "frame": 1,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              9000,
+              4900,
+              11900
+            ]
+          }
+        },
+        {
+          "frame": 2,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              1500,
+              7900,
+              4900,
+              11900
+            ]
+          }
+        },
+        {
+          "frame": 3,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              800,
+              7900,
+              4100,
+              11100
+            ]
+          }
+        },
+        {
+          "frame": 4,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              800,
+              7900,
+              4900,
+              11100
+            ]
+          }
+        },
+        {
+          "frame": 5,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              1600,
+              7900,
+              5700,
+              11100
+            ]
+          }
+        },
+        {
+          "frame": 6,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              7900,
+              6400,
+              11100
+            ]
+          }
+        },
+        {
+          "frame": 7,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              8100,
+              6400,
+              13400
+            ]
+          }
+        },
+        {
+          "frame": 8,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              10300,
+              6400,
+              13400
+            ]
+          }
+        },
+        {
+          "frame": 9,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              10300,
+              6400,
+              13400
+            ]
+          }
+        },
+        {
+          "frame": 10,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              10000,
+              6300,
+              13300
+            ]
+          }
+        },
+        {
+          "frame": 11,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              9700,
+              6200,
+              13100
+            ]
+          }
+        },
+        {
+          "frame": 12,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              9200,
+              6000,
+              12800
+            ]
+          }
+        },
+        {
+          "frame": 13,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              9000,
+              5500,
+              12400
+            ]
+          }
+        },
+        {
+          "frame": 14,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              8900,
+              5300,
+              12300
+            ]
+          }
+        },
+        {
+          "frame": 15,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              8700,
+              5000,
+              12200
+            ]
+          }
+        },
+        {
+          "frame": 16,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              8600,
+              4700,
+              12000
+            ]
+          }
+        },
+        {
+          "frame": 17,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              8500,
+              4600,
+              11900
+            ]
+          }
+        },
+        {
+          "frame": 18,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              8500,
+              4500,
+              11800
+            ]
+          }
+        },
+        {
+          "frame": 19,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              8500,
+              4600,
+              11800
+            ]
+          }
+        },
+        {
+          "frame": 20,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              8600,
+              4700,
+              11800
+            ]
+          }
+        },
+        {
+          "frame": 21,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              8700,
+              4800,
+              11900
+            ]
+          }
+        },
+        {
+          "frame": 22,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              8800,
+              4800,
+              11900
+            ]
+          }
+        },
+        {
+          "frame": 23,
+          "boxes": {
+            "legs": [
+              -5400,
+              0,
+              6000,
+              6200
+            ],
+            "torsoArms": [
+              -3600,
+              5200,
+              3500,
+              11800
+            ],
+            "head": [
+              500,
+              11800,
+              3200,
+              14600
+            ],
+            "extension": [
+              2000,
+              8900,
+              4900,
+              11900
+            ]
+          }
+        }
+      ],
+      "resetOnFrame24": "Return to current chosen locomotion/ready collision; do not retain this attack extension after move ends.",
+      "reasonForBodyRefit": "Old generic narrow legs/behind-center head did not fit the selected wide Stalker stance or forward head; explicit production body envelopes now cover planted boots,passive arm,torso,head and attacking arm."
+    },
+    "legacyHurtPhaseFallback": {
+      "windup": {
+        "legs": [
+          -5400,
+          0,
+          6000,
+          6200
+        ],
+        "torsoArms": [
+          -3600,
+          5200,
+          3500,
+          11800
+        ],
+        "head": [
+          500,
+          11800,
+          3200,
+          14600
+        ],
+        "extension": [
+          800,
+          7900,
+          6400,
+          11900
+        ]
+      },
+      "active": {
+        "legs": [
+          -5400,
+          0,
+          6000,
+          6200
+        ],
+        "torsoArms": [
+          -3600,
+          5200,
+          3500,
+          11800
+        ],
+        "head": [
+          500,
+          11800,
+          3200,
+          14600
+        ],
+        "extension": [
+          2000,
+          8100,
+          6400,
+          13400
+        ]
+      },
+      "recovery": {
+        "legs": [
+          -5400,
+          0,
+          6000,
+          6200
+        ],
+        "torsoArms": [
+          -3600,
+          5200,
+          3500,
+          11800
+        ],
+        "head": [
+          500,
+          11800,
+          3200,
+          14600
+        ],
+        "extension": [
+          2000,
+          8500,
+          6000,
+          12800
+        ]
+      }
+    },
+    "fSProximityPatch": {
+      "proximityMove": 32,
+      "proximityRange": 9000
+    }
+  }
+}

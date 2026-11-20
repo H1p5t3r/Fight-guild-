@@ -1,0 +1,94 @@
+[
+  {
+    "id": "5P",
+    "file": "5p-inbetweens.png",
+    "columns": 2,
+    "rows": 2,
+    "frames": [
+      3,
+      10,
+      12,
+      14
+    ],
+    "source": "/workspace/generated_images/exec-d2796db5-1593-4a81-9951-95f3134298c0.png",
+    "references": [
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5p.png"
+    ],
+    "prompt": "5p-inbetweens-prompt.txt"
+  },
+  {
+    "id": "5K",
+    "file": "5k-inbetweens.png",
+    "columns": 3,
+    "rows": 2,
+    "frames": [
+      5,
+      12,
+      14,
+      16,
+      18,
+      20
+    ],
+    "source": "/workspace/generated_images/exec-a2cabaf7-302e-4e20-8607-a6c777f3461b.png",
+    "references": [
+      "/workspace/generated_images/exec-3fe7b927-eab9-48a4-8584-bfa0a6b91223.png",
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/5k.png"
+    ],
+    "prompt": "5k-inbetweens-quality-prompt.txt"
+  },
+  {
+    "id": "2S",
+    "file": "2s-inbetweens-a.png",
+    "columns": 3,
+    "rows": 2,
+    "frames": [
+      3,
+      5,
+      7,
+      9,
+      14,
+      18
+    ],
+    "source": "/workspace/generated_images/exec-d804a7b2-7527-42fd-a646-8a2d0f20fc15.png",
+    "references": [
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/2s.png",
+      "/workspace/generated_images/exec-b4fffecd-75e2-4c0b-87ee-d0fa50b76449.png"
+    ],
+    "prompt": "2s-inbetweens-a-quality-prompt.txt"
+  },
+  {
+    "id": "2S",
+    "file": "2s-inbetweens-b.png",
+    "columns": 2,
+    "rows": 2,
+    "frames": [
+      20,
+      22,
+      24,
+      28
+    ],
+    "source": "/workspace/generated_images/exec-68309f12-1339-4f5f-99c6-c36549be8a53.png",
+    "references": [
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/2s.png"
+    ],
+    "prompt": "2s-inbetweens-b-prompt.txt"
+  },
+  {
+    "id": "2S",
+    "file": "2s-inbetweens-c.png",
+    "columns": 2,
+    "rows": 2,
+    "frames": [
+      30,
+      32,
+      34,
+      36
+    ],
+    "source": "/workspace/generated_images/exec-cfab0232-84b5-4a5a-8772-dc01f47d5a53.png",
+    "references": [
+      "/workspace/Fight-guild-/godot/assets/fighters/fillet-ground-v1/2s.png",
+      "/workspace/generated_images/exec-68309f12-1339-4f5f-99c6-c36549be8a53.png"
+    ],
+    "prompt": "2s-inbetweens-c-refinement-prompt.txt"
+  }
+]

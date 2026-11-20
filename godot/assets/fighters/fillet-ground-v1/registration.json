@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "calibrations": {
+    "5P": [
+      450,
+      230
+    ],
+    "5K": [
+      450,
+      220
+    ],
+    "c.S": [
+      520,
+      255
+    ],
+    "5S": [
+      450,
+      220
+    ],
+    "5Hs": [
+      450,
+      230
+    ],
+    "2P": [
+      560,
+      230
+    ],
+    "2K": [
+      560,
+      220
+    ],
+    "2S": [
+      600,
+      225
+    ],
+    "2Hs": [
+      350,
+      228
+    ],
+    "6P": [
+      450,
+      230
+    ],
+    "6Hs": [
+      450,
+      230
+    ]
+  },
+  "poses": 105,
+  "actions": 11,
+  "sourceSpecSHA256": "796292f71f5af141c91997b983ee223834a0826dbc8d3c7b1b1d7d260445e65d",
+  "notes": [
+    "Generated pixels preserved unchanged; no programmatic image edits.",
+    "All phase keys follow the authored clock; edited timings scale within each phase.",
+    "Current renderer uses its standard mirrored facing presentation; separate reverse-view drawings remain future art work.",
+    "Canonical collision data remains authoritative. First-pass raster alignment is subject to visual refinement; no hitboxes are resized to fit art."
+  ]
+}

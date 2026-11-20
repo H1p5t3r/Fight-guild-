@@ -1,0 +1,134 @@
+import {seedBaseline,ready,seekMoveFrame,dragHandle,showDisplayOptions} from './workbench-ui-helpers.mjs';
+import {chromium} from 'playwright';
+import {existsSync} from 'node:fs';
+import {mkdir} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {serveWorkshop} from '../scripts/serve-workbench.mjs';
+const server=await serveWorkshop(0),url=`http://127.0.0.1:${server.address().port}/`;
+const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
+try{
+  const page=await browser.newPage({viewport:{width:1440,height:1060}}),errors=[],requests=[];
+  page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));
+  await page.addInitScript(()=>{globalThis.WebAssembly=undefined;});
+  await seedBaseline(page);await page.goto(url);await page.waitForFunction(()=>moveWorkshop.preview()?.contacts.length===1);
+  assert.equal(await page.evaluate(()=>typeof WebAssembly),'undefined');
+  // Game-pixel measurements share the scene, and hiding them only changes presentation.
+  await ready(page);await page.locator('#restart').click();await showDisplayOptions(page);
+  assert.match(await page.locator('#distance-readout').innerText(),/Body gap 24 px/);
+  const measuredDraft=await page.evaluate(()=>JSON.stringify(moveWorkshop.data()));
+  const measuredCursor=await page.evaluate(()=>moveWorkshop.cursor());
+  const measuredScale=await page.evaluate(()=>moveWorkshop.geometry().view.scale),height=await page.locator('#preview').evaluate(c=>c.clientHeight);
+  await page.locator('#show-distances').uncheck();assert.equal(await page.locator('#distance-readout').isHidden(),true);
+  assert.equal(await page.locator('#preview').evaluate(c=>c.clientHeight),height-72);
+  assert.ok(Math.abs(await page.evaluate(()=>moveWorkshop.geometry().view.scale)-measuredScale)<1e-9,'Measurement strip preserves scene scale');
+  assert.deepEqual(await page.evaluate(()=>moveWorkshop.cursor()),measuredCursor);
+  assert.equal(await page.evaluate(()=>JSON.stringify(moveWorkshop.data())),measuredDraft);
+  await page.locator('#show-distances').check();assert.equal(await page.locator('#preview').evaluate(c=>c.clientHeight),height);
+  await page.locator('#test-facing').selectOption('-1');await ready(page);
+  assert.match(await page.locator('#distance-readout').innerText(),/Body gap 24 px/);
+  await page.locator('#test-facing').selectOption('1');await ready(page);await seekMoveFrame(page,5);await page.locator('#tab-hit').click();
+  const guide=await page.evaluate(()=>({m:moveWorkshop.data().characters[5].moves[0],g:moveWorkshop.geometry().measurements}));
+  assert.equal(guide.g.reach.value,guide.m.reach);assert.equal(guide.g.selected.width,guide.m.reach-guide.m.hitboxBack);assert.equal(guide.g.selected.height,guide.m.height);
+  await mkdir('build/workshop-distance-review',{recursive:true});await page.locator('#preview').screenshot({path:'build/workshop-distance-review/active.png'});
+  await page.locator('#tab-timing').click();
+
+  await page.locator('#test-entry').selectOption('run');
+  await page.waitForFunction(()=>moveWorkshop.preview()?.frames.some(f=>f.input&512));
+  await page.locator('#play').click();await page.waitForFunction(()=>Number(document.getElementById('frame').value)>8);
+  await page.locator('#restart').click();assert.equal(await page.locator('#frame').inputValue(),'0');
+  // The prominent toggle uses the real enabled flag and preserves the slot.
+  await page.locator('[data-move="8"]').click();await page.locator('#attack-enabled').uncheck();
+  assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[8].enabled),0);
+  await ready(page);assert.equal(await page.evaluate(()=>moveWorkshop.preview().geometryOnly),true);
+  await page.locator('#tab-hit').click();assert.ok(await page.evaluate(()=>moveWorkshop.geometry().handles.length>0));
+  assert.equal(await page.evaluate(()=>moveWorkshop.preview().contacts.length),0);await page.locator('#tab-timing').click();
+  await page.locator('[data-move="0"]').click();assert.equal(await page.locator('[data-move="8"]').count(),0);
+  await page.locator('#show-unused').check();await page.locator('[data-move="8"]').click();await page.locator('#attack-enabled').check();
+  await page.locator('[data-move="0"]').click();await page.locator('#field-active').fill('7');await page.locator('#field-hitstop').fill('0');
+  await page.locator('#tab-hit').click();assert.equal(await page.locator('#preview-mode').count(),0);
+  await seekMoveFrame(page,5);await page.locator('#hit-key-add').click();await page.locator('#hit-box-add').click();
+  for(const [name,value]of [['left','0'],['bottom','0'],['width','250'],['height','180'],['damage','20'],['hitstun','90'],['hitstop','0']])await page.locator('#field-hit-key-'+name).fill(value);
+  await page.locator('#hit-box-add').click();assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys[0].boxes.length),2);
+  await seekMoveFrame(page,7);
+  await page.locator('#hit-key-add').click();await page.locator('#hit-multi').check();
+  await page.locator('#field-hit-key-hit').fill('2');await page.locator('#field-hit-key-damage').fill('30');
+  const track=await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline);
+  assert.deepEqual(track.keys[0].boxes,[[0,0,25000,18000],[0,0,25000,18000]],'Adding a box preserves earlier numeric edits');assert.equal(track.keys[0].damage,20);assert.equal(track.keys[1].damage,30);assert.equal(track.keys[1].boxes.length,2);
+  // Dragging a custom key edits that box only, and one Undo restores it.
+  await dragHandle(page,'hit-key',2,15);
+  assert.ok(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys[1].boxes[1][2]>25000));
+  assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys[0].boxes[1][2]),25000);
+  await page.locator('#undo').click();
+  assert.deepEqual(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline),track);
+  // Undo before the pending recording runs must cancel stale simulation work.
+  await page.locator('#field-hit-key-damage').fill('35');await page.locator('#undo').click();await ready(page);
+  assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys[1].damage),30);
+  // Invalid geometry cannot silently replace the draft or escape through export.
+  await page.locator('#field-hit-key-width').fill('0');assert.equal(await page.locator('#export').isDisabled(),true);
+  const invalidCursor=await page.locator('#frame').inputValue();
+  await page.locator('#restart').click();assert.equal(await page.locator('#frame').inputValue(),invalidCursor);
+  await page.locator('#field-hit-key-width').fill('250');
+  await page.locator('#test-entry').selectOption('standing');
+  await page.waitForFunction(()=>moveWorkshop.preview()?.slot===0&&moveWorkshop.preview()?.contacts.length===2);
+  const multi=await page.evaluate(()=>moveWorkshop.preview());assert.equal(multi.contacts[0].damage,20);assert.ok(multi.contacts[1].damage>0&&multi.contacts[1].damage<30,'Second hit uses real combo scaling');
+  await page.locator('#frame').evaluate(n=>{n.value=n.max;n.dispatchEvent(new Event('input',{bubbles:true}));});assert.match(await page.locator('#test-result').innerText(),/2 hits/);
+  await page.locator('#hit-multi').uncheck();
+  await page.waitForFunction(()=>moveWorkshop.preview()?.contacts.length===1);assert.equal(await page.evaluate(()=>moveWorkshop.preview().totalDamage),20);
+  await page.locator('#hit-multi').check();
+  const pending=page.waitForEvent('download');await page.locator('#export').click();const file=await pending;await file.saveAs('build/workshop-hit-preview-roundtrip.json');
+  await page.locator('#reset').click();assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys.length),0);
+  await page.locator('#import-file').setInputFiles('build/workshop-hit-preview-roundtrip.json');await page.waitForFunction(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys.length===2);
+  // Shrinking Active must not strand keys outside the current active window.
+  await page.locator('#tab-timing').click();await page.locator('#field-active').fill('2');
+  await page.locator('#tab-hit').click();await page.locator('#hit-key-select').selectOption('1');
+  assert.equal(await page.locator('#field-hit-key-frame').inputValue(),'3');
+  await page.locator('#field-hit-key-damage').fill('31');
+  assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys[1].damage),31);
+  await page.locator('#hit-key-remove').click();
+  assert.equal(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys.length),1);
+  await page.locator('#undo').click();await page.locator('#hit-key-select').selectOption('1');
+  await page.locator('#field-hit-key-damage').fill('30');
+  await page.locator('#tab-timing').click();await page.locator('#field-active').fill('7');await page.locator('#tab-hit').click();
+  await ready(page);await mkdir('build/workshop-preview-review',{recursive:true});
+  await page.screenshot({path:'build/workshop-preview-review/keys.png',fullPage:true});
+  await page.waitForFunction(()=>moveWorkshop.preview()?.contacts.length===2);
+  const tick=await page.evaluate(()=>moveWorkshop.preview().contacts[1].tick);
+  await page.locator('#frame').evaluate((n,tick)=>{n.value=String(tick);n.dispatchEvent(new Event('input',{bubbles:true}));},tick);
+  await page.screenshot({path:'build/workshop-preview-review/contact.png',fullPage:true});
+  // Editing stays in the target scene; left-facing handles use local coordinates.
+  await page.locator('#test-facing').selectOption('-1');await ready(page);await seekMoveFrame(page,7);
+  await page.locator('#hit-box-select').selectOption('0');
+  const beforeLeft=await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys[1].boxes[0]);
+  await dragHandle(page,'hit-key',2,-15);
+  assert.ok(await page.evaluate(before=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys[1].boxes[0][2]>before,beforeLeft[2]));
+  assert.equal(await page.evaluate(()=>moveWorkshop.cursor().frame),7,'Dragging keeps the same move frame');
+  assert.ok(await page.evaluate(before=>moveWorkshop.geometry().measurements.reach.value>before,beforeLeft[2]),'Measured front edge follows a mirrored drag');
+  assert.equal(await page.evaluate(()=>moveWorkshop.preview().frames[moveWorkshop.cursor().index].state.players[0].facing),-1);
+  await page.locator('#undo').click();await ready(page);
+  assert.deepEqual(await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hitboxTimeline.keys[1].boxes[0]),beforeLeft);
+  await page.locator('#tab-hurt').click();await page.locator('#hurt-custom').check();await page.locator('#hurt-region').selectOption('torsoArms');await ready(page);
+  const beforeHurt=await page.evaluate(()=>moveWorkshop.data().characters[5].moves[0].hurtboxes.active.torsoArms);
+  await dragHandle(page,'hurt',2,-12);
+  assert.ok(await page.evaluate(before=>moveWorkshop.data().characters[5].moves[0].hurtboxes.active.torsoArms[2]>before,beforeHurt[2]));
+  assert.equal(await page.evaluate(()=>moveWorkshop.cursor().frame),7);
+  await page.locator('#undo').click();await ready(page);
+  // A run changes world position, without moving edit handles off the fighter.
+  await page.locator('#test-entry').selectOption('run');await ready(page);await seekMoveFrame(page,7);await page.locator('#tab-hit').click();
+  assert.ok(await page.evaluate(()=>moveWorkshop.preview().frames.some(f=>f.state.players[0].x!==moveWorkshop.preview().frames[0].state.players[0].x)));
+  await dragHandle(page,'hit-key',2,-10);assert.equal(await page.evaluate(()=>moveWorkshop.cursor().frame),7);
+  await page.locator('#undo').click();await ready(page);
+  // Contact timing can change, but the selected move frame survives the re-simulation.
+  await page.locator('#test-facing').selectOption('1');await page.locator('#test-entry').selectOption('standing');await ready(page);await seekMoveFrame(page,7);
+  const elapsed=await page.evaluate(()=>moveWorkshop.cursor().index);
+  await page.locator('#hit-key-select').selectOption('0');await page.locator('#field-hit-key-hitstop').fill('5');await ready(page);
+  await seekMoveFrame(page,7);assert.ok(await page.evaluate(()=>moveWorkshop.cursor().index)>elapsed);
+  await page.locator('#field-hit-key-damage').fill('31');await ready(page);assert.equal(await page.evaluate(()=>moveWorkshop.cursor().frame),7);
+  assert.equal(await page.locator('#preview-mode').count(),0);assert.equal(await page.locator('canvas').count(),1);assert.equal(await page.locator('input[type=range]').count(),1);
+  await page.locator('#test-behavior').selectOption('block');await page.waitForFunction(()=>moveWorkshop.preview()?.contacts.some(c=>c.event===2));
+  await page.locator('#frame').evaluate(n=>{n.value=n.max;n.dispatchEvent(new Event('input',{bubbles:true}));});assert.match(await page.locator('#test-result').innerText(),/blocks/);
+  await page.setViewportSize({width:390,height:844});await page.screenshot({path:'build/workshop-preview-review/mobile.png',fullPage:true});
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  assert.ok(await page.evaluate(()=>moveWorkshop.geometry().measurementLabels.every(l=>l.x>=0&&l.x+l.width<=document.getElementById('preview').clientWidth)),'Distance labels fit mobile canvas');
+  assert.deepEqual(errors,[]);assert.ok(requests.every(r=>r===url||r.startsWith('data:')));
+  console.log('PASS shared combat/editing workspace without WebAssembly; timed hitboxes, toggleable multi-hits, enabled attacks, JSON export, guarding and mobile layout.');
+}finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
