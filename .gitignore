@@ -7,7 +7,11 @@ web/generated/
 node_modules/
 test-results/
 godot/.godot/
-godot/bin/
+# Ship the Windows GDExtension so GitHub source ZIPs open directly in Godot.
+godot/bin/*
+!godot/bin/libfight_core.windows.template_debug.x86_64.dll
+!godot/bin/libfight_core.windows.template_release.x86_64.dll
+!godot/bin/windows-core.json
 native/.sconsign.dblite
 native/*.os
 core/*.os

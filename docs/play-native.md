@@ -2,7 +2,21 @@
 
 Extract the whole game ZIP first. On Windows run `FightGuild.exe`; on Linux run `FightGuild.x86_64` (use `chmod +x FightGuild.x86_64` if your unzip tool loses executable permissions). Keep the `.pck` and native library beside the executable. These x86-64 Windows/Linux packages do not require a browser, Node or a separately installed Godot editor.
 
-For the editable project ZIP, import `godot/project.godot` into **Godot 4.6.3**, then press F5. The archive includes native binaries for the platforms built. The complete repository, including concept references, is at https://github.com/H1p5t3r/Fight-guild-/tree/feat/godot-combat-lab.
+For the editable project ZIP or the GitHub source ZIP from `feat/godot-combat-lab`, import `godot/project.godot` into **64-bit Godot 4.6.3**, then press F5. Current source ZIPs include the Windows debug/release combat DLLs. The cloud tests use 4.6.3; a newer editor is not required to fix missing DLLs. The complete repository, including concept references, is at https://github.com/H1p5t3r/Fight-guild-/tree/feat/godot-combat-lab.
+
+## Windows: “Could not resolve external class member core”
+
+This is often a secondary error: `CombatModel` could not load the native `FightCore` class. Source ZIPs made before the Windows-binary delivery fix omitted `godot/bin` because compiled libraries were ignored by Git. Editing the highlighted `model.core.pose_boxes(...)` line does not install that dependency.
+
+1. Close Godot completely. Windows locks DLLs while the editor is open.
+2. Download [FightGuild-Windows-Core.zip](../exports/FightGuild-Windows-Core.zip), or get a fresh source ZIP from `feat/godot-combat-lab`.
+3. For the small repair ZIP, extract its contents into the folder containing `project.godot`. In a repository download this is **`godot/`**. Merge the `bin` folder and replace the matching DLLs. Keep your move JSON and saves.
+4. Confirm these exact paths exist relative to `project.godot`:
+   - `bin/libfight_core.windows.template_debug.x86_64.dll` — needed by the editor/F5.
+   - `bin/libfight_core.windows.template_release.x86_64.dll` — needed by release exports.
+5. Reopen `project.godot` and press F5. If it still fails, open **Output** and inspect the **first** GDExtension loading error. That distinguishes an incorrect folder, wrong architecture, blocked DLL or different dependency issue.
+
+Use the repair package with the matching current branch source. Copying an old DLL beside newer scripts can produce a different configuration/API mismatch. The standalone `FightGuild-Windows.zip` is a playable export; its release DLL alone is not sufficient for the Godot editor.
 
 ## Choose a mode
 

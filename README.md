@@ -18,7 +18,7 @@ Menus share the supplied **Guild Ball** visual language: Barlow Condensed, charc
 
 For browser-only attack tuning on a work PC, the [hosted Move Workshop](https://h1p5t3r.github.io/Fight-guild-/) is the intended delivery after the [one-time Pages setup](docs/move-workshop.md#hosted-publishing). It loads artwork as needed, keeps drafts and pose photos in your browser, and exports JSON for the Godot editor. The **Publish Move Workshop** workflow deploys updates from `feat/godot-combat-lab`. For offline use, extract **FightGuild-Move-Workshop.zip** and open `index.html`; keep its `assets` folder beside it. The single-file HTML is still built for compatibility. Current exports use schema 19; version-12–18 workshop files migrate automatically. No game install is needed. Before switching to the website, download your JSON from the old editor and import it on the site.
 
-Download the Windows/Linux ZIP from this branch's successful GitHub Actions artifacts, extract the whole folder and run its executable. For the editable project archive, import `godot/project.godot` in Godot 4.6.3. [Native play guide](docs/play-native.md) covers controls, saves, editing and direct online play.
+Download the Windows/Linux ZIP from this branch's successful GitHub Actions artifacts, extract the whole folder and run its executable. The current GitHub source ZIP also includes Windows x86-64 debug/release DLLs: import `godot/project.godot` in 64-bit Godot 4.6.3 and press F5. If an older source ZIP reports “Could not resolve external class member core,” use the [small Windows DLL repair ZIP](exports/FightGuild-Windows-Core.zip) and the [repair instructions](docs/play-native.md#windows-could-not-resolve-external-class-member-core). [Native play guide](docs/play-native.md) covers controls, saves, editing and direct online play.
 
 - Versus is first to two Scrum wins: **1st Scrum**, **2nd Scrum**, and **Final Down** at 1–1. Fighter loading/intros and the four-beat opening lead into each match; online clients synchronize before release.
 - Start from **Versus**, **Training** or **Development**, then choose fighters. Esc / gamepad Start opens the match menu. [Menu flow](docs/menu-flow.md) explains entry, pause, rematch and connection recovery.
@@ -46,7 +46,7 @@ bash scripts/godot.sh --editor
 bash scripts/godot.sh
 ```
 
-After C++ changes, run `bash scripts/build-godot.sh`. When changing collision authoring, default move data or atlas pivots/body scale, first run `python scripts/generate-combat-data.py`, then rebuild the extension. Ordinary GDScript/presentation changes need no native rebuild. Validate with `bash scripts/test-godot.sh`.
+After C++ changes, run `bash scripts/build-godot.sh`. When changing collision authoring, default move data or atlas pivots/body scale, first run `python scripts/generate-combat-data.py`, then rebuild the extension. The Windows DLLs in `godot/bin` are tracked for source-ZIP users. After core/native changes, also rebuild both Windows targets below and commit their refreshed `windows-core.json`; `python scripts/windows-core.py check` rejects stale binaries. Ordinary GDScript/presentation changes need no native rebuild. Validate with `bash scripts/test-godot.sh`.
 
 To export, install templates and build the Windows library with MinGW-w64 (setup builds the Linux library):
 
@@ -55,6 +55,8 @@ bash scripts/install-godot.sh --templates
 bash scripts/build-godot.sh target=template_release
 bash scripts/build-godot.sh platform=windows
 bash scripts/build-godot.sh platform=windows target=template_release
+python scripts/windows-core.py check
+python scripts/windows-core.py package --output exports/FightGuild-Windows-Core.zip
 bash scripts/export-godot.sh
 ```
 

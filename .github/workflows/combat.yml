@@ -3,6 +3,24 @@ on: [push, pull_request]
 permissions:
   contents: read
 jobs:
+  windows-source-bundle:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check Windows DLLs match the source ZIP
+        run: |
+          python scripts/windows-core.py check --archive exports/FightGuild-Windows-Core.zip
+          python tests/windows_core_package_test.py
+      - name: Package the Windows editor repair
+        run: python scripts/windows-core.py package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FightGuild-Windows-Core
+          path: build/FightGuild-Windows-Core.zip
+          if-no-files-found: error
   validate-and-package:
     runs-on: ubuntu-24.04
     env:

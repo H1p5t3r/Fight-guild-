@@ -7,6 +7,8 @@ import zipfile
 
 root = Path(__file__).resolve().parents[1]
 target = sys.argv[1] if len(sys.argv) > 1 else 'all'
+if target in ('all', 'Windows'):
+    subprocess.run([sys.executable, str(root / 'scripts/windows-core.py'), 'check'], check=True)
 notices = list((root / 'licenses').glob('*'))
 packages = []
 for platform in (['Linux', 'Windows'] if target == 'all' else [target]):
