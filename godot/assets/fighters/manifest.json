@@ -5728,6 +5728,1104 @@
               496
             ],
             "body_height": 480
+          },
+          {
+            "name": "236S / Read entry",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              242,
+              14,
+              535,
+              497
+            ],
+            "file": "smoke-idle-v1/idle.png",
+            "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d",
+            "body_height": 480,
+            "action_id": "236S",
+            "action_frame": 1,
+            "motion_cue": "Read entry"
+          },
+          {
+            "name": "236S / Gather",
+            "file": "smoke-attacks-v2/special_entries.png",
+            "sha256": "ef59027a26928489dbda7d8aed20523a1694002ccd59c31a89381fc25d90a148",
+            "generation_file": "exec-40e969ba-46ec-4f80-ad93-8b483f6bbd49.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              239,
+              11,
+              538,
+              497
+            ],
+            "body_height": 480,
+            "action_id": "236S",
+            "action_frame": 2,
+            "motion_cue": "Gather"
+          },
+          {
+            "name": "236S / Palm coiled \u00b7 hold",
+            "file": "smoke-attacks-v2/pillar_bodies.png",
+            "sha256": "0ee7cfbd37e999c468929d9121aec748015a79c3b8659c4ae58073570e9e3c12",
+            "generation_file": "exec-2336015d-5a21-449c-b1b4-31f3cc1c95ce.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              225,
+              12,
+              465,
+              497
+            ],
+            "body_height": 480,
+            "action_id": "236S",
+            "action_frame": 8,
+            "motion_cue": "Palm coiled \u00b7 hold"
+          },
+          {
+            "name": "236S / First-active pillar release",
+            "file": "smoke-attacks-v2/pillar_bodies.png",
+            "sha256": "0ee7cfbd37e999c468929d9121aec748015a79c3b8659c4ae58073570e9e3c12",
+            "generation_file": "exec-2336015d-5a21-449c-b1b4-31f3cc1c95ce.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              231,
+              9,
+              536,
+              497
+            ],
+            "body_height": 480,
+            "action_id": "236S",
+            "action_frame": 13,
+            "motion_cue": "First-active pillar release"
+          },
+          {
+            "file": "smoke-specials-v3/pillar-recovery.png",
+            "sha256": "88f18dc2d80492815421af3a2dc4db6f766245379e3500b29a4634a365382c56",
+            "generation_file": "exec-f06fd58e-0764-4261-9297-bf3771b1b06f.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "source_pose": 0,
+            "bounds": [
+              234,
+              11,
+              535,
+              497
+            ],
+            "pivot": [
+              400,
+              498
+            ],
+            "body_height": 480,
+            "name": "236S / Follow-through \u00b7 fingers unfurl",
+            "action_id": "236S",
+            "action_frame": 17,
+            "motion_cue": "Follow-through \u00b7 fingers unfurl"
+          },
+          {
+            "file": "smoke-specials-v3/pillar-recovery.png",
+            "sha256": "88f18dc2d80492815421af3a2dc4db6f766245379e3500b29a4634a365382c56",
+            "generation_file": "exec-f06fd58e-0764-4261-9297-bf3771b1b06f.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "source_pose": 1,
+            "bounds": [
+              235,
+              12,
+              514,
+              497
+            ],
+            "pivot": [
+              400,
+              498
+            ],
+            "body_height": 480,
+            "name": "236S / Collect the hand",
+            "action_id": "236S",
+            "action_frame": 31,
+            "motion_cue": "Collect the hand"
+          },
+          {
+            "file": "smoke-specials-v3/pillar-recovery.png",
+            "sha256": "88f18dc2d80492815421af3a2dc4db6f766245379e3500b29a4634a365382c56",
+            "generation_file": "exec-f06fd58e-0764-4261-9297-bf3771b1b06f.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "source_pose": 3,
+            "bounds": [
+              230,
+              11,
+              521,
+              497
+            ],
+            "pivot": [
+              400,
+              498
+            ],
+            "body_height": 480,
+            "name": "236S / Return to drift",
+            "action_id": "236S",
+            "action_frame": 39,
+            "motion_cue": "Return to drift"
+          },
+          {
+            "name": "236S / Settled \u00b7 cast lock remains",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              242,
+              14,
+              535,
+              497
+            ],
+            "file": "smoke-idle-v1/idle.png",
+            "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d",
+            "body_height": 480,
+            "action_id": "236S",
+            "action_frame": 45,
+            "motion_cue": "Settled \u00b7 cast lock remains"
+          },
+          {
+            "name": "236S / Settled \u00b7 still recovering",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              242,
+              14,
+              535,
+              497
+            ],
+            "file": "smoke-idle-v1/idle.png",
+            "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d",
+            "body_height": 480,
+            "action_id": "236S",
+            "action_frame": 49,
+            "motion_cue": "Settled \u00b7 still recovering"
+          },
+          {
+            "name": "236Hs / Read entry",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              242,
+              14,
+              535,
+              497
+            ],
+            "file": "smoke-idle-v1/idle.png",
+            "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d",
+            "body_height": 480,
+            "action_id": "236Hs",
+            "action_frame": 1,
+            "motion_cue": "Read entry"
+          },
+          {
+            "name": "236Hs / Gather",
+            "file": "smoke-attacks-v2/special_entries.png",
+            "sha256": "ef59027a26928489dbda7d8aed20523a1694002ccd59c31a89381fc25d90a148",
+            "generation_file": "exec-40e969ba-46ec-4f80-ad93-8b483f6bbd49.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              240,
+              13,
+              488,
+              497
+            ],
+            "body_height": 480,
+            "action_id": "236Hs",
+            "action_frame": 5,
+            "motion_cue": "Gather"
+          },
+          {
+            "name": "236Hs / Palm coiled \u00b7 hold",
+            "file": "smoke-attacks-v2/pillar_bodies.png",
+            "sha256": "0ee7cfbd37e999c468929d9121aec748015a79c3b8659c4ae58073570e9e3c12",
+            "generation_file": "exec-2336015d-5a21-449c-b1b4-31f3cc1c95ce.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              225,
+              12,
+              465,
+              497
+            ],
+            "body_height": 480,
+            "action_id": "236Hs",
+            "action_frame": 16,
+            "motion_cue": "Palm coiled \u00b7 hold"
+          },
+          {
+            "name": "236Hs / First-active pillar release",
+            "file": "smoke-attacks-v2/pillar_bodies.png",
+            "sha256": "0ee7cfbd37e999c468929d9121aec748015a79c3b8659c4ae58073570e9e3c12",
+            "generation_file": "exec-2336015d-5a21-449c-b1b4-31f3cc1c95ce.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              223,
+              12,
+              591,
+              497
+            ],
+            "body_height": 480,
+            "action_id": "236Hs",
+            "action_frame": 25,
+            "motion_cue": "First-active pillar release"
+          },
+          {
+            "file": "smoke-specials-v3/pillar-recovery.png",
+            "sha256": "88f18dc2d80492815421af3a2dc4db6f766245379e3500b29a4634a365382c56",
+            "generation_file": "exec-f06fd58e-0764-4261-9297-bf3771b1b06f.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "source_pose": 2,
+            "bounds": [
+              221,
+              11,
+              585,
+              497
+            ],
+            "pivot": [
+              400,
+              498
+            ],
+            "body_height": 480,
+            "name": "236Hs / Follow-through \u00b7 fingers unfurl",
+            "action_id": "236Hs",
+            "action_frame": 29,
+            "motion_cue": "Follow-through \u00b7 fingers unfurl"
+          },
+          {
+            "name": "236Hs / Lower the casting wrist",
+            "file": "smoke-attacks-v2/pillar_bodies.png",
+            "sha256": "0ee7cfbd37e999c468929d9121aec748015a79c3b8659c4ae58073570e9e3c12",
+            "generation_file": "exec-2336015d-5a21-449c-b1b4-31f3cc1c95ce.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              231,
+              9,
+              536,
+              497
+            ],
+            "body_height": 480,
+            "action_id": "236Hs",
+            "action_frame": 36,
+            "motion_cue": "Lower the casting wrist"
+          },
+          {
+            "file": "smoke-specials-v3/pillar-recovery.png",
+            "sha256": "88f18dc2d80492815421af3a2dc4db6f766245379e3500b29a4634a365382c56",
+            "generation_file": "exec-f06fd58e-0764-4261-9297-bf3771b1b06f.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "source_pose": 1,
+            "bounds": [
+              235,
+              12,
+              514,
+              497
+            ],
+            "pivot": [
+              400,
+              498
+            ],
+            "body_height": 480,
+            "name": "236Hs / Collect the hand",
+            "action_id": "236Hs",
+            "action_frame": 43,
+            "motion_cue": "Collect the hand"
+          },
+          {
+            "file": "smoke-specials-v3/pillar-recovery.png",
+            "sha256": "88f18dc2d80492815421af3a2dc4db6f766245379e3500b29a4634a365382c56",
+            "generation_file": "exec-f06fd58e-0764-4261-9297-bf3771b1b06f.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "source_pose": 3,
+            "bounds": [
+              230,
+              11,
+              521,
+              497
+            ],
+            "pivot": [
+              400,
+              498
+            ],
+            "body_height": 480,
+            "name": "236Hs / Return to drift",
+            "action_id": "236Hs",
+            "action_frame": 51,
+            "motion_cue": "Return to drift"
+          },
+          {
+            "name": "236Hs / Settled \u00b7 cast lock remains",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              242,
+              14,
+              535,
+              497
+            ],
+            "file": "smoke-idle-v1/idle.png",
+            "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d",
+            "body_height": 480,
+            "action_id": "236Hs",
+            "action_frame": 57,
+            "motion_cue": "Settled \u00b7 cast lock remains"
+          },
+          {
+            "name": "236Hs / Settled \u00b7 still recovering",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              242,
+              14,
+              535,
+              497
+            ],
+            "file": "smoke-idle-v1/idle.png",
+            "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d",
+            "body_height": 480,
+            "action_id": "236Hs",
+            "action_frame": 61,
+            "motion_cue": "Settled \u00b7 still recovering"
+          },
+          {
+            "name": "214S / Read entry",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              242,
+              14,
+              535,
+              497
+            ],
+            "file": "smoke-idle-v1/idle.png",
+            "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d",
+            "body_height": 480,
+            "action_id": "214S",
+            "action_frame": 1,
+            "motion_cue": "Read entry"
+          },
+          {
+            "name": "214S / Gather",
+            "file": "smoke-attacks-v2/special_entries.png",
+            "sha256": "ef59027a26928489dbda7d8aed20523a1694002ccd59c31a89381fc25d90a148",
+            "generation_file": "exec-40e969ba-46ec-4f80-ad93-8b483f6bbd49.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              233,
+              10,
+              485,
+              496
+            ],
+            "body_height": 480,
+            "action_id": "214S",
+            "action_frame": 3,
+            "motion_cue": "Gather"
+          },
+          {
+            "name": "214S / Loaded backhand \u00b7 hold",
+            "file": "smoke-attacks-v2/sword_bodies.png",
+            "sha256": "11305fbdd37a86f5fcf8aac2c618f1b8eeb3148b711d340cc630625083b97213",
+            "generation_file": "exec-78544440-dba2-4f77-a678-f8a037c5b6dd.png",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              493
+            ],
+            "bounds": [
+              179,
+              16,
+              593,
+              493
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 0,
+              "box": [
+                -30,
+                110,
+                65,
+                134
+              ],
+              "behind": true,
+              "opacity": 1.0
+            },
+            "action_id": "214S",
+            "action_frame": 7,
+            "motion_cue": "Loaded backhand \u00b7 hold"
+          },
+          {
+            "name": "214S / First-active backhand snap",
+            "file": "smoke-attacks-v2/sword_bodies.png",
+            "sha256": "11305fbdd37a86f5fcf8aac2c618f1b8eeb3148b711d340cc630625083b97213",
+            "generation_file": "exec-78544440-dba2-4f77-a678-f8a037c5b6dd.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              493
+            ],
+            "bounds": [
+              124,
+              16,
+              634,
+              494
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 1,
+              "box": [
+                8,
+                81,
+                250,
+                145
+              ],
+              "behind": false,
+              "opacity": 1.0
+            },
+            "action_id": "214S",
+            "action_frame": 15,
+            "motion_cue": "First-active backhand snap"
+          },
+          {
+            "name": "214S / Brake \u00b7 residual arc",
+            "file": "smoke-attacks-v2/sword_bodies.png",
+            "sha256": "11305fbdd37a86f5fcf8aac2c618f1b8eeb3148b711d340cc630625083b97213",
+            "generation_file": "exec-78544440-dba2-4f77-a678-f8a037c5b6dd.png",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              493
+            ],
+            "bounds": [
+              124,
+              16,
+              634,
+              494
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 1,
+              "box": [
+                8,
+                81,
+                250,
+                145
+              ],
+              "behind": false,
+              "opacity": 0.42
+            },
+            "action_id": "214S",
+            "action_frame": 18,
+            "motion_cue": "Brake \u00b7 residual arc"
+          },
+          {
+            "file": "smoke-specials-v3/backhand-recovery.png",
+            "sha256": "a43115662b4415efe3e1c4ac76461fd83e39be082b8d9a0066b0ccbf71274220",
+            "generation_file": "exec-3bc832e7-ad8a-400c-8192-815c12afc662.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "source_pose": 0,
+            "bounds": [
+              144,
+              12,
+              641,
+              493
+            ],
+            "pivot": [
+              429,
+              494
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 1,
+              "box": [
+                35,
+                90,
+                216,
+                138
+              ],
+              "behind": false,
+              "opacity": 0.2
+            },
+            "name": "214S / Follow-through \u00b7 cloth lags",
+            "action_id": "214S",
+            "action_frame": 20,
+            "motion_cue": "Follow-through \u00b7 cloth lags"
+          },
+          {
+            "file": "smoke-specials-v3/backhand-recovery.png",
+            "sha256": "a43115662b4415efe3e1c4ac76461fd83e39be082b8d9a0066b0ccbf71274220",
+            "generation_file": "exec-3bc832e7-ad8a-400c-8192-815c12afc662.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "source_pose": 1,
+            "bounds": [
+              174,
+              9,
+              537,
+              492
+            ],
+            "pivot": [
+              400,
+              493
+            ],
+            "body_height": 480,
+            "name": "214S / Withdraw the hand",
+            "action_id": "214S",
+            "action_frame": 26,
+            "motion_cue": "Withdraw the hand"
+          },
+          {
+            "name": "214S / Collect into drift",
+            "file": "smoke-attacks-v2/special_entries.png",
+            "sha256": "ef59027a26928489dbda7d8aed20523a1694002ccd59c31a89381fc25d90a148",
+            "generation_file": "exec-40e969ba-46ec-4f80-ad93-8b483f6bbd49.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              233,
+              10,
+              485,
+              496
+            ],
+            "body_height": 480,
+            "action_id": "214S",
+            "action_frame": 34,
+            "motion_cue": "Collect into drift"
+          },
+          {
+            "name": "214S / Settled \u00b7 still recovering",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              242,
+              14,
+              535,
+              497
+            ],
+            "file": "smoke-idle-v1/idle.png",
+            "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d",
+            "body_height": 480,
+            "action_id": "214S",
+            "action_frame": 38,
+            "motion_cue": "Settled \u00b7 still recovering"
+          },
+          {
+            "name": "214Hs / Read entry",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              242,
+              14,
+              535,
+              497
+            ],
+            "file": "smoke-idle-v1/idle.png",
+            "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d",
+            "body_height": 480,
+            "action_id": "214Hs",
+            "action_frame": 1,
+            "motion_cue": "Read entry"
+          },
+          {
+            "name": "214Hs / Gather",
+            "file": "smoke-attacks-v2/special_entries.png",
+            "sha256": "ef59027a26928489dbda7d8aed20523a1694002ccd59c31a89381fc25d90a148",
+            "generation_file": "exec-40e969ba-46ec-4f80-ad93-8b483f6bbd49.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              229,
+              10,
+              501,
+              496
+            ],
+            "body_height": 480,
+            "action_id": "214Hs",
+            "action_frame": 5,
+            "motion_cue": "Gather"
+          },
+          {
+            "name": "214Hs / Loaded backhand \u00b7 hold",
+            "file": "smoke-attacks-v2/sword_bodies.png",
+            "sha256": "11305fbdd37a86f5fcf8aac2c618f1b8eeb3148b711d340cc630625083b97213",
+            "generation_file": "exec-78544440-dba2-4f77-a678-f8a037c5b6dd.png",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              493
+            ],
+            "bounds": [
+              129,
+              15,
+              610,
+              493
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 2,
+              "box": [
+                -42,
+                108,
+                76,
+                136
+              ],
+              "behind": true,
+              "opacity": 1.0
+            },
+            "action_id": "214Hs",
+            "action_frame": 14,
+            "motion_cue": "Loaded backhand \u00b7 hold"
+          },
+          {
+            "name": "214Hs / First-active backhand snap",
+            "file": "smoke-attacks-v2/sword_bodies.png",
+            "sha256": "11305fbdd37a86f5fcf8aac2c618f1b8eeb3148b711d340cc630625083b97213",
+            "generation_file": "exec-78544440-dba2-4f77-a678-f8a037c5b6dd.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              493
+            ],
+            "bounds": [
+              82,
+              16,
+              638,
+              493
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 3,
+              "box": [
+                6,
+                87,
+                351,
+                139
+              ],
+              "behind": false,
+              "opacity": 1.0
+            },
+            "action_id": "214Hs",
+            "action_frame": 29,
+            "motion_cue": "First-active backhand snap"
+          },
+          {
+            "name": "214Hs / Brake \u00b7 residual arc",
+            "file": "smoke-attacks-v2/sword_bodies.png",
+            "sha256": "11305fbdd37a86f5fcf8aac2c618f1b8eeb3148b711d340cc630625083b97213",
+            "generation_file": "exec-78544440-dba2-4f77-a678-f8a037c5b6dd.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              493
+            ],
+            "bounds": [
+              82,
+              16,
+              638,
+              493
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 3,
+              "box": [
+                6,
+                87,
+                351,
+                139
+              ],
+              "behind": false,
+              "opacity": 0.42
+            },
+            "action_id": "214Hs",
+            "action_frame": 32,
+            "motion_cue": "Brake \u00b7 residual arc"
+          },
+          {
+            "file": "smoke-specials-v3/backhand-recovery.png",
+            "sha256": "a43115662b4415efe3e1c4ac76461fd83e39be082b8d9a0066b0ccbf71274220",
+            "generation_file": "exec-3bc832e7-ad8a-400c-8192-815c12afc662.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "source_pose": 2,
+            "bounds": [
+              104,
+              21,
+              672,
+              493
+            ],
+            "pivot": [
+              435,
+              493
+            ],
+            "body_height": 480,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 3,
+              "box": [
+                35,
+                90,
+                300,
+                132
+              ],
+              "behind": false,
+              "opacity": 0.2
+            },
+            "name": "214Hs / Follow-through \u00b7 cloth lags",
+            "action_id": "214Hs",
+            "action_frame": 34,
+            "motion_cue": "Follow-through \u00b7 cloth lags"
+          },
+          {
+            "file": "smoke-specials-v3/backhand-recovery.png",
+            "sha256": "a43115662b4415efe3e1c4ac76461fd83e39be082b8d9a0066b0ccbf71274220",
+            "generation_file": "exec-3bc832e7-ad8a-400c-8192-815c12afc662.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "source_pose": 3,
+            "bounds": [
+              164,
+              8,
+              523,
+              492
+            ],
+            "pivot": [
+              400,
+              492
+            ],
+            "body_height": 480,
+            "name": "214Hs / Withdraw the hand",
+            "action_id": "214Hs",
+            "action_frame": 44,
+            "motion_cue": "Withdraw the hand"
+          },
+          {
+            "name": "214Hs / Collect into drift",
+            "file": "smoke-attacks-v2/special_entries.png",
+            "sha256": "ef59027a26928489dbda7d8aed20523a1694002ccd59c31a89381fc25d90a148",
+            "generation_file": "exec-40e969ba-46ec-4f80-ad93-8b483f6bbd49.png",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "bounds": [
+              229,
+              10,
+              501,
+              496
+            ],
+            "body_height": 480,
+            "action_id": "214Hs",
+            "action_frame": 56,
+            "motion_cue": "Collect into drift"
+          },
+          {
+            "name": "214Hs / Settled \u00b7 still recovering",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "pivot": [
+              408,
+              495
+            ],
+            "bounds": [
+              242,
+              14,
+              535,
+              497
+            ],
+            "file": "smoke-idle-v1/idle.png",
+            "sha256": "ee5e9aaa9a87de047e9c406477d6b95cd184f3a37d679571ab212bbd6851b39d",
+            "body_height": 480,
+            "action_id": "214Hs",
+            "action_frame": 62,
+            "motion_cue": "Settled \u00b7 still recovering"
           }
         ],
         "transparent_samples": [
@@ -6206,83 +7304,280 @@
         },
         "14": {
           "artPose": 21,
+          "moveId": "236P",
           "windup": [
             {
               "start": 0,
-              "phase": "idle",
-              "pose": 0
-            },
-            {
-              "start": 20,
               "phase": "attack_animation",
-              "pose": 28
+              "pose": 32
             },
             {
-              "start": 65,
-              "phase": "signature_windup",
-              "pose": 20
+              "start": 8,
+              "phase": "attack_animation",
+              "pose": 33
+            },
+            {
+              "start": 58,
+              "phase": "attack_animation",
+              "pose": 34
             }
-          ]
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 35
+            },
+            {
+              "start": 11,
+              "phase": "attack_animation",
+              "pose": 36
+            },
+            {
+              "start": 50,
+              "phase": "attack_animation",
+              "pose": 37
+            },
+            {
+              "start": 72,
+              "phase": "attack_animation",
+              "pose": 38
+            },
+            {
+              "start": 88,
+              "phase": "attack_animation",
+              "pose": 39
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 40
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / follow-through / withdrawal / drift",
+            "authoredTiming": [
+              13,
+              36,
+              2
+            ],
+            "largestMotionBoundary": [
+              12,
+              13
+            ],
+            "source": "smoke-specials-v3"
+          }
         },
         "25": {
           "artPose": 22,
+          "moveId": "236K",
           "windup": [
             {
               "start": 0,
-              "phase": "idle",
-              "pose": 0
-            },
-            {
-              "start": 20,
               "phase": "attack_animation",
-              "pose": 29
+              "pose": 41
             },
             {
-              "start": 65,
-              "phase": "signature_windup",
-              "pose": 21
+              "start": 16,
+              "phase": "attack_animation",
+              "pose": 42
+            },
+            {
+              "start": 62,
+              "phase": "attack_animation",
+              "pose": 43
             }
-          ]
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 44
+            },
+            {
+              "start": 11,
+              "phase": "attack_animation",
+              "pose": 45
+            },
+            {
+              "start": 30,
+              "phase": "attack_animation",
+              "pose": 46
+            },
+            {
+              "start": 50,
+              "phase": "attack_animation",
+              "pose": 47
+            },
+            {
+              "start": 72,
+              "phase": "attack_animation",
+              "pose": 48
+            },
+            {
+              "start": 88,
+              "phase": "attack_animation",
+              "pose": 49
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 50
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / follow-through / withdrawal / drift",
+            "authoredTiming": [
+              25,
+              36,
+              2
+            ],
+            "largestMotionBoundary": [
+              24,
+              25
+            ],
+            "source": "smoke-specials-v3"
+          }
         },
         "15": {
           "artPose": 23,
+          "moveId": "236S",
           "windup": [
             {
               "start": 0,
-              "phase": "idle",
-              "pose": 0
-            },
-            {
-              "start": 20,
               "phase": "attack_animation",
-              "pose": 30
+              "pose": 51
             },
             {
-              "start": 65,
-              "phase": "signature_windup",
-              "pose": 22
+              "start": 14,
+              "phase": "attack_animation",
+              "pose": 52
+            },
+            {
+              "start": 42,
+              "phase": "attack_animation",
+              "pose": 53
             }
-          ]
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 54
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 55
+            },
+            {
+              "start": 8,
+              "phase": "attack_animation",
+              "pose": 56
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 57
+            },
+            {
+              "start": 66,
+              "phase": "attack_animation",
+              "pose": 58
+            },
+            {
+              "start": 83,
+              "phase": "attack_animation",
+              "pose": 59
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / follow-through / withdrawal / drift",
+            "authoredTiming": [
+              15,
+              3,
+              24
+            ],
+            "largestMotionBoundary": [
+              14,
+              15
+            ],
+            "source": "smoke-specials-v3"
+          }
         },
         "16": {
           "artPose": 24,
+          "moveId": "623Hs",
           "windup": [
             {
               "start": 0,
-              "phase": "idle",
-              "pose": 0
-            },
-            {
-              "start": 20,
               "phase": "attack_animation",
-              "pose": 31
+              "pose": 60
             },
             {
-              "start": 65,
-              "phase": "signature_windup",
-              "pose": 23
+              "start": 14,
+              "phase": "attack_animation",
+              "pose": 61
+            },
+            {
+              "start": 46,
+              "phase": "attack_animation",
+              "pose": 62
             }
-          ]
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 63
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 64
+            },
+            {
+              "start": 5,
+              "phase": "attack_animation",
+              "pose": 65
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 66
+            },
+            {
+              "start": 66,
+              "phase": "attack_animation",
+              "pose": 67
+            },
+            {
+              "start": 83,
+              "phase": "attack_animation",
+              "pose": 68
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / follow-through / withdrawal / drift",
+            "authoredTiming": [
+              29,
+              3,
+              36
+            ],
+            "largestMotionBoundary": [
+              28,
+              29
+            ],
+            "source": "smoke-specials-v3"
+          }
         }
       },
       "sword_fx": {

@@ -62,6 +62,12 @@ Requested scope: make repeatable character images performing directed actions, w
 - [ ] Extend each attack to **windup, active, impact, follow-through and recovery** animations after the first two stages are approved. Support multiple drawings per phase and explicit whiff/hit/block paths without changing authoritative combat timing accidentally.
 - [ ] Trial the complete workflow on one fighter and a second fighter with a different silhouette; measure drift and revision cost before using it for the rest of the roster or a new character.
 
+## Animation audit follow-ups — 20 November
+
+- [x] Audit eight attacks against the supplied fighting-game animation guide; give Smoke's four approved specials authored follow-through and recovery, with actual hit/block/whiff comparison recordings. See the [audit](attack-animation-audit-2026-11-20.md).
+- [ ] Give Smoke f.S distinct gas-pulse drawings for its changing multi-hit path and a held recovery sequence; retain the authored hit groups and timing.
+- [ ] Reduce Smoke 2Hs fire occlusion where fighters overlap, while preserving the visible active reach and the approved eruption.
+
 ## Momentum and defense
 
 - [x] Divide the continuous Momentum HUD into three equal sections without adding spends or thresholds.

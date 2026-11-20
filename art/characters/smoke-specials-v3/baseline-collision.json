@@ -1,0 +1,4259 @@
+{
+  "name": "Smoke",
+  "push": {
+    "halfWidth": 2600,
+    "standingHeight": 14000,
+    "crouchingHeight": 8400,
+    "airHeight": 9500,
+    "airBottom": 6000
+  },
+  "poses": {
+    "active": [
+      {
+        "hurt": {
+          "legs": [
+            356,
+            230,
+            449,
+            495
+          ],
+          "torsoArms": [
+            278,
+            85,
+            477,
+            250
+          ],
+          "head": [
+            389,
+            32,
+            433,
+            85
+          ],
+          "extension": [
+            473,
+            185,
+            537,
+            233
+          ]
+        },
+        "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            150,
+            235,
+            385,
+            490
+          ],
+          "torsoArms": [
+            170,
+            95,
+            340,
+            265
+          ],
+          "head": [
+            245,
+            40,
+            289,
+            96
+          ],
+          "extension": [
+            320,
+            85,
+            470,
+            150
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            175,
+            230,
+            262,
+            490
+          ],
+          "torsoArms": [
+            172,
+            95,
+            305,
+            255
+          ],
+          "head": [
+            230,
+            42,
+            274,
+            97
+          ],
+          "extension": [
+            260,
+            178,
+            485,
+            225
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            64,
+            259,
+            371,
+            509
+          ],
+          "torsoArms": [
+            121,
+            110,
+            299,
+            272
+          ],
+          "head": [
+            184,
+            65,
+            228,
+            117
+          ],
+          "extension": [
+            254,
+            117,
+            364,
+            165
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            150,
+            235,
+            385,
+            490
+          ],
+          "torsoArms": [
+            170,
+            105,
+            340,
+            265
+          ],
+          "head": [
+            245,
+            50,
+            289,
+            107
+          ],
+          "extension": [
+            315,
+            110,
+            452,
+            166
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            78,
+            253,
+            385,
+            490
+          ],
+          "torsoArms": [
+            130,
+            105,
+            294,
+            270
+          ],
+          "head": [
+            228,
+            64,
+            272,
+            115
+          ],
+          "extension": [
+            285,
+            37,
+            496,
+            118
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            58,
+            249,
+            229,
+            432
+          ],
+          "torsoArms": [
+            66,
+            141,
+            210,
+            282
+          ],
+          "head": [
+            133,
+            115,
+            157,
+            151
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            74,
+            245,
+            210,
+            428
+          ],
+          "torsoArms": [
+            106,
+            139,
+            188,
+            288
+          ],
+          "head": [
+            122,
+            113,
+            146,
+            149
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            200,
+            248,
+            394,
+            420
+          ],
+          "torsoArms": [
+            170,
+            120,
+            323,
+            266
+          ],
+          "head": [
+            270,
+            65,
+            314,
+            116
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            117,
+            234,
+            219,
+            429
+          ],
+          "torsoArms": [
+            70,
+            140,
+            166,
+            258
+          ],
+          "head": [
+            66,
+            114,
+            90,
+            150
+          ],
+          "extension": [
+            121,
+            172,
+            214,
+            196
+          ]
+        },
+        "extensionFor": "front arm"
+      },
+      {
+        "hurt": {
+          "legs": [
+            56,
+            265,
+            216,
+            429
+          ],
+          "torsoArms": [
+            111,
+            171,
+            185,
+            289
+          ],
+          "head": [
+            131,
+            150,
+            155,
+            186
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            316,
+            305,
+            645,
+            488
+          ],
+          "torsoArms": [
+            298,
+            205,
+            630,
+            364
+          ],
+          "head": [
+            410,
+            142,
+            460,
+            207
+          ],
+          "extension": [
+            245,
+            332,
+            319,
+            415
+          ]
+        },
+        "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+      }
+    ],
+    "windup": [
+      {
+        "hurt": {
+          "legs": [
+            152,
+            230,
+            383,
+            490
+          ],
+          "torsoArms": [
+            172,
+            95,
+            341,
+            257
+          ],
+          "head": [
+            250,
+            40,
+            294,
+            94
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            152,
+            230,
+            383,
+            490
+          ],
+          "torsoArms": [
+            172,
+            95,
+            341,
+            257
+          ],
+          "head": [
+            250,
+            40,
+            294,
+            94
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            174,
+            230,
+            262,
+            490
+          ],
+          "torsoArms": [
+            168,
+            95,
+            306,
+            250
+          ],
+          "head": [
+            226,
+            42,
+            266,
+            96
+          ],
+          "extension": [
+            270,
+            145,
+            360,
+            320
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            100,
+            235,
+            366,
+            490
+          ],
+          "torsoArms": [
+            140,
+            102,
+            296,
+            248
+          ],
+          "head": [
+            224,
+            50,
+            268,
+            100
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            152,
+            230,
+            383,
+            490
+          ],
+          "torsoArms": [
+            172,
+            95,
+            341,
+            257
+          ],
+          "head": [
+            250,
+            40,
+            294,
+            94
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            70,
+            255,
+            378,
+            502
+          ],
+          "torsoArms": [
+            125,
+            125,
+            296,
+            283
+          ],
+          "head": [
+            210,
+            77,
+            254,
+            130
+          ],
+          "extension": [
+            99,
+            18,
+            192,
+            145
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded."
+      }
+    ],
+    "block": [
+      {
+        "hurt": {
+          "legs": [
+            183,
+            215,
+            358,
+            490
+          ],
+          "torsoArms": [
+            250,
+            96,
+            361,
+            248
+          ],
+          "head": [
+            271,
+            60,
+            305,
+            110
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            173,
+            208,
+            356,
+            490
+          ],
+          "torsoArms": [
+            244,
+            92,
+            350,
+            241
+          ],
+          "head": [
+            268,
+            56,
+            302,
+            106
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            157,
+            249,
+            345,
+            490
+          ],
+          "torsoArms": [
+            217,
+            131,
+            326,
+            282
+          ],
+          "head": [
+            245,
+            103,
+            279,
+            153
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            188,
+            252,
+            373,
+            491
+          ],
+          "torsoArms": [
+            246,
+            139,
+            357,
+            285
+          ],
+          "head": [
+            284,
+            103,
+            318,
+            153
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            158,
+            218,
+            366,
+            490
+          ],
+          "torsoArms": [
+            229,
+            95,
+            406,
+            251
+          ],
+          "head": [
+            229,
+            59,
+            263,
+            109
+          ],
+          "extension": [
+            135,
+            70,
+            247,
+            143
+          ]
+        },
+        "extensionFor": "rear arm"
+      },
+      {
+        "hurt": {
+          "legs": [
+            151,
+            269,
+            339,
+            492
+          ],
+          "torsoArms": [
+            111,
+            152,
+            303,
+            302
+          ],
+          "head": [
+            275,
+            116,
+            309,
+            166
+          ],
+          "extension": [
+            277,
+            185,
+            391,
+            306
+          ]
+        },
+        "extensionFor": "front arm"
+      }
+    ],
+    "signature_windup": [
+      {
+        "hurt": {
+          "legs": [
+            152,
+            230,
+            383,
+            490
+          ],
+          "torsoArms": [
+            172,
+            95,
+            341,
+            257
+          ],
+          "head": [
+            250,
+            40,
+            294,
+            94
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            174,
+            230,
+            262,
+            490
+          ],
+          "torsoArms": [
+            168,
+            95,
+            306,
+            250
+          ],
+          "head": [
+            226,
+            42,
+            266,
+            96
+          ],
+          "extension": [
+            270,
+            145,
+            360,
+            320
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            240,
+            290,
+            440,
+            482
+          ],
+          "torsoArms": [
+            250,
+            181,
+            397,
+            300
+          ],
+          "head": [
+            350,
+            125,
+            392,
+            183
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            100,
+            235,
+            366,
+            490
+          ],
+          "torsoArms": [
+            140,
+            102,
+            296,
+            248
+          ],
+          "head": [
+            224,
+            50,
+            268,
+            100
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            152,
+            230,
+            383,
+            490
+          ],
+          "torsoArms": [
+            172,
+            95,
+            341,
+            257
+          ],
+          "head": [
+            250,
+            40,
+            294,
+            94
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            152,
+            322,
+            380,
+            490
+          ],
+          "torsoArms": [
+            170,
+            228,
+            310,
+            340
+          ],
+          "head": [
+            276,
+            174,
+            322,
+            228
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            206,
+            275,
+            391,
+            469
+          ],
+          "torsoArms": [
+            274,
+            210,
+            445,
+            325
+          ],
+          "head": [
+            384,
+            156,
+            424,
+            214
+          ],
+          "extension": [
+            430,
+            360,
+            522,
+            454
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            175,
+            272,
+            375,
+            469
+          ],
+          "torsoArms": [
+            212,
+            207,
+            362,
+            329
+          ],
+          "head": [
+            305,
+            155,
+            347,
+            213
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            279,
+            280,
+            631,
+            470
+          ],
+          "torsoArms": [
+            259,
+            190,
+            515,
+            355
+          ],
+          "head": [
+            459,
+            146,
+            505,
+            201
+          ],
+          "extension": [
+            449,
+            328,
+            569,
+            449
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            150,
+            323,
+            339,
+            466
+          ],
+          "torsoArms": [
+            220,
+            249,
+            360,
+            370
+          ],
+          "head": [
+            351,
+            201,
+            396,
+            259
+          ],
+          "extension": [
+            362,
+            324,
+            451,
+            458
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            146,
+            290,
+            459,
+            490
+          ],
+          "torsoArms": [
+            224,
+            194,
+            383,
+            318
+          ],
+          "head": [
+            343,
+            140,
+            386,
+            197
+          ],
+          "extension": [
+            388,
+            133,
+            451,
+            224
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            104,
+            253,
+            402,
+            490
+          ],
+          "torsoArms": [
+            139,
+            105,
+            307,
+            274
+          ],
+          "head": [
+            229,
+            55,
+            272,
+            112
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            138,
+            277,
+            489,
+            502
+          ],
+          "torsoArms": [
+            242,
+            170,
+            420,
+            300
+          ],
+          "head": [
+            340,
+            126,
+            384,
+            181
+          ],
+          "extension": [
+            270,
+            20,
+            466,
+            190
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            70,
+            255,
+            378,
+            502
+          ],
+          "torsoArms": [
+            125,
+            125,
+            296,
+            283
+          ],
+          "head": [
+            210,
+            77,
+            254,
+            130
+          ],
+          "extension": [
+            99,
+            18,
+            192,
+            145
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            178,
+            293,
+            527,
+            502
+          ],
+          "torsoArms": [
+            272,
+            178,
+            442,
+            319
+          ],
+          "head": [
+            391,
+            138,
+            435,
+            189
+          ],
+          "extension": [
+            226,
+            64,
+            293,
+            185
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            200,
+            248,
+            394,
+            420
+          ],
+          "torsoArms": [
+            170,
+            120,
+            323,
+            266
+          ],
+          "head": [
+            270,
+            65,
+            314,
+            116
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            230,
+            250,
+            434,
+            458
+          ],
+          "torsoArms": [
+            192,
+            120,
+            355,
+            278
+          ],
+          "head": [
+            294,
+            63,
+            338,
+            120
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            165,
+            236,
+            371,
+            400
+          ],
+          "torsoArms": [
+            116,
+            116,
+            317,
+            265
+          ],
+          "head": [
+            234,
+            60,
+            278,
+            116
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            306,
+            235,
+            478,
+            401
+          ],
+          "torsoArms": [
+            274,
+            112,
+            450,
+            257
+          ],
+          "head": [
+            432,
+            65,
+            476,
+            119
+          ],
+          "extension": [
+            453,
+            185,
+            537,
+            246
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            270,
+            266,
+            453,
+            429
+          ],
+          "torsoArms": [
+            237,
+            125,
+            408,
+            283
+          ],
+          "head": [
+            369,
+            77,
+            411,
+            131
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            360,
+            241,
+            434,
+            497
+          ],
+          "torsoArms": [
+            326,
+            92,
+            508,
+            262
+          ],
+          "head": [
+            397,
+            34,
+            438,
+            93
+          ],
+          "extension": [
+            283,
+            202,
+            341,
+            257
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            358,
+            242,
+            435,
+            497
+          ],
+          "torsoArms": [
+            319,
+            105,
+            466,
+            265
+          ],
+          "head": [
+            400,
+            37,
+            441,
+            98
+          ],
+          "extension": [
+            270,
+            203,
+            327,
+            250
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            235,
+            258,
+            593,
+            493
+          ],
+          "torsoArms": [
+            340,
+            97,
+            524,
+            273
+          ],
+          "head": [
+            417,
+            40,
+            460,
+            99
+          ],
+          "extension": [
+            282,
+            220,
+            341,
+            272
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            170,
+            264,
+            610,
+            493
+          ],
+          "torsoArms": [
+            330,
+            98,
+            519,
+            284
+          ],
+          "head": [
+            401,
+            42,
+            448,
+            101
+          ],
+          "extension": [
+            360,
+            212,
+            469,
+            260
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      }
+    ],
+    "signature_active": [
+      {
+        "hurt": {
+          "legs": [
+            150,
+            235,
+            385,
+            490
+          ],
+          "torsoArms": [
+            170,
+            95,
+            340,
+            265
+          ],
+          "head": [
+            245,
+            40,
+            289,
+            96
+          ],
+          "extension": [
+            320,
+            85,
+            470,
+            150
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            175,
+            230,
+            262,
+            490
+          ],
+          "torsoArms": [
+            172,
+            95,
+            305,
+            255
+          ],
+          "head": [
+            230,
+            42,
+            274,
+            97
+          ],
+          "extension": [
+            260,
+            178,
+            485,
+            225
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            194,
+            277,
+            440,
+            509
+          ],
+          "torsoArms": [
+            206,
+            142,
+            350,
+            292
+          ],
+          "head": [
+            265,
+            89,
+            310,
+            144
+          ],
+          "extension": [
+            335,
+            42,
+            400,
+            147
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            64,
+            259,
+            371,
+            509
+          ],
+          "torsoArms": [
+            121,
+            110,
+            299,
+            272
+          ],
+          "head": [
+            184,
+            65,
+            228,
+            117
+          ],
+          "extension": [
+            254,
+            117,
+            364,
+            165
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            150,
+            235,
+            385,
+            490
+          ],
+          "torsoArms": [
+            170,
+            105,
+            340,
+            265
+          ],
+          "head": [
+            245,
+            50,
+            289,
+            107
+          ],
+          "extension": [
+            315,
+            110,
+            452,
+            166
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            150,
+            340,
+            380,
+            490
+          ],
+          "torsoArms": [
+            180,
+            240,
+            312,
+            368
+          ],
+          "head": [
+            264,
+            183,
+            310,
+            240
+          ],
+          "extension": [
+            306,
+            236,
+            470,
+            279
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            84,
+            327,
+            330,
+            453
+          ],
+          "torsoArms": [
+            170,
+            225,
+            334,
+            355
+          ],
+          "head": [
+            272,
+            174,
+            318,
+            232
+          ],
+          "extension": [
+            285,
+            362,
+            528,
+            452
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            153,
+            280,
+            347,
+            453
+          ],
+          "torsoArms": [
+            167,
+            190,
+            324,
+            326
+          ],
+          "head": [
+            267,
+            133,
+            314,
+            194
+          ],
+          "extension": [
+            301,
+            175,
+            477,
+            237
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            287,
+            270,
+            653,
+            470
+          ],
+          "torsoArms": [
+            277,
+            166,
+            525,
+            336
+          ],
+          "head": [
+            398,
+            90,
+            444,
+            156
+          ],
+          "extension": [
+            496,
+            28,
+            648,
+            175
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            138,
+            350,
+            340,
+            487
+          ],
+          "torsoArms": [
+            177,
+            287,
+            336,
+            389
+          ],
+          "head": [
+            320,
+            247,
+            362,
+            303
+          ],
+          "extension": [
+            334,
+            343,
+            479,
+            415
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            133,
+            314,
+            444,
+            490
+          ],
+          "torsoArms": [
+            185,
+            224,
+            310,
+            348
+          ],
+          "head": [
+            270,
+            164,
+            312,
+            224
+          ],
+          "extension": [
+            300,
+            92,
+            432,
+            236
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            86,
+            290,
+            389,
+            490
+          ],
+          "torsoArms": [
+            117,
+            190,
+            320,
+            319
+          ],
+          "head": [
+            207,
+            135,
+            250,
+            193
+          ],
+          "extension": [
+            282,
+            250,
+            390,
+            330
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            105,
+            313,
+            443,
+            490
+          ],
+          "torsoArms": [
+            193,
+            225,
+            360,
+            345
+          ],
+          "head": [
+            310,
+            167,
+            354,
+            227
+          ],
+          "extension": [
+            340,
+            283,
+            496,
+            380
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            78,
+            253,
+            385,
+            490
+          ],
+          "torsoArms": [
+            130,
+            105,
+            294,
+            270
+          ],
+          "head": [
+            228,
+            64,
+            272,
+            115
+          ],
+          "extension": [
+            285,
+            37,
+            496,
+            118
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            171,
+            305,
+            527,
+            502
+          ],
+          "torsoArms": [
+            286,
+            192,
+            446,
+            324
+          ],
+          "head": [
+            402,
+            151,
+            446,
+            207
+          ],
+          "extension": [
+            310,
+            24,
+            456,
+            191
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            200,
+            248,
+            392,
+            404
+          ],
+          "torsoArms": [
+            167,
+            110,
+            335,
+            265
+          ],
+          "head": [
+            265,
+            57,
+            309,
+            111
+          ],
+          "extension": [
+            325,
+            143,
+            489,
+            187
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            212,
+            269,
+            357,
+            372
+          ],
+          "torsoArms": [
+            188,
+            116,
+            354,
+            276
+          ],
+          "head": [
+            287,
+            62,
+            331,
+            118
+          ],
+          "extension": [
+            338,
+            292,
+            528,
+            398
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            171,
+            232,
+            344,
+            439
+          ],
+          "torsoArms": [
+            124,
+            111,
+            317,
+            266
+          ],
+          "head": [
+            213,
+            55,
+            257,
+            111
+          ],
+          "extension": [
+            299,
+            94,
+            419,
+            150
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            210,
+            277,
+            415,
+            418
+          ],
+          "torsoArms": [
+            220,
+            181,
+            475,
+            299
+          ],
+          "head": [
+            408,
+            154,
+            452,
+            209
+          ],
+          "extension": [
+            460,
+            224,
+            638,
+            281
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            223,
+            263,
+            422,
+            448
+          ],
+          "torsoArms": [
+            171,
+            127,
+            346,
+            278
+          ],
+          "head": [
+            311,
+            73,
+            355,
+            130
+          ],
+          "extension": [
+            327,
+            98,
+            558,
+            154
+          ]
+        },
+        "extensionFor": "Extended limb only; gas, flame, hair, cloth and equipment excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            359,
+            241,
+            435,
+            497
+          ],
+          "torsoArms": [
+            327,
+            91,
+            491,
+            262
+          ],
+          "head": [
+            398,
+            33,
+            440,
+            94
+          ],
+          "extension": [
+            486,
+            75,
+            537,
+            116
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            360,
+            242,
+            435,
+            497
+          ],
+          "torsoArms": [
+            327,
+            108,
+            520,
+            268
+          ],
+          "head": [
+            400,
+            37,
+            441,
+            100
+          ],
+          "extension": [
+            518,
+            60,
+            591,
+            120
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            183,
+            252,
+            603,
+            494
+          ],
+          "torsoArms": [
+            300,
+            89,
+            508,
+            278
+          ],
+          "head": [
+            388,
+            40,
+            433,
+            99
+          ],
+          "extension": [
+            502,
+            119,
+            635,
+            160
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      },
+      {
+        "hurt": {
+          "legs": [
+            133,
+            262,
+            638,
+            493
+          ],
+          "torsoArms": [
+            284,
+            100,
+            521,
+            292
+          ],
+          "head": [
+            399,
+            40,
+            445,
+            100
+          ],
+          "extension": [
+            518,
+            145,
+            639,
+            194
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded.",
+        "strike": [
+          250,
+          180,
+          480,
+          350
+        ]
+      }
+    ],
+    "knockdown": [
+      {
+        "hurt": {
+          "legs": [
+            21,
+            414,
+            225,
+            480
+          ],
+          "torsoArms": [
+            190,
+            392,
+            442,
+            475
+          ],
+          "head": [
+            405,
+            417,
+            462,
+            472
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            75,
+            404,
+            395,
+            479
+          ],
+          "torsoArms": [
+            265,
+            370,
+            421,
+            434
+          ],
+          "head": [
+            350,
+            325,
+            406,
+            388
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            75,
+            364,
+            395,
+            479
+          ],
+          "torsoArms": [
+            239,
+            305,
+            395,
+            394
+          ],
+          "head": [
+            324,
+            260,
+            380,
+            325
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            81,
+            329,
+            395,
+            479
+          ],
+          "torsoArms": [
+            213,
+            265,
+            369,
+            359
+          ],
+          "head": [
+            298,
+            220,
+            354,
+            285
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            75,
+            290,
+            395,
+            480
+          ],
+          "torsoArms": [
+            186,
+            181,
+            342,
+            320
+          ],
+          "head": [
+            271,
+            136,
+            327,
+            201
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            92,
+            275,
+            395,
+            480
+          ],
+          "torsoArms": [
+            135,
+            100,
+            299,
+            305
+          ],
+          "head": [
+            220,
+            55,
+            284,
+            120
+          ]
+        }
+      }
+    ],
+    "knockdown_back": [
+      {
+        "hurt": {
+          "legs": [
+            40,
+            364,
+            245,
+            489
+          ],
+          "torsoArms": [
+            275,
+            427,
+            455,
+            482
+          ],
+          "head": [
+            390,
+            397,
+            445,
+            451
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            51,
+            381,
+            245,
+            486
+          ],
+          "torsoArms": [
+            229,
+            357,
+            410,
+            446
+          ],
+          "head": [
+            344,
+            327,
+            400,
+            385
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            88,
+            367,
+            245,
+            487
+          ],
+          "torsoArms": [
+            205,
+            320,
+            387,
+            432
+          ],
+          "head": [
+            320,
+            290,
+            377,
+            348
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            80,
+            315,
+            395,
+            480
+          ],
+          "torsoArms": [
+            218,
+            254,
+            399,
+            380
+          ],
+          "head": [
+            333,
+            224,
+            389,
+            285
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            84,
+            285,
+            395,
+            480
+          ],
+          "torsoArms": [
+            200,
+            222,
+            382,
+            350
+          ],
+          "head": [
+            315,
+            192,
+            372,
+            251
+          ]
+        }
+      },
+      {
+        "hurt": {
+          "legs": [
+            89,
+            250,
+            395,
+            480
+          ],
+          "torsoArms": [
+            105,
+            85,
+            294,
+            315
+          ],
+          "head": [
+            220,
+            55,
+            284,
+            120
+          ]
+        }
+      }
+    ],
+    "idle": [
+      {
+        "hurt": {
+          "legs": [
+            356,
+            230,
+            449,
+            495
+          ],
+          "torsoArms": [
+            278,
+            85,
+            477,
+            250
+          ],
+          "head": [
+            389,
+            32,
+            433,
+            85
+          ],
+          "extension": [
+            473,
+            185,
+            537,
+            233
+          ]
+        },
+        "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            356,
+            226,
+            449,
+            495
+          ],
+          "torsoArms": [
+            278,
+            81,
+            477,
+            246
+          ],
+          "head": [
+            389,
+            28,
+            433,
+            81
+          ],
+          "extension": [
+            473,
+            181,
+            537,
+            229
+          ]
+        },
+        "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            356,
+            224,
+            449,
+            495
+          ],
+          "torsoArms": [
+            278,
+            79,
+            477,
+            244
+          ],
+          "head": [
+            389,
+            26,
+            433,
+            79
+          ],
+          "extension": [
+            473,
+            179,
+            537,
+            227
+          ]
+        },
+        "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            356,
+            231,
+            449,
+            495
+          ],
+          "torsoArms": [
+            278,
+            86,
+            477,
+            251
+          ],
+          "head": [
+            389,
+            33,
+            433,
+            86
+          ],
+          "extension": [
+            473,
+            186,
+            537,
+            234
+          ]
+        },
+        "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+      }
+    ],
+    "crouch_idle": [
+      {
+        "hurt": {
+          "legs": [
+            316,
+            305,
+            645,
+            488
+          ],
+          "torsoArms": [
+            298,
+            205,
+            630,
+            364
+          ],
+          "head": [
+            410,
+            142,
+            460,
+            207
+          ],
+          "extension": [
+            245,
+            332,
+            319,
+            415
+          ]
+        },
+        "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            316,
+            300,
+            645,
+            488
+          ],
+          "torsoArms": [
+            298,
+            200,
+            630,
+            359
+          ],
+          "head": [
+            410,
+            137,
+            460,
+            202
+          ],
+          "extension": [
+            245,
+            327,
+            319,
+            410
+          ]
+        },
+        "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            316,
+            296,
+            645,
+            488
+          ],
+          "torsoArms": [
+            298,
+            196,
+            630,
+            355
+          ],
+          "head": [
+            410,
+            133,
+            460,
+            198
+          ],
+          "extension": [
+            245,
+            323,
+            319,
+            406
+          ]
+        },
+        "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            316,
+            306,
+            645,
+            488
+          ],
+          "torsoArms": [
+            298,
+            206,
+            630,
+            365
+          ],
+          "head": [
+            410,
+            143,
+            460,
+            208
+          ],
+          "extension": [
+            245,
+            333,
+            319,
+            416
+          ]
+        },
+        "extensionFor": "Outstretched hand and forearm only; cloth, hair and rear vapor excluded."
+      }
+    ],
+    "walk": [
+      {
+        "hurt": {
+          "legs": [
+            361,
+            232,
+            465,
+            493
+          ],
+          "torsoArms": [
+            347,
+            89,
+            550,
+            238
+          ],
+          "head": [
+            447,
+            32,
+            491,
+            89
+          ],
+          "extension": [
+            286,
+            207,
+            355,
+            245
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            353,
+            229,
+            457,
+            493
+          ],
+          "torsoArms": [
+            340,
+            84,
+            542,
+            234
+          ],
+          "head": [
+            438,
+            27,
+            483,
+            84
+          ],
+          "extension": [
+            281,
+            203,
+            349,
+            242
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            361,
+            230,
+            465,
+            493
+          ],
+          "torsoArms": [
+            347,
+            84,
+            550,
+            235
+          ],
+          "head": [
+            447,
+            27,
+            491,
+            84
+          ],
+          "extension": [
+            286,
+            204,
+            355,
+            243
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            354,
+            232,
+            458,
+            493
+          ],
+          "torsoArms": [
+            340,
+            88,
+            542,
+            238
+          ],
+          "head": [
+            439,
+            31,
+            483,
+            88
+          ],
+          "extension": [
+            280,
+            207,
+            349,
+            246
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            354,
+            232,
+            458,
+            493
+          ],
+          "torsoArms": [
+            340,
+            88,
+            542,
+            238
+          ],
+          "head": [
+            439,
+            31,
+            483,
+            88
+          ],
+          "extension": [
+            280,
+            207,
+            349,
+            246
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            361,
+            230,
+            465,
+            493
+          ],
+          "torsoArms": [
+            347,
+            84,
+            550,
+            235
+          ],
+          "head": [
+            447,
+            27,
+            491,
+            84
+          ],
+          "extension": [
+            286,
+            204,
+            355,
+            243
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            353,
+            229,
+            457,
+            493
+          ],
+          "torsoArms": [
+            340,
+            84,
+            542,
+            234
+          ],
+          "head": [
+            438,
+            27,
+            483,
+            84
+          ],
+          "extension": [
+            281,
+            203,
+            349,
+            242
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            361,
+            232,
+            465,
+            493
+          ],
+          "torsoArms": [
+            347,
+            89,
+            550,
+            238
+          ],
+          "head": [
+            447,
+            32,
+            491,
+            89
+          ],
+          "extension": [
+            286,
+            207,
+            355,
+            245
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      }
+    ],
+    "back_walk": [
+      {
+        "hurt": {
+          "legs": [
+            362,
+            244,
+            499,
+            500
+          ],
+          "torsoArms": [
+            270,
+            107,
+            455,
+            278
+          ],
+          "head": [
+            311,
+            41,
+            352,
+            107
+          ],
+          "extension": [
+            226,
+            217,
+            282,
+            273
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            370,
+            244,
+            499,
+            500
+          ],
+          "torsoArms": [
+            277,
+            106,
+            457,
+            278
+          ],
+          "head": [
+            317,
+            40,
+            358,
+            106
+          ],
+          "extension": [
+            234,
+            222,
+            288,
+            278
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            353,
+            251,
+            499,
+            500
+          ],
+          "torsoArms": [
+            267,
+            119,
+            457,
+            288
+          ],
+          "head": [
+            285,
+            44,
+            330,
+            119
+          ],
+          "extension": [
+            238,
+            230,
+            294,
+            284
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            343,
+            252,
+            499,
+            500
+          ],
+          "torsoArms": [
+            242,
+            118,
+            437,
+            286
+          ],
+          "head": [
+            281,
+            47,
+            324,
+            118
+          ],
+          "extension": [
+            211,
+            235,
+            268,
+            288
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            343,
+            252,
+            499,
+            500
+          ],
+          "torsoArms": [
+            242,
+            118,
+            437,
+            286
+          ],
+          "head": [
+            281,
+            47,
+            324,
+            118
+          ],
+          "extension": [
+            211,
+            235,
+            268,
+            288
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            353,
+            251,
+            499,
+            500
+          ],
+          "torsoArms": [
+            267,
+            119,
+            457,
+            288
+          ],
+          "head": [
+            285,
+            44,
+            330,
+            119
+          ],
+          "extension": [
+            238,
+            230,
+            294,
+            284
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            370,
+            244,
+            499,
+            500
+          ],
+          "torsoArms": [
+            277,
+            106,
+            457,
+            278
+          ],
+          "head": [
+            317,
+            40,
+            358,
+            106
+          ],
+          "extension": [
+            234,
+            222,
+            288,
+            278
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            362,
+            244,
+            499,
+            500
+          ],
+          "torsoArms": [
+            270,
+            107,
+            455,
+            278
+          ],
+          "head": [
+            311,
+            41,
+            352,
+            107
+          ],
+          "extension": [
+            226,
+            217,
+            282,
+            273
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      }
+    ],
+    "run": [
+      {
+        "hurt": {
+          "legs": [
+            151,
+            240,
+            288,
+            497
+          ],
+          "torsoArms": [
+            166,
+            116,
+            378,
+            252
+          ],
+          "head": [
+            265,
+            65,
+            307,
+            116
+          ],
+          "extension": [
+            121,
+            218,
+            173,
+            249
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            164,
+            243,
+            300,
+            496
+          ],
+          "torsoArms": [
+            167,
+            117,
+            378,
+            254
+          ],
+          "head": [
+            264,
+            65,
+            306,
+            117
+          ],
+          "extension": [
+            126,
+            218,
+            174,
+            250
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            164,
+            241,
+            294,
+            484
+          ],
+          "torsoArms": [
+            163,
+            116,
+            377,
+            252
+          ],
+          "head": [
+            264,
+            65,
+            306,
+            116
+          ],
+          "extension": [
+            122,
+            215,
+            171,
+            249
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            172,
+            239,
+            296,
+            496
+          ],
+          "torsoArms": [
+            167,
+            117,
+            375,
+            253
+          ],
+          "head": [
+            266,
+            66,
+            308,
+            117
+          ],
+          "extension": [
+            130,
+            215,
+            177,
+            247
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            160,
+            241,
+            290,
+            496
+          ],
+          "torsoArms": [
+            170,
+            116,
+            377,
+            254
+          ],
+          "head": [
+            267,
+            66,
+            310,
+            117
+          ],
+          "extension": [
+            128,
+            216,
+            179,
+            249
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            164,
+            242,
+            294,
+            496
+          ],
+          "torsoArms": [
+            169,
+            117,
+            377,
+            253
+          ],
+          "head": [
+            267,
+            66,
+            310,
+            117
+          ],
+          "extension": [
+            127,
+            218,
+            176,
+            249
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            154,
+            242,
+            291,
+            490
+          ],
+          "torsoArms": [
+            169,
+            117,
+            379,
+            254
+          ],
+          "head": [
+            268,
+            66,
+            311,
+            117
+          ],
+          "extension": [
+            124,
+            216,
+            175,
+            249
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            160,
+            242,
+            294,
+            497
+          ],
+          "torsoArms": [
+            168,
+            118,
+            377,
+            254
+          ],
+          "head": [
+            269,
+            66,
+            311,
+            118
+          ],
+          "extension": [
+            128,
+            217,
+            178,
+            250
+          ]
+        },
+        "extensionFor": "Rear hand and forearm only; hair, coat, vials and vapor excluded."
+      }
+    ],
+    "attack_animation": [
+      {
+        "hurt": {
+          "legs": [
+            290,
+            260,
+            658,
+            470
+          ],
+          "torsoArms": [
+            266,
+            142,
+            599,
+            346
+          ],
+          "head": [
+            416,
+            76,
+            461,
+            144
+          ],
+          "extension": [
+            197,
+            312,
+            279,
+            393
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            279,
+            280,
+            631,
+            470
+          ],
+          "torsoArms": [
+            259,
+            190,
+            515,
+            355
+          ],
+          "head": [
+            459,
+            146,
+            505,
+            201
+          ],
+          "extension": [
+            449,
+            328,
+            569,
+            449
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            287,
+            270,
+            653,
+            470
+          ],
+          "torsoArms": [
+            277,
+            166,
+            525,
+            336
+          ],
+          "head": [
+            398,
+            90,
+            444,
+            156
+          ],
+          "extension": [
+            496,
+            28,
+            648,
+            175
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            288,
+            272,
+            659,
+            470
+          ],
+          "torsoArms": [
+            266,
+            164,
+            523,
+            340
+          ],
+          "head": [
+            397,
+            84,
+            443,
+            152
+          ],
+          "extension": [
+            504,
+            11,
+            659,
+            174
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            281,
+            260,
+            690,
+            470
+          ],
+          "torsoArms": [
+            243,
+            129,
+            540,
+            332
+          ],
+          "head": [
+            354,
+            59,
+            399,
+            126
+          ],
+          "extension": [
+            500,
+            44,
+            669,
+            150
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            287,
+            266,
+            690,
+            470
+          ],
+          "torsoArms": [
+            240,
+            130,
+            517,
+            339
+          ],
+          "head": [
+            351,
+            60,
+            397,
+            130
+          ],
+          "extension": [
+            504,
+            144,
+            650,
+            222
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            286,
+            278,
+            689,
+            470
+          ],
+          "torsoArms": [
+            240,
+            145,
+            552,
+            340
+          ],
+          "head": [
+            353,
+            64,
+            398,
+            132
+          ],
+          "extension": [
+            201,
+            333,
+            274,
+            396
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            286,
+            278,
+            689,
+            470
+          ],
+          "torsoArms": [
+            237,
+            147,
+            551,
+            340
+          ],
+          "head": [
+            351,
+            68,
+            397,
+            133
+          ],
+          "extension": [
+            196,
+            330,
+            270,
+            397
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            347,
+            240,
+            435,
+            497
+          ],
+          "torsoArms": [
+            310,
+            92,
+            491,
+            255
+          ],
+          "head": [
+            391,
+            38,
+            434,
+            94
+          ],
+          "extension": [
+            255,
+            206,
+            323,
+            249
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            350,
+            238,
+            491,
+            498
+          ],
+          "torsoArms": [
+            308,
+            90,
+            519,
+            255
+          ],
+          "head": [
+            399,
+            38,
+            440,
+            96
+          ],
+          "extension": [
+            243,
+            201,
+            311,
+            244
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            342,
+            287,
+            483,
+            489
+          ],
+          "torsoArms": [
+            308,
+            146,
+            441,
+            313
+          ],
+          "head": [
+            391,
+            75,
+            435,
+            138
+          ],
+          "extension": [
+            246,
+            222,
+            322,
+            272
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            352,
+            272,
+            494,
+            497
+          ],
+          "torsoArms": [
+            285,
+            104,
+            512,
+            290
+          ],
+          "head": [
+            402,
+            38,
+            445,
+            99
+          ],
+          "extension": [
+            504,
+            178,
+            545,
+            224
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            368,
+            239,
+            448,
+            497
+          ],
+          "torsoArms": [
+            354,
+            92,
+            495,
+            263
+          ],
+          "head": [
+            398,
+            40,
+            440,
+            95
+          ],
+          "extension": [
+            490,
+            137,
+            536,
+            182
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            311,
+            278,
+            615,
+            464
+          ],
+          "torsoArms": [
+            291,
+            206,
+            513,
+            367
+          ],
+          "head": [
+            410,
+            137,
+            455,
+            193
+          ],
+          "extension": [
+            248,
+            314,
+            317,
+            383
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            315,
+            289,
+            599,
+            468
+          ],
+          "torsoArms": [
+            299,
+            226,
+            509,
+            378
+          ],
+          "head": [
+            410,
+            148,
+            456,
+            205
+          ],
+          "extension": [
+            247,
+            318,
+            316,
+            388
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            315,
+            283,
+            623,
+            468
+          ],
+          "torsoArms": [
+            289,
+            218,
+            515,
+            372
+          ],
+          "head": [
+            409,
+            140,
+            457,
+            202
+          ],
+          "extension": [
+            245,
+            319,
+            319,
+            384
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            312,
+            253,
+            545,
+            499
+          ],
+          "torsoArms": [
+            272,
+            94,
+            550,
+            276
+          ],
+          "head": [
+            407,
+            40,
+            451,
+            96
+          ],
+          "extension": [
+            239,
+            211,
+            289,
+            268
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            319,
+            245,
+            543,
+            500
+          ],
+          "torsoArms": [
+            288,
+            84,
+            527,
+            264
+          ],
+          "head": [
+            392,
+            39,
+            438,
+            99
+          ],
+          "extension": [
+            434,
+            10,
+            532,
+            94
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            313,
+            251,
+            549,
+            503
+          ],
+          "torsoArms": [
+            282,
+            110,
+            520,
+            274
+          ],
+          "head": [
+            402,
+            48,
+            446,
+            112
+          ],
+          "extension": [
+            257,
+            39,
+            343,
+            134
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            291,
+            306,
+            601,
+            469
+          ],
+          "torsoArms": [
+            279,
+            220,
+            565,
+            368
+          ],
+          "head": [
+            403,
+            155,
+            449,
+            218
+          ],
+          "extension": [
+            212,
+            342,
+            291,
+            390
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            312,
+            244,
+            526,
+            476
+          ],
+          "torsoArms": [
+            302,
+            105,
+            478,
+            268
+          ],
+          "head": [
+            392,
+            38,
+            433,
+            99
+          ],
+          "extension": [
+            242,
+            219,
+            307,
+            268
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            304,
+            170,
+            530,
+            444
+          ],
+          "torsoArms": [
+            289,
+            93,
+            533,
+            264
+          ],
+          "head": [
+            394,
+            37,
+            435,
+            96
+          ],
+          "extension": [
+            228,
+            190,
+            306,
+            241
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            345,
+            260,
+            526,
+            468
+          ],
+          "torsoArms": [
+            253,
+            126,
+            579,
+            288
+          ],
+          "head": [
+            380,
+            62,
+            426,
+            117
+          ],
+          "extension": [
+            270,
+            178,
+            355,
+            217
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            331,
+            262,
+            538,
+            425
+          ],
+          "torsoArms": [
+            290,
+            112,
+            537,
+            287
+          ],
+          "head": [
+            399,
+            67,
+            444,
+            127
+          ],
+          "extension": [
+            253,
+            6,
+            335,
+            119
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            352,
+            236,
+            506,
+            421
+          ],
+          "torsoArms": [
+            314,
+            83,
+            533,
+            252
+          ],
+          "head": [
+            398,
+            27,
+            440,
+            84
+          ],
+          "extension": [
+            265,
+            193,
+            326,
+            227
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            361,
+            241,
+            443,
+            498
+          ],
+          "torsoArms": [
+            303,
+            86,
+            499,
+            260
+          ],
+          "head": [
+            392,
+            57,
+            436,
+            111
+          ],
+          "extension": [
+            350,
+            11,
+            470,
+            93
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            369,
+            251,
+            446,
+            499
+          ],
+          "torsoArms": [
+            318,
+            92,
+            535,
+            270
+          ],
+          "head": [
+            396,
+            41,
+            443,
+            103
+          ],
+          "extension": [
+            294,
+            5,
+            374,
+            113
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            293,
+            269,
+            475,
+            495
+          ],
+          "torsoArms": [
+            340,
+            126,
+            598,
+            290
+          ],
+          "head": [
+            421,
+            53,
+            469,
+            120
+          ],
+          "extension": [
+            571,
+            91,
+            614,
+            155
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            361,
+            241,
+            433,
+            497
+          ],
+          "torsoArms": [
+            328,
+            90,
+            538,
+            264
+          ],
+          "head": [
+            396,
+            36,
+            438,
+            92
+          ],
+          "extension": [
+            283,
+            204,
+            340,
+            258
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            361,
+            241,
+            434,
+            497
+          ],
+          "torsoArms": [
+            328,
+            92,
+            489,
+            265
+          ],
+          "head": [
+            397,
+            36,
+            440,
+            94
+          ],
+          "extension": [
+            282,
+            204,
+            341,
+            259
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            359,
+            242,
+            434,
+            496
+          ],
+          "torsoArms": [
+            325,
+            92,
+            486,
+            265
+          ],
+          "head": [
+            398,
+            34,
+            439,
+            94
+          ],
+          "extension": [
+            274,
+            206,
+            339,
+            263
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      },
+      {
+        "hurt": {
+          "legs": [
+            358,
+            241,
+            437,
+            496
+          ],
+          "torsoArms": [
+            309,
+            92,
+            502,
+            265
+          ],
+          "head": [
+            397,
+            34,
+            441,
+            94
+          ],
+          "extension": [
+            308,
+            182,
+            371,
+            224
+          ]
+        },
+        "extensionFor": "Extended hand/forearm only; hair, coat, vials, poison, fire and crystal excluded."
+      }
+    ]
+  }
+}

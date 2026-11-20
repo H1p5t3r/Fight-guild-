@@ -18,7 +18,7 @@ export async function serveWorkshop(port=8081,host='127.0.0.1') {
 export async function serveWorkshopSite(port=8081,host='127.0.0.1',mount='/') {
   if(!/^\/(?:[\w.-]+\/)*$/.test(mount))throw new Error('Site mount must start and end with a slash.');
   const folder=new URL('../build/move-workshop/',import.meta.url);
-  const types={html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',css:'text/css; charset=utf-8',webp:'image/webp',woff2:'font/woff2',json:'application/json',txt:'text/plain; charset=utf-8'};
+  const types={html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',css:'text/css; charset=utf-8',webp:'image/webp',woff2:'font/woff2',json:'application/json',txt:'text/plain; charset=utf-8',mp4:'video/mp4'};
   const server=createServer(async(request,response)=>{
     if(!['GET','HEAD'].includes(request.method)){response.writeHead(405);response.end();return;}
     const pathname=new URL(request.url,'http://localhost').pathname;
@@ -26,7 +26,7 @@ export async function serveWorkshopSite(port=8081,host='127.0.0.1',mount='/') {
     const relative=pathname.startsWith(mount)?pathname.slice(mount.length):null;
     const name=relative===''?'index.html':relative;
     const hashed=/^assets\/[a-f0-9]{64}\.(?:webp|woff2|css|js)$/.test(name??'');
-    if(!hashed&&!['index.html','fillet-motion-review.html','shark-motion-review.html','version.json','FightGuild-moves.json','START_HERE.txt'].includes(name)){response.writeHead(404);response.end();return;}
+    if(!hashed&&!['index.html','fillet-motion-review.html','shark-motion-review.html','smoke-motion-review.html','smoke-specials-60fps.mp4','version.json','FightGuild-moves.json','START_HERE.txt'].includes(name)){response.writeHead(404);response.end();return;}
     try{
       const body=await readFile(new URL(name,folder));
       response.writeHead(200,{'Content-Type':types[name.split('.').at(-1)],'Content-Length':body.length,'Cache-Control':hashed?'public, max-age=31536000, immutable':'no-cache','X-Content-Type-Options':'nosniff'});

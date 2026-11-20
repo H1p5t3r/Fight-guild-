@@ -1,5 +1,12 @@
 # Smoke attack animation and approved specials
 
+**20 November update:** the four specials now use the
+[guide-audited recovery pass](attack-animation-audit-2026-11-20.md), with eight new
+recovery drawings and 37 timed cues. Register that pass with
+`scripts/register-smoke-specials-v3.py`. The earlier registration below is the
+historical November 18 import and should not be used to replace the current
+workshop batch.
+
 This pass implements the selected Venom Sabre and Furnace Cleaver effects with
 backhand body movement. Both effects sweep in a horizontal arc parallel to the
 ground. Smoke's hands are empty: there is no physical sword, handle or hilt.

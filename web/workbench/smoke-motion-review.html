@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smoke · Attack animation review</title>
+<style>
+:root{color-scheme:dark;font:16px/1.45 system-ui;color:#e9eee9;background:#0c171d}*{box-sizing:border-box}body{max-width:1360px;margin:auto;padding:24px}a{color:#c7dc8a}h1{font-size:clamp(24px,4vw,42px);margin:10px 0;font-style:italic}p{color:#aebec5;max-width:90ch}.tag{color:#c7dc8a;letter-spacing:.16em;font-size:12px}label{display:flex;gap:7px;align-items:center}select,button,input{font:inherit}select,button{color:#eef1e8;background:#20313b;border:1px solid #506570;border-radius:7px;min-height:44px;padding:8px 12px}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #d6df92;outline-offset:3px}.controls{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}.controls label span{font-size:13px;color:#aebec5}input[type=checkbox]{width:20px;height:20px;accent-color:#c7dc8a}.checks{gap:18px}.panels{display:grid;grid-template-columns:1fr 1fr;gap:14px}.panel{border:1px solid #324953;border-radius:10px;overflow:hidden;background:#111f28}h2{font-size:14px;letter-spacing:.06em;padding:12px 16px;margin:0;background:#1a2b34}.panel:last-child h2{color:#c7dc8a}canvas{width:100%;height:auto;display:block}.transport{display:flex;gap:10px;align-items:center;margin:16px 0}.transport input{min-width:40px;flex:1;accent-color:#c7dc8a}#readout{font-variant-numeric:tabular-nums;color:#d5dfbd}#note{min-height:44px}.legend{display:flex;flex-wrap:wrap;gap:18px;font-size:13px;color:#adbec6}.legend span:before{content:' ';display:inline-block;width:10px;height:10px;margin-right:6px;background:var(--color)}footer{border-top:1px solid #324953;margin-top:26px;padding-top:14px;font-size:13px}details{margin-top:20px;border:1px solid #324953;padding:14px;border-radius:8px}summary{cursor:pointer}li{margin:8px 0}#stage{font-weight:600;color:#d3dfb5}button[aria-pressed=true]{background:#485c33}@media(max-width:700px){body{padding:14px}.panels{grid-template-columns:1fr}.controls{gap:10px}.controls>label{flex-wrap:wrap}#move{max-width:calc(100vw - 28px)}.transport{flex-wrap:wrap}.transport input{flex-basis:55%}h2{padding:8px 12px}p{font-size:14px}}
+</style>
+<header><a href="index.html">← Move Workshop</a><div class="tag">FIGHT GUILD / MOTION LAB</div><h1>Smoke. Gather, strike, drift.</h1><p>Four specials refined around their actual attack timing. Compare the previous clips with the new follow-through and recovery. The audit samples show the existing Fillet, Shark and Smoke normals.</p><a href="smoke-specials-60fps.mp4">Watch the 60fps before-and-after video</a></header>
+<div class="controls">
+ <label><span>Attack</span><select id="move" aria-label="Attack"></select></label>
+ <label><span>Contact</span><select id="scenario"><option value="hit">Hit</option><option value="block">Block</option><option value="whiff">Whiff</option></select></label>
+ <label><span>Speed</span><select id="speed"><option value="1">1× / 60 Hz</option><option value="0.5">½ speed</option><option value="0.25">¼ speed</option></select></label>
+</div>
+<div class="controls checks"><label><input type="checkbox" id="boxes">Hitboxes</label><label><input type="checkbox" id="hurt">Hurtboxes</label><label><input type="checkbox" id="mirror">Mirror</label><label><input type="checkbox" id="silhouette">Silhouette</label><label><input type="checkbox" id="effects" checked>Effects</label></div>
+<p id="note"></p>
+<div class="panels"><section class="panel"><h2 id="before-label">PREVIOUS · CAPTURED BEFORE THE CHANGE</h2><canvas id="before" width="640" height="420" aria-label="Previous animation"></canvas></section><section class="panel"><h2 id="after-label">CURRENT · ATTACK-TIMED RECOVERY</h2><canvas id="after" width="640" height="420" aria-label="Current animation"></canvas></section></div>
+<div class="transport"><button id="play" aria-pressed="true">Pause</button><button id="back" aria-label="Previous frame">−1f</button><button id="forward" aria-label="Next frame">+1f</button><input id="seek" type="range" min="0" value="0" aria-label="Simulation frame"></div>
+<div id="readout"></div><p id="stage"></p>
+<div class="legend"><span style="--color:#e4bb77">Startup</span><span style="--color:#e88974">Active</span><span style="--color:#94c7c8">Recovery</span><span style="--color:#c2a1df">Projectile</span></div>
+<details><summary>What this audit checks</summary><ul><li>Readable load, contact and recovery silhouettes, with the largest strike movement at first active.</li><li>Fixed anatomy scale and deliberate held drawings; no blended poses or added body smears.</li><li>Effects aligned with authored reach and actual spawn time. Close/far pillars share the same artwork.</li><li>Real input, hit, block, whiff and hitstop recordings. A frame step advances one simulation tick.</li><li>Review at 1× before inspecting slow playback. Mirroring here checks artwork; automated tests exercise both actual facings.</li></ul><p>Fillet 2S and Shark 2Hs are existing timing benchmarks. Smoke 2Hs already has a staged eruption. Smoke f.S still reuses its contact art across a changing multi-hit path; that normal is documented for a later pass.</p></details>
+<footer>Based on the user-supplied archive of <a href="https://www.artemisiacollege.com/feeds/blog/fighting-game-animation">How to Animate a Fighting Game: Complete Guide</a>. Original approved character and effect designs retained. Current move values are unchanged.</footer>
+<script>
+const pack=__SMOKE_REVIEW_PACK__;
+const $=id=>document.getElementById(id),images=new Map(),colors={windup:'#e4bb77',active:'#e88974',recovery:'#94c7c8',neutral:'#849aa5'};
+let selected=0,cursor=0,playing=true,last=0,accumulator=0;
+const scenario=()=>$('scenario').value;
+function entries(m,before=false,which=scenario()){return (before?m.before:m.scenarios)[which];}
+function view(m,which){
+ let l=-100,r=240,t=185;
+ for(const track of [m.before[which],m.scenarios[which]])for(const f of track){
+  for(const b of [f.actor,...(f.tick<5?[f.target]:[])].filter(Boolean)){
+   const s=150/b.body_height,[x,y,w,h]=b.bounds??[0,0,b.region[2],b.region[3]];
+   // bounds are l/t/r/b in atlas-cell coordinates, not width/height.
+   const left=b.x+b.facing*(x-b.pivot[0])*s,right=b.x+b.facing*(w-b.pivot[0])*s;
+   l=Math.min(l,left,right);r=Math.max(r,left,right);t=Math.max(t,b.y+(b.pivot[1]-y)*s);
+   if(b.effect){l=Math.min(l,b.x+b.effect.box[0]);r=Math.max(r,b.x+b.effect.box[2]);t=Math.max(t,b.y+b.effect.box[3]);}
+  }
+  for(const q of f.projectiles){l=Math.min(l,q.x-q.width/2);r=Math.max(r,q.x+q.width/2);t=Math.max(t,q.y+q.height/2);}
+ }
+ const scale=Math.min(590/(r-l),285/t);return {scale,origin:25-l*scale};
+}
+function paint(canvas,m,tick,before=false,options={}){
+ const which=options.scenario??scenario(),record=entries(m,before,which),f=record[Math.min(tick,record.length-1)];
+ const ctx=canvas.getContext('2d'),mirror=(options.mirror??$('mirror').checked)?-1:1,silhouette=options.silhouette??$('silhouette').checked,fx=options.effects??$('effects').checked;
+ const v=view(m,which),s=v.scale,origin=mirror===1?v.origin:640-v.origin,ground=344;
+ ctx.clearRect(0,0,640,420);ctx.fillStyle=silhouette?'#bac7bc':'#111f28';ctx.fillRect(0,0,640,420);
+ ctx.strokeStyle=silhouette?'#9dab9f':'#243944';ctx.lineWidth=1;
+ for(let x=-500;x<=1100;x+=50){const px=origin+x*s*mirror;ctx.beginPath();ctx.moveTo(px,55);ctx.lineTo(px,ground);ctx.stroke();}
+ ctx.strokeStyle=silhouette?'#57665c':'#6d858b';ctx.beginPath();ctx.moveTo(15,ground);ctx.lineTo(625,ground);ctx.stroke();
+ function effect(b){const e=b.effect;if(!fx||!e)return;const img=images.get(e.file),[l,bt,r,top]=e.box;ctx.save();ctx.translate(origin+b.x*s*mirror,ground-b.y*s);ctx.scale(b.facing*mirror,1);ctx.globalAlpha=e.opacity??1;ctx.drawImage(img,...e.region,l*s,-top*s,(r-l)*s,(top-bt)*s);ctx.restore();}
+ function body(b){if(!b)return;if(b.effect?.behind)effect(b);const k=150/b.body_height*s;ctx.save();ctx.translate(origin+b.x*s*mirror,ground-b.y*s);ctx.scale(b.facing*mirror,1);if(silhouette)ctx.filter='brightness(0)';ctx.drawImage(images.get(b.file),...b.region,-b.pivot[0]*k,-b.pivot[1]*k,b.region[2]*k,b.region[3]*k);ctx.restore();if(!b.effect?.behind)effect(b);}
+ body(f.target);
+ if(fx)for(const q of f.projectiles){ctx.save();ctx.translate(origin+q.x*s*mirror,ground-(q.y+q.height/2)*s);ctx.scale(q.facing*mirror,1);ctx.drawImage(images.get(q.file),...q.region,-q.width*s/2,0,q.width*s,q.height*s);ctx.restore();}
+ body(f.actor);
+ if(f.target){const tx=origin+f.target.x*s*mirror;if(tx<12||tx>628){ctx.fillStyle='#aebec5';ctx.font='12px system-ui';ctx.textAlign=tx<12?'left':'right';ctx.fillText(`${tx<12?'← ':''}Target ${Math.round(f.target.x)}px${tx>628?' →':''}`,tx<12?16:624,ground-14);ctx.textAlign='left';}}
+ function boxes(list,color){ctx.save();ctx.translate(origin,ground);ctx.scale(mirror,1);ctx.strokeStyle=color;ctx.fillStyle=color+'15';ctx.lineWidth=1.5;for(const [l,b,r,top] of list){ctx.fillRect(l*s,-top*s,(r-l)*s,(top-b)*s);ctx.strokeRect(l*s,-top*s,(r-l)*s,(top-b)*s);}ctx.restore();}
+ if(options.boxes??$('boxes').checked){boxes(f.hits,'#ffca87');boxes(f.projectiles.map(q=>[q.x-q.width/2,q.y-q.height/2,q.x+q.width/2,q.y+q.height/2]),'#c2a1df');}
+ if(options.hurt??$('hurt').checked)boxes(f.hurt,'#8ed6be');
+ ctx.fillStyle=silhouette?'#19271f':colors[f.phase];ctx.font='600 16px system-ui';ctx.fillText(`${m.id} · ${f.frame?`${f.phase} / f${f.frame}`:'Ready'}${f.hitstop?' · HITSTOP':''}`,18,29);
+ ctx.font='13px system-ui';ctx.fillStyle=silhouette?'#34463c':'#b3c4ca';ctx.fillText(f.actor.motion_cue??f.actor.name??'Held drawing',18,50);
+ ctx.fillStyle='#c7dc8a';ctx.fillRect(origin-2,ground-3,4,6);
+ const total=m.startup-1+m.active+m.recovery,left=18,width=604;
+ let offset=0;for(const [phase,n] of [['windup',m.startup-1],['active',m.active],['recovery',m.recovery]]){ctx.fillStyle=colors[phase];ctx.fillRect(left+offset/total*width,368,n/total*width,5);offset+=n;}
+ if(f.frame){ctx.fillStyle='#fff';ctx.fillRect(left+(f.frame-1)/total*width,364,2,13);}
+ ctx.fillStyle=silhouette?'#19271f':'#b3c4ca';ctx.fillText(`${m.startup} startup / ${m.active} active / ${m.recovery} recovery · ${f.damage} damage`,18,401);
+}
+function draw(){const m=pack.moves[selected],n=entries(m).length;cursor=Math.max(0,Math.min(cursor,n-1));paint($('before'),m,cursor,true);paint($('after'),m,cursor);$('seek').max=n-1;$('seek').value=cursor;const f=entries(m)[cursor];$('readout').textContent=`Tick ${cursor} / ${n-1} · ${m.id} · ${m.startup} / ${m.active} / ${m.recovery}`;$('stage').textContent=f.hitstop?`Contact hold · ${f.hitstop} hitstop ticks remaining`:f.actor.motion_cue??f.actor.name??'Ready';}
+function pause(){playing=false;$('play').textContent='Play';$('play').setAttribute('aria-pressed','false');}
+function select(i,which=scenario()){selected=i;$('move').value=i;$('scenario').value=which;cursor=0;accumulator=0;const m=pack.moves[i];$('before-label').textContent=m.changed?'PREVIOUS · CAPTURED BEFORE THE CHANGE':'EXISTING CLIP · AUDIT SAMPLE';$('after-label').textContent=m.changed?'CURRENT · ATTACK-TIMED RECOVERY':'EXISTING CLIP · NO ART CHANGE';$('note').textContent=m.changed?(m.slot===14||m.slot===25?'The projectile has its own lifetime. Smoke releases, follows through and collects her hand during the existing action lock.':'Hold the loaded backhand, snap at first active, then let the arm and torso settle in deliberate stages.'):'Audit sample: existing choreography and frame data retained for comparison.';draw();}
+pack.moves.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${m.id} · ${m.label}${m.changed?'':' · audit'}`;$('move').append(o);});
+$('move').onchange=()=>select(+$('move').value);$('scenario').onchange=()=>select(selected);$('seek').oninput=()=>{pause();cursor=+$('seek').value;draw();};
+$('play').onclick=()=>{playing=!playing;$('play').textContent=playing?'Pause':'Play';$('play').setAttribute('aria-pressed',String(playing));};
+for(const [id,delta] of [['back',-1],['forward',1]])$(id).onclick=()=>{pause();cursor+=delta;draw();};
+for(const id of ['boxes','hurt','mirror','silhouette','effects'])$(id).onchange=draw;
+const ready=Promise.all(Object.entries(pack.images).map(async([file,url])=>{const img=new Image();img.src=url;await img.decode();images.set(file,img);}));
+function animate(now){const dt=last?Math.min(100,now-last):0;last=now;if(playing){accumulator+=dt*60/1000*Number($('speed').value);const step=Math.floor(accumulator);if(step){accumulator-=step;cursor=(cursor+step)%entries(pack.moves[selected]).length;draw();}}requestAnimationFrame(animate);}
+globalThis.smokeReview={pack,ready,paint,select,seek(t){pause();cursor=t;draw();}};
+ready.then(()=>{select(0);requestAnimationFrame(animate);}).catch(error=>{$('note').textContent='Could not load review artwork: '+error.message;});
+</script></html>

@@ -1,4 +1,5 @@
 import {LINE_DEFAULTS} from '../web/line-drive.mjs';
+import {comboMoveDefaults} from '../web/combo-rules.mjs';
 import {legacyPack} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -19,7 +20,7 @@ test('Latest Smoke upload keeps every tuning value, note and photo except four n
  assert.deepEqual(new Workshop(pack,JSON.parse(w.export())).data,w.data);
  const art=pack.art[2];
  assert.deepEqual(art.projectile_variants['14'],art.projectile_variants['25']);
- assert.equal(art.attack_animation.frames.length,32);
+ assert.equal(art.attack_animation.frames.length,69);
  assert.equal(inputName(w.move(2,14)),'236S');assert.equal(inputName(w.move(2,25)),'236Hs');
  assert.equal(inputName(w.move(2,15)),'214S');assert.equal(inputName(w.move(2,16)),'214Hs');
 });
@@ -33,7 +34,8 @@ test('Backdraft uses all eight keys with one hit; pillar clocks and special art 
   for(const slot of [14,25,15,16]){
    const r=preview.record(data,2,slot,{gap:500,facing}),m=data.characters[2].moves[slot];
    assert.ok(r.executed);assert.ok(r.frames.some(f=>f.state.players[0].posePhase===14));
-   assert.ok(r.frames.some(f=>f.state.players[0].posePhase===4&&f.state.players[0].poseIndex===m.artPose-1));
+   assert.ok(r.frames.some(f=>f.selectedFrame===m.startup&&f.state.players[0].posePhase===14&&
+    /First-active/.test(pack.art[2].attack_animation.frames[f.state.players[0].poseIndex].motion_cue)));
    if(slot===14||slot===25){
     const projectiles=r.frames.flatMap(f=>f.state.projectiles);
     assert.ok(projectiles.length>6);
@@ -58,7 +60,7 @@ test('Smoke source timing, independent hits and charged slots survive workshop/c
 });
 test('Leo corrects Tapper boxes without changing his timing, damage, stance or movement',async()=>{
  const previous=await json('godot/data/workshop/2026-11-18-tapper/FightGuild-Tapper.json');
- for(const c of previous.characters)for(const m of c.moves)Object.assign(m,LINE_DEFAULTS);
+ for(const c of previous.characters)for(const m of c.moves)Object.assign(m,LINE_DEFAULTS,comboMoveDefaults(m));
  for(const c of previous.characters)for(const m of c.moves)if(m.category===4&&m.motion===0)m.startup=2;
  const now=new Workshop(pack,await json('godot/data/workshop/2026-11-18-startup/FightGuild-Startup.json')).data;
  for(const c of [0,1,4,5]){

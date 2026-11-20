@@ -1,4 +1,5 @@
 import {buildSharkMotionReview} from './build-shark-motion-review.mjs';
+import {buildSmokeMotionReview} from './build-smoke-motion-review.mjs';
 import {build} from 'esbuild';
 import {isDeepStrictEqual} from 'node:util';
 import {chromium} from 'playwright';
@@ -128,7 +129,7 @@ const appScript=await asset(bundle.outputFiles[0].text,'js');
 let linkedCss=sourceCss;
 for(const {tag,bytes} of fonts)linkedCss=linkedCss.replace(tag,(await asset(bytes,'woff2')).slice('assets/'.length));
 const stylesheet=await asset(linkedCss,'css');
-const linkedHtml=template.replace('<!--WORKSHOP_REVIEWS-->', '<p>Animation reviews: <a href="shark-motion-review.html">Shark · full kit &amp; Drive</a> · <a href="fillet-motion-review.html">Fillet · full kit</a></p><p><a href="FightGuild-moves.json" download>Download the shipped move data</a>. Export your current draft before importing this file to try the new Shark Drive.</p>').replace('<!--WORKSHOP_STYLES-->',()=>`<link rel="stylesheet" href="${stylesheet}">`)
+const linkedHtml=template.replace('<!--WORKSHOP_REVIEWS-->', '<p>Animation reviews: <a href="smoke-motion-review.html">Smoke · specials &amp; attack audit</a> · <a href="shark-motion-review.html">Shark · full kit &amp; Drive</a> · <a href="fillet-motion-review.html">Fillet · full kit</a></p><p><a href="FightGuild-moves.json" download>Download the shipped move data</a>. Export your current draft before importing this file.</p>').replace('<!--WORKSHOP_STYLES-->',()=>`<link rel="stylesheet" href="${stylesheet}">`)
   .replace('<!--WORKSHOP_SCRIPT-->',()=>`<script defer src="${dataScript}"></script><script defer src="${appScript}"></script>`)
   .replace('<!--FONT_LICENSE-->',()=>`<!-- Bundled Barlow font license:\n${license.replace(/--/g,'—')}\n-->`)
   .replace('The page works offline without installing anything. It makes no network requests.',
@@ -137,6 +138,8 @@ await writeFile(path('build/move-workshop/index.html'),linkedHtml);
 await writeFile(path('build/move-workshop/fillet-motion-review.html'),await buildFilletMotionReview({art:manifest.fighters[5],roster:manifest.fighters,images:linkedImages,engine}));
 await writeFile(path('build/Fillet-Attack-Timing.html'),await buildFilletMotionReview({art:manifest.fighters[5],roster:manifest.fighters,images,engine}));
 await writeFile(path('build/move-workshop/shark-motion-review.html'),await buildSharkMotionReview({art:manifest.fighters[4],roster:manifest.fighters,images:linkedImages,engine}));
+await writeFile(path('build/move-workshop/smoke-motion-review.html'),await buildSmokeMotionReview({pack,images:linkedImages,engine}));
+await writeFile(path('build/move-workshop/smoke-specials-60fps.mp4'),await readFile(path('art/characters/smoke-specials-v3/previews/Smoke-Specials-Before-After-60fps.mp4')));
 await writeFile(path('build/move-workshop/.nojekyll'),'');
 await writeFile(path('build/move-workshop/FightGuild-moves.json'),JSON.stringify(pack.draft?.data??pack.defaults,null,2)+'\n');
 await writeFile(path('build/move-workshop/START_HERE.txt'),`Fight Guild - Move Workshop\n\nExtract this whole folder, then open index.html in Chrome or Edge.\nKeep the assets folder beside index.html. No installation or server is needed.\n\nDownload JSON before closing to keep a portable backup of edits, notes and photos.\nDrafts stay in this browser; they do not sync between PCs or with the old HTML.\nUse Import JSON to carry a saved draft into this version.\nFightGuild-moves.json contains the shipped project draft; importing it replaces\nthe open draft, so download your edits before doing so.\n`);

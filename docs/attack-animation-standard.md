@@ -49,3 +49,11 @@ Reference implementation: [Fillet 2S timing](../art/characters/fillet-v1/product
 Current whole-kit plan: [Fillet kit timing](../art/characters/fillet-v1/production/kit-timing/README.md).
 
 Shark's full-kit application is documented in [Shark v2](../art/characters/shark-kit-v2/README.md). A normal-throw capture must have separate whiff and connected recovery tracks: latch/load follows the capture clock, and the release pose only begins after capture succeeds. Include separate weapon endpoints and effect extents when framing an animation review so long attacks stay visible. Validate atlas alpha in the runtime as well as in the image preview; image-tool previews can conceal translucent background haze.
+
+The [20 November guide audit](attack-animation-audit-2026-11-20.md) adds a repeatable
+review check: include hit, block and whiff recordings, a silhouette/effects toggle,
+and the previous actual recording. For casts, separate the caster's visual
+follow-through from the projectile's saved lifetime. A body may settle during
+its existing action lock, but art must never shorten that lock. Check the source
+against the moving hand as well as the feet; a recovery jump should not be larger
+than the first-active strike. Record unresolved readability issues explicitly.

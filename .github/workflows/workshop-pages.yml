@@ -13,6 +13,8 @@ on:
       - 'scripts/build-workbench.mjs'
       - 'scripts/build-fillet-motion-review.mjs'
       - 'scripts/build-shark-motion-review.mjs'
+      - 'scripts/build-smoke-motion-review.mjs'
+      - 'art/characters/smoke-specials-v3/**'
       - 'art/characters/shark-kit-v2/**'
       - 'art/characters/fillet-v1/production/ground-twos/*.json'
       - 'art/characters/fillet-v1/production/sweep-timing/*.json'
@@ -77,6 +79,12 @@ jobs:
           ./build/shark-drive-tests
           node tests/workbench-shark-kit.mjs
           node tests/workbench-shark-kit-browser.mjs
+      - name: Verify Smoke attack timing and review
+        run: |
+          ./build/smoke-tests
+          node --test tests/workbench-smoke.mjs tests/workbench-smoke-specials.mjs
+          node tests/workbench-smoke-attacks-browser.mjs
+          node tests/workbench-smoke-specials-browser.mjs
       - uses: actions/upload-artifact@v4
         with:
           name: FightGuild-Portable-Editor

@@ -1,0 +1,527 @@
+{
+  "236S": {
+    "slot": 14,
+    "timing": [
+      13,
+      36,
+      2
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "phase": "windup",
+        "cue": "Read entry",
+        "pose": 32,
+        "source": "smoke-idle-v1/idle.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 2,
+        "phase": "windup",
+        "cue": "Gather",
+        "pose": 33,
+        "source": "smoke-attacks-v2/special_entries.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 8,
+        "phase": "windup",
+        "cue": "Palm coiled \u00b7 hold",
+        "pose": 34,
+        "source": "smoke-attacks-v2/pillar_bodies.png",
+        "region": [
+          0,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 13,
+        "phase": "active",
+        "cue": "First-active pillar release",
+        "pose": 35,
+        "source": "smoke-attacks-v2/pillar_bodies.png",
+        "region": [
+          768,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 17,
+        "phase": "active",
+        "cue": "Follow-through \u00b7 fingers unfurl",
+        "pose": 36,
+        "source": "smoke-specials-v3/pillar-recovery.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 31,
+        "phase": "active",
+        "cue": "Collect the hand",
+        "pose": 37,
+        "source": "smoke-specials-v3/pillar-recovery.png",
+        "region": [
+          768,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 39,
+        "phase": "active",
+        "cue": "Return to drift",
+        "pose": 38,
+        "source": "smoke-specials-v3/pillar-recovery.png",
+        "region": [
+          768,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 45,
+        "phase": "active",
+        "cue": "Settled \u00b7 cast lock remains",
+        "pose": 39,
+        "source": "smoke-idle-v1/idle.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 49,
+        "phase": "recovery",
+        "cue": "Settled \u00b7 still recovering",
+        "pose": 40,
+        "source": "smoke-idle-v1/idle.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      }
+    ],
+    "projectile": true
+  },
+  "236Hs": {
+    "slot": 25,
+    "timing": [
+      25,
+      36,
+      2
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "phase": "windup",
+        "cue": "Read entry",
+        "pose": 41,
+        "source": "smoke-idle-v1/idle.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 5,
+        "phase": "windup",
+        "cue": "Gather",
+        "pose": 42,
+        "source": "smoke-attacks-v2/special_entries.png",
+        "region": [
+          768,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 16,
+        "phase": "windup",
+        "cue": "Palm coiled \u00b7 hold",
+        "pose": 43,
+        "source": "smoke-attacks-v2/pillar_bodies.png",
+        "region": [
+          0,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 25,
+        "phase": "active",
+        "cue": "First-active pillar release",
+        "pose": 44,
+        "source": "smoke-attacks-v2/pillar_bodies.png",
+        "region": [
+          768,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 29,
+        "phase": "active",
+        "cue": "Follow-through \u00b7 fingers unfurl",
+        "pose": 45,
+        "source": "smoke-specials-v3/pillar-recovery.png",
+        "region": [
+          0,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 36,
+        "phase": "active",
+        "cue": "Lower the casting wrist",
+        "pose": 46,
+        "source": "smoke-attacks-v2/pillar_bodies.png",
+        "region": [
+          768,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 43,
+        "phase": "active",
+        "cue": "Collect the hand",
+        "pose": 47,
+        "source": "smoke-specials-v3/pillar-recovery.png",
+        "region": [
+          768,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 51,
+        "phase": "active",
+        "cue": "Return to drift",
+        "pose": 48,
+        "source": "smoke-specials-v3/pillar-recovery.png",
+        "region": [
+          768,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 57,
+        "phase": "active",
+        "cue": "Settled \u00b7 cast lock remains",
+        "pose": 49,
+        "source": "smoke-idle-v1/idle.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 61,
+        "phase": "recovery",
+        "cue": "Settled \u00b7 still recovering",
+        "pose": 50,
+        "source": "smoke-idle-v1/idle.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      }
+    ],
+    "projectile": true
+  },
+  "214S": {
+    "slot": 15,
+    "timing": [
+      15,
+      3,
+      24
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "phase": "windup",
+        "cue": "Read entry",
+        "pose": 51,
+        "source": "smoke-idle-v1/idle.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 3,
+        "phase": "windup",
+        "cue": "Gather",
+        "pose": 52,
+        "source": "smoke-attacks-v2/special_entries.png",
+        "region": [
+          0,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 7,
+        "phase": "windup",
+        "cue": "Loaded backhand \u00b7 hold",
+        "pose": 53,
+        "source": "smoke-attacks-v2/sword_bodies.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 15,
+        "phase": "active",
+        "cue": "First-active backhand snap",
+        "pose": 54,
+        "source": "smoke-attacks-v2/sword_bodies.png",
+        "region": [
+          768,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 18,
+        "phase": "recovery",
+        "cue": "Brake \u00b7 residual arc",
+        "pose": 55,
+        "source": "smoke-attacks-v2/sword_bodies.png",
+        "region": [
+          768,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 20,
+        "phase": "recovery",
+        "cue": "Follow-through \u00b7 cloth lags",
+        "pose": 56,
+        "source": "smoke-specials-v3/backhand-recovery.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 26,
+        "phase": "recovery",
+        "cue": "Withdraw the hand",
+        "pose": 57,
+        "source": "smoke-specials-v3/backhand-recovery.png",
+        "region": [
+          768,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 34,
+        "phase": "recovery",
+        "cue": "Collect into drift",
+        "pose": 58,
+        "source": "smoke-attacks-v2/special_entries.png",
+        "region": [
+          0,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 38,
+        "phase": "recovery",
+        "cue": "Settled \u00b7 still recovering",
+        "pose": 59,
+        "source": "smoke-idle-v1/idle.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      }
+    ],
+    "projectile": false
+  },
+  "214Hs": {
+    "slot": 16,
+    "timing": [
+      29,
+      3,
+      36
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "phase": "windup",
+        "cue": "Read entry",
+        "pose": 60,
+        "source": "smoke-idle-v1/idle.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 5,
+        "phase": "windup",
+        "cue": "Gather",
+        "pose": 61,
+        "source": "smoke-attacks-v2/special_entries.png",
+        "region": [
+          768,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 14,
+        "phase": "windup",
+        "cue": "Loaded backhand \u00b7 hold",
+        "pose": 62,
+        "source": "smoke-attacks-v2/sword_bodies.png",
+        "region": [
+          0,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 29,
+        "phase": "active",
+        "cue": "First-active backhand snap",
+        "pose": 63,
+        "source": "smoke-attacks-v2/sword_bodies.png",
+        "region": [
+          768,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 32,
+        "phase": "recovery",
+        "cue": "Brake \u00b7 residual arc",
+        "pose": 64,
+        "source": "smoke-attacks-v2/sword_bodies.png",
+        "region": [
+          768,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 34,
+        "phase": "recovery",
+        "cue": "Follow-through \u00b7 cloth lags",
+        "pose": 65,
+        "source": "smoke-specials-v3/backhand-recovery.png",
+        "region": [
+          0,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 44,
+        "phase": "recovery",
+        "cue": "Withdraw the hand",
+        "pose": 66,
+        "source": "smoke-specials-v3/backhand-recovery.png",
+        "region": [
+          768,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 56,
+        "phase": "recovery",
+        "cue": "Collect into drift",
+        "pose": 67,
+        "source": "smoke-attacks-v2/special_entries.png",
+        "region": [
+          768,
+          512,
+          768,
+          512
+        ]
+      },
+      {
+        "frame": 62,
+        "phase": "recovery",
+        "cue": "Settled \u00b7 still recovering",
+        "pose": 68,
+        "source": "smoke-idle-v1/idle.png",
+        "region": [
+          0,
+          0,
+          768,
+          512
+        ]
+      }
+    ],
+    "projectile": false
+  }
+}

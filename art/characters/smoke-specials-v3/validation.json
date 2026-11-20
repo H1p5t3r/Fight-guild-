@@ -1,0 +1,41 @@
+{
+  "baseline_commit": "df3b217873b257b4ed22fd13a4cd87a07503f3e6",
+  "audited_actions": 8,
+  "updated_specials": [
+    "236S",
+    "236Hs",
+    "214S",
+    "214Hs"
+  ],
+  "new_generated_drawings": 8,
+  "new_timed_cues": 37,
+  "checks": {
+    "registration_repeatable": true,
+    "move_json_unchanged": true,
+    "native_smoke_checks": 8723,
+    "native_collision_checks": 69660,
+    "native_signature_checks": 464,
+    "native_fillet_geometry_checks": 3576,
+    "native_shark_drive_checks": 659,
+    "godot_import": "passed outside socket-restricted sandbox",
+    "godot_smoke_and_art": "0 failures",
+    "browser_timing_replay": "hit/block/whiff outcomes, edited phase durations, actual facings, frozen poses/projectile ages, snapshot replay passed",
+    "browser_review": "desktop/mobile controls, no horizontal overflow, no WebAssembly, frame seek and mirror restore passed",
+    "browser_delivery": "hosted/subpath/JSON/photos/dragging/autosave passed; local file opening blocked by browser policy",
+    "windows_core": "debug/release rebuilt and package verified"
+  },
+  "preview": {
+    "file": "previews/Smoke-Specials-Before-After-60fps.mp4",
+    "fps": 60,
+    "seconds": 25,
+    "size": [
+      1280,
+      520
+    ],
+    "sha256": "7da39f58274ce7b5b39b2319323d63a99173c1cfa45da91204522a5a0e57d7b1"
+  },
+  "limitations": [
+    "Smoke f.S contact pulse/recovery art and 2Hs effect occlusion are deferred audit findings.",
+    "Cast exposure plans assume the authored first-active projectile spawn; delayed-spawn edits require a corresponding cast plan."
+  ]
+}

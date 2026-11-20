@@ -1,0 +1,32 @@
+[
+  {
+    "id": "backhand-recovery",
+    "file": "backhand-recovery.png",
+    "source": "/workspace/generated_images/exec-3bc832e7-ad8a-400c-8192-815c12afc662.png",
+    "sha256": "a43115662b4415efe3e1c4ac76461fd83e39be082b8d9a0066b0ccbf71274220",
+    "references": [
+      "smoke-attacks-v2/sword_bodies.png",
+      "smoke-idle-v1/idle.png"
+    ],
+    "prompt": "recovery-prompt.txt",
+    "columns": 2,
+    "rows": 2,
+    "body_height": 480,
+    "provenance": "image_gen; original PNG copied without pixel edits"
+  },
+  {
+    "id": "pillar-recovery",
+    "file": "pillar-recovery.png",
+    "source": "/workspace/generated_images/exec-f06fd58e-0764-4261-9297-bf3771b1b06f.png",
+    "sha256": "88f18dc2d80492815421af3a2dc4db6f766245379e3500b29a4634a365382c56",
+    "references": [
+      "smoke-attacks-v2/pillar_bodies.png",
+      "smoke-idle-v1/idle.png"
+    ],
+    "prompt": "pillar-recovery-prompt.txt",
+    "columns": 2,
+    "rows": 2,
+    "body_height": 480,
+    "provenance": "image_gen; original PNG copied without pixel edits"
+  }
+]
