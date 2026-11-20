@@ -2,6 +2,8 @@
 
 A native **Godot 4.6.3** fighting-game lab for iterating toward a PC/PS5 game. The PC build includes **Anvil, Hammer, Smoke, Tapper, Shark and Fillet**, generated sprites, all five basic **P / K / S / Hs / D** buttons, unified gatlings, a move editor, Momentum/Faultless Defense, counter/punish/reversal feedback and experimental direct rollback multiplayer.
 
+Watch the [Fillet, Smoke and Shark combo showcase](exports/FightGuild-Combo-Showcase.mp4): six verified normal-hit damage routes, full-speed footage and half-speed replays. The [route guide](docs/combo-showcase.md) includes inputs, damage, conditions and reproduction instructions.
+
 Each fighter has matching **windup and active** pose studies plus movement poses and three two-frame block reactions. Open **Development → Sprite review** to compare actions at the same scale. These are provisional kits and images. The [sprite production contract](docs/sprite-production.md) and [backlog](docs/backlog.md) cover consistent palettes, silhouettes, smear shapes, future characters and eventual windup → active → impact → follow-through → recovery sequences.
 
 **Fillet versus Shark** is the default matchup. Recovery editing includes independent grounded/airborne knockback, block pushback, launch and soft/hard knockdown. Universal **2D** sweep and **4P+K / 6P+K** throws cause hard knockdown. Combo gravity begins after five hits by default; Velocity-driven wall impacts deplete independent hidden wall pools; the next impact splats, a follow-up breaks the wall, and the attacker earns Momentum Positive Bonus. See [recovery and walls](docs/recovery-and-walls.md) for editable values and prototype limits.
