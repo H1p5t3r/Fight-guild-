@@ -24,6 +24,25 @@ func run() -> void:
 	var hash_before := model.state_hash()
 	check(not model.core.restore(old_snapshot) and model.state_hash() == hash_before, "Old snapshot version was accepted or changed live state")
 	var bounds := Vector2(1404, 722)
+	# Smoke's corner juggle previously froze here: modulo rounded a tile seam
+	# to 1024 and the draw loop kept emitting zero-height rectangles.
+	var seam_bounds := Vector2(1280, 598)
+	var seam_state := {"players": [{"x": 88000, "y": 0}, {"x": 97100, "y": 14671}]}
+	var seam_camera := ArenaStage.camera(seam_state, seam_bounds)
+	var seam_factor: float = seam_bounds.x / 1000.0 * seam_camera.zoom * 0.34
+	var seam_ground: float = seam_camera.offset.y + ArenaStage.floor_line(seam_bounds) * seam_camera.zoom
+	for side in [-1, 1]:
+		var rect := ArenaStage.wall_rect(seam_bounds, side, seam_camera.zoom, seam_camera.offset)
+		if rect.size.x <= 0: continue
+		var origin := Vector2(1160.0 - rect.size.x / seam_factor if side < 0 else 360.0, 880.0 - seam_ground / seam_factor)
+		var tiles := ArenaStage.wall_surface_tiles(rect, origin, seam_factor, Vector2(1536, 1024))
+		var area := 0.0
+		check(tiles.size() > 0 and tiles.size() <= 16, "Wall seam creates excessive tiles")
+		for i in range(0, tiles.size(), 2):
+			check(tiles[i].has_area() and rect.grow(0.001).encloses(tiles[i]), "Wall tile is empty or leaves its border")
+			check(Rect2(0, 0, 1536, 1024).grow(0.001).encloses(tiles[i + 1]), "Wall UV extends outside texture")
+			area += tiles[i].get_area()
+		check(absf(area - rect.get_area()) < 0.1, "Wall tiles leave gaps or overlap at the seam")
 	for path in ArenaStage.asset_paths():
 		var texture := load(path) as Texture2D
 		check(texture != null and texture.get_size() == Vector2(1536, 1024), "Missing generated plane: " + path)

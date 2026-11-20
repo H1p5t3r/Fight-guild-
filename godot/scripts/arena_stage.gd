@@ -163,19 +163,33 @@ static func draw_boundaries(canvas: Control, stage: int, zoom: float, offset: Ve
 			PackedColorArray([Color("080d16", 0.28 * alpha), Color("080d16", 0), Color("080d16", 0), Color("080d16", 0.28 * alpha)]))
 
 static func draw_wall_surface(canvas: Control, source: Texture2D, rect: Rect2, origin: Vector2, factor: float, alpha: float) -> void:
+	var tiles := wall_surface_tiles(rect, origin, factor, source.get_size())
+	for i in range(0, tiles.size(), 2):
+		canvas.draw_texture_rect_region(source, tiles[i], tiles[i + 1], Color(0.78, 0.83, 0.88, alpha))
+
+static func wall_surface_tiles(rect: Rect2, origin: Vector2, factor: float, image_size: Vector2) -> Array[Rect2]:
 	# Explicit bounded UV tiles avoid the clamped edge streaks of out-of-range
 	# texture regions, including high airborne cameras and very wide views.
+	var tiles: Array[Rect2] = []
 	var x := rect.position.x
+	var u := fposmod(origin.x, image_size.x)
+	var first_v := fposmod(origin.y, image_size.y)
 	while x < rect.end.x - 0.01:
-		var u := fposmod(origin.x + (x - rect.position.x) / factor, source.get_width())
-		var width := minf(rect.end.x - x, (source.get_width() - u) * factor)
+		var width := minf(rect.end.x - x, (image_size.x - u) * factor)
 		var y := rect.position.y
+		var v := first_v
 		while y < rect.end.y - 0.01:
-			var v := fposmod(origin.y + (y - rect.position.y) / factor, source.get_height())
-			var height := minf(rect.end.y - y, (source.get_height() - v) * factor)
-			canvas.draw_texture_rect_region(source, Rect2(x, y, width, height), Rect2(u, v, width / factor, height / factor), Color(0.78, 0.83, 0.88, alpha))
+			var height := minf(rect.end.y - y, (image_size.y - v) * factor)
+			if width > 0 and height > 0:
+				tiles.append(Rect2(x, y, width, height))
+				tiles.append(Rect2(u, v, width / factor, height / factor))
 			y += height
+			# Advance to the next tile explicitly. Recomputing modulo at a seam
+			# can round to the full texture height, producing a zero-size loop.
+			v = 0.0
 		x += width
+		u = 0.0
+	return tiles
 
 static func portal(canvas: Control, file: String, progress: float, side: int, opacity: float) -> void:
 	if opacity <= 0.0: return
