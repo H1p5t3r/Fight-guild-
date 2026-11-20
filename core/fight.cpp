@@ -40,6 +40,7 @@ void Simulation::reset(int c0,int c1,int s0,int s1) {
         f.move=f.last_move=-1;
         f.pull_owner=f.grab_owner=-1;
         f.combo_proration=f.combo_scale=f.damage_scale=100; f.input_age=-1;
+        clear_combo_physics(f);
         for(auto& h:f.history) { h.frame=-1000; h.direction=5; }
     }
 }
@@ -530,7 +531,7 @@ void Simulation::collide_wall(Fighter& f,int velocity,bool in_hitstun) {
     }
     f.vx=f.knockback_left=f.carry_vx=f.carry_time=0;
     if(in_hitstun&&f.reaction!=WallSplat&&f.bounce_wall>0) {
-        f.vx=velocity<0?f.bounce_wall:-f.bounce_wall; f.knockback_left=abs(f.vx)*HIT_TRAVEL_TICKS;
+        f.vx=velocity<0?f.bounce_wall:-f.bounce_wall; f.knockback_left=rules.combo_physics?0:abs(f.vx)*HIT_TRAVEL_TICKS;
         f.bounce_wall=0; f.vy=max(f.vy,500); f.y=max(1,f.y); f.reaction=AirReel;
     }
 }
@@ -538,7 +539,7 @@ void Simulation::move_horizontal(Fighter& f,bool was_hitstunned) {
     if(f.reaction==WallSplat||f.reaction==Downed||f.reaction==Waking||f.reaction==Reeled||f.reaction==Captured||f.reaction==Crumpled||f.guarding||f.grab_time) return;
     if(was_hitstunned||f.reaction==AirReel) {
         // Horizontal hit velocity advances on the defender's clock (including counter slowdown).
-        // Hitstop freezes it. The remaining-distance budget preserves authored knockback values.
+        // Hitstop freezes it. Legacy mode retains the authored distance budget.
         int velocity=f.vx;
         if(!velocity) return;
         if(f.knockback_left>0) velocity=(velocity<0?-1:1)*min(abs(velocity),f.knockback_left);
@@ -546,7 +547,12 @@ void Simulation::move_horizontal(Fighter& f,bool was_hitstunned) {
         int edge=clamp_x(f,velocity<0?0:100000);
         f.x=clamp_x(f,proposed);
         if((velocity<0&&proposed<=edge)||(velocity>0&&proposed>=edge)) {
-            collide_wall(f,velocity,was_hitstunned);
+            // Air reel remains an untechable combo until landing, including
+            // after its numeric stun timer expires.
+            collide_wall(f,velocity,was_hitstunned||(rules.combo_physics&&f.reaction==AirReel));
+        } else if(rules.combo_physics) {
+            int retained=f.y>0?rules.air_hit_drag:f.hit_crouching?rules.crouch_hit_drag:rules.ground_hit_drag;
+            f.vx=f.vx*retained/100;
         } else if(f.knockback_left>0) {
             f.knockback_left-=abs(velocity);
             f.vx=(velocity<0?-1:1)*min(abs(velocity),f.knockback_left);
@@ -900,8 +906,43 @@ bool Simulation::blocks(const Fighter& attacker,const Fighter& defender,bool was
 }
 
 int Simulation::gravity_percent(const Fighter& f) const {
+    if(rules.combo_physics) {
+        if(f.reaction!=AirReel) return 100;
+        return min(rules.gravity_cap,100+max(0,f.combo_decay-rules.decay_gravity_after)*rules.decay_gravity_step+f.repeat_gravity);
+    }
     if(f.reaction!=AirReel||f.combo_received<=rules.gravity_after) return 100;
     return min(rules.gravity_cap,100+(f.combo_received-rules.gravity_after)*rules.gravity_step+f.repeat_gravity);
+}
+void Simulation::clear_combo_physics(Fighter& f) {
+    f.combo_decay=f.hit_crouching=0;
+    f.launch_percent=f.push_percent=100;
+    for(auto& entry:f.combo_attacks) entry={};
+}
+int Simulation::combo_decay_basis(int player,int move,const Move& m,int serial,bool prior_combo) {
+    auto& target=world.players[1-player];
+    if(!prior_combo) {
+        clear_combo_physics(target);
+        target.repeat_gravity=0;
+        for(auto& uses:target.move_uses)uses=0;
+        target.combo_decay=m.v[StarterDecay];
+    }
+    // A multi-hit body, its projectile and later projectile contacts all share
+    // one attack identity. Retain identities while their projectile is alive.
+    for(const auto& entry:target.combo_attacks)if(entry.serial==serial+1)return entry.decay;
+    int slot=0;
+    for(int i=0;i<COMBO_ATTACK_SLOTS;++i) {
+        const int saved=target.combo_attacks[i].serial-1;
+        bool alive=saved==world.players[player].attack_serial;
+        for(const auto& q:world.projectiles)if(q.life&&q.owner==player&&q.serial==saved)alive=true;
+        if(saved<0||!alive){slot=i;break;}
+    }
+    int basis=target.combo_decay;
+    target.combo_attacks[slot]={serial+1,basis};
+    target.combo_decay=min(300,target.combo_decay+m.v[ComboDecay]);
+    int uses=target.move_uses[move]=min(1000,target.move_uses[move]+1);
+    if(rules.repeat_after>0&&uses>=rules.repeat_after)
+        target.repeat_gravity=min(300,target.repeat_gravity+rules.repeat_gravity_step);
+    return basis;
 }
 bool Simulation::throw_invulnerable(const Fighter& f) const {
     return f.pair_recovery>0||f.landing_time>0||f.y>0||semi_airborne(f)||f.prejump_time>0||f.reaction!=Free||(!f.guard_break&&f.throw_grace>0)||(f.guarding&&!f.guard_break)||(f.stun>0&&!f.guarding);
@@ -1000,6 +1041,7 @@ void Simulation::finish_wall_break() {
         f.move=f.last_move=-1;
         f.pull_owner=f.grab_owner=-1;
         f.combo_proration=f.combo_scale=f.damage_scale=100; f.input_age=-1;
+        clear_combo_physics(f);
         f.previous=f.raw=saved.raw; // A held transition input cannot become a fresh press.
         f.combo_display=saved.combo_display; f.combo_time=saved.combo_time;
         for(auto& h:f.history) { h.frame=-1000; h.direction=5; }
@@ -1090,6 +1132,7 @@ void Simulation::step(int raw0,int raw1) {
         if(!advances[p]) {pay_faultless(f);if(f.move<0&&f.display_move>=0)f.display_tick=world.frame;continue;}
         if(!prior_combo[p]&&f.reaction==Free&&!f.grab_time) {
             f.combo_received=f.repeat_gravity=0;
+            clear_combo_physics(f);
             f.combo_proration=f.combo_scale=100;
             for(auto& uses:f.move_uses) uses=0;
         }
@@ -1400,7 +1443,7 @@ void Simulation::update_projectiles() {
             if(contacts[i]!=Blocked) defender.combo=defender.combo_display=defender.combo_time=defender.combo_age=0;
             if(owner.move==q.move&&owner.attack_serial==q.serial) owner.contact=1;
             Move m=moves[q.character][q.move]; m.v[Category]=Special; m.v[PullFrames]=0;
-            apply_contact(q.owner,q.move,m,contacts[i],combos[i]||hit_this_tick[1-q.owner],reactions[i],q.facing,true);
+            apply_contact(q.owner,q.move,m,contacts[i],combos[i]||hit_this_tick[1-q.owner],reactions[i],q.facing,true,q.serial);
             if(contacts[i]!=Blocked) hit_this_tick[1-q.owner]=true;
             q.cooldown=m.v[ProjectileRehit];
             if(--q.hits<=0) q.life=0;
@@ -1427,7 +1470,7 @@ void Simulation::tick_grabs(const bool advances[2]) {
         }
     }
 }
-void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_combo,int prior_reaction,int facing,bool projectile) {
+void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_combo,int prior_reaction,int facing,bool projectile,int serial) {
     Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
     world.foreground_player=p;f.contact_ticks=0;
     bool blocked=contact==Blocked;
@@ -1467,6 +1510,14 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
         bool was_airborne=other.y>0;
         bool was_splatted=other.reaction==WallSplat||prior_reaction==WallSplat;
         bool throwing=m.v[Category]==Throw;
+        const int incoming_vx=other.vx,incoming_vy=other.vy;
+        int decay=0;
+        if(!blocked&&rules.combo_physics) {
+            decay=combo_decay_basis(p,move,m,serial<0?f.attack_serial:serial,prior_combo);
+            other.push_percent=min(rules.decay_push_cap,100+decay*rules.decay_push_step);
+            other.launch_percent=max(rules.decay_launch_floor,100-decay*rules.decay_launch_step);
+            if(!prior_combo||was_airborne)other.hit_crouching=!was_airborne&&(other.raw&Down);
+        }
         if(!blocked&&!prior_combo) {
             other.combo_proration=m.v[StarterProration]; other.combo_scale=100;
         }
@@ -1519,7 +1570,10 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
         int push=m.v[blocked?BlockPushback:was_airborne?AirPushback:Pushback]*(fd?mobility_or(other,FdPushPercent,rules.fd_push_percent):100)/100;
         int old_x=other.x;
         if(blocked||throwing) other.x=clamp_x(other,other.x+facing*push);
-        else {
+        else if(rules.combo_physics) {
+            int speed=m.v[was_airborne?AirHitSpeed:GroundHitSpeed]*other.push_percent/100;
+            other.vx=clamp(facing*speed+(was_airborne?incoming_vx*rules.launch_carry/100:0),-10000,10000);
+        } else {
             other.knockback_left=push;
             other.vx=facing*((push+HIT_TRAVEL_TICKS-1)/HIT_TRAVEL_TICKS);
         }
@@ -1527,12 +1581,15 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
         if(!projectile&&blocked&&(fd||rules.corner_push_transfer)) f.x=clamp_x(f,f.x-facing*(push-abs(other.x-old_x)));
         if(!blocked) {
             if(other.reaction==Reeled||other.reaction==Captured||other.reaction==Crumpled) other.reaction=was_airborne?AirReel:Free;
-            other.bounce_ground=was_airborne?m.v[GroundBounce]:0; other.bounce_wall=was_airborne?m.v[WallBounce]:0;
+            other.bounce_ground=was_airborne?m.v[GroundBounce]*(rules.combo_physics?other.launch_percent:100)/100:0;
+            other.bounce_wall=was_airborne?m.v[WallBounce]*(rules.combo_physics?other.push_percent:100)/100:0;
             other.grab_owner=-1; other.crumple_time=0;
             other.combo_received=f.combo;
-            int uses=other.move_uses[move]=min(1000,other.move_uses[move]+1);
-            if(rules.repeat_after>0&&uses>=rules.repeat_after&&f.combo>rules.gravity_after)
-                other.repeat_gravity=min(300,other.repeat_gravity+rules.repeat_gravity_step);
+            if(!rules.combo_physics) {
+                int uses=other.move_uses[move]=min(1000,other.move_uses[move]+1);
+                if(rules.repeat_after>0&&uses>=rules.repeat_after&&f.combo>rules.gravity_after)
+                    other.repeat_gravity=min(300,other.repeat_gravity+rules.repeat_gravity_step);
+            }
             other.knockdown=was_airborne&&contact==CounterHit&&m.v[AirCounterKnockdown]?m.v[AirCounterKnockdown]:m.v[Knockdown];
             other.down_frames=m.v[KnockdownFrames];
             other.wakeup_frames=m.v[WakeupFrames];
@@ -1546,6 +1603,10 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
                 f.teleported=other.teleported=1; // Preserve a delayed throw-finisher side swap through push resolution.
             }
             int lift=m.v[was_airborne?AirLaunch:Launch];
+            if(rules.combo_physics&&!throwing) {
+                if(lift>0)lift=lift*other.launch_percent/100;
+                if(was_airborne)lift=clamp(lift+incoming_vy*rules.launch_carry/100,-5000,5000);
+            }
             if(was_airborne||lift>0||other.knockdown!=NoKnockdown) {
                 other.reaction=AirReel;
                 other.y=max(1,other.y); other.vy=lift;
@@ -1665,6 +1726,8 @@ int Simulation::get(int player,int field) const {
         case 74:return f.variant; case 75:return f.tether_source; case 76:return f.tether_used;
         case 100:return f.tether_time;case 101:return 0;
         case 102:return f.line_pull_time;case 103:return f.line_pull_hold;
+        case 104:return f.combo_decay;case 105:return f.push_percent;
+        case 106:return f.launch_percent;case 107:return f.hit_crouching;
         case 77:return f.bleed_source; case 78:return f.bleed_time; case 79:return f.bleed_clock; case 80:return f.grey_life;
         case 81:return f.stance; case 82:return f.guard_button; case 83:return f.armor_left;
         case 84:return f.bounce_ground; case 85:return f.bounce_wall; case 86:return f.crumple_time;
@@ -1780,6 +1843,8 @@ int Simulation::move_set(int c,int m,int f,int v) {
         case DiveSpeedX: low=-2000; high=2000; break;
         case DiveSpeedY: low=-3000; high=0; break;
         case GroundBounce: low=0; high=3000; break;
+        case ComboDecay: case StarterDecay: low=0; high=100; break;
+        case GroundHitSpeed: case AirHitSpeed: low=0; high=4000; break;
         case WallBounce: low=0; high=3000; break;
         case CrumpleFrames: low=0; high=180; break;
         case AirCounterKnockdown: low=0; high=2; break;
@@ -1896,13 +1961,13 @@ int Simulation::rule_get(int f) const {
         rules.wall_break_damage,rules.positive_frames,rules.positive_gain_percent,rules.positive_regen,
         rules.fd_air_drain,rules.fd_level_cost,rules.corner_push_transfer,rules.wall_mid_cap,rules.grounded_wall_prime,
         rules.block_carryover,rules.throw_grace_frames,rules.air_landing_frames,rules.repeat_after,rules.repeat_gravity_step,
-        rules.prejump_frames,rules.empty_landing_frames};
+        rules.prejump_frames,rules.empty_landing_frames,rules.combo_physics,rules.decay_push_step,rules.decay_push_cap,rules.decay_launch_step,rules.decay_launch_floor,rules.ground_hit_drag,rules.crouch_hit_drag,rules.air_hit_drag,rules.launch_carry,rules.decay_gravity_after,rules.decay_gravity_step};
     return f>=0&&f<RULE_COUNT?values[f]:-1;
 }
 int Simulation::rule_set(int f,int v) {
-    const int low[RULE_COUNT]={1,3,1,0,0,0,0,0,0,1,0,0,100, 0,0,100,1,0,0,0,1,30,0,0,100,0, 1,0,0,0,0,0,0,0,0,0, 0,0};
+    const int low[RULE_COUNT]={1,3,1,0,0,0,0,0,0,1,0,0,100, 0,0,100,1,0,0,0,1,30,0,0,100,0, 1,0,0,0,0,0,0,0,0,0, 0,0,0,0,100,0,0,0,0,0,0,0,0};
     const int high[RULE_COUNT]={12,30,12,100,100,100,100,100,10000,1000,10000,100,1000,
-        100,100,400,10000,50000,600,1000,180,300,1000,1800,300,100, 1000,1000,1,100,1,1,30,120,100,100, 30,120};
+        100,100,400,10000,50000,600,1000,180,300,1000,1800,300,100, 1000,1000,1,100,1,1,30,120,100,100, 30,120,1,20,600,10,100,99,99,100,100,300,20};
     if(f<0||f>=RULE_COUNT||v<low[f]||v>high[f]) return 0;
     int* values[RULE_COUNT]={&rules.buffer,&rules.motion_window,&rules.motion_gap,
         &rules.move_gain,&rules.attack_gain,&rules.block_attack_gain,&rules.damage_gain,&rules.guard_gain,
@@ -1912,7 +1977,7 @@ int Simulation::rule_set(int f,int v) {
         &rules.wall_break_damage,&rules.positive_frames,&rules.positive_gain_percent,&rules.positive_regen,
         &rules.fd_air_drain,&rules.fd_level_cost,&rules.corner_push_transfer,&rules.wall_mid_cap,&rules.grounded_wall_prime,
         &rules.block_carryover,&rules.throw_grace_frames,&rules.air_landing_frames,&rules.repeat_after,&rules.repeat_gravity_step,
-        &rules.prejump_frames,&rules.empty_landing_frames};
+        &rules.prejump_frames,&rules.empty_landing_frames,&rules.combo_physics,&rules.decay_push_step,&rules.decay_push_cap,&rules.decay_launch_step,&rules.decay_launch_floor,&rules.ground_hit_drag,&rules.crouch_hit_drag,&rules.air_hit_drag,&rules.launch_carry,&rules.decay_gravity_after,&rules.decay_gravity_step};
     *values[f]=v;
     return 1;
 }
@@ -1938,6 +2003,27 @@ int Simulation::can_cancel(int c,int from,int to,int contact) const {
     }
     if(target.v[FollowFrom]>=0||target.v[FollowFrom2]>=0)
         return (from==target.v[FollowFrom]||from==target.v[FollowFrom2])&&(!target.v[FollowHit]||contact);
+    if(rules.combo_physics) {
+        if(target.v[Category]==Throw||(!contact&&!source.v[WhiffCancel])
+           ||(from==to&&!source.v[SelfCancel])||source.v[Air]!=target.v[Air])return 0;
+        const bool normal=source.v[Category]==Normal;
+        const bool command=source.v[Category]==Command;
+        if(target.v[Category]==Special||target.v[Category]==Drive)
+            return (normal||command)&&source.v[SpecialCancel];
+        if(target.v[Category]==Command) {
+            if(source.v[CommandRoutes]>=0)return (source.v[CommandRoutes]&(1<<target.v[Button]))!=0;
+            return normal&&!source.v[Air]&&(source.v[Button]<=1||from==CLOSE_SLASH);
+        }
+        if(target.v[Category]!=Normal)return 0;
+        if(source.v[NormalRoutes]>=0)return (source.v[NormalRoutes]&(1<<target.v[Button]))!=0;
+        if(!normal)return 0;
+        const int a=source.v[Button],b=target.v[Button];
+        if(source.v[Air])return (a==0&&from==to)||(a==1&&b==4)||(a==2&&(b==3||b==4))||(a==3&&b==4);
+        // Fight Guild's dedicated sweep is 2S. Drive keeps its special role.
+        return (a==0&&b==0)||(a==1&&(to==SLASH_SWEEP||b==4))
+            ||(from==CLOSE_SLASH&&(b==2||b==3||b==4))
+            ||((from==FAR_SLASH||from==SLASH_SWEEP)&&b==3);
+    }
     // Only close Slash adds these same-button normal routes to the unified tree.
     // An authored NormalRoutes mask still overrides the unified destinations.
     if(from==CLOSE_SLASH&&(to==FAR_SLASH||to==SLASH_SWEEP)
@@ -1948,6 +2034,12 @@ int Simulation::can_cancel(int c,int from,int to,int contact) const {
 }
 bool Simulation::cancel_window(const Fighter& f,int group) const {
     if(f.move<0||group<0||group>4) return false;
+    const auto& source=effective_move(f);
+    // Strive P/K special cancels and K gatlings close after the active frames.
+    // Stance and named follow-up/bleed routes remain character exceptions.
+    if(rules.combo_physics&&source.v[Category]==Normal&&source.v[StanceRequired]!=2
+       &&((group==1&&source.v[Button]<=1)||(group==0&&source.v[Button]==1))
+       &&(f.age<source.v[Startup]||f.age>=source.v[Startup]+source.v[Active]))return false;
     if(extended(f)) {
         if(!f.contact)return false;
         const int* x=extension(f);

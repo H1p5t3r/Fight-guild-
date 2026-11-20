@@ -14,7 +14,7 @@ import {buildFilletMotionReview} from './build-fillet-motion-review.mjs';
 const root=new URL('../',import.meta.url), path=p=>fileURLToPath(new URL(p,root));
 const wasm=await readFile(path('web/generated/fight.wasm'));
 const {instance}=await WebAssembly.instantiate(wasm),engine=new Engine(instance),defaults=engine.data();
-if(defaults.schema!==25||defaults.coreVersion!==25) throw new Error('Rebuild the current combat core before packaging the workshop.');
+if(defaults.schema!==26||defaults.coreVersion!==26) throw new Error('Rebuild the current combat core before packaging the workshop.');
 // Ship the actual integer combat simulation as plain JS. Workplace browsers
 // need neither a native executable nor WebAssembly permission to play a preview.
 execFileSync(path('node_modules/.bin/wasm2js'),[path('web/generated/fight.wasm'),'-O','--enable-bulk-memory','-o',path('build/fight-core-js.mjs')]);

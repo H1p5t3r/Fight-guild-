@@ -60,6 +60,12 @@ jobs:
         run: node scripts/build-workbench.mjs
       - name: Verify hosted and extracted editor
         run: node tests/workbench-delivery-browser.mjs
+      - name: Verify combo physics and mobile controls
+        run: |
+          ./build/combo-physics-tests
+          node --test tests/combo-physics.test.mjs
+          node scripts/verify-combo-decay.mjs
+          node tests/workbench-combo-browser.mjs
       - name: Verify all Fillet animation review clips
         run: |
           ./build/fillet-v1-tests

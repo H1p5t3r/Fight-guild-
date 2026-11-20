@@ -5,7 +5,7 @@ func check(ok: bool, text: String) -> void:
 func _initialize() -> void:
 	var model := CombatModel.new()
 	var initial := model.data()
-	check(initial.schema == 25 and initial.characters[5].moves.size() == 47, "v23 / 47 slots")
+	check(initial.schema == 26 and initial.characters[5].moves.size() == 47, "v23 / 47 slots")
 	check(initial.characters[5].extensions.params.bleedDuration == 420, "Owned bleed parameters")
 	check(model.load_data(initial).is_empty(), "Complete default extension round trip")
 	check(model.data() == initial, "No extension or art metadata lost")

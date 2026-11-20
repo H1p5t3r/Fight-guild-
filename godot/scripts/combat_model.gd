@@ -2,7 +2,7 @@ class_name CombatModel
 extends RefCounted
 
 const CHARACTERS := ["Anvil", "Hammer", "Smoke", "Tapper", "Shark", "Fillet"]
-const DATA_VERSION := 25
+const DATA_VERSION := 26
 
 static func startup_minimum(move: Dictionary) -> int:
 	if move.get("category") == 4: return 2
@@ -36,15 +36,16 @@ const INPUT_MASK := 4095
 const BUTTONS := ["P", "K", "S", "Hs", "D"]
 const MOVE_IDS := ["5P", "5K", "5S", "5Hs", "2P", "2K", "2S", "2Hs", "6P", "6K", "6S", "6Hs", "6D", "5D", "236P", "236S", "623Hs", "j.P", "j.K", "j.S", "j.Hs", "j.D", "2D", "4P+K", "6P+K", "236K", "236S>6S", "236S>2S", "214S", "j.214P", "214S>P", "j.214P>P","c.S","[S/Hs]","[S/Hs]>attack","st.P","st.K","st.S","st.Hs","st.2D","st.236D","j.4P+K","j.6P+K","6[Hs]","5[D]","236D","214D"]
 # Smear slots are reserved for schema compatibility; transition smearing is removed.
-const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange", "enabled", "artPose", "followFrom", "followFrom2", "followHit", "travelSpeed", "inertiaPercent", "pullFrames", "pullGap", "hitAngle", "normalCancelStart", "normalCancelEnd", "specialCancelStart", "specialCancelEnd", "jumpCancelStart", "jumpCancelEnd", "followCancelStart", "followCancelEnd", "cancelOn", "starterProration", "comboScaling", "minimumDamage", "landingRecovery", "attackLevel", "counterTier", "counterVulnerable", "counterFreezeFrames", "counterSlowFrames", "projectileKind", "projectileSpawnFrame", "projectileSpeedX", "projectileSpeedY", "projectileGravity", "projectileLife", "projectileOffsetX", "projectileOffsetY", "projectileWidth", "projectileHeight", "projectileHits", "projectileRehit", "projectileDurability", "projectilePersist", "projectileMelee", "smearMode", "smearPart", "smearStretch", "smearFrame1", "smearFrame2", "smearFrame3", "smearFrame4", "hurtMaskWindup", "hurtMaskActive", "hurtMaskRecovery","mechanic","tetherSpeed","tetherFrames","bleedInitial","bleedTickDamage","bleedTickFrames","bleedDuration","bleedBlockPercent","bleedCap","variantStartup","variantActive","variantRecovery","variantDamage","variantRange","variantSpeed","variantLift","variantHitstun","variantKnockdown","stanceRequired","stanceChange","actionType","holdFollow","holdFrame","holdButton","guardFollow","proximityMove","proximityRange","startupTravel","diveSpeedX","diveSpeedY","groundBounce","wallBounce","crumpleFrames","airCounterKnockdown","hurtWindowStart","hurtWindowEnd","hurtWindowMask","semiAirStart","semiAirEnd","armorFrames","armorHits","grabFrames","finishArtPose","finishArtFrame","tetherDuration","tetherRange","tetherGap"]
+const FIELDS := ["button", "category", "direction", "motion", "air", "startup", "active", "recovery", "damage", "hitstun", "blockstun", "hitstop", "pushback", "reach", "bottom", "height", "specialCancel", "jumpCancel", "whiffCancel", "selfCancel", "advance", "simpleDirection", "simpleButton", "normalRoutes", "commandRoutes", "hitLevel", "chipDamage", "guardBreak", "counterHitstun", "counterHitstop", "reversalEligible", "hitboxBack", "airPushback", "blockPushback", "launch", "airLaunch", "knockdown", "knockdownFrames", "wakeupFrames", "wallDamage", "throwRange", "enabled", "artPose", "followFrom", "followFrom2", "followHit", "travelSpeed", "inertiaPercent", "pullFrames", "pullGap", "hitAngle", "normalCancelStart", "normalCancelEnd", "specialCancelStart", "specialCancelEnd", "jumpCancelStart", "jumpCancelEnd", "followCancelStart", "followCancelEnd", "cancelOn", "starterProration", "comboScaling", "minimumDamage", "landingRecovery", "attackLevel", "counterTier", "counterVulnerable", "counterFreezeFrames", "counterSlowFrames", "projectileKind", "projectileSpawnFrame", "projectileSpeedX", "projectileSpeedY", "projectileGravity", "projectileLife", "projectileOffsetX", "projectileOffsetY", "projectileWidth", "projectileHeight", "projectileHits", "projectileRehit", "projectileDurability", "projectilePersist", "projectileMelee", "smearMode", "smearPart", "smearStretch", "smearFrame1", "smearFrame2", "smearFrame3", "smearFrame4", "hurtMaskWindup", "hurtMaskActive", "hurtMaskRecovery","mechanic","tetherSpeed","tetherFrames","bleedInitial","bleedTickDamage","bleedTickFrames","bleedDuration","bleedBlockPercent","bleedCap","variantStartup","variantActive","variantRecovery","variantDamage","variantRange","variantSpeed","variantLift","variantHitstun","variantKnockdown","stanceRequired","stanceChange","actionType","holdFollow","holdFrame","holdButton","guardFollow","proximityMove","proximityRange","startupTravel","diveSpeedX","diveSpeedY","groundBounce","wallBounce","crumpleFrames","airCounterKnockdown","hurtWindowStart","hurtWindowEnd","hurtWindowMask","semiAirStart","semiAirEnd","armorFrames","armorHits","grabFrames","finishArtPose","finishArtFrame","tetherDuration","tetherRange","tetherGap", "comboDecay", "starterDecay", "groundHitSpeed", "airHitSpeed"]
 const MOVEMENT_FIELDS := ["forwardStyle", "walkSpeed", "runSpeed", "runAcceleration", "stepSpeed", "stepFrames", "backSpeed", "backFrames", "attackFriction", "backStyle", "backWalkSpeed", "backRunSpeed", "jumpSpeed", "jumpForwardSpeed", "jumpBackSpeed", "gravity", "airJumps", "prejumpFrames", "airDashEnabled", "airBackdashEnabled", "airDashStyle", "airBackdashStyle", "airDashSpeed", "airBackdashSpeed", "airDashFrames", "airBackdashFrames", "airDashUses", "hoverHeight", "hoverRiseSpeed", "teleportDistance", "backTeleportDistance", "teleportStartup", "fdEnabled", "fdPushPercent", "fdDrain", "fdAirDrain", "fdBlockCost", "smearMode", "smearPart", "smearStretch", "airDashPauseFrames", "airBackdashPauseFrames"]
 const RULES := ["buttonBuffer", "motionWindow", "motionGap"]
 const MOMENTUM_RULES := ["movementGain", "attackGain", "blockedAttackGain", "damageTakenGain", "guardGain", "specialGain", "fdDrain", "fdBlockCost", "fdDamageCost", "fdPushPercent"]
 const RECOVERY_RULES := ["gravityAfter", "gravityStep", "gravityCap", "wallThreshold", "wallRange", "wallDecayDelay", "wallDecay", "wallSplatFrames", "wallBreakFrames", "wallBreakDamage", "positiveFrames", "positiveGainPercent", "positiveRegen"]
 const TUNING_RULES := ["fdAirDrain", "fdLevelCost", "cornerPushTransfer", "wallMidCap", "groundedWallPrime", "blockCarryover", "throwGraceFrames", "airLandingFrames", "repeatAfter", "repeatGravityStep"]
+const COMBO_RULES := ["comboPhysics", "decayPushStep", "decayPushCap", "decayLaunchStep", "decayLaunchFloor", "groundHitDrag", "crouchHitDrag", "airHitDrag", "launchCarry", "decayGravityAfter", "decayGravityStep"]
 const JUMP_RULES := ["prejumpFrames", "emptyLandingFrames"]
-const RULE_COUNT := 38 # Input, Momentum, recovery/walls, tuning, then jump rules.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy", "dashKind", "dashAge", "airDashUsed", "airJumpUsed", "teleported", "contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause","attackSerial","pairRecovery","captureFailed","contactTicks","coastPending","coastMode","dashSpeed","displayMove","displayAge","tetherTime","tetherChase","linePullTime","linePullHeld"]
+const RULE_COUNT := 49 # Input, Momentum, recovery/walls, tuning, jump, then combo rules.
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy", "dashKind", "dashAge", "airDashUsed", "airJumpUsed", "teleported", "contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause","attackSerial","pairRecovery","captureFailed","contactTicks","coastPending","coastMode","dashSpeed","displayMove","displayAge","tetherTime","tetherChase","linePullTime","linePullHeld", "comboDecay", "pushPercent", "launchPercent", "hitCrouching"]
 var extension_art: Array = ExtensionData.default_art.duplicate(true)
 var core := FightCore.new()
 var config: PackedInt32Array = core.configuration()
@@ -186,7 +187,7 @@ func extension(character: int, slot: int) -> Dictionary:
 	return ExtensionData.unpack(config.slice(start, start+count), slot < 0, extension_art[character].get("character" if slot < 0 else str(slot), {}))
 
 func data() -> Dictionary:
-	var result := {"schema": DATA_VERSION, "coreVersion": DATA_VERSION, "inputRules": {}, "momentumRules": {}, "recoveryRules": {}, "tuningRules": {}, "jumpRules": {}, "characters": []}
+	var result := {"schema": DATA_VERSION, "coreVersion": DATA_VERSION, "inputRules": {}, "momentumRules": {}, "recoveryRules": {}, "tuningRules": {}, "jumpRules": {}, "comboRules": {}, "characters": []}
 	for i in RULES.size():
 		result.inputRules[RULES[i]] = config[config.size() - RULE_COUNT + i]
 	for i in MOMENTUM_RULES.size():
@@ -194,9 +195,11 @@ func data() -> Dictionary:
 	for i in RECOVERY_RULES.size():
 		result.recoveryRules[RECOVERY_RULES[i]] = config[config.size() - RULE_COUNT + RULES.size() + MOMENTUM_RULES.size() + i]
 	for i in TUNING_RULES.size():
-		result.tuningRules[TUNING_RULES[i]] = config[config.size() - TUNING_RULES.size() - JUMP_RULES.size() + i]
+		result.tuningRules[TUNING_RULES[i]] = config[config.size() - RULE_COUNT + 26 + i]
 	for i in JUMP_RULES.size():
-		result.jumpRules[JUMP_RULES[i]] = config[config.size() - JUMP_RULES.size() + i]
+		result.jumpRules[JUMP_RULES[i]] = config[config.size() - RULE_COUNT + 36 + i]
+	for i in COMBO_RULES.size():
+		result.comboRules[COMBO_RULES[i]] = config[config.size() - RULE_COUNT + 38 + i]
 	for c in CHARACTERS.size():
 		var character := {"name": CHARACTERS[c], "moves": [], "movement": movement(c)}
 		var extra := extension(c, -1)
@@ -235,6 +238,10 @@ func load_data(value: Variant) -> String:
 	if version < 23:
 		var old_fillet: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/legacy_fillet_v22.json"))
 		for m in 45:
+			old_fillet.moves[m].comboDecay = 5
+			old_fillet.moves[m].starterDecay = 0
+			old_fillet.moves[m].groundHitSpeed = ceili(float(old_fillet.moves[m].pushback) / 6.0)
+			old_fillet.moves[m].airHitSpeed = ceili(float(old_fillet.moves[m].airPushback) / 6.0)
 			for i in FIELDS.size(): candidate[(5 * MOVE_IDS.size() + m) * FIELDS.size() + i] = int(old_fillet.moves[m].get(FIELDS[i], candidate[(5 * MOVE_IDS.size() + m) * FIELDS.size() + i]))
 			load_hurtboxes(old_fillet.moves[m].hurtboxes, candidate, 5, m)
 			load_hitboxes(old_fillet.moves[m].hitboxTimeline, candidate, 5, m)
@@ -307,9 +314,14 @@ func load_data(value: Variant) -> String:
 			if version < 25 and definition.get("mechanic") == 5:
 				definition.mechanic = 0
 				definition.enabled = 0
+			if version < 26:
+				definition.comboDecay = 5
+				definition.starterDecay = 0
+				definition.groundHitSpeed = ceili(float(definition.pushback) / 6.0)
+				definition.airHitSpeed = ceili(float(definition.airPushback) / 6.0)
 			for i in FIELDS.size():
-				if version < 24 and i >= 138: continue
-				if (version < 15 and i >= 69) or (version < 16 and i >= 91) or (version < 17 and i >= 94) or (version < 18 and i >= 112): continue
+				if version < 24 and i >= 138 and i < 141: continue
+				if i < 141 and ((version < 15 and i >= 69) or (version < 16 and i >= 91) or (version < 17 and i >= 94) or (version < 18 and i >= 112)): continue
 				var field: String = FIELDS[i]
 				if not valid_integer(definition.get(field)):
 					return "Invalid integer for %s / %s." % [MOVE_IDS[m], field]
@@ -336,7 +348,7 @@ func load_data(value: Variant) -> String:
 				if not valid_integer(characters[c].movement.get(field)): return "Invalid movement: " + field
 				candidate[start + i] = int(characters[c].movement[field])
 	var offset := candidate.size() - RULE_COUNT
-	for group in [["inputRules", RULES, 1], ["momentumRules", MOMENTUM_RULES, 3], ["recoveryRules", RECOVERY_RULES, 6], ["tuningRules", TUNING_RULES, 8], ["jumpRules", JUMP_RULES, 9]]:
+	for group in [["inputRules", RULES, 1], ["momentumRules", MOMENTUM_RULES, 3], ["recoveryRules", RECOVERY_RULES, 6], ["tuningRules", TUNING_RULES, 8], ["jumpRules", JUMP_RULES, 9], ["comboRules", COMBO_RULES, 26]]:
 		if version >= group[2]:
 			if not value.get(group[0]) is Dictionary: return "Missing " + group[0]
 			for i in group[1].size():
@@ -350,7 +362,7 @@ func load_data(value: Variant) -> String:
 		candidate[candidate.size() - RULE_COUNT + 27] = 0
 		candidate[candidate.size() - RULE_COUNT + 35] = 0
 	if version < 9:
-		candidate[candidate.size() - JUMP_RULES.size()] = 0 # Preserve legacy instant takeoff.
+		candidate[candidate.size() - RULE_COUNT + 36] = 0 # Preserve legacy instant takeoff.
 	if not core.configure(candidate):
 		return "A move value or rule is outside the supported range."
 	extension_art = next_art

@@ -111,7 +111,7 @@ int main(){
     setup();int enabled=0;for(auto& m:sim.moves[5])enabled+=m.v[Enabled];check(enabled==26,"26 enabled actions");
     for(int c=0;c<6;++c){check(sim.extension_set(c,-1,sim.character_extensions[c].v),"character extension validates");for(int m=0;m<MOVE_COUNT;++m)check(sim.extension_set(c,m,sim.extensions[c][m].v),"action extension validates");}
     check(sim.can_cancel(5,CLOSE_SLASH,FAR_SLASH,1)&&sim.can_cancel(5,CLOSE_SLASH,SLASH_SWEEP,1),"named c.S routes");
-    check(!sim.can_cancel(5,5,6,1)&&!sim.can_cancel(5,6,14,1),"no implicit 2K sweep or sweep special route");
+    check(sim.can_cancel(5,5,6,1)&&!sim.can_cancel(5,6,14,1),"2K has an explicit sweep route; sweep cannot cancel to unrelated specials");
     begin(CLOSE_SLASH);ticks(6);ticks(1,0,Right|Down);check(sim.world.players[1].stun==17&&sim.world.players[1].x==46800,"c.S first block, 6px push");
     unfreeze();sim.step(S,Right);check(sim.world.players[0].move==FAR_SLASH&&sim.world.players[0].age==1,"c.S bypasses proximity into f.S");
     setup(5,4,35000);begin(8);ticks(3);check(sim.box_count(0,HurtBox)==1,"6P only legs from frame 3");ticks(10);check(sim.box_count(0,HurtBox)==4,"6P restores body on frame 13");

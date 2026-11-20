@@ -394,7 +394,7 @@ static void test_replay() {
 }
 int main(int argc,char** argv) {
     if(argc>1&&std::strcmp(argv[1],"--trace")==0) {
-        legacy_fillet::defaults(default_simulation); reset(0,1,0,0); unsigned seed=123456;
+        defaults(); reset(0,1,0,0); unsigned seed=123456;
         for(int i=0;i<1200;++i) {
             int a=random_input(seed),b=random_input(seed); step(a,b);
             std::printf("%d %d %u\n",a,b,checksum());

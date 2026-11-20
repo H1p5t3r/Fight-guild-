@@ -1,3 +1,4 @@
+import {comboMoveDefaults} from '../web/combo-rules.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -11,14 +12,14 @@ const wasm=await WebAssembly.compile(await readFile('web/generated/fight.wasm'))
 test('Shark retains every submitted non-Drive move, disabled slot and movement value',()=>{
  const c=pack.draft.data.characters[4];assert.equal(c.moves.filter(m=>m.enabled).length,26);
  assert.deepEqual(c.movement,baseline.movement);
- for(const [slot,m]of baseline.moves.entries())if(![12,13,21,22].includes(slot))assert.deepEqual(c.moves[slot],{...m,...LINE_DEFAULTS},m.id);
+ for(const [slot,m]of baseline.moves.entries())if(![12,13,21,22].includes(slot))assert.deepEqual(c.moves[slot],{...m,...LINE_DEFAULTS,...comboMoveDefaults(m)},m.id);
  for(const slot of [12,14,15,16])assert.equal(c.moves[slot].enabled,0);
  assert.equal(c.moves[29].button,2,'Keep the saved S mapping despite its legacy j.214P slot ID');
  assert.equal(c.moves[6].knockdown,2,'2S remains the hard-knockdown sweep');
 });
 test('Schema-23 imports and reset preserve old Drive behavior, notes and newly required defaults',async()=>{
  const old=await json('godot/data/workshop/2026-11-19-fillet-v1/FightGuild-Fillet-v1.json'),copy=structuredClone(old),w=new Workshop(pack,old);
- assert.equal(w.data.schema,25);assert.deepEqual(old,copy);assert.deepEqual(w.data._moveWorkshop,old._moveWorkshop);
+ assert.equal(w.data.schema,26);assert.deepEqual(old,copy);assert.deepEqual(w.data._moveWorkshop,old._moveWorkshop);
  for(const [c,ch]of old.characters.entries())for(const [i,m]of ch.moves.entries())for(const [k,v]of Object.entries(m))assert.deepEqual(w.move(c,i)[k],v,`${c}/${i}/${k}`);
  assert.equal(w.move(4,13).mechanic,1);
  const older=await json('godot/data/workshop/2026-11-19-slash-sweeps/FightGuild-Slash-Sweeps.json'),legacy=new Workshop(pack,older);
@@ -64,8 +65,8 @@ test('Schema-24 migration retires Chase without losing custom tuning or art note
  const chase=old.characters[4].moves[12];chase.enabled=1;chase.mechanic=5;chase.tetherSpeed=1789;
  old._moveWorkshop.notes['Shark/6D']={label:'Saved chase study',active:'Keep my pose reference.'};
  const before=structuredClone(old),w=new Workshop(pack,old);
- assert.equal(w.data.schema,25);assert.deepEqual(old,before);
- assert.deepEqual(w.move(4,12),{...chase,enabled:0,mechanic:0});
+ assert.equal(w.data.schema,26);assert.deepEqual(old,before);
+ assert.deepEqual(w.move(4,12),{...chase,...comboMoveDefaults(chase),enabled:0,mechanic:0});
  assert.deepEqual(w.data._moveWorkshop,old._moveWorkshop);
  const e=new CombatPreview(pack).engine;e.loadData(old);assert.equal(e.move(4,12).enabled,0);assert.equal(e.move(4,12).mechanic,0);
 });

@@ -18,6 +18,10 @@ schema-16 controls, including combat playback, timed hitboxes, hurtboxes,
 art notes and pose photos, character movement and projectiles. This page also
 documents the newer mobile layout and sequence testing.
 
+## Combo controls (schema 26)
+
+**Timing & damage** includes per-move decay/starter decay and a **Shared combo physics** panel for all fighters. **Hitboxes & impact** includes grounded/airborne hit speed. Shared rules support undo, autosave, search and JSON export. The preview reports decay and launch percentage. [The combo guide](combo-decay.md) explains every new value, legacy distance fields and the tighter default gatlings. The older PDF predates these controls.
+
 ## Use it on another PC
 
 1. After the one-time Pages setup below, open

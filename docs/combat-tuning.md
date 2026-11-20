@@ -30,7 +30,7 @@ Defaults give P starters 70%, K starters 80%, and most other normals 100%; autho
 | Fillet `236S > 2S` | 35 + 35 = **70** |
 | Shark `214S > P` or `j.214P > P` | 25 + 27 = **52** |
 
-Gravity remains a separate system. The first X hits are unchanged (default five). After that threshold, each use of a move from its third use onward adds another 15 percentage points of gravity, on top of the existing per-hit increment, bounded by the existing gravity cap. Repeat threshold and increment are editable; zero disables the relevant repeat penalty. Normal jumps are unaffected. The frame lab shows last-hit base/final damage, effective percentage and current gravity.
+Gravity remains separate from damage scaling. Schema 26 replaces the first-X-hits gate with combo-decay gravity and an independent repeated-move penalty (third use onward by default). Every multi-hit attack use counts once. [Current combo physics](combo-decay.md) documents the formulas, velocity controls and preserved character exceptions.
 
 ## Blocking and throw protection
 

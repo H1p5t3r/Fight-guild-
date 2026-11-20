@@ -5,6 +5,7 @@ mkdir -p build web/generated
 # Runtime tests retain several independent configuration tables on the stack.
 python scripts/generate-combat-data.py --check
 python tests/combat_data_test.py
+"${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/combo_physics_test.cpp -o build/combo-physics-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/movement_projectile_test.cpp -o build/movement-projectile-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/fillet_v1_test.cpp -o build/fillet-v1-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/fillet_geometry_test.cpp -o build/fillet-geometry-tests

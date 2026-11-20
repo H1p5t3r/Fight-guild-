@@ -143,7 +143,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "5K",
@@ -284,7 +288,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 150,
+          "airHitSpeed": 200
         },
         {
           "id": "5S",
@@ -425,7 +433,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "5Hs",
@@ -566,7 +578,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "2P",
@@ -707,7 +723,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "2K",
@@ -848,7 +868,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 150,
+          "airHitSpeed": 200
         },
         {
           "id": "2S",
@@ -999,7 +1023,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "2Hs",
@@ -1140,7 +1168,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "6P",
@@ -1281,7 +1313,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "6K",
@@ -1422,7 +1458,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 150,
+          "airHitSpeed": 200
         },
         {
           "id": "6S",
@@ -1563,7 +1603,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "6Hs",
@@ -1704,7 +1748,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "6D",
@@ -1845,7 +1893,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "5D",
@@ -1986,7 +2038,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "236P",
@@ -2127,7 +2183,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "236S",
@@ -2268,7 +2328,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "623Hs",
@@ -2409,7 +2473,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "j.P",
@@ -2550,7 +2618,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "j.K",
@@ -2691,7 +2763,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 150,
+          "airHitSpeed": 200
         },
         {
           "id": "j.S",
@@ -2832,7 +2908,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "j.Hs",
@@ -2973,7 +3053,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "j.D",
@@ -3114,7 +3198,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "2D",
@@ -3255,7 +3343,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "4P+K",
@@ -3396,7 +3488,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 200
         },
         {
           "id": "6P+K",
@@ -3537,7 +3633,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 200
         },
         {
           "id": "236K",
@@ -3678,7 +3778,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "236S>6S",
@@ -3819,7 +3923,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "236S>2S",
@@ -3960,7 +4068,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "214S",
@@ -4101,7 +4213,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "j.214P",
@@ -4242,7 +4358,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "214S>P",
@@ -4383,7 +4503,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "j.214P>P",
@@ -4524,7 +4648,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "c.S",
@@ -4675,7 +4803,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "[S/Hs]",
@@ -4816,7 +4948,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "[S/Hs]>attack",
@@ -4957,7 +5093,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.P",
@@ -5098,7 +5238,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.K",
@@ -5239,7 +5383,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.S",
@@ -5380,7 +5528,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.Hs",
@@ -5521,7 +5673,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.2D",
@@ -5662,7 +5818,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.236D",
@@ -5803,7 +5963,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "j.4P+K",
@@ -5944,7 +6108,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "j.6P+K",
@@ -6085,7 +6253,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "6[Hs]",
@@ -6231,7 +6403,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "5[D]",
@@ -6377,7 +6553,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "236D",
@@ -6523,7 +6703,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "214D",
@@ -6669,7 +6853,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         }
       ],
       "movement": {
@@ -6859,7 +7047,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "5K",
@@ -7000,7 +7192,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 150,
+          "airHitSpeed": 200
         },
         {
           "id": "5S",
@@ -7141,7 +7337,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "5Hs",
@@ -7282,7 +7482,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "2P",
@@ -7423,7 +7627,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "2K",
@@ -7564,7 +7772,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 150,
+          "airHitSpeed": 200
         },
         {
           "id": "2S",
@@ -7715,7 +7927,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "2Hs",
@@ -7856,7 +8072,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "6P",
@@ -7997,7 +8217,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "6K",
@@ -8138,7 +8362,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 150,
+          "airHitSpeed": 200
         },
         {
           "id": "6S",
@@ -8279,7 +8507,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "6Hs",
@@ -8420,7 +8652,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "6D",
@@ -8561,7 +8797,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "5D",
@@ -8702,7 +8942,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "236P",
@@ -8843,7 +9087,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "236S",
@@ -8984,7 +9232,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "623Hs",
@@ -9125,7 +9377,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "j.P",
@@ -9266,7 +9522,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "j.K",
@@ -9407,7 +9667,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 150,
+          "airHitSpeed": 200
         },
         {
           "id": "j.S",
@@ -9548,7 +9812,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "j.Hs",
@@ -9689,7 +9957,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "j.D",
@@ -9830,7 +10102,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "2D",
@@ -9971,7 +10247,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "4P+K",
@@ -10112,7 +10392,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 200
         },
         {
           "id": "6P+K",
@@ -10253,7 +10537,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 200
         },
         {
           "id": "236K",
@@ -10394,7 +10682,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "236S>6S",
@@ -10535,7 +10827,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "236S>2S",
@@ -10676,7 +10972,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "214S",
@@ -10817,7 +11117,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "j.214P",
@@ -10958,7 +11262,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "214S>P",
@@ -11099,7 +11407,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "j.214P>P",
@@ -11240,7 +11552,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "c.S",
@@ -11391,7 +11707,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "[S/Hs]",
@@ -11532,7 +11852,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "[S/Hs]>attack",
@@ -11673,7 +11997,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.P",
@@ -11814,7 +12142,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.K",
@@ -11955,7 +12287,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.S",
@@ -12096,7 +12432,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.Hs",
@@ -12237,7 +12577,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.2D",
@@ -12378,7 +12722,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.236D",
@@ -12519,7 +12867,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "j.4P+K",
@@ -12660,7 +13012,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "j.6P+K",
@@ -12801,7 +13157,11 @@
           "finishArtFrame": 0,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "6[Hs]",
@@ -12947,7 +13307,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "5[D]",
@@ -13093,7 +13457,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "236D",
@@ -13239,7 +13607,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "214D",
@@ -13385,7 +13757,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         }
       ],
       "movement": {
@@ -13651,7 +14027,11 @@
           "hitPose": 1,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "5K",
@@ -13824,7 +14204,11 @@
           "hitPose": 2,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "5S",
@@ -14061,7 +14445,11 @@
           "hitPose": 3,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "5Hs",
@@ -14266,7 +14654,11 @@
           "hitPose": 4,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "2P",
@@ -14439,7 +14831,11 @@
           "hitPose": 1,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "2K",
@@ -14612,7 +15008,11 @@
           "hitPose": 2,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "2S",
@@ -14785,7 +15185,11 @@
           "hitPose": 3,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "2Hs",
@@ -15020,7 +15424,11 @@
           "hitPose": 4,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 20,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "6P",
@@ -15193,7 +15601,11 @@
           "hitPose": 1,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "6K",
@@ -15349,7 +15761,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 150,
+          "airHitSpeed": 200
         },
         {
           "id": "6S",
@@ -15505,7 +15921,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "6Hs",
@@ -15700,7 +16120,11 @@
           "hitPose": 4,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "6D",
@@ -15856,7 +16280,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "5D",
@@ -16029,7 +16457,11 @@
           "hitPose": 5,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "236P",
@@ -16185,7 +16617,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "236S",
@@ -16341,7 +16777,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "623Hs",
@@ -16497,7 +16937,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "j.P",
@@ -16676,7 +17120,11 @@
           "hitPose": 1,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "j.K",
@@ -16855,7 +17303,11 @@
           "hitPose": 2,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "j.S",
@@ -17028,7 +17480,11 @@
           "hitPose": 3,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "j.Hs",
@@ -17207,7 +17663,11 @@
           "hitPose": 4,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "j.D",
@@ -17363,7 +17823,11 @@
           "hitPose": 5,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "2D",
@@ -17536,7 +18000,11 @@
           "hitPose": 5,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "4P+K",
@@ -17692,7 +18160,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 200
         },
         {
           "id": "6P+K",
@@ -17848,7 +18320,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 200
         },
         {
           "id": "236K",
@@ -18004,7 +18480,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "236S>6S",
@@ -18160,7 +18640,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "236S>2S",
@@ -18316,7 +18800,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "214S",
@@ -18472,7 +18960,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "j.214P",
@@ -18628,7 +19120,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "214S>P",
@@ -18784,7 +19280,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "j.214P>P",
@@ -18940,7 +19440,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "c.S",
@@ -19113,7 +19617,11 @@
           "hitPose": 3,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "[S/Hs]",
@@ -19269,7 +19777,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "[S/Hs]>attack",
@@ -19425,7 +19937,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.P",
@@ -19581,7 +20097,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.K",
@@ -19737,7 +20257,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.S",
@@ -19893,7 +20417,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.Hs",
@@ -20049,7 +20577,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.2D",
@@ -20205,7 +20737,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.236D",
@@ -20361,7 +20897,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "j.4P+K",
@@ -20517,7 +21057,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "j.6P+K",
@@ -20673,7 +21217,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "6[Hs]",
@@ -20868,7 +21416,11 @@
           "hitPose": 4,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "5[D]",
@@ -21041,7 +21593,11 @@
           "hitPose": 5,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "236D",
@@ -21191,7 +21747,11 @@
           "hitPose": 5,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "214D",
@@ -21341,7 +21901,11 @@
           "hitPose": 5,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         }
       ]
     },
@@ -21569,7 +22133,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "5K",
@@ -21748,7 +22316,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "5S",
@@ -21904,7 +22476,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "5Hs",
@@ -22077,7 +22653,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "2P",
@@ -22250,7 +22830,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "2K",
@@ -22429,7 +23013,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "2S",
@@ -22608,7 +23196,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "2Hs",
@@ -22827,7 +23419,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "6P",
@@ -22983,7 +23579,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "6K",
@@ -23162,7 +23762,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "6S",
@@ -23318,7 +23922,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "6Hs",
@@ -23509,7 +24117,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "6D",
@@ -23665,7 +24277,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "5D",
@@ -23821,7 +24437,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "236P",
@@ -23977,7 +24597,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "236S",
@@ -24133,7 +24757,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "623Hs",
@@ -24289,7 +24917,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "j.P",
@@ -24480,7 +25112,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "j.K",
@@ -24659,7 +25295,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "j.S",
@@ -24863,7 +25503,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "j.Hs",
@@ -25036,7 +25680,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "j.D",
@@ -25192,7 +25840,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "2D",
@@ -25348,7 +26000,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "4P+K",
@@ -25504,7 +26160,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 84,
+          "airHitSpeed": 300
         },
         {
           "id": "6P+K",
@@ -25660,7 +26320,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 84,
+          "airHitSpeed": 300
         },
         {
           "id": "236K",
@@ -25816,7 +26480,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "236S>6S",
@@ -25972,7 +26640,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "236S>2S",
@@ -26128,7 +26800,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "214S",
@@ -26284,7 +26960,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "j.214P",
@@ -26440,7 +27120,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "214S>P",
@@ -26596,7 +27280,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "j.214P>P",
@@ -26752,7 +27440,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "c.S",
@@ -26931,7 +27623,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "[S/Hs]",
@@ -27097,7 +27793,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "[S/Hs]>attack",
@@ -27276,7 +27976,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "st.P",
@@ -27432,7 +28136,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "st.K",
@@ -27588,7 +28296,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "st.S",
@@ -27744,7 +28456,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "st.Hs",
@@ -27900,7 +28616,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "st.2D",
@@ -28066,7 +28786,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "st.236D",
@@ -28222,7 +28946,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 84,
+          "airHitSpeed": 300
         },
         {
           "id": "j.4P+K",
@@ -28378,7 +29106,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "j.6P+K",
@@ -28534,7 +29266,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "6[Hs]",
@@ -28690,7 +29426,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "5[D]",
@@ -28846,7 +29586,11 @@
           ],
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 300
         },
         {
           "id": "236D",
@@ -28996,7 +29740,11 @@
           "hitPose": 5,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "214D",
@@ -29146,7 +29894,11 @@
           "hitPose": 5,
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         }
       ]
     },
@@ -29364,7 +30116,11 @@
             10096,
             8795,
             11807
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "5K",
@@ -29539,7 +30295,11 @@
             354,
             8532,
             8253
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "5S",
@@ -29708,7 +30468,11 @@
             6333,
             15467,
             8600
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "5Hs",
@@ -29889,7 +30653,11 @@
             4703,
             15939,
             8800
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "2P",
@@ -30058,7 +30826,11 @@
             5173,
             8613,
             6933
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "2K",
@@ -30233,7 +31005,11 @@
             -219,
             9123,
             4877
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "2S",
@@ -30408,7 +31184,11 @@
             0,
             14772,
             3500
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "2Hs",
@@ -30611,7 +31391,11 @@
             2615,
             11140,
             8804
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 117
         },
         {
           "id": "6P",
@@ -30786,7 +31570,11 @@
             7538,
             10154,
             12462
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "6K",
@@ -30955,7 +31743,11 @@
             6347,
             9627,
             10933
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "6S",
@@ -31107,7 +31899,11 @@
             6140,
             8813,
             8250
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "6Hs",
@@ -31282,7 +32078,11 @@
             1966,
             16712,
             7864
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "6D",
@@ -31434,7 +32234,11 @@
             0,
             100,
             100
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 0,
+          "airHitSpeed": 0
         },
         {
           "id": "5D",
@@ -31586,7 +32390,11 @@
             5500,
             19500,
             10500
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 200
         },
         {
           "id": "236P",
@@ -31738,7 +32546,11 @@
             9843,
             7922,
             11297
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "236S",
@@ -31890,7 +32702,11 @@
             6140,
             8813,
             8250
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "623Hs",
@@ -32042,7 +32858,11 @@
             7546,
             5579,
             14344
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 317
         },
         {
           "id": "j.P",
@@ -32217,7 +33037,11 @@
             7086,
             9886,
             11371
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "j.K",
@@ -32392,7 +33216,11 @@
             4533,
             11667,
             9000
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "j.S",
@@ -32579,7 +33407,11 @@
             1692,
             14077,
             10846
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "j.Hs",
@@ -32782,7 +33614,11 @@
             -169,
             12704,
             12789
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "j.D",
@@ -32934,7 +33770,11 @@
             -8000,
             15000,
             5000
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 200
         },
         {
           "id": "2D",
@@ -33086,7 +33926,11 @@
             0,
             100,
             100
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 0,
+          "airHitSpeed": 0
         },
         {
           "id": "4P+K",
@@ -33238,7 +34082,11 @@
             0,
             5000,
             13700
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 200
         },
         {
           "id": "6P+K",
@@ -33390,7 +34238,11 @@
             0,
             5000,
             13700
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 200
         },
         {
           "id": "236K",
@@ -33542,7 +34394,11 @@
             4125,
             8907,
             6985
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "236S>6S",
@@ -33694,7 +34550,11 @@
             6140,
             8813,
             8250
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "236S>2S",
@@ -33846,7 +34706,11 @@
             6140,
             8813,
             8250
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "id": "214S",
@@ -34004,7 +34868,11 @@
             11000,
             20000,
             13000
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 0,
+          "airHitSpeed": 0
         },
         {
           "id": "j.214P",
@@ -34162,7 +35030,11 @@
             5800,
             25000,
             7000
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 0,
+          "airHitSpeed": 0
         },
         {
           "id": "214S>P",
@@ -34314,7 +35186,11 @@
             9608,
             8352,
             11230
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 250
         },
         {
           "id": "j.214P>P",
@@ -34466,7 +35342,11 @@
             7013,
             6528,
             8757
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 250
         },
         {
           "id": "c.S",
@@ -34653,7 +35533,11 @@
             -693,
             10960,
             11040
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 117,
+          "airHitSpeed": 234
         },
         {
           "id": "[S/Hs]",
@@ -34805,7 +35689,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "[S/Hs]>attack",
@@ -34957,7 +35845,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.P",
@@ -35109,7 +36001,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.K",
@@ -35261,7 +36157,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.S",
@@ -35413,7 +36313,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.Hs",
@@ -35565,7 +36469,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.2D",
@@ -35717,7 +36625,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "st.236D",
@@ -35869,7 +36781,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "j.4P+K",
@@ -36021,7 +36937,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "j.6P+K",
@@ -36173,7 +37093,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "6[Hs]",
@@ -36325,7 +37249,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "5[D]",
@@ -36477,7 +37405,11 @@
             8730,
             7482,
             12083
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "id": "236D",
@@ -36629,7 +37561,11 @@
             0,
             5000,
             13700
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "id": "214D",
@@ -36781,7 +37717,11 @@
             0,
             5000,
             13700
-          ]
+          ],
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         }
       ]
     },
@@ -36812,7 +37752,7 @@
           "advance": 0,
           "simpleDirection": 0,
           "simpleButton": 0,
-          "normalRoutes": 3,
+          "normalRoutes": 1,
           "commandRoutes": 1,
           "hitLevel": 0,
           "chipDamage": 0,
@@ -37089,9 +38029,7 @@
             "routes": {
               "normal": [
                 0,
-                1,
                 4,
-                5,
                 8
               ],
               "special": [
@@ -37387,7 +38325,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 267
         },
         {
           "button": 1,
@@ -37413,7 +38355,7 @@
           "advance": 0,
           "simpleDirection": 0,
           "simpleButton": 1,
-          "normalRoutes": 0,
+          "normalRoutes": 4,
           "commandRoutes": 9,
           "hitLevel": 0,
           "chipDamage": 0,
@@ -37689,6 +38631,7 @@
             },
             "routes": {
               "normal": [
+                6,
                 8,
                 11
               ],
@@ -37988,7 +38931,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 334
         },
         {
           "button": 2,
@@ -38015,7 +38962,7 @@
           "simpleDirection": 0,
           "simpleButton": 2,
           "normalRoutes": 8,
-          "commandRoutes": 8,
+          "commandRoutes": 0,
           "hitLevel": 0,
           "chipDamage": 0,
           "guardBreak": 0,
@@ -38291,8 +39238,7 @@
             "routes": {
               "normal": [
                 3,
-                7,
-                11
+                7
               ],
               "special": [
                 14,
@@ -38591,7 +39537,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 367,
+          "airHitSpeed": 434
         },
         {
           "button": 3,
@@ -38618,7 +39568,7 @@
           "simpleDirection": 0,
           "simpleButton": 3,
           "normalRoutes": 0,
-          "commandRoutes": 8,
+          "commandRoutes": 0,
           "hitLevel": 0,
           "chipDamage": 0,
           "guardBreak": 0,
@@ -38904,9 +39854,7 @@
               "friction": 90
             },
             "routes": {
-              "normal": [
-                11
-              ],
+              "normal": [],
               "special": [
                 14,
                 15,
@@ -39214,7 +40162,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 467,
+          "airHitSpeed": 534
         },
         {
           "button": 0,
@@ -39240,7 +40192,7 @@
           "advance": 0,
           "simpleDirection": 0,
           "simpleButton": 0,
-          "normalRoutes": 3,
+          "normalRoutes": 1,
           "commandRoutes": 1,
           "hitLevel": 0,
           "chipDamage": 0,
@@ -39517,9 +40469,7 @@
             "routes": {
               "normal": [
                 0,
-                1,
                 4,
-                5,
                 8
               ],
               "special": [
@@ -39815,7 +40765,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 234
         },
         {
           "button": 1,
@@ -39841,7 +40795,7 @@
           "advance": 0,
           "simpleDirection": 0,
           "simpleButton": 1,
-          "normalRoutes": 0,
+          "normalRoutes": 4,
           "commandRoutes": 9,
           "hitLevel": 1,
           "chipDamage": 0,
@@ -40117,6 +41071,7 @@
             },
             "routes": {
               "normal": [
+                6,
                 8,
                 11
               ],
@@ -40416,7 +41371,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 217,
+          "airHitSpeed": 284
         },
         {
           "button": 2,
@@ -40997,7 +41956,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 334,
+          "airHitSpeed": 400
         },
         {
           "button": 3,
@@ -41610,7 +42573,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 400,
+          "airHitSpeed": 467
         },
         {
           "button": 0,
@@ -42199,7 +43166,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 367,
+          "airHitSpeed": 434
         },
         {
           "button": 1,
@@ -42355,7 +43326,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 150,
+          "airHitSpeed": 200
         },
         {
           "button": 2,
@@ -42511,7 +43486,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "button": 3,
@@ -43130,7 +44109,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 534,
+          "airHitSpeed": 600
         },
         {
           "button": 4,
@@ -43286,7 +44269,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "button": 4,
@@ -43871,7 +44858,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 0,
+          "airHitSpeed": 0
         },
         {
           "button": 0,
@@ -44450,7 +45441,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 417,
+          "airHitSpeed": 484
         },
         {
           "button": 2,
@@ -45044,7 +46039,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 167,
+          "airHitSpeed": 234
         },
         {
           "button": 3,
@@ -45647,7 +46646,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 400,
+          "airHitSpeed": 467
         },
         {
           "button": 0,
@@ -45673,7 +46676,7 @@
           "advance": 0,
           "simpleDirection": 0,
           "simpleButton": 0,
-          "normalRoutes": 3,
+          "normalRoutes": 1,
           "commandRoutes": 0,
           "hitLevel": 2,
           "chipDamage": 0,
@@ -45949,8 +46952,7 @@
             },
             "routes": {
               "normal": [
-                17,
-                18
+                17
               ],
               "special": [],
               "follow": [],
@@ -46233,7 +47235,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 267
         },
         {
           "button": 1,
@@ -46259,7 +47265,7 @@
           "advance": 0,
           "simpleDirection": 0,
           "simpleButton": 1,
-          "normalRoutes": 4,
+          "normalRoutes": 0,
           "commandRoutes": 0,
           "hitLevel": 2,
           "chipDamage": 0,
@@ -46534,9 +47540,7 @@
               "friction": 90
             },
             "routes": {
-              "normal": [
-                19
-              ],
+              "normal": [],
               "special": [],
               "follow": [],
               "bleed": []
@@ -46817,7 +47821,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 284,
+          "airHitSpeed": 350
         },
         {
           "button": 2,
@@ -47425,7 +48433,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 367,
+          "airHitSpeed": 434
         },
         {
           "button": 3,
@@ -48029,7 +49041,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 450,
+          "airHitSpeed": 517
         },
         {
           "button": 4,
@@ -48185,7 +49201,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "button": 4,
@@ -48341,7 +49361,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 300,
+          "airHitSpeed": 350
         },
         {
           "button": 0,
@@ -48815,7 +49839,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 0,
+          "airHitSpeed": 0
         },
         {
           "button": 0,
@@ -49289,7 +50317,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 0,
+          "airHitSpeed": 0
         },
         {
           "button": 1,
@@ -49876,7 +50908,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 400,
+          "airHitSpeed": 467
         },
         {
           "button": 2,
@@ -50492,7 +51528,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 267
         },
         {
           "button": 2,
@@ -51126,7 +52166,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 200,
+          "airHitSpeed": 267
         },
         {
           "button": 2,
@@ -51282,7 +52326,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "button": 0,
@@ -51438,7 +52486,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "button": 0,
@@ -51594,7 +52646,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "button": 0,
@@ -51750,7 +52806,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 184,
+          "airHitSpeed": 234
         },
         {
           "button": 2,
@@ -56865,7 +57925,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 267,
+          "airHitSpeed": 334
         },
         {
           "button": 0,
@@ -57021,7 +58085,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 0,
@@ -57177,7 +58245,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 0,
@@ -57333,7 +58405,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 0,
@@ -57489,7 +58565,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 0,
@@ -57645,7 +58725,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 0,
@@ -57801,7 +58885,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 0,
@@ -57957,7 +59045,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 0,
@@ -58113,7 +59205,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 0,
@@ -58269,7 +59365,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 0,
@@ -58425,7 +59525,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 3,
@@ -58581,7 +59685,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 4,
@@ -58737,7 +59845,11 @@
           "hurtboxes": {},
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 100,
+          "airHitSpeed": 150
         },
         {
           "button": 4,
@@ -59254,7 +60366,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 0,
+          "airHitSpeed": 0
         },
         {
           "button": 4,
@@ -59797,7 +60913,11 @@
           },
           "tetherDuration": 180,
           "tetherRange": 45000,
-          "tetherGap": 6000
+          "tetherGap": 6000,
+          "comboDecay": 5,
+          "starterDecay": 0,
+          "groundHitSpeed": 0,
+          "airHitSpeed": 0
         }
       ],
       "movement": {

@@ -102,6 +102,7 @@ def install():
     fillet['movement']=spec['movementContract']['mobility42'];fillet['extensions']=character_ext(spec)
     for a in spec['actions']+spec['disabledStableSlots']:
         i=a['slot'];old=fillet['moves'][i];m=dict(a['schema22Scalars'],id=a['id'],hitPose=1+a['schema22Scalars']['button'])
+        m.update(tetherDuration=old.get('tetherDuration',180),tetherRange=old.get('tetherRange',45000),tetherGap=old.get('tetherGap',6000),comboDecay=old.get('comboDecay',5),starterDecay=old.get('starterDecay',0),groundHitSpeed=old.get('groundHitSpeed',(m['pushback']+5)//6),airHitSpeed=old.get('airHitSpeed',(m['airPushback']+5)//6))
         m['geometry']=[m['hitboxBack'],m['bottom'],m['reach'],m['bottom']+m['height']]
         m['hitboxTimeline']=a['hitboxTimeline'];m['hurtboxes']=a.get('legacyHurtPhaseFallback',a.get('hurtboxes',{}))
         if a in spec['actions']:m['extensions']=action_ext(a,ids)

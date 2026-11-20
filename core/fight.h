@@ -4,14 +4,14 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 25, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 47, FIELD_COUNT = 141;
+constexpr int VERSION = 26, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 47, FIELD_COUNT = 145;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
               STAB_GROUND=30, STAB_AIR=31;
 constexpr int CLOSE_SLASH=32, HELD_GUARD=33, GUARD_ATTACK=34, STANCE_P=35, STANCE_K=36, STANCE_S=37, STANCE_HS=38, STANCE_EXIT=39, STANCE_THROW=40, AIR_BACK_THROW=41, AIR_FORWARD_THROW=42;
 constexpr int FAR_SLASH=2, SLASH_SWEEP=6; // Saved 5S and 2S slot IDs remain compatible.
-constexpr unsigned RULES_REVISION=2; // Named routes, pair captures and shared throw tech.
+constexpr unsigned RULES_REVISION=3; // Combo decay, velocity knockback and Strive-style gatlings.
 constexpr int VAULT_CASHOUT=45, SKIM_CASHOUT=46;
 constexpr int CHARGED_HS=43, CHARGED_D=44;
 constexpr int MIN_STARTUP = 5;
@@ -36,7 +36,7 @@ enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery
              NormalCancelStart, NormalCancelEnd, SpecialCancelStart, SpecialCancelEnd,
              JumpCancelStart, JumpCancelEnd, FollowCancelStart, FollowCancelEnd, CancelOn,
              StarterProration, ComboScaling, MinimumDamage, LandingRecovery, AttackLevel,
-             CounterTier, CounterVulnerable, CounterFreezeFrames, CounterSlowFrames, ProjectileKind, ProjectileSpawnFrame, ProjectileSpeedX, ProjectileSpeedY, ProjectileGravity, ProjectileLife, ProjectileOffsetX, ProjectileOffsetY, ProjectileWidth, ProjectileHeight, ProjectileHits, ProjectileRehit, ProjectileDurability, ProjectilePersist, ProjectileMelee, SmearMode, SmearPart, SmearStretch, SmearFrame1, SmearFrame2, SmearFrame3, SmearFrame4, HurtMaskWindup, HurtMaskActive, HurtMaskRecovery, Mechanic, TetherSpeed, TetherFrames, BleedInitial, BleedTickDamage, BleedTickFrames, BleedDuration, BleedBlockPercent, BleedCap, VariantStartup, VariantActive, VariantRecovery, VariantDamage, VariantRange, VariantSpeed, VariantLift, VariantHitstun, VariantKnockdown, StanceRequired, StanceChange, ActionType, HoldFollow, HoldFrame, HoldButton, GuardFollow, ProximityMove, ProximityRange, StartupTravel, DiveSpeedX, DiveSpeedY, GroundBounce, WallBounce, CrumpleFrames, AirCounterKnockdown, HurtWindowStart, HurtWindowEnd, HurtWindowMask, SemiAirStart, SemiAirEnd, ArmorFrames, ArmorHits, GrabFrames, FinishArtPose, FinishArtFrame, TetherDuration, TetherRange, TetherGap };
+             CounterTier, CounterVulnerable, CounterFreezeFrames, CounterSlowFrames, ProjectileKind, ProjectileSpawnFrame, ProjectileSpeedX, ProjectileSpeedY, ProjectileGravity, ProjectileLife, ProjectileOffsetX, ProjectileOffsetY, ProjectileWidth, ProjectileHeight, ProjectileHits, ProjectileRehit, ProjectileDurability, ProjectilePersist, ProjectileMelee, SmearMode, SmearPart, SmearStretch, SmearFrame1, SmearFrame2, SmearFrame3, SmearFrame4, HurtMaskWindup, HurtMaskActive, HurtMaskRecovery, Mechanic, TetherSpeed, TetherFrames, BleedInitial, BleedTickDamage, BleedTickFrames, BleedDuration, BleedBlockPercent, BleedCap, VariantStartup, VariantActive, VariantRecovery, VariantDamage, VariantRange, VariantSpeed, VariantLift, VariantHitstun, VariantKnockdown, StanceRequired, StanceChange, ActionType, HoldFollow, HoldFrame, HoldButton, GuardFollow, ProximityMove, ProximityRange, StartupTravel, DiveSpeedX, DiveSpeedY, GroundBounce, WallBounce, CrumpleFrames, AirCounterKnockdown, HurtWindowStart, HurtWindowEnd, HurtWindowMask, SemiAirStart, SemiAirEnd, ArmorFrames, ArmorHits, GrabFrames, FinishArtPose, FinishArtFrame, TetherDuration, TetherRange, TetherGap, ComboDecay, StarterDecay, GroundHitSpeed, AirHitSpeed };
 enum KnockdownKind { NoKnockdown, SoftKnockdown, HardKnockdown };
 enum Reaction { Free, AirReel, Downed, Waking, WallSplat, Reeled, Captured, Crumpled };
 enum MobilityField { ForwardStyle, WalkSpeed, RunSpeed, RunAcceleration, StepSpeed, StepFrames,
@@ -69,7 +69,7 @@ enum Rule { ButtonBuffer, MotionWindow, MotionGap, MoveGain, AttackGain,
             PositiveFrames, PositiveGainPercent, PositiveRegen,
             FDAirDrain, FDLevelCost, CornerPushTransfer, WallMidCap, GroundedWallPrime,
             BlockCarryover, ThrowGraceFrames, AirLandingFrames, RepeatAfter, RepeatGravityStep,
-            PrejumpFrames, EmptyLandingFrames, RULE_COUNT };
+            PrejumpFrames, EmptyLandingFrames, ComboPhysics, DecayPushStep, DecayPushCap, DecayLaunchStep, DecayLaunchFloor, GroundHitDrag, CrouchHitDrag, AirHitDrag, LaunchCarry, DecayGravityAfter, DecayGravityStep, RULE_COUNT };
 struct Move { int v[FIELD_COUNT]; };
 inline int startup_minimum(const Move& m) {
     return m.v[Category]==Throw ? 2
@@ -77,6 +77,8 @@ inline int startup_minimum(const Move& m) {
 }
 inline int variant_startup_minimum(const Move& m) { return m.v[Mechanic]==2 ? 2 : MIN_STARTUP; }
 struct Sample { int frame, direction, pressed, held, consumed; };
+struct ComboAttack { int serial, decay; };
+constexpr int COMBO_ATTACK_SLOTS = 18; // Current attack plus all live projectile identities.
 struct Fighter {
     int character, simple, x, y, vy, facing, health;
     int move, age, stun, guarding, contact, hit_done, dash, previous, raw;
@@ -108,6 +110,8 @@ struct Fighter {
     int dash_speed, coast_pending, coast_mode, root_y;
     int display_move=-1, display_age, display_tick=-1;
     int gait_distance, gait_phase;
+    int combo_decay, launch_percent, push_percent, hit_crouching;
+    ComboAttack combo_attacks[COMBO_ATTACK_SLOTS];
     Sample history[HISTORY];
 };
 constexpr int MAX_PROJECTILES=16;
@@ -141,6 +145,18 @@ struct Rules {
     int fd_air_drain=50, fd_level_cost=50, corner_push_transfer=1, wall_mid_cap=50, grounded_wall_prime=1;
     int block_carryover=1, throw_grace_frames=5, air_landing_frames=3, repeat_after=3, repeat_gravity_step=15;
     int prejump_frames=4, empty_landing_frames=0;
+    int combo_physics=1;
+    int decay_push_step=6;
+    int decay_push_cap=350;
+    int decay_launch_step=2;
+    int decay_launch_floor=25;
+    int ground_hit_drag=85;
+    int crouch_hit_drag=80;
+    int air_hit_drag=98;
+    int launch_carry=20;
+    int decay_gravity_after=30;
+    int decay_gravity_step=2;
+
 };
 // Each engine adapter owns a simulation; multiple matches never share state.
 class Simulation {
@@ -232,6 +248,8 @@ private:
     void resolve_push(int previous_order, bool preserve_order);
     int clamp_x(const Fighter& fighter, int x) const;
     int gravity_percent(const Fighter& fighter) const;
+    int combo_decay_basis(int player,int move,const Move& payload,int serial,bool prior_combo);
+    void clear_combo_physics(Fighter& fighter);
     bool throw_invulnerable(const Fighter& fighter) const;
     void land(Fighter& fighter);
     void finish_wall_break();
@@ -246,7 +264,7 @@ private:
     int mobility_or(const Fighter& fighter, int field, int fallback) const;
     void update_projectiles();
     void spawn_projectile(Fighter& fighter);
-    void apply_contact(int player, int move, Move effective, int contact, bool prior_combo, int prior_reaction, int facing, bool projectile);
+    void apply_contact(int player, int move, Move effective, int contact, bool prior_combo, int prior_reaction, int facing, bool projectile,int serial=-1);
 };
 // Compatibility instance for the original C ABI and native test runner.
 extern Simulation default_simulation;

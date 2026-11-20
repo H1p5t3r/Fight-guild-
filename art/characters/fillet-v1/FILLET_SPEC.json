@@ -113,7 +113,7 @@
         "advance": 0,
         "simpleDirection": 0,
         "simpleButton": 0,
-        "normalRoutes": 3,
+        "normalRoutes": 1,
         "commandRoutes": 1,
         "hitLevel": 0,
         "chipDamage": 0,
@@ -559,8 +559,6 @@
         "normalTargets": [
           "5P",
           "2P",
-          "5K",
-          "2K",
           "6P"
         ],
         "normalCondition": "hit_or_block",
@@ -654,7 +652,7 @@
           "action_name": "Short check",
           "source_reference_id": "chipp_5p",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [
               "5P",
@@ -747,7 +745,7 @@
         "advance": 0,
         "simpleDirection": 0,
         "simpleButton": 1,
-        "normalRoutes": 0,
+        "normalRoutes": 4,
         "commandRoutes": 9,
         "hitLevel": 0,
         "chipDamage": 0,
@@ -1191,6 +1189,7 @@
       },
       "cancels": {
         "normalTargets": [
+          "2S",
           "6P",
           "6Hs"
         ],
@@ -1293,7 +1292,7 @@
           "action_name": "Step kick",
           "source_reference_id": "giovanna_5k",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [
               "6P",
@@ -2430,9 +2429,9 @@
         "normalTargets": [
           "5S",
           "5Hs",
+          "2S",
           "2Hs",
-          "6Hs",
-          "2S"
+          "6Hs"
         ],
         "normalCondition": "hit_or_block",
         "specialTargets": [
@@ -2542,7 +2541,7 @@
           "knife_assignment": "Short anatomical LEFT knife in a fixed reverse grip performs the rising cut. Long RIGHT knife remains low and passive for f.S.",
           "staging": {
             "anticipation": "Small inward wrist load then extend to the exact end-frame6 path anchor.",
-            "contact": "Sweep the fixed22px short blade upward along the authored frame6-to7 path. Frames8–11 hold/retract only the high blade path; do not leave damaging low trails.",
+            "contact": "Sweep the fixed22px short blade upward along the authored frame6-to7 path. Frames8\u201311 hold/retract only the high blade path; do not leave damaging low trails.",
             "follow_through": "Keep grip and blade length fixed. Respect the exact arm envelope and shrinking per-frame strike keys.",
             "retraction": "Fold left forearm back into guard during the selected recovery keys; keep both feet grounded."
           },
@@ -6481,7 +6480,7 @@
         "simpleDirection": 0,
         "simpleButton": 2,
         "normalRoutes": 8,
-        "commandRoutes": 8,
+        "commandRoutes": 0,
         "hitLevel": 0,
         "chipDamage": 0,
         "guardBreak": 0,
@@ -6925,8 +6924,7 @@
       "cancels": {
         "normalTargets": [
           "5Hs",
-          "2Hs",
-          "6Hs"
+          "2Hs"
         ],
         "normalCondition": "hit_or_block",
         "specialTargets": [
@@ -7011,7 +7009,7 @@
         "exit": "idle, crouch, walk or run according to legal buffered input on next actionable tick",
         "interrupt": "strike -> actual hit reaction immediately; legal cancel -> next action entry; no uninterruptible visual recovery after gameplay release",
         "specificStaging": {
-          "entry": "From c.S, the short LEFT hand retracts while long RIGHT starts from low and ready. Preserve incoming support foot and remaining momentum. Extend the right shoulder/arm during this action’s own startup; no extra step or added startup.",
+          "entry": "From c.S, the short LEFT hand retracts while long RIGHT starts from low and ready. Preserve incoming support foot and remaining momentum. Extend the right shoulder/arm during this action\u2019s own startup; no extra step or added startup.",
           "support_and_weight": "Left foot carries the forward reach; right heel releases slightly while the hips remain inside the body footprint.",
           "knife_assignment": "Long RIGHT knife owns the entire narrow forward corridor. Short LEFT stays near the sternum with its tip angled away from the right forearm.",
           "staging": {
@@ -7027,7 +7025,7 @@
           "action_name": "Long knife",
           "source_reference_id": "chipp_fs",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [
               "5Hs",
@@ -7122,7 +7120,7 @@
         "simpleDirection": 0,
         "simpleButton": 3,
         "normalRoutes": 0,
-        "commandRoutes": 8,
+        "commandRoutes": 0,
         "hitLevel": 0,
         "chipDamage": 0,
         "guardBreak": 0,
@@ -7576,9 +7574,7 @@
         "rootVSArt": "gameplay root follows these integers; local body settle is visual and bounded to 4px"
       },
       "cancels": {
-        "normalTargets": [
-          "6Hs"
-        ],
+        "normalTargets": [],
         "normalCondition": "hit_or_block",
         "specialTargets": [
           "236P",
@@ -7678,7 +7674,7 @@
           "action_name": "Crosscut",
           "source_reference_id": "chipp_5h",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [
               "6Hs"
@@ -7770,7 +7766,7 @@
         "advance": 0,
         "simpleDirection": 0,
         "simpleButton": 0,
-        "normalRoutes": 3,
+        "normalRoutes": 1,
         "commandRoutes": 1,
         "hitLevel": 0,
         "chipDamage": 0,
@@ -8216,8 +8212,6 @@
         "normalTargets": [
           "5P",
           "2P",
-          "5K",
-          "2K",
           "6P"
         ],
         "normalCondition": "hit_or_block",
@@ -8311,7 +8305,7 @@
           "action_name": "Low stance check",
           "source_reference_id": "chipp_2p",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [
               "5P",
@@ -8404,7 +8398,7 @@
         "advance": 0,
         "simpleDirection": 0,
         "simpleButton": 1,
-        "normalRoutes": 0,
+        "normalRoutes": 4,
         "commandRoutes": 9,
         "hitLevel": 1,
         "chipDamage": 0,
@@ -8848,6 +8842,7 @@
       },
       "cancels": {
         "normalTargets": [
+          "2S",
           "6P",
           "6Hs"
         ],
@@ -8950,7 +8945,7 @@
           "action_name": "Ankle check",
           "source_reference_id": "chipp_2k",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [
               "6P",
@@ -9573,7 +9568,7 @@
           "action_name": "Sweep",
           "source_reference_id": "giovanna_2d",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -10203,7 +10198,7 @@
           "action_name": "Rising scissors",
           "source_reference_id": "chipp_2h",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -10705,7 +10700,7 @@
         "armor": false,
         "projectile": false,
         "guardPoint": false,
-        "strikeInvulnerability": "upper anatomical regions absent on frames 3–12 only",
+        "strikeInvulnerability": "upper anatomical regions absent on frames 3\u201312 only",
         "throwInvulnerability": "none from ordinary attack recovery; universal prejump/air, stun/grace, protected landing and paired-state predicates remain applicable",
         "lowCrushFrames": [],
         "counterVulnerablePhases": [
@@ -10825,7 +10820,7 @@
           "action_name": "Shoulder guard cut",
           "source_reference_id": "chipp_6p",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -11467,7 +11462,7 @@
           "action_name": "Chasing cleave",
           "source_reference_id": "chipp_6h",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -11557,7 +11552,7 @@
         "advance": 0,
         "simpleDirection": 0,
         "simpleButton": 0,
-        "normalRoutes": 3,
+        "normalRoutes": 1,
         "commandRoutes": 0,
         "hitLevel": 2,
         "chipDamage": 0,
@@ -12001,8 +11996,7 @@
       },
       "cancels": {
         "normalTargets": [
-          "j.P",
-          "j.K"
+          "j.P"
         ],
         "normalCondition": "hit_or_block",
         "specialTargets": [],
@@ -12091,7 +12085,7 @@
           "action_name": "Air check",
           "source_reference_id": "chipp_jp",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [
               "j.P",
@@ -12176,7 +12170,7 @@
         "advance": 0,
         "simpleDirection": 0,
         "simpleButton": 1,
-        "normalRoutes": 4,
+        "normalRoutes": 0,
         "commandRoutes": 0,
         "hitLevel": 2,
         "chipDamage": 0,
@@ -12619,9 +12613,7 @@
         "rootVSArt": "gameplay root follows these integers; local body settle is visual and bounded to 4px"
       },
       "cancels": {
-        "normalTargets": [
-          "j.S"
-        ],
+        "normalTargets": [],
         "normalCondition": "hit_or_block",
         "specialTargets": [],
         "specialCondition": "hit_or_block",
@@ -12709,7 +12701,7 @@
           "action_name": "Descending kick",
           "source_reference_id": "chipp_jk",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [
               "j.S"
@@ -13338,7 +13330,7 @@
           "action_name": "Falling knife",
           "source_reference_id": "chipp_js",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [
               "j.Hs"
@@ -13965,7 +13957,7 @@
           "action_name": "Turning scissors",
           "source_reference_id": "chipp_jh",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -14577,7 +14569,7 @@
           "action_name": "Needle check",
           "source_reference_id": "lancelot_dual_blade",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -15203,7 +15195,7 @@
           "action_name": "Opening cut",
           "source_reference_id": "lancelot_dual_blade",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -15838,7 +15830,7 @@
           "action_name": "Crown cut",
           "source_reference_id": "lancelot_dual_blade",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -16485,7 +16477,7 @@
           "action_name": "Heel cut",
           "source_reference_id": "giovanna_2d",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -17138,7 +17130,7 @@
           "action_name": "Passing cut",
           "source_reference_id": "lancelot_dual_blade",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -17763,7 +17755,7 @@
           "action_name": "Rising carve",
           "source_reference_id": "chipp_2h",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -18304,7 +18296,7 @@
           "action_name": "Back throw",
           "source_reference_id": "cammy_capture",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -18351,7 +18343,7 @@
         "sideSwitch": true,
         "releaseOutcome": "standing; no knockdown, launcher, wall damage, combo continuation or Wound opportunity",
         "damage": "45; one health event at release",
-        "tech": "selected universal C1–C6 unfrozen pair-tick window plus C0 simultaneous clash; see normalThrowTech",
+        "tech": "selected universal C1\u2013C6 unfrozen pair-tick window plus C0 simultaneous clash; see normalThrowTech",
         "whiff": "finish the 2/2/32 action; no hitbox or strike fallback",
         "jumpFailureLatch": {
           "enabled": false,
@@ -18882,7 +18874,7 @@
           "action_name": "Forward throw",
           "source_reference_id": "cammy_capture",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -18929,7 +18921,7 @@
         "sideSwitch": false,
         "releaseOutcome": "standing; no knockdown, launcher, wall damage, combo continuation or Wound opportunity",
         "damage": "45; one health event at release",
-        "tech": "selected universal C1–C6 unfrozen pair-tick window plus C0 simultaneous clash; see normalThrowTech",
+        "tech": "selected universal C1\u2013C6 unfrozen pair-tick window plus C0 simultaneous clash; see normalThrowTech",
         "whiff": "finish the 2/2/32 action; no hitbox or strike fallback",
         "jumpFailureLatch": {
           "enabled": false,
@@ -19538,7 +19530,7 @@
           "action_name": "Wound",
           "source_reference_id": "alan_becker_staging",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -20060,7 +20052,7 @@
             "y": 0
           }
         ],
-        "verticalInterpolation": "integer linear interpolation; root samples override normal gravity for this grounded special only, frames6–21; landing gives no separate attack landing lock"
+        "verticalInterpolation": "integer linear interpolation; root samples override normal gravity for this grounded special only, frames6\u201321; landing gives no separate attack landing lock"
       },
       "cancels": {
         "normalTargets": [],
@@ -20156,7 +20148,7 @@
           "action_name": "Vault cashout",
           "source_reference_id": "cammy_capture",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -20214,7 +20206,7 @@
           "policy": "Latch failure if target is already airborne or in valid prejump at acceptance, or enters airborne/prejump or accepts any valid jump before the final capture test. Never clear this attempt latch on landing. Still complete whiff recovery."
         },
         "bleed": "snapshot and consume on confirmed capture, remove speed boost immediately",
-        "protectionWarning": "All approach evasion ends after21. At22–23 source is grounded with ordinary standing body and push profile. No low-crush or low-profile capture frames.",
+        "protectionWarning": "All approach evasion ends after21. At22\u201323 source is grounded with ordinary standing body and push profile. No low-crush or low-profile capture frames.",
         "graceAfterVictimActionability": 5,
         "localCaptureGuideBox": [
           0,
@@ -20780,7 +20772,7 @@
           "action_name": "Skim cashout",
           "source_reference_id": "cammy_capture",
           "status": "selected_for_v1_implementation",
-          "anchor_binding": "Use this action’s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
+          "anchor_binding": "Use this action\u2019s existing entry/anticipation/pre-contact/active/follow-through/recovery/retract/last-locked keys. These notes introduce no new frame durations or contact events; confirmed pair branches use their separate C clock.",
           "outgoing_routes_from_central_contract": {
             "normalTargets": [],
             "normalCondition": "hit_or_block",
@@ -20838,7 +20830,7 @@
           "policy": "Latch failure if target is already airborne or in valid prejump at acceptance, or enters airborne/prejump or accepts any valid jump before the final capture test. Never clear this attempt latch on landing. Still complete whiff recovery."
         },
         "bleed": "snapshot and consume on confirmed capture, remove speed boost immediately",
-        "protectionWarning": "All approach evasion ends after21. At22–23 source is grounded with ordinary standing body and push profile. No low-crush or low-profile capture frames.",
+        "protectionWarning": "All approach evasion ends after21. At22\u201323 source is grounded with ordinary standing body and push profile. No low-crush or low-profile capture frames.",
         "graceAfterVictimActionability": 5,
         "localCaptureGuideBox": [
           0,
@@ -21519,7 +21511,7 @@
       "id": "2D",
       "slot": 22,
       "status": "explicitly_disabled_v1",
-      "reason": "Fillet uses current2S sweep and Drive-onlyD. Disable this Fillet slot; preserve other characters’ current2D/Drive behavior.",
+      "reason": "Fillet uses current2S sweep and Drive-onlyD. Disable this Fillet slot; preserve other characters\u2019 current2D/Drive behavior.",
       "schema22Scalars": {
         "button": 4,
         "category": 0,
@@ -26055,7 +26047,7 @@
         ],
         "collisionProfile": "ready",
         "rootAndVisualOffsetPolicy": "Simulation y=0; vx=-850*facing (bleed -977*facing) for10 ticks unless cancelled. No visual hop or visual offset.",
-        "transitionPolicy": "Frames1–4 committed: no attack/jump/guard/FD. Frames5–10 attack/jump/FD cancellable and back-guardable. Movement does not stop for crouch/opposite direction. No invulnerability, semi-air or low crush.",
+        "transitionPolicy": "Frames1\u20134 committed: no attack/jump/guard/FD. Frames5\u201310 attack/jump/FD cancellable and back-guardable. Movement does not stop for crouch/opposite direction. No invulnerability, semi-air or low crush.",
         "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
       },
       {
@@ -26167,7 +26159,7 @@
         ],
         "collisionProfile": "air",
         "rootAndVisualOffsetPolicy": "All render offsets [0,0]. Root movement comes only from deterministic simulation.",
-        "transitionPolicy": "Overall f1–4: no attack, jump, ordinary guard orFD. Inputs still sample/buffer; zero velocity/carry and freeze gravity. This adds explicit guard/FD lock support beyond current core.",
+        "transitionPolicy": "Overall f1\u20134: no attack, jump, ordinary guard orFD. Inputs still sample/buffer; zero velocity/carry and freeze gravity. This adds explicit guard/FD lock support beyond current core.",
         "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
       },
       {
@@ -26203,7 +26195,7 @@
         ],
         "collisionProfile": "air",
         "rootAndVisualOffsetPolicy": "vx2000 or2200*facingSnapshot,vy0; five burst ticks; after final burst gravity resumes, but root does not descend until next tick because integration precedes gravity.",
-        "transitionPolicy": "Overall f5–9. Fromf5 set burst vx before input processing; attacks/FD may interrupt and ordinaryairguard is legal. Natural completion enables coast cap650/715 beforef10 inputs, including carry; no secondairdash orairjump.",
+        "transitionPolicy": "Overall f5\u20139. Fromf5 set burst vx before input processing; attacks/FD may interrupt and ordinaryairguard is legal. Natural completion enables coast cap650/715 beforef10 inputs, including carry; no secondairdash orairjump.",
         "customArtStatus": "required_this_implementation; author complete registered clips and both facings; no pre-implementation user review gate"
       },
       {
@@ -26506,9 +26498,9 @@
       "entry": "No added ready-to-attack delay. Select first anticipation key on f1 from idle/walk/run/crouch; apply move advance/inertia before integration. Cancel begins new move f1 immediately.",
       "poseKeyPartition": "Per-action exact keys in Fillet_V1 implementation_v0_2.json supersede a generic percentage partition. Hold resolved pose/geometry keys on actor action clocks.",
       "recovery": "Author recovery pose keys instead of returning to ready while still recovering. Last recovery tick remains its last pose/boxes; idle begins only on next actionable tick, unless hit/block/landing/cancel supersedes it.",
-      "inertiaApplication": "At begin choose carry velocity only if its magnitude exceeds current vx, consume carry, then truncate toward zero(vx*move.inertiaPercent/100), clamp±4000. No second bleed multiplier. Translate x byvx, then authored startupTravel/activeTravel, then drag90 toward zero each actor tick.",
+      "inertiaApplication": "At begin choose carry velocity only if its magnitude exceeds current vx, consume carry, then truncate toward zero(vx*move.inertiaPercent/100), clamp\u00b14000. No second bleed multiplier. Translate x byvx, then authored startupTravel/activeTravel, then drag90 toward zero each actor tick.",
       "carryLifetime": "Retain current 5-tick window including source movement tick: timer5 stored after run/step travel; decremented before control; usable for four subsequent action ticks. No repeated restoration on later gatlings.",
-      "perMoveOwnership": "advance, startupTravel, travelSpeed, inertiaPercent, airborne friction exception if any, landingRecovery and any special phase motion must be explicitly filled in the central move table. Suggested normal inertia40–70%; all throws and Wound0%. These suggestions are not approval.",
+      "perMoveOwnership": "advance, startupTravel, travelSpeed, inertiaPercent, airborne friction exception if any, landingRecovery and any special phase motion must be explicitly filled in the central move table. Suggested normal inertia40\u201370%; all throws and Wound0%. These suggestions are not approval.",
       "stopAndRestart": "Walking/stopping/crouching does not automatically resume a prior run; held forward after recovery produces walk unless a fresh dash edge survives buffer. Interrupted clips never resume; attacks increment serial and reset pose phase.",
       "airAttack": "Dash burst vx is set before attack entry; per-move inertia applies. Base vy continues ballistic unless move explicitly overrides it. Attack friction90 applies horizontally even in air. Air-action landing minimum3 except explicitly approved move branch.",
       "facing": "Latch action facing at acceptance; only explicitly authored exceptions apply (central236K one update afterf20). Otherwise lockthroughrecovery.",
@@ -27488,7 +27480,7 @@
       ],
       "coordinates": "Root-track values are world pixels relative to owner root at successful contact, oriented by captured facing; convert exactly *100. Interpolate linearly in raw integers with truncation toward zero at each C tick. Visual offset always[0,0]; these are physical scripted roots during capture, not a render-only teleport.",
       "wholePairWallClamp": "For each tick compute the two scripted roots including each fighter push halfWidth; translate both by same minimal x correction so both fit[0,100000]. Preserve relative gap and side order. Final120/170px gap must survive either corner.",
-      "roleLocks": "Capture assigns immutable owner/victim/entryFacing/entryRoot. Clear individualcounter slow andmovement/carry; owner/victim cannot act,guard,FD orreceive independent hits while paired. Inputs continue sampling. Normal-throw tech is the sole specialized capture-input exception in C1–6. Ordinary last5worldtick actionedges maybuffer into roleunlock.",
+      "roleLocks": "Capture assigns immutable owner/victim/entryFacing/entryRoot. Clear individualcounter slow andmovement/carry; owner/victim cannot act,guard,FD orreceive independent hits while paired. Inputs continue sampling. Normal-throw tech is the sole specialized capture-input exception in C1\u20136. Ordinary last5worldtick actionedges maybuffer into roleunlock.",
       "handAndWeaponOwnership": {
         "rightHand": "Always long knife; may cut or hold clear, never becomes the short knife.",
         "leftHand": "Always short knife; catches use forearm/pommel/closed-fist structure while blade points down/outward, not an unexplained empty hand.",
@@ -27498,7 +27490,7 @@
       },
       "postRelease": "Grounded ready/crouch-to-ready role clips consume exactly listed recovery counters; no new knockdown/wakeup appended. Restore per-character ready hurt/push geometry on release; during role recovery cannot guard/act. Victim throw grace5 starts on first unlocked tick. No ordinary throw/cashout may chain to Wound solely because this sequence visually tumbles the victim.",
       "currentContrast": "No Fillet move currently uses captured pair animation. Generic capture uses one fixed60px offset and generic victim hurt pose; current normal throws and conditional5D cashout apply immediately.",
-      "sourceApproach": "236D is grounded before capture (rooty0 byf21); C1–4 normalizes landed hop posture, never adds aerial capture.214D enters from its authored slide/rise. Wound rejects already-owned bleed.",
+      "sourceApproach": "236D is grounded before capture (rooty0 byf21); C1\u20134 normalizes landed hop posture, never adds aerial capture.214D enters from its authored slide/rise. Wound rejects already-owned bleed.",
       "normalThrowTechBranch": {
         "status": "selected_for_v1_implementation",
         "scope": "Universal ordinary ground throws only; not Fillet-only. Wound and command cashouts are not techable.",
@@ -27572,7 +27564,7 @@
       "bleedPercent": 110,
       "entry": "Only after natural completion of fifth burst tick (overall f9), set airDashCoastPending. Atstart of overall f10 before buffered inputs, clamp abs(vx) and abs(carryVx) to current eligible cap, preserving signs; clear pending and setcoastMode.",
       "continuedCoast": "No extra free-air drag. Clamp again to650 if bleed expires while coasting; entering bleed does not multiply existing vx. Steering reversal sets ordinary380. Grounding, an attack, hit/block, FD, new dash or reset clears coastMode.",
-      "earlyBurstCancel": "If attack accepted f5..f9 before dash completes, use2000/2200×move inertia and friction90. No coast clamp that tick and no old dash carry afterattack.",
+      "earlyBurstCancel": "If attack accepted f5..f9 before dash completes, use2000/2200\u00d7move inertia and friction90. No coast clamp that tick and no old dash carry afterattack.",
       "runJump": "Do not apply coast cap to a run jump that has not naturally finished an air dash.",
       "snapshot": [
         "airDashCoastPending",
@@ -27722,8 +27714,8 @@
     "paired release deals base plus snapshot exactly once; meter rewards use base only"
   ],
   "normalThrowTech": {
-    "status": "selected shared dependency; apply six-unfrozen-tick pre-commit gate to other characters’ ground normal throws while preserving their authored payload",
-    "window": "C1–C6 shared unfrozen pair ticks; C0 simultaneous normal-throw clash remains",
+    "status": "selected shared dependency; apply six-unfrozen-tick pre-commit gate to other characters\u2019 ground normal throws while preserving their authored payload",
+    "window": "C1\u2013C6 shared unfrozen pair ticks; C0 simultaneous normal-throw clash remains",
     "input": "fresh valid P+K chord",
     "sharedFreeze": 6,
     "equalRecoveryTicks": 12,
@@ -27733,7 +27725,7 @@
     "sideSwitch": false,
     "damage": 0,
     "statusChange": false,
-    "otherCharactersAdapter": "Pay authored capture hitstop once. Check fresh tech at C1–C6 before C6 commit; on failure apply their existing throw payload/side-swap/recovery without second capture freeze. Air, command and stance throws do not gain this late-tech window."
+    "otherCharactersAdapter": "Pay authored capture hitstop once. Check fresh tech at C1\u2013C6 before C6 commit; on failure apply their existing throw payload/side-swap/recovery without second capture freeze. Air, command and stance throws do not gain this late-tech window."
   },
   "version": "1.0.0",
   "previousResearchCommit": "a9b3bada78b1047a8693023b193ee6a15e53cba9",
@@ -27755,8 +27747,8 @@
   },
   "globalDeltas": {
     "lateGroundNormalThrowTech": {
-      "status": "selected shared dependency; apply six-unfrozen-tick pre-commit gate to other characters’ ground normal throws while preserving their authored payload",
-      "window": "C1–C6 shared unfrozen pair ticks; C0 simultaneous normal-throw clash remains",
+      "status": "selected shared dependency; apply six-unfrozen-tick pre-commit gate to other characters\u2019 ground normal throws while preserving their authored payload",
+      "window": "C1\u2013C6 shared unfrozen pair ticks; C0 simultaneous normal-throw clash remains",
       "input": "fresh valid P+K chord",
       "sharedFreeze": 6,
       "equalRecoveryTicks": 12,
@@ -27766,7 +27758,7 @@
       "sideSwitch": false,
       "damage": 0,
       "statusChange": false,
-      "otherCharactersAdapter": "Pay authored capture hitstop once. Check fresh tech at C1–C6 before C6 commit; on failure apply their existing throw payload/side-swap/recovery without second capture freeze. Air, command and stance throws do not gain this late-tech window."
+      "otherCharactersAdapter": "Pay authored capture hitstop once. Check fresh tech at C1\u2013C6 before C6 commit; on failure apply their existing throw payload/side-swap/recovery without second capture freeze. Air, command and stance throws do not gain this late-tech window."
     },
     "jumpBeforeGroundFD": {
       "legalJumpBeforeGroundFD": true,
@@ -27775,7 +27767,7 @@
       "heldUpAutojump": false,
       "rule": "Evaluate a legal jump before grounded FD. FD may continue in air under the shared guard rules. Stun, prejump and action legality still apply."
     },
-    "schemaMigration": "Allocate next free schema/core/snapshot layout revision; starting fromcd8b0ce use23 and bump RULES_REVISION1→2. Update native, WASM, Godot, Workshop and network fingerprints together.",
+    "schemaMigration": "Allocate next free schema/core/snapshot layout revision; starting fromcd8b0ce use23 and bump RULES_REVISION1\u21922. Update native, WASM, Godot, Workshop and network fingerprints together.",
     "unrelatedCast": "Preserve the latest all-cast2S and c.S data. Only Fillet receives this replacement kit; other characters receive disabled appended command slots and the declared shared infrastructure/rules."
   }
 }

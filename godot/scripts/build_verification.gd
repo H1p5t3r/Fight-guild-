@@ -356,12 +356,13 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 			var fighter: Dictionary = game.model.state().players[0]
 			check(fighter.character == character and fighter.move == slots[b], "Missing basic button for " + CombatModel.CHARACTERS[character])
 			var visual: Sprite2D = game.arena.sprites[0]
-			var art: int = game.model.move(character, slots[b]).artPose
-			var expected_pose := art - 1 if art else b + 1
-			check(visual.get_meta("phase") == ("idle" if character == 2 else "ready" if character == 4 and art else "signature_windup" if art else "windup") and visual.get_meta("pose") == (0 if character == 2 or (character == 4 and art) else expected_pose), "Attack has no entry/windup pose")
+			# Timed clips can use ready/idle/attack-animation keys rather than
+			# the retired two-pose signature sheets. Verify core -> renderer sync.
+			check(fighter.age < game.model.move(character, slots[b]).startup and visual.get_meta("phase") == FighterArt.PHASES[int(fighter.posePhase)] and visual.get_meta("pose") == fighter.poseIndex, "Attack has no synchronized entry/windup pose")
 			var anticipation: Texture2D = visual.texture
 			ticks(game.model.move(character, slots[b]).startup - 1)
-			check(visual.get_meta("phase") == ("signature_active" if art else "active") and visual.get_meta("pose") == expected_pose and visual.texture != anticipation, "Attack did not change to its active image")
+			fighter = game.model.state().players[0]
+			check(fighter.age >= game.model.move(character, slots[b]).startup and visual.get_meta("phase") == FighterArt.PHASES[int(fighter.posePhase)] and visual.get_meta("pose") == fighter.poseIndex and visual.texture != anticipation, "Attack did not change to its timed active image")
 	game.menus.selection.choose_fighter(0, 0)
 	game.confirm_selection()
 	game.reset_round()
@@ -467,10 +468,13 @@ func verify_signatures() -> void:
 	key(KEY_D, true); ticks(1)
 	key(KEY_S, false); key(KEY_K, true); ticks(1)
 	key(KEY_K, false); key(KEY_D, false)
-	var dedicated_art: bool = game.model.move(5, 25).artPose > 0
-	check(game.model.state().players[0].move == 25 and game.arena.sprites[0].get_meta("phase") == ("signature_windup" if dedicated_art else "windup"), "Keyboard 236K / selected windup failed")
+	var spiral: Dictionary = game.model.state().players[0]
+	var spiral_visual: Sprite2D = game.arena.sprites[0]
+	check(spiral.move == 25 and spiral_visual.get_meta("phase") == FighterArt.PHASES[int(spiral.posePhase)] and spiral_visual.get_meta("pose") == spiral.poseIndex, "Keyboard 236K / selected windup failed")
+	var spiral_windup: Texture2D = spiral_visual.texture
 	ticks(game.model.move(5, 25).startup - 1)
-	check(game.arena.sprites[0].get_meta("phase") == ("signature_active" if dedicated_art else "active"), "Selected active art did not follow combat timing")
+	spiral = game.model.state().players[0]
+	check(spiral.age >= game.model.move(5, 25).startup and spiral_visual.get_meta("phase") == FighterArt.PHASES[int(spiral.posePhase)] and spiral_visual.get_meta("pose") == spiral.poseIndex and spiral_visual.texture != spiral_windup, "Selected active art did not follow combat timing")
 	game.edit_character.select(5)
 	game.edit_move.select(0)
 	game.populate_editor()

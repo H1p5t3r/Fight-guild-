@@ -51,6 +51,7 @@ void Simulation::clear_pair_motion(Fighter& f) {
     f.knockdown=f.down_frames=f.wakeup_frames=f.recovery_time=f.wall_time=f.wall_side=0;
     f.combo=f.combo_display=f.combo_time=f.combo_age=f.combo_received=f.repeat_gravity=0;
     f.combo_proration=f.combo_scale=100;for(auto& uses:f.move_uses)uses=0;
+    clear_combo_physics(f);
     f.pull_time=f.grab_time=f.legacy_throw_gate_paid=0;f.pull_owner=f.grab_owner=-1;f.armor_left=0;
     f.bounce_ground=f.bounce_wall=f.crumple_time=f.root_y=f.coast_pending=f.coast_mode=0;
     f.pair_recovery=f.pair_grace_pending=f.throw_grace=f.air_action=f.air_dash_used=f.air_jump_used=0;

@@ -1,5 +1,7 @@
 # Combo showcase · November 20, 2026
 
+This video records the pre-decay build. Its long bounce/gatling loops are superseded by [schema 26 combo rules and replay comparisons](combo-decay.md).
+
 [Watch or download the MP4](../exports/FightGuild-Combo-Showcase.mp4).
 [Input traces and frame checksums](../exports/FightGuild-Combo-Routes.json).
 These are replay traces for the recording harness, not a Move Workshop import.

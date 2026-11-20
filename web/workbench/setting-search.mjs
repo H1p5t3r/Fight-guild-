@@ -1,7 +1,9 @@
+import {COMBO_RULE_SPECS} from '../combo-rules.mjs';
 import {GROUPS,SPECS,TABS,ART_FIELDS} from './specs.mjs';
 import {MOVEMENT_GROUPS} from './movement-editor.mjs';
 
 export const SETTING_INDEX=[
+ ...COMBO_RULE_SPECS.map(f=>({key:"rule-"+f.key,tab:"timing",label:f.label,group:"Shared combo physics",hint:f.help,id:"field-rule-"+f.key})),
  ...GROUPS.flatMap(group=>group.fields.map(key=>({key,tab:group.tab,label:SPECS[key].label,group:group.title,hint:SPECS[key].hint,id:key.startsWith('hurtMask')?'hurt-enabled-legs':SPECS[key].type==='mask'?`field-${key}${SPECS[key].unified?'-unified':'-0'}`:'field-'+key}))),
  ...MOVEMENT_GROUPS.flatMap(([group,,fields])=>fields.map(([key,label])=>({key:'movement-'+key,tab:'movement',label,group,id:'field-movement-'+key}))),
  ...ART_FIELDS.map(([key,label])=>({key:'note-'+key,tab:'art',label,group:'Art brief',id:'note-'+key})),

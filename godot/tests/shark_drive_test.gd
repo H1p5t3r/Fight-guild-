@@ -7,7 +7,7 @@ func _initialize() -> void: call_deferred("run")
 func run() -> void:
 	var model := CombatModel.new()
 	var data := model.data()
-	check(data.schema == 25, "Pull schema missing")
+	check(data.schema == 26, "Pull schema missing")
 	check(not data.characters[4].moves[12].enabled and data.characters[4].moves[12].mechanic == 0, "Chase still enabled")
 	var old := data.duplicate(true)
 	old.schema = 24; old.coreVersion = 24

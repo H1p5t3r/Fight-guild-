@@ -64,7 +64,8 @@ func verify_hook_rollback(air: bool) -> void:
 			var input := 0
 			var other := 0
 			if air:
-				input = 8 if frame == 0 else 4 if frame == 5 else 5 if frame == 6 else 17 if frame == 7 else 0
+				# The saved j.214P slot now uses S, matching the authored kit.
+				input = 8 if frame == 0 else 4 if frame == 5 else 5 if frame == 6 else 65 if frame == 7 else 0
 			else:
 				input = 4 if frame == 0 else 5 if frame == 1 else 65 if frame == 2 else 0
 				# Begin the four-frame prejump earlier to preserve the recorded hook contact height.

@@ -9,7 +9,7 @@ func check(condition: bool, description: String) -> void:
 func _initialize() -> void:
 	var model := LegacyFixture.create()
 	var original := model.data()
-	check(CombatModel.RULE_COUNT == CombatModel.RULES.size() + CombatModel.MOMENTUM_RULES.size() + CombatModel.RECOVERY_RULES.size() + CombatModel.TUNING_RULES.size() + CombatModel.JUMP_RULES.size(), "Rule layout differs from the adapter")
+	check(CombatModel.RULE_COUNT == CombatModel.RULES.size() + CombatModel.MOMENTUM_RULES.size() + CombatModel.RECOVERY_RULES.size() + CombatModel.TUNING_RULES.size() + CombatModel.JUMP_RULES.size() + CombatModel.COMBO_RULES.size(), "Rule layout differs from the adapter")
 	var fingerprint := model.fingerprint()
 	var edited := original.duplicate(true)
 	edited.characters[0].moves[0].damage = 177
@@ -46,6 +46,7 @@ func _initialize() -> void:
 	var expected_new_move: Dictionary = original.characters[5].moves[0].duplicate()
 	expected_new_move = JSON.parse_string(FileAccess.get_file_as_string("res://data/legacy_fillet_v22.json")).moves[0]
 	expected_new_move.erase("id")
+	expected_new_move.merge({"tetherDuration":180.0,"tetherRange":45000.0,"tetherGap":6000.0,"comboDecay":5.0,"starterDecay":0.0,"groundHitSpeed":float(ceili(float(expected_new_move.pushback)/6.0)),"airHitSpeed":float(ceili(float(expected_new_move.airPushback)/6.0))})
 	check(JSON.parse_string(JSON.stringify(model.move(5, 0))) == expected_new_move, "New fighters missing migration defaults")
 	legacy.schema = 2
 	legacy.coreVersion = 2

@@ -28,6 +28,7 @@ var fields := {}
 var buffer_fields: Array[SpinBox] = []
 var momentum_fields := {}
 var recovery_fields := {}
+var combo_fields := {}
 var movement_fields := {}
 var jump_fields := {}
 var tuning_fields := {}
@@ -278,11 +279,15 @@ func build_interface() -> void:
 	reactions.add_theme_constant_override("h_separation", 10)
 	reactions.add_theme_constant_override("v_separation", 8)
 	editor.add_child(reactions)
-	for spec in [["pushback","Ground knockback px",0,200,100],["airPushback","Air knockback px",0,200,100],["blockPushback","Block pushback px",0,200,100],["launch","Ground launch px/f",0,30,100],["airLaunch","Air launch px/f",-30,30,100],["knockdownFrames","Down duration f",1,180,1],["wakeupFrames","Wakeup duration f",0,60,1],["throwRange","Throw reach px",0,200,100]]:
+	for spec in [["pushback","Legacy / throw ground px",0,200,100],["airPushback","Legacy / throw air px",0,200,100],["blockPushback","Block pushback px",0,200,100],["launch","Ground launch px/f",0,30,100],["airLaunch","Air launch px/f",-30,30,100],["knockdownFrames","Down duration f",1,180,1],["wakeupFrames","Wakeup duration f",0,60,1],["throwRange","Throw reach px",0,200,100]]:
 		add_field(reactions, spec)
+	var combo_meta: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/combo_physics.json"))
+	for spec in combo_meta.moves:
+		add_field(reactions, [spec.key, spec.label, float(spec.min) / spec.scale, float(spec.max) / spec.scale, spec.scale])
+		fields[spec.key].control.tooltip_text = spec.help
 	var knockdown := option(reactions, "Knockdown", ["None", "Soft · on back", "Hard · face down"])
 	fields.knockdown = {"control": knockdown, "scale": 1}
-	var reaction_note := label(editor, "Launch: upward speed; air launch may be negative. Hit knockback travels over 6 action frames; wall impact damage equals the arriving horizontal speed. Soft knockdowns lie on the back; hard knockdowns lie face down. Both get up in place. 2S is a low hard-knockdown sweep with punishable block recovery. 4P+K / 6P+K cause hard knockdown.", 11, MUTED)
+	var reaction_note := label(editor, "Launch: upward speed; air launch may be negative. Modern hit knockback uses velocity and drag; legacy mode uses a 6-frame distance budget; wall impact damage equals the arriving horizontal speed. Soft knockdowns lie on the back; hard knockdowns lie face down. Both get up in place. 2S is a low hard-knockdown sweep with punishable block recovery. 4P+K / 6P+K cause hard knockdown.", 11, MUTED)
 	reaction_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	var guard_break := CheckBox.new()
 	guard_break.text = "Guard break on block"
@@ -370,7 +375,7 @@ func build_interface() -> void:
 	var recovery_grid := GridContainer.new()
 	recovery_grid.columns = 2
 	recovery_panel.add_child(recovery_grid)
-	for spec in [["gravityAfter","Unscaled hits",0,100,1],["gravityStep","Gravity +% / hit",0,100,1],["gravityCap","Gravity cap %",100,400,1],["wallThreshold","Wall health (velocity units)",1,10000,1],["wallSplatFrames","Splat duration f",1,180,1],["wallBreakFrames","Break transition f",30,300,1],["wallBreakDamage","Break bonus damage",0,1000,1],["positiveFrames","Positive duration f",0,1800,1],["positiveGainPercent","Positive gain %",100,300,1],["positiveRegen","Positive regen % / f",0,1,100]]:
+	for spec in [["gravityAfter","Legacy unscaled hits",0,100,1],["gravityStep","Legacy gravity +% / hit",0,100,1],["gravityCap","Gravity cap %",100,400,1],["wallThreshold","Wall health (velocity units)",1,10000,1],["wallSplatFrames","Splat duration f",1,180,1],["wallBreakFrames","Break transition f",30,300,1],["wallBreakDamage","Break bonus damage",0,1000,1],["positiveFrames","Positive duration f",0,1800,1],["positiveGainPercent","Positive gain %",100,300,1],["positiveRegen","Positive regen % / f",0,1,100]]:
 		var column := VBoxContainer.new()
 		recovery_grid.add_child(column)
 		label(column, spec[1], 10, MUTED)
@@ -380,7 +385,19 @@ func build_interface() -> void:
 		spin.step = 0.01 if spec[4] == 100 else 1
 		column.add_child(spin)
 		recovery_fields[spec[0]] = {"control": spin, "scale": spec[4]}
-	var recovery_note := label(recovery_panel, "First X hits use normal gravity. Each further hit adds gravity up to the cap. Each wall loses health only from hitstun impacts: 100 velocity units = 1 px/f. Depleting it primes the NEXT hitstun impact to splat. Strike the splat to break; an expired splat falls into soft recovery. Wall breaks return to neutral with a Momentum gain bonus.", 11, MUTED)
+	label(recovery_panel, "COMBO PHYSICS · ALL FIGHTERS", 11, MUTED)
+	for spec in combo_meta.rules:
+		var column := VBoxContainer.new()
+		recovery_panel.add_child(column)
+		label(column, spec.label, 10, MUTED)
+		var spin := SpinBox.new()
+		spin.min_value = spec.min
+		spin.max_value = spec.max
+		spin.step = 1
+		spin.tooltip_text = spec.help
+		column.add_child(spin)
+		combo_fields[spec.key] = spin
+	var recovery_note := label(recovery_panel, "Modern physics scales push speed, positive launch and ground bounce with combo decay. General gravity starts at the decay threshold; repeated-move gravity is independent. Mode 0 retains the legacy hit-count rules. Each wall loses health only from hitstun impacts: 100 velocity units = 1 px/f. Depleting it primes the NEXT hitstun impact to splat. Strike the splat to break; an expired splat falls into soft recovery. Wall breaks return to neutral with a Momentum gain bonus.", 11, MUTED)
 	recovery_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button(recovery_panel, "Apply recovery & reset", apply_recovery, true, "essential")
 	var tuning_panel := VBoxContainer.new()
@@ -414,7 +431,7 @@ func build_interface() -> void:
 		spin.max_value = spec[2]
 		column.add_child(spin)
 		jump_fields[spec[0]] = spin
-	var tuning_note := label(tuning_panel, "No timed blocking bonus. Guard break bypasses carryover and throw protection. Jump startup is throw-immune but cannot guard strikes. Repeated moves add gravity only after the unscaled-hit threshold.", 11, MUTED)
+	var tuning_note := label(tuning_panel, "No timed blocking bonus. Guard break bypasses carryover and throw protection. Jump startup is throw-immune but cannot guard strikes. In modern physics, repeated moves add gravity from the configured use count, including early in a combo.", 11, MUTED)
 	tuning_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	button(tuning_panel, "Apply tuning & reset", apply_tuning, true, "essential")
 	var movement_panel := VBoxContainer.new()
@@ -1048,6 +1065,7 @@ func populate_editor() -> void:
 		momentum_fields[rule].control.value = float(data.momentumRules[rule]) / momentum_fields[rule].scale
 	for rule in recovery_fields:
 		recovery_fields[rule].control.value = float(data.recoveryRules[rule]) / recovery_fields[rule].scale
+	for rule in combo_fields: combo_fields[rule].value = data.comboRules[rule]
 	for rule in tuning_fields:
 		var entry: Dictionary = tuning_fields[rule]
 		if entry.control is CheckBox: entry.control.button_pressed = bool(data.tuningRules[rule])
@@ -1123,6 +1141,7 @@ func apply_movement() -> void:
 func apply_recovery() -> void:
 	if connection.active: return
 	var data := model.data()
+	for rule in combo_fields: data.comboRules[rule] = int(combo_fields[rule].value)
 	for rule in recovery_fields:
 		data.recoveryRules[rule] = roundi(recovery_fields[rule].control.value * recovery_fields[rule].scale)
 	var error := model.load_data(data)

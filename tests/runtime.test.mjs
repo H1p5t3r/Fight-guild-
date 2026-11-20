@@ -10,7 +10,7 @@ const module=await WebAssembly.compile(await readFile(new URL('../web/generated/
 const create=async()=>{const e=new Engine(await WebAssembly.instantiate(module));e.loadData(legacyData(e.data()));return e;};
 
 test('Native C++ and WebAssembly match every frame of a 1200-frame input trace',async()=>{
-  const e=await create();e.reset([0,1]);
+  const e=new Engine(await WebAssembly.instantiate(module));e.reset([0,1]);
   const trace=execFileSync(fileURLToPath(new URL('../build/core-tests',import.meta.url)),['--trace'],{encoding:'utf8'}).trim().split('\n');
   assert.equal(trace.length,1200);
   for(const row of trace){const [a,b,hash]=row.split(' ').map(Number);e.step(a,b);assert.equal(e.hash,hash,`frame ${e.frame}`);}

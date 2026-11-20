@@ -11,8 +11,8 @@ func run() -> void:
 	check(model.load_data(source).is_empty(), "Uploaded batch did not import")
 	var actual := model.data()
 	var serialized: Dictionary = JSON.parse_string(JSON.stringify(actual))
-	check(actual.schema == 25, "Batch was not upgraded")
-	for group in ["inputRules", "momentumRules", "recoveryRules", "tuningRules", "jumpRules"]:
+	check(actual.schema == 26, "Batch was not upgraded")
+	for group in ["inputRules", "momentumRules", "recoveryRules", "tuningRules", "jumpRules", "comboRules"]:
 		for key in source[group]: check(actual[group][key] == source[group][key], "Global rule changed")
 	for c in 6:
 		for key in source.characters[c].movement:

@@ -1,3 +1,4 @@
+import {COMBO_FIELDS} from '../combo-rules.mjs';
 import STANCE_FIELDS from '../../godot/data/stance_fields.json' with {type:'json'};
 import {MECHANIC_SPECS} from './mechanics-specs.mjs';
 import {FIELD_GROUPS} from './field-layout.mjs';
@@ -65,6 +66,10 @@ options.variantKnockdown=options.knockdown;
 for(const f of STANCE_FIELDS){labels[f.key]=f.label;hints[f.key]=f.help;if(f.scale===100)(/Speed|Travel|Bounce/.test(f.key)?speed:pixel).add(f.key);}
 Object.assign(options,{stanceRequired:[[0,'Any'],[1,'Normal stance'],[2,'Rolling stance']],stanceChange:[[0,'None'],[1,'Enter on hit'],[2,'Exit on start']],actionType:[[0,'Strike'],[1,'Held guard'],[2,'Stance exit'],[3,'Stall and dive'],[4,'Grab sequence'],[5,'Hold to charge'],[6,'Air projectile recoil']],airCounterKnockdown:options.knockdown,holdButton:options.button});
 masks.hurtWindowMask=['Legs','Torso & arms','Head','Body extension'];
+for(const f of COMBO_FIELDS){labels[f.key]=f.label;hints[f.key]=f.help;if(f.scale===100)speed.add(f.key);}
+labels.pushback='Legacy ground distance / throw separation';labels.airPushback='Legacy air distance / throw separation';
+hints.pushback='Throws use this immediate separation. Strikes use it only in legacy physics mode; modern strikes use Ground hit speed.';
+hints.airPushback='Air throws use this separation. Modern air strikes use Air hit speed.';
 export const SPECS = Object.fromEntries(Object.entries(labels).map(([key,label])=>[key,{
   key,label,scale:pixel.has(key)||speed.has(key)?100:1,
   unit:key==='projectileGravity'?'px/f²':['tetherDuration','variantStartup','variantActive','variantRecovery','bleedDuration','projectileLife','projectileRehit','projectileSpawnFrame','smearFrame1','smearFrame2','smearFrame3','smearFrame4'].includes(key)?'f':pixel.has(key)?'px':speed.has(key)?'px/f':percent.has(key)?'%': /startup|active|recovery|stun|stop|Frames|Start|End/i.test(key)?'f':'',

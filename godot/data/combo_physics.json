@@ -1,0 +1,156 @@
+{
+  "moves": [
+    {
+      "key": "comboDecay",
+      "enum": "ComboDecay",
+      "label": "Combo decay cost",
+      "default": 5,
+      "min": 0,
+      "max": 100,
+      "scale": 1,
+      "help": "Physics decay added once per attack use, including multi-hit attacks. Separate from damage scaling."
+    },
+    {
+      "key": "starterDecay",
+      "enum": "StarterDecay",
+      "label": "Extra starter decay",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "scale": 1,
+      "help": "Additional physics decay when this attack starts a combo. Applies to its launch and later attacks."
+    },
+    {
+      "key": "groundHitSpeed",
+      "enum": "GroundHitSpeed",
+      "label": "Ground hit speed",
+      "default": 100,
+      "min": 0,
+      "max": 4000,
+      "scale": 100,
+      "help": "Initial horizontal speed on a grounded hit, before combo decay. Friction slows it each action frame."
+    },
+    {
+      "key": "airHitSpeed",
+      "enum": "AirHitSpeed",
+      "label": "Air hit speed",
+      "default": 150,
+      "min": 0,
+      "max": 4000,
+      "scale": 100,
+      "help": "Initial horizontal speed on an airborne hit, before decay and inherited momentum. Continues through the launch."
+    }
+  ],
+  "rules": [
+    {
+      "key": "comboPhysics",
+      "enum": "ComboPhysics",
+      "member": "combo_physics",
+      "label": "Combo decay physics",
+      "default": 1,
+      "min": 0,
+      "max": 1,
+      "help": "1 uses decay, velocity knockback and Strive-style gatlings. 0 replays the legacy distance-budget and unified gatling rules."
+    },
+    {
+      "key": "decayPushStep",
+      "enum": "DecayPushStep",
+      "member": "decay_push_step",
+      "label": "Pushback increase / decay point %",
+      "default": 6,
+      "min": 0,
+      "max": 20,
+      "help": "Both grounded and airborne hit speed grow with accumulated decay."
+    },
+    {
+      "key": "decayPushCap",
+      "enum": "DecayPushCap",
+      "member": "decay_push_cap",
+      "label": "Pushback cap %",
+      "default": 350,
+      "min": 100,
+      "max": 600,
+      "help": "Maximum horizontal hit-speed multiplier."
+    },
+    {
+      "key": "decayLaunchStep",
+      "enum": "DecayLaunchStep",
+      "member": "decay_launch_step",
+      "label": "Launch reduction / decay point %",
+      "default": 2,
+      "min": 0,
+      "max": 10,
+      "help": "Reduces upward launches and ground-bounce speed; downward spikes retain their authored speed."
+    },
+    {
+      "key": "decayLaunchFloor",
+      "enum": "DecayLaunchFloor",
+      "member": "decay_launch_floor",
+      "label": "Minimum upward launch %",
+      "default": 25,
+      "min": 0,
+      "max": 100,
+      "help": "Floor for upward launch and bounce strength. No universal bounce-count limit."
+    },
+    {
+      "key": "groundHitDrag",
+      "enum": "GroundHitDrag",
+      "member": "ground_hit_drag",
+      "label": "Standing speed retained / frame %",
+      "default": 85,
+      "min": 0,
+      "max": 99,
+      "help": "Higher values let hit pushback slide farther. Hitstop freezes this clock."
+    },
+    {
+      "key": "crouchHitDrag",
+      "enum": "CrouchHitDrag",
+      "member": "crouch_hit_drag",
+      "label": "Crouching speed retained / frame %",
+      "default": 80,
+      "min": 0,
+      "max": 99,
+      "help": "Crouching when a grounded combo starts gives stronger friction."
+    },
+    {
+      "key": "airHitDrag",
+      "enum": "AirHitDrag",
+      "member": "air_hit_drag",
+      "label": "Air speed retained / frame %",
+      "default": 98,
+      "min": 0,
+      "max": 100,
+      "help": "Horizontal drift retained each airborne reaction frame."
+    },
+    {
+      "key": "launchCarry",
+      "enum": "LaunchCarry",
+      "member": "launch_carry",
+      "label": "Incoming air velocity carried %",
+      "default": 20,
+      "min": 0,
+      "max": 100,
+      "help": "Adds part of the target's incoming horizontal and vertical velocity to the next air hit."
+    },
+    {
+      "key": "decayGravityAfter",
+      "enum": "DecayGravityAfter",
+      "member": "decay_gravity_after",
+      "label": "Extra gravity after decay",
+      "default": 30,
+      "min": 0,
+      "max": 300,
+      "help": "Decay points allowed before general gravity scaling. Repeated-attack gravity applies independently from its configured use count."
+    },
+    {
+      "key": "decayGravityStep",
+      "enum": "DecayGravityStep",
+      "member": "decay_gravity_step",
+      "label": "Gravity increase / excess decay %",
+      "default": 2,
+      "min": 0,
+      "max": 20,
+      "help": "Additional gravity per decay point beyond the threshold, combined with repeated-attack gravity under the gravity cap."
+    }
+  ]
+}

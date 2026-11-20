@@ -1,7 +1,7 @@
 {
-  "label": "Fillet OTG routes \u00b7 Shark actionable pull",
-  "file": "2026-11-20-fillet-otg/FightGuild-Fillet-OTG.json",
-  "sha256": "10a096806ce59bb8312b0e6cea04cbc47adb8ae0d6442257388d5d6aded8caf9",
-  "sourceFile": "2026-11-19-shark-v2/FightGuild-Shark-v2.json",
-  "sourceSha256": "ce5df46fb3e1e248f3994c01e8e2adc7bbb2c29c4e3ae945bc9ae77816f0582a"
+  "label": "Strive-style combo decay \u00b7 velocity knockback",
+  "file": "2026-11-20-combo-decay/FightGuild-Combo-Decay.json",
+  "sha256": "1651adf179d0445ccad2181d73224b210a116c4f7a21289b6951a96a5e4e7e7f",
+  "sourceFile": "2026-11-20-fillet-otg/FightGuild-Fillet-OTG.json",
+  "sourceSha256": "10a096806ce59bb8312b0e6cea04cbc47adb8ae0d6442257388d5d6aded8caf9"
 }

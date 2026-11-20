@@ -1,3 +1,4 @@
+import {COMBO_RULE_SPECS} from '../combo-rules.mjs';
 import {renderExtension} from './extension-editor.mjs';
 import {renderMovement} from './movement-editor.mjs';
 import {moveFieldLimit} from '../startup-rules.mjs';
@@ -39,6 +40,36 @@ function save(){
 function scheduleSave(){unexported=true;savePending=true;$('save-status').textContent='Saving draft…';clearTimeout(saveTimer);saveTimer=setTimeout(save,250);}
 function validBeforeLeaving(){if(referenceBusy){announce('The pose reference is still being prepared.');return false;}if(bootLocked){announce('Recover your saved draft or start a new one first.');return false;}if(!errors.size)return true;announce('Fix the highlighted value before changing moves or downloading.');$(errors.keys().next().value)?.focus();return false;}
 function move(){return model.move(character,slot);}
+function comboRuleForm(){
+  const panel=el('details',{class:'field-panel',id:'combo-rules'});
+  panel.append(el('summary',{},'Shared combo physics · all fighters'));
+  const body=el('div',{class:'panel-body'});panel.append(body);
+  body.append(el('p',{class:'panel-intro'},'Separate from damage scaling. Hit speed and bounce strength use decay before this attack. Repeated-attack gravity starts on the configured use, without a hit-count delay.'));
+  const grid=el('div',{class:'field-grid'});body.append(grid);
+  const extra=[
+    {key:'repeatAfter',group:'tuningRules',label:'Repeat penalty from use',help:'3 penalizes the third and later uses of the same move. 0 disables it.'},
+    {key:'repeatGravityStep',group:'tuningRules',label:'Repeat gravity +%',help:'Additional gravity for each penalized use; multi-hit attacks count once.'},
+    {key:'gravityCap',group:'recoveryRules',label:'Gravity cap %',help:'Maximum combined decay and repeated-attack gravity.'}
+  ];
+  for(const spec of [...COMBO_RULE_SPECS,...extra]){
+    const group=spec.group||'comboRules',key=spec.key,id='rule-'+key;
+    const limits=pack.limits.rules[group][key];
+    const field=el('div',{class:'field'}),label=el('label',{class:'field-label',for:'field-'+id},spec.label);
+    let input;
+    if(key==='comboPhysics'){
+      input=el('select',{id:'field-'+id});
+      for(const [v,t] of [[1,'Decay + velocity (current)'],[0,'Legacy distance + gatlings']])input.append(el('option',{value:v},t));
+    }else input=el('input',{id:'field-'+id,type:'number',min:limits.min,max:limits.max,step:1,inputmode:'numeric'});
+    input.value=model.data[group][key];input.setAttribute('aria-describedby','help-'+id+' error-'+id);
+    field.append(label,input,el('p',{class:'hint',id:'help-'+id},spec.help),el('p',{class:'field-error',id:'error-'+id}));grid.append(field);
+    input.onchange=()=>{try{
+      if(input.value.trim()==='')throw new Error('Enter a whole number.');
+      model.changeRule(group,key,Number(input.value));fieldError(id,'');
+      stop();pendingSeek={tick:0};syncSummary();scheduleSave();
+    }catch(error){fieldError(id,error.message);}};
+  }
+  return panel;
+}
 function fieldError(key,message){const id='field-'+key,node=$(id);if(message)errors.set(id,message);else errors.delete(id);node?.setAttribute('aria-invalid',String(!!message));const messageNode=$('error-'+key);if(messageNode)messageNode.textContent=message||'';refreshActions();}
 function refreshActions(){
   $('export').disabled=bootLocked||referenceBusy||errors.size>0;$('undo').disabled=bootLocked||referenceBusy||(!model.undoStack.length&&!errors.size);$('redo').disabled=bootLocked||referenceBusy||!model.redoStack.length||errors.size>0;
@@ -289,6 +320,7 @@ function buildForm(){
     }));return;
   }
   const nodes=groups.map(group=>panels.create(group,fieldControl));
+  if(tab==='timing')nodes.push(comboRuleForm());
   if(move().extensions&&['routes','hit'].includes(tab))nodes.unshift(extensionForm());
   if(['timing','routes'].includes(tab)&&[2,32].includes(slot))nodes.unshift(slashForm());
   if(tab==='hit'&&move().mechanic!==4)nodes.unshift(renderHitEditor({move:move(),frame,pack,character,boxIndex:hitBox,selectedFrame:hitKeyFrame,
@@ -385,7 +417,7 @@ function drawTest(){
     if(a.captureFailed)$('test-readout').textContent+=' · capture attempt failed';
   }
   const contacts=testRecord.contacts.filter(c=>c.tick<=testIndex),hits=contacts.filter(c=>c.event!==2).length;
-  $('test-result').textContent=previewPending?'Recalculating contact…':`${hits} hit${hits===1?'':'s'} · ${contacts.length-hits} blocks · ${1000-target.health} damage · attacker travel ${((a.x-testRecord.frames[0].state.players[0].x)/100).toFixed(1)}px`;
+  $('test-result').textContent=previewPending?'Recalculating contact…':`${hits} hit${hits===1?'':'s'} · ${contacts.length-hits} blocks · ${1000-target.health} damage · decay ${target.comboDecay} · launch ${target.launchPercent}% · attacker travel ${((a.x-testRecord.frames[0].state.players[0].x)/100).toFixed(1)}px`;
   $('test-warning').textContent=testRecord.warnings.join(' ');$('test-warning').hidden=!testRecord.warnings.length;
   showSequenceResult(testRecord,testIndex);
   $('geometry-help').textContent=testRecord.sequence?'Play or scrub the full sequence, or tap a step’s frame to inspect its start. Edit each attack in its own section; this test uses its current values.':a.variant&&f.selectedFrame?'Follow-up timing is shown here. Edit its range and movement in Drive mechanics; phase hurtboxes inherit from the applying move.':testRecord.movement?'Play or scrub the movement here. Edit the character profile alongside this preview.':playing?'Pause or scrub to edit boxes directly on the fighter.':!f.selectedFrame?'Use Windup, Active or Recovery to jump to an editable attack frame.':tab==='hurt'?'Enable custom boxes, choose a body region and drag its blue handles. Changes update this same exchange.':tab==='hit'&&m.mechanic===4?'Reel In has no hitbox. Edit pull duration, range and gap in Drive system.':tab==='hit'?'On active frames, drag the selected orange box or its edges. Edits keep this move frame while recalculating contact.':'Play, pause or scrub here. Open Hit & movement or Hurtboxes to edit directly on the fighter.';
@@ -480,6 +512,7 @@ createSettingSearch({el,onFind:entry=>{
   if(!validBeforeLeaving())return false;selectTab(entry.tab);
   if(entry.key?.startsWith('hurtMask')){const phase=entry.key==='hurtMaskWindup'?'windup':entry.key==='hurtMaskActive'?'active':'recovery';seekMove(phaseStart(move(),phase));}
   panels.reveal(entry.key);
+  if(entry.key.startsWith('rule-'))$('combo-rules').open=true;
   const target=$(entry.id)||document.querySelector(`[data-setting="${entry.key}"] input,[data-setting="${entry.key}"] select`);
   const box=target?.closest('.field,[data-panel],.hurt-vulnerability')||target;
   target?.focus({preventScroll:true});box?.scrollIntoView({block:'center'});box?.classList.add('setting-focus');setTimeout(()=>box?.classList.remove('setting-focus'),1800);return true;

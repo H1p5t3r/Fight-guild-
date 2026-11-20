@@ -46,7 +46,7 @@ test('Backdraft uses all eight keys with one hit; pillar clocks and special art 
 
 test('Smoke source timing, independent hits and charged slots survive workshop/core round trips',()=>{
  const w=new Workshop(pack,pack.draft.data),c=w.data.characters[2];
- assert.equal(w.data.schema,25);assert.equal(c.moves.length,47);
+ assert.equal(w.data.schema,26);assert.equal(c.moves.length,47);
  assert.equal(blockAdvantage(c.moves[2]),-7);assert.equal(blockAdvantage(c.moves[3]),-4);
  assert.equal(blockAdvantage(c.moves[43]),12);
  assert.equal(inputName(c.moves[32]),'c.S');assert.equal(inputName(c.moves[2]),'f.S');assert.equal(inputName(c.moves[43]),'6[Hs]');
