@@ -1,5 +1,4 @@
 import {readFile} from 'node:fs/promises';
-import {CombatPreview} from '../web/workbench/simulation.mjs';
 import {inputName,phaseAt} from '../web/workbench/model.mjs';
 
 const phases=['active','windup','block','signature_windup','signature_active','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation','backdash'];
@@ -15,7 +14,10 @@ export const smokeReviewActions=[
 ];
 // Capture real input, contact and saved pose clocks, including hitstop. The
 // baseline is recorded before changing registration, never guessed afterward.
-export function recordSmokeReview(pack,engine=null){
+export async function recordSmokeReview(pack,engine=null){
+ // build-workbench creates fight-core.mjs before calling this function. Do not
+ // import simulation at module startup: a clean checkout has no generated core.
+ const {CombatPreview}=await import('../web/workbench/simulation.mjs');
  const preview=new CombatPreview(pack),data=pack.draft?.data??pack.defaults;
  if(engine)preview.engine=engine;
  const resolveTile=(c,phase,index)=>{
@@ -52,7 +54,7 @@ export function recordSmokeReview(pack,engine=null){
 export async function buildSmokeMotionReview({pack,images,engine=null}){
  const before=JSON.parse(await readFile(new URL('../art/characters/smoke-specials-v3/before.json',import.meta.url),'utf8'));
  const saved=engine?.data();let recorded;
- try{recorded=recordSmokeReview(pack,engine);}finally{if(engine)engine.loadData(saved);}
+ try{recorded=await recordSmokeReview(pack,engine);}finally{if(engine)engine.loadData(saved);}
  const moves=recorded.map((move,i)=>({...move,before:before[i].scenarios}));
  const files=new Set();
  for(const m of moves)for(const scenarios of [m.scenarios,m.before])for(const entries of Object.values(scenarios))for(const f of entries){

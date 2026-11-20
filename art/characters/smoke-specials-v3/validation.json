@@ -22,7 +22,8 @@
     "browser_timing_replay": "hit/block/whiff outcomes, edited phase durations, actual facings, frozen poses/projectile ages, snapshot replay passed",
     "browser_review": "desktop/mobile controls, no horizontal overflow, no WebAssembly, frame seek and mirror restore passed",
     "browser_delivery": "hosted/subpath/JSON/photos/dragging/autosave passed; local file opening blocked by browser policy",
-    "windows_core": "debug/release rebuilt and package verified"
+    "windows_core": "debug/release rebuilt and package verified",
+    "clean_workshop_build": "passed with web/generated/fight-core.mjs absent; generated-core import deferred until after bootstrap"
   },
   "preview": {
     "file": "previews/Smoke-Specials-Before-After-60fps.mp4",
