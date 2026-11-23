@@ -77,7 +77,9 @@ that becomes a block. Repaints do not replay audio. Round resets, menus, muted
 playback and long stalls cannot burst old sounds on resume.
 
 Godot's **Sound** control in the home/pause menus offers mute, volume and an impact
-preview. The Workshop has **View & playback → Sound: Off/On**. It starts off, unlocks
+preview. The unpublished Workshop source has **View & playback → Sound: Off/On**.
+Website updates and both publishing jobs are paused at the user's request; these
+source changes have not been deployed. That control starts off, unlocks
 only on a user click, loads the sound bank on demand, and plays only while the recorded exchange advances. Scrubbing
 is silent; half-speed playback spaces the cues without pitching the samples down.
 
@@ -88,5 +90,45 @@ counter bass layers under the weapon impact. Defense and wall sounds are separat
 Both frontends limit simultaneous voices and the output mix. These are an initial
 sound-design pass; they can be replaced without changing combat logic.
 
-New impact artwork is still at A/B review, tracked in
-`docs/presentation-roadmap.md`; the options sheet is not installed in the game.
+## Native Ink Snap impacts
+
+The user delegated the impact choice; **B / Ink Snap** is installed in Godot.
+Two original generated atlases supply cut, blunt, pierce, fire, poison, block,
+Faultless Defense and counter families. Guard breaks enlarge the block burst;
+armor/clashes use pierce fragments and wall contacts use blunt fragments. These
+effects sit above fighters and below collision diagnostics and the HUD. Existing
+weapon trails stay separate. Wall-travel cinematics retain their own presentation.
+
+Each family has three drawings, with metadata contact pivots and mirrored facing.
+The contact drawing holds through shared hitstop and action ages 0–1; the release
+plays at ages 2–4 and fragments at 5–9, then clears. There is no image interpolation
+or pose warping. A follow-up replaces the prior body burst on that receiver so a
+rapid multi-hit cannot stack frozen opaque impacts; trades and wall contacts stay
+independent, and every contact retains its audio event. Opacity starts at 88%, then
+76%, with fragments fading from 60%.
+A small camera impulse and two-action-frame warm receiver tint replace the
+previous red tint throughout hitstun. Reduced motion disables the impulse.
+
+Contact placement prefers the overlapping hurt region nearest the strike's
+vertical center, preventing tall mid attacks from always sparkling at the first
+listed leg box. Projectiles use their contact location; throws use the torso.
+Weapons never contribute hurt regions. This placement change is cosmetic and
+does not alter hitboxes, damage, timing or rollback checksums.
+
+`godot/assets/effects/impact-v1/manifest.json` preserves source hashes, regions and
+pivots; PNG bytes are unchanged from generation. Exact prompts are retained in
+`art/effects/impact-v1/production-prompts.md`.
+
+Verification: native feedback assertions for low/mid/high contacts in both facings,
+Godot feedback/history/audio tests,
+the native impact rendering tests, and 11 review scenarios using the current
+authored move data. Scenarios cover all eight families, guard break, a two-hit
+Shark scoop and an airborne Fillet contact, including mirrored facing. The review
+checks expected contact kinds and both hits before recording. The Windows core
+repair ZIP and both DLLs match the updated native source manifest.
+
+Run `python scripts/capture-impact-review.py` to record
+`exports/FightGuild-Impact-Review.mp4` with actual gameplay timing and audio.
+Use `bash scripts/godot.sh --headless --script res://tests/impacts_preview.gd --
+--test --verify` for the same contact scenarios without rendering. Neither command
+updates or publishes the move-editor website.

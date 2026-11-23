@@ -9,12 +9,16 @@ until the user explicitly asks to resume. Continue improvements in the native
 Godot game. Both jobs in `workshop-pages.yml` are paused; preserve these guards.
 Do not treat permission for game/art changes as permission to resume the website.
 
-1. **Combat impact feedback — in progress.** Resolved contact events and original
+1. **Combat impact feedback — complete (2026-11-23).** Resolved contact events and original
    sound effects now cover weapons, defense, counters, landing and walls in Godot
    and the Workshop preview source. The user delegated the impact choice; use
-   B / Ink Snap from `art/effects/impact-v1/options.png` in Godot only. Produce and review the selected effects
-   at actual combat timing before marking this priority complete.
-2. **Receiver animations and paired throws.** Strong reactions, readable knockdown
+   B / Ink Snap from `art/effects/impact-v1/options.png` in Godot only. Eight impact
+   families now hold through hitstop, then release into fragments; brief body tint
+   and a reduced-motion-aware camera impulse add weight. Native checks and eleven
+   recorded scenarios cover normal/block/FD/guard-break/counter, two-hit, airborne
+   and mirrored contacts. Review: `exports/FightGuild-Impact-Review.mp4`.
+   The Workshop source audio changes remain unpublished during the website freeze.
+2. **Receiver animations and paired throws — next.** Strong reactions, readable knockdown
    and recovery, and convincing attacker/defender alignment.
 3. **Spacing and combo audit.** Check the roster against standing, crouching and
    airborne targets, both corners, FD, repeat launchers and wall transitions.

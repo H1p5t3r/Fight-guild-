@@ -1,0 +1,353 @@
+{
+  "format": 1,
+  "style": "B / Ink Snap",
+  "approval": "2026-11-23: Use whatever impacts you like more",
+  "sheets": {
+    "contacts.png": {
+      "source": "/workspace/generated_images/exec-4e31ecf3-512e-4a55-ba84-1d23efbc110c.png",
+      "sha256": "024ad85672c7b262f901b3b04c0dd9de939aa30f5d050b481e16905e1c6f5518",
+      "size": [
+        1086,
+        1448
+      ]
+    },
+    "elements.png": {
+      "source": "/workspace/generated_images/exec-cb67cf0a-9a99-4ed5-92d1-62e44fc2450d.png",
+      "sha256": "86eb560eff833418f2807c9edbfe9101a2f293d3c8f2cb8a7cb6a8e4f341bb9d",
+      "size": [
+        1086,
+        1448
+      ]
+    }
+  },
+  "families": {
+    "cut": {
+      "file": "contacts.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "pivot": [
+            192,
+            182
+          ]
+        },
+        {
+          "region": [
+            362,
+            0,
+            362,
+            362
+          ],
+          "pivot": [
+            185,
+            182
+          ]
+        },
+        {
+          "region": [
+            724,
+            0,
+            362,
+            362
+          ],
+          "pivot": [
+            177,
+            182
+          ]
+        }
+      ]
+    },
+    "blunt": {
+      "file": "contacts.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            362,
+            362,
+            362
+          ],
+          "pivot": [
+            180,
+            182
+          ]
+        },
+        {
+          "region": [
+            362,
+            362,
+            362,
+            362
+          ],
+          "pivot": [
+            177,
+            182
+          ]
+        },
+        {
+          "region": [
+            724,
+            362,
+            362,
+            362
+          ],
+          "pivot": [
+            174,
+            182
+          ]
+        }
+      ]
+    },
+    "block": {
+      "file": "contacts.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            724,
+            362,
+            362
+          ],
+          "pivot": [
+            286,
+            147
+          ]
+        },
+        {
+          "region": [
+            362,
+            724,
+            362,
+            362
+          ],
+          "pivot": [
+            283,
+            147
+          ]
+        },
+        {
+          "region": [
+            724,
+            724,
+            362,
+            362
+          ],
+          "pivot": [
+            271,
+            147
+          ]
+        }
+      ]
+    },
+    "counter": {
+      "file": "contacts.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            1086,
+            362,
+            362
+          ],
+          "pivot": [
+            160,
+            155
+          ]
+        },
+        {
+          "region": [
+            362,
+            1086,
+            362,
+            362
+          ],
+          "pivot": [
+            145,
+            155
+          ]
+        },
+        {
+          "region": [
+            724,
+            1086,
+            362,
+            362
+          ],
+          "pivot": [
+            153,
+            155
+          ]
+        }
+      ]
+    },
+    "pierce": {
+      "file": "elements.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "pivot": [
+            188,
+            200
+          ]
+        },
+        {
+          "region": [
+            362,
+            0,
+            362,
+            362
+          ],
+          "pivot": [
+            185,
+            200
+          ]
+        },
+        {
+          "region": [
+            724,
+            0,
+            362,
+            362
+          ],
+          "pivot": [
+            182,
+            200
+          ]
+        }
+      ]
+    },
+    "fire": {
+      "file": "elements.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            362,
+            362,
+            362
+          ],
+          "pivot": [
+            180,
+            182
+          ]
+        },
+        {
+          "region": [
+            362,
+            362,
+            362,
+            362
+          ],
+          "pivot": [
+            180,
+            182
+          ]
+        },
+        {
+          "region": [
+            724,
+            362,
+            362,
+            362
+          ],
+          "pivot": [
+            180,
+            182
+          ]
+        }
+      ]
+    },
+    "gas": {
+      "file": "elements.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            724,
+            362,
+            362
+          ],
+          "pivot": [
+            281,
+            151
+          ]
+        },
+        {
+          "region": [
+            362,
+            724,
+            362,
+            362
+          ],
+          "pivot": [
+            281,
+            151
+          ]
+        },
+        {
+          "region": [
+            724,
+            724,
+            362,
+            362
+          ],
+          "pivot": [
+            273,
+            151
+          ]
+        }
+      ]
+    },
+    "faultless": {
+      "file": "elements.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            1086,
+            362,
+            362
+          ],
+          "pivot": [
+            283,
+            147
+          ]
+        },
+        {
+          "region": [
+            362,
+            1086,
+            362,
+            362
+          ],
+          "pivot": [
+            281,
+            147
+          ]
+        },
+        {
+          "region": [
+            724,
+            1086,
+            362,
+            362
+          ],
+          "pivot": [
+            270,
+            147
+          ]
+        }
+      ]
+    }
+  }
+}

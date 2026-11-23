@@ -11,6 +11,8 @@ var diagnostics := true
 var sprites: Array[Sprite2D] = []
 var weapons: Array[HookWeapon] = []
 var collision_layer: Control
+var impact_layer: Control
+var impact_cues: Array = []
 var hud_layer: Control
 var feedback := CombatFeedback.new()
 var camera_center := 0.5
@@ -39,6 +41,11 @@ func _ready() -> void:
 		var weapon := HookWeapon.new()
 		add_child(weapon)
 		weapons.append(weapon)
+	impact_layer = Control.new()
+	impact_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	impact_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(impact_layer)
+	impact_layer.draw.connect(draw_impacts)
 	collision_layer = Control.new()
 	collision_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	collision_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -61,6 +68,7 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	show_boxes = boxes
 	paused = frozen
 	feedback.refresh(view, size)
+	impact_cues = CombatImpacts.visible(model.cues.visible_at(int(view.frame)))
 	# Reorder only this arena's fighter children so menus keep their own layering.
 	var draw_order := [1, 0] if int(view.get("foregroundPlayer", -1)) == 0 else [0, 1]
 	for depth in 2:
@@ -85,6 +93,9 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 		accent_offset = focus * (1.0 - accent)
 		camera_offset = accent_offset + camera_offset * accent
 		camera_zoom *= accent
+		var impulse := CombatImpacts.impulse(impact_cues, feedback.reduced_motion)
+		accent_offset += impulse
+		camera_offset += impulse
 	for p in 2:
 		var fighter: Dictionary = view.players[p]
 		var sprite := sprites[p]
@@ -98,7 +109,7 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 		FighterArt.apply(sprite, character, phase, pose, scale_x * (float(shot.scale) if travel else camera_zoom), fighter.facing, -1 if travel else int(fighter.idleTime))
 		sprite.position = shot.position if travel else screen_point(Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x))
 		sprite.rotation = float(shot.angle) if travel else 0.0
-		sprite.modulate = Color(1, 1, 1, shot.alpha) if travel else Color("ffa69a") if fighter.stun and not fighter.guarding else Color.WHITE
+		sprite.modulate = Color(1, 1, 1, shot.alpha) if travel else CombatImpacts.tint(p, impact_cues)
 		weapons[p].visible = false
 		if not travel and character == 4 and fighter.weaponVisible:
 			var move := model.move(character, fighter.move)
@@ -109,6 +120,14 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	queue_redraw()
 	hud_layer.queue_redraw()
 	collision_layer.queue_redraw()
+	impact_layer.queue_redraw()
+
+func draw_impacts() -> void:
+	if view.is_empty() or int(view.wallBreakTime) > 0: return
+	var sx := size.x / 1000.0
+	var project := func(point: Vector2) -> Vector2:
+		return screen_point(Vector2(point.x / 100.0 * sx, ArenaStage.floor_line(size) - point.y / 100.0 * sx))
+	CombatImpacts.draw(impact_layer, impact_cues, project, sx * camera_zoom)
 
 func draw_projectiles() -> void:
 	if view.is_empty() or int(view.wallBreakTime) > 0: return

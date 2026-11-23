@@ -29,11 +29,20 @@ static void contacts(){
         for(int i=0;i<s.cue_count;++i)if(s.cues[i].v[1]==kind){
             CHECK(s.cues[i].v[0]==0&&s.cues[i].v[2]==0&&s.cues[i].v[3]==5&&s.cues[i].v[4]==0);
             CHECK(s.cues[i].v[8]==facing&&s.cues[i].v[6]>b.x-12000&&s.cues[i].v[6]<b.x+12000);
+            CHECK(s.cues[i].v[7]>=8000); // Tall mid strikes must not pick the legs merely because they are first.
         }
         for(int n=0;n<8;++n){s.step(0,input);CHECK(s.cue_count==0);}
     }
     setup();s.world.players[1].x=99000;s.step(0,0);CHECK(count(SwingCue)==1&&count(HitCue)==0);
     s.reset(5,4,0,0);CHECK(s.cue_count==0);
+}
+static void strike_height(){
+    for(int facing:{-1,1})for(int bottom:{0,12000}){
+        setup(facing);auto& m=s.moves[5][0];m.v[Bottom]=bottom;m.v[Height]=2700;
+        s.step(0,0);CHECK(count(HitCue)==1);
+        for(int i=0;i<s.cue_count;++i)if(s.cues[i].v[1]==HitCue)
+            CHECK(s.cues[i].v[7]>=bottom&&s.cues[i].v[7]<=bottom+2700);
+    }
 }
 static void multi_and_replay(){
     setup();auto& m=s.moves[5][0];m.v[Active]=5;m.v[Hitstop]=0;m.v[Hitstun]=80;
@@ -88,5 +97,5 @@ static void walls_and_landing(){
     setup();s.world.players[0].move=-1;s.world.players[1].y=50;s.world.players[1].vy=-300;
     s.step(0,0);CHECK(count(LandCue)==1);s.step(0,0);CHECK(count(LandCue)==0);
 }
-int main(){contacts();multi_and_replay();projectiles();utilities_and_throws();walls_and_landing();
+int main(){contacts();strike_height();multi_and_replay();projectiles();utilities_and_throws();walls_and_landing();
     std::printf("Feedback: %d checks, %d failures\n",checks,failures);return failures?1:0;}
