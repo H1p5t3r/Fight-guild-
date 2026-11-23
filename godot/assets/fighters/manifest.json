@@ -28185,7 +28185,8 @@
               25,
               328,
               320
-            ]
+            ],
+            "body_height": 350
           },
           {
             "region": [
@@ -41826,6 +41827,15 @@
             }
           }
         ]
+      },
+      "reaction_scale_calibration": {
+        "reference": "appearance-v3/fillet-ready.png / Stalker stance; fillet-ground-v1/5p.png / attack entry",
+        "phase": "active",
+        "pose": 9,
+        "previous_body_height": 310,
+        "body_height": 350,
+        "method": "Fixed uniform pose scale, matched in a native equal-zoom review. Ground hit, air reel, splat and captured reactions share this drawing and pivot. Knockdown/get-up, attack and locomotion scales are unchanged.",
+        "rebuild": "python scripts/calibrate-fillet-reactions.py && python scripts/generate-combat-data.py"
       }
     }
   ],

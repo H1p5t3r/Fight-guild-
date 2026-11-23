@@ -28,6 +28,7 @@ cases = [
     (["--headless", "--script", "tests/counter_test.gd", "--", "--test"], "0 failures"),
     (["--headless", "--script", "tests/feedback_test.gd", "--", "--test"], "menu: PASS"),
     (["--headless", "--script", "tests/impacts_test.gd", "--", "--test"], "0 failures"),
+    (["--headless", "--script", "tests/fillet_scale_test.gd", "--", "--test"], "Fillet reaction scale: 0 failures"),
     (["--headless", "--script", "tests/impacts_preview.gd", "--", "--test", "--verify"], "Native impact review: 0 failures"),
     (["--headless", "--script", "tests/art_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/collision_test.gd"], "0 failures"),
