@@ -1,3 +1,4 @@
+import {STEP_DRIVE_DEFAULTS} from '../web/step-drive.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -11,7 +12,7 @@ const actions=[[15,145],[16,230],[14,96],[25,246]];
 const cue=f=>f.state.players[0].posePhase===14?art.attack_animation.frames[f.state.players[0].poseIndex]:null;
 
 test('Smoke animation registration preserves authored moves and identical near/far projectile art',()=>{
- for(const [slot] of actions)assert.deepEqual(data.characters[2].moves[slot],baseline.moves[slot]);
+ for(const [slot] of actions)assert.deepEqual(data.characters[2].moves[slot],{...baseline.moves[slot],...STEP_DRIVE_DEFAULTS});
  assert.deepEqual(art.projectile_variants['14'],art.projectile_variants['25']);
  for(const key of ['projectileWidth','projectileHeight'])assert.equal(data.characters[2].moves[14][key],data.characters[2].moves[25][key]);
  assert.equal(data.characters[2].moves[14].projectileOffsetX,15000);

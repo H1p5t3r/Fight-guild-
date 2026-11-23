@@ -143,5 +143,12 @@
     "linux": "native tested",
     "windows": "debug/release cross-compiled; on-device playtesting remains",
     "ps5": "not built"
+  },
+  "smokeRegression": {
+    "tests": 9,
+    "failures": 0,
+    "attackBrowser": "pass",
+    "reviewBrowser": "pass",
+    "note": "Historical preservation fixtures include only the three added schema-27 defaults; all prior move values are still compared."
   }
 }

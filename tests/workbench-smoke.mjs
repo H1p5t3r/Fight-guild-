@@ -1,3 +1,4 @@
+import {STEP_DRIVE_DEFAULTS} from '../web/step-drive.mjs';
 import {LINE_DEFAULTS} from '../web/line-drive.mjs';
 import {comboMoveDefaults} from '../web/combo-rules.mjs';
 import {legacyPack} from './legacy-data.mjs';
@@ -60,7 +61,7 @@ test('Smoke source timing, independent hits and charged slots survive workshop/c
 });
 test('Leo corrects Tapper boxes without changing his timing, damage, stance or movement',async()=>{
  const previous=await json('godot/data/workshop/2026-11-18-tapper/FightGuild-Tapper.json');
- for(const c of previous.characters)for(const m of c.moves)Object.assign(m,LINE_DEFAULTS,comboMoveDefaults(m));
+ for(const c of previous.characters)for(const m of c.moves)Object.assign(m,LINE_DEFAULTS,comboMoveDefaults(m),STEP_DRIVE_DEFAULTS);
  for(const c of previous.characters)for(const m of c.moves)if(m.category===4&&m.motion===0)m.startup=2;
  const now=new Workshop(pack,await json('godot/data/workshop/2026-11-18-startup/FightGuild-Startup.json')).data;
  for(const c of [0,1,4,5]){
