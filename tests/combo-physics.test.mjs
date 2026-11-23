@@ -1,3 +1,4 @@
+import {upgradeStepDrive} from '../web/step-drive.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -16,7 +17,7 @@ test('Schema 25 migration preserves authoring data and creates editable velocity
   for(const [key,value]of Object.entries(m))assert.deepEqual(upgraded[key],value,`${c}/${i}/${key}`);
   assert.equal(upgraded.groundHitSpeed,Math.ceil(m.pushback/6));assert.equal(upgraded.airHitSpeed,Math.ceil(m.airPushback/6));
  }
- e.loadData(data);const {_moveWorkshop,...gameplay}=data;assert.deepEqual(e.data(),gameplay);
+ e.loadData(data);const {_moveWorkshop,...gameplay}=data;assert.deepEqual(e.data(),upgradeStepDrive(gameplay));
  const fingerprint=e.fingerprint();data.comboRules.launchCarry=35;e.loadData(data);assert.notEqual(e.fingerprint(),fingerprint);
  const valid=e.fingerprint();data.comboRules.airHitDrag=101;assert.throws(()=>e.loadData(data));assert.equal(e.fingerprint(),valid);
  data.comboRules.airHitDrag=98;data.characters[2].moves[7].comboDecay=-1;assert.throws(()=>e.loadData(data));assert.equal(e.fingerprint(),valid);

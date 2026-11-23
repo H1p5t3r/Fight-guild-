@@ -1,0 +1,98 @@
+[
+  {
+    "id": "checks",
+    "file": "checks.png",
+    "source": "/workspace/generated_images/exec-a189331a-72ff-4213-bba4-6c1d76cc98b2.png",
+    "sha256": "8e7eb9a490addc30aeed5a0b4df093b608482af1963be231a2577365ad5ba819",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "kicks",
+    "file": "kicks.png",
+    "source": "/workspace/generated_images/exec-619d0954-19e5-4f63-8729-d4131b421625.png",
+    "sha256": "0897893df419b251b7aa0b956b889495eb9403fcc7ed7336a60cd65d769ba690",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "slashes",
+    "file": "slashes.png",
+    "source": "/workspace/generated_images/exec-ca577bd6-dde1-4f53-8065-961e4b586fb0.png",
+    "sha256": "3ecbe804049a45e78d651a4c87e56e2d00d18f3739bc4af2aa16e4ea81a9441f",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "heavy_sweep",
+    "file": "heavy_sweep.png",
+    "source": "/workspace/generated_images/exec-a9fc5467-f081-4e50-8150-1372044ca267.png",
+    "sha256": "b701243b082eafd1710d7bdf25120bb573d1e5e8d8e2e171e49b11018757c49b",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "lift_brace",
+    "file": "lift_brace.png",
+    "source": "/workspace/generated_images/exec-8c8d523e-ee77-485e-9422-cf2133b2c7f8.png",
+    "sha256": "f6f161c534ac6efbebda27a43fa9a53ce2f4aed6c37d9ca200c9504109964b06",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "slams",
+    "file": "slams.png",
+    "source": "/workspace/generated_images/exec-fc056c04-3c34-4f77-92b6-613a883174db.png",
+    "sha256": "f3daca8cc2a2f45c9109b5b9925601c53bc56029697ab7e694913a6d4113a9e3",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "specials",
+    "file": "specials.png",
+    "source": "/workspace/generated_images/exec-97fa7191-fa3b-4b20-834e-03fc5b4b2976.png",
+    "sha256": "5ce15b2a3260acc14f677d65878128a7c7078c3dea52d52c641c931d0cf9e527",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "air_checks",
+    "file": "air_checks.png",
+    "source": "/workspace/generated_images/exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+    "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "air_swings",
+    "file": "air_swings.png",
+    "source": "/workspace/generated_images/exec-da97fad4-5cf6-4825-8067-b050b12b1a91.png",
+    "sha256": "66ac8b9bc948e306fe1b17a205ea765a9c92d0f3e1f391208d6ac4e621eef29f",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "throws",
+    "file": "throws.png",
+    "source": "/workspace/generated_images/exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+    "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "drive_ready",
+    "file": "drive_ready.png",
+    "source": "/workspace/generated_images/exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+    "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  },
+  {
+    "id": "effects",
+    "file": "effects.png",
+    "source": "/workspace/generated_images/exec-3daf0854-81f5-43a0-a7ef-283c0160b165.png",
+    "sha256": "4a692754567e8cdee40fccaa95ef0a48c687ce2019853c10340f537ee2bbeefe",
+    "approvedDirection": "A \u2014 Shoulder Drive",
+    "date": "2026-11-23"
+  }
+]

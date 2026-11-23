@@ -14,7 +14,7 @@ test('Third upload preserves the untouched fighters alongside the new Smoke and 
   for(let i=0;i<32;++i)for(const [key,value] of Object.entries(original.characters[c].moves[i])) assert.deepEqual(data.characters[c].moves[i][key],key==='startup'&&original.characters[c].moves[i].category===4&&!original.characters[c].moves[i].motion?2:value,`${c}/${i}/${key}`);
  }
  for(const [key,value] of Object.entries(original._moveWorkshop.notes))assert.deepEqual(data._moveWorkshop.notes[key],value);
- const old=new Workshop(pack,original);assert.equal(old.data.schema,26);assert.equal(old.move(3,35).enabled,0);assert.equal(old.move(3,0).startup,original.characters[3].moves[0].startup);
+ const old=new Workshop(pack,original);assert.equal(old.data.schema,27);assert.equal(old.move(3,35).enabled,0);assert.equal(old.move(3,0).startup,original.characters[3].moves[0].startup);
  w.change(3,40,'grabFrames',30);w.change(3,37,'stanceRequired',2);assert.deepEqual(new Workshop(pack,JSON.parse(w.export())).data,w.data);
  assert.equal(inputName(w.move(3,40)),'st.236D');
 });

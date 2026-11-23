@@ -102,14 +102,14 @@ export class Preview {
       const hurt=!record.sequence&&!i&&moveFrame&&!f.variant&&(record.geometryOnly||m.hurtboxes[phase])?Object.values(enabledHurtboxes(effectiveHurtboxes(this.pack,record.character,m,moveFrame),m,phase)).map(localToWorld):frame.boxes[i].hurt;
       if(this.options.hurt)hurt.forEach(box=>rect(box,'#7bb8d4'));
       const authored=!record.sequence&&!i&&moveFrame&&!f.variant;
-      const hits=authored?attackLocal.map(localToWorld):frame.boxes[i].hit;
+      const hits=[4,5].includes(m.mechanic)&&!i?[]:authored?attackLocal.map(localToWorld):frame.boxes[i].hit;
       if(this.options.hit&&(!authored||phase==='active'||this.edit.hit))hits.forEach(box=>rect(box,'#f1aa66',.12,authored&&phase!=='active'));
       if(f.weaponVisible){const start=point(f.weaponBackX,f.weaponBackY),end=point(f.weaponTipX,f.weaponTipY),sheet=this.pack.art[f.character].hook_weapon,img=sheet&&this.image(sheet.file);
         if(this.options.art&&img?.complete&&img.naturalWidth){const [bx,by]=sheet.butt,[tx,ty]=sheet.tip;ctx.save();ctx.translate(start.x,start.y);ctx.rotate(Math.atan2(end.y-start.y,end.x-start.x)-Math.atan2(ty-by,tx-bx));const ratio=Math.hypot(end.x-start.x,end.y-start.y)/Math.hypot(tx-bx,ty-by);ctx.scale(ratio,ratio);ctx.drawImage(img,-bx,-by);ctx.restore();}
       }
       ctx.fillStyle=i?'#80d2dc':'#e0ba76';ctx.font='12px system-ui';ctx.textAlign=i?'right':'left';ctx.fillText(`${this.pack.art[f.character].name.toUpperCase()} · ${f.health} HP`,i?w-14:14,18);
       const barX=i?w-174:14;ctx.fillStyle='#36464e';ctx.fillRect(barX,24,160,4);ctx.fillStyle='#c4bdbe';ctx.fillRect(barX,24,160*f.health/1000,4);ctx.fillStyle=i?'#80d2dc':'#e0ba76';ctx.fillRect(barX,24,160*(f.health-f.greyLife)/1000,4);
-      const status=f.bleedTime?`BLEED · ${f.greyLife} grey · ${(f.bleedTime/60).toFixed(1)}s`:f.tetherSource?f.tetherTime?`LINE · ${(f.tetherTime/60).toFixed(1)}s`:f.tetherUsed?'TETHER · PULLED':'TETHER':f.variant&&f.move>=0?f.variant===1?'TETHER PULL':'CASH-OUT GRAB':'';ctx.font='11px system-ui';ctx.fillText(status,i?w-14:14,42);
+      const status=f.driveAutoDistance?f.driveBonus?`DRIVE +${f.driveBonus}f · FULL CARRY`:f.driveUsed?'BREAK STEP · SPENT':`BREAK STEP · READY · ${(f.driveAutoDistance/100).toFixed(0)}px`:f.bleedTime?`BLEED · ${f.greyLife} grey · ${(f.bleedTime/60).toFixed(1)}s`:f.tetherSource?f.tetherTime?`LINE · ${(f.tetherTime/60).toFixed(1)}s`:f.tetherUsed?'TETHER · PULLED':'TETHER':f.variant&&f.move>=0?f.variant===1?'TETHER PULL':'CASH-OUT GRAB':'';ctx.font='11px system-ui';ctx.fillText(status,i?w-14:14,42);
     });
     this.handles=[];this.boxPixels=null;let selectedBox=null;
     const handles=(box,color,target,extra={},keys=[0,2,3,1])=>{

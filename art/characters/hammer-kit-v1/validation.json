@@ -1,0 +1,147 @@
+{
+  "date": "2026-11-23",
+  "nativeDriveChecks": 236,
+  "nativeFailures": 0,
+  "javascriptAdapterTests": 48,
+  "javascriptFailures": 0,
+  "art": {
+    "bodyPoses": 1162,
+    "maxHurtRegions": 4,
+    "godotImportAndArtTest": "pass"
+  },
+  "godot": [
+    "Hammer Drive and snapshot replay",
+    "schema migration and independent rollback models",
+    "combo physics",
+    "workshop batch and hurtbox switches",
+    "tuning presets",
+    "compiled collision",
+    "menus, match entry, gameplay and timing feedback"
+  ],
+  "browser": {
+    "hammerActions": 23,
+    "allContactClipsConnect": true,
+    "desktopAndMobile": "pass",
+    "hostedSubpath": "pass",
+    "initialWorkshopFetchMiB": 5.61,
+    "decodedSheets": 172,
+    "sharkRegression": "pass",
+    "consoleAndResourceErrors": 0,
+    "localFileCheck": "Skipped locally because this managed browser blocks file://; the standard CI Chromium checks extracted offline files."
+  },
+  "routes": [
+    {
+      "slot": -1,
+      "id": "ROUTE",
+      "name": "f.S pressure \u2192 Break Step",
+      "damage": 6,
+      "bonus": true,
+      "warnings": [],
+      "steps": [
+        {
+          "move": 2,
+          "delay": 0,
+          "opportunity": 0,
+          "input": 1,
+          "start": 1,
+          "route": "opener"
+        },
+        {
+          "move": 14,
+          "delay": 0,
+          "opportunity": 23,
+          "input": 24,
+          "start": 26,
+          "route": "cancel / buffered link"
+        },
+        {
+          "move": 13,
+          "delay": 0,
+          "opportunity": 52,
+          "input": 53,
+          "start": 53,
+          "route": "cancel / buffered link"
+        },
+        {
+          "move": 32,
+          "delay": 0,
+          "opportunity": 64,
+          "input": 65,
+          "start": 65,
+          "route": "cancel / buffered link"
+        }
+      ]
+    },
+    {
+      "slot": -1,
+      "id": "ROUTE",
+      "name": "Close confirm \u2192 Drive \u2192 launcher",
+      "damage": 291,
+      "bonus": true,
+      "warnings": [],
+      "steps": [
+        {
+          "move": 32,
+          "delay": 0,
+          "opportunity": 0,
+          "input": 1,
+          "start": 1,
+          "route": "opener"
+        },
+        {
+          "move": 2,
+          "delay": 0,
+          "opportunity": 19,
+          "input": 20,
+          "start": 20,
+          "route": "cancel / buffered link"
+        },
+        {
+          "move": 14,
+          "delay": 0,
+          "opportunity": 42,
+          "input": 43,
+          "start": 45,
+          "route": "cancel / buffered link"
+        },
+        {
+          "move": 13,
+          "delay": 0,
+          "opportunity": 71,
+          "input": 72,
+          "start": 72,
+          "route": "cancel / buffered link"
+        },
+        {
+          "move": 32,
+          "delay": 0,
+          "opportunity": 77,
+          "input": 78,
+          "start": 78,
+          "route": "cancel / buffered link"
+        },
+        {
+          "move": 3,
+          "delay": 0,
+          "opportunity": 96,
+          "input": 97,
+          "start": 97,
+          "route": "cancel / buffered link"
+        },
+        {
+          "move": 16,
+          "delay": 0,
+          "opportunity": 125,
+          "input": 126,
+          "start": 128,
+          "route": "cancel / buffered link"
+        }
+      ]
+    }
+  ],
+  "platforms": {
+    "linux": "native tested",
+    "windows": "debug/release cross-compiled; on-device playtesting remains",
+    "ps5": "not built"
+  }
+}

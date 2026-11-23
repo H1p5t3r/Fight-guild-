@@ -17,6 +17,9 @@ static func reset(model: CombatModel) -> void:
 	data.characters[5] = JSON.parse_string(FileAccess.get_file_as_string("res://data/legacy_fillet_v22.json"))
 	data.characters[5].moves.append_array(additions)
 	for action in data.characters[5].moves:
+		action.driveDistance = 0
+		action.drivePlus = 4
+		action.driveNeutralFrames = 12
 		action.tetherDuration = 180
 		action.tetherRange = 45000
 		action.tetherGap = 6000

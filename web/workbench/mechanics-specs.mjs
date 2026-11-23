@@ -4,8 +4,8 @@ export const MECHANIC_SPECS = [
     "Drive mechanic",
     0,
     0,
-    4,
-    "0 off; 1 legacy tether; 2 bleed; 3 attach line on hit; 4 spend line to pull. Reel In ignores guard and creates no damage, hitstop or new stun. Existing hitstun/blockstun pauses during the pull."
+    5,
+    "0 off; 1 legacy tether; 2 bleed; 3 attach line on hit; 4 spend line to pull. Reel In ignores guard and creates no damage, hitstop or new stun. Existing hitstun/blockstun pauses during the pull. 5 Break Step: one movement cancel per string, into an enhanced normal."
   ],
   [
     "tetherSpeed",
@@ -166,5 +166,29 @@ export const MECHANIC_SPECS = [
     0,
     20000,
     "Minimum horizontal distance between fighter roots at the end of Reel In, clamped to body spacing. The pull never pushes the target farther away."
+  ],
+  [
+    "driveDistance",
+    "Drive distance override",
+    0,
+    0,
+    80000,
+    "0 derives travel from the longest enabled grounded normal plus its block pushback, minus body spacing. The budget is fixed at activation; no homing. Capped at 40 px per burst frame."
+  ],
+  [
+    "drivePlus",
+    "Enhanced normal \u00b7 extra blockstun",
+    4,
+    0,
+    30,
+    "Adds these frames of block advantage to the normal canceled out of the burst. It always inherits 100% of dash velocity; its usual attack friction then applies."
+  ],
+  [
+    "driveNeutralFrames",
+    "Drive reset \u00b7 neutral frames",
+    12,
+    1,
+    120,
+    "Consecutive unfrozen ticks with both fighters free, no attacks, stun, knockdown, dash or live projectile. Small pressure gaps do not refresh it."
   ]
 ];

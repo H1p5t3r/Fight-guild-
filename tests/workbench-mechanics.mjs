@@ -9,7 +9,7 @@ const shippedPack=JSON.parse(await readFile('build/workbench-pack.json','utf8'))
 test('Batch 2 upgrades without losing any submitted value or art note',async()=>{
  const original=JSON.parse(await readFile('godot/data/workshop/2026-11-19-slash-sweeps/FightGuild-Slash-Sweeps.json','utf8'));
  const w=new Workshop(pack,original), upgraded=w.snapshot();
- assert.equal(upgraded.schema,26);assert.deepEqual(upgraded._moveWorkshop,original._moveWorkshop);
+ assert.equal(upgraded.schema,27);assert.deepEqual(upgraded._moveWorkshop,original._moveWorkshop);
  for(const [c,ch] of original.characters.entries())for(const [i,m] of ch.moves.entries())for(const [k,v] of Object.entries(m))assert.deepEqual(upgraded.characters[c].moves[i][k],v,`${ch.name} ${m.id} ${k}`);
  assert.equal(w.move(4,13).mechanic,1);assert.equal(w.move(4,22).mechanic,1);assert.equal(w.move(5,13).mechanic,2);
  w.change(5,13,'bleedBlockPercent',35);w.change(5,13,'variantStartup',18);

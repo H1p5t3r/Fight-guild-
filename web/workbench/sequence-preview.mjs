@@ -70,7 +70,7 @@ export function recordSequence(preview,data,character,slot,queue,options,directi
    // Once fully free, a conflicting or unavailable contextual mapping cannot
    // improve by waiting in place. Report it instead of silently using another move.
    if(!attempt.success&&state.players[0].move<0&&!state.players[0].stun&&!state.players[0].reaction&&!state.players[0].landingTime&&state.players[0].y===0&&!state.players[0].prejumpTime){
-    row.error=unexpected>=0?`Input starts ${moveName(moves[unexpected])} at this spacing or stance.`:'Input unavailable in this state. Check its mapping and prerequisites.';break;
+    row.error=m.mechanic===5&&state.players[0].driveUsed?'Break Step is spent. Return to neutral before another use.':unexpected>=0?`Input starts ${moveName(moves[unexpected])} at this spacing or stance.`:'Input unavailable in this state. Check its mapping and prerequisites.';break;
    }
    step(0,`Waiting for ${moveName(m)}`);wait++;
   }

@@ -1552,6 +1552,6158 @@
             ]
           }
         ]
+      },
+      "idle": {
+        "file": "hammer-kit-v1/drive_ready.png",
+        "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+        "size": [
+          1536,
+          1024
+        ],
+        "body_height": 425,
+        "columns": 3,
+        "rows": 2,
+        "frames": [
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              30,
+              53,
+              451,
+              474
+            ],
+            "pivot": [
+              230,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 4
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              30,
+              53,
+              451,
+              474
+            ],
+            "pivot": [
+              230,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 4
+          }
+        ],
+        "frame_ticks": [
+          18,
+          18,
+          18,
+          18
+        ]
+      },
+      "crouch_idle": {
+        "file": "hammer-kit-v1/drive_ready.png",
+        "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+        "size": [
+          1536,
+          1024
+        ],
+        "body_height": 425,
+        "columns": 3,
+        "rows": 2,
+        "frames": [
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5
+          }
+        ]
+      },
+      "hammer_fx": {
+        "file": "hammer-kit-v1/effects.png",
+        "sha256": "4a692754567e8cdee40fccaa95ef0a48c687ce2019853c10340f537ee2bbeefe",
+        "size": [
+          1536,
+          1024
+        ],
+        "frames": [
+          {
+            "region": [
+              48,
+              213,
+              690,
+              200
+            ],
+            "pivot": [
+              0,
+              200
+            ],
+            "bounds": [
+              0,
+              0,
+              690,
+              200
+            ]
+          },
+          {
+            "region": [
+              876,
+              35,
+              594,
+              452
+            ],
+            "pivot": [
+              0,
+              452
+            ],
+            "bounds": [
+              0,
+              0,
+              594,
+              452
+            ]
+          },
+          {
+            "region": [
+              50,
+              548,
+              620,
+              431
+            ],
+            "pivot": [
+              0,
+              431
+            ],
+            "bounds": [
+              0,
+              0,
+              620,
+              431
+            ]
+          },
+          {
+            "region": [
+              856,
+              781,
+              613,
+              160
+            ],
+            "pivot": [
+              0,
+              160
+            ],
+            "bounds": [
+              0,
+              0,
+              613,
+              160
+            ]
+          }
+        ]
+      },
+      "attack_animation": {
+        "file": "hammer-kit-v1/drive_ready.png",
+        "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+        "size": [
+          1536,
+          1024
+        ],
+        "body_height": 425,
+        "columns": 3,
+        "rows": 2,
+        "frames": [
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "5P / Entry",
+            "action_id": "5P",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/checks.png",
+            "sha256": "8e7eb9a490addc30aeed5a0b4df093b608482af1963be231a2577365ad5ba819",
+            "generation_file": "exec-a189331a-72ff-4213-bba4-6c1d76cc98b2.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              34,
+              121,
+              405,
+              507
+            ],
+            "pivot": [
+              260,
+              507
+            ],
+            "body_height": 385,
+            "source_pose": 0,
+            "name": "5P / Loaded \u00b7 hold through final startup",
+            "action_id": "5P",
+            "action_frame": 2,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/checks.png",
+            "sha256": "8e7eb9a490addc30aeed5a0b4df093b608482af1963be231a2577365ad5ba819",
+            "generation_file": "exec-a189331a-72ff-4213-bba4-6c1d76cc98b2.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              8,
+              128,
+              473,
+              507
+            ],
+            "pivot": [
+              225,
+              507
+            ],
+            "body_height": 385,
+            "source_pose": 1,
+            "name": "5P / First-active snap",
+            "action_id": "5P",
+            "action_frame": 5,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/checks.png",
+            "sha256": "8e7eb9a490addc30aeed5a0b4df093b608482af1963be231a2577365ad5ba819",
+            "generation_file": "exec-a189331a-72ff-4213-bba4-6c1d76cc98b2.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              8,
+              128,
+              473,
+              507
+            ],
+            "pivot": [
+              225,
+              507
+            ],
+            "body_height": 385,
+            "source_pose": 1,
+            "name": "5P / Brake \u00b7 no lingering strike effect",
+            "action_id": "5P",
+            "action_frame": 8,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/checks.png",
+            "sha256": "8e7eb9a490addc30aeed5a0b4df093b608482af1963be231a2577365ad5ba819",
+            "generation_file": "exec-a189331a-72ff-4213-bba4-6c1d76cc98b2.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              17,
+              125,
+              388,
+              507
+            ],
+            "pivot": [
+              233,
+              507
+            ],
+            "body_height": 385,
+            "source_pose": 2,
+            "name": "5P / Withdraw",
+            "action_id": "5P",
+            "action_frame": 11,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "5P / Settle \u00b7 still recovering",
+            "action_id": "5P",
+            "action_frame": 15,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5,
+            "name": "2P / Entry",
+            "action_id": "2P",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/checks.png",
+            "sha256": "8e7eb9a490addc30aeed5a0b4df093b608482af1963be231a2577365ad5ba819",
+            "generation_file": "exec-a189331a-72ff-4213-bba4-6c1d76cc98b2.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              509,
+              512
+            ],
+            "bounds": [
+              18,
+              187,
+              398,
+              481
+            ],
+            "pivot": [
+              265,
+              481
+            ],
+            "body_height": 385,
+            "source_pose": 3,
+            "name": "2P / Loaded \u00b7 hold through final startup",
+            "action_id": "2P",
+            "action_frame": 2,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/checks.png",
+            "sha256": "8e7eb9a490addc30aeed5a0b4df093b608482af1963be231a2577365ad5ba819",
+            "generation_file": "exec-a189331a-72ff-4213-bba4-6c1d76cc98b2.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              509,
+              512,
+              515,
+              512
+            ],
+            "bounds": [
+              1,
+              196,
+              483,
+              481
+            ],
+            "pivot": [
+              233,
+              481
+            ],
+            "body_height": 385,
+            "source_pose": 4,
+            "name": "2P / First-active snap",
+            "action_id": "2P",
+            "action_frame": 5,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/checks.png",
+            "sha256": "8e7eb9a490addc30aeed5a0b4df093b608482af1963be231a2577365ad5ba819",
+            "generation_file": "exec-a189331a-72ff-4213-bba4-6c1d76cc98b2.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              509,
+              512,
+              515,
+              512
+            ],
+            "bounds": [
+              1,
+              196,
+              483,
+              481
+            ],
+            "pivot": [
+              233,
+              481
+            ],
+            "body_height": 385,
+            "source_pose": 4,
+            "name": "2P / Brake \u00b7 no lingering strike effect",
+            "action_id": "2P",
+            "action_frame": 8,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/checks.png",
+            "sha256": "8e7eb9a490addc30aeed5a0b4df093b608482af1963be231a2577365ad5ba819",
+            "generation_file": "exec-a189331a-72ff-4213-bba4-6c1d76cc98b2.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              9,
+              187,
+              399,
+              481
+            ],
+            "pivot": [
+              250,
+              481
+            ],
+            "body_height": 385,
+            "source_pose": 5,
+            "name": "2P / Withdraw",
+            "action_id": "2P",
+            "action_frame": 11,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5,
+            "name": "2P / Settle \u00b7 still recovering",
+            "action_id": "2P",
+            "action_frame": 16,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "5K / Entry",
+            "action_id": "5K",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/kicks.png",
+            "sha256": "0897893df419b251b7aa0b956b889495eb9403fcc7ed7336a60cd65d769ba690",
+            "generation_file": "exec-619d0954-19e5-4f63-8729-d4131b421625.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              51,
+              69,
+              403,
+              484
+            ],
+            "pivot": [
+              278,
+              484
+            ],
+            "body_height": 415,
+            "source_pose": 0,
+            "name": "5K / Loaded \u00b7 hold through final startup",
+            "action_id": "5K",
+            "action_frame": 2,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/kicks.png",
+            "sha256": "0897893df419b251b7aa0b956b889495eb9403fcc7ed7336a60cd65d769ba690",
+            "generation_file": "exec-619d0954-19e5-4f63-8729-d4131b421625.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              67,
+              496,
+              484
+            ],
+            "pivot": [
+              278,
+              484
+            ],
+            "body_height": 415,
+            "source_pose": 1,
+            "name": "5K / First-active snap",
+            "action_id": "5K",
+            "action_frame": 7,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/kicks.png",
+            "sha256": "0897893df419b251b7aa0b956b889495eb9403fcc7ed7336a60cd65d769ba690",
+            "generation_file": "exec-619d0954-19e5-4f63-8729-d4131b421625.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              67,
+              496,
+              484
+            ],
+            "pivot": [
+              278,
+              484
+            ],
+            "body_height": 415,
+            "source_pose": 1,
+            "name": "5K / Brake \u00b7 no lingering strike effect",
+            "action_id": "5K",
+            "action_frame": 10,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/kicks.png",
+            "sha256": "0897893df419b251b7aa0b956b889495eb9403fcc7ed7336a60cd65d769ba690",
+            "generation_file": "exec-619d0954-19e5-4f63-8729-d4131b421625.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              51,
+              68,
+              399,
+              484
+            ],
+            "pivot": [
+              278,
+              484
+            ],
+            "body_height": 415,
+            "source_pose": 2,
+            "name": "5K / Withdraw",
+            "action_id": "5K",
+            "action_frame": 15,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "5K / Settle \u00b7 still recovering",
+            "action_id": "5K",
+            "action_frame": 22,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5,
+            "name": "2K / Entry",
+            "action_id": "2K",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/kicks.png",
+            "sha256": "0897893df419b251b7aa0b956b889495eb9403fcc7ed7336a60cd65d769ba690",
+            "generation_file": "exec-619d0954-19e5-4f63-8729-d4131b421625.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              51,
+              140,
+              399,
+              445
+            ],
+            "pivot": [
+              278,
+              445
+            ],
+            "body_height": 415,
+            "source_pose": 3,
+            "name": "2K / Loaded \u00b7 hold through final startup",
+            "action_id": "2K",
+            "action_frame": 2,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/kicks.png",
+            "sha256": "0897893df419b251b7aa0b956b889495eb9403fcc7ed7336a60cd65d769ba690",
+            "generation_file": "exec-619d0954-19e5-4f63-8729-d4131b421625.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              41,
+              146,
+              490,
+              445
+            ],
+            "pivot": [
+              278,
+              445
+            ],
+            "body_height": 415,
+            "source_pose": 4,
+            "name": "2K / First-active snap",
+            "action_id": "2K",
+            "action_frame": 6,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/kicks.png",
+            "sha256": "0897893df419b251b7aa0b956b889495eb9403fcc7ed7336a60cd65d769ba690",
+            "generation_file": "exec-619d0954-19e5-4f63-8729-d4131b421625.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              41,
+              146,
+              490,
+              445
+            ],
+            "pivot": [
+              278,
+              445
+            ],
+            "body_height": 415,
+            "source_pose": 4,
+            "name": "2K / Brake \u00b7 no lingering strike effect",
+            "action_id": "2K",
+            "action_frame": 9,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/kicks.png",
+            "sha256": "0897893df419b251b7aa0b956b889495eb9403fcc7ed7336a60cd65d769ba690",
+            "generation_file": "exec-619d0954-19e5-4f63-8729-d4131b421625.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              138,
+              406,
+              445
+            ],
+            "pivot": [
+              278,
+              445
+            ],
+            "body_height": 415,
+            "source_pose": 5,
+            "name": "2K / Withdraw",
+            "action_id": "2K",
+            "action_frame": 13,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5,
+            "name": "2K / Settle \u00b7 still recovering",
+            "action_id": "2K",
+            "action_frame": 20,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "c.S / Entry",
+            "action_id": "c.S",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/slashes.png",
+            "sha256": "3ecbe804049a45e78d651a4c87e56e2d00d18f3739bc4af2aa16e4ea81a9441f",
+            "generation_file": "exec-ca577bd6-dde1-4f53-8065-961e4b586fb0.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              109,
+              393,
+              463
+            ],
+            "pivot": [
+              225,
+              463
+            ],
+            "body_height": 365,
+            "source_pose": 0,
+            "name": "c.S / Loaded \u00b7 hold through final startup",
+            "action_id": "c.S",
+            "action_frame": 2,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/slashes.png",
+            "sha256": "3ecbe804049a45e78d651a4c87e56e2d00d18f3739bc4af2aa16e4ea81a9441f",
+            "generation_file": "exec-ca577bd6-dde1-4f53-8065-961e4b586fb0.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              33,
+              109,
+              475,
+              464
+            ],
+            "pivot": [
+              180,
+              464
+            ],
+            "body_height": 365,
+            "source_pose": 1,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 0,
+              "box": [
+                35,
+                50.0,
+                112.0,
+                144.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
+            "name": "c.S / First-active snap",
+            "action_id": "c.S",
+            "action_frame": 8,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/slashes.png",
+            "sha256": "3ecbe804049a45e78d651a4c87e56e2d00d18f3739bc4af2aa16e4ea81a9441f",
+            "generation_file": "exec-ca577bd6-dde1-4f53-8065-961e4b586fb0.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              33,
+              109,
+              475,
+              464
+            ],
+            "pivot": [
+              180,
+              464
+            ],
+            "body_height": 365,
+            "source_pose": 1,
+            "name": "c.S / Brake \u00b7 no lingering strike effect",
+            "action_id": "c.S",
+            "action_frame": 12,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/slashes.png",
+            "sha256": "3ecbe804049a45e78d651a4c87e56e2d00d18f3739bc4af2aa16e4ea81a9441f",
+            "generation_file": "exec-ca577bd6-dde1-4f53-8065-961e4b586fb0.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              45,
+              112,
+              439,
+              463
+            ],
+            "pivot": [
+              200,
+              463
+            ],
+            "body_height": 365,
+            "source_pose": 2,
+            "name": "c.S / Withdraw",
+            "action_id": "c.S",
+            "action_frame": 17,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "c.S / Settle \u00b7 still recovering",
+            "action_id": "c.S",
+            "action_frame": 24,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "5S / Entry",
+            "action_id": "5S",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/slashes.png",
+            "sha256": "3ecbe804049a45e78d651a4c87e56e2d00d18f3739bc4af2aa16e4ea81a9441f",
+            "generation_file": "exec-ca577bd6-dde1-4f53-8065-961e4b586fb0.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              33,
+              148,
+              371,
+              435
+            ],
+            "pivot": [
+              225,
+              435
+            ],
+            "body_height": 365,
+            "source_pose": 3,
+            "name": "5S / Loaded \u00b7 hold through final startup",
+            "action_id": "5S",
+            "action_frame": 3,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/slashes.png",
+            "sha256": "3ecbe804049a45e78d651a4c87e56e2d00d18f3739bc4af2aa16e4ea81a9441f",
+            "generation_file": "exec-ca577bd6-dde1-4f53-8065-961e4b586fb0.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              161,
+              508,
+              435
+            ],
+            "pivot": [
+              170,
+              435
+            ],
+            "body_height": 365,
+            "source_pose": 4,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 0,
+              "box": [
+                35,
+                65.0,
+                240.0,
+                113.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
+            "name": "5S / First-active snap",
+            "action_id": "5S",
+            "action_frame": 12,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/slashes.png",
+            "sha256": "3ecbe804049a45e78d651a4c87e56e2d00d18f3739bc4af2aa16e4ea81a9441f",
+            "generation_file": "exec-ca577bd6-dde1-4f53-8065-961e4b586fb0.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              161,
+              508,
+              435
+            ],
+            "pivot": [
+              170,
+              435
+            ],
+            "body_height": 365,
+            "source_pose": 4,
+            "name": "5S / Brake \u00b7 no lingering strike effect",
+            "action_id": "5S",
+            "action_frame": 16,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/slashes.png",
+            "sha256": "3ecbe804049a45e78d651a4c87e56e2d00d18f3739bc4af2aa16e4ea81a9441f",
+            "generation_file": "exec-ca577bd6-dde1-4f53-8065-961e4b586fb0.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              44,
+              144,
+              464,
+              435
+            ],
+            "pivot": [
+              200,
+              435
+            ],
+            "body_height": 365,
+            "source_pose": 5,
+            "name": "5S / Withdraw",
+            "action_id": "5S",
+            "action_frame": 23,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "5S / Settle \u00b7 still recovering",
+            "action_id": "5S",
+            "action_frame": 34,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "5Hs / Entry",
+            "action_id": "5Hs",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/heavy_sweep.png",
+            "sha256": "b701243b082eafd1710d7bdf25120bb573d1e5e8d8e2e171e49b11018757c49b",
+            "generation_file": "exec-a9fc5467-f081-4e50-8150-1372044ca267.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              33,
+              126,
+              422,
+              485
+            ],
+            "pivot": [
+              245,
+              485
+            ],
+            "body_height": 365,
+            "source_pose": 0,
+            "name": "5Hs / Loaded \u00b7 hold through final startup",
+            "action_id": "5Hs",
+            "action_frame": 4,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/heavy_sweep.png",
+            "sha256": "b701243b082eafd1710d7bdf25120bb573d1e5e8d8e2e171e49b11018757c49b",
+            "generation_file": "exec-a9fc5467-f081-4e50-8150-1372044ca267.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              18,
+              122,
+              508,
+              485
+            ],
+            "pivot": [
+              165,
+              485
+            ],
+            "body_height": 365,
+            "source_pose": 1,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 0,
+              "box": [
+                35,
+                54.0,
+                215.0,
+                134.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
+            "name": "5Hs / First-active snap",
+            "action_id": "5Hs",
+            "action_frame": 15,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/heavy_sweep.png",
+            "sha256": "b701243b082eafd1710d7bdf25120bb573d1e5e8d8e2e171e49b11018757c49b",
+            "generation_file": "exec-a9fc5467-f081-4e50-8150-1372044ca267.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              18,
+              122,
+              508,
+              485
+            ],
+            "pivot": [
+              165,
+              485
+            ],
+            "body_height": 365,
+            "source_pose": 1,
+            "name": "5Hs / Brake \u00b7 no lingering strike effect",
+            "action_id": "5Hs",
+            "action_frame": 19,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/heavy_sweep.png",
+            "sha256": "b701243b082eafd1710d7bdf25120bb573d1e5e8d8e2e171e49b11018757c49b",
+            "generation_file": "exec-a9fc5467-f081-4e50-8150-1372044ca267.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              131,
+              461,
+              485
+            ],
+            "pivot": [
+              190,
+              485
+            ],
+            "body_height": 365,
+            "source_pose": 2,
+            "name": "5Hs / Withdraw",
+            "action_id": "5Hs",
+            "action_frame": 28,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "5Hs / Settle \u00b7 still recovering",
+            "action_id": "5Hs",
+            "action_frame": 40,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5,
+            "name": "2S / Entry",
+            "action_id": "2S",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/heavy_sweep.png",
+            "sha256": "b701243b082eafd1710d7bdf25120bb573d1e5e8d8e2e171e49b11018757c49b",
+            "generation_file": "exec-a9fc5467-f081-4e50-8150-1372044ca267.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              507,
+              512
+            ],
+            "bounds": [
+              29,
+              160,
+              425,
+              447
+            ],
+            "pivot": [
+              260,
+              447
+            ],
+            "body_height": 365,
+            "source_pose": 3,
+            "name": "2S / Loaded \u00b7 hold through final startup",
+            "action_id": "2S",
+            "action_frame": 3,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/heavy_sweep.png",
+            "sha256": "b701243b082eafd1710d7bdf25120bb573d1e5e8d8e2e171e49b11018757c49b",
+            "generation_file": "exec-a9fc5467-f081-4e50-8150-1372044ca267.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              507,
+              512,
+              517,
+              512
+            ],
+            "bounds": [
+              0,
+              190,
+              510,
+              458
+            ],
+            "pivot": [
+              170,
+              445
+            ],
+            "body_height": 365,
+            "source_pose": 4,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 0,
+              "box": [
+                35,
+                2.0,
+                178.0,
+                32.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
+            "name": "2S / First-active snap",
+            "action_id": "2S",
+            "action_frame": 10,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/heavy_sweep.png",
+            "sha256": "b701243b082eafd1710d7bdf25120bb573d1e5e8d8e2e171e49b11018757c49b",
+            "generation_file": "exec-a9fc5467-f081-4e50-8150-1372044ca267.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              507,
+              512,
+              517,
+              512
+            ],
+            "bounds": [
+              0,
+              190,
+              510,
+              458
+            ],
+            "pivot": [
+              170,
+              445
+            ],
+            "body_height": 365,
+            "source_pose": 4,
+            "name": "2S / Brake \u00b7 no lingering strike effect",
+            "action_id": "2S",
+            "action_frame": 14,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/heavy_sweep.png",
+            "sha256": "b701243b082eafd1710d7bdf25120bb573d1e5e8d8e2e171e49b11018757c49b",
+            "generation_file": "exec-a9fc5467-f081-4e50-8150-1372044ca267.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              31,
+              162,
+              467,
+              446
+            ],
+            "pivot": [
+              180,
+              446
+            ],
+            "body_height": 365,
+            "source_pose": 5,
+            "name": "2S / Withdraw",
+            "action_id": "2S",
+            "action_frame": 22,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5,
+            "name": "2S / Settle \u00b7 still recovering",
+            "action_id": "2S",
+            "action_frame": 34,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5,
+            "name": "2Hs / Entry",
+            "action_id": "2Hs",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/lift_brace.png",
+            "sha256": "f6f161c534ac6efbebda27a43fa9a53ce2f4aed6c37d9ca200c9504109964b06",
+            "generation_file": "exec-8c8d523e-ee77-485e-9422-cf2133b2c7f8.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              34,
+              199,
+              447,
+              498
+            ],
+            "pivot": [
+              260,
+              498
+            ],
+            "body_height": 385,
+            "source_pose": 0,
+            "name": "2Hs / Loaded \u00b7 hold through final startup",
+            "action_id": "2Hs",
+            "action_frame": 4,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/lift_brace.png",
+            "sha256": "f6f161c534ac6efbebda27a43fa9a53ce2f4aed6c37d9ca200c9504109964b06",
+            "generation_file": "exec-8c8d523e-ee77-485e-9422-cf2133b2c7f8.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              60,
+              18,
+              464,
+              498
+            ],
+            "pivot": [
+              200,
+              498
+            ],
+            "body_height": 385,
+            "source_pose": 1,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 1,
+              "box": [
+                35,
+                32.0,
+                132.0,
+                182.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
+            "name": "2Hs / First-active snap",
+            "action_id": "2Hs",
+            "action_frame": 14,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/lift_brace.png",
+            "sha256": "f6f161c534ac6efbebda27a43fa9a53ce2f4aed6c37d9ca200c9504109964b06",
+            "generation_file": "exec-8c8d523e-ee77-485e-9422-cf2133b2c7f8.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              60,
+              18,
+              464,
+              498
+            ],
+            "pivot": [
+              200,
+              498
+            ],
+            "body_height": 385,
+            "source_pose": 1,
+            "name": "2Hs / Brake \u00b7 no lingering strike effect",
+            "action_id": "2Hs",
+            "action_frame": 19,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/lift_brace.png",
+            "sha256": "f6f161c534ac6efbebda27a43fa9a53ce2f4aed6c37d9ca200c9504109964b06",
+            "generation_file": "exec-8c8d523e-ee77-485e-9422-cf2133b2c7f8.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              36,
+              143,
+              419,
+              498
+            ],
+            "pivot": [
+              180,
+              498
+            ],
+            "body_height": 385,
+            "source_pose": 2,
+            "name": "2Hs / Withdraw",
+            "action_id": "2Hs",
+            "action_frame": 28,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              123,
+              435,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5,
+            "name": "2Hs / Settle \u00b7 still recovering",
+            "action_id": "2Hs",
+            "action_frame": 40,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "6P / Entry",
+            "action_id": "6P",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/lift_brace.png",
+            "sha256": "f6f161c534ac6efbebda27a43fa9a53ce2f4aed6c37d9ca200c9504109964b06",
+            "generation_file": "exec-8c8d523e-ee77-485e-9422-cf2133b2c7f8.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              39,
+              188,
+              466,
+              497
+            ],
+            "pivot": [
+              270,
+              497
+            ],
+            "body_height": 385,
+            "source_pose": 3,
+            "name": "6P / Loaded \u00b7 hold through final startup",
+            "action_id": "6P",
+            "action_frame": 3,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/lift_brace.png",
+            "sha256": "f6f161c534ac6efbebda27a43fa9a53ce2f4aed6c37d9ca200c9504109964b06",
+            "generation_file": "exec-8c8d523e-ee77-485e-9422-cf2133b2c7f8.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              12,
+              178,
+              454,
+              497
+            ],
+            "pivot": [
+              200,
+              497
+            ],
+            "body_height": 385,
+            "source_pose": 4,
+            "name": "6P / First-active snap",
+            "action_id": "6P",
+            "action_frame": 10,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/lift_brace.png",
+            "sha256": "f6f161c534ac6efbebda27a43fa9a53ce2f4aed6c37d9ca200c9504109964b06",
+            "generation_file": "exec-8c8d523e-ee77-485e-9422-cf2133b2c7f8.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              12,
+              178,
+              454,
+              497
+            ],
+            "pivot": [
+              200,
+              497
+            ],
+            "body_height": 385,
+            "source_pose": 4,
+            "name": "6P / Brake \u00b7 no lingering strike effect",
+            "action_id": "6P",
+            "action_frame": 14,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/lift_brace.png",
+            "sha256": "f6f161c534ac6efbebda27a43fa9a53ce2f4aed6c37d9ca200c9504109964b06",
+            "generation_file": "exec-8c8d523e-ee77-485e-9422-cf2133b2c7f8.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              11,
+              200,
+              438,
+              497
+            ],
+            "pivot": [
+              170,
+              497
+            ],
+            "body_height": 385,
+            "source_pose": 5,
+            "name": "6P / Withdraw",
+            "action_id": "6P",
+            "action_frame": 21,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "6P / Settle \u00b7 still recovering",
+            "action_id": "6P",
+            "action_frame": 30,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "6Hs / Entry",
+            "action_id": "6Hs",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/slams.png",
+            "sha256": "f3daca8cc2a2f45c9109b5b9925601c53bc56029697ab7e694913a6d4113a9e3",
+            "generation_file": "exec-fc056c04-3c34-4f77-92b6-613a883174db.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              45,
+              11,
+              430,
+              481
+            ],
+            "pivot": [
+              220,
+              481
+            ],
+            "body_height": 395,
+            "source_pose": 0,
+            "name": "6Hs / Loaded \u00b7 hold through final startup",
+            "action_id": "6Hs",
+            "action_frame": 7,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/slams.png",
+            "sha256": "f3daca8cc2a2f45c9109b5b9925601c53bc56029697ab7e694913a6d4113a9e3",
+            "generation_file": "exec-fc056c04-3c34-4f77-92b6-613a883174db.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              31,
+              162,
+              506,
+              489
+            ],
+            "pivot": [
+              185,
+              489
+            ],
+            "body_height": 395,
+            "source_pose": 1,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 2,
+              "box": [
+                35,
+                8.0,
+                222.0,
+                180.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
+            "name": "6Hs / First-active snap",
+            "action_id": "6Hs",
+            "action_frame": 22,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/slams.png",
+            "sha256": "f3daca8cc2a2f45c9109b5b9925601c53bc56029697ab7e694913a6d4113a9e3",
+            "generation_file": "exec-fc056c04-3c34-4f77-92b6-613a883174db.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              31,
+              162,
+              506,
+              489
+            ],
+            "pivot": [
+              185,
+              489
+            ],
+            "body_height": 395,
+            "source_pose": 1,
+            "name": "6Hs / Brake \u00b7 no lingering strike effect",
+            "action_id": "6Hs",
+            "action_frame": 27,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/slams.png",
+            "sha256": "f3daca8cc2a2f45c9109b5b9925601c53bc56029697ab7e694913a6d4113a9e3",
+            "generation_file": "exec-fc056c04-3c34-4f77-92b6-613a883174db.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              44,
+              176,
+              472,
+              481
+            ],
+            "pivot": [
+              180,
+              481
+            ],
+            "body_height": 395,
+            "source_pose": 2,
+            "name": "6Hs / Withdraw",
+            "action_id": "6Hs",
+            "action_frame": 36,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "6Hs / Settle \u00b7 still recovering",
+            "action_id": "6Hs",
+            "action_frame": 50,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "236S / Entry",
+            "action_id": "236S",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/slams.png",
+            "sha256": "f3daca8cc2a2f45c9109b5b9925601c53bc56029697ab7e694913a6d4113a9e3",
+            "generation_file": "exec-fc056c04-3c34-4f77-92b6-613a883174db.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              510,
+              512
+            ],
+            "bounds": [
+              52,
+              4,
+              400,
+              479
+            ],
+            "pivot": [
+              225,
+              479
+            ],
+            "body_height": 395,
+            "source_pose": 3,
+            "name": "236S / Loaded \u00b7 hold through final startup",
+            "action_id": "236S",
+            "action_frame": 8,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/slams.png",
+            "sha256": "f3daca8cc2a2f45c9109b5b9925601c53bc56029697ab7e694913a6d4113a9e3",
+            "generation_file": "exec-fc056c04-3c34-4f77-92b6-613a883174db.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              510,
+              512,
+              514,
+              512
+            ],
+            "bounds": [
+              0,
+              127,
+              504,
+              479
+            ],
+            "pivot": [
+              177,
+              479
+            ],
+            "body_height": 395,
+            "source_pose": 4,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 2,
+              "box": [
+                35,
+                5.0,
+                155.0,
+                175.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
+            "name": "236S / First-active snap",
+            "action_id": "236S",
+            "action_frame": 26,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/slams.png",
+            "sha256": "f3daca8cc2a2f45c9109b5b9925601c53bc56029697ab7e694913a6d4113a9e3",
+            "generation_file": "exec-fc056c04-3c34-4f77-92b6-613a883174db.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              510,
+              512,
+              514,
+              512
+            ],
+            "bounds": [
+              0,
+              127,
+              504,
+              479
+            ],
+            "pivot": [
+              177,
+              479
+            ],
+            "body_height": 395,
+            "source_pose": 4,
+            "name": "236S / Brake \u00b7 no lingering strike effect",
+            "action_id": "236S",
+            "action_frame": 30,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/slams.png",
+            "sha256": "f3daca8cc2a2f45c9109b5b9925601c53bc56029697ab7e694913a6d4113a9e3",
+            "generation_file": "exec-fc056c04-3c34-4f77-92b6-613a883174db.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              120,
+              425,
+              479
+            ],
+            "pivot": [
+              175,
+              479
+            ],
+            "body_height": 395,
+            "source_pose": 5,
+            "name": "236S / Withdraw",
+            "action_id": "236S",
+            "action_frame": 40,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "236S / Settle \u00b7 still recovering",
+            "action_id": "236S",
+            "action_frame": 54,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "236P / Entry",
+            "action_id": "236P",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/specials.png",
+            "sha256": "5ce15b2a3260acc14f677d65878128a7c7078c3dea52d52c641c931d0cf9e527",
+            "generation_file": "exec-97fa7191-fa3b-4b20-834e-03fc5b4b2976.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              34,
+              119,
+              446,
+              467
+            ],
+            "pivot": [
+              240,
+              467
+            ],
+            "body_height": 385,
+            "source_pose": 0,
+            "name": "236P / Loaded \u00b7 hold through final startup",
+            "action_id": "236P",
+            "action_frame": 5,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/specials.png",
+            "sha256": "5ce15b2a3260acc14f677d65878128a7c7078c3dea52d52c641c931d0cf9e527",
+            "generation_file": "exec-97fa7191-fa3b-4b20-834e-03fc5b4b2976.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              34,
+              128,
+              507,
+              467
+            ],
+            "pivot": [
+              175,
+              467
+            ],
+            "body_height": 385,
+            "source_pose": 1,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 0,
+              "box": [
+                35,
+                48.0,
+                238.0,
+                118.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
+            "name": "236P / First-active snap",
+            "action_id": "236P",
+            "action_frame": 16,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/specials.png",
+            "sha256": "5ce15b2a3260acc14f677d65878128a7c7078c3dea52d52c641c931d0cf9e527",
+            "generation_file": "exec-97fa7191-fa3b-4b20-834e-03fc5b4b2976.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              34,
+              128,
+              507,
+              467
+            ],
+            "pivot": [
+              175,
+              467
+            ],
+            "body_height": 385,
+            "source_pose": 1,
+            "name": "236P / Brake \u00b7 no lingering strike effect",
+            "action_id": "236P",
+            "action_frame": 20,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/specials.png",
+            "sha256": "5ce15b2a3260acc14f677d65878128a7c7078c3dea52d52c641c931d0cf9e527",
+            "generation_file": "exec-97fa7191-fa3b-4b20-834e-03fc5b4b2976.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              50,
+              120,
+              433,
+              467
+            ],
+            "pivot": [
+              195,
+              467
+            ],
+            "body_height": 385,
+            "source_pose": 2,
+            "name": "236P / Withdraw",
+            "action_id": "236P",
+            "action_frame": 28,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "236P / Settle \u00b7 still recovering",
+            "action_id": "236P",
+            "action_frame": 40,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "623Hs / Entry",
+            "action_id": "623Hs",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/specials.png",
+            "sha256": "5ce15b2a3260acc14f677d65878128a7c7078c3dea52d52c641c931d0cf9e527",
+            "generation_file": "exec-97fa7191-fa3b-4b20-834e-03fc5b4b2976.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              36,
+              180,
+              443,
+              475
+            ],
+            "pivot": [
+              235,
+              475
+            ],
+            "body_height": 385,
+            "source_pose": 3,
+            "name": "623Hs / Loaded \u00b7 hold through final startup",
+            "action_id": "623Hs",
+            "action_frame": 4,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/specials.png",
+            "sha256": "5ce15b2a3260acc14f677d65878128a7c7078c3dea52d52c641c931d0cf9e527",
+            "generation_file": "exec-97fa7191-fa3b-4b20-834e-03fc5b4b2976.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              36,
+              25,
+              463,
+              475
+            ],
+            "pivot": [
+              210,
+              475
+            ],
+            "body_height": 385,
+            "source_pose": 4,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 1,
+              "box": [
+                35,
+                24.0,
+                122.0,
+                214.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
+            "name": "623Hs / First-active snap",
+            "action_id": "623Hs",
+            "action_frame": 13,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/specials.png",
+            "sha256": "5ce15b2a3260acc14f677d65878128a7c7078c3dea52d52c641c931d0cf9e527",
+            "generation_file": "exec-97fa7191-fa3b-4b20-834e-03fc5b4b2976.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              36,
+              25,
+              463,
+              475
+            ],
+            "pivot": [
+              210,
+              475
+            ],
+            "body_height": 385,
+            "source_pose": 4,
+            "name": "623Hs / Brake \u00b7 no lingering strike effect",
+            "action_id": "623Hs",
+            "action_frame": 18,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/specials.png",
+            "sha256": "5ce15b2a3260acc14f677d65878128a7c7078c3dea52d52c641c931d0cf9e527",
+            "generation_file": "exec-97fa7191-fa3b-4b20-834e-03fc5b4b2976.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              38,
+              107,
+              437,
+              475
+            ],
+            "pivot": [
+              205,
+              475
+            ],
+            "body_height": 385,
+            "source_pose": 5,
+            "name": "623Hs / Withdraw",
+            "action_id": "623Hs",
+            "action_frame": 28,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "623Hs / Settle \u00b7 still recovering",
+            "action_id": "623Hs",
+            "action_frame": 42,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              58,
+              427,
+              477
+            ],
+            "pivot": [
+              278,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.P / Entry",
+            "action_id": "j.P",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              58,
+              427,
+              477
+            ],
+            "pivot": [
+              278,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.P / Loaded \u00b7 hold through final startup",
+            "action_id": "j.P",
+            "action_frame": 2,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              520,
+              512
+            ],
+            "bounds": [
+              9,
+              67,
+              520,
+              480
+            ],
+            "pivot": [
+              245,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 1,
+            "name": "j.P / First-active snap",
+            "action_id": "j.P",
+            "action_frame": 6,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              520,
+              512
+            ],
+            "bounds": [
+              9,
+              67,
+              520,
+              480
+            ],
+            "pivot": [
+              245,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 1,
+            "name": "j.P / Brake \u00b7 no lingering strike effect",
+            "action_id": "j.P",
+            "action_frame": 9,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1032,
+              0,
+              504,
+              512
+            ],
+            "bounds": [
+              0,
+              67,
+              432,
+              479
+            ],
+            "pivot": [
+              257,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 2,
+            "name": "j.P / Withdraw",
+            "action_id": "j.P",
+            "action_frame": 11,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              58,
+              427,
+              477
+            ],
+            "pivot": [
+              278,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.P / Settle \u00b7 still recovering",
+            "action_id": "j.P",
+            "action_frame": 15,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              58,
+              427,
+              477
+            ],
+            "pivot": [
+              278,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.K / Entry",
+            "action_id": "j.K",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              30,
+              50,
+              417,
+              468
+            ],
+            "pivot": [
+              288,
+              470
+            ],
+            "body_height": 430,
+            "source_pose": 3,
+            "name": "j.K / Loaded \u00b7 hold through final startup",
+            "action_id": "j.K",
+            "action_frame": 2,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              522,
+              512
+            ],
+            "bounds": [
+              2,
+              51,
+              522,
+              464
+            ],
+            "pivot": [
+              256,
+              485
+            ],
+            "body_height": 430,
+            "source_pose": 4,
+            "name": "j.K / First-active snap",
+            "action_id": "j.K",
+            "action_frame": 8,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              522,
+              512
+            ],
+            "bounds": [
+              2,
+              51,
+              522,
+              464
+            ],
+            "pivot": [
+              256,
+              485
+            ],
+            "body_height": 430,
+            "source_pose": 4,
+            "name": "j.K / Brake \u00b7 no lingering strike effect",
+            "action_id": "j.K",
+            "action_frame": 12,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1034,
+              512,
+              502,
+              512
+            ],
+            "bounds": [
+              21,
+              56,
+              404,
+              466
+            ],
+            "pivot": [
+              268,
+              470
+            ],
+            "body_height": 430,
+            "source_pose": 5,
+            "name": "j.K / Withdraw",
+            "action_id": "j.K",
+            "action_frame": 16,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              58,
+              427,
+              477
+            ],
+            "pivot": [
+              278,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.K / Settle \u00b7 still recovering",
+            "action_id": "j.K",
+            "action_frame": 21,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              58,
+              427,
+              477
+            ],
+            "pivot": [
+              278,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.S / Entry",
+            "action_id": "j.S",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/air_swings.png",
+            "sha256": "66ac8b9bc948e306fe1b17a205ea765a9c92d0f3e1f391208d6ac4e621eef29f",
+            "generation_file": "exec-da97fad4-5cf6-4825-8067-b050b12b1a91.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              22,
+              22,
+              385,
+              482
+            ],
+            "pivot": [
+              304,
+              470
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.S / Loaded \u00b7 hold through final startup",
+            "action_id": "j.S",
+            "action_frame": 3,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/air_swings.png",
+            "sha256": "66ac8b9bc948e306fe1b17a205ea765a9c92d0f3e1f391208d6ac4e621eef29f",
+            "generation_file": "exec-da97fad4-5cf6-4825-8067-b050b12b1a91.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              19,
+              100,
+              493,
+              481
+            ],
+            "pivot": [
+              223,
+              470
+            ],
+            "body_height": 430,
+            "source_pose": 1,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 0,
+              "box": [
+                35,
+                -18.0,
+                172.0,
+                44.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
+            "name": "j.S / First-active snap",
+            "action_id": "j.S",
+            "action_frame": 10,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/air_swings.png",
+            "sha256": "66ac8b9bc948e306fe1b17a205ea765a9c92d0f3e1f391208d6ac4e621eef29f",
+            "generation_file": "exec-da97fad4-5cf6-4825-8067-b050b12b1a91.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              19,
+              100,
+              493,
+              481
+            ],
+            "pivot": [
+              223,
+              470
+            ],
+            "body_height": 430,
+            "source_pose": 1,
+            "name": "j.S / Brake \u00b7 no lingering strike effect",
+            "action_id": "j.S",
+            "action_frame": 15,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/air_swings.png",
+            "sha256": "66ac8b9bc948e306fe1b17a205ea765a9c92d0f3e1f391208d6ac4e621eef29f",
+            "generation_file": "exec-da97fad4-5cf6-4825-8067-b050b12b1a91.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              33,
+              76,
+              418,
+              481
+            ],
+            "pivot": [
+              230,
+              460
+            ],
+            "body_height": 430,
+            "source_pose": 2,
+            "name": "j.S / Withdraw",
+            "action_id": "j.S",
+            "action_frame": 21,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              58,
+              427,
+              477
+            ],
+            "pivot": [
+              278,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.S / Settle \u00b7 still recovering",
+            "action_id": "j.S",
+            "action_frame": 29,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              58,
+              427,
+              477
+            ],
+            "pivot": [
+              278,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.Hs / Entry",
+            "action_id": "j.Hs",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/air_swings.png",
+            "sha256": "66ac8b9bc948e306fe1b17a205ea765a9c92d0f3e1f391208d6ac4e621eef29f",
+            "generation_file": "exec-da97fad4-5cf6-4825-8067-b050b12b1a91.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              42,
+              11,
+              399,
+              414
+            ],
+            "pivot": [
+              233,
+              460
+            ],
+            "body_height": 430,
+            "source_pose": 3,
+            "name": "j.Hs / Loaded \u00b7 hold through final startup",
+            "action_id": "j.Hs",
+            "action_frame": 4,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/air_swings.png",
+            "sha256": "66ac8b9bc948e306fe1b17a205ea765a9c92d0f3e1f391208d6ac4e621eef29f",
+            "generation_file": "exec-da97fad4-5cf6-4825-8067-b050b12b1a91.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              20,
+              108,
+              449,
+              458
+            ],
+            "pivot": [
+              209,
+              480
+            ],
+            "body_height": 430,
+            "source_pose": 4,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 2,
+              "box": [
+                35,
+                -58.0,
+                120.0,
+                60.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
+            "name": "j.Hs / First-active snap",
+            "action_id": "j.Hs",
+            "action_frame": 13,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/air_swings.png",
+            "sha256": "66ac8b9bc948e306fe1b17a205ea765a9c92d0f3e1f391208d6ac4e621eef29f",
+            "generation_file": "exec-da97fad4-5cf6-4825-8067-b050b12b1a91.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              20,
+              108,
+              449,
+              458
+            ],
+            "pivot": [
+              209,
+              480
+            ],
+            "body_height": 430,
+            "source_pose": 4,
+            "name": "j.Hs / Brake \u00b7 no lingering strike effect",
+            "action_id": "j.Hs",
+            "action_frame": 19,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/air_swings.png",
+            "sha256": "66ac8b9bc948e306fe1b17a205ea765a9c92d0f3e1f391208d6ac4e621eef29f",
+            "generation_file": "exec-da97fad4-5cf6-4825-8067-b050b12b1a91.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              25,
+              92,
+              418,
+              424
+            ],
+            "pivot": [
+              208,
+              475
+            ],
+            "body_height": 430,
+            "source_pose": 5,
+            "name": "j.Hs / Withdraw",
+            "action_id": "j.Hs",
+            "action_frame": 26,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              58,
+              427,
+              477
+            ],
+            "pivot": [
+              278,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.Hs / Settle \u00b7 still recovering",
+            "action_id": "j.Hs",
+            "action_frame": 36,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              25,
+              112,
+              472,
+              475
+            ],
+            "pivot": [
+              212,
+              475
+            ],
+            "body_height": 395,
+            "source_pose": 0,
+            "name": "4P+K / Loaded \u00b7 hold through final startup",
+            "action_id": "4P+K",
+            "action_frame": 1,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              23,
+              109,
+              448,
+              473
+            ],
+            "pivot": [
+              175,
+              473
+            ],
+            "body_height": 395,
+            "source_pose": 1,
+            "name": "4P+K / First-active snap",
+            "action_id": "4P+K",
+            "action_frame": 2,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              23,
+              109,
+              448,
+              473
+            ],
+            "pivot": [
+              175,
+              473
+            ],
+            "body_height": 395,
+            "source_pose": 1,
+            "name": "4P+K / Brake \u00b7 no lingering strike effect",
+            "action_id": "4P+K",
+            "action_frame": 4,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              4,
+              112,
+              437,
+              475
+            ],
+            "pivot": [
+              200,
+              475
+            ],
+            "body_height": 395,
+            "source_pose": 2,
+            "name": "4P+K / Withdraw",
+            "action_id": "4P+K",
+            "action_frame": 13,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "4P+K / Settle \u00b7 still recovering",
+            "action_id": "4P+K",
+            "action_frame": 25,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              25,
+              112,
+              472,
+              475
+            ],
+            "pivot": [
+              212,
+              475
+            ],
+            "body_height": 395,
+            "source_pose": 0,
+            "name": "4P+K / Collar latch",
+            "action_id": "4P+K",
+            "action_frame": 0,
+            "motion_cue": "Collar latch"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              23,
+              109,
+              448,
+              473
+            ],
+            "pivot": [
+              175,
+              473
+            ],
+            "body_height": 395,
+            "source_pose": 1,
+            "name": "4P+K / Shoulder / hip turn",
+            "action_id": "4P+K",
+            "action_frame": 3,
+            "motion_cue": "Shoulder / hip turn"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              25,
+              112,
+              472,
+              475
+            ],
+            "pivot": [
+              212,
+              475
+            ],
+            "body_height": 395,
+            "source_pose": 0,
+            "name": "6P+K / Loaded \u00b7 hold through final startup",
+            "action_id": "6P+K",
+            "action_frame": 1,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              23,
+              109,
+              448,
+              473
+            ],
+            "pivot": [
+              175,
+              473
+            ],
+            "body_height": 395,
+            "source_pose": 1,
+            "name": "6P+K / First-active snap",
+            "action_id": "6P+K",
+            "action_frame": 2,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              23,
+              109,
+              448,
+              473
+            ],
+            "pivot": [
+              175,
+              473
+            ],
+            "body_height": 395,
+            "source_pose": 1,
+            "name": "6P+K / Brake \u00b7 no lingering strike effect",
+            "action_id": "6P+K",
+            "action_frame": 4,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              4,
+              112,
+              437,
+              475
+            ],
+            "pivot": [
+              200,
+              475
+            ],
+            "body_height": 395,
+            "source_pose": 2,
+            "name": "6P+K / Withdraw",
+            "action_id": "6P+K",
+            "action_frame": 13,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "6P+K / Settle \u00b7 still recovering",
+            "action_id": "6P+K",
+            "action_frame": 25,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              25,
+              112,
+              472,
+              475
+            ],
+            "pivot": [
+              212,
+              475
+            ],
+            "body_height": 395,
+            "source_pose": 0,
+            "name": "6P+K / Collar latch",
+            "action_id": "6P+K",
+            "action_frame": 0,
+            "motion_cue": "Collar latch"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              23,
+              109,
+              448,
+              473
+            ],
+            "pivot": [
+              175,
+              473
+            ],
+            "body_height": 395,
+            "source_pose": 1,
+            "name": "6P+K / Shoulder / hip turn",
+            "action_id": "6P+K",
+            "action_frame": 3,
+            "motion_cue": "Shoulder / hip turn"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              19,
+              44,
+              464,
+              434
+            ],
+            "pivot": [
+              249,
+              420
+            ],
+            "body_height": 395,
+            "source_pose": 3,
+            "name": "j.4P+K / Loaded \u00b7 hold through final startup",
+            "action_id": "j.4P+K",
+            "action_frame": 1,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              9,
+              62,
+              495,
+              445
+            ],
+            "pivot": [
+              293,
+              450
+            ],
+            "body_height": 395,
+            "source_pose": 4,
+            "name": "j.4P+K / First-active snap",
+            "action_id": "j.4P+K",
+            "action_frame": 2,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              9,
+              62,
+              495,
+              445
+            ],
+            "pivot": [
+              293,
+              450
+            ],
+            "body_height": 395,
+            "source_pose": 4,
+            "name": "j.4P+K / Brake \u00b7 no lingering strike effect",
+            "action_id": "j.4P+K",
+            "action_frame": 4,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              13,
+              70,
+              385,
+              433
+            ],
+            "pivot": [
+              224,
+              435
+            ],
+            "body_height": 395,
+            "source_pose": 5,
+            "name": "j.4P+K / Withdraw",
+            "action_id": "j.4P+K",
+            "action_frame": 12,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              58,
+              427,
+              477
+            ],
+            "pivot": [
+              278,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.4P+K / Settle \u00b7 still recovering",
+            "action_id": "j.4P+K",
+            "action_frame": 24,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              19,
+              44,
+              464,
+              434
+            ],
+            "pivot": [
+              249,
+              420
+            ],
+            "body_height": 395,
+            "source_pose": 3,
+            "name": "j.4P+K / Collar latch",
+            "action_id": "j.4P+K",
+            "action_frame": 0,
+            "motion_cue": "Collar latch"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              9,
+              62,
+              495,
+              445
+            ],
+            "pivot": [
+              293,
+              450
+            ],
+            "body_height": 395,
+            "source_pose": 4,
+            "name": "j.4P+K / Shoulder / hip turn",
+            "action_id": "j.4P+K",
+            "action_frame": 3,
+            "motion_cue": "Shoulder / hip turn"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              19,
+              44,
+              464,
+              434
+            ],
+            "pivot": [
+              249,
+              420
+            ],
+            "body_height": 395,
+            "source_pose": 3,
+            "name": "j.6P+K / Loaded \u00b7 hold through final startup",
+            "action_id": "j.6P+K",
+            "action_frame": 1,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              9,
+              62,
+              495,
+              445
+            ],
+            "pivot": [
+              293,
+              450
+            ],
+            "body_height": 395,
+            "source_pose": 4,
+            "name": "j.6P+K / First-active snap",
+            "action_id": "j.6P+K",
+            "action_frame": 2,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              9,
+              62,
+              495,
+              445
+            ],
+            "pivot": [
+              293,
+              450
+            ],
+            "body_height": 395,
+            "source_pose": 4,
+            "name": "j.6P+K / Brake \u00b7 no lingering strike effect",
+            "action_id": "j.6P+K",
+            "action_frame": 4,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              13,
+              70,
+              385,
+              433
+            ],
+            "pivot": [
+              224,
+              435
+            ],
+            "body_height": 395,
+            "source_pose": 5,
+            "name": "j.6P+K / Withdraw",
+            "action_id": "j.6P+K",
+            "action_frame": 12,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/air_checks.png",
+            "sha256": "75503c278e791ac84fe30004060edbb3f87458a8db47a6977876ae8ca960dfe5",
+            "generation_file": "exec-a43e7708-955a-4edf-8b18-03dc125d25d4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              15,
+              58,
+              427,
+              477
+            ],
+            "pivot": [
+              278,
+              440
+            ],
+            "body_height": 430,
+            "source_pose": 0,
+            "name": "j.6P+K / Settle \u00b7 still recovering",
+            "action_id": "j.6P+K",
+            "action_frame": 24,
+            "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              19,
+              44,
+              464,
+              434
+            ],
+            "pivot": [
+              249,
+              420
+            ],
+            "body_height": 395,
+            "source_pose": 3,
+            "name": "j.6P+K / Collar latch",
+            "action_id": "j.6P+K",
+            "action_frame": 0,
+            "motion_cue": "Collar latch"
+          },
+          {
+            "file": "hammer-kit-v1/throws.png",
+            "sha256": "897079fdce20e8b44ddb4598ec7fb73e433d69949c24b57af4664000ca2a3de8",
+            "generation_file": "exec-7b6937f4-5d55-4413-8e80-723abdcf3075.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              9,
+              62,
+              495,
+              445
+            ],
+            "pivot": [
+              293,
+              450
+            ],
+            "body_height": 395,
+            "source_pose": 4,
+            "name": "j.6P+K / Shoulder / hip turn",
+            "action_id": "j.6P+K",
+            "action_frame": 3,
+            "motion_cue": "Shoulder / hip turn"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "5D / Entry",
+            "action_id": "5D",
+            "action_frame": 1,
+            "motion_cue": "Entry"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              42,
+              128,
+              409,
+              479
+            ],
+            "pivot": [
+              235,
+              479
+            ],
+            "body_height": 425,
+            "source_pose": 0,
+            "name": "5D / Loaded \u00b7 hold through final startup",
+            "action_id": "5D",
+            "action_frame": 2,
+            "motion_cue": "Loaded \u00b7 hold through final startup"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              14,
+              119,
+              512,
+              478
+            ],
+            "pivot": [
+              192,
+              478
+            ],
+            "body_height": 425,
+            "source_pose": 1,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 3,
+              "box": [
+                -100,
+                0,
+                10,
+                22
+              ],
+              "opacity": 0.65,
+              "behind": true
+            },
+            "name": "5D / First-active snap",
+            "action_id": "5D",
+            "action_frame": 5,
+            "motion_cue": "First-active snap"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              14,
+              119,
+              512,
+              478
+            ],
+            "pivot": [
+              192,
+              478
+            ],
+            "body_height": 425,
+            "source_pose": 1,
+            "name": "5D / Brake \u00b7 no lingering strike effect",
+            "action_id": "5D",
+            "action_frame": 17,
+            "motion_cue": "Brake \u00b7 no lingering strike effect"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              69,
+              116,
+              485,
+              478
+            ],
+            "pivot": [
+              215,
+              478
+            ],
+            "body_height": 425,
+            "source_pose": 2,
+            "name": "5D / Withdraw",
+            "action_id": "5D",
+            "action_frame": 19,
+            "motion_cue": "Withdraw"
+          },
+          {
+            "file": "hammer-kit-v1/drive_ready.png",
+            "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363",
+            "generation_file": "exec-b321a4cb-d58a-48dd-b6b6-e136a94dea02.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              32,
+              55,
+              454,
+              474
+            ],
+            "pivot": [
+              235,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "name": "5D / Settle \u00b7 still recovering",
+            "action_id": "5D",
+            "action_frame": 21,
+            "motion_cue": "Settle \u00b7 still recovering"
+          }
+        ]
+      },
+      "attack_animations": {
+        "0": {
+          "artPose": 0,
+          "moveId": "5P",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 0
+            },
+            {
+              "start": 25,
+              "phase": "attack_animation",
+              "pose": 1
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 2
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 3
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 4
+            },
+            {
+              "start": 77,
+              "phase": "attack_animation",
+              "pose": 5
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              5,
+              3,
+              9
+            ],
+            "largestMotionBoundary": [
+              4,
+              5
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "4": {
+          "artPose": 0,
+          "moveId": "2P",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 6
+            },
+            {
+              "start": 25,
+              "phase": "attack_animation",
+              "pose": 7
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 8
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 9
+            },
+            {
+              "start": 30,
+              "phase": "attack_animation",
+              "pose": 10
+            },
+            {
+              "start": 80,
+              "phase": "attack_animation",
+              "pose": 11
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              5,
+              3,
+              10
+            ],
+            "largestMotionBoundary": [
+              4,
+              5
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "1": {
+          "artPose": 0,
+          "moveId": "5K",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 12
+            },
+            {
+              "start": 16,
+              "phase": "attack_animation",
+              "pose": 13
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 14
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 15
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 16
+            },
+            {
+              "start": 80,
+              "phase": "attack_animation",
+              "pose": 17
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              7,
+              3,
+              15
+            ],
+            "largestMotionBoundary": [
+              6,
+              7
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "5": {
+          "artPose": 0,
+          "moveId": "2K",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 18
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 19
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 20
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 21
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 22
+            },
+            {
+              "start": 78,
+              "phase": "attack_animation",
+              "pose": 23
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              6,
+              3,
+              14
+            ],
+            "largestMotionBoundary": [
+              5,
+              6
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "32": {
+          "artPose": 0,
+          "moveId": "c.S",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 24
+            },
+            {
+              "start": 14,
+              "phase": "attack_animation",
+              "pose": 25
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 26
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 27
+            },
+            {
+              "start": 31,
+              "phase": "attack_animation",
+              "pose": 28
+            },
+            {
+              "start": 75,
+              "phase": "attack_animation",
+              "pose": 29
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              8,
+              4,
+              16
+            ],
+            "largestMotionBoundary": [
+              7,
+              8
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "2": {
+          "artPose": 0,
+          "moveId": "5S",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 30
+            },
+            {
+              "start": 18,
+              "phase": "attack_animation",
+              "pose": 31
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 32
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 33
+            },
+            {
+              "start": 30,
+              "phase": "attack_animation",
+              "pose": 34
+            },
+            {
+              "start": 78,
+              "phase": "attack_animation",
+              "pose": 35
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              12,
+              4,
+              23
+            ],
+            "largestMotionBoundary": [
+              11,
+              12
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "3": {
+          "artPose": 0,
+          "moveId": "5Hs",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 36
+            },
+            {
+              "start": 21,
+              "phase": "attack_animation",
+              "pose": 37
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 38
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 39
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 40
+            },
+            {
+              "start": 77,
+              "phase": "attack_animation",
+              "pose": 41
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              15,
+              4,
+              27
+            ],
+            "largestMotionBoundary": [
+              14,
+              15
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "6": {
+          "artPose": 0,
+          "moveId": "2S",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 42
+            },
+            {
+              "start": 22,
+              "phase": "attack_animation",
+              "pose": 43
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 44
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 45
+            },
+            {
+              "start": 30,
+              "phase": "attack_animation",
+              "pose": 46
+            },
+            {
+              "start": 76,
+              "phase": "attack_animation",
+              "pose": 47
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              10,
+              4,
+              26
+            ],
+            "largestMotionBoundary": [
+              9,
+              10
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "7": {
+          "artPose": 0,
+          "moveId": "2Hs",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 48
+            },
+            {
+              "start": 23,
+              "phase": "attack_animation",
+              "pose": 49
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 50
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 51
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 52
+            },
+            {
+              "start": 77,
+              "phase": "attack_animation",
+              "pose": 53
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              14,
+              5,
+              27
+            ],
+            "largestMotionBoundary": [
+              13,
+              14
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "8": {
+          "artPose": 0,
+          "moveId": "6P",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 54
+            },
+            {
+              "start": 22,
+              "phase": "attack_animation",
+              "pose": 55
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 56
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 57
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 58
+            },
+            {
+              "start": 76,
+              "phase": "attack_animation",
+              "pose": 59
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              10,
+              4,
+              21
+            ],
+            "largestMotionBoundary": [
+              9,
+              10
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "11": {
+          "artPose": 0,
+          "moveId": "6Hs",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 60
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 61
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 62
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 63
+            },
+            {
+              "start": 31,
+              "phase": "attack_animation",
+              "pose": 64
+            },
+            {
+              "start": 79,
+              "phase": "attack_animation",
+              "pose": 65
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              22,
+              5,
+              29
+            ],
+            "largestMotionBoundary": [
+              21,
+              22
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "15": {
+          "artPose": 0,
+          "moveId": "236S",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 66
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 67
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 68
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 69
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 70
+            },
+            {
+              "start": 80,
+              "phase": "attack_animation",
+              "pose": 71
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              26,
+              4,
+              30
+            ],
+            "largestMotionBoundary": [
+              25,
+              26
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "14": {
+          "artPose": 0,
+          "moveId": "236P",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 72
+            },
+            {
+              "start": 26,
+              "phase": "attack_animation",
+              "pose": 73
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 74
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 75
+            },
+            {
+              "start": 32,
+              "phase": "attack_animation",
+              "pose": 76
+            },
+            {
+              "start": 80,
+              "phase": "attack_animation",
+              "pose": 77
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              16,
+              4,
+              25
+            ],
+            "largestMotionBoundary": [
+              15,
+              16
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "16": {
+          "artPose": 0,
+          "moveId": "623Hs",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 78
+            },
+            {
+              "start": 25,
+              "phase": "attack_animation",
+              "pose": 79
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 80
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 81
+            },
+            {
+              "start": 32,
+              "phase": "attack_animation",
+              "pose": 82
+            },
+            {
+              "start": 77,
+              "phase": "attack_animation",
+              "pose": 83
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              13,
+              5,
+              31
+            ],
+            "largestMotionBoundary": [
+              12,
+              13
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "17": {
+          "artPose": 0,
+          "moveId": "j.P",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 84
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 85
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 86
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 87
+            },
+            {
+              "start": 25,
+              "phase": "attack_animation",
+              "pose": 88
+            },
+            {
+              "start": 75,
+              "phase": "attack_animation",
+              "pose": 89
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              6,
+              3,
+              8
+            ],
+            "largestMotionBoundary": [
+              5,
+              6
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "18": {
+          "artPose": 0,
+          "moveId": "j.K",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 90
+            },
+            {
+              "start": 14,
+              "phase": "attack_animation",
+              "pose": 91
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 92
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 93
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 94
+            },
+            {
+              "start": 75,
+              "phase": "attack_animation",
+              "pose": 95
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              8,
+              4,
+              12
+            ],
+            "largestMotionBoundary": [
+              7,
+              8
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "19": {
+          "artPose": 0,
+          "moveId": "j.S",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 96
+            },
+            {
+              "start": 22,
+              "phase": "attack_animation",
+              "pose": 97
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 98
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 99
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 100
+            },
+            {
+              "start": 77,
+              "phase": "attack_animation",
+              "pose": 101
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              10,
+              5,
+              18
+            ],
+            "largestMotionBoundary": [
+              9,
+              10
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "20": {
+          "artPose": 0,
+          "moveId": "j.Hs",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 102
+            },
+            {
+              "start": 25,
+              "phase": "attack_animation",
+              "pose": 103
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 104
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 105
+            },
+            {
+              "start": 31,
+              "phase": "attack_animation",
+              "pose": 106
+            },
+            {
+              "start": 77,
+              "phase": "attack_animation",
+              "pose": 107
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              13,
+              6,
+              22
+            ],
+            "largestMotionBoundary": [
+              12,
+              13
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "23": {
+          "artPose": 0,
+          "moveId": "4P+K",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 108
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 109
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 110
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 111
+            },
+            {
+              "start": 77,
+              "phase": "attack_animation",
+              "pose": 112
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              2,
+              2,
+              27
+            ],
+            "largestMotionBoundary": [
+              1,
+              2
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "24": {
+          "artPose": 0,
+          "moveId": "6P+K",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 115
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 116
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 117
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 118
+            },
+            {
+              "start": 77,
+              "phase": "attack_animation",
+              "pose": 119
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              2,
+              2,
+              27
+            ],
+            "largestMotionBoundary": [
+              1,
+              2
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "41": {
+          "artPose": 0,
+          "moveId": "j.4P+K",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 122
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 123
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 124
+            },
+            {
+              "start": 32,
+              "phase": "attack_animation",
+              "pose": 125
+            },
+            {
+              "start": 80,
+              "phase": "attack_animation",
+              "pose": 126
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              2,
+              2,
+              25
+            ],
+            "largestMotionBoundary": [
+              1,
+              2
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "42": {
+          "artPose": 0,
+          "moveId": "j.6P+K",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 129
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 130
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 131
+            },
+            {
+              "start": 32,
+              "phase": "attack_animation",
+              "pose": 132
+            },
+            {
+              "start": 80,
+              "phase": "attack_animation",
+              "pose": 133
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              2,
+              2,
+              25
+            ],
+            "largestMotionBoundary": [
+              1,
+              2
+            ],
+            "source": "hammer-kit-v1"
+          }
+        },
+        "13": {
+          "artPose": 0,
+          "moveId": "5D",
+          "windup": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 136
+            },
+            {
+              "start": 25,
+              "phase": "attack_animation",
+              "pose": 137
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 138
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 139
+            },
+            {
+              "start": 33,
+              "phase": "attack_animation",
+              "pose": 140
+            },
+            {
+              "start": 66,
+              "phase": "attack_animation",
+              "pose": 141
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / weighted withdrawal",
+            "authoredTiming": [
+              5,
+              12,
+              6
+            ],
+            "largestMotionBoundary": [
+              4,
+              5
+            ],
+            "source": "hammer-kit-v1"
+          }
+        }
+      },
+      "paired_animations": {
+        "23": {
+          "moveId": "4P+K",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 113
+            },
+            {
+              "tick": 3,
+              "phase": "attack_animation",
+              "pose": 114
+            }
+          ]
+        },
+        "24": {
+          "moveId": "6P+K",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 120
+            },
+            {
+              "tick": 3,
+              "phase": "attack_animation",
+              "pose": 121
+            }
+          ]
+        },
+        "41": {
+          "moveId": "j.4P+K",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 127
+            },
+            {
+              "tick": 3,
+              "phase": "attack_animation",
+              "pose": 128
+            }
+          ]
+        },
+        "42": {
+          "moveId": "j.6P+K",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 134
+            },
+            {
+              "tick": 3,
+              "phase": "attack_animation",
+              "pose": 135
+            }
+          ]
+        }
       }
     },
     {

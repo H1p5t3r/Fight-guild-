@@ -1,3 +1,4 @@
+import {upgradeStepDrive} from '../step-drive.mjs';
 import {upgradeComboPhysics} from '../combo-rules.mjs';
 import {upgradeLineDrive,upgradePullDrive} from '../line-drive.mjs';
 import {packExtension,upgradeExtensions,extensionBody,migrationDefaults} from '../extensions.mjs';
@@ -23,9 +24,9 @@ export function validate(data, pack) {
   const migration=data?.schema<23?migrationDefaults(pack.defaults):pack.defaults;
   data=upgradeStances(upgradeMechanics(upgradeHurtMasks(upgradeMovement(upgradeHitboxes(data),migration)),migration),migration);
   data=upgradeAirDash(upgradeStartupRules(upgradeCharges(data,migration)),migration);
-  data=upgradeComboPhysics(upgradePullDrive(upgradeLineDrive(upgradeExtensions(data,pack.defaults))));
+  data=upgradeStepDrive(upgradeComboPhysics(upgradePullDrive(upgradeLineDrive(upgradeExtensions(data,pack.defaults)))));
   if(!record(data)||data.schema!==pack.defaults.schema||data.coreVersion!==pack.defaults.coreVersion)
-    throw new Error('This editor accepts current Fight Guild moves and workshop exports from versions 12–26. Your open draft has not changed.');
+    throw new Error('This editor accepts current Fight Guild moves and workshop exports from versions 12–27. Your open draft has not changed.');
   if(!Array.isArray(data.characters)||data.characters.length!==CHARACTERS.length) throw new Error('The file must contain all six fighters.');
   for(const [group,limits] of Object.entries(pack.limits.rules)) {
     if(!record(data[group])) throw new Error(`Missing ${group}.`);
@@ -242,6 +243,7 @@ export class Workshop {
 // Same local strike geometry as Simulation::attack_box, in integer core units.
 // Preview origin/pose can differ from a live match; the authored rectangle does not.
 export function attackBoxes(m,frame,push) {
+  if(m.mechanic===4||m.mechanic===5)return [];
   if(m.category===4)return [[0,0,push.halfWidth+m.throwRange,push.standingHeight]];
   const key=keyAt(m,Math.max(1,frame-m.startup+1));
   if(key?.boxes!==undefined&&key.boxes!==null)return clone(key.boxes);

@@ -7,7 +7,7 @@ func _initialize() -> void:
 	var old: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/workshop/2026-11-20-fillet-otg/FightGuild-Fillet-OTG.json"))
 	check(model.load_data(old).is_empty(), "Schema 25 imports")
 	var data := model.data()
-	check(data.schema == 26 and data.comboRules.comboPhysics == 1, "Modern physics enabled on migration")
+	check(data.schema == 27 and data.comboRules.comboPhysics == 1, "Modern physics enabled on migration")
 	for group in ["tuningRules", "recoveryRules"]:
 		for key in old[group]: check(data[group][key] == old[group][key], "Other saved rules preserved")
 	for c in 6:

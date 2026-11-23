@@ -18,6 +18,10 @@ schema-16 controls, including combat playback, timed hitboxes, hurtboxes,
 art notes and pose photos, character movement and projectiles. This page also
 documents the newer mobile layout and sequence testing.
 
+## Hammer Drive controls (schema 27)
+
+Hammer’s **5D Break Step** uses a movement-only Drive panel: automatic/override travel distance, enhanced-normal extra blockstun, and neutral reset duration. Its preview offers travel alone or dash → contextual Slash. The sequence tester respects the spent resource and reports failed contextual inputs. The [kit guide](hammer-kit.md) explains the rules and current balance; [the interactive review](https://h1p5t3r.github.io/Fight-guild-/hammer-motion-review.html) shows all 23 enabled actions. Older imports retain their tuned kits and notes while gaining safe defaults for the three fields.
+
 ## Combo controls (schema 26)
 
 **Timing & damage** includes per-move decay/starter decay and a **Shared combo physics** panel for all fighters. **Hitboxes & impact** includes grounded/airborne hit speed. Shared rules support undo, autosave, search and JSON export. The preview reports decay and launch percentage. [The combo guide](combo-decay.md) explains every new value, legacy distance fields and the tighter default gatlings. The older PDF predates these controls.

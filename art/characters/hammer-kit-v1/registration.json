@@ -1,0 +1,9 @@
+{
+  "actions": 23,
+  "poses": 142,
+  "idlePoses": 8,
+  "pairedActions": 4,
+  "largestMotion": "Last startup \u2192 first active",
+  "bodyPolicy": "Fixed scale per atlas, support-foot / pelvis registration; max four body-only boxes.",
+  "pixelEdits": false
+}

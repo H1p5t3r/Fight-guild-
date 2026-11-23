@@ -43,7 +43,7 @@ func _initialize() -> void:
 				var point := Vector2i(sample[0], sample[1])
 				check(source.get_pixelv(point).a < 0.03, "Atlas background is not transparent: " + path)
 			var signatures: int = 32 if c == 3 else 24 if c == 2 else 20 if c == 4 else 4
-			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8, "attack_animation": 271 if c == 5 else 191 if c == 4 else 69, "backdash": 6}[phase]
+			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8, "attack_animation": 271 if c == 5 else 191 if c == 4 else 142 if c == 1 else 69, "backdash": 6}[phase]
 			check(sheet.frames.size() == count, "Missing poses: " + path)
 			for pose in sheet.frames.size():
 				var frame_size := source.get_size()
@@ -136,5 +136,5 @@ func _initialize() -> void:
 		FighterArt.apply(sprite, 5, "ready", 0, 1, facing)
 		check(not sprite.get_node("AttackEffect").visible, "Knife arc leaked into ready stance")
 	sprite.free()
-	print("Godot sprite catalog: ", failures, " failures; six fighters, 1012 body keys, alpha, regions, provenance and idle/movement vapor")
+	print("Godot sprite catalog: ", failures, " failures; six fighters, 1162 body keys, alpha, regions, provenance and idle/movement vapor")
 	quit(1 if failures else 0)

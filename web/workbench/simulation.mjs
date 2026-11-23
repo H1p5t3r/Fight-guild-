@@ -38,8 +38,8 @@ export class CombatPreview {
     if(grey&&data.characters[character].extensions){e.api.fg_preview_status(1,1,grey);result.warnings.push(`Target begins with ${grey} grey life; owned bleed is an explicit preview setup.`);}
     let elapsed=0,quiet=0,lastGroups=0,followed=false;
     const mechanicTest=m.mechanic&&!m.extensions?(options.mechanic||'single'):'single';
-    const separateLine=m.mechanic>=3;
-    if(m.mechanic>=4&&mechanicTest==='followup'){
+    const separateLine=m.mechanic===3||m.mechanic===4;
+    if(m.mechanic===4&&mechanicTest==='followup'){
       const tag=data.characters[character].moves.findIndex(a=>a.enabled&&a.mechanic===3);
       if(tag>=0){e.api.fg_preview_status(1,2,tag+1);followed=true;result.warnings.push('Target begins with an attached line. This is an explicit preview setup.');}
       else result.warnings.push('This fighter has no enabled Attach line action.');
@@ -61,19 +61,19 @@ export class CombatPreview {
       if(behavior==='tech'&&state.pairKind&&!state.hitstop&&state.pairClock<6)return INPUT.P|INPUT.K;
       return behavior==='block'?back:behavior==='crouch'?back|INPUT.down:behavior==='fd'?back|INPUT.faultless:0;
     };
-    const step=(input,stage)=>{e.step(input,defenderInput());elapsed++;return capture(input,stage);};
+    const step=(input,stage,targetInput=defenderInput())=>{e.step(input,targetInput);elapsed++;return capture(input,stage);};
     capture(0,'Ready');
     if(mechanicTest!=='single'&&m.mechanic<4)result.warnings.push('Status setup uses an unguarded hit. The selected guard behavior is used for the follow-up.');
     if(!m.enabled){result.warnings.push('Attack disabled: geometry only. You can edit its boxes here; enable it to test movement and contact.');return this.geometryRecord(result,m);}
     const forward=directionBits(6,facing);
     if(entry==='walk'||entry==='run')for(let i=0;i<12;++i)step(forward|(entry==='run'&&i===0?INPUT.dash:0),entry==='run'?'Run / step approach':'Walk approach');
     if(m.air||entry==='jump'||entry==='forwardJump'){
-      step(INPUT.up|(entry==='forwardJump'?forward:0),'Jump input');
+      step(INPUT.up|(entry==='forwardJump'?forward:0),'Jump input',defenderInput()|(options.targetEntry==='jump'?INPUT.up:0));
       for(let i=0;i<11;++i)step(entry==='forwardJump'?forward:0,'Jump approach');
     }
     const contextual=m.followFrom>=0||m.followFrom2>=0;
     const command=slot===32?data.characters[character].moves[2]:m;
-    if(contextual||m.stanceRequired===2||slot===33||slot===34||slot===43||slot===44){
+    if(options.isolated||contextual||m.stanceRequired===2||slot===33||slot===34||slot===43||slot===44){
       // A selected rekka ending can be studied on its own without changing any
       // routes. This explicit isolated mode is identified in the visible result.
       e.api.fg_preview_begin(0,slot);
@@ -90,6 +90,11 @@ export class CombatPreview {
     let state=e.state();
     for(let i=0;i<4800;++i){
       state=step(m.actionType===1&&i<40?(INPUT.P<<m.holdButton):0,followed?'Drive follow-up':result.executed?'Attack & reaction':'Waiting for input');
+      if(m.mechanic===5&&mechanicTest==='followup'&&!followed&&state.players[0].move===slot&&state.players[0].age>=m.startup-1+m.active-2&&!state.hitstop){
+        followed=true;const normal=data.characters[character].moves[2];
+        state=step(directionBits(5,state.players[0].facing)|(INPUT.P<<normal.button),'Drive → normal');
+        result.warnings.push('The burst cancels into the contextual standing Slash input. Spacing chooses c.S or f.S.');
+      }
       if(state.winner!==-1)break;
       const free=state.players.every(p=>p.move<0&&p.stun===0&&!p.linePullTime&&p.reaction===0&&p.landingTime===0&&!p.pairRecovery&&p.y===0)&&!state.pairKind&&state.hitstop===0&&!e.boxes(0,4).length&&!e.boxes(1,4).length;
       quiet=free?quiet+1:0;

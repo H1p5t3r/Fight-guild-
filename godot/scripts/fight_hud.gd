@@ -163,6 +163,16 @@ static func draw_momentum(canvas: CanvasItem, fighter: Dictionary, rail: Rect2, 
 	var caption := "FAULTLESS DEFENSE" if fighter.faultless else "MOMENTUM"
 	text(canvas, caption, Vector2(rail.end.x if right else rail.position.x, rail.position.y - 6), maxi(13, ceili(12.0 / ui_scale)), color, right, 2)
 	text(canvas, "%.0f%%" % (fighter.momentum / 100.0), Vector2(rail.position.x if right else rail.end.x, rail.position.y - 6), maxi(15, ceili(14.0 / ui_scale)), IVORY, not right, 2)
+	if int(fighter.get("driveAutoDistance", 0)) > 0:
+		var ready := not bool(fighter.get("driveUsed", 0))
+		var enhanced := int(fighter.get("driveBonus", 0))
+		var mark_x := rail.end.x - 7 if right else rail.position.x + 7
+		var mark_y := rail.position.y - 43
+		var drive_color := Color("95bcff") if ready or enhanced > 0 else Color(IVORY, 0.35)
+		var diamond := PackedVector2Array([Vector2(mark_x, mark_y - 7), Vector2(mark_x + 7, mark_y), Vector2(mark_x, mark_y + 7), Vector2(mark_x - 7, mark_y), Vector2(mark_x, mark_y - 7)])
+		if ready or enhanced > 0: canvas.draw_colored_polygon(diamond, Color(drive_color, 0.75))
+		canvas.draw_polyline(diamond, drive_color, 1.4, true)
+		text(canvas, "DRIVE +%df" % enhanced if enhanced > 0 else "BREAK STEP" if ready else "DRIVE SPENT", Vector2(mark_x - 17 if right else mark_x + 17, mark_y + 5), maxi(13, ceili(12.0 / ui_scale)), drive_color, right, 1)
 	var section_width := (rail.size.x - 12.0) / 3.0
 	for section in 3:
 		var x := rail.position.x + (2 - section if right else section) * (section_width + 6)

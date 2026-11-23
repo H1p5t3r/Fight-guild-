@@ -1,0 +1,1036 @@
+{
+  "5P": {
+    "slot": 0,
+    "timing": [
+      5,
+      3,
+      9
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 2,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/checks.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 5,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/checks.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 8,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/checks.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 11,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/checks.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 15,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "2P": {
+    "slot": 4,
+    "timing": [
+      5,
+      3,
+      10
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 2,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/checks.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 5,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/checks.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 8,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/checks.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 11,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/checks.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 16,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 5
+      }
+    ]
+  },
+  "5K": {
+    "slot": 1,
+    "timing": [
+      7,
+      3,
+      15
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 2,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/kicks.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 7,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/kicks.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 10,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/kicks.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 15,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/kicks.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 22,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "2K": {
+    "slot": 5,
+    "timing": [
+      6,
+      3,
+      14
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 2,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/kicks.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 6,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/kicks.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 9,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/kicks.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 13,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/kicks.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 20,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 5
+      }
+    ]
+  },
+  "c.S": {
+    "slot": 32,
+    "timing": [
+      8,
+      4,
+      16
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 2,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/slashes.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 8,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/slashes.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 12,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/slashes.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 17,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/slashes.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 24,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "5S": {
+    "slot": 2,
+    "timing": [
+      12,
+      4,
+      23
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 3,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/slashes.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 12,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/slashes.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 16,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/slashes.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 23,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/slashes.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 34,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "5Hs": {
+    "slot": 3,
+    "timing": [
+      15,
+      4,
+      27
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 4,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/heavy_sweep.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 15,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/heavy_sweep.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 19,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/heavy_sweep.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 28,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/heavy_sweep.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 40,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "2S": {
+    "slot": 6,
+    "timing": [
+      10,
+      4,
+      26
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 3,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/heavy_sweep.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 10,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/heavy_sweep.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 14,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/heavy_sweep.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 22,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/heavy_sweep.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 34,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 5
+      }
+    ]
+  },
+  "2Hs": {
+    "slot": 7,
+    "timing": [
+      14,
+      5,
+      27
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 4,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/lift_brace.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 14,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/lift_brace.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 19,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/lift_brace.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 28,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/lift_brace.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 40,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 5
+      }
+    ]
+  },
+  "6P": {
+    "slot": 8,
+    "timing": [
+      10,
+      4,
+      21
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 3,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/lift_brace.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 10,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/lift_brace.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 14,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/lift_brace.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 21,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/lift_brace.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 30,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "6Hs": {
+    "slot": 11,
+    "timing": [
+      22,
+      5,
+      29
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 7,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/slams.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 22,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/slams.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 27,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/slams.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 36,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/slams.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 50,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "236S": {
+    "slot": 15,
+    "timing": [
+      26,
+      4,
+      30
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 8,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/slams.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 26,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/slams.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 30,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/slams.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 40,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/slams.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 54,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "236P": {
+    "slot": 14,
+    "timing": [
+      16,
+      4,
+      25
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 5,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/specials.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 16,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/specials.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 20,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/specials.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 28,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/specials.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 40,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "623Hs": {
+    "slot": 16,
+    "timing": [
+      13,
+      5,
+      31
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 4,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/specials.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 13,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/specials.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 18,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/specials.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 28,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/specials.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 42,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "j.P": {
+    "slot": 17,
+    "timing": [
+      6,
+      3,
+      8
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 2,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 6,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 9,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 11,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 15,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 0
+      }
+    ]
+  },
+  "j.K": {
+    "slot": 18,
+    "timing": [
+      8,
+      4,
+      12
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 2,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 8,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 12,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 16,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 21,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 0
+      }
+    ]
+  },
+  "j.S": {
+    "slot": 19,
+    "timing": [
+      10,
+      5,
+      18
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 3,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/air_swings.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 10,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/air_swings.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 15,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/air_swings.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 21,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/air_swings.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 29,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 0
+      }
+    ]
+  },
+  "j.Hs": {
+    "slot": 20,
+    "timing": [
+      13,
+      6,
+      22
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 4,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/air_swings.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 13,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/air_swings.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 19,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/air_swings.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 26,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/air_swings.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 36,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 0
+      }
+    ]
+  },
+  "4P+K": {
+    "slot": 23,
+    "timing": [
+      2,
+      2,
+      27
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 2,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 4,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 13,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 25,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "6P+K": {
+    "slot": 24,
+    "timing": [
+      2,
+      2,
+      27
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 2,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 4,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 13,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 25,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  },
+  "j.4P+K": {
+    "slot": 41,
+    "timing": [
+      2,
+      2,
+      25
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 2,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 4,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 12,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 24,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 0
+      }
+    ]
+  },
+  "j.6P+K": {
+    "slot": 42,
+    "timing": [
+      2,
+      2,
+      25
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 2,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 4,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 4
+      },
+      {
+        "frame": 12,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/throws.png",
+        "sourcePose": 5
+      },
+      {
+        "frame": 24,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/air_checks.png",
+        "sourcePose": 0
+      }
+    ]
+  },
+  "5D": {
+    "slot": 13,
+    "timing": [
+      5,
+      12,
+      6
+    ],
+    "keys": [
+      {
+        "frame": 1,
+        "cue": "Entry",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      },
+      {
+        "frame": 2,
+        "cue": "Loaded \u00b7 hold through final startup",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 0
+      },
+      {
+        "frame": 5,
+        "cue": "First-active snap",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 17,
+        "cue": "Brake \u00b7 no lingering strike effect",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 1
+      },
+      {
+        "frame": 19,
+        "cue": "Withdraw",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 2
+      },
+      {
+        "frame": 21,
+        "cue": "Settle \u00b7 still recovering",
+        "source": "hammer-kit-v1/drive_ready.png",
+        "sourcePose": 3
+      }
+    ]
+  }
+}

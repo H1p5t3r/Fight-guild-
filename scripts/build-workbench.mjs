@@ -1,3 +1,4 @@
+import {buildHammerMotionReview} from './build-hammer-motion-review.mjs';
 import {buildSharkMotionReview} from './build-shark-motion-review.mjs';
 import {buildSmokeMotionReview} from './build-smoke-motion-review.mjs';
 import {build} from 'esbuild';
@@ -15,7 +16,7 @@ import {buildFilletMotionReview} from './build-fillet-motion-review.mjs';
 const root=new URL('../',import.meta.url), path=p=>fileURLToPath(new URL(p,root));
 const wasm=await readFile(path('web/generated/fight.wasm'));
 const {instance}=await WebAssembly.instantiate(wasm),engine=new Engine(instance),defaults=engine.data();
-if(defaults.schema!==26||defaults.coreVersion!==26) throw new Error('Rebuild the current combat core before packaging the workshop.');
+if(defaults.schema!==27||defaults.coreVersion!==27) throw new Error('Rebuild the current combat core before packaging the workshop.');
 // Ship the actual integer combat simulation as plain JS. Workplace browsers
 // need neither a native executable nor WebAssembly permission to play a preview.
 execFileSync(path('node_modules/.bin/wasm2js'),[path('web/generated/fight.wasm'),'-O','--enable-bulk-memory','-o',path('build/fight-core-js.mjs')]);
@@ -48,7 +49,7 @@ for(const [group,values] of Object.entries(defaults).filter(([key])=>key.endsWit
 if(JSON.stringify(defaults)!==JSON.stringify(engine.data()))throw new Error('Limit probing changed defaults.');
 const manifest=JSON.parse(await readFile(path('godot/assets/fighters/manifest.json'),'utf8'));
 const collisions=JSON.parse(await readFile(path('godot/data/fighter_collision.json'),'utf8'));
-const phases=['active','windup','block','signature_active','signature_windup','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation','backdash','idle_smoke','movement_smoke','backdraft_fx','sword_fx','sweep_fx','knife_fx','line_fx'];
+const phases=['active','windup','block','signature_active','signature_windup','ready','walk','run','stance','knockdown','knockdown_back','idle','crouch_idle','back_walk','attack_animation','backdash','idle_smoke','movement_smoke','backdraft_fx','sword_fx','sweep_fx','knife_fx','line_fx','hammer_fx'];
 const art=manifest.fighters.map(f=>Object.fromEntries(['name','hook_weapon','projectile','projectile_variants','attack_animations','attack_connected','paired_animations',...phases].filter(p=>f[p]).map(p=>[p,f[p]])));
 const files=[...new Set(art.flatMap(f=>phases.filter(p=>f[p]).flatMap(p=>[f[p].file,...f[p].frames.flatMap(frame=>frame.file?[frame.file]:[])])))];
 for(const f of manifest.fighters)if(f.hook_weapon&&!files.includes(f.hook_weapon.file))files.push(f.hook_weapon.file);
@@ -132,7 +133,7 @@ const appScript=await asset(bundle.outputFiles[0].text,'js');
 let linkedCss=sourceCss;
 for(const {tag,bytes} of fonts)linkedCss=linkedCss.replace(tag,(await asset(bytes,'woff2')).slice('assets/'.length));
 const stylesheet=await asset(linkedCss,'css');
-const linkedHtml=template.replace('<!--WORKSHOP_REVIEWS-->', '<p>Animation reviews: <a href="smoke-motion-review.html">Smoke · specials &amp; attack audit</a> · <a href="shark-motion-review.html">Shark · full kit &amp; Drive</a> · <a href="fillet-motion-review.html">Fillet · animation audit</a></p><p><a href="FightGuild-moves.json" download>Download the shipped move data</a>. Export your current draft before importing this file.</p>').replace('<!--WORKSHOP_STYLES-->',()=>`<link rel="stylesheet" href="${stylesheet}">`)
+const linkedHtml=template.replace('<!--WORKSHOP_REVIEWS-->', '<p>Animation reviews: <a href="hammer-motion-review.html">Hammer · Break Step &amp; full kit</a> · <a href="smoke-motion-review.html">Smoke · specials &amp; attack audit</a> · <a href="shark-motion-review.html">Shark · full kit &amp; Drive</a> · <a href="fillet-motion-review.html">Fillet · animation audit</a></p><p><a href="FightGuild-moves.json" download>Download the shipped move data</a>. Export your current draft before importing this file.</p>').replace('<!--WORKSHOP_STYLES-->',()=>`<link rel="stylesheet" href="${stylesheet}">`)
   .replace('<!--WORKSHOP_SCRIPT-->',()=>`<script defer src="${dataScript}"></script><script defer src="${appScript}"></script>`)
   .replace('<!--FONT_LICENSE-->',()=>`<!-- Bundled Barlow font license:\n${license.replace(/--/g,'—')}\n-->`)
   .replace('The page works offline without installing anything. It makes no network requests.',
@@ -144,6 +145,7 @@ await writeFile(path('build/Fillet-Attack-Timing.html'),await buildFilletMotionR
 await writeFile(path('build/move-workshop/shark-motion-review.html'),await buildSharkMotionReview({art:manifest.fighters[4],roster:manifest.fighters,images:linkedImages,engine}));
 await writeFile(path('build/move-workshop/smoke-motion-review.html'),await buildSmokeMotionReview({pack,images:linkedImages,engine}));
 await writeFile(path('build/move-workshop/smoke-specials-60fps.mp4'),await readFile(path('art/characters/smoke-specials-v3/previews/Smoke-Specials-Before-After-60fps.mp4')));
+await writeFile(path('build/move-workshop/hammer-motion-review.html'),await buildHammerMotionReview({pack,images:linkedImages,engine}));
 await writeFile(path('build/move-workshop/.nojekyll'),'');
 await writeFile(path('build/move-workshop/FightGuild-moves.json'),JSON.stringify(pack.draft?.data??pack.defaults,null,2)+'\n');
 await writeFile(path('build/move-workshop/START_HERE.txt'),`Fight Guild - Move Workshop\n\nExtract this whole folder, then open index.html in Chrome or Edge.\nKeep the assets folder beside index.html. No installation or server is needed.\n\nDownload JSON before closing to keep a portable backup of edits, notes and photos.\nDrafts stay in this browser; they do not sync between PCs or with the old HTML.\nUse Import JSON to carry a saved draft into this version.\nFightGuild-moves.json contains the shipped project draft; importing it replaces\nthe open draft, so download your edits before doing so.\n`);

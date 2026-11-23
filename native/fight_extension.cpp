@@ -122,6 +122,9 @@ public:
                 ||f.repeat_gravity<0||f.repeat_gravity>300||f.last_damage<0||f.last_damage>2000
                 ||f.damage_scale<0||f.damage_scale>100||f.last_base_damage<0||f.last_base_damage>1000
                 ||f.counter_tier< -1||f.counter_tier>3||f.prejump_time<0||f.prejump_time>30
+                ||f.drive_used<0||f.drive_used>1||f.drive_neutral<0||f.drive_neutral>120
+                ||f.drive_source<0||f.drive_source>fight::MOVE_COUNT||f.drive_distance<0||f.drive_distance>80000
+                ||f.drive_speed<0||f.drive_speed>4000||f.drive_bonus<0||f.drive_bonus>30
                 ||f.idle_time<0||f.idle_time>=1000000||f.stance<0||f.stance>1||f.guard_button<0||f.guard_button>fight::D
                 ||f.armor_left<0||f.armor_left>8||f.bounce_ground<0||f.bounce_ground>3000||f.bounce_wall<0||f.bounce_wall>3000
                 ||f.crumple_time<0||f.crumple_time>180||f.grab_time<0||f.grab_time>120||f.grab_owner< -1||f.grab_owner>1

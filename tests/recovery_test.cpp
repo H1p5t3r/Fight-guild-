@@ -31,7 +31,7 @@ static void test_universals() {
             CHECK(!s.can_cancel(c,0,slot,1));
         }
         for(int raw:{Down|D,Down|Left|D,Down|Right|D}) {
-            s.reset(c,(c+1)%6,0,0);s.step(raw,0);CHECK(s.world.players[0].move==SWEEP);
+            s.reset(c,(c+1)%6,0,0);s.step(raw,0);CHECK(s.world.players[0].move==(c==1?13:SWEEP)); // Hammer has only Break Step on D.
         }
     }
     for(int guard:{int(Right),Right|Down}) {

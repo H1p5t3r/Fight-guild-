@@ -4,7 +4,7 @@
 // No engine, allocator, clock, floating point, or platform dependencies.
 // World coordinates are hundredths of a pixel; one step is exactly 1/60 second.
 namespace fight {
-constexpr int VERSION = 26, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 47, FIELD_COUNT = 145;
+constexpr int VERSION = 27, CHARACTER_COUNT = 6, HISTORY = 64, MOVE_COUNT = 47, FIELD_COUNT = 148;
 constexpr int STAGE_COUNT = 3; // Charter Grounds, Tide Docks, Foundry Walk; a connected loop.
 constexpr int SWEEP = 22, BACK_THROW = 23, FORWARD_THROW = 24;
 constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_AIR=29,
@@ -36,7 +36,7 @@ enum Field { Button, Category, Direction, Motion, Air, Startup, Active, Recovery
              NormalCancelStart, NormalCancelEnd, SpecialCancelStart, SpecialCancelEnd,
              JumpCancelStart, JumpCancelEnd, FollowCancelStart, FollowCancelEnd, CancelOn,
              StarterProration, ComboScaling, MinimumDamage, LandingRecovery, AttackLevel,
-             CounterTier, CounterVulnerable, CounterFreezeFrames, CounterSlowFrames, ProjectileKind, ProjectileSpawnFrame, ProjectileSpeedX, ProjectileSpeedY, ProjectileGravity, ProjectileLife, ProjectileOffsetX, ProjectileOffsetY, ProjectileWidth, ProjectileHeight, ProjectileHits, ProjectileRehit, ProjectileDurability, ProjectilePersist, ProjectileMelee, SmearMode, SmearPart, SmearStretch, SmearFrame1, SmearFrame2, SmearFrame3, SmearFrame4, HurtMaskWindup, HurtMaskActive, HurtMaskRecovery, Mechanic, TetherSpeed, TetherFrames, BleedInitial, BleedTickDamage, BleedTickFrames, BleedDuration, BleedBlockPercent, BleedCap, VariantStartup, VariantActive, VariantRecovery, VariantDamage, VariantRange, VariantSpeed, VariantLift, VariantHitstun, VariantKnockdown, StanceRequired, StanceChange, ActionType, HoldFollow, HoldFrame, HoldButton, GuardFollow, ProximityMove, ProximityRange, StartupTravel, DiveSpeedX, DiveSpeedY, GroundBounce, WallBounce, CrumpleFrames, AirCounterKnockdown, HurtWindowStart, HurtWindowEnd, HurtWindowMask, SemiAirStart, SemiAirEnd, ArmorFrames, ArmorHits, GrabFrames, FinishArtPose, FinishArtFrame, TetherDuration, TetherRange, TetherGap, ComboDecay, StarterDecay, GroundHitSpeed, AirHitSpeed };
+             CounterTier, CounterVulnerable, CounterFreezeFrames, CounterSlowFrames, ProjectileKind, ProjectileSpawnFrame, ProjectileSpeedX, ProjectileSpeedY, ProjectileGravity, ProjectileLife, ProjectileOffsetX, ProjectileOffsetY, ProjectileWidth, ProjectileHeight, ProjectileHits, ProjectileRehit, ProjectileDurability, ProjectilePersist, ProjectileMelee, SmearMode, SmearPart, SmearStretch, SmearFrame1, SmearFrame2, SmearFrame3, SmearFrame4, HurtMaskWindup, HurtMaskActive, HurtMaskRecovery, Mechanic, TetherSpeed, TetherFrames, BleedInitial, BleedTickDamage, BleedTickFrames, BleedDuration, BleedBlockPercent, BleedCap, VariantStartup, VariantActive, VariantRecovery, VariantDamage, VariantRange, VariantSpeed, VariantLift, VariantHitstun, VariantKnockdown, StanceRequired, StanceChange, ActionType, HoldFollow, HoldFrame, HoldButton, GuardFollow, ProximityMove, ProximityRange, StartupTravel, DiveSpeedX, DiveSpeedY, GroundBounce, WallBounce, CrumpleFrames, AirCounterKnockdown, HurtWindowStart, HurtWindowEnd, HurtWindowMask, SemiAirStart, SemiAirEnd, ArmorFrames, ArmorHits, GrabFrames, FinishArtPose, FinishArtFrame, TetherDuration, TetherRange, TetherGap, ComboDecay, StarterDecay, GroundHitSpeed, AirHitSpeed, DriveDistance, DrivePlus, DriveNeutralFrames };
 enum KnockdownKind { NoKnockdown, SoftKnockdown, HardKnockdown };
 enum Reaction { Free, AirReel, Downed, Waking, WallSplat, Reeled, Captured, Crumpled };
 enum MobilityField { ForwardStyle, WalkSpeed, RunSpeed, RunAcceleration, StepSpeed, StepFrames,
@@ -111,6 +111,7 @@ struct Fighter {
     int display_move=-1, display_age, display_tick=-1;
     int gait_distance, gait_phase;
     int combo_decay, launch_percent, push_percent, hit_crouching;
+    int drive_used, drive_neutral, drive_source, drive_distance, drive_speed, drive_bonus;
     ComboAttack combo_attacks[COMBO_ATTACK_SLOTS];
     Sample history[HISTORY];
 };
@@ -228,6 +229,9 @@ private:
     void clear_owned_status(int owner);
     int requested(Fighter& f, Sample& h) const;
     void begin(Fighter& f, int move);
+    int drive_distance(const Fighter& f, int move) const;
+    bool drive_window(const Fighter& f) const;
+    void tick_drive_resources();
     bool active(const Fighter& f) const;
     void control(Fighter& f);
     bool overlaps(const Fighter& a, const Fighter& b) const;

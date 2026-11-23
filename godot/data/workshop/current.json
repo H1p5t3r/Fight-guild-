@@ -1,7 +1,7 @@
 {
-  "label": "Strive-style combo decay \u00b7 velocity knockback",
-  "file": "2026-11-20-combo-decay/FightGuild-Combo-Decay.json",
-  "sha256": "1651adf179d0445ccad2181d73224b210a116c4f7a21289b6951a96a5e4e7e7f",
-  "sourceFile": "2026-11-20-fillet-otg/FightGuild-Fillet-OTG.json",
-  "sourceSha256": "10a096806ce59bb8312b0e6cea04cbc47adb8ae0d6442257388d5d6aded8caf9"
+  "label": "Hammer \u00b7 Break Step kit",
+  "file": "2026-11-23-hammer/FightGuild-Hammer.json",
+  "sha256": "cbb7ee98d86c274f9ce7948ef83fbfe410d31619ce5eb3e01c76e6f76e9a7c78",
+  "sourceFile": "2026-11-20-combo-decay/FightGuild-Combo-Decay.json",
+  "sourceSha256": "1651adf179d0445ccad2181d73224b210a116c4f7a21289b6951a96a5e4e7e7f"
 }

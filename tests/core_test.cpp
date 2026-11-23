@@ -22,6 +22,9 @@ static void fresh(int s0=0,int s1=0) {
         m.v[HitboxBack]=1200; m.v[Bottom]=2000; m.v[Height]=8000;
         m.v[ChipDamage]=(special||m.v[Category]==Drive)?m.v[Damage]/10:0;
     }
+    // Keep the mirrored-input/reversal fixture independent of Hammer's authored 236S.
+    moves[1][14].v[Button]=moves[1][14].v[SimpleButton]=0;
+    moves[1][14].v[SimpleDirection]=6;moves[1][14].v[ReversalEligible]=1;
     reset(0,1,s0,s1);
 }
 // Boundary tests begin at the last startup tick, using a legal 5f move.
@@ -50,7 +53,7 @@ static void test_routes() {
     for(int from=1;from<4;++from) for(int to=8;to<13;++to) CHECK(fg_can_cancel(0,from,to,1));
     for(int from=0;from<8;++from) CHECK(fg_can_cancel(0,from,14,1));
     CHECK(!fg_can_cancel(0,14,15,1));
-    CHECK(fg_can_cancel(1,13,14,1)); // Hammer Drive explicitly permits special cancels.
+    CHECK(!fg_can_cancel(1,13,14,1)); // Break Step cancels into normals, not specials.
     CHECK(!fg_can_cancel(0,13,14,1));
     CHECK(!fg_move_set(0,0,Startup,0));
     CHECK(!fg_move_set(0,0,Damage,1001));
@@ -364,7 +367,7 @@ static void test_roster() {
         if(move.v[GrabFrames]) ticks(move.v[GrabFrames]);
         if(world.players[1].health!=1000-move.v[Damage]) std::fprintf(stderr,"Roster contact c=%d button=%d x=%d/%d\n",c,button,world.players[0].x,world.players[1].x);
         CHECK(world.players[1].health==1000-move.v[Damage]);
-        CHECK(world.players[0].contact==1);
+        CHECK(world.players[0].contact==(move.v[Mechanic]==5?0:1));
         thaw(); ticks(1,Right|(P<<button));
         if(moves[c][8+button].v[Enabled]&&moves[c][8+button].v[Category]==Command&&!world.players[0].stance) CHECK(world.players[0].move==8+button); // Same-button command route for every fighter/button.
     }

@@ -1,5 +1,13 @@
 # Playable-build backlog
 
+## Hammer · Break Step
+
+- [x] Full provisional normals, air normals, throws and three specials; approved A / Shoulder Drive art.
+- [x] One-use step Drive, special → Drive → normal routes, full velocity carry, editable block advantage and neutral reset.
+- [x] Automatic reach + block-push travel calibration, rollback state, editor controls and an interactive motion review.
+- [ ] Playtest spacing, reactability and the +4f pressure reward against the other finished kits.
+- [ ] Replace Hammer’s remaining legacy walk/run, guard and hit-reaction artwork through the approved options process.
+
 ## Approved combat priorities from the Dustloop study
 
 The [2026-11-15 source review](research/strive-dustloop-2026-11-15.md) compares the three supplied saved pages with the Fillet/Shark build. The user approved these priorities, including block carryover and post-stun throw protection after clarification. **No Just Guard / Instant Block timing mechanic is requested.** Guard-break throw vulnerability and the backward-dash restriction remain authoritative.

@@ -34,6 +34,7 @@ export const FIELD_GROUPS=[
  group('projectile-motion','projectiles','Projectile movement','Velocity and gravity apply to moving projectiles.',['projectileSpeedX','projectileSpeedY','projectileGravity']),
  group('projectile-contact','projectiles','Contact & clashes','Hit limits, clashes and persistence after the owner is hit.',['projectileHits','projectileRehit','projectileDurability','projectilePersist','projectileMelee']),
  group('drive-type','mechanics','Applied status','A status can change what this same input does on its next use.',['mechanic']),
+ group('step-drive','mechanics','Break Step','Startup is the first burst frame; Active is burst duration; Recovery is landing. Cancel any special after its first active frame into Drive, then any grounded normal out of the burst.',['driveDistance','drivePlus','driveNeutralFrames'],true),
  group('tether','mechanics','Tether pull','The pull moves the opponent toward the owner without dealing damage.',['tetherSpeed','tetherFrames']),
  group('line','mechanics','Line behavior','Tag on hit, then spend it with the separate 2D pull input.',['tetherDuration','tetherRange','tetherGap'],true),
  group('bleed','mechanics','Bleed & grey life','Grey life is stored damage. It is paid out by a successful cash-out grab.',['bleedInitial','bleedTickDamage','bleedTickFrames','bleedDuration','bleedBlockPercent','bleedCap']),
@@ -49,11 +50,13 @@ export const FIELD_GROUPS=[
 ];
 
 export function inactiveReason(key,m){
+ if(key.startsWith('drive')&&m.mechanic!==5)return 'Used by Break Step.';
+ if(m.mechanic===5&&['damage','chipDamage','hitstop','hitstun','blockstun','hitboxBack','reach','bottom','height','guardBreak','projectileKind','inertiaPercent','travelSpeed','startupTravel','advance'].includes(key))return 'Break Step is movement only. Travel is derived from its distance and burst duration; it cannot strike or spawn a projectile.';
  if(m.mechanic===4&&(key.startsWith('projectile')||['damage','chipDamage','hitstop','hitstun','blockstun','attackLevel','counterTier','counterFreezeFrames','counterSlowFrames','counterHitstun','counterHitstop','starterProration','comboScaling','minimumDamage','hitboxBack','reach','bottom','height','pushback','launch','crumpleFrames','airPushback','airLaunch','groundBounce','wallBounce','airCounterKnockdown','hitLevel','blockPushback','guardBreak','knockdown','knockdownFrames','wakeupFrames','hitAngle','pullFrames','pullGap','throwRange'].includes(key)))return 'Reel In only moves the target. It ignores guard and applies no damage, hitstop or new stun.';
  if(key==='tetherSpeed'&&m.mechanic!==1)return 'Used by legacy tether. Reel In uses duration and gap.';
  if(key==='tetherFrames'&&![1,4].includes(m.mechanic))return 'Used by Reel In or legacy tether.';
  if(key==='tetherDuration'&&m.mechanic!==3)return 'Used by Attach line.';
- if(key==='tetherRange'&&m.mechanic<3)return 'Used by line actions.';
+ if(key==='tetherRange'&&![3,4].includes(m.mechanic))return 'Used by line actions.';
  if(key==='tetherGap'&&m.mechanic!==4)return 'Used by Reel In.';
  if(key.startsWith('bleed')&&m.mechanic!==2)return 'Used by Bleed → cash-out grab.';
  if(['variantStartup','variantActive','variantRecovery'].includes(key)&&![1,2].includes(m.mechanic))return 'Enable an applied status to use conditional follow-up timing.';

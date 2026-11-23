@@ -46,7 +46,7 @@ func _initialize() -> void:
 	var expected_new_move: Dictionary = original.characters[5].moves[0].duplicate()
 	expected_new_move = JSON.parse_string(FileAccess.get_file_as_string("res://data/legacy_fillet_v22.json")).moves[0]
 	expected_new_move.erase("id")
-	expected_new_move.merge({"tetherDuration":180.0,"tetherRange":45000.0,"tetherGap":6000.0,"comboDecay":5.0,"starterDecay":0.0,"groundHitSpeed":float(ceili(float(expected_new_move.pushback)/6.0)),"airHitSpeed":float(ceili(float(expected_new_move.airPushback)/6.0))})
+	expected_new_move.merge({"driveDistance":0.0,"drivePlus":4.0,"driveNeutralFrames":12.0,"tetherDuration":180.0,"tetherRange":45000.0,"tetherGap":6000.0,"comboDecay":5.0,"starterDecay":0.0,"groundHitSpeed":float(ceili(float(expected_new_move.pushback)/6.0)),"airHitSpeed":float(ceili(float(expected_new_move.airPushback)/6.0))})
 	check(JSON.parse_string(JSON.stringify(model.move(5, 0))) == expected_new_move, "New fighters missing migration defaults")
 	legacy.schema = 2
 	legacy.coreVersion = 2

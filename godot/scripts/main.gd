@@ -195,7 +195,7 @@ func build_interface() -> void:
 	mode = option(toolbar, "", ["Training", "Local versus"])
 	mode.item_selected.connect(func(_i: int): reset_round(); dummy.disabled = mode.selected == 1; training_momentum.disabled = mode.selected == 1)
 	dummy = option(toolbar, "", ["Stand", "Guard all", "Crouch guard", "Practice sequence", "Faultless guard", "Attack loop", "Guard → reversal", "Player 2 controls"])
-	dummy.tooltip_text = "Attack loop repeats Hs for counter/punish practice. Guard → reversal buffers 236P as blockstun ends."
+	dummy.tooltip_text = "Attack loop repeats Hs. Guard → reversal buffers an enabled grounded special as blockstun ends, preferring moves marked for reversal timing."
 	button(toolbar, "Hitboxes", func(): show_boxes = not show_boxes)
 	pause_button = button(toolbar, "Pause", func(): paused = not paused; pause_button.text = "Resume" if paused else "Pause", true)
 	button(toolbar, "+1 frame", advance_one, true)
@@ -268,10 +268,10 @@ func build_interface() -> void:
 	var stance_rows: Array = JSON.parse_string(FileAccess.get_file_as_string("res://data/stance_fields.json"))
 	for entry in stance_rows: mechanic_rows.append([entry.key, entry.label, entry.default, entry.min, entry.max, entry.help])
 	for row in mechanic_rows:
-		var scale := 100 if row[0] in ["tetherSpeed", "variantRange", "tetherRange", "tetherGap", "variantSpeed", "variantLift", "proximityRange", "startupTravel", "diveSpeedX", "diveSpeedY", "groundBounce", "wallBounce"] else 1
+		var scale := 100 if row[0] in ["driveDistance", "tetherSpeed", "variantRange", "tetherRange", "tetherGap", "variantSpeed", "variantLift", "proximityRange", "startupTravel", "diveSpeedX", "diveSpeedY", "groundBounce", "wallBounce"] else 1
 		add_field(mechanic_grid, [row[0], row[1], float(row[3]) / scale, float(row[4]) / scale, scale])
 		fields[row[0]].control.tooltip_text = row[5]
-	var mechanic_note := label(mechanic_panel, "Mechanic: 0 off · 1 legacy tether · 2 bleed/cash-out · 3 attach line · 4 pull. Pull ignores guard, keeps a free target actionable, and pauses existing hitstun/blockstun until it ends. Speeds are px/f, range is px; timing is frames. Getting hit clears your statuses. Cash-out KD: 0 none, 1 soft, 2 hard.", 11, MUTED)
+	var mechanic_note := label(mechanic_panel, "Mechanic: 0 off · 1 legacy tether · 2 bleed/cash-out · 3 attach line · 4 pull · 5 Break Step. Break Step: active = burst frames; recovery = landing. One use per string, normal gets extra blockstun + full velocity. Pull ignores guard, keeps a free target actionable, and pauses existing hitstun/blockstun until it ends. Speeds are px/f, range is px; timing is frames. Getting hit clears your statuses. Cash-out KD: 0 none, 1 soft, 2 hard.", 11, MUTED)
 	mechanic_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label(editor, "HIT REACTIONS", 11, MUTED)
 	var reactions := GridContainer.new()
@@ -1228,6 +1228,25 @@ func advance_one() -> void:
 	pause_button.text = "Resume"
 	simulate_local()
 
+func dummy_reversal_input(fighter: Dictionary, away: int) -> int:
+	var guard := away | 4
+	var selected: Dictionary = {}
+	for slot in CombatModel.MOVE_IDS.size():
+		var action: Dictionary = model.move(fighter.character, slot)
+		if not action.enabled or action.air or action.category != 2 or action.stanceRequired == 2 or action.actionType == 1: continue
+		if selected.is_empty() or action.reversalEligible > selected.reversalEligible: selected = action
+	if selected.is_empty(): return guard
+	var simple: bool = bool(fighter.simple) and selected.simpleDirection > 0
+	var digits: String = str(selected.simpleDirection if simple else selected.motion if selected.motion else selected.direction)
+	var index: int = digits.length() - int(fighter.stun)
+	if index < 0 or index >= digits.length(): return guard
+	var direction: int = int(digits[index])
+	var column: int = (direction - 1) % 3 - 1
+	var bits: int = (4 if direction <= 3 else 8 if direction >= 7 else 0)
+	if column != 0: bits |= away if column < 0 else (1 if away == 2 else 2)
+	if fighter.stun == 1: bits |= (16 << int(selected.simpleButton if simple else selected.button)) | (1024 if simple else 0)
+	return bits
+
 func simulate_local() -> void:
 	var a := read_input(0)
 	var b := read_input(1)
@@ -1238,12 +1257,7 @@ func simulate_local() -> void:
 			b = 128 if state.players[1].move < 0 and state.players[1].stun == 0 else 0
 		elif dummy.selected == 6:
 			b = away | 4
-			var toward := 1 if away == 2 else 2
-			if state.hitstop == 0:
-				match int(state.players[1].stun):
-					3: b = 4
-					2: b = 4 | toward
-					1: b = toward | 16
+			if state.hitstop == 0: b = dummy_reversal_input(state.players[1], away)
 		elif dummy.selected != 7:
 			b = [0, away, away | 4, RollbackSession.scripted_input(model.frame(), 1), away | 4 | 2048][dummy.selected]
 	var raw := lab.inputs(a, b) if activity in ["training", "development"] else Vector2i(a, b)

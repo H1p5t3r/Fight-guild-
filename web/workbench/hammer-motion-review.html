@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hammer · Break Step</title>
+<style>
+:root{color-scheme:dark;font:16px/1.5 system-ui;background:#0b141e;color:#eee9de}*{box-sizing:border-box}body{max-width:1140px;margin:auto;padding:24px}a{color:#a5c5ff}h1{font-style:italic;font-size:clamp(32px,5vw,58px);line-height:1;margin:12px 0}p{color:#afbfce;max-width:85ch}.eyebrow{font-size:12px;letter-spacing:.2em;color:#a5c5ff}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:end;margin:20px 0}label{display:grid;gap:5px;font-size:13px;color:#b4c4d5}button,select{font:inherit;min-height:44px;background:#1c3049;color:#f0ede6;border:1px solid #516b8b;border-radius:6px;padding:8px 13px}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #e8bf75;outline-offset:3px}.toggle{display:flex;align-items:center;min-height:44px}input[type=checkbox]{width:20px;height:20px;accent-color:#9cbaff}canvas{display:block;width:100%;height:auto;border:1px solid #42536c;border-radius:10px;background:#111f2c}input[type=range]{width:100%;min-height:44px;accent-color:#a5c5ff}.readout{font-variant-numeric:tabular-nums;min-height:3em;margin:8px 0;color:#d5e2ef}.legend{border-left:3px solid #628cdc;padding:8px 16px;background:#132338}.warnings{color:#e4bd78}@media(max-width:600px){body{padding:14px}.controls>label:first-child{width:100%}.controls select{max-width:100%}h1{font-size:36px}}
+</style>
+<a href="index.html">← Move Workshop</a><p class="eyebrow">FIGHT GUILD / MASONS / APPROVED DIRECTION A</p>
+<h1>HAMMER · BREAK STEP</h1>
+<p>Compact load. Explosive shoulder drive. A single chance to turn reach into pressure. These clips use the game's input, collision, hitstop and animation clocks.</p>
+<div class="controls">
+ <label>Move or route<select id="move-select"></select></label>
+ <label>Contact<select id="scenario"><option value="hit">Hit</option><option value="block">Block</option><option value="whiff">Whiff</option></select></label>
+ <label>Playback<select id="speed"><option value="1">60 fps · full speed</option><option value="0.5">Half speed</option><option value="0.25">Quarter speed</option></select></label>
+ <button id="play">Pause</button><button id="back" aria-label="Previous frame">−1 frame</button><button id="next" aria-label="Next frame">+1 frame</button>
+ <label class="toggle"><input id="boxes" type="checkbox">Collision boxes</label><label class="toggle"><input id="mirror" type="checkbox">Mirror</label>
+</div>
+<canvas id="canvas" width="1100" height="560" aria-label="Hammer attack and Drive route playback"></canvas>
+<label>Frame<input id="frame" type="range" min="0" max="1" value="0"></label>
+<div class="readout" id="readout" aria-live="off"></div><p class="warnings" id="warnings"></p>
+<p class="legend"><strong>5D — Break Step</strong><br>4f load → 12f burst → 6f recovery. Cancel any special after its first active frame into Drive. Cancel the burst into a grounded normal for +4f block advantage and full dash velocity. One use per string; 12 uninterrupted neutral frames restore it. No armor or invulnerability.</p>
+<script>
+const pack=__HAMMER_REVIEW_PACK__, $=id=>document.getElementById(id),images=new Map();let selected=pack.moves.findIndex(m=>m.slot===13),tick=0,playing=!matchMedia('(prefers-reduced-motion: reduce)').matches,last=0,budget=0;
+const ready=Promise.all(Object.entries(pack.images).map(([key,url])=>new Promise((resolve,reject)=>{const im=new Image();im.onload=resolve;im.onerror=()=>reject(Error('Image failed: '+key));im.src=url;images.set(key,im);})));for(const [i,m]of pack.moves.entries())$('move-select').add(new Option(m.id+' · '+m.name,i));$('move-select').value=selected;
+const clip=()=>pack.moves[selected].scenarios[$('scenario').value];
+function paint(){const m=pack.moves[selected],frames=clip(),f=frames[Math.min(tick,frames.length-1)],c=$('canvas').getContext('2d');const mirror=$('mirror').checked?-1:1;
+ const center=(f.actor.x+f.target.x)/2,spread=Math.max(350,Math.abs(f.actor.x-f.target.x)+350),scale=Math.min(2.1,1040/spread),ground=455,point=(x,y)=>[550+(x-center)*scale*mirror,ground-y*scale];
+ c.clearRect(0,0,1100,560);c.fillStyle='#111f2c';c.fillRect(0,0,1100,560);c.strokeStyle='#20384d';c.lineWidth=1;for(let x=0;x<1000;x+=50){const [px]=point(x,0);c.beginPath();c.moveTo(px,70);c.lineTo(px,ground);c.stroke();}c.strokeStyle='#8198af';c.beginPath();c.moveTo(20,ground);c.lineTo(1080,ground);c.stroke();
+ function effect(b){const e=b.effect;if(!e)return;const [x,y]=point(b.x,b.y),[l,bt,r,t]=e.box;c.save();c.translate(x,y);c.scale(b.facing*mirror,1);c.globalAlpha=e.opacity??1;c.drawImage(images.get(e.file),...e.region,l*scale,-t*scale,(r-l)*scale,(t-bt)*scale);c.restore();}
+ function body(b){if(b.effect?.behind)effect(b);const [x,y]=point(b.x,b.y),k=150/b.body_height*scale;c.save();c.translate(x,y);c.scale(b.facing*mirror,1);c.drawImage(images.get(b.file),...b.region,-b.pivot[0]*k,-b.pivot[1]*k,b.region[2]*k,b.region[3]*k);c.restore();if(!b.effect?.behind)effect(b);}
+ body(f.target);body(f.actor);
+ if($('boxes').checked)for(const player of f.boxes)for(const [kind,color]of [['hurt','#67c6ed'],['push','#b5d98b'],['hit','#ff9775']])for(const [l,b,r,t]of player[kind]){const [x,y]=point(l,t),[xx,yy]=point(r,b);c.strokeStyle=color;c.lineWidth=2;c.strokeRect(Math.min(x,xx),y,Math.abs(xx-x),yy-y);}
+ c.fillStyle='#b4cbef';c.font='bold italic 26px system-ui';c.fillText(m.id+' · '+m.name,28,42);c.font='17px system-ui';c.fillStyle=f.driveBonus?'#f2d898':'#a5c5ff';c.fillText(f.driveBonus?'DRIVE +'+f.driveBonus+'f / FULL CARRY':f.driveUsed?'BREAK STEP / SPENT':'BREAK STEP / READY',28,78);
+ c.textAlign='right';c.fillStyle='#eee9de';c.fillText(f.damage+' DAMAGE'+(f.combo>1?' / '+f.combo+' HITS':''),1072,42);c.textAlign='left';c.fillStyle='#a9bccb';c.font='15px system-ui';c.fillText(f.hitstop?'IMPACT FREEZE':f.stage,28,525);
+ $('readout').textContent=`${tick+1} / ${frames.length} ticks · ${m.timing.length?m.timing.join(' / ')+'f · ':''}move frame ${f.age} · velocity ${f.vx.toFixed(2)} px/f · auto dash ${f.driveDistance.toFixed(1)} px`;$('frame').max=frames.length-1;$('frame').value=tick;$('warnings').textContent=[...(m.warnings??[]),...(m.notes?.[$('scenario').value]??[])].join(' ');$('play').textContent=playing?'Pause':'Play';
+}
+function seek(n){tick=Math.max(0,Math.min(clip().length-1,n));paint();}
+$('move-select').onchange=()=>{selected=Number($('move-select').value);const m=pack.moves[selected];$('scenario').disabled=!!m.behavior;if(m.behavior)$('scenario').value=m.behavior;seek(0)};$('scenario').onchange=()=>seek(0);$('frame').oninput=()=>{playing=false;seek(Number($('frame').value))};$('play').onclick=()=>{playing=!playing;paint()};$('back').onclick=()=>{playing=false;seek(tick-1)};$('next').onclick=()=>{playing=false;seek(tick+1)};for(const id of ['mirror','boxes'])$(id).onchange=paint;
+function animate(now){if(playing){budget+=Math.min(100,now-last)*Number($('speed').value);while(budget>=1000/60){budget-=1000/60;tick=(tick+1)%clip().length;}paint();}last=now;requestAnimationFrame(animate)}
+ready.then(()=>{paint();requestAnimationFrame(animate)});globalThis.hammerReview={pack,ready,seek,state:()=>({selected,tick}),pause:()=>{playing=false;paint()}};
+</script></html>

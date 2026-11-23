@@ -14,6 +14,8 @@ on:
       - 'scripts/build-fillet-motion-review.mjs'
       - 'scripts/build-shark-motion-review.mjs'
       - 'scripts/build-smoke-motion-review.mjs'
+      - 'scripts/build-hammer-motion-review.mjs'
+      - 'art/characters/hammer-kit-v1/**'
       - 'art/characters/smoke-specials-v3/**'
       - 'art/characters/shark-kit-v2/**'
       - 'art/characters/fillet-v1/production/ground-twos/*.json'
@@ -80,6 +82,11 @@ jobs:
           ./build/shark-drive-tests
           node tests/workbench-shark-kit.mjs
           node tests/workbench-shark-kit-browser.mjs
+      - name: Verify Hammer kit and Break Step
+        run: |
+          ./build/hammer-drive-tests
+          node tests/workbench-hammer.mjs
+          node tests/workbench-hammer-browser.mjs
       - name: Verify Smoke attack timing and review
         run: |
           ./build/smoke-tests

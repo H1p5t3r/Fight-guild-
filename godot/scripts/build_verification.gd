@@ -86,6 +86,7 @@ func timing_fixture() -> Dictionary:
 			character.moves[slot].reach = 50000
 			character.moves[slot].hitstun = 24
 	data.characters[1].moves[3].reach = 100 # Dummy Hs whiffs so its recovery can be punished.
+	data.characters[1].moves[14].reversalEligible = 1 # Exercise timing with Hammer's current 236S mapping.
 	return data
 
 func verify_shark_movement() -> void:

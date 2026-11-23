@@ -11,7 +11,7 @@ func run() -> void:
 	check(model.load_data(source).is_empty(), "Uploaded batch did not import")
 	var actual := model.data()
 	var serialized: Dictionary = JSON.parse_string(JSON.stringify(actual))
-	check(actual.schema == 26, "Batch was not upgraded")
+	check(actual.schema == 27, "Batch was not upgraded")
 	for group in ["inputRules", "momentumRules", "recoveryRules", "tuningRules", "jumpRules", "comboRules"]:
 		for key in source[group]: check(actual[group][key] == source[group][key], "Global rule changed")
 	for c in 6:
@@ -24,7 +24,8 @@ func run() -> void:
 			for key in CombatModel.FIELDS: check(before[key] == after[key], "Uploaded move value changed: %s/%s/%s" % [c,m,key])
 			check(before.hurtboxes == serialized.characters[c].moves[m].hurtboxes, "Authored hurtboxes changed")
 			check(before.hitboxTimeline == serialized.characters[c].moves[m].hitboxTimeline, "Authored hit timeline changed")
-		if c == 2: check(actual.characters[c].moves[8].hurtWindowMask == 1 and actual.characters[c].moves[8].hurtWindowEnd == 17, "Smoke timed anti-air protection missing")
+		if c == 1: check(actual.characters[c].moves[8].hurtWindowStart == 1 and actual.characters[c].moves[8].hurtWindowMask == 1 and actual.characters[c].moves[8].hurtWindowEnd == 13, "Hammer anti-air protection missing")
+		elif c == 2: check(actual.characters[c].moves[8].hurtWindowMask == 1 and actual.characters[c].moves[8].hurtWindowEnd == 17, "Smoke timed anti-air protection missing")
 		elif c == 3: check(actual.characters[c].moves[8].hurtWindowMask == 1 and actual.characters[c].moves[8].hurtWindowEnd == 14, "Tapper timed anti-air protection missing")
 		elif c == 4: check(actual.characters[c].moves[8].hurtMaskWindup == 3 and actual.characters[c].moves[8].hurtWindowStart == 4 and actual.characters[c].moves[8].hurtWindowEnd == 13 and actual.characters[c].moves[8].hurtWindowMask == 1, "Shark staged anti-air protection missing")
 		elif c == 5: check(actual.characters[c].moves[8].hurtWindowStart == 3 and actual.characters[c].moves[8].hurtWindowEnd == 12, "Fillet v1 protection missing")

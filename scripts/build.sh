@@ -21,6 +21,7 @@ python tests/combat_data_test.py
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/tapper_test.cpp -o build/tapper-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/smoke_test.cpp -o build/smoke-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/shark_drive_test.cpp -o build/shark-drive-tests
+"${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/hammer_drive_test.cpp -o build/hammer-drive-tests
 if command -v zig >/dev/null 2>&1; then
   fight_zig="$(command -v zig)"
 else
