@@ -43,6 +43,9 @@ concurrency:
 
 jobs:
   build:
+    # User paused website updates on 2026-11-23. Resume only on explicit request.
+    # Retain push/concurrency so this pause also supersedes an older active run.
+    if: ${{ false }}
     runs-on: ubuntu-24.04
     env:
       FIGHT_TOOLS: /tmp/fight-guild-workshop-tools
@@ -109,6 +112,7 @@ jobs:
         with:
           path: build/move-workshop
   deploy:
+    if: ${{ false }}
     needs: build
     runs-on: ubuntu-24.04
     permissions:

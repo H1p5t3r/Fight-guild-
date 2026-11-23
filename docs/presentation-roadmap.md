@@ -4,10 +4,15 @@ Work through these in order, finishing and pushing each step to
 `feat/godot-combat-lab` before beginning the next. This records the user's approved
 priority list, not a claim that the later items are implemented.
 
+**Website freeze (2026-11-23):** Do not update or publish the move-editor website
+until the user explicitly asks to resume. Continue improvements in the native
+Godot game. Both jobs in `workshop-pages.yml` are paused; preserve these guards.
+Do not treat permission for game/art changes as permission to resume the website.
+
 1. **Combat impact feedback — in progress.** Resolved contact events and original
    sound effects now cover weapons, defense, counters, landing and walls in Godot
-   and the Workshop preview. A/B impact artwork is awaiting the user's selection
-   in `art/effects/impact-v1/options.png`. Produce and review the selected effects
+   and the Workshop preview source. The user delegated the impact choice; use
+   B / Ink Snap from `art/effects/impact-v1/options.png` in Godot only. Produce and review the selected effects
    at actual combat timing before marking this priority complete.
 2. **Receiver animations and paired throws.** Strong reactions, readable knockdown
    and recovery, and convincing attacker/defender alignment.
