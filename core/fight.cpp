@@ -785,12 +785,17 @@ int Simulation::hurt_mask(const Fighter& f,int tick_offset) const {
     if(m.v[HurtWindowStart]>0&&age>=m.v[HurtWindowStart]&&age<=m.v[HurtWindowEnd]) mask&=m.v[HurtWindowMask];
     return mask;
 }
-Box Simulation::hurt_box(const Fighter& f,int index,int tick_offset) const {
-    if(index<0) return {};
+int Simulation::hurt_region(const Fighter& f,int index,int tick_offset) const {
+    if(index<0) return MAX_HURTBOXES;
     const int* body=extended_body(f,tick_offset);
     int mask=hurt_mask(f,tick_offset)&(body?body[0]:15),region=0;
     for(;region<MAX_HURTBOXES;++region) if((mask&(1<<region))&&index--==0) break;
+    return region;
+}
+Box Simulation::hurt_box(const Fighter& f,int index,int tick_offset) const {
+    const int region=hurt_region(f,index,tick_offset);
     if(region==MAX_HURTBOXES) return {};
+    const int* body=extended_body(f,tick_offset);
     if(body) {const int* b=body+1+region*4;return transform({b[0],b[1],b[2],b[3]},f);}
     if(const auto* profile=hurt_override(f,tick_offset)) return transform(profile->boxes[region],f);
     Pose art=pose(f,tick_offset);
@@ -1303,7 +1308,8 @@ void Simulation::step(int raw0,int raw1) {
         }
         f.hit_groups|=hit_bit(contact_fighter,1);
         f.hit_done=f.contact=1;
-        apply_contact(p,hits[p],m,contacts[p],prior_combo[1-p],prior_reaction[1-p],f.facing,false);
+        const ContactVisual visual=contact_visual(contact_fighter,contact_fighters[1-p],m);
+        apply_contact(p,hits[p],m,contacts[p],prior_combo[1-p],prior_reaction[1-p],f.facing,false,-1,-1,-1,&visual);
     }
     update_projectiles();
     // A line pull resolves after simultaneous strikes, so hitting its owner
@@ -1417,7 +1423,7 @@ void Simulation::spawn_projectile(Fighter& f) {
 }
 // Swept AABB in fixed-point time. Fast/thin shots cannot tunnel through a body
 // or one another; relative motion also keeps diagonal clashes honest.
-static bool swept_point(int x0,int y0,int x1,int y1,const Box& b) {
+static bool swept_point(int x0,int y0,int x1,int y1,const Box& b,long long* contact_time=nullptr) {
     long long enter=0,leave=1000000;
     const int starts[]={x0,y0},deltas[]={x1-x0,y1-y0},lo[]={b.left,b.bottom},hi[]={b.right,b.top};
     for(int axis=0;axis<2;++axis) {
@@ -1430,6 +1436,7 @@ static bool swept_point(int x0,int y0,int x1,int y1,const Box& b) {
         if(last<leave) leave=last;
         if(enter>leave) return false;
     }
+    if(contact_time)*contact_time=enter;
     return enter<=leave;
 }
 void Simulation::update_projectiles() {
@@ -1459,17 +1466,30 @@ void Simulation::update_projectiles() {
         }
     }
     int contacts[MAX_PROJECTILES]={}; bool combos[MAX_PROJECTILES]={}; int reactions[MAX_PROJECTILES]={};
+    ContactVisual visuals[MAX_PROJECTILES]={};
     for(int i=0;i<MAX_PROJECTILES;++i) {
         auto& q=world.projectiles[i]; if(!q.life||q.cooldown) continue;
         auto& defender=world.players[1-q.owner]; const auto& m=moves[q.character][q.move];
         if(defender.reaction==Downed||defender.reaction==Waking||defender.reaction==Captured||defender.grab_time
             ||(semi_airborne(defender)&&m.v[HitLevel]==1)) continue;
         bool hit=false;
+        long long first=1000001;int nearest=2147483647;
         for(int b=0;b<hurt_count(defender,defender.slow_held?0:1);++b) {
             Box target=hurt_box(defender,b,defender.slow_held?0:1);
+            const Box body=target;
             target.left-=(m.v[ProjectileWidth]+1)/2-1; target.right+=m.v[ProjectileWidth]/2-1;
             target.bottom-=(m.v[ProjectileHeight]+1)/2-1; target.top+=m.v[ProjectileHeight]/2-1;
-            if(swept_point(old_x[i],old_y[i],q.x,q.y,target)) hit=true;
+            long long arrival=0;
+            if(swept_point(old_x[i],old_y[i],q.x,q.y,target,&arrival)) {
+                hit=true;
+                const int x=old_x[i]+static_cast<int>((q.x-old_x[i])*arrival/1000000);
+                const int y=old_y[i]+static_cast<int>((q.y-old_y[i])*arrival/1000000);
+                const int cy=clamp(y,body.bottom,body.top),distance=abs(cy-y);
+                if(arrival<first||(arrival==first&&distance<nearest)) {
+                    first=arrival;nearest=distance;
+                    visuals[i]={clamp(x,body.left,body.right),cy,CueProjectile|region_flags(hurt_region(defender,b,defender.slow_held?0:1))|(defender.y>0?CueAirborne:0)};
+                }
+            }
         }
         if(!hit) continue;
         Fighter source=world.players[q.owner]; source.move=q.move; source.x=old_x[i]; source.y=q.y; source.facing=q.facing;
@@ -1492,7 +1512,7 @@ void Simulation::update_projectiles() {
             if(contacts[i]!=Blocked) defender.combo=defender.combo_display=defender.combo_time=defender.combo_age=0;
             if(owner.move==q.move&&owner.attack_serial==q.serial) owner.contact=1;
             Move m=moves[q.character][q.move]; m.v[Category]=Special; m.v[PullFrames]=0;
-            apply_contact(q.owner,q.move,m,contacts[i],combos[i]||hit_this_tick[1-q.owner],reactions[i],q.facing,true,q.serial,q.x,q.y);
+            apply_contact(q.owner,q.move,m,contacts[i],combos[i]||hit_this_tick[1-q.owner],reactions[i],q.facing,true,q.serial,q.x,q.y,&visuals[i]);
             if(contacts[i]!=Blocked) hit_this_tick[1-q.owner]=true;
             q.cooldown=m.v[ProjectileRehit];
             if(--q.hits<=0) q.life=0;
@@ -1519,7 +1539,7 @@ void Simulation::tick_grabs(const bool advances[2]) {
         }
     }
 }
-void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_combo,int prior_reaction,int facing,bool projectile,int serial,int impact_x,int impact_y) {
+void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_combo,int prior_reaction,int facing,bool projectile,int serial,int impact_x,int impact_y,const ContactVisual* visual) {
     Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
     world.foreground_player=p;f.contact_ticks=0;
     if(!projectile&&f.move==move&&f.drive_bonus>0&&(m.v[Category]==Normal||m.v[Category]==Command))
@@ -1529,7 +1549,7 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
     bool armor=!blocked&&other.move>=0&&other.reaction==Free&&other.armor_left>0&&m.v[Category]!=Throw&&m.v[HitLevel]!=1
         &&other.age+1<=moves[other.character][other.move].v[ArmorFrames];
     if(point||armor) {
-        contact_cue(p,move,m,armor?ArmorCue:BlockCue,facing,projectile,serial,impact_x,impact_y);
+        contact_cue(p,move,m,armor?ArmorCue:BlockCue,facing,projectile,serial,impact_x,impact_y,visual);
         if(armor) --other.armor_left;
         int damage=point?m.v[ChipDamage]:m.v[Damage]; other.health=max(0,other.health-damage);
         f.event=point?Blocked:NormalHit; f.last_damage=damage; f.last_base_damage=m.v[Damage]; f.damage_scale=100;
@@ -1544,7 +1564,7 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
         other.vx=other.vy=other.knockback_left=other.faultless=other.stance=0; return;
     }
     const bool cashout=!projectile&&f.variant==2;
-    contact_cue(p,move,m,blocked?(other.faultless?FaultlessCue:m.v[GuardBreak]?GuardBreakCue:BlockCue):contact,facing,projectile,serial,impact_x,impact_y);
+    contact_cue(p,move,m,blocked?(other.faultless?FaultlessCue:m.v[GuardBreak]?GuardBreakCue:BlockCue):contact,facing,projectile,serial,impact_x,impact_y,visual);
     const int cash=(!blocked&&cashout&&other.bleed_source)?other.grey_life:0;
     if(!blocked) {clear_owned_status(1-p);other.pair_recovery=other.pair_grace_pending=0;}
     for(auto& target:world.players) if(target.tether_used) target.tether_source=target.tether_used=target.tether_time=0;

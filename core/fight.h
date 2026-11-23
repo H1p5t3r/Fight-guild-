@@ -52,6 +52,8 @@ enum CueKind { HitCue=1, BlockCue, CounterCue, PunishCue, GuardBreakCue, Faultle
                ArmorCue, SwingCue, LandCue, WallCue, WallBreakCue, ClashCue };
 constexpr int CUE_FIELDS=12, MAX_CUES=64;
 struct Cue { int v[CUE_FIELDS]; }; // frame, kind, actor, character, move, serial, x, y, facing, strength, flags, variant
+enum CueFlags { CueProjectile=1, CueLegs=2, CueChest=4, CueHead=6, CueRegionMask=6, CueAirborne=8 };
+struct ContactVisual { int x, y, flags; }; // Presentation only; sampled before either side of a trade changes pose.
 constexpr int HURT_PHASES = 3, HURT_FIELDS = 1+MAX_HURTBOXES*4;
 // count 0 inherits the current sprite pose. Custom phases have the three body
 // regions and optionally one extension; weapons never acquire hurt regions.
@@ -211,7 +213,9 @@ public:
     static unsigned collision_hash();
 private:
     void emit_cue(int kind,int player,int move,int x,int y,int strength=0,int flags=0,int serial=-1,int facing=0);
-    void contact_cue(int player,int move,const Move& payload,int kind,int facing,bool projectile,int serial,int impact_x=-1,int impact_y=-1);
+    ContactVisual contact_visual(const Fighter& source,const Fighter& target,const Move& payload) const;
+    int hurt_region(const Fighter& fighter,int index,int tick_offset=0) const;
+    void contact_cue(int player,int move,const Move& payload,int kind,int facing,bool projectile,int serial,int impact_x=-1,int impact_y=-1,const ContactVisual* visual=nullptr);
     bool extended(const Fighter& f) const { return character_extensions[f.character].v[CPolicy]==1; }
     const int* extension(const Fighter& f) const { return extensions[f.character][f.move < 0 ? 0 : f.move].v; }
     const int* extended_body(const Fighter& f,int offset=0) const;
@@ -279,7 +283,7 @@ private:
     int mobility_or(const Fighter& fighter, int field, int fallback) const;
     void update_projectiles();
     void spawn_projectile(Fighter& fighter);
-    void apply_contact(int player, int move, Move effective, int contact, bool prior_combo, int prior_reaction, int facing, bool projectile,int serial=-1,int impact_x=-1,int impact_y=-1);
+    void apply_contact(int player, int move, Move effective, int contact, bool prior_combo, int prior_reaction, int facing, bool projectile,int serial=-1,int impact_x=-1,int impact_y=-1,const ContactVisual* visual=nullptr);
 };
 // Compatibility instance for the original C ABI and native test runner.
 extern Simulation default_simulation;

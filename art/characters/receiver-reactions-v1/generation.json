@@ -1,0 +1,19 @@
+{
+  "status": "Awaiting user direction selection; concept boards only, not runtime art.",
+  "created": "2026-11-23",
+  "generator": "image_gen",
+  "references": [
+    "godot/assets/fighters/appearance-v3/fillet-ready.png",
+    "godot/assets/fighters/fillet-ground-v1/5p.png"
+  ],
+  "images": {
+    "a-compact-snap.png": {
+      "sha256": "f9494f235fb215de43e211a164a57f8530fa7312abb8c0d9b7b62c0134aa64ad",
+      "original_bytes_preserved": true
+    },
+    "b-whip-recoil.png": {
+      "sha256": "836f9e86dd631c3e8716108e7f27825755dcb2956ebe7ae27054560910cfd25b",
+      "original_bytes_preserved": true
+    }
+  }
+}

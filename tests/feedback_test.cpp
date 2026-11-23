@@ -66,7 +66,7 @@ static void projectiles(){
     m.v[ProjectileWidth]=12000;m.v[ProjectileHeight]=12000;m.v[ProjectileLife]=100;m.v[Hitstop]=0;
     s.world.projectiles[0]={100,0,5,14,77,45000,8000,12000,0,1,1,0,1};
     s.step(0,0);CHECK(count(HitCue)==1);
-    for(int i=0;i<s.cue_count;++i)if(s.cues[i].v[1]==HitCue)CHECK(s.cues[i].v[4]==14&&s.cues[i].v[5]==77&&s.cues[i].v[10]==1);
+    for(int i=0;i<s.cue_count;++i)if(s.cues[i].v[1]==HitCue)CHECK(s.cues[i].v[4]==14&&s.cues[i].v[5]==77&&(s.cues[i].v[10]&CueProjectile));
     setup();s.world.players[0].move=-1;s.world.players[1].x=90000;
     for(int c:{4,5}){s.moves[c][14].v[ProjectileKind]=1;s.moves[c][14].v[ProjectileWidth]=10000;s.moves[c][14].v[ProjectileHeight]=10000;}
     s.world.projectiles[0]={100,0,5,14,2,50000,20000,0,0,1,1,0,1};
@@ -97,5 +97,56 @@ static void walls_and_landing(){
     setup();s.world.players[0].move=-1;s.world.players[1].y=50;s.world.players[1].vy=-300;
     s.step(0,0);CHECK(count(LandCue)==1);s.step(0,0);CHECK(count(LandCue)==0);
 }
-int main(){contacts();strike_height();multi_and_replay();projectiles();utilities_and_throws();walls_and_landing();
+static void region_body(int player,int move,int mask=15){
+    auto& f=s.world.players[player];f.move=move;f.age=0;
+    auto& m=s.moves[f.character][move];m.v[Startup]=60;m.v[CounterVulnerable]=0;
+    m.v[HurtMaskWindup]=m.v[HurtMaskActive]=m.v[HurtMaskRecovery]=mask;
+    m.v[HurtWindowStart]=0;
+    s.move_hit[f.character][move]={};
+    for(int phase=0;phase<3;++phase)s.move_hurt[f.character][move][phase]={4,{{-5000,0,5000,5000},{-5000,6000,5000,11000},{-5000,12000,5000,15000},{-5000,16000,5000,18000}}};
+}
+static void regions(){
+    const int bottoms[]={1000,7000,13000,17000},expected[]={CueLegs,CueChest,CueHead,CueChest};
+    for(int facing:{-1,1})for(int region=0;region<4;++region)for(int air:{0,1})for(int masked:{0,1}){
+        setup(facing);region_body(1,3,masked?1<<region:15);
+        auto& b=s.world.players[1];b.y=air*5000;
+        auto& m=s.moves[5][0];m.v[Bottom]=bottoms[region]+b.y;m.v[Height]=1000;
+        s.step(0,0);CHECK(count(HitCue)==1);
+        for(int i=0;i<s.cue_count;++i)if(s.cues[i].v[1]==HitCue)CHECK(s.cues[i].v[10]==(expected[region]|(air?CueAirborne:0)));
+    }
+    // A later hitbox key reaches the head even though the base move is low.
+    setup();region_body(1,3);auto& a=s.world.players[0];auto& m=s.moves[5][0];
+    m.v[Bottom]=1000;m.v[Height]=1000;m.v[Active]=5;a.age=m.v[Startup]+1;
+    s.move_hit[5][0]={};s.move_hit[5][0].count=2;
+    s.move_hit[5][0].keys[0]={1,1,1,-1,-1,-1,-1,{{0,1000,30000,2000}}};
+    s.move_hit[5][0].keys[1]={3,1,1,-1,-1,-1,-1,{{0,13000,30000,14000}}};
+    s.step(0,0);CHECK(count(HitCue)==1);
+    for(int i=0;i<s.cue_count;++i)if(s.cues[i].v[1]==HitCue)CHECK((s.cues[i].v[10]&CueRegionMask)==CueHead);
+    // Both contacts must use pre-interruption bodies, regardless of player order.
+    for(int swap:{0,1}){
+        setup();region_body(0,0);region_body(1,0);
+        for(int p=0;p<2;++p){auto& f=s.world.players[p];auto& hit=s.moves[f.character][0];
+            hit.v[Reach]=30000;hit.v[Bottom]=p==swap?13000:1000;hit.v[Height]=1000;
+            hit.v[Pushback]=hit.v[AirPushback]=0;f.age=hit.v[Startup]-1;}
+        s.step(0,0);CHECK(count(HitCue)==2);
+        for(int i=0;i<s.cue_count;++i)if(s.cues[i].v[1]==HitCue)CHECK((s.cues[i].v[10]&CueRegionMask)==(s.cues[i].v[2]==swap?CueHead:CueLegs));
+    }
+    // Thin fast projectiles select a swept body contact, including disabled boxes.
+    for(int facing:{-1,1})for(int region=0;region<3;++region){
+        setup(facing);s.world.players[0].move=-1;region_body(1,3,1<<region);
+        auto& shot=s.moves[5][14];shot.v[ProjectileKind]=1;shot.v[ProjectilePersist]=1;
+        shot.v[ProjectileWidth]=shot.v[ProjectileHeight]=500;shot.v[ProjectileGravity]=0;
+        s.world.projectiles[0]={100,0,5,14,77,50000-facing*10000,bottoms[region],facing*30000,0,facing,1,0,1};
+        s.step(0,0);CHECK(count(HitCue)==1);
+        for(int i=0;i<s.cue_count;++i)if(s.cues[i].v[1]==HitCue)CHECK(s.cues[i].v[10]==(expected[region]|CueProjectile));
+    }
+    // A falling projectile crosses head then torso/legs in one tick: first contact wins.
+    setup();s.world.players[0].move=-1;region_body(1,3,7);
+    auto& shot=s.moves[5][14];shot.v[ProjectileKind]=1;shot.v[ProjectilePersist]=1;
+    shot.v[ProjectileWidth]=shot.v[ProjectileHeight]=500;
+    s.world.projectiles[0]={100,0,5,14,77,s.world.players[1].x,20000,0,-20000,1,1,0,1};
+    s.step(0,0);CHECK(count(HitCue)==1);
+    for(int i=0;i<s.cue_count;++i)if(s.cues[i].v[1]==HitCue)CHECK(s.cues[i].v[10]==(CueHead|CueProjectile));
+}
+int main(){contacts();strike_height();multi_and_replay();projectiles();utilities_and_throws();walls_and_landing();regions();
     std::printf("Feedback: %d checks, %d failures\n",checks,failures);return failures?1:0;}
