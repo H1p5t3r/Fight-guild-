@@ -89,6 +89,9 @@ try {
 const regions=['legs','torsoArms','head','extension'],posePhases={active:0,windup:1,block:2,signature_windup:3,signature_active:4,ready:5,walk:6,run:7,stance:8,knockdown:9,knockdown_back:10,idle:11,crouch_idle:12,back_walk:13,attack_animation:14,backdash:15};
 const hurtPoses=art.map((fighter,c)=>Object.fromEntries(Object.entries(posePhases).filter(([phase])=>fighter[phase]).map(([phase,p])=>[phase,fighter[phase].frames.map((_,pose)=>Object.fromEntries(Array.from({length:engine.api.fg_pose_box_count(c,p,pose)},(_,n)=>[regions[n],Array.from({length:4},(_,edge)=>engine.api.fg_pose_box_get(c,p,pose,n,edge))])))])));
 const pack={format:1,defaults,limits,art,collisions:collisions.fighters,hurtPoses,images};
+pack.audio={manifest:JSON.parse(await readFile(path('godot/data/combat_audio.json'),'utf8')),sounds:{}};
+const soundFiles=JSON.parse(await readFile(path('godot/assets/audio/combat/manifest.json'),'utf8')).sounds;
+for(const sound of soundFiles)pack.audio.sounds[sound.file.replace('.wav','')]='data:audio/wav;base64,'+(await readFile(path('godot/assets/audio/combat/'+sound.file))).toString('base64');
 const manifestPath=path('godot/data/workshop/current.json');
 if(existsSync(manifestPath)){
   const batch=JSON.parse(await readFile(manifestPath,'utf8')),raw=await readFile(path('godot/data/workshop/'+batch.file));
@@ -127,7 +130,8 @@ async function asset(content,extension){
 }
 const linkedImages={};
 for(const [file,encoded] of Object.entries(images))linkedImages[file]=await asset(Buffer.from(encoded.split(',')[1],'base64'),'webp');
-const linkedPack={...pack,images:linkedImages};
+const soundScript=await asset('globalThis.FIGHT_WORKSHOP_SOUNDS='+JSON.stringify(pack.audio.sounds)+';','js');
+const linkedPack={...pack,images:linkedImages,audio:{manifest:pack.audio.manifest,script:soundScript}};
 const dataScript=await asset('globalThis.FIGHT_WORKSHOP_DATA='+JSON.stringify(linkedPack)+';','js');
 const appScript=await asset(bundle.outputFiles[0].text,'js');
 let linkedCss=sourceCss;

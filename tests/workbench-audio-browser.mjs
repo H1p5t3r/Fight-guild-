@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import {chromium} from 'playwright';
+import {existsSync} from 'node:fs';
+import {serveWorkshopSite} from '../scripts/serve-workbench.mjs';
+import {ready,showDisplayOptions} from './workbench-ui-helpers.mjs';
+const server=await serveWorkshopSite(0,'127.0.0.1','/Fight-guild-/');
+const browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||(existsSync('/usr/bin/chromium')?'/usr/bin/chromium':undefined),args:['--no-sandbox']});
+try{
+ const page=await browser.newPage({viewport:{width:390,height:844},reducedMotion:'reduce'}),errors=[],requests=[];
+ page.on('request',r=>requests.push(r.url()));
+ page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(`http://127.0.0.1:${server.address().port}/Fight-guild-/`);await ready(page);
+ assert.deepEqual(await page.evaluate(()=>moveWorkshop.audio()),{enabled:false,played:0});
+ const bank=await page.evaluate(()=>FIGHT_WORKSHOP_DATA.audio.script);
+ assert.ok(bank&&!requests.some(url=>url.endsWith(bank)),'Sound bank must not delay initial load');
+ await showDisplayOptions(page);
+ await page.locator('#preview-sound').click();await page.waitForFunction(()=>moveWorkshop.audio().enabled);
+ assert.ok(requests.some(url=>url.endsWith(bank)),'Sound bank was not loaded on demand');
+ await page.locator('#test-speed').selectOption('1');
+ await page.keyboard.press('Escape');
+ await page.locator('#restart').click();await page.locator('#play').click();
+ await page.waitForFunction(()=>moveWorkshop.audio().played>0);
+ await page.locator('#frame').evaluate(el=>{el.value=0;el.dispatchEvent(new Event('input',{bubbles:true}));});
+ const heard=await page.evaluate(()=>moveWorkshop.audio().played);
+ await page.locator('#frame').evaluate(el=>{el.value=el.max;el.dispatchEvent(new Event('input',{bubbles:true}));});
+ assert.equal(await page.evaluate(()=>moveWorkshop.audio().played),heard,'Scrubbing must be silent');
+ await showDisplayOptions(page);await page.locator('#preview-sound').click();assert.equal(await page.locator('#preview-sound').getAttribute('aria-pressed'),'false');await page.keyboard.press('Escape');
+ await page.locator('#restart').click();await page.locator('#play').click();
+ await page.waitForFunction(()=>moveWorkshop.cursor().index>=8);
+ assert.equal(await page.evaluate(()=>moveWorkshop.audio().played),heard,'Muted playback emitted sounds');
+ assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+ assert.deepEqual(errors,[]);
+ console.log('PASS mobile sound opt-in, playback, mute and silent seek.');
+}finally{await browser.close();await new Promise(r=>server.close(r));}

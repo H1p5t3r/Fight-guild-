@@ -18,6 +18,7 @@ protected:
         ClassDB::bind_method(D_METHOD("preview_begin", "player", "move"), &FightCore::preview_begin);
         ClassDB::bind_method(D_METHOD("reset", "character0", "character1", "simple0", "simple1"), &FightCore::reset);
         ClassDB::bind_method(D_METHOD("step", "input0", "input1"), &FightCore::step);
+        ClassDB::bind_method(D_METHOD("feedback_events"), &FightCore::feedback_events);
         ClassDB::bind_method(D_METHOD("read_value", "player", "field"), &FightCore::read_value);
         ClassDB::bind_method(D_METHOD("checksum"), &FightCore::checksum);
         ClassDB::bind_method(D_METHOD("snapshot"), &FightCore::snapshot);
@@ -38,6 +39,12 @@ public:
     int preview_begin(int p,int move) { return simulation.preview_begin(p,move); }
     void reset(int a,int b,bool simple_a,bool simple_b) { simulation.reset(a,b,simple_a,simple_b); }
     void step(int a,int b) { simulation.step(a,b); }
+    PackedInt32Array feedback_events() const {
+        PackedInt32Array result;
+        for(int i=0;i<simulation.cue_count;++i)for(int f=0;f<fight::CUE_FIELDS;++f)
+            result.push_back(simulation.cue_get(i,f));
+        return result;
+    }
     int read_value(int p,int f) const { return simulation.get(p,f); }
     int64_t checksum() const { return simulation.checksum(); }
     int64_t collision_hash() const { return fight::Simulation::collision_hash(); }
@@ -152,6 +159,7 @@ public:
                 ||q.hits<1||q.hits>32||q.cooldown<0||q.cooldown>120||q.durability<1||q.durability>32) return false;
         }
         simulation.world=candidate;
+        simulation.cue_count=0;
         return true;
     }
     PackedInt32Array configuration() const {

@@ -13,6 +13,8 @@ static int clamp(int v,int lo,int hi) { return max(lo,min(v,hi)); }
 static int abs(int v) { return v<0?-v:v; }
 static int button_bit(int b) { return P<<b; }
 
+#include "feedback.inc"
+
 void Simulation::defaults() {
     rules=Rules{};
     for(int c=0;c<CHARACTER_COUNT;++c) for(int i=0;i<MOVE_COUNT;++i) {
@@ -25,6 +27,7 @@ void Simulation::defaults() {
 }
 
 void Simulation::reset(int c0,int c1,int s0,int s1) {
+    cue_count=0;
     world=State{};
     world.remaining=99*60;
     world.winner=-1;
@@ -540,6 +543,7 @@ void Simulation::control(Fighter& f) {
 void Simulation::collide_wall(Fighter& f,int velocity,bool in_hitstun) {
     int side=velocity<0?0:1;
     if(in_hitstun&&!f.guarding&&f.reaction!=WallSplat&&f.reaction!=Downed&&f.reaction!=Waking) {
+        emit_cue(WallCue,int(&f-world.players),-1,side?100000:0,f.y+8000,world.wall_health[side]==0?4:2);
         // Test health BEFORE this impact. Depleting a healthy wall cannot also splat.
         if(world.wall_health[side]==0) {
             f.reaction=WallSplat; f.wall_time=rules.wall_splat_frames;
@@ -984,6 +988,7 @@ bool Simulation::throw_invulnerable(const Fighter& f) const {
     return f.pair_recovery>0||f.landing_time>0||f.y>0||semi_airborne(f)||f.prejump_time>0||f.reaction!=Free||(!f.guard_break&&f.throw_grace>0)||(f.guarding&&!f.guard_break)||(f.stun>0&&!f.guarding);
 }
 void Simulation::land(Fighter& f) {
+    if(f.y!=0||f.reaction==AirReel)emit_cue(LandCue,int(&f-world.players),-1,f.x,0,f.reaction==AirReel?3:0);
     if(f.reaction==AirReel&&f.bounce_ground>0) {
         f.y=1; f.vy=f.bounce_ground; f.bounce_ground=0; f.stun=max(f.stun,12); return;
     }
@@ -1088,6 +1093,7 @@ void Simulation::finish_wall_break() {
 }
 
 void Simulation::step(int raw0,int raw1) {
+    cue_count=0;
     // Cinematic presentation follows real simulation ticks, including the impact freeze.
     if(world.impact_time>0) --world.impact_time;
     int raw[2]={raw0&INPUT_MASK,raw1&INPUT_MASK};
@@ -1180,6 +1186,11 @@ void Simulation::step(int raw0,int raw1) {
         f.teleported=0;
         f.display_move=-1;
         control(f);pay_faultless(f);
+        if(f.move>=0&&f.age+1==effective_move(f).v[Startup]) {
+            const auto m=effective_move(f);
+            if(m.v[Category]!=Throw&&m.v[ActionType]!=1&&m.v[Mechanic]!=4&&m.v[Mechanic]!=5)
+                emit_cue(SwingCue,p,f.move,f.x,f.y+8000,m.v[AttackLevel]);
+        }
         if(f.move<0&&!f.stun&&f.reaction==Free) f.idle_time=(f.idle_time+1)%1000000;
         spawn_projectile(f);
         move_horizontal(f,prior_stun[p]>0&&!prior_guard[p]);
@@ -1440,6 +1451,7 @@ void Simulation::update_projectiles() {
         const auto& ma=moves[a.character][a.move]; const auto& mb=moves[b.character][b.move];
         int width=(ma.v[ProjectileWidth]+mb.v[ProjectileWidth])/2-1,height=(ma.v[ProjectileHeight]+mb.v[ProjectileHeight])/2-1;
         if(swept_point(old_x[i]-old_x[j],old_y[i]-old_y[j],a.x-b.x,a.y-b.y,{-width,-height,width,height})) {
+            emit_cue(ClashCue,a.owner,a.move,(a.x+b.x)/2,(a.y+b.y)/2,2,1,a.serial);
             int da=a.durability,db=b.durability;
             a.durability=max(0,da-db); b.durability=max(0,db-da);
             if(!a.durability) a.life=0;
@@ -1480,7 +1492,7 @@ void Simulation::update_projectiles() {
             if(contacts[i]!=Blocked) defender.combo=defender.combo_display=defender.combo_time=defender.combo_age=0;
             if(owner.move==q.move&&owner.attack_serial==q.serial) owner.contact=1;
             Move m=moves[q.character][q.move]; m.v[Category]=Special; m.v[PullFrames]=0;
-            apply_contact(q.owner,q.move,m,contacts[i],combos[i]||hit_this_tick[1-q.owner],reactions[i],q.facing,true,q.serial);
+            apply_contact(q.owner,q.move,m,contacts[i],combos[i]||hit_this_tick[1-q.owner],reactions[i],q.facing,true,q.serial,q.x,q.y);
             if(contacts[i]!=Blocked) hit_this_tick[1-q.owner]=true;
             q.cooldown=m.v[ProjectileRehit];
             if(--q.hits<=0) q.life=0;
@@ -1507,7 +1519,7 @@ void Simulation::tick_grabs(const bool advances[2]) {
         }
     }
 }
-void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_combo,int prior_reaction,int facing,bool projectile,int serial) {
+void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_combo,int prior_reaction,int facing,bool projectile,int serial,int impact_x,int impact_y) {
     Fighter& f=world.players[p]; Fighter& other=world.players[1-p];
     world.foreground_player=p;f.contact_ticks=0;
     if(!projectile&&f.move==move&&f.drive_bonus>0&&(m.v[Category]==Normal||m.v[Category]==Command))
@@ -1517,6 +1529,7 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
     bool armor=!blocked&&other.move>=0&&other.reaction==Free&&other.armor_left>0&&m.v[Category]!=Throw&&m.v[HitLevel]!=1
         &&other.age+1<=moves[other.character][other.move].v[ArmorFrames];
     if(point||armor) {
+        contact_cue(p,move,m,armor?ArmorCue:BlockCue,facing,projectile,serial,impact_x,impact_y);
         if(armor) --other.armor_left;
         int damage=point?m.v[ChipDamage]:m.v[Damage]; other.health=max(0,other.health-damage);
         f.event=point?Blocked:NormalHit; f.last_damage=damage; f.last_base_damage=m.v[Damage]; f.damage_scale=100;
@@ -1531,6 +1544,7 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
         other.vx=other.vy=other.knockback_left=other.faultless=other.stance=0; return;
     }
     const bool cashout=!projectile&&f.variant==2;
+    contact_cue(p,move,m,blocked?(other.faultless?FaultlessCue:m.v[GuardBreak]?GuardBreakCue:BlockCue):contact,facing,projectile,serial,impact_x,impact_y);
     const int cash=(!blocked&&cashout&&other.bleed_source)?other.grey_life:0;
     if(!blocked) {clear_owned_status(1-p);other.pair_recovery=other.pair_grace_pending=0;}
     for(auto& target:world.players) if(target.tether_used) target.tether_source=target.tether_used=target.tether_time=0;
@@ -1662,6 +1676,7 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
                 other.vx=other.knockback_left=0;
             }
             if(was_splatted&&!throwing) {
+                emit_cue(WallBreakCue,p,move,other.x,other.y+8000,4);
                 other.health=max(0,other.health-rules.wall_break_damage);
                 world.wall_break_time=rules.wall_break_frames;
                 world.wall_break_actor=p; world.wall_break_side=other.wall_side;
@@ -2138,6 +2153,9 @@ unsigned checksum() { return default_simulation.checksum(); }
 }
 
 extern "C" {
+int fg_cue_count() { return fight::default_simulation.cue_count; }
+int fg_cue_get(int index,int field) { return fight::default_simulation.cue_get(index,field); }
+void fg_cue_clear() { fight::default_simulation.cue_count=0; }
 int fg_version() { return fight::VERSION; }
 void fg_defaults() { fight::defaults(); }
 void fg_reset(int a,int b,int c,int d) { fight::reset(a,b,c,d); }

@@ -76,9 +76,11 @@ var lab := TrainingLab.new()
 var lab_window: Window
 var timeline: FrameTimeline
 var lab_status: Label
+var combat_audio := CombatAudio.new()
 
 func _ready() -> void:
 	name = "FightGuild"
+	add_child(combat_audio)
 	motion.load_preferences()
 	build_theme()
 	build_interface()
@@ -580,6 +582,7 @@ func menu_action(action: String) -> void:
 		"confirm_fighters": confirm_selection()
 		"back": menu_back()
 		"controls", "pause_controls": show_controls()
+		"sound", "pause_sound": show_sound_settings()
 		"motion":
 			motion.toggle_reduced()
 			menus.update_motion_label()
@@ -995,6 +998,48 @@ func show_controls() -> void:
 	dialog.canceled.connect(func(): close_dialog(dialog))
 	dialog.popup_centered(Vector2i(900, 600))
 
+func show_sound_settings() -> void:
+	held.clear()
+	var dialog := AcceptDialog.new()
+	var previous := get_viewport().gui_get_focus_owner()
+	if previous != null: dialog.set_meta("return_focus", weakref(previous))
+	dialog.theme = GuildTheme.stock()
+	dialog.title = "Combat sound"
+	var layout := VBoxContainer.new()
+	layout.add_theme_constant_override("separation", 18)
+	dialog.add_child(layout)
+	var toggle := CheckBox.new()
+	toggle.text = "Sound effects"
+	toggle.button_pressed = combat_audio.enabled
+	layout.add_child(toggle)
+	toggle.toggled.connect(func(value: bool):
+		combat_audio.enabled = value
+		combat_audio.save_preferences()
+		if not value: combat_audio.silence())
+	var caption := Label.new()
+	layout.add_child(caption)
+	var slider := HSlider.new()
+	slider.min_value = 0
+	slider.max_value = 100
+	slider.value = combat_audio.volume * 100
+	slider.custom_minimum_size = Vector2(340, 36)
+	slider.accessibility_name = "Sound effects volume"
+	layout.add_child(slider)
+	caption.text = "Volume: %d%%" % slider.value
+	slider.value_changed.connect(func(value: float):
+		combat_audio.volume = value / 100.0
+		caption.text = "Volume: %d%%" % value
+		combat_audio.save_preferences())
+	var preview := Button.new()
+	preview.text = "Preview impact"
+	layout.add_child(preview)
+	preview.pressed.connect(func():
+		if combat_audio.enabled and combat_audio.volume > 0: combat_audio.play_cue({"kind": 1, "character": 5, "move": 3, "serial": 1, "actor": 0, "strength": 2}))
+	add_child(dialog)
+	dialog.confirmed.connect(func(): close_dialog(dialog))
+	dialog.canceled.connect(func(): close_dialog(dialog))
+	dialog.popup_centered(Vector2i(400, 240))
+
 func close_dialog(dialog: Window) -> void:
 	var previous: Control = dialog.get_meta("return_focus").get_ref() if dialog.has_meta("return_focus") else null
 	dialog.queue_free()
@@ -1292,6 +1337,12 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	var state := model.state()
+	var confirmed := model.frame() - 1
+	if connection.active and connection.session != null:
+		confirmed = mini(confirmed, mini(connection.session.confirmed[0], connection.session.confirmed[1]))
+	# Let the finishing impact ring out across the result/intermission transition.
+	var sound_active: bool = screen == "play" or (state.winner >= 0 and screen in ["entry", "results"])
+	combat_audio.consume(model, confirmed, sound_active and not paused and not has_open_dialog() and get_window().has_focus())
 	arena.round_label = MatchCeremony.round_call(round_number)
 	arena.score = match_score.wins
 	arena.presentation_active = screen in ["entry", "results"]

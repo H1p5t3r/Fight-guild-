@@ -41,6 +41,8 @@ func start_replay(model: CombatModel, dummy_only: bool = false) -> bool:
 	if recording.is_empty(): message = "Record an exchange first."; return false
 	if fingerprint != model.fingerprint(): message = "Move settings changed. Record a new exchange."; return false
 	if not model.core.restore(initial): message = "The recording's starting state could not be restored."; return false
+	# Intentional playback is a fresh presentation pass, unlike network rollback.
+	model.cues.reset()
 	clear_trace()
 	playback = 2 if dummy_only else 1
 	message = "REPLAY · P2 dummy; P1 is live" if dummy_only else "REPLAY · both players"

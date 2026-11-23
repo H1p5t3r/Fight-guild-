@@ -47,7 +47,7 @@ export class CombatPreview {
     const capture=(input,stage)=>{
       const state=e.state(),players=state.players;
       const contact=players[0].contactCount!==lastGroups;
-      const frame={state,input,stage,selectedFrame:players[0].move===slot?players[0].age:players[0].displayMove===slot?players[0].displayAge:0,
+      const frame={state,input,stage,cues:e.feedbackEvents(),selectedFrame:players[0].move===slot?players[0].age:players[0].displayMove===slot?players[0].displayAge:0,
         boxes:[0,1].map(p=>({hurt:e.boxes(p,0),push:e.boxes(p,1),hit:e.boxes(p,2),projectiles:e.boxes(p,4)})),contact:null};
       if(contact){frame.contact={tick:elapsed,event:players[0].event,damage:players[0].lastDamage,combo:players[0].combo,
         x:players[1].x,y:players[1].y+7500};result.contacts.push(frame.contact);}
@@ -152,7 +152,7 @@ export class CombatPreview {
       }
       const state=e.state(),frame={state,input,stage:state.players[0].dashTicks>0&&state.players[0].y>0&&state.players[0].dashAge===0?'Air dash pause':action==='fd'?'Faultless Defense':action.replace(/([A-Z])/g,' $1'),selectedFrame:0,boxes:[0,1].map(p=>({hurt:e.boxes(p,0),push:e.boxes(p,1),hit:e.boxes(p,2),projectiles:e.boxes(p,4)})),contact:null};
       if(state.players[1].contactCount!==lastContact){lastContact=state.players[1].contactCount;frame.contact={tick,event:state.players[1].event,damage:state.players[1].lastDamage,combo:state.players[1].combo,x:state.players[0].x,y:state.players[0].y+7500};result.contacts.push(frame.contact);}
-      result.frames.push(frame);
+      frame.cues=e.feedbackEvents();result.frames.push(frame);
     }
     result.displacement=(e.state().players[0].x-50000)/100;
     return result;

@@ -19,7 +19,7 @@ export function recordSequence(preview,data,character,slot,queue,options,directi
   const state=e.state(),a=state.players[0],b=state.players[1];if(a.move>=0)lastSlot=a.move;
   const frame={state,input,stage,sequenceStep:currentStep,moveSlot:lastSlot,selectedFrame:a.move>=0?a.age:0,boxes:[0,1].map(p=>({hurt:e.boxes(p,0),push:e.boxes(p,1),hit:e.boxes(p,2),projectiles:e.boxes(p,4)})),contact:null};
   if(a.contactCount!==lastContacts){frame.contact={tick:elapsed,event:a.event,damage:a.lastDamage,combo:a.combo,x:b.x,y:b.y+7500};result.contacts.push(frame.contact);}
-  lastContacts=a.contactCount;result.maxCombo=Math.max(result.maxCombo,a.combo);result.frames.push(frame);return state;
+  frame.cues=e.feedbackEvents();lastContacts=a.contactCount;result.maxCombo=Math.max(result.maxCombo,a.combo);result.frames.push(frame);return state;
  };
  const step=(input,stage)=>{e.step(input,defend(e));elapsed++;return capture(input,stage);};
  capture(0,'Ready');

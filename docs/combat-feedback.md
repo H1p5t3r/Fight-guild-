@@ -58,3 +58,35 @@ Schema/core version **4** originally added the three per-move timing fields and 
 Regression tests cover startup/active/recovery edges, trade symmetry, recovery cancels, zero/max bonuses, counter-hit follow-ups, blocked contacts, both players' reversal timing, traditional/simple execution, expired buffers/hitstop, late inputs, opt-in normals, interruption of a timed reversal, combo continuity and deterministic restoration. Native, Godot and WebAssembly traces must still agree frame by frame.
 
 Schema/core **10** appends two move fields and integer slowdown/cinematic snapshot state. Schema 1–9 imports keep existing authored counter bonuses, disable new slowdown and use legacy additive freeze until edited or restored to defaults. Counter tests cover alternate-tick clocks, airborne gravity, follow-up hitstop, trade symmetry, old-save migration, reduced-motion presentation and odd-phase snapshot replay.
+## Contact audio and effect events (2026-11-23)
+
+The core emits a bounded per-step presentation event list after resolving contacts.
+It distinguishes hit, block, counter, punish, guard break, Faultless Defense,
+armor/guard point, attack release, landing, wall impact, wall break and projectile
+clash. Events carry the real source move/attack identity and receiving body position,
+including projectiles whose owner has already started another move. Capture poses,
+bleed ticks and utility pulls/dashes do not manufacture strike impacts. Paired throw
+impacts occur at the damaging release.
+
+Events are outside `State`, move data and checksums. The schema stays at 27 and
+combat timing, damage, pushback and hitstop are unchanged. Godot keeps 360 input
+frames of cosmetic history; resimulation replaces the predicted future. Visual cue
+ages hold during shared hitstop. Online audio consumes only jointly confirmed input
+frames, accepting a short confirmation delay rather than sounding a predicted hit
+that becomes a block. Repaints do not replay audio. Round resets, menus, muted
+playback and long stalls cannot burst old sounds on resume.
+
+Godot's **Sound** control in the home/pause menus offers mute, volume and an impact
+preview. The Workshop has **View & playback → Sound: Off/On**. It starts off, unlocks
+only on a user click, loads the sound bank on demand, and plays only while the recorded exchange advances. Scrubbing
+is silent; half-speed playback spaces the cues without pitching the samples down.
+
+The 23 short WAVs are original synthesized placeholders, generated reproducibly by
+`scripts/generate-combat-audio.py` with no external recordings. Cuts, spear strikes,
+blunt body hits, hammer, gas, fire and stone have separate contact/release families;
+counter bass layers under the weapon impact. Defense and wall sounds are separate.
+Both frontends limit simultaneous voices and the output mix. These are an initial
+sound-design pass; they can be replaced without changing combat logic.
+
+New impact artwork is still at A/B review, tracked in
+`docs/presentation-roadmap.md`; the options sheet is not installed in the game.

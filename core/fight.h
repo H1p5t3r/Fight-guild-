@@ -46,6 +46,12 @@ struct Mobility { int v[MOBILITY_FIELDS]; };
 enum BoxKind { HurtBox, PushBox, HitBox, WallBox, ProjectileBox };
 constexpr int HIT_TRAVEL_TICKS = 6; // Existing hit-distance budgets now travel over six action ticks.
 struct Box { int left, bottom, right, top; };
+// Per-step presentation output. Deliberately outside State/configuration/hash:
+// consumers rebuild it on resimulation and only play confirmed audio online.
+enum CueKind { HitCue=1, BlockCue, CounterCue, PunishCue, GuardBreakCue, FaultlessCue,
+               ArmorCue, SwingCue, LandCue, WallCue, WallBreakCue, ClashCue };
+constexpr int CUE_FIELDS=12, MAX_CUES=64;
+struct Cue { int v[CUE_FIELDS]; }; // frame, kind, actor, character, move, serial, x, y, facing, strength, flags, variant
 constexpr int HURT_PHASES = 3, HURT_FIELDS = 1+MAX_HURTBOXES*4;
 // count 0 inherits the current sprite pose. Custom phases have the three body
 // regions and optionally one extension; weapons never acquire hurt regions.
@@ -162,6 +168,9 @@ struct Rules {
 // Each engine adapter owns a simulation; multiple matches never share state.
 class Simulation {
 public:
+    Cue cues[MAX_CUES]{};
+    int cue_count=0;
+    int cue_get(int index,int field) const;
     State world{};
     Move moves[CHARACTER_COUNT][MOVE_COUNT]{};
     MoveHurt move_hurt[CHARACTER_COUNT][MOVE_COUNT][HURT_PHASES]{};
@@ -201,6 +210,8 @@ public:
     static Box pose_box(int character, int phase, int pose, int index);
     static unsigned collision_hash();
 private:
+    void emit_cue(int kind,int player,int move,int x,int y,int strength=0,int flags=0,int serial=-1,int facing=0);
+    void contact_cue(int player,int move,const Move& payload,int kind,int facing,bool projectile,int serial,int impact_x=-1,int impact_y=-1);
     bool extended(const Fighter& f) const { return character_extensions[f.character].v[CPolicy]==1; }
     const int* extension(const Fighter& f) const { return extensions[f.character][f.move < 0 ? 0 : f.move].v; }
     const int* extended_body(const Fighter& f,int offset=0) const;
@@ -268,7 +279,7 @@ private:
     int mobility_or(const Fighter& fighter, int field, int fallback) const;
     void update_projectiles();
     void spawn_projectile(Fighter& fighter);
-    void apply_contact(int player, int move, Move effective, int contact, bool prior_combo, int prior_reaction, int facing, bool projectile,int serial=-1);
+    void apply_contact(int player, int move, Move effective, int contact, bool prior_combo, int prior_reaction, int facing, bool projectile,int serial=-1,int impact_x=-1,int impact_y=-1);
 };
 // Compatibility instance for the original C ABI and native test runner.
 extern Simulation default_simulation;
@@ -289,6 +300,9 @@ unsigned checksum();
 #define FG_EXPORT(name)
 #endif
 extern "C" {
+FG_EXPORT(fg_cue_count) int fg_cue_count();
+FG_EXPORT(fg_cue_get) int fg_cue_get(int index,int field);
+FG_EXPORT(fg_cue_clear) void fg_cue_clear();
 FG_EXPORT(fg_version) int fg_version();
 FG_EXPORT(fg_defaults) void fg_defaults();
 FG_EXPORT(fg_reset) void fg_reset(int character0, int character1, int simple0, int simple1);

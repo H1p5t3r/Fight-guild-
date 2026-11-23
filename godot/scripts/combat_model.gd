@@ -48,13 +48,19 @@ const RULE_COUNT := 49 # Input, Momentum, recovery/walls, tuning, jump, then com
 const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy", "dashKind", "dashAge", "airDashUsed", "airJumpUsed", "teleported", "contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause","attackSerial","pairRecovery","captureFailed","contactTicks","coastPending","coastMode","dashSpeed","displayMove","displayAge","tetherTime","tetherChase","linePullTime","linePullHeld", "comboDecay", "pushPercent", "launchPercent", "hitCrouching","driveUsed","driveNeutral","driveBonus","driveDistance","driveSpeed","driveAutoDistance"]
 var extension_art: Array = ExtensionData.default_art.duplicate(true)
 var core := FightCore.new()
+var cues := CombatCues.new()
 var config: PackedInt32Array = core.configuration()
 
 func reset(characters: Array = [5, 4], simple: Array = [false, false]) -> void:
 	core.reset(characters[0], characters[1], simple[0], simple[1])
+	cues.reset()
 
 func step(a: int, b: int) -> void:
+	var before := frame()
+	var frozen := core.read_value(-1, 2) > 0
 	core.step(a, b)
+	if core.has_method("feedback_events"):
+		cues.capture(before, frozen, core.call("feedback_events"))
 
 func frame() -> int:
 	return core.read_value(-1, 0)

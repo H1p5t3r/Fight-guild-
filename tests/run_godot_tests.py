@@ -26,6 +26,7 @@ cases = [
     (["--headless", "--script", "tests/training_lab_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/tuning_test.gd", "--", "--test"], "0 failures"),
     (["--headless", "--script", "tests/counter_test.gd", "--", "--test"], "0 failures"),
+    (["--headless", "--script", "tests/feedback_test.gd", "--", "--test"], "menu: PASS"),
     (["--headless", "--script", "tests/art_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/collision_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/ui_smoke.gd", "--", "--test", "--review"], "0 failures"),

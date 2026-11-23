@@ -7,7 +7,7 @@ import {join} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {serveWorkshopSite} from '../scripts/serve-workbench.mjs';
-import {ready,seekMoveFrame,dragHandle} from './workbench-ui-helpers.mjs';
+import {ready,seekMoveFrame,dragHandle,showDisplayOptions} from './workbench-ui-helpers.mjs';
 
 const mount='/Fight-guild-/',server=await serveWorkshopSite(0,'127.0.0.1',mount);
 const origin=`http://127.0.0.1:${server.address().port}`,url=origin+mount;
@@ -75,6 +75,9 @@ try{
   }
   if(localAllowed){
     await ready(local);assert.deepEqual(await data(local),initial);
+    await showDisplayOptions(local);await local.locator('#preview-sound').click();
+    await local.waitForFunction(()=>moveWorkshop.audio().enabled);
+    await local.locator('#preview-sound').click();
     await local.locator('#import-file').setInputFiles(exported);
     await local.waitForFunction(()=>document.getElementById('toast').textContent.startsWith('Move data imported'));
     await ready(local);

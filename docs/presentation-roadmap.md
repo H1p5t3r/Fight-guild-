@@ -1,0 +1,30 @@
+# Playable-build improvement order
+
+Work through these in order, finishing and pushing each step to
+`feat/godot-combat-lab` before beginning the next. This records the user's approved
+priority list, not a claim that the later items are implemented.
+
+1. **Combat impact feedback — in progress.** Resolved contact events and original
+   sound effects now cover weapons, defense, counters, landing and walls in Godot
+   and the Workshop preview. A/B impact artwork is awaiting the user's selection
+   in `art/effects/impact-v1/options.png`. Produce and review the selected effects
+   at actual combat timing before marking this priority complete.
+2. **Receiver animations and paired throws.** Strong reactions, readable knockdown
+   and recovery, and convincing attacker/defender alignment.
+3. **Spacing and combo audit.** Check the roster against standing, crouching and
+   airborne targets, both corners, FD, repeat launchers and wall transitions.
+4. **Movement transitions.** Consistent planted feet, body scale and transitions
+   into/out of attacks; Hammer locomotion, Fillet air poses and Tapper stance.
+5. **Input and controller support.** Remapping, device/deadzone handling, motion
+   acceptance and buffered-action validation.
+6. **Training and Workshop diagnostics.** Recording slots, defensive dummy choices,
+   and clear explanations when a sequence cannot connect or cancel.
+7. **Character rewards and counterplay.** Fillet bleed, Shark's pull, Tapper's stance
+   loops and Hammer's once-per-string Drive.
+8. **Repeatable sprite pipeline.** Approved references and choreography, registration,
+   timing/coverage checks and a single review workflow.
+9. **Online usability.** Easier connection, rematches and testing on real networks.
+10. **Remaining roster design.** Anvil's identity and Tapper's eventual specials.
+
+New sprite/animation directions retain the established options → user selection →
+production process. Do not silently treat an unanswered art question as approval.

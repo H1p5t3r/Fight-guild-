@@ -15,7 +15,7 @@ MANIFEST = 'godot/bin/windows-core.json'
 TARGETS = ('template_debug', 'template_release')
 INPUTS = (
     'core/fight.cpp', 'core/fight.h', 'core/combat_data.h', 'core/extensions.h',
-    'core/extension_tables.inc', 'core/fillet_v1.inc', 'core/step_drive.inc', 'native/fight_extension.cpp',
+    'core/extension_tables.inc', 'core/fillet_v1.inc', 'core/step_drive.inc', 'core/feedback.inc', 'native/fight_extension.cpp',
     'native/SConstruct', 'native/build_profile.json', 'godot/fight_core.gdextension',
 )
 

@@ -42,6 +42,10 @@ export class Engine {
     this.api.fg_reset(...characters,...simple.map(Number));
   }
   step(a,b) { this.api.fg_step(a,b); }
+  feedbackEvents() {
+    const keys=['frame','kind','actor','character','move','serial','x','y','facing','strength','flags','variant'];
+    return Array.from({length:this.api.fg_cue_count?.()??0},(_,i)=>Object.fromEntries(keys.map((key,f)=>[key,this.api.fg_cue_get(i,f)])));
+  }
   get frame() { return this.api.fg_get(-1,0); }
   get hash() { return this.api.fg_checksum() >>> 0; }
   snapshot() {
@@ -50,6 +54,7 @@ export class Engine {
   restore(bytes) {
     if(!(bytes instanceof Uint8Array)||bytes.byteLength!==this.api.fg_state_size()) throw new Error('Invalid snapshot');
     new Uint8Array(this.api.memory.buffer,this.api.fg_state_ptr(),bytes.length).set(bytes);
+    this.api.fg_cue_clear?.();
   }
   state() {
     const keys=['x','y','facing','health','move','age','stun','guarding','contact','combo','event','lastMove','raw','character','simple','momentum','faultless','blockReaction','blockAge','blockAdvantage','guardBreak','throwInvulnerable','comboDisplay','comboTime','comboAge','hitNotice','hitNoticeTime','reversalTime','reversalInputAge','posePhase','poseIndex','reaction','knockdown','recoveryTime','comboReceived','gravityPercent','wallDamage','wallSplatTime','positiveTime','vx','running','dashTicks','pullTime','pullOwner','weaponBackX','weaponBackY','weaponTipX','weaponTipY','weaponVisible','carryVx','carryTime',"landingTime","throwGrace","cancelMask","inputAge","lastDamage","damageScale","starterProration","comboScale","counterTier","repeatGravity","lastBaseDamage","prejumpTime","counterSlowTime","counterSlowHeld","knockbackLeft","hitGroups","vy","dashKind","dashAge","airDashUsed","airJumpUsed","teleported","contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause","attackSerial","pairRecovery","captureFailed","contactTicks","coastPending","coastMode","dashSpeed","displayMove","displayAge","tetherTime","tetherChase","linePullTime","linePullHeld","comboDecay","pushPercent","launchPercent","hitCrouching","driveUsed","driveNeutral","driveBonus","driveDistance","driveSpeed","driveAutoDistance"];

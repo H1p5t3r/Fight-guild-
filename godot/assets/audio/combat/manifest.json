@@ -1,0 +1,123 @@
+{
+  "author": "Fight Guild",
+  "source": "Original procedural synthesis; no external samples",
+  "generator": "scripts/generate-combat-audio.py",
+  "rate": 48000,
+  "sounds": [
+    {
+      "file": "hit_body.wav",
+      "seconds": 0.17,
+      "sha256": "e4bc00c40ba9683d953ba9961d129813ebb599e46a2e1ba0e0135f91e217a7f3"
+    },
+    {
+      "file": "swing_body.wav",
+      "seconds": 0.19,
+      "sha256": "113b3fce6f1e1ecaf7e54111acf0cde91664501bcbdeb4711dbcb542518c50f4"
+    },
+    {
+      "file": "hit_cut.wav",
+      "seconds": 0.15,
+      "sha256": "f15bfc41a54b7243f53cd456bc64c60886523ba90b0b3a57cfbe113209819f2e"
+    },
+    {
+      "file": "swing_cut.wav",
+      "seconds": 0.12,
+      "sha256": "219babf4f8a83d11d7e5bd0e6352865a30664851d44b6a89791430688a11bb7d"
+    },
+    {
+      "file": "hit_spear.wav",
+      "seconds": 0.19,
+      "sha256": "6ce58683b0f00f991caa9f0de61b979d00f39028ab9e5e47e838becb6eb2be79"
+    },
+    {
+      "file": "swing_spear.wav",
+      "seconds": 0.19,
+      "sha256": "4bb2953ed387cfdcdc5438cb12b837d3a989d636a537e58773a899840486092a"
+    },
+    {
+      "file": "hit_hammer.wav",
+      "seconds": 0.27,
+      "sha256": "4cdb83d9c5a560e839c82ae9f8db2c05a53aecd605642cbbc0289357fa61dd9a"
+    },
+    {
+      "file": "swing_hammer.wav",
+      "seconds": 0.19,
+      "sha256": "b0dd99895457c483e7795fad4c4c277b1615b466b6c6adb28ea285cdec802650"
+    },
+    {
+      "file": "hit_gas.wav",
+      "seconds": 0.28,
+      "sha256": "6da86d5d146ede8716605fdb692fe204be49a899a136c5a81f7dfb28a469e46d"
+    },
+    {
+      "file": "swing_gas.wav",
+      "seconds": 0.19,
+      "sha256": "048b46c4f9d48f63e89ac1e1f9fc4bd60105fc3fd6ae19f82f7b2daa03e51578"
+    },
+    {
+      "file": "hit_fire.wav",
+      "seconds": 0.29,
+      "sha256": "5e28c38d2433555b3f9cd5c1b9480dd697349e9064159e601d0c43089210a583"
+    },
+    {
+      "file": "swing_fire.wav",
+      "seconds": 0.19,
+      "sha256": "a697bb3c7b0b6bb1e6e7afc9a272b8b816587f174914d18481183e4744779c82"
+    },
+    {
+      "file": "hit_stone.wav",
+      "seconds": 0.24,
+      "sha256": "6594a3a7c18d74895397c471a9233a338e83310613b43f7579e055e8f7d20957"
+    },
+    {
+      "file": "swing_stone.wav",
+      "seconds": 0.19,
+      "sha256": "ea39d4c3b04a132aa96ee5d59ab3c1da549145c70ae449723d06b79628525dd5"
+    },
+    {
+      "file": "block.wav",
+      "seconds": 0.19,
+      "sha256": "8706352865ee25f5ac45fd8a046ced64513efa9313f79d7d951b17a5935390d5"
+    },
+    {
+      "file": "faultless.wav",
+      "seconds": 0.25,
+      "sha256": "f800c355a9d823be3693773758331c1b8d79ab7153af239d7625210fb1cbd873"
+    },
+    {
+      "file": "guard_break.wav",
+      "seconds": 0.38,
+      "sha256": "f78c4fa7b29830fa977a56a0110b0fcd7e81087e96240a2ac1c22dee84aabdfc"
+    },
+    {
+      "file": "armor.wav",
+      "seconds": 0.22,
+      "sha256": "2d9570ecfbf8be6a7e37bfc0d4aa5b3623f43cf945663e0722db2e885ff242b6"
+    },
+    {
+      "file": "counter.wav",
+      "seconds": 0.32,
+      "sha256": "0d7837badac83729f6545efa2afd88e3e839ed1a1ad1e3938a4670c1fa5fdba6"
+    },
+    {
+      "file": "land.wav",
+      "seconds": 0.17,
+      "sha256": "1fd35303b821787be44d550d54aea23e6daf7d292308c09832dac85fad7b88d0"
+    },
+    {
+      "file": "wall.wav",
+      "seconds": 0.32,
+      "sha256": "8a9140d4032503047af2235af478f49026044a6994735b67bfcca10a15cf23d2"
+    },
+    {
+      "file": "wall_break.wav",
+      "seconds": 0.52,
+      "sha256": "84a7b97999c99f91729f754aa9a6fd8c9d45e6c1c64ebc4d2c6e24fe8892b8d8"
+    },
+    {
+      "file": "clash.wav",
+      "seconds": 0.23,
+      "sha256": "cd43223a234dafe1036874cadd33a5abe19e73fc8010e1b170a671f3a65da75f"
+    }
+  ]
+}

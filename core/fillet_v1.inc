@@ -139,6 +139,8 @@ bool Simulation::tick_pair() {
 }
 void Simulation::release_pair() {
     const PairState pair=world.pair;world.pair={};
+    if(pair.kind!=LegacyCapture&&pair.kind!=WoundCapture)
+        contact_cue(pair.owner,pair.move,pair.payload,HitCue,pair.facing,false,-1);
     auto& f=world.players[pair.owner];auto& other=world.players[1-pair.owner];
     f.reaction=other.reaction=Free;
     if(pair.kind==LegacyCapture) {

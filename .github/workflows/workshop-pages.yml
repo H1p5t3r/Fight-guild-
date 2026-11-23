@@ -8,6 +8,8 @@ on:
       - 'web/**'
       - 'core/**'
       - 'godot/assets/fighters/**'
+      - 'godot/assets/audio/**'
+      - 'godot/assets/effects/**'
       - 'godot/data/**'
       - 'godot/Content/Fonts/**'
       - 'scripts/build-workbench.mjs'
@@ -65,6 +67,11 @@ jobs:
         run: node scripts/build-workbench.mjs
       - name: Verify hosted and extracted editor
         run: node tests/workbench-delivery-browser.mjs
+      - name: Verify combat feedback and preview sound
+        run: |
+          ./build/feedback-tests
+          node tests/workbench-feedback.mjs
+          node tests/workbench-audio-browser.mjs
       - name: Verify combo physics and mobile controls
         run: |
           ./build/combo-physics-tests

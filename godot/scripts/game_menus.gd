@@ -74,6 +74,7 @@ func _ready() -> void:
 	footer.offset_top = -40
 	home_utilities = line(footer)
 	action(home_utilities, "controls", "Controls", 40, "secondary")
+	action(home_utilities, "sound", "Sound", 40, "secondary")
 	var hint := text(footer, "Arrows / D-pad: navigate   ·   Enter / A: select   ·   Esc / B: back", 17, MUTED)
 	hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -243,6 +244,7 @@ func build_pause(page: VBoxContainer) -> void:
 	action(actions, "change_fighters", "Change fighters")
 	action(actions, "pause_home", "Main menu", 38, "secondary")
 	action(actions, "pause_controls", "Controls", 38, "secondary")
+	action(actions, "pause_sound", "Sound", 38, "secondary")
 
 func build_results(page: VBoxContainer) -> void:
 	result_title = heading(page, "ROUND COMPLETE", "Run it back, try another fighter, or return to the main menu.")

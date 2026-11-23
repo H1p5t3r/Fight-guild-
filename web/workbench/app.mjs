@@ -1,3 +1,4 @@
+import {CombatAudio} from './combat-audio.mjs';
 import {COMBO_RULE_SPECS} from '../combo-rules.mjs';
 import {renderExtension} from './extension-editor.mjs';
 import {renderMovement} from './movement-editor.mjs';
@@ -17,6 +18,7 @@ import {renderDrive} from './drive-editor.mjs';
 import {createSettingSearch} from './setting-search.mjs';
 import {renderSequence,showSequenceResult} from './sequence-editor.mjs';
 const $=id=>document.getElementById(id),pack=globalThis.FIGHT_WORKSHOP_DATA;
+const combatAudio=new CombatAudio(pack);
 const STORAGE='fight-guild.move-workshop.v1';
 let model,character=5,slot=0,tab='timing',filter='all',frame=5,playing=false,lastTick=0,saveTimer,toastTimer,dragBefore;
 let storageOkay=true,savePending=false,unexported=false,bootLocked=false,recoveryRaw='',referenceBusy=false;
@@ -365,7 +367,7 @@ function syncPreview(){
   const f=matchingRecord()?testRecord.frames[testIndex]:null,variant=f?.selectedFrame?f.state.players[0].variant:0,m=variantMove(move(),variant);
   frame=Math.max(1,Math.min(totalFrames(m),frame));drawTimeline(m,variant);scheduleTest();
 }
-function stop(){playing=false;$('play').setAttribute('aria-label',tab==='sequence'?'Play sequence':'Play attack');}
+function stop(){playing=false;combatAudio.silence();$('play').setAttribute('aria-label',tab==='sequence'?'Play sequence':'Play attack');}
 function testOptions(){return {bleed:$('test-bleed').value,mechanic:$('test-mechanic').value,target:Number($('test-target').value),behavior:$('test-behavior').value,entry:$('test-entry').value,gap:Number($('test-gap').value),facing:Number($('test-facing').value),simple:$('test-simple').value==='1',movement:tab==='movement'?movementAction:null,sequence:tab==='sequence'?model.sequence(character):null};}
 function matchingRecord(){return testRecord?.character===character&&testRecord?.slot===slot&&!!testRecord.movement===(tab==='movement')&&!!testRecord.sequence===(tab==='sequence');}
 function seekMove(value,variant=0){
@@ -424,7 +426,7 @@ function drawTest(){
   $('geometry-help').textContent=testRecord.sequence?'Play or scrub the full sequence, or tap a step’s frame to inspect its start. Edit each attack in its own section; this test uses its current values.':a.variant&&f.selectedFrame?'Follow-up timing is shown here. Edit its range and movement in Drive mechanics; phase hurtboxes inherit from the applying move.':testRecord.movement?'Play or scrub the movement here. Edit the character profile alongside this preview.':playing?'Pause or scrub to edit boxes directly on the fighter.':!f.selectedFrame?'Use Windup, Active or Recovery to jump to an editable attack frame.':tab==='hurt'?'Enable custom boxes, choose a body region and drag its blue handles. Changes update this same exchange.':tab==='hit'&&m.mechanic===5?'Break Step has no hitbox. Edit movement and pressure reward in Drive system.':tab==='hit'&&m.mechanic===4?'Reel In has no hitbox. Edit pull duration, range and gap in Drive system.':tab==='hit'?'On active frames, drag the selected orange box or its edges. Edits keep this move frame while recalculating contact.':'Play, pause or scrub here. Open Hit & movement or Hurtboxes to edit directly on the fighter.';
 }
 function animate(time){
-  if(playing&&testRecord&&!previewPending){if(!lastTick)lastTick=time;const step=1000/(60*Number($('test-speed').value)),advance=Math.floor((time-lastTick)/step);if(advance){testIndex=Math.min(testRecord.frames.length-1,testIndex+advance);lastTick+=advance*step;if(testIndex===testRecord.frames.length-1)stop();drawTest();}}
+  if(playing&&testRecord&&!previewPending){if(!lastTick)lastTick=time;const step=1000/(60*Number($('test-speed').value)),advance=Math.floor((time-lastTick)/step);if(advance){const before=testIndex;testIndex=Math.min(testRecord.frames.length-1,testIndex+advance);lastTick+=advance*step;combatAudio.advance(testRecord,before,testIndex);if(testIndex===testRecord.frames.length-1){playing=false;$('play').setAttribute('aria-label',tab==='sequence'?'Play sequence':'Play attack');}drawTest();}}
   requestAnimationFrame(animate);
 }
 function syncVisibleFields(){for(const [key,spec]of Object.entries(SPECS)){const input=$('field-'+key);if(input&&spec.type==='number'&&document.activeElement!==input)input.value=move()[key]/spec.scale;}}
@@ -486,7 +488,7 @@ $('import-file').onchange=async event=>{
 };
 $('export').onclick=()=>{if(!validBeforeLeaving())return;try{download(model.export(),'FightGuild-moves-'+date()+'.json','application/json');save();unexported=false;announce('JSON downloaded. Import it in the Godot move editor or send it back for the sprite pass.');}catch(error){announce(error.message);}};
 $('frame').addEventListener('input',()=>{if(!validBeforeLeaving()){$('frame').value=testIndex;return;}stop();hitKeyFrame=null;const tick=Number($('frame').value);if(previewPending)pendingSeek={tick};else{testIndex=tick;drawTest();}renderForm();});
-$('play').onclick=()=>{if(!validBeforeLeaving()||!testRecord||previewPending)return;if(testIndex===testRecord.frames.length-1)testIndex=0;playing=!playing;hitKeyFrame=null;lastTick=0;$('play').setAttribute('aria-label',(playing?'Pause ':'Play ')+(tab==='sequence'?'sequence':'attack'));drawTest();};
+$('play').onclick=()=>{if(!validBeforeLeaving()||!testRecord||previewPending)return;if(testIndex===testRecord.frames.length-1)testIndex=0;playing=!playing;if(!playing)combatAudio.silence();hitKeyFrame=null;lastTick=0;$('play').setAttribute('aria-label',(playing?'Pause ':'Play ')+(tab==='sequence'?'sequence':'attack'));drawTest();};
 $('restart').onclick=()=>{if(!validBeforeLeaving())return;stop();hitKeyFrame=null;pendingSeek={tick:0};syncPreview();renderForm();};
 $('form').addEventListener('focusin',()=>{if(playing){stop();drawTest();}});
 for(const key of ['hit','hurt','push','art','distances'])$('show-'+key).onchange=()=>{preview.options[key]=$('show-'+key).checked;if(key==='distances')$('preview').classList.toggle('with-distances',preview.options.distances);preview.draw();};
@@ -499,7 +501,16 @@ window.addEventListener('pagehide',()=>{if(savePending)save();});
 window.addEventListener('beforeunload',event=>{if(referenceBusy||errors.size||!storageOkay&&unexported){event.preventDefault();event.returnValue='';}});
 window.addEventListener('storage',event=>{if(event.key===STORAGE&&event.newValue){banner('This draft was saved in another tab. Download your current JSON before switching tabs to keep both versions.');}});
 // Read-only inspection used by browser integration checks and JSON round trips.
-globalThis.moveWorkshop={data:()=>model.snapshot(),selection:()=>({character,slot,tab}),version:pack.defaults.coreVersion};
+$('preview-sound').onclick=async()=>{
+  const button=$('preview-sound');
+  if(combatAudio.enabled){combatAudio.disable();button.textContent='Sound: Off';button.setAttribute('aria-pressed','false');return;}
+  button.disabled=true;
+  try{await combatAudio.enable();button.textContent='Sound: On';button.setAttribute('aria-pressed','true');}
+  catch(error){combatAudio.disable();announce(error.message);}
+  finally{button.disabled=false;}
+};
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+globalThis.moveWorkshop={data:()=>model.snapshot(),selection:()=>({character,slot,tab}),version:pack.defaults.coreVersion,audio:()=>({enabled:combatAudio.enabled,played:combatAudio.played})};
 $('test-target').append(...CHARACTERS.map((name,i)=>el('option',{value:i},name)));$('test-target').value='4';
 $('attack-enabled').onchange=()=>{if(!validBeforeLeaving()){$('attack-enabled').checked=!!move().enabled;return;}commit('enabled',Number($('attack-enabled').checked));if($('field-enabled'))$('field-enabled').checked=!!move().enabled;};
 for(const id of ['test-target','test-behavior','test-entry','test-gap','test-facing','test-simple','test-mechanic','test-bleed'])$(id).onchange=()=>{if(!validBeforeLeaving())return;const gap=Number($('test-gap').value);if(!Number.isInteger(gap)||gap<0||gap>450){$('test-gap').value='24';announce('Use a whole starting gap from 0 to 450 px.');}layout.update(CHARACTERS[character],moveName(move()),model.note(character,slot).label);testSignature='';scheduleTest();for(const button of document.querySelectorAll('[data-drive-test]'))button.setAttribute('aria-pressed',String(button.dataset.driveTest===$('test-mechanic').value));};

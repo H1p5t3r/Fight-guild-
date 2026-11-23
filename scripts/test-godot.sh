@@ -4,6 +4,8 @@ cd "$(dirname "$0")/.."
 mkdir -p build
 python scripts/generate-combat-data.py --check
 python tests/combat_data_test.py
+"${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/feedback_test.cpp -o build/feedback-tests
+./build/feedback-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/mechanics_test.cpp -o build/mechanics-tests
 ./build/mechanics-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/movement_projectile_test.cpp -o build/movement-projectile-tests
