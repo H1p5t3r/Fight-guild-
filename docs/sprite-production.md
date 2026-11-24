@@ -4,6 +4,13 @@ Attack timing now follows the user-approved [held-pose production standard](atta
 hold the load through startup, put the largest attacking motion at first active,
 and use deliberate follow-through/recovery holds tied to the actual move data.
 
+Receiver animation now follows the approved [A / Compact Snap reaction standard](receiver-reactions.md):
+separate legs, chest, head and air clips; hold contact during hitstop, then play a
+short recoil and maintain the stun pose until the existing gameplay state releases.
+All six fighters have three generated keys per clip. These atlases are render-only:
+do not add their silhouettes to compiled hurtboxes or normalize bent bodies by
+their changing visible height. Source PNGs stay unchanged; fit feet/hips in metadata.
+
 Latest Shark pass: [selected idle, walk, backward walk, backdash and run](shark-movement.md),
 following [Ky normals and the approved fluid Low Scoop](shark-normals.md).
 The motion standard uses hip-led weight transfer, torso rotation, heel pivots,

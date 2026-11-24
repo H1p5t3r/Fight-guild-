@@ -1,5 +1,1632 @@
 {
   "version": 1,
-  "status": "Direction review pending; no new drawings installed.",
-  "fighters": {}
+  "status": "Approved A / Compact Snap; all six fighters, four visual-only reactions each.",
+  "approved": "2026-11-24",
+  "key_action_ages": [
+    0,
+    2,
+    5
+  ],
+  "fighters": {
+    "0": {
+      "legs": {
+        "file": "anvil.png",
+        "body_height": 260,
+        "sha256": "f6dd630b9dfedac9ec8fb0b4ad62f5fe252e7d175361d6f03601e3182fc14a6d",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              0,
+              362,
+              390
+            ],
+            "pivot": [
+              181,
+              359
+            ],
+            "bounds": [
+              61,
+              93,
+              349,
+              360
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              0,
+              362,
+              390
+            ],
+            "pivot": [
+              174,
+              359
+            ],
+            "bounds": [
+              60,
+              122,
+              341,
+              360
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              0,
+              362,
+              390
+            ],
+            "pivot": [
+              179,
+              359
+            ],
+            "bounds": [
+              54,
+              130,
+              337,
+              360
+            ]
+          }
+        ]
+      },
+      "chest": {
+        "file": "anvil.png",
+        "body_height": 260,
+        "sha256": "f6dd630b9dfedac9ec8fb0b4ad62f5fe252e7d175361d6f03601e3182fc14a6d",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              390,
+              362,
+              339
+            ],
+            "pivot": [
+              181,
+              306
+            ],
+            "bounds": [
+              71,
+              32,
+              350,
+              307
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              390,
+              362,
+              339
+            ],
+            "pivot": [
+              192,
+              306
+            ],
+            "bounds": [
+              65,
+              64,
+              323,
+              307
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              390,
+              362,
+              339
+            ],
+            "pivot": [
+              195,
+              307
+            ],
+            "bounds": [
+              57,
+              72,
+              327,
+              308
+            ]
+          }
+        ]
+      },
+      "head": {
+        "file": "anvil.png",
+        "body_height": 260,
+        "sha256": "f6dd630b9dfedac9ec8fb0b4ad62f5fe252e7d175361d6f03601e3182fc14a6d",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              729,
+              362,
+              346
+            ],
+            "pivot": [
+              186,
+              316
+            ],
+            "bounds": [
+              69,
+              31,
+              354,
+              317
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              729,
+              362,
+              346
+            ],
+            "pivot": [
+              178,
+              316
+            ],
+            "bounds": [
+              44,
+              36,
+              341,
+              317
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              729,
+              362,
+              346
+            ],
+            "pivot": [
+              173,
+              316
+            ],
+            "bounds": [
+              42,
+              41,
+              339,
+              317
+            ]
+          }
+        ]
+      },
+      "air": {
+        "file": "anvil.png",
+        "body_height": 260,
+        "sha256": "f6dd630b9dfedac9ec8fb0b4ad62f5fe252e7d175361d6f03601e3182fc14a6d",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              1075,
+              362,
+              373
+            ],
+            "pivot": [
+              200,
+              313
+            ],
+            "bounds": [
+              67,
+              31,
+              354,
+              324
+            ],
+            "hip": [
+              200,
+              185
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              1075,
+              362,
+              373
+            ],
+            "pivot": [
+              204,
+              328
+            ],
+            "bounds": [
+              72,
+              60,
+              334,
+              311
+            ],
+            "hip": [
+              204,
+              200
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              1075,
+              362,
+              373
+            ],
+            "pivot": [
+              198,
+              337
+            ],
+            "bounds": [
+              62,
+              61,
+              322,
+              315
+            ],
+            "hip": [
+              198,
+              209
+            ]
+          }
+        ]
+      }
+    },
+    "1": {
+      "legs": {
+        "file": "hammer.png",
+        "body_height": 340,
+        "sha256": "a2a26608d2c5695ade832bf4bd1156266127c4e99c6e107f20e20646ce2e3b27",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              0,
+              362,
+              377
+            ],
+            "pivot": [
+              201,
+              352
+            ],
+            "bounds": [
+              52,
+              49,
+              328,
+              353
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              0,
+              362,
+              377
+            ],
+            "pivot": [
+              184,
+              352
+            ],
+            "bounds": [
+              39,
+              67,
+              308,
+              353
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              0,
+              362,
+              377
+            ],
+            "pivot": [
+              174,
+              352
+            ],
+            "bounds": [
+              24,
+              86,
+              302,
+              353
+            ]
+          }
+        ]
+      },
+      "chest": {
+        "file": "hammer.png",
+        "body_height": 340,
+        "sha256": "a2a26608d2c5695ade832bf4bd1156266127c4e99c6e107f20e20646ce2e3b27",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              377,
+              362,
+              341
+            ],
+            "pivot": [
+              204,
+              321
+            ],
+            "bounds": [
+              57,
+              25,
+              326,
+              322
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              377,
+              362,
+              341
+            ],
+            "pivot": [
+              186,
+              321
+            ],
+            "bounds": [
+              51,
+              46,
+              310,
+              322
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              377,
+              362,
+              341
+            ],
+            "pivot": [
+              174,
+              322
+            ],
+            "bounds": [
+              36,
+              61,
+              298,
+              323
+            ]
+          }
+        ]
+      },
+      "head": {
+        "file": "hammer.png",
+        "body_height": 340,
+        "sha256": "a2a26608d2c5695ade832bf4bd1156266127c4e99c6e107f20e20646ce2e3b27",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              718,
+              362,
+              359
+            ],
+            "pivot": [
+              209,
+              332
+            ],
+            "bounds": [
+              51,
+              18,
+              338,
+              333
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              718,
+              362,
+              359
+            ],
+            "pivot": [
+              194,
+              334
+            ],
+            "bounds": [
+              41,
+              18,
+              322,
+              335
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              718,
+              362,
+              359
+            ],
+            "pivot": [
+              181,
+              334
+            ],
+            "bounds": [
+              40,
+              26,
+              312,
+              335
+            ]
+          }
+        ]
+      },
+      "air": {
+        "file": "hammer.png",
+        "body_height": 340,
+        "sha256": "a2a26608d2c5695ade832bf4bd1156266127c4e99c6e107f20e20646ce2e3b27",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              1077,
+              362,
+              371
+            ],
+            "pivot": [
+              212,
+              328
+            ],
+            "bounds": [
+              53,
+              25,
+              324,
+              334
+            ],
+            "hip": [
+              212,
+              171
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              1077,
+              362,
+              371
+            ],
+            "pivot": [
+              206,
+              347
+            ],
+            "bounds": [
+              50,
+              35,
+              301,
+              322
+            ],
+            "hip": [
+              206,
+              190
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              1077,
+              362,
+              371
+            ],
+            "pivot": [
+              192,
+              356
+            ],
+            "bounds": [
+              36,
+              51,
+              279,
+              323
+            ],
+            "hip": [
+              192,
+              199
+            ]
+          }
+        ]
+      }
+    },
+    "2": {
+      "legs": {
+        "file": "smoke.png",
+        "body_height": 335,
+        "sha256": "2cbd399311cc36408bc887e731e206887f311c6f71aa42de44b5f840e068fb3b",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              0,
+              362,
+              371
+            ],
+            "pivot": [
+              198,
+              353
+            ],
+            "bounds": [
+              81,
+              43,
+              311,
+              354
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              0,
+              362,
+              371
+            ],
+            "pivot": [
+              189,
+              353
+            ],
+            "bounds": [
+              63,
+              66,
+              287,
+              354
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              0,
+              362,
+              371
+            ],
+            "pivot": [
+              176,
+              353
+            ],
+            "bounds": [
+              44,
+              78,
+              269,
+              354
+            ]
+          }
+        ]
+      },
+      "chest": {
+        "file": "smoke.png",
+        "body_height": 335,
+        "sha256": "2cbd399311cc36408bc887e731e206887f311c6f71aa42de44b5f840e068fb3b",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              371,
+              362,
+              354
+            ],
+            "pivot": [
+              203,
+              338
+            ],
+            "bounds": [
+              77,
+              17,
+              299,
+              339
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              371,
+              362,
+              354
+            ],
+            "pivot": [
+              189,
+              338
+            ],
+            "bounds": [
+              54,
+              39,
+              285,
+              339
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              371,
+              362,
+              354
+            ],
+            "pivot": [
+              184,
+              339
+            ],
+            "bounds": [
+              46,
+              54,
+              272,
+              340
+            ]
+          }
+        ]
+      },
+      "head": {
+        "file": "smoke.png",
+        "body_height": 335,
+        "sha256": "2cbd399311cc36408bc887e731e206887f311c6f71aa42de44b5f840e068fb3b",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              725,
+              362,
+              365
+            ],
+            "pivot": [
+              206,
+              345
+            ],
+            "bounds": [
+              74,
+              15,
+              326,
+              346
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              725,
+              362,
+              365
+            ],
+            "pivot": [
+              198,
+              345
+            ],
+            "bounds": [
+              55,
+              15,
+              316,
+              346
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              725,
+              362,
+              365
+            ],
+            "pivot": [
+              188,
+              345
+            ],
+            "bounds": [
+              48,
+              15,
+              308,
+              346
+            ]
+          }
+        ]
+      },
+      "air": {
+        "file": "smoke.png",
+        "body_height": 335,
+        "sha256": "2cbd399311cc36408bc887e731e206887f311c6f71aa42de44b5f840e068fb3b",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              1090,
+              362,
+              358
+            ],
+            "pivot": [
+              215,
+              312
+            ],
+            "bounds": [
+              69,
+              18,
+              324,
+              317
+            ],
+            "hip": [
+              215,
+              149
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              1090,
+              362,
+              358
+            ],
+            "pivot": [
+              206,
+              326
+            ],
+            "bounds": [
+              64,
+              32,
+              302,
+              297
+            ],
+            "hip": [
+              206,
+              163
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              1090,
+              362,
+              358
+            ],
+            "pivot": [
+              198,
+              333
+            ],
+            "bounds": [
+              58,
+              39,
+              287,
+              295
+            ],
+            "hip": [
+              198,
+              170
+            ]
+          }
+        ]
+      }
+    },
+    "3": {
+      "legs": {
+        "file": "tapper.png",
+        "body_height": 345,
+        "sha256": "9ad27da0f71f8c87d8f421f1ea2fcfbdb4661eaa9c8fc75fb0a389f55f1df879",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              0,
+              362,
+              364
+            ],
+            "pivot": [
+              200,
+              349
+            ],
+            "bounds": [
+              60,
+              25,
+              319,
+              350
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              0,
+              362,
+              364
+            ],
+            "pivot": [
+              186,
+              349
+            ],
+            "bounds": [
+              49,
+              51,
+              304,
+              350
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              0,
+              362,
+              364
+            ],
+            "pivot": [
+              176,
+              349
+            ],
+            "bounds": [
+              36,
+              67,
+              291,
+              350
+            ]
+          }
+        ]
+      },
+      "chest": {
+        "file": "tapper.png",
+        "body_height": 345,
+        "sha256": "9ad27da0f71f8c87d8f421f1ea2fcfbdb4661eaa9c8fc75fb0a389f55f1df879",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              364,
+              362,
+              363
+            ],
+            "pivot": [
+              204,
+              346
+            ],
+            "bounds": [
+              56,
+              15,
+              319,
+              347
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              364,
+              362,
+              363
+            ],
+            "pivot": [
+              190,
+              346
+            ],
+            "bounds": [
+              38,
+              43,
+              306,
+              347
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              364,
+              362,
+              363
+            ],
+            "pivot": [
+              177,
+              346
+            ],
+            "bounds": [
+              28,
+              54,
+              293,
+              347
+            ]
+          }
+        ]
+      },
+      "head": {
+        "file": "tapper.png",
+        "body_height": 345,
+        "sha256": "9ad27da0f71f8c87d8f421f1ea2fcfbdb4661eaa9c8fc75fb0a389f55f1df879",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              727,
+              362,
+              360
+            ],
+            "pivot": [
+              202,
+              345
+            ],
+            "bounds": [
+              58,
+              14,
+              318,
+              346
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              727,
+              362,
+              360
+            ],
+            "pivot": [
+              188,
+              345
+            ],
+            "bounds": [
+              46,
+              15,
+              319,
+              346
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              727,
+              362,
+              360
+            ],
+            "pivot": [
+              177,
+              345
+            ],
+            "bounds": [
+              35,
+              16,
+              297,
+              346
+            ]
+          }
+        ]
+      },
+      "air": {
+        "file": "tapper.png",
+        "body_height": 345,
+        "sha256": "9ad27da0f71f8c87d8f421f1ea2fcfbdb4661eaa9c8fc75fb0a389f55f1df879",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              1087,
+              362,
+              361
+            ],
+            "pivot": [
+              205,
+              332
+            ],
+            "bounds": [
+              50,
+              13,
+              322,
+              332
+            ],
+            "hip": [
+              205,
+              172
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              1087,
+              362,
+              361
+            ],
+            "pivot": [
+              202,
+              341
+            ],
+            "bounds": [
+              39,
+              30,
+              298,
+              325
+            ],
+            "hip": [
+              202,
+              181
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              1087,
+              362,
+              361
+            ],
+            "pivot": [
+              194,
+              351
+            ],
+            "bounds": [
+              34,
+              46,
+              278,
+              322
+            ],
+            "hip": [
+              194,
+              191
+            ]
+          }
+        ]
+      }
+    },
+    "4": {
+      "legs": {
+        "file": "shark.png",
+        "body_height": 340,
+        "sha256": "797d3cf4f6427fd7852adfaa6415c00fadf8bf6b469c9485b8d3a94effb4225e",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              0,
+              362,
+              367
+            ],
+            "pivot": [
+              178,
+              343
+            ],
+            "bounds": [
+              35,
+              32,
+              331,
+              344
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              0,
+              362,
+              367
+            ],
+            "pivot": [
+              183,
+              343
+            ],
+            "bounds": [
+              48,
+              58,
+              327,
+              344
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              0,
+              362,
+              367
+            ],
+            "pivot": [
+              183,
+              343
+            ],
+            "bounds": [
+              41,
+              70,
+              320,
+              344
+            ]
+          }
+        ]
+      },
+      "chest": {
+        "file": "shark.png",
+        "body_height": 340,
+        "sha256": "797d3cf4f6427fd7852adfaa6415c00fadf8bf6b469c9485b8d3a94effb4225e",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              367,
+              362,
+              360
+            ],
+            "pivot": [
+              181,
+              338
+            ],
+            "bounds": [
+              36,
+              22,
+              307,
+              339
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              367,
+              362,
+              360
+            ],
+            "pivot": [
+              182,
+              338
+            ],
+            "bounds": [
+              44,
+              71,
+              324,
+              339
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              367,
+              362,
+              360
+            ],
+            "pivot": [
+              183,
+              338
+            ],
+            "bounds": [
+              50,
+              81,
+              323,
+              339
+            ]
+          }
+        ]
+      },
+      "head": {
+        "file": "shark.png",
+        "body_height": 340,
+        "sha256": "797d3cf4f6427fd7852adfaa6415c00fadf8bf6b469c9485b8d3a94effb4225e",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              727,
+              362,
+              359
+            ],
+            "pivot": [
+              182,
+              340
+            ],
+            "bounds": [
+              34,
+              21,
+              330,
+              341
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              727,
+              362,
+              359
+            ],
+            "pivot": [
+              182,
+              340
+            ],
+            "bounds": [
+              34,
+              24,
+              335,
+              341
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              727,
+              362,
+              359
+            ],
+            "pivot": [
+              182,
+              340
+            ],
+            "bounds": [
+              36,
+              25,
+              332,
+              341
+            ]
+          }
+        ]
+      },
+      "air": {
+        "file": "shark.png",
+        "body_height": 340,
+        "sha256": "797d3cf4f6427fd7852adfaa6415c00fadf8bf6b469c9485b8d3a94effb4225e",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              1086,
+              362,
+              362
+            ],
+            "pivot": [
+              200,
+              317
+            ],
+            "bounds": [
+              37,
+              18,
+              331,
+              323
+            ],
+            "hip": [
+              200,
+              156
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              1086,
+              362,
+              362
+            ],
+            "pivot": [
+              204,
+              345
+            ],
+            "bounds": [
+              49,
+              60,
+              319,
+              307
+            ],
+            "hip": [
+              204,
+              184
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              1086,
+              362,
+              362
+            ],
+            "pivot": [
+              207,
+              351
+            ],
+            "bounds": [
+              48,
+              65,
+              316,
+              306
+            ],
+            "hip": [
+              207,
+              190
+            ]
+          }
+        ]
+      }
+    },
+    "5": {
+      "legs": {
+        "file": "fillet.png",
+        "body_height": 390,
+        "sha256": "f46a6d6ee3ade601e458d030d5e6a97f751050e4e9740999ac0d67cadaa590c2",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              0,
+              362,
+              398
+            ],
+            "pivot": [
+              204,
+              384
+            ],
+            "bounds": [
+              57,
+              56,
+              334,
+              385
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              0,
+              362,
+              398
+            ],
+            "pivot": [
+              182,
+              385
+            ],
+            "bounds": [
+              43,
+              90,
+              305,
+              386
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              0,
+              362,
+              398
+            ],
+            "pivot": [
+              176,
+              384
+            ],
+            "bounds": [
+              40,
+              100,
+              297,
+              385
+            ]
+          }
+        ]
+      },
+      "chest": {
+        "file": "fillet.png",
+        "body_height": 390,
+        "sha256": "f46a6d6ee3ade601e458d030d5e6a97f751050e4e9740999ac0d67cadaa590c2",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              398,
+              362,
+              346
+            ],
+            "pivot": [
+              211,
+              337
+            ],
+            "bounds": [
+              60,
+              11,
+              340,
+              338
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              398,
+              362,
+              346
+            ],
+            "pivot": [
+              188,
+              337
+            ],
+            "bounds": [
+              59,
+              50,
+              317,
+              338
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              398,
+              362,
+              346
+            ],
+            "pivot": [
+              179,
+              337
+            ],
+            "bounds": [
+              53,
+              53,
+              305,
+              338
+            ]
+          }
+        ]
+      },
+      "head": {
+        "file": "fillet.png",
+        "body_height": 390,
+        "sha256": "f46a6d6ee3ade601e458d030d5e6a97f751050e4e9740999ac0d67cadaa590c2",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              744,
+              362,
+              344
+            ],
+            "pivot": [
+              216,
+              336
+            ],
+            "bounds": [
+              61,
+              9,
+              347,
+              337
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              744,
+              362,
+              344
+            ],
+            "pivot": [
+              200,
+              336
+            ],
+            "bounds": [
+              42,
+              10,
+              328,
+              337
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              744,
+              362,
+              344
+            ],
+            "pivot": [
+              191,
+              336
+            ],
+            "bounds": [
+              38,
+              12,
+              319,
+              337
+            ]
+          }
+        ]
+      },
+      "air": {
+        "file": "fillet.png",
+        "body_height": 390,
+        "sha256": "f46a6d6ee3ade601e458d030d5e6a97f751050e4e9740999ac0d67cadaa590c2",
+        "frames": [
+          {
+            "name": "Contact",
+            "region": [
+              0,
+              1088,
+              362,
+              360
+            ],
+            "pivot": [
+              209,
+              352
+            ],
+            "bounds": [
+              81,
+              7,
+              314,
+              325
+            ],
+            "hip": [
+              209,
+              169
+            ]
+          },
+          {
+            "name": "Recoil",
+            "region": [
+              362,
+              1088,
+              362,
+              360
+            ],
+            "pivot": [
+              202,
+              374
+            ],
+            "bounds": [
+              60,
+              42,
+              289,
+              314
+            ],
+            "hip": [
+              202,
+              191
+            ]
+          },
+          {
+            "name": "Stun hold",
+            "region": [
+              724,
+              1088,
+              362,
+              360
+            ],
+            "pivot": [
+              191,
+              381
+            ],
+            "bounds": [
+              70,
+              46,
+              255,
+              321
+            ],
+            "hip": [
+              191,
+              198
+            ]
+          }
+        ]
+      }
+    }
+  }
 }

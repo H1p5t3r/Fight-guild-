@@ -21,10 +21,13 @@ Do not treat permission for game/art changes as permission to resume the website
 2. **Receiver animations and paired throws — in progress.** Fillet's inherited hurt
    pose has been calibrated to her current size. Native rendering now has separate
    leg, chest, head and airborne reaction selection, with contact-region metadata
-   and a rollback-aware receiver clock. New drawings are pending the user's
-   A / Compact Snap versus B / Whip Recoil selection; review sheets use three poses
-   and motion arrows. See [receiver reactions](receiver-reactions.md). Paired throw
-   receiver art/alignment remains after this reaction pass.
+   and a rollback-aware receiver clock. The user selected **A / Compact Snap**;
+   all six fighters now have 24 reaction clips / 72 drawings with fixed anatomy
+   scale, grounded foot anchors and airborne hip anchors. Forty-eight actual
+   contact scenarios verify all families and both facings without changing
+   gameplay. Review: `exports/FightGuild-Compact-Snap-Reactions.mp4`.
+   See [receiver reactions](receiver-reactions.md). **Paired throw receiver
+   art/alignment is next within this item.**
 3. **Spacing and combo audit.** Check the roster against standing, crouching and
    airborne targets, both corners, FD, repeat launchers and wall transitions.
 4. **Movement transitions.** Consistent planted feet, body scale and transitions

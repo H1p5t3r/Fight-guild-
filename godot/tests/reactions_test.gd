@@ -89,5 +89,35 @@ func run() -> void:
 	CombatReactions.manifest = saved_catalog
 	CombatReactions.textures.clear()
 	sprite.free()
+	# Installed production clips must be exercised through real core contacts and
+	# the arena, in both directions, without changing the snapshot or box geometry.
+	var arena = load("res://scripts/arena.gd").new()
+	root.add_child(arena); arena.size = Vector2(1440, 810)
+	for character in 6:
+		for family in ["legs", "chest", "head", "air"]:
+			var clip: Dictionary = CombatReactions.catalog().fighters[str(character)][family]
+			check(clip.frames.size() == 3, "Missing production reaction keys")
+			for facing in [-1, 1]:
+				var sample := ReactionFixtures.contact(character, family, facing)
+				var seen := {}
+				for tick in 20:
+					var state := sample.state()
+					var event := sample.cues.reaction_at(sample.frame(), 1)
+					check(CombatReactions.family(state.players[1], event) == family, "Actual contact selected wrong family: %d/%s/%d" % [character, family, facing])
+					var snapshot: PackedByteArray = sample.core.snapshot()
+					var boxes_before: PackedInt32Array = sample.core.boxes(1, 0)
+					arena.refresh(sample, state, false, false)
+					check(sample.core.snapshot() == snapshot and sample.core.boxes(1, 0) == boxes_before, "Rendering changed gameplay or hurtboxes")
+					if not event.is_empty():
+						var index := CombatReactions.key(int(event.age))
+						seen[index] = true
+						var rendered := arena.sprites[1] as Sprite2D
+						check(rendered.texture is AtlasTexture and rendered.texture.atlas.resource_path.ends_with("reactions-v1/" + str(clip.file)), "Arena kept the generic hurt drawing")
+						check(rendered.texture.region.position.x == clip.frames[index].region[0], "Wrong production key rendered")
+						check(is_equal_approx(absf(rendered.scale.x), rendered.scale.y) and signf(rendered.scale.x) == -facing, "Reaction scale/facing changed")
+					sample.step(0, 0)
+				check(seen.size() == 3, "Actual hit did not exercise contact, recoil and hold")
+	arena.queue_free()
+	await process_frame
 	print("Receiver reactions: %d failures; body zones, air priority, timing, trades, rollback and native rendering" % failures)
 	quit(1 if failures else 0)
