@@ -1,0 +1,44 @@
+{
+  "fillet_flight": {
+    "file": "fillet-flight.png",
+    "sha256": "9529155b7c48530a6839e974e4b328b430bf0ec73049c3c1fd1c373c028c7887",
+    "generated_source": "/workspace/generated_images/exec-77b8c511-89fc-4b00-9e84-4314d2c0bb44.png",
+    "approval": "Fillet implementation-pack movement choreography",
+    "references": [
+      {
+        "path": "godot/assets/fighters/fillet-kit-v1/jp.png",
+        "sha256": "5391c1da7224a496adce2553feaff629ecf31c26cddc0cb2c5e2be5613936937"
+      },
+      {
+        "path": "godot/assets/fighters/appearance-v3/fillet-ready.png",
+        "sha256": "118a679ca64c09deee61b48356aab113176878f6f9378771c496ef88eca78f9d"
+      }
+    ]
+  },
+  "fillet_ground": {
+    "file": "fillet-ground.png",
+    "sha256": "dd3c4bb8958747d2ed1e8b243338a59659a2a193e624bc74ce462a9998d9f213",
+    "generated_source": "/workspace/generated_images/exec-0959ef14-cd58-4148-8a4a-67d7486a676b.png",
+    "approval": "Fillet implementation-pack movement choreography",
+    "references": [
+      {
+        "path": "godot/assets/fighters/appearance-v3/fillet-ready.png",
+        "sha256": "118a679ca64c09deee61b48356aab113176878f6f9378771c496ef88eca78f9d"
+      },
+      {
+        "path": "godot/assets/fighters/fillet-kit-v1/jp.png",
+        "sha256": "5391c1da7224a496adce2553feaff629ecf31c26cddc0cb2c5e2be5613936937"
+      }
+    ]
+  },
+  "hammer_options_initial": {
+    "file": "hammer-footwork-options-initial.png",
+    "sha256": "d7d493557c7a998d7b7f954964879dd90191285225f85ce351db4448e82bc676",
+    "status": "review only; pending user selection; excluded from runtime assets"
+  },
+  "hammer_options": {
+    "file": "hammer-footwork-options.png",
+    "sha256": "48a9fd3bf0eb54a1eb48f71537696333fb525125fd484bc03ee1701d916d09c6",
+    "status": "review only; pending user selection; excluded from runtime assets"
+  }
+}

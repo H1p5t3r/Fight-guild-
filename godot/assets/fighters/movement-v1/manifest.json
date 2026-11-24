@@ -1,0 +1,260 @@
+{
+  "version": 1,
+  "presentation_only": true,
+  "sheets": {
+    "fillet_flight": {
+      "file": "fillet-flight.png",
+      "sha256": "9529155b7c48530a6839e974e4b328b430bf0ec73049c3c1fd1c373c028c7887",
+      "size": [
+        1536,
+        1024
+      ],
+      "body_height": 535,
+      "frames": [
+        {
+          "region": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            272,
+            478
+          ],
+          "bounds": [
+            84,
+            12,
+            410,
+            511
+          ],
+          "name": "fast ascent"
+        },
+        {
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            230,
+            487
+          ],
+          "bounds": [
+            51,
+            16,
+            379,
+            446
+          ],
+          "name": "slow ascent"
+        },
+        {
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            203,
+            490
+          ],
+          "bounds": [
+            31,
+            17,
+            351,
+            472
+          ],
+          "name": "apex guard"
+        },
+        {
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            242,
+            490
+          ],
+          "bounds": [
+            70,
+            19,
+            386,
+            497
+          ],
+          "name": "early descent"
+        },
+        {
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            219,
+            511
+          ],
+          "bounds": [
+            40,
+            46,
+            430,
+            481
+          ],
+          "name": "late descent"
+        },
+        {
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            262,
+            493
+          ],
+          "bounds": [
+            52,
+            48,
+            427,
+            449
+          ],
+          "name": "dash burst"
+        }
+      ]
+    },
+    "fillet_ground": {
+      "file": "fillet-ground.png",
+      "sha256": "dd3c4bb8958747d2ed1e8b243338a59659a2a193e624bc74ce462a9998d9f213",
+      "size": [
+        1536,
+        1024
+      ],
+      "body_height": 550,
+      "frames": [
+        {
+          "region": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            255,
+            482
+          ],
+          "bounds": [
+            40,
+            19,
+            470,
+            483
+          ],
+          "name": "stalker reference"
+        },
+        {
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            247,
+            482
+          ],
+          "bounds": [
+            34,
+            54,
+            459,
+            483
+          ],
+          "name": "jump compression"
+        },
+        {
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            236,
+            482
+          ],
+          "bounds": [
+            41,
+            13,
+            431,
+            483
+          ],
+          "name": "jump extension"
+        },
+        {
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            255,
+            482
+          ],
+          "bounds": [
+            41,
+            74,
+            469,
+            484
+          ],
+          "name": "landing absorb"
+        },
+        {
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            245,
+            482
+          ],
+          "bounds": [
+            31,
+            46,
+            458,
+            483
+          ],
+          "name": "landing rise"
+        },
+        {
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            226,
+            482
+          ],
+          "bounds": [
+            10,
+            19,
+            442,
+            483
+          ],
+          "name": "stalker return"
+        }
+      ]
+    }
+  },
+  "registration": {
+    "flight": "Belt-buckle landmark registered to approved j.P: source reference [274.5,226], pivot [250,490], constant anatomy scale 535. Individual offsets register drawings; no interpolated root offsets.",
+    "ground": "Common floor line 482; pivots track the midpoint of the two planted boots. Constant anatomy scale 550, calibrated to wide Stalker ready."
+  }
+}

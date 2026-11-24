@@ -117,7 +117,9 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 			phase = FighterArt.PHASES[int(shot.phase)]
 			pose = int(shot.pose)
 		FighterArt.apply(sprite, character, phase, pose, scale_x * (float(shot.scale) if travel else camera_zoom), fighter.facing, -1 if travel else int(fighter.idleTime))
-		if not travel: CombatReactions.apply(sprite, fighter, model.cues.reaction_at(int(view.frame), p), scale_x * camera_zoom)
+		if not travel:
+			CombatMovement.apply(sprite, fighter, model.movement(character), scale_x * camera_zoom)
+			CombatReactions.apply(sprite, fighter, model.cues.reaction_at(int(view.frame), p), scale_x * camera_zoom)
 		sprite.position = shot.position if travel else screen_point(Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x))
 		sprite.rotation = float(shot.angle) if travel else 0.0
 		sprite.modulate = Color(1, 1, 1, shot.alpha) if travel else CombatImpacts.tint(p, impact_cues)

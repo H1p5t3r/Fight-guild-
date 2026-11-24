@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-24",
+  "scope": "Native Fillet movement presentation; Hammer options remain pending",
+  "gameplay_changed": false,
+  "workshop_changed": false,
+  "checks": {
+    "movement_presentation": 3371,
+    "before_after_native_records": 750,
+    "identical_before_after_checksums": true,
+    "receiver_reactions": "pass",
+    "paired_throw_scenarios": 84,
+    "impact_presentation": "pass",
+    "fillet_reaction_scale": "pass",
+    "menus_and_playable_scene": "pass",
+    "generated_combat_data": "unchanged; --check passed"
+  },
+  "review": "exports/FightGuild-Fillet-Movement.mp4",
+  "remaining": [
+    "Hammer footwork selection and production",
+    "Tapper stance travel and recovery",
+    "ground gait entry continuity"
+  ]
+}
