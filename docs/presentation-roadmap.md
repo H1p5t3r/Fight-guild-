@@ -43,12 +43,17 @@ Do not treat permission for game/art changes as permission to resume the website
    `5Hs` loses the third hit of the sampled slash route against Tapper and
    standing Fillet outside the defender's corner; keep that limitation for his
    full kit/art pass. See [audit and reproduction](combat-spacing-audit.md).
-4. **Movement transitions — in progress (2026-11-24).** Fillet now has registered
+4. **Movement transitions — complete first pass (2026-11-24).** Fillet now has registered
    takeoff, ascent/apex/descent, air-dash pause/burst and landing presentation,
    following her approved movement contract without changing gameplay. Her air
-   attacks return to matching artwork. Hammer's new footwork awaits the user's
-   A/B selection; Tapper's stance travel/return is still outstanding.
+   attacks return to matching artwork. The user delegated the remaining choices:
+   Hammer uses A / Grounded March with alternating walk/run steps and a separate
+   retreat cycle. Tapper has guarded forward/back shuffles, stance step dashes,
+   and follow-through/withdrawal/settle on all four stance normals. Their travel
+   playback uses resolved distance and rollback history, including planted
+   corner stops. No movement, attack timing or collision rules changed.
    See [movement transitions and review](movement-transitions.md).
+   **Item 5, input and controller support, is next.**
 5. **Input and controller support.** Remapping, device/deadzone handling, motion
    acceptance and buffered-action validation.
 6. **Training and Workshop diagnostics.** Recording slots, defensive dummy choices,

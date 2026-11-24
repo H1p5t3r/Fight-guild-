@@ -118,7 +118,8 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 			pose = int(shot.pose)
 		FighterArt.apply(sprite, character, phase, pose, scale_x * (float(shot.scale) if travel else camera_zoom), fighter.facing, -1 if travel else int(fighter.idleTime))
 		if not travel:
-			CombatMovement.apply(sprite, fighter, model.movement(character), scale_x * camera_zoom)
+			var movement_move := model.move(character, fighter.move) if character == 3 and int(fighter.move) in [35, 36, 37, 38] else {}
+			CombatMovement.apply(sprite, fighter, model.movement(character), scale_x * camera_zoom, model.locomotion.at(int(view.frame), p), movement_move)
 			CombatReactions.apply(sprite, fighter, model.cues.reaction_at(int(view.frame), p), scale_x * camera_zoom)
 		sprite.position = shot.position if travel else screen_point(Vector2(fighter.x / 100.0 * scale_x, floor_y - fighter.y / 100.0 * scale_x))
 		sprite.rotation = float(shot.angle) if travel else 0.0

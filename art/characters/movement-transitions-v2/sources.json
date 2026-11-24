@@ -1,0 +1,92 @@
+[
+  {
+    "id": "hammer_walk",
+    "file": "godot/assets/fighters/movement-v1/hammer-walk.png",
+    "original": "/workspace/generated_images/exec-55abbccc-d1b6-4c79-8d65-6a5430afcf4d.png",
+    "sha256": "65cc0a801df62595d6227b15b3e1d617881b4574afbff5b653737f03ad980c38",
+    "references": [
+      {
+        "path": "godot/assets/fighters/hammer-kit-v1/drive_ready.png",
+        "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363"
+      }
+    ],
+    "approval": "User delegated selection: Continue with your judgement, 2026-11-24"
+  },
+  {
+    "id": "hammer_run",
+    "file": "godot/assets/fighters/movement-v1/hammer-run.png",
+    "original": "/workspace/generated_images/exec-d2e4e3c1-3be1-43c5-9abf-52c8ea5f1537.png",
+    "sha256": "67ebf7475179615b2c2aac2b9ef04020ebc3675f7e0453e3c697e82f8a1445cf",
+    "references": [
+      {
+        "path": "godot/assets/fighters/movement-v1/hammer-walk.png",
+        "sha256": "65cc0a801df62595d6227b15b3e1d617881b4574afbff5b653737f03ad980c38"
+      },
+      {
+        "path": "godot/assets/fighters/hammer-kit-v1/drive_ready.png",
+        "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363"
+      }
+    ],
+    "approval": "User delegated selection: Continue with your judgement, 2026-11-24"
+  },
+  {
+    "id": "hammer_back",
+    "file": "godot/assets/fighters/movement-v1/hammer-back.png",
+    "original": "/workspace/generated_images/exec-318d215d-75ca-4d05-85de-c32af63f644f.png",
+    "sha256": "030426c5fce5da1364e55909583d25ac6ab7e7d5cd0e99a338cead89788becea",
+    "references": [
+      {
+        "path": "godot/assets/fighters/movement-v1/hammer-walk.png",
+        "sha256": "65cc0a801df62595d6227b15b3e1d617881b4574afbff5b653737f03ad980c38"
+      },
+      {
+        "path": "godot/assets/fighters/hammer-kit-v1/drive_ready.png",
+        "sha256": "4c64ad033deb2d15c2e20da29b3214ebc4015bb9c9f62bbf680f2ebc40636363"
+      }
+    ],
+    "approval": "User delegated selection: Continue with your judgement, 2026-11-24"
+  },
+  {
+    "id": "tapper_travel",
+    "file": "godot/assets/fighters/movement-v1/tapper-travel.png",
+    "original": "/workspace/generated_images/exec-4b7f39aa-d7d1-431f-a485-f1e0b80d2960.png",
+    "sha256": "f1deff3b1eb0d63ee546e99de3df00fcabdd4f098a21d8461e58d3de72eaa256",
+    "references": [
+      {
+        "path": "godot/assets/fighters/tapper-v1/idle.png",
+        "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e"
+      }
+    ],
+    "approval": "User delegated selection: Continue with your judgement, 2026-11-24"
+  },
+  {
+    "id": "tapper_return",
+    "file": "godot/assets/fighters/movement-v1/tapper-return.png",
+    "original": "/workspace/generated_images/exec-3afa4a2c-c425-40a5-92ce-ec37d0826cc0.png",
+    "sha256": "030ab76747a8b7a9606490838e65fd61a678bc1c00685688e75fff094e809d1e",
+    "references": [
+      {
+        "path": "godot/assets/fighters/tapper-v1/actions-7.png",
+        "sha256": "35bc5f23b35323208b137b394b0157c17f2278b35d628aeca3396ce174fbcedd"
+      },
+      {
+        "path": "godot/assets/fighters/tapper-v1/idle.png",
+        "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e"
+      }
+    ],
+    "approval": "User delegated selection: Continue with your judgement, 2026-11-24"
+  },
+  {
+    "id": "tapper_dash",
+    "file": "godot/assets/fighters/movement-v1/tapper-dash.png",
+    "original": "/workspace/generated_images/exec-11286826-fbba-4d22-9fa5-2949f092b8df.png",
+    "sha256": "0dd473c367e6edfc6e8ad436c8284c39abf91f3448b94925ba94325a7e722280",
+    "references": [
+      {
+        "path": "godot/assets/fighters/tapper-v1/idle.png",
+        "sha256": "e4ee6ff016d5d5c67e57bc0064dd9ba6715657193236710299733cc73394d11e"
+      }
+    ],
+    "approval": "User delegated selection: Continue with your judgement, 2026-11-24"
+  }
+]

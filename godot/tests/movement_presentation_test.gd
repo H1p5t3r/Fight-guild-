@@ -24,7 +24,7 @@ func run() -> void:
 		var source := Image.new()
 		check(source.load_png_from_buffer(FileAccess.get_file_as_bytes(path)) == OK, "Movement PNG cannot decode")
 		check(source.get_size() == Vector2i(sheet.size[0], sheet.size[1]), "Movement atlas dimensions changed")
-		for point in [Vector2i(0, 0), Vector2i(1535, 0), Vector2i(0, 1023)]:
+		for point in [Vector2i(0, 0), Vector2i(source.get_width() - 1, 0), Vector2i(0, source.get_height() - 1)]:
 			check(source.get_pixelv(point).a < 0.03, "Movement background is opaque")
 	var arena = load("res://scripts/arena.gd").new()
 	root.add_child(arena); arena.size = Vector2(1440, 810)

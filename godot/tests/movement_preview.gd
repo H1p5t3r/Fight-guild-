@@ -73,5 +73,27 @@ func run() -> void:
 				root.get_texture().get_image().save_png(output.path_join("%d-%03d.png" % [character, tick]))
 	var file := FileAccess.open(output.path_join("states.json"), FileAccess.WRITE)
 	file.store_string(JSON.stringify(records))
-	print("Native movement review: 750 simulation frames captured")
+	var captured := 750
+	if args.has("--details"):
+		for slot in [35, 36, 37, 38, -1, -2]:
+			model.reset([3, 0])
+			model.core.preview_place(0, 36000, 0, 0)
+			model.core.preview_place(1, 69000, 0, 0)
+			# Prepare the existing stance in the native core before recording.
+			model.core.preview_begin(0, 35)
+			for tick in 35: model.step(0, 0)
+			for tick in 72:
+				var input := 0
+				if tick == 12:
+					if slot >= 0: model.core.preview_begin(0, slot)
+					else: input = 512 | (2 if slot == -1 else 1)
+				model.step(input, 0)
+				caption.text = "%s / TAPPER\n%s   •   60 FPS" % [label, model.move_name(3, slot) + " / WITHDRAWAL" if slot >= 0 else "STANCE FORWARD STEP" if slot == -1 else "STANCE BACK STEP"]
+				arena.refresh(model, model.state(), false, false)
+				await process_frame
+				await RenderingServer.frame_post_draw
+				if tick in [12, 15, 19, 24, 28, 34, 42, 52, 60]:
+					root.get_texture().get_image().save_png(output.path_join("detail-%d-%d.png" % [slot, tick]))
+				captured += 1
+	print("Native movement review: %d simulation frames captured" % captured)
 	quit()

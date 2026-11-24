@@ -9,6 +9,7 @@ import time
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--label', default='AFTER')
 parser.add_argument('--output', default='build/movement-after')
+parser.add_argument('--details', action='store_true', help='Also record all Tapper stance withdrawals and both step dashes')
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 out = (root / args.output).resolve()
@@ -32,10 +33,11 @@ with (out / 'display.log').open('w') as log:
                             '--rendering-method', 'gl_compatibility', '--resolution', '1440x810',
                             '--fixed-fps', '60', '--write-movie', str(out / 'movement.avi'),
                             '--script', 'res://tests/movement_preview.gd', '--', '--test',
-                            '--label', args.label, '--output', str(out)], cwd=root, env=env,
+                            '--label', args.label, '--output', str(out)] + (['--details'] if args.details else []), cwd=root, env=env,
                            stdout=game_log, stderr=subprocess.STDOUT, check=True, timeout=240)
         report = (out / 'godot.log').read_text()
-        if 'ERROR:' in report or 'Native movement review: 750 simulation frames captured' not in report:
+        expected = 1182 if args.details else 750
+        if 'ERROR:' in report or f'Native movement review: {expected} simulation frames captured' not in report:
             raise RuntimeError('Godot review failed; see ' + str(out / 'godot.log'))
     finally:
         display.terminate()

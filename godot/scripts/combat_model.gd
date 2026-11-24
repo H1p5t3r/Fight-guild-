@@ -49,16 +49,21 @@ const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "gua
 var extension_art: Array = ExtensionData.default_art.duplicate(true)
 var core := FightCore.new()
 var cues := CombatCues.new()
+var locomotion := CombatLocomotion.new()
 var config: PackedInt32Array = core.configuration()
 
 func reset(characters: Array = [5, 4], simple: Array = [false, false]) -> void:
 	core.reset(characters[0], characters[1], simple[0], simple[1])
 	cues.reset()
+	locomotion.reset()
 
 func step(a: int, b: int) -> void:
 	var before := frame()
 	var frozen := core.read_value(-1, 2) > 0
+	var movement_frozen := frozen or core.read_value(-1, 4) > 0
+	var previous_x := [core.read_value(0, 0), core.read_value(1, 0)]
 	core.step(a, b)
+	locomotion.capture(before, movement_frozen, core, previous_x, [movement(core.read_value(0, 13)), movement(core.read_value(1, 13))])
 	if core.has_method("feedback_events"):
 		var held := []
 		var receiving := []

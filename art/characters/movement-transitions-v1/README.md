@@ -7,5 +7,6 @@ Fillet uses the selected choreography in
 velocity-selected ascent/apex/descent, an arrested air dash followed by its burst,
 and interruptible landing. No new movement lock, root interpolation or smearing.
 
-Hammer's footwork options are pending user selection. Do not ship either option
-as production art before that selection.
+Hammer's option board was held for selection. On 2026-11-24 the user delegated
+the choice with “Continue with your judgement”; A / Grounded March was selected.
+Separate production drawings and provenance are in `movement-transitions-v2`.

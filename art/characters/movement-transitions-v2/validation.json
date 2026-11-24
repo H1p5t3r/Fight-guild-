@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-24",
+  "authorization": "Continue with your judgement",
+  "selected_direction": "Hammer A / Grounded March; Tapper guarded shuffle and stance recovery",
+  "new_drawings": 48,
+  "original_png_bytes_preserved": true,
+  "canonical_collision_and_rules_changed": false,
+  "workshop_website_changed": false,
+  "validation": {
+    "full_native_godot_suite": "PASS",
+    "fillet_and_asset_checks": 3407,
+    "locomotion_stance_and_rollback_checks": 3919,
+    "baseline_records": 750,
+    "identical_baseline_checksums": true,
+    "native_review_frames": 1182,
+    "late_remote_input_visual_rollback": "PASS",
+    "generated_combat_data": "PASS --check; no compiled changes"
+  },
+  "review": "exports/FightGuild-Movement-Transitions.mp4",
+  "remaining_art": "Existing Hammer neutral air pose and other fighters ground gait selection remain for later art passes."
+}
