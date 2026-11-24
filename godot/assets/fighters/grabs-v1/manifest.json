@@ -1,0 +1,878 @@
+{
+  "version": 1,
+  "approved": "2026-11-24",
+  "direction": "A / Collar Fold",
+  "purpose": "Native render-only paired grips. No collision-authoring frames.",
+  "fighters": {
+    "0": {
+      "file": "anvil.png",
+      "body_height": 440,
+      "sha256": "d34c00d0c11e1237bebdc138dbad23d714c78b9cdc5aa22ae2529956770719dc",
+      "frames": [
+        {
+          "name": "Grip catch",
+          "region": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            230,
+            450
+          ],
+          "contact": [
+            450,
+            158
+          ],
+          "bounds": [
+            53,
+            45,
+            502,
+            451
+          ]
+        },
+        {
+          "name": "Grip load",
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            241,
+            450
+          ],
+          "contact": [
+            446,
+            202
+          ],
+          "bounds": [
+            69,
+            78,
+            481,
+            451
+          ]
+        },
+        {
+          "name": "Grip turn",
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            240,
+            450
+          ],
+          "contact": [
+            436,
+            204
+          ],
+          "bounds": [
+            65,
+            67,
+            475,
+            451
+          ]
+        },
+        {
+          "name": "Caught",
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            244,
+            466
+          ],
+          "contact": [
+            307,
+            143
+          ],
+          "bounds": [
+            74,
+            48,
+            475,
+            467
+          ]
+        },
+        {
+          "name": "Collar fold",
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            236,
+            466
+          ],
+          "contact": [
+            330,
+            201
+          ],
+          "bounds": [
+            61,
+            80,
+            470,
+            467
+          ]
+        },
+        {
+          "name": "Turned fold",
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            231,
+            472
+          ],
+          "contact": [
+            345,
+            202
+          ],
+          "bounds": [
+            79,
+            74,
+            460,
+            473
+          ]
+        }
+      ]
+    },
+    "1": {
+      "file": "hammer.png",
+      "body_height": 480,
+      "sha256": "832111d2812725e9dad73f793bd534054268b49a522cd4aee1d6325cc1aba8a4",
+      "frames": [
+        {
+          "name": "Grip catch",
+          "region": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            267,
+            462
+          ],
+          "contact": [
+            467,
+            116
+          ],
+          "bounds": [
+            30,
+            29,
+            501,
+            463
+          ]
+        },
+        {
+          "name": "Grip load",
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            261,
+            459
+          ],
+          "contact": [
+            419,
+            182
+          ],
+          "bounds": [
+            37,
+            50,
+            446,
+            460
+          ]
+        },
+        {
+          "name": "Grip turn",
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            251,
+            462
+          ],
+          "contact": [
+            409,
+            176
+          ],
+          "bounds": [
+            47,
+            29,
+            425,
+            463
+          ]
+        },
+        {
+          "name": "Caught",
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            285,
+            475
+          ],
+          "contact": [
+            306,
+            128
+          ],
+          "bounds": [
+            25,
+            3,
+            461,
+            476
+          ]
+        },
+        {
+          "name": "Collar fold",
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            264,
+            474
+          ],
+          "contact": [
+            342,
+            180
+          ],
+          "bounds": [
+            38,
+            51,
+            446,
+            475
+          ]
+        },
+        {
+          "name": "Turned fold",
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            274,
+            478
+          ],
+          "contact": [
+            365,
+            197
+          ],
+          "bounds": [
+            81,
+            54,
+            430,
+            479
+          ]
+        }
+      ]
+    },
+    "2": {
+      "file": "smoke.png",
+      "body_height": 480,
+      "sha256": "1c4ec4ffa218b32a0eb1fd1679d789b90b69cefcc830018d72ebce14a1b17f6c",
+      "frames": [
+        {
+          "name": "Grip catch",
+          "region": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            258,
+            481
+          ],
+          "contact": [
+            449,
+            111
+          ],
+          "bounds": [
+            67,
+            26,
+            483,
+            482
+          ]
+        },
+        {
+          "name": "Grip load",
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            257,
+            479
+          ],
+          "contact": [
+            383,
+            200
+          ],
+          "bounds": [
+            65,
+            58,
+            417,
+            480
+          ]
+        },
+        {
+          "name": "Grip turn",
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            256,
+            481
+          ],
+          "contact": [
+            395,
+            165
+          ],
+          "bounds": [
+            47,
+            32,
+            435,
+            482
+          ]
+        },
+        {
+          "name": "Caught",
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            274,
+            488
+          ],
+          "contact": [
+            323,
+            144
+          ],
+          "bounds": [
+            95,
+            14,
+            473,
+            489
+          ]
+        },
+        {
+          "name": "Collar fold",
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            246,
+            488
+          ],
+          "contact": [
+            336,
+            184
+          ],
+          "bounds": [
+            67,
+            49,
+            411,
+            489
+          ]
+        },
+        {
+          "name": "Turned fold",
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            238,
+            486
+          ],
+          "contact": [
+            357,
+            188
+          ],
+          "bounds": [
+            56,
+            43,
+            413,
+            487
+          ]
+        }
+      ]
+    },
+    "3": {
+      "file": "tapper.png",
+      "body_height": 450,
+      "sha256": "6a527f03ba267b2509d0734446b3dd4caadbaa6a701611a8475ebfe00672ec4c",
+      "frames": [
+        {
+          "name": "Grip catch",
+          "region": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            264,
+            463
+          ],
+          "contact": [
+            454,
+            139
+          ],
+          "bounds": [
+            58,
+            12,
+            493,
+            464
+          ]
+        },
+        {
+          "name": "Grip load",
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            257,
+            463
+          ],
+          "contact": [
+            409,
+            197
+          ],
+          "bounds": [
+            60,
+            49,
+            431,
+            464
+          ]
+        },
+        {
+          "name": "Grip turn",
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            264,
+            464
+          ],
+          "contact": [
+            389,
+            180
+          ],
+          "bounds": [
+            60,
+            38,
+            416,
+            465
+          ]
+        },
+        {
+          "name": "Caught",
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            286,
+            475
+          ],
+          "contact": [
+            321,
+            138
+          ],
+          "bounds": [
+            63,
+            8,
+            479,
+            476
+          ]
+        },
+        {
+          "name": "Collar fold",
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            239,
+            475
+          ],
+          "contact": [
+            333,
+            193
+          ],
+          "bounds": [
+            52,
+            46,
+            441,
+            476
+          ]
+        },
+        {
+          "name": "Turned fold",
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            246,
+            478
+          ],
+          "contact": [
+            354,
+            190
+          ],
+          "bounds": [
+            52,
+            42,
+            423,
+            479
+          ]
+        }
+      ]
+    },
+    "4": {
+      "file": "shark.png",
+      "body_height": 480,
+      "sha256": "4be2ee92d1505a465ab11856f58bc3e492c52cbff6049f62e02246798cac9d93",
+      "frames": [
+        {
+          "name": "Grip catch",
+          "region": [
+            0,
+            0,
+            546,
+            512
+          ],
+          "pivot": [
+            260,
+            471
+          ],
+          "contact": [
+            452,
+            144
+          ],
+          "bounds": [
+            56,
+            36,
+            515,
+            472
+          ]
+        },
+        {
+          "name": "Grip load",
+          "region": [
+            546,
+            0,
+            478,
+            512
+          ],
+          "pivot": [
+            210,
+            471
+          ],
+          "contact": [
+            354,
+            205
+          ],
+          "bounds": [
+            26,
+            69,
+            416,
+            472
+          ]
+        },
+        {
+          "name": "Grip turn",
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            255,
+            473
+          ],
+          "contact": [
+            372,
+            198
+          ],
+          "bounds": [
+            53,
+            70,
+            455,
+            474
+          ]
+        },
+        {
+          "name": "Caught",
+          "region": [
+            0,
+            512,
+            546,
+            512
+          ],
+          "pivot": [
+            278,
+            472
+          ],
+          "contact": [
+            300,
+            125
+          ],
+          "bounds": [
+            46,
+            24,
+            477,
+            473
+          ]
+        },
+        {
+          "name": "Collar fold",
+          "region": [
+            546,
+            512,
+            478,
+            512
+          ],
+          "pivot": [
+            204,
+            472
+          ],
+          "contact": [
+            289,
+            184
+          ],
+          "bounds": [
+            24,
+            69,
+            399,
+            473
+          ]
+        },
+        {
+          "name": "Turned fold",
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            255,
+            474
+          ],
+          "contact": [
+            355,
+            184
+          ],
+          "bounds": [
+            94,
+            68,
+            447,
+            475
+          ]
+        }
+      ]
+    },
+    "5": {
+      "file": "fillet.png",
+      "body_height": 480,
+      "sha256": "d82eb39d9f4b348c8fec2f13268a5e6dd91208c00a52e141bfd4ff3c20aae6dd",
+      "frames": [
+        {
+          "name": "Grip catch",
+          "region": [
+            0,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            278,
+            479
+          ],
+          "contact": [
+            457,
+            149
+          ],
+          "bounds": [
+            71,
+            17,
+            499,
+            480
+          ]
+        },
+        {
+          "name": "Grip load",
+          "region": [
+            512,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            276,
+            479
+          ],
+          "contact": [
+            388,
+            210
+          ],
+          "bounds": [
+            68,
+            59,
+            456,
+            480
+          ]
+        },
+        {
+          "name": "Grip turn",
+          "region": [
+            1024,
+            0,
+            512,
+            512
+          ],
+          "pivot": [
+            287,
+            480
+          ],
+          "contact": [
+            358,
+            190
+          ],
+          "bounds": [
+            62,
+            35,
+            431,
+            481
+          ]
+        },
+        {
+          "name": "Caught",
+          "region": [
+            0,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            306,
+            480
+          ],
+          "contact": [
+            330,
+            139
+          ],
+          "bounds": [
+            102,
+            4,
+            502,
+            481
+          ]
+        },
+        {
+          "name": "Collar fold",
+          "region": [
+            512,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            270,
+            480
+          ],
+          "contact": [
+            350,
+            174
+          ],
+          "bounds": [
+            53,
+            42,
+            457,
+            481
+          ]
+        },
+        {
+          "name": "Turned fold",
+          "region": [
+            1024,
+            512,
+            512,
+            512
+          ],
+          "pivot": [
+            261,
+            482
+          ],
+          "contact": [
+            354,
+            177
+          ],
+          "bounds": [
+            72,
+            48,
+            404,
+            483
+          ]
+        }
+      ]
+    }
+  }
+}

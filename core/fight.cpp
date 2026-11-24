@@ -1754,6 +1754,7 @@ int Simulation::get(int player,int field) const {
         case 19:return world.wall_health[0]; case 20:return world.wall_health[1];
         case 21:return world.foreground_player;
         case 22:return world.pair.kind;case 23:return world.pair.clock;case 24:return world.pair.owner;case 25:return world.pair.move;
+        case 26:return world.pair.ticks;case 27:return world.pair.facing;
         default:return 0; }
     }
     if(player>1) return 0;

@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Record native throw presentation with existing approved art; no website build."""
+"""Record native Collar Fold grips and longer holds; no website build."""
 from pathlib import Path
+import argparse
 import os
 import shutil
 import subprocess
 import time
 
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--stills', action='store_true')
+args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 out = root / 'build/paired-throw-review'
 out.mkdir(parents=True, exist_ok=True)
@@ -24,10 +28,12 @@ with (out / 'display.log').open('w') as log:
                 break
             time.sleep(.1)
         with (out / 'godot.log').open('w') as game_log:
-            subprocess.run(['bash', 'scripts/godot.sh', '--display-driver', 'x11', '--audio-driver', 'Dummy',
-                            '--rendering-method', 'gl_compatibility', '--resolution', '1440x810',
-                            '--fixed-fps', '60', '--write-movie', str(out / 'throws.avi'),
-                            '--script', 'res://tests/paired_throws_preview.gd', '--', '--test', '--output', str(out)],
+            command = ['bash', 'scripts/godot.sh', '--display-driver', 'x11', '--audio-driver', 'Dummy',
+                       '--rendering-method', 'gl_compatibility', '--resolution', '1440x810']
+            if not args.stills: command += ['--fixed-fps', '60', '--write-movie', str(out / 'throws.avi')]
+            command += ['--script', 'res://tests/paired_throws_preview.gd', '--', '--test', '--output', str(out)]
+            if args.stills: command += ['--stills']
+            subprocess.run(command,
                            cwd=root, env=env, stdout=game_log, stderr=subprocess.STDOUT, check=True, timeout=240)
         report = (out / 'godot.log').read_text()
         if 'ERROR:' in report or 'Native paired throw review: 0 failures' not in report:
@@ -35,8 +41,9 @@ with (out / 'display.log').open('w') as log:
     finally:
         display.terminate()
         display.wait(timeout=10)
-subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', str(out / 'throws.avi'), '-c:v', 'libx264',
+if not args.stills:
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', str(out / 'throws.avi'), '-c:v', 'libx264',
                 '-crf', '20', '-pix_fmt', 'yuv420p', '-an', '-movflags', '+faststart',
-                str(root / 'exports/FightGuild-Throw-Presentation.mp4')], check=True)
-shutil.copyfile(out / '5-24-release.png', root / 'exports/FightGuild-Throw-Release.png')
-print('Native throw review: exports/FightGuild-Throw-Presentation.mp4')
+                str(root / 'exports/FightGuild-Collar-Fold-Grabs.mp4')], check=True)
+shutil.copyfile(out / '5-24-hold.png', root / 'exports/FightGuild-Collar-Fold-Grab.png')
+print('Native Collar Fold review saved.')

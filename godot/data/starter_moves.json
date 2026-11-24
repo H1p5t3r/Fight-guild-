@@ -3552,7 +3552,7 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 0,
+          "grabFrames": 40,
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "tetherDuration": 180,
@@ -3700,7 +3700,7 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 0,
+          "grabFrames": 40,
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "tetherDuration": 180,
@@ -10785,7 +10785,7 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 0,
+          "grabFrames": 40,
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "tetherDuration": 180,
@@ -10944,7 +10944,7 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 0,
+          "grabFrames": 40,
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "tetherDuration": 180,
@@ -18732,7 +18732,7 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 0,
+          "grabFrames": 40,
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hitPose": 1,
@@ -18895,7 +18895,7 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 0,
+          "grabFrames": 40,
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hitPose": 1,
@@ -25120,9 +25120,9 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 20,
+          "grabFrames": 40,
           "finishArtPose": 23,
-          "finishArtFrame": 8,
+          "finishArtFrame": 36,
           "hitPose": 5,
           "geometry": [
             1000,
@@ -26873,9 +26873,9 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 20,
+          "grabFrames": 34,
           "finishArtPose": 23,
-          "finishArtFrame": 8,
+          "finishArtFrame": 30,
           "hitPose": 1,
           "geometry": [
             1000,
@@ -27036,9 +27036,9 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 20,
+          "grabFrames": 34,
           "finishArtPose": 23,
-          "finishArtFrame": 8,
+          "finishArtFrame": 30,
           "hitPose": 1,
           "geometry": [
             1000,
@@ -29710,9 +29710,9 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 24,
+          "grabFrames": 52,
           "finishArtPose": 31,
-          "finishArtFrame": 12,
+          "finishArtFrame": 48,
           "hitPose": 5,
           "geometry": [
             1000,
@@ -34931,7 +34931,7 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 0,
+          "grabFrames": 40,
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
@@ -35090,7 +35090,7 @@
           "semiAirEnd": 0,
           "armorFrames": 0,
           "armorHits": 0,
-          "grabFrames": 0,
+          "grabFrames": 40,
           "finishArtPose": 0,
           "finishArtFrame": 0,
           "hurtboxes": {},
@@ -50623,7 +50623,7 @@
               "bleedWindowStart": 0,
               "bleedWindowEnd": 0,
               "captureFreeze": 6,
-              "pairTicks": 24,
+              "pairTicks": 40,
               "releaseFreeze": 8,
               "ownerRecovery": 12,
               "victimRecovery": 14,
@@ -51104,7 +51104,7 @@
               "bleedWindowStart": 0,
               "bleedWindowEnd": 0,
               "captureFreeze": 6,
-              "pairTicks": 24,
+              "pairTicks": 40,
               "releaseFreeze": 8,
               "ownerRecovery": 12,
               "victimRecovery": 14,
@@ -61173,7 +61173,7 @@
               "bleedWindowStart": 0,
               "bleedWindowEnd": 0,
               "captureFreeze": 6,
-              "pairTicks": 28,
+              "pairTicks": 52,
               "releaseFreeze": 8,
               "ownerRecovery": 16,
               "victimRecovery": 18,
@@ -61697,7 +61697,7 @@
               "bleedWindowStart": 0,
               "bleedWindowEnd": 0,
               "captureFreeze": 6,
-              "pairTicks": 28,
+              "pairTicks": 52,
               "releaseFreeze": 8,
               "ownerRecovery": 16,
               "victimRecovery": 18,
@@ -63038,7 +63038,7 @@
               ]
             },
             {
-              "tick": 16,
+              "tick": 32,
               "owner": [
                 0,
                 0
@@ -63049,7 +63049,7 @@
               ]
             },
             {
-              "tick": 20,
+              "tick": 36,
               "owner": [
                 -1500,
                 0
@@ -63060,7 +63060,7 @@
               ]
             },
             {
-              "tick": 24,
+              "tick": 40,
               "owner": [
                 -3000,
                 0
@@ -63095,7 +63095,7 @@
               ]
             },
             {
-              "tick": 12,
+              "tick": 28,
               "owner": [
                 0,
                 0
@@ -63106,7 +63106,7 @@
               ]
             },
             {
-              "tick": 20,
+              "tick": 36,
               "owner": [
                 6000,
                 0
@@ -63117,7 +63117,7 @@
               ]
             },
             {
-              "tick": 24,
+              "tick": 40,
               "owner": [
                 9000,
                 0
@@ -63152,7 +63152,7 @@
               ]
             },
             {
-              "tick": 20,
+              "tick": 44,
               "owner": [
                 0,
                 0
@@ -63163,7 +63163,7 @@
               ]
             },
             {
-              "tick": 24,
+              "tick": 48,
               "owner": [
                 -2750,
                 0
@@ -63174,7 +63174,7 @@
               ]
             },
             {
-              "tick": 28,
+              "tick": 52,
               "owner": [
                 -5500,
                 0

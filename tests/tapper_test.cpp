@@ -25,7 +25,7 @@ static void inputs_and_stance(){
 }
 static void captures(){
  Simulation s;setup(s);auto& a=s.world.players[0];auto& b=s.world.players[1];
- hit(s,13);CHECK(b.reaction==Captured&&a.grab_time>0&&b.health==1000&&s.get(-1,21)==0);ticks(s,25);
+ hit(s,13);CHECK(b.reaction==Captured&&a.grab_time>0&&b.health==1000&&s.get(-1,21)==0);thaw(s);ticks(s,s.moves[3][13].v[GrabFrames]);
  CHECK(a.stance==1&&b.health==935&&a.contact_count==1);CHECK(b.knockdown==SoftKnockdown);
  setup(s);s.moves[3][13].v[ArtPose]=s.moves[3][13].v[FinishArtPose]=0;hit(s,13);CHECK(s.get(0,30)>=0&&s.box_count(0,HurtBox)>0);
  setup(s);hit(s,13,Right);CHECK(b.guarding&&!a.stance&&!a.grab_time);
@@ -33,8 +33,8 @@ static void captures(){
   setup(s);a.stance=1;if(immune==1){b.stun=10;b.guarding=1;}if(immune==2)b.throw_grace=5;if(immune==3)b.y=10000;
   hit(s,STANCE_THROW,Right);CHECK((b.reaction==Captured)==(immune==0));
  }
- setup(s);a.stance=1;hit(s,STANCE_THROW,Right);CHECK(b.health==1000);ticks(s,25);CHECK(b.health==860&&a.stance&&a.contact_count==1&&b.knockdown==HardKnockdown);
- setup(s);hit(s,BACK_THROW);while(s.world.pair.kind||s.world.hitstop)s.step(0,0);ticks(s,22);CHECK(a.x>b.x&&a.stance&&b.knockdown==HardKnockdown);
+ setup(s);a.stance=1;hit(s,STANCE_THROW,Right);CHECK(b.health==1000);thaw(s);ticks(s,s.moves[3][STANCE_THROW].v[GrabFrames]);CHECK(b.health==860&&a.stance&&a.contact_count==1&&b.knockdown==HardKnockdown);
+ setup(s);hit(s,BACK_THROW);while(s.world.pair.kind||s.world.hitstop)s.step(0,0);ticks(s,s.moves[3][BACK_THROW].v[GrabFrames]);CHECK(a.x>b.x&&a.stance&&b.knockdown==HardKnockdown);
  setup(s);a.y=b.y=15000;b.x=a.x-7000;s.preview_begin(0,AIR_BACK_THROW);ticks(s,5);CHECK(b.health==840&&b.knockdown==HardKnockdown);
  // Real air back throw input takes priority over the P+K FD chord.
  setup(s);a.y=b.y=15000;s.step(Left|P|K,0);CHECK(a.move==AIR_BACK_THROW&&!a.faultless);ticks(s,4);CHECK(b.health==840&&b.knockdown==HardKnockdown);

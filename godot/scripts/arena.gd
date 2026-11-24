@@ -128,6 +128,7 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 			var back := Vector2(fighter.weaponBackX / 100.0 * scale_x, floor_y - fighter.weaponBackY / 100.0 * scale_x)
 			var tip := Vector2(fighter.weaponTipX / 100.0 * scale_x, floor_y - fighter.weaponTipY / 100.0 * scale_x)
 			weapons[p].present(screen_point(origin), screen_point(back), screen_point(tip), fighter.facing, scale_x * camera_zoom)
+	if not travel: CombatGrabs.present(sprites, model, view, scale_x * camera_zoom)
 	queue_redraw()
 	hud_layer.queue_redraw()
 	collision_layer.queue_redraw()

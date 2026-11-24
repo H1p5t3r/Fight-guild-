@@ -18,7 +18,7 @@ Do not treat permission for game/art changes as permission to resume the website
    recorded scenarios cover normal/block/FD/guard-break/counter, two-hit, airborne
    and mirrored contacts. Review: `exports/FightGuild-Impact-Review.mp4`.
    The Workshop source audio changes remain unpublished during the website freeze.
-2. **Receiver animations and paired throws — in progress.** Fillet's inherited hurt
+2. **Receiver animations and paired throws — complete first pass (2026-11-24).** Fillet's inherited hurt
    pose has been calibrated to her current size. Native rendering now has separate
    leg, chest, head and airborne reaction selection, with contact-region metadata
    and a rollback-aware receiver clock. The user selected **A / Compact Snap**;
@@ -30,9 +30,11 @@ Do not treat permission for game/art changes as permission to resume the website
    those approved reactions throughout the existing recovery lock, and capture
    owners keep foreground priority. Eighty-four actual captures cover the roster,
    corners, techs, non-damaging Wound and replay. Review:
-   `exports/FightGuild-Throw-Presentation.mp4`. **New grip poses/alignment remain
-   in direction review (A / Collar Fold or B / Shoulder Turn), not installed.**
-   See [paired throws](paired-throws.md); finish this before moving to item 3.
+   `exports/FightGuild-Throw-Presentation.mp4`. The user selected **A / Collar
+   Fold** and requested longer holds: 36 owner/receiver drawings now cover the
+   roster, with 40-tick grounded normals and 52-tick command grabs, retaining
+   startup and tech windows. Review: `exports/FightGuild-Collar-Fold-Grabs.mp4`.
+   See [paired throws](paired-throws.md). **Item 3 is next.**
 3. **Spacing and combo audit.** Check the roster against standing, crouching and
    airborne targets, both corners, FD, repeat launchers and wall transitions.
 4. **Movement transitions.** Consistent planted feet, body scale and transitions

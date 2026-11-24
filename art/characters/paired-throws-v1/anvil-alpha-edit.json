@@ -1,0 +1,7 @@
+{
+  "prompt": "Remove the complete white/grey background and every floor shadow from this SIX-POSE Anvil sprite sheet. Output the exact same six character drawings in the exact same 3-column by 2-row layout on true fully TRANSPARENT alpha, including all gaps between limbs, beard, hammer and shield. All empty pixels must have alpha zero. Make the actual characters opaque. Preserve the original canvas, positions, body size, armour, white beard, hammer, shield and crisp inked outlines without redesigning or cropping anything. No new background, no gradients, no glows, no shadow, no lettering.",
+  "refs": [
+    "/workspace/Fight-guild-/godot/assets/fighters/grabs-v1/anvil.png"
+  ],
+  "source": "/workspace/generated_images/exec-f23c5a89-5bb4-4e75-b19d-6b6c03c4347a.png"
+}

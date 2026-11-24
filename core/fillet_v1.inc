@@ -89,7 +89,13 @@ void Simulation::start_pair(int p,int kind,const Move& payload) {
     pair.origin_x=f.x;pair.victim_x=(other.x-f.x)*f.facing;pair.saved_age=f.age+1;pair.payload=payload;
     pair.down_pose=other.knockdown;const int* x=extension(f);
     int freeze=payload.v[Hitstop];
-    if(kind==LegacyCapture) { pair.ticks=pair.tech_ticks=6; }
+    if(kind==LegacyCapture) {
+        pair.tech_ticks=6;
+        // Ordinary one-stage throws may author a longer grip with GrabFrames.
+        // Tapper already owns a second capture stage, so only pay his tech gate
+        // here. Zero retains the six-tick behavior of older saved move data.
+        pair.ticks=payload.v[ActionType]==4?6:max(6,payload.v[GrabFrames]);
+    }
     else {
         freeze=x[XCaptureFreeze];pair.ticks=x[XPairTicks];pair.release_freeze=x[XReleaseFreeze];
         pair.owner_recovery=x[XOwnerRecovery];pair.victim_recovery=x[XVictimRecovery];pair.grace=x[XThrowGrace];

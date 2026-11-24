@@ -98,7 +98,7 @@ static void capture_boundaries(){
     check(sim.world.players[0].grab_time>0&&sim.world.hitstop==0,"Tapper resumes authored capture after gate without second freeze");
     while(sim.world.players[0].grab_time)sim.step(0,0);
     check(sim.world.players[1].health<1000&&sim.world.hitstop==0&&sim.world.players[0].stance==1,"Tapper finisher preserves damage/stance and pays no second capture stop");
-    setup(5,4,7000);begin(FORWARD_THROW);ticks(2);unfreeze();ticks(24);unfreeze();
+    setup(5,4,7000);begin(FORWARD_THROW);ticks(2);unfreeze();ticks(sim.world.pair.ticks);unfreeze();
     auto& attacker=sim.world.players[0];auto& defender=sim.world.players[1];
     defender.x=attacker.x+6000;defender.pair_recovery=0;defender.pair_grace_pending=0;
     check(sim.preview_begin(1,0),"isolate strike against paired release recovery");defender.age=sim.moves[4][0].v[Startup]-1;sim.step(0,0);
@@ -127,11 +127,11 @@ int main(){
     setup();begin(13);ticks(45);check(!sim.world.pair.kind&&!sim.world.players[1].bleed_time&&sim.world.players[0].move==-1,"standing Wound whiffs finitely");
     setup(5,4,7000);begin(FORWARD_THROW);ticks(2);check(sim.world.pair.kind==NormalCapture&&sim.world.players[1].health==1000,"throw has precommit pair");
     unfreeze();sim.step(0,P|K);check(!sim.world.pair.kind&&sim.world.players[0].pair_recovery==12&&sim.world.players[1].health==1000,"C1 fresh chord techs without damage");
-    setup(5,4,7000);begin(FORWARD_THROW);ticks(2);unfreeze();ticks(24);check(sim.world.players[1].health==955&&sim.world.players[0].momentum==360&&sim.world.players[1].momentum==180,"throw release damage/meter once");
+    setup(5,4,7000);begin(FORWARD_THROW);ticks(2);unfreeze();ticks(sim.world.pair.ticks);check(sim.world.players[1].health==955&&sim.world.players[0].momentum==360&&sim.world.players[1].momentum==180,"throw release damage/meter once");
     check(sim.world.players[0].pair_recovery==12&&sim.world.players[1].pair_recovery==14,"+2 independent recovery");
     unfreeze();ticks(12);check(!sim.world.players[0].pair_recovery&&sim.world.players[1].pair_recovery==2,"owner unlocks two ticks earlier");
     setup(5,4,24000);bleed(420,59);begin(VAULT_CASHOUT);ticks(22);check(sim.world.pair.kind==CommandCapture&&!sim.world.players[1].bleed_source,"cashout capture consumes snapshotted bleed");
-    unfreeze();ticks(28);check(sim.world.players[1].health==886&&sim.world.players[1].x-sim.world.players[0].x==17000,"55 + 59 release, 170px reset");
+    unfreeze();ticks(sim.world.pair.ticks);check(sim.world.players[1].health==886&&sim.world.players[1].x-sim.world.players[0].x==17000,"55 + 59 release, 170px reset");
     setup(5,4,24000);bleed();begin(SKIM_CASHOUT);sim.step(0,Up);ticks(60);check(!sim.world.pair.kind&&sim.world.players[1].health==1000&&sim.world.players[0].move==-1,"jump failure latch and finite whiff");
     setup(4,5,7000);begin(FORWARD_THROW);ticks(2);check(sim.world.pair.kind==LegacyCapture,"other fighters get precommit gate");unfreeze();sim.step(0,P|K);check(sim.world.players[1].health==1000&&!sim.world.pair.kind,"legacy throw tech preserves health");
     setup(5,4,7000);begin(FORWARD_THROW);sim.preview_begin(1,FORWARD_THROW);ticks(2);check(!sim.world.pair.kind&&sim.world.players[0].pair_recovery==12,"simultaneous captures tech symmetrically");

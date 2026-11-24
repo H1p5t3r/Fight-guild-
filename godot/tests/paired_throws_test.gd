@@ -20,6 +20,18 @@ func render_checked() -> void:
 	check(model.core.snapshot() == snapshot, "Throw presentation changed the simulation snapshot")
 	for p in 2:
 		check(model.core.boxes(p, 0) == boxes[p], "Throw presentation changed hurtboxes")
+	var grip := CombatGrabs.capture(model, state)
+	if not grip.is_empty():
+		for p in 2:
+			var sprite := arena.sprites[p] as Sprite2D
+			check(sprite.get_meta("grab_role") == ("owner" if p == int(grip.owner) else "receiver"), "Paired drawing lost its role")
+			var offset: Vector2 = sprite.get_meta("grab_offset")
+			var world_scale: float = arena.size.x / 1000.0 * arena.camera_zoom
+			check(is_zero_approx(offset.y) and absf(offset.x) <= 18.0 * world_scale + 0.01, "Grip registration moved feet vertically or too far from physics")
+			if sprite.texture is AtlasTexture and "/grabs-v1/" in sprite.texture.atlas.resource_path:
+				var clip: Dictionary = CombatGrabs.catalog().fighters[str(state.players[p].character)]
+				check(is_equal_approx(sprite.scale.y, 150.0 / float(clip.body_height) * world_scale) and is_equal_approx(absf(sprite.scale.x), sprite.scale.y), "Grip pose changed anatomy scale")
+		check(arena.sprites[1-int(grip.owner)].get_meta("reaction_family") == "", "Hit recoil replaced a paired hold")
 	var foreground: int = arena.foreground_player(state)
 	if foreground in [0, 1]:
 		check(arena.sprites[foreground].get_index() > arena.sprites[1 - foreground].get_index(), "Capture owner hidden behind defender")

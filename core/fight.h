@@ -11,7 +11,7 @@ constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_
               STAB_GROUND=30, STAB_AIR=31;
 constexpr int CLOSE_SLASH=32, HELD_GUARD=33, GUARD_ATTACK=34, STANCE_P=35, STANCE_K=36, STANCE_S=37, STANCE_HS=38, STANCE_EXIT=39, STANCE_THROW=40, AIR_BACK_THROW=41, AIR_FORWARD_THROW=42;
 constexpr int FAR_SLASH=2, SLASH_SWEEP=6; // Saved 5S and 2S slot IDs remain compatible.
-constexpr unsigned RULES_REVISION=3; // Combo decay, velocity knockback and Strive-style gatlings.
+constexpr unsigned RULES_REVISION=4; // Authored ground-grab hold duration; tech gate remains six ticks.
 constexpr int VAULT_CASHOUT=45, SKIM_CASHOUT=46;
 constexpr int CHARGED_HS=43, CHARGED_D=44;
 constexpr int MIN_STARTUP = 5;
