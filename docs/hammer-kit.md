@@ -2,6 +2,34 @@
 
 Hammer is a grounded Masons bruiser: long, committed hammer normals become close pressure through one **5D Break Step** per string. The approved art direction is **A / Shoulder Drive**, with compact loads and forceful releases. This is a playable first balance pass.
 
+## Current native movement tuning — 2026-11-24
+
+The active native batch is `godot/data/workshop/2026-11-24-hammer-movement/FightGuild-Hammer-Movement.json`.
+It changes only Hammer's forward walk, run cap and run acceleration from the
+previous Collar Fold batch. Historical starter defaults and previous exports
+remain intact; other fighters, attacks, Drive, jumps and backdash are unchanged.
+
+| Movement at 60 Hz | Previous Hammer | Current Hammer | Current Smoke |
+| --- | ---: | ---: | ---: |
+| Forward walk, world units/frame | 3.2 | 2.8 | 3.4 |
+| Backward walk, world units/frame | 2.5 | 2.5 | 3.4 |
+| Run cap, world units/frame | 10.0 | 10.2 | 10.5 |
+| Run acceleration, units/frame² | 1.0 | 3.0 | 5.0 |
+| Frames to run cap from rest | 10 | 4 | 3 |
+
+At 12 / 30 / 60 running frames from rest, Hammer travels 109.8 / 293.4 / 599.4
+world units; Smoke travels 120 / 309 / 624. This makes his run substantially
+more responsive while preserving Smoke's lead throughout acceleration and travel.
+
+The registered walk/run drawings retain fixed stride distances. Reducing walking
+speed therefore slows the footfall cadence instead of shrinking the drawn stride
+and keeping his legs moving at the old rate. The native launch loads the current
+batch; an existing locally saved move set still takes precedence and can import
+this JSON to adopt the tuning. The website remains frozen.
+
+Verify with `godot/tests/hammer_mobility_test.gd`: real inputs in both facings,
+standing/walking run starts, short/long travel, footfall cadence and replay.
+
 ## Drive rules
 
 - **5D:** 4 frames of load, 12 frames of burst movement, 6 frames of recovery. The editor shows **5 / 12 / 6** because startup names the first active frame.
@@ -50,4 +78,4 @@ Open [Hammer's motion review](https://h1p5t3r.github.io/Fight-guild-/hammer-moti
 
 The website preserves existing browser-local drafts. **Export your draft before importing the current supplied JSON** to try Hammer's new kit. Importing an older JSON adds the three new schema fields without replacing its Hammer tuning or art notes. The other five fighters' submitted move and movement values are unchanged.
 
-New art covers 23 enabled actions, standing/crouching idle and four throw capture tracks. Attacks hold the load through final startup and snap on first active, with fixed-scale registration and real hitstop. Broad generated hammer effects reach the authored hitbox; weapons/effects never enlarge hurtboxes. Walk/run, block and ordinary hit reactions still use the earlier art and are a separate follow-up.
+New kit art covers 23 enabled actions, standing/crouching idle and four throw capture tracks. Attacks hold the load through final startup and snap on first active, with fixed-scale registration and real hitstop. Broad generated hammer effects reach the authored hitbox; weapons/effects never enlarge hurtboxes. Subsequent passes added Grounded March walk/run/retreat and Compact Snap hit reactions; see [movement transitions](movement-transitions.md) and [receiver reactions](receiver-reactions.md). Block and neutral air art remain earlier drawings.

@@ -11,6 +11,7 @@ cases = [
     (["--headless", "--script", "tests/combo_snapshot_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/model_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/hammer_test.gd"], "0 failures"),
+    (["--headless", "--script", "tests/hammer_mobility_test.gd", "--", "--test"], "Hammer mobility: 0 failures"),
     (["--headless", "--script", "tests/fillet_v1_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/movement_projectile_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/movement_presentation_test.gd", "--", "--test"], "Movement presentation: 0 failures"),

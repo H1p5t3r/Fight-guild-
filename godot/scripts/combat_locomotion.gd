@@ -27,9 +27,12 @@ static func mode(f: Dictionary) -> String:
 	return ""
 
 static func stride(mode_name: String, profile: Dictionary) -> int:
+	# These are distances between drawings in the registered cycles. Editing
+	# travel speed must change footfall cadence, not shrink the drawn stride.
 	match mode_name:
-		"hammer_run": return maxi(1, int(profile.runSpeed) * 3)
-		"hammer_back": return maxi(1, int(profile.backWalkSpeed) * 5)
+		"hammer_walk": return 1600
+		"hammer_run": return 3000
+		"hammer_back": return 1250
 		"tapper_forward": return 600
 		"tapper_back": return 500
 	return maxi(1, int(profile.walkSpeed) * 5)

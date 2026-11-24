@@ -79,6 +79,11 @@ entry key. Hitstop/counter holds freeze playback, while a blocked root plants a
 contact pose even if requested run velocity remains nonzero. Ground stops get a
 brief, interruptible settle. Step dashes use the existing saved dash age.
 
+Hammer's stride distances stay fixed at 16 world units per walk key, 30 per run
+key and 12.5 per retreat key. His later movement retune lowers walk speed and
+raises run acceleration/cap; those speed changes now alter the cadence naturally
+instead of also rescaling stride distances. See [current movement tuning](hammer-kit.md).
+
 This history never enters native snapshots, gameplay hashes or collision data.
 As with combat cues, a standalone imported snapshot without its prior visual
 history starts a fresh gait; ordinary in-session rollback has the needed history.

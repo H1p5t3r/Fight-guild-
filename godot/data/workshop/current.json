@@ -1,7 +1,7 @@
 {
-  "label": "Collar Fold \u00b7 longer grab holds",
-  "file": "2026-11-24-collar-fold/FightGuild-Collar-Fold.json",
-  "sha256": "a1ac5672ee04227fb478ae0b4bce8a9b092883642fd2f9c2a0e4cda72d3ba6b2",
-  "sourceFile": "2026-11-23-hammer/FightGuild-Hammer.json",
-  "sourceSha256": "cbb7ee98d86c274f9ce7948ef83fbfe410d31619ce5eb3e01c76e6f76e9a7c78"
+  "label": "Hammer \u00b7 measured walk and quicker run",
+  "file": "2026-11-24-hammer-movement/FightGuild-Hammer-Movement.json",
+  "sha256": "dd031e293f3804aff82a1114943ab731e03a38454e7162e255b3e93bfd1f1aa1",
+  "sourceFile": "2026-11-24-collar-fold/FightGuild-Collar-Fold.json",
+  "sourceSha256": "a1ac5672ee04227fb478ae0b4bce8a9b092883642fd2f9c2a0e4cda72d3ba6b2"
 }
