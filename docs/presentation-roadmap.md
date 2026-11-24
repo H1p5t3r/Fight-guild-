@@ -26,8 +26,13 @@ Do not treat permission for game/art changes as permission to resume the website
    scale, grounded foot anchors and airborne hip anchors. Forty-eight actual
    contact scenarios verify all families and both facings without changing
    gameplay. Review: `exports/FightGuild-Compact-Snap-Reactions.mp4`.
-   See [receiver reactions](receiver-reactions.md). **Paired throw receiver
-   art/alignment is next within this item.**
+   See [receiver reactions](receiver-reactions.md). Paired throw release now uses
+   those approved reactions throughout the existing recovery lock, and capture
+   owners keep foreground priority. Eighty-four actual captures cover the roster,
+   corners, techs, non-damaging Wound and replay. Review:
+   `exports/FightGuild-Throw-Presentation.mp4`. **New grip poses/alignment remain
+   in direction review (A / Collar Fold or B / Shoulder Turn), not installed.**
+   See [paired throws](paired-throws.md); finish this before moving to item 3.
 3. **Spacing and combo audit.** Check the roster against standing, crouching and
    airborne targets, both corners, FD, repeat launchers and wall transitions.
 4. **Movement transitions.** Consistent planted feet, body scale and transitions

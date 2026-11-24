@@ -64,7 +64,7 @@ func step(a: int, b: int) -> void:
 		var receiving := []
 		for p in 2:
 			held.append(core.read_value(p, 64) != 0) # counterSlowHeld, on the resolved tick
-			receiving.append(CombatReactions.receiving({"stun": core.read_value(p, 6), "guarding": core.read_value(p, 7), "reaction": core.read_value(p, 31)}))
+			receiving.append(CombatReactions.receiving({"stun": core.read_value(p, 6), "guarding": core.read_value(p, 7), "reaction": core.read_value(p, 31), "pairRecovery": core.read_value(p, 92)}))
 		cues.capture(before, frozen, core.call("feedback_events"), held, receiving)
 
 func frame() -> int:

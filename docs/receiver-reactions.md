@@ -82,7 +82,14 @@ Each receiver has a separate cosmetic history entry:
 
 - Action ages 0–1: contact drawing, held throughout shared hitstop.
 - Ages 2–4: sharp recoil.
-- Age 5 onward: held stun pose, for as long as the fighter remains stunned/reeling.
+- Age 5 onward: held stun pose, for as long as the fighter remains stunned/reeling
+  or in the existing recovery lock after a damaging paired throw.
+
+Authored Fillet throws release their defender into `pairRecovery`, without normal
+hitstun. The damaging release cue now starts chest recoil and holds it through
+that lock; it no longer immediately returns to idle. The attacker gets no receiver
+cue. A successful throw tech and Wound's non-damaging release also get no cue and
+therefore keep their own presentation. See [paired throws](paired-throws.md).
 
 The clock also respects defender-only counter slowdown. It outlives the short
 impact burst, resets on a new hit, and clears when the defender recovers. Rollback

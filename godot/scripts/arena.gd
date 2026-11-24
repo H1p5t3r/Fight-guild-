@@ -62,6 +62,16 @@ func _ready() -> void:
 			ArenaStage.draw_footer(hud_layer, int(view.stage), not diagnostics)
 			FightHud.draw(hud_layer, view, score, round_label, diagnostics))
 
+static func foreground_player(state: Dictionary) -> int:
+	# Keep the grip readable throughout capture, including its initial freeze
+	# and tech window before the core records any damaging contact.
+	var owner := int(state.get("pairOwner", -1))
+	if int(state.get("pairKind", 0)) > 0 and owner in [0, 1]: return owner
+	for fighter in state.get("players", []):
+		owner = int(fighter.get("grabOwner", -1))
+		if int(fighter.get("reaction", 0)) == 6 and owner in [0, 1]: return owner
+	return int(state.get("foregroundPlayer", -1))
+
 func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bool) -> void:
 	model = simulation
 	view = state
@@ -70,7 +80,7 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	feedback.refresh(view, size)
 	impact_cues = CombatImpacts.visible(model.cues.visible_at(int(view.frame)))
 	# Reorder only this arena's fighter children so menus keep their own layering.
-	var draw_order := [1, 0] if int(view.get("foregroundPlayer", -1)) == 0 else [0, 1]
+	var draw_order := [1, 0] if foreground_player(view) == 0 else [0, 1]
 	for depth in 2:
 		var p: int = draw_order[depth]
 		if sprites[p].get_index() != depth * 2: move_child(sprites[p], depth * 2)

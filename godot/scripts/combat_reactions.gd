@@ -10,7 +10,10 @@ static var textures: Dictionary = {}
 static func receiving(fighter: Dictionary) -> bool:
 	var reaction := int(fighter.get("reaction", 0))
 	if reaction in [2, 3, 4, 6]: return false # Knockdown, wakeup, wall splat and capture keep their own art.
-	return (int(fighter.get("stun", 0)) > 0 and not fighter.get("guarding", 0)) or reaction in [1, 5, 7]
+	# Authored damaging throws lock recovery without ordinary hitstun. Keep the
+	# release cue alive until that lock ends. A lock alone never creates a cue:
+	# the attacker, throw techs and Fillet's non-damaging Wound stay unaffected.
+	return (int(fighter.get("stun", 0)) > 0 and not fighter.get("guarding", 0)) or reaction in [1, 5, 7] or int(fighter.get("pairRecovery", 0)) > 0
 
 static func family(fighter: Dictionary, cue: Dictionary) -> String:
 	if cue.is_empty() or not receiving(fighter): return ""
