@@ -8,6 +8,8 @@ python tests/combat_data_test.py
 ./build/feedback-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/grab_timing_test.cpp -o build/grab-timing-tests
 ./build/grab-timing-tests
+"${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/combo_endings_test.cpp -o build/combo-endings-tests
+./build/combo-endings-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/mechanics_test.cpp -o build/mechanics-tests
 ./build/mechanics-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/movement_projectile_test.cpp -o build/movement-projectile-tests
@@ -32,4 +34,5 @@ python tests/combat_data_test.py
 ./build/tapper-tests
 ./build/core-tests --trace > build/native.trace
 python tests/run_godot_tests.py
+bash scripts/audit-native-combat.sh
 python tests/godot_network.py

@@ -11,7 +11,7 @@ constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_
               STAB_GROUND=30, STAB_AIR=31;
 constexpr int CLOSE_SLASH=32, HELD_GUARD=33, GUARD_ATTACK=34, STANCE_P=35, STANCE_K=36, STANCE_S=37, STANCE_HS=38, STANCE_EXIT=39, STANCE_THROW=40, AIR_BACK_THROW=41, AIR_FORWARD_THROW=42;
 constexpr int FAR_SLASH=2, SLASH_SWEEP=6; // Saved 5S and 2S slot IDs remain compatible.
-constexpr unsigned RULES_REVISION=4; // Authored ground-grab hold duration; tech gate remains six ticks.
+constexpr unsigned RULES_REVISION=5; // Wall splats consume pending launch bounces.
 constexpr int VAULT_CASHOUT=45, SKIM_CASHOUT=46;
 constexpr int CHARGED_HS=43, CHARGED_D=44;
 constexpr int MIN_STARTUP = 5;
@@ -20,6 +20,10 @@ enum HurtRegion { LegsHurt, TorsoArmsHurt, HeadHurt, ExtensionHurt };
 static_assert(ExtensionHurt+1==MAX_HURTBOXES, "Three body regions and one optional extension only");
 constexpr int MOMENTUM_MAX = 10000, INPUT_MASK = 4095;
 constexpr int MAX_STUN = 240, MAX_HITSTOP = 60, NOTICE_TICKS = 60, COMBO_HOLD = 60;
+constexpr int MAX_HIT_VELOCITY = 10000;
+// An authored 3000-unit wall bounce can be amplified by the allowed 600% cap.
+// Reaction velocities have a wider range than voluntary movement (4000).
+constexpr int MAX_WALL_BOUNCE_VELOCITY = 18000;
 enum Input { Left=1, Right=2, Down=4, Up=8, P=16, K=32, S=64, Hs=128, D=256,
              Dash=512, Simple=1024, Faultless=2048 };
 enum Kind { Normal, Command, Special, Drive, Throw };

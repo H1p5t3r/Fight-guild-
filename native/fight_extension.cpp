@@ -115,7 +115,7 @@ public:
                 ||f.knockback_left<0||f.knockback_left>240000
                 ||f.wall_time<0||f.wall_time>180||f.wall_side< -1||f.wall_side>1
                 ||f.positive_time<0||f.positive_time>1800
-                ||f.vx< -4000||f.vx>4000||f.running<0||f.running>1||f.dash<0||f.dash>120
+                ||f.vx< -fight::MAX_WALL_BOUNCE_VELOCITY||f.vx>fight::MAX_WALL_BOUNCE_VELOCITY||f.running<0||f.running>1||f.dash<0||f.dash>120
                 ||f.dash_kind<0||f.dash_kind>3||f.dash_age<0||f.dash_age>120
                 ||f.dash_pause<0||f.dash_pause>30||f.dash_backwards<0||f.dash_backwards>1
                 ||f.dash_air<0||f.dash_air>1||f.air_dash_used<0||f.air_dash_used>5||f.air_jump_used<0||f.air_jump_used>5
@@ -133,7 +133,7 @@ public:
                 ||f.drive_source<0||f.drive_source>fight::MOVE_COUNT||f.drive_distance<0||f.drive_distance>80000
                 ||f.drive_speed<0||f.drive_speed>4000||f.drive_bonus<0||f.drive_bonus>30
                 ||f.idle_time<0||f.idle_time>=1000000||f.stance<0||f.stance>1||f.guard_button<0||f.guard_button>fight::D
-                ||f.armor_left<0||f.armor_left>8||f.bounce_ground<0||f.bounce_ground>3000||f.bounce_wall<0||f.bounce_wall>3000
+                ||f.armor_left<0||f.armor_left>8||f.bounce_ground<0||f.bounce_ground>3000||f.bounce_wall<0||f.bounce_wall>fight::MAX_WALL_BOUNCE_VELOCITY
                 ||f.crumple_time<0||f.crumple_time>180||f.grab_time<0||f.grab_time>120||f.grab_owner< -1||f.grab_owner>1
                 ||f.variant<0||f.variant>2||f.tether_source<0||f.tether_source>fight::MOVE_COUNT||f.tether_used<0||f.tether_used>1
                 ||f.bleed_source<0||f.bleed_source>fight::MOVE_COUNT||f.bleed_time<0||f.bleed_time>3600||f.bleed_clock<0||f.bleed_clock>600

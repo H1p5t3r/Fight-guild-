@@ -34,9 +34,16 @@ Do not treat permission for game/art changes as permission to resume the website
    Fold** and requested longer holds: 36 owner/receiver drawings now cover the
    roster, with 40-tick grounded normals and 52-tick command grabs, retaining
    startup and tech windows. Review: `exports/FightGuild-Collar-Fold-Grabs.mp4`.
-   See [paired throws](paired-throws.md). **Item 3 is next.**
-3. **Spacing and combo audit.** Check the roster against standing, crouching and
-   airborne targets, both corners, FD, repeat launchers and wall transitions.
+   See [paired throws](paired-throws.md).
+3. **Spacing and combo audit — complete first pass (2026-11-24).** The current
+   Workshop configuration passes 134,784 contact/spacing scenarios, 864 real-input
+   sweep routes and 3,168 guard/FD comparisons. Wall splats now consume queued
+   bounces, and Godot accepts valid amplified-knockback rollback snapshots.
+   Repeat-launch, wall-break/recovery and replay checks pass. Anvil's short
+   `5Hs` loses the third hit of the sampled slash route against Tapper and
+   standing Fillet outside the defender's corner; keep that limitation for his
+   full kit/art pass. See [audit and reproduction](combat-spacing-audit.md).
+   **Item 4 is next.**
 4. **Movement transitions.** Consistent planted feet, body scale and transitions
    into/out of attacks; Hammer locomotion, Fillet air poses and Tapper stance.
 5. **Input and controller support.** Remapping, device/deadzone handling, motion

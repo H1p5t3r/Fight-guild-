@@ -26,6 +26,12 @@ Let `d` be decay before the current attack's cost, including any starter penalty
 
 Ground bounces consume their pending bounce on landing. A later move can grant another bounce, but its speed is reduced by decay and the target retains combo/repeat gravity. There is **no invented universal one-bounce cap**.
 
+A wall splat consumes pending ground/wall bounces. If the splat expires, the
+defender falls into the existing soft recovery rather than firing an old bounce
+on landing. This was fixed in rules revision 5; see the
+[native spacing and combo audit](combat-spacing-audit.md), which also corrects
+Godot snapshot validation for amplified knockback.
+
 Hitstop freezes travel and gravity. Counter slowdown advances them on the defender's slower clock. Air reel remains untechable until landing; it still qualifies for a wall impact after its numeric stun timer expires. Wall collisions use the incoming velocity before drag and reset horizontal movement, except an authored wall bounce.
 
 ## Default gatlings

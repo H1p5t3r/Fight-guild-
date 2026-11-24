@@ -549,6 +549,9 @@ void Simulation::collide_wall(Fighter& f,int velocity,bool in_hitstun) {
             f.reaction=WallSplat; f.wall_time=rules.wall_splat_frames;
             f.wall_side=side==0?-1:1;
             f.y=max(2000,f.y); f.vy=0; // A high airborne impact keeps its actual height.
+            // The wall caught this launch. Its queued floor/wall bounces must
+            // not survive and relaunch the victim after the splat times out.
+            f.bounce_ground=f.bounce_wall=0;
             f.pull_time=0; f.pull_owner=f.grab_owner=-1;
         } else world.wall_health[side]=max(0,world.wall_health[side]-abs(velocity));
     }
@@ -1645,7 +1648,7 @@ void Simulation::apply_contact(int p,int move,Move m,int contact,bool prior_comb
         if(blocked||throwing) other.x=clamp_x(other,other.x+facing*push);
         else if(rules.combo_physics) {
             int speed=m.v[was_airborne?AirHitSpeed:GroundHitSpeed]*other.push_percent/100;
-            other.vx=clamp(facing*speed+(was_airborne?incoming_vx*rules.launch_carry/100:0),-10000,10000);
+            other.vx=clamp(facing*speed+(was_airborne?incoming_vx*rules.launch_carry/100:0),-MAX_HIT_VELOCITY,MAX_HIT_VELOCITY);
         } else {
             other.knockback_left=push;
             other.vx=facing*((push+HIT_TRAVEL_TICKS-1)/HIT_TRAVEL_TICKS);
