@@ -1,0 +1,180 @@
+{
+  "format": 1,
+  "style": "Ink Snap / contact accents",
+  "sheets": {
+    "accents.png": {
+      "source": "/workspace/generated_images/exec-ec43d253-bcea-45be-af2d-ea7fa077225c.png",
+      "sha256": "8e6deddc2a6724a9b183cba7a99366029fdc19da353f0d2ef15df726e10b86de",
+      "size": [
+        1086,
+        1448
+      ]
+    }
+  },
+  "families": {
+    "flash": {
+      "file": "accents.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            0,
+            362,
+            362
+          ],
+          "pivot": [
+            191,
+            218
+          ]
+        },
+        {
+          "region": [
+            362,
+            0,
+            362,
+            362
+          ],
+          "pivot": [
+            181,
+            215
+          ]
+        },
+        {
+          "region": [
+            724,
+            0,
+            362,
+            362
+          ],
+          "pivot": [
+            181,
+            215
+          ]
+        }
+      ]
+    },
+    "guard_break": {
+      "file": "accents.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            362,
+            362,
+            362
+          ],
+          "pivot": [
+            180,
+            207
+          ]
+        },
+        {
+          "region": [
+            362,
+            362,
+            362,
+            362
+          ],
+          "pivot": [
+            177,
+            213
+          ]
+        },
+        {
+          "region": [
+            724,
+            362,
+            362,
+            362
+          ],
+          "pivot": [
+            181,
+            207
+          ]
+        }
+      ]
+    },
+    "armor": {
+      "file": "accents.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            724,
+            362,
+            362
+          ],
+          "pivot": [
+            190,
+            185
+          ]
+        },
+        {
+          "region": [
+            362,
+            724,
+            362,
+            362
+          ],
+          "pivot": [
+            176,
+            191
+          ]
+        },
+        {
+          "region": [
+            724,
+            724,
+            362,
+            362
+          ],
+          "pivot": [
+            181,
+            185
+          ]
+        }
+      ]
+    },
+    "release": {
+      "file": "accents.png",
+      "frames": [
+        {
+          "region": [
+            0,
+            1086,
+            362,
+            362
+          ],
+          "pivot": [
+            181,
+            183
+          ]
+        },
+        {
+          "region": [
+            362,
+            1086,
+            362,
+            362
+          ],
+          "pivot": [
+            181,
+            183
+          ]
+        },
+        {
+          "region": [
+            724,
+            1086,
+            362,
+            362
+          ],
+          "pivot": [
+            181,
+            183
+          ]
+        }
+      ]
+    }
+  }
+}

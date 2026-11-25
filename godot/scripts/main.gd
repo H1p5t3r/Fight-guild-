@@ -1141,11 +1141,21 @@ func show_sound_settings() -> void:
 		combat_audio.volume = value / 100.0
 		caption.text = "Effects volume: %d%%" % value
 		combat_audio.save_preferences())
+	var preview_row := HBoxContainer.new()
+	layout.add_child(preview_row)
+	var sound_picker := OptionButton.new()
+	sound_picker.accessibility_name = "Effect to preview"
+	sound_picker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	for title in ["Light punch", "Heavy knife", "Block", "Faultless Defense", "Guard break", "Armor", "Counter"]: sound_picker.add_item(title)
+	sound_picker.selected = 1
+	preview_row.add_child(sound_picker)
 	var preview := Button.new()
-	preview.text = "Preview impact"
-	layout.add_child(preview)
+	preview.text = "Preview effect"
+	preview_row.add_child(preview)
 	preview.pressed.connect(func():
-		if combat_audio.enabled and combat_audio.volume > 0: combat_audio.play_cue({"kind": 1, "character": 5, "move": 3, "serial": 1, "actor": 0, "strength": 2}))
+		var option := sound_picker.selected
+		combat_audio.play_cue({"kind": [1, 1, 2, 6, 5, 7, 3][option], "character": 5,
+			"move": 0 if option == 0 else 3, "serial": combat_audio.played + 1, "actor": 0, "strength": 0 if option == 0 else 3}))
 	add_child(dialog)
 	dialog.confirmed.connect(func(): close_dialog(dialog))
 	dialog.canceled.connect(func(): close_dialog(dialog))

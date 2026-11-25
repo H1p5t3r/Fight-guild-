@@ -28,31 +28,36 @@ func run() -> void:
 	var directory := args[args.find("--output") + 1] if args.has("--output") else "user://"
 	DirAccess.make_dir_recursive_absolute(directory)
 	var cases := [
+		[3,0,"light","LIGHT / BODY SNAP",0,false],
+		[1,3,"whiff","HEAVY / RELEASE",0,false],
 		[5,3,"cut","KNIFE / HIT",0,false], [1,3,"blunt","HAMMER / HIT",0,false],
 		[4,2,"pierce","SPEAR / HIT",0,true], [2,16,"fire","FLAME / HIT",0,false],
 		[2,15,"gas","POISON / HIT",0,false], [5,3,"block","BLOCK",2,false],
 		[5,3,"faultless","FAULTLESS DEFENSE",2050,false], [1,3,"counter","COUNTER HIT",0,false],
 		[2,16,"guard_break","GUARD BREAK",2,false], [4,7,"multi","TWO-HIT SCOOP",0,false],
-		[5,7,"air","AIRBORNE CONTACT",0,false]]
+		[5,7,"air","AIRBORNE CONTACT",0,false], [4,0,"armor","ANVIL / SHIELD ARMOR",256,false]]
 	var failures := 0
 	for example in cases:
-		model.reset([int(example[0]), 4 if int(example[0]) != 4 else 5])
+		model.reset([int(example[0]), 0 if example[2] == "armor" else 4 if int(example[0]) != 4 else 5])
 		var facing := -1 if example[5] else 1
 		model.core.preview_place(0, 50000 - facing * 4500, 0, 10000)
 		model.core.preview_place(1, 50000 + facing * 4500, 0, 10000)
+		if example[2] == "whiff": model.core.preview_place(1, 75000, 0, 10000)
 		model.step(0, 0)
-		caption.text = "INK SNAP  /  " + str(example[3]) + "  /  60 FPS"
+		caption.text = "INK SNAP II  /  " + str(example[3]) + "  /  60 FPS"
 		arena.round_label = "IMPACT REVIEW"
 		var saved := false
 		var contacts := 0
-		var required_kind: int = {"block":2,"faultless":6,"counter":3,"guard_break":5}.get(example[2],1)
+		var required_kind: int = {"block":2,"faultless":6,"counter":3,"guard_break":5,"armor":7,"whiff":8}.get(example[2],1)
 		var startup: int = model.move(int(example[0]), int(example[1])).startup
 		for tick in 110:
+			if example[2] == "armor" and tick == 8: model.core.preview_begin(1, 13)
 			if tick == 16: model.core.preview_begin(0, int(example[1]))
 			if example[2] == "counter" and tick == 16 + startup - 3: model.core.preview_begin(1, 3)
 			# Hold position until contact: walking back through the entire lead-in
 			# would turn a block demonstration into a legitimate spacing whiff.
 			var guard := int(example[4]) if tick >= 16 + startup - 2 else 0
+			if example[2] == "armor": guard = 256 if tick >= 8 else 0
 			if facing < 0 and guard: guard = (guard & ~2) | 1
 			if example[2] == "air" and tick >= 16 and tick <= 20: guard = 8
 			model.step(0, guard)
@@ -63,7 +68,8 @@ func run() -> void:
 			arena.refresh(model, model.state(), false, false)
 			await process_frame
 			await RenderingServer.frame_post_draw
-			if not saved and model.cues.visible_at(model.frame()).any(func(c: Dictionary) -> bool: return c.kind == required_kind):
+			var visible: Array = model.cues.releases_at(model.frame()) if required_kind == 8 else model.cues.visible_at(model.frame())
+			if not saved and visible.any(func(c: Dictionary) -> bool: return c.kind == required_kind):
 				root.get_texture().get_image().save_png(directory.path_join(str(example[2]) + ".png"))
 				saved = true
 		var enough := contacts >= (2 if example[2] == "multi" else 1)

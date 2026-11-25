@@ -127,8 +127,60 @@ Shark scoop and an airborne Fillet contact, including mirrored facing. The revie
 checks expected contact kinds and both hits before recording. The Windows core
 repair ZIP and both DLLs match the updated native source manifest.
 
-Run `python scripts/capture-impact-review.py` to record
-`exports/FightGuild-Impact-Review.mp4` with actual gameplay timing and audio.
+The original recording is `exports/FightGuild-Impact-Review.mp4`.
+Run `python scripts/capture-impact-review.py` to record the current version listed
+below, with actual gameplay timing and audio.
 Use `bash scripts/godot.sh --headless --script res://tests/impacts_preview.gd --
 --test --verify` for the same contact scenarios without rendering. Neither command
 updates or publishes the move-editor website.
+
+## Native Ink Snap II (2026-11-25)
+
+The existing weapon/element drawings now have a darker local edge and a small
+ivory contact flash. The flash clears in five simulation ticks even during
+hitstop; the main drawing remains held on its contact key until action resumes.
+Camera recoil settles in four simulation ticks rather than staying offset for
+the entire freeze. Pausing and repainting advance neither clock. Reduced motion
+still disables camera movement; there is no full-screen flash.
+
+Normal block keeps its blue crescent, FD its larger teal ring; both now wrap
+toward the defending fighter instead of curling back over the attacker. Guard
+break now uses a fractured blue shield with amber cracks; armor/clashes use steel-gray
+fragments and magma-orange sparks. The generated accent atlas retains its
+original pixels, with registered contact pivots. Sources and the exact prompt
+are in `art/effects/impact-v2/`. Heavy releases have a restrained guild-tinted
+speed accent behind the fighter for up to five action ticks; an actual impact
+immediately removes the matching release. Character sprites, weapon reach,
+animation timing, hitboxes and combat state are unchanged.
+
+The native audio bank contains **60 original synthesized WAVs**: three hit
+variations and two release variations per material, plus paired defense, heavy,
+landing and wall samples. Anvil's shield has a metal family; Smoke's Flashpoint
+uses fire. Tapper's hand strikes use body impacts. A sharp transient, material
+body and short tail replace the old uniform noise swell. Heavy hits add a low
+accent; counters retain the weapon layer beneath their bass accent. Serial-based
+variation now actually changes across attacks (the former serial multiplier
+was divisible by the variation modulus).
+
+Audio still waits for confirmed online inputs. A contact stops its own swing
+tail, and quiet swings cannot steal counter/impact voices from the bounded
+16-voice pool. A limiter reserves output headroom. **Sound → Preview effect**
+offers light/heavy hits, block, FD, guard break, armor and counter. The old audio
+bank and manifest are retained for the frozen browser editor.
+
+Reproduction:
+
+```bash
+python scripts/generate-combat-audio-v2.py
+bash scripts/godot.sh --headless --editor --import
+bash scripts/godot.sh --headless --script res://tests/feedback_test.gd -- --test
+bash scripts/godot.sh --headless --script res://tests/impacts_test.gd -- --test
+python scripts/capture-impact-review.py
+```
+
+The [new review](../exports/FightGuild-Combat-Effects-2026-11-25.mp4) uses current
+authored data in fourteen real contact/whiff scenarios, with native audio.
+Tests cover rollback correction, confirmation, muting, voice priority, sample
+availability, distinct defense art, independent flash/hold clocks, pause and
+reduced motion. PCM checks verify hashes, 48 kHz format, headroom and clean
+endpoints. Neither the browser editor nor gameplay rules are changed.

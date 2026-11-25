@@ -13,6 +13,7 @@ var weapons: Array[HookWeapon] = []
 var collision_layer: Control
 var impact_layer: Control
 var impact_cues: Array = []
+var release_cues: Array = []
 var hud_layer: Control
 var feedback := CombatFeedback.new()
 var camera_center := 0.5
@@ -72,6 +73,7 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	paused = frozen
 	feedback.refresh(view, size)
 	impact_cues = CombatImpacts.visible(model.cues.visible_at(int(view.frame)))
+	release_cues = model.cues.releases_at(int(view.frame))
 	# Reorder only this arena's fighter children so menus keep their own layering.
 	var draw_order := [1, 0] if foreground_player(view) == 0 else [0, 1]
 	for depth in 2:
@@ -178,6 +180,9 @@ func _draw() -> void:
 		return
 	draw_ground_shadows()
 	draw_projectiles()
+	var project := func(point: Vector2) -> Vector2:
+		return screen_point(Vector2(point.x / 100.0 * sx, floor_y - point.y / 100.0 * sx))
+	CombatImpacts.draw_releases(self, release_cues, project, sx * camera_zoom)
 	for p in 2:
 		var target: Dictionary = view.players[p]
 		var owner: Dictionary = view.players[1-p]

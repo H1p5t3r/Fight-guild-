@@ -29,8 +29,16 @@ func run() -> void:
 	check(CombatImpacts.family(cue) == "gas", "Poison Sword lost gas contact")
 	cue.kind = 2
 	check(CombatImpacts.family(cue) == "block", "Block contact missing")
+	check(CombatImpacts.drawing(cue).facing == -1, "Guard crescent wraps toward the attacker")
+	cue.facing = -1
+	check(CombatImpacts.drawing(cue).facing == 1, "Mirrored guard does not wrap toward the defender")
+	cue.facing = 1
 	cue.kind = 6
 	check(CombatImpacts.family(cue) == "faultless", "FD uses ordinary block art")
+	cue.kind = 5
+	check(CombatImpacts.family(cue) == "guard_break", "Guard break still uses ordinary block art")
+	cue.kind = 7
+	check(CombatImpacts.family(cue) == "armor", "Armor lost its metal/ember response")
 	cue.kind = 3
 	check(CombatImpacts.family(cue) == "counter", "Counter contact missing")
 	check(CombatImpacts.impulse([cue], true) == Vector2.ZERO, "Reduced motion still shakes")
@@ -56,6 +64,27 @@ func run() -> void:
 	check(arena.impact_layer.get_index() > arena.sprites[0].get_index() and arena.impact_layer.get_index() > arena.sprites[1].get_index(), "Impact hidden behind fighters")
 	check(arena.impact_layer.get_index() < arena.hud_layer.get_index(), "Impact covers HUD")
 	check(model.state_hash() == before, "Presentation changed combat state")
+	var initial_flash_age := int(arena.impact_cues[0].screen_age)
+	for tick in 4: model.step(0, 0)
+	var frozen_cues := model.cues.visible_at(model.frame())
+	check(frozen_cues[0].age == 0 and frozen_cues[0].screen_age == initial_flash_age + 4, "Contact drawing and brief flash do not have independent clocks")
+	check(CombatImpacts.impulse(frozen_cues, false) == Vector2.ZERO, "Camera impulse stays displaced through long hitstop")
+	check(CombatImpacts.drawing(frozen_cues[0]).key == 0, "Hitstop advanced the held impact drawing")
+	var history_hash := model.state_hash()
+	arena.refresh(model, model.state(), false, true)
+	arena.refresh(model, model.state(), false, true)
+	check(frozen_cues[0].screen_age == initial_flash_age + 4 and model.state_hash() == history_hash, "Pause/repaint advances presentation or gameplay")
+	var release_history := CombatCues.new()
+	var swing := PackedInt32Array([0,8,0,5,3,7,50000,8000,1,3,0,0])
+	release_history.capture(0, false, swing)
+	check(release_history.releases_at(1).size() == 1 and release_history.visible_at(1).is_empty(), "Whiff release missing or treated as a hit")
+	var impact := PackedInt32Array([1,1,0,5,3,7,54000,8000,1,3,0,0])
+	release_history.capture(1, false, impact)
+	check(release_history.releases_at(2).is_empty(), "A confirmed hit kept its release effect")
+	release_history.capture(1, false, PackedInt32Array())
+	check(release_history.visible_at(2).is_empty() and release_history.releases_at(2).size() == 1, "Rollback did not restore a corrected whiff")
+	for tick in range(2, 9): release_history.capture(tick, true, PackedInt32Array())
+	check(release_history.releases_at(9).is_empty(), "A whiff release lingers through unrelated hitstop")
 	arena.queue_free(); await process_frame
-	print("Ink Snap assets, families, clocks, layering and reduced motion: %d failures" % failures)
+	print("Ink Snap assets, distinct defense, snap/release clocks, rollback, layering and reduced motion: %d failures" % failures)
 	quit(1 if failures else 0)

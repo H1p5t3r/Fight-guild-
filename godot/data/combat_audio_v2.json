@@ -1,0 +1,13 @@
+{
+  "format": 2,
+  "credit": "Original Fight Guild synthesized effects; scripts/generate-combat-audio-v2.py",
+  "kinds": {"2":"block","3":"counter","5":"guard_break","6":"faultless","7":"armor","9":"land","10":"wall","11":"wall_break","12":"clash"},
+  "characters": [
+    {"family":"shield","moves":{"0":"body","1":"body","4":"body","5":"body","8":"body","15":"body","16":"body","17":"body","18":"body","23":"body","24":"body","26":"body"}},
+    {"family":"hammer","moves":{"0":"body","1":"body","4":"body","5":"body","8":"body","17":"body","18":"body","31":"stone"}},
+    {"family":"gas","moves":{"1":"body","5":"body","12":"fire","14":"stone","25":"stone","15":"gas","16":"fire","18":"body","23":"body","24":"body"}},
+    {"family":"body","moves":{"3":"hammer","7":"hammer","11":"hammer","20":"hammer"}},
+    {"family":"spear","moves":{"0":"body","1":"body","4":"body","5":"body","8":"body","17":"body","18":"body","23":"body","24":"body"}},
+    {"family":"cut","moves":{"0":"body","1":"body","4":"body","5":"body","8":"body","17":"body","18":"body","23":"body","24":"body","45":"body","46":"body"}}
+  ]
+}

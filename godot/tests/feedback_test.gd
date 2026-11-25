@@ -60,6 +60,39 @@ func run() -> void:
 				sounds[sound] = true
 	for sound in sounds:
 		check(ResourceLoader.exists(CombatAudio.DIRECTORY + sound + ".wav"), "Missing sound: " + sound)
+	var cue := {"kind":1, "character":5, "move":3, "serial":7, "actor":0, "strength":3}
+	var heavy := CombatAudio.layers(cue)
+	check(heavy.size() == 2 and heavy[1].key == "heavy", "Heavy hit lost its low accent")
+	check(heavy == CombatAudio.layers(cue), "Sound variation is not deterministic")
+	cue.serial += 1
+	check(heavy[0].file != CombatAudio.layers(cue)[0].file and heavy[0].pitch != CombatAudio.layers(cue)[0].pitch, "Consecutive attacks still use identical variation")
+	cue.kind = 3
+	check(CombatAudio.layers(cue).size() == 2 and CombatAudio.layers(cue)[1].key == "hit_cut", "Counter replaced the weapon impact")
+	cue.kind = 8
+	check(CombatAudio.layers(cue).size() == 1 and CombatAudio.layers(cue)[0].gain < heavy[0].gain - 3, "Swing competes with the contact")
+	for character in 6:
+		cue.character = character
+		for move in CombatModel.MOVE_IDS.size():
+			cue.move = move
+			for kind in range(1, 13):
+				cue.kind = kind
+				for layer in CombatAudio.layers(cue):
+					check(ResourceLoader.exists(CombatAudio.DIRECTORY + str(layer.file)), "Missing varied sound: " + str(layer.file))
+	check(CombatAudio.sound_for({"kind":1,"character":0,"move":31}) == "hit_shield", "Anvil's shield still sounds like a hammer")
+	check(CombatAudio.sound_for({"kind":1,"character":2,"move":12}) == "hit_fire", "Flashpoint uses the gas sound")
+	# Exercise real pooled playback as well as the confirmation recorder.
+	var mixer := CombatAudio.new(); root.add_child(mixer)
+	cue = {"kind":3, "character":5, "move":3, "serial":0, "actor":0, "strength":3}
+	for i in 8:
+		cue.serial = i
+		mixer.play_cue(cue)
+	check(mixer.voices.size() == 16 and mixer.played == 16, "Contact pool failed to bound layered playback")
+	check(mixer.select_voice(1) == -1, "A quiet swing can steal a counter voice")
+	mixer.enabled = false
+	var heard := mixer.played
+	mixer.play_cue(cue)
+	check(mixer.played == heard, "Direct preview ignores mute")
+	mixer.silence(); mixer.queue_free()
 	var game = load("res://scripts/main.gd").new()
 	root.add_child(game)
 	await process_frame

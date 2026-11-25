@@ -44,7 +44,7 @@ Momentum has **three equal sections**, with continuous gain and separately edita
 
 Combos now appear as large background numerals on the attacker's current side. **Attack loop** and **Guard → reversal** training dummies help test counter hits, recovery punishes and first-frame reversals. Counter freeze, defender-only slowdown, bonuses and reversal eligibility are editable per move. Medium/large counters use oversized italic callouts, and large counters briefly push the camera in. See [combo and timing rules](docs/combat-feedback.md).
 
-Native combat now uses **Ink Snap** impact effects with distinct weapon and defense families, contact sounds, hitstop-aware animation and a small camera impulse. Watch the [in-game impact review](exports/FightGuild-Impact-Review.mp4). The move-editor website remains paused; this visual pass is for Godot.
+Native combat uses **Ink Snap II**: sharp contact flashes, distinct block/FD/shattered-guard/armor effects, subtle attack-release accents and 60 original material-based sound samples. Heavy hits have a low accent; confirmed impacts cut their swing tails. Watch the [gameplay effects review with audio](exports/FightGuild-Combat-Effects-2026-11-25.mp4). Sound settings let you audition hits and defense. The move-editor website remains paused; this pass is for Godot.
 
 The [combat tuning editor](docs/combat-tuning.md) now supports cancel windows, starter and progressive damage scaling, jump startup, landing recovery, attack/counter presets, block carryover, five-frame post-stun throw protection and grounded wall priming. Guard break retains its throw vulnerability and backdash restriction. Blocking has no Just Guard or Instant Block timing requirement.
 

@@ -1,0 +1,11 @@
+{
+  "prompt": "production-prompt.txt",
+  "references": [
+    "godot/assets/effects/impact-v1/contacts.png",
+    "godot/assets/effects/impact-v1/elements.png"
+  ],
+  "asset": "godot/assets/effects/impact-v2/accents.png",
+  "source": "/workspace/generated_images/exec-ec43d253-bcea-45be-af2d-ea7fa077225c.png",
+  "sha256": "8e6deddc2a6724a9b183cba7a99366029fdc19da353f0d2ef15df726e10b86de",
+  "pixelEdits": false
+}
