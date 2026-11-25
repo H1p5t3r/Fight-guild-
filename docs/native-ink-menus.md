@@ -7,7 +7,7 @@ Fight Guild's native front end uses the requested Persona 5-inspired print langu
 - Home features an approved combat stance as a three-tone cutout and an oversized silhouette. The six fighter buttons change the featured guild, illustration and dominant color. This is a menu preference for the current session; it does not change the match selection.
 - Versus, local sides, online connection, pause, results, Controls and Sound share the ink treatment. The native Combat Lab retains its functional editing layout.
 - Side-select colors follow the current matchup. Character select retains P1/P2 ownership, mirror picks and independent simplified-input toggles.
-- Character select has no portrait panels. Banana cream, teal and the other guild colors cross an irregular central tear. Switching the active player shifts the boundary toward the opponent; choosing a fighter sends a short color surge into the other field. The roster stays above the artwork and the controls stay still. A mirror match uses a darker shade of the same guild for P2.
+- Character select has no portrait panels. Crimson, teal and the other guild colors cross an irregular central tear. Switching the active player shifts the boundary toward the opponent; choosing a fighter sends a short color surge into the other field. The roster stays above the artwork and the controls stay still. A mirror match uses a darker shade of the same guild for P2.
 - Pause freezes the actual displayed fight: both fighters keep their attack/reaction/grab textures, camera positions, facing, scale and foreground order. Bodies fill with their own guild color, weapons turn white, and black outlines plus an offset ink shadow separate them from the dimmed arena. Angled command strips radiate around the combined visible bounds of both fighters, with guild-colored ink rays. The group focus ignores nearly transparent atlas padding. Results feature the winner and their guild. Canceling character selection restores the frozen matchup.
 - Front-end posters use the existing registered combat artwork. Fillet uses her ready stance; Shark, Smoke and Hammer use their idle loops; Tapper uses his ready pose; Anvil falls back to his available windup pose. No fighter textures, attack animations, hitboxes or simulation data are modified.
 
@@ -18,7 +18,7 @@ Fight Guild's native front end uses the requested Persona 5-inspired print langu
 | Alchemists | `#a8ba76` sage |
 | Brewers | `#d99a59` amber |
 | Fishermen | `#5ab5b5` teal |
-| Butchers | `#f5e8a6` banana cream |
+| Butchers / Fillet | `#dc143c` crimson red |
 
 Blacksmiths and Butchers use the user-corrected 2026-11-25 colors throughout native menus, pause silhouettes and health bars. The palette reads the same `FighterSelectPortrait.COLORS` values already used by the game. The shaders add black and paper-white without rewriting the sprites.
 
@@ -62,7 +62,7 @@ Review artifacts:
 - [Blacksmiths pause treatment](../exports/FightGuild-Ink-Pause-Blacksmiths.png)
 - [Results](../exports/FightGuild-Ink-Results.png)
 
-The reel records actual native UI tweens at 60 fps, forward/back travel, idle pause and first-active attack pause/resume. It enters a fixture match directly to keep the reel focused on menus; the normal loading and character-intro sequence remains in the game.
+The reel records actual native UI tweens at 60 fps, forward/back travel, idle pause and first-active attack pause/resume. It predates Fillet's crimson correction; the stills show the current palette. It enters a fixture match directly to keep the reel focused on menus; the normal loading and character-intro sequence remains in the game.
 
 ## Verification and reproduction
 

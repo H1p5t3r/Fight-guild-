@@ -3,7 +3,7 @@ render_mode unshaded;
 
 uniform bool silhouette = false;
 uniform vec4 ink : source_color = vec4(0.035, 0.035, 0.047, 1.0);
-uniform vec4 accent : source_color = vec4(0.961, 0.910, 0.651, 1.0);
+uniform vec4 accent : source_color = vec4(0.862745, 0.078431, 0.235294, 1.0);
 uniform vec4 paper : source_color = vec4(1.0, 0.969, 0.914, 1.0);
 varying vec4 tint;
 

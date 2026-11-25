@@ -2,7 +2,7 @@ class_name FighterSelectPortrait
 extends Control
 
 const GUILDS := ["BLACKSMITHS", "MASONS", "ALCHEMISTS", "BREWERS", "FISHERMEN", "BUTCHERS"]
-const COLORS := [Color("aeb4bc"), Color("99b0c2"), Color("a8ba76"), Color("d99a59"), Color("5ab5b5"), Color("f5e8a6")]
+const COLORS := [Color("aeb4bc"), Color("99b0c2"), Color("a8ba76"), Color("d99a59"), Color("5ab5b5"), Color("dc143c")]
 const PLAYER_COLORS := [GuildTheme.BRASS, Color("79c8d2")]
 var motion := MenuMotion.new()
 var player := 0
