@@ -7,7 +7,8 @@ do not earn activation or contact meter for their owner.
 
 Watch the [native super showcase](../exports/FightGuild-Supers-2026-11-25.mp4).
 The [full animation production pass](super-animation-production.md) begins with
-[Sky Foundry's new native review](../exports/FightGuild-Sky-Foundry-2026-11-25.mp4).
+[Sky Foundry](../exports/FightGuild-Sky-Foundry-2026-11-25.mp4) and
+[Iron Dominion](../exports/FightGuild-Iron-Dominion-2026-11-25.mp4).
 These are provisional balance values, captured from the current native build.
 Normal combo proration still applies; the video starts each demonstration fresh.
 Exsanguinate's demonstration begins with 150 stored grey life.
@@ -62,9 +63,9 @@ Old binary snapshots are incompatible with the added cinematic state.
 
 ## Art and reproduction
 
-Eleven super clips use original generated sheets. Sky Foundry now has a full
-16-key replacement following its approved catch/lift/slam choreography, plus a
-dedicated face, effects and sound pass. Fixed source scale, held anticipation and a first-active snap
+All twelve supers use original generated art. Sky Foundry and Iron Dominion now
+each have 16-key replacements, dedicated faces, separate effects and original
+sound passes. Fixed source scale, held anticipation and a first-active snap
 follow the established animation process. The largest authored pose change is
 at the final-startup/first-active boundary. Saved capture clocks drive impact
 holds and recovery; no procedural smear or warped inbetweens are added.
@@ -75,7 +76,7 @@ retain the magma-orange accent.
 [timing plan](../art/characters/supers-v1/timing-plan.json) record provenance.
 Pixel data remains unchanged; registration uses atlas regions, pivots and
 body-only collision metadata, with no more than four hurtboxes per pose.
-Face cut-ins use the existing portrait fallback described in the
+Other face cut-ins use the existing portrait fallback described in the
 [presentation guide](super-freeze-presentation.md).
 
 The authoring batch is `godot/data/workshop/2026-11-25-supers/FightGuild-Supers.json`.

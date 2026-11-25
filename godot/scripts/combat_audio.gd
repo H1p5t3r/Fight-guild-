@@ -43,6 +43,11 @@ func _ready() -> void:
 	for name in ["clamp","lift","fall","slam"]:
 		var file: String = "../supers-v2/sky_foundry_"+str(name)+".wav"
 		streams[file] = load(DIRECTORY+file)
+	for fighter in FighterArt.catalog().fighters:
+		for spec in fighter.get("super_presentations",{}).values():
+			for sample in spec.get("sounds",{}).values():
+				var file: String = "../supers-v2/"+str(sample)+".wav"
+				if not streams.has(file): streams[file]=load(DIRECTORY+file)
 
 func save_preferences() -> void:
 	if OS.get_cmdline_user_args().has("--test"): return
@@ -85,6 +90,8 @@ static func layers(cue: Dictionary) -> Array:
 		return [{"key":"super_motion","file":str(cue.sound),"gain":-9.0,"pitch":1.0,"priority":3}]
 	if SuperAnimation.enabled and int(cue.character)==0 and int(cue.move)==16 and int(cue.kind) in [1,3,4]:
 		return [{"key":"super_slam","file":"../supers-v2/sky_foundry_slam.wav","gain":-7.0,"pitch":1.0,"priority":4}]
+	if SuperAnimation.profile(int(cue.character),int(cue.move)).has("sounds") and int(cue.kind) in [1,3,4]:
+		return [] # Saved paired beats supply the authored contact sound.
 	var key := sound_for(cue)
 	var kind := int(cue.kind)
 	var strength := clampi(int(cue.strength), 0, 4)

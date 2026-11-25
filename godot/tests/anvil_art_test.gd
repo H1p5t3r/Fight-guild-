@@ -90,7 +90,7 @@ func run() -> void:
 				var before: PackedByteArray = model.core.snapshot()
 				arena.refresh(model, state, false, false)
 				check(model.core.snapshot() == before, "Rendering mutated combat")
-				check("anvil-bull-v2/" in arena.sprites[0].texture.atlas.resource_path or "supers-v1/anvil.png" in arena.sprites[0].texture.atlas.resource_path or "supers-v2/sky-foundry/" in arena.sprites[0].texture.atlas.resource_path, "Legacy sprite appeared")
+				check("anvil-bull-v2/" in arena.sprites[0].texture.atlas.resource_path or "supers-v1/anvil.png" in arena.sprites[0].texture.atlas.resource_path or "supers-v2/sky-foundry/" in arena.sprites[0].texture.atlas.resource_path or "supers-v2/iron-dominion/" in arena.sprites[0].texture.atlas.resource_path, "Legacy sprite appeared")
 				model.step(0, 0)
 			check(active_seen or slot in [13, 21], "Never reached active: " + slot_text)
 		# The stance's held age must still show a walking guard from saved travel.

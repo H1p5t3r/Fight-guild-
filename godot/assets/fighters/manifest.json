@@ -10595,7 +10595,8 @@
         "down_prone": 345,
         "iron_turn": 400,
         "supers-v1": 425,
-        "sky-foundry-v2": 445
+        "sky-foundry-v2": 445,
+        "iron-dominion-v2": 445
       },
       "super_sky_foundry": {
         "file": "supers-v2/sky-foundry/entry.png",
@@ -11320,7 +11321,839 @@
             ]
           ],
           "description": "Held load, first-active catch, rising support, apex, downward load, damage-frame slam and grounded return."
+        },
+        "31": {
+          "phase": "super_iron_dominion",
+          "fx_phase": "super_iron_dominion_fx",
+          "mode": "strike",
+          "pair_ticks": 90,
+          "release_freeze": 22,
+          "owner_recovery": 24,
+          "paired": [
+            [
+              0,
+              1
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              16,
+              3
+            ],
+            [
+              27,
+              4
+            ],
+            [
+              39,
+              5
+            ],
+            [
+              40,
+              6
+            ],
+            [
+              48,
+              7
+            ],
+            [
+              58,
+              8
+            ],
+            [
+              69,
+              9
+            ],
+            [
+              70,
+              10
+            ],
+            [
+              78,
+              11
+            ],
+            [
+              84,
+              12
+            ]
+          ],
+          "connected": [
+            [
+              0,
+              13
+            ],
+            [
+              7,
+              14
+            ],
+            [
+              17,
+              15
+            ]
+          ],
+          "whiff": [
+            [
+              0,
+              2
+            ],
+            [
+              28,
+              14
+            ],
+            [
+              68,
+              15
+            ]
+          ],
+          "sounds": {
+            "0": "iron_dominion_ram",
+            "40": "iron_dominion_press",
+            "70": "iron_dominion_crush",
+            "finish": "iron_dominion_finish"
+          },
+          "effects": [
+            {
+              "stage": "active",
+              "start": 0,
+              "end": 5,
+              "key": 0,
+              "box": [
+                75,
+                -135,
+                180,
+                130
+              ],
+              "anchor": "owner",
+              "fade": true,
+              "contact_box": [
+                -35,
+                -135,
+                80,
+                110
+              ]
+            },
+            {
+              "stage": "paired",
+              "start": 0,
+              "end": 7,
+              "key": 0,
+              "box": [
+                -65,
+                -140,
+                140,
+                140
+              ],
+              "anchor": "receiver",
+              "fade": true
+            },
+            {
+              "stage": "paired",
+              "start": 40,
+              "end": 49,
+              "key": 1,
+              "box": [
+                -75,
+                -175,
+                140,
+                170
+              ],
+              "anchor": "receiver",
+              "fade": true
+            },
+            {
+              "stage": "paired",
+              "start": 70,
+              "end": 80,
+              "key": 2,
+              "box": [
+                -75,
+                -180,
+                160,
+                175
+              ],
+              "anchor": "receiver",
+              "fade": true
+            },
+            {
+              "stage": "connected",
+              "start": 0,
+              "end": 4,
+              "key": 3,
+              "box": [
+                -5,
+                -85,
+                190,
+                90
+              ],
+              "anchor": "owner",
+              "fade": false
+            },
+            {
+              "stage": "connected",
+              "start": 4,
+              "end": 12,
+              "key": 4,
+              "box": [
+                -15,
+                -35,
+                210,
+                40
+              ],
+              "anchor": "owner",
+              "fade": false
+            },
+            {
+              "stage": "connected",
+              "start": 12,
+              "end": 30,
+              "key": 5,
+              "box": [
+                -15,
+                -75,
+                210,
+                80
+              ],
+              "anchor": "owner",
+              "fade": true
+            }
+          ]
         }
+      },
+      "super_iron_dominion": {
+        "file": "supers-v2/iron-dominion/entry.png",
+        "body_height": 445,
+        "frames": [
+          {
+            "file": "supers-v2/iron-dominion/entry.png",
+            "sha256": "5c0964aa03950b2b0a8e92fa22a32d32ce5611d766e6bdf5843a161a1b05d0b5",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              183,
+              57,
+              593,
+              474
+            ],
+            "pivot": [
+              360,
+              475
+            ],
+            "tip": [
+              594,
+              202.5
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 0,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/entry.png",
+            "sha256": "5c0964aa03950b2b0a8e92fa22a32d32ce5611d766e6bdf5843a161a1b05d0b5",
+            "region": [
+              768,
+              0,
+              768,
+              506
+            ],
+            "bounds": [
+              24,
+              52,
+              717,
+              474
+            ],
+            "pivot": [
+              337,
+              474
+            ],
+            "tip": [
+              722,
+              168.5
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 1,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/entry.png",
+            "sha256": "5c0964aa03950b2b0a8e92fa22a32d32ce5611d766e6bdf5843a161a1b05d0b5",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              94,
+              64,
+              731,
+              470
+            ],
+            "pivot": [
+              355,
+              471
+            ],
+            "tip": [
+              731,
+              176.5
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 2,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/entry.png",
+            "sha256": "5c0964aa03950b2b0a8e92fa22a32d32ce5611d766e6bdf5843a161a1b05d0b5",
+            "region": [
+              768,
+              506,
+              768,
+              518
+            ],
+            "bounds": [
+              136,
+              1,
+              664,
+              485
+            ],
+            "pivot": [
+              340,
+              487
+            ],
+            "tip": [
+              674,
+              119.5
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 3,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/press.png",
+            "sha256": "b42cf56bfc3687f5204329f690c94932bd4401419b43de1551ac92f0b1731903",
+            "region": [
+              0,
+              0,
+              768,
+              501
+            ],
+            "bounds": [
+              159,
+              87,
+              606,
+              473
+            ],
+            "pivot": [
+              358,
+              472
+            ],
+            "tip": [
+              608,
+              328.5
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 0,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/press.png",
+            "sha256": "b42cf56bfc3687f5204329f690c94932bd4401419b43de1551ac92f0b1731903",
+            "region": [
+              768,
+              0,
+              768,
+              501
+            ],
+            "bounds": [
+              137,
+              90,
+              583,
+              474
+            ],
+            "pivot": [
+              342,
+              474
+            ],
+            "tip": [
+              588,
+              349.0
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 1,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/press.png",
+            "sha256": "b42cf56bfc3687f5204329f690c94932bd4401419b43de1551ac92f0b1731903",
+            "region": [
+              0,
+              501,
+              768,
+              523
+            ],
+            "bounds": [
+              125,
+              1,
+              688,
+              489
+            ],
+            "pivot": [
+              355,
+              492
+            ],
+            "tip": [
+              689,
+              111.0
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 2,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/press.png",
+            "sha256": "b42cf56bfc3687f5204329f690c94932bd4401419b43de1551ac92f0b1731903",
+            "region": [
+              768,
+              501,
+              768,
+              523
+            ],
+            "bounds": [
+              124,
+              1,
+              677,
+              488
+            ],
+            "pivot": [
+              342,
+              490
+            ],
+            "tip": [
+              677,
+              114.5
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 3,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/crush.png",
+            "sha256": "51ce0937f923dc68aa8dbefd5f23b037ca87e8376f72e1ffc5297c1386d02f74",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              158,
+              3,
+              592,
+              488
+            ],
+            "pivot": [
+              355,
+              486
+            ],
+            "tip": [
+              592,
+              110.5
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 0,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/crush.png",
+            "sha256": "51ce0937f923dc68aa8dbefd5f23b037ca87e8376f72e1ffc5297c1386d02f74",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              103,
+              32,
+              590,
+              488
+            ],
+            "pivot": [
+              339,
+              491
+            ],
+            "tip": [
+              588,
+              141.5
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 1,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/crush.png",
+            "sha256": "51ce0937f923dc68aa8dbefd5f23b037ca87e8376f72e1ffc5297c1386d02f74",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              71,
+              67,
+              718,
+              482
+            ],
+            "pivot": [
+              355,
+              483
+            ],
+            "tip": [
+              717,
+              273.0
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 2,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/crush.png",
+            "sha256": "51ce0937f923dc68aa8dbefd5f23b037ca87e8376f72e1ffc5297c1386d02f74",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              29,
+              93,
+              669,
+              484
+            ],
+            "pivot": [
+              342,
+              483
+            ],
+            "tip": [
+              670,
+              323.5
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 3,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/finish.png",
+            "sha256": "7a1886518724c31ce99f09afd463f3448b15541e90482144d514f285d9e75c44",
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              129,
+              64,
+              625,
+              476
+            ],
+            "pivot": [
+              355,
+              479
+            ],
+            "tip": [
+              625,
+              177.5
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 0,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/finish.png",
+            "sha256": "7a1886518724c31ce99f09afd463f3448b15541e90482144d514f285d9e75c44",
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              13,
+              90,
+              655,
+              482
+            ],
+            "pivot": [
+              347,
+              482
+            ],
+            "tip": [
+              670,
+              357.5
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 1,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/finish.png",
+            "sha256": "7a1886518724c31ce99f09afd463f3448b15541e90482144d514f285d9e75c44",
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              110,
+              33,
+              653,
+              465
+            ],
+            "pivot": [
+              355,
+              461
+            ],
+            "tip": [
+              651,
+              283.0
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 2,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/iron-dominion/finish.png",
+            "sha256": "7a1886518724c31ce99f09afd463f3448b15541e90482144d514f285d9e75c44",
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              112,
+              15,
+              581,
+              464
+            ],
+            "pivot": [
+              338,
+              485
+            ],
+            "tip": [
+              586,
+              207.0
+            ],
+            "body_height": 445,
+            "source_size": [
+              1536,
+              1024
+            ],
+            "source_pose": 3,
+            "scale_group": "iron-dominion-v2",
+            "render_only": true
+          }
+        ],
+        "render_only": true
+      },
+      "super_iron_dominion_fx": {
+        "file": "supers-v2/iron-dominion/effects.png",
+        "body_height": 512,
+        "frames": [
+          {
+            "region": [
+              32,
+              153,
+              445,
+              269
+            ],
+            "pivot": [
+              222.5,
+              269
+            ],
+            "bounds": [
+              0,
+              0,
+              445,
+              269
+            ]
+          },
+          {
+            "region": [
+              545,
+              61,
+              438,
+              418
+            ],
+            "pivot": [
+              219.0,
+              418
+            ],
+            "bounds": [
+              0,
+              0,
+              438,
+              418
+            ]
+          },
+          {
+            "region": [
+              1049,
+              69,
+              440,
+              412
+            ],
+            "pivot": [
+              220.0,
+              412
+            ],
+            "bounds": [
+              0,
+              0,
+              440,
+              412
+            ]
+          },
+          {
+            "region": [
+              31,
+              613,
+              466,
+              299
+            ],
+            "pivot": [
+              233.0,
+              299
+            ],
+            "bounds": [
+              0,
+              0,
+              466,
+              299
+            ]
+          },
+          {
+            "region": [
+              528,
+              695,
+              470,
+              218
+            ],
+            "pivot": [
+              235.0,
+              218
+            ],
+            "bounds": [
+              0,
+              0,
+              470,
+              218
+            ]
+          },
+          {
+            "region": [
+              1044,
+              748,
+              441,
+              163
+            ],
+            "pivot": [
+              220.5,
+              163
+            ],
+            "bounds": [
+              0,
+              0,
+              441,
+              163
+            ]
+          }
+        ],
+        "render_only": true
       }
     },
     {

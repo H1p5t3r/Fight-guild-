@@ -1,0 +1,92 @@
+{
+  "name": "Iron Dominion",
+  "character": 0,
+  "slot": 31,
+  "input": "63214S",
+  "status": "completed-native-review",
+  "startup": 18,
+  "active": 5,
+  "recovery": 18,
+  "freeze": 54,
+  "pairTicks": 90,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 280,
+  "choreography": "Compact shield brace, first-active ram, rising shield press on the 45% impact, downward shield strike on the 78% impact, committed final shield plant at actual damage, weight settling into High Clamp.",
+  "bodyKeys": 16,
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      7,
+      2
+    ],
+    [
+      16,
+      3
+    ],
+    [
+      27,
+      4
+    ],
+    [
+      39,
+      5
+    ],
+    [
+      40,
+      6
+    ],
+    [
+      48,
+      7
+    ],
+    [
+      58,
+      8
+    ],
+    [
+      69,
+      9
+    ],
+    [
+      70,
+      10
+    ],
+    [
+      78,
+      11
+    ],
+    [
+      84,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      7,
+      14
+    ],
+    [
+      17,
+      15
+    ]
+  ],
+  "requirements": [
+    "Largest initial shield displacement between last startup and first active",
+    "Each saved impact at ticks 40 and 70 receives a distinct striking pose",
+    "Final damage pose begins at release tick 90, never on an unconfirmed block or miss",
+    "Maintain fixed anatomical scale and left-arm shield ownership",
+    "Independent generated magma-orange shield effects",
+    "Native hit, block, whiff and mirrored review"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveShieldTravelWorldUnits": 52.1
+}

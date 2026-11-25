@@ -56,7 +56,8 @@ func run() -> void:
 			check(model.core.snapshot() == saved, "Super rendering changed simulation")
 			pair_seen = pair_seen or state.pairKind > 0
 			if state.pairKind == 8:
-				check(arena.sprites[0].get_meta("phase") == "attack_animation", "Cinematic owner replaced with generic grab")
+				var presentation := SuperAnimation.profile(c,slot)
+				check(arena.sprites[0].get_meta("phase") == presentation.get("phase","attack_animation"), "Cinematic owner replaced with generic grab")
 				check(arena.sprites[1].get_meta("super_role", "") == "receiver", "Missing cinematic receiver")
 			if not entry.cinematic and state.players[0].move < 0 and not state.projectiles.is_empty(): utility_action = true
 			model.step(0, 0)

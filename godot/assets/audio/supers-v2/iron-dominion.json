@@ -1,0 +1,26 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-iron-dominion-audio.py",
+  "sounds": [
+    {
+      "file": "iron_dominion_ram.wav",
+      "seconds": 0.32,
+      "sha256": "1be62b5d337b1cea3db8a72343551bcd3fa8cd876dfbcd1d1ed06c0215a0a75e"
+    },
+    {
+      "file": "iron_dominion_press.wav",
+      "seconds": 0.36,
+      "sha256": "c04decd3fdf341dd9abd7940db14c04c5ee16938a9ccb550a0e7c906f041da34"
+    },
+    {
+      "file": "iron_dominion_crush.wav",
+      "seconds": 0.42,
+      "sha256": "a1e3780bb8b04e95e13cf5e4d8dded4266a1024d6677e5951eef4ee0c5ad362a"
+    },
+    {
+      "file": "iron_dominion_finish.wav",
+      "seconds": 0.8,
+      "sha256": "6d80393d2df182e7a77bca804e5072ae05d9cd96401be0b8cfe6407318973f33"
+    }
+  ]
+}

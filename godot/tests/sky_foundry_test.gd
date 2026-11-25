@@ -104,7 +104,7 @@ func run() -> void:
 	freeze.present(0,-1,40,54,"Sky Foundry")
 	check(freeze.portrait==texture,"Mirroring/closing changed portrait")
 	freeze.present(0,1,20,54,"Iron Dominion")
-	check(not freeze.custom_portrait,"Sky Foundry portrait leaked to another super")
+	check(freeze.portrait!=texture,"Sky Foundry portrait leaked to another super")
 	check(model.fingerprint()==fingerprint,"Presentation changed move data")
 	freeze.queue_free();recorder.queue_free();arena.queue_free();await process_frame
 	print("Sky Foundry animation: %d checks / %d failures" % [checks,failures])

@@ -1,0 +1,70 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v2/iron-dominion/entry.png",
+    "original": "/workspace/generated_images/exec-54c75bd6-45f9-43e9-b326-6c1211ae0422.png",
+    "sha256": "5c0964aa03950b2b0a8e92fa22a32d32ce5611d766e6bdf5843a161a1b05d0b5",
+    "prompt": "art/characters/supers-v2/iron-dominion/entry-prompt.txt",
+    "pixelEdits": false,
+    "references": [
+      "godot/assets/fighters/supers-v2/sky-foundry/entry.png"
+    ]
+  },
+  {
+    "id": "press",
+    "file": "godot/assets/fighters/supers-v2/iron-dominion/press.png",
+    "original": "/workspace/generated_images/exec-94f788f4-320d-448e-a3f8-09c5cffb9f73.png",
+    "sha256": "b42cf56bfc3687f5204329f690c94932bd4401419b43de1551ac92f0b1731903",
+    "prompt": "art/characters/supers-v2/iron-dominion/press-prompt.txt",
+    "pixelEdits": false,
+    "references": [
+      "godot/assets/fighters/supers-v2/iron-dominion/entry.png"
+    ]
+  },
+  {
+    "id": "crush",
+    "file": "godot/assets/fighters/supers-v2/iron-dominion/crush.png",
+    "original": "/workspace/generated_images/exec-4ed0744a-3665-4325-a9a0-9bd481065108.png",
+    "sha256": "51ce0937f923dc68aa8dbefd5f23b037ca87e8376f72e1ffc5297c1386d02f74",
+    "prompt": "art/characters/supers-v2/iron-dominion/crush-prompt.txt",
+    "pixelEdits": false,
+    "references": [
+      "godot/assets/fighters/supers-v2/iron-dominion/entry.png",
+      "godot/assets/fighters/supers-v2/iron-dominion/press.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v2/iron-dominion/finish.png",
+    "original": "/workspace/generated_images/exec-8ac1c9ec-b4d2-496f-a862-dbd355753516.png",
+    "sha256": "7a1886518724c31ce99f09afd463f3448b15541e90482144d514f285d9e75c44",
+    "prompt": "art/characters/supers-v2/iron-dominion/finish-prompt.txt",
+    "pixelEdits": false,
+    "references": [
+      "godot/assets/fighters/supers-v2/iron-dominion/crush.png",
+      "godot/assets/fighters/supers-v2/sky-foundry/entry.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v2/iron-dominion/effects.png",
+    "original": "/workspace/generated_images/exec-f01c0426-0d30-4845-8a24-99d36c1a4678.png",
+    "sha256": "d4a69bfb03696826d7749d0f37211611ad4dcf12333c0556c52f924ba3def467",
+    "prompt": "art/characters/supers-v2/iron-dominion/effects-prompt.txt",
+    "pixelEdits": false,
+    "references": [
+      "godot/assets/fighters/supers-v2/sky-foundry/effects.png"
+    ]
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/iron-dominion/portrait.png",
+    "original": "/workspace/generated_images/exec-47cdaaf1-9e36-4c6c-ba8d-bd171e44537a.png",
+    "sha256": "c36551ff3622744386e5cf529e6c54c2dda9f71efd06bfaaadf49a47c9e02d17",
+    "prompt": "art/characters/supers-v2/iron-dominion/portrait-prompt.txt",
+    "pixelEdits": false,
+    "references": [
+      "godot/assets/fighters/supers-v2/iron-dominion/entry.png"
+    ]
+  }
+]

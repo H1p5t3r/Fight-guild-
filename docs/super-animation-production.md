@@ -74,10 +74,55 @@ rollback, first-active timing, complete pose coverage, grounded/range misses,
 confirmed audio, portrait isolation and gameplay fingerprints. The native Anvil,
 full super roster, feedback and screen-tear regression suites also run.
 
+## 02 — Anvil / Iron Dominion
+
+[Watch the native 60 FPS review with sound](../exports/FightGuild-Iron-Dominion-2026-11-25.mp4).
+The review separates confirmed hit, mirrored P2 hit, block and out-of-range miss.
+Sixteen new full-body drawings replace the reused shield brace: a compressed
+opening ram, rising press, downward crush, final shield plant and return to the
+High Clamp guard. The left arm retains Shield 1 throughout. Six original magma
+effect drawings and four original shield impacts follow those distinct beats.
+Iron Dominion has its own face cut-in; Sky Foundry retains its own.
+
+The strike poses begin on the saved capture impacts at ticks 40 and 70. The
+final plant starts at actual release/damage, tick 90, holding through its real
+22-tick hitstop before the existing 24-tick recovery. Block and whiff withdraw
+from the opening ram; they never play the confirmed finish or its sounds. The
+18/5/18 move timing, armor, 280 damage, +14 first-active block advantage and
+two-segment cost are unchanged. Receiver reactions continue to follow the real
+capture path. One anatomical scale is shared across all 16 body drawings.
+
+Presentation profiles now support saved-clock effect tracks and cinematic sound
+beats. Their cues use the existing confirmation/rollback history. New body,
+effect and cut-in textures join match loading to avoid first-use disk reads.
+The original PNG bytes are preserved; registration only supplies atlas regions,
+body pivots, shield masks and exposures.
+
+- [Exposure plan](../art/characters/supers-v2/iron-dominion/exposure-plan.json)
+- [Image provenance](../art/characters/supers-v2/iron-dominion/sources.json)
+- [Registration](../art/characters/supers-v2/iron-dominion/registration.json)
+
+```bash
+python scripts/register-iron-dominion.py
+python scripts/generate-iron-dominion-audio.py
+bash scripts/godot.sh --headless --editor --import
+bash scripts/godot.sh --headless --script res://tests/iron_dominion_test.gd -- --test
+python scripts/capture-iron-dominion.py --baseline
+python scripts/capture-iron-dominion.py
+```
+
+Checks cover all six receivers, both owners and facings, the two intermediate
+impact exposures, every body key, fixed scale, pause, hit/block/whiff separation,
+audio cue counts and unchanged gameplay fingerprints. Sky Foundry and the full
+super roster are regression-tested after extending the presentation profiles.
+Edited capture lengths of 91, 100 and 120 ticks also retain exact alignment at
+the native integer-rounded impact boundaries. On block, the opening force effect
+ends at the defender instead of continuing through their guard.
+
 ## Production order
 
 1. Sky Foundry — full pass and native review.
-2. Iron Dominion.
+2. Iron Dominion — full pass and native review.
 3. Freemason.
 4. Grand Design.
 5. Flashpoint.

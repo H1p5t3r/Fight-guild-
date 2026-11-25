@@ -18,11 +18,11 @@ static func selection(model: CombatModel, state: Dictionary, owner: int) -> Dict
 		slot = int(fighter.lastMove)
 	var spec := profile(int(fighter.character), slot)
 	if spec.is_empty(): return {}
-	var result := {"owner":owner,"slot":slot,"spec":spec,"pose":0,"stage":"windup","tick":0,"facing":int(fighter.facing)}
+	var result := {"owner":owner,"character":int(fighter.character),"slot":slot,"spec":spec,"pose":0,"stage":"windup","tick":0,"facing":int(fighter.facing)}
 	if captured:
 		result.stage = "paired"
 		result.facing = int(state.pairFacing)
-		result.tick = int(state.pairClock)
+		result.tick = paired_tick(int(state.pairClock),int(state.pairTicks),spec)
 		result.pose = exposure(spec.paired, int(result.tick))
 	elif int(fighter.pairRecovery) > 0:
 		result.stage = "connected"
@@ -33,13 +33,25 @@ static func selection(model: CombatModel, state: Dictionary, owner: int) -> Dict
 		var age := int(fighter.age)
 		var active := int(move.startup)
 		if age >= active and age < active + int(move.active):
-			result.stage = "active"; result.pose = 1
+			result.stage = "active"; result.pose = 1; result.tick = age-active
 		elif age >= active + int(move.active):
 			result.stage = "whiff"
 			result.tick = age-active-int(move.active)
 			var percent := int(result.tick)*100/maxi(1,int(move.recovery))
-			result.pose = 1 if percent < 16 else 0 if percent < 65 else 15
+			result.pose = exposure(spec.whiff,percent) if spec.has("whiff") else 1 if percent < 16 else 0 if percent < 65 else 15
 	return result
+
+static func paired_tick(tick: int, total: int, spec: Dictionary) -> int:
+	if str(spec.get("mode","carry"))!="strike": return tick
+	var authored := int(spec.pair_ticks)
+	var actual := [0,total*45/100,total*78/100,total]
+	var target := [0,authored*45/100,authored*78/100,authored]
+	# Preserve the native impact boundaries even when edited durations round to
+	# different integer ticks. A linear percentage alone can show the load on hit.
+	for i in 3:
+		if tick<=int(actual[i+1]):
+			return int(target[i])+(tick-int(actual[i]))*(int(target[i+1])-int(target[i]))/maxi(1,int(actual[i+1])-int(actual[i]))
+	return authored
 
 static func exposure(keys: Array, tick: int) -> int:
 	var pose := int(keys[0][1])
@@ -50,9 +62,32 @@ static func exposure(keys: Array, tick: int) -> int:
 
 static func replaces_impact(cue: Dictionary, sprites: Array[Sprite2D]) -> bool:
 	var animation: Dictionary = sprites[int(cue.actor)].get_meta("super_animation",{})
-	return not animation.is_empty() and str(animation.stage)=="connected" and int(cue.move)==int(animation.slot) and int(cue.kind) in [1,3,4]
+	if animation.is_empty() or int(cue.move)!=int(animation.slot) or int(cue.kind) not in [1,3,4]: return false
+	return str(animation.stage)=="connected" or (str(animation.stage)=="paired" and animation.spec.has("effects"))
 
 static func audio_events(core: Object, previous_kind: int, previous_clock: int) -> Array:
+	var paired_kind: int = core.read_value(-1,22)
+	if paired_kind==8 or previous_kind==8:
+		for p in 2:
+			var character: int = core.read_value(p,13)
+			var slot: int = core.read_value(-1,25) if paired_kind==8 else core.read_value(p,11)
+			var spec := profile(character,slot)
+			if not spec.has("sounds"): continue
+			var sample := ""
+			if paired_kind==8 and core.read_value(-1,24)==p:
+				var tick: int = core.read_value(-1,23)
+				for mark in spec.sounds:
+					if mark=="finish": continue
+					var target := int(mark)
+					var total: int = core.read_value(-1,26)
+					if target==int(spec.pair_ticks)*45/100: target=total*45/100
+					elif target==int(spec.pair_ticks)*78/100: target=total*78/100
+					if (target==0 and previous_kind!=8) or (target>0 and previous_clock<target and tick>=target): sample=str(spec.sounds[mark])
+			elif paired_kind==0 and core.read_value(p,92)>0:
+				sample=str(spec.sounds.get("finish",""))
+			if not sample.is_empty():
+				return [{"kind":13,"actor":p,"character":character,"move":slot,"serial":core.read_value(p,91),"strength":4,"sound":"../supers-v2/"+sample+".wav"}]
+		return []
 	if core.read_value(-1,22)!=7: return []
 	var owner: int = core.read_value(-1,24)
 	if core.read_value(owner,13)!=0 or core.read_value(-1,25)!=16 or profile(0,16).is_empty(): return []
@@ -86,7 +121,7 @@ static func present(sprites: Array[Sprite2D], model: CombatModel, state: Diction
 		var sprite := sprites[owner]
 		FighterArt.apply(sprite,int(fighter.character),str(cue.spec.phase),int(cue.pose),world_scale,int(cue.facing))
 		sprite.set_meta("super_animation",cue)
-		if str(cue.stage) != "paired": continue
+		if str(cue.stage) != "paired" or str(cue.spec.get("mode","carry")) != "carry": continue
 		var victim := sprites[1-owner]
 		var receiver := int(state.players[1-owner].character)
 		var original := victim.position
@@ -106,7 +141,7 @@ static func present(sprites: Array[Sprite2D], model: CombatModel, state: Diction
 			if child is Sprite2D: child.visible = false
 
 static func draw_effect(canvas: CanvasItem, cue: Dictionary, key: int, box: Rect2, opacity: float, origin: Vector2, scale: float) -> void:
-	var texture := FighterArt.texture(0,str(cue.spec.fx_phase),key)
+	var texture := FighterArt.texture(int(cue.character),str(cue.spec.fx_phase),key)
 	canvas.draw_set_transform(origin,0.0,Vector2(float(cue.facing)*scale,scale))
 	canvas.draw_texture_rect(texture,box,false,Color(1,1,1,opacity))
 	canvas.draw_set_transform(Vector2.ZERO)
@@ -118,6 +153,9 @@ static func draw_behind(canvas: Control, sprites: Array[Sprite2D], _state: Dicti
 		var tick := int(cue.tick)
 		var shade := minf(float(tick)/12.0,float(int(cue.spec.pair_ticks)-tick)/12.0)*0.24
 		canvas.draw_rect(Rect2(Vector2.ZERO,canvas.size),Color(0.025,0.029,0.035,clampf(shade,0.0,0.24)))
+		if cue.spec.has("effects"):
+			draw_track(canvas,sprites,cue,_state,scale,true)
+			continue
 		var point := sprites[owner].position
 		if tick >= 12 and tick < 30:
 			draw_effect(canvas,cue,0,Rect2(-75,-175,160,205),0.75*float(30-tick)/18.0,point,scale)
@@ -128,6 +166,9 @@ static func draw_front(canvas: CanvasItem, sprites: Array[Sprite2D], state: Dict
 	for owner in 2:
 		var cue: Dictionary = sprites[owner].get_meta("super_animation",{})
 		if cue.is_empty(): continue
+		if cue.spec.has("effects"):
+			draw_track(canvas,sprites,cue,state,scale,false)
+			continue
 		var tick := int(cue.tick)
 		if str(cue.stage) == "paired" and tick < 6:
 			draw_effect(canvas,cue,2,Rect2(-17,-17,34,34),0.88,grip(sprites[owner],0),scale)
@@ -137,3 +178,20 @@ static func draw_front(canvas: CanvasItem, sprites: Array[Sprite2D], state: Dict
 			var key := 3 if age < 4 else 4 if age < 12 else 5
 			var alpha := 0.95 if age < 12 else 0.7*float(30-age)/18.0
 			draw_effect(canvas,cue,key,Rect2(-110,-85,260,92),alpha,sprites[owner].position,scale)
+
+static func draw_track(canvas: CanvasItem, sprites: Array[Sprite2D], cue: Dictionary, state: Dictionary, scale: float, behind: bool) -> void:
+	var tick := int(cue.tick)
+	if str(cue.stage)=="connected":
+		tick = int(cue.spec.release_freeze)-mini(int(state.hitstop),int(cue.spec.release_freeze)) if tick==0 else int(cue.spec.release_freeze)+tick
+	for item in cue.spec.effects:
+		if str(item.stage)!=str(cue.stage) or bool(item.get("behind",false))!=behind: continue
+		if tick<int(item.start) or tick>=int(item.end): continue
+		var origin := sprites[int(cue.owner)].position
+		if item.get("anchor", "owner")=="receiver": origin=sprites[1-int(cue.owner)].position
+		var box: Array = item.box
+		if item.has("contact_box") and int(state.players[int(cue.owner)].contact)!=0:
+			origin=sprites[1-int(cue.owner)].position
+			box=item.contact_box
+		var opacity: float = item.get("opacity",0.85)
+		if item.get("fade",false): opacity*=float(int(item.end)-tick)/maxi(1,int(item.end)-int(item.start))
+		draw_effect(canvas,cue,int(item.key),Rect2(box[0],box[1],box[2],box[3]),opacity,origin,scale)

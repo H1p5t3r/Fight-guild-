@@ -89,8 +89,16 @@ func begin(chosen: Array, number: int, is_practice: bool, is_online: bool, repea
 		return
 	# Prepare selected fighters and every adjoining area before revealing the stage.
 	var paths: Array[String] = ArenaStage.asset_paths()
+	var super_faces: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(SuperFreeze.PORTRAITS_PATH)).get("moves",{})
 	for character in characters:
-		for stage in FighterArt.phase_names(character):
+		for record in super_faces.values():
+			if int(record.get("character",-1))==character and record.has("file"):
+				paths.append(("res://assets/ui/super-freeze/"+str(record.file)).simplify_path())
+		var stages := FighterArt.phase_names(character)
+		for spec in FighterArt.catalog().fighters[character].get("super_presentations",{}).values():
+			for key in ["phase","fx_phase"]:
+				if spec.has(key) and str(spec[key]) not in stages: stages.append(str(spec[key]))
+		for stage in stages:
 			paths.append(FighterArt.DIRECTORY + FighterArt.sheet(character, stage).file)
 			for frame in FighterArt.sheet(character, stage).frames:
 				if frame.has("file"): paths.append(FighterArt.DIRECTORY + frame.file)
