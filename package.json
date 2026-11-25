@@ -9,7 +9,7 @@
   "scripts": {
     "build": "bash scripts/build.sh && node scripts/bundle.mjs",
     "start": "node scripts/server.mjs",
-    "test": "bash scripts/build.sh && ./build/feedback-tests && ./build/combo-physics-tests && ./build/fillet-v1-tests && ./build/fillet-geometry-tests && ./build/smoke-tests && ./build/tapper-tests && ./build/core-tests && ./build/mechanics-tests && ./build/shark-drive-tests && ./build/hammer-drive-tests && ./build/movement-projectile-tests && ./build/collision-tests && ./build/hit-timeline-tests && ./build/recovery-tests && ./build/signature-tests && ./build/tuning-tests && ./build/counter-tests && ./build/wall-tests && node --test tests/*.test.mjs",
+    "test": "bash scripts/build.sh && ./build/feedback-tests && ./build/combo-physics-tests && ./build/fillet-v1-tests && ./build/fillet-geometry-tests && ./build/smoke-tests && ./build/tapper-tests && ./build/core-tests && ./build/mechanics-tests && ./build/shark-drive-tests && ./build/hammer-drive-tests && ./build/anvil-tests && ./build/movement-projectile-tests && ./build/collision-tests && ./build/hit-timeline-tests && ./build/recovery-tests && ./build/signature-tests && ./build/tuning-tests && ./build/counter-tests && ./build/wall-tests && node --test tests/*.test.mjs",
     "test:browser": "node tests/browser-smoke.mjs",
     "build:workshop": "bash scripts/build.sh && node scripts/build-workbench.mjs",
     "start:workshop": "node scripts/serve-workbench.mjs",

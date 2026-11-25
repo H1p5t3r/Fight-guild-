@@ -75,12 +75,15 @@ jobs:
           python-version: '3.12'
       - run: bash scripts/setup-web.sh
       - name: Package and verify browser Move Workshop
+        # User paused website updates. Keep portable-core tests above running.
+        if: ${{ false }}
         run: |
           npx playwright install --with-deps chromium
           node scripts/build-workbench.mjs
           python scripts/build-locomotion-preview.py
           npm run test:workshop
       - uses: actions/upload-artifact@v4
+        if: ${{ false }} # Resume browser artifacts only when website work resumes.
         with:
           name: FightGuild-Move-Workshop
           path: |

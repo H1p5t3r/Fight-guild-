@@ -86,5 +86,7 @@ func run() -> void:
 	check(not app.tuning_fields.throwGraceFrames.control.editable and app.tuning_fields.blockCarryover.control.disabled and not app.jump_fields.prejumpFrames.editable, "Online tuning controls were left editable")
 	app.queue_free()
 	await process_frame
+	# Let the audio mixer release its last theme decoder before test shutdown.
+	await create_timer(0.1).timeout
 	print("Tuning migration, editor, presets and rollback: ", failures, " failures")
 	quit(int(failures != 0))

@@ -14,7 +14,7 @@ int Simulation::extension_set(int c,int m,const int* v) {
         if(m>=0&&i>=XRoutes&&i<XRoutes+8) continue; // signed bit masks
         if(v[i]< -1000000||v[i]>1000000) return 0;
     }
-    if(v[0]<0||v[0]>1) return 0;
+    if(v[0]<0||v[0]>(m<0?2:1)) return 0;
     if(!v[0]) { for(int i=1;i<size;++i) if(v[i]) return 0; }
     else if(m<0) {
         if(v[CBleedDuration]<1||v[CBleedDuration]>3600||v[CBleedInterval]<1||v[CBleedInterval]>600

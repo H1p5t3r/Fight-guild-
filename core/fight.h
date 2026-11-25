@@ -11,7 +11,9 @@ constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_
               STAB_GROUND=30, STAB_AIR=31;
 constexpr int CLOSE_SLASH=32, HELD_GUARD=33, GUARD_ATTACK=34, STANCE_P=35, STANCE_K=36, STANCE_S=37, STANCE_HS=38, STANCE_EXIT=39, STANCE_THROW=40, AIR_BACK_THROW=41, AIR_FORWARD_THROW=42;
 constexpr int FAR_SLASH=2, SLASH_SWEEP=6; // Saved 5S and 2S slot IDs remain compatible.
-constexpr unsigned RULES_REVISION=5; // Wall splats consume pending launch bounces.
+constexpr unsigned RULES_REVISION=6; // Grappler captures, charge/HCB inputs and deterministic super freeze.
+constexpr int GrapplerGrab=7, AntiAirSuper=8, ArmoredRush=9, RushBrake=10, ShieldStance=11, ShieldDive=12;
+constexpr int SUPER_COST=5000, SUPER_FREEZE_TICKS=54;
 constexpr int VAULT_CASHOUT=45, SKIM_CASHOUT=46;
 constexpr int CHARGED_HS=43, CHARGED_D=44;
 constexpr int MIN_STARTUP = 5;
@@ -57,7 +59,7 @@ enum CueKind { HitCue=1, BlockCue, CounterCue, PunishCue, GuardBreakCue, Faultle
 constexpr int CUE_FIELDS=12, MAX_CUES=64;
 struct Cue { int v[CUE_FIELDS]; }; // frame, kind, actor, character, move, serial, x, y, facing, strength, flags, variant
 enum CueFlags { CueProjectile=1, CueLegs=2, CueChest=4, CueHead=6, CueRegionMask=6, CueAirborne=8 };
-struct ContactVisual { int x, y, flags; }; // Presentation only; sampled before either side of a trade changes pose.
+struct ContactSample { int x, y, flags; bool legs=false; }; // Anatomical contact, sampled before either side of a trade changes pose.
 constexpr int HURT_PHASES = 3, HURT_FIELDS = 1+MAX_HURTBOXES*4;
 // count 0 inherits the current sprite pose. Custom phases have the three body
 // regions and optionally one extension; weapons never acquire hurt regions.
@@ -124,6 +126,7 @@ struct Fighter {
     int gait_distance, gait_phase;
     int combo_decay, launch_percent, push_percent, hit_crouching;
     int drive_used, drive_neutral, drive_source, drive_distance, drive_speed, drive_bonus;
+    int carried_armor; // At most one unspent upper-body hit from shield stance.
     ComboAttack combo_attacks[COMBO_ATTACK_SLOTS];
     Sample history[HISTORY];
 };
@@ -132,6 +135,7 @@ struct Projectile { int life, owner, character, move, serial, x, y, vx, vy, faci
 struct PairState {
     int kind, owner, move, clock, origin_x, facing, victim_x, grey, down_pose;
     int saved_age, ticks, release_freeze, owner_recovery, victim_recovery, grace, track, tech_ticks;
+    int victim_y, combo;
     Move payload{};
 };
 struct State {
@@ -140,6 +144,7 @@ struct State {
     int wall_health[2]; // Shared by both fighters, independently for the left/right wall.
     int wall_break_x[2], wall_break_y[2]; // Cinematic origins survive neutral reset and rollback.
     int impact_time, impact_duration, impact_actor, impact_tier, impact_x, impact_y;
+    int super_time, super_duration, super_actor=-1;
     int foreground_player=-1; // Last confirmed attacker; saved with rollback state.
     Fighter players[2];
     Projectile projectiles[MAX_PROJECTILES];
@@ -217,9 +222,9 @@ public:
     static unsigned collision_hash();
 private:
     void emit_cue(int kind,int player,int move,int x,int y,int strength=0,int flags=0,int serial=-1,int facing=0);
-    ContactVisual contact_visual(const Fighter& source,const Fighter& target,const Move& payload) const;
+    ContactSample contact_sample(const Fighter& source,const Fighter& target,const Move& payload) const;
     int hurt_region(const Fighter& fighter,int index,int tick_offset=0) const;
-    void contact_cue(int player,int move,const Move& payload,int kind,int facing,bool projectile,int serial,int impact_x=-1,int impact_y=-1,const ContactVisual* visual=nullptr);
+    void contact_cue(int player,int move,const Move& payload,int kind,int facing,bool projectile,int serial,int impact_x=-1,int impact_y=-1,const ContactSample* visual=nullptr);
     bool extended(const Fighter& f) const { return character_extensions[f.character].v[CPolicy]==1; }
     const int* extension(const Fighter& f) const { return extensions[f.character][f.move < 0 ? 0 : f.move].v; }
     const int* extended_body(const Fighter& f,int offset=0) const;
@@ -234,7 +239,7 @@ private:
     void release_pair();
     void tech_pair();
     bool tech_input(Fighter& f);
-    void clear_pair_motion(Fighter& f);
+    void clear_pair_motion(Fighter& f, bool keep_combo=false);
     void place_pair(int owner,int owner_x,int victim_x,int owner_y=0,int victim_y=0);
     void pay_faultless(Fighter& f);
     Move effective_move(const Fighter& fighter) const;
@@ -287,7 +292,7 @@ private:
     int mobility_or(const Fighter& fighter, int field, int fallback) const;
     void update_projectiles();
     void spawn_projectile(Fighter& fighter);
-    void apply_contact(int player, int move, Move effective, int contact, bool prior_combo, int prior_reaction, int facing, bool projectile,int serial=-1,int impact_x=-1,int impact_y=-1,const ContactVisual* visual=nullptr);
+    void apply_contact(int player, int move, Move effective, int contact, bool prior_combo, int prior_reaction, int facing, bool projectile,int serial=-1,int impact_x=-1,int impact_y=-1,const ContactSample* visual=nullptr);
 };
 // Compatibility instance for the original C ABI and native test runner.
 extern Simulation default_simulation;

@@ -45,7 +45,7 @@ const TUNING_RULES := ["fdAirDrain", "fdLevelCost", "cornerPushTransfer", "wallM
 const COMBO_RULES := ["comboPhysics", "decayPushStep", "decayPushCap", "decayLaunchStep", "decayLaunchFloor", "groundHitDrag", "crouchHitDrag", "airHitDrag", "launchCarry", "decayGravityAfter", "decayGravityStep"]
 const JUMP_RULES := ["prejumpFrames", "emptyLandingFrames"]
 const RULE_COUNT := 49 # Input, Momentum, recovery/walls, tuning, jump, then combo rules.
-const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy", "dashKind", "dashAge", "airDashUsed", "airJumpUsed", "teleported", "contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause","attackSerial","pairRecovery","captureFailed","contactTicks","coastPending","coastMode","dashSpeed","displayMove","displayAge","tetherTime","tetherChase","linePullTime","linePullHeld", "comboDecay", "pushPercent", "launchPercent", "hitCrouching","driveUsed","driveNeutral","driveBonus","driveDistance","driveSpeed","driveAutoDistance"]
+const STATE_FIELDS := ["x", "y", "facing", "health", "move", "age", "stun", "guarding", "contact", "combo", "event", "lastMove", "raw", "character", "simple", "momentum", "faultless", "blockReaction", "blockAge", "blockAdvantage", "guardBreak", "throwInvulnerable", "comboDisplay", "comboTime", "comboAge", "hitNotice", "hitNoticeTime", "reversalTime", "reversalInputAge", "posePhase", "poseIndex", "reaction", "knockdown", "recoveryTime", "comboReceived", "gravityPercent", "wallDamage", "wallSplatTime", "positiveTime", "vx", "running", "dashTicks", "pullTime", "pullOwner", "weaponBackX", "weaponBackY", "weaponTipX", "weaponTipY", "weaponVisible", "carryVx", "carryTime", "landingTime", "throwGrace", "cancelMask", "inputAge", "lastDamage", "damageScale", "starterProration", "comboScale", "counterTier", "repeatGravity", "lastBaseDamage", "prejumpTime", "counterSlowTime", "counterSlowHeld", "knockbackLeft", "hitGroups", "vy", "dashKind", "dashAge", "airDashUsed", "airJumpUsed", "teleported", "contactCount","variant","tetherSource","tetherUsed","bleedSource","bleedTime","bleedClock","greyLife","stance","guardButton","armorLeft","groundBounce","wallBounce","crumpleTime","grabTime","grabOwner","idleTime","dashPause","attackSerial","pairRecovery","captureFailed","contactTicks","coastPending","coastMode","dashSpeed","displayMove","displayAge","tetherTime","tetherChase","linePullTime","linePullHeld", "comboDecay", "pushPercent", "launchPercent", "hitCrouching","driveUsed","driveNeutral","driveBonus","driveDistance","driveSpeed","driveAutoDistance","carriedArmor","armorAvailable"]
 var extension_art: Array = ExtensionData.default_art.duplicate(true)
 var core := FightCore.new()
 var cues := CombatCues.new()
@@ -59,7 +59,7 @@ func reset(characters: Array = [5, 4], simple: Array = [false, false]) -> void:
 
 func step(a: int, b: int) -> void:
 	var before := frame()
-	var frozen := core.read_value(-1, 2) > 0
+	var frozen := core.read_value(-1, 2) > 0 or core.read_value(-1, 28) > 0
 	var movement_frozen := frozen or core.read_value(-1, 4) > 0
 	var previous_x := [core.read_value(0, 0), core.read_value(1, 0)]
 	core.step(a, b)
@@ -82,6 +82,9 @@ func state() -> Dictionary:
 	var result := {"frame": frame(), "remaining": core.read_value(-1, 1), "hitstop": core.read_value(-1, 2), "winner": core.read_value(-1, 3), "wallBreakTime": core.read_value(-1, 4), "wallBreakActor": core.read_value(-1, 5), "wallBreakSide": core.read_value(-1, 6), "stage": core.read_value(-1, 7), "wallBreakDuration": core.read_value(-1, 8), "impactTime": core.read_value(-1, 9), "impactDuration": core.read_value(-1, 10), "impactActor": core.read_value(-1, 11), "impactTier": core.read_value(-1, 12), "impactX": core.read_value(-1, 13), "impactY": core.read_value(-1, 14), "wallBreakX": [core.read_value(-1, 15), core.read_value(-1, 16)], "wallBreakY": [core.read_value(-1, 17), core.read_value(-1, 18)], "wallHealth": [core.read_value(-1, 19), core.read_value(-1, 20)], "foregroundPlayer": core.read_value(-1, 21), "pairKind": core.read_value(-1,22), "pairClock": core.read_value(-1,23), "pairOwner": core.read_value(-1,24), "pairMove": core.read_value(-1,25), "players": []}
 	result.pairTicks = core.read_value(-1, 26)
 	result.pairFacing = core.read_value(-1, 27)
+	result.superFreezeTime = core.read_value(-1, 28)
+	result.superFreezeDuration = core.read_value(-1, 29)
+	result.superFreezeActor = core.read_value(-1, 30)
 	for p in 2:
 		var fighter := {}
 		for i in STATE_FIELDS.size():
@@ -97,6 +100,11 @@ func state() -> Dictionary:
 	return result
 
 func move_name(character: int, slot: int) -> String:
+	var base := (character * MOVE_IDS.size() + slot) * FIELDS.size()
+	var motion_id: int = config[base + FIELDS.find("motion")]
+	if motion_id in [63214, 46]:
+		return ("63214" if motion_id == 63214 else "[4]6") + ["P", "K", "S", "Hs", "D"][config[base]]
+	if config[base + FIELDS.find("actionType")] == 10: return "[4]6Hs > P"
 	if slot == 2 and config[(character * MOVE_IDS.size() + slot) * FIELDS.size() + FIELDS.find("proximityMove")] == 32: return "f.S"
 	return MOVE_IDS[slot]
 

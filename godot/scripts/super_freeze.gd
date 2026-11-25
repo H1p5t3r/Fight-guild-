@@ -1,7 +1,7 @@
 class_name SuperFreeze
 extends Control
 
-# Rendering only. Future supers pass their saved freeze age here. The screen
+# Rendering only. Supers pass their deterministic, saved freeze age here. The screen
 # copy precedes the tear, so this renderer never feeds back on itself.
 const DEFAULT_TICKS := 54
 const PORTRAITS_PATH := "res://assets/ui/super-freeze/portraits.json"

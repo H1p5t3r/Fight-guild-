@@ -163,6 +163,9 @@ func run() -> void:
 	game.open_pause()
 	await capture("13-pause-active")
 	print("Native ink menus: ", failures, " failures / ", checks, " checks")
+	game.queue_free()
+	await process_frame
+	await create_timer(0.1).timeout # Retire the final theme decoder before exit.
 	quit(1 if failures else 0)
 
 func hold(seconds: float) -> void:

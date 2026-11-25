@@ -2,7 +2,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p build
-python scripts/generate-combat-data.py --check
+python scripts/generate-combat-data.py --check --native-only
 python tests/combat_data_test.py
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/feedback_test.cpp -o build/feedback-tests
 ./build/feedback-tests

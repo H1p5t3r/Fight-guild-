@@ -3,7 +3,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p build web/generated
 # Runtime tests retain several independent configuration tables on the stack.
-python scripts/generate-combat-data.py --check
+python scripts/generate-combat-data.py --check --native-only
 python tests/combat_data_test.py
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/feedback_test.cpp -o build/feedback-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/combo_physics_test.cpp -o build/combo-physics-tests
@@ -23,6 +23,7 @@ python tests/combat_data_test.py
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/smoke_test.cpp -o build/smoke-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/shark_drive_test.cpp -o build/shark-drive-tests
 "${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/hammer_drive_test.cpp -o build/hammer-drive-tests
+"${CXX:-g++}" -std=c++17 -O2 -Wall -Wextra -Werror -pedantic core/fight.cpp tests/anvil_test.cpp -o build/anvil-tests
 if command -v zig >/dev/null 2>&1; then
   fight_zig="$(command -v zig)"
 else

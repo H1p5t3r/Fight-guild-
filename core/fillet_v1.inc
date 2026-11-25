@@ -43,16 +43,18 @@ const int* Simulation::extended_body(const Fighter& f,int offset) const {
     else if(f.vx) index=(f.vx*f.facing<0?12:4)+f.gait_phase;
     return character_extensions[f.character].v+CProfiles+index*17;
 }
-void Simulation::clear_pair_motion(Fighter& f) {
+void Simulation::clear_pair_motion(Fighter& f,bool keep_combo) {
     f.move=-1; f.age=f.stun=f.contact=f.hit_done=f.dash=f.dash_pause=f.running=0;
     f.vx=f.vy=f.carry_vx=f.carry_time=f.knockback_left=f.prejump_time=f.landing_time=0;
     f.slow_time=f.slow_phase=f.slow_held=f.guarding=f.faultless=f.guard_break=0;
     f.block_reaction=f.block_age=f.block_advantage=0;
     f.knockdown=f.down_frames=f.wakeup_frames=f.recovery_time=f.wall_time=f.wall_side=0;
-    f.combo=f.combo_display=f.combo_time=f.combo_age=f.combo_received=f.repeat_gravity=0;
-    f.combo_proration=f.combo_scale=100;for(auto& uses:f.move_uses)uses=0;
-    clear_combo_physics(f);
-    f.pull_time=f.grab_time=f.legacy_throw_gate_paid=0;f.pull_owner=f.grab_owner=-1;f.armor_left=0;
+    if(!keep_combo) {
+        f.combo=f.combo_display=f.combo_time=f.combo_age=f.combo_received=f.repeat_gravity=0;
+        f.combo_proration=f.combo_scale=100;for(auto& uses:f.move_uses)uses=0;
+        clear_combo_physics(f);
+    }
+    f.pull_time=f.grab_time=f.legacy_throw_gate_paid=0;f.pull_owner=f.grab_owner=-1;f.armor_left=f.carried_armor=0;
     f.bounce_ground=f.bounce_wall=f.crumple_time=f.root_y=f.coast_pending=f.coast_mode=0;
     f.pair_recovery=f.pair_grace_pending=f.throw_grace=f.air_action=f.air_dash_used=f.air_jump_used=0;
     f.display_move=-1;
@@ -67,6 +69,13 @@ void Simulation::place_pair(int owner,int ax,int bx,int ay,int by) {
 }
 bool Simulation::capture_eligible(const Fighter& f,const Fighter& target,int kind) const {
     if(world.pair.kind||(f.y>0&&!(kind==5&&f.variant==2&&f.y<=8000))||f.prejump_time||f.stun||f.reaction!=Free) return false;
+    if(kind==AntiAirCapture) {
+        // Airborne opponents are throwable both in neutral and during a juggle.
+        // Prejump and grounded targets are never caught by the anti-air super.
+        if(target.y<=0||target.prejump_time||target.pair_recovery||target.grab_time||target.throw_grace
+           ||(target.reaction!=Free&&target.reaction!=AirReel))return false;
+        return (target.x-f.x)*f.facing>=0&&overlaps(f,target);
+    }
     if(kind==WoundCapture) return !has_bleed(f)&&target.y==0&&target.reaction==Downed&&target.recovery_time>0&&overlaps(f,target);
     if(target.y>0||target.prejump_time||(target.stun&&!(kind!=CommandCapture&&target.guard_break&&target.guarding))||target.reaction!=Free||(!target.guard_break&&target.throw_grace)
        ||target.landing_time||target.pair_recovery||target.grab_time||semi_airborne(target)) return false;
@@ -87,6 +96,8 @@ void Simulation::start_pair(int p,int kind,const Move& payload) {
     auto& f=world.players[p];auto& other=world.players[1-p];
     PairState pair{};pair.kind=kind;pair.owner=p;pair.move=f.move;pair.facing=f.facing;
     pair.origin_x=f.x;pair.victim_x=(other.x-f.x)*f.facing;pair.saved_age=f.age+1;pair.payload=payload;
+    pair.victim_y=other.y;
+    pair.combo=kind==AntiAirCapture&&(other.stun>0||other.reaction==AirReel);
     pair.down_pose=other.knockdown;const int* x=extension(f);
     int freeze=payload.v[Hitstop];
     if(kind==LegacyCapture) {
@@ -107,7 +118,7 @@ void Simulation::start_pair(int p,int kind,const Move& payload) {
         bool tech=i!=p&&pair.tech_ticks&&(h.held&(P|K|S|Hs|D))==(P|K)&&!(h.consumed&(P|K));
         h.consumed|=h.pressed&~(tech?(P|K):0);
     }
-    clear_pair_motion(f);clear_pair_motion(other);
+    clear_pair_motion(f,pair.combo);clear_pair_motion(other,pair.combo);
     f.reaction=other.reaction=Captured;f.last_move=pair.move;
     world.pair=pair;world.hitstop=max(world.hitstop,freeze);
 }
@@ -136,6 +147,7 @@ bool Simulation::tick_pair() {
         for(int i=0;i<4;++i) {
             int a=left[1+i],b=right[1+i];
             if(left[0]==0&&i==2)a=pair.victim_x;
+            if(left[0]==0&&i==3)a=pair.victim_y;
             positions[i]=left==right?a:a+(b-a)*(pair.clock-left[0])/max(1,right[0]-left[0]);
         }
         place_pair(pair.owner,pair.origin_x+pair.facing*positions[0],pair.origin_x+pair.facing*positions[2],positions[1],positions[3]);
@@ -145,7 +157,7 @@ bool Simulation::tick_pair() {
 }
 void Simulation::release_pair() {
     const PairState pair=world.pair;world.pair={};
-    if(pair.kind!=LegacyCapture&&pair.kind!=WoundCapture)
+    if(pair.kind!=LegacyCapture&&pair.kind!=WoundCapture&&pair.kind!=GrapplerCapture&&pair.kind!=AntiAirCapture)
         contact_cue(pair.owner,pair.move,pair.payload,HitCue,pair.facing,false,-1);
     auto& f=world.players[pair.owner];auto& other=world.players[1-pair.owner];
     f.reaction=other.reaction=Free;
@@ -161,6 +173,20 @@ void Simulation::release_pair() {
     f.y=other.y=0;f.facing=f.x<=other.x?1:-1;other.facing=-f.facing;
     const int gap=extensions[f.character][pair.move].v[XReleaseGap],middle=(f.x+other.x)/2;
     place_pair(pair.owner,middle-f.facing*(gap/2),middle+f.facing*(gap-gap/2));
+    if(pair.kind==GrapplerCapture||pair.kind==AntiAirCapture) {
+        // The authored root track already chooses the throw side. Pay damage
+        // once, at the slam, through the usual scaling/knockdown/feedback path.
+        auto payload=pair.payload;payload.v[Hitstop]=pair.release_freeze;
+        payload.v[Pushback]=payload.v[AirPushback]=0;payload.v[Direction]=5;
+        payload.v[Launch]=payload.v[AirLaunch]=0;
+        f.move=pair.move;f.age=payload.v[Startup]-1+payload.v[Active];
+        f.hit_done=f.contact=1;
+        apply_contact(pair.owner,pair.move,payload,NormalHit,pair.combo,Free,f.facing,false);
+        if(other.reaction==AirReel&&other.y<=1)land(other);
+        f.move=-1;f.pair_recovery=pair.owner_recovery;
+        f.teleported=other.teleported=1;
+        return;
+    }
     f.pair_recovery=pair.owner_recovery;other.pair_recovery=pair.victim_recovery;
     if(other.pair_recovery)other.pair_grace_pending=pair.grace;else other.throw_grace=pair.grace;
     if(pair.kind==WoundCapture) {

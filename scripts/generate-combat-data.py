@@ -221,8 +221,10 @@ def compile_data():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true', help='Fail if generated files are stale')
+    parser.add_argument('--native-only', action='store_true', help='Leave the frozen browser metadata untouched')
     args = parser.parse_args()
     for path, content in compile_data().items():
+        if args.native_only and path.parent == ROOT / 'web': continue
         if args.check:
             if not path.exists() or path.read_text() != content:
                 raise SystemExit(f'Stale generated file: {path.relative_to(ROOT)}; run {Path(__file__).name}')

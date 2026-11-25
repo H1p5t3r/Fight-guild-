@@ -84,6 +84,10 @@ public:
         fight::State candidate{};
         std::memcpy(&candidate,bytes.ptr(),sizeof(candidate));
         if(candidate.version!=fight::VERSION||candidate.frame<0||candidate.winner< -1||candidate.winner>2||candidate.hitstop<0||candidate.hitstop>fight::MAX_HITSTOP) return false;
+        if(candidate.super_time<0||candidate.super_time>fight::SUPER_FREEZE_TICKS
+            ||candidate.super_duration<0||candidate.super_duration>fight::SUPER_FREEZE_TICKS
+            ||candidate.super_time>candidate.super_duration||candidate.super_actor< -1||candidate.super_actor>1
+            ||(candidate.super_time>0&&candidate.super_actor<0)||(candidate.super_time==0&&candidate.super_actor!=-1))return false;
         if(candidate.foreground_player< -1||candidate.foreground_player>1) return false;
         if(candidate.wall_break_time<0||candidate.wall_break_time>300||candidate.wall_break_actor< -1
             ||candidate.wall_break_actor>1||candidate.wall_break_side< -1||candidate.wall_break_side>1
@@ -133,7 +137,7 @@ public:
                 ||f.drive_source<0||f.drive_source>fight::MOVE_COUNT||f.drive_distance<0||f.drive_distance>80000
                 ||f.drive_speed<0||f.drive_speed>4000||f.drive_bonus<0||f.drive_bonus>30
                 ||f.idle_time<0||f.idle_time>=1000000||f.stance<0||f.stance>1||f.guard_button<0||f.guard_button>fight::D
-                ||f.armor_left<0||f.armor_left>8||f.bounce_ground<0||f.bounce_ground>3000||f.bounce_wall<0||f.bounce_wall>fight::MAX_WALL_BOUNCE_VELOCITY
+                ||f.carried_armor<0||f.carried_armor>1||f.armor_left<0||f.armor_left>8||f.bounce_ground<0||f.bounce_ground>3000||f.bounce_wall<0||f.bounce_wall>fight::MAX_WALL_BOUNCE_VELOCITY
                 ||f.crumple_time<0||f.crumple_time>180||f.grab_time<0||f.grab_time>120||f.grab_owner< -1||f.grab_owner>1
                 ||f.variant<0||f.variant>2||f.tether_source<0||f.tether_source>fight::MOVE_COUNT||f.tether_used<0||f.tether_used>1
                 ||f.bleed_source<0||f.bleed_source>fight::MOVE_COUNT||f.bleed_time<0||f.bleed_time>3600||f.bleed_clock<0||f.bleed_clock>600
@@ -147,7 +151,8 @@ public:
             for(int uses:f.move_uses) if(uses<0||uses>1000) return false;
         }
         const auto& pair=candidate.pair;
-        if(pair.kind<0||pair.kind>fight::LegacyCapture||pair.owner<0||pair.owner>1||pair.clock<0||pair.clock>180||pair.grey<0||pair.grey>999) return false;
+        if(pair.kind<0||pair.kind>fight::AntiAirCapture||pair.owner<0||pair.owner>1||pair.clock<0||pair.clock>180||pair.grey<0||pair.grey>999) return false;
+        if(pair.combo<0||pair.combo>1||pair.victim_y<0||pair.victim_y>200000)return false;
         if(pair.kind&&(pair.move<0||pair.move>=fight::MOVE_COUNT||pair.ticks<1||pair.ticks>180||pair.clock>pair.ticks
           ||(pair.facing!=1&&pair.facing!=-1)||pair.track<0||pair.track>3||pair.tech_ticks<0||pair.tech_ticks>30)) return false;
         for(const auto& q:candidate.projectiles) {

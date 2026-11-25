@@ -1,3 +1,4 @@
+import {frozenBrowserData,frozenBrowserEngine} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -11,7 +12,7 @@ const plans=JSON.parse(readFileSync('art/characters/fillet-v1/production/kit-tim
 const audited=JSON.parse(readFileSync('art/characters/fillet-v1/production/guide-audit-v1/exposure-plans.json'));
 const expectedTicks=a=>(audited[a.id]??plans[a.id].keys).map(k=>k.frame);
 const wasm=await WebAssembly.compile(readFileSync('web/generated/fight.wasm'));
-const engine=async()=>new Engine(await WebAssembly.instantiate(wasm));
+const engine=async()=>frozenBrowserEngine(new Engine(await WebAssembly.instantiate(wasm)));
 const place=(e,facing,gap=40000)=>{e.reset([5,4]);e.api.fg_preview_place(0,50000,0,0);e.api.fg_preview_place(1,50000+facing*gap,0,0);e.step(0,0);};
 
 const beginWhiff=(e,a,facing=1)=>{
@@ -190,7 +191,8 @@ test('Command grabs keep their first-active latch through capture and use distin
   assert.ok(e.state().pairKind);assert.equal(e.state().pairClock,0);assert.equal(e.state().hitstop,6);
   const start=e.state(),frozenPose=start.players[0].poseIndex;
   for(let i=0;i<6;i++){e.step(0,0);assert.equal(e.state().players[0].poseIndex,frozenPose);assert.equal(e.state().pairClock,0);}
-  for(let clock=1;clock<28;clock++){
+  const duration=move.extensions.params.pairTicks;assert.equal(duration,52);
+  for(let clock=1;clock<duration;clock++){
    e.step(0,0);const state=e.state(),tile=art.attack_animation.frames[state.players[0].poseIndex];
    assert.equal(state.pairClock,clock);assert.equal(state.players[1].health,1000,'Knife accents are not extra damage events');
    assert.equal(state.players[0].y,0);assert.equal(state.players[1].y,0);

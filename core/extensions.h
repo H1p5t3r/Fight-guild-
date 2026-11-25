@@ -15,5 +15,6 @@ constexpr int XRoutes=30, XHurt=38, XPush=615, XRoot=656, XVertical=697;
 constexpr int CProfiles=18, CPairTracks=783;
 struct ActionExtension { int v[EXTENSION_FIELDS]; };
 struct CharacterExtension { int v[CHARACTER_EXTENSION_FIELDS]; };
-enum CaptureKind { StrikeContact, NormalCapture, CommandCapture, WoundCapture, LegacyCapture };
+enum CaptureKind { StrikeContact, NormalCapture, CommandCapture, WoundCapture, LegacyCapture,
+                   ImmediateCapture, GrapplerCapture, AntiAirCapture };
 }

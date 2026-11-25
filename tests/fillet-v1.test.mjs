@@ -1,3 +1,4 @@
+import {frozenBrowserData,frozenBrowserEngine} from './legacy-data.mjs';
 import {STEP_DRIVE_DEFAULTS} from '../web/step-drive.mjs';
 import {comboMoveDefaults} from '../web/combo-rules.mjs';
 import {LINE_DEFAULTS} from '../web/line-drive.mjs';
@@ -10,7 +11,7 @@ import {Engine,FIELDS,INPUT} from '../web/engine.mjs';
 import {packExtension,unpackExtension} from '../web/extensions.mjs';
 const spec=JSON.parse(readFileSync('art/characters/fillet-v1/FILLET_SPEC.json'));
 const wasm=await WebAssembly.compile(readFileSync('web/generated/fight.wasm'));
-const create=async()=>new Engine(await WebAssembly.instantiate(wasm));
+const create=async()=>frozenBrowserEngine(new Engine(await WebAssembly.instantiate(wasm)));
 const ticks=(e,n,a=0,b=0)=>{while(n--)e.step(a,b);};
 test('Selected Fillet scalars, timelines, named routes and art metadata survive a v23 round trip',async()=>{
  const e=await create(),data=e.data();assert.equal(data.schema,27);assert.equal(data.characters[5].moves.length,47);
@@ -62,9 +63,9 @@ test('Real c.S → f.S inputs preserve pressure spacing, FD push and combo scali
  }
 });
 
-test('Complete input-selected rekka branches reach Wound against every current receiver, mirrored, with replay traces',async()=>{
+test('Complete input-selected rekka branches reach Wound against every frozen-workshop receiver, mirrored, with replay traces',async()=>{
  const current=JSON.parse(readFileSync('godot/data/workshop/current.json'));
- const batch=JSON.parse(readFileSync('godot/data/workshop/'+current.file));
+ const batch=frozenBrowserData(JSON.parse(readFileSync('godot/data/workshop/'+current.file)));
  const digest=path=>createHash('sha256').update(readFileSync(path)).digest('hex');
  const evidence=[JSON.stringify({type:'build',schema:23,sourceSpecSHA256:digest('art/characters/fillet-v1/FILLET_SPEC.json'),wasmSHA256:digest('web/generated/fight.wasm'),batchSHA256:current.sha256,setup:'Only initial roots/meter are placed; all actions use ordinary input samples.'})];
  for(const receiver of [0,1,2,3,4,5])for(const owner of [0,1])for(const facing of [-1,1])for(const branch of ['high','low']){

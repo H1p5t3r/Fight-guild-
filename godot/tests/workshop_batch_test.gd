@@ -29,7 +29,7 @@ func run() -> void:
 		elif c == 3: check(actual.characters[c].moves[8].hurtWindowMask == 1 and actual.characters[c].moves[8].hurtWindowEnd == 14, "Tapper timed anti-air protection missing")
 		elif c == 4: check(actual.characters[c].moves[8].hurtMaskWindup == 3 and actual.characters[c].moves[8].hurtWindowStart == 4 and actual.characters[c].moves[8].hurtWindowEnd == 13 and actual.characters[c].moves[8].hurtWindowMask == 1, "Shark staged anti-air protection missing")
 		elif c == 5: check(actual.characters[c].moves[8].hurtWindowStart == 3 and actual.characters[c].moves[8].hurtWindowEnd == 12, "Fillet v1 protection missing")
-		else: check(actual.characters[c].moves[8].hurtMaskWindup == 1 and actual.characters[c].moves[8].hurtMaskActive == 1 and actual.characters[c].moves[8].hurtMaskRecovery == 15, "Universal 6P protection missing")
+		else: check(actual.characters[c].moves[8].hurtWindowStart == 1 and actual.characters[c].moves[8].hurtWindowMask == 1 and actual.characters[c].moves[8].hurtWindowEnd == 16, "Anvil anti-air protection missing")
 	var game = load("res://scripts/main.gd").new()
 	root.add_child(game)
 	await process_frame

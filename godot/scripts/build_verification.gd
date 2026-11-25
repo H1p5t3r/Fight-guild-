@@ -77,6 +77,12 @@ func verify_smoke_idles() -> void:
 
 func timing_fixture() -> Dictionary:
 	var data: Dictionary = game.model.data().duplicate(true)
+	# This fixture checks combo typography, not Anvil's no-normal-chain policy.
+	data.characters[0].erase("extensions")
+	for definition in data.characters[0].moves: definition.erase("extensions")
+	for slot in [0, 4]:
+		data.characters[0].moves[slot].normalRoutes = 1
+		data.characters[0].moves[slot].selfCancel = 1
 	for character in data.characters:
 		for definition in character.moves:
 			definition.damage = 0
@@ -265,24 +271,28 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	game.selection_simple[1].button_pressed = false
 	game.confirm_selection()
 	key(KEY_SHIFT, true)
-	key(KEY_W, true)
-	key(KEY_I, true)
-	ticks(1)
-	for code in [KEY_SHIFT, KEY_W, KEY_I]: key(code, false)
-	var state: Dictionary = game.model.state()
-	check(state.players[0].move == 16 and state.players[0].y == 0, "Simple up+Hs should invoke special, not jump")
-	check(state.players[0].simple == 1 and state.players[1].simple == 0, "Simple controls are not independent")
-	game.reset_round()
-	key(KEY_S, true)
-	ticks(1)
-	key(KEY_D, true)
-	ticks(1)
-	key(KEY_S, false)
+	key(KEY_A, true)
 	key(KEY_J, true)
 	ticks(1)
-	key(KEY_J, false)
-	key(KEY_D, false)
-	check(game.model.state().players[0].move == 14, "Traditional motions no longer work in simple mode")
+	for code in [KEY_SHIFT, KEY_A, KEY_J]: key(code, false)
+	var state: Dictionary = game.model.state()
+	check(state.players[0].move == 14 and state.players[0].y == 0, "Simple back+P should invoke Foundry Drop")
+	check(state.players[0].simple == 1 and state.players[1].simple == 0, "Simple controls are not independent")
+	game.reset_round()
+	key(KEY_D, true) # 6
+	ticks(1)
+	key(KEY_S, true) # 3
+	ticks(1)
+	key(KEY_D, false) # 2
+	ticks(1)
+	key(KEY_A, true) # 1
+	ticks(1)
+	key(KEY_S, false) # 4K
+	key(KEY_K, true)
+	ticks(1)
+	key(KEY_K, false)
+	key(KEY_A, false)
+	check(game.model.state().players[0].move == 15, "Traditional half-circle grab no longer works in simple mode")
 	game.run_trial()
 	check(game.trial_status.text.begins_with("PASS"), "Rollback workbench failed")
 	game.lock_online(true)
@@ -327,7 +337,8 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 			check(defender.blockReaction == reaction and defender.throwInvulnerable == int(reaction != 3), "Incorrect block reaction / throw eligibility")
 			var block_visual: Sprite2D = game.arena.sprites[1]
 			check(block_visual.get_meta("phase") == "block" and block_visual.get_meta("pose") == (reaction - 1) * 2, "Missing block contact frame")
-			ticks(10)
+			release_hitstop()
+			ticks(4)
 			check(block_visual.get_meta("pose") == (reaction - 1) * 2 + 1, "Block clip did not settle after hitstop")
 	game.fields.chipDamage.control.value = 12
 	game.apply_move()

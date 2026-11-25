@@ -67,7 +67,7 @@ static Result attack(Simulation& s,int c,int target,int move,int posture,int gap
 static int route_checks=0,route_failures=0;
 static void basic_routes(Simulation& s) {
     for(bool slash:{false,true}) {
-    int cases=0,failures=0,spacing_breaks=0;
+    int cases=0,failures=0,rejected_chains=0;
     for(int c=0;c<6;++c)for(int target=0;target<6;++target)
     for(int side=0;side<2;++side)for(int player=0;player<2;++player)for(int corner=0;corner<3;++corner)for(int crouch=0;crouch<2;++crouch) {
         s.reset(player?target:c,player?c:target,0,0);
@@ -81,9 +81,11 @@ static void basic_routes(Simulation& s) {
         step(slash?S:Down|K);
         for(int i=0;i<60&&!a.contact_count;++i)step(Down);
         while(s.world.hitstop)step(Down);
+        const bool no_normal_chain=s.character_extensions[c].v[CPolicy]==2;
+        const int first_serial=a.attack_serial;
         step(slash?S:Down|S);
         for(int i=0;i<120&&a.contact_count<2;++i)step(Down);
-        if(slash) {
+        if(slash&&!no_normal_chain) {
             while(s.world.hitstop)step(Down);
             step(Hs);
             for(int i=0;i<120&&a.contact_count<3;++i)step(Down);
@@ -92,19 +94,19 @@ static void basic_routes(Simulation& s) {
         ++cases;
         const int hits=slash?3:2;
         const bool connected=a.contact_count==hits&&a.combo==hits&&a.event!=Blocked&&(slash||b.knockdown==HardKnockdown);
-        // Measured starter-kit limitation, not a universal combo promise:
-        // Anvil's short 5Hs whiffs after f.S pushes Tapper (or a standing
-        // Fillet starter) away from the wall.
-        // Keep this visible until Anvil's dedicated kit/art pass addresses it.
-        const bool spacing_break=slash&&c==0&&(target==3||(target==5&&!crouch))&&corner!=2;
-        if(!connected&&spacing_break)++spacing_breaks;
-        else if(!connected||spacing_break) {
+        // The grappler kit deliberately rejects normal chains. Verify the
+        // second input never starts an attack, even if it would have whiffed.
+        const bool correct=no_normal_chain
+            ? a.contact_count==1&&a.attack_serial==first_serial&&a.move<0
+            : connected;
+        if(correct&&no_normal_chain)++rejected_chains;
+        if(!correct) {
             if(route_failures<12)std::fprintf(stderr,"%s route %d vs %d side%d player%d corner%d: contacts%d combo%d event%d kd%d move%d\n",slash?"Slash":"Sweep",c,target,side,player,corner,a.contact_count,a.combo,a.event,b.knockdown,a.move);
             ++route_failures;
             ++failures;
         }
     }
-    std::printf("Real-input %s routes: %d cases, %d documented spacing breaks, %d unexpected failures\n",slash?"c.S > f.S > 5Hs":"2K > 2S",cases,spacing_breaks,failures);
+    std::printf("Real-input %s routes: %d cases, %d intentional grappler chain rejections, %d failures\n",slash?"c.S > f.S > 5Hs":"2K > 2S",cases,rejected_chains,failures);
     }
 }
 struct GuardResult {int contacts,guarding,gap,health,momentum,stun,wall;};

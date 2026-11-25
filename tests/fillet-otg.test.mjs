@@ -1,3 +1,4 @@
+import {frozenBrowserData,frozenBrowserEngine} from './legacy-data.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -6,9 +7,9 @@ import {Engine,INPUT} from '../web/engine.mjs';
 
 const json=path=>JSON.parse(readFileSync(path));
 const manifest=json('godot/data/workshop/current.json');
-const current=json('godot/data/workshop/'+manifest.file);
+const current=frozenBrowserData(json('godot/data/workshop/'+manifest.file));
 const wasm=await WebAssembly.compile(readFileSync('web/generated/fight.wasm'));
-const create=async()=>new Engine(await WebAssembly.instantiate(wasm));
+const create=async()=>frozenBrowserEngine(new Engine(await WebAssembly.instantiate(wasm)));
 
 test('OTG revision preserves every prior value and art brief except three explicit named routes',async()=>{
  const before=json('godot/data/workshop/2026-11-19-shark-v2/FightGuild-Shark-v2.json');

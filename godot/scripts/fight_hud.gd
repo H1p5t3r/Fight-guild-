@@ -173,6 +173,17 @@ static func draw_momentum(canvas: CanvasItem, fighter: Dictionary, rail: Rect2, 
 		if ready or enhanced > 0: canvas.draw_colored_polygon(diamond, Color(drive_color, 0.75))
 		canvas.draw_polyline(diamond, drive_color, 1.4, true)
 		text(canvas, "DRIVE +%df" % enhanced if enhanced > 0 else "BREAK STEP" if ready else "DRIVE SPENT", Vector2(mark_x - 17 if right else mark_x + 17, mark_y + 5), maxi(13, ceili(12.0 / ui_scale)), drive_color, right, 1)
+	if int(fighter.get("character", -1)) == 0 and (int(fighter.get("move", -1)) == 13 or int(fighter.get("armorAvailable", 0)) > 0):
+		var mark_y := rail.position.y - 43
+		var mark_x := rail.end.x - 7 if right else rail.position.x + 7
+		var armor := int(fighter.get("armorAvailable", 0))
+		for index in 2:
+			var x := mark_x + (-18 if right else 18) * index
+			var shield := PackedVector2Array([Vector2(x - 6, mark_y - 7), Vector2(x + 6, mark_y - 7), Vector2(x + 6, mark_y + 2), Vector2(x, mark_y + 8), Vector2(x - 6, mark_y + 2), Vector2(x - 6, mark_y - 7)])
+			canvas.draw_colored_polygon(shield, accent if index < armor else Color(INK, 0.55))
+			canvas.draw_polyline(shield, IVORY if index < armor else Color(IVORY, 0.35), 1.2, true)
+		var caption_x := mark_x - 34 if right else mark_x + 34
+		text(canvas, "BULWARK" if int(fighter.get("move", -1)) == 13 else "IRON ARMOR", Vector2(caption_x, mark_y + 5), maxi(13, ceili(12.0 / ui_scale)), accent, right, 1)
 	var section_width := (rail.size.x - 12.0) / 3.0
 	for section in 3:
 		var x := rail.position.x + (2 - section if right else section) * (section_width + 6)

@@ -156,5 +156,10 @@ func run() -> void:
 	check(game.super_preview_player == 1, "Shift+F8 did not select P2")
 	game.cancel_super_freeze_preview()
 	check(game.model.config == config, "Presentation changed combat configuration")
+	game.queue_free()
+	await process_frame
+	await process_frame
+	# Headless frames can run faster than the audio mixer retires a decoder.
+	await create_timer(0.1).timeout
 	print("Super freeze presentation: %d failures / %d checks" % [failures, checks])
 	quit(1 if failures else 0)

@@ -44,7 +44,7 @@ static func pack(value: Variant, character := false) -> PackedInt32Array:
 	for name in parameters:
 		if not integer(value.params.get(name)): return PackedInt32Array()
 		result.append(int(value.params[name]))
-	if result[0] != 1: return PackedInt32Array()
+	if result[0] != 1 and not (character and result[0] == 2): return PackedInt32Array()
 	if value.has("art") and not value.art is Dictionary: return PackedInt32Array()
 	if character:
 		if not allowed(value.get("profiles"), layout.profiles): return PackedInt32Array()

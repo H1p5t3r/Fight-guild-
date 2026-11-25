@@ -21,9 +21,9 @@
     "key": "actionType",
     "default": 0,
     "min": 0,
-    "max": 6,
+    "max": 12,
     "label": "Action behavior",
-    "help": "0 strike; 1 held guard; 2 stance exit; 3 stall/dive; 4 grab sequence; 5 hold to charge; 6 air projectile stall/recoil.",
+    "help": "0 strike; 1 held guard; 2 stance exit; 3 stall/dive; 4 grab sequence; 5 hold to charge; 6 air projectile stall/recoil; 7 grappler capture; 8 anti-air super (50% Momentum); 9 armored rush; 10 rush brake; 11 hold-D shield advance (upper armor); 12 multi-hit shield descent.",
     "scale": 1
   },
   {

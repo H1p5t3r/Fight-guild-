@@ -345,7 +345,7 @@ func build_interface() -> void:
 	var advanced_grid := GridContainer.new()
 	advanced_grid.columns = 2
 	advanced.add_child(advanced_grid)
-	for spec in [["artPose","Artwork pose (0–32)",0,32,1],["followFrom","Follow source slot",-1,CombatModel.MOVE_IDS.size()-1,1],["followFrom2","Second source slot",-1,CombatModel.MOVE_IDS.size()-1,1],["travelSpeed","Active travel px/f",-20,20,100],["inertiaPercent","Carry speed %",0,200,1],["pullFrames","Pull duration f",0,60,1],["pullGap","Pull extra gap px",0,100,100],["hitAngle","Hit slope −1/0/+1",-1,1,1],["button","Button (0–4)",0,4,1],["category","Kind (0–4)",0,4,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (0/214/236/623)",0,623,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["simpleDirection","Simple direction",0,9,1],["simpleButton","Simple button",0,4,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
+	for spec in [["artPose","Artwork pose (0–32)",0,32,1],["followFrom","Follow source slot",-1,CombatModel.MOVE_IDS.size()-1,1],["followFrom2","Second source slot",-1,CombatModel.MOVE_IDS.size()-1,1],["travelSpeed","Active travel px/f",-20,20,100],["inertiaPercent","Carry speed %",0,200,1],["pullFrames","Pull duration f",0,60,1],["pullGap","Pull extra gap px",0,100,100],["hitAngle","Hit slope −1/0/+1",-1,1,1],["button","Button (0–4)",0,4,1],["category","Kind (0–4)",0,4,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (46 charge / 214 / 236 / 623 / 63214)",0,63214,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["simpleDirection","Simple direction",0,9,1],["simpleButton","Simple button",0,4,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
 		add_field(advanced_grid, spec)
 	var note := label(advanced, "Kind: 0 normal, 1 command, 2 special, 3 Drive, 4 throw. Button: P=0 K=1 S=2 Hs=3 D=4. Masks: −1 unified; P=1 K=2 S=4 Hs=8 D=16. Follow source −1 disables the route. Signature slots: 15 up slash, 25 spiral, 26 mid, 27 low, 28/29 hooks, 30/31 stabs. Hook slope ±1 travels at 45°; height is its thickness. Art pose 0 uses button art.", 10, MUTED)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -1372,7 +1372,7 @@ func preview_super_freeze(player: int, ticks: int = SuperFreeze.DEFAULT_TICKS) -
 	if connection.active or activity not in ["training", "development"] or screen != "play" or changing_layers() or has_open_dialog() or super_preview_player >= 0: return false
 	if player not in [0, 1]: return false
 	var state := model.state()
-	if int(state.winner) >= 0 or int(state.wallBreakTime) > 0: return false
+	if int(state.winner) >= 0 or int(state.wallBreakTime) > 0 or int(state.superFreezeTime) > 0: return false
 	release_focus_from_ui()
 	held.clear()
 	input_release_required = true
@@ -1511,7 +1511,13 @@ func _process(_delta: float) -> void:
 	arena.presentation_active = screen in ["entry", "results"]
 	arena.diagnostics = activity in ["training", "development"]
 	arena.feedback.reduced_motion = motion.reduced
-	if match_entry.phase != "loading": arena.refresh(model, state, show_boxes, paused)
+	if match_entry.phase != "loading": arena.refresh(model, state, show_boxes, paused or int(state.superFreezeTime) > 0)
+	if super_preview_player < 0:
+		if screen == "play" and int(state.superFreezeTime) > 0:
+			var actor: Dictionary = state.players[int(state.superFreezeActor)]
+			super_freeze.reduced_motion = motion.reduced
+			super_freeze.present(int(actor.character), int(actor.facing), int(state.superFreezeDuration) - int(state.superFreezeTime), int(state.superFreezeDuration))
+		else: super_freeze.clear()
 	if screen in ["play", "pause"] and activity in ["local", "online"] and state.winner >= 0:
 		finish_scrum(state)
 	input_label.text = "INPUT HISTORY   " + ("   ".join(history) if not history.is_empty() else "—")

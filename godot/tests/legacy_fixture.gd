@@ -9,6 +9,7 @@ static func strip_extensions(data: Dictionary) -> void:
 static func reset(model: CombatModel) -> void:
 	model.restore_defaults()
 	var data := model.data()
+	data.characters[0] = JSON.parse_string(FileAccess.get_file_as_string("res://tests/fixtures/anvil-pre-grappler.json"))
 	data.comboRules.comboPhysics = 0 # Historical distance-budget/gatling fixture.
 	var additions: Array = data.characters[5].moves.slice(45)
 	for action in additions:
