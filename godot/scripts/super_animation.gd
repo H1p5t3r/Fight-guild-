@@ -32,6 +32,16 @@ static func selection(model: CombatModel, state: Dictionary, owner: int) -> Dict
 		var move := model.move(int(fighter.character), slot)
 		var age := int(fighter.age)
 		var active := int(move.startup)
+		if str(spec.get("mode",""))=="cast":
+			if age<active:
+				result.tick=age
+				result.pose=exposure(spec.windup,age*100/maxi(1,active))
+			else:
+				result.stage="cast";result.tick=age-active
+				result.pose=int(spec.active_pose)
+				if age>=active+int(move.active):
+					result.pose=exposure(spec.recovery,(age-active-int(move.active))*100/maxi(1,int(move.recovery)))
+			return result
 		if age >= active and age < active + int(move.active):
 			result.stage = "active"; result.pose = 1; result.tick = age-active
 		elif age >= active + int(move.active):
@@ -101,6 +111,19 @@ static func audio_events(core: Object, previous_kind: int, previous_clock: int) 
 		"serial":core.read_value(owner,CombatModel.STATE_FIELDS.find("attackSerial")),
 		"strength":3,"sound":"../supers-v2/sky_foundry_"+sound+".wav"}]
 
+static func cast_audio(core: Object, previous_projectiles: Array) -> Array:
+	var events:=[]
+	for i in 16:
+		var index:=-2-i
+		if core.read_value(index,0)<=0 or int(previous_projectiles[i])>0:continue
+		var owner:int=core.read_value(index,1)
+		var character:int=core.read_value(owner,13)
+		var slot:int=core.read_value(index,8)
+		var spec:=profile(character,slot)
+		if str(spec.get("mode",""))!="cast" or not spec.get("sounds",{}).has("spawn"):continue
+		events.append({"kind":13,"actor":owner,"character":character,"move":slot,"serial":core.read_value(owner,91),"strength":3,"sound":"../supers-v2/"+str(spec.sounds.spawn)+".wav"})
+	return events
+
 static func foreground(state: Dictionary) -> int:
 	var owner := int(state.get("pairOwner", -1))
 	if int(state.get("pairKind",0)) != 7 or owner not in [0,1]: return -1
@@ -151,16 +174,31 @@ static func draw_effect(canvas: CanvasItem, cue: Dictionary, key: int, box: Rect
 	canvas.draw_texture_rect(texture,box,false,Color(1,1,1,opacity))
 	canvas.draw_set_transform(Vector2.ZERO)
 
+static func draw_projectile_contacts(canvas: CanvasItem, cues: Array, project: Callable, scale: float) -> void:
+	for contact in CombatImpacts.visible(cues):
+		if int(contact.kind) not in [1,2,3,4,6] or (int(contact.flags)&1)==0:continue
+		var spec:=profile(int(contact.character),int(contact.move))
+		if not spec.has("projectile_contact"):continue
+		var age:=int(contact.age)
+		if age>=10:continue
+		var track:Dictionary=spec.projectile_contact
+		var key:=int(track.keys[0] if age<3 else track.keys[1])
+		var box:Array=track.box
+		var cue:={"character":contact.character,"facing":contact.facing,"spec":spec}
+		draw_effect(canvas,cue,key,Rect2(box[0],box[1],box[2],box[3]),0.75 if age<3 else 0.6*float(10-age)/7.0,project.call(Vector2(contact.x,contact.y)),scale)
+
 static func draw_behind(canvas: Control, sprites: Array[Sprite2D], _state: Dictionary, scale: float) -> void:
 	for owner in 2:
 		var cue: Dictionary = sprites[owner].get_meta("super_animation",{})
-		if cue.is_empty() or str(cue.stage) != "paired": continue
+		if cue.is_empty():continue
 		var tick := int(cue.tick)
-		var shade := minf(float(tick)/12.0,float(int(cue.spec.pair_ticks)-tick)/12.0)*0.24
-		canvas.draw_rect(Rect2(Vector2.ZERO,canvas.size),Color(0.025,0.029,0.035,clampf(shade,0.0,0.24)))
+		if str(cue.stage)=="paired":
+			var shade := minf(float(tick)/12.0,float(int(cue.spec.pair_ticks)-tick)/12.0)*0.24
+			canvas.draw_rect(Rect2(Vector2.ZERO,canvas.size),Color(0.025,0.029,0.035,clampf(shade,0.0,0.24)))
 		if cue.spec.has("effects"):
 			draw_track(canvas,sprites,cue,_state,scale,true)
 			continue
+		if str(cue.stage)!="paired":continue
 		var point := sprites[owner].position
 		if tick >= 12 and tick < 30:
 			draw_effect(canvas,cue,0,Rect2(-75,-175,160,205),0.75*float(30-tick)/18.0,point,scale)

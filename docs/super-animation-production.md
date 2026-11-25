@@ -160,12 +160,60 @@ every drawing, weapon/body scale, pause, snapshots and replay, authored sound
 counts, edited capture durations and separate block/whiff behavior. The final
 receiver hold is also checked against the saved hitstop state.
 
+## 04 — Hammer / Grand Design
+
+[Watch the native 60 FPS review with sound](../exports/FightGuild-Grand-Design-2026-11-25.mp4).
+Eight original body keys cover the short cast: low guard, rear coil, overhead load,
+ground plant, compression, guiding hand and return to guard. Six separate ground
+accents and a six-key stone-wave loop accompany a dedicated face cut-in. The
+last-startup to first-active hammer movement measures 257.09 world units, larger
+than every other adjacent body-key change. All keys share the same anatomical
+scale and original generated PNG bytes.
+
+The wave follows its own saved age, independently of Hammer's cast. Its tall,
+narrow drawing fills the existing projectile rectangle, with a stable silhouette
+while internal fractures and chips cycle. Real projectile contacts scatter stone
+fragments while preserving distinct block feedback. Mirroring now occurs around the
+projectile collision center, correcting an inherited one-hitbox-width art shift
+for left-facing projectiles. Original plant and stone
+sounds follow the actual first-active and projectile-spawn events, including
+edited timings. Utility projectile contact audio remains audible after the caster
+returns to neutral; it does not use the captured-super sound suppression.
+
+The review includes hit, mirrored hit, crouch block, miss and a real-input run
+behind the wave into a Slash follow-up. Crouch blocking is deliberate: holding
+standing back walks the dummy out of this slow projectile's range. No positions
+are corrected during playback. The cast never captures the opponent or locks
+Hammer to the projectile. The 16/1/10 timing, frame-22 spawn, 120 damage, 12 chip,
+launch, meter cost and projectile behavior are unchanged.
+
+Sources: [exposure plan](../art/characters/supers-v2/grand-design/exposure-plan.json),
+[prompts and hashes](../art/characters/supers-v2/grand-design/sources.json),
+[layout](../art/characters/supers-v2/grand-design/layout.json).
+
+```bash
+python scripts/register-super-presentation.py grand-design
+python scripts/generate-grand-design-audio.py
+bash scripts/godot.sh --headless --editor --import
+bash scripts/godot.sh --headless --script res://tests/super_cast_test.gd -- --test
+python scripts/capture-grand-design.py --stills
+python scripts/capture-grand-design.py
+```
+
+The cast suite checks both owners/facings, all body/projectile keys, scale, pause,
+actual hit/block damage, wave independence, one-time cast/spawn audio, contact
+sound preservation, snapshot replay and edited startup/spawn/recovery timing.
+The full native super roster also passes. The baseline remains in
+`build/grand-design-before/`. The final mirrored case was re-recorded after the
+projectile-center correction (`capture-super-animation.py grand-design --case
+mirrored`) and replaces that case in the exported reel at the same 60 FPS.
+
 ## Production order
 
 1. Sky Foundry — full pass and native review.
 2. Iron Dominion — full pass and native review.
 3. Freemason — full pass and native review.
-4. Grand Design.
+4. Grand Design — full pass and native review.
 5. Flashpoint.
 6. The Air Is Mine.
 7. Last Orders.

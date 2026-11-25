@@ -19531,43 +19531,59 @@
       },
       "projectile_variants": {
         "31": {
-          "file": "supers-v1/utility.png",
+          "frame_ticks": 5,
+          "loop_all": true,
+          "file": "supers-v2/grand-design/wave.png",
           "frames": [
             {
               "region": [
-                8,
-                639,
-                583,
-                202
+                15,
+                13,
+                473,
+                475
               ]
             },
             {
               "region": [
-                591,
-                468,
-                576,
-                374
+                527,
+                13,
+                473,
+                475
               ]
             },
             {
               "region": [
-                1197,
-                607,
-                564,
-                235
+                1040,
+                13,
+                476,
+                475
               ]
             },
             {
               "region": [
-                1197,
-                607,
-                564,
-                235
+                16,
+                525,
+                478,
+                475
+              ]
+            },
+            {
+              "region": [
+                528,
+                525,
+                473,
+                475
+              ]
+            },
+            {
+              "region": [
+                1040,
+                525,
+                473,
+                475
               ]
             }
-          ],
-          "frame_ticks": 12,
-          "source": "/workspace/generated_images/exec-7d063287-ecd4-4cd9-a2ea-41d1af9587ed.png"
+          ]
         }
       },
       "attack_connected": {
@@ -19586,7 +19602,8 @@
       },
       "anatomical_scales": {
         "supers-v1": 425,
-        "freemason-v2": 425
+        "freemason-v2": 425,
+        "grand-design-v2": 425
       },
       "super_freemason": {
         "file": "supers-v2/freemason/entry.png",
@@ -20421,7 +20438,525 @@
               15
             ]
           ]
+        },
+        "31": {
+          "mode": "cast",
+          "windup": [
+            [
+              0,
+              0
+            ],
+            [
+              25,
+              1
+            ],
+            [
+              50,
+              2
+            ],
+            [
+              87,
+              3
+            ]
+          ],
+          "active_pose": 4,
+          "recovery": [
+            [
+              0,
+              4
+            ],
+            [
+              30,
+              5
+            ],
+            [
+              50,
+              6
+            ],
+            [
+              80,
+              7
+            ]
+          ],
+          "sounds": {
+            "cast": "grand_design_plant",
+            "spawn": "grand_design_wave"
+          },
+          "effects": [
+            {
+              "stage": "cast",
+              "start": 0,
+              "end": 3,
+              "key": 0,
+              "box": [
+                20,
+                -180,
+                145,
+                180
+              ],
+              "fade": true
+            },
+            {
+              "stage": "cast",
+              "start": 0,
+              "end": 3,
+              "key": 1,
+              "box": [
+                100,
+                -55,
+                90,
+                60
+              ]
+            },
+            {
+              "stage": "cast",
+              "start": 3,
+              "end": 8,
+              "key": 2,
+              "box": [
+                80,
+                -22,
+                140,
+                30
+              ],
+              "fade": true
+            },
+            {
+              "stage": "cast",
+              "start": 3,
+              "end": 8,
+              "key": 3,
+              "box": [
+                80,
+                -25,
+                135,
+                30
+              ],
+              "behind": true
+            },
+            {
+              "stage": "cast",
+              "start": 6,
+              "end": 9,
+              "key": 4,
+              "box": [
+                90,
+                -70,
+                130,
+                76
+              ],
+              "fade": true
+            },
+            {
+              "stage": "cast",
+              "start": 9,
+              "end": 12,
+              "key": 5,
+              "box": [
+                95,
+                -80,
+                130,
+                85
+              ],
+              "fade": true
+            }
+          ],
+          "projectile_contact": {
+            "keys": [
+              4,
+              5
+            ],
+            "box": [
+              -50,
+              -70,
+              100,
+              140
+            ]
+          },
+          "phase": "super_grand_design",
+          "fx_phase": "super_grand_design_fx",
+          "pair_ticks": 0,
+          "release_freeze": 0,
+          "owner_recovery": 0
         }
+      },
+      "super_grand_design": {
+        "file": "supers-v2/grand-design/load.png",
+        "body_height": 425,
+        "frames": [
+          {
+            "file": "supers-v2/grand-design/load.png",
+            "sha256": "908508f8bff631dc74aec5171c6ee3c9b081ffb49f439e4760550b1893a1cddc",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              508
+            ],
+            "bounds": [
+              128,
+              54,
+              555,
+              459
+            ],
+            "pivot": [
+              365,
+              457
+            ],
+            "body_height": 425,
+            "source_pose": 0,
+            "scale_group": "grand-design-v2",
+            "render_only": true,
+            "tip": [
+              130,
+              290
+            ]
+          },
+          {
+            "file": "supers-v2/grand-design/load.png",
+            "sha256": "908508f8bff631dc74aec5171c6ee3c9b081ffb49f439e4760550b1893a1cddc",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              507
+            ],
+            "bounds": [
+              82,
+              15,
+              586,
+              459
+            ],
+            "pivot": [
+              342,
+              458
+            ],
+            "body_height": 425,
+            "source_pose": 1,
+            "scale_group": "grand-design-v2",
+            "render_only": true,
+            "tip": [
+              137,
+              80
+            ]
+          },
+          {
+            "file": "supers-v2/grand-design/load.png",
+            "sha256": "908508f8bff631dc74aec5171c6ee3c9b081ffb49f439e4760550b1893a1cddc",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              508,
+              768,
+              516
+            ],
+            "bounds": [
+              126,
+              1,
+              592,
+              482
+            ],
+            "pivot": [
+              365,
+              481
+            ],
+            "body_height": 425,
+            "source_pose": 2,
+            "scale_group": "grand-design-v2",
+            "render_only": true,
+            "tip": [
+              208,
+              44
+            ]
+          },
+          {
+            "file": "supers-v2/grand-design/load.png",
+            "sha256": "908508f8bff631dc74aec5171c6ee3c9b081ffb49f439e4760550b1893a1cddc",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              507,
+              768,
+              517
+            ],
+            "bounds": [
+              105,
+              1,
+              550,
+              483
+            ],
+            "pivot": [
+              342,
+              481
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "scale_group": "grand-design-v2",
+            "render_only": true,
+            "tip": [
+              157,
+              47
+            ]
+          },
+          {
+            "file": "supers-v2/grand-design/release.png",
+            "sha256": "10ed73936451089ee8803b187e3f713bc9524cad3ad6c1ddba62b3579a490e2f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              27,
+              51,
+              766,
+              471
+            ],
+            "pivot": [
+              300,
+              468
+            ],
+            "body_height": 425,
+            "source_pose": 0,
+            "scale_group": "grand-design-v2",
+            "render_only": true,
+            "tip": [
+              700,
+              468
+            ]
+          },
+          {
+            "file": "supers-v2/grand-design/release.png",
+            "sha256": "10ed73936451089ee8803b187e3f713bc9524cad3ad6c1ddba62b3579a490e2f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              66,
+              103,
+              704,
+              471
+            ],
+            "pivot": [
+              337,
+              468
+            ],
+            "body_height": 425,
+            "source_pose": 1,
+            "scale_group": "grand-design-v2",
+            "render_only": true,
+            "tip": [
+              638,
+              468
+            ]
+          },
+          {
+            "file": "supers-v2/grand-design/release.png",
+            "sha256": "10ed73936451089ee8803b187e3f713bc9524cad3ad6c1ddba62b3579a490e2f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              67,
+              47,
+              706,
+              470
+            ],
+            "pivot": [
+              320,
+              468
+            ],
+            "body_height": 425,
+            "source_pose": 2,
+            "scale_group": "grand-design-v2",
+            "render_only": true,
+            "tip": [
+              640,
+              466
+            ]
+          },
+          {
+            "file": "supers-v2/grand-design/release.png",
+            "sha256": "10ed73936451089ee8803b187e3f713bc9524cad3ad6c1ddba62b3579a490e2f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              94,
+              55,
+              568,
+              464
+            ],
+            "pivot": [
+              337,
+              468
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "scale_group": "grand-design-v2",
+            "render_only": true,
+            "tip": [
+              96,
+              276
+            ]
+          }
+        ],
+        "render_only": true
+      },
+      "super_grand_design_fx": {
+        "file": "supers-v2/grand-design/effects.png",
+        "body_height": 512,
+        "frames": [
+          {
+            "region": [
+              39,
+              33,
+              452,
+              460
+            ],
+            "pivot": [
+              226.0,
+              460
+            ],
+            "bounds": [
+              0,
+              0,
+              452,
+              460
+            ]
+          },
+          {
+            "region": [
+              545,
+              169,
+              479,
+              306
+            ],
+            "pivot": [
+              239.5,
+              306
+            ],
+            "bounds": [
+              0,
+              0,
+              479,
+              306
+            ]
+          },
+          {
+            "region": [
+              1024,
+              320,
+              496,
+              168
+            ],
+            "pivot": [
+              248.0,
+              168
+            ],
+            "bounds": [
+              0,
+              0,
+              496,
+              168
+            ]
+          },
+          {
+            "region": [
+              18,
+              812,
+              464,
+              170
+            ],
+            "pivot": [
+              232.0,
+              170
+            ],
+            "bounds": [
+              0,
+              0,
+              464,
+              170
+            ]
+          },
+          {
+            "region": [
+              536,
+              602,
+              439,
+              367
+            ],
+            "pivot": [
+              219.5,
+              367
+            ],
+            "bounds": [
+              0,
+              0,
+              439,
+              367
+            ]
+          },
+          {
+            "region": [
+              1142,
+              584,
+              254,
+              381
+            ],
+            "pivot": [
+              127.0,
+              381
+            ],
+            "bounds": [
+              0,
+              0,
+              254,
+              381
+            ]
+          }
+        ],
+        "render_only": true
       }
     },
     {

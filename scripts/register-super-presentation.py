@@ -49,6 +49,17 @@ def main():
         l,t,r,b=int(xx.min()),int(yy.min()),int(xx.max()+1),int(yy.max()+1)
         effects.append(dict(region=[x+l,y+t,r-l,b-t],pivot=[(r-l)/2,b-t],bounds=[0,0,r-l,b-t]))
     fighter[phase+'_fx']=dict(file=str(path.relative_to(ART)),body_height=512,frames=effects,render_only=True)
+    if 'projectile' in layout:
+        config=dict(layout['projectile']);source=sources[config.pop('source')];path=ROOT/source['file']
+        assert hashlib.sha256(path.read_bytes()).hexdigest()==source['sha256']
+        im=Image.open(path);assert im.mode=='RGBA' and im.size==(1536,1024)
+        alpha=np.asarray(im.getchannel('A'));assert alpha.min()==0
+        regions=[]
+        for i in range(6):
+            row,col=divmod(i,3);x,y=col*512,row*512
+            yy,xx=np.where(alpha[y:y+512,x:x+512]>64)
+            regions.append(dict(region=[x+int(xx.min()),y+int(yy.min()),int(xx.max()-xx.min()+1),int(yy.max()-yy.min()+1)]))
+        fighter.setdefault('projectile_variants',{})[str(plan['slot'])]=dict(config,file=str(path.relative_to(ART)),frames=regions)
     profile=dict(layout['presentation'],phase=phase,fx_phase=phase+'_fx',pair_ticks=plan['pairTicks'],release_freeze=plan['releaseFreeze'],owner_recovery=plan['ownerRecovery'])
     for key in ['paired','connected']:
         if key in plan:profile[key]=plan[key]

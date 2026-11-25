@@ -9,7 +9,8 @@ Watch the [native super showcase](../exports/FightGuild-Supers-2026-11-25.mp4).
 The [full animation production pass](super-animation-production.md) begins with
 [Sky Foundry](../exports/FightGuild-Sky-Foundry-2026-11-25.mp4) and
 [Iron Dominion](../exports/FightGuild-Iron-Dominion-2026-11-25.mp4), followed by
-[Freemason](../exports/FightGuild-Freemason-2026-11-25.mp4).
+[Freemason](../exports/FightGuild-Freemason-2026-11-25.mp4) and
+[Grand Design](../exports/FightGuild-Grand-Design-2026-11-25.mp4).
 These are provisional balance values, captured from the current native build.
 Normal combo proration still applies; the video starts each demonstration fresh.
 Exsanguinate's demonstration begins with 150 stored grey life.
@@ -64,9 +65,10 @@ Old binary snapshots are incompatible with the added cinematic state.
 
 ## Art and reproduction
 
-All twelve supers use original generated art. Sky Foundry, Iron Dominion and Freemason now
-each have 16-key replacements, dedicated faces, separate effects and original
-sound passes. Fixed source scale, held anticipation and a first-active snap
+All twelve supers use original generated art. Sky Foundry, Iron Dominion and Freemason
+now each have 16-key replacements. Grand Design has eight caster keys and an
+independent six-key stone wave. All four have dedicated faces, separate effects
+and original sound passes. Fixed source scale, held anticipation and a first-active snap
 follow the established animation process. The largest authored pose change is
 at the final-startup/first-active boundary. Saved capture clocks drive impact
 holds and recovery; no procedural smear or warped inbetweens are added.

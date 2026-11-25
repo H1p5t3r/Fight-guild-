@@ -143,6 +143,7 @@ func draw_impacts() -> void:
 		return screen_point(Vector2(point.x / 100.0 * sx, ArenaStage.floor_line(size) - point.y / 100.0 * sx))
 	var ordinary := impact_cues.filter(func(cue: Dictionary) -> bool: return not SuperAnimation.replaces_impact(cue,sprites))
 	CombatImpacts.draw(impact_layer, ordinary, project, sx * camera_zoom)
+	SuperAnimation.draw_projectile_contacts(impact_layer,impact_cues,project,sx*camera_zoom)
 	SuperAnimation.draw_front(impact_layer, sprites, view, sx * camera_zoom)
 
 func draw_projectiles() -> void:
@@ -152,8 +153,10 @@ func draw_projectiles() -> void:
 	for q in view.get("projectiles", []):
 		var from := screen_point(Vector2((q.x - q.width * 0.5) / 100.0 * sx, floor_y - (q.y + q.height * 0.5) / 100.0 * sx))
 		var extent := Vector2(q.width, q.height) / 100.0 * sx * camera_zoom
-		var target := Rect2(from, extent)
-		if int(q.facing) < 0: target.position.x += extent.x; target.size.x = -extent.x
+		# Flip around the collision rectangle's center. A negative draw-rect width
+		# flips the raster without moving its origin; adding its width displaced
+		# every left-facing projectile by an entire hitbox.
+		var target := Rect2(-extent*0.5,extent)
 		var source := Rect2(797, 350, 708, 390) if int(q.kind) == 2 else Rect2(28, 326, 695, 432)
 		var art: Texture2D = PROJECTILE_ART
 		var custom: Dictionary = FighterArt.projectile_art(int(view.players[int(q.owner)].character), int(q.move), int(q.life), int(q.age))
@@ -163,7 +166,9 @@ func draw_projectiles() -> void:
 			art = FighterArt.textures[custom.file]
 			var r: Array = custom.region
 			source = Rect2(r[0], r[1], r[2], r[3])
+		draw_set_transform(from+extent*0.5,0.0,Vector2(float(q.facing),1.0))
 		draw_texture_rect_region(art, target, source)
+		draw_set_transform(Vector2.ZERO)
 
 func screen_point(point: Vector2) -> Vector2:
 	return camera_offset + point * camera_zoom

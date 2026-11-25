@@ -1,0 +1,95 @@
+{
+  "name": "Grand Design",
+  "character": 1,
+  "slot": 31,
+  "input": "214214Hs",
+  "status": "completed-native-review",
+  "startup": 16,
+  "active": 1,
+  "recovery": 10,
+  "freeze": 54,
+  "pairTicks": 0,
+  "releaseFreeze": 0,
+  "ownerRecovery": 0,
+  "damage": 120,
+  "bodyKeys": 8,
+  "choreography": "Coil the hammer above the rear shoulder; first active drives its head into the ground. The knees and hips absorb impact, one hand guides the delayed stone wave, then Hammer lifts the weapon into guard. The wave has an independent saved-lifetime animation while its caster is free to act.",
+  "startupKeys": [
+    [
+      0,
+      0
+    ],
+    [
+      25,
+      1
+    ],
+    [
+      50,
+      2
+    ],
+    [
+      87,
+      3
+    ]
+  ],
+  "activeKeys": [
+    [
+      0,
+      4
+    ]
+  ],
+  "recoveryKeys": [
+    [
+      0,
+      4
+    ],
+    [
+      30,
+      5
+    ],
+    [
+      50,
+      6
+    ],
+    [
+      80,
+      7
+    ]
+  ],
+  "projectile": {
+    "spawnFrame": 22,
+    "speedX": 250,
+    "life": 100,
+    "width": 9000,
+    "height": 16000,
+    "keys": 6
+  },
+  "requirements": [
+    "Largest weapon travel from last startup to first active",
+    "Fixed anatomical scale, no decorative movement of gameplay root",
+    "Caster and projectile clocks independent",
+    "No pair capture on hit",
+    "Readable full-sized wave during all collision frames",
+    "Native hit, block, whiff, mirrored and caster-follow-up review"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveHammerTravelWorldUnits": 257.09,
+  "largestBodyKeyTravelAtFirstActive": true,
+  "verification": {
+    "castChecks": 5501,
+    "castFailures": 0,
+    "rosterChecks": 8302,
+    "rosterFailures": 0,
+    "freemasonRegressionChecks": 17249,
+    "feedback": "pass",
+    "reviewDamage": {
+      "hit": 120,
+      "mirrored": 120,
+      "block": 12,
+      "whiff": 0,
+      "followup": 161
+    }
+  },
+  "reviewCorrection": "Final video replaces its second case with the separately recorded corrected mirrored case; all gameplay and clocks identical."
+}

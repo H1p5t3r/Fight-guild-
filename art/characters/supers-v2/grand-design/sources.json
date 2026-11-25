@@ -1,0 +1,50 @@
+[
+  {
+    "id": "load",
+    "file": "godot/assets/fighters/supers-v2/grand-design/load.png",
+    "original": "/workspace/generated_images/exec-f74aae42-0c74-4a44-8552-d730e39d609c.png",
+    "sha256": "908508f8bff631dc74aec5171c6ee3c9b081ffb49f439e4760550b1893a1cddc",
+    "prompt": "art/characters/supers-v2/grand-design/load-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/freemason/entry.png"
+    ]
+  },
+  {
+    "id": "release",
+    "file": "godot/assets/fighters/supers-v2/grand-design/release.png",
+    "original": "/workspace/generated_images/exec-64ffcc91-c6e7-480c-a8a7-51deba15c048.png",
+    "sha256": "10ed73936451089ee8803b187e3f713bc9524cad3ad6c1ddba62b3579a490e2f",
+    "prompt": "art/characters/supers-v2/grand-design/release-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/grand-design/load.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v2/grand-design/effects.png",
+    "original": "/workspace/generated_images/exec-26de115a-e45a-4f9b-8a32-ea8926380621.png",
+    "sha256": "7ce149a18b3bc949692eb901c555a6fdedfeafd25f9ff11dd81226feb134c94c",
+    "prompt": "art/characters/supers-v2/grand-design/effects-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/freemason/entry.png"
+    ]
+  },
+  {
+    "id": "wave",
+    "file": "godot/assets/fighters/supers-v2/grand-design/wave.png",
+    "original": "/workspace/generated_images/exec-02e1a7a4-a4c2-4f9a-b470-fb761e3dd119.png",
+    "sha256": "cc62fc3cf1f6deaf780eb7ba4f1fb570577e9693c9ebd37c6d0d009224a1cd81",
+    "prompt": "art/characters/supers-v2/grand-design/wave-prompt.txt",
+    "references": []
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/grand-design/portrait.png",
+    "original": "/workspace/generated_images/exec-d32dd5fa-5c62-4833-a00c-a677888723c9.png",
+    "sha256": "597878947a8b65cf59567e525c4b5f5046888d5026eb0b0dbbe991f1389c0a8e",
+    "prompt": "art/characters/supers-v2/grand-design/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/grand-design/load.png"
+    ]
+  }
+]

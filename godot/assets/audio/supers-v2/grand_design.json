@@ -1,0 +1,16 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-grand-design-audio.py",
+  "sounds": [
+    {
+      "file": "grand_design_plant.wav",
+      "seconds": 0.42,
+      "sha256": "d147b570f25ccaa54ccbd8399a039137d3583a84f4a0bfeebfd2045c2cfb55b3"
+    },
+    {
+      "file": "grand_design_wave.wav",
+      "seconds": 0.9,
+      "sha256": "086159ae4a61ad563ad5f369b7ddfe13a4d46aa349305ac3524fa2f8782bb01c"
+    }
+  ]
+}

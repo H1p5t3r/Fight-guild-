@@ -44,6 +44,20 @@
       "width": 0.55,
       "center_y": 0.53,
       "source": "art/characters/supers-v2/freemason/portrait-prompt.txt"
+    },
+    "Grand Design": {
+      "character": 1,
+      "enabled": true,
+      "file": "../../fighters/supers-v2/grand-design/portrait.png",
+      "region": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "width": 0.68,
+      "center_y": 0.62,
+      "source": "art/characters/supers-v2/grand-design/portrait-prompt.txt"
     }
   }
 }

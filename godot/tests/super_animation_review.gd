@@ -51,7 +51,14 @@ func run() -> void:
 	await process_frame
 	var examples: Array=[[0,4,1,"hit"],[1,5,-1,"mirrored"],[0,4,1,"block"],[0,4,1,"whiff"]]
 	if args.has("--baseline"):examples=[examples[0]]
+	if args.has("--case"):
+		var chosen:=str(args[args.find("--case")+1])
+		examples=examples.filter(func(e:Array)->bool:return str(e[3])==chosen)
+		if examples.is_empty():printerr("Unknown review case: "+chosen);quit(1);return
 	var move:=model.move(character,slot)
+	var profile:=SuperAnimation.profile(character,slot)
+	var paired_marks:=[]
+	for key in profile.get("paired",[]):paired_marks.append(int(key[0]))
 	for example in examples:
 		var owner:=int(example[0]);var facing:=int(example[2]);var id:=str(example[3])
 		model.reset([character,int(example[1])] if owner==0 else [int(example[1]),character])
@@ -69,7 +76,7 @@ func run() -> void:
 			var mark:=""
 			if tick==20:mark="cutin"
 			elif int(actor.age)==int(move.startup)-1 and int(actor.move)==slot:mark="last-load"
-			elif int(state.pairKind)>0 and int(state.pairClock) in [0,16,27,40,58,70,84]:mark="pair-%03d"%int(state.pairClock)
+			elif int(state.pairKind)>0 and int(state.pairClock) in paired_marks:mark="pair-%03d"%int(state.pairClock)
 			elif int(actor.pairRecovery)>0 and int(actor.pairRecovery) in [24,17,7]:mark="recovery-%02d"%int(actor.pairRecovery)
 			elif int(actor.age)==int(move.startup) and int(actor.move)==slot:mark="active"
 			elif tick==260:mark="settled"
