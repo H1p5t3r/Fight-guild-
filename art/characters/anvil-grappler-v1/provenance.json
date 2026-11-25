@@ -47,7 +47,17 @@
         "idle-reaching-options.png / D, bottom-left"
       ],
       "sha256": "7fb397af97b5ae6a7bc7285f87f39993595727d75fa93b5c5478b9a23d355e85",
-      "status": "Selected D direction with user-requested narrower stance and closed-jaw toothy grin; generated reference for future sprite production."
+      "status": "Design approved, but the user identified a missing finger on the free right hand. Superseded for production by high-clamp-hand-corrected.png; preserved as the unedited source."
+    },
+    {
+      "image": "high-clamp-hand-corrected.png",
+      "prompt": "high-clamp-hand-corrected-prompt.txt",
+      "source": "/workspace/generated_images/exec-301612ac-e69f-423f-aaf8-a63826e67b29.png",
+      "references": [
+        "high-clamp-refined.png"
+      ],
+      "sha256": "8d78d7a76fff0afd5711175489cb7dd22d8876d7ba8c4e89789b5e050c6cd589",
+      "status": "Approved High Clamp design with the requested right-hand anatomy correction: four distinct curled fingers and one opposing thumb. Current production reference; no runtime import in this correction."
     }
   ]
 }
