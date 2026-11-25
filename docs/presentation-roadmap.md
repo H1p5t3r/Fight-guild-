@@ -9,6 +9,12 @@ until the user explicitly asks to resume. Continue improvements in the native
 Godot game. Both jobs in `workshop-pages.yml` are paused; preserve these guards.
 Do not treat permission for game/art changes as permission to resume the website.
 
+**Super-freeze presentation (2026-11-25):** A native cut-in renderer and local
+training/development preview are ready, with no super attacks or new meter spend.
+The new face-art direction is awaiting A / Coiled or B / Breakthrough selection;
+existing approved portraits remain the runtime fallback. See
+[integration and review](super-freeze-presentation.md).
+
 1. **Combat impact feedback — complete (2026-11-23).** Resolved contact events and original
    sound effects now cover weapons, defense, counters, landing and walls in Godot
    and the Workshop preview source. The user delegated the impact choice; use

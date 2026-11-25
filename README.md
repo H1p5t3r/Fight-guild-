@@ -33,6 +33,7 @@ Download the Windows/Linux ZIP from this branch's successful GitHub Actions arti
 - **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = run/dash; numpad + = modifier; back + numpad Enter = Faultless Defense.
 - Choose simplified inputs independently at fighter select. Traditional motions stay available.
 - In **Training**, use **Record**, **Replay** and **Frame lab** to inspect both fighters, cancel windows, input age, spacing and damage scaling. P2-only replay lets you practice against a recorded exchange; [training lab](docs/training-lab.md) explains the controls.
+- **Super cut-in** in Training/Development previews a frozen-match face banner; **F8 / Shift+F8** select P1/P2. This adds presentation only, with no super attacks or Momentum cost. [Preview and face-art selection](docs/super-freeze-presentation.md).
 - In **Development**, edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1–17 saves preserve edits during migration; Restore default move set loads the new starter tuning.
 - Online: direct ENet/UDP host and join, default port 7000. Both players use Player 1 controls locally. Matching move data is required.
 

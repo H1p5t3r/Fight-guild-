@@ -80,6 +80,11 @@ var lab_window: Window
 var timeline: FrameTimeline
 var lab_status: Label
 var combat_audio := CombatAudio.new()
+var super_freeze: SuperFreeze
+var super_preview_player := -1
+var super_preview_tick := 0
+var super_preview_duration := SuperFreeze.DEFAULT_TICKS
+var super_preview_background: Texture2D
 
 func _ready() -> void:
 	name = "FightGuild"
@@ -216,8 +221,19 @@ func build_interface() -> void:
 	button(practice, "Stop", func(): lab.stop(), true)
 	button(practice, "Replay", func(): replay_exchange(false), true)
 	button(practice, "Frame lab", open_frame_lab, true)
+	var super_menu := MenuButton.new()
+	super_menu.text = "Super cut-in"
+	super_menu.tooltip_text = "Preview the freeze presentation only. F8: P1 · Shift+F8: P2. No attack or Momentum cost."
+	GuildTheme.apply(super_menu, "secondary")
+	super_menu.get_popup().add_item("Preview Player 1 · F8", 0)
+	super_menu.get_popup().add_item("Preview Player 2 · Shift+F8", 1)
+	super_menu.get_popup().id_pressed.connect(preview_super_freeze)
+	practice.add_child(super_menu)
+	locked_buttons.append(super_menu)
 	arena = Arena.new()
 	left.add_child(arena)
+	super_freeze = SuperFreeze.new()
+	arena.add_child(super_freeze)
 	arena.gui_input.connect(func(event: InputEvent):
 		if event is InputEventMouseButton and event.pressed: release_focus_from_ui())
 	inputs = row(left)
@@ -547,6 +563,7 @@ func build_frame_lab() -> void:
 
 func open_frame_lab() -> void:
 	if connection.active or activity not in ["training", "development"]: return
+	cancel_super_freeze_preview()
 	paused = true
 	pause_button.text = "Resume"
 	lab_window.popup_centered()
@@ -554,6 +571,7 @@ func open_frame_lab() -> void:
 
 func record_exchange() -> void:
 	if connection.active or screen != "play" or activity not in ["training", "development"]: return
+	cancel_super_freeze_preview()
 	lab_window.hide()
 	lab.start_recording(model)
 	paused = false
@@ -561,6 +579,7 @@ func record_exchange() -> void:
 
 func replay_exchange(dummy_only: bool) -> void:
 	if connection.active or screen != "play" or activity not in ["training", "development"]: return
+	cancel_super_freeze_preview()
 	if not lab.start_replay(model, dummy_only): return
 	lab_window.hide()
 	var state := model.state()
@@ -615,6 +634,7 @@ func menu_action(action: String) -> void:
 			show_screen("online")
 
 func show_screen(next: String) -> void:
+	if next != "play": cancel_super_freeze_preview()
 	var previous := screen
 	screen = next
 	held.clear()
@@ -788,7 +808,12 @@ func configure_activity() -> void:
 
 func open_pause() -> void:
 	if screen != "play" or has_open_dialog(): return
+	# The viewport still contains the last drawn cut-in until the next render.
+	# Use the pre-freeze image when canceling into the pause tableau.
+	var frozen_background := super_preview_background if super_preview_player >= 0 else null
+	cancel_super_freeze_preview()
 	pause_tableau.capture(arena, model.state(), model.frame())
+	if frozen_background != null: pause_tableau.background.texture = frozen_background
 	menus.configure_pause(connection.active, model.state())
 	show_screen("pause")
 	menus.pause_commands.focal_point = pause_tableau.focal_point
@@ -1242,6 +1267,10 @@ func has_open_dialog() -> bool:
 	return false
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and (event.keycode == KEY_F8 or event.physical_keycode == KEY_F8):
+		if preview_super_freeze(1 if event.shift_pressed else 0):
+			get_viewport().set_input_as_handled()
+			return
 	if screen == "sides" and not has_open_dialog() and menus.sides.handle_input(event):
 		get_viewport().set_input_as_handled()
 		return
@@ -1267,7 +1296,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		var code: int = event.physical_keycode if event.physical_keycode else event.keycode
 		if not event.pressed: held.erase(code)
-		elif application_focused and screen == "play" and not changing_layers() and not input_release_required and not is_editing() and not event.echo: held[code] = true
+		elif application_focused and screen == "play" and super_preview_player < 0 and not changing_layers() and not input_release_required and not is_editing() and not event.echo: held[code] = true
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
@@ -1280,10 +1309,49 @@ func _notification(what: int) -> void:
 		input_release_required = true
 
 func read_input(player: int) -> int:
-	if not application_focused or screen != "play" or changing_layers() or input_release_required or is_editing(): return 0
+	if not application_focused or screen != "play" or super_preview_player >= 0 or changing_layers() or input_release_required or is_editing(): return 0
 	return fighter_inputs.sample(player, held)
 
+func preview_super_freeze(player: int, ticks: int = SuperFreeze.DEFAULT_TICKS) -> bool:
+	if connection.active or activity not in ["training", "development"] or screen != "play" or changing_layers() or has_open_dialog() or super_preview_player >= 0: return false
+	if player not in [0, 1]: return false
+	var state := model.state()
+	if int(state.winner) >= 0 or int(state.wallBreakTime) > 0: return false
+	release_focus_from_ui()
+	held.clear()
+	input_release_required = true
+	super_preview_player = player
+	super_preview_tick = 0
+	super_preview_duration = clampi(ticks, 24, 180)
+	if DisplayServer.get_name() != "headless":
+		var image := get_viewport().get_texture().get_image()
+		if image != null and not image.is_empty(): super_preview_background = ImageTexture.create_from_image(image)
+	super_freeze.reduced_motion = motion.reduced
+	var fighter: Dictionary = state.players[player]
+	super_freeze.present(int(fighter.character), int(fighter.facing), 0, super_preview_duration)
+	return true
+
+func cancel_super_freeze_preview() -> void:
+	if super_preview_player >= 0:
+		held.clear()
+		input_release_required = true
+	super_preview_player = -1
+	super_preview_tick = 0
+	super_preview_background = null
+	if is_instance_valid(super_freeze): super_freeze.clear()
+
+func tick_super_freeze_preview() -> void:
+	# Preview owns only a presentation clock. No core tick means health, motion,
+	# buffers, projectiles, hitstop and status durations all remain unchanged.
+	super_preview_tick += 1
+	if super_preview_tick >= super_preview_duration:
+		cancel_super_freeze_preview()
+		return
+	var fighter: Dictionary = model.state().players[super_preview_player]
+	super_freeze.present(int(fighter.character), int(fighter.facing), super_preview_tick, super_preview_duration)
+
 func reset_round() -> void:
+	cancel_super_freeze_preview()
 	lab.stop()
 	lab.clear_trace()
 	if connection.active: return
@@ -1299,7 +1367,7 @@ func reset_round() -> void:
 	release_focus_from_ui()
 
 func advance_one() -> void:
-	if connection.active or screen != "play" or changing_layers() or activity not in ["training", "development"]: return
+	if connection.active or screen != "play" or super_preview_player >= 0 or changing_layers() or activity not in ["training", "development"]: return
 	release_focus_from_ui()
 	paused = true
 	pause_button.text = "Resume"
@@ -1364,6 +1432,8 @@ func _physics_process(_delta: float) -> void:
 		var raw := read_input(0)
 		connection.tick(raw)
 		record_input(raw)
+	elif super_preview_player >= 0:
+		if screen == "play" and not has_open_dialog(): tick_super_freeze_preview()
 	elif screen == "play" and not changing_layers() and not paused and not has_open_dialog():
 		simulate_local()
 

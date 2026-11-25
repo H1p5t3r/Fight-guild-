@@ -14,6 +14,7 @@ cases = [
     (["--headless", "--script", "tests/input_menu_test.gd", "--", "--test"], "Native controls and side-select menus: 0 failures"),
     (["--headless", "--script", "tests/ink_menu_review.gd", "--", "--test"], "Native ink menus: 0 failures"),
     (["--headless", "--script", "tests/pause_tableau_test.gd", "--", "--test"], "Frozen pause presentation: 0 failures"),
+    (["--headless", "--script", "tests/super_freeze_test.gd", "--", "--test"], "Super freeze presentation: 0 failures"),
     (["--headless", "--script", "tests/hammer_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/hammer_mobility_test.gd", "--", "--test"], "Hammer mobility: 0 failures"),
     (["--headless", "--script", "tests/fillet_v1_test.gd"], "0 failures"),

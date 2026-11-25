@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-25",
+  "status": "review-options-awaiting-user-selection",
+  "prompt": "Create a polished four-panel concept review sheet for Fight Guild super-freeze FACE CUT-INS. This is NEW artwork of our own two fighters, matching their supplied model sheets precisely; not any character from another game. Wide 1536x1024 composition, two rows and two columns, very large clear faces. Top row FILLET, bottom row SHARK. Left column label 'A / COILED'; right column label 'B / BREAKTHROUGH'. Small fighter name in each panel. Both treatments use jagged black ink, crisp bone-white torn edges, ONE dominant guild-color band (Fillet CRIMSON #DC143C; Shark TEAL #5AB5B5), and clean high-contrast anime cel rendering, consistent mature fighting-game anatomy. Each cut-in shows the fighter's ENTIRE face, chin, neck and leading shoulder, as they lean and push forcefully toward screen-right, preparing an enormous attack. Hair trails left, eyes target the opponent to the right; no impacts yet. Strong compressed preparation, never a neutral passport portrait. The portrait should fill its jagged horizontal band and not be tiny.\nA / COILED: close three-quarter low camera, lowered chin, intense focused eyes, jaw set, restrained ferocious expression, forward shoulder. Black ink shadows cover the rear half of the face; small white rim.\nB / BREAKTHROUGH: more forceful forward thrust of head and shoulder, slightly open fierce grin / clenched teeth, more diagonal tilt and foreshortening, eyebrows severe, hair carried backward. Visibly more explosive personality than A while preserving the same identity.\nFILLET: athletic adult woman, short swept BLACK hair with charcoal grouped locks, amber eyes, slim arms, ivory blouse and crimson shoulder armor, pale skin, no mask. Use source design faithfully.\nSHARK: athletic adult man, long LOW-VOLUME white hair following skull and flowing backward, physical BLUE SPORTS GLASSES with visible frames and temple arms, natural skin, NO face paint, teal scale armor, bone fish-skull shoulder armor. Confident and dangerous.\nMake all faces large and readable; do not crop the jaw. Ink and guild-colored energy streaks suggest forward motion. No weapons crossing the faces. No Japanese glyphs, no logos, no speech balloons, no game UI, no green background. Neutral warm white gutters separate the four complete cut-in panels. These are review options, not a sprite sheet.",
+  "source": "/workspace/generated_images/exec-46139238-0de4-48e5-996d-b345a310c4d0.png",
+  "references": [
+    "art/characters/fillet.png",
+    "art/characters/shark.png"
+  ],
+  "sha256": "39b48cc99cfbff7fa133bcd2efbf3b99a619d395a3420665a4c1260928eeff2f",
+  "reference_sha256": {
+    "art/characters/fillet.png": "4fb262dca63378b5c2d13b4fa08051e25da335e3e8894fd2626fbd4a76854408",
+    "art/characters/shark.png": "9de94bcd8305ee941964a87b85686d76e436d63081ff708a9c602cbd856acc50"
+  }
+}
