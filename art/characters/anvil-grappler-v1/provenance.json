@@ -37,7 +37,17 @@
       "image": "idle-reaching-options.png",
       "prompt": "idle-reaching-options-prompt.txt",
       "sha256": "28c9874ca5ae4cc070cfa74e1e645a5980ba2218b3aec658bc02b451daa7a5aa",
-      "status": "Six reaching base-idle alternatives A\u2013F; awaiting user selection. Shield 1 selected; neutral shield back/grip visible; free elbow bent with upright reaching palm."
+      "status": "D / High Clamp selected by user. Refine with slightly narrower foot spacing and a closed-jaw wide tooth grin."
+    },
+    {
+      "image": "high-clamp-refined.png",
+      "prompt": "high-clamp-refined-prompt.txt",
+      "source": "/workspace/generated_images/exec-4c9570e4-7f50-482f-b13f-ab18b09c89f3.png",
+      "references": [
+        "idle-reaching-options.png / D, bottom-left"
+      ],
+      "sha256": "7fb397af97b5ae6a7bc7285f87f39993595727d75fa93b5c5478b9a23d355e85",
+      "status": "Selected D direction with user-requested narrower stance and closed-jaw toothy grin; generated reference for future sprite production."
     }
   ]
 }

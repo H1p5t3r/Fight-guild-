@@ -14,4 +14,6 @@ Every raw generation, exact prompt and SHA-256 is preserved in `provenance.json`
 
 Neutral idle and movement carry the shield angled away from the camera, showing its inner face, left-hand grip and forearm straps. Guard, shield stance and shield attacks turn its armored exterior into the action. The right hand stays free for grappling.
 
-The first bent-arm correction pulled the free hand too close to the chest. The user still wants an active reaching/grabbing intent. `idle-reaching-options.png` presents A–F alternatives with bent elbows, upright palms and the inner shield grip visible. Selection is pending; no new art was registered in the game. The provisional idle/movement/Drive studies and every exact prompt remain under `production/`, outside runtime assets.
+The first bent-arm correction pulled the free hand too close to the chest. The user still wants an active reaching/grabbing intent. `idle-reaching-options.png` presents A–F alternatives with bent elbows, upright palms and the inner shield grip visible. **D / High Clamp is selected**, refined with slightly closer footing and a closed-jaw toothy grin. `high-clamp-refined.png` is the new production reference; no concept image has been registered in the game. The provisional idle/movement/Drive studies and every exact prompt remain under `production/`, outside runtime assets.
+
+Keep D’s high reaching right hand and roughly right-angle elbow. Narrow the feet slightly without slimming or shortening Bull. The mouth is a wide teeth-baring grin with the jaw closed, never an open shout.

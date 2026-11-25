@@ -205,12 +205,13 @@
         "status": "selected_by_user"
       },
       "base_idle": {
-        "status": "awaiting_selection",
+        "status": "selected_by_user",
         "source_sheet": "art/characters/anvil-grappler-v1/idle-reaching-options.png",
         "requirements": [
-          "Free RIGHT elbow bent roughly 90 degrees.",
-          "Keep reaching out to grab; do not retract the hand to the chest.",
-          "Upright or inward palm, thumb up, relaxed curled fingers.",
+          "Use D / High Clamp: raised reaching RIGHT hand, approximately 90-degree elbow, upright palm and natural thumb.",
+          "Keep the grabbing hand well forward and high; do not pull it back against the chest.",
+          "Bring the feet slightly closer together while preserving Bull muscular width, height, bent knees and planted balance.",
+          "Closed jaw with a broad teeth-baring grin, not an open shouting mouth.",
           "Neutral shield carry exposes its inner face, LEFT grip and straps."
         ],
         "options": [
@@ -220,7 +221,14 @@
           "D / High Clamp",
           "E / Lead-Hand Bait",
           "F / Bull Catch"
-        ]
+        ],
+        "id": "D",
+        "name": "High Clamp",
+        "source_panel": "bottom-left",
+        "refined_reference": "art/characters/anvil-grappler-v1/high-clamp-refined.png",
+        "refinement_status": "generated_from_user_requested_changes",
+        "user_instruction": "D but bring his stance just a bit less wide. And close his mouth with a wide tooth grin.",
+        "supersedes": "The tucked-hand correction and unselected A/B/C/E/F idle alternatives."
       }
     }
   }
