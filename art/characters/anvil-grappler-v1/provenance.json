@@ -31,7 +31,13 @@
       "image": "shield-options.png",
       "prompt": "anvil_shield-prompt.txt",
       "sha256": "012c711b630a0a2847bf2cc371b0cfc3ae23d4af63f5e9b9bbe8642e7122e3ca",
-      "status": "Awaiting selection: 1 Guild Original / 2 Forge Plate / 3 Iron Guard."
+      "status": "1 / Guild Original selected. Neutral carry subsequently revised to show inner grip/straps; action/stance may present exterior."
+    },
+    {
+      "image": "idle-reaching-options.png",
+      "prompt": "idle-reaching-options-prompt.txt",
+      "sha256": "28c9874ca5ae4cc070cfa74e1e645a5980ba2218b3aec658bc02b451daa7a5aa",
+      "status": "Six reaching base-idle alternatives A\u2013F; awaiting user selection. Shield 1 selected; neutral shield back/grip visible; free elbow bent with upright reaching palm."
     }
   ]
 }

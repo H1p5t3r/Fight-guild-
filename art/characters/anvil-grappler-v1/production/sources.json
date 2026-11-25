@@ -1,0 +1,125 @@
+{
+  "date": "2026-11-25",
+  "pixelEdits": false,
+  "records": [
+    {
+      "id": "base-original",
+      "source": "/workspace/generated_images/exec-7e633b1a-fb15-41bd-937e-c9b8fcc4d256.png",
+      "file": "sources/base-original.png",
+      "prompt": "base-prompt.txt",
+      "sha256": "54e7996c1ade0c3dd2f5cce7adb99a583dc512b1eee298e01d0ff2b5b8fb490e",
+      "runtime": false,
+      "tool": "image_gen.imagegen",
+      "status": "Provisional study; base idle selection reopened before registration."
+    },
+    {
+      "id": "walk-original",
+      "source": "/workspace/generated_images/exec-60099005-69fc-44b8-b5ca-304e4367294f.png",
+      "file": "sources/walk-original.png",
+      "prompt": "walk-prompt.txt",
+      "sha256": "7e062f2685f9826f7a29807d5b4be7e2b8d22069f797f20a9cbc93c12743061b",
+      "runtime": false,
+      "tool": "image_gen.imagegen",
+      "status": "Provisional study; base idle selection reopened before registration."
+    },
+    {
+      "id": "drive-original",
+      "source": "/workspace/generated_images/exec-ffec7d9a-c59a-40a7-8cd2-a66b26627787.png",
+      "file": "sources/drive-original.png",
+      "prompt": "drive-prompt.txt",
+      "sha256": "703afa356d422c25ed06d01df20bc60e80fdc264d8dc65c5b49132999322574d",
+      "runtime": false,
+      "tool": "image_gen.imagegen",
+      "status": "Provisional study; base idle selection reopened before registration."
+    },
+    {
+      "id": "drive-raised",
+      "source": "/workspace/generated_images/exec-370778d9-5a93-4911-a220-945b9a4c37ae.png",
+      "file": "sources/drive-raised.png",
+      "prompt": "drive_fix-prompt.txt",
+      "sha256": "3897e7bc162e15a797d1e738fc1bcb1a8bc2e53f1ca6f02e48a34514dd040769",
+      "runtime": false,
+      "tool": "image_gen.imagegen",
+      "status": "Provisional study; base idle selection reopened before registration."
+    },
+    {
+      "id": "dash-original",
+      "source": "/workspace/generated_images/exec-b9cc3412-4409-4e42-897a-1683b2b8550c.png",
+      "file": "sources/dash-original.png",
+      "prompt": "dash-prompt.txt",
+      "sha256": "818c64edd568a16a2f62d3f8efd27a76cf66dd2826d8ca9a913f59badcafeeaa",
+      "runtime": false,
+      "tool": "image_gen.imagegen",
+      "status": "Provisional study; base idle selection reopened before registration."
+    },
+    {
+      "id": "base-rear",
+      "source": "/workspace/generated_images/exec-d9f89dcb-a434-4c91-8b3b-2550431c002e.png",
+      "file": "sources/base-rear.png",
+      "prompt": "base_rear-prompt.txt",
+      "sha256": "630e107c8283c30bf75e284c7153b0be913987bb5d9304fc78bdb8df66cbc362",
+      "runtime": false,
+      "tool": "image_gen.imagegen",
+      "status": "Provisional study; base idle selection reopened before registration."
+    },
+    {
+      "id": "walk-rear",
+      "source": "/workspace/generated_images/exec-75bd344a-a9f4-481f-9693-f459b0ec41ff.png",
+      "file": "sources/walk-rear.png",
+      "prompt": "walk_rear-prompt.txt",
+      "sha256": "120831928cc305ed093ba365fb4565842356915235abfc0ae7d496dba6a8f89e",
+      "runtime": false,
+      "tool": "image_gen.imagegen",
+      "status": "Provisional study; base idle selection reopened before registration."
+    },
+    {
+      "id": "base",
+      "source": "/workspace/generated_images/exec-ce5f243d-7bf6-4565-84cd-05a197d12b4f.png",
+      "file": "sources/base.png",
+      "prompt": "elbow-prompt.txt",
+      "sha256": "ddb0c3750daa4314c3ae93d4dc609ffecda397894e44e0cc2da4f6aca707d74a",
+      "runtime": false,
+      "tool": "image_gen.imagegen",
+      "status": "Provisional study; base idle selection reopened before registration."
+    },
+    {
+      "id": "walk",
+      "source": "/workspace/generated_images/exec-cf739eab-3399-4bcb-838f-0520418002ad.png",
+      "file": "sources/walk.png",
+      "prompt": "walk-elbow-prompt.txt",
+      "sha256": "6a7f18b50e09fe7d33c7d43d5faa8af9b73601523a727017a2fbbfae2a654f19",
+      "runtime": false,
+      "tool": "image_gen.imagegen",
+      "status": "Provisional study; base idle selection reopened before registration.",
+      "aliases": [
+        "walk-elbow"
+      ]
+    },
+    {
+      "id": "drive",
+      "source": "/workspace/generated_images/exec-2a6bdd65-b011-4176-9661-e4b4962da691.png",
+      "file": "sources/drive.png",
+      "prompt": "drive-elbow-prompt.txt",
+      "sha256": "6a9357fdd63f297e2d9eefb5c785d8b2a5f440a7430342b2a77367c24175587a",
+      "runtime": false,
+      "tool": "image_gen.imagegen",
+      "status": "Provisional study; base idle selection reopened before registration.",
+      "aliases": [
+        "drive-elbow"
+      ]
+    },
+    {
+      "id": "dash",
+      "source": "/workspace/generated_images/exec-a1cdc8b5-a3eb-4180-93bc-67d345bbcf39.png",
+      "file": "sources/dash.png",
+      "prompt": "dash-elbow-prompt.txt",
+      "sha256": "2991acd00d0d257dfb5a8131b27eeed9a2c2d5901f7cecebb5dd8c75a837a3e5",
+      "runtime": false,
+      "tool": "image_gen.imagegen",
+      "status": "Provisional study; base idle selection reopened before registration.",
+      "aliases": [
+        "dash-elbow"
+      ]
+    }
+  ]
+}

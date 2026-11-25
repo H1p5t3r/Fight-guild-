@@ -1,6 +1,6 @@
 # Anvil: Bulwark grappler prototype
 
-This is the native Godot mechanics pass. The refined **C / Bull** body is selected, with less overall height and width than the first sheet while retaining its muscular torso. Shield selection is pending. The approval sheets are in `art/characters/anvil-grappler-v1`; they are not runtime sprites. Existing Anvil artwork remains provisional until that choice is complete.
+This is the native Godot mechanics pass. The refined **C / Bull** body is selected, with less overall height and width than the first sheet while retaining its muscular torso. **Shield 1 / Guild Original is selected.** The base idle is being chosen from six reaching poses. Neutral carry exposes the shield’s inner face, left-hand grip and straps; guard/Drive turns its armored face outward. The free right elbow stays bent roughly 90°, with an upright hand reaching to grab. The approval sheets are in `art/characters/anvil-grappler-v1`; they are not runtime sprites. Existing Anvil artwork remains provisional until the base-idle choice is complete.
 
 ## Inputs and purpose
 
@@ -33,7 +33,7 @@ The air slam has independent hit groups starting on active frames 1, 4, 7, 10 an
 
 Anvil's grounded shield normals reach up to 245 px. The shield has no hurtbox. Normals do not chain into each other or jump-cancel; they special-cancel on contact. Standing S retains close/far context. 2S remains a hard-knockdown sweep and is -15 on first-active block.
 
-Ground command grabs do not catch airborne/prejump targets or ordinary hitstun, blockstun, landing lock and throw immunity. They cannot be manually teched. Their damage is paid once at the slam, followed by hard knockdown. The A/B staging is saved pair-root movement; final attacker/receiver artwork will follow the approved choreography after the shield choice.
+Ground command grabs do not catch airborne/prejump targets or ordinary hitstun, blockstun, landing lock and throw immunity. They cannot be manually teched. Their damage is paid once at the slam, followed by hard knockdown. The A/B staging is saved pair-root movement; final attacker/receiver artwork will follow the approved choreography after the base-idle choice.
 
 Sky Foundry never catches a grounded target. It can catch an airborne juggle; existing combo scaling carries through the entire capture. The super spends 50% at activation, including on whiff, and does not refund attacker Momentum on hit. The freeze stops both fighters, projectiles, round time, status timers and hitstop while input samples continue. It drives the existing screen-rip cut-in from saved simulation time, including on rollback. Its provisional invulnerability lasts through the catch window.
 
@@ -45,4 +45,4 @@ Sky Foundry never catches a grounded target. It can catch an airborne juggle; ex
 - Generate with `python scripts/generate-combat-data.py --native-only` while the website is frozen. Browser editor files and deployment remain unchanged. The frozen web JSON adapter does not support Anvil policy 2 yet; use the native editor for this kit until web work resumes.
 - Native C++ and Godot tests cover inputs in both directions/player slots, armor exhaustion and transfer, leg contacts, normal cancel restrictions, grabs, multi-hit descent, super cost/freeze/capture, damage scaling and rollback. A direct WASM-core test checks the same saved combat state without changing the frozen editor.
 
-Remaining art work: selected shield, hammer-free production sprites, attack clips timed to the stats, paired A/B grab clips, and the super's final choreography. Keep the largest motion between final startup and first active; use held poses and fixed body calibration, not independently resized frames.
+Remaining art work: selected reaching base idle, hammer-free production sprites, attack clips timed to the stats, paired A/B grab clips, and the super's final choreography. Keep the largest motion between final startup and first active; use held poses and fixed body calibration, not independently resized frames.

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_date": "2026-11-18",
+  "updated_date": "2026-11-25",
   "scope": "Current character-art decisions; not runtime combat configuration.",
   "fighters": {
     "fillet": {
@@ -171,6 +171,56 @@
         ],
         "reference_directory": "art/characters/smoke-special-options-v1",
         "production_directory": "godot/assets/fighters/smoke-attacks-v2"
+      }
+    },
+    "anvil": {
+      "body": {
+        "id": "C / Bull \u2014 refined",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/anvil-grappler-v1/bull-refined.png",
+        "requirements": [
+          "Retain exposed muscular chest, tattooed right arm and braided white beard.",
+          "Slightly reduce the original Bull height and width; still the largest fighter.",
+          "Remove the hammer."
+        ]
+      },
+      "shield": {
+        "id": "1 / Guild Original",
+        "status": "selected_by_user",
+        "source_sheet": "art/characters/anvil-grappler-v1/shield-options.png",
+        "source_panel": "left",
+        "user_instruction": "Shield 1 looks good.",
+        "requirements": [
+          "Rectangular dark iron shield with a notched top, corner rivets and central anvil emblem.",
+          "Mount to LEFT forearm; RIGHT arm remains the free grappling hand.",
+          "During idle and normal movement, angle away from camera and show the inner face, handgrip and straps.",
+          "During guard, shield stance and attacks, turn the armored outer face toward the action."
+        ]
+      },
+      "grabs": {
+        "selected": [
+          "A / Foundry Drop",
+          "B / Iron Turn"
+        ],
+        "status": "selected_by_user"
+      },
+      "base_idle": {
+        "status": "awaiting_selection",
+        "source_sheet": "art/characters/anvil-grappler-v1/idle-reaching-options.png",
+        "requirements": [
+          "Free RIGHT elbow bent roughly 90 degrees.",
+          "Keep reaching out to grab; do not retract the hand to the chest.",
+          "Upright or inward palm, thumb up, relaxed curled fingers.",
+          "Neutral shield carry exposes its inner face, LEFT grip and straps."
+        ],
+        "options": [
+          "A / Collar Hunt",
+          "B / Long Guard",
+          "C / Low Snare",
+          "D / High Clamp",
+          "E / Lead-Hand Bait",
+          "F / Bull Catch"
+        ]
       }
     }
   }
