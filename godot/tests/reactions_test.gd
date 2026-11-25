@@ -112,7 +112,8 @@ func run() -> void:
 						var index := CombatReactions.key(int(event.age))
 						seen[index] = true
 						var rendered := arena.sprites[1] as Sprite2D
-						check(rendered.texture is AtlasTexture and rendered.texture.atlas.resource_path.ends_with("reactions-v1/" + str(clip.file)), "Arena kept the generic hurt drawing")
+						var expected_file: String = clip.frames[index].get("file", clip.file)
+						check(rendered.texture is AtlasTexture and rendered.texture.atlas.resource_path == (CombatReactions.DIRECTORY + expected_file).simplify_path(), "Arena kept the generic hurt drawing")
 						check(rendered.texture.region.position.x == clip.frames[index].region[0], "Wrong production key rendered")
 						check(is_equal_approx(absf(rendered.scale.x), rendered.scale.y) and signf(rendered.scale.x) == -facing, "Reaction scale/facing changed")
 					sample.step(0, 0)

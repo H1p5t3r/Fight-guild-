@@ -7,6 +7,7 @@ root = Path(__file__).resolve().parents[1]
 cases = [
     (["--headless", "--editor", "--import"], None),
     (["--headless", "--script", "tests/anvil_test.gd", "--", "--test"], "Anvil native: 24 checks, 0 failures"),
+    (["--headless", "--script", "tests/anvil_art_test.gd", "--", "--test"], "Anvil art: 0 failures"),
     (["--headless", "--script", "tests/core_bridge.gd", "--", str(root / "build/native.trace")], "0 failures"),
     (["--headless", "--script", "tests/combo_physics_test.gd"], "0 failures"),
     (["--headless", "--script", "tests/combo_snapshot_test.gd"], "0 failures"),

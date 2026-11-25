@@ -70,7 +70,7 @@ def configure(character, starter, template):
                (100,7000,0,12500,0),(112,7000,0,14000,0)]),
         track([(0,0,0,0,0),(20,0,0,7000,0)]),
     ]
-    ext['art'] = {'name':'Anvil / Bull grappler', 'status':'Refined C / Bull body approved; shield selection pending; grab choreographies A + B approved.'}
+    ext['art'] = {'name':'Anvil / Bull grappler', 'status':'Approved High Clamp Bull with Shield 1 and five-digit free hand; native production sprites registered in anvil-bull-v2; grab choreographies A + B.'}
     character['extensions'] = ext
     for slot, move in enumerate(character['moves']):
         move['enabled'] = int(slot in KIT)
@@ -156,7 +156,7 @@ def configure(character, starter, template):
                 releaseFreeze=24 if slot==16 else 18,ownerRecovery=24,victimRecovery=0,
                 releaseGap=8500,throwGrace=5,techTicks=0,pairTrack={14:0,15:1,16:2}[slot])
         extra['art']={'name':name,'role':INTENT.get(slot,'Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.'),
-            'productionStatus':'Refined Bull body approved; shield selection pending; no new runtime artwork applied.'}
+            'productionStatus':'Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys.'}
         move['extensions']=extra
     character['movement'].update(walkSpeed=250,backWalkSpeed=200,forwardStyle=1,stepSpeed=850,stepFrames=10,
         runSpeed=850,runAcceleration=80,airDashEnabled=0,airBackdashEnabled=0)

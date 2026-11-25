@@ -76,6 +76,9 @@ static void grabs(){
         int ticks_left=300;while(s.world.pair.kind&&ticks_left-->0)advance();
         CHECK(ticks_left>0&&b().health==667&&a().last_damage==333);
         CHECK(b().reaction==Downed&&b().knockdown==HardKnockdown);
+        const Pose finish=s.pose(a());const Fighter copied=a();const Pose collision_finish=s.pose(copied);
+        CHECK(finish.phase==14&&collision_finish.phase==finish.phase&&collision_finish.index==finish.index);
+        CHECK(s.box_count(owner,HurtBox)==Simulation::pose_box_count(0,finish.phase,finish.index));
         CHECK(a().facing==(slot==14?face:-face));ticks(120);CHECK(b().health==667);
     }
     for(int invalid:{0,1,2,3,4}){

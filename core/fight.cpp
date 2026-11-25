@@ -721,6 +721,20 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     while(idle_key<3&&idle_elapsed>=idle_ticks[idle_key]) idle_elapsed-=idle_ticks[idle_key++];
     const Pose ready=f.stance&&f.character==3?Pose{8,((f.idle_time+tick_offset)/7)%4}:POSE_COUNTS[f.character][11]?Pose{11,idle_key}:Pose{LOCOMOTION_POSES[f.character]?5:0,0};
     const Pose crouch=POSE_COUNTS[f.character][12]?Pose{12,((f.idle_time+tick_offset)/20)%4}:Pose{0,11};
+    if(f.character==0&&f.pair_recovery>0&&f.last_move>=0&&f.reaction==Free&&!f.stun&&f.contact
+       &&(moves[0][f.last_move].v[ActionType]==GrapplerGrab||moves[0][f.last_move].v[ActionType]==AntiAirSuper)) {
+        // Keep the connected slam through release hitstop and its real recovery
+        // lock. Missed grabs never enter this saved-state path. Capture clears
+        // contact on both sides; only the owner gets it back at the slam. Use
+        // that saved marker so pose queries on collision copies agree too.
+        const auto& clip=CONTACT_ANIMATIONS[0][f.last_move];
+        const int duration=max(1,extensions[0][f.last_move].v[XOwnerRecovery]);
+        const int percent=clamp(duration-f.pair_recovery+tick_offset,0,duration-1)*100/duration;
+        for(int key=clip.counts[2]-1;key>=0;--key) {
+            const auto& frame=clip.keys[2][key];
+            if(percent>=frame.start)return {frame.phase,frame.pose};
+        }
+    }
     // Successful captures use the saved paired clock, not the cleared move age.
     // This is presentation only: capture timing, roots, damage and immunity are
     // still owned by the existing pair contract and rollback state.
@@ -753,6 +767,16 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
     if(f.move>=0) {
         const auto& m=effective_move(f);
         int age=f.age+tick_offset;
+        if(f.character==0&&m.v[ActionType]==ShieldStance&&age>=m.v[Startup]-1&&age<m.v[Startup]+m.v[Active]-1&&POSE_COUNTS[0][8]) {
+            // Held stance age stops advancing. Saved travel drives the guarded
+            // shuffle, so it freezes/replays with physics rather than rendering.
+            const int stride=max(1,m.v[TravelSpeed])*5;
+            const int distance=f.x*f.facing;
+            const int step=distance>=0?distance/stride:-((-distance+stride-1)/stride);
+            const int forward=f.facing>0?Right:Left,back=f.facing>0?Left:Right;
+            const bool advancing=(f.raw&D)&&(f.raw&forward)&&!(f.raw&(back|Down));
+            return {8,advancing?(step%4+4)%4:0};
+        }
         if(f.grab_time>0) {
             int art=m.v[FinishArtPose]>0&&m.v[GrabFrames]-f.grab_time>=m.v[FinishArtFrame]?m.v[FinishArtPose]:m.v[ArtPose];
             return art>0?Pose{4,art-1}:Pose{0,1+m.v[Button]};
@@ -792,7 +816,7 @@ Pose Simulation::pose(const Fighter& f,int tick_offset) const {
         // Distance-driven gait needs no render clock or extra rollback state.
         // It freezes during hitstop and follows acceleration. Dedicated backward
         // cycles advance chronologically with retreat, rather than playing in reverse.
-        if(f.dash>0&&f.character==3) return {7,min(7,f.dash_age*8/max(1,mobility[f.character].v[f.dash_direction==f.facing?StepFrames:BackFrames]))};
+        if(f.dash>0&&(f.character==3||(f.character==0&&!f.dash_air&&f.dash_kind==StepDash))) return {7,min(7,f.dash_age*8/max(1,mobility[f.character].v[f.dash_direction==f.facing?StepFrames:BackFrames]))};
         if(!f.vx) return ready;
         const int phase=f.running?7:POSE_COUNTS[f.character][13]&&f.vx*f.facing<0?13:6;
         const auto& profile=mobility[f.character];

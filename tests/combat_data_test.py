@@ -45,7 +45,7 @@ class HurtboxContract(unittest.TestCase):
             for phase, poses in fighter['poses'].items():
                 for index, pose in enumerate(poses):
                     counts.append(len(generator.hurt_rectangles(copy.deepcopy(pose), f"{fighter['name']} {phase} {index}")))
-        self.assertEqual(len(counts), 1162)  # Includes Hammer: 142 action/capture + 8 idle poses.
+        self.assertEqual(len(counts), 1378)  # Includes Anvil's 173 action/capture keys and locomotion.
         self.assertEqual(set(counts), {3, 4})
 
 

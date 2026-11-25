@@ -89,7 +89,9 @@ func exercise(attacker: int, victim: int, slot: int, owner: int, facing: int, mi
 		render_checked()
 		if damaging_pair and released and int(receiver.pairRecovery) > 0:
 			var sprite := arena.sprites[1 - owner] as Sprite2D
-			check(sprite.get_meta("reaction_family") == "chest" and sprite.texture is AtlasTexture and sprite.texture.atlas.resource_path.ends_with("reactions-v1/%s.png" % CombatModel.CHARACTERS[victim].to_lower()), "Arena failed to show approved release art: " + label)
+			var expected_frame := CombatReactions.frame_for(victim, "chest", int(cue.age))
+			var expected_path: String = (CombatReactions.DIRECTORY + str(expected_frame.file)).simplify_path()
+			check(sprite.get_meta("reaction_family") == "chest" and sprite.texture is AtlasTexture and sprite.texture.atlas.resource_path == expected_path, "Arena failed to show approved release art: " + label)
 		if not replay_snapshot.is_empty():
 			replay_frames += 1
 			replay_cues[model.frame()] = cue.duplicate(true)

@@ -76,6 +76,6 @@ func run() -> void:
 	game.queue_free()
 	await process_frame
 	# Headless frames can run faster than the audio mixer retires a decoder.
-	await create_timer(0.1).timeout
+	await create_timer(0.5).timeout
 	print("Anvil native: %d checks, %d failures" % [checks, failures])
 	quit(1 if failures else 0)

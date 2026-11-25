@@ -35,8 +35,8 @@ static func frame_for(character: int, key: int) -> Dictionary:
 	var clip: Dictionary = catalog().get("fighters", {}).get(str(character), {})
 	if clip.is_empty(): return {}
 	var frame: Dictionary = clip.frames[key].duplicate()
-	frame.file = clip.file
-	frame.body_height = clip.body_height
+	frame.file = frame.get("file", clip.file)
+	frame.body_height = frame.get("body_height", clip.body_height)
 	return frame
 
 static func apply_frame(sprite: Sprite2D, frame: Dictionary, world_scale: float, facing: int) -> void:
@@ -70,6 +70,28 @@ static func present(sprites: Array[Sprite2D], model: CombatModel, state: Diction
 	var remaining := int(info.total) - int(info.tick)
 	var back := int(info.slot) == 23
 	var facing := int(info.facing)
+	if int(attacker.character) == 0 and int(info.kind) in [6, 7]:
+		# The core selects A/B/super owner drawings on the shared capture clock.
+		# Keep those distinct lifts/slams instead of the generic collar overlay.
+		FighterArt.apply(sprites[owner], 0, FighterArt.PHASES[int(attacker.posePhase)], int(attacker.poseIndex), world_scale, facing)
+		var lifted := int(receiver.y) > int(attacker.y) + 4000
+		var finish_tick: int = {14:82, 15:76, 16:100}.get(int(info.slot), int(info.total) - 7)
+		if int(info.tick) >= int(finish_tick):
+			FighterArt.apply(sprites[1-owner], int(receiver.character), "knockdown", 0, world_scale, -facing)
+		elif lifted:
+			FighterArt.apply(sprites[1-owner], int(receiver.character), "knockdown_back", 0, world_scale, -facing)
+			# The saved airborne capture root is the carried pelvis, not a sole.
+			# Register the horizontal body around it without resizing the drawing.
+			var victim_sheet := FighterArt.sheet(int(receiver.character), "knockdown_back")
+			var victim_frame: Dictionary = victim_sheet.frames[0]
+			var b: Array = victim_frame.bounds
+			sprites[1-owner].offset.y = -float(b[1] + b[3]) * 0.5
+		else:
+			apply_frame(sprites[1-owner], frame_for(int(receiver.character), 4), world_scale, -facing)
+		for p in 2:
+			sprites[p].set_meta("grab_role", "owner" if p == owner else "receiver")
+			sprites[p].set_meta("grab_key", int(info.tick))
+		return
 	# Side switching is already authored in the simulation. The turning drawing
 	# follows that crossing instead of holding a grip facing away from the victim.
 	if back and int(info.tick) > int(info.total) / 2 and absi(int(receiver.x) - int(attacker.x)) > 1500:

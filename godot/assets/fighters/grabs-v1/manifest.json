@@ -5,148 +5,224 @@
   "purpose": "Native render-only paired grips. No collision-authoring frames.",
   "fighters": {
     "0": {
-      "file": "anvil.png",
-      "body_height": 440,
-      "sha256": "d34c00d0c11e1237bebdc138dbad23d714c78b9cdc5aa22ae2529956770719dc",
+      "file": "../anvil-bull-v2/grabs.png",
+      "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+      "size": [
+        1536,
+        1024
+      ],
+      "body_height": 300,
       "frames": [
         {
+          "file": "../anvil-bull-v2/grabs.png",
+          "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+          "source_size": [
+            1536,
+            1024
+          ],
+          "generation_file": "exec-6f4a91be-efa7-4f25-a956-ec80498b8c7d.png",
+          "region": [
+            0,
+            0,
+            768,
+            331
+          ],
+          "bounds": [
+            187,
+            26,
+            553,
+            324
+          ],
+          "pivot": [
+            335,
+            320
+          ],
+          "body_height": 300,
+          "source_pose": 0,
           "name": "Grip catch",
-          "region": [
-            0,
-            0,
-            512,
-            512
-          ],
-          "pivot": [
-            230,
-            450
-          ],
           "contact": [
-            450,
-            158
-          ],
-          "bounds": [
-            53,
-            45,
-            502,
-            451
+            405,
+            110
           ]
         },
         {
-          "name": "Grip load",
+          "file": "../anvil-bull-v2/grabs.png",
+          "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+          "source_size": [
+            1536,
+            1024
+          ],
+          "generation_file": "exec-6f4a91be-efa7-4f25-a956-ec80498b8c7d.png",
           "region": [
-            512,
+            768,
             0,
-            512,
-            512
-          ],
-          "pivot": [
-            241,
-            450
-          ],
-          "contact": [
-            446,
-            202
+            768,
+            341
           ],
           "bounds": [
-            69,
-            78,
-            481,
-            451
-          ]
-        },
-        {
-          "name": "Grip turn",
-          "region": [
-            1024,
-            0,
-            512,
-            512
+            151,
+            16,
+            505,
+            321
           ],
           "pivot": [
-            240,
-            450
-          ],
-          "contact": [
-            436,
-            204
-          ],
-          "bounds": [
-            65,
-            67,
-            475,
-            451
-          ]
-        },
-        {
-          "name": "Caught",
-          "region": [
-            0,
-            512,
-            512,
-            512
-          ],
-          "pivot": [
-            244,
-            466
-          ],
-          "contact": [
-            307,
-            143
-          ],
-          "bounds": [
-            74,
-            48,
-            475,
-            467
-          ]
-        },
-        {
-          "name": "Collar fold",
-          "region": [
-            512,
-            512,
-            512,
-            512
-          ],
-          "pivot": [
-            236,
-            466
-          ],
-          "contact": [
             330,
-            201
+            320
           ],
-          "bounds": [
-            61,
-            80,
-            470,
-            467
+          "body_height": 300,
+          "source_pose": 1,
+          "name": "Grip load",
+          "contact": [
+            400,
+            110
           ]
         },
         {
-          "name": "Turned fold",
+          "file": "../anvil-bull-v2/grabs.png",
+          "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+          "source_size": [
+            1536,
+            1024
+          ],
+          "generation_file": "exec-6f4a91be-efa7-4f25-a956-ec80498b8c7d.png",
           "region": [
-            1024,
-            512,
-            512,
-            512
-          ],
-          "pivot": [
-            231,
-            472
-          ],
-          "contact": [
-            345,
-            202
+            768,
+            700,
+            768,
+            324
           ],
           "bounds": [
-            79,
-            74,
-            460,
-            473
+            135,
+            23,
+            504,
+            312
+          ],
+          "pivot": [
+            330,
+            306
+          ],
+          "body_height": 300,
+          "source_pose": 5,
+          "name": "Grip turn",
+          "contact": [
+            400,
+            96
+          ]
+        },
+        {
+          "file": "../anvil-bull-v2/reactions_high.png",
+          "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+          "source_size": [
+            1536,
+            1024
+          ],
+          "generation_file": "exec-df0b9a88-576b-4c18-a5c2-d239f7689473.png",
+          "region": [
+            768,
+            0,
+            768,
+            341
+          ],
+          "bounds": [
+            203,
+            26,
+            588,
+            330
+          ],
+          "pivot": [
+            345,
+            327
+          ],
+          "body_height": 300,
+          "source_pose": 1,
+          "name": "Caught",
+          "contact": [
+            415,
+            117
+          ]
+        },
+        {
+          "file": "../anvil-bull-v2/reactions_high.png",
+          "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+          "source_size": [
+            1536,
+            1024
+          ],
+          "generation_file": "exec-df0b9a88-576b-4c18-a5c2-d239f7689473.png",
+          "region": [
+            768,
+            341,
+            768,
+            341
+          ],
+          "bounds": [
+            185,
+            27,
+            625,
+            332
+          ],
+          "pivot": [
+            345,
+            328
+          ],
+          "body_height": 300,
+          "source_pose": 3,
+          "name": "Collar fold",
+          "contact": [
+            415,
+            118
+          ]
+        },
+        {
+          "file": "../anvil-bull-v2/reactions_high.png",
+          "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+          "source_size": [
+            1536,
+            1024
+          ],
+          "generation_file": "exec-df0b9a88-576b-4c18-a5c2-d239f7689473.png",
+          "region": [
+            768,
+            682,
+            768,
+            342
+          ],
+          "bounds": [
+            179,
+            39,
+            621,
+            326
+          ],
+          "pivot": [
+            345,
+            326
+          ],
+          "body_height": 300,
+          "source_pose": 5,
+          "name": "Turned fold",
+          "contact": [
+            415,
+            116
           ]
         }
+      ],
+      "transparent_samples": [
+        [
+          0,
+          0
+        ],
+        [
+          1535,
+          0
+        ],
+        [
+          0,
+          1023
+        ],
+        [
+          1535,
+          1023
+        ]
       ]
     },
     "1": {

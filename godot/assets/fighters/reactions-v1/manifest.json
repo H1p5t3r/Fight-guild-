@@ -9,272 +9,444 @@
   ],
   "fighters": {
     "0": {
-      "legs": {
-        "file": "anvil.png",
-        "body_height": 260,
-        "sha256": "f6dd630b9dfedac9ec8fb0b4ad62f5fe252e7d175361d6f03601e3182fc14a6d",
+      "head": {
+        "file": "../anvil-bull-v2/reactions_high.png",
+        "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+        "size": [
+          1536,
+          1024
+        ],
+        "body_height": 300,
         "frames": [
           {
-            "name": "Contact",
+            "file": "../anvil-bull-v2/reactions_high.png",
+            "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "generation_file": "exec-df0b9a88-576b-4c18-a5c2-d239f7689473.png",
             "region": [
               0,
               0,
-              362,
-              390
-            ],
-            "pivot": [
-              181,
-              359
+              768,
+              340
             ],
             "bounds": [
-              61,
-              93,
-              349,
-              360
-            ]
+              225,
+              7,
+              601,
+              331
+            ],
+            "pivot": [
+              345,
+              327
+            ],
+            "body_height": 300,
+            "source_pose": 0
           },
           {
-            "name": "Recoil",
-            "region": [
-              362,
-              0,
-              362,
-              390
+            "file": "../anvil-bull-v2/reactions_high.png",
+            "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+            "source_size": [
+              1536,
+              1024
             ],
-            "pivot": [
-              174,
-              359
+            "generation_file": "exec-df0b9a88-576b-4c18-a5c2-d239f7689473.png",
+            "region": [
+              0,
+              340,
+              768,
+              342
             ],
             "bounds": [
-              60,
-              122,
-              341,
-              360
-            ]
+              191,
+              1,
+              633,
+              333
+            ],
+            "pivot": [
+              345,
+              329
+            ],
+            "body_height": 300,
+            "source_pose": 2
           },
           {
-            "name": "Stun hold",
-            "region": [
-              724,
-              0,
-              362,
-              390
+            "file": "../anvil-bull-v2/reactions_high.png",
+            "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+            "source_size": [
+              1536,
+              1024
             ],
-            "pivot": [
-              179,
-              359
+            "generation_file": "exec-df0b9a88-576b-4c18-a5c2-d239f7689473.png",
+            "region": [
+              0,
+              682,
+              768,
+              342
             ],
             "bounds": [
-              54,
-              130,
-              337,
-              360
-            ]
+              227,
+              5,
+              631,
+              326
+            ],
+            "pivot": [
+              345,
+              326
+            ],
+            "body_height": 300,
+            "source_pose": 4
           }
+        ],
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
         ]
       },
       "chest": {
-        "file": "anvil.png",
-        "body_height": 260,
-        "sha256": "f6dd630b9dfedac9ec8fb0b4ad62f5fe252e7d175361d6f03601e3182fc14a6d",
+        "file": "../anvil-bull-v2/reactions_high.png",
+        "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+        "size": [
+          1536,
+          1024
+        ],
+        "body_height": 300,
         "frames": [
           {
-            "name": "Contact",
+            "file": "../anvil-bull-v2/reactions_high.png",
+            "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "generation_file": "exec-df0b9a88-576b-4c18-a5c2-d239f7689473.png",
             "region": [
+              768,
               0,
-              390,
-              362,
-              339
-            ],
-            "pivot": [
-              181,
-              306
+              768,
+              341
             ],
             "bounds": [
-              71,
-              32,
-              350,
-              307
-            ]
+              203,
+              26,
+              588,
+              330
+            ],
+            "pivot": [
+              345,
+              327
+            ],
+            "body_height": 300,
+            "source_pose": 1
           },
           {
-            "name": "Recoil",
-            "region": [
-              362,
-              390,
-              362,
-              339
+            "file": "../anvil-bull-v2/reactions_high.png",
+            "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+            "source_size": [
+              1536,
+              1024
             ],
-            "pivot": [
-              192,
-              306
+            "generation_file": "exec-df0b9a88-576b-4c18-a5c2-d239f7689473.png",
+            "region": [
+              768,
+              341,
+              768,
+              341
             ],
             "bounds": [
-              65,
-              64,
-              323,
-              307
-            ]
+              185,
+              27,
+              625,
+              332
+            ],
+            "pivot": [
+              345,
+              328
+            ],
+            "body_height": 300,
+            "source_pose": 3
           },
           {
-            "name": "Stun hold",
-            "region": [
-              724,
-              390,
-              362,
-              339
+            "file": "../anvil-bull-v2/reactions_high.png",
+            "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+            "source_size": [
+              1536,
+              1024
             ],
-            "pivot": [
-              195,
-              307
+            "generation_file": "exec-df0b9a88-576b-4c18-a5c2-d239f7689473.png",
+            "region": [
+              768,
+              682,
+              768,
+              342
             ],
             "bounds": [
-              57,
-              72,
-              327,
-              308
-            ]
+              179,
+              39,
+              621,
+              326
+            ],
+            "pivot": [
+              345,
+              326
+            ],
+            "body_height": 300,
+            "source_pose": 5
           }
+        ],
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
         ]
       },
-      "head": {
-        "file": "anvil.png",
-        "body_height": 260,
-        "sha256": "f6dd630b9dfedac9ec8fb0b4ad62f5fe252e7d175361d6f03601e3182fc14a6d",
+      "legs": {
+        "file": "../anvil-bull-v2/reactions_low.png",
+        "sha256": "4b38a877fbb5abd377ae1bfb0d0fb7f517fab48bfa643de90683a14b5595e28f",
+        "size": [
+          1536,
+          1024
+        ],
+        "body_height": 300,
         "frames": [
           {
-            "name": "Contact",
+            "file": "../anvil-bull-v2/reactions_low.png",
+            "sha256": "4b38a877fbb5abd377ae1bfb0d0fb7f517fab48bfa643de90683a14b5595e28f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "generation_file": "exec-029ebfa0-9f10-4b2a-9246-cabffb6b5af8.png",
             "region": [
               0,
-              729,
-              362,
-              346
-            ],
-            "pivot": [
-              186,
-              316
+              0,
+              768,
+              341
             ],
             "bounds": [
-              69,
-              31,
-              354,
-              317
-            ]
+              233,
+              10,
+              590,
+              341
+            ],
+            "pivot": [
+              370,
+              339
+            ],
+            "body_height": 300,
+            "source_pose": 0
           },
           {
-            "name": "Recoil",
+            "file": "../anvil-bull-v2/reactions_low.png",
+            "sha256": "4b38a877fbb5abd377ae1bfb0d0fb7f517fab48bfa643de90683a14b5595e28f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "generation_file": "exec-029ebfa0-9f10-4b2a-9246-cabffb6b5af8.png",
             "region": [
-              362,
-              729,
-              362,
-              346
-            ],
-            "pivot": [
-              178,
-              316
-            ],
-            "bounds": [
-              44,
-              36,
+              0,
               341,
-              317
-            ]
-          },
-          {
-            "name": "Stun hold",
-            "region": [
-              724,
-              729,
-              362,
-              346
-            ],
-            "pivot": [
-              173,
-              316
+              768,
+              341
             ],
             "bounds": [
-              42,
-              41,
-              339,
-              317
-            ]
+              241,
+              33,
+              592,
+              333
+            ],
+            "pivot": [
+              370,
+              331
+            ],
+            "body_height": 300,
+            "source_pose": 2
+          },
+          {
+            "file": "../anvil-bull-v2/reactions_low.png",
+            "sha256": "4b38a877fbb5abd377ae1bfb0d0fb7f517fab48bfa643de90683a14b5595e28f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "generation_file": "exec-029ebfa0-9f10-4b2a-9246-cabffb6b5af8.png",
+            "region": [
+              0,
+              682,
+              768,
+              342
+            ],
+            "bounds": [
+              239,
+              44,
+              601,
+              330
+            ],
+            "pivot": [
+              370,
+              327
+            ],
+            "body_height": 300,
+            "source_pose": 4
           }
+        ],
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
         ]
       },
       "air": {
-        "file": "anvil.png",
-        "body_height": 260,
-        "sha256": "f6dd630b9dfedac9ec8fb0b4ad62f5fe252e7d175361d6f03601e3182fc14a6d",
+        "file": "../anvil-bull-v2/reactions_low.png",
+        "sha256": "4b38a877fbb5abd377ae1bfb0d0fb7f517fab48bfa643de90683a14b5595e28f",
+        "size": [
+          1536,
+          1024
+        ],
+        "body_height": 300,
         "frames": [
           {
-            "name": "Contact",
-            "region": [
-              0,
-              1075,
-              362,
-              373
+            "file": "../anvil-bull-v2/reactions_low.png",
+            "sha256": "4b38a877fbb5abd377ae1bfb0d0fb7f517fab48bfa643de90683a14b5595e28f",
+            "source_size": [
+              1536,
+              1024
             ],
-            "pivot": [
-              200,
-              313
+            "generation_file": "exec-029ebfa0-9f10-4b2a-9246-cabffb6b5af8.png",
+            "region": [
+              768,
+              0,
+              768,
+              341
             ],
             "bounds": [
-              67,
-              31,
-              354,
-              324
-            ],
-            "hip": [
-              200,
-              185
-            ]
-          },
-          {
-            "name": "Recoil",
-            "region": [
-              362,
-              1075,
-              362,
-              373
-            ],
-            "pivot": [
-              204,
+              110,
+              7,
+              555,
               328
             ],
-            "bounds": [
-              72,
-              60,
-              334,
-              311
+            "pivot": [
+              310,
+              283
             ],
-            "hip": [
-              204,
-              200
-            ]
+            "body_height": 300,
+            "source_pose": 1
           },
           {
-            "name": "Stun hold",
-            "region": [
-              724,
-              1075,
-              362,
-              373
+            "file": "../anvil-bull-v2/reactions_low.png",
+            "sha256": "4b38a877fbb5abd377ae1bfb0d0fb7f517fab48bfa643de90683a14b5595e28f",
+            "source_size": [
+              1536,
+              1024
             ],
-            "pivot": [
-              198,
-              337
+            "generation_file": "exec-029ebfa0-9f10-4b2a-9246-cabffb6b5af8.png",
+            "region": [
+              768,
+              341,
+              768,
+              341
             ],
             "bounds": [
-              62,
-              61,
-              322,
-              315
+              165,
+              10,
+              549,
+              307
             ],
-            "hip": [
-              198,
-              209
-            ]
+            "pivot": [
+              310,
+              307
+            ],
+            "body_height": 300,
+            "source_pose": 3
+          },
+          {
+            "file": "../anvil-bull-v2/reactions_low.png",
+            "sha256": "4b38a877fbb5abd377ae1bfb0d0fb7f517fab48bfa643de90683a14b5595e28f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "generation_file": "exec-029ebfa0-9f10-4b2a-9246-cabffb6b5af8.png",
+            "region": [
+              768,
+              682,
+              768,
+              342
+            ],
+            "bounds": [
+              181,
+              6,
+              518,
+              317
+            ],
+            "pivot": [
+              310,
+              350
+            ],
+            "body_height": 300,
+            "source_pose": 5
           }
+        ],
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ],
+          [
+            1535,
+            1023
+          ]
         ]
       }
     },

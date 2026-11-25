@@ -64,7 +64,7 @@ static void poses() {
         CHECK(Simulation::pose_box_count(c,5,1)==0);
         CHECK(Simulation::pose_box_count(c,8,0)==0);
     }
-    CHECK(Simulation::pose_box_count(0,6,0)==0);
+    CHECK(Simulation::pose_box_count(0,6,0)==3); // Anvil now has a fitted walk cycle.
     for(int c=0;c<6;++c) for(int m=0;m<MOVE_COUNT;++m) {
         for(int field=0;field<FIELD_COUNT;++field) CHECK(s.move_set(c,m,field,s.moves[c][m].v[field]));
         CHECK(s.moves[c][m].v[Startup]>=startup_minimum(s.moves[c][m]));
@@ -122,25 +122,26 @@ static void contact_and_weapons() {
         s.reset(c,(c+1)%6,0,0); flush(s);
         for(int tick=1;tick<=s.moves[c][m].v[Startup];++tick) {
             s.step(tick==1?P<<slot:0,0);
-            if(tick<s.moves[c][m].v[Startup]) { CHECK(s.world.players[1].health==1000); CHECK(s.box_count(0,HitBox)==0); const int phase=s.get(0,29); CHECK((c==1||c==2)?(phase==11||phase==12||phase==14||phase==3):c==4?(phase==5||phase==14||phase==3):phase==(s.moves[c][m].v[ArtPose]?3:1)); }
+            if(tick<s.moves[c][m].v[Startup]) { CHECK(s.world.players[1].health==1000); CHECK(s.box_count(0,HitBox)==0); const int phase=s.get(0,29); CHECK((c==0||c==1||c==2)?(phase==11||phase==12||phase==14||phase==3):c==4?(phase==5||phase==14||phase==3):phase==(s.moves[c][m].v[ArtPose]?3:1)); }
         }
         const auto& track=s.move_hit[c][m];
         const int boxes=track.count&&track.keys[0].frame==1&&track.keys[0].count>=0?track.keys[0].count:1;
-        CHECK(s.box_count(0,HitBox)==(s.world.players[0].grab_time||s.moves[c][m].v[Mechanic]==5?0:boxes)&&((c==1||c==4)?s.get(0,29)==14:s.get(0,29)==(s.moves[c][m].v[ArtPose]?4:0)&&s.get(0,30)==(s.moves[c][m].v[ArtPose]?s.moves[c][m].v[ArtPose]-1:slot+1)));
+        CHECK(s.box_count(0,HitBox)==(s.world.players[0].grab_time||s.moves[c][m].v[Mechanic]==5?0:boxes)&&((c==0||c==1||c==4)?s.get(0,29)==14:s.get(0,29)==(s.moves[c][m].v[ArtPose]?4:0)&&s.get(0,30)==(s.moves[c][m].v[ArtPose]?s.moves[c][m].v[ArtPose]-1:slot+1)));
         for(int n=0;n<s.moves[c][m].v[GrabFrames];++n)s.step(0,0);
         CHECK(s.world.players[1].health==1000-s.moves[c][m].v[Damage]);
     }
-    // Contact with Anvil's extended P shield alone cannot hurt him. A tiny probe
+    // Contact with Anvil's extended f.S shield alone cannot hurt him. A tiny probe
     // through the head can. Mirror the entire setup to catch anchor/flip mistakes.
     for(int mirror=0;mirror<2;++mirror) for(int body=0;body<2;++body) {
         legacy_fillet::defaults(s); s.reset(1,0,0,0);
         auto& attacker=s.world.players[0]; auto& defender=s.world.players[1];
-        attacker.x=mirror?30000:70000; attacker.facing=mirror?1:-1;
-        defender.x=50000; defender.facing=mirror?-1:1; defender.move=0; defender.age=6; defender.hit_done=1;
+        attacker.x=mirror?10000:90000; attacker.facing=mirror?1:-1;
+        defender.x=50000; defender.facing=mirror?-1:1; defender.move=2; defender.age=s.moves[0][2].v[Startup]-1; defender.hit_done=1;
         Pose pose=s.pose(defender,1);
-        CHECK(pose.phase==0&&pose.index==1);
-        // Authored Anvil P: head center ~+6px /125px; shield outer edge ~+65px/65px.
-        int local_x=body?560:6500, y=body?12500:6500;
+        CHECK(pose.phase==14);
+        const Box head=Simulation::pose_box(0,pose.phase,pose.index,2);
+        // Bull f.S shield plate: source (650,450), root (245,659), scale 150/300.
+        int local_x=body?(head.left+head.right)/2:20250, y=body?(head.bottom+head.top)/2:10450;
         int target=defender.x+defender.facing*local_x;
         auto& probe=s.moves[1][0];
         int center=(target-attacker.x)*attacker.facing;

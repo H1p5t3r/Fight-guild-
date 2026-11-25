@@ -1,0 +1,23 @@
+{
+  "actions": 26,
+  "actionKeys": 173,
+  "pairedActions": 7,
+  "sourceAtlases": 17,
+  "poseCounts": {
+    "active": 12,
+    "windup": 6,
+    "block": 6,
+    "knockdown": 6,
+    "knockdown_back": 6,
+    "ready": 1,
+    "idle": 4,
+    "crouch_idle": 4,
+    "walk": 8,
+    "back_walk": 8,
+    "run": 8,
+    "backdash": 6,
+    "stance": 4,
+    "attack_animation": 173
+  },
+  "pixelEdits": false
+}

@@ -70,7 +70,9 @@ test('Conditional startup floors, schema-4 migration and compiled collision API 
     assert.ok([3,4].includes(e.boxes(0,0).length));
     assert.equal(e.boxes(0,2).length,tick===e.move(0,0).startup?1:0);
   }
-  assert.equal(e.state().players[0].poseIndex,1);
+  const art=JSON.parse(await readFile(new URL('../godot/assets/fighters/manifest.json',import.meta.url)));
+  assert.equal(e.state().players[0].posePhase,14);
+  assert.equal(e.state().players[0].poseIndex,art.fighters[0].attack_animations['0'].active[0].pose);
 });
 
 test('Signature moves, movement profiles and schema-6 migration survive the WASM adapter',async()=>{

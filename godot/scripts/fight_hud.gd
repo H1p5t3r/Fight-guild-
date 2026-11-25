@@ -75,6 +75,15 @@ static func draw_health(canvas: CanvasItem, rail: Rect2, health: int, guild: Col
 
 static func portrait(character: int) -> AtlasTexture:
 	if not portraits.has(character):
+		var authored: Dictionary = FighterArt.catalog().fighters[character].get("hud_portrait", {})
+		if not authored.is_empty():
+			var result := AtlasTexture.new()
+			result.atlas = load(FighterArt.DIRECTORY + str(authored.file))
+			var rect: Array = authored.region
+			result.region = Rect2(rect[0], rect[1], rect[2], rect[3])
+			result.filter_clip = true
+			portraits[character] = result
+			return result
 		if character in [4, 5]:
 			var result := AtlasTexture.new()
 			result.atlas = PORTRAIT_SHEET

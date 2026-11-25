@@ -209,7 +209,7 @@
             "art": {
               "name": "Iron Knuckle",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -418,7 +418,7 @@
             "art": {
               "name": "Steel Toe",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -627,7 +627,7 @@
             "art": {
               "name": "Shield Reach",
               "role": "Long disjointed shield poke. No normal chains; confirm into a special.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -836,7 +836,7 @@
             "art": {
               "name": "Foundry Gate",
               "role": "Furthest normal: heavy shield extension. Slow and punishable alone.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -1045,7 +1045,7 @@
             "art": {
               "name": "Low Knuckle",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -1254,7 +1254,7 @@
             "art": {
               "name": "Heel Check",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -1463,7 +1463,7 @@
             "art": {
               "name": "Iron Sweep",
               "role": "Dedicated low sweep, hard knockdown; -15 on first-active block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -1672,7 +1672,7 @@
             "art": {
               "name": "Rising Plate",
               "role": "Rising shield launcher. Confirm into the anti-air super with 50% Momentum.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -1881,7 +1881,7 @@
             "art": {
               "name": "High Palm",
               "role": "6P anti-air; upper-body hurtboxes disabled through frame 16.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -2386,7 +2386,7 @@
             "art": {
               "name": "Gate Crash",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -2753,7 +2753,7 @@
             "art": {
               "name": "Bulwark",
               "role": "Hold D. Advance with forward while holding. Two upper-body armor hits; legs and throws remain vulnerable. Cancel into a special or command grab, transferring at most one unspent armor hit. Release D for 14f recovery. No meter farming on stance entry.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -2962,7 +2962,7 @@
             "art": {
               "name": "Foundry Drop",
               "role": "63214P: A / Foundry Drop. Catch, overhead lift, seated powerbomb. 333 damage, untechable, 5f startup. Jump, throw immunity and hit/blockstun defeat the catch.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -3171,7 +3171,7 @@
             "art": {
               "name": "Iron Turn",
               "role": "63214K: B / Iron Turn. Catch, hip turn, sweeping side-switch throw. 333 damage, untechable, 6f startup.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -3380,7 +3380,7 @@
             "art": {
               "name": "Sky Foundry",
               "role": "63214Hs: anti-air command-grab super. 50% Momentum, 54f deterministic screen freeze, 5f startup, airborne targets only. Can catch a juggle with ordinary combo scaling. Ground targets are safe. No Momentum refund on hit.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -3589,7 +3589,7 @@
             "art": {
               "name": "Air Knuckle",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -3798,7 +3798,7 @@
             "art": {
               "name": "Air Boot",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -4007,7 +4007,7 @@
             "art": {
               "name": "Hanging Plate",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -4216,7 +4216,7 @@
             "art": {
               "name": "Falling Gate",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -4471,7 +4471,7 @@
             "art": {
               "name": "Falling Bulwark",
               "role": "j.D: stop horizontal and vertical momentum, 9f hover startup, then vertical shield descent. Five separate hit groups every 3 active frames, wide hitbox. Landing ends the attack into 22f recovery. No armor.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -4828,7 +4828,7 @@
             "art": {
               "name": "Back Cast",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -5037,7 +5037,7 @@
             "art": {
               "name": "Foundry Toss",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -5690,7 +5690,7 @@
             "art": {
               "name": "Iron Advance",
               "role": "[4]6Hs: charge back for 30f, release forward + Hs. One intrinsic armor hit (including lows), advancing shield special, P brake during active approach. Bulwark can add only one upper-body armor hit.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -6057,7 +6057,7 @@
             "art": {
               "name": "Plant",
               "role": "P during Iron Advance: stop and plant. No hitbox or armor; 17 total locked frames.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -6414,7 +6414,7 @@
             "art": {
               "name": "Chest Check",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -7807,7 +7807,7 @@
             "art": {
               "name": "Air Back Cast",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -8016,7 +8016,7 @@
             "art": {
               "name": "Air Foundry Toss",
               "role": "Committed normal. No normal-to-normal or jump cancel; special cancel on hit/block.",
-              "productionStatus": "Refined Bull body approved; shield selection pending; no new runtime artwork applied."
+              "productionStatus": "Native anvil-bull-v2 sprites use approved High Clamp Bull, Shield 1 and stat-timed exposure keys."
             }
           }
         },
@@ -9000,7 +9000,7 @@
         ],
         "art": {
           "name": "Anvil / Bull grappler",
-          "status": "Refined C / Bull body approved; shield selection pending; grab choreographies A + B approved."
+          "status": "Approved High Clamp Bull with Shield 1 and five-digit free hand; native production sprites registered in anvil-bull-v2; grab choreographies A + B."
         }
       }
     },

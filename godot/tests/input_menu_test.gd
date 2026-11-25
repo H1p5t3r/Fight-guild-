@@ -149,5 +149,8 @@ func run() -> void:
 			if child.has_method("begin_binding"):
 				check(root.get_visible_rect().encloses(Rect2(Vector2(child.position), Vector2(child.size))), "Controls window overflows the viewport")
 		check(root.get_texture().get_image().save_png("/tmp/fg-control-settings.png") == OK, "Controls screenshot failed")
+	game.queue_free()
+	await process_frame
+	await create_timer(0.5).timeout
 	print("Native controls and side-select menus: %d failures; %d checks; local flow, remap capture, hotplug, focus and held-input isolation" % [failures, checks])
 	quit(1 if failures else 0)
