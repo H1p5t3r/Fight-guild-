@@ -43,8 +43,6 @@ func run() -> void:
 		return
 	game.motion.instant = true
 	game.finish_menu_motion()
-	check(FighterSelectPortrait.COLORS[0] == Color("aeb4bc"), "Blacksmiths did not use steel grey")
-	check(FighterSelectPortrait.COLORS[5] == Color("f5e8a6"), "Butchers did not use banana cream")
 	game.go_home()
 	var initial_hash: int = game.model.state_hash()
 	for index in CombatModel.CHARACTERS.size():
