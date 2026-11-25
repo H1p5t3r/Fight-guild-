@@ -6,6 +6,8 @@ uses the saved **54-tick screen-rip freeze** and displays the move's name. Super
 do not earn activation or contact meter for their owner.
 
 Watch the [native super showcase](../exports/FightGuild-Supers-2026-11-25.mp4).
+The [full animation production pass](super-animation-production.md) begins with
+[Sky Foundry's new native review](../exports/FightGuild-Sky-Foundry-2026-11-25.mp4).
 These are provisional balance values, captured from the current native build.
 Normal combo proration still applies; the video starts each demonstration fresh.
 Exsanguinate's demonstration begins with 150 stored grey life.
@@ -60,8 +62,9 @@ Old binary snapshots are incompatible with the added cinematic state.
 
 ## Art and reproduction
 
-Eleven new super clips use original generated sheets; Sky Foundry retains its
-approved capture. Fixed source scale, held anticipation and a first-active snap
+Eleven super clips use original generated sheets. Sky Foundry now has a full
+16-key replacement following its approved catch/lift/slam choreography, plus a
+dedicated face, effects and sound pass. Fixed source scale, held anticipation and a first-active snap
 follow the established animation process. The largest authored pose change is
 at the final-startup/first-active boundary. Saved capture clocks drive impact
 holds and recovery; no procedural smear or warped inbetweens are added.

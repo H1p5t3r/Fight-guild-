@@ -1,0 +1,90 @@
+{
+  "name": "Sky Foundry",
+  "character": 0,
+  "slot": 16,
+  "input": "63214Hs",
+  "status": "completed-native-review",
+  "approvedChoreography": "Airborne catch, rising lift, overhead apex, falling sit-out slam. Approved Bull / High Clamp with Shield 1.",
+  "gameplaySource": "godot/data/workshop/2026-11-25-supers/FightGuild-Supers.json",
+  "startup": 5,
+  "active": 6,
+  "recovery": 45,
+  "freeze": 54,
+  "pairTicks": 112,
+  "releaseFreeze": 24,
+  "ownerRecovery": 24,
+  "cost": 6667,
+  "damage": 333,
+  "pixelEdits": false,
+  "sheets": {
+    "entry": [
+      "loaded anticipation",
+      "first-active catch",
+      "take the weight",
+      "drive upward"
+    ],
+    "air": [
+      "ascending tuck",
+      "open apex",
+      "suspended hold",
+      "turn into descent"
+    ],
+    "slam": [
+      "pull downward",
+      "accelerated drop",
+      "floor compression",
+      "impact hold"
+    ],
+    "recovery": [
+      "recoil brace",
+      "push off floor",
+      "guard regather",
+      "return to High Clamp"
+    ]
+  },
+  "pairExposureTicks": [
+    0,
+    6,
+    12,
+    20,
+    30,
+    44,
+    58,
+    65,
+    88,
+    100
+  ],
+  "requirements": [
+    "Largest reach change at final startup to first active",
+    "One anatomical scale per atlas; support soles or pelvis registered",
+    "Opponent attached at authored hand with saved-clock depth changes",
+    "No impact or lifted opponent on whiff",
+    "Damage and capture timing unchanged",
+    "Separate generated magma-orange effects",
+    "Review native 60 Hz contact, mirrored contact and grounded miss"
+  ],
+  "impactAt": "Saved pair release tick 112; damage and 24-tick hitstop occur together",
+  "connectedRecoveryKeys": [
+    [
+      0,
+      11
+    ],
+    [
+      4,
+      12
+    ],
+    [
+      8,
+      13
+    ],
+    [
+      15,
+      14
+    ],
+    [
+      21,
+      15
+    ]
+  ],
+  "firstActiveReachChangeWorldUnits": 71.6
+}

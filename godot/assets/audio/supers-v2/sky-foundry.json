@@ -1,0 +1,26 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-sky-foundry-audio.py",
+  "sounds": [
+    {
+      "file": "sky_foundry_clamp.wav",
+      "seconds": 0.23,
+      "sha256": "e936377ea14f248072c332fab10041a57ddc55aa5c997cc24fd9cd2a1fc0a491"
+    },
+    {
+      "file": "sky_foundry_lift.wav",
+      "seconds": 0.48,
+      "sha256": "7e323b1b06481f3d6efe878459f08574bc200b8a1fa3d89cb66f621bfa6b52ca"
+    },
+    {
+      "file": "sky_foundry_fall.wav",
+      "seconds": 0.3,
+      "sha256": "250c2f4bed89372efbf6b9d5929d6262e94a2c9f8b14210983b16d31ba2bf012"
+    },
+    {
+      "file": "sky_foundry_slam.wav",
+      "seconds": 0.72,
+      "sha256": "0fc16fc6e9d627e6f7dd1f60f9e382b0f2cf04fb490fcb4cfa66c937981607c6"
+    }
+  ]
+}

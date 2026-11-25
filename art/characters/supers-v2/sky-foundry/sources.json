@@ -1,0 +1,73 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v2/sky-foundry/entry.png",
+    "source": "/workspace/generated_images/exec-a40eeccf-96f7-42b4-90cd-c59f87f1b9ad.png",
+    "sha256": "83145e13f4ae26dead5a57df24b38496cf6ad97b5280a17a73fc868fcb98889f",
+    "prompt": "entry-prompt.txt",
+    "references": [
+      "art/characters/anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "pixelEdits": false
+  },
+  {
+    "id": "air",
+    "file": "godot/assets/fighters/supers-v2/sky-foundry/air.png",
+    "source": "/workspace/generated_images/exec-4eac5f88-3d84-4030-95d8-91512264c929.png",
+    "sha256": "bcb5e5868ebb3b9fe147c50aa83f3237900ae01f25666cca203f08a60e1e65bb",
+    "prompt": "air-prompt.txt",
+    "references": [
+      "art/characters/anvil-grappler-v1/high-clamp-hand-corrected.png",
+      "godot/assets/fighters/supers-v2/sky-foundry/entry.png"
+    ],
+    "pixelEdits": false
+  },
+  {
+    "id": "slam",
+    "file": "godot/assets/fighters/supers-v2/sky-foundry/slam.png",
+    "source": "/workspace/generated_images/exec-803a30de-26c5-4a6e-b02b-603da3ee2f39.png",
+    "sha256": "1bb65400fc6357f50c2ccfb1e50ce6ebd667d84a451562df37b4cf76dbb03520",
+    "prompt": "slam-prompt.txt",
+    "references": [
+      "art/characters/anvil-grappler-v1/high-clamp-hand-corrected.png",
+      "godot/assets/fighters/supers-v2/sky-foundry/entry.png",
+      "godot/assets/fighters/supers-v2/sky-foundry/air.png"
+    ],
+    "pixelEdits": false
+  },
+  {
+    "id": "recovery",
+    "file": "godot/assets/fighters/supers-v2/sky-foundry/recovery.png",
+    "source": "/workspace/generated_images/exec-2a558d12-712d-468d-83d7-20db31549250.png",
+    "sha256": "e4d845027671322457b6aa602a9dfcba98b30aea8c6e95d347990bf2897ece5f",
+    "prompt": "recovery-prompt.txt",
+    "references": [
+      "art/characters/anvil-grappler-v1/high-clamp-hand-corrected.png",
+      "godot/assets/fighters/supers-v2/sky-foundry/entry.png",
+      "godot/assets/fighters/supers-v2/sky-foundry/slam.png"
+    ],
+    "pixelEdits": false
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v2/sky-foundry/effects.png",
+    "source": "/workspace/generated_images/exec-be19ba40-1455-4e46-8009-e8b6a372b0fd.png",
+    "sha256": "22ba004901b8f2b16b025a3c0ae23d33ecfdd57d961c20b142a5ab317c463168",
+    "prompt": "effects-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/shield_effects.png"
+    ],
+    "pixelEdits": false
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/sky-foundry/portrait.png",
+    "source": "/workspace/generated_images/exec-9dd9c417-0703-4b88-977f-e66ae71c22d8.png",
+    "sha256": "804a7f9019da5fd37ac789104b95698a4772c31c1dba7481498c4ca1e68b3c09",
+    "prompt": "portrait-prompt.txt",
+    "references": [
+      "art/characters/anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "pixelEdits": false
+  }
+]

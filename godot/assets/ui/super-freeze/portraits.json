@@ -1,5 +1,21 @@
 {
   "version": 1,
-  "status": "Awaiting face-cut-in direction selection. Existing approved portraits are the fallback.",
-  "fighters": {}
+  "status": "Sky Foundry has a dedicated production portrait; other moves retain their existing portrait fallback.",
+  "fighters": {},
+  "moves": {
+    "Sky Foundry": {
+      "character": 0,
+      "enabled": true,
+      "file": "../../fighters/supers-v2/sky-foundry/portrait.png",
+      "region": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "width": 0.54,
+      "center_y": 0.57,
+      "source": "art/characters/supers-v2/sky-foundry/portrait-prompt.txt"
+    }
+  }
 }

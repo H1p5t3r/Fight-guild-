@@ -62,6 +62,7 @@ func step(a: int, b: int) -> void:
 	var frozen := core.read_value(-1, 2) > 0 or core.read_value(-1, 28) > 0
 	var movement_frozen := frozen or core.read_value(-1, 4) > 0
 	var previous_x := [core.read_value(0, 0), core.read_value(1, 0)]
+	var previous_pair := [core.read_value(-1,22),core.read_value(-1,23)]
 	core.step(a, b)
 	locomotion.capture(before, movement_frozen, core, previous_x, [movement(core.read_value(0, 13)), movement(core.read_value(1, 13))])
 	if core.has_method("feedback_events"):
@@ -70,7 +71,7 @@ func step(a: int, b: int) -> void:
 		for p in 2:
 			held.append(core.read_value(p, 64) != 0) # counterSlowHeld, on the resolved tick
 			receiving.append(CombatReactions.receiving({"stun": core.read_value(p, 6), "guarding": core.read_value(p, 7), "reaction": core.read_value(p, 31), "pairRecovery": core.read_value(p, 92)}))
-		cues.capture(before, frozen, core.call("feedback_events"), held, receiving)
+		cues.capture(before, frozen, core.call("feedback_events"), held, receiving, SuperAnimation.audio_events(core,previous_pair[0],previous_pair[1]))
 
 func frame() -> int:
 	return core.read_value(-1, 0)

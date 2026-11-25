@@ -22,6 +22,8 @@ Current combo physics uses **Strive-style decay, velocity knockback, weaker repe
 
 All six fighters now have **two supers**. **Whiskey Chaser** is Tapper’s stance barrage and **Freemason** is Hammer’s heavy finisher. Confirmed cinematic supers lock both players until their finish; **The Air Is Mine** and **Grand Design** remain actionable after their utility casts recover. [Inputs, roles and rules](docs/supers.md) · [native super showcase](exports/FightGuild-Supers-2026-11-25.mp4).
 
+The full super animation pass starts with **Sky Foundry**: 16 body drawings, a dedicated torn-screen face, magma launch/slam effects and four original sounds, all on its existing combat clocks. [Watch with sound](exports/FightGuild-Sky-Foundry-2026-11-25.mp4) · [production notes](docs/super-animation-production.md).
+
 ## Play or edit
 
 For browser-only attack tuning on a work PC, the [hosted Move Workshop](https://h1p5t3r.github.io/Fight-guild-/) is the intended delivery after the [one-time Pages setup](docs/move-workshop.md#hosted-publishing). It loads artwork as needed, keeps drafts and pose photos in your browser, and exports JSON for the Godot editor. The **Publish Move Workshop** workflow deploys updates from `feat/godot-combat-lab`. For offline use, extract **FightGuild-Move-Workshop.zip** and open `index.html`; keep its `assets` folder beside it. The single-file HTML is still built for compatibility. Current exports use schema 27; version-12–26 workshop files migrate automatically. No game install is needed. Before switching to the website, download your JSON from the old editor and import it on the site.

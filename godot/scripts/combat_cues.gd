@@ -13,7 +13,7 @@ func reset() -> void:
 	latest = -1
 	epoch += 1
 
-func capture(frame: int, frozen: bool, values: PackedInt32Array, held: Array = [false, false], receiving: Array = [true, true]) -> void:
+func capture(frame: int, frozen: bool, values: PackedInt32Array, held: Array = [false, false], receiving: Array = [true, true], audio_events: Array = []) -> void:
 	# A replay replaces the predicted future, including contacts that disappeared.
 	if frame <= latest:
 		for key in frames.keys():
@@ -49,6 +49,9 @@ func capture(frame: int, frozen: bool, values: PackedInt32Array, held: Array = [
 		if cue.kind in [1, 3, 4] and receiving[receiver]: reactions[receiver] = cue.duplicate()
 	# Enough for trades and overlapping projectiles; bounded even with zero hitstop.
 	if active.size() > 32: active = active.slice(active.size() - 32)
+	# Cosmetic super sounds share confirmation and rollback history, but never
+	# create a hit spark, reaction, damage event or simulation field.
+	events.append_array(audio_events)
 	frames[frame] = {"events": events, "active": active, "reactions": reactions, "releases": releases}
 	frames.erase(frame - HISTORY)
 	latest = frame

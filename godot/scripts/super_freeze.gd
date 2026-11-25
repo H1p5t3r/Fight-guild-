@@ -14,6 +14,8 @@ var reduced_motion := false
 var portrait: Texture2D
 var custom_portrait := false
 var portrait_records: Dictionary = {}
+var move_portraits: Dictionary = {}
+var active_record: Dictionary = {}
 var textures: Dictionary = {}
 var tear_material: ShaderMaterial
 var screen_copy: BackBufferCopy
@@ -23,7 +25,9 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	clip_contents = true
-	portrait_records = JSON.parse_string(FileAccess.get_file_as_string(PORTRAITS_PATH)).get("fighters", {})
+	var records: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(PORTRAITS_PATH))
+	portrait_records = records.get("fighters", {})
+	move_portraits = records.get("moves", {})
 	screen_copy = BackBufferCopy.new()
 	screen_copy.copy_mode = BackBufferCopy.COPY_MODE_VIEWPORT
 	add_child(screen_copy)
@@ -62,22 +66,26 @@ func present(fighter: int, direction: int, tick: int, total: int = DEFAULT_TICKS
 	duration = total
 	move_title.text = title.to_upper()
 	move_title.modulate.a = float(composition().alpha)
-	portrait = portrait_for(character)
+	portrait = portrait_for(character, title)
 	visible = true
 	update_material()
 
-func portrait_for(fighter: int) -> Texture2D:
+func portrait_for(fighter: int, title: String = "") -> Texture2D:
 	var record: Dictionary = portrait_records.get(CombatModel.CHARACTERS[fighter].to_lower(), {})
-	custom_portrait = record.get("approved", false) and record.has("file")
+	var move_record: Dictionary = move_portraits.get(title, {})
+	if int(move_record.get("character", -1)) == fighter: record = move_record
+	active_record = record
+	custom_portrait = (record.get("approved", false) or record.get("enabled", false)) and record.has("file")
 	if not custom_portrait: return FightHud.portrait(fighter)
-	if not textures.has(fighter):
+	var key := str(record.file)+":"+str(record.region)
+	if not textures.has(key):
 		var texture := AtlasTexture.new()
 		texture.atlas = load("res://assets/ui/super-freeze/" + str(record.file))
 		var rect: Array = record.region
 		texture.region = Rect2(rect[0], rect[1], rect[2], rect[3])
 		texture.filter_clip = true
-		textures[fighter] = texture
-	return textures[fighter]
+		textures[key] = texture
+	return textures[key]
 
 func composition() -> Dictionary:
 	var phase := float(elapsed) / maxf(duration - 1, 1)
@@ -100,9 +108,10 @@ func update_material() -> void:
 	tear_material.set_shader_parameter("face_atlas", texture)
 	tear_material.set_shader_parameter("face_region", Vector4(region.position.x / texture_size.x,
 		region.position.y / texture_size.y, region.size.x / texture_size.x, region.size.y / texture_size.y))
-	var width := 1.0 if custom_portrait else 0.68
+	var width := float(active_record.get("width", 1.0)) if custom_portrait else 0.68
 	var height := width * (size.x / maxf(size.y, 1.0)) / (region.size.x / maxf(region.size.y, 1.0))
-	tear_material.set_shader_parameter("face_box", Vector4((1.0 - width) * 0.5, 0.5 - height * 0.5, width, height))
+	var center_y := float(active_record.get("center_y",0.5)) if custom_portrait else 0.5
+	tear_material.set_shader_parameter("face_box", Vector4((1.0 - width) * 0.5, center_y - height * 0.5, width, height))
 	tear_material.set_shader_parameter("panel_pixels", size.max(Vector2.ONE))
 	tear_material.set_shader_parameter("guild", FighterSelectPortrait.COLORS[character])
 	tear_material.set_shader_parameter("direction", facing)

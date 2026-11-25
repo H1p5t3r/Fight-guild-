@@ -40,6 +40,9 @@ func _ready() -> void:
 	var bank: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(DIRECTORY + "manifest.json"))
 	for sample in bank.sounds:
 		streams[str(sample.file)] = load(DIRECTORY + str(sample.file))
+	for name in ["clamp","lift","fall","slam"]:
+		var file: String = "../supers-v2/sky_foundry_"+str(name)+".wav"
+		streams[file] = load(DIRECTORY+file)
 
 func save_preferences() -> void:
 	if OS.get_cmdline_user_args().has("--test"): return
@@ -78,6 +81,10 @@ static func sound_for(cue: Dictionary) -> String:
 	return "swing_" + family if kind == 8 else "hit_" + family
 
 static func layers(cue: Dictionary) -> Array:
+	if cue.has("sound"):
+		return [{"key":"super_motion","file":str(cue.sound),"gain":-9.0,"pitch":1.0,"priority":3}]
+	if SuperAnimation.enabled and int(cue.character)==0 and int(cue.move)==16 and int(cue.kind) in [1,3,4]:
+		return [{"key":"super_slam","file":"../supers-v2/sky_foundry_slam.wav","gain":-7.0,"pitch":1.0,"priority":4}]
 	var key := sound_for(cue)
 	var kind := int(cue.kind)
 	var strength := clampi(int(cue.strength), 0, 4)

@@ -64,6 +64,8 @@ func _ready() -> void:
 			FightHud.draw(hud_layer, view, score, round_label, diagnostics))
 
 static func foreground_player(state: Dictionary) -> int:
+	var cinematic := SuperAnimation.foreground(state)
+	if cinematic >= 0: return cinematic
 	return CombatGrabs.foreground_player(state)
 
 func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bool) -> void:
@@ -128,6 +130,7 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 			weapons[p].present(screen_point(origin), screen_point(back), screen_point(tip), fighter.facing, scale_x * camera_zoom)
 	if not travel: CombatGrabs.present(sprites, model, view, scale_x * camera_zoom)
 	if not travel: CombatSupers.present(sprites, view, scale_x * camera_zoom)
+	if not travel: SuperAnimation.present(sprites, model, view, scale_x * camera_zoom)
 	queue_redraw()
 	hud_layer.queue_redraw()
 	collision_layer.queue_redraw()
@@ -138,7 +141,9 @@ func draw_impacts() -> void:
 	var sx := size.x / 1000.0
 	var project := func(point: Vector2) -> Vector2:
 		return screen_point(Vector2(point.x / 100.0 * sx, ArenaStage.floor_line(size) - point.y / 100.0 * sx))
-	CombatImpacts.draw(impact_layer, impact_cues, project, sx * camera_zoom)
+	var ordinary := impact_cues.filter(func(cue: Dictionary) -> bool: return not SuperAnimation.replaces_impact(cue,sprites))
+	CombatImpacts.draw(impact_layer, ordinary, project, sx * camera_zoom)
+	SuperAnimation.draw_front(impact_layer, sprites, view, sx * camera_zoom)
 
 func draw_projectiles() -> void:
 	if view.is_empty() or int(view.wallBreakTime) > 0: return
@@ -180,6 +185,7 @@ func _draw() -> void:
 		return
 	draw_ground_shadows()
 	draw_projectiles()
+	SuperAnimation.draw_behind(self, sprites, view, sx * camera_zoom)
 	var project := func(point: Vector2) -> Vector2:
 		return screen_point(Vector2(point.x / 100.0 * sx, floor_y - point.y / 100.0 * sx))
 	CombatImpacts.draw_releases(self, release_cues, project, sx * camera_zoom)

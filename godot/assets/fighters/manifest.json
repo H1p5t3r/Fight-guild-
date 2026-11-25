@@ -10594,7 +10594,733 @@
         "down_back": 350,
         "down_prone": 345,
         "iron_turn": 400,
-        "supers-v1": 425
+        "supers-v1": 425,
+        "sky-foundry-v2": 445
+      },
+      "super_sky_foundry": {
+        "file": "supers-v2/sky-foundry/entry.png",
+        "body_height": 445,
+        "frames": [
+          {
+            "file": "supers-v2/sky-foundry/entry.png",
+            "sha256": "83145e13f4ae26dead5a57df24b38496cf6ad97b5280a17a73fc868fcb98889f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              216,
+              75,
+              625,
+              492
+            ],
+            "pivot": [
+              355,
+              487
+            ],
+            "grip": [
+              359,
+              161
+            ],
+            "body_height": 445,
+            "source_pose": 0,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / entry / 1",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/entry.png",
+            "sha256": "83145e13f4ae26dead5a57df24b38496cf6ad97b5280a17a73fc868fcb98889f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              507
+            ],
+            "bounds": [
+              150,
+              7,
+              586,
+              489
+            ],
+            "pivot": [
+              332,
+              485
+            ],
+            "grip": [
+              524,
+              60
+            ],
+            "body_height": 445,
+            "source_pose": 1,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / entry / 2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/entry.png",
+            "sha256": "83145e13f4ae26dead5a57df24b38496cf6ad97b5280a17a73fc868fcb98889f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              184,
+              14,
+              611,
+              496
+            ],
+            "pivot": [
+              355,
+              492
+            ],
+            "grip": [
+              518,
+              66
+            ],
+            "body_height": 445,
+            "source_pose": 2,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / entry / 3",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/entry.png",
+            "sha256": "83145e13f4ae26dead5a57df24b38496cf6ad97b5280a17a73fc868fcb98889f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              507,
+              768,
+              517
+            ],
+            "bounds": [
+              183,
+              1,
+              562,
+              507
+            ],
+            "pivot": [
+              332,
+              441
+            ],
+            "grip": [
+              494,
+              46
+            ],
+            "body_height": 445,
+            "source_pose": 3,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / entry / 4",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/air.png",
+            "sha256": "bcb5e5868ebb3b9fe147c50aa83f3237900ae01f25666cca203f08a60e1e65bb",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              215,
+              11,
+              588,
+              496
+            ],
+            "pivot": [
+              367,
+              477
+            ],
+            "grip": [
+              506,
+              65
+            ],
+            "body_height": 445,
+            "source_pose": 0,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / air / 1",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/air.png",
+            "sha256": "bcb5e5868ebb3b9fe147c50aa83f3237900ae01f25666cca203f08a60e1e65bb",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              161,
+              6,
+              552,
+              508
+            ],
+            "pivot": [
+              362,
+              481
+            ],
+            "grip": [
+              288,
+              42
+            ],
+            "body_height": 445,
+            "source_pose": 1,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / air / 2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/air.png",
+            "sha256": "bcb5e5868ebb3b9fe147c50aa83f3237900ae01f25666cca203f08a60e1e65bb",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              195,
+              6,
+              578,
+              494
+            ],
+            "pivot": [
+              380,
+              496
+            ],
+            "grip": [
+              328,
+              41
+            ],
+            "body_height": 445,
+            "source_pose": 2,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / air / 3",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/air.png",
+            "sha256": "bcb5e5868ebb3b9fe147c50aa83f3237900ae01f25666cca203f08a60e1e65bb",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              184,
+              28,
+              552,
+              436
+            ],
+            "pivot": [
+              352,
+              492
+            ],
+            "grip": [
+              294,
+              69
+            ],
+            "body_height": 445,
+            "source_pose": 3,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / air / 4",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/slam.png",
+            "sha256": "1bb65400fc6357f50c2ccfb1e50ce6ebd667d84a451562df37b4cf76dbb03520",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              208,
+              7,
+              605,
+              466
+            ],
+            "pivot": [
+              410,
+              478
+            ],
+            "grip": [
+              329,
+              55
+            ],
+            "body_height": 445,
+            "source_pose": 0,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / slam / 1",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/slam.png",
+            "sha256": "1bb65400fc6357f50c2ccfb1e50ce6ebd667d84a451562df37b4cf76dbb03520",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              521
+            ],
+            "bounds": [
+              153,
+              4,
+              624,
+              521
+            ],
+            "pivot": [
+              386,
+              507
+            ],
+            "grip": [
+              258,
+              56
+            ],
+            "body_height": 445,
+            "source_pose": 1,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / slam / 2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/slam.png",
+            "sha256": "1bb65400fc6357f50c2ccfb1e50ce6ebd667d84a451562df37b4cf76dbb03520",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              147,
+              4,
+              619,
+              482
+            ],
+            "pivot": [
+              380,
+              475
+            ],
+            "grip": [
+              322,
+              47
+            ],
+            "body_height": 445,
+            "source_pose": 2,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / slam / 3",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/slam.png",
+            "sha256": "1bb65400fc6357f50c2ccfb1e50ce6ebd667d84a451562df37b4cf76dbb03520",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              521,
+              768,
+              503
+            ],
+            "bounds": [
+              78,
+              94,
+              649,
+              482
+            ],
+            "pivot": [
+              360,
+              477
+            ],
+            "grip": [
+              375,
+              447
+            ],
+            "body_height": 445,
+            "source_pose": 3,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / slam / 4",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/recovery.png",
+            "sha256": "e4d845027671322457b6aa602a9dfcba98b30aea8c6e95d347990bf2897ece5f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              136,
+              78,
+              672,
+              478
+            ],
+            "pivot": [
+              313,
+              474
+            ],
+            "grip": [
+              328,
+              446
+            ],
+            "body_height": 445,
+            "source_pose": 0,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / recovery / 1",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/recovery.png",
+            "sha256": "e4d845027671322457b6aa602a9dfcba98b30aea8c6e95d347990bf2897ece5f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              139,
+              47,
+              612,
+              474
+            ],
+            "pivot": [
+              260,
+              470
+            ],
+            "grip": [
+              275,
+              447
+            ],
+            "body_height": 445,
+            "source_pose": 1,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / recovery / 2",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/recovery.png",
+            "sha256": "e4d845027671322457b6aa602a9dfcba98b30aea8c6e95d347990bf2897ece5f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              178,
+              57,
+              634,
+              479
+            ],
+            "pivot": [
+              380,
+              473
+            ],
+            "grip": [
+              379,
+              185
+            ],
+            "body_height": 445,
+            "source_pose": 2,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / recovery / 3",
+            "render_only": true
+          },
+          {
+            "file": "supers-v2/sky-foundry/recovery.png",
+            "sha256": "e4d845027671322457b6aa602a9dfcba98b30aea8c6e95d347990bf2897ece5f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              154,
+              14,
+              622,
+              482
+            ],
+            "pivot": [
+              332,
+              478
+            ],
+            "grip": [
+              309,
+              103
+            ],
+            "body_height": 445,
+            "source_pose": 3,
+            "scale_group": "sky-foundry-v2",
+            "name": "Sky Foundry / recovery / 4",
+            "render_only": true
+          }
+        ],
+        "render_only": true
+      },
+      "super_sky_foundry_fx": {
+        "file": "supers-v2/sky-foundry/effects.png",
+        "body_height": 512,
+        "frames": [
+          {
+            "region": [
+              33,
+              85,
+              451,
+              366
+            ],
+            "pivot": [
+              225.5,
+              366
+            ],
+            "bounds": [
+              0,
+              0,
+              451,
+              366
+            ]
+          },
+          {
+            "region": [
+              552,
+              81,
+              436,
+              370
+            ],
+            "pivot": [
+              218.0,
+              370
+            ],
+            "bounds": [
+              0,
+              0,
+              436,
+              370
+            ]
+          },
+          {
+            "region": [
+              1165,
+              141,
+              229,
+              229
+            ],
+            "pivot": [
+              114.5,
+              229
+            ],
+            "bounds": [
+              0,
+              0,
+              229,
+              229
+            ]
+          },
+          {
+            "region": [
+              23,
+              694,
+              463,
+              250
+            ],
+            "pivot": [
+              231.5,
+              250
+            ],
+            "bounds": [
+              0,
+              0,
+              463,
+              250
+            ]
+          },
+          {
+            "region": [
+              533,
+              724,
+              469,
+              220
+            ],
+            "pivot": [
+              234.5,
+              220
+            ],
+            "bounds": [
+              0,
+              0,
+              469,
+              220
+            ]
+          },
+          {
+            "region": [
+              1064,
+              706,
+              442,
+              232
+            ],
+            "pivot": [
+              221.0,
+              232
+            ],
+            "bounds": [
+              0,
+              0,
+              442,
+              232
+            ]
+          }
+        ],
+        "render_only": true
+      },
+      "super_presentations": {
+        "16": {
+          "phase": "super_sky_foundry",
+          "fx_phase": "super_sky_foundry_fx",
+          "source": "supers-v2/sky-foundry",
+          "pair_ticks": 112,
+          "release_freeze": 24,
+          "owner_recovery": 24,
+          "paired": [
+            [
+              0,
+              1
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              12,
+              3
+            ],
+            [
+              20,
+              4
+            ],
+            [
+              30,
+              5
+            ],
+            [
+              44,
+              6
+            ],
+            [
+              58,
+              7
+            ],
+            [
+              65,
+              8
+            ],
+            [
+              88,
+              9
+            ],
+            [
+              100,
+              10
+            ]
+          ],
+          "connected": [
+            [
+              0,
+              11
+            ],
+            [
+              4,
+              12
+            ],
+            [
+              8,
+              13
+            ],
+            [
+              15,
+              14
+            ],
+            [
+              21,
+              15
+            ]
+          ],
+          "description": "Held load, first-active catch, rising support, apex, downward load, damage-frame slam and grounded return."
+        }
       }
     },
     {

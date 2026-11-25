@@ -35,7 +35,8 @@ func check_capture_depth(model: CombatModel, arena: Control) -> void:
 					var phase := str(sprite.get_meta("phase", ""))
 					if slot == 16 and int(state.pairClock) < 12:
 						check(phase == "knockdown_back", "Sky Foundry catch used an upright floating victim")
-						check(int(arena.sprites[owner].get_meta("pose")) == int(FighterArt.catalog().fighters[0].paired_animations["16"].keys[1].pose), "Sky Foundry catch lost its supporting palm")
+						var authored := SuperAnimation.selection(model,state,owner)
+						check(str(arena.sprites[owner].get_meta("phase")) == str(authored.spec.phase) and int(arena.sprites[owner].get_meta("pose")) == int(authored.pose), "Sky Foundry catch lost its supporting palm")
 					if phase in ["knockdown", "knockdown_back"]:
 						var sheet := FighterArt.sheet(victim, phase)
 						check(is_equal_approx(sprite.scale.y, 150.0/float(sheet.frames[0].get("body_height",sheet.body_height))*ws), "Carried receiver changed size")
@@ -89,7 +90,7 @@ func run() -> void:
 				var before: PackedByteArray = model.core.snapshot()
 				arena.refresh(model, state, false, false)
 				check(model.core.snapshot() == before, "Rendering mutated combat")
-				check("anvil-bull-v2/" in arena.sprites[0].texture.atlas.resource_path or "supers-v1/anvil.png" in arena.sprites[0].texture.atlas.resource_path, "Legacy sprite appeared")
+				check("anvil-bull-v2/" in arena.sprites[0].texture.atlas.resource_path or "supers-v1/anvil.png" in arena.sprites[0].texture.atlas.resource_path or "supers-v2/sky-foundry/" in arena.sprites[0].texture.atlas.resource_path, "Legacy sprite appeared")
 				model.step(0, 0)
 			check(active_seen or slot in [13, 21], "Never reached active: " + slot_text)
 		# The stance's held age must still show a walking guard from saved travel.
@@ -139,7 +140,7 @@ func run() -> void:
 				arena.refresh(model, state, false, true)
 				check(arena.sprites[1].position.is_equal_approx(placement), "Pause/repeated render advanced throw alignment")
 				poses[state.players[0].poseIndex] = true
-				check("anvil-bull-v2/" in arena.sprites[0].texture.atlas.resource_path, "Generic grab replaced authored choreography")
+				check("anvil-bull-v2/" in arena.sprites[0].texture.atlas.resource_path or (slot==16 and "supers-v2/sky-foundry/" in arena.sprites[0].texture.atlas.resource_path), "Generic grab replaced authored choreography")
 				check(arena.sprites[0].get_meta("grab_role") == "owner", "Capture role lost")
 				check(model.core.snapshot() == before, "Paired presentation changed simulation")
 			check(poses.size() == 3, "Capture did not show catch/lift/slam")
