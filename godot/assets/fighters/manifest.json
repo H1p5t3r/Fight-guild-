@@ -43,6 +43,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "name": "Anvil / active / 1"
           },
           {
@@ -69,8 +70,9 @@
               245,
               324
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 2,
+            "scale_group": "checks",
             "name": "Anvil / active / 2"
           },
           {
@@ -97,8 +99,9 @@
               265,
               331
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 2,
+            "scale_group": "kicks",
             "name": "Anvil / active / 3"
           },
           {
@@ -125,8 +128,9 @@
               245,
               318
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 3,
+            "scale_group": "slashes",
             "name": "Anvil / active / 4"
           },
           {
@@ -153,8 +157,9 @@
               235,
               324
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 2,
+            "scale_group": "heavy_sweep",
             "name": "Anvil / active / 5"
           },
           {
@@ -181,8 +186,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 0,
+            "scale_group": "drive",
             "name": "Anvil / active / 6"
           },
           {
@@ -211,6 +217,7 @@
             ],
             "body_height": 435,
             "source_pose": 0,
+            "scale_group": "walk",
             "name": "Anvil / active / 7"
           },
           {
@@ -239,6 +246,7 @@
             ],
             "body_height": 435,
             "source_pose": 3,
+            "scale_group": "walk",
             "name": "Anvil / active / 8"
           },
           {
@@ -267,6 +275,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "name": "Anvil / active / 9"
           },
           {
@@ -293,8 +302,9 @@
               345,
               327
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "reactions_high",
             "name": "Anvil / active / 10"
           },
           {
@@ -323,6 +333,7 @@
             ],
             "body_height": 345,
             "source_pose": 0,
+            "scale_group": "down_prone",
             "name": "Anvil / active / 11"
           },
           {
@@ -351,6 +362,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "name": "Anvil / active / 12"
           }
         ],
@@ -408,6 +420,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "name": "Anvil / windup / 1"
           },
           {
@@ -434,8 +447,9 @@
               245,
               331
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 0,
+            "scale_group": "checks",
             "name": "Anvil / windup / 2"
           },
           {
@@ -462,8 +476,9 @@
               270,
               330
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 4,
+            "scale_group": "kicks",
             "name": "Anvil / windup / 3"
           },
           {
@@ -490,8 +505,9 @@
               245,
               317
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 0,
+            "scale_group": "slashes",
             "name": "Anvil / windup / 4"
           },
           {
@@ -518,8 +534,9 @@
               260,
               348
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 0,
+            "scale_group": "heavy_sweep",
             "name": "Anvil / windup / 5"
           },
           {
@@ -546,8 +563,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 0,
+            "scale_group": "drive",
             "name": "Anvil / windup / 6"
           }
         ],
@@ -605,6 +623,7 @@
             ],
             "body_height": 425,
             "source_pose": 4,
+            "scale_group": "base",
             "name": "Anvil / block / 1"
           },
           {
@@ -631,8 +650,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 0,
+            "scale_group": "drive",
             "name": "Anvil / block / 2"
           },
           {
@@ -659,8 +679,9 @@
               235,
               480
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 1,
+            "scale_group": "drive",
             "name": "Anvil / block / 3"
           },
           {
@@ -687,8 +708,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 2,
+            "scale_group": "drive",
             "name": "Anvil / block / 4"
           },
           {
@@ -717,6 +739,7 @@
             ],
             "body_height": 425,
             "source_pose": 5,
+            "scale_group": "base",
             "name": "Anvil / block / 5"
           },
           {
@@ -743,8 +766,9 @@
               345,
               329
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 2,
+            "scale_group": "reactions_high",
             "name": "Anvil / block / 6"
           }
         ],
@@ -802,6 +826,7 @@
             ],
             "body_height": 345,
             "source_pose": 0,
+            "scale_group": "down_prone",
             "name": "Anvil / knockdown / 1"
           },
           {
@@ -830,6 +855,7 @@
             ],
             "body_height": 345,
             "source_pose": 1,
+            "scale_group": "down_prone",
             "name": "Anvil / knockdown / 2"
           },
           {
@@ -858,6 +884,7 @@
             ],
             "body_height": 345,
             "source_pose": 2,
+            "scale_group": "down_prone",
             "name": "Anvil / knockdown / 3"
           },
           {
@@ -886,6 +913,7 @@
             ],
             "body_height": 345,
             "source_pose": 3,
+            "scale_group": "down_prone",
             "name": "Anvil / knockdown / 4"
           },
           {
@@ -914,6 +942,7 @@
             ],
             "body_height": 345,
             "source_pose": 4,
+            "scale_group": "down_prone",
             "name": "Anvil / knockdown / 5"
           },
           {
@@ -942,6 +971,7 @@
             ],
             "body_height": 345,
             "source_pose": 5,
+            "scale_group": "down_prone",
             "name": "Anvil / knockdown / 6"
           }
         ],
@@ -971,7 +1001,7 @@
           1536,
           1024
         ],
-        "body_height": 300,
+        "body_height": 350,
         "frames": [
           {
             "file": "anvil-bull-v2/down_back.png",
@@ -997,8 +1027,9 @@
               385,
               326
             ],
-            "body_height": 300,
+            "body_height": 350,
             "source_pose": 0,
+            "scale_group": "down_back",
             "name": "Anvil / knockdown back / 1"
           },
           {
@@ -1025,8 +1056,9 @@
               385,
               326
             ],
-            "body_height": 300,
+            "body_height": 350,
             "source_pose": 1,
+            "scale_group": "down_back",
             "name": "Anvil / knockdown back / 2"
           },
           {
@@ -1053,8 +1085,9 @@
               385,
               309
             ],
-            "body_height": 300,
+            "body_height": 350,
             "source_pose": 2,
+            "scale_group": "down_back",
             "name": "Anvil / knockdown back / 3"
           },
           {
@@ -1081,8 +1114,9 @@
               385,
               309
             ],
-            "body_height": 300,
+            "body_height": 350,
             "source_pose": 3,
+            "scale_group": "down_back",
             "name": "Anvil / knockdown back / 4"
           },
           {
@@ -1109,8 +1143,9 @@
               385,
               319
             ],
-            "body_height": 300,
+            "body_height": 350,
             "source_pose": 4,
+            "scale_group": "down_back",
             "name": "Anvil / knockdown back / 5"
           },
           {
@@ -1137,8 +1172,9 @@
               345,
               321
             ],
-            "body_height": 300,
+            "body_height": 350,
             "source_pose": 5,
+            "scale_group": "down_back",
             "name": "Anvil / knockdown back / 6"
           }
         ],
@@ -1196,6 +1232,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "name": "Anvil / ready / 1"
           }
         ],
@@ -1253,6 +1290,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "name": "Anvil / idle / 1"
           },
           {
@@ -1281,6 +1319,7 @@
             ],
             "body_height": 425,
             "source_pose": 1,
+            "scale_group": "base",
             "name": "Anvil / idle / 2"
           },
           {
@@ -1309,6 +1348,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "name": "Anvil / idle / 3"
           },
           {
@@ -1337,6 +1377,7 @@
             ],
             "body_height": 425,
             "source_pose": 1,
+            "scale_group": "base",
             "name": "Anvil / idle / 4"
           }
         ],
@@ -1400,6 +1441,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "name": "Anvil / crouch idle / 1"
           },
           {
@@ -1428,6 +1470,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "name": "Anvil / crouch idle / 2"
           },
           {
@@ -1456,6 +1499,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "name": "Anvil / crouch idle / 3"
           },
           {
@@ -1484,6 +1528,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "name": "Anvil / crouch idle / 4"
           }
         ],
@@ -1541,6 +1586,7 @@
             ],
             "body_height": 435,
             "source_pose": 0,
+            "scale_group": "walk",
             "name": "Anvil / walk / 1"
           },
           {
@@ -1569,6 +1615,7 @@
             ],
             "body_height": 435,
             "source_pose": 0,
+            "scale_group": "walk",
             "name": "Anvil / walk / 2"
           },
           {
@@ -1597,6 +1644,7 @@
             ],
             "body_height": 435,
             "source_pose": 1,
+            "scale_group": "walk",
             "name": "Anvil / walk / 3"
           },
           {
@@ -1625,6 +1673,7 @@
             ],
             "body_height": 435,
             "source_pose": 2,
+            "scale_group": "walk",
             "name": "Anvil / walk / 4"
           },
           {
@@ -1653,6 +1702,7 @@
             ],
             "body_height": 435,
             "source_pose": 3,
+            "scale_group": "walk",
             "name": "Anvil / walk / 5"
           },
           {
@@ -1681,6 +1731,7 @@
             ],
             "body_height": 435,
             "source_pose": 3,
+            "scale_group": "walk",
             "name": "Anvil / walk / 6"
           },
           {
@@ -1709,6 +1760,7 @@
             ],
             "body_height": 435,
             "source_pose": 4,
+            "scale_group": "walk",
             "name": "Anvil / walk / 7"
           },
           {
@@ -1737,6 +1789,7 @@
             ],
             "body_height": 435,
             "source_pose": 5,
+            "scale_group": "walk",
             "name": "Anvil / walk / 8"
           }
         ],
@@ -1794,6 +1847,7 @@
             ],
             "body_height": 435,
             "source_pose": 5,
+            "scale_group": "walk",
             "name": "Anvil / back walk / 1"
           },
           {
@@ -1822,6 +1876,7 @@
             ],
             "body_height": 435,
             "source_pose": 4,
+            "scale_group": "walk",
             "name": "Anvil / back walk / 2"
           },
           {
@@ -1850,6 +1905,7 @@
             ],
             "body_height": 435,
             "source_pose": 3,
+            "scale_group": "walk",
             "name": "Anvil / back walk / 3"
           },
           {
@@ -1878,6 +1934,7 @@
             ],
             "body_height": 435,
             "source_pose": 3,
+            "scale_group": "walk",
             "name": "Anvil / back walk / 4"
           },
           {
@@ -1906,6 +1963,7 @@
             ],
             "body_height": 435,
             "source_pose": 2,
+            "scale_group": "walk",
             "name": "Anvil / back walk / 5"
           },
           {
@@ -1934,6 +1992,7 @@
             ],
             "body_height": 435,
             "source_pose": 1,
+            "scale_group": "walk",
             "name": "Anvil / back walk / 6"
           },
           {
@@ -1962,6 +2021,7 @@
             ],
             "body_height": 435,
             "source_pose": 0,
+            "scale_group": "walk",
             "name": "Anvil / back walk / 7"
           },
           {
@@ -1990,6 +2050,7 @@
             ],
             "body_height": 435,
             "source_pose": 0,
+            "scale_group": "walk",
             "name": "Anvil / back walk / 8"
           }
         ],
@@ -2019,7 +2080,7 @@
           1536,
           1024
         ],
-        "body_height": 425,
+        "body_height": 435,
         "frames": [
           {
             "file": "anvil-bull-v2/dash.png",
@@ -2045,8 +2106,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 0,
+            "scale_group": "dash",
             "name": "Anvil / run / 1"
           },
           {
@@ -2073,8 +2135,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 0,
+            "scale_group": "dash",
             "name": "Anvil / run / 2"
           },
           {
@@ -2101,8 +2164,9 @@
               235,
               480
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 1,
+            "scale_group": "dash",
             "name": "Anvil / run / 3"
           },
           {
@@ -2129,8 +2193,9 @@
               235,
               480
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 1,
+            "scale_group": "dash",
             "name": "Anvil / run / 4"
           },
           {
@@ -2157,8 +2222,9 @@
               235,
               480
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 1,
+            "scale_group": "dash",
             "name": "Anvil / run / 5"
           },
           {
@@ -2185,8 +2251,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 2,
+            "scale_group": "dash",
             "name": "Anvil / run / 6"
           },
           {
@@ -2213,8 +2280,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 2,
+            "scale_group": "dash",
             "name": "Anvil / run / 7"
           },
           {
@@ -2241,8 +2309,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 2,
+            "scale_group": "dash",
             "name": "Anvil / run / 8"
           }
         ],
@@ -2272,7 +2341,7 @@
           1536,
           1024
         ],
-        "body_height": 425,
+        "body_height": 435,
         "frames": [
           {
             "file": "anvil-bull-v2/dash.png",
@@ -2298,8 +2367,9 @@
               235,
               478
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 3,
+            "scale_group": "dash",
             "name": "Anvil / backdash / 1"
           },
           {
@@ -2326,8 +2396,9 @@
               235,
               478
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 3,
+            "scale_group": "dash",
             "name": "Anvil / backdash / 2"
           },
           {
@@ -2354,8 +2425,9 @@
               235,
               478
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 4,
+            "scale_group": "dash",
             "name": "Anvil / backdash / 3"
           },
           {
@@ -2382,8 +2454,9 @@
               235,
               478
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 4,
+            "scale_group": "dash",
             "name": "Anvil / backdash / 4"
           },
           {
@@ -2410,8 +2483,9 @@
               235,
               477
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 5,
+            "scale_group": "dash",
             "name": "Anvil / backdash / 5"
           },
           {
@@ -2438,8 +2512,9 @@
               235,
               477
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 5,
+            "scale_group": "dash",
             "name": "Anvil / backdash / 6"
           }
         ],
@@ -2469,7 +2544,7 @@
           1536,
           1024
         ],
-        "body_height": 425,
+        "body_height": 435,
         "frames": [
           {
             "file": "anvil-bull-v2/drive.png",
@@ -2495,8 +2570,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 0,
+            "scale_group": "drive",
             "name": "Anvil / stance / 1"
           },
           {
@@ -2523,8 +2599,9 @@
               235,
               480
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 1,
+            "scale_group": "drive",
             "name": "Anvil / stance / 2"
           },
           {
@@ -2551,8 +2628,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 0,
+            "scale_group": "drive",
             "name": "Anvil / stance / 3"
           },
           {
@@ -2579,8 +2657,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 2,
+            "scale_group": "drive",
             "name": "Anvil / stance / 4"
           }
         ],
@@ -2638,6 +2717,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "5P",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -2667,8 +2747,9 @@
               245,
               331
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 0,
+            "scale_group": "checks",
             "action_id": "5P",
             "action_frame": 2,
             "motion_cue": "Load / held through last startup",
@@ -2698,8 +2779,9 @@
               245,
               324
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 2,
+            "scale_group": "checks",
             "action_id": "5P",
             "action_frame": 7,
             "motion_cue": "First-active snap",
@@ -2729,12 +2811,13 @@
               245,
               324
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 2,
+            "scale_group": "checks",
             "action_id": "5P",
             "action_frame": 10,
-            "motion_cue": "Contact ends",
-            "name": "5P / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "5P / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/checks.png",
@@ -2760,8 +2843,9 @@
               245,
               326
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 4,
+            "scale_group": "checks",
             "action_id": "5P",
             "action_frame": 15,
             "motion_cue": "Withdraw",
@@ -2793,6 +2877,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "5P",
             "action_frame": 22,
             "motion_cue": "Settle / lock persists",
@@ -2824,6 +2909,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "action_id": "2P",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -2853,8 +2939,9 @@
               265,
               330
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 1,
+            "scale_group": "checks",
             "action_id": "2P",
             "action_frame": 2,
             "motion_cue": "Load / held through last startup",
@@ -2884,8 +2971,9 @@
               260,
               324
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 3,
+            "scale_group": "checks",
             "action_id": "2P",
             "action_frame": 7,
             "motion_cue": "First-active snap",
@@ -2915,12 +3003,13 @@
               260,
               324
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 3,
+            "scale_group": "checks",
             "action_id": "2P",
             "action_frame": 10,
-            "motion_cue": "Contact ends",
-            "name": "2P / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "2P / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/checks.png",
@@ -2946,8 +3035,9 @@
               265,
               326
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 5,
+            "scale_group": "checks",
             "action_id": "2P",
             "action_frame": 15,
             "motion_cue": "Withdraw",
@@ -2979,6 +3069,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "action_id": "2P",
             "action_frame": 22,
             "motion_cue": "Settle / lock persists",
@@ -3010,6 +3101,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "5K",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -3039,8 +3131,9 @@
               270,
               330
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 4,
+            "scale_group": "kicks",
             "action_id": "5K",
             "action_frame": 3,
             "motion_cue": "Load / held through last startup",
@@ -3070,8 +3163,9 @@
               265,
               331
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 2,
+            "scale_group": "kicks",
             "action_id": "5K",
             "action_frame": 10,
             "motion_cue": "First-active snap",
@@ -3101,12 +3195,13 @@
               265,
               331
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 2,
+            "scale_group": "kicks",
             "action_id": "5K",
             "action_frame": 14,
-            "motion_cue": "Contact ends",
-            "name": "5K / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "5K / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/kicks.png",
@@ -3132,8 +3227,9 @@
               270,
               330
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 4,
+            "scale_group": "kicks",
             "action_id": "5K",
             "action_frame": 20,
             "motion_cue": "Withdraw",
@@ -3165,6 +3261,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "5K",
             "action_frame": 29,
             "motion_cue": "Settle / lock persists",
@@ -3196,6 +3293,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "action_id": "2K",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -3225,8 +3323,9 @@
               280,
               336
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 1,
+            "scale_group": "kicks",
             "action_id": "2K",
             "action_frame": 2,
             "motion_cue": "Load / held through last startup",
@@ -3256,8 +3355,9 @@
               280,
               331
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 3,
+            "scale_group": "kicks",
             "action_id": "2K",
             "action_frame": 9,
             "motion_cue": "First-active snap",
@@ -3287,12 +3387,13 @@
               280,
               331
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 3,
+            "scale_group": "kicks",
             "action_id": "2K",
             "action_frame": 12,
-            "motion_cue": "Contact ends",
-            "name": "2K / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "2K / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/kicks.png",
@@ -3318,8 +3419,9 @@
               280,
               330
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 5,
+            "scale_group": "kicks",
             "action_id": "2K",
             "action_frame": 18,
             "motion_cue": "Withdraw",
@@ -3351,6 +3453,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "action_id": "2K",
             "action_frame": 26,
             "motion_cue": "Settle / lock persists",
@@ -3382,6 +3485,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "c.S",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -3411,8 +3515,9 @@
               245,
               317
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 0,
+            "scale_group": "slashes",
             "action_id": "c.S",
             "action_frame": 3,
             "motion_cue": "Load / held through last startup",
@@ -3442,8 +3547,21 @@
               245,
               318
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 2,
+            "scale_group": "slashes",
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 1,
+              "box": [
+                12.0,
+                45.0,
+                105.0,
+                145.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
             "action_id": "c.S",
             "action_frame": 10,
             "motion_cue": "First-active snap",
@@ -3473,12 +3591,13 @@
               245,
               318
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 2,
+            "scale_group": "slashes",
             "action_id": "c.S",
             "action_frame": 14,
-            "motion_cue": "Contact ends",
-            "name": "c.S / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "c.S / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/slashes.png",
@@ -3504,8 +3623,9 @@
               245,
               328
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 4,
+            "scale_group": "slashes",
             "action_id": "c.S",
             "action_frame": 21,
             "motion_cue": "Withdraw",
@@ -3537,6 +3657,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "c.S",
             "action_frame": 31,
             "motion_cue": "Settle / lock persists",
@@ -3568,6 +3689,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "5S",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -3597,8 +3719,9 @@
               245,
               317
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 0,
+            "scale_group": "slashes",
             "action_id": "5S",
             "action_frame": 5,
             "motion_cue": "Load / held through last startup",
@@ -3628,8 +3751,21 @@
               245,
               318
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 3,
+            "scale_group": "slashes",
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 0,
+              "box": [
+                60.0,
+                55.0,
+                215.0,
+                120.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
             "action_id": "5S",
             "action_frame": 16,
             "motion_cue": "First-active snap",
@@ -3659,12 +3795,13 @@
               245,
               318
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 3,
+            "scale_group": "slashes",
             "action_id": "5S",
             "action_frame": 21,
-            "motion_cue": "Contact ends",
-            "name": "5S / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "5S / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/slashes.png",
@@ -3690,8 +3827,9 @@
               245,
               328
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 5,
+            "scale_group": "slashes",
             "action_id": "5S",
             "action_frame": 29,
             "motion_cue": "Withdraw",
@@ -3723,6 +3861,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "5S",
             "action_frame": 41,
             "motion_cue": "Settle / lock persists",
@@ -3754,6 +3893,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "5Hs",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -3783,8 +3923,9 @@
               260,
               348
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 0,
+            "scale_group": "heavy_sweep",
             "action_id": "5Hs",
             "action_frame": 6,
             "motion_cue": "Load / held through last startup",
@@ -3814,8 +3955,21 @@
               235,
               324
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 2,
+            "scale_group": "heavy_sweep",
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 0,
+              "box": [
+                60.0,
+                50.0,
+                245.0,
+                135.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
             "action_id": "5Hs",
             "action_frame": 19,
             "motion_cue": "First-active snap",
@@ -3845,12 +3999,13 @@
               235,
               324
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 2,
+            "scale_group": "heavy_sweep",
             "action_id": "5Hs",
             "action_frame": 24,
-            "motion_cue": "Contact ends",
-            "name": "5Hs / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "5Hs / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/heavy_sweep.png",
@@ -3876,8 +4031,9 @@
               250,
               327
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 4,
+            "scale_group": "heavy_sweep",
             "action_id": "5Hs",
             "action_frame": 34,
             "motion_cue": "Withdraw",
@@ -3909,6 +4065,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "5Hs",
             "action_frame": 49,
             "motion_cue": "Settle / lock persists",
@@ -3940,6 +4097,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "action_id": "2S",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -3969,8 +4127,9 @@
               260,
               348
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 1,
+            "scale_group": "heavy_sweep",
             "action_id": "2S",
             "action_frame": 4,
             "motion_cue": "Load / held through last startup",
@@ -4000,8 +4159,21 @@
               235,
               324
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 3,
+            "scale_group": "heavy_sweep",
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 0,
+              "box": [
+                12.0,
+                0.0,
+                180.0,
+                32.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
             "action_id": "2S",
             "action_frame": 13,
             "motion_cue": "First-active snap",
@@ -4031,12 +4203,13 @@
               235,
               324
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 3,
+            "scale_group": "heavy_sweep",
             "action_id": "2S",
             "action_frame": 17,
-            "motion_cue": "Contact ends",
-            "name": "2S / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "2S / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/heavy_sweep.png",
@@ -4062,8 +4235,9 @@
               250,
               327
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 5,
+            "scale_group": "heavy_sweep",
             "action_id": "2S",
             "action_frame": 26,
             "motion_cue": "Withdraw",
@@ -4095,6 +4269,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "action_id": "2S",
             "action_frame": 40,
             "motion_cue": "Settle / lock persists",
@@ -4126,6 +4301,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "action_id": "2Hs",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -4155,8 +4331,9 @@
               245,
               315
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 0,
+            "scale_group": "lift_anti",
             "action_id": "2Hs",
             "action_frame": 5,
             "motion_cue": "Load / held through last startup",
@@ -4186,8 +4363,21 @@
               245,
               355
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 2,
+            "scale_group": "lift_anti",
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 1,
+              "box": [
+                12.0,
+                15.0,
+                135.0,
+                185.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
             "action_id": "2Hs",
             "action_frame": 16,
             "motion_cue": "First-active snap",
@@ -4217,12 +4407,13 @@
               245,
               355
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 2,
+            "scale_group": "lift_anti",
             "action_id": "2Hs",
             "action_frame": 21,
-            "motion_cue": "Contact ends",
-            "name": "2Hs / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "2Hs / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/lift_anti.png",
@@ -4248,8 +4439,9 @@
               245,
               324
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 4,
+            "scale_group": "lift_anti",
             "action_id": "2Hs",
             "action_frame": 31,
             "motion_cue": "Withdraw",
@@ -4281,6 +4473,7 @@
             ],
             "body_height": 425,
             "source_pose": 2,
+            "scale_group": "base",
             "action_id": "2Hs",
             "action_frame": 45,
             "motion_cue": "Settle / lock persists",
@@ -4312,6 +4505,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "6P",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -4341,8 +4535,9 @@
               245,
               315
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 1,
+            "scale_group": "lift_anti",
             "action_id": "6P",
             "action_frame": 3,
             "motion_cue": "Load / held through last startup",
@@ -4372,8 +4567,9 @@
               245,
               334
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 3,
+            "scale_group": "lift_anti",
             "action_id": "6P",
             "action_frame": 12,
             "motion_cue": "First-active snap",
@@ -4403,12 +4599,13 @@
               245,
               334
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 3,
+            "scale_group": "lift_anti",
             "action_id": "6P",
             "action_frame": 17,
-            "motion_cue": "Contact ends",
-            "name": "6P / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "6P / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/lift_anti.png",
@@ -4434,8 +4631,9 @@
               245,
               324
             ],
-            "body_height": 300,
+            "body_height": 325,
             "source_pose": 5,
+            "scale_group": "lift_anti",
             "action_id": "6P",
             "action_frame": 25,
             "motion_cue": "Withdraw",
@@ -4467,6 +4665,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "6P",
             "action_frame": 37,
             "motion_cue": "Settle / lock persists",
@@ -4498,6 +4697,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "6Hs",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -4527,8 +4727,9 @@
               245,
               349
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "rush",
             "action_id": "6Hs",
             "action_frame": 7,
             "motion_cue": "Load / held through last startup",
@@ -4558,8 +4759,21 @@
               245,
               319
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 2,
+            "scale_group": "rush",
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 2,
+              "box": [
+                60.0,
+                10.0,
+                235.0,
+                180.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
             "action_id": "6Hs",
             "action_frame": 24,
             "motion_cue": "First-active snap",
@@ -4589,12 +4803,13 @@
               245,
               319
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 2,
+            "scale_group": "rush",
             "action_id": "6Hs",
             "action_frame": 29,
-            "motion_cue": "Contact ends",
-            "name": "6Hs / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "6Hs / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/rush.png",
@@ -4620,8 +4835,9 @@
               245,
               327
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 4,
+            "scale_group": "rush",
             "action_id": "6Hs",
             "action_frame": 40,
             "motion_cue": "Withdraw",
@@ -4653,6 +4869,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "6Hs",
             "action_frame": 56,
             "motion_cue": "Settle / lock persists",
@@ -4684,6 +4901,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "214S",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -4713,8 +4931,9 @@
               245,
               349
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 1,
+            "scale_group": "rush",
             "action_id": "214S",
             "action_frame": 7,
             "motion_cue": "Load / held through last startup",
@@ -4744,8 +4963,21 @@
               245,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 3,
+            "scale_group": "rush",
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 0,
+              "box": [
+                12.0,
+                25.0,
+                140.0,
+                135.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
             "action_id": "214S",
             "action_frame": 23,
             "motion_cue": "First-active snap",
@@ -4775,12 +5007,13 @@
               245,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 3,
+            "scale_group": "rush",
             "action_id": "214S",
             "action_frame": 47,
-            "motion_cue": "Contact ends",
-            "name": "214S / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "214S / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/rush.png",
@@ -4806,8 +5039,9 @@
               245,
               327
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 5,
+            "scale_group": "rush",
             "action_id": "214S",
             "action_frame": 56,
             "motion_cue": "Withdraw",
@@ -4839,6 +5073,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "214S",
             "action_frame": 69,
             "motion_cue": "Settle / lock persists",
@@ -4870,6 +5105,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "214S>P",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -4899,8 +5135,9 @@
               245,
               327
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 5,
+            "scale_group": "rush",
             "action_id": "214S>P",
             "action_frame": 2,
             "motion_cue": "Load / held through last startup",
@@ -4930,8 +5167,9 @@
               245,
               327
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 5,
+            "scale_group": "rush",
             "action_id": "214S>P",
             "action_frame": 5,
             "motion_cue": "First-active snap",
@@ -4961,12 +5199,13 @@
               245,
               327
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 5,
+            "scale_group": "rush",
             "action_id": "214S>P",
             "action_frame": 6,
-            "motion_cue": "Contact ends",
-            "name": "214S>P / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "214S>P / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/rush.png",
@@ -4992,8 +5231,9 @@
               245,
               327
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 5,
+            "scale_group": "rush",
             "action_id": "214S>P",
             "action_frame": 10,
             "motion_cue": "Withdraw",
@@ -5025,6 +5265,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "214S>P",
             "action_frame": 15,
             "motion_cue": "Settle / lock persists",
@@ -5056,6 +5297,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.P",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -5085,8 +5327,9 @@
               335,
               311
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "air_checks",
             "action_id": "j.P",
             "action_frame": 2,
             "motion_cue": "Load / held through last startup",
@@ -5116,8 +5359,9 @@
               335,
               303
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 2,
+            "scale_group": "air_checks",
             "action_id": "j.P",
             "action_frame": 8,
             "motion_cue": "First-active snap",
@@ -5147,12 +5391,13 @@
               335,
               303
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 2,
+            "scale_group": "air_checks",
             "action_id": "j.P",
             "action_frame": 12,
-            "motion_cue": "Contact ends",
-            "name": "j.P / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "j.P / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/air_checks.png",
@@ -5178,8 +5423,9 @@
               335,
               315
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 4,
+            "scale_group": "air_checks",
             "action_id": "j.P",
             "action_frame": 16,
             "motion_cue": "Withdraw",
@@ -5211,6 +5457,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.P",
             "action_frame": 23,
             "motion_cue": "Settle / lock persists",
@@ -5242,6 +5489,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.K",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -5271,8 +5519,9 @@
               290,
               296
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 1,
+            "scale_group": "air_checks",
             "action_id": "j.K",
             "action_frame": 3,
             "motion_cue": "Load / held through last startup",
@@ -5302,8 +5551,9 @@
               290,
               285
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 3,
+            "scale_group": "air_checks",
             "action_id": "j.K",
             "action_frame": 10,
             "motion_cue": "First-active snap",
@@ -5333,12 +5583,13 @@
               290,
               285
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 3,
+            "scale_group": "air_checks",
             "action_id": "j.K",
             "action_frame": 14,
-            "motion_cue": "Contact ends",
-            "name": "j.K / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "j.K / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/air_checks.png",
@@ -5364,8 +5615,9 @@
               290,
               306
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 5,
+            "scale_group": "air_checks",
             "action_id": "j.K",
             "action_frame": 20,
             "motion_cue": "Withdraw",
@@ -5397,6 +5649,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.K",
             "action_frame": 28,
             "motion_cue": "Settle / lock persists",
@@ -5428,6 +5681,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.S",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -5457,8 +5711,9 @@
               300,
               315
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 0,
+            "scale_group": "air_swings",
             "action_id": "j.S",
             "action_frame": 4,
             "motion_cue": "Load / held through last startup",
@@ -5488,8 +5743,21 @@
               300,
               310
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 2,
+            "scale_group": "air_swings",
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 0,
+              "box": [
+                12.0,
+                -15.0,
+                180.0,
+                60.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
             "action_id": "j.S",
             "action_frame": 13,
             "motion_cue": "First-active snap",
@@ -5519,12 +5787,13 @@
               300,
               310
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 2,
+            "scale_group": "air_swings",
             "action_id": "j.S",
             "action_frame": 18,
-            "motion_cue": "Contact ends",
-            "name": "j.S / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "j.S / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/air_swings.png",
@@ -5550,8 +5819,9 @@
               300,
               327
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 4,
+            "scale_group": "air_swings",
             "action_id": "j.S",
             "action_frame": 25,
             "motion_cue": "Withdraw",
@@ -5583,6 +5853,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.S",
             "action_frame": 36,
             "motion_cue": "Settle / lock persists",
@@ -5614,6 +5885,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.Hs",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -5643,8 +5915,9 @@
               290,
               336
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 1,
+            "scale_group": "air_swings",
             "action_id": "j.Hs",
             "action_frame": 5,
             "motion_cue": "Load / held through last startup",
@@ -5674,8 +5947,21 @@
               290,
               340
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 3,
+            "scale_group": "air_swings",
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 2,
+              "box": [
+                12.0,
+                -55.0,
+                155.0,
+                70.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
             "action_id": "j.Hs",
             "action_frame": 16,
             "motion_cue": "First-active snap",
@@ -5705,12 +5991,13 @@
               290,
               340
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 3,
+            "scale_group": "air_swings",
             "action_id": "j.Hs",
             "action_frame": 21,
-            "motion_cue": "Contact ends",
-            "name": "j.Hs / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "j.Hs / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/air_swings.png",
@@ -5736,8 +6023,9 @@
               290,
               312
             ],
-            "body_height": 300,
+            "body_height": 335,
             "source_pose": 5,
+            "scale_group": "air_swings",
             "action_id": "j.Hs",
             "action_frame": 30,
             "motion_cue": "Withdraw",
@@ -5769,6 +6057,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.Hs",
             "action_frame": 43,
             "motion_cue": "Settle / lock persists",
@@ -5800,6 +6089,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "5D",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -5829,8 +6119,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 0,
+            "scale_group": "drive",
             "action_id": "5D",
             "action_frame": 2,
             "motion_cue": "Load / held through last startup",
@@ -5860,8 +6151,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 0,
+            "scale_group": "drive",
             "action_id": "5D",
             "action_frame": 5,
             "motion_cue": "First-active snap",
@@ -5891,12 +6183,13 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 0,
+            "scale_group": "drive",
             "action_id": "5D",
             "action_frame": 7,
-            "motion_cue": "Contact ends",
-            "name": "5D / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "5D / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/drive.png",
@@ -5922,8 +6215,9 @@
               235,
               475
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 0,
+            "scale_group": "drive",
             "action_id": "5D",
             "action_frame": 11,
             "motion_cue": "Withdraw",
@@ -5955,6 +6249,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "5D",
             "action_frame": 18,
             "motion_cue": "Settle / lock persists",
@@ -5986,6 +6281,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.D",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -6015,8 +6311,9 @@
               235,
               415
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 3,
+            "scale_group": "drive",
             "action_id": "j.D",
             "action_frame": 2,
             "motion_cue": "Load / held through last startup",
@@ -6046,8 +6343,21 @@
               235,
               454
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 4,
+            "scale_group": "drive",
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 3,
+              "box": [
+                -110.0,
+                -70.0,
+                140.0,
+                75.0
+              ],
+              "opacity": 0.92,
+              "behind": false
+            },
             "action_id": "j.D",
             "action_frame": 9,
             "motion_cue": "First-active snap",
@@ -6077,12 +6387,13 @@
               235,
               484
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 5,
+            "scale_group": "drive",
             "action_id": "j.D",
             "action_frame": 99,
-            "motion_cue": "Contact ends",
-            "name": "j.D / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "j.D / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/drive.png",
@@ -6108,8 +6419,9 @@
               235,
               484
             ],
-            "body_height": 425,
+            "body_height": 435,
             "source_pose": 5,
+            "scale_group": "drive",
             "action_id": "j.D",
             "action_frame": 106,
             "motion_cue": "Withdraw",
@@ -6141,6 +6453,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.D",
             "action_frame": 116,
             "motion_cue": "Settle / lock persists",
@@ -6172,6 +6485,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "236P",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -6201,8 +6515,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "236P",
             "action_frame": 2,
             "motion_cue": "Load / held through last startup",
@@ -6232,8 +6551,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "236P",
             "action_frame": 5,
             "motion_cue": "First-active snap",
@@ -6263,12 +6587,17 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "236P",
             "action_frame": 8,
-            "motion_cue": "Contact ends",
-            "name": "236P / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "236P / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/grabs.png",
@@ -6294,8 +6623,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "236P",
             "action_frame": 22,
             "motion_cue": "Withdraw",
@@ -6327,6 +6661,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "236P",
             "action_frame": 41,
             "motion_cue": "Settle / lock persists",
@@ -6356,8 +6691,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "236P",
             "action_frame": 0,
             "motion_cue": "Captured / 0",
@@ -6387,8 +6727,13 @@
               350,
               365
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 2,
+            "scale_group": "grabs",
+            "grip": [
+              312,
+              37
+            ],
             "action_id": "236P",
             "action_frame": 26,
             "motion_cue": "Captured / 2",
@@ -6418,8 +6763,13 @@
               350,
               306
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 4,
+            "scale_group": "grabs",
+            "grip": [
+              403,
+              285
+            ],
             "action_id": "236P",
             "action_frame": 82,
             "motion_cue": "Captured / 4",
@@ -6451,130 +6801,151 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "236S",
             "action_frame": 1,
             "motion_cue": "Entry",
             "name": "236S / Entry"
           },
           {
-            "file": "anvil-bull-v2/grabs.png",
-            "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+            "file": "anvil-bull-v2/iron_turn.png",
+            "sha256": "dff5e1adc9af74d6ff263f937f16573c50264e2d39902b26a2dfd2abcb389c15",
             "source_size": [
               1536,
               1024
             ],
-            "generation_file": "exec-6f4a91be-efa7-4f25-a956-ec80498b8c7d.png",
+            "generation_file": "exec-09c6b050-72c1-4fb1-8a92-2e2db91989dd.png",
             "region": [
-              768,
               0,
-              768,
-              341
+              0,
+              512,
+              1024
             ],
             "bounds": [
-              151,
-              16,
-              505,
-              321
+              73,
+              374,
+              428,
+              772
             ],
             "pivot": [
-              330,
-              320
+              240,
+              770
             ],
-            "body_height": 300,
-            "source_pose": 1,
+            "body_height": 400,
+            "source_pose": 0,
+            "scale_group": "iron_turn",
+            "grip": [
+              335,
+              493
+            ],
             "action_id": "236S",
             "action_frame": 2,
             "motion_cue": "Load / held through last startup",
             "name": "236S / Load / held through last startup"
           },
           {
-            "file": "anvil-bull-v2/grabs.png",
-            "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+            "file": "anvil-bull-v2/iron_turn.png",
+            "sha256": "dff5e1adc9af74d6ff263f937f16573c50264e2d39902b26a2dfd2abcb389c15",
             "source_size": [
               1536,
               1024
             ],
-            "generation_file": "exec-6f4a91be-efa7-4f25-a956-ec80498b8c7d.png",
+            "generation_file": "exec-09c6b050-72c1-4fb1-8a92-2e2db91989dd.png",
             "region": [
-              768,
               0,
-              768,
-              341
+              0,
+              512,
+              1024
             ],
             "bounds": [
-              151,
-              16,
-              505,
-              321
+              73,
+              374,
+              428,
+              772
             ],
             "pivot": [
-              330,
-              320
+              240,
+              770
             ],
-            "body_height": 300,
-            "source_pose": 1,
+            "body_height": 400,
+            "source_pose": 0,
+            "scale_group": "iron_turn",
+            "grip": [
+              335,
+              493
+            ],
             "action_id": "236S",
             "action_frame": 6,
             "motion_cue": "First-active snap",
             "name": "236S / First-active snap"
           },
           {
-            "file": "anvil-bull-v2/grabs.png",
-            "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+            "file": "anvil-bull-v2/iron_turn.png",
+            "sha256": "dff5e1adc9af74d6ff263f937f16573c50264e2d39902b26a2dfd2abcb389c15",
             "source_size": [
               1536,
               1024
             ],
-            "generation_file": "exec-6f4a91be-efa7-4f25-a956-ec80498b8c7d.png",
+            "generation_file": "exec-09c6b050-72c1-4fb1-8a92-2e2db91989dd.png",
             "region": [
-              768,
               0,
-              768,
-              341
+              0,
+              512,
+              1024
             ],
             "bounds": [
-              151,
-              16,
-              505,
-              321
+              73,
+              374,
+              428,
+              772
             ],
             "pivot": [
-              330,
-              320
+              240,
+              770
             ],
-            "body_height": 300,
-            "source_pose": 1,
+            "body_height": 400,
+            "source_pose": 0,
+            "scale_group": "iron_turn",
+            "grip": [
+              335,
+              493
+            ],
             "action_id": "236S",
             "action_frame": 9,
-            "motion_cue": "Contact ends",
-            "name": "236S / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "236S / Contact ends / effect off"
           },
           {
-            "file": "anvil-bull-v2/grabs.png",
-            "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+            "file": "anvil-bull-v2/iron_turn.png",
+            "sha256": "dff5e1adc9af74d6ff263f937f16573c50264e2d39902b26a2dfd2abcb389c15",
             "source_size": [
               1536,
               1024
             ],
-            "generation_file": "exec-6f4a91be-efa7-4f25-a956-ec80498b8c7d.png",
+            "generation_file": "exec-09c6b050-72c1-4fb1-8a92-2e2db91989dd.png",
             "region": [
-              768,
               0,
-              768,
-              341
+              0,
+              512,
+              1024
             ],
             "bounds": [
-              151,
-              16,
-              505,
-              321
+              73,
+              374,
+              428,
+              772
             ],
             "pivot": [
-              330,
-              320
+              240,
+              770
             ],
-            "body_height": 300,
-            "source_pose": 1,
+            "body_height": 400,
+            "source_pose": 0,
+            "scale_group": "iron_turn",
+            "grip": [
+              335,
+              493
+            ],
             "action_id": "236S",
             "action_frame": 22,
             "motion_cue": "Withdraw",
@@ -6606,99 +6977,115 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "236S",
             "action_frame": 41,
             "motion_cue": "Settle / lock persists",
             "name": "236S / Settle / lock persists"
           },
           {
-            "file": "anvil-bull-v2/grabs.png",
-            "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+            "file": "anvil-bull-v2/iron_turn.png",
+            "sha256": "dff5e1adc9af74d6ff263f937f16573c50264e2d39902b26a2dfd2abcb389c15",
             "source_size": [
               1536,
               1024
             ],
-            "generation_file": "exec-6f4a91be-efa7-4f25-a956-ec80498b8c7d.png",
+            "generation_file": "exec-09c6b050-72c1-4fb1-8a92-2e2db91989dd.png",
             "region": [
-              768,
               0,
-              768,
-              341
+              0,
+              512,
+              1024
             ],
             "bounds": [
-              151,
-              16,
-              505,
-              321
+              73,
+              374,
+              428,
+              772
             ],
             "pivot": [
-              330,
-              320
+              240,
+              770
             ],
-            "body_height": 300,
-            "source_pose": 1,
+            "body_height": 400,
+            "source_pose": 0,
+            "scale_group": "iron_turn",
+            "grip": [
+              335,
+              493
+            ],
             "action_id": "236S",
             "action_frame": 0,
             "motion_cue": "Captured / 1",
             "name": "236S / Captured / 1"
           },
           {
-            "file": "anvil-bull-v2/grabs.png",
-            "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+            "file": "anvil-bull-v2/iron_turn.png",
+            "sha256": "dff5e1adc9af74d6ff263f937f16573c50264e2d39902b26a2dfd2abcb389c15",
             "source_size": [
               1536,
               1024
             ],
-            "generation_file": "exec-6f4a91be-efa7-4f25-a956-ec80498b8c7d.png",
+            "generation_file": "exec-09c6b050-72c1-4fb1-8a92-2e2db91989dd.png",
             "region": [
-              768,
-              341,
-              768,
-              359
+              512,
+              0,
+              508,
+              1024
             ],
             "bounds": [
-              164,
-              1,
-              509,
-              359
+              64,
+              371,
+              445,
+              772
             ],
             "pivot": [
-              330,
-              355
+              240,
+              770
             ],
-            "body_height": 300,
-            "source_pose": 3,
+            "body_height": 400,
+            "source_pose": 1,
+            "scale_group": "iron_turn",
+            "grip": [
+              267,
+              459
+            ],
             "action_id": "236S",
             "action_frame": 32,
             "motion_cue": "Captured / 3",
             "name": "236S / Captured / 3"
           },
           {
-            "file": "anvil-bull-v2/grabs.png",
-            "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+            "file": "anvil-bull-v2/iron_turn.png",
+            "sha256": "dff5e1adc9af74d6ff263f937f16573c50264e2d39902b26a2dfd2abcb389c15",
             "source_size": [
               1536,
               1024
             ],
-            "generation_file": "exec-6f4a91be-efa7-4f25-a956-ec80498b8c7d.png",
+            "generation_file": "exec-09c6b050-72c1-4fb1-8a92-2e2db91989dd.png",
             "region": [
-              768,
-              700,
-              768,
-              324
+              1020,
+              0,
+              516,
+              1024
             ],
             "bounds": [
-              135,
-              23,
-              504,
-              312
+              1,
+              382,
+              442,
+              773
             ],
             "pivot": [
-              330,
-              306
+              244,
+              770
             ],
-            "body_height": 300,
-            "source_pose": 5,
+            "body_height": 400,
+            "source_pose": 2,
+            "scale_group": "iron_turn",
+            "grip": [
+              53,
+              652
+            ],
             "action_id": "236S",
             "action_frame": 76,
             "motion_cue": "Captured / 5",
@@ -6730,6 +7117,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "623Hs",
             "action_frame": 1,
             "motion_cue": "Entry",
@@ -6759,8 +7147,13 @@
               330,
               355
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 3,
+            "scale_group": "grabs",
+            "grip": [
+              245,
+              53
+            ],
             "action_id": "623Hs",
             "action_frame": 2,
             "motion_cue": "Load / held through last startup",
@@ -6790,8 +7183,13 @@
               350,
               365
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 2,
+            "scale_group": "grabs",
+            "grip": [
+              312,
+              37
+            ],
             "action_id": "623Hs",
             "action_frame": 5,
             "motion_cue": "First-active snap",
@@ -6821,12 +7219,17 @@
               350,
               365
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 2,
+            "scale_group": "grabs",
+            "grip": [
+              312,
+              37
+            ],
             "action_id": "623Hs",
             "action_frame": 11,
-            "motion_cue": "Contact ends",
-            "name": "623Hs / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "623Hs / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/grabs.png",
@@ -6852,8 +7255,13 @@
               330,
               355
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 3,
+            "scale_group": "grabs",
+            "grip": [
+              245,
+              53
+            ],
             "action_id": "623Hs",
             "action_frame": 26,
             "motion_cue": "Withdraw",
@@ -6885,6 +7293,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "623Hs",
             "action_frame": 47,
             "motion_cue": "Settle / lock persists",
@@ -6914,8 +7323,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "623Hs",
             "action_frame": 0,
             "motion_cue": "Captured / 0",
@@ -6945,8 +7359,13 @@
               350,
               365
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 2,
+            "scale_group": "grabs",
+            "grip": [
+              312,
+              37
+            ],
             "action_id": "623Hs",
             "action_frame": 12,
             "motion_cue": "Captured / 2",
@@ -6976,8 +7395,13 @@
               350,
               306
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 4,
+            "scale_group": "grabs",
+            "grip": [
+              403,
+              285
+            ],
             "action_id": "623Hs",
             "action_frame": 100,
             "motion_cue": "Captured / 4",
@@ -7007,8 +7431,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "4P+K",
             "action_frame": 1,
             "motion_cue": "Load / held through last startup",
@@ -7038,8 +7467,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "4P+K",
             "action_frame": 2,
             "motion_cue": "First-active snap",
@@ -7069,12 +7503,17 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "4P+K",
             "action_frame": 4,
-            "motion_cue": "Contact ends",
-            "name": "4P+K / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "4P+K / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/grabs.png",
@@ -7100,8 +7539,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "4P+K",
             "action_frame": 13,
             "motion_cue": "Withdraw",
@@ -7133,6 +7577,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "4P+K",
             "action_frame": 25,
             "motion_cue": "Settle / lock persists",
@@ -7162,8 +7607,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "4P+K",
             "action_frame": 0,
             "motion_cue": "Captured / 0",
@@ -7193,8 +7643,13 @@
               330,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 1,
+            "scale_group": "grabs",
+            "grip": [
+              363,
+              166
+            ],
             "action_id": "4P+K",
             "action_frame": 13,
             "motion_cue": "Captured / 1",
@@ -7224,8 +7679,13 @@
               330,
               306
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 5,
+            "scale_group": "grabs",
+            "grip": [
+              479,
+              225
+            ],
             "action_id": "4P+K",
             "action_frame": 33,
             "motion_cue": "Captured / 5",
@@ -7255,8 +7715,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "6P+K",
             "action_frame": 1,
             "motion_cue": "Load / held through last startup",
@@ -7286,8 +7751,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "6P+K",
             "action_frame": 2,
             "motion_cue": "First-active snap",
@@ -7317,12 +7787,17 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "6P+K",
             "action_frame": 4,
-            "motion_cue": "Contact ends",
-            "name": "6P+K / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "6P+K / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/grabs.png",
@@ -7348,8 +7823,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "6P+K",
             "action_frame": 13,
             "motion_cue": "Withdraw",
@@ -7381,6 +7861,7 @@
             ],
             "body_height": 425,
             "source_pose": 0,
+            "scale_group": "base",
             "action_id": "6P+K",
             "action_frame": 25,
             "motion_cue": "Settle / lock persists",
@@ -7410,8 +7891,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "6P+K",
             "action_frame": 0,
             "motion_cue": "Captured / 0",
@@ -7441,8 +7927,13 @@
               330,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 1,
+            "scale_group": "grabs",
+            "grip": [
+              363,
+              166
+            ],
             "action_id": "6P+K",
             "action_frame": 13,
             "motion_cue": "Captured / 1",
@@ -7472,8 +7963,13 @@
               330,
               306
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 5,
+            "scale_group": "grabs",
+            "grip": [
+              479,
+              225
+            ],
             "action_id": "6P+K",
             "action_frame": 33,
             "motion_cue": "Captured / 5",
@@ -7503,8 +7999,9 @@
               335,
               311
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "air_checks",
             "action_id": "j.4P+K",
             "action_frame": 1,
             "motion_cue": "Load / held through last startup",
@@ -7534,8 +8031,9 @@
               335,
               311
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "air_checks",
             "action_id": "j.4P+K",
             "action_frame": 2,
             "motion_cue": "First-active snap",
@@ -7565,12 +8063,13 @@
               335,
               311
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "air_checks",
             "action_id": "j.4P+K",
             "action_frame": 4,
-            "motion_cue": "Contact ends",
-            "name": "j.4P+K / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "j.4P+K / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/air_checks.png",
@@ -7596,8 +8095,9 @@
               335,
               315
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 4,
+            "scale_group": "air_checks",
             "action_id": "j.4P+K",
             "action_frame": 12,
             "motion_cue": "Withdraw",
@@ -7629,6 +8129,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.4P+K",
             "action_frame": 24,
             "motion_cue": "Settle / lock persists",
@@ -7658,8 +8159,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "j.4P+K",
             "action_frame": 0,
             "motion_cue": "Captured / 0",
@@ -7689,8 +8195,13 @@
               330,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 1,
+            "scale_group": "grabs",
+            "grip": [
+              363,
+              166
+            ],
             "action_id": "j.4P+K",
             "action_frame": 13,
             "motion_cue": "Captured / 1",
@@ -7720,8 +8231,13 @@
               330,
               306
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 5,
+            "scale_group": "grabs",
+            "grip": [
+              479,
+              225
+            ],
             "action_id": "j.4P+K",
             "action_frame": 33,
             "motion_cue": "Captured / 5",
@@ -7751,8 +8267,9 @@
               335,
               311
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "air_checks",
             "action_id": "j.6P+K",
             "action_frame": 1,
             "motion_cue": "Load / held through last startup",
@@ -7782,8 +8299,9 @@
               335,
               311
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "air_checks",
             "action_id": "j.6P+K",
             "action_frame": 2,
             "motion_cue": "First-active snap",
@@ -7813,12 +8331,13 @@
               335,
               311
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "air_checks",
             "action_id": "j.6P+K",
             "action_frame": 4,
-            "motion_cue": "Contact ends",
-            "name": "j.6P+K / Contact ends"
+            "motion_cue": "Contact ends / effect off",
+            "name": "j.6P+K / Contact ends / effect off"
           },
           {
             "file": "anvil-bull-v2/air_checks.png",
@@ -7844,8 +8363,9 @@
               335,
               315
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 4,
+            "scale_group": "air_checks",
             "action_id": "j.6P+K",
             "action_frame": 12,
             "motion_cue": "Withdraw",
@@ -7877,6 +8397,7 @@
             ],
             "body_height": 425,
             "source_pose": 3,
+            "scale_group": "base",
             "action_id": "j.6P+K",
             "action_frame": 24,
             "motion_cue": "Settle / lock persists",
@@ -7906,8 +8427,13 @@
               335,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 0,
+            "scale_group": "grabs",
+            "grip": [
+              412,
+              210
+            ],
             "action_id": "j.6P+K",
             "action_frame": 0,
             "motion_cue": "Captured / 0",
@@ -7937,8 +8463,13 @@
               330,
               320
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 1,
+            "scale_group": "grabs",
+            "grip": [
+              363,
+              166
+            ],
             "action_id": "j.6P+K",
             "action_frame": 13,
             "motion_cue": "Captured / 1",
@@ -7968,8 +8499,13 @@
               330,
               306
             ],
-            "body_height": 300,
+            "body_height": 330,
             "source_pose": 5,
+            "scale_group": "grabs",
+            "grip": [
+              479,
+              225
+            ],
             "action_id": "j.6P+K",
             "action_frame": 33,
             "motion_cue": "Captured / 5",
@@ -9667,6 +10203,108 @@
             "fixedAnatomicalScale": true
           }
         }
+      },
+      "shield_fx": {
+        "file": "anvil-bull-v2/shield_effects.png",
+        "sha256": "61288787c968d44b5a6869815f5b539b580797d83bcc65a5c5109b6cf3bc0ee9",
+        "size": [
+          1536,
+          1024
+        ],
+        "frames": [
+          {
+            "region": [
+              39,
+              203,
+              698,
+              225
+            ],
+            "pivot": [
+              0,
+              225
+            ],
+            "bounds": [
+              0,
+              0,
+              698,
+              225
+            ]
+          },
+          {
+            "region": [
+              836,
+              14,
+              671,
+              482
+            ],
+            "pivot": [
+              0,
+              482
+            ],
+            "bounds": [
+              0,
+              0,
+              671,
+              482
+            ]
+          },
+          {
+            "region": [
+              36,
+              533,
+              678,
+              459
+            ],
+            "pivot": [
+              0,
+              459
+            ],
+            "bounds": [
+              0,
+              0,
+              678,
+              459
+            ]
+          },
+          {
+            "region": [
+              800,
+              754,
+              713,
+              215
+            ],
+            "pivot": [
+              0,
+              215
+            ],
+            "bounds": [
+              0,
+              0,
+              713,
+              215
+            ]
+          }
+        ]
+      },
+      "anatomical_scales": {
+        "base": 425,
+        "walk": 435,
+        "drive": 435,
+        "dash": 435,
+        "checks": 325,
+        "kicks": 325,
+        "slashes": 335,
+        "heavy_sweep": 335,
+        "lift_anti": 325,
+        "rush": 330,
+        "air_checks": 330,
+        "air_swings": 335,
+        "grabs": 330,
+        "reactions_high": 330,
+        "reactions_low": 330,
+        "down_back": 350,
+        "down_prone": 345,
+        "iron_turn": 400
       }
     },
     {

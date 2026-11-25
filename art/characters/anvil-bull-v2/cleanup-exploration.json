@@ -1,0 +1,26 @@
+[
+  {
+    "source": "/workspace/generated_images/exec-a407ff6b-26af-479d-96c0-c75201af7ee7.png",
+    "sha256": "0e53c0e07e447ec765cd5a1e0cd88a9e4a2bd30bdfac630ac9867d2ed7d7face",
+    "prompt": "prompts/shield-effects.txt",
+    "reason": "Superseded by user-requested magma-orange accents.",
+    "registered": false,
+    "pixelEdits": false
+  },
+  {
+    "source": "/workspace/generated_images/exec-39ab2639-c2ed-4bd2-9919-bcb5cbaaebee.png",
+    "sha256": "8ffd0e1c1e4e7df3e8c1bc3ef13852a9b9892b1df969ee925a2b1ad1fdf0922d",
+    "prompt": "prompts/grabs-cleanup.txt",
+    "reason": "Rejected: B middle pose still holds hand overhead.",
+    "registered": false,
+    "pixelEdits": false
+  },
+  {
+    "source": "/workspace/generated_images/exec-bc68542c-5117-4e98-a5ef-b4dd26c2ab79.png",
+    "sha256": "289ce3248be5ac2a2c02cf76a3fdb2ade7961ca65da9bb11c347dd97705d09e8",
+    "prompt": "prompts/iron-turn-cleanup.txt",
+    "reason": "Approved motion direction; replaced by generated spacing correction to avoid atlas-neighbor bleed.",
+    "registered": false,
+    "pixelEdits": false
+  }
+]

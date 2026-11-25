@@ -7,6 +7,66 @@ const DIRECTORY := "res://assets/fighters/grabs-v1/"
 static var manifest: Dictionary = {}
 static var textures: Dictionary = {}
 
+# Saved capture clocks control occlusion, including hitstop and rollback.
+# Outside a capture the arena uses the latest connected attack as before.
+static func foreground_player(state: Dictionary) -> int:
+	var owner := int(state.get("pairOwner", -1))
+	if int(state.get("pairKind", 0)) > 0 and owner in [0, 1]:
+		if int(state.players[owner].character) == 0 and int(state.pairMove) in [23, 24, 41, 42]:
+			return 1-owner if int(state.pairClock) >= int(state.pairTicks)-8 else owner
+		if int(state.players[owner].character) == 0 and int(state.pairKind) in [6, 7]:
+			var tick := int(state.pairClock)
+			match int(state.pairMove):
+				14: return 1-owner if tick < 12 or tick >= 70 else owner
+				15: return owner if tick >= 32 and tick < 58 else 1-owner
+				16: return owner if tick >= 12 and tick < 88 else 1-owner
+		return owner
+	for fighter in state.get("players", []):
+		owner = int(fighter.get("grabOwner", -1))
+		if int(fighter.get("reaction", 0)) == 6 and owner in [0, 1]:
+			var attacker: Dictionary = state.players[owner]
+			if int(attacker.character) == 0 and int(attacker.get("grabTime", 0)) <= 8: return 1-owner
+			return owner
+	return int(state.get("foregroundPlayer", -1))
+
+static func anvil_receiver(sprites: Array[Sprite2D], state: Dictionary, info: Dictionary, world_scale: float) -> void:
+	var owner := int(info.owner)
+	var receiver: Dictionary = state.players[1-owner]
+	var attacker: Dictionary = state.players[owner]
+	var slot := int(info.slot)
+	var tick := int(info.tick)
+	var facing := int(info.facing)
+	var lift_tick: int = {14:26, 15:32, 16:12}[slot]
+	var finish_tick: int = {14:82, 15:76, 16:100}[slot]
+	var victim := sprites[1-owner]
+	var owner_frame: Dictionary = FighterArt.sheet(0, FighterArt.PHASES[int(attacker.posePhase)]).frames[int(attacker.poseIndex)]
+	var original := victim.position
+	if tick >= finish_tick:
+		FighterArt.apply(victim, int(receiver.character), "knockdown", 0, world_scale, facing if slot == 15 else -facing)
+	elif tick >= lift_tick:
+		FighterArt.apply(victim, int(receiver.character), "knockdown_back", 0, world_scale, -facing)
+		var frame: Dictionary = FighterArt.sheet(int(receiver.character), "knockdown_back").frames[0]
+		var b: Array = frame.bounds
+		# Support the underside of the carried torso at the actual gripping hand.
+		# The sprite's feet pivot is unsuitable for a horizontal body. Scale is
+		# unchanged; its saved physics root still drives the release/landing.
+		var body_anchor := Vector2(frame.pivot[0], lerpf(float(b[1]), float(b[3]), 0.82))
+		var hand := sprites[owner].position + (Vector2(owner_frame.grip[0], owner_frame.grip[1]) + sprites[owner].offset) * sprites[owner].scale
+		var carry := hand - (body_anchor + victim.offset) * victim.scale
+		# Release over the last six capture ticks, avoiding a floor-position pop.
+		var release := clampf(float(tick - (finish_tick - 6)) / 6.0, 0.0, 1.0)
+		victim.position = carry.lerp(original, release)
+	else:
+		var frame := frame_for(int(receiver.character), 4)
+		apply_frame(victim, frame, world_scale, -facing)
+		var hand := sprites[owner].position + (Vector2(owner_frame.grip[0], owner_frame.grip[1]) + sprites[owner].offset) * sprites[owner].scale
+		# Register the standing collar horizontally without pulling feet up.
+		victim.position.x += clampf(hand.x - contact_point(victim, frame).x, -42.0*world_scale, 42.0*world_scale)
+	for p in 2:
+		sprites[p].set_meta("grab_role", "owner" if p == owner else "receiver")
+		sprites[p].set_meta("grab_key", tick)
+	victim.set_meta("grab_offset", victim.position - original)
+
 static func catalog() -> Dictionary:
 	if manifest.is_empty(): manifest = JSON.parse_string(FileAccess.get_file_as_string(DIRECTORY + "manifest.json"))
 	return manifest
@@ -74,23 +134,7 @@ static func present(sprites: Array[Sprite2D], model: CombatModel, state: Diction
 		# The core selects A/B/super owner drawings on the shared capture clock.
 		# Keep those distinct lifts/slams instead of the generic collar overlay.
 		FighterArt.apply(sprites[owner], 0, FighterArt.PHASES[int(attacker.posePhase)], int(attacker.poseIndex), world_scale, facing)
-		var lifted := int(receiver.y) > int(attacker.y) + 4000
-		var finish_tick: int = {14:82, 15:76, 16:100}.get(int(info.slot), int(info.total) - 7)
-		if int(info.tick) >= int(finish_tick):
-			FighterArt.apply(sprites[1-owner], int(receiver.character), "knockdown", 0, world_scale, -facing)
-		elif lifted:
-			FighterArt.apply(sprites[1-owner], int(receiver.character), "knockdown_back", 0, world_scale, -facing)
-			# The saved airborne capture root is the carried pelvis, not a sole.
-			# Register the horizontal body around it without resizing the drawing.
-			var victim_sheet := FighterArt.sheet(int(receiver.character), "knockdown_back")
-			var victim_frame: Dictionary = victim_sheet.frames[0]
-			var b: Array = victim_frame.bounds
-			sprites[1-owner].offset.y = -float(b[1] + b[3]) * 0.5
-		else:
-			apply_frame(sprites[1-owner], frame_for(int(receiver.character), 4), world_scale, -facing)
-		for p in 2:
-			sprites[p].set_meta("grab_role", "owner" if p == owner else "receiver")
-			sprites[p].set_meta("grab_key", int(info.tick))
+		anvil_receiver(sprites, state, info, world_scale)
 		return
 	# Side switching is already authored in the simulation. The turning drawing
 	# follows that crossing instead of holding a grip facing away from the victim.

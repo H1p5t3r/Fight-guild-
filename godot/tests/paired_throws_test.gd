@@ -63,12 +63,14 @@ func exercise(attacker: int, victim: int, slot: int, owner: int, facing: int, mi
 		var cue := model.cues.reaction_at(model.frame(), 1 - owner)
 		if int(state.pairKind) > 0 or int(receiver.grabOwner) == owner:
 			captured = true
-			check(arena.foreground_player(state) == owner, "Wrong foreground during capture: " + label)
+			var remaining := int(state.pairTicks)-int(state.pairClock) if int(state.pairKind) > 0 else int(state.players[owner].grabTime)
+			var expected_foreground := 1-owner if attacker == 0 and remaining <= 8 else owner
+			check(arena.foreground_player(state) == expected_foreground, "Wrong foreground during capture: " + label)
 			check(CombatReactions.family(receiver, cue).is_empty(), "Strike art replaced capture: " + label)
 			# Previous hit priority must not obscure either kind of current grip.
 			var prior_contact := state.duplicate(true)
 			prior_contact.foregroundPlayer = 1 - owner
-			check(arena.foreground_player(prior_contact) == owner, "Previous attacker overrides capture: " + label)
+			check(arena.foreground_player(prior_contact) == expected_foreground, "Previous attacker overrides capture: " + label)
 		elif captured:
 			released = true
 		for event in model.cues.events_at(model.frame() - 1):

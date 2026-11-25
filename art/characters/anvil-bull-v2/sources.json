@@ -205,5 +205,29 @@
     ],
     "tool": "image_gen.imagegen",
     "pixelEdits": false
+  },
+  {
+    "id": "shield_effects",
+    "file": "shield_effects.png",
+    "source": "/workspace/generated_images/exec-c74d16f3-f116-406d-b6d3-a9fe176da7d8.png",
+    "sha256": "61288787c968d44b5a6869815f5b539b580797d83bcc65a5c5109b6cf3bc0ee9",
+    "prompt": "prompts/shield-effects-magma.txt",
+    "references": [
+      "/workspace/generated_images/exec-a407ff6b-26af-479d-96c0-c75201af7ee7.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "iron_turn",
+    "file": "iron_turn.png",
+    "source": "/workspace/generated_images/exec-09c6b050-72c1-4fb1-8a92-2e2db91989dd.png",
+    "sha256": "dff5e1adc9af74d6ff263f937f16573c50264e2d39902b26a2dfd2abcb389c15",
+    "prompt": "prompts/iron-turn-spacing.txt",
+    "references": [
+      "/workspace/generated_images/exec-bc68542c-5117-4e98-a5ef-b4dd26c2ab79.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
   }
 ]

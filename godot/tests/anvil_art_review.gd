@@ -55,7 +55,7 @@ func run() -> void:
 			var state := model.state()
 			blocked = blocked or bool(state.players[1].guarding)
 			caption.text = str(example[1])+"\nNATIVE BUILD · 60 FPS · ORIGINAL GAMEPLAY TIMING"
-			var chosen := tick == 22 if slot in [0,2,3,6,8] else tick == 82 if slot == 13 else tick == 20 if slot == -1 else tick == 72 if slot in [14,15] else tick == 110 if slot == 16 else tick == 43
+			var chosen := int(state.players[0].age) == int(model.move(0, slot).startup) if slot in [0,2,3,6,8] else tick == 82 if slot == 13 else tick == 20 if slot == -1 else tick == 72 if slot in [14,15] else tick == 110 if slot == 16 else tick == 43
 			if stills and not chosen: continue
 			arena.refresh(model,state,false,false)
 			await process_frame

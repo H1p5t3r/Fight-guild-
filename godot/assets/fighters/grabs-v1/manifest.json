@@ -11,7 +11,7 @@
         1536,
         1024
       ],
-      "body_height": 300,
+      "body_height": 330,
       "frames": [
         {
           "file": "../anvil-bull-v2/grabs.png",
@@ -37,8 +37,13 @@
             335,
             320
           ],
-          "body_height": 300,
+          "body_height": 330,
           "source_pose": 0,
+          "scale_group": "grabs",
+          "grip": [
+            412,
+            210
+          ],
           "name": "Grip catch",
           "contact": [
             405,
@@ -69,8 +74,13 @@
             330,
             320
           ],
-          "body_height": 300,
+          "body_height": 330,
           "source_pose": 1,
+          "scale_group": "grabs",
+          "grip": [
+            363,
+            166
+          ],
           "name": "Grip load",
           "contact": [
             400,
@@ -101,8 +111,13 @@
             330,
             306
           ],
-          "body_height": 300,
+          "body_height": 330,
           "source_pose": 5,
+          "scale_group": "grabs",
+          "grip": [
+            479,
+            225
+          ],
           "name": "Grip turn",
           "contact": [
             400,
@@ -133,8 +148,9 @@
             345,
             327
           ],
-          "body_height": 300,
+          "body_height": 330,
           "source_pose": 1,
+          "scale_group": "reactions_high",
           "name": "Caught",
           "contact": [
             415,
@@ -165,8 +181,9 @@
             345,
             328
           ],
-          "body_height": 300,
+          "body_height": 330,
           "source_pose": 3,
+          "scale_group": "reactions_high",
           "name": "Collar fold",
           "contact": [
             415,
@@ -197,8 +214,9 @@
             345,
             326
           ],
-          "body_height": 300,
+          "body_height": 330,
           "source_pose": 5,
+          "scale_group": "reactions_high",
           "name": "Turned fold",
           "contact": [
             415,

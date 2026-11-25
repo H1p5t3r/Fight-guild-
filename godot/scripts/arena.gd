@@ -63,14 +63,7 @@ func _ready() -> void:
 			FightHud.draw(hud_layer, view, score, round_label, diagnostics))
 
 static func foreground_player(state: Dictionary) -> int:
-	# Keep the grip readable throughout capture, including its initial freeze
-	# and tech window before the core records any damaging contact.
-	var owner := int(state.get("pairOwner", -1))
-	if int(state.get("pairKind", 0)) > 0 and owner in [0, 1]: return owner
-	for fighter in state.get("players", []):
-		owner = int(fighter.get("grabOwner", -1))
-		if int(fighter.get("reaction", 0)) == 6 and owner in [0, 1]: return owner
-	return int(state.get("foregroundPlayer", -1))
+	return CombatGrabs.foreground_player(state)
 
 func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bool) -> void:
 	model = simulation

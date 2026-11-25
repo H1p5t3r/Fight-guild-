@@ -33,9 +33,17 @@ LANDMARKS = {
  'reactions_low': [(414,31,190,339,370),(263,20,158,340,310),(410,390,537,672,370),(294,373,523,703,310),(414,760,903,1009,370),(321,745,907,1087,310)],
  'down_back': [(229,170,265,326,385),(272,103,251,326,385),(421,394,542,650,385),(430,386,530,650,385),(456,735,883,1001,385),(375,686,857,1001,345)],
  'down_prone': [(522,146,232,268,385),(518,78,222,268,385),(509,339,485,578,385),(463,313,476,580,385),(431,655,819,987,370),(386,610,786,987,345)],
+ 'iron_turn': [(265,375,551,770,240),(148,405,565,770,240),(130,446,590,770,240)],
 }
 HEIGHTS = {name: 300 for name in LANDMARKS}
-HEIGHTS.update(base=425, walk=435, drive=425, dash=425, down_prone=345, down_back=300)
+# Anatomical calibration, independent of an attack's reach or the alpha bounds.
+# The initial 300px attack-sheet default enlarged shoulders/heads relative to
+# the approved idle. Keep one scale throughout each source's motion, including
+# horizontal knockdown and airborne drawings; never fit a pose to its cell.
+HEIGHTS.update(base=425, walk=435, drive=435, dash=435, checks=325,
+ kicks=325, slashes=335, heavy_sweep=335, lift_anti=325, rush=330,
+ air_checks=330, air_swings=335, grabs=330, reactions_high=330,
+ reactions_low=330, down_back=350, down_prone=345, iron_turn=400)
 # Individual source poses with a strongly extended anatomical limb. Never shield.
 EXTENSIONS = {
  ('checks',2):[365,410,590,470],('checks',3):[430,490,615,550],
@@ -67,7 +75,13 @@ SHIELDS = {
  'reactions_low':[(451,38,589,218),(372,10,535,185),(450,383,593,557),(400,352,514,527),(450,738,600,922),(317,696,476,857)],
  'down_back':[(302,89,447,219),(338,74,453,232),(451,390,590,566),(454,399,574,593),(478,753,585,943),(416,735,555,931)],
  'down_prone':[(554,220,727,265),(578,220,727,265),(550,531,709,575),(486,429,620,574),(507,726,625,925),(462,674,596,900)],
+ 'iron_turn':[(299,417,427,590),(295,373,443,558),(310,383,437,566)],
 }
+
+# Palm support / collar anchors in original source pixels, not guessed from the
+# whole sprite's bounds (which include weapons and loose clothing).
+GRIPS = {'grabs':[(412,210),(363,166),(312,368),(245,394),(403,985),(479,925)],
+         'iron_turn':[(335,493),(267,459),(49,652)]}
 
 PLAN = {0:('checks',[0,2,4]),4:('checks',[1,3,5]),1:('kicks',[4,2,4]),5:('kicks',[1,3,5]),32:('slashes',[0,2,4]),2:('slashes',[0,3,5]),3:('heavy_sweep',[0,2,4]),6:('heavy_sweep',[1,3,5]),7:('lift_anti',[0,2,4]),8:('lift_anti',[1,3,5]),11:('rush',[0,2,4]),28:('rush',[1,3,5]),30:('rush',[5,5,5]),17:('air_checks',[0,2,4]),18:('air_checks',[1,3,5]),19:('air_swings',[0,2,4]),20:('air_swings',[1,3,5]),13:('drive',[0,0,0]),21:('drive',[3,4,5]),14:('grabs',[0,0,0]),15:('grabs',[1,1,1]),16:('grabs',[3,2,3]),23:('grabs',[0,0,0]),24:('grabs',[0,0,0]),41:('air_checks',[0,0,4]),42:('air_checks',[0,0,4])}
 
@@ -78,10 +92,11 @@ def main():
     moves=load(ROOT/'godot/data/workshop'/current['file'])['characters'][0]['moves']
     masks=load(ART/'pause-weapon-regions.json'); bank={}
     for source in load(PROD/'sources.json'):
+        if source['id']=='shield_effects': continue
         name=source['id']; path=ART/'anvil-bull-v2'/source['file']; image=Image.open(path)
         assert hashlib.sha256(path.read_bytes()).hexdigest()==source['sha256']
-        alpha=image.getchannel('A'); pix=alpha.load(); cols=3 if name in ('base','walk','drive','dash') else 2
-        rows=6//cols; width=1536//cols; items=[]
+        alpha=image.getchannel('A'); pix=alpha.load(); cols=3 if name in ('base','walk','drive','dash','iron_turn') else 2
+        rows=1 if name=='iron_turn' else 6//cols; width=1536//cols; items=[]
         xcuts=[0]+[min(range(k*width-45,k*width+46),key=lambda x:(sum(pix[x,y]>32 for y in range(1024)),abs(x-k*width))) for k in range(1,cols)]+[1536]
         for i,(cx,head_top,hip,floor,root_x) in enumerate(LANDMARKS[name]):
             row,col=divmod(i,cols);left,right=xcuts[col:col+2];dx=col*width-left
@@ -105,6 +120,9 @@ def main():
             air=name.startswith('air_') or name=='base' and i==3 or name=='drive' and i in (3,4) or name=='reactions_low' and i%2==1
             pivot_y=hip+(200 if large else 125) if air else floor
             frame=dict(file='anvil-bull-v2/'+source['file'],sha256=source['sha256'],source_size=[1536,1024],generation_file=Path(source['source']).name,region=[left,top,w,h],bounds=list(bounds),pivot=[root_x+dx,pivot_y-top],body_height=HEIGHTS[name],source_pose=i)
+            frame['scale_group']=name
+            if name in GRIPS:
+                gx,gy=GRIPS[name][i];frame['grip']=[gx+dx,gy-top]
             items.append((frame,fit))
             # Preserve guild fill on the hand: an interior rectangular grip hole
             # splits the render-only shield mask into four polygons.
@@ -117,6 +135,17 @@ def main():
     def sheet(items):
         frames=[copy.deepcopy(p[0]) for p in items]
         return dict(file=frames[0]['file'],sha256=frames[0]['sha256'],size=[1536,1024],body_height=frames[0]['body_height'],frames=frames,transparent_samples=[[0,0],[1535,0],[0,1023],[1535,1023]])
+    # Original generated pixels, atlas regions only. Their world-space envelope
+    # is the authored strike box, never part of Anvil's hurt silhouette.
+    fxsource=next(s for s in load(PROD/'sources.json') if s['id']=='shield_effects')
+    fxpath=ART/'anvil-bull-v2'/fxsource['file']
+    assert hashlib.sha256(fxpath.read_bytes()).hexdigest()==fxsource['sha256']
+    alpha=Image.open(fxpath).getchannel('A');fxframes=[]
+    for i in range(4):
+        x,y=(i%2)*768,(i//2)*512
+        l,t,r,b=alpha.crop((x,y,x+768,y+512)).point(lambda a:255 if a>64 else 0).getbbox()
+        fxframes.append(dict(region=[x+l,y+t,r-l,b-t],pivot=[0,b-t],bounds=[0,0,r-l,b-t]))
+    fighter['shield_fx']=dict(file='anvil-bull-v2/'+fxsource['file'],sha256=fxsource['sha256'],size=[1536,1024],frames=fxframes)
     def register(phase,items):
         fighter[phase]=sheet(items)
         for index,frame in enumerate(fighter[phase]['frames']):
@@ -148,12 +177,17 @@ def main():
         index=len(frames);frames.append(f);fits.append(h);return index
     for slot,(name,keys) in PLAN.items():
         m=moves[slot];s,a,r=[m[k] for k in ('startup','active','recovery')]
-        load_pose,contact,withdraw=[bank[name][i] for i in keys]
+        load_pose,contact,withdraw=[copy.deepcopy(bank[name][i]) for i in keys]
+        if slot==15: load_pose=contact=withdraw=copy.deepcopy(bank['iron_turn'][0])
+        release=copy.deepcopy(contact)
+        if slot in (2,3,6,7,11,19,20,21,28,32):
+            fx=1 if slot in (7,32) else 2 if slot in (11,20) else 3 if slot==21 else 0
+            contact[0]['effect']=dict(sheet='shield_fx',pose=fx,box=[m['hitboxBack']/100,m['bottom']/100,m['reach']/100,(m['bottom']+m['height'])/100],opacity=.92,behind=False)
         neutral=jump if m['air'] else crouch if m['direction']==2 else ready
         # For grabs, contact means reaching, never the successful lift/slam.
         cues=[]
         if s>3:cues.append((1,neutral,'Entry'))
-        cues.extend([(max(2 if s>3 else 1,(s-1)//3),load_pose,'Load / held through last startup'),(s,contact,'First-active snap'),(s+a,withdraw if slot==21 else contact,'Contact ends'),(s+a+max(1,r//3),withdraw,'Withdraw'),(s+a+max(2,4*r//5),neutral,'Settle / lock persists')])
+        cues.extend([(max(2 if s>3 else 1,(s-1)//3),load_pose,'Load / held through last startup'),(s,contact,'First-active snap'),(s+a,withdraw if slot==21 else release,'Contact ends / effect off'),(s+a+max(1,r//3),withdraw,'Withdraw'),(s+a+max(2,4*r//5),neutral,'Settle / lock persists')])
         clip=dict(artPose=m['artPose'],moveId=m['id'],windup=[],active=[],recovery=[],exposureTiming=dict(authoredTiming=[s,a,r],largestMotionBoundary=[s-1,s],source='anvil-bull-v2',fixedAnatomicalScale=True))
         for tick,pair,role in cues:
             phase='windup' if tick<s else 'active' if tick<s+a else 'recovery'
@@ -167,7 +201,8 @@ def main():
             total={14:88,15:92,16:112}.get(slot,40)
             lift,slam={14:(26,82),15:(32,76),16:(12,100)}.get(slot,(total//3,total-7))
             timeline=[(0,indices[0]),(lift,indices[1]),(slam,indices[2])]
-            paired[str(slot)]=dict(moveId=m['id'],keys=[dict(tick=t,phase='attack_animation',pose=add(bank['grabs'][i],slot,t,'Captured / '+str(i))) for t,i in timeline])
+            pair_items=[bank['iron_turn'][i] for i in range(3)] if slot==15 else [bank['grabs'][i] for _,i in timeline]
+            paired[str(slot)]=dict(moveId=m['id'],keys=[dict(tick=t,phase='attack_animation',pose=add(item,slot,t,'Captured / '+str(i))) for (t,i),item in zip(timeline,pair_items)])
     register('attack_animation',list(zip(frames,fits)))
     fighter['attack_animations']=clips;fighter['paired_animations']=paired
     fighter['attack_connected']={}
@@ -176,6 +211,7 @@ def main():
         connected['recovery'][0]['pose']=paired[str(slot)]['keys'][-1]['pose']
         fighter['attack_connected'][str(slot)]=connected
     fighter['reference']='art/characters/anvil-grappler-v1/high-clamp-hand-corrected.png'
+    fighter['anatomical_scales']=HEIGHTS
     fighter['hud_portrait']=dict(file=ready[0]['file'],sha256=ready[0]['sha256'],region=[215,13,129,182])
     save(ART/'manifest.json',manifest);save(ROOT/'godot/data/fighter_collision.json',collision)
     (ART/'pause-weapon-regions.json').write_text('{\n'+',\n'.join('  '+json.dumps(k)+': [\n'+',\n'.join('    '+json.dumps(p,separators=(',',':')) for p in v)+'\n  ]' for k,v in masks.items())+'\n}\n')
@@ -193,6 +229,6 @@ def main():
         frame['contact']=[frame['pivot'][0]+70,frame['pivot'][1]-210]
     grabs['fighters']['0']=clip;save(ART/'grabs-v1/manifest.json',grabs)
     save(PROD/'registration.json',dict(actions=len(clips),actionKeys=len(frames),pairedActions=len(paired),sourceAtlases=len(bank),poseCounts={p:len(fighter[p]['frames']) for p in body['poses'] if p in fighter},pixelEdits=False))
-    print(f'Anvil Bull: {len(clips)} action clips, {len(frames)} action keys, {len(paired)} paired tracks; 17 original atlases.')
+    print(f'Anvil Bull: {len(clips)} action clips, {len(frames)} action keys, {len(paired)} paired tracks; {len(bank)} body atlases + magma effects.')
 
 if __name__=='__main__': main()

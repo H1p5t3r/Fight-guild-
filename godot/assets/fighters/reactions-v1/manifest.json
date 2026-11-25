@@ -16,7 +16,7 @@
           1536,
           1024
         ],
-        "body_height": 300,
+        "body_height": 330,
         "frames": [
           {
             "file": "../anvil-bull-v2/reactions_high.png",
@@ -42,8 +42,9 @@
               345,
               327
             ],
-            "body_height": 300,
-            "source_pose": 0
+            "body_height": 330,
+            "source_pose": 0,
+            "scale_group": "reactions_high"
           },
           {
             "file": "../anvil-bull-v2/reactions_high.png",
@@ -69,8 +70,9 @@
               345,
               329
             ],
-            "body_height": 300,
-            "source_pose": 2
+            "body_height": 330,
+            "source_pose": 2,
+            "scale_group": "reactions_high"
           },
           {
             "file": "../anvil-bull-v2/reactions_high.png",
@@ -96,8 +98,9 @@
               345,
               326
             ],
-            "body_height": 300,
-            "source_pose": 4
+            "body_height": 330,
+            "source_pose": 4,
+            "scale_group": "reactions_high"
           }
         ],
         "transparent_samples": [
@@ -126,7 +129,7 @@
           1536,
           1024
         ],
-        "body_height": 300,
+        "body_height": 330,
         "frames": [
           {
             "file": "../anvil-bull-v2/reactions_high.png",
@@ -152,8 +155,9 @@
               345,
               327
             ],
-            "body_height": 300,
-            "source_pose": 1
+            "body_height": 330,
+            "source_pose": 1,
+            "scale_group": "reactions_high"
           },
           {
             "file": "../anvil-bull-v2/reactions_high.png",
@@ -179,8 +183,9 @@
               345,
               328
             ],
-            "body_height": 300,
-            "source_pose": 3
+            "body_height": 330,
+            "source_pose": 3,
+            "scale_group": "reactions_high"
           },
           {
             "file": "../anvil-bull-v2/reactions_high.png",
@@ -206,8 +211,9 @@
               345,
               326
             ],
-            "body_height": 300,
-            "source_pose": 5
+            "body_height": 330,
+            "source_pose": 5,
+            "scale_group": "reactions_high"
           }
         ],
         "transparent_samples": [
@@ -236,7 +242,7 @@
           1536,
           1024
         ],
-        "body_height": 300,
+        "body_height": 330,
         "frames": [
           {
             "file": "../anvil-bull-v2/reactions_low.png",
@@ -262,8 +268,9 @@
               370,
               339
             ],
-            "body_height": 300,
-            "source_pose": 0
+            "body_height": 330,
+            "source_pose": 0,
+            "scale_group": "reactions_low"
           },
           {
             "file": "../anvil-bull-v2/reactions_low.png",
@@ -289,8 +296,9 @@
               370,
               331
             ],
-            "body_height": 300,
-            "source_pose": 2
+            "body_height": 330,
+            "source_pose": 2,
+            "scale_group": "reactions_low"
           },
           {
             "file": "../anvil-bull-v2/reactions_low.png",
@@ -316,8 +324,9 @@
               370,
               327
             ],
-            "body_height": 300,
-            "source_pose": 4
+            "body_height": 330,
+            "source_pose": 4,
+            "scale_group": "reactions_low"
           }
         ],
         "transparent_samples": [
@@ -346,7 +355,7 @@
           1536,
           1024
         ],
-        "body_height": 300,
+        "body_height": 330,
         "frames": [
           {
             "file": "../anvil-bull-v2/reactions_low.png",
@@ -372,8 +381,9 @@
               310,
               283
             ],
-            "body_height": 300,
-            "source_pose": 1
+            "body_height": 330,
+            "source_pose": 1,
+            "scale_group": "reactions_low"
           },
           {
             "file": "../anvil-bull-v2/reactions_low.png",
@@ -399,8 +409,9 @@
               310,
               307
             ],
-            "body_height": 300,
-            "source_pose": 3
+            "body_height": 330,
+            "source_pose": 3,
+            "scale_group": "reactions_low"
           },
           {
             "file": "../anvil-bull-v2/reactions_low.png",
@@ -426,8 +437,9 @@
               310,
               350
             ],
-            "body_height": 300,
-            "source_pose": 5
+            "body_height": 330,
+            "source_pose": 5,
+            "scale_group": "reactions_low"
           }
         ],
         "transparent_samples": [
