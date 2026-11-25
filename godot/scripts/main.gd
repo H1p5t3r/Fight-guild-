@@ -9,7 +9,6 @@ var application_focused := true
 var model := CombatModel.new()
 var connection := NativePeer.new()
 var characters := [5, 4]
-var simple := [false, false]
 var held := {}
 var paused := false
 var show_boxes := true
@@ -39,7 +38,6 @@ var editor_title: Label
 var routes: Label
 var pause_button: Button
 var locked_buttons: Array[Button] = []
-var selection_simple: Array[CheckBox] = []
 var file_dialog: FileDialog
 var importing := false
 var address: LineEdit
@@ -242,7 +240,7 @@ func build_interface() -> void:
 	input_label = label(inputs, "INPUT HISTORY   —", 12, ACCENT)
 	input_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	action_label = label(inputs, "READY", 12, MUTED)
-	keyboard_hint = label(left, "WASD move · J / K / L / I / O attack · Space dash · Shift simple · Back + Q FD", 11, MUTED)
+	keyboard_hint = label(left, "WASD move · J / K / L / I / O attack · Space dash · Back + Q FD", 11, MUTED)
 	keyboard_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	editor_shell = PanelContainer.new()
 	editor_shell.custom_minimum_size.x = 352
@@ -345,7 +343,7 @@ func build_interface() -> void:
 	var advanced_grid := GridContainer.new()
 	advanced_grid.columns = 2
 	advanced.add_child(advanced_grid)
-	for spec in [["artPose","Artwork pose (0–32)",0,32,1],["followFrom","Follow source slot",-1,CombatModel.MOVE_IDS.size()-1,1],["followFrom2","Second source slot",-1,CombatModel.MOVE_IDS.size()-1,1],["travelSpeed","Active travel px/f",-20,20,100],["inertiaPercent","Carry speed %",0,200,1],["pullFrames","Pull duration f",0,60,1],["pullGap","Pull extra gap px",0,100,100],["hitAngle","Hit slope −1/0/+1",-1,1,1],["button","Button (0–4)",0,4,1],["category","Kind (0–4)",0,4,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (46 charge / 214 / 236 / 623 / 63214)",0,63214,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["simpleDirection","Simple direction",0,9,1],["simpleButton","Simple button",0,4,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
+	for spec in [["artPose","Artwork pose (0–32)",0,32,1],["followFrom","Follow source slot",-1,CombatModel.MOVE_IDS.size()-1,1],["followFrom2","Second source slot",-1,CombatModel.MOVE_IDS.size()-1,1],["travelSpeed","Active travel px/f",-20,20,100],["inertiaPercent","Carry speed %",0,200,1],["pullFrames","Pull duration f",0,60,1],["pullGap","Pull extra gap px",0,100,100],["hitAngle","Hit slope −1/0/+1",-1,1,1],["button","Button (0–4)",0,4,1],["category","Kind (0–4)",0,4,1],["direction","Direction (1–9)",1,9,1],["motion","Motion (214 / 236 / 623 / 63214 / 214214 / 236236)",0,236236,1],["air","Air (0/1)",0,1,1],["hitLevel","Guard level (0–2)",0,2,1],["normalRoutes","Normal mask",-1,31,1],["commandRoutes","Command mask",-1,31,1]]:
 		add_field(advanced_grid, spec)
 	var note := label(advanced, "Kind: 0 normal, 1 command, 2 special, 3 Drive, 4 throw. Button: P=0 K=1 S=2 Hs=3 D=4. Masks: −1 unified; P=1 K=2 S=4 Hs=8 D=16. Follow source −1 disables the route. Signature slots: 15 up slash, 25 spiral, 26 mid, 27 low, 28/29 hooks, 30/31 stabs. Hook slope ±1 travels at 45°; height is its thickness. Art pose 0 uses button art.", 10, MUTED)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -504,7 +502,6 @@ func build_interface() -> void:
 	menus.motion = motion
 	add_child(menus)
 	menus.action_requested.connect(menu_action)
-	selection_simple = menus.simplified
 	address = menus.address
 	port = menus.port
 	net_status = menus.status
@@ -587,7 +584,6 @@ func replay_exchange(dummy_only: bool) -> void:
 	var state := model.state()
 	for p in 2:
 		characters[p] = int(state.players[p].character)
-		simple[p] = bool(state.players[p].simple)
 	held.clear()
 	history.clear()
 	last_raw = 0
@@ -742,7 +738,7 @@ func cancel_match_entry() -> void:
 	else:
 		selection_return = "sides" if activity == "local" else "home"
 		pending_activity = activity
-		menus.configure_selection(activity, characters, simple)
+		menus.configure_selection(activity, characters)
 		show_screen("fighters")
 
 func entry_failed(message: String) -> void:
@@ -759,7 +755,7 @@ func choose_activity(which: String) -> void:
 		return
 	pending_activity = which
 	selection_return = screen
-	menus.configure_selection(which, characters, simple)
+	menus.configure_selection(which, characters)
 	show_screen("fighters")
 
 func confirm_sides() -> void:
@@ -770,12 +766,11 @@ func confirm_selection() -> void:
 	if connection.active: return
 	for p in 2:
 		characters[p] = menus.selection.chosen[p]
-		simple[p] = selection_simple[p].button_pressed
 	if screen == "fighters":
 		activity = pending_activity
 		configure_activity()
 		if activity == "online":
-			menus.online_fighter.text = CombatModel.CHARACTERS[characters[0]] + ("  ·  Simplified inputs on" if simple[0] else "  ·  Motion inputs")
+			menus.online_fighter.text = CombatModel.CHARACTERS[characters[0]] + "  ·  Motion inputs"
 			net_status.text = "Choose Host or Join to begin."
 			show_screen("online")
 			return
@@ -829,7 +824,7 @@ func menu_back() -> void:
 		"online":
 			cancel_connection()
 			selection_return = "matches"
-			menus.configure_selection("online", characters, simple)
+			menus.configure_selection("online", characters)
 			pending_activity = "online"
 			show_screen("fighters")
 		"pause": show_screen("play")
@@ -1412,7 +1407,7 @@ func reset_round() -> void:
 	lab.clear_trace()
 	if connection.active: return
 	round_resolved = false
-	model.reset(characters, simple)
+	model.reset(characters)
 	if mode.selected == 0:
 		for p in 2: model.core.set_training_momentum(p, [0, 5000, 10000][training_momentum.selected])
 	held.clear()
@@ -1435,17 +1430,17 @@ func dummy_reversal_input(fighter: Dictionary, away: int) -> int:
 	for slot in CombatModel.MOVE_IDS.size():
 		var action: Dictionary = model.move(fighter.character, slot)
 		if not action.enabled or action.air or action.category != 2 or action.stanceRequired == 2 or action.actionType == 1: continue
+		if int(action.actionType) in [8, 13, 14, 15] and int(fighter.momentum) < 6667: continue
 		if selected.is_empty() or action.reversalEligible > selected.reversalEligible: selected = action
 	if selected.is_empty(): return guard
-	var simple: bool = bool(fighter.simple) and selected.simpleDirection > 0
-	var digits: String = str(selected.simpleDirection if simple else selected.motion if selected.motion else selected.direction)
+	var digits: String = str(selected.motion if selected.motion else selected.direction)
 	var index: int = digits.length() - int(fighter.stun)
 	if index < 0 or index >= digits.length(): return guard
 	var direction: int = int(digits[index])
 	var column: int = (direction - 1) % 3 - 1
 	var bits: int = (4 if direction <= 3 else 8 if direction >= 7 else 0)
 	if column != 0: bits |= away if column < 0 else (1 if away == 2 else 2)
-	if fighter.stun == 1: bits |= (16 << int(selected.simpleButton if simple else selected.button)) | (1024 if simple else 0)
+	if fighter.stun == 1: bits |= (16 << int(selected.button))
 	return bits
 
 func simulate_local() -> void:
@@ -1516,7 +1511,7 @@ func _process(_delta: float) -> void:
 		if screen == "play" and int(state.superFreezeTime) > 0:
 			var actor: Dictionary = state.players[int(state.superFreezeActor)]
 			super_freeze.reduced_motion = motion.reduced
-			super_freeze.present(int(actor.character), int(actor.facing), int(state.superFreezeDuration) - int(state.superFreezeTime), int(state.superFreezeDuration))
+			super_freeze.present(int(actor.character), int(actor.facing), int(state.superFreezeDuration) - int(state.superFreezeTime), int(state.superFreezeDuration), CombatSupers.title(int(actor.character), int(actor.lastMove)))
 		else: super_freeze.clear()
 	if screen in ["play", "pause"] and activity in ["local", "online"] and state.winner >= 0:
 		finish_scrum(state)
@@ -1540,7 +1535,7 @@ func start_network(host: bool) -> void:
 		return
 	# SpinBox updates its text on a later frame; only commit text the user is editing.
 	if port.get_line_edit().has_focus(): port.apply()
-	var result := connection.begin(model, host, address.text.strip_edges(), int(port.value), characters[0], simple[0])
+	var result := connection.begin(model, host, address.text.strip_edges(), int(port.value), characters[0])
 	if result != OK: net_status.text = "Could not open connection: " + error_string(result); return
 	lock_online(true)
 	paused = false

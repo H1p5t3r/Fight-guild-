@@ -16,7 +16,7 @@ static void mark(){CHECK(s.preview_status(1-owner,2,14));}
 static void no_strike(){CHECK(b().health==1000&&!a().contact_count&&!a().contact&&!a().combo&&!b().combo_received&&!s.world.hitstop);}
 static void tags(){
  setup();s.step(D,0);CHECK(a().move==13);setup();s.step(Right|D,0);CHECK(a().move!=12);setup();s.step(Down|D,0);CHECK(a().move==22);
- CHECK(!s.moves[4][12].v[Enabled]&&!s.moves[4][12].v[Mechanic]);CHECK(!s.move_set(4,13,Mechanic,6));
+ CHECK(is_super(s.moves[4][12])&&!s.moves[4][12].v[Mechanic]);CHECK(!s.move_set(4,13,Mechanic,6));
  for(int direction:{1,-1}){
   setup(direction);b().x=a().x+direction*10000;start(13);step();CHECK(b().tether_source==14&&b().tether_time==180);CHECK(b().health==964);
   int time=b().tether_time;ticks(3);CHECK(b().tether_time==time);while(s.world.hitstop)step();

@@ -85,7 +85,8 @@ static func projectile_art(character: int, move: int, life: int, age: int = 0) -
 	if effect.has("frames"):
 		# Remaining life is saved and freezes with hitstop. Both pillar distances
 		# share the exact same texture and geometry, including expiration art.
-		var index: int = 3 if life <= 6 else (age / 6) % 3
+		var interval: int = int(effect.get("frame_ticks", 6))
+		var index: int = 3 if life <= 6 else (age / interval) % 3
 		return {"file": effect.file, "region": effect.frames[index].region}
 	return effect
 

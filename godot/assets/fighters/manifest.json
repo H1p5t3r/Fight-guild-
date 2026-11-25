@@ -8510,6 +8510,185 @@
             "action_frame": 33,
             "motion_cue": "Captured / 5",
             "name": "j.6P+K / Captured / 5"
+          },
+          {
+            "file": "supers-v1/anvil.png",
+            "sha256": "f6093f1bfd213040fbe4814bdc2fa0c0e5ce3c807c3019d5f38feda288591277",
+            "generation_file": "exec-19a070ab-b6b7-4b80-93d5-912466041792.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              497,
+              512
+            ],
+            "bounds": [
+              34,
+              76,
+              450,
+              475
+            ],
+            "pivot": [
+              220,
+              470
+            ],
+            "body_height": 425,
+            "source_pose": 0,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Held anticipation",
+            "name": "Iron Dominion / Held anticipation"
+          },
+          {
+            "file": "supers-v1/anvil.png",
+            "sha256": "f6093f1bfd213040fbe4814bdc2fa0c0e5ce3c807c3019d5f38feda288591277",
+            "generation_file": "exec-19a070ab-b6b7-4b80-93d5-912466041792.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              497,
+              0,
+              527,
+              512
+            ],
+            "bounds": [
+              1,
+              91,
+              524,
+              467
+            ],
+            "pivot": [
+              225,
+              467
+            ],
+            "body_height": 425,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 1,
+              "box": [
+                0.0,
+                0.0,
+                260.0,
+                170.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "First-active snap",
+            "name": "Iron Dominion / First-active snap"
+          },
+          {
+            "file": "supers-v1/anvil.png",
+            "sha256": "f6093f1bfd213040fbe4814bdc2fa0c0e5ce3c807c3019d5f38feda288591277",
+            "generation_file": "exec-19a070ab-b6b7-4b80-93d5-912466041792.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1020,
+              512,
+              516,
+              512
+            ],
+            "bounds": [
+              1,
+              96,
+              467,
+              471
+            ],
+            "pivot": [
+              224,
+              468
+            ],
+            "body_height": 425,
+            "source_pose": 5,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Braked follow-through",
+            "name": "Iron Dominion / Braked follow-through"
+          },
+          {
+            "file": "supers-v1/anvil.png",
+            "sha256": "f6093f1bfd213040fbe4814bdc2fa0c0e5ce3c807c3019d5f38feda288591277",
+            "generation_file": "exec-19a070ab-b6b7-4b80-93d5-912466041792.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              497,
+              0,
+              527,
+              512
+            ],
+            "bounds": [
+              1,
+              91,
+              524,
+              467
+            ],
+            "pivot": [
+              225,
+              467
+            ],
+            "body_height": 425,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Impact hold without lingering hitbox effect",
+            "name": "Iron Dominion / Impact hold without lingering hitbox effect"
+          },
+          {
+            "file": "supers-v1/anvil.png",
+            "sha256": "f6093f1bfd213040fbe4814bdc2fa0c0e5ce3c807c3019d5f38feda288591277",
+            "generation_file": "exec-19a070ab-b6b7-4b80-93d5-912466041792.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              31,
+              59,
+              493,
+              474
+            ],
+            "pivot": [
+              205,
+              470
+            ],
+            "body_height": 425,
+            "source_pose": 2,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "shield_fx",
+              "pose": 1,
+              "box": [
+                0.0,
+                0.0,
+                260.0,
+                170.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "Finishing impact",
+            "name": "Iron Dominion / Finishing impact"
           }
         ],
         "transparent_samples": [
@@ -9889,6 +10068,59 @@
             "source": "anvil-bull-v2",
             "fixedAnatomicalScale": true
           }
+        },
+        "31": {
+          "moveId": "j.214P>P",
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 173
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 174
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 176
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 175
+            },
+            {
+              "start": 85,
+              "phase": "idle",
+              "pose": 0
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / braked recovery",
+            "authoredTiming": [
+              18,
+              5,
+              18
+            ],
+            "largestMotionBoundary": [
+              17,
+              18
+            ],
+            "source": "supers-v1"
+          }
         }
       },
       "paired_animations": {
@@ -10029,6 +10261,51 @@
               "tick": 33,
               "phase": "attack_animation",
               "pose": 172
+            }
+          ]
+        },
+        "31": {
+          "moveId": "j.214P>P",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 174
+            },
+            {
+              "tick": 7,
+              "phase": "attack_animation",
+              "pose": 176
+            },
+            {
+              "tick": 16,
+              "phase": "attack_animation",
+              "pose": 173
+            },
+            {
+              "tick": 40,
+              "phase": "attack_animation",
+              "pose": 174
+            },
+            {
+              "tick": 46,
+              "phase": "attack_animation",
+              "pose": 176
+            },
+            {
+              "tick": 54,
+              "phase": "attack_animation",
+              "pose": 175
+            },
+            {
+              "tick": 70,
+              "phase": "attack_animation",
+              "pose": 177
+            },
+            {
+              "tick": 76,
+              "phase": "attack_animation",
+              "pose": 175
             }
           ]
         }
@@ -10202,6 +10479,18 @@
             "source": "anvil-bull-v2",
             "fixedAnatomicalScale": true
           }
+        },
+        "31": {
+          "moveId": "j.214P>P",
+          "windup": [],
+          "active": [],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 175
+            }
+          ]
         }
       },
       "shield_fx": {
@@ -10304,7 +10593,8 @@
         "reactions_low": 330,
         "down_back": 350,
         "down_prone": 345,
-        "iron_turn": 400
+        "iron_turn": 400,
+        "supers-v1": 425
       }
     },
     {
@@ -15960,6 +16250,309 @@
             "action_id": "5D",
             "action_frame": 21,
             "motion_cue": "Settle \u00b7 still recovering"
+          },
+          {
+            "file": "supers-v1/hammer.png",
+            "sha256": "1942f9b279c94b71feed16e75a040df37505333969cd25c2bbff408aaf34fdfc",
+            "generation_file": "exec-ce40d139-84e4-44f7-ad3f-df2808013368.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              501,
+              512
+            ],
+            "bounds": [
+              57,
+              131,
+              403,
+              478
+            ],
+            "pivot": [
+              215,
+              475
+            ],
+            "body_height": 425,
+            "source_pose": 0,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Held anticipation",
+            "name": "Freemason / Held anticipation"
+          },
+          {
+            "file": "supers-v1/hammer.png",
+            "sha256": "1942f9b279c94b71feed16e75a040df37505333969cd25c2bbff408aaf34fdfc",
+            "generation_file": "exec-ce40d139-84e4-44f7-ad3f-df2808013368.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              501,
+              0,
+              533,
+              512
+            ],
+            "bounds": [
+              1,
+              99,
+              533,
+              477
+            ],
+            "pivot": [
+              216,
+              475
+            ],
+            "body_height": 425,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 0,
+              "box": [
+                0.0,
+                0.0,
+                290.0,
+                165.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "First-active snap",
+            "name": "Freemason / First-active snap"
+          },
+          {
+            "file": "supers-v1/hammer.png",
+            "sha256": "1942f9b279c94b71feed16e75a040df37505333969cd25c2bbff408aaf34fdfc",
+            "generation_file": "exec-ce40d139-84e4-44f7-ad3f-df2808013368.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1034,
+              0,
+              502,
+              512
+            ],
+            "bounds": [
+              29,
+              118,
+              475,
+              478
+            ],
+            "pivot": [
+              205,
+              475
+            ],
+            "body_height": 425,
+            "source_pose": 2,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Braked follow-through",
+            "name": "Freemason / Braked follow-through"
+          },
+          {
+            "file": "supers-v1/hammer.png",
+            "sha256": "1942f9b279c94b71feed16e75a040df37505333969cd25c2bbff408aaf34fdfc",
+            "generation_file": "exec-ce40d139-84e4-44f7-ad3f-df2808013368.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              501,
+              0,
+              533,
+              512
+            ],
+            "bounds": [
+              1,
+              99,
+              533,
+              477
+            ],
+            "pivot": [
+              216,
+              475
+            ],
+            "body_height": 425,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Impact hold without lingering hitbox effect",
+            "name": "Freemason / Impact hold without lingering hitbox effect"
+          },
+          {
+            "file": "supers-v1/hammer.png",
+            "sha256": "1942f9b279c94b71feed16e75a040df37505333969cd25c2bbff408aaf34fdfc",
+            "generation_file": "exec-ce40d139-84e4-44f7-ad3f-df2808013368.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1034,
+              0,
+              502,
+              512
+            ],
+            "bounds": [
+              29,
+              118,
+              475,
+              478
+            ],
+            "pivot": [
+              205,
+              475
+            ],
+            "body_height": 425,
+            "source_pose": 2,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "hammer_fx",
+              "pose": 0,
+              "box": [
+                0.0,
+                0.0,
+                290.0,
+                165.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "Finishing impact",
+            "name": "Freemason / Finishing impact"
+          },
+          {
+            "file": "supers-v1/hammer.png",
+            "sha256": "1942f9b279c94b71feed16e75a040df37505333969cd25c2bbff408aaf34fdfc",
+            "generation_file": "exec-ce40d139-84e4-44f7-ad3f-df2808013368.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              89,
+              2,
+              445,
+              475
+            ],
+            "pivot": [
+              220,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 3,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Held anticipation",
+            "name": "Grand Design / Held anticipation"
+          },
+          {
+            "file": "supers-v1/hammer.png",
+            "sha256": "1942f9b279c94b71feed16e75a040df37505333969cd25c2bbff408aaf34fdfc",
+            "generation_file": "exec-ce40d139-84e4-44f7-ad3f-df2808013368.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              38,
+              112,
+              461,
+              477
+            ],
+            "pivot": [
+              215,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 4,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "First-active snap",
+            "name": "Grand Design / First-active snap"
+          },
+          {
+            "file": "supers-v1/hammer.png",
+            "sha256": "1942f9b279c94b71feed16e75a040df37505333969cd25c2bbff408aaf34fdfc",
+            "generation_file": "exec-ce40d139-84e4-44f7-ad3f-df2808013368.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              46,
+              72,
+              463,
+              477
+            ],
+            "pivot": [
+              215,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 5,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Braked follow-through",
+            "name": "Grand Design / Braked follow-through"
+          },
+          {
+            "file": "supers-v1/hammer.png",
+            "sha256": "1942f9b279c94b71feed16e75a040df37505333969cd25c2bbff408aaf34fdfc",
+            "generation_file": "exec-ce40d139-84e4-44f7-ad3f-df2808013368.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              38,
+              112,
+              461,
+              477
+            ],
+            "pivot": [
+              215,
+              474
+            ],
+            "body_height": 425,
+            "source_pose": 4,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Impact hold without lingering hitbox effect",
+            "name": "Grand Design / Impact hold without lingering hitbox effect"
           }
         ]
       },
@@ -17162,6 +17755,112 @@
             ],
             "source": "hammer-kit-v1"
           }
+        },
+        "12": {
+          "moveId": "6D",
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 142
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 143
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 145
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 144
+            },
+            {
+              "start": 85,
+              "phase": "idle",
+              "pose": 0
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / braked recovery",
+            "authoredTiming": [
+              12,
+              4,
+              34
+            ],
+            "largestMotionBoundary": [
+              11,
+              12
+            ],
+            "source": "supers-v1"
+          }
+        },
+        "31": {
+          "moveId": "j.214P>P",
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 147
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 148
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 150
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 149
+            },
+            {
+              "start": 85,
+              "phase": "idle",
+              "pose": 0
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / braked recovery",
+            "authoredTiming": [
+              16,
+              1,
+              10
+            ],
+            "largestMotionBoundary": [
+              15,
+              16
+            ],
+            "source": "supers-v1"
+          }
         }
       },
       "paired_animations": {
@@ -17224,7 +17923,110 @@
               "pose": 135
             }
           ]
+        },
+        "12": {
+          "moveId": "6D",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 143
+            },
+            {
+              "tick": 7,
+              "phase": "attack_animation",
+              "pose": 145
+            },
+            {
+              "tick": 16,
+              "phase": "attack_animation",
+              "pose": 142
+            },
+            {
+              "tick": 40,
+              "phase": "attack_animation",
+              "pose": 143
+            },
+            {
+              "tick": 46,
+              "phase": "attack_animation",
+              "pose": 145
+            },
+            {
+              "tick": 54,
+              "phase": "attack_animation",
+              "pose": 144
+            },
+            {
+              "tick": 70,
+              "phase": "attack_animation",
+              "pose": 146
+            },
+            {
+              "tick": 76,
+              "phase": "attack_animation",
+              "pose": 144
+            }
+          ]
         }
+      },
+      "projectile_variants": {
+        "31": {
+          "file": "supers-v1/utility.png",
+          "frames": [
+            {
+              "region": [
+                8,
+                639,
+                583,
+                202
+              ]
+            },
+            {
+              "region": [
+                591,
+                468,
+                576,
+                374
+              ]
+            },
+            {
+              "region": [
+                1197,
+                607,
+                564,
+                235
+              ]
+            },
+            {
+              "region": [
+                1197,
+                607,
+                564,
+                235
+              ]
+            }
+          ],
+          "frame_ticks": 12,
+          "source": "/workspace/generated_images/exec-7d063287-ecd4-4cd9-a2ea-41d1af9587ed.png"
+        }
+      },
+      "attack_connected": {
+        "12": {
+          "moveId": "6D",
+          "windup": [],
+          "active": [],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 144
+            }
+          ]
+        }
+      },
+      "anatomical_scales": {
+        "supers-v1": 425
       }
     },
     {
@@ -22499,6 +23301,309 @@
             "action_id": "214Hs",
             "action_frame": 62,
             "motion_cue": "Settled \u00b7 still recovering"
+          },
+          {
+            "file": "supers-v1/smoke.png",
+            "sha256": "882a5f5c8577c1847e3724771837cc661c4a909f8e7c043125bfdb07365cb542",
+            "generation_file": "exec-1578ecf3-191e-45be-9556-caf4c4b023c4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              145,
+              18,
+              374,
+              488
+            ],
+            "pivot": [
+              292,
+              489
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Held anticipation",
+            "name": "Flashpoint / Held anticipation"
+          },
+          {
+            "file": "supers-v1/smoke.png",
+            "sha256": "882a5f5c8577c1847e3724771837cc661c4a909f8e7c043125bfdb07365cb542",
+            "generation_file": "exec-1578ecf3-191e-45be-9556-caf4c4b023c4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              40,
+              17,
+              475,
+              491
+            ],
+            "pivot": [
+              255,
+              489
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 2,
+              "box": [
+                0.0,
+                0.0,
+                175.0,
+                190.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "First-active snap",
+            "name": "Flashpoint / First-active snap"
+          },
+          {
+            "file": "supers-v1/smoke.png",
+            "sha256": "882a5f5c8577c1847e3724771837cc661c4a909f8e7c043125bfdb07365cb542",
+            "generation_file": "exec-1578ecf3-191e-45be-9556-caf4c4b023c4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              74,
+              13,
+              479,
+              492
+            ],
+            "pivot": [
+              265,
+              489
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Braked follow-through",
+            "name": "Flashpoint / Braked follow-through"
+          },
+          {
+            "file": "supers-v1/smoke.png",
+            "sha256": "882a5f5c8577c1847e3724771837cc661c4a909f8e7c043125bfdb07365cb542",
+            "generation_file": "exec-1578ecf3-191e-45be-9556-caf4c4b023c4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              40,
+              17,
+              475,
+              491
+            ],
+            "pivot": [
+              255,
+              489
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Impact hold without lingering hitbox effect",
+            "name": "Flashpoint / Impact hold without lingering hitbox effect"
+          },
+          {
+            "file": "supers-v1/smoke.png",
+            "sha256": "882a5f5c8577c1847e3724771837cc661c4a909f8e7c043125bfdb07365cb542",
+            "generation_file": "exec-1578ecf3-191e-45be-9556-caf4c4b023c4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              74,
+              13,
+              479,
+              492
+            ],
+            "pivot": [
+              265,
+              489
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "sword_fx",
+              "pose": 2,
+              "box": [
+                0.0,
+                0.0,
+                175.0,
+                190.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "Finishing impact",
+            "name": "Flashpoint / Finishing impact"
+          },
+          {
+            "file": "supers-v1/smoke.png",
+            "sha256": "882a5f5c8577c1847e3724771837cc661c4a909f8e7c043125bfdb07365cb542",
+            "generation_file": "exec-1578ecf3-191e-45be-9556-caf4c4b023c4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              90,
+              15,
+              394,
+              493
+            ],
+            "pivot": [
+              247,
+              492
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Held anticipation",
+            "name": "The Air Is Mine / Held anticipation"
+          },
+          {
+            "file": "supers-v1/smoke.png",
+            "sha256": "882a5f5c8577c1847e3724771837cc661c4a909f8e7c043125bfdb07365cb542",
+            "generation_file": "exec-1578ecf3-191e-45be-9556-caf4c4b023c4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              40,
+              14,
+              452,
+              490
+            ],
+            "pivot": [
+              240,
+              492
+            ],
+            "body_height": 480,
+            "source_pose": 4,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "First-active snap",
+            "name": "The Air Is Mine / First-active snap"
+          },
+          {
+            "file": "supers-v1/smoke.png",
+            "sha256": "882a5f5c8577c1847e3724771837cc661c4a909f8e7c043125bfdb07365cb542",
+            "generation_file": "exec-1578ecf3-191e-45be-9556-caf4c4b023c4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              104,
+              12,
+              420,
+              493
+            ],
+            "pivot": [
+              257,
+              492
+            ],
+            "body_height": 480,
+            "source_pose": 5,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Braked follow-through",
+            "name": "The Air Is Mine / Braked follow-through"
+          },
+          {
+            "file": "supers-v1/smoke.png",
+            "sha256": "882a5f5c8577c1847e3724771837cc661c4a909f8e7c043125bfdb07365cb542",
+            "generation_file": "exec-1578ecf3-191e-45be-9556-caf4c4b023c4.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              40,
+              14,
+              452,
+              490
+            ],
+            "pivot": [
+              240,
+              492
+            ],
+            "body_height": 480,
+            "source_pose": 4,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Impact hold without lingering hitbox effect",
+            "name": "The Air Is Mine / Impact hold without lingering hitbox effect"
           }
         ],
         "transparent_samples": [
@@ -23251,6 +24356,112 @@
             ],
             "source": "smoke-specials-v3"
           }
+        },
+        "12": {
+          "moveId": "6D",
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 69
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 70
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 72
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 71
+            },
+            {
+              "start": 85,
+              "phase": "idle",
+              "pose": 0
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / braked recovery",
+            "authoredTiming": [
+              8,
+              5,
+              35
+            ],
+            "largestMotionBoundary": [
+              7,
+              8
+            ],
+            "source": "supers-v1"
+          }
+        },
+        "31": {
+          "moveId": "j.214P>P",
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 74
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 75
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 77
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 76
+            },
+            {
+              "start": 85,
+              "phase": "idle",
+              "pose": 0
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / braked recovery",
+            "authoredTiming": [
+              24,
+              1,
+              18
+            ],
+            "largestMotionBoundary": [
+              23,
+              24
+            ],
+            "source": "supers-v1"
+          }
         }
       },
       "sword_fx": {
@@ -23622,7 +24833,110 @@
               1023
             ]
           ]
+        },
+        "31": {
+          "file": "supers-v1/utility.png",
+          "frames": [
+            {
+              "region": [
+                14,
+                124,
+                577,
+                302
+              ]
+            },
+            {
+              "region": [
+                591,
+                33,
+                574,
+                396
+              ]
+            },
+            {
+              "region": [
+                1204,
+                109,
+                557,
+                318
+              ]
+            },
+            {
+              "region": [
+                1204,
+                109,
+                557,
+                318
+              ]
+            }
+          ],
+          "frame_ticks": 12,
+          "source": "/workspace/generated_images/exec-7d063287-ecd4-4cd9-a2ea-41d1af9587ed.png"
         }
+      },
+      "paired_animations": {
+        "12": {
+          "moveId": "6D",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 70
+            },
+            {
+              "tick": 7,
+              "phase": "attack_animation",
+              "pose": 72
+            },
+            {
+              "tick": 15,
+              "phase": "attack_animation",
+              "pose": 69
+            },
+            {
+              "tick": 37,
+              "phase": "attack_animation",
+              "pose": 70
+            },
+            {
+              "tick": 43,
+              "phase": "attack_animation",
+              "pose": 72
+            },
+            {
+              "tick": 50,
+              "phase": "attack_animation",
+              "pose": 71
+            },
+            {
+              "tick": 65,
+              "phase": "attack_animation",
+              "pose": 73
+            },
+            {
+              "tick": 71,
+              "phase": "attack_animation",
+              "pose": 71
+            }
+          ]
+        }
+      },
+      "attack_connected": {
+        "12": {
+          "moveId": "6D",
+          "windup": [],
+          "active": [],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 71
+            }
+          ]
+        }
+      },
+      "anatomical_scales": {
+        "supers-v1": 480
       }
     },
     {
@@ -26519,6 +27833,570 @@
             ]
           }
         ]
+      },
+      "attack_animation": {
+        "file": "supers-v1/tapper.png",
+        "body_height": 470,
+        "size": [
+          1536,
+          1024
+        ],
+        "frames": [
+          {
+            "file": "supers-v1/tapper.png",
+            "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+            "generation_file": "exec-3e2072db-4e5e-4754-9308-afd5dcc0fa57.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              88,
+              47,
+              431,
+              490
+            ],
+            "pivot": [
+              235,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 0,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Held anticipation",
+            "name": "Last Orders / Held anticipation"
+          },
+          {
+            "file": "supers-v1/tapper.png",
+            "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+            "generation_file": "exec-3e2072db-4e5e-4754-9308-afd5dcc0fa57.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              64,
+              10,
+              430,
+              491
+            ],
+            "pivot": [
+              235,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "First-active snap",
+            "name": "Last Orders / First-active snap"
+          },
+          {
+            "file": "supers-v1/tapper.png",
+            "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+            "generation_file": "exec-3e2072db-4e5e-4754-9308-afd5dcc0fa57.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              54,
+              62,
+              435,
+              489
+            ],
+            "pivot": [
+              235,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 2,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Braked follow-through",
+            "name": "Last Orders / Braked follow-through"
+          },
+          {
+            "file": "supers-v1/tapper.png",
+            "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+            "generation_file": "exec-3e2072db-4e5e-4754-9308-afd5dcc0fa57.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              64,
+              10,
+              430,
+              491
+            ],
+            "pivot": [
+              235,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Impact hold without lingering hitbox effect",
+            "name": "Last Orders / Impact hold without lingering hitbox effect"
+          },
+          {
+            "file": "supers-v1/tapper.png",
+            "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+            "generation_file": "exec-3e2072db-4e5e-4754-9308-afd5dcc0fa57.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              54,
+              62,
+              435,
+              489
+            ],
+            "pivot": [
+              235,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 2,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Finishing impact",
+            "name": "Last Orders / Finishing impact"
+          },
+          {
+            "file": "supers-v1/tapper.png",
+            "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+            "generation_file": "exec-3e2072db-4e5e-4754-9308-afd5dcc0fa57.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              82,
+              73,
+              415,
+              487
+            ],
+            "pivot": [
+              235,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 3,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Held anticipation",
+            "name": "Whiskey Chaser / Held anticipation"
+          },
+          {
+            "file": "supers-v1/tapper.png",
+            "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+            "generation_file": "exec-3e2072db-4e5e-4754-9308-afd5dcc0fa57.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              36,
+              30,
+              484,
+              488
+            ],
+            "pivot": [
+              235,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 4,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "First-active snap",
+            "name": "Whiskey Chaser / First-active snap"
+          },
+          {
+            "file": "supers-v1/tapper.png",
+            "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+            "generation_file": "exec-3e2072db-4e5e-4754-9308-afd5dcc0fa57.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              52,
+              40,
+              471,
+              488
+            ],
+            "pivot": [
+              235,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 5,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Braked follow-through",
+            "name": "Whiskey Chaser / Braked follow-through"
+          },
+          {
+            "file": "supers-v1/tapper.png",
+            "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+            "generation_file": "exec-3e2072db-4e5e-4754-9308-afd5dcc0fa57.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              36,
+              30,
+              484,
+              488
+            ],
+            "pivot": [
+              235,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 4,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Impact hold without lingering hitbox effect",
+            "name": "Whiskey Chaser / Impact hold without lingering hitbox effect"
+          },
+          {
+            "file": "supers-v1/tapper.png",
+            "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+            "generation_file": "exec-3e2072db-4e5e-4754-9308-afd5dcc0fa57.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              52,
+              40,
+              471,
+              488
+            ],
+            "pivot": [
+              235,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 5,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Finishing impact",
+            "name": "Whiskey Chaser / Finishing impact"
+          }
+        ],
+        "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+        "transparent_samples": [
+          [
+            0,
+            0
+          ],
+          [
+            1535,
+            0
+          ],
+          [
+            0,
+            1023
+          ]
+        ]
+      },
+      "attack_animations": {
+        "12": {
+          "moveId": "6D",
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 0
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 1
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 3
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 2
+            },
+            {
+              "start": 85,
+              "phase": "ready",
+              "pose": 0
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / braked recovery",
+            "authoredTiming": [
+              7,
+              4,
+              38
+            ],
+            "largestMotionBoundary": [
+              6,
+              7
+            ],
+            "source": "supers-v1"
+          }
+        },
+        "31": {
+          "moveId": "j.214P>P",
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 5
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 6
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 8
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 7
+            },
+            {
+              "start": 85,
+              "phase": "ready",
+              "pose": 0
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / braked recovery",
+            "authoredTiming": [
+              10,
+              9,
+              12
+            ],
+            "largestMotionBoundary": [
+              9,
+              10
+            ],
+            "source": "supers-v1"
+          }
+        }
+      },
+      "paired_animations": {
+        "12": {
+          "moveId": "6D",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 1
+            },
+            {
+              "tick": 7,
+              "phase": "attack_animation",
+              "pose": 3
+            },
+            {
+              "tick": 17,
+              "phase": "attack_animation",
+              "pose": 0
+            },
+            {
+              "tick": 43,
+              "phase": "attack_animation",
+              "pose": 1
+            },
+            {
+              "tick": 49,
+              "phase": "attack_animation",
+              "pose": 3
+            },
+            {
+              "tick": 57,
+              "phase": "attack_animation",
+              "pose": 2
+            },
+            {
+              "tick": 74,
+              "phase": "attack_animation",
+              "pose": 4
+            },
+            {
+              "tick": 80,
+              "phase": "attack_animation",
+              "pose": 2
+            }
+          ]
+        },
+        "31": {
+          "moveId": "j.214P>P",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 6
+            },
+            {
+              "tick": 7,
+              "phase": "attack_animation",
+              "pose": 8
+            },
+            {
+              "tick": 17,
+              "phase": "attack_animation",
+              "pose": 5
+            },
+            {
+              "tick": 43,
+              "phase": "attack_animation",
+              "pose": 6
+            },
+            {
+              "tick": 49,
+              "phase": "attack_animation",
+              "pose": 8
+            },
+            {
+              "tick": 57,
+              "phase": "attack_animation",
+              "pose": 7
+            },
+            {
+              "tick": 74,
+              "phase": "attack_animation",
+              "pose": 9
+            },
+            {
+              "tick": 80,
+              "phase": "attack_animation",
+              "pose": 7
+            }
+          ]
+        }
+      },
+      "attack_connected": {
+        "12": {
+          "moveId": "6D",
+          "windup": [],
+          "active": [],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 2
+            }
+          ]
+        },
+        "31": {
+          "moveId": "j.214P>P",
+          "windup": [],
+          "active": [],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 7
+            }
+          ]
+        }
+      },
+      "anatomical_scales": {
+        "supers-v1": 470
       }
     },
     {
@@ -35172,6 +37050,364 @@
             "action_id": "c.S",
             "action_frame": 21,
             "motion_cue": "Settle"
+          },
+          {
+            "file": "supers-v1/shark.png",
+            "sha256": "ff84765bfe1ebc58946197345b3cef10fae7ed5279ce09b71c0b04008bcdbdf1",
+            "generation_file": "exec-2f555a12-f924-4d75-9d5b-36108ffc0674.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              68,
+              58,
+              456,
+              472
+            ],
+            "pivot": [
+              220,
+              469
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Held anticipation",
+            "name": "No Safe Harbour / Held anticipation"
+          },
+          {
+            "file": "supers-v1/shark.png",
+            "sha256": "ff84765bfe1ebc58946197345b3cef10fae7ed5279ce09b71c0b04008bcdbdf1",
+            "generation_file": "exec-2f555a12-f924-4d75-9d5b-36108ffc0674.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              19,
+              95,
+              506,
+              470
+            ],
+            "pivot": [
+              205,
+              469
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "line_fx",
+              "pose": 0,
+              "box": [
+                0.0,
+                50.0,
+                400.0,
+                125.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "First-active snap",
+            "name": "No Safe Harbour / First-active snap"
+          },
+          {
+            "file": "supers-v1/shark.png",
+            "sha256": "ff84765bfe1ebc58946197345b3cef10fae7ed5279ce09b71c0b04008bcdbdf1",
+            "generation_file": "exec-2f555a12-f924-4d75-9d5b-36108ffc0674.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              52,
+              95,
+              462,
+              472
+            ],
+            "pivot": [
+              220,
+              469
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Braked follow-through",
+            "name": "No Safe Harbour / Braked follow-through"
+          },
+          {
+            "file": "supers-v1/shark.png",
+            "sha256": "ff84765bfe1ebc58946197345b3cef10fae7ed5279ce09b71c0b04008bcdbdf1",
+            "generation_file": "exec-2f555a12-f924-4d75-9d5b-36108ffc0674.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              19,
+              95,
+              506,
+              470
+            ],
+            "pivot": [
+              205,
+              469
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Impact hold without lingering hitbox effect",
+            "name": "No Safe Harbour / Impact hold without lingering hitbox effect"
+          },
+          {
+            "file": "supers-v1/shark.png",
+            "sha256": "ff84765bfe1ebc58946197345b3cef10fae7ed5279ce09b71c0b04008bcdbdf1",
+            "generation_file": "exec-2f555a12-f924-4d75-9d5b-36108ffc0674.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              0,
+              512,
+              512
+            ],
+            "bounds": [
+              52,
+              95,
+              462,
+              472
+            ],
+            "pivot": [
+              220,
+              469
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "line_fx",
+              "pose": 0,
+              "box": [
+                0.0,
+                50.0,
+                400.0,
+                125.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "Finishing impact",
+            "name": "No Safe Harbour / Finishing impact"
+          },
+          {
+            "file": "supers-v1/shark.png",
+            "sha256": "ff84765bfe1ebc58946197345b3cef10fae7ed5279ce09b71c0b04008bcdbdf1",
+            "generation_file": "exec-2f555a12-f924-4d75-9d5b-36108ffc0674.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              57,
+              125,
+              471,
+              470
+            ],
+            "pivot": [
+              215,
+              469
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Held anticipation",
+            "name": "Undertow / Held anticipation"
+          },
+          {
+            "file": "supers-v1/shark.png",
+            "sha256": "ff84765bfe1ebc58946197345b3cef10fae7ed5279ce09b71c0b04008bcdbdf1",
+            "generation_file": "exec-2f555a12-f924-4d75-9d5b-36108ffc0674.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              46,
+              90,
+              478,
+              470
+            ],
+            "pivot": [
+              215,
+              469
+            ],
+            "body_height": 480,
+            "source_pose": 4,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "line_fx",
+              "pose": 0,
+              "box": [
+                0.0,
+                0.0,
+                145.0,
+                150.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "First-active snap",
+            "name": "Undertow / First-active snap"
+          },
+          {
+            "file": "supers-v1/shark.png",
+            "sha256": "ff84765bfe1ebc58946197345b3cef10fae7ed5279ce09b71c0b04008bcdbdf1",
+            "generation_file": "exec-2f555a12-f924-4d75-9d5b-36108ffc0674.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              27,
+              51,
+              438,
+              473
+            ],
+            "pivot": [
+              215,
+              469
+            ],
+            "body_height": 480,
+            "source_pose": 5,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Braked follow-through",
+            "name": "Undertow / Braked follow-through"
+          },
+          {
+            "file": "supers-v1/shark.png",
+            "sha256": "ff84765bfe1ebc58946197345b3cef10fae7ed5279ce09b71c0b04008bcdbdf1",
+            "generation_file": "exec-2f555a12-f924-4d75-9d5b-36108ffc0674.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              46,
+              90,
+              478,
+              470
+            ],
+            "pivot": [
+              215,
+              469
+            ],
+            "body_height": 480,
+            "source_pose": 4,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Impact hold without lingering hitbox effect",
+            "name": "Undertow / Impact hold without lingering hitbox effect"
+          },
+          {
+            "file": "supers-v1/shark.png",
+            "sha256": "ff84765bfe1ebc58946197345b3cef10fae7ed5279ce09b71c0b04008bcdbdf1",
+            "generation_file": "exec-2f555a12-f924-4d75-9d5b-36108ffc0674.png",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              1024,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              27,
+              51,
+              438,
+              473
+            ],
+            "pivot": [
+              215,
+              469
+            ],
+            "body_height": 480,
+            "source_pose": 5,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "line_fx",
+              "pose": 0,
+              "box": [
+                0.0,
+                0.0,
+                145.0,
+                150.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "Finishing impact",
+            "name": "Undertow / Finishing impact"
           }
         ]
       },
@@ -36642,6 +38878,112 @@
               7
             ]
           }
+        },
+        "12": {
+          "moveId": "6D",
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 191
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 192
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 194
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 193
+            },
+            {
+              "start": 85,
+              "phase": "idle",
+              "pose": 0
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / braked recovery",
+            "authoredTiming": [
+              12,
+              4,
+              30
+            ],
+            "largestMotionBoundary": [
+              11,
+              12
+            ],
+            "source": "supers-v1"
+          }
+        },
+        "14": {
+          "moveId": "236P",
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "idle",
+              "pose": 0
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 196
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 197
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 199
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 198
+            },
+            {
+              "start": 85,
+              "phase": "idle",
+              "pose": 0
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / braked recovery",
+            "authoredTiming": [
+              7,
+              5,
+              32
+            ],
+            "largestMotionBoundary": [
+              6,
+              7
+            ],
+            "source": "supers-v1"
+          }
         }
       },
       "normal_selection": {
@@ -37415,6 +39757,96 @@
               "pose": 151
             }
           ]
+        },
+        "12": {
+          "moveId": "6D",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 192
+            },
+            {
+              "tick": 7,
+              "phase": "attack_animation",
+              "pose": 194
+            },
+            {
+              "tick": 17,
+              "phase": "attack_animation",
+              "pose": 191
+            },
+            {
+              "tick": 43,
+              "phase": "attack_animation",
+              "pose": 192
+            },
+            {
+              "tick": 49,
+              "phase": "attack_animation",
+              "pose": 194
+            },
+            {
+              "tick": 57,
+              "phase": "attack_animation",
+              "pose": 193
+            },
+            {
+              "tick": 74,
+              "phase": "attack_animation",
+              "pose": 195
+            },
+            {
+              "tick": 80,
+              "phase": "attack_animation",
+              "pose": 193
+            }
+          ]
+        },
+        "14": {
+          "moveId": "236P",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 197
+            },
+            {
+              "tick": 7,
+              "phase": "attack_animation",
+              "pose": 199
+            },
+            {
+              "tick": 14,
+              "phase": "attack_animation",
+              "pose": 196
+            },
+            {
+              "tick": 36,
+              "phase": "attack_animation",
+              "pose": 197
+            },
+            {
+              "tick": 42,
+              "phase": "attack_animation",
+              "pose": 199
+            },
+            {
+              "tick": 48,
+              "phase": "attack_animation",
+              "pose": 198
+            },
+            {
+              "tick": 62,
+              "phase": "attack_animation",
+              "pose": 200
+            },
+            {
+              "tick": 68,
+              "phase": "attack_animation",
+              "pose": 198
+            }
+          ]
         }
       },
       "attack_exposure_standard": "docs/attack-animation-standard.md",
@@ -37512,7 +39944,34 @@
               2
             ]
           }
+        },
+        "12": {
+          "moveId": "6D",
+          "windup": [],
+          "active": [],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 193
+            }
+          ]
+        },
+        "14": {
+          "moveId": "236P",
+          "windup": [],
+          "active": [],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 198
+            }
+          ]
         }
+      },
+      "anatomical_scales": {
+        "supers-v1": 480
       }
     },
     {
@@ -49067,6 +51526,364 @@
             "key_index": 8,
             "motion_cue": "Lower the elbow",
             "audit_key": "623Hs-lower-elbow"
+          },
+          {
+            "file": "supers-v1/fillet.png",
+            "sha256": "9d2396779039b294c12606be5292cdd9d951cd61f54d419ea2739813ad57950f",
+            "generation_file": "exec-13ce0fb9-721d-4682-af4e-38506ef8d223.png",
+            "source_size": [
+              1024,
+              1536
+            ],
+            "region": [
+              0,
+              0,
+              460,
+              512
+            ],
+            "bounds": [
+              56,
+              117,
+              401,
+              512
+            ],
+            "pivot": [
+              212,
+              446
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Held anticipation",
+            "name": "Bloodletting / Held anticipation"
+          },
+          {
+            "file": "supers-v1/fillet.png",
+            "sha256": "9d2396779039b294c12606be5292cdd9d951cd61f54d419ea2739813ad57950f",
+            "generation_file": "exec-13ce0fb9-721d-4682-af4e-38506ef8d223.png",
+            "source_size": [
+              1024,
+              1536
+            ],
+            "region": [
+              460,
+              0,
+              564,
+              512
+            ],
+            "bounds": [
+              0,
+              63,
+              541,
+              449
+            ],
+            "pivot": [
+              212,
+              446
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "knife_fx",
+              "pose": 0,
+              "box": [
+                0.0,
+                20.0,
+                200.0,
+                120.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "First-active snap",
+            "name": "Bloodletting / First-active snap"
+          },
+          {
+            "file": "supers-v1/fillet.png",
+            "sha256": "9d2396779039b294c12606be5292cdd9d951cd61f54d419ea2739813ad57950f",
+            "generation_file": "exec-13ce0fb9-721d-4682-af4e-38506ef8d223.png",
+            "source_size": [
+              1024,
+              1536
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              47,
+              0,
+              406,
+              459
+            ],
+            "pivot": [
+              210,
+              459
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Braked follow-through",
+            "name": "Bloodletting / Braked follow-through"
+          },
+          {
+            "file": "supers-v1/fillet.png",
+            "sha256": "9d2396779039b294c12606be5292cdd9d951cd61f54d419ea2739813ad57950f",
+            "generation_file": "exec-13ce0fb9-721d-4682-af4e-38506ef8d223.png",
+            "source_size": [
+              1024,
+              1536
+            ],
+            "region": [
+              460,
+              0,
+              564,
+              512
+            ],
+            "bounds": [
+              0,
+              63,
+              541,
+              449
+            ],
+            "pivot": [
+              212,
+              446
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Impact hold without lingering hitbox effect",
+            "name": "Bloodletting / Impact hold without lingering hitbox effect"
+          },
+          {
+            "file": "supers-v1/fillet.png",
+            "sha256": "9d2396779039b294c12606be5292cdd9d951cd61f54d419ea2739813ad57950f",
+            "generation_file": "exec-13ce0fb9-721d-4682-af4e-38506ef8d223.png",
+            "source_size": [
+              1024,
+              1536
+            ],
+            "region": [
+              0,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              47,
+              0,
+              406,
+              459
+            ],
+            "pivot": [
+              210,
+              459
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "knife_fx",
+              "pose": 0,
+              "box": [
+                0.0,
+                20.0,
+                200.0,
+                120.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "Finishing impact",
+            "name": "Bloodletting / Finishing impact"
+          },
+          {
+            "file": "supers-v1/fillet.png",
+            "sha256": "9d2396779039b294c12606be5292cdd9d951cd61f54d419ea2739813ad57950f",
+            "generation_file": "exec-13ce0fb9-721d-4682-af4e-38506ef8d223.png",
+            "source_size": [
+              1024,
+              1536
+            ],
+            "region": [
+              512,
+              512,
+              512,
+              512
+            ],
+            "bounds": [
+              11,
+              66,
+              430,
+              460
+            ],
+            "pivot": [
+              185,
+              459
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Held anticipation",
+            "name": "Exsanguinate / Held anticipation"
+          },
+          {
+            "file": "supers-v1/fillet.png",
+            "sha256": "9d2396779039b294c12606be5292cdd9d951cd61f54d419ea2739813ad57950f",
+            "generation_file": "exec-13ce0fb9-721d-4682-af4e-38506ef8d223.png",
+            "source_size": [
+              1024,
+              1536
+            ],
+            "region": [
+              0,
+              1024,
+              512,
+              512
+            ],
+            "bounds": [
+              31,
+              40,
+              446,
+              470
+            ],
+            "pivot": [
+              190,
+              471
+            ],
+            "body_height": 480,
+            "source_pose": 4,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "knife_fx",
+              "pose": 0,
+              "box": [
+                0.0,
+                0.0,
+                130.0,
+                170.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "First-active snap",
+            "name": "Exsanguinate / First-active snap"
+          },
+          {
+            "file": "supers-v1/fillet.png",
+            "sha256": "9d2396779039b294c12606be5292cdd9d951cd61f54d419ea2739813ad57950f",
+            "generation_file": "exec-13ce0fb9-721d-4682-af4e-38506ef8d223.png",
+            "source_size": [
+              1024,
+              1536
+            ],
+            "region": [
+              512,
+              1024,
+              512,
+              512
+            ],
+            "bounds": [
+              8,
+              6,
+              428,
+              471
+            ],
+            "pivot": [
+              210,
+              471
+            ],
+            "body_height": 480,
+            "source_pose": 5,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Braked follow-through",
+            "name": "Exsanguinate / Braked follow-through"
+          },
+          {
+            "file": "supers-v1/fillet.png",
+            "sha256": "9d2396779039b294c12606be5292cdd9d951cd61f54d419ea2739813ad57950f",
+            "generation_file": "exec-13ce0fb9-721d-4682-af4e-38506ef8d223.png",
+            "source_size": [
+              1024,
+              1536
+            ],
+            "region": [
+              0,
+              1024,
+              512,
+              512
+            ],
+            "bounds": [
+              31,
+              40,
+              446,
+              470
+            ],
+            "pivot": [
+              190,
+              471
+            ],
+            "body_height": 480,
+            "source_pose": 4,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "motion_cue": "Impact hold without lingering hitbox effect",
+            "name": "Exsanguinate / Impact hold without lingering hitbox effect"
+          },
+          {
+            "file": "supers-v1/fillet.png",
+            "sha256": "9d2396779039b294c12606be5292cdd9d951cd61f54d419ea2739813ad57950f",
+            "generation_file": "exec-13ce0fb9-721d-4682-af4e-38506ef8d223.png",
+            "source_size": [
+              1024,
+              1536
+            ],
+            "region": [
+              512,
+              1024,
+              512,
+              512
+            ],
+            "bounds": [
+              8,
+              6,
+              428,
+              471
+            ],
+            "pivot": [
+              210,
+              471
+            ],
+            "body_height": 480,
+            "source_pose": 5,
+            "scale_group": "supers-v1",
+            "super_art": true,
+            "effect": {
+              "sheet": "knife_fx",
+              "pose": 0,
+              "box": [
+                0.0,
+                0.0,
+                130.0,
+                170.0
+              ],
+              "opacity": 0.94,
+              "behind": false
+            },
+            "motion_cue": "Finishing impact",
+            "name": "Exsanguinate / Finishing impact"
           }
         ]
       },
@@ -50872,6 +53689,112 @@
             ],
             "source": "art/characters/fillet-v1/production/kit-timing/exposure-plans.json"
           }
+        },
+        "12": {
+          "moveId": "6D",
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 271
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 272
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 274
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 273
+            },
+            {
+              "start": 85,
+              "phase": "ready",
+              "pose": 0
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / braked recovery",
+            "authoredTiming": [
+              10,
+              4,
+              24
+            ],
+            "largestMotionBoundary": [
+              9,
+              10
+            ],
+            "source": "supers-v1"
+          }
+        },
+        "31": {
+          "moveId": "j.214P>P",
+          "artPose": 0,
+          "windup": [
+            {
+              "start": 0,
+              "phase": "ready",
+              "pose": 0
+            },
+            {
+              "start": 28,
+              "phase": "attack_animation",
+              "pose": 276
+            }
+          ],
+          "active": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 277
+            }
+          ],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 279
+            },
+            {
+              "start": 20,
+              "phase": "attack_animation",
+              "pose": 278
+            },
+            {
+              "start": 85,
+              "phase": "ready",
+              "pose": 0
+            }
+          ],
+          "exposureTiming": {
+            "style": "held load / first-active snap / held contact / braked recovery",
+            "authoredTiming": [
+              8,
+              3,
+              32
+            ],
+            "largestMotionBoundary": [
+              7,
+              8
+            ],
+            "source": "supers-v1"
+          }
         }
       },
       "ground_normal_selection": {
@@ -51196,6 +54119,96 @@
               "pose": 269
             }
           ]
+        },
+        "12": {
+          "moveId": "6D",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 272
+            },
+            {
+              "tick": 7,
+              "phase": "attack_animation",
+              "pose": 274
+            },
+            {
+              "tick": 13,
+              "phase": "attack_animation",
+              "pose": 271
+            },
+            {
+              "tick": 34,
+              "phase": "attack_animation",
+              "pose": 272
+            },
+            {
+              "tick": 40,
+              "phase": "attack_animation",
+              "pose": 274
+            },
+            {
+              "tick": 45,
+              "phase": "attack_animation",
+              "pose": 273
+            },
+            {
+              "tick": 59,
+              "phase": "attack_animation",
+              "pose": 275
+            },
+            {
+              "tick": 65,
+              "phase": "attack_animation",
+              "pose": 273
+            }
+          ]
+        },
+        "31": {
+          "moveId": "j.214P>P",
+          "keys": [
+            {
+              "tick": 0,
+              "phase": "attack_animation",
+              "pose": 277
+            },
+            {
+              "tick": 7,
+              "phase": "attack_animation",
+              "pose": 279
+            },
+            {
+              "tick": 19,
+              "phase": "attack_animation",
+              "pose": 276
+            },
+            {
+              "tick": 48,
+              "phase": "attack_animation",
+              "pose": 277
+            },
+            {
+              "tick": 54,
+              "phase": "attack_animation",
+              "pose": 279
+            },
+            {
+              "tick": 64,
+              "phase": "attack_animation",
+              "pose": 278
+            },
+            {
+              "tick": 84,
+              "phase": "attack_animation",
+              "pose": 280
+            },
+            {
+              "tick": 90,
+              "phase": "attack_animation",
+              "pose": 278
+            }
+          ]
         }
       },
       "attack_exposure_standard": "docs/attack-animation-standard.md",
@@ -51357,6 +54370,35 @@
         "body_height": 350,
         "method": "Fixed uniform pose scale, matched in a native equal-zoom review. Ground hit, air reel, splat and captured reactions share this drawing and pivot. Knockdown/get-up, attack and locomotion scales are unchanged.",
         "rebuild": "python scripts/calibrate-fillet-reactions.py && python scripts/generate-combat-data.py"
+      },
+      "attack_connected": {
+        "12": {
+          "moveId": "6D",
+          "windup": [],
+          "active": [],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 273
+            }
+          ]
+        },
+        "31": {
+          "moveId": "j.214P>P",
+          "windup": [],
+          "active": [],
+          "recovery": [
+            {
+              "start": 0,
+              "phase": "attack_animation",
+              "pose": 278
+            }
+          ]
+        }
+      },
+      "anatomical_scales": {
+        "supers-v1": 480
       }
     }
   ],

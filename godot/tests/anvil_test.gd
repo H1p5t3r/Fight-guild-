@@ -16,9 +16,17 @@ func run() -> void:
 	var load_error := model.load_data(source)
 	check(load_error.is_empty(), "Current batch failed validation: " + load_error)
 	var earlier: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://data/workshop/" + batch.sourceFile))
-	for c in range(1, 6): check(source.characters[c] == earlier.characters[c], "Changed another fighter's data")
+	for c in range(1, 6):
+		var intact := true
+		for slot in CombatModel.MOVE_IDS.size():
+			if not CombatSupers.info(c, slot).is_empty(): continue
+			var old_move: Dictionary = earlier.characters[c].moves[slot].duplicate(true)
+			old_move.simpleDirection = 0.0
+			old_move.simpleButton = 0.0
+			intact = intact and source.characters[c].moves[slot] == old_move
+		check(intact, "Changed another fighter's non-super moves")
 	check(model.move_name(0, 14) == "63214P" and model.move_name(0, 15) == "63214K", "Ground-grab notation")
-	check(model.move_name(0, 16) == "63214Hs" and model.move_name(0, 28) == "[4]6Hs", "Super/rush notation")
+	check(model.move_name(0, 16).begins_with("63214Hs") and model.move_name(0, 28) == "[4]6Hs", "Super/rush notation")
 	var fingerprint := model.fingerprint()
 	var round_trip := model.data()
 	load_error = model.load_data(round_trip)
@@ -38,7 +46,7 @@ func run() -> void:
 	model.core.preview_place(1, 56000, 16000, 0)
 	check(model.core.preview_begin(0, 16) == 1, "Super did not begin")
 	snapshot = model.core.snapshot()
-	check(model.state().superFreezeTime == 54 and model.state().players[0].momentum == 5000, "Super cost/freeze")
+	check(model.state().superFreezeTime == 54 and model.state().players[0].momentum == 3333, "Super cost/freeze")
 	for tick in 12: model.step(0, 0)
 	check(model.core.restore(snapshot), "Super snapshot rejected")
 	check(model.state().superFreezeTime == 54 and model.state().superFreezeActor == 0, "Super snapshot clocks lost")

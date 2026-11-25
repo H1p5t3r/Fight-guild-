@@ -73,7 +73,6 @@ static func notation(raw: int, facing: int) -> String:
 	for button in 5:
 		if raw & (16 << button): value += CombatModel.BUTTONS[button]
 	if raw & 512: value += " Dash"
-	if raw & 1024: value += " Simple"
 	if raw & 2048: value += " FD"
 	return value
 

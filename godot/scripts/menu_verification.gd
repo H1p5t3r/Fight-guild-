@@ -46,8 +46,6 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	await verify_roster()
 	game.menus.selection.choose_fighter(0, 2)
 	game.menus.selection.choose_fighter(1, 5)
-	game.selection_simple[0].button_pressed = true
-	game.selection_simple[1].button_pressed = false
 	# A menu key that remains held across the transition is ignored until released.
 	key(KEY_J, true)
 	press("confirm_fighters")
@@ -56,7 +54,7 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	game._physics_process(1.0 / 60.0)
 	var state: Dictionary = game.model.state()
 	check(game.screen == "play" and game.activity == "training" and game.practice.visible and not game.editor_shell.visible and not game.sprite_button.visible, "Training shows incorrect tools")
-	check(state.players[0].character == 2 and state.players[1].character == 5 and state.players[0].simple == 1 and state.players[1].simple == 0 and state.players[0].move == -1, "Selection was not applied independently")
+	check(state.players[0].character == 2 and state.players[1].character == 5 and state.players[0].simple == 0 and state.players[1].simple == 0 and state.players[0].move == -1, "Selection was not applied independently")
 	key(KEY_ESCAPE, true)
 	key(KEY_ESCAPE, false)
 	check(game.screen == "pause", "Escape did not pause")
@@ -122,7 +120,6 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	press("development")
 	for p in 2:
 		game.menus.selection.choose_fighter(p, p)
-		game.selection_simple[p].button_pressed = false
 	press("confirm_fighters")
 	await tree.process_frame
 	check(game.get_viewport().gui_get_focus_owner() == null, "Menu focus still captures gameplay controls")
@@ -158,10 +155,7 @@ func verify_roster() -> void:
 		joy(JOY_BUTTON_DPAD_DOWN, true)
 		joy(JOY_BUTTON_DPAD_DOWN, false)
 	check(selection.chosen == [5, 5] and selection.tiles[5].markers == [true, true], "Mirror selection lost a player or marker")
-	selection.simple_checks[1].grab_focus()
-	key(KEY_SPACE, true)
-	key(KEY_SPACE, false)
-	check(selection.simple_checks[1].button_pressed and not selection.simple_checks[0].button_pressed, "Input toggle changed both players")
+	check(not "simple_checks" in selection, "Retired input toggle is still present")
 	selection.set_active_player(0)
 	selection.focus_selection()
 

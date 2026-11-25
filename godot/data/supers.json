@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "roster": [
+    {
+      "character": 0,
+      "slot": 16,
+      "role": 0,
+      "name": "Sky Foundry",
+      "input": "63214Hs",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": true,
+      "description": "Airborne-only invincible command grab; existing approved lift and slam."
+    },
+    {
+      "character": 0,
+      "slot": 31,
+      "role": 1,
+      "name": "Iron Dominion",
+      "input": "63214S",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": true,
+      "description": "Upper-body armored advance. +14 on first-active block, close hard knockdown on hit. Lows and throws bypass armor."
+    },
+    {
+      "character": 1,
+      "slot": 12,
+      "role": 2,
+      "name": "Freemason",
+      "input": "236236S",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": true,
+      "description": "Heavy damage and wall carry. The committed horizontal hammer finisher."
+    },
+    {
+      "character": 1,
+      "slot": 31,
+      "role": 3,
+      "name": "Grand Design",
+      "input": "214214Hs",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": false,
+      "description": "Delayed moving stone wave. Return control after the cast; a hit launches for a follow-up. Does not refresh Drive."
+    },
+    {
+      "character": 2,
+      "slot": 12,
+      "role": 4,
+      "name": "Flashpoint",
+      "input": "236236S",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": true,
+      "description": "Invincible short-range backhand flame strike. Punishable on block."
+    },
+    {
+      "character": 2,
+      "slot": 31,
+      "role": 5,
+      "name": "The Air Is Mine",
+      "input": "214214Hs",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": false,
+      "description": "Stationary gas field, three blockable pulses. Hold back/neutral/forward during the cast for near/middle/far placement. Disappears if Smoke is hit."
+    },
+    {
+      "character": 3,
+      "slot": 12,
+      "role": 6,
+      "name": "Last Orders",
+      "input": "236236S",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": true,
+      "description": "Regular-stance invincible uppercut into headbutt. Hit enters Dempsey stance."
+    },
+    {
+      "character": 3,
+      "slot": 31,
+      "role": 7,
+      "name": "Whiskey Chaser",
+      "input": "214214Hs",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": true,
+      "description": "Dempsey-only hook barrage. Plus on block; hit finishes in stance. No invulnerability."
+    },
+    {
+      "character": 4,
+      "slot": 12,
+      "role": 8,
+      "name": "No Safe Harbour",
+      "input": "236236S",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": true,
+      "description": "Long narrow hook thrust, reel and corner carry. Jumping over the horizontal lane beats it."
+    },
+    {
+      "character": 4,
+      "slot": 14,
+      "role": 9,
+      "name": "Undertow",
+      "input": "214214Hs",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": true,
+      "description": "Invincible close hook sweep. Confirmed hit switches sides and restores spear spacing."
+    },
+    {
+      "character": 5,
+      "slot": 12,
+      "role": 10,
+      "name": "Bloodletting",
+      "input": "236236S",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": true,
+      "description": "Advancing crosscut. Confirmed hit applies or refreshes owned bleed and hard knockdown."
+    },
+    {
+      "character": 5,
+      "slot": 31,
+      "role": 11,
+      "name": "Exsanguinate",
+      "input": "214214Hs",
+      "cost": 6667,
+      "freeze": 54,
+      "cinematic": true,
+      "description": "Close crossing-knife finish. Consumes owned bleed and pays at most 150 stored grey life once, in addition to scaled base damage."
+    }
+  ]
+}

@@ -15,9 +15,10 @@ const create=async()=>frozenBrowserEngine(new Engine(await WebAssembly.instantia
 const ticks=(e,n,a=0,b=0)=>{while(n--)e.step(a,b);};
 test('Selected Fillet scalars, timelines, named routes and art metadata survive a v23 round trip',async()=>{
  const e=await create(),data=e.data();assert.equal(data.schema,27);assert.equal(data.characters[5].moves.length,47);
- for(const a of [...spec.actions,...spec.disabledStableSlots]){
+ // Two former disabled slots now hold supers, verified by supers_test.cpp.
+ for(const a of [...spec.actions,...spec.disabledStableSlots.filter(a=>![12,31].includes(a.slot))]){
   const m=data.characters[5].moves[a.slot];assert.equal(m.id,a.id);
-  for(const key of FIELDS)assert.equal(m[key],(a.schema22Scalars[key]??STEP_DRIVE_DEFAULTS[key]??LINE_DEFAULTS[key]??comboMoveDefaults(a.schema22Scalars)[key]),`${a.id}/${key}`);
+  for(const key of FIELDS)assert.equal(m[key],(['simpleButton','simpleDirection'].includes(key)?0:a.schema22Scalars[key]??STEP_DRIVE_DEFAULTS[key]??LINE_DEFAULTS[key]??comboMoveDefaults(a.schema22Scalars)[key]),`${a.id}/${key}`);
   const {multiHit,keys}=a.hitboxTimeline;
   assert.deepEqual(m.hitboxTimeline,{multiHit,keys:keys.map(({actionFrame,...key})=>key)});
   if(a.hurtboxTimeline){assert.deepEqual(m.extensions.hurtboxes,a.hurtboxTimeline.keys);assert.deepEqual(m.extensions.art.animation,a.animation);}

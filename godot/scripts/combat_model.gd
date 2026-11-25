@@ -52,8 +52,8 @@ var cues := CombatCues.new()
 var locomotion := CombatLocomotion.new()
 var config: PackedInt32Array = core.configuration()
 
-func reset(characters: Array = [5, 4], simple: Array = [false, false]) -> void:
-	core.reset(characters[0], characters[1], simple[0], simple[1])
+func reset(characters: Array = [5, 4], _retired_simple: Array = [false, false]) -> void:
+	core.reset(characters[0], characters[1], false, false)
 	cues.reset()
 	locomotion.reset()
 
@@ -102,8 +102,11 @@ func state() -> Dictionary:
 func move_name(character: int, slot: int) -> String:
 	var base := (character * MOVE_IDS.size() + slot) * FIELDS.size()
 	var motion_id: int = config[base + FIELDS.find("motion")]
-	if motion_id in [63214, 46]:
-		return ("63214" if motion_id == 63214 else "[4]6") + ["P", "K", "S", "Hs", "D"][config[base]]
+	if config[base + FIELDS.find("actionType")] in [8, 13, 14, 15]:
+		var super_info := CombatSupers.info(character, slot)
+		if not super_info.is_empty(): return str(super_info.input) + " / " + str(super_info.name)
+	if motion_id in [63214, 46, 236236, 214214]:
+		return ("[4]6" if motion_id == 46 else str(motion_id)) + ["P", "K", "S", "Hs", "D"][config[base]]
 	if config[base + FIELDS.find("actionType")] == 10: return "[4]6Hs > P"
 	if slot == 2 and config[(character * MOVE_IDS.size() + slot) * FIELDS.size() + FIELDS.find("proximityMove")] == 32: return "f.S"
 	return MOVE_IDS[slot]

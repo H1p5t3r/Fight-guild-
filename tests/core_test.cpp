@@ -8,7 +8,7 @@ static int checks=0,failures=0;
 #define CHECK(x) do { ++checks; if(!(x)) { std::fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x); ++failures; } } while(0)
 // Stable mechanics fixture: these explicit values isolate rules from starter balance.
 // The roster/collision suites and cross-runtime trace below exercise shipped defaults.
-static void fresh(int s0=0,int s1=0) {
+static void fresh(int buffer0=0,int buffer1=0) {
     legacy_fillet::defaults(default_simulation);
     for(int c=0;c<CHARACTER_COUNT;++c) for(int i=0;i<MOVE_COUNT;++i) {
         auto& m=moves[c][i]; int b=m.v[Button];
@@ -25,7 +25,17 @@ static void fresh(int s0=0,int s1=0) {
     // Keep the mirrored-input/reversal fixture independent of Hammer's authored 236S.
     moves[1][14].v[Button]=moves[1][14].v[SimpleButton]=0;
     moves[1][14].v[SimpleDirection]=6;moves[1][14].v[ReversalEligible]=1;
-    reset(0,1,s0,s1);
+    reset(0,1,0,0);
+    // Boundary/reversal fixtures start with an actual 23 / 21 motion prefix
+    // already in input history. This replaces the retired shortcut fixture.
+    if(buffer0||buffer1) {
+        world.frame=2;
+        for(int p=0;p<2;++p) if(p?buffer1:buffer0) {
+            auto& f=world.players[p];int forward=p?Left:Right;
+            f.history[0]={0,2,Down,Down,0};
+            f.history[1]={1,3,forward,Down|forward,0};
+        }
+    }
 }
 // Boundary tests begin at the last startup tick, using a legal 5f move.
 static void prime_hit(int player=0,int slot=0) {
@@ -44,7 +54,7 @@ static void test_routes() {
     CHECK(!fg_can_cancel(0,3,0,1));
     for(int c=0;c<CHARACTER_COUNT;++c) for(int from=0;from<MOVE_COUNT;++from) {
         const auto& source=moves[c][from];
-        if(!source.v[Enabled]||source.v[StanceRequired]==2||source.v[ActionType]==1||source.v[ActionType]==2) continue;
+        if(is_super(source)||!source.v[Enabled]||source.v[StanceRequired]==2||source.v[ActionType]==1||source.v[ActionType]==2) continue;
         int command=8+source.v[Button];
         if(from!=command&&moves[c][command].v[Enabled]&&moves[c][command].v[Category]==Command) CHECK(fg_can_cancel(c,from,command,1));
         CHECK(!fg_can_cancel(c,from,command,0));
@@ -71,16 +81,16 @@ static void test_motion() {
     CHECK(world.players[0].move==8); // Stale motion becomes forward P command normal.
     fresh(); ticks(1,0,Down); ticks(1,0,Down|Left); ticks(1,0,Left|P);
     CHECK(world.players[1].move==14); // Facing-left motions mirror correctly.
-    fresh(1); ticks(1,Simple|Right|P);
-    CHECK(world.players[0].move==14);
+    fresh(); reset(0,1,1,1); ticks(1,Simple|Right|P);
+    CHECK(world.players[0].move==8&&world.players[0].simple==0);
     fresh(); ticks(1,Simple|Right|P);
-    CHECK(world.players[0].move==8); // Disabled simple mode cannot invoke a shortcut.
+    CHECK(world.players[0].move==8); // The retired bit cannot invoke a shortcut.
     fresh(1); ticks(1,Down); ticks(1,Down|Right); ticks(1,Right|P);
     CHECK(world.players[0].move==14); // Traditional motions remain available.
-    fresh(1); ticks(1,Simple|P);
-    CHECK(world.players[0].move==-1); // Unmapped modifier chord does not fall through.
-    fresh(1); ticks(1,Simple|Up|Hs);
-    CHECK(world.players[0].move==16&&world.players[0].y==0);
+    fresh(); ticks(1,Simple|P);
+    CHECK(world.players[0].move==0); // The retired modifier is ignored.
+    fresh(); ticks(1,Simple|Up);
+    CHECK(world.players[0].prejump_time>0); // No modifier suppresses jumping.
     fresh(); ticks(1,Left|Right|P);
     CHECK(world.players[0].move==0);
 }
@@ -308,7 +318,7 @@ static void test_reversals() {
     CHECK(world.players[0].move==-1&&!world.players[0].reversal_time); // Just outside 5-tick buffer.
     fresh(); world.players[0].stun=3;
     step(Down,0); step(Down|Right,0); step(Right|P,0); step(0,0);
-    CHECK(world.players[0].move==14&&world.players[0].reversal_time==NOTICE_TICKS); // Motion, not just simple.
+    CHECK(world.players[0].move==14&&world.players[0].reversal_time==NOTICE_TICKS); // Full reversal motion on the wakeup boundary.
     fresh(); world.players[0].stun=1; step(0,0); step(P,0);
     CHECK(world.players[0].move==0&&!world.players[0].reversal_time); // Normals are opt-in.
     fresh(); moves[0][0].v[ReversalEligible]=1; world.players[0].stun=1;

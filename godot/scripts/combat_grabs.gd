@@ -72,7 +72,7 @@ static func catalog() -> Dictionary:
 
 static func capture(model: CombatModel, state: Dictionary) -> Dictionary:
 	var kind := int(state.get("pairKind", 0))
-	if kind == 3: return {} # Wound retains its downed-to-standing presentation.
+	if kind in [3, 8]: return {} # Wound and strike supers own their presentation.
 	if kind > 0:
 		var owner := int(state.pairOwner)
 		var slot := int(state.pairMove)

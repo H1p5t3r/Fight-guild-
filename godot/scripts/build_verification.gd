@@ -267,8 +267,6 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	ticks(1)
 	key(KEY_J, false)
 	check(game.model.state().players[0].move == -1, "Typing in editor leaked into game input")
-	game.selection_simple[0].button_pressed = true
-	game.selection_simple[1].button_pressed = false
 	game.confirm_selection()
 	key(KEY_SHIFT, true)
 	key(KEY_A, true)
@@ -276,8 +274,8 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	ticks(1)
 	for code in [KEY_SHIFT, KEY_A, KEY_J]: key(code, false)
 	var state: Dictionary = game.model.state()
-	check(state.players[0].move == 14 and state.players[0].y == 0, "Simple back+P should invoke Foundry Drop")
-	check(state.players[0].simple == 1 and state.players[1].simple == 0, "Simple controls are not independent")
+	check(state.players[0].move == 0 and state.players[0].y == 0, "Retired modifier must not invoke a grab")
+	check(state.players[0].simple == 0 and state.players[1].simple == 0, "Retired control mode was restored")
 	game.reset_round()
 	key(KEY_D, true) # 6
 	ticks(1)
@@ -292,7 +290,7 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	ticks(1)
 	key(KEY_K, false)
 	key(KEY_A, false)
-	check(game.model.state().players[0].move == 15, "Traditional half-circle grab no longer works in simple mode")
+	check(game.model.state().players[0].move == 15, "Half-circle grab input failed")
 	game.run_trial()
 	check(game.trial_status.text.begins_with("PASS"), "Rollback workbench failed")
 	game.lock_online(true)
@@ -358,7 +356,6 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 	var slots := [0, 1, 2, 3, 13]
 	for character in CombatModel.CHARACTERS.size():
 		game.menus.selection.choose_fighter(0, character)
-		game.selection_simple[0].button_pressed = false
 		game.confirm_selection()
 		for b in button_keys.size():
 			game.reset_round()

@@ -23,7 +23,7 @@ const beginWhiff=(e,a,facing=1)=>{
 };
 
 test('All 26 attacks use authored phase clocks in both facings; landing interrupts air recovery',async()=>{
- const e=await engine();assert.equal(actions.length,26);assert.equal(art.attack_animation.frames.length,271);
+ const e=await engine();assert.equal(actions.length,26);assert.equal(art.attack_animation.frames.length,281);
  for(const a of actions)for(const facing of [-1,1]){
   beginWhiff(e,a,facing);const seen=new Set();let landed=false;
   for(let step=0;step<160;step++){

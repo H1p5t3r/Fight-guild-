@@ -11,9 +11,14 @@ constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_
               STAB_GROUND=30, STAB_AIR=31;
 constexpr int CLOSE_SLASH=32, HELD_GUARD=33, GUARD_ATTACK=34, STANCE_P=35, STANCE_K=36, STANCE_S=37, STANCE_HS=38, STANCE_EXIT=39, STANCE_THROW=40, AIR_BACK_THROW=41, AIR_FORWARD_THROW=42;
 constexpr int FAR_SLASH=2, SLASH_SWEEP=6; // Saved 5S and 2S slot IDs remain compatible.
-constexpr unsigned RULES_REVISION=6; // Grappler captures, charge/HCB inputs and deterministic super freeze.
+constexpr unsigned RULES_REVISION=7; // Two-segment supers, cinematic locks and utility-super projectiles.
 constexpr int GrapplerGrab=7, AntiAirSuper=8, ArmoredRush=9, RushBrake=10, ShieldStance=11, ShieldDive=12;
-constexpr int SUPER_COST=5000, SUPER_FREEZE_TICKS=54;
+constexpr int SuperStrike=13, SuperField=14, SuperWave=15;
+constexpr int SUPER_COST=6667, SUPER_FREEZE_TICKS=54;
+// Reuse disabled slots without changing any enabled normal/special or the save layout.
+constexpr int SUPER_SLOTS[CHARACTER_COUNT][2]={{16,31},{12,31},{12,31},{12,31},{12,14},{12,31}};
+enum SuperRole { SkyFoundry, IronDominion, Freemason, GrandDesign, Flashpoint, AirIsMine,
+                 LastOrders, WhiskeyChaser, NoSafeHarbour, Undertow, Bloodletting, Exsanguinate };
 constexpr int VAULT_CASHOUT=45, SKIM_CASHOUT=46;
 constexpr int CHARGED_HS=43, CHARGED_D=44;
 constexpr int MIN_STARTUP = 5;
@@ -85,6 +90,12 @@ enum Rule { ButtonBuffer, MotionWindow, MotionGap, MoveGain, AttackGain,
             BlockCarryover, ThrowGraceFrames, AirLandingFrames, RepeatAfter, RepeatGravityStep,
             PrejumpFrames, EmptyLandingFrames, ComboPhysics, DecayPushStep, DecayPushCap, DecayLaunchStep, DecayLaunchFloor, GroundHitDrag, CrouchHitDrag, AirHitDrag, LaunchCarry, DecayGravityAfter, DecayGravityStep, RULE_COUNT };
 struct Move { int v[FIELD_COUNT]; };
+inline bool is_super(const Move& m) {
+    return m.v[ActionType]==AntiAirSuper || (m.v[ActionType]>=SuperStrike&&m.v[ActionType]<=SuperWave);
+}
+inline int super_role(int character,int move) {
+    return character*2+(move==SUPER_SLOTS[character][1]?1:0);
+}
 inline int startup_minimum(const Move& m) {
     return m.v[Category]==Throw ? 2
         : m.v[Button]==0 && (m.v[Category]==Normal || m.v[Category]==Command) ? 3 : MIN_STARTUP;
@@ -136,6 +147,7 @@ struct PairState {
     int kind, owner, move, clock, origin_x, facing, victim_x, grey, down_pose;
     int saved_age, ticks, release_freeze, owner_recovery, victim_recovery, grace, track, tech_ticks;
     int victim_y, combo;
+    int contact, serial, wall_side;
     Move payload{};
 };
 struct State {
@@ -237,6 +249,9 @@ private:
     void start_pair(int owner,int kind,const Move& payload);
     bool tick_pair();
     void release_pair();
+    void start_super_pair(int player,int move,const Move& payload,int contact,bool combo,int reaction,int facing,int serial);
+    void tick_super_pair();
+    void release_super_pair(const PairState& pair);
     void tech_pair();
     bool tech_input(Fighter& f);
     void clear_pair_motion(Fighter& f, bool keep_combo=false);
@@ -292,7 +307,7 @@ private:
     int mobility_or(const Fighter& fighter, int field, int fallback) const;
     void update_projectiles();
     void spawn_projectile(Fighter& fighter);
-    void apply_contact(int player, int move, Move effective, int contact, bool prior_combo, int prior_reaction, int facing, bool projectile,int serial=-1,int impact_x=-1,int impact_y=-1,const ContactSample* visual=nullptr);
+    void apply_contact(int player, int move, Move effective, int contact, bool prior_combo, int prior_reaction, int facing, bool projectile,int serial=-1,int impact_x=-1,int impact_y=-1,const ContactSample* visual=nullptr,bool super_finish=false);
 };
 // Compatibility instance for the original C ABI and native test runner.
 extern Simulation default_simulation;

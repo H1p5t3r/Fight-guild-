@@ -27,7 +27,7 @@ Medium and large defaults use the saved Dustloop [counter-slowdown table](https:
 
 A reversal is an eligible move **starting on the first actionable tick after hitstun or blockstun**, including guard break. Eligibility defaults to specials and Drive; `reversalEligible` can opt any move in or out. A correctly timed reversal is recognized even when it whiffs, is blocked or is immediately interrupted. Timing does not grant invulnerability.
 
-The existing button buffer supplies leniency: by default the current press and the previous four input samples are considered. An eligible move buffered four ticks before execution can start as a reversal; five ticks before execution is too early. The button-buffer editor adjusts this window. Traditional motions and enabled simplified inputs use the same execution test. Motion windows and facing rules remain unchanged.
+The existing button buffer supplies leniency: by default the current press and the previous four input samples are considered. An eligible move buffered four ticks before execution can start as a reversal; five ticks before execution is too early. The button-buffer editor adjusts this window. Motion inputs use this execution test. Simple inputs have been removed; see [supers](supers.md) for double-quarter-circle recognition.
 
 After one actionable tick passes, a later move is not a reversal. Choosing guard, FD, jump or dash uses that opportunity. Completing one's own attack recovery or performing a gatling does not create it. Inputs still age during hitstop, so a very early input can expire before stun ends. Reversal feedback records the actual input age and lasts 60 unfrozen ticks.
 

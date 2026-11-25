@@ -9,7 +9,6 @@ var palette := MenuPalette.new()
 var chosen := [5, 4]
 var active_player := 0
 var online := false
-var simple_checks: Array[CheckBox] = []
 var slot_buttons: Array[Button] = []
 var hero_panels: Array[VBoxContainer] = []
 var portraits: Array[FighterSelectPortrait] = []
@@ -53,13 +52,6 @@ func _ready() -> void:
 		portrait.motion = motion
 		panel.add_child(portrait)
 		portraits.append(portrait)
-		var simple := CheckBox.new()
-		simple.text = "Simplified inputs"
-		simple.custom_minimum_size.y = 38
-		simple.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN if p == 0 else Control.SIZE_SHRINK_END
-		simple.tooltip_text = "Enable modifier + direction + button specials for this fighter. Motion inputs remain available."
-		panel.add_child(simple)
-		simple_checks.append(simple)
 	spacer(roster_column)
 	roster_caption = label(roster_column, "P1 / CHOOSE A FIGHTER", 17, InkMenu.PAPER)
 	roster_caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -108,7 +100,7 @@ func _ready() -> void:
 	start_button.pressed.connect(func(): confirmed.emit())
 	footer.add_child(start_button)
 	resized.connect(queue_redraw)
-	configure("local", chosen, [false, false])
+	configure("local", chosen)
 
 func label(parent: Node, value: String, font_size: int, color: Color) -> Label:
 	var result := Label.new()
@@ -124,7 +116,7 @@ func spacer(parent: Node) -> void:
 	space.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	parent.add_child(space)
 
-func configure(activity: String, characters: Array, simple: Array) -> void:
+func configure(activity: String, characters: Array) -> void:
 	online = activity == "online"
 	var practice := activity in ["training", "development"]
 	context.text = {"local":"LOCAL VERSUS", "online":"ONLINE VERSUS", "training":"TRAINING", "development":"DEVELOPMENT / COMBAT LAB"}[activity]
@@ -133,7 +125,6 @@ func configure(activity: String, characters: Array, simple: Array) -> void:
 	for p in 2:
 		portraits[p].role.text = "LOCAL PLAYER / 01" if online else "TRAINING DUMMY / 02" if practice and p == 1 else "PLAYER %02d" % (p + 1)
 		slot_buttons[p].text = "P2 / DUMMY" if practice and p == 1 else "PLAYER " + str(p + 1)
-		simple_checks[p].set_pressed_no_signal(simple[p])
 		choose_fighter(p, characters[p])
 	set_active_player(0)
 	start_button.text = {"local":"LET'S FIGHT  →", "online":"CONTINUE  →", "training":"START TRAINING  →", "development":"OPEN COMBAT LAB  →"}[activity]
@@ -156,7 +147,7 @@ func set_active_player(player: int) -> void:
 		portraits[p].queue_redraw()
 	roster_caption.text = "P%d / CHOOSE A FIGHTER" % (active_player + 1)
 	roster_caption.add_theme_color_override("font_color", InkMenu.PAPER)
-	instruction.text = "Choose P1 or P2 above the roster. Motions are always available." if not online else "Your opponent chooses their fighter on their own computer."
+	instruction.text = "Choose P1 or P2 above the roster." if not online else "Your opponent chooses their fighter on their own computer."
 	refresh_roster()
 
 func refresh_roster() -> void:
@@ -175,7 +166,6 @@ func refresh_roster() -> void:
 	if start_button == null: return
 	for p in 2:
 		slot_buttons[p].focus_neighbor_bottom = slot_buttons[p].get_path_to(tiles[chosen[active_player]])
-		simple_checks[p].focus_neighbor_bottom = simple_checks[p].get_path_to(start_button)
 	start_button.focus_neighbor_top = start_button.get_path_to(tiles[chosen[active_player]])
 
 func focus_selection() -> void:

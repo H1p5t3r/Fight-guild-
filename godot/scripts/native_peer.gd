@@ -11,7 +11,6 @@ var model: CombatModel
 var session: RollbackSession
 var player := 0
 var local_character := 0
-var local_simple := false
 var opponent := 0
 var is_host := false
 var active := false
@@ -32,18 +31,16 @@ var remote_ready := false
 var generation := 1
 var score := MatchScore.new()
 var match_characters := [5, 4]
-var match_simple := [false, false]
 var remote_winner := -1
 var result_probe := CombatModel.new()
 const ROUND_MESSAGES := ["intro_ready", "countdown_ready", "countdown", "go", "intermission_ready", "next_round", "input", "hash"]
 
-func begin(simulation: CombatModel, host: bool, address: String, port: int, character: int, simple: bool) -> Error:
+func begin(simulation: CombatModel, host: bool, address: String, port: int, character: int, _retired_simple: bool = false) -> Error:
 	close()
 	model = simulation
 	is_host = host
 	player = 0 if host else 1
 	local_character = character
-	local_simple = simple
 	peer = ENetMultiplayerPeer.new()
 	var result := peer.create_server(port, 1) if host else peer.create_client(address, port)
 	if result != OK:
@@ -91,7 +88,7 @@ func _connected(id: int) -> void:
 	if opponent != 0:
 		return
 	opponent = id
-	send({"type": "hello", "protocol": 4, "fingerprint": model.fingerprint(), "character": local_character, "simple": local_simple})
+	send({"type": "hello", "protocol": 5, "fingerprint": model.fingerprint(), "character": local_character})
 
 func send(message: Dictionary) -> void:
 	if peer != null and opponent != 0:
@@ -144,28 +141,26 @@ func handle_message(message: Dictionary) -> void:
 			return
 	match message.get("type", ""):
 		"hello":
-			if hello_received or phase != "connecting" or message.get("protocol") != 4 or message.get("fingerprint") != model.fingerprint():
+			if hello_received or phase != "connecting" or message.get("protocol") != 5 or message.get("fingerprint") != model.fingerprint():
 				fail("Build or move data differs. Import the same move set or restore defaults on both clients.")
 				return
-			if not CombatModel.valid_integer(message.get("character")) or int(message.character) not in range(CombatModel.CHARACTERS.size()) or not message.get("simple") is bool:
+			if not CombatModel.valid_integer(message.get("character")) or int(message.character) not in range(CombatModel.CHARACTERS.size()):
 				fail("Invalid fighter selection.")
 				return
 			hello_received = true
 			if is_host:
 				var characters := [local_character, int(message.character)]
-				var simplified := [local_simple, message.simple]
-				send({"type": "start", "characters": characters, "simple": simplified})
-				prepare_match(characters, simplified)
+				send({"type": "start", "characters": characters})
+				prepare_match(characters)
 		"start":
-			if is_host or not hello_received or phase != "connecting" or not message.get("characters") is Array or not message.get("simple") is Array:
+			if is_host or not hello_received or phase != "connecting" or not message.get("characters") is Array:
 				fail("Unexpected match-start message.")
 				return
 			var characters: Array = message.characters
-			var simplified: Array = message.simple
-			if characters.size() != 2 or simplified.size() != 2 or not CombatModel.valid_integer(characters[0]) or int(characters[0]) not in range(CombatModel.CHARACTERS.size()) or characters[1] != local_character or not simplified[0] is bool or not simplified[1] is bool or simplified[1] != local_simple:
+			if characters.size() != 2 or not CombatModel.valid_integer(characters[0]) or int(characters[0]) not in range(CombatModel.CHARACTERS.size()) or characters[1] != local_character:
 				fail("Match selection does not match the handshake.")
 				return
-			prepare_match(characters, simplified)
+			prepare_match(characters)
 		"intro_ready", "countdown_ready":
 			var expected := "intro" if message.type == "intro_ready" else "countdown"
 			if not is_host or phase != expected or remote_ready:
@@ -196,7 +191,7 @@ func handle_message(message: Dictionary) -> void:
 			if is_host or phase != "intermission" or not local_ready or score.finished() or message.get("winner") != score.last_winner or not score_matches:
 				fail("Next Scrum does not match the confirmed result.")
 				return
-			prepare_match(match_characters, match_simple, false)
+			prepare_match(match_characters, false)
 		"input":
 			if session == null or not CombatModel.valid_integer(message.get("frame")) or not CombatModel.valid_integer(message.get("input")):
 				fail("Invalid input message.")
@@ -216,13 +211,12 @@ func handle_message(message: Dictionary) -> void:
 		_:
 			fail("Unknown peer message.")
 
-func prepare_match(characters: Array, simple: Array, new_match: bool = true) -> void:
+func prepare_match(characters: Array, new_match: bool = true) -> void:
 	if new_match:
 		score.reset()
 		generation = 1
 	else: generation += 1
 	match_characters = characters.duplicate()
-	match_simple = simple.duplicate()
 	session = null
 	hashes.clear()
 	last_sent_hash = -1
@@ -230,7 +224,7 @@ func prepare_match(characters: Array, simple: Array, new_match: bool = true) -> 
 	waiting_ticks = 0
 	remote_winner = -1
 	result_probe.load_data(model.data())
-	model.reset(characters, simple)
+	model.reset(characters)
 	phase = "intro"
 	phase_elapsed = 0.0
 	local_ready = false
@@ -291,7 +285,7 @@ func advance_preparation() -> void:
 			fail("Peers disagreed on the completed Scrum.")
 			return
 		send({"type": "next_round", "winner": score.last_winner, "score": score.wins})
-		prepare_match(match_characters, match_simple, false)
+		prepare_match(match_characters, false)
 
 func begin_countdown() -> void:
 	phase = "countdown"

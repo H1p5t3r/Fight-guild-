@@ -16,6 +16,7 @@ func run() -> void:
 	controls.persistence = false
 	for player in 2:
 		for action in 12:
+			if action == 10: continue
 			var code: int = controls.profiles[player].keys[action]
 			check(controls.translate(player, {code: true}, {}, {}) == 1 << action, "Default keyboard action lost")
 			check(controls.translate(1-player, {code: true}, {}, {}) == 0, "Keyboard leaked to other player")
@@ -43,7 +44,8 @@ func run() -> void:
 	check(not controls.bind(0, "keys", 4, KEY_KP_1).is_empty(), "Cross-player keyboard collision accepted")
 	check(not controls.bind(0, "keys", 4, KEY_ESCAPE).is_empty(), "Escape was remapped")
 	check(not controls.bind(0, "pad", 4, JOY_BUTTON_START).is_empty(), "Start was remapped")
-	check(controls.bind(0, "pad", 4, 100).is_empty() and controls.profiles[0].pad[10] == JOY_BUTTON_A, "Trigger/button swap failed")
+	check(not controls.bind(0, "keys", 10, KEY_SHIFT).is_empty(), "Retired modifier was rebound")
+	check(controls.bind(0, "pad", 4, 100).is_empty() and controls.profiles[0].pad[4] == 100, "Trigger/button swap failed")
 	check(controls.bind(0, "keys", 4, -1).is_empty(), "Unbind rejected")
 	controls.set_option(0, "keyboard", false)
 	check(controls.translate(0, {KEY_F: true}, {}, {}) == 0, "Disabled keyboard still controls player")
@@ -73,6 +75,15 @@ func run() -> void:
 		var broken := saved.duplicate(true)
 		broken[0][field] = null
 		check(not FighterInputs.valid_profiles(broken), "Invalid profile field accepted: " + field)
+	var legacy := [FighterInputs.defaults(0), FighterInputs.defaults(1)]
+	legacy[0].keys[10] = KEY_SHIFT; legacy[1].keys[10] = KEY_KP_ADD
+	legacy[0].pad[10] = 100; legacy[1].pad[10] = 100
+	var old_file := FileAccess.open(path, FileAccess.WRITE)
+	old_file.store_string(JSON.stringify({"version": 1, "players": legacy})); old_file.close()
+	loaded.load_preferences(path)
+	check(loaded.status.is_empty() and loaded.profiles[0].keys[10] == -1 and loaded.profiles[1].pad[10] == -1, "Old modifier bindings were not retired")
+	check(loaded.bind(1, "keys", 4, KEY_SHIFT).is_empty(), "Old modifier key remained reserved by the other player")
+	check(loaded.bind(0, "pad", 4, 100).is_empty(), "Old modifier trigger was not available for remapping")
 	DirAccess.remove_absolute(path)
 	controls.reset_player(0); controls.reset_player(1)
 	verify_native_inputs(controls)
@@ -121,7 +132,7 @@ func verify_native_inputs(controls: FighterInputs) -> void:
 				model.reset([0, 0], [simple, simple])
 				var raw := sample_bits(controls, player, 1024 | forward | 16, gamepad)
 				model.step(raw if player == 0 else 0, raw if player == 1 else 0)
-				check(model.state().players[player].move == (14 if simple else 8), "Simple toggle changed motion acceptance")
+				check(model.state().players[player].move == 8 and model.state().players[player].simple == 0, "Retired modifier or mode changed the command normal")
 			# A whiffed normal cannot gatling; a late K buffers through recovery.
 			for early in [false, true]:
 				model.reset([0, 0])

@@ -144,7 +144,6 @@ static func draw(canvas: Control, state: Dictionary, wins: Array, round_call: St
 		if right: image_rect.size.x = -image_rect.size.x
 		canvas.draw_texture_rect(bust, image_rect, false)
 		var detail := "P%d" % (p + 1)
-		if fighter.simple: detail += " / SIMPLE"
 		if diagnostics: detail += " / %d HP" % fighter.health
 		text(canvas, "POSITIVE BONUS" if fighter.positiveTime > 0 else detail,
 			Vector2(name_x, 80), maxi(13, ceili(11.0 / scale_factor)), Color("a8e9b1") if fighter.positiveTime > 0 else Color(IVORY, 0.7), right, 2)

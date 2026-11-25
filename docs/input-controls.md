@@ -2,7 +2,7 @@
 
 The native game now provides saved remapping and a local side selector. These
 changes do not update or publish the browser Move Workshop. Combat move JSON,
-attack timings and the deterministic motion/action buffers are unchanged.
+attack timings and the deterministic motion/action buffers remain separate from physical bindings. Simple inputs have been retired; specials and supers use motions.
 
 ## Choose your side
 
@@ -70,7 +70,7 @@ combat; opposed held inputs still count as held for menu release protection.
 contains physical bindings, controller preference, keyboard toggles and analog
 settings. A valid candidate is loaded atomically. Invalid files are preserved;
 a save failure keeps the session's bindings usable and displays an explanation.
-The training keyboard hint follows Player 1's current bindings.
+The training keyboard hint follows Player 1's current bindings. Loading an older control file clears its retired modifier slot; Shift, numpad + and LT/L2 can be remapped to other actions. The hidden slot remains unassignable so older recordings keep their bit positions.
 
 Initial automatic assignment uses connected devices in order. Runtime ownership
 then stays stable: removing Player 1's pad never shifts Player 2 into that slot.
@@ -91,7 +91,7 @@ and closing settings require input release before combat accepts held controls.
 - `tests/input_controls_test.gd`: all default keyboard/pad actions, remaps,
   duplicate/reserved controls, threshold hysteresis, direction modes, SOCD,
   stable hot-plug ownership, save/load and malformed data. Remapped keyboard and
-  pad samples drive native 236/623 motions in both facings, simple mode, buffered
+  pad samples drive native 236/623 motions in both facings, retired-modifier compatibility, buffered
   recovery inputs and restored-history replay.
 - `tests/input_menu_test.gd`: actual menu flow, physical input events, side swaps,
   neutral devices, cancel/back/confirm, reconnects, remap capture, offline pause,
@@ -104,7 +104,7 @@ and closing settings require input release before combat accepts held controls.
   checks that the side-select action and Controls window fit. Test controllers
   are simulated and explicitly labeled in those screenshots.
 
-No native DLL/schema change is needed: `FighterInputs` produces the same 12-bit
+The physical-binding layout is preserved: `FighterInputs` produces the same 12-bit
 samples already used by recordings and rollback. The buffer remains the game's
 configurable implementation, not verified Strive input parity. Windows gameplay,
 physical controllers/fightsticks, platform-specific glyph detection and PS5

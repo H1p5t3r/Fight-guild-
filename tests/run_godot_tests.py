@@ -5,6 +5,7 @@ import sys
 
 root = Path(__file__).resolve().parents[1]
 cases = [
+    (["--headless", "--script", "tests/supers_test.gd", "--", "--test"], "0 failures"),
     (["--headless", "--editor", "--import"], None),
     (["--headless", "--script", "tests/anvil_test.gd", "--", "--test"], "Anvil native: 24 checks, 0 failures"),
     (["--headless", "--script", "tests/anvil_art_test.gd", "--", "--test"], "Anvil art: 0 failures"),

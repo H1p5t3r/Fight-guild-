@@ -47,10 +47,10 @@ func run() -> void:
 	var arena = load("res://scripts/arena.gd").new()
 	root.add_child(arena)
 	arena.size = Vector2(1280, 720)
-	check(fighter.attack_animations.size() == 26, "Incomplete enabled kit")
+	check(fighter.attack_animations.size() == 27, "Incomplete enabled kit including Iron Dominion")
 	for phase in FighterArt.phase_names(0):
 		for frame in FighterArt.sheet(0, phase).frames:
-			check(str(frame.file).begins_with("anvil-bull-v2/"), "Old hammer art in " + phase)
+			check(str(frame.file).begins_with("anvil-bull-v2/") or str(frame.file) == "supers-v1/anvil.png", "Old hammer art in " + phase)
 			check(not str(frame.get("name", "")).is_empty(), "Sprite review caption missing in " + phase)
 			check(int(frame.body_height) == int(fighter.anatomical_scales[frame.scale_group]), "State changed anatomical scale: " + phase)
 	# Alternate presentation paths must retain the same calibration as combat.
@@ -68,7 +68,7 @@ func run() -> void:
 			var clip: Dictionary = fighter.attack_animations[slot_text]
 			for phase in ["windup", "active", "recovery"]:
 				for entry in clip[phase]:
-					var frame: Dictionary = fighter.attack_animation.frames[int(entry.pose)]
+					var frame: Dictionary = fighter[str(entry.phase)].frames[int(entry.pose)]
 					if frame.has("effect"):
 						check(phase == "active", "Strike trail persists outside active frames")
 						check(frame.effect.box == [float(move.hitboxBack)/100, float(move.bottom)/100, float(move.reach)/100, float(move.bottom+move.height)/100], "Trail no longer marks authored strike envelope")
@@ -89,7 +89,7 @@ func run() -> void:
 				var before: PackedByteArray = model.core.snapshot()
 				arena.refresh(model, state, false, false)
 				check(model.core.snapshot() == before, "Rendering mutated combat")
-				check("anvil-bull-v2/" in arena.sprites[0].texture.atlas.resource_path, "Legacy sprite appeared")
+				check("anvil-bull-v2/" in arena.sprites[0].texture.atlas.resource_path or "supers-v1/anvil.png" in arena.sprites[0].texture.atlas.resource_path, "Legacy sprite appeared")
 				model.step(0, 0)
 			check(active_seen or slot in [13, 21], "Never reached active: " + slot_text)
 		# The stance's held age must still show a walking guard from saved travel.

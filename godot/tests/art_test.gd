@@ -1,10 +1,23 @@
 extends SceneTree
 
 var failures := 0
+var source_images := {}
+var source_hashes := {}
 func check(ok: bool, message: String) -> void:
 	if not ok:
 		failures += 1
 		printerr(message)
+
+func source_image(path: String) -> Image:
+	if not source_images.has(path):
+		var decoded := Image.new()
+		check(decoded.load_png_from_buffer(FileAccess.get_file_as_bytes(path)) == OK, "Could not decode source atlas: " + path)
+		source_images[path] = decoded
+	return source_images[path]
+
+func source_hash(path: String) -> String:
+	if not source_hashes.has(path): source_hashes[path] = FileAccess.get_sha256(path)
+	return source_hashes[path]
 
 func _initialize() -> void:
 	var fighters: Array = FighterArt.catalog().fighters
@@ -29,10 +42,8 @@ func _initialize() -> void:
 		for phase in FighterArt.phase_names(c):
 			var sheet := FighterArt.sheet(c, phase)
 			var path: String = FighterArt.DIRECTORY + sheet.file
-			check(FileAccess.get_sha256(path) == sheet.sha256, "Artwork checksum changed without metadata update: " + path)
-			var source := Image.new()
-			var image_error := source.load_png_from_buffer(FileAccess.get_file_as_bytes(path))
-			check(image_error == OK, "Could not decode source atlas: " + path)
+			check(source_hash(path) == sheet.sha256, "Artwork checksum changed without metadata update: " + path)
+			var source := source_image(path)
 			var dimensions: Array = sheet.get("size", [1536, 1024])
 			check(source != null and source.get_size() == Vector2i(dimensions[0], dimensions[1]), "Unexpected atlas dimensions: " + path)
 			if source == null: continue
@@ -43,15 +54,14 @@ func _initialize() -> void:
 				var point := Vector2i(sample[0], sample[1])
 				check(source.get_pixelv(point).a < 0.03, "Atlas background is not transparent: " + path)
 			var signatures: int = 32 if c == 3 else 24 if c == 2 else 20 if c == 4 else 4
-			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8, "attack_animation": 173 if c == 0 else 271 if c == 5 else 191 if c == 4 else 142 if c == 1 else 69, "backdash": 6}[phase]
+			var count: int = {"active": 12, "windup": 6, "block": 6, "signature_windup": signatures, "signature_active": signatures, "ready": 1, "walk": 8, "run": 8, "stance": 4, "knockdown": 6, "knockdown_back": 6, "idle": 4, "crouch_idle": 4, "back_walk": 8, "attack_animation": [178,151,78,10,201,281][c], "backdash": 6}[phase]
 			check(sheet.frames.size() == count, "Missing poses: " + path)
 			for pose in sheet.frames.size():
 				var frame_size := source.get_size()
 				if sheet.frames[pose].has("file"):
 					var alternate: String = FighterArt.DIRECTORY + sheet.frames[pose].file
-					check(FileAccess.get_sha256(alternate) == sheet.frames[pose].sha256, "Swing frame checksum is stale: " + alternate)
-					var alternate_image := Image.new()
-					check(alternate_image.load_png_from_buffer(FileAccess.get_file_as_bytes(alternate)) == OK, "Cannot decode swing frame")
+					check(source_hash(alternate) == sheet.frames[pose].sha256, "Swing frame checksum is stale: " + alternate)
+					var alternate_image := source_image(alternate)
 					var expected_size: Array = sheet.frames[pose].get("source_size", dimensions)
 					frame_size = Vector2i(expected_size[0], expected_size[1])
 					check(alternate_image.get_size() == frame_size and alternate_image.get_pixel(0, 0).a < 0.03, "Invalid swing atlas dimensions/alpha")
@@ -130,11 +140,11 @@ func _initialize() -> void:
 			var near := sprite.transform * (arc.transform * Vector2.ZERO)
 			var far := sprite.transform * (arc.transform * arc.texture.get_size())
 			check(near.is_equal_approx(Vector2(box[0] * facing, -box[3])), "Knife arc origin differs from strike corridor")
-			check(far.is_equal_approx(Vector2(box[2] * facing, -box[1])), "Knife arc reach differs from strike corridor")
-			if key.action_id == "2S" and key.action_frame >= 12 and key.action_frame <= 15:
+			check(far.distance_to(Vector2(box[2] * facing, -box[1])) < 0.001, "Knife arc reach differs from strike corridor: %d / %s" % [index, far])
+			if key.get("action_id", "") == "2S" and key.action_frame >= 12 and key.action_frame <= 15:
 				check(is_equal_approx(arc.modulate.a, 1.0), "Active knife edge must stay visible")
 		FighterArt.apply(sprite, 5, "ready", 0, 1, facing)
 		check(not sprite.get_node("AttackEffect").visible, "Knife arc leaked into ready stance")
 	sprite.free()
-	print("Godot sprite catalog: ", failures, " failures; six fighters, 1378 body keys, alpha, regions, provenance and idle/movement vapor")
+	print("Godot sprite catalog: ", failures, " failures; six fighters, 1431 body keys, alpha, regions, provenance and idle/movement vapor")
 	quit(1 if failures else 0)

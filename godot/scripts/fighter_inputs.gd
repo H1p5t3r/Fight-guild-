@@ -8,9 +8,9 @@ signal devices_changed
 signal controller_lost(player: int)
 
 const PATH := "user://controls.json"
-const ACTIONS := ["Left", "Right", "Down / crouch", "Up / jump", "P", "K", "S", "Hs", "D", "Run / dash", "Simple modifier", "Faultless Defense"]
-const KEYS := [[KEY_A, KEY_D, KEY_S, KEY_W, KEY_J, KEY_K, KEY_L, KEY_I, KEY_O, KEY_SPACE, KEY_SHIFT, KEY_Q], [KEY_LEFT, KEY_RIGHT, KEY_DOWN, KEY_UP, KEY_KP_1, KEY_KP_2, KEY_KP_3, KEY_KP_5, KEY_KP_6, KEY_KP_0, KEY_KP_ADD, KEY_KP_ENTER]]
-const PAD := [JOY_BUTTON_DPAD_LEFT, JOY_BUTTON_DPAD_RIGHT, JOY_BUTTON_DPAD_DOWN, JOY_BUTTON_DPAD_UP, JOY_BUTTON_A, JOY_BUTTON_X, JOY_BUTTON_Y, JOY_BUTTON_B, JOY_BUTTON_RIGHT_SHOULDER, JOY_BUTTON_LEFT_SHOULDER, 100, 101]
+const ACTIONS := ["Left", "Right", "Down / crouch", "Up / jump", "P", "K", "S", "Hs", "D", "Run / dash", "", "Faultless Defense"]
+const KEYS := [[KEY_A, KEY_D, KEY_S, KEY_W, KEY_J, KEY_K, KEY_L, KEY_I, KEY_O, KEY_SPACE, -1, KEY_Q], [KEY_LEFT, KEY_RIGHT, KEY_DOWN, KEY_UP, KEY_KP_1, KEY_KP_2, KEY_KP_3, KEY_KP_5, KEY_KP_6, KEY_KP_0, -1, KEY_KP_ENTER]]
+const PAD := [JOY_BUTTON_DPAD_LEFT, JOY_BUTTON_DPAD_RIGHT, JOY_BUTTON_DPAD_DOWN, JOY_BUTTON_DPAD_UP, JOY_BUTTON_A, JOY_BUTTON_X, JOY_BUTTON_Y, JOY_BUTTON_B, JOY_BUTTON_RIGHT_SHOULDER, JOY_BUTTON_LEFT_SHOULDER, -1, 101]
 const PAD_NAMES := ["A / Cross", "B / Circle", "X / Square", "Y / Triangle", "Back / Select", "Guide", "Start / Options", "Left stick click", "Right stick click", "LB / L1", "RB / R1", "D-pad up", "D-pad down", "D-pad left", "D-pad right", "Misc", "Paddle 1", "Paddle 2", "Paddle 3", "Paddle 4", "Touchpad"]
 
 var profiles: Array = [defaults(0), defaults(1)]
@@ -151,7 +151,7 @@ static func valid_profiles(value: Variant) -> bool:
 	return true
 
 func bind(player: int, kind: String, action: int, code: int) -> String:
-	if player not in [0, 1] or kind not in ["keys", "pad"] or action < 0 or action >= 12 or not valid_binding(kind, code):
+	if player not in [0, 1] or kind not in ["keys", "pad"] or action < 0 or action >= 12 or action == 10 or not valid_binding(kind, code):
 		return "That control is reserved or unsupported. Esc and Start always open the menu."
 	if kind == "keys" and code >= 0 and code in profiles[1-player].keys:
 		return "%s is already assigned to Player %d. Clear that binding first." % [binding_name(kind, code), 2-player]
@@ -203,6 +203,8 @@ func load_preferences(path: String = PATH) -> void:
 		profile.stick_mode = int(profile.stick_mode)
 		for kind in ["keys", "pad"]:
 			for i in 12: profile[kind][i] = int(profile[kind][i])
+			# Free the old modifier's key/trigger for ordinary remapping.
+			profile[kind][10] = -1
 	assigned = [-1, -1]
 	reservations = ["", ""]
 	gates = [{}, {}]
@@ -250,7 +252,7 @@ func translate(player: int, keys: Dictionary, buttons: Dictionary, axes: Diction
 	# Digital directions take precedence over stick drift in combined mode.
 	if profile.stick_mode == 2: pad = (pad & ~15) | stick
 	elif profile.stick_mode == 0 and pad & 15 == 0: pad |= stick
-	raw |= pad
+	raw = (raw | pad) & ~1024
 	return clean_directions(raw) if clean else raw
 
 func sample(player: int, keys: Dictionary, clean: bool = true) -> int:
@@ -277,11 +279,12 @@ static func notation(raw: int) -> String:
 	var y := int(bool(raw & 8)) - int(bool(raw & 4))
 	var result := str(5 + x + y * 3)
 	for i in range(4, 12):
-		if raw & (1 << i): result += " + " + ACTIONS[i]
+		if i != 10 and raw & (1 << i): result += " + " + ACTIONS[i]
 	return result
 
 func keyboard_hint(player: int) -> String:
 	if not profiles[player].keyboard: return "Keyboard off · " + device_name(player) + " · Controls to change bindings"
 	var values := []
-	for code in profiles[player].keys: values.append(binding_name("keys", int(code)))
-	return "%s / %s / %s / %s move · %s / %s / %s / %s / %s attack · %s dash · %s simple · Back + %s FD" % values
+	for index in profiles[player].keys.size():
+		if index != 10: values.append(binding_name("keys", int(profiles[player].keys[index])))
+	return "%s / %s / %s / %s move · %s / %s / %s / %s / %s attack · %s dash · Back + %s FD" % values

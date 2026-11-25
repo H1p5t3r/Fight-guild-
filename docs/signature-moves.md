@@ -14,7 +14,7 @@ These are playable starting values. Startup minimums are 2f for grabs, 3f for P 
 
 Directions are relative to facing. `>` means a new button press during the preceding move; holding S or P never repeats an attack. Fillet can follow up after hit/block contact, or after the active frames finish on whiff, until its authored follow-up window closes (12 frames after the last active frame by default). The full route and the shortcut both end in the same low. Shark's P follow-up requires an unblocked hook hit and the matching ground/air state; block or whiff does not unlock it. Universal same-button command-normal cancels still apply to the new attacks.
 
-With simplified controls enabled at character select, hold the modifier and use **6K / 6S** for Fillet's starters, **4S / j.4P** for Shark's hooks. Follow-up directions remain **6S / 2S** for Fillet and **P** for Shark. Traditional motions work in either control mode. Development's Controls guide lists the keyboard/controller bindings.
+Use the listed motion inputs for starters. Follow-up directions remain **6S / 2S** for Fillet and **P** for Shark. The simplified-input modifier and shortcuts have been removed. Development’s Controls guide lists the keyboard/controller bindings.
 
 ## Hook and movement behavior
 

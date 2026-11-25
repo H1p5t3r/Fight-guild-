@@ -4,7 +4,7 @@
 
 PC and PS5 are target platforms; Godot is the current engine. Begin with sprites and move to 3D models on a 2D plane later. The core must support rollback online play. An in-program editor must allow manual move tuning.
 
-Attack buttons are **P, K, S, Hs, D**; their names do not dictate each character's action. There is a dedicated dash macro. Traditional motions are supported; simplified execution uses a modifier plus a per-move direction/button mapping. Each player enables or disables simplified controls in fighter select.
+Attack buttons are **P, K, S, Hs, D**; their names do not dictate each character's action. There is a dedicated dash macro. Specials and supers use traditional motions. Simplified execution, its modifier and fighter-select toggles have been removed; legacy shortcut data is ignored.
 
 The current shared gatlings follow Strive's tighter P/K/S/Hs families. Ground P chains into P and command normals; K chains into the dedicated 2S sweep and command normals; c.S opens S/Hs/command routes; f.S and 2S lead to Hs. Hs and command normals have no implicit normal cancel. Air routes have their own tree. Drive remains a special-category action.
 
@@ -28,7 +28,7 @@ These are useful prototype defaults, not additional approved design requirements
 
 ## Momentum and defense
 
-Momentum follows the requested Strive-inspired resource direction with FD as its only spending option. Negative Penalty is explicitly deferred. The editor controls chip damage, guard break and provisional meter rates. Block reactions distinguish negative/even and positive attacker advantage; guard break overrides them and removes backward dash buffering and blockstun grab immunity. See [Momentum and defense](momentum-defense.md) for exact implemented behavior and remaining parity work.
+Momentum follows the requested Strive-inspired resource direction with FD and two supers per fighter as its spending options. Supers cost two segments; [inputs and rules](supers.md). Negative Penalty is explicitly deferred. The editor controls chip damage, guard break and provisional meter rates. Block reactions distinguish negative/even and positive attacker advantage; guard break overrides them and removes backward dash buffering and blockstun grab immunity. See [Momentum and defense](momentum-defense.md) for exact implemented behavior and remaining parity work.
 
 ## Hit timing and combos
 

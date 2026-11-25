@@ -1,7 +1,7 @@
 {
-  "label": "Anvil \u00b7 Bulwark grappler",
-  "file": "2026-11-25-anvil/FightGuild-Anvil.json",
-  "sha256": "80273f78e45be2f35048be5ad5bf84b038acc87029e9bfe129b8bb9023e8b50e",
-  "sourceFile": "2026-11-24-hammer-movement/FightGuild-Hammer-Movement.json",
-  "sourceSha256": "dd031e293f3804aff82a1114943ab731e03a38454e7162e255b3e93bfd1f1aa1"
+  "label": "Two-segment supers / full roster",
+  "file": "2026-11-25-supers/FightGuild-Supers.json",
+  "sha256": "1cddbc0fb9b087074625b988e3588fbe733e28ccab025f0b16c97560c5e4c925",
+  "sourceFile": "2026-11-25-anvil/FightGuild-Anvil.json",
+  "sourceSha256": "80273f78e45be2f35048be5ad5bf84b038acc87029e9bfe129b8bb9023e8b50e"
 }

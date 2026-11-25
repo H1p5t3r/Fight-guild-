@@ -151,10 +151,14 @@ public:
             for(int uses:f.move_uses) if(uses<0||uses>1000) return false;
         }
         const auto& pair=candidate.pair;
-        if(pair.kind<0||pair.kind>fight::AntiAirCapture||pair.owner<0||pair.owner>1||pair.clock<0||pair.clock>180||pair.grey<0||pair.grey>999) return false;
+        if(pair.kind<0||pair.kind>fight::SuperCapture||pair.owner<0||pair.owner>1||pair.clock<0||pair.clock>180||pair.grey<0||pair.grey>999) return false;
         if(pair.combo<0||pair.combo>1||pair.victim_y<0||pair.victim_y>200000)return false;
         if(pair.kind&&(pair.move<0||pair.move>=fight::MOVE_COUNT||pair.ticks<1||pair.ticks>180||pair.clock>pair.ticks
-          ||(pair.facing!=1&&pair.facing!=-1)||pair.track<0||pair.track>3||pair.tech_ticks<0||pair.tech_ticks>30)) return false;
+          ||(pair.facing!=1&&pair.facing!=-1)||pair.track<0||pair.track>(pair.kind==fight::SuperCapture?11:3)||pair.tech_ticks<0||pair.tech_ticks>30)) return false;
+        if(pair.kind==fight::SuperCapture&&(pair.contact<fight::NormalHit||pair.contact>fight::PunishHit||pair.contact==fight::Blocked
+          ||pair.serial<0||pair.serial>=100000000||pair.wall_side< -1||pair.wall_side>1
+          ||pair.track!=fight::super_role(candidate.players[pair.owner].character,pair.move)
+          ||pair.payload.v[fight::ActionType]!=fight::SuperStrike))return false;
         for(const auto& q:candidate.projectiles) {
             if(q.life<0||q.life>600) return false;
             if(!q.life) continue;

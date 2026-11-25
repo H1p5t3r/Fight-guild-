@@ -19,7 +19,6 @@ var back_button: Button
 var home_utilities: HBoxContainer
 var selection: FighterSelect
 var sides: SideSelect
-var simplified: Array[CheckBox] = []
 var address: LineEdit
 var port: SpinBox
 var status: Label
@@ -290,7 +289,6 @@ func build_fighters(page: VBoxContainer) -> void:
 	selection.matchup_changed.connect(Callable(backdrop, "set_matchup"))
 	page.add_child(selection)
 	selection.confirmed.connect(func(): action_requested.emit("confirm_fighters"))
-	simplified = selection.simple_checks
 	buttons.confirm_fighters = selection.start_button
 
 func build_online(page: VBoxContainer) -> void:
@@ -353,8 +351,8 @@ func build_results(page: VBoxContainer) -> void:
 	spacer(actions)
 	result_poster = poster(split)
 
-func configure_selection(activity: String, chosen: Array, simple: Array) -> void:
-	selection.configure(activity, chosen, simple)
+func configure_selection(activity: String, chosen: Array) -> void:
+	selection.configure(activity, chosen)
 
 func configure_pause(online: bool, state: Dictionary = {}) -> void:
 	if not state.is_empty():

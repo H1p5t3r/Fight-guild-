@@ -16,10 +16,10 @@ test('Anvil armor carry and anti-air super replay identically in the shared WASM
   e.restore(armor);ticks(e,30);assert.equal(e.hash,armorHash);
   e.reset([0,2]);e.api.fg_preview_place(0,35000,0,10000);e.api.fg_preview_place(1,56000,16000,0);
   e.api.fg_preview_begin(0,16);
-  assert.equal(e.api.fg_get(-1,28),54);assert.equal(e.api.fg_get(0,15),5000);
+  assert.equal(e.api.fg_get(-1,28),54);assert.equal(e.api.fg_get(0,15),3333);
   const frozen=e.snapshot();ticks(e,54);
   assert.equal(e.api.fg_get(1,1),16000);assert.equal(e.api.fg_get(0,5),0);
   ticks(e,5);assert.equal(e.api.fg_get(-1,22),7);
-  ticks(e,150);assert.equal(e.api.fg_get(1,3),667);assert.equal(e.api.fg_get(0,15),5000);
+  ticks(e,150);assert.equal(e.api.fg_get(1,3),667);assert.equal(e.api.fg_get(0,15),3333);
   const hash=e.hash;e.restore(frozen);ticks(e,209);assert.equal(e.hash,hash);
 });

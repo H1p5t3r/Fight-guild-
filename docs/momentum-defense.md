@@ -1,6 +1,6 @@
 # Momentum and defensive reactions
 
-Momentum is Fight Guild's Strive-inspired resource: a 0–100% gauge displayed in **three equal sections**, approach/offense/defense gains, and Faultless Defense (FD). Each section represents one third of the meter; fill and FD drain remain continuous across the gaps. Player 2's gauge fills from the opposite edge. **FD is the only spending mechanic. Negative Penalty is deferred**, including its meter removal and gain reduction. These are editable prototype rates, not a verified reproduction of Strive's numerical formulas. Wall breaks and a Momentum Positive Bonus are implemented. Supers, Roman Cancels and RISC are not implemented.
+Momentum is Fight Guild's Strive-inspired resource: a 0–100% gauge displayed in **three equal sections**, approach/offense/defense gains, and Faultless Defense (FD). Each section represents one third of the meter; fill and FD drain remain continuous across the gaps. Player 2's gauge fills from the opposite edge. **FD and supers spend Momentum. Negative Penalty is deferred**, including its meter removal and gain reduction. These are editable prototype rates, not a verified reproduction of Strive's numerical formulas. Wall breaks and a Momentum Positive Bonus are implemented. Each fighter has [two supers](supers.md), costing two segments (6667/10000) on activation. Roman Cancels and RISC are not implemented.
 
 ## Gain and spending
 
@@ -13,7 +13,8 @@ Both players start a round at 0%. Training can reset both gauges to 0%, 50% or 1
 | Attack is blocked | +0.04% per point of authored damage |
 | Take a hit | +0.04% per point of authored damage |
 | Ordinary guard | +0.03% per point of incoming authored damage |
-| Start a special or Drive | +1%, once per activation, including whiffs |
+| Start a non-super special or Drive | +1%, once per activation, including whiffs |
+| Start a super | −66.67% (two segments); no activation/contact gain for the attacker |
 | Hold grounded FD | −0.25% per simulation tick (15% per second) |
 | Hold airborne FD | −0.50% per simulation tick (30% per second) |
 | Block a hit with FD | −2.5% plus −0.5% per incoming attack level, in addition to holding drain |
@@ -56,4 +57,4 @@ Schema/core version 3 introduced `chipDamage`, `guardBreak`, ten Momentum rules 
 
 Coverage includes gain/cap/reset, no passive penalty, air/high/low FD, empty-meter fallback, input consumption, chip KO, corner push, late contact advantage, guard-break backdash/throw eligibility, replay restoration, native/Godot/WebAssembly parity and two-peer rollback. Godot UI tests drive keyboard input and all 18 block clips through actual contacts, including both frames. Windows/controller hardware validation remains separate from cross-compilation.
 
-Wall breaks grant a provisional Positive Bonus: 150% earned Momentum and 0.05% passive gain per unfrozen tick for 360 ticks. FD suppresses these gains while used. These values are editable; no additional spend or Negative Penalty has been added.
+Wall breaks grant a provisional Positive Bonus: 150% earned Momentum and 0.05% passive gain per unfrozen tick for 360 ticks. FD suppresses these gains while used. These values are editable; Negative Penalty remains deferred.

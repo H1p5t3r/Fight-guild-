@@ -17,6 +17,7 @@ var portrait_records: Dictionary = {}
 var textures: Dictionary = {}
 var tear_material: ShaderMaterial
 var screen_copy: BackBufferCopy
+var move_title: Label
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -33,6 +34,17 @@ func _ready() -> void:
 	tear_material.shader = TEAR_SHADER
 	panel.material = tear_material
 	add_child(panel)
+	move_title = Label.new()
+	move_title.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	move_title.offset_top = -172
+	move_title.offset_bottom = -100
+	move_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	move_title.add_theme_font_override("font", CombatTypography.FONT)
+	move_title.add_theme_font_size_override("font_size", 52)
+	move_title.add_theme_color_override("font_color", Color("fff7e9"))
+	move_title.add_theme_color_override("font_outline_color", Color("09090c"))
+	move_title.add_theme_constant_override("outline_size", 12)
+	add_child(move_title)
 	resized.connect(update_material)
 	clear()
 
@@ -40,7 +52,7 @@ func clear() -> void:
 	visible = false
 	elapsed = 0
 
-func present(fighter: int, direction: int, tick: int, total: int = DEFAULT_TICKS) -> void:
+func present(fighter: int, direction: int, tick: int, total: int = DEFAULT_TICKS, title: String = "") -> void:
 	if fighter < 0 or fighter >= CombatModel.CHARACTERS.size() or total <= 0 or tick < 0 or tick >= total:
 		clear()
 		return
@@ -48,6 +60,8 @@ func present(fighter: int, direction: int, tick: int, total: int = DEFAULT_TICKS
 	facing = -1 if direction < 0 else 1
 	elapsed = tick
 	duration = total
+	move_title.text = title.to_upper()
+	move_title.modulate.a = float(composition().alpha)
 	portrait = portrait_for(character)
 	visible = true
 	update_material()

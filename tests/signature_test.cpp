@@ -37,14 +37,14 @@ static void routes() {
         fresh(s,4,mirror);s.world.players[0].y=22000;s.world.players[0].vy=100;
         motion(s,S,true,mirror);CHECK(s.world.players[0].move==HOOK_AIR);
     }
-    fresh(s);s.reset(5,4,1,1);s.step(Simple|Right|K,0);CHECK(s.world.players[0].move==KNIFE_SPIRAL);
-    s.reset(4,5,1,0);s.step(Simple|Left|S,0);CHECK(s.world.players[0].move==HOOK_GROUND);
-    s.reset(4,5,1,0);s.world.players[0].y=22000;s.step(Simple|Left|P,0);CHECK(s.world.players[0].move==HOOK_AIR);
+    fresh(s);s.reset(5,4,1,1);s.step(Simple|Right|K,0);CHECK(s.world.players[0].move!=KNIFE_SPIRAL);
+    s.reset(4,5,1,0);s.step(Simple|Left|S,0);CHECK(s.world.players[0].move!=HOOK_GROUND);
+    s.reset(4,5,1,0);s.world.players[0].y=22000;s.step(Simple|Left|P,0);CHECK(s.world.players[0].move!=HOOK_AIR);
     CHECK(s.can_cancel(5,15,REKKA_LOW,0)&&s.can_cancel(5,REKKA_MID,REKKA_LOW,0));
     CHECK(!s.can_cancel(5,0,REKKA_MID,1)&&!s.can_cancel(5,0,REKKA_LOW,1));
     CHECK(!s.can_cancel(4,HOOK_GROUND,STAB_GROUND,0)&&s.can_cancel(4,HOOK_GROUND,STAB_GROUND,1));
     for(int c=0;c<6;++c) for(int m=25;m<32;++m)
-        CHECK(bool(s.moves[c][m].v[Enabled])==(c==5?m<=27:c==4?m>=28:false));
+        if(!is_super(s.moves[c][m]))CHECK(bool(s.moves[c][m].v[Enabled])==(c==5?m<=27:c==4?m>=28:false));
 }
 static void mobility() {
     Simulation s;

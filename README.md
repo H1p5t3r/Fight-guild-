@@ -1,6 +1,6 @@
 # Fight Guild
 
-A native **Godot 4.6.3** fighting-game lab for iterating toward a PC/PS5 game. The PC build includes **Anvil, Hammer, Smoke, Tapper, Shark and Fillet**, generated sprites, all five basic **P / K / S / Hs / D** buttons, unified gatlings, a move editor, Momentum/Faultless Defense, counter/punish/reversal feedback and experimental direct rollback multiplayer.
+A native **Godot 4.6.3** fighting-game lab for iterating toward a PC/PS5 game. The PC build includes **Anvil, Hammer, Smoke, Tapper, Shark and Fillet**, generated sprites, all five basic **P / K / S / Hs / D** buttons, unified gatlings, a move editor, Momentum/Faultless Defense, two supers per fighter, counter/punish/reversal feedback and experimental direct rollback multiplayer.
 
 Watch the [all-six-fighter combo showcase](exports/FightGuild-Combo-Showcase-2026-11-25.mp4): twelve verified routes, full-speed footage, half-speed replays and fighter themes. The [route guide and individual videos](docs/combo-showcase-2026-11-25.md) include inputs, damage, setup conditions and reproduction instructions. Anvil's revised animations use magma-orange shield effects, consistent anatomical scale and front/behind grab choreography.
 
@@ -10,7 +10,7 @@ Each fighter has matching **windup and active** pose studies plus movement poses
 
 Fillet has **236K** knife spiral and **236S > 6S > 2S** rekka, with **236S > 2S** as the shortcut. Shark has **214S / j.214P** diagonal hook pulls and **P** on-hit stabs. Both have dedicated generated windup/active art. Most fighters run forward; Anvil and Tapper step. Run/step velocity carries into attacks, including motion commands. Tune these in Development; [signature moves and movement](docs/signature-moves.md) lists the inputs and settings.
 
-Body-only hurtboxes follow all **1162 current poses**, using **legs, torso-and-arms, head, and at most one optional extension**—four boxes maximum. Per-fighter pushboxes and preliminary stats/hitboxes cover **282 move slots**. **Weapons never extend hurtboxes; startup minimums are 2f for grabs, 3f for P normals, and 5f for other attacks.** Development overlays and Sprite review show the actual collision geometry. See [collision rules](docs/collision-rules.md) and [move stats](docs/move-stats.md).
+Body-only hurtboxes follow all **1431 current poses**, using **legs, torso-and-arms, head, and at most one optional extension**—four boxes maximum. Per-fighter pushboxes and preliminary stats/hitboxes cover **282 move slots**. **Weapons never extend hurtboxes; startup minimums are 2f for grabs, 3f for P normals, and 5f for other attacks.** Development overlays and Sprite review show the actual collision geometry. See [collision rules](docs/collision-rules.md) and [move stats](docs/move-stats.md).
 
 Menus share the supplied **Guild Ball** visual language: Barlow Condensed, charcoal panels, raised blue controls and brass trim. Character select adds a central angled roster and large guild-colored fighters, following the requested 2XKO-inspired direction. Versus fills the screen with generated Fillet/Shark face portraits, guild-colored health rails with names inside, an open timer dial, diamond Scrum markers and floating three-section Momentum. The stage floor and fighters share one camera projection, with body contact shadows and readable outlined combo numerals. Menus use interruptible eased transitions, with a saved reduced-motion option. Controls uses its separate warm Settings skin. [Menu style and provenance](docs/menu-style.md) records the reusable assets and review workflow.
 
@@ -19,6 +19,8 @@ Menus share the supplied **Guild Ball** visual language: Barlow Condensed, charc
 **Hammer’s full kit is playable:** compact shoulder-led normals, three hammer specials and **5D Break Step**. Cancel a special into one burst per string, then a normal with full velocity carry and +4f block advantage. [Kit and controls](docs/hammer-kit.md) · [interactive animation review](https://h1p5t3r.github.io/Fight-guild-/hammer-motion-review.html).
 
 Current combo physics uses **Strive-style decay, velocity knockback, weaker repeated bounces and tighter gatlings**. [Rules, editor controls and verified routes](docs/combo-decay.md) explain the provisional coefficients and character exceptions.
+
+All six fighters now have **two supers**. **Whiskey Chaser** is Tapper’s stance barrage and **Freemason** is Hammer’s heavy finisher. Confirmed cinematic supers lock both players until their finish; **The Air Is Mine** and **Grand Design** remain actionable after their utility casts recover. [Inputs, roles and rules](docs/supers.md) · [native super showcase](exports/FightGuild-Supers-2026-11-25.mp4).
 
 ## Play or edit
 
@@ -29,16 +31,16 @@ Download the Windows/Linux ZIP from this branch's successful GitHub Actions arti
 - Versus is first to two Scrum wins: **1st Scrum**, **2nd Scrum**, and **Final Down** at 1–1. Fighter loading/intros and the four-beat opening lead into each match; online clients synchronize before release.
 - Start from **Versus**, **Training** or **Development**, then choose fighters. Esc / gamepad Start opens the match menu. [Menu flow](docs/menu-flow.md) explains entry, pause, rematch and connection recovery.
 - **Local versus** first asks you to choose sides. Move your controller left/right or use the device cards. **Controls** saves remaps, controller assignments and deadzones, with a live input test; [control setup](docs/input-controls.md).
-- **Player 1:** WASD; J/K/L/I/O = P/K/S/Hs/D; Space = run/dash; left Shift = simple modifier; back + Q = Faultless Defense.
-- **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = run/dash; numpad + = modifier; back + numpad Enter = Faultless Defense.
-- Choose simplified inputs independently at fighter select. Traditional motions stay available.
+- **Player 1:** WASD; J/K/L/I/O = P/K/S/Hs/D; Space = run/dash; back + Q = Faultless Defense.
+- **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = run/dash; back + numpad Enter = Faultless Defense.
+- Specials and supers use motion inputs. The simple-input modifier, shortcuts and character-select toggles are removed. Existing move files still import.
 - In **Training**, use **Record**, **Replay** and **Frame lab** to inspect both fighters, cancel windows, input age, spacing and damage scaling. P2-only replay lets you practice against a recorded exchange; [training lab](docs/training-lab.md) explains the controls.
-- **Super cut-in** in Training/Development previews a frozen-match face banner; **F8 / Shift+F8** select P1/P2. This adds presentation only, with no super attacks or Momentum cost. [Preview and face-art selection](docs/super-freeze-presentation.md).
+- **Super cut-in** in Training/Development previews a frozen-match face banner; **F8 / Shift+F8** select P1/P2. The preview spends no meter; real supers trigger the same cut-in and cost two Momentum segments. [Preview and face-art selection](docs/super-freeze-presentation.md).
 - **Fighter themes:** all six supplied songs play in native matches. **Sound** offers independent music/effects volume, P1/P2 or fixed-theme selection, and a song preview. [Assignments and playback](docs/fighter-music.md).
 - In **Development**, edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1–17 saves preserve edits during migration; Restore default move set loads the new starter tuning.
 - Online: direct ENet/UDP host and join, default port 7000. Both players use Player 1 controls locally. Matching move data is required.
 
-Momentum has **three equal sections**, with continuous gain and separately editable ground/air FD costs. Try **Start Momentum: 50%** and the **Faultless guard** dummy in training. The move editor exposes chip damage and **Guard break on block**; Sprite review includes negative/even, positive and guard-break clips. [Momentum and defense rules](docs/momentum-defense.md) describe the provisional tuning. Negative Penalty is deferred; FD is the only meter spend.
+Momentum has **three equal sections**, with continuous gain and separately editable ground/air FD costs. Try **Start Momentum: 50%** and the **Faultless guard** dummy in training. The move editor exposes chip damage and **Guard break on block**; Sprite review includes negative/even, positive and guard-break clips. [Momentum and defense rules](docs/momentum-defense.md) describe the provisional tuning. Negative Penalty is deferred. FD and supers spend meter; each super costs two segments (66.67%).
 
 Combos now appear as large background numerals on the attacker's current side. **Attack loop** and **Guard → reversal** training dummies help test counter hits, recovery punishes and first-frame reversals. Counter freeze, defender-only slowdown, bonuses and reversal eligibility are editable per move. Medium/large counters use oversized italic callouts, and large counters briefly push the camera in. See [combo and timing rules](docs/combat-feedback.md).
 

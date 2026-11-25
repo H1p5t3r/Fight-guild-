@@ -87,7 +87,6 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	verify_local_match()
 	await verify_online_gates()
 	game.characters = [0, 1]
-	game.simple = [false, false]
 	game.round_number = 1
 	game.match_score.reset()
 	game.reset_round()

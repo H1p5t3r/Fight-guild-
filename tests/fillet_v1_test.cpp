@@ -108,7 +108,7 @@ static void capture_boundaries(){
 }
 
 int main(){
-    setup();int enabled=0;for(auto& m:sim.moves[5])enabled+=m.v[Enabled];check(enabled==26,"26 enabled actions");
+    setup();int enabled=0;for(auto& m:sim.moves[5])enabled+=m.v[Enabled];check(enabled==28,"26 kit actions plus two supers");
     for(int c=0;c<6;++c){check(sim.extension_set(c,-1,sim.character_extensions[c].v),"character extension validates");for(int m=0;m<MOVE_COUNT;++m)check(sim.extension_set(c,m,sim.extensions[c][m].v),"action extension validates");}
     check(sim.can_cancel(5,CLOSE_SLASH,FAR_SLASH,1)&&sim.can_cancel(5,CLOSE_SLASH,SLASH_SWEEP,1),"named c.S routes");
     check(sim.can_cancel(5,5,6,1)&&!sim.can_cancel(5,6,14,1),"2K has an explicit sweep route; sweep cannot cancel to unrelated specials");

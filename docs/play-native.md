@@ -27,11 +27,11 @@ The game opens at the main menu. Use the mouse, arrow keys/Enter, or a controlle
 - **Training → Fighter select → Start training:** choose your fighter and a dummy, then practice with dummy behavior, starting Momentum, input history, hitboxes, pause, frame step and reset controls. **Record / Replay / Frame lab** capture exchanges and inspect both players; [training guide](training-lab.md).
 - **Development → Fighter select → Open combat lab:** practice controls plus the move editor, sprite review, buffer/Momentum tuning, data import/export and rollback workbench.
 
-Choose Anvil, Hammer, Smoke, Tapper, Shark or Fillet. Each player independently chooses simplified controls. The training dummy can stand, guard, crouch guard, run a practice sequence, use Faultless Defense, repeat Hs attacks or attempt reversals after guarding.
+Choose Anvil, Hammer, Smoke, Tapper, Shark or Fillet. All fighters use motion inputs. The training dummy can stand, guard, crouch guard, run a practice sequence, use Faultless Defense, repeat Hs attacks or attempt reversals after guarding.
 
 **Esc / gamepad Start / Menu** opens the match menu. Offline rounds freeze there; Resume keeps the exact round, Restart scrum restarts the current Scrum while retaining earlier wins, and Change fighters can be canceled without losing the round. Online play continues with neutral input while the menu is open; leaving closes the connection. Applied move edits survive navigation between modes. Save locally to retain them after quitting.
 
-At fighter select, choose Player 1 or Player 2 above the central roster, then use arrows/D-pad or click a portrait. Both players may choose the same fighter. Simplified-input toggles remain independent. **Motion: Full / Reduced** on the main menu controls menu animation and is saved locally.
+At fighter select, choose Player 1 or Player 2 above the central roster, then use arrows/D-pad or click a portrait. Both players may choose the same fighter. **Motion: Full / Reduced** on the main menu controls menu animation and is saved locally.
 
 Matches use **1st Scrum**, **2nd Scrum**, and **Final Down** when tied 1–1. First to two Scrum wins takes the match; draws replay the current Scrum. Win markers sit beside the health bars. Each Scrum resets health, Momentum and the timer.
 
@@ -61,12 +61,11 @@ side selection can swap the two keyboard layouts. See [control setup](input-cont
 | Hs | I | Numpad 5 | Right face button |
 | D | O | Numpad 6 | Right shoulder |
 | Run / dash macro | Space | Numpad 0 | Left shoulder |
-| Simple modifier | Left Shift | Numpad + | Left trigger |
 | Faultless Defense (hold away too) | Q | Numpad Enter | Right trigger |
 
-With simple controls enabled, hold the modifier for per-move shortcuts. Fillet uses 6K / 6S for her spiral/rekka; Shark uses 4S / j.4P for his hooks. Other original shortcuts include forward+P, down+S and up+Hs. Directions are relative to facing. Traditional 236P, 236S and 623Hs still work. Buttons also have crouching, forward command-normal and air variants. These kits are provisional.
+Specials and supers require their motion plus attack button. Directions are relative to facing; buttons also have crouching, forward command-normal and air variants. The former simple-input modifier and shortcuts are removed. Old move files and saved controller mappings still load; the retired modifier key and left trigger are freed for remapping. [Super inputs and roles](supers.md).
 
-Hold back + any two of P/K/S/Hs as an alternative FD chord. Momentum builds through approaching, attacking and defending; FD is its only spend. Its three equal HUD sections fill continuously to 100%; the divisions do not alter gain or costs. Select **Start Momentum: 50%** in training to try it immediately. FD prevents chip damage and adds pushback. Empty meter falls back to ordinary guard. Negative Penalty is deferred.
+Hold back + any two of P/K/S/Hs as an alternative FD chord. Momentum builds through approaching, attacking and defending; FD and supers spend it. Each super costs two segments (66.67%) and triggers the screen-rip freeze. Its three equal HUD sections fill continuously to 100%; the divisions do not alter gain or costs. Select **Start Momentum: 50%** in training to try it immediately. FD prevents chip damage and adds pushback. Empty meter falls back to ordinary guard. Negative Penalty is deferred.
 
 Block animations distinguish negative/even attacks, plus-on-block pressure and guard break. Enable **Guard break on block** for a move to test its exposed stance: backdash inputs during the stun are discarded and blockstun grab protection is absent. See [Momentum and defense](momentum-defense.md).
 

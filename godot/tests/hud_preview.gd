@@ -43,7 +43,7 @@ func run() -> void:
 				character.moves[slot].reach = 50000
 		game.model.load_data(data)
 		# Real contacts create health loss, Momentum and the combo display.
-		game.model.reset(game.characters, game.simple)
+		game.model.reset(game.characters)
 		for _i in 18: game.model.step(2, 0)
 		if args.has("--fd"):
 			game.model.core.set_training_momentum(1, 6500)

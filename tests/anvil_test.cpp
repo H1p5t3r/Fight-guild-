@@ -95,19 +95,19 @@ static void super(){
     setup();a().momentum=4999;CHECK(!s.preview_begin(owner,16)&&a().momentum==4999);
     for(int p:{0,1})for(int face:{-1,1}){
         setup(face,p);a().momentum=10000;b().y=16000;b().vy=300;b().vx=-200;
-        CHECK(s.preview_begin(owner,16));CHECK(a().momentum==5000&&s.world.super_time==54&&s.world.super_actor==owner);
+        CHECK(s.preview_begin(owner,16));CHECK(a().momentum==3333&&s.world.super_time==54&&s.world.super_actor==owner);
         const int x=b().x,y=b().y,vy=b().vy,time=s.world.remaining;
         ticks(54);CHECK(b().x==x&&b().y==y&&b().vy==vy&&s.world.remaining==time&&a().age==0&&!s.world.super_time);
         ticks(5);CHECK(s.world.pair.kind==AntiAirCapture);
-        ticks(150);CHECK(b().health==667&&a().momentum==5000);
+        ticks(150);CHECK(b().health==667&&a().momentum==3333);
     }
-    setup();a().momentum=5000;b().x=a().x+8000;CHECK(s.preview_begin(owner,16));ticks(110);
+    setup();a().momentum=SUPER_COST;b().x=a().x+8000;CHECK(s.preview_begin(owner,16));ticks(110);
     CHECK(!s.world.pair.kind&&b().health==1000&&a().momentum==0); // Grounded opponent is safe.
-    setup();a().momentum=5000;b().y=16000;b().stun=30;b().reaction=AirReel;
+    setup();a().momentum=SUPER_COST;b().y=16000;b().stun=30;b().reaction=AirReel;
     a().combo=3;b().combo_received=3;b().combo_proration=70;b().combo_scale=80;
     CHECK(s.preview_begin(owner,16));ticks(59);CHECK(s.world.pair.kind==AntiAirCapture&&s.world.pair.combo);
     ticks(150);CHECK(b().health>667&&b().health<1000&&a().last_damage<333);
-    setup();a().momentum=5000;b().y=16000;CHECK(s.preview_begin(owner,16));ticks(12);
+    setup();a().momentum=SUPER_COST;b().y=16000;CHECK(s.preview_begin(owner,16));ticks(12);
     const State saved=s.world;ticks(200);unsigned expected=s.checksum();s.world=saved;ticks(200);CHECK(s.checksum()==expected);
 }
 static void dive_and_routes(){

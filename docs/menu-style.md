@@ -49,7 +49,7 @@ bash scripts/godot.sh --resolution 1280x720 --script tests/style_review.gd -- --
 
 For quicker character-select captures, use `tests/menu_preview.gd -- --test --fighters --p1 0 --p2 4 --screenshot /absolute/path/select.png`. `--online`, `--training` and `--mirror` inspect those variants. The same script's `--tour` plays a reproducible native navigation tour; Godot's `--write-movie /absolute/path/tour.avi --fixed-fps 60` can record it.
 
-The surface fixture shows normal, hover, pressed, focus and disabled artwork together. Actual input behavior is exercised by the menu suite: entry/back paths, keyboard/controller navigation, simplified controls, pause/rematch, input isolation, Controls tabs/fixed footer/focus return, and ENet handshake/cancellation/disconnect recovery. The host-port check also prevents delayed SpinBox text from replacing the selected value.
+The surface fixture shows normal, hover, pressed, focus and disabled artwork together. Actual input behavior is exercised by the menu suite: entry/back paths, keyboard/controller navigation, motion-only selection, pause/rematch, input isolation, Controls tabs/fixed footer/focus return, and ENet handshake/cancellation/disconnect recovery. The host-port check also prevents delayed SpinBox text from replacing the selected value.
 
 ## Match entrance
 

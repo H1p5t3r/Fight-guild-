@@ -1,0 +1,90 @@
+[
+  {
+    "id": "hammer",
+    "file": "godot/assets/fighters/supers-v1/hammer.png",
+    "source": "/workspace/generated_images/exec-ce40d139-84e4-44f7-ad3f-df2808013368.png",
+    "sha256": "1942f9b279c94b71feed16e75a040df37505333969cd25c2bbff408aaf34fdfc",
+    "prompt": "prompts/hammer.txt",
+    "references": [
+      "godot/assets/fighters/hammer-kit-v1/drive_ready.png"
+    ]
+  },
+  {
+    "id": "smoke",
+    "file": "godot/assets/fighters/supers-v1/smoke.png",
+    "source": "/workspace/generated_images/exec-1578ecf3-191e-45be-9556-caf4c4b023c4.png",
+    "sha256": "882a5f5c8577c1847e3724771837cc661c4a909f8e7c043125bfdb07365cb542",
+    "prompt": "prompts/smoke.txt",
+    "references": [
+      "godot/assets/fighters/smoke-idle-v1/idle.png"
+    ]
+  },
+  {
+    "id": "tapper",
+    "file": "godot/assets/fighters/supers-v1/tapper.png",
+    "source": "/workspace/generated_images/exec-3e2072db-4e5e-4754-9308-afd5dcc0fa57.png",
+    "sha256": "8af15ec72aeb1cd900e95da68ebcccb5985ab0495400283ca4a313372eb26334",
+    "prompt": "prompts/tapper.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png"
+    ]
+  },
+  {
+    "id": "anvil",
+    "file": "godot/assets/fighters/supers-v1/anvil.png",
+    "source": "/workspace/generated_images/exec-19a070ab-b6b7-4b80-93d5-912466041792.png",
+    "sha256": "f6093f1bfd213040fbe4814bdc2fa0c0e5ce3c807c3019d5f38feda288591277",
+    "prompt": "prompts/anvil-correction.txt",
+    "references": [
+      "godot/assets/fighters/supers-v1/anvil.png"
+    ],
+    "supersedes": {
+      "id": "anvil",
+      "file": "godot/assets/fighters/supers-v1/anvil.png",
+      "source": "/workspace/generated_images/exec-16488394-fa7b-4ad2-bbdc-dbf1fe78e7d1.png",
+      "sha256": "9a78aa9a25b39c0bc5e20973868c11522a8f36458ff02d9ebb3d17ac11b4a753",
+      "prompt": "prompts/anvil.txt",
+      "references": [
+        "art/characters/anvil-grappler-v1/high-clamp-hand-corrected.png"
+      ]
+    }
+  },
+  {
+    "id": "shark",
+    "file": "godot/assets/fighters/supers-v1/shark.png",
+    "source": "/workspace/generated_images/exec-2f555a12-f924-4d75-9d5b-36108ffc0674.png",
+    "sha256": "ff84765bfe1ebc58946197345b3cef10fae7ed5279ce09b71c0b04008bcdbdf1",
+    "prompt": "prompts/shark.txt",
+    "references": [
+      "godot/assets/fighters/shark-movement-v1/idle.png"
+    ]
+  },
+  {
+    "id": "fillet",
+    "file": "godot/assets/fighters/supers-v1/fillet.png",
+    "source": "/workspace/generated_images/exec-13ce0fb9-721d-4682-af4e-38506ef8d223.png",
+    "sha256": "9d2396779039b294c12606be5292cdd9d951cd61f54d419ea2739813ad57950f",
+    "prompt": "prompts/fillet-layout.txt",
+    "references": [
+      "godot/assets/fighters/supers-v1/fillet.png"
+    ],
+    "supersedes": {
+      "id": "fillet",
+      "file": "godot/assets/fighters/supers-v1/fillet.png",
+      "source": "/workspace/generated_images/exec-dfcd0a37-1ea4-426a-b490-d1218c4402af.png",
+      "sha256": "636ea59d5c971556d81f9c1fc9057481501811e40a445f59e7b1c236d865aa11",
+      "prompt": "prompts/fillet.txt",
+      "references": [
+        "godot/assets/fighters/appearance-v3/fillet-ready.png"
+      ]
+    }
+  },
+  {
+    "id": "utility",
+    "file": "godot/assets/fighters/supers-v1/utility.png",
+    "source": "/workspace/generated_images/exec-7d063287-ecd4-4cd9-a2ea-41d1af9587ed.png",
+    "sha256": "4670f541840a9e1a585f135b18062eb8a8a73ac3d579b1bd4c59fcbfa1613127",
+    "prompt": "prompts/utility.txt",
+    "references": []
+  }
+]

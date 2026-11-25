@@ -1,8 +1,9 @@
 # Super-freeze cut-in
 
 The native game has a reusable cut-in renderer and a local training/development
-preview. **No super attacks, commands, damage, invulnerability, cancels or new
-Momentum spending have been added.** The move-editor website remains frozen.
+preview. All twelve [supers](supers.md) now invoke this renderer from their saved
+simulation freeze clock and cost two Momentum segments. The local preview remains
+free. The move-editor website remains frozen.
 
 In Training or Development, choose **Super cut-in → Preview Player 1 / Player 2**.
 Keyboard shortcuts are **F8** and **Shift+F8**. The preview holds the current
@@ -66,7 +67,7 @@ video's character or lettering.
 
 ## Integration boundary
 
-`SuperFreeze.present(character, facing, elapsed_ticks, total_ticks)` renders a
+`SuperFreeze.present(character, facing, elapsed_ticks, total_ticks, title = "")` renders a
 specific frame. `clear()` removes it. It has no autonomous timer, combat model
 reference or gameplay mutations. Re-presenting an earlier tick produces the same
 composition, suitable for a future saved freeze clock and rollback resimulation.
@@ -74,10 +75,10 @@ An explicit `BackBufferCopy` precedes the screen-tear shader, so each draw sampl
 the clean arena rather than an earlier cut-in. UV mapping respects the arena's
 rectangle inside the training layout; surrounding controls are unaffected.
 
-When supers are designed, their deterministic core activation event must own the
-actor, duration and elapsed freeze ticks, with the same state on both peers.
-Connect that state to `main.super_freeze.present(...)` and clear it when the freeze
-ends or is rolled back. **Do not use the local preview's simulation gate online.**
+Super activation now owns the actor, duration and elapsed freeze ticks in the
+deterministic core. `main.gd` presents that saved clock and the move title; it
+clears the overlay when the freeze ends or is rolled back. The separate local
+preview gate is never used for online super execution.
 This change does not implement that future core super event or freeze state.
 
 The local preview skips model stepping while advancing only the cut-in clock.

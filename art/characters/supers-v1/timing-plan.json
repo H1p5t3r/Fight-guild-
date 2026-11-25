@@ -1,0 +1,199 @@
+{
+  "actions": [
+    {
+      "name": "Iron Dominion",
+      "character": 0,
+      "slot": 31,
+      "timing": [
+        18,
+        5,
+        18
+      ],
+      "cinematic": true,
+      "sourcePoses": [
+        0,
+        1,
+        5
+      ],
+      "bodyHeight": 425
+    },
+    {
+      "name": "Freemason",
+      "character": 1,
+      "slot": 12,
+      "timing": [
+        12,
+        4,
+        34
+      ],
+      "cinematic": true,
+      "sourcePoses": [
+        0,
+        1,
+        2
+      ],
+      "bodyHeight": 425
+    },
+    {
+      "name": "Grand Design",
+      "character": 1,
+      "slot": 31,
+      "timing": [
+        16,
+        1,
+        10
+      ],
+      "cinematic": false,
+      "sourcePoses": [
+        3,
+        4,
+        5
+      ],
+      "bodyHeight": 425
+    },
+    {
+      "name": "Flashpoint",
+      "character": 2,
+      "slot": 12,
+      "timing": [
+        8,
+        5,
+        35
+      ],
+      "cinematic": true,
+      "sourcePoses": [
+        0,
+        1,
+        2
+      ],
+      "bodyHeight": 480
+    },
+    {
+      "name": "The Air Is Mine",
+      "character": 2,
+      "slot": 31,
+      "timing": [
+        24,
+        1,
+        18
+      ],
+      "cinematic": false,
+      "sourcePoses": [
+        3,
+        4,
+        5
+      ],
+      "bodyHeight": 480
+    },
+    {
+      "name": "Last Orders",
+      "character": 3,
+      "slot": 12,
+      "timing": [
+        7,
+        4,
+        38
+      ],
+      "cinematic": true,
+      "sourcePoses": [
+        0,
+        1,
+        2
+      ],
+      "bodyHeight": 470
+    },
+    {
+      "name": "Whiskey Chaser",
+      "character": 3,
+      "slot": 31,
+      "timing": [
+        10,
+        9,
+        12
+      ],
+      "cinematic": true,
+      "sourcePoses": [
+        3,
+        4,
+        5
+      ],
+      "bodyHeight": 470
+    },
+    {
+      "name": "No Safe Harbour",
+      "character": 4,
+      "slot": 12,
+      "timing": [
+        12,
+        4,
+        30
+      ],
+      "cinematic": true,
+      "sourcePoses": [
+        0,
+        1,
+        2
+      ],
+      "bodyHeight": 480
+    },
+    {
+      "name": "Undertow",
+      "character": 4,
+      "slot": 14,
+      "timing": [
+        7,
+        5,
+        32
+      ],
+      "cinematic": true,
+      "sourcePoses": [
+        3,
+        4,
+        5
+      ],
+      "bodyHeight": 480
+    },
+    {
+      "name": "Bloodletting",
+      "character": 5,
+      "slot": 12,
+      "timing": [
+        10,
+        4,
+        24
+      ],
+      "cinematic": true,
+      "sourcePoses": [
+        0,
+        1,
+        2
+      ],
+      "bodyHeight": 480
+    },
+    {
+      "name": "Exsanguinate",
+      "character": 5,
+      "slot": 31,
+      "timing": [
+        8,
+        3,
+        32
+      ],
+      "cinematic": true,
+      "sourcePoses": [
+        3,
+        4,
+        5
+      ],
+      "bodyHeight": 480
+    }
+  ],
+  "pixelEdits": false,
+  "excluded": [
+    {
+      "file": "anvil.png",
+      "pose": 4,
+      "reason": "Shield ownership inconsistent; not registered in any clip."
+    }
+  ]
+}

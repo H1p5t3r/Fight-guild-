@@ -121,6 +121,7 @@ void Simulation::start_pair(int p,int kind,const Move& payload) {
     clear_pair_motion(f,pair.combo);clear_pair_motion(other,pair.combo);
     f.reaction=other.reaction=Captured;f.last_move=pair.move;
     world.pair=pair;world.hitstop=max(world.hitstop,freeze);
+    if(kind==AntiAirCapture)for(auto& q:world.projectiles)q.life=0;
 }
 void Simulation::tech_pair() {
     const int order=world.players[0].x<=world.players[1].x?1:-1;
@@ -135,6 +136,7 @@ void Simulation::tech_pair() {
 }
 bool Simulation::tick_pair() {
     auto& pair=world.pair;if(!pair.kind)return false;
+    if(pair.kind==SuperCapture) {tick_super_pair();return true;}
     auto& f=world.players[pair.owner];auto& other=world.players[1-pair.owner];
     ++pair.clock;
     if(pair.clock<=pair.tech_ticks&&tech_input(other)) { tech_pair();return true; }
@@ -157,6 +159,7 @@ bool Simulation::tick_pair() {
 }
 void Simulation::release_pair() {
     const PairState pair=world.pair;world.pair={};
+    if(pair.kind==SuperCapture) {release_super_pair(pair);return;}
     if(pair.kind!=LegacyCapture&&pair.kind!=WoundCapture&&pair.kind!=GrapplerCapture&&pair.kind!=AntiAirCapture)
         contact_cue(pair.owner,pair.move,pair.payload,HitCue,pair.facing,false,-1);
     auto& f=world.players[pair.owner];auto& other=world.players[1-pair.owner];
@@ -185,6 +188,7 @@ void Simulation::release_pair() {
         if(other.reaction==AirReel&&other.y<=1)land(other);
         f.move=-1;f.pair_recovery=pair.owner_recovery;
         f.teleported=other.teleported=1;
+        if(pair.kind==AntiAirCapture)for(auto& player:world.players)for(auto& h:player.history)h.consumed=INPUT_MASK;
         return;
     }
     f.pair_recovery=pair.owner_recovery;other.pair_recovery=pair.victim_recovery;
