@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-25",
+  "tracks": [
+    {
+      "character": 0,
+      "fighter": "Anvil",
+      "title": "Better Than Me",
+      "source": "Better Than Me.m4a",
+      "source_sha256": "588dabee5d66e2912d2f0dd2a24df0ec12edc230d148cdaa309ef2915f85f46a",
+      "file": "anvil.ogg",
+      "assignment": "remaining unassigned track"
+    },
+    {
+      "character": 1,
+      "fighter": "Hammer",
+      "title": "Space Between the Names",
+      "source": "Space Between the Names.m4a",
+      "source_sha256": "c99cf47b664b66f477cac4115f7160bf00c36005fb8147a4fd5a40ed735a3bf3",
+      "file": "hammer.ogg",
+      "assignment": "user supplied"
+    },
+    {
+      "character": 2,
+      "fighter": "Smoke",
+      "title": "The Air Is Mine",
+      "source": "The Air Is Mine.m4a",
+      "source_sha256": "09912aa4c11d4d3827137e102fd8f9c4aa6a72c034418fe2de1d8935a8eb36be",
+      "file": "smoke.ogg",
+      "assignment": "user supplied"
+    },
+    {
+      "character": 3,
+      "fighter": "Tapper",
+      "title": "Hit Me",
+      "source": "Hit Me.m4a",
+      "source_sha256": "c1022fa0efeecb7b641bb826a7c4c338ecf2322773db9ab9b3ccde6ccb00e47b",
+      "file": "tapper.ogg",
+      "assignment": "user supplied"
+    },
+    {
+      "character": 4,
+      "fighter": "Shark",
+      "title": "No Safe Harbour",
+      "source": "No Safe Harbour.m4a",
+      "source_sha256": "8b0de82442d4c84fb9b8df78eec4e1e159a83f06720436acb03591fb897679d5",
+      "file": "shark.ogg",
+      "assignment": "user supplied"
+    },
+    {
+      "character": 5,
+      "fighter": "Fillet",
+      "title": "Thumb on the Scale",
+      "source": "Thumb on the Scale.m4a",
+      "source_sha256": "b0cd59f69b32fa8c03e189bc27cadafaeea64fa0899e51f48daaa68d502b4345",
+      "file": "fillet.ogg",
+      "assignment": "user supplied"
+    }
+  ]
+}

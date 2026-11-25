@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "tracks": [
+    {
+      "character": 0,
+      "fighter": "Anvil",
+      "title": "Better Than Me",
+      "file": "anvil.ogg",
+      "duration": 199.214,
+      "sha256": "69639b62c8749ff6d16623aa80db50d30f4ee75b3b697a70ee37ea25864da681"
+    },
+    {
+      "character": 1,
+      "fighter": "Hammer",
+      "title": "Space Between the Names",
+      "file": "hammer.ogg",
+      "duration": 177.133,
+      "sha256": "69c284c926014932b0ffd9c86d3f89c27cadce525e41968adba2c6602b6d2d91"
+    },
+    {
+      "character": 2,
+      "fighter": "Smoke",
+      "title": "The Air Is Mine",
+      "file": "smoke.ogg",
+      "duration": 194.814,
+      "sha256": "9aee9232104f7c4ad468f42ff0b85e26eecede1bf532c5ea66d57c53ed157bd7"
+    },
+    {
+      "character": 3,
+      "fighter": "Tapper",
+      "title": "Hit Me",
+      "file": "tapper.ogg",
+      "duration": 191.453,
+      "sha256": "14abec1d1ebca581e3d4007c33900f252e0deab91df2905f5fbfe05e1d8ec111"
+    },
+    {
+      "character": 4,
+      "fighter": "Shark",
+      "title": "No Safe Harbour",
+      "file": "shark.ogg",
+      "duration": 216.214,
+      "sha256": "f8d9fffd129f157fecba4c5c5fd65b2018e30a863994d04bdad7edee8059cbc0"
+    },
+    {
+      "character": 5,
+      "fighter": "Fillet",
+      "title": "Thumb on the Scale",
+      "file": "fillet.ogg",
+      "duration": 196.293,
+      "sha256": "03a5a1aac31f83184fe028bf3c3e5fe834dd5bd54662528b0b170db06b8502a8"
+    }
+  ]
+}

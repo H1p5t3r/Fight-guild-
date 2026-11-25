@@ -80,6 +80,7 @@ var lab_window: Window
 var timeline: FrameTimeline
 var lab_status: Label
 var combat_audio := CombatAudio.new()
+var fighter_music := FighterMusic.new()
 var super_freeze: SuperFreeze
 var super_preview_player := -1
 var super_preview_tick := 0
@@ -89,6 +90,7 @@ var super_preview_background: Texture2D
 func _ready() -> void:
 	name = "FightGuild"
 	add_child(combat_audio)
+	add_child(fighter_music)
 	motion.load_preferences()
 	build_theme()
 	build_interface()
@@ -1065,10 +1067,63 @@ func show_sound_settings() -> void:
 	var previous := get_viewport().gui_get_focus_owner()
 	if previous != null: dialog.set_meta("return_focus", weakref(previous))
 	dialog.theme = InkMenu.theme(menus.palette.accent)
-	dialog.title = "Combat sound"
+	dialog.title = "Sound & music"
+	# Checkboxes keep a transparent background even in their checked state.
+	for color in ["font_color", "font_pressed_color", "font_hover_color", "font_hover_pressed_color", "font_focus_color"]:
+		dialog.theme.set_color(color, "CheckBox", InkMenu.PAPER)
+	dialog.set_meta("music_settings", true)
 	var layout := VBoxContainer.new()
-	layout.add_theme_constant_override("separation", 18)
+	layout.add_theme_constant_override("separation", 12)
 	dialog.add_child(layout)
+	var music_toggle := CheckBox.new()
+	music_toggle.name = "MusicEnabled"
+	music_toggle.text = "Fighter themes"
+	music_toggle.button_pressed = fighter_music.enabled
+	layout.add_child(music_toggle)
+	music_toggle.toggled.connect(fighter_music.set_enabled)
+	var music_caption := label(layout, "Music volume: %d%%" % (fighter_music.volume * 100), 17)
+	var music_slider := HSlider.new()
+	music_slider.name = "MusicVolume"
+	music_slider.min_value = 0
+	music_slider.max_value = 100
+	music_slider.value = fighter_music.volume * 100
+	music_slider.custom_minimum_size = Vector2(540, 36)
+	music_slider.accessibility_name = "Music volume"
+	layout.add_child(music_slider)
+	music_slider.value_changed.connect(func(value: float):
+		fighter_music.set_volume(value / 100.0)
+		music_caption.text = "Music volume: %d%%" % value)
+	var theme_picker := OptionButton.new()
+	theme_picker.name = "MusicTheme"
+	theme_picker.accessibility_name = "Match theme"
+	theme_picker.add_item("Theme follows Player 1's fighter")
+	theme_picker.add_item("Theme follows Player 2's fighter")
+	for record in fighter_music.catalog.tracks:
+		theme_picker.add_item("%s · %s" % [record.fighter, record.title])
+	theme_picker.select(fighter_music.source)
+	layout.add_child(theme_picker)
+	var theme_caption := label(layout, "", 17, MUTED)
+	theme_caption.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	# Seed wrapping width before AcceptDialog measures its minimum height.
+	theme_caption.custom_minimum_size = Vector2(540, 24)
+	theme_caption.size.x = 540
+	var update_theme := func():
+		var track: Dictionary = fighter_music.track(fighter_music.selected_character())
+		theme_caption.text = "%s — %s" % [track.fighter, track.title]
+	update_theme.call()
+	theme_picker.item_selected.connect(func(index: int):
+		fighter_music.set_source(index)
+		update_theme.call())
+	var music_preview := Button.new()
+	music_preview.name = "MusicPreview"
+	music_preview.text = "Preview theme"
+	music_preview.toggle_mode = true
+	layout.add_child(music_preview)
+	music_preview.toggled.connect(func(value: bool):
+		if value: fighter_music.preview_theme()
+		else: fighter_music.end_preview()
+		music_preview.text = "Stop preview" if value else "Preview theme")
+	layout.add_child(HSeparator.new())
 	var toggle := CheckBox.new()
 	toggle.text = "Sound effects"
 	toggle.button_pressed = combat_audio.enabled
@@ -1086,10 +1141,10 @@ func show_sound_settings() -> void:
 	slider.custom_minimum_size = Vector2(340, 36)
 	slider.accessibility_name = "Sound effects volume"
 	layout.add_child(slider)
-	caption.text = "Volume: %d%%" % slider.value
+	caption.text = "Effects volume: %d%%" % slider.value
 	slider.value_changed.connect(func(value: float):
 		combat_audio.volume = value / 100.0
-		caption.text = "Volume: %d%%" % value
+		caption.text = "Effects volume: %d%%" % value
 		combat_audio.save_preferences())
 	var preview := Button.new()
 	preview.text = "Preview impact"
@@ -1099,9 +1154,10 @@ func show_sound_settings() -> void:
 	add_child(dialog)
 	dialog.confirmed.connect(func(): close_dialog(dialog))
 	dialog.canceled.connect(func(): close_dialog(dialog))
-	dialog.popup_centered(Vector2i(400, 240))
+	dialog.popup_centered(Vector2i(620, 550))
 
 func close_dialog(dialog: Window) -> void:
+	if dialog.has_meta("music_settings"): fighter_music.end_preview()
 	var previous: Control = dialog.get_meta("return_focus").get_ref() if dialog.has_meta("return_focus") else null
 	dialog.queue_free()
 	call_deferred("resume_after_dialog", previous)
@@ -1442,6 +1498,9 @@ func _process(_delta: float) -> void:
 		pause_tableau.visible = menus.pause_mix > 0.001 and pause_tableau.captured_frame >= 0
 	var state := model.state()
 	var confirmed := model.frame() - 1
+	var music_active := screen in ["entry", "play", "pause", "results"] or (screen == "fighters" and selection_return == "pause")
+	fighter_music.update_context(music_active, [state.players[0].character, state.players[1].character],
+		screen == "pause" or paused or has_open_dialog(), application_focused and get_window().has_focus())
 	if connection.active and connection.session != null:
 		confirmed = mini(confirmed, mini(connection.session.confirmed[0], connection.session.confirmed[1]))
 	# Let the finishing impact ring out across the result/intermission transition.

@@ -39,6 +39,12 @@ A loading card and two fighter introductions lead into “The stands hunger for 
 
 See [menu paths and edge cases](menu-flow.md).
 
+Open **Sound** from Home or the pause menu for separate **music and effects**
+volume controls. Fighter themes follow Player 1 by default; choose Player 2 or a
+specific fighter's song and use **Preview theme** to audition it. Music continues
+through Scrums and screen freezes, softens during pauses, and resumes at the same
+position after muting or returning to the game. [Songs and playback settings](fighter-music.md).
+
 Open **Controls** from Home or the match menu to remap each player's physical
 keys, controller buttons and triggers, choose their controller, adjust stick and
 trigger thresholds, or try **Test inputs**. Settings save locally in

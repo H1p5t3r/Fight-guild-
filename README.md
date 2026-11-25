@@ -34,6 +34,7 @@ Download the Windows/Linux ZIP from this branch's successful GitHub Actions arti
 - Choose simplified inputs independently at fighter select. Traditional motions stay available.
 - In **Training**, use **Record**, **Replay** and **Frame lab** to inspect both fighters, cancel windows, input age, spacing and damage scaling. P2-only replay lets you practice against a recorded exchange; [training lab](docs/training-lab.md) explains the controls.
 - **Super cut-in** in Training/Development previews a frozen-match face banner; **F8 / Shift+F8** select P1/P2. This adds presentation only, with no super attacks or Momentum cost. [Preview and face-art selection](docs/super-freeze-presentation.md).
+- **Fighter themes:** all six supplied songs play in native matches. **Sound** offers independent music/effects volume, P1/P2 or fixed-theme selection, and a song preview. [Assignments and playback](docs/fighter-music.md).
 - In **Development**, edit any fighter, Apply & reset, then Save locally or export JSON. Old schema-1–17 saves preserve edits during migration; Restore default move set loads the new starter tuning.
 - Online: direct ENet/UDP host and join, default port 7000. Both players use Player 1 controls locally. Matching move data is required.
 
