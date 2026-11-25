@@ -114,7 +114,7 @@ generated fragment cleanups; Tapper also needed a background-alpha correction. T
 preserved under `art/archive/swing-v3-studies/`. Roots, body scale,
 attack hitboxes, reach, movement and timings stay unchanged.
 
-Some first-pass active sheets include baked-in flashes, gradients, or inconsistent weapon details. Track and replace these during the consistency pass; do not treat them as new style rules. Body/equipment and effect layers should be separate in the production pipeline.
+Some first-pass active sheets include baked-in flashes, gradients, or inconsistent weapon details. Track and replace these during the consistency pass; do not treat them as new style rules. Body/equipment and effect layers should be separate in the production pipeline. Export a registered weapon material matte (or per-frame weapon polygons) as well, including dark handles and excluding gripping hands. This supports the pause treatment: flat guild bodies, white weapons and black ink silhouettes. A material matte follows the rendered pose and pivot; it is not a hurtbox or invulnerability mask.
 
 ## Current build contract
 

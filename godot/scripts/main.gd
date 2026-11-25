@@ -47,7 +47,7 @@ var port: SpinBox
 var leave_button: Button
 var menus: GameMenus
 var match_entry: MatchEntry
-var screen_wipe: MenuInkWipe
+var pause_tableau: PauseTableau
 var round_number := 1
 var match_score := MatchScore.new()
 var round_resolved := false
@@ -480,6 +480,8 @@ func build_interface() -> void:
 	label(route_panel, "All attacks → same-button command", 10, ACCENT)
 	build_dialogs()
 	build_frame_lab()
+	pause_tableau = PauseTableau.new()
+	add_child(pause_tableau)
 	menus = GameMenus.new()
 	menus.motion = motion
 	add_child(menus)
@@ -504,11 +506,6 @@ func build_interface() -> void:
 		else: next_scrum())
 	match_entry.canceled.connect(cancel_match_entry)
 	match_entry.failed.connect(entry_failed)
-	screen_wipe = MenuInkWipe.new()
-	screen_wipe.motion = motion
-	screen_wipe.palette = menus.palette
-	screen_wipe.z_index = 100
-	add_child(screen_wipe)
 
 func add_field(parent: Node, spec: Array) -> void:
 	var column := VBoxContainer.new()
@@ -626,6 +623,7 @@ func show_screen(next: String) -> void:
 	menus.set_active(not playing)
 	if not playing: menus.show_page(next, previous == "play")
 	elif next == "play": input_release_required = has_gameplay_input_held()
+	if playing and previous == "pause": menus.pause_commands.depart()
 	var target := "play" if playing else "menus"
 	if target == layer_target:
 		if motion.instant: finish_menu_motion()
@@ -633,20 +631,26 @@ func show_screen(next: String) -> void:
 		return
 	layer_target = target
 	if layer_tween: layer_tween.kill()
-	screen_wipe.sweep(1.0 if playing else -1.0)
 	MenuMotion.interactive(play_root, false)
 	if motion.instant:
 		settle_layers()
 		return
 	play_root.visible = true
 	menus.visible = true
+	if playing and previous != "pause": pause_tableau.visible = false
 	layer_tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	if next == "pause" or (previous == "pause" and playing):
+		# The captured frame is identical to the last live frame. Ink comes up
+		# directly on the fighters, with no blackout, camera cut or replacement pose.
+		play_root.visible = false
+		pause_tableau.visible = true
+		layer_tween.tween_property(pause_tableau, "amount", 0.0 if playing else 1.0, motion.duration(0.28))
 	layer_tween.tween_property(play_root, "modulate:a", 1.0 if playing else 0.0, motion.duration(0.28))
 	layer_tween.tween_property(menus, "modulate:a", 0.0 if playing else 1.0, motion.duration(0.28))
 	layer_tween.chain().tween_callback(settle_layers)
 
 func changing_layers() -> bool:
-	return (layer_tween != null and layer_tween.is_running()) or screen_wipe.is_animating()
+	return layer_tween != null and layer_tween.is_running()
 
 func settle_layers() -> void:
 	var playing := screen in ["play", "entry"]
@@ -654,6 +658,8 @@ func settle_layers() -> void:
 	play_root.modulate.a = 1.0 if playing else 0.0
 	menus.visible = not playing
 	menus.modulate.a = 0.0 if playing else 1.0
+	pause_tableau.visible = not playing and menus.pause_mix > 0.001 and pause_tableau.captured_frame >= 0
+	if screen == "pause": pause_tableau.amount = 1.0
 	MenuMotion.interactive(play_root, screen == "play")
 	if screen == "play":
 		held.clear()
@@ -661,7 +667,6 @@ func settle_layers() -> void:
 
 func finish_menu_motion() -> void:
 	if layer_tween: layer_tween.kill()
-	screen_wipe.finish()
 	settle_layers()
 	menus.finish_motion()
 
@@ -783,8 +788,10 @@ func configure_activity() -> void:
 
 func open_pause() -> void:
 	if screen != "play" or has_open_dialog(): return
+	pause_tableau.capture(arena, model.state(), model.frame())
 	menus.configure_pause(connection.active, model.state())
 	show_screen("pause")
+	menus.pause_commands.focal_point = pause_tableau.focal_point
 
 func menu_back() -> void:
 	match screen:
@@ -1361,6 +1368,8 @@ func _physics_process(_delta: float) -> void:
 		simulate_local()
 
 func _process(_delta: float) -> void:
+	if screen not in ["play", "entry"] and not changing_layers():
+		pause_tableau.visible = menus.pause_mix > 0.001 and pause_tableau.captured_frame >= 0
 	var state := model.state()
 	var confirmed := model.frame() - 1
 	if connection.active and connection.session != null:

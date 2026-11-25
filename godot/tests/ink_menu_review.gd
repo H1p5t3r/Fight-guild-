@@ -43,6 +43,8 @@ func run() -> void:
 		return
 	game.motion.instant = true
 	game.finish_menu_motion()
+	check(FighterSelectPortrait.COLORS[0] == Color("aeb4bc"), "Blacksmiths did not use steel grey")
+	check(FighterSelectPortrait.COLORS[5] == Color("f5e8a6"), "Butchers did not use banana cream")
 	game.go_home()
 	var initial_hash: int = game.model.state_hash()
 	for index in CombatModel.CHARACTERS.size():
@@ -75,12 +77,20 @@ func run() -> void:
 	await game.wait_for_match_entry()
 	await capture("05-combat")
 	game.open_pause()
-	check(game.menus.pause_poster.character == 5 and game.menus.pause_poster.opponent == 4, "Pause lost actual matchup")
+	check(game.pause_tableau.captured_characters == [5, 4], "Pause lost actual matchup")
+	check(game.pause_tableau.copies.size() >= 2, "Pause did not preserve the actual fighters")
+	for copy in game.pause_tableau.copies:
+		check(copy.get_global_transform_with_canvas().is_equal_approx(copy.get_meta("source_transform")), "Pause changed a fighter's displayed transform")
 	await capture("06-pause")
+	await check_pause_pixels()
+	check_pause_composition()
+	var pair_focus: Vector2 = game.menus.pause_commands.focus_local
+	check((pair_focus + game.menus.pause_commands.get_global_position()).is_equal_approx(game.pause_tableau.focal_point * game.pause_tableau.size), "Radial commands did not anchor to the combined fighter silhouette")
 	game.menu_action("change_fighters")
 	game.menus.selection.choose_fighter(0, 2)
 	game.menu_back()
 	check(game.menus.palette.character == 5 and game.characters[0] == 5, "Canceling selection changed the paused matchup palette")
+	check(game.menus.pause_commands.focus_local.is_equal_approx(pair_focus), "Returning from selection moved the pair-centered commands")
 	var state: Dictionary = game.model.state().duplicate(true)
 	state.winner = 1
 	game.menus.configure_results(state, false, "FINAL DOWN", [1, 2])
@@ -111,7 +121,7 @@ func run() -> void:
 	game.motion.instant = false
 	game.motion.reduced = true
 	game.menu_action("matches")
-	check(not game.menus.wipe.is_animating() and game.menus.wipe.progress == 1.0, "Reduced motion still plays the ink wipe")
+	check(game.menus.camera == game.menus.LOCATIONS.matches, "Reduced motion still travels the shared camera")
 	await game.wait_for_menu_motion()
 	await capture("11-reduced")
 	game.go_home()
@@ -127,22 +137,82 @@ func run() -> void:
 	game.go_home()
 	await game.wait_for_menu_motion()
 	game.menu_action("matches")
-	check(game.menus.wipe.is_animating(), "Full motion did not start ink wipe")
-	var uninterrupted: Tween = game.menus.wipe.tween
+	check(game.menus.camera_tween.is_running(), "Full motion did not start shared-space travel")
+	game.menus.camera_tween.pause()
+	game.menus.camera_tween.custom_step(0.4)
+	var uninterrupted: Vector2 = game.menus.camera
 	game.menu_back()
-	check(game.menus.wipe.tween == uninterrupted, "Rapid navigation restarted ink coverage")
+	check(game.menus.camera == uninterrupted, "Rapid navigation snapped the persistent camera")
 	await game.wait_for_menu_motion()
-	check(game.screen == "home" and game.menus.wipe.progress == 1.0, "Interrupted ink wipe left stale coverage")
+	check(game.screen == "home" and game.menus.camera == Vector2.ZERO, "Interrupted camera finished at the wrong location")
 	game.menu_action("matches")
 	await game.wait_for_menu_motion()
 	game.menu_back()
-	check(game.menus.wipe.direction == -1.0, "Back navigation did not reverse the settled ink cut")
+	check(game.menus.camera == game.menus.LOCATIONS.matches, "Back navigation jumped before retracing its path")
 	await game.wait_for_menu_motion()
+	game.motion.instant = true
+	for pair in [[1, 2], [3, 0]]:
+		game.model.reset(pair)
+		game.show_screen("play")
+		for tick in 8: await process_frame
+		game.open_pause()
+		await capture("pause-%d-%d" % pair)
+	game.model.reset([5, 4])
+	game.show_screen("play")
+	game.model.core.preview_begin(0, 3)
+	for tick in int(game.model.move(5, 3).startup): game.model.step(0, 0)
+	for tick in 8: await process_frame
+	game.open_pause()
+	await capture("13-pause-active")
 	print("Native ink menus: ", failures, " failures / ", checks, " checks")
 	quit(1 if failures else 0)
 
 func hold(seconds: float) -> void:
 	await create_timer(seconds).timeout
+
+func check_pause_composition() -> void:
+	var wheel: PauseCommands = game.menus.pause_commands
+	var original := wheel.focal_point
+	var rect := game.get_viewport_rect().grow(1)
+	var hash_before: int = game.model.state_hash()
+	for focus in [Vector2(0.2, 0.32), Vector2(0.8, 0.75)]:
+		wheel.focal_point = focus
+		for button in wheel.buttons.values():
+			for corner in [Vector2.ZERO, Vector2(button.size.x, 0), button.size, Vector2(0, button.size.y)]:
+				check(rect.has_point(button.get_global_transform_with_canvas() * corner), "Radial command leaves viewport near a corner")
+	wheel.focal_point = original
+	game.motion.instant = false
+	wheel.enter()
+	for i in wheel.ORDER.size():
+		var button: Button = wheel.buttons[wheel.ORDER[i]]
+		var center := button.get_global_transform_with_canvas() * (button.size * 0.5)
+		check(not rect.has_point(center), "Radial command did not enter from beyond the screen edge")
+	wheel.finish()
+	game.motion.reduced = true
+	wheel.enter()
+	for button in wheel.buttons.values():
+		check(rect.has_point(button.get_global_transform_with_canvas() * (button.size * 0.5)), "Reduced Motion moved a command outside its final location")
+	wheel.finish()
+	game.motion.reduced = false
+	game.motion.instant = true
+	check(game.model.state_hash() == hash_before, "Pause layout or motion changed gameplay state")
+
+func check_pause_pixels() -> void:
+	if DisplayServer.get_name() == "headless": return
+	# Material probes are independent of the radial command strips crossing a blade.
+	game.menus.visible = false
+	await process_frame
+	await RenderingServer.frame_post_draw
+	var rendered := root.get_texture().get_image()
+	var scale_value := Vector2(rendered.get_size()) / game.get_viewport_rect().size
+	var source: Sprite2D = game.arena.sprites[0]
+	for probe in [[Vector2(810, 310), FighterSelectPortrait.COLORS[5], "hair"], [Vector2(735, 520), FighterSelectPortrait.COLORS[5], "pale shirt"], [Vector2(655, 785), Color.WHITE, "knife"]]:
+		var point: Vector2 = source.get_global_transform_with_canvas() * (source.offset + probe[0]) * scale_value
+		var sampled := rendered.get_pixelv(Vector2i(point))
+		var expected: Color = probe[1]
+		check(Vector3(sampled.r, sampled.g, sampled.b).distance_to(Vector3(expected.r, expected.g, expected.b)) < 0.12, "Pause material wrong for " + probe[2] + ": " + str(sampled))
+	game.menus.visible = true
+	await process_frame
 
 func tour() -> void:
 	game.motion.reduced = false
@@ -159,6 +229,11 @@ func tour() -> void:
 	game.menu_action("matches")
 	await game.wait_for_menu_motion()
 	await hold(0.7)
+	game.menu_back()
+	await game.wait_for_menu_motion()
+	await hold(0.3)
+	game.menu_action("matches")
+	await game.wait_for_menu_motion()
 	game.menu_action("local")
 	await game.wait_for_menu_motion()
 	await hold(0.8)
@@ -194,6 +269,20 @@ func tour() -> void:
 	game.menu_action("resume")
 	await game.wait_for_menu_motion()
 	await hold(0.7)
+	# Freeze at an actual first-active attack pose, then continue that same move.
+	game.model.core.preview_begin(0, 3)
+	for tick in int(game.model.move(5, 3).startup):
+		game.model.step(0, 0)
+		await process_frame
+	await hold(0.12)
+	game.open_pause()
+	await game.wait_for_menu_motion()
+	await hold(1.5)
+	game.menu_action("resume")
+	await game.wait_for_menu_motion()
+	for tick in 40:
+		game.model.step(0, 0)
+		await process_frame
 	var state: Dictionary = game.model.state().duplicate(true)
 	state.winner = 1
 	game.menus.configure_results(state, false, "FINAL DOWN", [1, 2])

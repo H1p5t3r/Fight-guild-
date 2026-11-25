@@ -199,7 +199,7 @@ func verify_controller() -> void:
 	check(game.screen == "pause" and game.menus.buttons.resume.has_focus(), "Controller Start did not open/focus pause")
 	joy(JOY_BUTTON_DPAD_DOWN, true)
 	joy(JOY_BUTTON_DPAD_DOWN, false)
-	check(game.menus.buttons.restart.has_focus(), "Controller D-pad did not move menu focus")
+	check(game.menus.buttons.pause_controls.has_focus(), "Controller D-pad did not wrap the radial menu's right column")
 	joy(JOY_BUTTON_DPAD_UP, true)
 	joy(JOY_BUTTON_DPAD_UP, false)
 	joy(JOY_BUTTON_A, true)

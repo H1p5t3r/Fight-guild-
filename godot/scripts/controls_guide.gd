@@ -1,7 +1,7 @@
 extends AcceptDialog
 
 var controls: FighterInputs
-var accent := Color("d67570")
+var accent := FighterSelectPortrait.COLORS[5]
 var tabs: Array[Button] = []
 var bindings: VBoxContainer
 var headings := ["Player 1", "Player 2", "Guide"]

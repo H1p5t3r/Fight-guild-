@@ -5,7 +5,7 @@ signal changed
 
 # One shared guild palette per menu flow; never written into combat state.
 var character := 5
-var accent := Color("d67570")
+var accent := FighterSelectPortrait.COLORS[5]
 
 func set_fighter(index: int) -> void:
 	index = clampi(index, 0, FighterSelectPortrait.COLORS.size() - 1)

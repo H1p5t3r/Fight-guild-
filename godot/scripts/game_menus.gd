@@ -25,14 +25,29 @@ var port: SpinBox
 var status: Label
 var online_fighter: Label
 var pause_note: Label
+var pause_commands: PauseCommands
 var result_title: Label
 var result_note: Label
 var palette := MenuPalette.new()
 var backdrop: Control
-var wipe: MenuInkWipe
+# A single camera travels between fixed menu locations. The shared ink backdrop
+# follows at a slower depth; pages no longer disappear behind screen-covering wipes.
+const LOCATIONS := {"home": Vector2(0, 0), "matches": Vector2(1, 0), "sides": Vector2(2, 0), "fighters": Vector2(2, 1), "online": Vector2(3, 1), "pause": Vector2(0, 1), "results": Vector2(1, 1)}
+var camera := Vector2.ZERO:
+	set(value):
+		camera = value
+		position_pages()
+		if is_instance_valid(backdrop): backdrop.travel = value
+var camera_tween: Tween
+var page_extent := Vector2(1280, 720)
+var pause_mix := 0.0:
+	set(value):
+		pause_mix = value
+		if is_instance_valid(backdrop): backdrop.modulate.a = 1.0 - value
 var home_poster: MenuFighterPoster
 var versus_poster: MenuFighterPoster
-var pause_poster: MenuFighterPoster
+var pause_character := 5
+var pause_opponent := 4
 var result_poster: MenuFighterPoster
 var online_poster: MenuFighterPoster
 var featured_caption: Label
@@ -74,6 +89,8 @@ func _ready() -> void:
 	root.add_child(body)
 	body.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	body.offset_bottom = -50
+	# The viewport is the boundary: entering strips can cross the page margins.
+	body.clip_contents = false
 	body.resized.connect(layout_pages)
 	for id in ["home", "matches", "sides", "fighters", "online", "pause", "results"]:
 		var page := column(body)
@@ -108,13 +125,9 @@ func _ready() -> void:
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	action(home_utilities, "quit", "Quit", 40, "secondary")
 	var motion_button := action(home_utilities, "motion", "", 40, "secondary")
-	motion_button.tooltip_text = "Reduce motion: short fades; no ink wipes, sliding portraits or animated idles."
+	motion_button.tooltip_text = "Reduce motion: short fades; no camera travel, sliding portraits or animated idles."
 	update_motion_label()
 	text(footer, "EARLY BUILD", 16, GOLD)
-	wipe = MenuInkWipe.new()
-	wipe.motion = motion
-	wipe.palette = palette
-	add_child(wipe)
 	show_page("home", true)
 	layout_pages.call_deferred()
 
@@ -315,25 +328,12 @@ func build_online(page: VBoxContainer) -> void:
 	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
 func build_pause(page: VBoxContainer) -> void:
-	heading(page, "TIME OUT.", "MATCH MENU  /  Your next move.")
-	var body := scroll_body(page)
-	var split := line(body)
-	split.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	var actions := column(split)
-	actions.custom_minimum_size.x = 460
-	actions.add_theme_constant_override("separation", 3)
-	pause_note = text(actions, "", 20, GOLD)
-	pause_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	pause_note.custom_minimum_size.x = 460
-	action(actions, "resume", "BACK IN", 60).add_theme_font_size_override("font_size", 38)
-	action(actions, "restart", "Restart " + str(MatchCeremony.script().roundName).to_lower(), 54)
-	action(actions, "change_fighters", "Change fighters", 54)
-	action(actions, "pause_home", "Main menu", 54)
-	var settings := line(actions)
-	action(settings, "pause_controls", "Controls", 40, "secondary")
-	action(settings, "pause_sound", "Sound", 40, "secondary")
-	spacer(actions)
-	pause_poster = poster(split)
+	pause_commands = PauseCommands.new()
+	pause_commands.motion = motion
+	page.add_child(pause_commands)
+	pause_commands.action_requested.connect(func(action_id: String): action_requested.emit(action_id))
+	for id in pause_commands.buttons: buttons[id] = pause_commands.buttons[id]
+	pause_note = pause_commands.note
 
 func build_results(page: VBoxContainer) -> void:
 	result_title = heading(page, "MATCH COMPLETE", "THE FINAL WHISTLE  /  First to two Scrums.")
@@ -360,11 +360,15 @@ func configure_pause(online: bool, state: Dictionary = {}) -> void:
 	if not state.is_empty():
 		var fighter: int = state.players[0].character
 		palette.set_fighter(fighter)
-		pause_poster.present(fighter, int(state.players[1].character))
+		pause_character = fighter
+		pause_opponent = int(state.players[1].character)
 	pause_note.text = "Online match continues while this menu is open." if online else "The round is paused."
 	buttons.restart.visible = not online
 	buttons.change_fighters.visible = not online
-	buttons.pause_home.text = "Leave match & main menu" if online else "Main menu"
+	buttons.pause_home.text = "MAIN MENU"
+	buttons.pause_home.subtitle = "Leave the online match" if online else "Leave the arena"
+	buttons.pause_home.accessibility_name = "Main menu. " + buttons.pause_home.subtitle
+	pause_commands.configure([pause_character, pause_opponent])
 
 func configure_results(state: Dictionary, online: bool, round_label: String = "", score: Array = [0, 0]) -> void:
 	var winner: int = int(state.winner) if state.winner in [0, 1] else 0
@@ -386,12 +390,17 @@ func set_connecting(connecting: bool) -> void:
 	port.editable = not connecting
 
 func layout_pages() -> void:
+	page_extent = size
 	for id in pages:
 		var node: Control = pages[id]
-		var slide := node.position.x
 		node.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		node.offset_top = 0 if id == "home" else 64
-		node.position.x = slide
+	position_pages()
+
+func position_pages() -> void:
+	for id in pages:
+		var displacement: Vector2 = (LOCATIONS[id] - camera) * page_extent
+		pages[id].position = Vector2(0, 0 if id == "home" else 64) + (Vector2.ZERO if motion.reduced else displacement)
 
 func update_motion_label() -> void:
 	buttons.motion.text = "Motion: Reduced" if motion.reduced else "Motion: Full"
@@ -405,69 +414,82 @@ func set_active(enabled: bool) -> void:
 	MenuMotion.interactive(home_utilities, enabled and current_page == "home")
 
 func show_page(page: String, fresh: bool = false) -> void:
-	var depth := {"home":0, "matches":1, "sides":2, "fighters":3, "online":4, "pause":1, "results":1}
-	var direction := -1.0 if depth[page] < depth[current_page] else 1.0
 	current_page = page
-	backdrop.page = page
+	backdrop.set_page(page, fresh)
 	if page in ["home", "matches"]: palette.set_fighter(featured)
-	if page == "pause": palette.set_fighter(pause_poster.character)
+	if page == "pause":
+		palette.set_fighter(pause_character)
+		pause_commands.enter()
 	if page == "results": palette.set_fighter(result_poster.character)
 	if page == "fighters": palette.set_fighter(selection.chosen[selection.active_player])
 	if page == "online":
 		palette.set_fighter(selection.chosen[0])
 		online_poster.present(selection.chosen[0])
-	if not fresh: wipe.sweep(direction)
-	else: wipe.finish()
 	back_button.visible = page not in ["home", "results"]
 	breadcrumb.text = {"home":"MAIN MENU", "matches":"VERSUS", "sides":"SIDE SELECT", "fighters":"FIGHTER SELECT", "online":"ONLINE / CONNECTION", "pause":"MATCH MENU", "results":"RESULT"}[page]
+	if camera_tween: camera_tween.kill()
+	for tween in page_tweens.values(): tween.kill()
+	page_tweens.clear()
 	for id in pages:
-		var node: Control = pages[id]
-		if page_tweens.has(id): page_tweens[id].kill()
-		var incoming: bool = id == page
-		MenuMotion.interactive(node, active and incoming)
-		if fresh or motion.instant:
-			settle_page(id)
-			continue
-		if not node.visible and not incoming: continue
-		if not node.visible:
-			node.modulate.a = 0.0
-			node.position.x = motion.distance(96.0 * direction)
-		node.visible = true
-		var tween := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		page_tweens[id] = tween
-		var duration := motion.duration(0.34 if incoming else 0.22)
-		tween.tween_property(node, "modulate:a", 1.0 if incoming else 0.0, duration)
-		tween.tween_property(node, "position:x", 0.0 if incoming else motion.distance(-72.0 * direction), duration)
-		tween.chain().tween_callback(settle_page.bind(id))
+		MenuMotion.interactive(pages[id], active and id == page)
+		if id == page: pages[id].visible = true
+	if fresh or motion.instant:
+		camera = LOCATIONS[page]
+		for id in pages: settle_page(id)
+	elif motion.reduced:
+		camera = LOCATIONS[page]
+		for id in pages:
+			var node: Control = pages[id]
+			if not node.visible: continue
+			if id == page: node.modulate.a = 0.0
+			var tween := create_tween()
+			page_tweens[id] = tween
+			tween.tween_property(node, "modulate:a", 1.0 if id == page else 0.0, motion.duration(0.28))
+			tween.tween_callback(settle_page.bind(id))
+	else:
+		# Pages share one translation. Reversing midway starts at the current camera,
+		# so the same panels and landmarks retrace their path without snapping/fading.
+		for id in pages: pages[id].modulate.a = 1.0
+		position_pages()
+		camera_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		page_tweens.camera = camera_tween
+		var distance := camera.distance_to(LOCATIONS[page])
+		camera_tween.tween_property(self, "camera", LOCATIONS[page], motion.duration(clampf(0.34 + distance * 0.035, 0.34, 0.44)))
+		camera_tween.tween_callback(func():
+			for id in pages: settle_page(id))
 	if chrome_tween: chrome_tween.kill()
 	if fresh or motion.instant:
 		header.modulate.a = 0.0 if page == "home" else 1.0
 		home_utilities.modulate.a = 1.0 if page == "home" else 0.0
+		pause_mix = 1.0 if page == "pause" else 0.0
 	else:
 		chrome_tween = create_tween().set_parallel(true)
 		chrome_tween.tween_property(header, "modulate:a", 0.0 if page == "home" else 1.0, motion.duration(0.18))
 		chrome_tween.tween_property(home_utilities, "modulate:a", 1.0 if page == "home" else 0.0, motion.duration(0.18))
+		chrome_tween.tween_property(self, "pause_mix", 1.0 if page == "pause" else 0.0, motion.duration(0.30))
 	set_active(active)
 	call_deferred("focus_page", page)
 
 func settle_page(id: String) -> void:
 	pages[id].visible = id == current_page
 	pages[id].modulate.a = 1.0
-	pages[id].position.x = 0.0
+	position_pages()
 
 func is_animating() -> bool:
 	for tween in page_tweens.values():
 		if tween.is_running(): return true
-	return (chrome_tween != null and chrome_tween.is_running()) or selection.is_animating() or wipe.is_animating() or backdrop.is_animating()
+	return (chrome_tween != null and chrome_tween.is_running()) or selection.is_animating() or backdrop.is_animating() or pause_commands.is_animating()
 
 func finish_motion() -> void:
-	wipe.finish()
+	pause_commands.finish()
 	backdrop.finish_motion()
 	selection.finish_motion()
-	for id in pages:
-		if page_tweens.has(id): page_tweens[id].kill()
-		settle_page(id)
+	for tween in page_tweens.values(): tween.kill()
+	if camera_tween: camera_tween.kill()
+	camera = LOCATIONS[current_page]
+	for id in pages: settle_page(id)
 	if chrome_tween: chrome_tween.kill()
+	pause_mix = 1.0 if current_page == "pause" else 0.0
 	header.modulate.a = 0.0 if current_page == "home" else 1.0
 	home_utilities.modulate.a = 1.0 if current_page == "home" else 0.0
 

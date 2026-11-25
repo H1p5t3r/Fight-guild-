@@ -25,11 +25,13 @@ func run(tree: SceneTree, game: Control) -> int:
 		tween.custom_step(0.06)
 	await tree.process_frame
 	check(game.screen == "matches" and game.menus.buttons.local.has_focus(), "Incoming menu was not immediately navigable")
-	check(game.menus.pages.matches.modulate.a > 0.0 and game.menus.pages.matches.modulate.a < 1.0, "Page transition did not animate")
-	var visible_alpha: float = game.menus.pages.home.modulate.a
+	check(game.menus.camera.x > 0.0 and game.menus.camera.x < 1.0, "Shared camera did not travel between menu locations")
+	var camera_position: Vector2 = game.menus.camera
+	var page_distance: Vector2 = game.menus.pages.matches.position - game.menus.pages.home.position
+	check(is_equal_approx(page_distance.x, game.menus.page_extent.x), "Pages did not retain their shared spatial relationship")
 	key(KEY_ESCAPE, true)
 	key(KEY_ESCAPE, false)
-	check(is_equal_approx(game.menus.pages.home.modulate.a, visible_alpha), "Interrupted fade snapped instead of continuing from its current appearance")
+	check(game.menus.camera.is_equal_approx(camera_position), "Interrupted navigation snapped the shared camera")
 	game.menu_action("training")
 	game.menu_back()
 	await game.wait_for_menu_motion()
