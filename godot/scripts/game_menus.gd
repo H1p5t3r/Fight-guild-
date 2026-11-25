@@ -3,9 +3,9 @@ extends Control
 
 signal action_requested(action: String)
 
-const DISPLAY_FONT = GuildTheme.SEMIBOLD
-const GOLD := GuildTheme.BRASS
-const MUTED := GuildTheme.MUTED
+const DISPLAY_FONT = CombatTypography.FONT
+const GOLD := InkMenu.PAPER
+const MUTED := InkMenu.MUTED
 var pages := {}
 var buttons := {}
 var current_page := "home"
@@ -27,6 +27,16 @@ var online_fighter: Label
 var pause_note: Label
 var result_title: Label
 var result_note: Label
+var palette := MenuPalette.new()
+var backdrop: Control
+var wipe: MenuInkWipe
+var home_poster: MenuFighterPoster
+var versus_poster: MenuFighterPoster
+var pause_poster: MenuFighterPoster
+var result_poster: MenuFighterPoster
+var online_poster: MenuFighterPoster
+var featured_caption: Label
+var featured := 5
 
 func _ready() -> void:
 	for binding in [["ui_accept", JOY_BUTTON_A], ["ui_cancel", JOY_BUTTON_B], ["ui_up", JOY_BUTTON_DPAD_UP], ["ui_down", JOY_BUTTON_DPAD_DOWN], ["ui_left", JOY_BUTTON_DPAD_LEFT], ["ui_right", JOY_BUTTON_DPAD_RIGHT]]:
@@ -35,10 +45,15 @@ func _ready() -> void:
 		event.button_index = binding[1]
 		if not InputMap.action_has_event(binding[0], event): InputMap.action_add_event(binding[0], event)
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(preload("res://scripts/guild_backdrop.gd").new())
+	theme = InkMenu.theme(palette.accent)
+	palette.changed.connect(func(): theme = InkMenu.theme(palette.accent))
+	backdrop = preload("res://scripts/guild_backdrop.gd").new()
+	backdrop.palette = palette
+	backdrop.motion = motion
+	add_child(backdrop)
 	var margin := MarginContainer.new()
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for edge in ["left", "right"]: margin.add_theme_constant_override("margin_" + edge, 36)
+	for edge in ["left", "right"]: margin.add_theme_constant_override("margin_" + edge, 40)
 	for edge in ["top", "bottom"]: margin.add_theme_constant_override("margin_" + edge, 24)
 	add_child(margin)
 	var root := Control.new()
@@ -48,13 +63,17 @@ func _ready() -> void:
 	header.offset_bottom = 40
 	var brand := text(header, "FIGHT GUILD", 28, GOLD)
 	brand.add_theme_font_override("font", DISPLAY_FONT)
+	brand.add_theme_color_override("font_outline_color", InkMenu.INK)
+	brand.add_theme_constant_override("outline_size", 4)
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	breadcrumb = text(header, "MAIN MENU", 17, MUTED)
+	breadcrumb.add_theme_color_override("font_outline_color", InkMenu.INK)
+	breadcrumb.add_theme_constant_override("outline_size", 5)
 	back_button = action(header, "back", "Back", 38, "secondary")
 	var body := Control.new()
 	root.add_child(body)
 	body.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	body.offset_bottom = -60
+	body.offset_bottom = -50
 	body.resized.connect(layout_pages)
 	for id in ["home", "matches", "sides", "fighters", "online", "pause", "results"]:
 		var page := column(body)
@@ -67,9 +86,10 @@ func _ready() -> void:
 			"home": build_home(page)
 			"matches": build_matches(page)
 			"sides":
-				heading(page, "CHOOSE YOUR SIDE", "LOCAL VERSUS  /  Take your place, then choose your fighter.")
+				heading(page, "TAKE YOUR SIDE.", "LOCAL VERSUS  /  Move your device left or right, then choose your fighter.")
 				sides = SideSelect.new()
 				sides.motion = motion
+				sides.palette = palette
 				page.add_child(sides)
 				sides.confirmed.connect(func(): action_requested.emit("confirm_sides"))
 				buttons.confirm_sides = sides.continue_button
@@ -83,14 +103,18 @@ func _ready() -> void:
 	home_utilities = line(footer)
 	action(home_utilities, "controls", "Controls", 40, "secondary")
 	action(home_utilities, "sound", "Sound", 40, "secondary")
-	var hint := text(footer, "Arrows / D-pad: navigate   ·   Enter / A: select   ·   Esc / B: back", 17, MUTED)
+	var hint := text(footer, "D-pad / Arrows  MOVE     A / Enter  SELECT     B / Esc  BACK", 16, MUTED)
 	hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	action(home_utilities, "quit", "Quit", 40, "secondary")
 	var motion_button := action(home_utilities, "motion", "", 40, "secondary")
-	motion_button.tooltip_text = "Reduce menu motion: short fades, no sliding portraits or pages."
+	motion_button.tooltip_text = "Reduce motion: short fades; no ink wipes, sliding portraits or animated idles."
 	update_motion_label()
 	text(footer, "EARLY BUILD", 16, GOLD)
+	wipe = MenuInkWipe.new()
+	wipe.motion = motion
+	wipe.palette = palette
+	add_child(wipe)
 	show_page("home", true)
 	layout_pages.call_deferred()
 
@@ -115,8 +139,10 @@ func text(parent: Node, value: String, font_size: int = 20, color: Color = Guild
 	return node
 
 func heading(parent: Node, value: String, subtitle: String) -> Label:
-	var title := text(parent, value, 30, GOLD)
+	var title := text(parent, value, 46, GOLD)
 	title.add_theme_font_override("font", DISPLAY_FONT)
+	title.add_theme_color_override("font_outline_color", InkMenu.INK)
+	title.add_theme_constant_override("outline_size", 8)
 	var note := text(parent, subtitle, 18, MUTED)
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	return title
@@ -143,10 +169,14 @@ func section(parent: Node, title: String = "") -> VBoxContainer:
 	return content
 
 func action(parent: Node, id: String, value: String, height: int = 38, family: String = "primary") -> Button:
-	var node := Button.new()
+	var node := InkMenuButton.new()
+	node.motion = motion
+	node.palette = palette
+	node.compact = height < 48
+	node.add_theme_font_size_override("font_size", 18 if node.compact else 32)
 	node.text = value
 	node.custom_minimum_size.y = height
-	GuildTheme.apply(node, family)
+	node.set_meta("family", family)
 	node.pressed.connect(func(): action_requested.emit(id))
 	parent.add_child(node)
 	buttons[id] = node
@@ -157,55 +187,94 @@ func spacer(parent: Node) -> void:
 	space.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	parent.add_child(space)
 
+func poster(parent: Node) -> MenuFighterPoster:
+	var art := MenuFighterPoster.new()
+	art.palette = palette
+	art.motion = motion
+	parent.add_child(art)
+	return art
+
+func set_featured(index: int) -> void:
+	featured = index
+	palette.set_fighter(index)
+	home_poster.present(index)
+	versus_poster.present(index)
+	featured_caption.text = FighterSelectPortrait.GUILDS[index] + "  /  " + FighterSelectPortrait.LINES[index]
+
 func build_home(page: VBoxContainer) -> void:
 	var body := scroll_body(page)
 	var split := line(body)
 	split.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	split.add_theme_constant_override("separation", 24)
 	var choices := column(split)
-	choices.custom_minimum_size.x = 320
+	choices.custom_minimum_size.x = 430
+	choices.add_theme_constant_override("separation", 4)
 	spacer(choices)
-	text(choices, "MAIN MENU", 18, GOLD)
-	var title := text(choices, "FIGHT\nGUILD", 88)
+	text(choices, "THE GUILDS ARE CALLING.", 18, MUTED)
+	var title := text(choices, "FIGHT\nGUILD", 96)
 	title.add_theme_font_override("font", DISPLAY_FONT)
-	title.add_theme_constant_override("line_spacing", -22)
-	text(choices, "Choose your fighter.", 20, MUTED)
-	var versus := action(choices, "matches", "VERSUS", 64, "essential")
-	versus.add_theme_font_size_override("font_size", 32)
-	var training := action(choices, "training", "TRAINING", 52)
-	training.add_theme_font_size_override("font_size", 26)
-	action(choices, "development", "DEVELOPMENT", 42, "secondary")
-	var description := text(choices, "Local and online matches.", 18, MUTED)
-	description.custom_minimum_size.y = 44
+	title.add_theme_constant_override("line_spacing", -28)
+	title.rotation = -0.045
+	for entry in [["matches", "VERSUS", 72], ["training", "TRAINING", 64], ["development", "COMBAT LAB", 58]]:
+		var button := action(choices, entry[0], entry[1], entry[2]) as InkMenuButton
+		button.serial = "0" + str(["matches", "training", "development"].find(entry[0]) + 1)
+		button.add_theme_font_size_override("font_size", 42 if entry[0] == "matches" else 34)
+	var description := text(choices, "Local and online matches.", 19, MUTED)
+	description.custom_minimum_size.y = 40
 	description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	for id in ["matches", "training", "development"]:
-		var explain := func(): description.text = {"matches":"Local and online matches.", "training":"Practice combos, defense and timing.", "development":"Edit moves and test the combat lab."}[id]
+		var explain := func(): description.text = {"matches":"Local and online matches.", "training":"Find the route. Practice combos and defense.", "development":"Tune moves, hitboxes and combat rules."}[id]
 		buttons[id].focus_entered.connect(explain)
 		buttons[id].mouse_entered.connect(explain)
 	spacer(choices)
 	var artwork := column(split)
 	artwork.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var faceoff := preload("res://scripts/home_faceoff.gd").new()
-	artwork.add_child(faceoff)
-	var roster := text(artwork, "ANVIL   /   HAMMER   /   SMOKE   /   TAPPER   /   SHARK   /   FILLET", 17, MUTED)
-	roster.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	artwork.add_theme_constant_override("separation", 2)
+	home_poster = poster(artwork)
+	featured_caption = text(artwork, "BUTCHERS  /  CUT DEEP.", 20, InkMenu.INK)
+	featured_caption.add_theme_font_override("font", GuildTheme.SEMIBOLD)
+	var guilds := line(artwork)
+	for index in CombatModel.CHARACTERS.size():
+		var choose := InkMenuButton.new()
+		choose.motion = motion
+		choose.palette = palette
+		choose.compact = true
+		choose.text = CombatModel.CHARACTERS[index]
+		choose.tooltip_text = "Feature " + FighterSelectPortrait.GUILDS[index].capitalize()
+		choose.accessibility_name = choose.tooltip_text
+		choose.custom_minimum_size.y = 36
+		choose.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		choose.add_theme_font_size_override("font_size", 15)
+		choose.pressed.connect(func(): set_featured(index))
+		guilds.add_child(choose)
 
 func build_matches(page: VBoxContainer) -> void:
-	heading(page, "VERSUS", "Play together on one computer or connect to a rival.")
+	heading(page, "PICK A FIGHT.", "VERSUS  /  One room or one connection away.")
 	var body := scroll_body(page)
-	var groups := line(body)
-	groups.add_theme_constant_override("separation", 12)
-	var local := section(groups, "PLAY TOGETHER")
-	text(local, "Two players. One computer.\nShare a keyboard or connect controllers.", 20, MUTED)
-	action(local, "local", "Local versus")
-	var online := section(groups, "PLAY ONLINE")
-	text(online, "Choose your fighter, then host or join.\nUse a host address and UDP port.", 20, MUTED)
-	action(online, "online", "Online versus")
-	text(body, "Both players need the same build and move data for online play.", 18, MUTED)
+	var split := line(body)
+	split.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var choices := column(split)
+	choices.custom_minimum_size.x = 440
+	spacer(choices)
+	action(choices, "local", "LOCAL VERSUS", 76).add_theme_font_size_override("font_size", 38)
+	text(choices, "Two players. One screen.\nShare a keyboard or bring your controllers.", 22, MUTED)
+	var gap := Control.new()
+	gap.custom_minimum_size.y = 20
+	choices.add_child(gap)
+	action(choices, "online", "ONLINE VERSUS", 76).add_theme_font_size_override("font_size", 36)
+	text(choices, "Choose your fighter. Host or join a match.", 22, MUTED)
+	text(choices, "Both players need the same build and move data.", 18, MUTED)
+	spacer(choices)
+	versus_poster = poster(split)
+	# Both axes work, preserving pad habits from the previous horizontal menu.
+	buttons.local.focus_neighbor_right = buttons.local.get_path_to(buttons.online)
+	buttons.online.focus_neighbor_left = buttons.online.get_path_to(buttons.local)
 
 func build_fighters(page: VBoxContainer) -> void:
 	selection = FighterSelect.new()
 	selection.motion = motion
+	selection.palette = palette
+	selection.matchup_changed.connect(Callable(backdrop, "set_matchup"))
 	page.add_child(selection)
 	selection.confirmed.connect(func(): action_requested.emit("confirm_fighters"))
 	simplified = selection.simple_checks
@@ -214,7 +283,11 @@ func build_fighters(page: VBoxContainer) -> void:
 func build_online(page: VBoxContainer) -> void:
 	heading(page, "ONLINE / CONNECTION", "Both players choose a fighter locally and use Player 1 controls on their own computer.")
 	var body := scroll_body(page)
-	var form := section(body, "YOUR MATCH")
+	var split := line(body)
+	split.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var form := section(split, "YOUR MATCH")
+	form.custom_minimum_size.x = 620
+	form.get_parent().size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	online_fighter = text(form, "", 26, GOLD)
 	var fields := line(form)
 	var host_column := column(fields)
@@ -237,45 +310,68 @@ func build_online(page: VBoxContainer) -> void:
 	var actions := line(form)
 	for id in ["host", "join", "cancel_connection"]:
 		action(actions, id, {"host":"Host match", "join":"Join match", "cancel_connection":"Cancel connection"}[id], 40, "secondary" if id == "cancel_connection" else "primary")
+	online_poster = poster(split)
 	status = text(page, "Choose Host or Join to begin.", 20, GOLD)
 	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 
 func build_pause(page: VBoxContainer) -> void:
-	heading(page, "MATCH MENU", "Return to the fight when you're ready.")
-	pause_note = text(page, "", 20, GOLD)
+	heading(page, "TIME OUT.", "MATCH MENU  /  Your next move.")
 	var body := scroll_body(page)
-	var actions := section(body, "YOUR NEXT MOVE")
-	actions.get_parent().size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	actions.custom_minimum_size.x = 420
-	action(actions, "resume", "Resume", 40, "essential")
-	action(actions, "restart", "Restart " + str(MatchCeremony.script().roundName).to_lower())
-	action(actions, "change_fighters", "Change fighters")
-	action(actions, "pause_home", "Main menu", 38, "secondary")
-	action(actions, "pause_controls", "Controls", 38, "secondary")
-	action(actions, "pause_sound", "Sound", 38, "secondary")
+	var split := line(body)
+	split.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var actions := column(split)
+	actions.custom_minimum_size.x = 460
+	actions.add_theme_constant_override("separation", 3)
+	pause_note = text(actions, "", 20, GOLD)
+	pause_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	pause_note.custom_minimum_size.x = 460
+	action(actions, "resume", "BACK IN", 60).add_theme_font_size_override("font_size", 38)
+	action(actions, "restart", "Restart " + str(MatchCeremony.script().roundName).to_lower(), 54)
+	action(actions, "change_fighters", "Change fighters", 54)
+	action(actions, "pause_home", "Main menu", 54)
+	var settings := line(actions)
+	action(settings, "pause_controls", "Controls", 40, "secondary")
+	action(settings, "pause_sound", "Sound", 40, "secondary")
+	spacer(actions)
+	pause_poster = poster(split)
 
 func build_results(page: VBoxContainer) -> void:
-	result_title = heading(page, "ROUND COMPLETE", "Run it back, try another fighter, or return to the main menu.")
-	result_note = text(page, "", 20, GOLD)
+	result_title = heading(page, "MATCH COMPLETE", "THE FINAL WHISTLE  /  First to two Scrums.")
 	var body := scroll_body(page)
-	var actions := section(body, "NEXT ROUND")
-	actions.get_parent().size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	actions.custom_minimum_size.x = 420
-	action(actions, "rematch", "Rematch", 40, "essential")
-	action(actions, "results_fighters", "Change fighters")
-	action(actions, "return_lobby", "Return to online lobby")
-	action(actions, "results_home", "Main menu", 38, "secondary")
+	var split := line(body)
+	split.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	var actions := column(split)
+	actions.custom_minimum_size.x = 460
+	result_note = text(actions, "", 22, GOLD)
+	result_note.custom_minimum_size.x = 460
+	result_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	spacer(actions)
+	action(actions, "rematch", "RUN IT BACK", 72).add_theme_font_size_override("font_size", 38)
+	action(actions, "results_fighters", "Change fighters", 60)
+	action(actions, "return_lobby", "Return to online lobby", 60)
+	action(actions, "results_home", "Main menu", 54, "secondary")
+	spacer(actions)
+	result_poster = poster(split)
 
 func configure_selection(activity: String, chosen: Array, simple: Array) -> void:
 	selection.configure(activity, chosen, simple)
 
-func configure_pause(online: bool) -> void:
+func configure_pause(online: bool, state: Dictionary = {}) -> void:
+	if not state.is_empty():
+		var fighter: int = state.players[0].character
+		palette.set_fighter(fighter)
+		pause_poster.present(fighter, int(state.players[1].character))
 	pause_note.text = "Online match continues while this menu is open." if online else "The round is paused."
 	buttons.restart.visible = not online
 	buttons.change_fighters.visible = not online
 	buttons.pause_home.text = "Leave match & main menu" if online else "Main menu"
 
 func configure_results(state: Dictionary, online: bool, round_label: String = "", score: Array = [0, 0]) -> void:
+	var winner: int = int(state.winner) if state.winner in [0, 1] else 0
+	var fighter: int = state.players[winner].character
+	palette.set_fighter(fighter)
+	result_poster.present(fighter)
+
 	result_title.text = "Draw." if state.winner == 2 else CombatModel.CHARACTERS[state.players[state.winner].character] + " wins."
 	result_note.text = "%d–%d · %s · MATCH COMPLETE · " % [score[0], score[1], round_label] + ("Return to the lobby to host or join another match." if online else "Run it back or choose new fighters.")
 	buttons.rematch.visible = not online
@@ -312,6 +408,16 @@ func show_page(page: String, fresh: bool = false) -> void:
 	var depth := {"home":0, "matches":1, "sides":2, "fighters":3, "online":4, "pause":1, "results":1}
 	var direction := -1.0 if depth[page] < depth[current_page] else 1.0
 	current_page = page
+	backdrop.page = page
+	if page in ["home", "matches"]: palette.set_fighter(featured)
+	if page == "pause": palette.set_fighter(pause_poster.character)
+	if page == "results": palette.set_fighter(result_poster.character)
+	if page == "fighters": palette.set_fighter(selection.chosen[selection.active_player])
+	if page == "online":
+		palette.set_fighter(selection.chosen[0])
+		online_poster.present(selection.chosen[0])
+	if not fresh: wipe.sweep(direction)
+	else: wipe.finish()
 	back_button.visible = page not in ["home", "results"]
 	breadcrumb.text = {"home":"MAIN MENU", "matches":"VERSUS", "sides":"SIDE SELECT", "fighters":"FIGHTER SELECT", "online":"ONLINE / CONNECTION", "pause":"MATCH MENU", "results":"RESULT"}[page]
 	for id in pages:
@@ -325,13 +431,13 @@ func show_page(page: String, fresh: bool = false) -> void:
 		if not node.visible and not incoming: continue
 		if not node.visible:
 			node.modulate.a = 0.0
-			node.position.x = motion.distance(32.0 * direction)
+			node.position.x = motion.distance(96.0 * direction)
 		node.visible = true
 		var tween := create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		page_tweens[id] = tween
-		var duration := motion.duration(0.28 if incoming else 0.18)
+		var duration := motion.duration(0.34 if incoming else 0.22)
 		tween.tween_property(node, "modulate:a", 1.0 if incoming else 0.0, duration)
-		tween.tween_property(node, "position:x", 0.0 if incoming else motion.distance(-24.0 * direction), duration)
+		tween.tween_property(node, "position:x", 0.0 if incoming else motion.distance(-72.0 * direction), duration)
 		tween.chain().tween_callback(settle_page.bind(id))
 	if chrome_tween: chrome_tween.kill()
 	if fresh or motion.instant:
@@ -352,9 +458,11 @@ func settle_page(id: String) -> void:
 func is_animating() -> bool:
 	for tween in page_tweens.values():
 		if tween.is_running(): return true
-	return (chrome_tween != null and chrome_tween.is_running()) or selection.is_animating()
+	return (chrome_tween != null and chrome_tween.is_running()) or selection.is_animating() or wipe.is_animating() or backdrop.is_animating()
 
 func finish_motion() -> void:
+	wipe.finish()
+	backdrop.finish_motion()
 	selection.finish_motion()
 	for id in pages:
 		if page_tweens.has(id): page_tweens[id].kill()

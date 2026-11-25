@@ -18,6 +18,7 @@ func run() -> void:
 		return
 	if args.has("--fighters") or args.has("--online") or args.has("--training") or args.has("--mirror"):
 		game.choose_activity("online" if args.has("--online") else "training" if args.has("--training") else "local")
+		if game.screen == "sides": game.confirm_sides()
 		game.menus.selection.choose_fighter(0, 0)
 		game.menus.selection.choose_fighter(1, 0 if args.has("--mirror") else 4)
 	for p in 2:

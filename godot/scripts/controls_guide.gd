@@ -1,6 +1,7 @@
 extends AcceptDialog
 
 var controls: FighterInputs
+var accent := Color("d67570")
 var tabs: Array[Button] = []
 var bindings: VBoxContainer
 var headings := ["Player 1", "Player 2", "Guide"]
@@ -16,15 +17,15 @@ var binding_buttons := {}
 
 func _ready() -> void:
 	title = "Fight Guild · Controls"
-	theme = GuildTheme.settings()
+	theme = InkMenu.theme(accent)
 	ok_button_text = "Close"
 	dialog_close_on_escape = false
 	get_ok_button().hide()
 	var layout := VBoxContainer.new()
 	add_child(layout)
-	var heading := label(layout, "MAKE IT YOURS", 30, GuildTheme.CREAM)
-	heading.add_theme_font_override("font", GuildTheme.SEMIBOLD)
-	label(layout, "Controls save on this computer. Esc / Start always opens the match menu.", 18, GuildTheme.WARM_MUTED)
+	var heading := label(layout, "MAKE IT YOURS", 30, InkMenu.PAPER)
+	heading.add_theme_font_override("font", InkMenu.FONT)
+	label(layout, "Controls save on this computer. Esc / Start always opens the match menu.", 18, InkMenu.MUTED)
 	var navigation := HBoxContainer.new()
 	layout.add_child(navigation)
 	var group := ButtonGroup.new()
@@ -50,7 +51,7 @@ func _ready() -> void:
 	bindings.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	bindings.add_theme_constant_override("separation", 10)
 	scroll.add_child(bindings)
-	status_label = label(layout, "", 17, GuildTheme.ORANGE)
+	status_label = label(layout, "", 17, accent)
 	status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	# Give the wrapping label a width before popup minimum-size measurement.
 	# A zero-width first layout can otherwise grow AcceptDialog past the screen.
@@ -102,10 +103,10 @@ func show_bindings(scheme: int) -> void:
 	for child in bindings.get_children():
 		bindings.remove_child(child)
 		child.queue_free()
-	label(bindings, headings[scheme].to_upper() + " / " + ("BINDINGS" if scheme < 2 else "MOTIONS & DEFENSE"), 18, GuildTheme.ORANGE)
+	label(bindings, headings[scheme].to_upper() + " / " + ("BINDINGS" if scheme < 2 else "MOTIONS & DEFENSE"), 18, accent)
 	set_status()
 	if scheme == 2:
-		var note := label(bindings, "Numpad notation faces right: 5 neutral, 2 down, 4 back, 6 forward; mirror left/right when facing left. j. means airborne.\n\nTraditional motions work in both control modes. Enable simple controls at fighter select, then hold Simple plus the move's direction and button. Development shows each move's current mapping.\n\n66 or Dash begins forward movement. Hold forward or Dash to run; 4 + Dash goes backward. Air dashes depend on the character.\n\n2S is a hard-knockdown sweep. 4P+K / 6P+K throws; + means simultaneous. Hold away to block; hold down-away against lows.\n\nAway + Faultless Defense spends Momentum to prevent chip and add pushback. Away + two of P/K/S/Hs also works, except grounded 4P+K (back throw). Guard break removes backdash and blockstun grab protection.\n\nCombined controller mode prioritizes digital directions over the left stick. Opposite directions neutralize. Stick and trigger values must cross their threshold to activate, then fall below 80% of it to release.\n\nA disconnected controller never transfers the other player's controls. Reconnect it, or assign a replacement here. Identical controllers can require manual assignment after restarting.\n\nOnline uses Player 1 controls on each computer. Menus keep their own arrows / D-pad, Enter / A, Esc / B navigation. Test inputs captures these buttons until Esc / Start. Release controls after closing settings before returning to combat.", 19, GuildTheme.WARM_MUTED)
+		var note := label(bindings, "Numpad notation faces right: 5 neutral, 2 down, 4 back, 6 forward; mirror left/right when facing left. j. means airborne.\n\nTraditional motions work in both control modes. Enable simple controls at fighter select, then hold Simple plus the move's direction and button. Development shows each move's current mapping.\n\n66 or Dash begins forward movement. Hold forward or Dash to run; 4 + Dash goes backward. Air dashes depend on the character.\n\n2S is a hard-knockdown sweep. 4P+K / 6P+K throws; + means simultaneous. Hold away to block; hold down-away against lows.\n\nAway + Faultless Defense spends Momentum to prevent chip and add pushback. Away + two of P/K/S/Hs also works, except grounded 4P+K (back throw). Guard break removes backdash and blockstun grab protection.\n\nCombined controller mode prioritizes digital directions over the left stick. Opposite directions neutralize. Stick and trigger values must cross their threshold to activate, then fall below 80% of it to release.\n\nA disconnected controller never transfers the other player's controls. Reconnect it, or assign a replacement here. Identical controllers can require manual assignment after restarting.\n\nOnline uses Player 1 controls on each computer. Menus keep their own arrows / D-pad, Enter / A, Esc / B navigation. Test inputs captures these buttons until Esc / Start. Release controls after closing settings before returning to combat.", 19, InkMenu.MUTED)
 		note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		return
 	var profile: Dictionary = controls.profiles[scheme]
@@ -142,7 +143,7 @@ func show_bindings(scheme: int) -> void:
 	for field in ["deadzone", "trigger"]:
 		var column := VBoxContainer.new()
 		tuning.add_child(column)
-		label(column, "Stick deadzone" if field == "deadzone" else "Trigger threshold", 17, GuildTheme.WARM_MUTED)
+		label(column, "Stick deadzone" if field == "deadzone" else "Trigger threshold", 17, InkMenu.MUTED)
 		var spinner := SpinBox.new()
 		spinner.name = "StickDeadzone" if field == "deadzone" else "TriggerThreshold"
 		spinner.min_value = 10
@@ -156,7 +157,7 @@ func show_bindings(scheme: int) -> void:
 	var input_mode := VBoxContainer.new()
 	tuning.add_child(input_mode)
 	input_mode.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	label(input_mode, "Controller directions", 17, GuildTheme.WARM_MUTED)
+	label(input_mode, "Controller directions", 17, InkMenu.MUTED)
 	var direction := OptionButton.new()
 	for item in ["D-pad + stick", "D-pad only", "Stick only"]: direction.add_item(item)
 	direction.select(int(profile.stick_mode))
@@ -165,7 +166,7 @@ func show_bindings(scheme: int) -> void:
 	direction.item_selected.connect(func(index: int): controls.set_option(selected, "stick_mode", index); set_status())
 	var live := HBoxContainer.new()
 	bindings.add_child(live)
-	live_label = label(live, "5", 19, GuildTheme.CREAM)
+	live_label = label(live, "5", 19, InkMenu.PAPER)
 	live_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	live_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	test_button = make_button(live, "Test inputs", func():
@@ -178,9 +179,9 @@ func show_bindings(scheme: int) -> void:
 	grid.add_theme_constant_override("h_separation", 14)
 	grid.add_theme_constant_override("v_separation", 6)
 	bindings.add_child(grid)
-	for title_text in ["ACTION", "KEYBOARD", "CONTROLLER"]: label(grid, title_text, 17, GuildTheme.ORANGE)
+	for title_text in ["ACTION", "KEYBOARD", "CONTROLLER"]: label(grid, title_text, 17, accent)
 	for action in [4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2, 3]:
-		var caption := label(grid, FighterInputs.ACTIONS[action], 20, GuildTheme.CREAM)
+		var caption := label(grid, FighterInputs.ACTIONS[action], 20, InkMenu.PAPER)
 		caption.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		for kind in ["keys", "pad"]:
 			var binding := make_button(grid, FighterInputs.binding_name(kind, int(profile[kind][action])), func(): begin_binding(kind, action))

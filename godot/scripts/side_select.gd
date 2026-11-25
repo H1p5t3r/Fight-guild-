@@ -4,6 +4,10 @@ extends VBoxContainer
 signal confirmed
 var controls: FighterInputs
 var motion := MenuMotion.new()
+var palette := MenuPalette.new()
+var guild_characters := [5, 4]
+var lane_panels: Array[PanelContainer] = []
+var lane_titles: Array[Label] = []
 var active := false
 var owners := {}
 var lanes: Array[VBoxContainer] = []
@@ -25,22 +29,25 @@ func _ready() -> void:
 		panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		panel.size_flags_stretch_ratio = 1.0 if lane != -1 else 0.84
 		var style := StyleBoxFlat.new()
-		style.bg_color = Color("15252d") if lane != -1 else Color("10191f")
+		style.bg_color = InkMenu.INK if lane != -1 else Color(0.035, 0.035, 0.047, 0.82)
 		style.border_color = accent(lane)
 		style.set_border_width_all(1)
-		style.border_width_top = 5 if lane != -1 else 1
+		style.border_width_top = 8 if lane != -1 else 1
+		style.skew = Vector2(-0.035 if lane != 1 else 0.035, 0)
 		style.content_margin_left = 18
 		style.content_margin_right = 18
 		style.content_margin_top = 12
 		style.content_margin_bottom = 12
 		panel.add_theme_stylebox_override("panel", style)
 		columns.add_child(panel)
+		lane_panels.append(panel)
 		var body := VBoxContainer.new()
 		body.add_theme_constant_override("separation", 6)
 		panel.add_child(body)
 		var title := text(body, "1P" if lane == 0 else "2P" if lane == 1 else "VS", 56, accent(lane))
-		title.add_theme_font_override("font", GuildTheme.SEMIBOLD)
-		text(body, "LEFT SIDE" if lane == 0 else "RIGHT SIDE" if lane == 1 else "UNASSIGNED", 18, GuildTheme.MUTED)
+		lane_titles.append(title)
+		title.add_theme_font_override("font", InkMenu.FONT)
+		text(body, "LEFT SIDE" if lane == 0 else "RIGHT SIDE" if lane == 1 else "UNASSIGNED", 18, InkMenu.MUTED)
 		body.add_child(HSeparator.new())
 		var scroll := ScrollContainer.new()
 		scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -52,18 +59,20 @@ func _ready() -> void:
 		list.add_theme_constant_override("separation", 12)
 		scroll.add_child(list)
 		lanes.append(list)
-	instruction = text(self, "Move your controller left or right to choose a side.", 19, GuildTheme.IVORY)
+	instruction = text(self, "Move your controller left or right to choose a side.", 19, InkMenu.PAPER)
 	instruction.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	continue_button = Button.new()
+	continue_button = InkMenuButton.new()
+	continue_button.palette = palette
+	continue_button.motion = motion
 	continue_button.text = "CHOOSE FIGHTERS  →"
 	continue_button.custom_minimum_size.y = 52
 	continue_button.add_theme_font_size_override("font_size", 24)
-	GuildTheme.apply(continue_button, "essential")
+
 	continue_button.pressed.connect(func(): if ready_to_continue(): confirmed.emit())
 	add_child(continue_button)
 
-static func accent(lane: int) -> Color:
-	return GuildTheme.BRASS if lane == 0 else Color("66c5c3") if lane == 1 else GuildTheme.MUTED
+func accent(lane: int) -> Color:
+	return FighterSelectPortrait.COLORS[guild_characters[lane]] if lane >= 0 else InkMenu.PAPER
 
 func text(parent: Node, value: String, font_size: int, color: Color) -> Label:
 	var result := Label.new()
@@ -74,8 +83,14 @@ func text(parent: Node, value: String, font_size: int, color: Color) -> Label:
 	parent.add_child(result)
 	return result
 
-func configure(service: FighterInputs) -> void:
+func configure(service: FighterInputs, characters: Array = [5, 4]) -> void:
 	controls = service
+	guild_characters = characters.duplicate()
+	palette.set_fighter(guild_characters[0])
+	for i in 3:
+		var lane: int = [0, -1, 1][i]
+		lane_panels[i].get_theme_stylebox("panel").border_color = accent(lane)
+		lane_titles[i].add_theme_color_override("font_color", accent(lane))
 	owners.clear()
 	axis_latches.clear()
 	for p in 2: owners["key%d" % p] = p if controls.profiles[p].keyboard else -1
@@ -144,7 +159,7 @@ func render() -> void:
 		var lane: VBoxContainer = lanes[[0, -1, 1].find(owner)]
 		var panel := PanelContainer.new()
 		var style := StyleBoxFlat.new()
-		style.bg_color = Color("21323b")
+		style.bg_color = accent(owner).darkened(0.83)
 		style.border_color = Color(accent(owner), 0.65)
 		style.set_border_width_all(1)
 		style.set_content_margin_all(6)
@@ -154,25 +169,29 @@ func render() -> void:
 		var content := VBoxContainer.new()
 		content.add_theme_constant_override("separation", 4)
 		panel.add_child(content)
-		var name_label := text(content, source_name(source), 17, GuildTheme.IVORY)
+		var name_label := text(content, source_name(source), 17, InkMenu.PAPER)
 		name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		var buttons := HBoxContainer.new()
 		content.add_child(buttons)
 		for destination in [0, -1, 1]:
-			var button := Button.new()
+			var button := InkMenuButton.new()
+			button.palette = palette
+			button.motion = motion
+			button.compact = true
+			button.add_theme_font_size_override("font_size", 18)
 			button.text = "1P" if destination == 0 else "—" if destination == -1 else "2P"
 			button.custom_minimum_size.y = 36
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			button.disabled = destination == owner
 			button.accessibility_name = source_name(source).replace("\n", " ") + (" unassign" if destination < 0 else " to Player %d" % (destination + 1))
-			GuildTheme.apply(button, "secondary")
+
 			buttons.add_child(button)
 			button.pressed.connect(func():
 				move_source(source, destination)
 				continue_button.grab_focus.call_deferred())
 	for i in 3:
 		if lanes[i].get_child_count() == 0:
-			text(lanes[i], "MOVE HERE TO JOIN" if i != 1 else "Connect a controller\nor move a device here.", 18, GuildTheme.MUTED)
+			text(lanes[i], "MOVE HERE TO JOIN" if i != 1 else "Connect a controller\nor move a device here.", 18, InkMenu.MUTED)
 	continue_button.disabled = not ready_to_continue()
 	instruction.text = "Choose a side with left / right. Enter or Start continues. Cards also work with the mouse." if ready_to_continue() else "Assign an input to each side to continue. Left / right moves your own device."
 

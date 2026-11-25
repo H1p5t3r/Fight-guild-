@@ -14,6 +14,7 @@ var arrival := 1.0:
 		arrival = value
 		queue_redraw()
 var previous_alpha := 1.0
+var idle_ticks := 0.0
 var tween: Tween
 var portrait := Sprite2D.new()
 var ghost := Sprite2D.new()
@@ -25,15 +26,16 @@ const LINES := ["HOLD THE LINE.", "BREAK THE WALL.", "BREATHE IT IN.", "LAST ORD
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-	clip_contents = true
+	clip_contents = false
 	custom_minimum_size = Vector2(280, 210)
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
 	for sprite in [ghost, portrait]:
 		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		add_child(sprite)
-	fighter_name = make_label(68)
-	fighter_name.add_theme_font_override("font", GuildTheme.SEMIBOLD)
+	fighter_name = make_label(58)
+	fighter_name.add_theme_font_override("font", InkMenu.FONT)
+	fighter_name.rotation = -0.055 if player == 0 else 0.035
 	fighter_name.add_theme_color_override("font_shadow_color", Color("071016"))
 	fighter_name.add_theme_constant_override("shadow_offset_x", 3)
 	fighter_name.add_theme_constant_override("shadow_offset_y", 3)
@@ -54,11 +56,13 @@ func _ready() -> void:
 	role.offset_top = 5
 	role.offset_bottom = 30
 	role.add_theme_font_override("font", GuildTheme.SEMIBOLD)
-	role.add_theme_color_override("font_color", PLAYER_COLORS[player])
+	role.add_theme_color_override("font_color", InkMenu.PAPER)
 	for label in [fighter_name, guild_name, role, tagline]:
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT if player == 0 else HORIZONTAL_ALIGNMENT_RIGHT
 		label.add_theme_color_override("font_outline_color", Color("071016"))
 		label.add_theme_constant_override("outline_size", 3)
+	portrait.material = InkMenu.material(COLORS[maxi(character, 0)])
+	ghost.material = InkMenu.material(COLORS[maxi(previous, 0)])
 	resized.connect(queue_redraw)
 
 func make_label(font_size: int) -> Label:
@@ -75,6 +79,9 @@ func present(index: int) -> void:
 	previous_alpha = arrival
 	var first := character < 0
 	character = index
+	idle_ticks = 0.0
+	portrait.material.set_shader_parameter("accent", COLORS[index])
+	ghost.material.set_shader_parameter("accent", COLORS[previous])
 	fighter_name.text = CombatModel.CHARACTERS[index].to_upper()
 	guild_name.text = GUILDS[index]
 	tagline.text = LINES[index]
@@ -93,6 +100,15 @@ func finish_motion() -> void:
 func is_animating() -> bool:
 	return tween != null and tween.is_running()
 
+func _process(delta: float) -> void:
+	if not is_visible_in_tree(): return
+	if not motion.reduced and not motion.instant: idle_ticks += delta * 60.0
+	queue_redraw()
+
+func apply_idle(sprite: Sprite2D, index: int, factor: float, facing: int) -> void:
+	var phase := InkMenu.idle_phase(index)
+	FighterArt.apply(sprite, index, phase, FighterArt.idle_pose(index, int(idle_ticks)) if phase == "idle" else 0, factor, facing)
+
 func _draw() -> void:
 	if character < 0: return
 	var w := size.x
@@ -100,21 +116,21 @@ func _draw() -> void:
 	var accent: Color = COLORS[character]
 	var direction := 1 if player == 0 else -1
 	var guild_origin := Vector2(w * (0.20 if player == 0 else 0.80), h * 0.44)
-	draw_guild_mark(guild_origin, minf(w * 0.32, 105.0), Color(accent, 0.18))
+	draw_guild_mark(guild_origin, minf(w * 0.52, 180.0), Color(InkMenu.INK, 0.22))
 	var number := "0" + str(player + 1)
 	var number_size := mini(170, int(w * 0.44))
 	var width := GuildTheme.SEMIBOLD.get_string_size(number, HORIZONTAL_ALIGNMENT_LEFT, -1, number_size).x
-	draw_string_outline(GuildTheme.SEMIBOLD, Vector2(0 if player == 0 else w - width, h * 0.88), number, HORIZONTAL_ALIGNMENT_LEFT, -1, number_size, 2, Color(accent, 0.15))
+	draw_string_outline(GuildTheme.SEMIBOLD, Vector2(0 if player == 0 else w - width, h * 0.88), number, HORIZONTAL_ALIGNMENT_LEFT, -1, number_size, 2, Color(InkMenu.PAPER, 0.35))
 	if arrival < 1.0 and not motion.reduced:
 		var tip := w * arrival
 		draw_colored_polygon(PackedVector2Array([Vector2(0, h * 0.28), Vector2(tip, h * 0.19), Vector2(w, h * 0.38), Vector2(tip * 0.5, h * 0.52)]), Color(accent, (1.0 - arrival) * 0.27))
-	var anchor := Vector2(w * 0.5, h + 12)
-	FighterArt.apply(portrait, character, "windup", 4, h * 1.02 / 150.0, direction)
+	var anchor := Vector2(w * 0.5, h - 20)
+	apply_idle(portrait, character, h * 1.05 / 150.0, direction)
 	portrait.position = anchor + Vector2(motion.distance(32) * (1.0 - arrival) * -direction, 0)
 	portrait.modulate.a = arrival
 	ghost.visible = arrival < 1.0
 	if ghost.visible:
-		FighterArt.apply(ghost, previous, "windup", 4, h * 1.02 / 150.0, direction)
+		apply_idle(ghost, previous, h * 1.05 / 150.0, direction)
 		ghost.position = anchor + Vector2(motion.distance(16) * arrival * direction, 0)
 		ghost.modulate.a = (1.0 - arrival) * previous_alpha
 

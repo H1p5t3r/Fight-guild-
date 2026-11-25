@@ -47,6 +47,7 @@ var port: SpinBox
 var leave_button: Button
 var menus: GameMenus
 var match_entry: MatchEntry
+var screen_wipe: MenuInkWipe
 var round_number := 1
 var match_score := MatchScore.new()
 var round_resolved := false
@@ -503,6 +504,11 @@ func build_interface() -> void:
 		else: next_scrum())
 	match_entry.canceled.connect(cancel_match_entry)
 	match_entry.failed.connect(entry_failed)
+	screen_wipe = MenuInkWipe.new()
+	screen_wipe.motion = motion
+	screen_wipe.palette = menus.palette
+	screen_wipe.z_index = 100
+	add_child(screen_wipe)
 
 func add_field(parent: Node, spec: Array) -> void:
 	var column := VBoxContainer.new()
@@ -627,6 +633,7 @@ func show_screen(next: String) -> void:
 		return
 	layer_target = target
 	if layer_tween: layer_tween.kill()
+	screen_wipe.sweep(1.0 if playing else -1.0)
 	MenuMotion.interactive(play_root, false)
 	if motion.instant:
 		settle_layers()
@@ -639,7 +646,7 @@ func show_screen(next: String) -> void:
 	layer_tween.chain().tween_callback(settle_layers)
 
 func changing_layers() -> bool:
-	return layer_tween != null and layer_tween.is_running()
+	return (layer_tween != null and layer_tween.is_running()) or screen_wipe.is_animating()
 
 func settle_layers() -> void:
 	var playing := screen in ["play", "entry"]
@@ -654,6 +661,7 @@ func settle_layers() -> void:
 
 func finish_menu_motion() -> void:
 	if layer_tween: layer_tween.kill()
+	screen_wipe.finish()
 	settle_layers()
 	menus.finish_motion()
 
@@ -719,7 +727,7 @@ func choose_activity(which: String) -> void:
 	if connection.active: return
 	if which == "local" and screen != "sides":
 		sides_return = screen
-		menus.sides.configure(fighter_inputs)
+		menus.sides.configure(fighter_inputs, characters)
 		show_screen("sides")
 		return
 	pending_activity = which
@@ -775,7 +783,7 @@ func configure_activity() -> void:
 
 func open_pause() -> void:
 	if screen != "play" or has_open_dialog(): return
-	menus.configure_pause(connection.active)
+	menus.configure_pause(connection.active, model.state())
 	show_screen("pause")
 
 func menu_back() -> void:
@@ -1011,6 +1019,7 @@ func show_controls() -> void:
 	held.clear()
 	var dialog := preload("res://scripts/controls_guide.gd").new()
 	dialog.controls = fighter_inputs
+	dialog.accent = menus.palette.accent
 	var previous := get_viewport().gui_get_focus_owner()
 	if previous != null: dialog.set_meta("return_focus", weakref(previous))
 	add_child(dialog)
@@ -1023,7 +1032,7 @@ func show_sound_settings() -> void:
 	var dialog := AcceptDialog.new()
 	var previous := get_viewport().gui_get_focus_owner()
 	if previous != null: dialog.set_meta("return_focus", weakref(previous))
-	dialog.theme = GuildTheme.stock()
+	dialog.theme = InkMenu.theme(menus.palette.accent)
 	dialog.title = "Combat sound"
 	var layout := VBoxContainer.new()
 	layout.add_theme_constant_override("separation", 18)

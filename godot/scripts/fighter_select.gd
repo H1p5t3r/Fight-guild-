@@ -2,8 +2,10 @@ class_name FighterSelect
 extends VBoxContainer
 
 signal confirmed
+signal matchup_changed(chosen: Array, player: int, online: bool)
 
 var motion := MenuMotion.new()
+var palette := MenuPalette.new()
 var chosen := [5, 4]
 var active_player := 0
 var online := false
@@ -23,15 +25,20 @@ func _ready() -> void:
 	add_theme_constant_override("separation", 8)
 	var heading := HBoxContainer.new()
 	add_child(heading)
-	var title := label(heading, "PICK YOUR FIGHT.", 40, GuildTheme.IVORY)
-	title.add_theme_font_override("font", GuildTheme.SEMIBOLD)
+	var title := label(heading, "PICK YOUR FIGHT.", 42, InkMenu.PAPER)
+	title.add_theme_font_override("font", InkMenu.FONT)
+	title.add_theme_color_override("font_outline_color", InkMenu.INK)
+	title.add_theme_constant_override("outline_size", 6)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	context = label(heading, "LOCAL VERSUS", 18, GuildTheme.BRASS)
+	context = label(heading, "LOCAL VERSUS", 18, InkMenu.PAPER)
+	context.add_theme_color_override("font_outline_color", InkMenu.INK)
+	context.add_theme_constant_override("outline_size", 4)
 	var matchup := HBoxContainer.new()
 	matchup.add_theme_constant_override("separation", 24)
 	matchup.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	add_child(matchup)
 	var roster_column := VBoxContainer.new()
+	roster_column.z_index = 5
 	roster_column.custom_minimum_size.x = 304
 	roster_column.add_theme_constant_override("separation", 8)
 	for p in 2:
@@ -54,13 +61,18 @@ func _ready() -> void:
 		panel.add_child(simple)
 		simple_checks.append(simple)
 	spacer(roster_column)
-	roster_caption = label(roster_column, "P1 / CHOOSE A FIGHTER", 17, GuildTheme.BRASS)
+	roster_caption = label(roster_column, "P1 / CHOOSE A FIGHTER", 17, InkMenu.PAPER)
 	roster_caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var players := HBoxContainer.new()
 	players.add_theme_constant_override("separation", 8)
 	roster_column.add_child(players)
 	for p in 2:
-		var slot := Button.new()
+		var slot := InkMenuButton.new()
+		slot.motion = motion
+		slot.palette = palette
+		slot.compact = true
+		slot.toggle_mode = true
+		slot.add_theme_font_size_override("font_size", 17)
 		slot.custom_minimum_size = Vector2(120, 38)
 		slot.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		slot.pressed.connect(func(): set_active_player(p); focus_selection())
@@ -83,12 +95,16 @@ func _ready() -> void:
 	var footer := HBoxContainer.new()
 	footer.add_theme_constant_override("separation", 16)
 	add_child(footer)
-	instruction = label(footer, "", 17, GuildTheme.MUTED)
+	instruction = label(footer, "", 17, InkMenu.MUTED)
 	instruction.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	instruction.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	start_button = Button.new()
+	start_button = InkMenuButton.new()
+	start_button.motion = motion
+	start_button.palette = palette
+	start_button.compact = true
+	start_button.add_theme_font_size_override("font_size", 20)
 	start_button.custom_minimum_size = Vector2(240, 42)
-	GuildTheme.apply(start_button, "essential")
+
 	start_button.pressed.connect(func(): confirmed.emit())
 	footer.add_child(start_button)
 	resized.connect(queue_redraw)
@@ -125,17 +141,21 @@ func configure(activity: String, characters: Array, simple: Array) -> void:
 func choose_fighter(player: int, index: int) -> void:
 	chosen[player] = clampi(index, 0, CombatModel.CHARACTERS.size() - 1)
 	portraits[player].present(chosen[player])
+	if player == active_player: palette.set_fighter(chosen[player])
+	matchup_changed.emit(chosen, active_player, online)
 	refresh_roster()
 	queue_redraw()
 
 func set_active_player(player: int) -> void:
 	active_player = 0 if online else player
+	palette.set_fighter(chosen[active_player])
+	matchup_changed.emit(chosen, active_player, online)
 	for p in 2:
-		GuildTheme.apply(slot_buttons[p], "primary" if p == active_player else "secondary")
+		slot_buttons[p].set_pressed_no_signal(p == active_player)
 		portraits[p].editing = p == active_player
 		portraits[p].queue_redraw()
 	roster_caption.text = "P%d / CHOOSE A FIGHTER" % (active_player + 1)
-	roster_caption.add_theme_color_override("font_color", FighterSelectPortrait.PLAYER_COLORS[active_player])
+	roster_caption.add_theme_color_override("font_color", InkMenu.PAPER)
 	instruction.text = "Choose P1 or P2 above the roster. Motions are always available." if not online else "Your opponent chooses their fighter on their own computer."
 	refresh_roster()
 
@@ -168,18 +188,3 @@ func is_animating() -> bool:
 
 func finish_motion() -> void:
 	for portrait in portraits: portrait.finish_motion()
-
-func _draw() -> void:
-	if portraits.is_empty(): return
-	var w := size.x
-	var h := size.y
-	var left: Color = FighterSelectPortrait.COLORS[chosen[0]]
-	var right: Color = FighterSelectPortrait.COLORS[chosen[1]]
-	# A shared stage, with each guild's color spilling behind its fighter.
-	draw_colored_polygon(PackedVector2Array([Vector2(0, 70), Vector2(w * 0.39, 48), Vector2(w * 0.27, h - 56), Vector2(0, h - 72)]), Color(left, 0.10))
-	if not online:
-		draw_colored_polygon(PackedVector2Array([Vector2(w * 0.64, 48), Vector2(w, 70), Vector2(w, h - 72), Vector2(w * 0.74, h - 56)]), Color(right, 0.10))
-	for i in 7:
-		var y := h - 126.0 + i * 5.0
-		draw_line(Vector2(0, y), Vector2(w * 0.28, y - 12), Color(left, 0.14), 1)
-		if not online: draw_line(Vector2(w * 0.73, y - 12), Vector2(w, y), Color(right, 0.14), 1)
