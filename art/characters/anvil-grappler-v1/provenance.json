@@ -1,0 +1,37 @@
+{
+  "tool": "image_gen.imagegen",
+  "date": "2026-11-25",
+  "runtimeImported": false,
+  "records": [
+    {
+      "image": "grab-options.png",
+      "prompt": "anvil_grappler-prompt.txt",
+      "sha256": "94c2ec29bde1039843b6a20611a4052b26c7fef32319aa6c4d74701e2604ada6",
+      "status": "A / Foundry Drop and B / Iron Turn approved. C not selected."
+    },
+    {
+      "image": "proportions-rejected.png",
+      "prompt": "anvil_proportions-prompt.txt",
+      "sha256": "60bb766d62da1a6b09f3cc256e03835c9feb3c5ed3fa96fc2903379f22245180",
+      "status": "C / Bull body selected later, with a modest height/width reduction. The A+C header is outdated: grabs are A+B."
+    },
+    {
+      "image": "proportions-v2-options.png",
+      "prompt": "anvil_proportions_v2-prompt.txt",
+      "sha256": "3735c6aa3784f3c47184aa18baa1a092aadeefe1f7e4ab28c4afa930a8ff1b0a",
+      "status": "Rejected: lost muscular definition."
+    },
+    {
+      "image": "bull-refined.png",
+      "prompt": "anvil_bull_refined-prompt.txt",
+      "sha256": "312ffc26060ea830fe31944782054316f1964f6cc4515777520d42204de3a27d",
+      "status": "Bull body retained; shield needs revision."
+    },
+    {
+      "image": "shield-options.png",
+      "prompt": "anvil_shield-prompt.txt",
+      "sha256": "012c711b630a0a2847bf2cc371b0cfc3ae23d4af63f5e9b9bbe8642e7122e3ca",
+      "status": "Awaiting selection: 1 Guild Original / 2 Forge Plate / 3 Iron Guard."
+    }
+  ]
+}
