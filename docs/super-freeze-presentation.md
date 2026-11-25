@@ -18,27 +18,30 @@ The reference opens a narrow white tear, exposes a face inside an angled black
 and colored band, holds briefly, then tears/slides away. The green background is
 a compositing matte, not part of the intended match treatment.
 
-The native version tears the actual frozen match image along a ragged diagonal
-seam. Its upper and lower pieces bow apart, keeping the outer screen edges
-pinned, to uncover the face and guild color underneath. The portrait stays fixed
-in place and at its original proportions throughout. Paper fibers, folded lips
-and an inner shadow give the screen edges thickness.
+The native version rips a **strip out of the frozen match image** to reveal the
+face and guild color beneath it. The strip has fixed ragged upper and lower edges;
+the surrounding screen stays in place, with no stretching, separation or dimming.
+The tear travels horizontally along the fighter's facing. Only the extracted
+strip curls at the moving edge: its printed side carries the original match image,
+turning over to expose a paper backing. The portrait stays fixed at its original
+proportions as the opening passes over it.
 
-On exit, a rejoin front travels across the opening. Fine fibers reach from both
-edges, join, and disappear as the screen knits back into the original match.
-Fully sealed regions restore the original pixels; there is no departing banner
-or final-frame seam. The face and tear direction follow actual facing, while the
-stage keeps its orientation. The demo's 54-tick plan is:
+On exit, the strip returns **in the opposite direction**: a left-to-right rip seals
+right-to-left, and the mirrored version does the reverse. The curled edge unrolls
+and short fibers reconnect at this returning front. Restored regions show the
+original pixels immediately; no final-frame seam remains. Top/bottom edges never
+slide together. The face and tear direction follow actual facing while the stage
+keeps its orientation. The demo's 54-tick plan is:
 
 | Presentation ticks | Treatment |
 | --- | --- |
-| 0–13 | Intact screen splits; the rip travels across and pulls open |
-| 14–32 | Fixed face revealed beneath the parted screen |
-| 33–53 | Fibers reconnect along a traveling closure; screen seals completely |
+| 0–13 | A traveling rip removes a fixed-height strip; the extracted edge curls |
+| 14–32 | Fixed face revealed through the missing strip |
+| 33–53 | The strip unrolls and knits back in the reverse direction |
 | 54 | Cut-in removed; combat resumes on the following physics tick |
 
-Reduced Motion uses the same freeze duration with a stationary fade and no screen
-deformation or traveling fibers. Menu transition speed does not lengthen this
+Reduced Motion uses the same freeze duration with a stationary cut-out fade and
+no traveling rip, curl or fibers. Menu transition speed does not lengthen this
 combat presentation.
 
 ## Face artwork: awaiting selection
@@ -88,12 +91,14 @@ background, so its frozen tableau cannot retain a stray cut-in image.
 
 - `bash scripts/godot.sh --headless --script tests/super_freeze_test.gd -- --test`
   checks all six fighters, both players/facings, live attacks, a live projectile,
-  recovery, duration boundaries, input gates, interruption, reduced motion and
-  simulation/configuration preservation.
+  recovery, duration boundaries, input gates, interruption, reduced motion,
+  reverse closure direction and simulation/configuration preservation.
 - `python scripts/capture-super-freeze-review.py` records the native renderer at
   60 fps; `--stills` saves hold, opening and closure checkpoints. The first and
   last frames are compared against the intact match for all six fighters and
-  Reduced Motion. `--stills --inset --size 1920x1080 --display :97` also checks
+  Reduced Motion. Intermediate pixel checks verify that the upper/lower screen
+  remains unchanged and that the far end is restored first during closure, in
+  both facings. `--stills --inset --size 1920x1080 --display :97` also checks
   that a smaller arena's effect leaves the surrounding interface untouched.
 - [Current native motion preview](../exports/FightGuild-Super-Freeze-Review.mp4)
   with [opening](../exports/FightGuild-Super-Freeze-Ripping.png),

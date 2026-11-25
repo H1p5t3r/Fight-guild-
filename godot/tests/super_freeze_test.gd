@@ -100,7 +100,7 @@ func run() -> void:
 	check(game.super_preview_duration == 24 and game.super_freeze.reduced_motion, "Reduced motion or duration limits ignored")
 	game.super_freeze.present(5, 1, 20, 54)
 	var original: Dictionary = game.super_freeze.composition()
-	check(game.super_freeze.tear_material.get_shader_parameter("reduced_motion"), "Reduced motion did not disable screen deformation")
+	check(game.super_freeze.tear_material.get_shader_parameter("reduced_motion"), "Reduced motion did not disable rip travel")
 	var fixed_face: Vector4 = game.super_freeze.tear_material.get_shader_parameter("face_box")
 	game.super_freeze.present(5, 1, 40, 54)
 	check(game.super_freeze.tear_material.get_shader_parameter("face_box") == fixed_face, "Closing the screen moved or stretched the face")
@@ -110,6 +110,20 @@ func run() -> void:
 	check(game.super_freeze.composition().opening == 0.0, "First frame did not start with an intact screen")
 	game.super_freeze.present(5, 1, 53, 54)
 	check(is_equal_approx(game.super_freeze.composition().closing, 1.0), "Screen did not finish knitting before combat resumed")
+	check(game.super_freeze.composition().rip_front < -0.10, "Reverse closure left part of the strip missing")
+	var prior := -1.0
+	for tick in range(14):
+		game.super_freeze.present(5, 1, tick, 54)
+		var front: float = game.super_freeze.composition().rip_front
+		check(front >= prior, "Opening rip changed direction")
+		prior = front
+	game.super_freeze.present(5, 1, 32, 54)
+	prior = game.super_freeze.composition().rip_front
+	for tick in range(33, 54):
+		game.super_freeze.present(5, 1, tick, 54)
+		var front: float = game.super_freeze.composition().rip_front
+		check(front <= prior, "Closure did not travel opposite to the opening rip")
+		prior = front
 	game.super_freeze.present(5, 1, 54, 54)
 	check(not game.super_freeze.visible, "Past-end presentation remained on screen")
 	game.cancel_super_freeze_preview()

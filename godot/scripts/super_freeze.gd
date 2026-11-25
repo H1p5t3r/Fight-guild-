@@ -69,8 +69,12 @@ func composition() -> Dictionary:
 	var phase := float(elapsed) / maxf(duration - 1, 1)
 	var opening := clampf(phase / 0.26, 0.0, 1.0)
 	var closing := clampf((phase - 0.62) / 0.38, 0.0, 1.0)
+	# Cut out a fixed strip from left to right in facing-relative coordinates,
+	# then replace it from right to left. Overscan clears every ragged edge.
+	var rip_front := minf(lerpf(-0.12, 1.12, smoothstep(0.0, 1.0, opening)),
+		lerpf(1.12, -0.12, smoothstep(0.0, 1.0, closing)))
 	return {"opening": opening, "closing": closing, "phase": phase,
-		"alpha": minf(opening * 2.0, 1.0) * (1.0 - closing)}
+		"rip_front": rip_front, "alpha": minf(opening * 2.0, 1.0) * (1.0 - closing)}
 
 func update_material() -> void:
 	if tear_material == null or portrait == null: return
@@ -88,7 +92,7 @@ func update_material() -> void:
 	tear_material.set_shader_parameter("panel_pixels", size.max(Vector2.ONE))
 	tear_material.set_shader_parameter("guild", FighterSelectPortrait.COLORS[character])
 	tear_material.set_shader_parameter("direction", facing)
-	tear_material.set_shader_parameter("tear_open", cue.opening)
+	tear_material.set_shader_parameter("rip_front", cue.rip_front)
 	tear_material.set_shader_parameter("knit_close", cue.closing)
 	tear_material.set_shader_parameter("opacity", cue.alpha)
 	tear_material.set_shader_parameter("reduced_motion", reduced_motion)

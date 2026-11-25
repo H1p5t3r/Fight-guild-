@@ -47,6 +47,44 @@ func check_outside_arena(before: Image) -> void:
 				printerr("Screen tear changed a pixel outside the training arena")
 				return
 
+func check_stationary_remainder(before: Image, description: String) -> void:
+	var after := root.get_texture().get_image()
+	var scale := Vector2(before.get_size()) / root.get_visible_rect().size
+	var rect := Rect2(arena.get_global_rect().position * scale, arena.size * scale)
+	# These areas border the torn band but must never slide, stretch or dim.
+	for row in [0.05, 0.18, 0.24, 0.78, 0.84, 0.95]:
+		for column in range(1, 40):
+			var p := Vector2i(rect.position + rect.size * Vector2(column / 40.0, row))
+			if before.get_pixelv(p) != after.get_pixelv(p):
+				failed = true
+				printerr("Rip moved or recolored the surrounding match: " + description)
+				return
+
+func changed_column(before: Image, x: float, facing: int) -> bool:
+	var after := root.get_texture().get_image()
+	var scale := Vector2(before.get_size()) / root.get_visible_rect().size
+	var rect := Rect2(arena.get_global_rect().position * scale, arena.size * scale)
+	var differences := 0
+	for row in range(9):
+		var p := Vector2i(rect.position + rect.size * Vector2(x if facing > 0 else 1.0 - x, 0.46 + row * 0.01))
+		var a := before.get_pixelv(p)
+		var b := after.get_pixelv(p)
+		if maxf(absf(a.r - b.r), maxf(absf(a.g - b.g), absf(a.b - b.b))) > 0.02: differences += 1
+	return differences >= 6
+
+func check_rip_travel(before: Image, tick: int, facing: int) -> void:
+	# Independent visual checkpoints: reveal the near side first, then restore
+	# the far side first. This rejects the previous same-direction closure.
+	var expected := {
+		6: [true, false, false], 10: [true, true, true],
+		20: [true, true, true], 39: [true, true, true],
+		44: [true, false, false], 49: [false, false, false]}
+	if not expected.has(tick): return
+	for i in 3:
+		if changed_column(before, [0.15, 0.55, 0.75][i], facing) != expected[tick][i]:
+			failed = true
+			printerr("Wrong rip/reverse-seal direction at tick %d, column %d, facing %d" % [tick, i, facing])
+
 func run() -> void:
 	var args := OS.get_cmdline_user_args()
 	if args.has("--output"): output = args[args.find("--output") + 1]
@@ -93,7 +131,10 @@ func run() -> void:
 			cut_in.present(character, int(fighter.facing), tick)
 			await draw_frame()
 			if tick == 20: save_still(CombatModel.CHARACTERS[character].to_lower())
-			if tick == 20 and inset: check_outside_arena(intact)
+			if tick in INSPECTION_TICKS:
+				check_stationary_remainder(intact, "%s / %d" % [CombatModel.CHARACTERS[character], tick])
+				check_rip_travel(intact, tick, int(fighter.facing))
+				if inset: check_outside_arena(intact)
 			if character == 5 and tick in INSPECTION_TICKS: save_still("fillet-%02d" % tick)
 			if tick in [0, 53]: check_intact_screen(intact, "%s / %d" % [CombatModel.CHARACTERS[character], tick])
 			if model.core.snapshot() != snapshot: failed = true
@@ -112,6 +153,7 @@ func run() -> void:
 		cut_in.present(5, 1, tick)
 		await draw_frame()
 		if tick == 20: save_still("reduced")
+		check_stationary_remainder(intact, "Reduced Motion / %d" % tick)
 		if tick in [0, 53]: check_intact_screen(intact, "Reduced Motion / %d" % tick)
 	cut_in.clear()
 	print("Native super freeze review: " + ("FAIL" if failed else "PASS"))

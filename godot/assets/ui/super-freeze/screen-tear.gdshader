@@ -11,7 +11,7 @@ uniform vec4 guild : source_color = vec4(0.863, 0.078, 0.235, 1.0);
 uniform vec4 ink : source_color = vec4(0.031, 0.035, 0.051, 1.0);
 uniform vec4 paper : source_color = vec4(1.0, 0.969, 0.910, 1.0);
 uniform vec2 panel_pixels = vec2(1280.0, 720.0);
-uniform float tear_open = 0.0;
+uniform float rip_front = -0.12;
 uniform float knit_close = 0.0;
 uniform float opacity = 1.0;
 uniform float direction = 1.0;
@@ -45,68 +45,66 @@ void fragment() {
 	vec2 point = vec2(direction < 0.0 ? 1.0 - UV.x : UV.x, UV.y);
 	float x = point.x;
 	float pixel = 1.0 / panel_pixels.y;
+	float aspect = panel_pixels.x / panel_pixels.y;
 	float grain = fiber_noise(x, 73.0) * 0.009 + fiber_noise(x, 211.0) * 0.003;
 	float seam = 0.565 - x * 0.13 + fiber_noise(x, 19.0) * 0.019 + grain;
 	float spread = 0.162 + 0.012 * sin(x * 3.141593);
-	float opened = smoothstep(x * 0.57, x * 0.57 + 0.43, tear_open);
-	float joined = smoothstep(x * 0.72, x * 0.72 + 0.28, knit_close);
-	float peel = opened * (1.0 - joined);
-	if (reduced_motion) { peel = 1.0; }
-	float gap = spread * peel;
-	float top = seam - gap;
-	float bottom = seam + gap;
-	float outside = abs(point.y - seam) - gap;
-	vec2 source_uv = UV;
-
-	// Pin the outer screen edges. Pixels near the rip bow away with their
-	// frozen fighter/stage artwork attached to the two pieces of screen.
-	if (!reduced_motion && gap > 0.0) {
-		if (point.y < top) {
-			float bend = clamp(point.y / max(top, 0.01), 0.0, 1.0);
-			source_uv.y += gap * bend * bend;
-		} else if (point.y > bottom) {
-			float bend = clamp((1.0 - point.y) / max(1.0 - bottom, 0.01), 0.0, 1.0);
-			source_uv.y -= gap * bend * bend;
-		}
-	}
-	// Infer the actual arena rectangle in any nested layout or viewport scale.
-	// Only the face/tear direction mirrors; the stage itself always stays upright.
-	vec2 span = vec2(dFdx(SCREEN_UV.x) / max(dFdx(UV.x), 0.000001),
-		dFdy(SCREEN_UV.y) / max(dFdy(UV.y), 0.000001));
-	vec2 screen_origin = SCREEN_UV - UV * span;
-	vec2 screen_sample = clamp(screen_origin + source_uv * span,
-		screen_origin + SCREEN_PIXEL_SIZE * 0.5,
-		screen_origin + span - SCREEN_PIXEL_SIZE * 0.5);
+	// These two cut edges never separate or change height. A strip is removed
+	// from the frozen image; all pixels above/below it keep their original UVs.
+	float top = seam - spread;
+	float bottom = seam + spread + fiber_noise(x + 0.43, 113.0) * 0.007;
+	float band_distance = max(top - point.y, point.y - bottom);
+	float along = clamp((point.y - top) / (bottom - top), 0.0, 1.0);
+	float ragged_front = (0.5 - along) * 0.045
+		+ fiber_noise(along, 23.0) * 0.025 + fiber_noise(along, 79.0) * 0.009;
+	float edge_x = (reduced_motion ? 1.12 : rip_front) + ragged_front;
+	float front_distance = (point.x - edge_x) * aspect;
+	float cut_distance = max(band_distance, front_distance);
+	float hole = 1.0 - smoothstep(-pixel, pixel, cut_distance);
 	vec4 untouched = texture(frozen_scene, SCREEN_UV);
-	vec3 surface = texture(frozen_scene, screen_sample).rgb;
-	float weight = reduced_motion ? 1.0 : peel;
-	surface *= 1.0 - 0.22 * weight;
 	vec3 beneath = portrait_at(point);
-	float rim_width = pixel * (1.6 + hash(floor(x * 397.0)) * 2.2);
-	float depth = 1.0 - smoothstep(0.0, 12.0 * pixel, -outside);
+	float depth = 1.0 - smoothstep(0.0, 12.0 * pixel, -cut_distance);
 	beneath = mix(beneath, ink.rgb, depth * 0.72);
-	vec3 composite = mix(surface, beneath, 1.0 - smoothstep(-pixel, pixel, outside));
-	// Uneven white fibers, a folded lip and a deep inner shadow convey thickness.
-	float lip = (1.0 - smoothstep(0.0, 8.0 * pixel, outside)) * step(0.0, outside);
-	composite = mix(composite, paper.rgb, lip * weight * 0.30);
-	float rim = 1.0 - smoothstep(rim_width, rim_width + pixel, abs(outside));
-	composite = mix(composite, paper.rgb, rim * smoothstep(0.0, 2.5 * pixel, gap));
+	vec3 composite = mix(untouched.rgb, beneath, hole);
+	float rim_width = pixel * (1.4 + hash(floor(x * 397.0)) * 2.0);
+	float rim = 1.0 - smoothstep(rim_width, rim_width + pixel, abs(cut_distance));
+	composite = mix(composite, paper.rgb, rim);
 
 	if (!reduced_motion) {
-		// Staggered fibers reach from both lips as the rejoin front passes. They
-		// meet across the remaining gap, then disappear into the sealed image.
-		float cell = floor(x * 67.0);
-		float along = clamp((point.y - top) / max(2.0 * gap, pixel), 0.0, 1.0);
-		float strand_x = 0.5 + sin(along * 6.283185 + hash(cell) * 5.0) * 0.18;
-		float strand = 1.0 - smoothstep(0.035, 0.080, abs(fract(x * 67.0) - strand_x));
-		float reach = smoothstep(0.02, 0.65, joined) * 0.58;
-		float tips = max(1.0 - step(reach, along), step(1.0 - reach, along));
-		float knitting = smoothstep(0.03, 0.23, joined) * (1.0 - smoothstep(0.82, 1.0, joined));
-		float fiber = strand * tips * knitting * step(0.20, hash(cell + 87.0))
-			* (1.0 - step(0.0, outside)) * smoothstep(0.0, pixel * 5.0, gap);
-		composite = mix(composite, paper.rgb, fiber * 0.9);
+		// Only the extracted strip curls. Its printed front carries the original
+		// match image, then turns over to show paper backing at the rolled lip.
+		// The same fold unrolls on the reverse trip as the original pixels return.
+		float curl_width = 0.075;
+		float curl_u = (edge_x - point.x) / curl_width;
+		float curl = step(0.0, curl_u) * (1.0 - step(1.0, curl_u))
+			* (1.0 - smoothstep(-pixel, pixel, band_distance));
+		float u = clamp(curl_u, 0.0, 1.0);
+		vec2 span = vec2(dFdx(SCREEN_UV.x) / max(dFdx(UV.x), 0.000001),
+			dFdy(SCREEN_UV.y) / max(dFdy(UV.y), 0.000001));
+		vec2 screen_origin = SCREEN_UV - UV * span;
+		float printed_x = edge_x + sin(u * 3.141593) * curl_width * 0.65;
+		vec2 printed_uv = vec2(direction < 0.0 ? 1.0 - printed_x : printed_x, UV.y);
+		vec2 sample_uv = clamp(screen_origin + printed_uv * span,
+			screen_origin + SCREEN_PIXEL_SIZE * 0.5,
+			screen_origin + span - SCREEN_PIXEL_SIZE * 0.5);
+		vec3 printed = texture(frozen_scene, sample_uv).rgb * (1.0 - sin(u * 3.141593) * 0.42);
+		vec3 backing = mix(paper.rgb, ink.rgb, 0.10 + pow(1.0 - u, 2.0) * 0.38);
+		backing *= 0.96 + fiber_noise(point.y, 239.0) * 0.06;
+		vec3 folded = mix(printed, backing, smoothstep(0.40, 0.54, u));
+		float curl_shadow = (1.0 - smoothstep(1.0, 1.20, curl_u)) * step(1.0, curl_u) * hole;
+		composite = mix(composite, ink.rgb, curl_shadow * 0.45);
+		composite = mix(composite, folded, curl);
+		// Short horizontal fibers reconnect at the reverse-moving seal, rather
+		// than bridging a vertically shrinking gap between two screen halves.
+		float row = floor(along * 43.0);
+		float stitch = 1.0 - smoothstep(0.035, 0.095,
+			abs(fract(along * 43.0 + u * 0.28) - 0.5));
+		float fibers = stitch * step(0.32, hash(row + 87.0))
+			* smoothstep(0.85, 1.0, curl_u) * (1.0 - smoothstep(1.0, 1.28, curl_u))
+			* step(0.001, knit_close) * hole;
+		composite = mix(composite, paper.rgb, fibers * 0.85);
 	}
-	// Closed columns are the unmodified original pixels, including the last frame.
-	float coverage = reduced_motion ? opacity : smoothstep(0.0, pixel, gap);
-	COLOR = vec4(mix(untouched.rgb, composite, coverage), untouched.a);
+	// Every untouched/restored pixel is sampled in place. Reduced Motion fades
+	// the stationary cut-out instead of moving the rip or the paper fold.
+	COLOR = vec4(mix(untouched.rgb, composite, reduced_motion ? opacity : 1.0), untouched.a);
 }
