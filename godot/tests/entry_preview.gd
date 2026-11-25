@@ -13,6 +13,7 @@ func run() -> void:
 	await process_frame
 	var args := OS.get_cmdline_user_args()
 	game.choose_activity("local")
+	game.confirm_sides()
 	game.menus.selection.choose_fighter(0, 0)
 	game.menus.selection.choose_fighter(1, 4)
 	for p in 2:

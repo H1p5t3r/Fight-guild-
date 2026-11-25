@@ -4,7 +4,8 @@ const Arena = preload("res://scripts/arena.gd")
 const SAVE_PATH := "user://moves.json"
 const ACCENT := GuildTheme.BRASS
 const MUTED := GuildTheme.MUTED
-const KEY_MAPS := [{KEY_A:1, KEY_D:2, KEY_S:4, KEY_W:8, KEY_J:16, KEY_K:32, KEY_L:64, KEY_I:128, KEY_O:256, KEY_SPACE:512, KEY_SHIFT:1024, KEY_Q:2048}, {KEY_LEFT:1, KEY_RIGHT:2, KEY_DOWN:4, KEY_UP:8, KEY_KP_1:16, KEY_KP_2:32, KEY_KP_3:64, KEY_KP_5:128, KEY_KP_6:256, KEY_KP_0:512, KEY_KP_ADD:1024, KEY_KP_ENTER:2048}]
+var fighter_inputs := FighterInputs.new()
+var application_focused := true
 var model := CombatModel.new()
 var connection := NativePeer.new()
 var characters := [5, 4]
@@ -54,6 +55,7 @@ var screen := "home"
 var activity := "development"
 var pending_activity := "development"
 var selection_return := "home"
+var sides_return := "matches"
 var input_release_required := false
 var motion := MenuMotion.new()
 var layer_tween: Tween
@@ -84,6 +86,10 @@ func _ready() -> void:
 	motion.load_preferences()
 	build_theme()
 	build_interface()
+	add_child(fighter_inputs)
+	fighter_inputs.changed.connect(refresh_input_hint)
+	fighter_inputs.controller_lost.connect(on_controller_lost)
+	refresh_input_hint()
 	connection.manual_presentation = true
 	add_child(connection)
 	connection.status_changed.connect(func(message: String): net_status.text = message)
@@ -580,6 +586,7 @@ func menu_action(action: String) -> void:
 		"matches": show_screen("matches")
 		"local", "online", "training", "development": choose_activity(action)
 		"confirm_fighters": confirm_selection()
+		"confirm_sides": confirm_sides()
 		"back": menu_back()
 		"controls", "pause_controls": show_controls()
 		"sound", "pause_sound": show_sound_settings()
@@ -698,7 +705,7 @@ func cancel_match_entry() -> void:
 		cancel_connection()
 		show_screen("online")
 	else:
-		selection_return = "matches" if activity == "local" else "home"
+		selection_return = "sides" if activity == "local" else "home"
 		pending_activity = activity
 		menus.configure_selection(activity, characters, simple)
 		show_screen("fighters")
@@ -710,10 +717,19 @@ func entry_failed(message: String) -> void:
 
 func choose_activity(which: String) -> void:
 	if connection.active: return
+	if which == "local" and screen != "sides":
+		sides_return = screen
+		menus.sides.configure(fighter_inputs)
+		show_screen("sides")
+		return
 	pending_activity = which
 	selection_return = screen
 	menus.configure_selection(which, characters, simple)
 	show_screen("fighters")
+
+func confirm_sides() -> void:
+	if screen != "sides" or not menus.sides.apply(): return
+	choose_activity("local")
 
 func confirm_selection() -> void:
 	if connection.active: return
@@ -766,6 +782,7 @@ func menu_back() -> void:
 	match screen:
 		"entry": cancel_match_entry()
 		"matches": show_screen("home")
+		"sides": show_screen(sides_return)
 		"fighters": show_screen(selection_return)
 		"online":
 			cancel_connection()
@@ -805,18 +822,20 @@ func on_network_ended() -> void:
 	if activity == "online": show_screen("online")
 
 func has_gameplay_input_held() -> bool:
-	if Input.is_action_pressed("ui_accept"): return true
-	for mapping in KEY_MAPS:
-		for code in mapping:
-			if Input.is_physical_key_pressed(code) or Input.is_key_pressed(code): return true
-	for pad in Input.get_connected_joypads():
-		for b in [JOY_BUTTON_A, JOY_BUTTON_B, JOY_BUTTON_X, JOY_BUTTON_Y, JOY_BUTTON_LEFT_SHOULDER, JOY_BUTTON_RIGHT_SHOULDER, JOY_BUTTON_DPAD_LEFT, JOY_BUTTON_DPAD_RIGHT, JOY_BUTTON_DPAD_UP, JOY_BUTTON_DPAD_DOWN]:
-			if Input.is_joy_button_pressed(pad, b): return true
-		for axis in [JOY_AXIS_LEFT_X, JOY_AXIS_LEFT_Y]:
-			if absf(Input.get_joy_axis(pad, axis)) > 0.35: return true
-		for axis in [JOY_AXIS_TRIGGER_LEFT, JOY_AXIS_TRIGGER_RIGHT]:
-			if Input.get_joy_axis(pad, axis) > 0.5: return true
-	return false
+	return Input.is_action_pressed("ui_accept") or fighter_inputs.any_held()
+
+func refresh_input_hint() -> void:
+	keyboard_hint.text = fighter_inputs.keyboard_hint(0)
+	held.clear()
+	if screen == "play": input_release_required = true
+
+func on_controller_lost(player: int) -> void:
+	held.clear()
+	input_release_required = true
+	if screen == "play" and not has_open_dialog():
+		open_pause()
+		menus.pause_note.text = "Player %d controller disconnected. Reconnect it or choose Controls." % (player + 1)
+		if connection.active: menus.pause_note.text += " The online match continues."
 
 func show_sprite_review(clip: int = 0) -> void:
 	held.clear()
@@ -991,6 +1010,7 @@ func show_sprite_review(clip: int = 0) -> void:
 func show_controls() -> void:
 	held.clear()
 	var dialog := preload("res://scripts/controls_guide.gd").new()
+	dialog.controls = fighter_inputs
 	var previous := get_viewport().gui_get_focus_owner()
 	if previous != null: dialog.set_meta("return_focus", weakref(previous))
 	add_child(dialog)
@@ -1206,6 +1226,9 @@ func has_open_dialog() -> bool:
 	return false
 
 func _input(event: InputEvent) -> void:
+	if screen == "sides" and not has_open_dialog() and menus.sides.handle_input(event):
+		get_viewport().set_input_as_handled()
+		return
 	if screen == "entry":
 		if event.is_action_released("ui_accept"): entry_accept_released = true
 		if event.is_action_pressed("ui_cancel"):
@@ -1228,28 +1251,21 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		var code: int = event.physical_keycode if event.physical_keycode else event.keycode
 		if not event.pressed: held.erase(code)
-		elif screen == "play" and not changing_layers() and not input_release_required and not is_editing() and not event.echo: held[code] = true
+		elif application_focused and screen == "play" and not changing_layers() and not input_release_required and not is_editing() and not event.echo: held[code] = true
 
 func _notification(what: int) -> void:
-	if what == NOTIFICATION_APPLICATION_FOCUS_OUT: held.clear()
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		application_focused = false
+		held.clear()
+		input_release_required = true
+		if is_instance_valid(menus) and screen == "play" and not connection.active: open_pause()
+	elif what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		application_focused = true
+		input_release_required = true
 
 func read_input(player: int) -> int:
-	if screen != "play" or changing_layers() or input_release_required or is_editing(): return 0
-	var raw := 0
-	for key in held: raw |= KEY_MAPS[player].get(key, 0)
-	var pads := Input.get_connected_joypads()
-	if player >= pads.size(): return raw
-	var pad := pads[player]
-	if Input.is_joy_button_pressed(pad, JOY_BUTTON_DPAD_LEFT) or Input.get_joy_axis(pad, JOY_AXIS_LEFT_X) < -0.35: raw |= 1
-	if Input.is_joy_button_pressed(pad, JOY_BUTTON_DPAD_RIGHT) or Input.get_joy_axis(pad, JOY_AXIS_LEFT_X) > 0.35: raw |= 2
-	if Input.is_joy_button_pressed(pad, JOY_BUTTON_DPAD_DOWN) or Input.get_joy_axis(pad, JOY_AXIS_LEFT_Y) > 0.35: raw |= 4
-	if Input.is_joy_button_pressed(pad, JOY_BUTTON_DPAD_UP) or Input.get_joy_axis(pad, JOY_AXIS_LEFT_Y) < -0.35: raw |= 8
-	var buttons := [JOY_BUTTON_A, JOY_BUTTON_X, JOY_BUTTON_Y, JOY_BUTTON_B, JOY_BUTTON_RIGHT_SHOULDER, JOY_BUTTON_LEFT_SHOULDER]
-	for b in buttons.size():
-		if Input.is_joy_button_pressed(pad, buttons[b]): raw |= 16 << b
-	if Input.get_joy_axis(pad, JOY_AXIS_TRIGGER_LEFT) > 0.5: raw |= 1024
-	if Input.get_joy_axis(pad, JOY_AXIS_TRIGGER_RIGHT) > 0.5: raw |= 2048
-	return raw
+	if not application_focused or screen != "play" or changing_layers() or input_release_required or is_editing(): return 0
+	return fighter_inputs.sample(player, held)
 
 func reset_round() -> void:
 	lab.stop()

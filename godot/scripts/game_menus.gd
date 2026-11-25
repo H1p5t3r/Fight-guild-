@@ -18,6 +18,7 @@ var breadcrumb: Label
 var back_button: Button
 var home_utilities: HBoxContainer
 var selection: FighterSelect
+var sides: SideSelect
 var simplified: Array[CheckBox] = []
 var address: LineEdit
 var port: SpinBox
@@ -55,7 +56,7 @@ func _ready() -> void:
 	body.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	body.offset_bottom = -60
 	body.resized.connect(layout_pages)
-	for id in ["home", "matches", "fighters", "online", "pause", "results"]:
+	for id in ["home", "matches", "sides", "fighters", "online", "pause", "results"]:
 		var page := column(body)
 		page.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		page.offset_top = 0 if id == "home" else 64
@@ -65,6 +66,13 @@ func _ready() -> void:
 		match id:
 			"home": build_home(page)
 			"matches": build_matches(page)
+			"sides":
+				heading(page, "CHOOSE YOUR SIDE", "LOCAL VERSUS  /  Take your place, then choose your fighter.")
+				sides = SideSelect.new()
+				sides.motion = motion
+				page.add_child(sides)
+				sides.confirmed.connect(func(): action_requested.emit("confirm_sides"))
+				buttons.confirm_sides = sides.continue_button
 			"fighters": build_fighters(page)
 			"online": build_online(page)
 			"pause": build_pause(page)
@@ -294,17 +302,18 @@ func update_motion_label() -> void:
 
 func set_active(enabled: bool) -> void:
 	active = enabled
+	sides.active = enabled and current_page == "sides"
 	MenuMotion.interactive(self, enabled)
 	for id in pages: MenuMotion.interactive(pages[id], enabled and id == current_page)
 	MenuMotion.interactive(header, enabled and current_page != "home")
 	MenuMotion.interactive(home_utilities, enabled and current_page == "home")
 
 func show_page(page: String, fresh: bool = false) -> void:
-	var depth := {"home":0, "matches":1, "fighters":2, "online":3, "pause":1, "results":1}
+	var depth := {"home":0, "matches":1, "sides":2, "fighters":3, "online":4, "pause":1, "results":1}
 	var direction := -1.0 if depth[page] < depth[current_page] else 1.0
 	current_page = page
 	back_button.visible = page not in ["home", "results"]
-	breadcrumb.text = {"home":"MAIN MENU", "matches":"VERSUS", "fighters":"FIGHTER SELECT", "online":"ONLINE / CONNECTION", "pause":"MATCH MENU", "results":"RESULT"}[page]
+	breadcrumb.text = {"home":"MAIN MENU", "matches":"VERSUS", "sides":"SIDE SELECT", "fighters":"FIGHTER SELECT", "online":"ONLINE / CONNECTION", "pause":"MATCH MENU", "results":"RESULT"}[page]
 	for id in pages:
 		var node: Control = pages[id]
 		if page_tweens.has(id): page_tweens[id].kill()
@@ -359,6 +368,7 @@ func focus_page(page: String) -> void:
 	match page:
 		"home": buttons.matches.grab_focus()
 		"matches": buttons.local.grab_focus()
+		"sides": sides.continue_button.grab_focus()
 		"fighters": selection.focus_selection()
 		"online": (buttons.cancel_connection if buttons.host.disabled else buttons.host).grab_focus()
 		"pause": buttons.resume.grab_focus()

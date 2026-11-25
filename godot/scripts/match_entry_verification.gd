@@ -29,6 +29,7 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	game = subject
 	game.motion.instant = false
 	game.choose_activity("local")
+	game.confirm_sides()
 	game.menus.selection.choose_fighter(0, 2)
 	game.menus.selection.choose_fighter(1, 5)
 	await game.wait_for_menu_motion()
@@ -62,6 +63,7 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	# A held Select cannot skip the intro it just opened. A new press can.
 	game.go_home()
 	game.choose_activity("local")
+	game.confirm_sides()
 	await game.wait_for_menu_motion()
 	key(KEY_ENTER, true)
 	game.confirm_selection()
@@ -115,6 +117,7 @@ func verify_local_match() -> void:
 	game.model.load_data(knockout_data(game.model, [0, 1]))
 	game.go_home()
 	game.choose_activity("local")
+	game.confirm_sides()
 	for p in 2: game.menus.selection.choose_fighter(p, p)
 	game.confirm_selection()
 	for _tick in 5: game.model.step(16, 0)

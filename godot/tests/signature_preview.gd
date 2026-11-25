@@ -11,6 +11,7 @@ func run() -> void:
 	await process_frame
 	game.motion.instant = true
 	game.choose_activity("local")
+	game.confirm_sides()
 	game.confirm_selection()
 	await game.wait_for_match_entry()
 	game.show_boxes = args.has("--boxes")

@@ -29,6 +29,7 @@ func run() -> void:
 	game.motion.instant = true
 	game.motion.reduced = args.has("--reduced")
 	game.choose_activity("local")
+	game.confirm_sides()
 	game.confirm_selection()
 	await game.wait_for_match_entry()
 	for side in [1, -1]:

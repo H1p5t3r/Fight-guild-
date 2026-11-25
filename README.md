@@ -28,6 +28,7 @@ Download the Windows/Linux ZIP from this branch's successful GitHub Actions arti
 
 - Versus is first to two Scrum wins: **1st Scrum**, **2nd Scrum**, and **Final Down** at 1–1. Fighter loading/intros and the four-beat opening lead into each match; online clients synchronize before release.
 - Start from **Versus**, **Training** or **Development**, then choose fighters. Esc / gamepad Start opens the match menu. [Menu flow](docs/menu-flow.md) explains entry, pause, rematch and connection recovery.
+- **Local versus** first asks you to choose sides. Move your controller left/right or use the device cards. **Controls** saves remaps, controller assignments and deadzones, with a live input test; [control setup](docs/input-controls.md).
 - **Player 1:** WASD; J/K/L/I/O = P/K/S/Hs/D; Space = run/dash; left Shift = simple modifier; back + Q = Faultless Defense.
 - **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = run/dash; numpad + = modifier; back + numpad Enter = Faultless Defense.
 - Choose simplified inputs independently at fighter select. Traditional motions stay available.

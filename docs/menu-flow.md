@@ -4,10 +4,12 @@ The native game opens at **Main menu**. Applied move data remains in memory when
 
 | Entry | Sequence | Tools and exit paths |
 | --- | --- | --- |
-| Versus / Local versus | Main menu → Versus → Local versus → Fighter select → Loading → Intros → Opening → Match | Full-width arena; Esc/Start opens Resume, Restart scrum, Change fighters, Main menu. A completed match offers Rematch, Change fighters and Main menu. |
+| Versus / Local versus | Main menu → Versus → Local versus → Side select → Fighter select → Loading → Intros → Opening → Match | Full-width arena; Esc/Start opens Resume, Restart scrum, Change fighters, Main menu. A completed match offers Rematch, Change fighters and Main menu. |
 | Versus / Online versus | Main menu → Versus → Online versus → Local fighter select → Connection → Host or Join → Loading → Intros → Opening → Match | Opponent chooses their own fighter. Waiting exposes Cancel connection. Errors and disconnects return to the connection screen with the explanation and retained selection/address. Back cancels the connection and returns to fighter select, then Versus. |
 | Training | Main menu → Training → Fighter and dummy select → Start training | Dummy behavior, starting Momentum, input history, hitboxes, pause, one-frame step and reset. No move editor. |
 | Development | Main menu → Development → Fighter and dummy select → Open combat lab | Training tools plus move/buffer/Momentum editing, sprite review, import/export/save, unified gatling reference and rollback trial. The lab can also switch to local versus for testing. |
+
+Local **Side select** uses left / neutral / right device cards. Each keyboard layout or controller can choose a side independently; both players need an assigned input to continue. Back discards unconfirmed assignments. Local Change fighters returns through the side screen, and Fighter select Back returns there. [Controls and side selection](input-controls.md) covers remapping, hot-plugging and keyboard swaps.
 
 Fighter select has a central six-fighter grid. Choose **Player 1** or **Player 2** above it to edit that slot (Player 2 is the dummy in practice). Arrows/D-pad move through the two-column grid; focus previews and selects that fighter for the active slot. Up from the first row returns to the player selector; Down from the last row reaches Start. Both players may choose the same fighter, and both badges remain visible. Online selects only your local fighter.
 

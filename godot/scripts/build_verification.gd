@@ -402,9 +402,9 @@ func run(runtime: SceneTree, existing: Control = null) -> void:
 		check(game.has_open_dialog(), "Sprite review did not open")
 	game.motion.instant = false
 	if args.has("--home"): game.go_home()
-	if args.has("--fighters"): game.go_home(); game.choose_activity("local")
+	if args.has("--fighters"): game.go_home(); game.choose_activity("local"); game.confirm_sides()
 	if args.has("--training"): game.go_home(); game.choose_activity("training"); game.confirm_selection()
-	if args.has("--match"): game.go_home(); game.choose_activity("local"); game.confirm_selection()
+	if args.has("--match"): game.go_home(); game.choose_activity("local"); game.confirm_sides(); game.confirm_selection()
 	if args.has("--matches"): game.go_home(); game.show_screen("matches")
 	if args.has("--connection"): game.go_home(); game.choose_activity("online"); game.confirm_selection()
 	if args.has("--controls"): game.go_home(); game.show_controls()

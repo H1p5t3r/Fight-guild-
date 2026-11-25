@@ -43,6 +43,7 @@ func tour() -> void:
 	await game.wait_for_menu_motion()
 	await create_timer(0.35).timeout
 	game.menu_action("local")
+	game.confirm_sides()
 	await game.wait_for_menu_motion()
 	await create_timer(0.45).timeout
 	game.menus.selection.tiles[2].grab_focus()

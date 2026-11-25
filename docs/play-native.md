@@ -22,7 +22,7 @@ Use the repair package with the matching current branch source. Copying an old D
 
 The game opens at the main menu. Use the mouse, arrow keys/Enter, or a controller's D-pad/A to navigate; Esc/B goes back. Menus use the supplied Guild Ball panel/font style; Controls opens in its separate warm Settings skin.
 
-- **Versus → Local versus → Fighter select → Let’s fight:** a first-to-two Scrum match, a full-width arena, and a results screen with Rematch and Change fighters.
+- **Versus → Local versus → Choose your side → Fighter select → Let’s fight:** assign a keyboard/controller to each side, then play a first-to-two Scrum match with Rematch and Change fighters.
 - **Versus → Online versus → Fighter select → Connection:** choose only your local fighter, then Host or Join. Both peers connect, prepare their fighters and finish the opening before combat starts.
 - **Training → Fighter select → Start training:** choose your fighter and a dummy, then practice with dummy behavior, starting Momentum, input history, hitboxes, pause, frame step and reset controls. **Record / Replay / Frame lab** capture exchanges and inspect both players; [training guide](training-lab.md).
 - **Development → Fighter select → Open combat lab:** practice controls plus the move editor, sprite review, buffer/Momentum tuning, data import/export and rollback workbench.
@@ -38,6 +38,12 @@ Matches use **1st Scrum**, **2nd Scrum**, and **Final Down** when tied 1–1. Fi
 A loading card and two fighter introductions lead into “The stands hunger for legends.” → “Let the guilds give them names.” → the Scrum call → “Break the line!” Press Enter/A or click **Skip intros** to skip the spotlights. The four opening beats still play, and held buttons must be released before attacking. Practice resets remain immediate.
 
 See [menu paths and edge cases](menu-flow.md).
+
+Open **Controls** from Home or the match menu to remap each player's physical
+keys, controller buttons and triggers, choose their controller, adjust stick and
+trigger thresholds, or try **Test inputs**. Settings save locally in
+`user://controls.json`, independently of move JSON. The table below shows defaults;
+side selection can swap the two keyboard layouts. See [control setup](input-controls.md).
 
 | Action | Player 1 keyboard | Player 2 keyboard | Gamepad |
 | --- | --- | --- | --- |

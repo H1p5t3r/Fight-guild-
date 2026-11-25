@@ -53,9 +53,17 @@ Do not treat permission for game/art changes as permission to resume the website
    playback uses resolved distance and rollback history, including planted
    corner stops. No movement, attack timing or collision rules changed.
    See [movement transitions and review](movement-transitions.md).
-   **Item 5, input and controller support, is next.**
-5. **Input and controller support.** Remapping, device/deadzone handling, motion
-   acceptance and buffered-action validation.
+5. **Input and controller support — complete first pass (2026-11-25).** Native
+   Controls now saves keyboard/button/trigger remaps per player, supports explicit
+   controller assignment, adjustable stick/trigger thresholds, direction-source
+   choices and a live tester. Hot-plugging preserves the other player's assignment;
+   disconnect/focus/menu gates prevent held inputs leaking into combat. Physical
+   samples feed the existing deterministic motion and action buffers. Local versus
+   now enters a three-lane side selector before fighter select, including keyboard
+   layout swaps, neutral devices and controller-driven selection. Native input,
+   menu, replay and 720p layout checks pass; physical Windows/controller testing
+   remains a hardware follow-up. See [controls and side selection](input-controls.md).
+   **Item 6, training and diagnostics, is next.**
 6. **Training and Workshop diagnostics.** Recording slots, defensive dummy choices,
    and clear explanations when a sequence cannot connect or cancel.
 7. **Character rewards and counterplay.** Fillet bleed, Shark's pull, Tapper's stance

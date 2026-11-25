@@ -82,6 +82,8 @@ func run(runtime: SceneTree, subject: Control) -> int:
 	game.go_home()
 	press("matches")
 	press("local")
+	check(game.screen == "sides", "Local versus skipped side selection")
+	press("confirm_sides")
 	game.menus.selection.choose_fighter(0, 0)
 	game.menus.selection.choose_fighter(1, 1)
 	press("confirm_fighters")
@@ -175,7 +177,7 @@ func verify_controls_dialog() -> void:
 	dialog.tabs[1].pressed.emit()
 	check(dialog.bindings.get_child(0).text.begins_with("PLAYER 2"), "Controls tab did not switch bindings")
 	dialog.tabs[2].pressed.emit()
-	check(dialog.bindings.get_child(0).text.begins_with("GAMEPAD"), "Gamepad bindings missing")
+	check(dialog.bindings.get_child(0).text.begins_with("GUIDE"), "Control guide missing")
 	await tree.process_frame
 	var scroll: ScrollContainer = dialog.find_child("ControlsBody", true, false)
 	var close: Button = dialog.find_child("CloseAction", true, false)
