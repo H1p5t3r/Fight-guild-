@@ -1,0 +1,963 @@
+{
+  "reference": "../anvil-grappler-v1/high-clamp-hand-corrected.png",
+  "approval": "2026-11-25: LGTM after right-hand correction",
+  "bodyPolicy": "One fixed anatomical scale per atlas, target idle 160 world pixels; body-only hurtboxes, shield excluded; no pixel processing.",
+  "timingPolicy": "Hold compact load through last startup; largest limb/shield displacement to first active; held contact then recoil/withdraw; saved action and capture clocks.",
+  "actions": {
+    "0": {
+      "id": "5P",
+      "name": null,
+      "timing": [
+        7,
+        3,
+        15
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 2,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 7,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 10,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 15,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 22,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "1": {
+      "id": "5K",
+      "name": null,
+      "timing": [
+        10,
+        4,
+        19
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 3,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 10,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 14,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 20,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 29,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "2": {
+      "id": "5S",
+      "name": null,
+      "timing": [
+        16,
+        5,
+        26
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 5,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 16,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 21,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 29,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 41,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "3": {
+      "id": "5Hs",
+      "name": null,
+      "timing": [
+        19,
+        5,
+        32
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 6,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 19,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 24,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 34,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 49,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "4": {
+      "id": "2P",
+      "name": null,
+      "timing": [
+        7,
+        3,
+        16
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 2,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 7,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 10,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 15,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 22,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "5": {
+      "id": "2K",
+      "name": null,
+      "timing": [
+        9,
+        3,
+        18
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 2,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 9,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 12,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 18,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 26,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "6": {
+      "id": "2S",
+      "name": null,
+      "timing": [
+        13,
+        4,
+        29
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 4,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 13,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 17,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 26,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 40,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "7": {
+      "id": "2Hs",
+      "name": null,
+      "timing": [
+        16,
+        5,
+        30
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 5,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 16,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 21,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 31,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 45,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "8": {
+      "id": "6P",
+      "name": null,
+      "timing": [
+        12,
+        5,
+        25
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 3,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 12,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 17,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 25,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 37,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "11": {
+      "id": "6Hs",
+      "name": null,
+      "timing": [
+        24,
+        5,
+        34
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 7,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 24,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 29,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 40,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 56,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "13": {
+      "id": "5D",
+      "name": null,
+      "timing": [
+        5,
+        2,
+        14
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 1,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 5,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 7,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 11,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 18,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "14": {
+      "id": "236P",
+      "name": null,
+      "timing": [
+        5,
+        3,
+        42
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 1,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 5,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 8,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 22,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 41,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "15": {
+      "id": "236S",
+      "name": null,
+      "timing": [
+        6,
+        3,
+        40
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 1,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 6,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 9,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 22,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 41,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "16": {
+      "id": "623Hs",
+      "name": null,
+      "timing": [
+        5,
+        6,
+        45
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 1,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 5,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 11,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 26,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 47,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "17": {
+      "id": "j.P",
+      "name": null,
+      "timing": [
+        8,
+        4,
+        14
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 2,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 8,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 12,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 16,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 23,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "18": {
+      "id": "j.K",
+      "name": null,
+      "timing": [
+        10,
+        4,
+        18
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 3,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 10,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 14,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 20,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 28,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "19": {
+      "id": "j.S",
+      "name": null,
+      "timing": [
+        13,
+        5,
+        23
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 4,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 13,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 18,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 25,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 36,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "20": {
+      "id": "j.Hs",
+      "name": null,
+      "timing": [
+        16,
+        5,
+        28
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 5,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 16,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 21,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 30,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 43,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "21": {
+      "id": "j.D",
+      "name": null,
+      "timing": [
+        9,
+        90,
+        22
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 2,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 9,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 99,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 106,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 116,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "23": {
+      "id": "4P+K",
+      "name": null,
+      "timing": [
+        2,
+        2,
+        27
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "load"
+        },
+        {
+          "frame": 1,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 2,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 4,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 13,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 25,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "24": {
+      "id": "6P+K",
+      "name": null,
+      "timing": [
+        2,
+        2,
+        27
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "load"
+        },
+        {
+          "frame": 1,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 2,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 4,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 13,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 25,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "28": {
+      "id": "214S",
+      "name": null,
+      "timing": [
+        23,
+        24,
+        28
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 7,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 23,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 47,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 56,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 69,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "30": {
+      "id": "214S>P",
+      "name": null,
+      "timing": [
+        5,
+        1,
+        12
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 1,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 5,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 6,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 10,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 15,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "32": {
+      "id": "c.S",
+      "name": null,
+      "timing": [
+        10,
+        4,
+        22
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "ready"
+        },
+        {
+          "frame": 3,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 10,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 14,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 21,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 31,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "41": {
+      "id": "j.4P+K",
+      "name": null,
+      "timing": [
+        2,
+        2,
+        25
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "load"
+        },
+        {
+          "frame": 1,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 2,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 4,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 12,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 24,
+          "pose": "settle; lock persists"
+        }
+      ]
+    },
+    "42": {
+      "id": "j.6P+K",
+      "name": null,
+      "timing": [
+        2,
+        2,
+        25
+      ],
+      "keys": [
+        {
+          "frame": 1,
+          "pose": "load"
+        },
+        {
+          "frame": 1,
+          "pose": "load / hold"
+        },
+        {
+          "frame": 2,
+          "pose": "contact / maximum snap"
+        },
+        {
+          "frame": 4,
+          "pose": "contact / effect removed"
+        },
+        {
+          "frame": 12,
+          "pose": "withdraw"
+        },
+        {
+          "frame": 24,
+          "pose": "settle; lock persists"
+        }
+      ]
+    }
+  },
+  "captureTracks": {
+    "14": {
+      "duration": 88,
+      "poses": [
+        "catch",
+        "loaded waist grip",
+        "overhead lift",
+        "seated powerbomb",
+        "settle"
+      ],
+      "releaseOnlyOnCapture": true
+    },
+    "15": {
+      "duration": 92,
+      "poses": [
+        "catch",
+        "hip turn",
+        "shoulder lift",
+        "rotating side-switch slam",
+        "settle"
+      ],
+      "releaseOnlyOnCapture": true
+    },
+    "16": {
+      "duration": 112,
+      "poses": [
+        "high catch",
+        "hoist",
+        "rising loaded hold",
+        "descending powerbomb",
+        "settle"
+      ],
+      "releaseOnlyOnCapture": true
+    },
+    "normal": {
+      "duration": 40,
+      "poses": [
+        "collar catch",
+        "load",
+        "turn",
+        "release"
+      ],
+      "releaseOnlyOnCapture": true
+    }
+  }
+}

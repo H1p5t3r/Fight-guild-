@@ -1,0 +1,209 @@
+[
+  {
+    "id": "base",
+    "file": "base.png",
+    "source": "/workspace/generated_images/exec-345fc0d9-6ed2-4774-99fd-afbb898dca4a.png",
+    "sha256": "8fd684d93427fd0c97182f2d4c18554f7123ed96d51169c808bde04faafb3da7",
+    "prompt": "prompts/base.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "walk",
+    "file": "walk.png",
+    "source": "/workspace/generated_images/exec-157efb7c-cf94-4a74-b13e-73aafc6a31a2.png",
+    "sha256": "34a9c5dd44ab46700b8ed369639744b32fb670216cedba258b499ba876f145ca",
+    "prompt": "prompts/walk.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "drive",
+    "file": "drive.png",
+    "source": "/workspace/generated_images/exec-a94f73f1-5fe7-4291-886e-bf1095e500da.png",
+    "sha256": "9519e1030b18a80d524d3854e12b2ca0d9907d8f196a1f151c4636e1a14327f9",
+    "prompt": "prompts/drive.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png",
+      "../../../../godot/assets/fighters/anvil-bull-v2/base.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "dash",
+    "file": "dash.png",
+    "source": "/workspace/generated_images/exec-e4d5f2b7-6726-4ec7-990d-8e7e857fdf25.png",
+    "sha256": "d68e639a082c7e3554c87609e3ab02121eb7218d675969744c137e6da7b25d10",
+    "prompt": "prompts/dash.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png",
+      "../../../../godot/assets/fighters/anvil-bull-v2/base.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "checks",
+    "file": "checks.png",
+    "source": "/workspace/generated_images/exec-6f1fd34c-cae1-45fa-8e84-949fafec90ab.png",
+    "sha256": "7843b70248ae2e037367ecc53a7e108c46db5ef8d2b1a81edcd5e506d9827588",
+    "prompt": "prompts/checks.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "kicks",
+    "file": "kicks.png",
+    "source": "/workspace/generated_images/exec-006a4b32-a5d2-4bbd-aeed-000ed177240d.png",
+    "sha256": "031f9254a2cd81f285a05d5ec5834caf80d624ec5db53b0cb5252c25a6b760b4",
+    "prompt": "prompts/kicks.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "slashes",
+    "file": "slashes.png",
+    "source": "/workspace/generated_images/exec-97c3d906-971a-4583-a31f-7a4a07e4e047.png",
+    "sha256": "4c25aa2ee8b52c12b0a68d03c723aefec692006a85985b36974aed25f939bdfb",
+    "prompt": "prompts/slashes.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "heavy_sweep",
+    "file": "heavy_sweep.png",
+    "source": "/workspace/generated_images/exec-4c650984-7267-4775-b90b-0329212ea956.png",
+    "sha256": "36505504d1b636a4bd99efe38e888934f023874f866e65db706bcf6269426800",
+    "prompt": "prompts/heavy_sweep.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "lift_anti",
+    "file": "lift_anti.png",
+    "source": "/workspace/generated_images/exec-a8a97a74-33a4-44e4-af87-159e14b9d939.png",
+    "sha256": "ed8f3af40a7f2bd350e65fc7bf6b59ce96a7a48e89cb0f847f6044bd704d0f7a",
+    "prompt": "prompts/lift_anti.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "rush",
+    "file": "rush.png",
+    "source": "/workspace/generated_images/exec-b85e7bda-a412-4109-8982-f1f79d17c4c2.png",
+    "sha256": "9b002f18b952b10c3ab81237ce956908751b241475a7349fd5359de9bd733309",
+    "prompt": "prompts/rush.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "air_checks",
+    "file": "air_checks.png",
+    "source": "/workspace/generated_images/exec-85f231fa-fa1d-47b8-ae24-b9ddf88f28a5.png",
+    "sha256": "8d4f0f4a7d8b7249436196a2a14443631e303d23aa7c457e28bc22e634e7d216",
+    "prompt": "prompts/air_checks.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "air_swings",
+    "file": "air_swings.png",
+    "source": "/workspace/generated_images/exec-298c5272-ebb6-47cd-9f1a-7e901c579c90.png",
+    "sha256": "26cc08e97c36fb890241181bce9046d272d381578440dc2d6022bfce056e850f",
+    "prompt": "prompts/air_swings.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "grabs",
+    "file": "grabs.png",
+    "source": "/workspace/generated_images/exec-6f4a91be-efa7-4f25-a956-ec80498b8c7d.png",
+    "sha256": "1fafd53896a55145d9db1574d9b61d6c58be443bb455d77faa46a3835391d78c",
+    "prompt": "prompts/grabs.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png",
+      "../anvil-grappler-v1/grab-options.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "reactions_high",
+    "file": "reactions_high.png",
+    "source": "/workspace/generated_images/exec-df0b9a88-576b-4c18-a5c2-d239f7689473.png",
+    "sha256": "319c438e53e760cd8edfc3098c5e7eb6bd11fa2a0a8989f6ea04cd04f40f04c2",
+    "prompt": "prompts/reactions_high.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "reactions_low",
+    "file": "reactions_low.png",
+    "source": "/workspace/generated_images/exec-029ebfa0-9f10-4b2a-9246-cabffb6b5af8.png",
+    "sha256": "4b38a877fbb5abd377ae1bfb0d0fb7f517fab48bfa643de90683a14b5595e28f",
+    "prompt": "prompts/reactions_low.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "down_back",
+    "file": "down_back.png",
+    "source": "/workspace/generated_images/exec-b6bba611-1123-4902-b634-3a8a21079e63.png",
+    "sha256": "e7e59a0f9267d42e343da936077be3ab130ff6402b5248123a320d6e35ec55a9",
+    "prompt": "prompts/down_back.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  },
+  {
+    "id": "down_prone",
+    "file": "down_prone.png",
+    "source": "/workspace/generated_images/exec-3a665ad4-ffa0-455e-a78b-250f5d47cb08.png",
+    "sha256": "7c4d391c1354e3eb5edf6ba195e2eb2d37a23a2aca2c4442d01b65c95c495526",
+    "prompt": "prompts/down_prone-floor-study.txt",
+    "references": [
+      "../anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "tool": "image_gen.imagegen",
+    "pixelEdits": false
+  }
+]
