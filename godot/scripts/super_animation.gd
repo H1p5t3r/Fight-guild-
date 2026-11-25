@@ -121,6 +121,11 @@ static func present(sprites: Array[Sprite2D], model: CombatModel, state: Diction
 		var sprite := sprites[owner]
 		FighterArt.apply(sprite,int(fighter.character),str(cue.spec.phase),int(cue.pose),world_scale,int(cue.facing))
 		sprite.set_meta("super_animation",cue)
+		if str(cue.stage)=="connected" and int(cue.tick)==0 and int(state.hitstop)>0 and cue.spec.get("finish_receiver","") in ["chest","head"]:
+			var reaction: Dictionary = state.players[1-owner].duplicate()
+			reaction.reaction=0;reaction.stun=1;reaction.guarding=0
+			CombatReactions.apply(sprites[1-owner],reaction,{"flags":6 if cue.spec.finish_receiver=="head" else 4,"age":2},world_scale)
+			sprites[1-owner].set_meta("super_role","receiver")
 		if str(cue.stage) != "paired" or str(cue.spec.get("mode","carry")) != "carry": continue
 		var victim := sprites[1-owner]
 		var receiver := int(state.players[1-owner].character)

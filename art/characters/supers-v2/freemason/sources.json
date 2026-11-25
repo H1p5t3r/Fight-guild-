@@ -1,0 +1,69 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v2/freemason/entry.png",
+    "original": "/workspace/generated_images/exec-bc8e808a-ed34-45da-aad2-6a316aa0a6b3.png",
+    "sha256": "c6f3e7e3f99b831e5eba0245567cd66b6bb03c73b976fb05f49f8ddbb864e722",
+    "prompt": "art/characters/supers-v2/freemason/entry-prompt.txt",
+    "references": [
+      "godot/assets/fighters/hammer-kit-v1/drive_ready.png"
+    ],
+    "pixelEdits": false
+  },
+  {
+    "id": "rise",
+    "file": "godot/assets/fighters/supers-v2/freemason/rise.png",
+    "original": "/workspace/generated_images/exec-b319c164-dc5f-4c5b-8a70-7ad58eb38f1b.png",
+    "sha256": "4344fad44ed3ddaee231e49f7dc7ba173c227bf5c44a950963c971cac5b0f9bc",
+    "prompt": "art/characters/supers-v2/freemason/rise-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/freemason/entry.png"
+    ],
+    "pixelEdits": false
+  },
+  {
+    "id": "crush",
+    "file": "godot/assets/fighters/supers-v2/freemason/crush.png",
+    "original": "/workspace/generated_images/exec-dc529ef9-cfec-47fa-9f36-527eed1a624d.png",
+    "sha256": "4eda8075a53fffca500cb0bff303c69d8266e4e21adc661bc98713f7325b444a",
+    "prompt": "art/characters/supers-v2/freemason/crush-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/freemason/entry.png",
+      "godot/assets/fighters/supers-v2/freemason/rise.png"
+    ],
+    "pixelEdits": false
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v2/freemason/finish.png",
+    "original": "/workspace/generated_images/exec-bc8a86d8-7cc4-4d77-9524-7662ad3a5bc0.png",
+    "sha256": "5520f9f8c93fbf893e7481990eacd4350fb7634a70ebd0e8f1f4bb4ca099f14a",
+    "prompt": "art/characters/supers-v2/freemason/finish-transparency-prompt.txt",
+    "references": [
+      "/workspace/generated_images/exec-3259fcba-71e5-4d74-8dc5-6becd87e5abf.png"
+    ],
+    "pixelEdits": false
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v2/freemason/effects.png",
+    "original": "/workspace/generated_images/exec-c58a4bfc-af0a-49d8-814a-b8e661b311ec.png",
+    "sha256": "5640ab25256032f334a1fe64e24cc52d356468e2c378568eaa1ff54660915b8a",
+    "prompt": "art/characters/supers-v2/freemason/effects-prompt.txt",
+    "references": [
+      "godot/assets/fighters/hammer-kit-v1/effects.png"
+    ],
+    "pixelEdits": false
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/freemason/portrait.png",
+    "original": "/workspace/generated_images/exec-cd0b7ee4-3199-46de-a5d9-d1822f377108.png",
+    "sha256": "db84fe5444d0d4cacc231af9d6daab8eb4fd1704c4663fe20884126f3d92e159",
+    "prompt": "art/characters/supers-v2/freemason/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/freemason/entry.png"
+    ],
+    "pixelEdits": false
+  }
+]

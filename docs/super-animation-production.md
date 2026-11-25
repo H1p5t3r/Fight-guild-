@@ -119,11 +119,52 @@ Edited capture lengths of 91, 100 and 120 ticks also retain exact alignment at
 the native integer-rounded impact boundaries. On block, the opening force effect
 ends at the defender instead of continuing through their guard.
 
+## 03 — Hammer / Freemason
+
+[Watch the native 60 FPS review with sound](../exports/FightGuild-Freemason-2026-11-25.mp4).
+The approved Shoulder Drive style now carries through sixteen original body
+keys: a compact hip load, horizontal strike, weight brake, rising cross-body
+strike, overhead downstroke, final horizontal carry and controlled return.
+Six separate blue/ivory hammer effects and four original metal/bass impacts
+give each strike its own accent. A new face drawing fills the torn-screen cut-in.
+
+The two intermediate blows follow capture ticks 40 and 70; the final strike
+begins at actual release/damage, tick 90. The defender holds the existing strong
+upper-body recoil during the real release freeze, then displays the actual hard
+knockdown. This replaces the earlier presentation in which the defender was
+already prone before the horizontal finishing blow. No simulation position,
+collision, damage, stun, invulnerability or recovery value changes. Freemason
+remains 12/4/34, 360 base damage and two Momentum segments.
+
+The constant 425-pixel anatomical scale matches Hammer's existing source scale.
+Weapon masks preserve the pause treatment. One generated finish sheet had a
+translucent white background; it was corrected through image generation before
+registration. No script edits any source pixels. The final PNGs and all prompts,
+including the transparency correction, retain their provenance.
+
+- [Exposure plan](../art/characters/supers-v2/freemason/exposure-plan.json)
+- [Original assets and hashes](../art/characters/supers-v2/freemason/sources.json)
+- [Body roots, weapon masks and effects](../art/characters/supers-v2/freemason/layout.json)
+
+```bash
+python scripts/register-super-presentation.py freemason
+python scripts/generate-freemason-audio.py
+bash scripts/godot.sh --headless --editor --import
+bash scripts/godot.sh --headless --script res://tests/super_presentation_test.gd -- --test --character 1 --slot 12
+python scripts/capture-freemason.py --baseline
+python scripts/capture-freemason.py
+```
+
+The common presentation checks cover six defenders, both player sides/facings,
+every drawing, weapon/body scale, pause, snapshots and replay, authored sound
+counts, edited capture durations and separate block/whiff behavior. The final
+receiver hold is also checked against the saved hitstop state.
+
 ## Production order
 
 1. Sky Foundry — full pass and native review.
 2. Iron Dominion — full pass and native review.
-3. Freemason.
+3. Freemason — full pass and native review.
 4. Grand Design.
 5. Flashpoint.
 6. The Air Is Mine.

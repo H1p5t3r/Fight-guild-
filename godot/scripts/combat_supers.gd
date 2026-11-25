@@ -21,7 +21,8 @@ static func present(sprites: Array[Sprite2D], state: Dictionary, world_scale: fl
 	var victim := sprites[1-owner]
 	# These are strikes, not generic collar grabs. Keep the authored owner art
 	# and show the receiver's actual chest/air recoil on the saved impact beats.
-	if tick >= total-8:
+	var spec := SuperAnimation.profile(int(state.players[owner].character),int(state.pairMove))
+	if tick >= total-8 and not spec.has("finish_receiver"):
 		FighterArt.apply(victim, int(receiver.character), "knockdown", 0, world_scale, int(receiver.facing))
 	else:
 		var beat := 0 if tick < total*45/100 else total*45/100 if tick < total*78/100 else total*78/100

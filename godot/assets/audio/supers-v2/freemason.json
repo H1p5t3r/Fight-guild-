@@ -1,0 +1,26 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-freemason-audio.py",
+  "sounds": [
+    {
+      "file": "freemason_ram.wav",
+      "seconds": 0.35,
+      "sha256": "edadba191b1e225add822ceb900d2fea38c71ef54dfae0d77c5e76d018ebc9e3"
+    },
+    {
+      "file": "freemason_rise.wav",
+      "seconds": 0.38,
+      "sha256": "7fe2cfcf8d00a657652c03ffb76f4561433668cee276af60be113504da779d03"
+    },
+    {
+      "file": "freemason_crush.wav",
+      "seconds": 0.45,
+      "sha256": "f0102a6ac5ccc84c819ebeb7290cdb138b57b5595cab2435513ea4ab7e2c5163"
+    },
+    {
+      "file": "freemason_finish.wav",
+      "seconds": 0.85,
+      "sha256": "88d1923bc02284905be136a876b71c02d5984dbd9309ccc9d41752b5f8e1ad2a"
+    }
+  ]
+}

@@ -26,6 +26,8 @@ The full super animation pass starts with **Sky Foundry**: 16 body drawings, a d
 
 **Iron Dominion** follows with a complete 16-drawing shield assault, separate rising/downward impacts, a final shield plant, its own face and four shield sounds. [Watch hit, block and whiff](exports/FightGuild-Iron-Dominion-2026-11-25.mp4).
 
+**Freemason** adds Hammer's full 16-drawing horizontal/rising/downward sequence, blue hammer-force effects and a held finishing recoil before knockdown. [Watch the native review](exports/FightGuild-Freemason-2026-11-25.mp4).
+
 ## Play or edit
 
 For browser-only attack tuning on a work PC, the [hosted Move Workshop](https://h1p5t3r.github.io/Fight-guild-/) is the intended delivery after the [one-time Pages setup](docs/move-workshop.md#hosted-publishing). It loads artwork as needed, keeps drafts and pose photos in your browser, and exports JSON for the Godot editor. The **Publish Move Workshop** workflow deploys updates from `feat/godot-combat-lab`. For offline use, extract **FightGuild-Move-Workshop.zip** and open `index.html`; keep its `assets` folder beside it. The single-file HTML is still built for compatibility. Current exports use schema 27; version-12–26 workshop files migrate automatically. No game install is needed. Before switching to the website, download your JSON from the old editor and import it on the site.
