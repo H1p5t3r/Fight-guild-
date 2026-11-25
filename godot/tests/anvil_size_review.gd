@@ -33,10 +33,17 @@ func run() -> void:
 		root.add_child(line)
 		var sprite := Sprite2D.new()
 		root.add_child(sprite)
-		sprite.position = origin + Vector2(145, 227)
+		sprite.position = origin + Vector2(160, 227)
+		var frame: Dictionary
 		if str(item[1]) == "reaction":
-			CombatGrabs.apply_frame(sprite, CombatReactions.frame_for(0, "head" if int(item[2]) == 0 else "air", 3), 1.1, 1)
-		else: FighterArt.apply(sprite, 0, str(item[1]), int(item[2]), 1.1, 1)
+			frame = CombatReactions.frame_for(0, "head" if int(item[2]) == 0 else "air", 3)
+			CombatGrabs.apply_frame(sprite, frame, 1.0, 1)
+		else:
+			frame = FighterArt.sheet(0, str(item[1])).frames[int(item[2])]
+			FighterArt.apply(sprite, 0, str(item[1]), int(item[2]), 1.0, 1)
+		# Centre the drawing horizontally for the contact sheet, without scaling
+		# it to the tile. All body and weapon pixels fit at the same world zoom.
+		sprite.position.x -= (float(frame.bounds[0]+frame.bounds[2])*0.5+sprite.offset.x)*sprite.scale.x
 		for child in sprite.get_children():
 			if child is Sprite2D: child.visible = false
 	await process_frame

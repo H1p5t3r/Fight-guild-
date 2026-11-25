@@ -28,7 +28,7 @@ size in every fight state, and **magma-orange accents** on weapon swing effects.
 The Blacksmiths' guild colour remains grey.
 
 `shield_effects.png` contains horizontal, rising, descending and low pressure
-shapes. Eleven shield attacks use these only in their active exposure. The effect
+shapes. Ten shield attacks use these only in their active exposure. The effect
 envelope uses that move's actual back/reach/bottom/top values, with no extra
 hurtbox. Recovery removes the effect immediately. The first-active snap, held
 load and authored gameplay frame counts remain intact.
@@ -51,6 +51,10 @@ the last six capture ticks. Iron Turn goes behind Anvil during its shoulder load
 and comes forward as it is released. Ordinary throws also bring the receiver
 forward at release. Neither player slot, facing, hitstop nor repeated rendering
 advances these presentation tracks or changes the combat snapshot.
+
+Sky Foundry uses its raised-palm support drawing immediately on the airborne
+catch. It never places an upright standing receiver above the ground-grab pose;
+the same horizontal torso anchor continues into the lift.
 
 Inspect `exports/FightGuild-Anvil-Size-Review.png` for a fixed-camera comparison;
 reproduce it with `python scripts/capture-anvil-art.py --size-sheet`. The native

@@ -1,5 +1,7 @@
 # Combo showcase · November 20, 2026
 
+Historical recording. The [November 25 showcase](combo-showcase-2026-11-25.md) covers all six fighters with the current native kit and art; use its reproduction instructions with the current scripts.
+
 This video records the pre-decay build. Its long bounce/gatling loops are superseded by [schema 26 combo rules and replay comparisons](combo-decay.md).
 
 [Watch or download the MP4](../exports/FightGuild-Combo-Showcase.mp4).

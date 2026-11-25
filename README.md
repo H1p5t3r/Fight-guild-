@@ -2,7 +2,7 @@
 
 A native **Godot 4.6.3** fighting-game lab for iterating toward a PC/PS5 game. The PC build includes **Anvil, Hammer, Smoke, Tapper, Shark and Fillet**, generated sprites, all five basic **P / K / S / Hs / D** buttons, unified gatlings, a move editor, Momentum/Faultless Defense, counter/punish/reversal feedback and experimental direct rollback multiplayer.
 
-Watch the [Fillet, Smoke and Shark combo showcase](exports/FightGuild-Combo-Showcase.mp4): six verified normal-hit damage routes, full-speed footage and half-speed replays. The [route guide](docs/combo-showcase.md) includes inputs, damage, conditions and reproduction instructions.
+Watch the [all-six-fighter combo showcase](exports/FightGuild-Combo-Showcase-2026-11-25.mp4): twelve verified routes, full-speed footage, half-speed replays and fighter themes. The [route guide and individual videos](docs/combo-showcase-2026-11-25.md) include inputs, damage, setup conditions and reproduction instructions. Anvil's revised animations use magma-orange shield effects, consistent anatomical scale and front/behind grab choreography.
 
 Each fighter has matching **windup and active** pose studies plus movement poses and three two-frame block reactions. Open **Development → Sprite review** to compare actions at the same scale. These are provisional kits and images. The [sprite production contract](docs/sprite-production.md) and [backlog](docs/backlog.md) cover consistent palettes, silhouettes, smear shapes, future characters and eventual windup → active → impact → follow-through → recovery sequences.
 

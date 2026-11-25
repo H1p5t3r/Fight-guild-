@@ -32,14 +32,13 @@ static func foreground_player(state: Dictionary) -> int:
 static func anvil_receiver(sprites: Array[Sprite2D], state: Dictionary, info: Dictionary, world_scale: float) -> void:
 	var owner := int(info.owner)
 	var receiver: Dictionary = state.players[1-owner]
-	var attacker: Dictionary = state.players[owner]
 	var slot := int(info.slot)
 	var tick := int(info.tick)
 	var facing := int(info.facing)
-	var lift_tick: int = {14:26, 15:32, 16:12}[slot]
+	var lift_tick: int = {14:26, 15:32, 16:0}[slot]
 	var finish_tick: int = {14:82, 15:76, 16:100}[slot]
 	var victim := sprites[1-owner]
-	var owner_frame: Dictionary = FighterArt.sheet(0, FighterArt.PHASES[int(attacker.posePhase)]).frames[int(attacker.poseIndex)]
+	var owner_frame: Dictionary = FighterArt.sheet(0, str(sprites[owner].get_meta("phase"))).frames[int(sprites[owner].get_meta("pose"))]
 	var original := victim.position
 	if tick >= finish_tick:
 		FighterArt.apply(victim, int(receiver.character), "knockdown", 0, world_scale, facing if slot == 15 else -facing)
@@ -134,6 +133,11 @@ static func present(sprites: Array[Sprite2D], model: CombatModel, state: Diction
 		# The core selects A/B/super owner drawings on the shared capture clock.
 		# Keep those distinct lifts/slams instead of the generic collar overlay.
 		FighterArt.apply(sprites[owner], 0, FighterArt.PHASES[int(attacker.posePhase)], int(attacker.poseIndex), world_scale, facing)
+		if int(info.slot) == 16 and int(info.tick) < 12:
+			# Sky Foundry catches an airborne body. Begin with the raised palm,
+			# not the ground-grab reach plus an upright victim floating above it.
+			var catch_pose: Dictionary = FighterArt.catalog().fighters[0].paired_animations["16"].keys[1]
+			FighterArt.apply(sprites[owner], 0, str(catch_pose.phase), int(catch_pose.pose), world_scale, facing)
 		anvil_receiver(sprites, state, info, world_scale)
 		return
 	# Side switching is already authored in the simulation. The turning drawing

@@ -1,19 +1,16 @@
 // Search ordinary input sequences in the shipped core. Never change move data,
 // seed hitstun, teleport during a route, or count a reset as a combo.
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
-import {createHash} from 'node:crypto';
-import {Engine,INPUT} from '../web/engine.mjs';
-const manifest=JSON.parse(readFileSync('godot/data/workshop/current.json'));
-const data=JSON.parse(readFileSync('godot/data/workshop/'+manifest.file));
-const wasm=readFileSync('web/generated/fight.wasm');
-const engine=new Engine((await WebAssembly.instantiate(wasm)).instance);engine.loadData(data);
+import {createCore,INPUT,manifest,data,wasm,sha256,directory,notation} from './combo-showcase-core.mjs';
+const engine=await createCore();
 const g=(p,k)=>engine.api.fg_get(p,k),snapshot=()=>engine.snapshot();
 const dir=(n,f=1)=>{const x=(n-1)%3-1,y=Math.floor((n-1)/3)-1;return (x?(x*f>0?INPUT.right:INPUT.left):0)|(y>0?INPUT.up:y<0?INPUT.down:0);};
-const out='build/combo-showcase';mkdirSync(out,{recursive:true});
+const out=directory;mkdirSync(out,{recursive:true});
 const width=Number(process.env.COMBO_BEAM??24),depthLimit=Number(process.env.COMBO_DEPTH??8);
 let trials=0;
 
-function tick(node,input=0){
+function tick(node,input){
+ input??=g(0,13)===0?dir(4,g(0,2)):0;
  const defend=node.hits?INPUT.down|dir(4,g(1,2)):0;
  engine.step(input,defend);node.inputs.push([input,defend]);
  const count=g(0,73),delta=count-node.contacts;
@@ -22,9 +19,9 @@ function tick(node,input=0){
   if(g(0,10)===2||g(0,9)!==node.hits+delta)node.invalid=true;
   node.hits+=delta;node.contacts=count;
  }
- node.damage=1000-g(1,3);
+ node.damage=(node.healthBase??1000)-g(1,3);
  if(g(-1,4))node.ended=true; // Stop at the break hit, including its freeze.
- if(node.hits&&!g(-1,2)){
+ if(node.hits&&!g(-1,2)&&!g(-1,28)&&!g(-1,22)){
   const reaction=g(1,31);
   if(g(-1,4)||g(-1,3)>=0||reaction===2||reaction===3||(!g(1,6)&&reaction===0))node.ended=true;
  }
@@ -45,7 +42,7 @@ function command(base,slot,moves){
  if(g(0,12)&(INPUT.P|INPUT.K|INPUT.S|INPUT.Hs|INPUT.D))if(!tick(n))return null;
  const charged=slot===43||slot===44;
  const source=charged?moves[slot===43?11:13]:slot===32?moves[2]:m;
- const commands=source.motion?String(source.motion).split('').map(Number):[source.direction];
+ const commands=source.motion?String(source.motion).split('').map(Number):[g(0,13)===0&&source.direction===5?4:source.direction];
  const facing=g(0,2),button=INPUT.P<<source.button;
  const began=n.inputs.length;
  for(let j=0;j<commands.length;j++){
@@ -57,12 +54,22 @@ function command(base,slot,moves){
    if(g(0,4)===slot){started=true;break;}
    if(!charged||g(0,4)!==(slot===43?11:13))return null;
   }
-  if(!tick(n,charged?dir(source.direction,facing)|button:0))return null;
+  if(!tick(n,charged?dir(source.direction,facing)|button:undefined))return null;
  }
  if(!started)return null;
  n.route.push({slot,inputFrame:began+1,startFrame:n.inputs.length});
+ // Non-damaging movement/pull can connect two damaging actions. Never count
+ // them as extra hits; the defender's real actionable state still ends a route.
+ if(m.mechanic===5||m.mechanic===4){
+  for(let j=0;j<70&&!n.invalid&&!n.ended;j++){
+   if(m.mechanic===5&&g(0,5)>=m.startup||m.mechanic===4&&g(1,102)>0)break;
+   tick(n);
+  }
+  if(n.invalid||n.ended)return null;
+  n.state=snapshot();return n;
+ }
  const before=base.contacts;
- for(let j=0;j<110&&n.contacts===before&&!n.invalid&&!n.ended;j++)tick(n);
+ for(let j=0;j<240&&n.contacts===before&&!n.invalid&&!n.ended;j++)tick(n);
  if(n.invalid||n.contacts===before)return null;
  n.state=snapshot();return n;
 }
@@ -84,27 +91,32 @@ function finish(parent){
  for(let j=0;j<180&&!n.invalid&&!n.ended;j++)tick(n);
  n.state=snapshot();return n;
 }
-function label(c,slot){
- const m=data.characters[c].moves[slot];if(slot===32)return 'c.S';if(slot===2)return 'f.S';
- if(slot===43)return '6[Hs]';if(slot===44)return '5[D]';
- const button=['P','K','S','Hs','D'][m.button];
- return (m.air?'j.':'')+(m.motion||m.direction)+button;
-}
 const compare=(a,b)=>b.damage-a.damage||b.hits-a.hits||a.inputs.length-b.inputs.length;
 const selected=process.argv.slice(2);
 const results=[];
-for(const c of [5,2,4])for(const corner of [false,true]){
- const id=data.characters[c].name.toLowerCase()+'-'+(corner?'corner':'midscreen');
+for(const c of [5,2,4,3,1,0])for(const corner of [false,true]){
+ const stance=c===3&&process.env.COMBO_STANCE==='1';
+ const id=data.characters[c].name.toLowerCase()+'-'+(stance?'stance':corner?'corner':'midscreen');
  if(selected.length&&!selected.includes(id))continue;
- const target=c===5?4:c===2?5:2;
+ const target=c===4||c===2?5:4;
  engine.reset([c,target]);
- const root=corner?88000:42000,gap=6500;
- engine.api.fg_preview_place(0,root,0,0);engine.api.fg_preview_place(1,root+gap,0,0);
- const initial={characters:[c,target],positions:[root,root+gap],momentum:0};
- const start={state:snapshot(),inputs:[],route:[],hits:0,contacts:0,damage:0,invalid:false,ended:false};
+ const root=corner?85000:42000,gap=6500,momentum=c===0?5000:0;
+ engine.api.fg_preview_place(0,root,0,momentum);engine.api.fg_preview_place(1,root+gap,0,momentum);
+ const initial={characters:[c,target],positions:[root,root+gap],momentum};
+ if(stance){
+  initial.setupInputs=[];
+  const setup=a=>{engine.step(a,0);initial.setupInputs.push([a,0]);};
+  setup(INPUT.D);for(let i=0;i<180;i++)setup(0);
+  if(!g(0,81)||g(1,6)||g(1,31))throw new Error('Tapper failed to earn his starting stance');
+  for(let i=0;i<90&&Math.abs(g(1,0)-g(0,0))>7500;i++)setup(dir(6,g(0,2)));
+  for(let i=0;i<8;i++)setup(0);
+  initial.baseHealth=g(1,3);initial.contactBase=g(0,73);
+ }
+ const start={state:snapshot(),inputs:[],route:[],hits:0,contacts:initial.contactBase??0,healthBase:initial.baseHealth??1000,damage:0,invalid:false,ended:false};
  const moves=data.characters[c].moves;
- const candidates=moves.flatMap((m,i)=>m.enabled&&m.category!==4&&m.damage>0?[i]:[]);
- const starters=[32,3,7,11,...(c===4?[10]:[]),...(c===2?[43,44]:[])];
+ if(c===0){for(let i=0;i<30;i++)tick(start,INPUT.left);start.state=snapshot();}
+ const candidates=moves.flatMap((m,i)=>m.enabled&&(m.category!==4||m.actionType===8)&&(m.damage>0||m.mechanic===5||m.mechanic===4)?[i]:[]);
+ const starters=stance?[35,36,37,38]:[32,3,7,11,...(process.env.COMBO_AIR==='1'?[19,20,21]:[]),...(c===4?[10]:[]),...(c===2?[43,44]:[])];
  let beam=starters.map(slot=>attempt(start,slot,0,moves)).filter(Boolean),best=[];
  for(let depth=1;depth<=depthLimit&&beam.length;depth++){
   const complete=beam.map(finish).filter(n=>!n.invalid&&n.hits>=2);
@@ -128,9 +140,10 @@ for(const c of [5,2,4])for(const corner of [false,true]){
    perRoute.set(route,(perRoute.get(route)??0)+1);
   }
  }
- const rows=best.map(n=>({route:n.route.map(r=>({...r,notation:label(c,r.slot)})),damage:n.damage,hits:n.hits,inputs:n.inputs,frames:n.inputs.length,wallBreak:!!(()=>{engine.restore(n.state);return g(-1,4);})()}));
+ const rows=best.map(n=>({route:n.route.map(r=>({...r,notation:notation(c,r.slot)})),damage:n.damage,hits:n.hits,inputs:n.inputs,frames:n.inputs.length,wallBreak:!!(()=>{engine.restore(n.state);return g(-1,4);})()}));
  const result={id,character:c,target,corner,initial,search:{beam:width,maxMoves:depthLimit,delaySamples:[0,3,7,12,18],trials},candidates:rows};
  writeFileSync(`${out}/${id}.json`,JSON.stringify(result,null,2)+'\n');results.push(result);
  console.log('BEST',id,rows.slice(0,3).map(r=>`${r.damage}/${r.hits}: ${r.route.map(a=>a.notation).join(' > ')}`).join('\n'));
+ if(stance)break;
 }
-writeFileSync(`${out}/search-build.json`,JSON.stringify({schema:1,source:manifest,wasmSha256:createHash('sha256').update(wasm).digest('hex'),note:'Bounded beam search of real inputs. Defender guards after the first hit; resets, blocked contacts and broken combos are rejected. Results are high-damage routes found, not a proof of global optimality.'},null,2)+'\n');
+writeFileSync(`${out}/search-build.json`,JSON.stringify({schema:2,source:manifest,wasmSha256:sha256(wasm),configurationSha256:sha256(readFileSync(`${out}/configuration.bin`)),note:'Bounded beam search of real inputs on the native configuration. Defender guards after the first hit; resets, blocked contacts and broken combos are rejected. Results are high-damage routes found, not a proof of global optimality.'},null,2)+'\n');

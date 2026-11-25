@@ -33,6 +33,9 @@ func check_capture_depth(model: CombatModel, arena: Control) -> void:
 					var sprite: Sprite2D = arena.sprites[1-owner]
 					var ws: float = arena.size.x/1000.0*arena.camera_zoom
 					var phase := str(sprite.get_meta("phase", ""))
+					if slot == 16 and int(state.pairClock) < 12:
+						check(phase == "knockdown_back", "Sky Foundry catch used an upright floating victim")
+						check(int(arena.sprites[owner].get_meta("pose")) == int(FighterArt.catalog().fighters[0].paired_animations["16"].keys[1].pose), "Sky Foundry catch lost its supporting palm")
 					if phase in ["knockdown", "knockdown_back"]:
 						var sheet := FighterArt.sheet(victim, phase)
 						check(is_equal_approx(sprite.scale.y, 150.0/float(sheet.frames[0].get("body_height",sheet.body_height))*ws), "Carried receiver changed size")

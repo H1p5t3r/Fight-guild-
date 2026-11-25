@@ -29,6 +29,9 @@ func run() -> void:
 		[0,"5P / HIT",1],[2,"f.S / BLOCK",1],[3,"5Hs / WHIFF",1],[6,"2S / HIT",-1],
 		[8,"6P / WHIFF",1],[28,"IRON ADVANCE / HIT",1],[21,"j.D / FALLING BULWARK",1],
 		[14,"63214P / FOUNDRY DROP",1],[15,"63214K / IRON TURN",-1],[16,"63214Hs / SKY FOUNDRY",1]]
+	if args.has("--slot"):
+		var requested := int(args[args.find("--slot")+1])
+		cases = cases.filter(func(item): return int(item[0]) == requested)
 	for example in cases:
 		var slot := int(example[0])
 		var facing := int(example[2])

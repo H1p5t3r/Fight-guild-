@@ -21,7 +21,8 @@ var font := GuildTheme.SEMIBOLD
 var muted := Color("a8b8c4")
 var ink := Color("0b1118")
 var paper := Color("f3ecdb")
-var accents := {5: Color("e1817f"), 2: Color("b9d17e"), 4: Color("7ac7ce")}
+var accents := FighterSelectPortrait.COLORS
+var super_freeze: SuperFreeze
 
 func _initialize() -> void: call_deferred("run")
 
@@ -41,7 +42,7 @@ func draw_overlay() -> void:
 	overlay.draw_rect(Rect2(0, 48, 1280, 2), Color(accent, 0.65))
 	overlay.draw_rect(Rect2(0, 648, 1280, 2), Color(accent, 0.65))
 	text("FIGHT GUILD", Vector2(22, 23), 19, paper)
-	text("COMBO LAB / 20 NOV 2026", Vector2(22, 41), 12, muted)
+	text("COMBO LAB / " + str(film.date), Vector2(22, 41), 12, muted)
 	text(CombatModel.CHARACTERS[int(clip.character)].to_upper() + "  /  " + (str(clip.bonus.title) if bonus else str(clip.title)), Vector2(211, 32), 28, accent)
 	var score := "%d DAMAGE   /   %d %s" % [display_damage, display_hits, "HIT" if display_hits == 1 else "HITS"]
 	text(score, Vector2(1256 - font.get_string_size(score, HORIZONTAL_ALIGNMENT_LEFT, -1, 28).x, 32), 28, paper)
@@ -72,9 +73,13 @@ func draw_overlay() -> void:
 
 func frame() -> void:
 	var state := model.state()
-	display_damage = maxi(display_damage, 1000 - int(state.players[1].health))
+	display_damage = maxi(display_damage, int(clip.initial.get("baseHealth", 1000)) - int(state.players[1].health))
 	display_hits = maxi(display_hits, int(state.players[0].combo))
 	arena.refresh(model, state, false, false)
+	if int(state.superFreezeTime) > 0:
+		var actor: Dictionary = state.players[int(state.superFreezeActor)]
+		super_freeze.present(int(actor.character), int(actor.facing), int(state.superFreezeDuration)-int(state.superFreezeTime), int(state.superFreezeDuration))
+	else: super_freeze.clear()
 	overlay.queue_redraw()
 	await process_frame
 	await RenderingServer.frame_post_draw
@@ -83,6 +88,8 @@ func frame() -> void:
 func reset_clip() -> void:
 	model.reset(clip.initial.characters)
 	for p in 2: model.core.preview_place(p, int(clip.initial.positions[p]), 0, int(clip.initial.momentum))
+	for input in clip.initial.get("setupInputs", []): model.step(int(input[0]), int(input[1]))
+	super_freeze.clear()
 	tick_index = 0
 	display_damage = 0
 	display_hits = 0
@@ -104,6 +111,9 @@ func run() -> void:
 	sha.start(HashingContext.HASH_SHA256)
 	sha.update(source_bytes)
 	if sha.finish().hex_encode() != str(film.source.sha256): fail("Workshop file differs from the searched build"); return
+	sha.start(HashingContext.HASH_SHA256)
+	sha.update(FileAccess.get_file_as_bytes("res://assets/fighters/manifest.json"))
+	if sha.finish().hex_encode() != str(film.artSha256): fail("Artwork changed after the recording plan was prepared"); return
 	var background := ColorRect.new()
 	background.color = ink
 	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -114,6 +124,8 @@ func run() -> void:
 	arena.size = Vector2(1280, 598)
 	arena.diagnostics = false
 	arena.round_label = "TRAINING"
+	super_freeze = SuperFreeze.new()
+	arena.add_child(super_freeze)
 	overlay = Control.new()
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.add_child(overlay)
@@ -142,6 +154,9 @@ func run() -> void:
 				if pass_index == 1: await frame()
 				if not capture_dir.is_empty() and pass_index == 0 and i == int(clip.firstHit) + 3:
 					root.get_texture().get_image().save_png(capture_dir.path_join(str(clip.id) + "-hit.png"))
+				var capture_state := model.state()
+				if not capture_dir.is_empty() and pass_index == 0 and int(capture_state.pairKind) == 7 and int(capture_state.pairClock) in [4, 30, 100]:
+					root.get_texture().get_image().save_png(capture_dir.path_join(str(clip.id) + "-capture-%d.png" % int(capture_state.pairClock)))
 			for i in (1 if quick else 75): await frame()
 		print("Verified native footage: ", clip.id, " / ", clip.damage, " damage / ", clip.hits, " hits")
 	if args.has("--chapters"):
