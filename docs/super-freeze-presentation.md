@@ -18,21 +18,28 @@ The reference opens a narrow white tear, exposes a face inside an angled black
 and colored band, holds briefly, then tears/slides away. The green background is
 a compositing matte, not part of the intended match treatment.
 
-The native version uses an original jagged band, paper-white rim, black shadow,
-sparse fragments and the acting fighter's guild palette. It leaves the match
-visible below a dark tint. The whole composition mirrors using actual facing,
-not the player's starting side. The demo's 54-tick plan is:
+The native version tears the actual frozen match image along a ragged diagonal
+seam. Its upper and lower pieces bow apart, keeping the outer screen edges
+pinned, to uncover the face and guild color underneath. The portrait stays fixed
+in place and at its original proportions throughout. Paper fibers, folded lips
+and an inner shadow give the screen edges thickness.
+
+On exit, a rejoin front travels across the opening. Fine fibers reach from both
+edges, join, and disappear as the screen knits back into the original match.
+Fully sealed regions restore the original pixels; there is no departing banner
+or final-frame seam. The face and tear direction follow actual facing, while the
+stage keeps its orientation. The demo's 54-tick plan is:
 
 | Presentation ticks | Treatment |
 | --- | --- |
-| 0–8 | Thin tear, fast entrance, aperture opens to the face |
-| 9–41 | Stable face hold over the frozen match |
-| 42–53 | Accelerating exit and trailing fragments |
+| 0–13 | Intact screen splits; the rip travels across and pulls open |
+| 14–32 | Fixed face revealed beneath the parted screen |
+| 33–53 | Fibers reconnect along a traveling closure; screen seals completely |
 | 54 | Cut-in removed; combat resumes on the following physics tick |
 
-Reduced Motion uses the same freeze duration with a stationary fade, no sweeping
-entrance, no aperture stretch and no moving fragments. Menu transition speed does
-not lengthen this combat presentation.
+Reduced Motion uses the same freeze duration with a stationary fade and no screen
+deformation or traveling fibers. Menu transition speed does not lengthen this
+combat presentation.
 
 ## Face artwork: awaiting selection
 
@@ -60,6 +67,9 @@ video's character or lettering.
 specific frame. `clear()` removes it. It has no autonomous timer, combat model
 reference or gameplay mutations. Re-presenting an earlier tick produces the same
 composition, suitable for a future saved freeze clock and rollback resimulation.
+An explicit `BackBufferCopy` precedes the screen-tear shader, so each draw samples
+the clean arena rather than an earlier cut-in. UV mapping respects the arena's
+rectangle inside the training layout; surrounding controls are unaffected.
 
 When supers are designed, their deterministic core activation event must own the
 actor, duration and elapsed freeze ticks, with the same state on both peers.
@@ -81,7 +91,12 @@ background, so its frozen tableau cannot retain a stray cut-in image.
   recovery, duration boundaries, input gates, interruption, reduced motion and
   simulation/configuration preservation.
 - `python scripts/capture-super-freeze-review.py` records the native renderer at
-  60 fps; `--stills` saves stills only. `--size 1920x1080` checks another viewport.
+  60 fps; `--stills` saves hold, opening and closure checkpoints. The first and
+  last frames are compared against the intact match for all six fighters and
+  Reduced Motion. `--stills --inset --size 1920x1080 --display :97` also checks
+  that a smaller arena's effect leaves the surrounding interface untouched.
 - [Current native motion preview](../exports/FightGuild-Super-Freeze-Review.mp4)
-  and [Fillet still](../exports/FightGuild-Super-Freeze-Fillet.png) use the approved
+  with [opening](../exports/FightGuild-Super-Freeze-Ripping.png),
+  [knitting closure](../exports/FightGuild-Super-Freeze-Knitting.png) and
+  [Fillet hold](../exports/FightGuild-Super-Freeze-Fillet.png) use the approved
   existing portrait fallback pending the new face-art selection.
