@@ -11,7 +11,7 @@ constexpr int KNIFE_SPIRAL=25, REKKA_MID=26, REKKA_LOW=27, HOOK_GROUND=28, HOOK_
               STAB_GROUND=30, STAB_AIR=31;
 constexpr int CLOSE_SLASH=32, HELD_GUARD=33, GUARD_ATTACK=34, STANCE_P=35, STANCE_K=36, STANCE_S=37, STANCE_HS=38, STANCE_EXIT=39, STANCE_THROW=40, AIR_BACK_THROW=41, AIR_FORWARD_THROW=42;
 constexpr int FAR_SLASH=2, SLASH_SWEEP=6; // Saved 5S and 2S slot IDs remain compatible.
-constexpr unsigned RULES_REVISION=7; // Two-segment supers, cinematic locks and utility-super projectiles.
+constexpr unsigned RULES_REVISION=8; // Shark's upward hook cannot hit grounded opponents.
 constexpr int GrapplerGrab=7, AntiAirSuper=8, ArmoredRush=9, RushBrake=10, ShieldStance=11, ShieldDive=12;
 constexpr int SuperStrike=13, SuperField=14, SuperWave=15;
 constexpr int SUPER_COST=6667, SUPER_FREEZE_TICKS=54;

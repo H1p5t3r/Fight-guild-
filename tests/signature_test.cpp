@@ -122,6 +122,50 @@ static void hooks() {
     CHECK(hook(s,false,false,true));thaw(s);s.world.players[0].stun=10;s.step(0,0);
     CHECK(s.world.players[1].reaction!=Reeled&&s.world.players[1].pull_owner==-1);
 }
+static void ground_hook_targets() {
+    // Use the current roster, including Anvil's tall standing hurtboxes.
+    Simulation s;
+    for(int owner:{0,1}) for(int facing:{-1,1}) for(int character=0;character<CHARACTER_COUNT;++character) {
+        for(int posture=0;posture<4;++posture) {
+            s.defaults();s.reset(owner==0?4:character,owner==0?character:4,0,0);
+            auto& a=s.world.players[owner];auto& b=s.world.players[1-owner];
+            a.x=50000;a.facing=facing;b.x=a.x+facing*7000;b.facing=-facing;
+            a.move=HOOK_GROUND;a.age=s.moves[4][HOOK_GROUND].v[Startup]-1;
+            if(posture==3)b.stun=60; // Grounded hitstun does not turn this into a combo route.
+            const int input=posture==1?Down:posture==2?(facing>0?Right:Left):0;
+            for(int tick=0;tick<s.moves[4][HOOK_GROUND].v[Active];++tick) {
+                s.step(owner==0?0:input,owner==0?input:0);
+                CHECK(b.y==0&&b.health==1000&&!b.pull_time&&!b.tether_source);
+                CHECK(!a.contact&&!a.hit_done&&!a.contact_count&&!s.world.hitstop);
+            }
+            s.step(owner==0?P:0,owner==0?0:P);
+            CHECK(a.move!=STAB_GROUND); // A ground whiff never unlocks the on-hit stab.
+        }
+        // The same real spear geometry still catches a jumping or juggled target.
+        for(bool juggle:{false,true}) {
+            s.defaults();s.reset(owner==0?4:character,owner==0?character:4,0,0);
+            auto& a=s.world.players[owner];auto& b=s.world.players[1-owner];
+            a.x=50000;a.facing=facing;b.x=a.x+facing*7000;b.facing=-facing;
+            a.move=HOOK_GROUND;a.age=s.moves[4][HOOK_GROUND].v[Startup]-1;
+            b.y=10000;b.vy=0;
+            if(juggle){b.reaction=AirReel;b.stun=60;}
+            const State saved=s.world;
+            s.step(0,0);
+            CHECK(b.health<1000&&b.reaction==Reeled&&b.pull_owner==owner&&a.contact);
+            const unsigned hash=s.checksum();s.world=saved;s.step(0,0);CHECK(s.checksum()==hash);
+        }
+    }
+    // Prejump and a target landing on this contact tick are both grounded.
+    for(bool landing:{false,true}) {
+        s.defaults();s.reset(4,0,0,0);
+        auto& a=s.world.players[0];auto& b=s.world.players[1];
+        a.x=50000;b.x=57000;a.move=HOOK_GROUND;a.age=s.moves[4][HOOK_GROUND].v[Startup]-1;
+        if(landing){b.y=1;b.vy=-500;}
+        s.step(0,landing?0:Up);
+        CHECK(b.y==0&&b.health==1000&&!b.pull_time&&!a.contact);
+        CHECK(landing?b.vy==0:b.prejump_time>0);
+    }
+}
 static void rekka_hits() {
     for(bool skip:{false,true}) {
         Simulation s;legacy_fillet::defaults(s);s.reset(5,4,0,0);s.world.players[1].x=48000;
@@ -143,4 +187,4 @@ static void rekka_hits() {
         CHECK(s.world.players[1].health==(crouch?997:955));
     }
 }
-int main() { routes();mobility();hooks();rekka_hits();std::printf("Signature moves / movement: %d checks, %d failures\n",checks,failures);return failures?1:0; }
+int main() { routes();mobility();hooks();ground_hook_targets();rekka_hits();std::printf("Signature moves / movement: %d checks, %d failures\n",checks,failures);return failures?1:0; }

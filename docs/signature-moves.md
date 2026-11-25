@@ -18,6 +18,8 @@ Use the listed motion inputs for starters. Follow-up directions remain **6S / 2S
 
 ## Hook and movement behavior
 
+Shark's ground **214S upward hook only connects with airborne opponents**, including airborne hitstun. Standing, crouching, guarding, grounded hitstun, prejump and landing opponents are ineligible even if their hurtboxes overlap the spear. A grounded whiff causes no damage, blockstun, pull or tether and does not unlock the on-hit stab. The downward air hook can still hit grounded opponents.
+
 The hooked spear travels from the hand to a **250px forward endpoint**, rising or falling one pixel per horizontal pixel. Eight narrow rectangles follow the spear itself; the tether has no hitbox or hurtbox. This makes the ground version an angled aerial catch and the air version a downward catch, rather than a full rectangular sweep. The visible spear reads its endpoints from the authoritative core, including hitstop and rollback. It extends during eight active ticks and retracts during the first eight recovery ticks. The pose holds for that retraction; this is procedural weapon travel, not additional generated animation frames.
 
 On hit, the victim is reeled toward the attacker over ten unfrozen ticks, ending at pushbox separation plus 5px. Body separation and stage bounds still apply. The target cannot act or tech during the reel. Interrupting the attacker releases the victim; a follow-up hit replaces the reel with its own reaction. The hitstun permits the stab to combo from a normal jump. Timing, range, thickness, pull duration/gap and follow-up conditions are editable.

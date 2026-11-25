@@ -54,7 +54,7 @@ Faultless Defense and existing authored fields do not shift.
 
 The two double-quarter-circle motions have a ten-tick longer total recognition
 window than the ordinary motion window, with the same per-direction gap limit.
-Anvil retains half-circle-back inputs. Online protocol 5 and rules revision 7
+Anvil retains half-circle-back inputs. Online protocol 5 and rules revision 8
 reject older gameplay builds; both peers need the same native build and move data.
 Old binary snapshots are incompatible with the added cinematic state.
 

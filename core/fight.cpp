@@ -1360,6 +1360,9 @@ void Simulation::step(int raw0,int raw1) {
                     &&(other.x-f.x)*f.facing>=0&&abs(other.x-f.x)<=separation+tm.v[ThrowRange];
             } else if(!effective_move(f).v[ProjectileKind]||effective_move(f).v[ProjectileMelee]) connects=overlaps(f,other);
         }
+        // Shark's upward hook is an aerial catch, even when its near spear
+        // segments overlap a tall grounded body. Prejump/landing also whiff.
+        if(connects&&f.character==4&&f.move==HOOK_GROUND&&other.y<=0) connects=false;
         if(connects&&semi_airborne(other)&&effective_move(f).v[HitLevel]==1) connects=false;
         if(connects) {
             hits[p]=f.move; blocked[p]=blocks(f,other,prior_stun[1-p]>0,prior_landing[1-p]>0||prior_pair_lock[1-p]>0);
