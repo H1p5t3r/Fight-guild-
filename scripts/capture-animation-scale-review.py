@@ -9,6 +9,7 @@ from pathlib import Path
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output', default='build/animation-scale-before')
 parser.add_argument('--catalog', action='store_true', help='Review every unique body cell in the roster')
+parser.add_argument('--external', action='store_true', help='Review render-only reaction, grab and movement atlases')
 parser.add_argument('--character',type=int,choices=range(6))
 parser.add_argument('--phase',help='Only render this super phase')
 args = parser.parse_args()
@@ -33,7 +34,7 @@ with (out/'display.log').open('w') as log:
         command = ['bash', 'scripts/godot.sh', '--display-driver', 'x11',
                    '--rendering-method', 'gl_compatibility', '--audio-driver', 'Dummy',
                    '--resolution', '1800x1600', '--script',
-                   'res://tests/animation_scale_review.gd', '--', '--test', '--output', str(out)]
+                   'res://tests/animation_external_scale_review.gd' if args.external else 'res://tests/animation_scale_review.gd', '--', '--test', '--output', str(out)]
         if args.catalog:
             command.append('--catalog')
         if args.character is not None:

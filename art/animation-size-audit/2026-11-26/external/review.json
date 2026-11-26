@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-26",
+  "reviewedDrawings": 168,
+  "reactionDrawings": 72,
+  "grabDrawings": 36,
+  "movementDrawings": 60,
+  "pages": 20,
+  "method": "Native Godot capture at fixed world zoom 1.55, using runtime pivots and body_height. Approved idle shown beside every group. All twenty pages visually reviewed.",
+  "result": "No additional blanket scale correction justified. Pose compression, shoulder turns and airborne tucks account for silhouette height differences.",
+  "limitations": "Visual anatomy comparison, not automatic anatomical measurement. These pages cover the external reaction, grab and movement catalogs; main-catalog and super reviews are separate.",
+  "gameplayChanged": false,
+  "sourcePixelsChanged": false,
+  "captures": [
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/0-grabs.png",
+      "sha256": "476f0390a756c774e916cd916cdceff0d35dbf5b02fa9314a765395d38e5c600"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/0-reactions.png",
+      "sha256": "313780db919d6802089dc5f93e68a70daaf31561961552483a8e7a2c208905ad"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/1-grabs.png",
+      "sha256": "a3442521ac1d9d7c22e5cb1aa9908275073ec6fd12278df98f771c17aa962e43"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/1-hammer_back.png",
+      "sha256": "8bf3c76062fdbfc053a7a106a3fbced42fa5239106d4aa3957abb65438375c0e"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/1-hammer_run.png",
+      "sha256": "d79f6d14f116c9eaec555db97b37b340b20191aef880f10b370284027e3f66e9"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/1-hammer_walk.png",
+      "sha256": "15379018cc5a5f58147fdab205b7f8d7d66e18f3210911b67f61f28b844e0074"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/1-reactions.png",
+      "sha256": "5b0e48d8f7b932dbe040698240b32f17fa4875a9d2290ba9eff269f4fab1a79f"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/2-grabs.png",
+      "sha256": "184746e38c8c6896759d11877a36ba7d6196241e1e0f4aeac0f0f1a666b83c4e"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/2-reactions.png",
+      "sha256": "a78b0dd7f9062217c42b2d56177f5f3ca32b9857325565cabe8d48a5b5e67084"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/3-grabs.png",
+      "sha256": "42ea68f30f9d03c2af1c7594d08601831e312a2e0640e98f7761c9cae1ea2d15"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/3-reactions.png",
+      "sha256": "a0a720a2219405ff226b348e70e8b423d0e488d0ff940d72437a16acd3479f05"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/3-tapper_dash.png",
+      "sha256": "ea99ee4c05fc3b1ed9efee3d32c77c73fd23c301f2a245074a82d833eef84fc2"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/3-tapper_return.png",
+      "sha256": "a791b00e20d5b7fbeec0ac2a271269e05c28215bd86c6ea457f35490f0f30d4c"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/3-tapper_travel.png",
+      "sha256": "bcd48218f1f418d7c50745fe18c35afb2cc09f6cac35d7909ab6ff87aa8feb77"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/4-grabs.png",
+      "sha256": "9cb0f4b030a4632eaa7e43330f1320c500f46ad118c236e4556048e50df64e8d"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/4-reactions.png",
+      "sha256": "b189b87101a82e29f9b31a42243d0e5a7ec3e44e9f21df0b757b2db53d4d6cb3"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/5-fillet_flight.png",
+      "sha256": "46fd5846d08f1f997621476e357991965f5d3d66e3f629cd1b849725e01cfc7d"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/5-fillet_ground.png",
+      "sha256": "1ad495d65406dd3fdc05a932165ed6684d1950a70a6edd6253cbd05833d623e8"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/5-grabs.png",
+      "sha256": "144462400e9320c37b2e923e3af9bb9cbf44f3cf97be3e89906ef9161a717625"
+    },
+    {
+      "file": "art/animation-size-audit/2026-11-26/external/5-reactions.png",
+      "sha256": "a92b309c5a772b2aa612ffb9e2e25859ee638dd8371bee082d18af7c1f07cf53"
+    }
+  ]
+}
