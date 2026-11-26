@@ -44,6 +44,9 @@ static func selection(model: CombatModel, state: Dictionary, owner: int) -> Dict
 			return result
 		if age >= active and age < active + int(move.active):
 			result.stage = "active"; result.pose = 1; result.tick = age-active
+			# Optional active-frame exposures follow the authored hitbox timeline.
+			# Hitstop holds this same saved age, including separate blocked hits.
+			if spec.has("active_keys"):result.pose=exposure(spec.active_keys,int(result.tick))
 		elif age >= active + int(move.active):
 			result.stage = "whiff"
 			result.tick = age-active-int(move.active)
@@ -235,6 +238,11 @@ static func draw_track(canvas: CanvasItem, sprites: Array[Sprite2D], cue: Dictio
 		if item.has("contact_box") and int(state.players[int(cue.owner)].contact)!=0:
 			origin=sprites[1-int(cue.owner)].position
 			box=item.contact_box
+		if item.get("stop_at_guard",false) and int(state.players[int(cue.owner)].contact)!=0:
+			# Keep the hook trail connected to its owner and end at the guard.
+			# This is a drawing rectangle only; collision and pushback stay native.
+			var distance:float=(sprites[1-int(cue.owner)].position.x-origin.x)*float(cue.facing)/scale
+			box=[box[0],box[1],maxf(1.0,distance-20.0-float(box[0])),box[3]]
 		var opacity: float = item.get("opacity",0.85)
 		if item.get("fade",false): opacity*=float(int(item.end)-tick)/maxi(1,int(item.end)-int(item.start))
 		draw_effect(canvas,cue,int(item.key),Rect2(box[0],box[1],box[2],box[3]),opacity,origin,scale)

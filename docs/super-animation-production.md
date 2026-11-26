@@ -325,6 +325,47 @@ python scripts/capture-super-animation.py last-orders --stills
 python scripts/capture-super-animation.py last-orders
 ```
 
+## 08 — Tapper / Whiskey Chaser
+
+[Watch the native 60 FPS review with sound](../exports/FightGuild-Whiskey-Chaser-2026-11-26.mp4).
+Sixteen original body keys develop a low Dempsey roll into alternating near-arm,
+far-arm and low body hooks, followed by a committed final hook and settled guard.
+The staff stays slung behind Tapper throughout. Every key uses his existing
+470-pixel anatomical scale; the largest adjacent punch displacement, 108.48 world
+units, is reserved for the last-startup to first-active change. The second hook's
+arm staging and elbow bend were corrected through image generation.
+
+The unsuccessful branch also has real choreography: the three blocked pulses
+show impact poses 1, 6 and 10 at active frames 1, 5 and 9. Optional active-frame
+presentation keys read the saved move age, so hitstop holds the correct punch.
+Separate amber/ivory hook trails start near Tapper and stop at the defender's
+guard; their drawing width follows the actual separation without changing boxes
+or pushback. The confirmed sequence uses the native 0/43/74/release-96 beats.
+Six effect keys, four original synthesized punch sounds and a dedicated grinning
+cut-in portrait complete the move. Dempsey guard is retained on hit, block or miss.
+
+The 10/9/12 timing, stance requirement, 260 confirmed damage, three 5-chip block
+pulses, momentum cost and lack of invulnerability are unchanged. The common suite
+passes 17,481 checks, including exact three-contact pose alignment, all body keys,
+all receivers and sides, scale, pause, replay and edited capture duration.
+Last Orders and the full super roster also pass. The reviewer sets up Dempsey
+before the idle lead-in using an ordinary stance normal; no gameplay edits or
+mid-sequence corrections are used in the recording.
+
+Sources: [exposure plan](../art/characters/supers-v2/whiskey-chaser/exposure-plan.json),
+[original image records](../art/characters/supers-v2/whiskey-chaser/sources.json),
+[exposures, effect placement and masks](../art/characters/supers-v2/whiskey-chaser/layout.json).
+Two transparency corrections were generated as new images; registration leaves
+all selected PNG bytes unchanged.
+
+```bash
+python scripts/register-super-presentation.py whiskey-chaser
+python scripts/generate-whiskey-chaser-audio.py
+bash scripts/godot.sh --headless --script res://tests/super_presentation_test.gd -- --test --character 3 --slot 31
+python scripts/capture-super-animation.py whiskey-chaser --stills
+python scripts/capture-super-animation.py whiskey-chaser
+```
+
 ## Production order
 
 1. Sky Foundry — full pass and native review.
@@ -334,7 +375,7 @@ python scripts/capture-super-animation.py last-orders
 5. Flashpoint — full pass and native review.
 6. The Air Is Mine — full pass and native review.
 7. Last Orders — full pass and native review.
-8. Whiskey Chaser.
+8. Whiskey Chaser — full pass and native review.
 9. No Safe Harbour.
 10. Undertow.
 11. Bloodletting.

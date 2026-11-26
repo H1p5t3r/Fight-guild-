@@ -52,13 +52,14 @@ func run()->void:
 						if event.has("sound"):sounds.append(event.sound)
 				check(paired and int(model.state().players[1-owner].health)==1000-int(move.damage),"Single confirmed damage changed")
 				check(sounds.size()==spec.sounds.size(),"Missing/repeated authored impact audio")
-				if character==3 and slot==12:check(int(model.state().players[owner].stance)==1,"Last Orders lost stance finish")
+				if character==3:check(int(model.state().players[owner].stance)==1,"Tapper super lost stance finish")
 				check(model.core.restore(restored),"Snapshot restore")
 				for tick in 30:model.step(0,0)
 				check(model.state_hash()==replay_hash,"Presentation caused replay divergence")
 	for blocking in [false,true]:
 		model.reset([character,4]);model.core.preview_place(0,44000 if blocking else 15000,0,10000);model.core.preview_place(1,56000 if blocking else 90000,0,0)
 		model.core.preview_begin(0,slot)
+		var block_poses:=[]
 		for tick in 220:
 			var state:=model.state();var cue:=SuperAnimation.selection(model,state,0)
 			check(state.pairKind==0,"Block/whiff entered a successful cinematic")
@@ -66,10 +67,18 @@ func run()->void:
 				seen[int(cue.pose)]=true
 				check(str(cue.stage) not in ["paired","connected"],"Block/whiff played confirmed sequence")
 			model.step(0,2 if blocking else 0)
+			if character==3 and slot==31 and blocking:
+				for event in model.cues.events_at(model.frame()-1):
+					if int(event.kind)==2:
+						var contact:=SuperAnimation.selection(model,model.state(),0)
+						block_poses.append(int(contact.pose))
 			check(not model.cues.events_at(model.frame()-1).any(func(c:Dictionary)->bool:return c.has("sound")),"Block/whiff played confirmed impact audio")
 		if character==3 and slot==12:check(int(model.state().players[0].stance)==0,"Last Orders entered stance on miss/block")
 		var damage:=1000-int(model.state().players[1].health)
 		check(damage>0 and damage<int(move.damage) if blocking else damage==0,"Block/whiff damage rule changed")
+		if character==3 and slot==31:
+			check(int(model.state().players[0].stance)==1,"Whiskey Chaser lost Dempsey stance")
+			if blocking:check(damage==15 and block_poses==[1,6,10],"Three blocked hooks lost pose/contact alignment: "+str(block_poses))
 	check(seen.size()==body.frames.size(),"Not every hit/block/whiff drawing was exposed")
 	check(model.fingerprint()==fingerprint,"Art changed move data")
 	for duration in [int(spec.pair_ticks)+1,int(spec.pair_ticks)+10,mini(120,int(spec.pair_ticks)+30)]:

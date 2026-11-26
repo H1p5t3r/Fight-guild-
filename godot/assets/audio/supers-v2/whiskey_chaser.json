@@ -1,0 +1,26 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-whiskey-chaser-audio.py",
+  "sounds": [
+    {
+      "file": "whiskey_chaser_hook.wav",
+      "seconds": 0.32,
+      "sha256": "d6ebc89ca5b9934afd3cd0479259e9297ff4b8cffe2e920297ef9bef89704865"
+    },
+    {
+      "file": "whiskey_chaser_cross.wav",
+      "seconds": 0.34,
+      "sha256": "020391b1044cb2df0c32bda16ebcdd936cd8030eb5cf4b9a3dea344e7d4b0f24"
+    },
+    {
+      "file": "whiskey_chaser_body.wav",
+      "seconds": 0.4,
+      "sha256": "d7457c335e552f9ef137ed73b8ab381d3ee3483d488842940977ee29a099b39c"
+    },
+    {
+      "file": "whiskey_chaser_finish.wav",
+      "seconds": 0.85,
+      "sha256": "ee06fc1a74a10ec58989df4a67d1f4705789f54a06f407ad6c3c1f83ca90c6e0"
+    }
+  ]
+}

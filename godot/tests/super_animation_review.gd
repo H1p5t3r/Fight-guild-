@@ -62,6 +62,15 @@ func run() -> void:
 	for example in examples:
 		var owner:=int(example[0]);var facing:=int(example[2]);var id:=str(example[3])
 		model.reset([character,int(example[1])] if owner==0 else [int(example[1]),character])
+		if int(move.stanceRequired)==2:
+			# Set up the stance with an ordinary stance normal before rendering.
+			model.core.preview_place(owner,10000,0,10000);model.core.preview_place(1-owner,90000,0,0)
+			for stance_slot in CombatModel.MOVE_IDS.size():
+				var normal:=model.move(character,stance_slot)
+				if int(normal.stanceRequired)==2 and int(normal.actionType)==0 and int(normal.enabled)==1:
+					model.core.preview_begin(owner,stance_slot)
+					for setup_tick in int(normal.startup)+int(normal.active)+int(normal.recovery)+3:model.step(0,0)
+					break
 		model.core.preview_place(owner,50000-facing*(33000 if id=="whiff" else 6000),0,10000)
 		model.core.preview_place(1-owner,50000+facing*(33000 if id=="whiff" else 6000),0,0)
 		caption.text="%s  /  %s  /  %s" % [entry.name.to_upper(),entry.input,"BEFORE" if args.has("--baseline") else id.to_upper()+" / 60 FPS"]
@@ -78,7 +87,7 @@ func run() -> void:
 			elif int(actor.age)==int(move.startup)-1 and int(actor.move)==slot:mark="last-load"
 			elif int(state.pairKind)>0 and int(state.pairClock) in paired_marks:mark="pair-%03d"%int(state.pairClock)
 			elif int(actor.pairRecovery)>0 and int(actor.pairRecovery) in [24,17,7]:mark="recovery-%02d"%int(actor.pairRecovery)
-			elif int(actor.age)==int(move.startup) and int(actor.move)==slot:mark="active"
+			elif int(actor.move)==slot and int(actor.age)>=int(move.startup) and int(actor.age)<int(move.startup)+int(move.active):mark="active-%02d"%(int(actor.age)-int(move.startup))
 			elif tick==260:mark="settled"
 			if stamps.has(mark):mark=""
 			if not mark.is_empty():stamps[mark]=true

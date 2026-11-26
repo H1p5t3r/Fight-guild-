@@ -1,0 +1,111 @@
+{
+  "name": "Whiskey Chaser",
+  "character": 3,
+  "slot": 31,
+  "input": "214214Hs",
+  "status": "completed-native-review",
+  "date": "2026-11-26",
+  "startup": 10,
+  "active": 9,
+  "recovery": 12,
+  "freeze": 54,
+  "pairTicks": 96,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 260,
+  "bodyKeys": 16,
+  "choreography": "Low Dempsey coil into a maximal near-arm horizontal hook; shoulder weave, far-arm counterhook at43, near-arm body hook at74 and a heavy final rotating hook at96. Retain low guard on every finish. Block/miss uses the same alternating hands on actual active frames1/5/9.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      14,
+      3
+    ],
+    [
+      26,
+      4
+    ],
+    [
+      42,
+      5
+    ],
+    [
+      43,
+      6
+    ],
+    [
+      52,
+      7
+    ],
+    [
+      62,
+      8
+    ],
+    [
+      73,
+      9
+    ],
+    [
+      74,
+      10
+    ],
+    [
+      82,
+      11
+    ],
+    [
+      89,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      7,
+      14
+    ],
+    [
+      17,
+      15
+    ]
+  ],
+  "requirements": [
+    "First active has largest limb travel",
+    "Alternate near/far/near hook arms visibly",
+    "Three block pulses align with active frames1/5/9",
+    "Constant470pixel anatomy and stowed staff",
+    "Held contact poses and small follow-through",
+    "Dempsey stance on hit, block and miss"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveHandTravelWorldUnits": 108.48,
+  "largestAdjacentTipChangeAtFirstActive": true,
+  "verification": {
+    "presentationChecks": 17481,
+    "presentationFailures": 0,
+    "rosterChecks": 8302,
+    "rosterFailures": 0,
+    "blockedContactPoses": [
+      1,
+      6,
+      10
+    ],
+    "reviewDamage": {
+      "hit": 260,
+      "mirrored": 260,
+      "block": 15,
+      "whiff": 0
+    }
+  }
+}
