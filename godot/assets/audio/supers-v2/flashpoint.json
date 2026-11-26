@@ -1,0 +1,26 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-flashpoint-audio.py",
+  "sounds": [
+    {
+      "file": "flashpoint_backhand.wav",
+      "seconds": 0.38,
+      "sha256": "d0f0a64211ca34dafb1dc6922e67d4695a1ae19e4f7d3ec4beb3118a087c8b5c"
+    },
+    {
+      "file": "flashpoint_lift.wav",
+      "seconds": 0.58,
+      "sha256": "80fb450d8369401f7d5b4f6fb464387c9a84e5f64d53089f05ad61ebd729153e"
+    },
+    {
+      "file": "flashpoint_compress.wav",
+      "seconds": 0.36,
+      "sha256": "a78ac7a91d28f6896a2b1eb07a5a26ff5d432272af171c6351fa35817b6782b1"
+    },
+    {
+      "file": "flashpoint_ignite.wav",
+      "seconds": 0.95,
+      "sha256": "b5941e8e2cf2d863b41f23bcbbf99ac13b3ad2d74add3a7048a8ad9e86d8c706"
+    }
+  ]
+}

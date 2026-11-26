@@ -30,6 +30,8 @@ The full super animation pass starts with **Sky Foundry**: 16 body drawings, a d
 
 **Grand Design** completes Hammer's pair with an eight-key ground cast, independent six-key stone wave, matching contact debris and a real follow-up demonstration. [Watch the native review](exports/FightGuild-Grand-Design-2026-11-25.mp4).
 
+**Flashpoint** gives Smoke a full backhand, rising fire lift, compression and ignition, with 16 body keys, separate flames and four original sounds. [Watch the native review](exports/FightGuild-Flashpoint-2026-11-25.mp4).
+
 ## Play or edit
 
 For browser-only attack tuning on a work PC, the [hosted Move Workshop](https://h1p5t3r.github.io/Fight-guild-/) is the intended delivery after the [one-time Pages setup](docs/move-workshop.md#hosted-publishing). It loads artwork as needed, keeps drafts and pose photos in your browser, and exports JSON for the Godot editor. The **Publish Move Workshop** workflow deploys updates from `feat/godot-combat-lab`. For offline use, extract **FightGuild-Move-Workshop.zip** and open `index.html`; keep its `assets` folder beside it. The single-file HTML is still built for compatibility. Current exports use schema 27; version-12–26 workshop files migrate automatically. No game install is needed. Before switching to the website, download your JSON from the old editor and import it on the site.

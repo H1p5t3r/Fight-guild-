@@ -1,0 +1,62 @@
+[
+  {
+    "id": "rise",
+    "file": "godot/assets/fighters/supers-v2/flashpoint/rise.png",
+    "original": "/workspace/generated_images/exec-fc8f56d3-c702-44e9-a8a9-4e4311b61adb.png",
+    "sha256": "c82afa5c5185b8489fb4d7f94068c46b1c8525cbc4aee797e4f02d360d39beda",
+    "prompt": "art/characters/supers-v2/flashpoint/rise-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/flashpoint/entry.png"
+    ]
+  },
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v2/flashpoint/entry.png",
+    "original": "/workspace/generated_images/exec-96b096af-0bae-49fc-901e-b14c639774b4.png",
+    "sha256": "cf38ff7b6298625d464449322c73c0b08cd2c2d17a9c991d2558d47dc0380ddb",
+    "prompt": "art/characters/supers-v2/flashpoint/entry-load-correction-prompt.txt",
+    "references": [
+      "/workspace/generated_images/exec-9f1589c1-de5a-4b61-850a-09fd9fc99e83.png"
+    ]
+  },
+  {
+    "id": "compress",
+    "file": "godot/assets/fighters/supers-v2/flashpoint/compress.png",
+    "original": "/workspace/generated_images/exec-27bcaad3-26ee-4142-8a29-4d38033ed80e.png",
+    "sha256": "6ddd6b9fd1e5d37fac57c97efcd8177622b2b9426a68a878328d105cd57d2322",
+    "prompt": "art/characters/supers-v2/flashpoint/compress-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/flashpoint/entry.png",
+      "godot/assets/fighters/supers-v2/flashpoint/rise.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v2/flashpoint/finish.png",
+    "original": "/workspace/generated_images/exec-2838ebbe-c49e-4a7e-840b-a892fe41381a.png",
+    "sha256": "e7dca3f654242f6d092fe8a1ddcb4b95f34d6c2bd4780480e5fdfe8d99333573",
+    "prompt": "art/characters/supers-v2/flashpoint/finish-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/flashpoint/entry.png",
+      "godot/assets/fighters/supers-v2/flashpoint/compress.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v2/flashpoint/effects.png",
+    "original": "/workspace/generated_images/exec-04a4626c-c8d7-4635-ae9e-8dd7e61651d8.png",
+    "sha256": "1eab018b5dae92e25a61ed95f36bc5e64567fef664b0a78e6e3c99c1853fd56a",
+    "prompt": "art/characters/supers-v2/flashpoint/effects-prompt.txt",
+    "references": []
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/flashpoint/portrait.png",
+    "original": "/workspace/generated_images/exec-9bb7bec1-b37e-4600-a15d-567d143f9ba5.png",
+    "sha256": "0d6b5acf366c2efd2991d34019aaae956c95a2934bd94d9a0ccf3b5fc351ce9b",
+    "prompt": "art/characters/supers-v2/flashpoint/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/flashpoint/entry.png"
+    ]
+  }
+]

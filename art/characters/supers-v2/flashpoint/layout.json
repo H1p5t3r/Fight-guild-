@@ -1,0 +1,304 @@
+{
+  "bodyHeight": 480,
+  "body": {
+    "entry": [
+      {
+        "root": [
+          390,
+          493
+        ],
+        "tip": [
+          358,
+          196
+        ]
+      },
+      {
+        "root": [
+          1163,
+          493
+        ],
+        "tip": [
+          1390,
+          100
+        ]
+      },
+      {
+        "root": [
+          390,
+          1005
+        ],
+        "tip": [
+          617,
+          659
+        ]
+      },
+      {
+        "root": [
+          1163,
+          1004
+        ],
+        "tip": [
+          1184,
+          695
+        ]
+      }
+    ],
+    "rise": [
+      {
+        "root": [
+          392,
+          489
+        ],
+        "tip": [
+          383,
+          248
+        ]
+      },
+      {
+        "root": [
+          1162,
+          490
+        ],
+        "tip": [
+          1195,
+          214
+        ]
+      },
+      {
+        "root": [
+          392,
+          1003
+        ],
+        "tip": [
+          613,
+          533
+        ]
+      },
+      {
+        "root": [
+          1167,
+          1006
+        ],
+        "tip": [
+          1347,
+          557
+        ]
+      }
+    ],
+    "compress": [
+      {
+        "root": [
+          389,
+          493
+        ],
+        "tip": [
+          449,
+          78
+        ]
+      },
+      {
+        "root": [
+          1165,
+          493
+        ],
+        "tip": [
+          1213,
+          88
+        ]
+      },
+      {
+        "root": [
+          389,
+          1007
+        ],
+        "tip": [
+          529,
+          635
+        ]
+      },
+      {
+        "root": [
+          1164,
+          1007
+        ],
+        "tip": [
+          1263,
+          654
+        ]
+      }
+    ],
+    "finish": [
+      {
+        "root": [
+          389,
+          494
+        ],
+        "tip": [
+          443,
+          84
+        ]
+      },
+      {
+        "root": [
+          1135,
+          495
+        ],
+        "tip": [
+          1334,
+          86
+        ]
+      },
+      {
+        "root": [
+          389,
+          1007
+        ],
+        "tip": [
+          544,
+          684
+        ]
+      },
+      {
+        "root": [
+          1137,
+          1007
+        ],
+        "tip": [
+          1250,
+          735
+        ]
+      }
+    ]
+  },
+  "presentation": {
+    "mode": "strike",
+    "finish_receiver": "chest",
+    "whiff": [
+      [
+        0,
+        2
+      ],
+      [
+        25,
+        14
+      ],
+      [
+        65,
+        15
+      ]
+    ],
+    "sounds": {
+      "0": "flashpoint_backhand",
+      "37": "flashpoint_lift",
+      "65": "flashpoint_compress",
+      "finish": "flashpoint_ignite"
+    },
+    "effects": [
+      {
+        "stage": "active",
+        "start": 0,
+        "end": 5,
+        "key": 0,
+        "box": [
+          30,
+          -145,
+          155,
+          110
+        ],
+        "fade": true,
+        "contact_box": [
+          -50,
+          -140,
+          105,
+          105
+        ]
+      },
+      {
+        "stage": "paired",
+        "start": 0,
+        "end": 8,
+        "key": 0,
+        "box": [
+          -80,
+          -140,
+          160,
+          115
+        ],
+        "anchor": "receiver",
+        "fade": true
+      },
+      {
+        "stage": "paired",
+        "start": 37,
+        "end": 47,
+        "key": 1,
+        "box": [
+          55,
+          -280,
+          145,
+          270
+        ],
+        "behind": true,
+        "fade": true
+      },
+      {
+        "stage": "paired",
+        "start": 65,
+        "end": 75,
+        "key": 2,
+        "box": [
+          -80,
+          -130,
+          160,
+          160
+        ],
+        "anchor": "receiver",
+        "fade": true
+      },
+      {
+        "stage": "connected",
+        "start": 0,
+        "end": 5,
+        "key": 3,
+        "box": [
+          -80,
+          -150,
+          195,
+          165
+        ],
+        "anchor": "receiver"
+      },
+      {
+        "stage": "connected",
+        "start": 5,
+        "end": 13,
+        "key": 4,
+        "box": [
+          -90,
+          -155,
+          200,
+          175
+        ],
+        "anchor": "receiver",
+        "fade": true
+      },
+      {
+        "stage": "connected",
+        "start": 13,
+        "end": 30,
+        "key": 5,
+        "box": [
+          -70,
+          -150,
+          175,
+          160
+        ],
+        "anchor": "receiver",
+        "fade": true
+      }
+    ],
+    "paired_recoil_age": 2
+  },
+  "faceWidth": 0.55,
+  "faceY": 0.57
+}

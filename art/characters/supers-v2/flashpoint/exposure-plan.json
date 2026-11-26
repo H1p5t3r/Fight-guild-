@@ -1,0 +1,106 @@
+{
+  "name": "Flashpoint",
+  "character": 2,
+  "slot": 12,
+  "input": "236236S",
+  "status": "completed-native-review",
+  "startup": 8,
+  "active": 5,
+  "recovery": 35,
+  "freeze": 54,
+  "pairTicks": 84,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 300,
+  "bodyKeys": 16,
+  "choreography": "Held cross-body coil into a horizontal empty-hand backhand; drifting follow-through, a rising palm fire lift at tick37, open-hand compression at65, and a final forward ignition at release84. Return into the approved almost-weightless idle. All fire is separate effect art; no physical sword.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      14,
+      3
+    ],
+    [
+      24,
+      4
+    ],
+    [
+      36,
+      5
+    ],
+    [
+      37,
+      6
+    ],
+    [
+      45,
+      7
+    ],
+    [
+      54,
+      8
+    ],
+    [
+      64,
+      9
+    ],
+    [
+      65,
+      10
+    ],
+    [
+      72,
+      11
+    ],
+    [
+      78,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      7,
+      14
+    ],
+    [
+      17,
+      15
+    ]
+  ],
+  "requirements": [
+    "Largest wrist travel from last startup to first active",
+    "Right hand performs horizontal backhand parallel with the ground",
+    "No sword, beam or invented flight of the caster",
+    "Nearly weightless toe-touch stance, fixed anatomical scale",
+    "Native fire impacts at37,65,84",
+    "Block and miss use opening withdrawal only",
+    "Native hit, mirrored, crouch block and whiff review"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveHandTravelWorldUnits": 86.32,
+  "largestAdjacentTipChangeAtFirstActive": true,
+  "verification": {
+    "presentationChecks": 16861,
+    "presentationFailures": 0,
+    "rosterChecks": 8302,
+    "rosterFailures": 0,
+    "reviewDamage": {
+      "hit": 300,
+      "mirrored": 300,
+      "block": 8,
+      "whiff": 0
+    }
+  }
+}

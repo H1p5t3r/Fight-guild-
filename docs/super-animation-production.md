@@ -208,13 +208,54 @@ The full native super roster also passes. The baseline remains in
 projectile-center correction (`capture-super-animation.py grand-design --case
 mirrored`) and replaces that case in the exported reel at the same 60 FPS.
 
+## 05 — Smoke / Flashpoint
+
+[Watch the native 60 FPS review with sound](../exports/FightGuild-Flashpoint-2026-11-25.mp4).
+Sixteen original body keys develop the approved empty-hand backhand into a
+complete flame sequence: cross-body coil, horizontal cut, drifting follow-through,
+upward fire lift, two-handed compression, final ignition and settled idle. Smoke
+retains her toe-touch posture, long slim anatomy, hat and cream/olive costume.
+The refined opening coil reserves the largest adjacent fingertip displacement
+(86.32 world units) for the first active frame. One 480-pixel anatomical scale
+is used across every body key. No body warp, physical sword or beam is added.
+
+Six separate flame drawings use ivory heat, orange fire and sculpted charcoal
+ribbons. The upward lift follows the actual airborne receiver path; compression
+begins at capture tick 65 and the final ignition starts only at release/damage,
+tick 84. Four original synthesized fire sounds follow ticks 0, 37, 65 and release.
+The receiver uses the stronger existing recoil key on the captured impact beats.
+The final chest recoil holds through the existing hitstop before hard knockdown.
+Block and miss withdraw from the opening cut and never play the capture finish.
+The 8/5/35 timing, invulnerability, 300 damage, two-segment cost and recovery rules
+are unchanged. Her new face portrait uses the existing rip-and-knit cut-in.
+
+Sources: [exposure plan](../art/characters/supers-v2/flashpoint/exposure-plan.json),
+[original PNG provenance](../art/characters/supers-v2/flashpoint/sources.json),
+[registration](../art/characters/supers-v2/flashpoint/layout.json).
+The load correction is a new image-generator edit; original source bytes remain
+in the recorded source path. Runtime registration only defines regions/pivots.
+
+```bash
+python scripts/register-super-presentation.py flashpoint
+python scripts/generate-flashpoint-audio.py
+bash scripts/godot.sh --headless --editor --import
+bash scripts/godot.sh --headless --script res://tests/super_presentation_test.gd -- --test --character 2 --slot 12
+python scripts/capture-super-animation.py flashpoint --stills
+python scripts/capture-super-animation.py flashpoint
+```
+
+The common presentation suite checks all six receivers, both sides/facings,
+complete key coverage, scale, pause, edited capture durations, exact damage/audio
+counts and snapshot replay. Native review separates hit, mirrored hit, block and
+miss. The old animation is retained in `build/flashpoint-before/` for comparison.
+
 ## Production order
 
 1. Sky Foundry — full pass and native review.
 2. Iron Dominion — full pass and native review.
 3. Freemason — full pass and native review.
 4. Grand Design — full pass and native review.
-5. Flashpoint.
+5. Flashpoint — full pass and native review.
 6. The Air Is Mine.
 7. Last Orders.
 8. Whiskey Chaser.

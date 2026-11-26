@@ -27866,7 +27866,842 @@
         }
       },
       "anatomical_scales": {
-        "supers-v1": 480
+        "supers-v1": 480,
+        "flashpoint-v2": 480
+      },
+      "super_flashpoint": {
+        "file": "supers-v2/flashpoint/entry.png",
+        "body_height": 480,
+        "frames": [
+          {
+            "file": "supers-v2/flashpoint/entry.png",
+            "sha256": "cf38ff7b6298625d464449322c73c0b08cd2c2d17a9c991d2558d47dc0380ddb",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              187,
+              11,
+              483,
+              495
+            ],
+            "pivot": [
+              390,
+              493
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              358,
+              196
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/entry.png",
+            "sha256": "cf38ff7b6298625d464449322c73c0b08cd2c2d17a9c991d2558d47dc0380ddb",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              160,
+              10,
+              626,
+              494
+            ],
+            "pivot": [
+              395,
+              493
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              622,
+              100
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/entry.png",
+            "sha256": "cf38ff7b6298625d464449322c73c0b08cd2c2d17a9c991d2558d47dc0380ddb",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              151,
+              11,
+              622,
+              494
+            ],
+            "pivot": [
+              390,
+              493
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              617,
+              147
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/entry.png",
+            "sha256": "cf38ff7b6298625d464449322c73c0b08cd2c2d17a9c991d2558d47dc0380ddb",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              192,
+              12,
+              533,
+              494
+            ],
+            "pivot": [
+              395,
+              492
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              416,
+              183
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/rise.png",
+            "sha256": "c82afa5c5185b8489fb4d7f94068c46b1c8525cbc4aee797e4f02d360d39beda",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              216,
+              11,
+              505,
+              490
+            ],
+            "pivot": [
+              392,
+              489
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              383,
+              248
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/rise.png",
+            "sha256": "c82afa5c5185b8489fb4d7f94068c46b1c8525cbc4aee797e4f02d360d39beda",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              175,
+              25,
+              452,
+              490
+            ],
+            "pivot": [
+              394,
+              490
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              427,
+              214
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/rise.png",
+            "sha256": "c82afa5c5185b8489fb4d7f94068c46b1c8525cbc4aee797e4f02d360d39beda",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              171,
+              8,
+              611,
+              491
+            ],
+            "pivot": [
+              392,
+              491
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              613,
+              21
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/rise.png",
+            "sha256": "c82afa5c5185b8489fb4d7f94068c46b1c8525cbc4aee797e4f02d360d39beda",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              200,
+              12,
+              581,
+              491
+            ],
+            "pivot": [
+              399,
+              494
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              579,
+              45
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/compress.png",
+            "sha256": "6ddd6b9fd1e5d37fac57c97efcd8177622b2b9426a68a878328d105cd57d2322",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              187,
+              8,
+              516,
+              495
+            ],
+            "pivot": [
+              389,
+              493
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              449,
+              78
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/compress.png",
+            "sha256": "6ddd6b9fd1e5d37fac57c97efcd8177622b2b9426a68a878328d105cd57d2322",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              185,
+              8,
+              495,
+              495
+            ],
+            "pivot": [
+              397,
+              493
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              445,
+              88
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/compress.png",
+            "sha256": "6ddd6b9fd1e5d37fac57c97efcd8177622b2b9426a68a878328d105cd57d2322",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              187,
+              8,
+              538,
+              495
+            ],
+            "pivot": [
+              389,
+              495
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              529,
+              123
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/compress.png",
+            "sha256": "6ddd6b9fd1e5d37fac57c97efcd8177622b2b9426a68a878328d105cd57d2322",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              189,
+              8,
+              504,
+              496
+            ],
+            "pivot": [
+              396,
+              495
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              495,
+              142
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/finish.png",
+            "sha256": "e7dca3f654242f6d092fe8a1ddcb4b95f34d6c2bd4780480e5fdfe8d99333573",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              207,
+              9,
+              459,
+              497
+            ],
+            "pivot": [
+              389,
+              494
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              443,
+              84
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/finish.png",
+            "sha256": "e7dca3f654242f6d092fe8a1ddcb4b95f34d6c2bd4780480e5fdfe8d99333573",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              141,
+              9,
+              578,
+              497
+            ],
+            "pivot": [
+              367,
+              495
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              566,
+              86
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/finish.png",
+            "sha256": "e7dca3f654242f6d092fe8a1ddcb4b95f34d6c2bd4780480e5fdfe8d99333573",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              184,
+              9,
+              551,
+              497
+            ],
+            "pivot": [
+              389,
+              495
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              544,
+              172
+            ]
+          },
+          {
+            "file": "supers-v2/flashpoint/finish.png",
+            "sha256": "e7dca3f654242f6d092fe8a1ddcb4b95f34d6c2bd4780480e5fdfe8d99333573",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              169,
+              9,
+              499,
+              496
+            ],
+            "pivot": [
+              369,
+              495
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "flashpoint-v2",
+            "render_only": true,
+            "tip": [
+              482,
+              223
+            ]
+          }
+        ],
+        "render_only": true
+      },
+      "super_flashpoint_fx": {
+        "file": "supers-v2/flashpoint/effects.png",
+        "body_height": 512,
+        "frames": [
+          {
+            "region": [
+              13,
+              117,
+              486,
+              315
+            ],
+            "pivot": [
+              243.0,
+              315
+            ],
+            "bounds": [
+              0,
+              0,
+              486,
+              315
+            ]
+          },
+          {
+            "region": [
+              526,
+              16,
+              469,
+              476
+            ],
+            "pivot": [
+              234.5,
+              476
+            ],
+            "bounds": [
+              0,
+              0,
+              469,
+              476
+            ]
+          },
+          {
+            "region": [
+              1038,
+              23,
+              483,
+              462
+            ],
+            "pivot": [
+              241.5,
+              462
+            ],
+            "bounds": [
+              0,
+              0,
+              483,
+              462
+            ]
+          },
+          {
+            "region": [
+              14,
+              520,
+              484,
+              466
+            ],
+            "pivot": [
+              242.0,
+              466
+            ],
+            "bounds": [
+              0,
+              0,
+              484,
+              466
+            ]
+          },
+          {
+            "region": [
+              523,
+              549,
+              489,
+              432
+            ],
+            "pivot": [
+              244.5,
+              432
+            ],
+            "bounds": [
+              0,
+              0,
+              489,
+              432
+            ]
+          },
+          {
+            "region": [
+              1063,
+              545,
+              460,
+              431
+            ],
+            "pivot": [
+              230.0,
+              431
+            ],
+            "bounds": [
+              0,
+              0,
+              460,
+              431
+            ]
+          }
+        ],
+        "render_only": true
+      },
+      "super_presentations": {
+        "12": {
+          "mode": "strike",
+          "finish_receiver": "chest",
+          "whiff": [
+            [
+              0,
+              2
+            ],
+            [
+              25,
+              14
+            ],
+            [
+              65,
+              15
+            ]
+          ],
+          "sounds": {
+            "0": "flashpoint_backhand",
+            "37": "flashpoint_lift",
+            "65": "flashpoint_compress",
+            "finish": "flashpoint_ignite"
+          },
+          "effects": [
+            {
+              "stage": "active",
+              "start": 0,
+              "end": 5,
+              "key": 0,
+              "box": [
+                30,
+                -145,
+                155,
+                110
+              ],
+              "fade": true,
+              "contact_box": [
+                -50,
+                -140,
+                105,
+                105
+              ]
+            },
+            {
+              "stage": "paired",
+              "start": 0,
+              "end": 8,
+              "key": 0,
+              "box": [
+                -80,
+                -140,
+                160,
+                115
+              ],
+              "anchor": "receiver",
+              "fade": true
+            },
+            {
+              "stage": "paired",
+              "start": 37,
+              "end": 47,
+              "key": 1,
+              "box": [
+                55,
+                -280,
+                145,
+                270
+              ],
+              "behind": true,
+              "fade": true
+            },
+            {
+              "stage": "paired",
+              "start": 65,
+              "end": 75,
+              "key": 2,
+              "box": [
+                -80,
+                -130,
+                160,
+                160
+              ],
+              "anchor": "receiver",
+              "fade": true
+            },
+            {
+              "stage": "connected",
+              "start": 0,
+              "end": 5,
+              "key": 3,
+              "box": [
+                -80,
+                -150,
+                195,
+                165
+              ],
+              "anchor": "receiver"
+            },
+            {
+              "stage": "connected",
+              "start": 5,
+              "end": 13,
+              "key": 4,
+              "box": [
+                -90,
+                -155,
+                200,
+                175
+              ],
+              "anchor": "receiver",
+              "fade": true
+            },
+            {
+              "stage": "connected",
+              "start": 13,
+              "end": 30,
+              "key": 5,
+              "box": [
+                -70,
+                -150,
+                175,
+                160
+              ],
+              "anchor": "receiver",
+              "fade": true
+            }
+          ],
+          "paired_recoil_age": 2,
+          "phase": "super_flashpoint",
+          "fx_phase": "super_flashpoint_fx",
+          "pair_ticks": 84,
+          "release_freeze": 22,
+          "owner_recovery": 24,
+          "paired": [
+            [
+              0,
+              1
+            ],
+            [
+              6,
+              2
+            ],
+            [
+              14,
+              3
+            ],
+            [
+              24,
+              4
+            ],
+            [
+              36,
+              5
+            ],
+            [
+              37,
+              6
+            ],
+            [
+              45,
+              7
+            ],
+            [
+              54,
+              8
+            ],
+            [
+              64,
+              9
+            ],
+            [
+              65,
+              10
+            ],
+            [
+              72,
+              11
+            ],
+            [
+              78,
+              12
+            ]
+          ],
+          "connected": [
+            [
+              0,
+              13
+            ],
+            [
+              7,
+              14
+            ],
+            [
+              17,
+              15
+            ]
+          ]
+        }
       }
     },
     {

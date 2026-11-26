@@ -29,7 +29,7 @@ static func present(sprites: Array[Sprite2D], state: Dictionary, world_scale: fl
 		receiver.reaction = 0
 		receiver.stun = 1
 		receiver.guarding = 0
-		CombatReactions.apply(victim, receiver, {"flags": 8 if int(receiver.y) > 0 else 4, "age": tick-beat}, world_scale)
+		CombatReactions.apply(victim, receiver, {"flags": 8 if int(receiver.y) > 0 else 4, "age": tick-beat+int(spec.get("paired_recoil_age",0))}, world_scale)
 	for child in victim.get_children():
 		if child is Sprite2D: child.visible = false
 	for p in 2: sprites[p].set_meta("super_role", "owner" if p == owner else "receiver")
