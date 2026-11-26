@@ -9,7 +9,7 @@ from pathlib import Path
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('super', help='production folder, e.g. flashpoint')
-parser.add_argument('--case', choices=['hit','mirrored','block','whiff','followup'])
+parser.add_argument('--case', choices=['hit','mirrored','block','whiff','followup','near','far'])
 parser.add_argument('--stills', action='store_true')
 parser.add_argument('--baseline', action='store_true')
 args = parser.parse_args()
@@ -44,7 +44,7 @@ with (out/'display.log').open('w') as log:
         display.terminate()
         display.wait(timeout=10)
 if not args.stills:
-    target = out/'case.mp4' if args.case else out/'before.mp4' if args.baseline else root/'exports'/('FightGuild-'+plan['name'].replace(' ','-')+'-2026-11-25.mp4')
+    target = out/'case.mp4' if args.case else out/'before.mp4' if args.baseline else root/'exports'/('FightGuild-'+plan['name'].replace(' ','-')+'-'+plan.get('date','2026-11-25')+'.mp4')
     subprocess.run(['ffmpeg','-y','-loglevel','error','-i',str(out/'review.avi'),'-c:v','libx264','-crf','18','-pix_fmt','yuv420p','-c:a','aac','-b:a','160k','-movflags','+faststart',str(target)],check=True)
     print('Native review:',target)
 else:

@@ -1,0 +1,21 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-air-is-mine-audio.py",
+  "sounds": [
+    {
+      "file": "air_is_mine_release.wav",
+      "seconds": 0.48,
+      "sha256": "e4464026c52b1527fddd415e775eb83792e2fd861480ef3a1e74d01fc2eb54dc"
+    },
+    {
+      "file": "air_is_mine_bloom.wav",
+      "seconds": 0.85,
+      "sha256": "ef62d1947f370a3a38bfc4210c67dfce636cfa1a1359100184a2ef9644cfe781"
+    },
+    {
+      "file": "air_is_mine_pulse.wav",
+      "seconds": 0.3,
+      "sha256": "2a337aff9409cccd6e4d81783a0e042c43536cd2fde4422897655098d0aa97f3"
+    }
+  ]
+}

@@ -1,0 +1,270 @@
+{
+  "bodyHeight": 480,
+  "body": {
+    "load": [
+      {
+        "root": [
+          410,
+          493
+        ],
+        "tip": [
+          530,
+          236
+        ]
+      },
+      {
+        "root": [
+          1165,
+          493
+        ],
+        "tip": [
+          1250,
+          194
+        ]
+      },
+      {
+        "root": [
+          410,
+          1006
+        ],
+        "tip": [
+          490,
+          638
+        ]
+      },
+      {
+        "root": [
+          1165,
+          1006
+        ],
+        "tip": [
+          1228,
+          622
+        ]
+      }
+    ],
+    "release": [
+      {
+        "root": [
+          400,
+          494
+        ],
+        "tip": [
+          617,
+          68
+        ]
+      },
+      {
+        "root": [
+          1170,
+          494
+        ],
+        "tip": [
+          1370,
+          48
+        ]
+      },
+      {
+        "root": [
+          400,
+          1007
+        ],
+        "tip": [
+          548,
+          540
+        ]
+      },
+      {
+        "root": [
+          1170,
+          1007
+        ],
+        "tip": [
+          1310,
+          583
+        ]
+      }
+    ],
+    "recovery": [
+      {
+        "root": [
+          405,
+          496
+        ],
+        "tip": [
+          556,
+          83
+        ]
+      },
+      {
+        "root": [
+          1175,
+          496
+        ],
+        "tip": [
+          1300,
+          141
+        ]
+      },
+      {
+        "root": [
+          405,
+          1008
+        ],
+        "tip": [
+          530,
+          711
+        ]
+      },
+      {
+        "root": [
+          1175,
+          1008
+        ],
+        "tip": [
+          1290,
+          742
+        ]
+      }
+    ]
+  },
+  "presentation": {
+    "mode": "cast",
+    "windup": [
+      [
+        0,
+        0
+      ],
+      [
+        20,
+        1
+      ],
+      [
+        45,
+        2
+      ],
+      [
+        79,
+        3
+      ]
+    ],
+    "active_pose": 4,
+    "recovery": [
+      [
+        0,
+        4
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        22,
+        6
+      ],
+      [
+        38,
+        7
+      ],
+      [
+        55,
+        8
+      ],
+      [
+        66,
+        9
+      ],
+      [
+        77,
+        10
+      ],
+      [
+        88,
+        11
+      ]
+    ],
+    "sounds": {
+      "cast": "air_is_mine_release",
+      "spawn": "air_is_mine_bloom",
+      "pulse": "air_is_mine_pulse"
+    },
+    "effects": [
+      {
+        "stage": "windup",
+        "start": 18,
+        "end": 24,
+        "key": 0,
+        "box": [
+          5,
+          -130,
+          60,
+          85
+        ],
+        "behind": false,
+        "fade": true
+      },
+      {
+        "stage": "cast",
+        "start": 0,
+        "end": 4,
+        "key": 1,
+        "box": [
+          -45,
+          -160,
+          230,
+          150
+        ],
+        "behind": false,
+        "fade": true
+      },
+      {
+        "stage": "cast",
+        "start": 2,
+        "end": 8,
+        "key": 2,
+        "box": [
+          -25,
+          -135,
+          220,
+          130
+        ],
+        "behind": true,
+        "fade": true
+      },
+      {
+        "stage": "cast",
+        "start": 7,
+        "end": 14,
+        "key": 3,
+        "box": [
+          -10,
+          -155,
+          180,
+          150
+        ],
+        "behind": false,
+        "fade": true
+      }
+    ],
+    "projectile_contact": {
+      "keys": [
+        4,
+        5
+      ],
+      "box": [
+        -50,
+        -55,
+        100,
+        110
+      ]
+    }
+  },
+  "projectile": {
+    "source": "cloud",
+    "frame_ticks": 8,
+    "loop_all": true,
+    "opacity": 0.85
+  },
+  "faceWidth": 0.59,
+  "faceY": 0.59
+}

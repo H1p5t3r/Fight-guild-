@@ -54,11 +54,15 @@ func run()->void:
 							check(CombatAudio.layers(event)[0].file.ends_with(str(spec.sounds.cast)+".wav"),"Cast sound routing")
 							plant_sounds+=1
 						if int(event.kind) in [1,2,3,4]:check(not CombatAudio.layers(event).is_empty(),"Lost projectile contact audio")
+						if spec.sounds.has("pulse") and int(event.kind) in [1,2,3,4] and (int(event.get("flags",0))&1)!=0:
+							var layers:=CombatAudio.layers(event)
+							check(layers.any(func(layer:Dictionary)->bool:return str(layer.file).ends_with(str(spec.sounds.pulse)+".wav")),"Missing field contact pulse")
+							if int(event.kind)==2:check(layers.size()>1,"Pulse replaced guard feedback")
 				check(free_with_wave,"Caster remained locked to projectile")
 				check(spawn_sounds==1 and plant_sounds==1,"Repeated/missing cast sounds")
 				var damage:=1000-int(model.state().players[1-owner].health)
-				print("owner ",owner," face ",facing," block ",blocked," damage ",damage," expected ",move.chipDamage if blocked else move.damage)
-				check(damage==int(move.chipDamage) if blocked else damage==int(move.damage),"Contact damage changed")
+				print("owner ",owner," face ",facing," block ",blocked," damage ",damage," expected ",(move.chipDamage if blocked else move.damage)*int(move.projectileHits))
+				check(damage==int(move.chipDamage)*int(move.projectileHits) if blocked else damage==int(move.damage)*int(move.projectileHits),"Contact damage changed")
 				check(model.core.restore(restored),"Restore")
 				var guard:=(2 if facing>0 else 1)|4
 				for tick in 30:model.step(guard if blocked and owner==1 else 0,guard if blocked and owner==0 else 0)
@@ -75,6 +79,25 @@ func run()->void:
 	check(int(model.state().players[1].health)==1000,"Whiff dealt damage")
 	check(wave_seen.size()==6,"Missing projectile key")
 	check(model.fingerprint()==fingerprint,"Data changed")
+	if character==2 and slot==31:
+		for placement in [[1,15000],[0,25000],[2,35000]]:
+			model.reset([character,4]);model.core.preview_place(0,15000,0,10000);model.core.preview_place(1,85000,0,0);model.core.preview_begin(0,slot)
+			for tick in 100:
+				model.step(int(placement[0]),0)
+				if not model.state().projectiles.is_empty():break
+			var field:Dictionary=model.state().projectiles[0]
+			check(int(field.x)==15000+int(placement[1]) and int(field.vx)==0,"Stationary field placement changed")
+		model.reset([character,4]);model.core.preview_place(0,15000,0,10000);model.core.preview_place(1,85000,0,0);model.core.preview_begin(0,slot)
+		for tick in 100:model.step(0,0)
+		check(not model.state().projectiles.is_empty(),"Field ended before interruption test")
+		model.core.preview_place(1,int(model.state().players[0].x)+4000,0,0)
+		model.core.preview_begin(1,0)
+		var interrupted:=false
+		for tick in 40:
+			model.step(0,0)
+			if int(model.state().players[0].health)<1000:
+				interrupted=true;check(model.state().projectiles.is_empty(),"Cloud survived Smoke being hit");break
+		check(interrupted,"Interruption strike missed Smoke")
 	for timing in [[24,1,18,32],[10,2,20,18]]:
 		var data:=model.data()
 		for i in 4:data.characters[character].moves[slot][["startup","active","recovery","projectileSpawnFrame"][i]]=timing[i]

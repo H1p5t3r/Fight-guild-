@@ -167,7 +167,7 @@ func draw_projectiles() -> void:
 			var r: Array = custom.region
 			source = Rect2(r[0], r[1], r[2], r[3])
 		draw_set_transform(from+extent*0.5,0.0,Vector2(float(q.facing),1.0))
-		draw_texture_rect_region(art, target, source)
+		draw_texture_rect_region(art,target,source,Color(1,1,1,float(custom.get("opacity",1.0))))
 		draw_set_transform(Vector2.ZERO)
 
 func screen_point(point: Vector2) -> Vector2:

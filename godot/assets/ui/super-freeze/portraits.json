@@ -72,6 +72,20 @@
       "width": 0.55,
       "center_y": 0.57,
       "source": "art/characters/supers-v2/flashpoint/portrait-prompt.txt"
+    },
+    "The Air Is Mine": {
+      "character": 2,
+      "enabled": true,
+      "file": "../../fighters/supers-v2/the-air-is-mine/portrait.png",
+      "region": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "width": 0.59,
+      "center_y": 0.59,
+      "source": "art/characters/supers-v2/the-air-is-mine/portrait-prompt.txt"
     }
   }
 }

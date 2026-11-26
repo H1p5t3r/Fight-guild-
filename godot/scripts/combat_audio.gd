@@ -115,6 +115,10 @@ static func layers(cue: Dictionary) -> Array:
 		var count := 3 if str(layer.key).begins_with("hit_") else 2
 		var variant := identity % count
 		layer.file = str(layer.key) + ("_%d" % (variant + 1) if variant else "") + ".wav"
+	if spec.get("mode","")=="cast" and spec.get("sounds",{}).has("pulse") and (int(cue.get("flags",0))&1)!=0 and kind in [1,2,3,4,6]:
+		var pulse:="../supers-v2/"+str(spec.sounds.pulse)+".wav"
+		if kind in [1,4]:result[0].file=pulse
+		else:result.append({"key":"field_pulse","file":pulse,"gain":-15.0,"pitch":1.0,"priority":3})
 	return result
 
 func select_voice(priority: int) -> int:

@@ -11,7 +11,8 @@ The [full animation production pass](super-animation-production.md) begins with
 [Iron Dominion](../exports/FightGuild-Iron-Dominion-2026-11-25.mp4), followed by
 [Freemason](../exports/FightGuild-Freemason-2026-11-25.mp4) and
 [Grand Design](../exports/FightGuild-Grand-Design-2026-11-25.mp4), then
-[Flashpoint](../exports/FightGuild-Flashpoint-2026-11-25.mp4).
+[Flashpoint](../exports/FightGuild-Flashpoint-2026-11-25.mp4) and
+[The Air Is Mine](../exports/FightGuild-The-Air-Is-Mine-2026-11-26.mp4).
 These are provisional balance values, captured from the current native build.
 Normal combo proration still applies; the video starts each demonstration fresh.
 Exsanguinate's demonstration begins with 150 stored grey life.
@@ -67,7 +68,7 @@ Old binary snapshots are incompatible with the added cinematic state.
 ## Art and reproduction
 
 All twelve supers use original generated art. Sky Foundry, Iron Dominion, Freemason and Flashpoint
-now each have 16-key replacements. Grand Design has eight caster keys and an
+now each have 16-key replacements. The Air Is Mine has twelve caster keys and six independently looping cloud keys. Grand Design has eight caster keys and an
 independent six-key stone wave. All five have dedicated faces, separate effects
 and original sound passes. Fixed source scale, held anticipation and a first-active snap
 follow the established animation process. The largest authored pose change is

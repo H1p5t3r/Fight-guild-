@@ -1,0 +1,106 @@
+{
+  "name": "The Air Is Mine",
+  "character": 2,
+  "slot": 31,
+  "input": "214214Hs",
+  "status": "completed-native-review",
+  "startup": 24,
+  "active": 1,
+  "recovery": 18,
+  "freeze": 54,
+  "pairTicks": 0,
+  "releaseFreeze": 0,
+  "ownerRecovery": 0,
+  "damage": 50,
+  "bodyKeys": 12,
+  "choreography": "Gather palms at the waist, inhale and lift the wrists, hold close to the chest, then open a broad curtain with both hands on the first active frame. Guide the stationary field with one hand high and one low, relax the wrists and return to the approved drifting idle. The field lives on a separate saved clock and reacts to actual contacts.",
+  "startupKeys": [
+    [
+      0,
+      0
+    ],
+    [
+      20,
+      1
+    ],
+    [
+      45,
+      2
+    ],
+    [
+      79,
+      3
+    ]
+  ],
+  "recoveryKeys": [
+    [
+      0,
+      4
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      22,
+      6
+    ],
+    [
+      38,
+      7
+    ],
+    [
+      55,
+      8
+    ],
+    [
+      66,
+      9
+    ],
+    [
+      77,
+      10
+    ],
+    [
+      88,
+      11
+    ]
+  ],
+  "projectile": {
+    "spawnFrame": 24,
+    "life": 180,
+    "width": 20000,
+    "height": 16000,
+    "hits": 3,
+    "rehit": 36,
+    "keys": 6
+  },
+  "requirements": [
+    "Largest limb separation at first active curtain release",
+    "Consistent slim anatomy and toe registration",
+    "Independent stationary cloud loop, actual-contact pulse accents",
+    "Keep near, middle and far placement",
+    "Caster recovers normally, no captured sequence",
+    "Cloud clears when Smoke is hit",
+    "Native hit, block, whiff, mirrored and placement review"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "date": "2026-11-26",
+  "verification": {
+    "presentationChecks": 6735,
+    "presentationFailures": 0,
+    "rosterChecks": 8302,
+    "rosterFailures": 0,
+    "reviewDamage": {
+      "hit": 150,
+      "mirrored": 150,
+      "block": 15,
+      "whiff": 0,
+      "near": 150,
+      "far": 150
+    }
+  },
+  "firstActiveHandTravelWorldUnits": 49.88,
+  "largestAdjacentTipChangeAtFirstActive": true
+}

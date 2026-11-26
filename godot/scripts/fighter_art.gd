@@ -87,7 +87,7 @@ static func projectile_art(character: int, move: int, life: int, age: int = 0) -
 		# share the exact same texture and geometry, including expiration art.
 		var interval: int = int(effect.get("frame_ticks", 6))
 		if effect.get("loop_all",false):
-			return {"file":effect.file,"region":effect.frames[(age/maxi(1,interval))%effect.frames.size()].region}
+			return {"file":effect.file,"region":effect.frames[(age/maxi(1,interval))%effect.frames.size()].region,"opacity":effect.get("opacity",1.0)}
 		var index: int = 3 if life <= 6 else (age / interval) % 3
 		return {"file": effect.file, "region": effect.frames[index].region}
 	return effect

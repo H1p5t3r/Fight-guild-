@@ -249,6 +249,44 @@ complete key coverage, scale, pause, edited capture durations, exact damage/audi
 counts and snapshot replay. Native review separates hit, mirrored hit, block and
 miss. The old animation is retained in `build/flashpoint-before/` for comparison.
 
+## 06 — Smoke / The Air Is Mine
+
+[Watch the native 60 FPS review with sound](../exports/FightGuild-The-Air-Is-Mine-2026-11-26.mp4).
+Twelve body keys take Smoke from a compact inhaling gesture through a first-active
+curtain release, a high/low guiding pose and a gradual return to her toe-touch
+idle. A fixed 480-pixel anatomical scale and registered toes prevent size changes.
+Six independent charcoal/olive gas keys roll around a transparent center, with
+acid-green accents, so the defender remains readable inside the field. Separate
+release, contact and dispersal effects never stretch Smoke's body. Her dedicated
+portrait uses the existing ripped-screen reveal and reverse closure.
+
+Three original synthesized sounds cover the breath release, cloud bloom and
+actual contact pulses. Block, counter and Faultless Defense retain their distinct
+contact layers. The cloud runs on the saved projectile age after Smoke recovers;
+its opacity is presentation metadata. Near, middle and far placement, three hits,
+36-frame rehit, stationary behavior, clearance on Smoke being hit, 24/1/18 timing,
+50 damage per hit, meter cost and free action between pulses are unchanged.
+
+Sources: [exposure plan](../art/characters/supers-v2/the-air-is-mine/exposure-plan.json),
+[original source records](../art/characters/supers-v2/the-air-is-mine/sources.json),
+[layout](../art/characters/supers-v2/the-air-is-mine/layout.json).
+The curtain and follow-through corrections were made through image generation;
+registration changes metadata only and keeps all selected PNG bytes intact.
+
+```bash
+python scripts/register-super-presentation.py the-air-is-mine
+python scripts/generate-air-is-mine-audio.py
+bash scripts/godot.sh --headless --script res://tests/super_cast_test.gd -- --test --character 2 --slot 31
+python scripts/capture-super-animation.py the-air-is-mine --stills
+python scripts/capture-super-animation.py the-air-is-mine
+```
+
+The cast suite passes 6,735 checks, including both sides/facings, all twelve body
+and six cloud keys, exact three-hit damage/chip, replay, edited cast/spawn timings,
+all placements and interruption by a real opponent attack. The six-case native
+review covers hit, mirrored hit, crouch block, miss, near and far placement.
+Grand Design, full-roster supers and combat feedback are also regression checked.
+
 ## Production order
 
 1. Sky Foundry — full pass and native review.
@@ -256,7 +294,7 @@ miss. The old animation is retained in `build/flashpoint-before/` for comparison
 3. Freemason — full pass and native review.
 4. Grand Design — full pass and native review.
 5. Flashpoint — full pass and native review.
-6. The Air Is Mine.
+6. The Air Is Mine — full pass and native review.
 7. Last Orders.
 8. Whiskey Chaser.
 9. No Safe Harbour.
