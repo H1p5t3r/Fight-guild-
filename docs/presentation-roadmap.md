@@ -69,8 +69,11 @@ existing approved portraits remain the runtime fallback. See
    layout swaps, neutral devices and controller-driven selection. Native input,
    menu, replay and 720p layout checks pass; physical Windows/controller testing
    remains a hardware follow-up. See [controls and side selection](input-controls.md).
-   **Item 6, training and diagnostics, is next.**
-6. **Training and Workshop diagnostics.** Recording slots, defensive dummy choices,
+   **Priority change (2026-11-26): rhythm combo trials before item 6.** The first
+   native pass provides ten verified routes across the roster, scrolling button
+   lanes, directions/charge holds, demos, early/late feedback, mirrored practice,
+   slow speeds and clears based on the real combo. See [combo trials](combo-trials.md).
+6. **Training and Workshop diagnostics — deferred while trials come first.** Recording slots, defensive dummy choices,
    and clear explanations when a sequence cannot connect or cancel.
 7. **Character rewards and counterplay.** Fillet bleed, Shark's pull, Tapper's stance
    loops and Hammer's once-per-string Drive.

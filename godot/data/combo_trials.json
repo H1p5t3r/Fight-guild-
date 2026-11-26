@@ -1,0 +1,2244 @@
+{
+	"fingerprint": "27-49e0664f-4063f988",
+	"fps": 60,
+	"kit": "2026-11-25-supers/FightGuild-Supers.json",
+	"source": "FightGuild-Combo-Routes-2026-11-25.json",
+	"trials": [
+		{
+			"character": 5.0,
+			"contacts": [
+				{
+					"frame": 7,
+					"slot": 32
+				},
+				{
+					"frame": 33,
+					"slot": 11
+				},
+				{
+					"frame": 55,
+					"slot": 15
+				},
+				{
+					"frame": 88,
+					"slot": 5
+				},
+				{
+					"frame": 105,
+					"slot": 15
+				},
+				{
+					"frame": 138,
+					"slot": 5
+				},
+				{
+					"frame": 156,
+					"slot": 6
+				}
+			],
+			"corner": false,
+			"damage": 191,
+			"duration": 156,
+			"hint": "Press at the line, not on impact. 6Hs launches; buffer 236S, then pick up with 2K.",
+			"hits": 7,
+			"id": "fillet-midscreen",
+			"initial": {
+				"baseHealth": 1000.0,
+				"characters": [
+					5.0,
+					4.0
+				],
+				"contactBase": 0.0,
+				"momentum": 0.0,
+				"positions": [
+					42000.0,
+					48500.0
+				]
+			},
+			"runs": [
+				[
+					1,
+					64
+				],
+				[
+					14,
+					0
+				],
+				[
+					1,
+					130
+				],
+				[
+					28,
+					0
+				],
+				[
+					1,
+					4
+				],
+				[
+					1,
+					6
+				],
+				[
+					1,
+					66
+				],
+				[
+					31,
+					0
+				],
+				[
+					1,
+					36
+				],
+				[
+					15,
+					0
+				],
+				[
+					1,
+					4
+				],
+				[
+					1,
+					6
+				],
+				[
+					1,
+					66
+				],
+				[
+					31,
+					0
+				],
+				[
+					1,
+					36
+				],
+				[
+					15,
+					0
+				],
+				[
+					1,
+					68
+				],
+				[
+					11,
+					0
+				]
+			],
+			"starts": [
+				{
+					"frame": 1,
+					"slot": 32,
+					"step": 0
+				},
+				{
+					"frame": 16,
+					"slot": 11,
+					"step": 1
+				},
+				{
+					"frame": 47,
+					"slot": 15,
+					"step": 2
+				},
+				{
+					"frame": 83,
+					"slot": 5,
+					"step": 3
+				},
+				{
+					"frame": 97,
+					"slot": 15,
+					"step": 4
+				},
+				{
+					"frame": 133,
+					"slot": 5,
+					"step": 5
+				},
+				{
+					"frame": 145,
+					"slot": 6,
+					"step": 6
+				}
+			],
+			"steps": [
+				{
+					"inputFrame": 1.0,
+					"notation": "c.S",
+					"slot": 32.0,
+					"startFrame": 1.0
+				},
+				{
+					"inputFrame": 16.0,
+					"notation": "6Hs",
+					"slot": 11.0,
+					"startFrame": 16.0
+				},
+				{
+					"inputFrame": 45.0,
+					"notation": "236S",
+					"slot": 15.0,
+					"startFrame": 47.0
+				},
+				{
+					"inputFrame": 79.0,
+					"notation": "2K",
+					"slot": 5.0,
+					"startFrame": 83.0
+				},
+				{
+					"inputFrame": 95.0,
+					"notation": "236S",
+					"slot": 15.0,
+					"startFrame": 97.0
+				},
+				{
+					"inputFrame": 129.0,
+					"notation": "2K",
+					"slot": 5.0,
+					"startFrame": 133.0
+				},
+				{
+					"inputFrame": 145.0,
+					"notation": "2S",
+					"slot": 6.0,
+					"startFrame": 145.0
+				}
+			],
+			"title": "MIDSCREEN ROUTE"
+		},
+		{
+			"character": 5.0,
+			"contacts": [
+				{
+					"frame": 7,
+					"slot": 32
+				},
+				{
+					"frame": 33,
+					"slot": 11
+				},
+				{
+					"frame": 55,
+					"slot": 15
+				},
+				{
+					"frame": 88,
+					"slot": 5
+				},
+				{
+					"frame": 103,
+					"slot": 8
+				},
+				{
+					"frame": 123,
+					"slot": 16
+				},
+				{
+					"frame": 184,
+					"slot": 11
+				}
+			],
+			"corner": true,
+			"damage": 278,
+			"duration": 184,
+			"hint": "Press at the line, not on impact. 6Hs launches; buffer 236S, then pick up with 2K.",
+			"hits": 7,
+			"id": "fillet-corner",
+			"initial": {
+				"baseHealth": 1000.0,
+				"characters": [
+					5.0,
+					4.0
+				],
+				"contactBase": 0.0,
+				"momentum": 0.0,
+				"positions": [
+					85000.0,
+					91500.0
+				]
+			},
+			"runs": [
+				[
+					1,
+					64
+				],
+				[
+					14,
+					0
+				],
+				[
+					1,
+					130
+				],
+				[
+					28,
+					0
+				],
+				[
+					1,
+					4
+				],
+				[
+					1,
+					6
+				],
+				[
+					1,
+					66
+				],
+				[
+					31,
+					0
+				],
+				[
+					1,
+					36
+				],
+				[
+					15,
+					0
+				],
+				[
+					1,
+					18
+				],
+				[
+					15,
+					0
+				],
+				[
+					1,
+					2
+				],
+				[
+					1,
+					4
+				],
+				[
+					1,
+					134
+				],
+				[
+					49,
+					0
+				],
+				[
+					1,
+					130
+				],
+				[
+					21,
+					0
+				]
+			],
+			"starts": [
+				{
+					"frame": 1,
+					"slot": 32,
+					"step": 0
+				},
+				{
+					"frame": 16,
+					"slot": 11,
+					"step": 1
+				},
+				{
+					"frame": 47,
+					"slot": 15,
+					"step": 2
+				},
+				{
+					"frame": 83,
+					"slot": 5,
+					"step": 3
+				},
+				{
+					"frame": 95,
+					"slot": 8,
+					"step": 4
+				},
+				{
+					"frame": 113,
+					"slot": 16,
+					"step": 5
+				},
+				{
+					"frame": 167,
+					"slot": 11,
+					"step": 6
+				}
+			],
+			"steps": [
+				{
+					"inputFrame": 1.0,
+					"notation": "c.S",
+					"slot": 32.0,
+					"startFrame": 1.0
+				},
+				{
+					"inputFrame": 16.0,
+					"notation": "6Hs",
+					"slot": 11.0,
+					"startFrame": 16.0
+				},
+				{
+					"inputFrame": 45.0,
+					"notation": "236S",
+					"slot": 15.0,
+					"startFrame": 47.0
+				},
+				{
+					"inputFrame": 79.0,
+					"notation": "2K",
+					"slot": 5.0,
+					"startFrame": 83.0
+				},
+				{
+					"inputFrame": 95.0,
+					"notation": "6P",
+					"slot": 8.0,
+					"startFrame": 95.0
+				},
+				{
+					"inputFrame": 111.0,
+					"notation": "623Hs",
+					"slot": 16.0,
+					"startFrame": 113.0
+				},
+				{
+					"inputFrame": 163.0,
+					"notation": "6Hs",
+					"slot": 11.0,
+					"startFrame": 167.0
+				}
+			],
+			"title": "CORNER BREAK"
+		},
+		{
+			"character": 2.0,
+			"contacts": [
+				{
+					"frame": 28,
+					"slot": 44
+				},
+				{
+					"frame": 80,
+					"slot": 32
+				},
+				{
+					"frame": 108,
+					"slot": 7
+				},
+				{
+					"frame": 152,
+					"slot": 16
+				}
+			],
+			"corner": false,
+			"damage": 221,
+			"duration": 152,
+			"hint": "Hold D through the long note to charge the opener. Buffer each quarter-circle before its button.",
+			"hits": 4,
+			"id": "smoke-midscreen",
+			"initial": {
+				"baseHealth": 1000.0,
+				"characters": [
+					2.0,
+					5.0
+				],
+				"contactBase": 0.0,
+				"momentum": 0.0,
+				"positions": [
+					42000.0,
+					48500.0
+				]
+			},
+			"runs": [
+				[
+					28,
+					256
+				],
+				[
+					40,
+					0
+				],
+				[
+					1,
+					64
+				],
+				[
+					21,
+					0
+				],
+				[
+					1,
+					132
+				],
+				[
+					30,
+					0
+				],
+				[
+					1,
+					4
+				],
+				[
+					1,
+					5
+				],
+				[
+					1,
+					129
+				],
+				[
+					28,
+					0
+				]
+			],
+			"starts": [
+				{
+					"frame": 1,
+					"slot": 13,
+					"step": 0
+				},
+				{
+					"frame": 28,
+					"slot": 44,
+					"step": 0
+				},
+				{
+					"frame": 73,
+					"slot": 32,
+					"step": 1
+				},
+				{
+					"frame": 91,
+					"slot": 7,
+					"step": 2
+				},
+				{
+					"frame": 124,
+					"slot": 16,
+					"step": 3
+				}
+			],
+			"steps": [
+				{
+					"inputFrame": 1.0,
+					"notation": "5[D]",
+					"slot": 44.0,
+					"startFrame": 28.0
+				},
+				{
+					"inputFrame": 69.0,
+					"notation": "c.S",
+					"slot": 32.0,
+					"startFrame": 73.0
+				},
+				{
+					"inputFrame": 91.0,
+					"notation": "2Hs",
+					"slot": 7.0,
+					"startFrame": 91.0
+				},
+				{
+					"inputFrame": 122.0,
+					"notation": "214Hs",
+					"slot": 16.0,
+					"startFrame": 124.0
+				}
+			],
+			"title": "CHARGED DRIVE CONFIRM"
+		},
+		{
+			"character": 2.0,
+			"contacts": [
+				{
+					"frame": 28,
+					"slot": 44
+				},
+				{
+					"frame": 80,
+					"slot": 32
+				},
+				{
+					"frame": 108,
+					"slot": 7
+				},
+				{
+					"frame": 143,
+					"slot": 15
+				}
+			],
+			"corner": true,
+			"damage": 204,
+			"duration": 143,
+			"hint": "Hold D through the long note to charge the opener. Buffer each quarter-circle before its button.",
+			"hits": 4,
+			"id": "smoke-corner",
+			"initial": {
+				"baseHealth": 1000.0,
+				"characters": [
+					2.0,
+					5.0
+				],
+				"contactBase": 0.0,
+				"momentum": 0.0,
+				"positions": [
+					85000.0,
+					91500.0
+				]
+			},
+			"runs": [
+				[
+					28,
+					256
+				],
+				[
+					40,
+					0
+				],
+				[
+					1,
+					64
+				],
+				[
+					21,
+					0
+				],
+				[
+					1,
+					132
+				],
+				[
+					33,
+					0
+				],
+				[
+					1,
+					4
+				],
+				[
+					1,
+					5
+				],
+				[
+					1,
+					65
+				],
+				[
+					16,
+					0
+				]
+			],
+			"starts": [
+				{
+					"frame": 1,
+					"slot": 13,
+					"step": 0
+				},
+				{
+					"frame": 28,
+					"slot": 44,
+					"step": 0
+				},
+				{
+					"frame": 73,
+					"slot": 32,
+					"step": 1
+				},
+				{
+					"frame": 91,
+					"slot": 7,
+					"step": 2
+				},
+				{
+					"frame": 127,
+					"slot": 15,
+					"step": 3
+				}
+			],
+			"steps": [
+				{
+					"inputFrame": 1.0,
+					"notation": "5[D]",
+					"slot": 44.0,
+					"startFrame": 28.0
+				},
+				{
+					"inputFrame": 69.0,
+					"notation": "c.S",
+					"slot": 32.0,
+					"startFrame": 73.0
+				},
+				{
+					"inputFrame": 91.0,
+					"notation": "2Hs",
+					"slot": 7.0,
+					"startFrame": 91.0
+				},
+				{
+					"inputFrame": 125.0,
+					"notation": "214S",
+					"slot": 15.0,
+					"startFrame": 127.0
+				}
+			],
+			"title": "POISON SWORD FINISH"
+		},
+		{
+			"character": 4.0,
+			"contacts": [
+				{
+					"frame": 13,
+					"slot": 10
+				},
+				{
+					"frame": 50,
+					"slot": 32
+				},
+				{
+					"frame": 73,
+					"slot": 10
+				}
+			],
+			"corner": false,
+			"damage": 159,
+			"duration": 73,
+			"hint": "6S > c.S > 6S. Wait through recovery before linking the next Slash.",
+			"hits": 3,
+			"id": "shark-midscreen",
+			"initial": {
+				"baseHealth": 1000.0,
+				"characters": [
+					4.0,
+					5.0
+				],
+				"contactBase": 0.0,
+				"momentum": 0.0,
+				"positions": [
+					42000.0,
+					48500.0
+				]
+			},
+			"runs": [
+				[
+					1,
+					66
+				],
+				[
+					38,
+					0
+				],
+				[
+					1,
+					64
+				],
+				[
+					20,
+					0
+				],
+				[
+					1,
+					66
+				],
+				[
+					12,
+					0
+				]
+			],
+			"starts": [
+				{
+					"frame": 1,
+					"slot": 10,
+					"step": 0
+				},
+				{
+					"frame": 44,
+					"slot": 32,
+					"step": 1
+				},
+				{
+					"frame": 61,
+					"slot": 10,
+					"step": 2
+				}
+			],
+			"steps": [
+				{
+					"inputFrame": 1.0,
+					"notation": "6S",
+					"slot": 10.0,
+					"startFrame": 1.0
+				},
+				{
+					"inputFrame": 40.0,
+					"notation": "c.S",
+					"slot": 32.0,
+					"startFrame": 44.0
+				},
+				{
+					"inputFrame": 61.0,
+					"notation": "6S",
+					"slot": 10.0,
+					"startFrame": 61.0
+				}
+			],
+			"title": "Shoulder snap links"
+		},
+		{
+			"character": 3.0,
+			"contacts": [
+				{
+					"frame": 7,
+					"slot": 32
+				},
+				{
+					"frame": 29,
+					"slot": 2
+				},
+				{
+					"frame": 49,
+					"slot": 7
+				}
+			],
+			"corner": false,
+			"damage": 215,
+			"duration": 49,
+			"hint": "A short starter: close Slash into far Slash, then crouching Heavy Slash.",
+			"hits": 3,
+			"id": "tapper-midscreen",
+			"initial": {
+				"baseHealth": 1000.0,
+				"characters": [
+					3.0,
+					4.0
+				],
+				"contactBase": 0.0,
+				"momentum": 0.0,
+				"positions": [
+					42000.0,
+					48500.0
+				]
+			},
+			"runs": [
+				[
+					1,
+					64
+				],
+				[
+					16,
+					0
+				],
+				[
+					1,
+					64
+				],
+				[
+					19,
+					0
+				],
+				[
+					1,
+					132
+				],
+				[
+					11,
+					0
+				]
+			],
+			"starts": [
+				{
+					"frame": 1,
+					"slot": 32,
+					"step": 0
+				},
+				{
+					"frame": 18,
+					"slot": 2,
+					"step": 1
+				},
+				{
+					"frame": 38,
+					"slot": 7,
+					"step": 2
+				}
+			],
+			"steps": [
+				{
+					"inputFrame": 1.0,
+					"notation": "c.S",
+					"slot": 32.0,
+					"startFrame": 1.0
+				},
+				{
+					"inputFrame": 18.0,
+					"notation": "f.S",
+					"slot": 2.0,
+					"startFrame": 18.0
+				},
+				{
+					"inputFrame": 38.0,
+					"notation": "2Hs",
+					"slot": 7.0,
+					"startFrame": 38.0
+				}
+			],
+			"title": "FRONT STANCE CONFIRM"
+		},
+		{
+			"character": 3.0,
+			"contacts": [
+				{
+					"frame": 18,
+					"slot": 38
+				},
+				{
+					"frame": 31,
+					"slot": 37
+				},
+				{
+					"frame": 44,
+					"slot": 37
+				},
+				{
+					"frame": 57,
+					"slot": 37
+				},
+				{
+					"frame": 72,
+					"slot": 35
+				},
+				{
+					"frame": 88,
+					"slot": 36
+				}
+			],
+			"corner": false,
+			"damage": 265,
+			"duration": 88,
+			"hint": "Starts in Dempsey stance, earned by a recorded 5D setup. Release S between the repeated hooks.",
+			"hits": 6,
+			"id": "tapper-stance",
+			"initial": {
+				"baseHealth": 935.0,
+				"characters": [
+					3.0,
+					4.0
+				],
+				"contactBase": 1.0,
+				"momentum": 0.0,
+				"positions": [
+					42000.0,
+					48500.0
+				],
+				"setupInputs": [
+					[
+						256.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					],
+					[
+						0.0,
+						0.0
+					]
+				]
+			},
+			"runs": [
+				[
+					1,
+					128
+				],
+				[
+					25,
+					0
+				],
+				[
+					1,
+					64
+				],
+				[
+					12,
+					0
+				],
+				[
+					1,
+					64
+				],
+				[
+					12,
+					0
+				],
+				[
+					1,
+					64
+				],
+				[
+					12,
+					0
+				],
+				[
+					1,
+					16
+				],
+				[
+					14,
+					0
+				],
+				[
+					1,
+					32
+				],
+				[
+					7,
+					0
+				]
+			],
+			"starts": [
+				{
+					"frame": 1,
+					"slot": 38,
+					"step": 0
+				},
+				{
+					"frame": 27,
+					"slot": 37,
+					"step": 1
+				},
+				{
+					"frame": 40,
+					"slot": 37,
+					"step": 2
+				},
+				{
+					"frame": 53,
+					"slot": 37,
+					"step": 3
+				},
+				{
+					"frame": 66,
+					"slot": 35,
+					"step": 4
+				},
+				{
+					"frame": 81,
+					"slot": 36,
+					"step": 5
+				}
+			],
+			"steps": [
+				{
+					"inputFrame": 1.0,
+					"notation": "st.5Hs",
+					"slot": 38.0,
+					"startFrame": 1.0
+				},
+				{
+					"inputFrame": 27.0,
+					"notation": "st.5S",
+					"slot": 37.0,
+					"startFrame": 27.0
+				},
+				{
+					"inputFrame": 40.0,
+					"notation": "st.5S",
+					"slot": 37.0,
+					"startFrame": 40.0
+				},
+				{
+					"inputFrame": 53.0,
+					"notation": "st.5S",
+					"slot": 37.0,
+					"startFrame": 53.0
+				},
+				{
+					"inputFrame": 66.0,
+					"notation": "st.5P",
+					"slot": 35.0,
+					"startFrame": 66.0
+				},
+				{
+					"inputFrame": 81.0,
+					"notation": "st.5K",
+					"slot": 36.0,
+					"startFrame": 81.0
+				}
+			],
+			"title": "DEMPSEY STANCE ROUTE"
+		},
+		{
+			"character": 1.0,
+			"contacts": [
+				{
+					"frame": 22,
+					"slot": 11
+				},
+				{
+					"frame": 54,
+					"slot": 14
+				},
+				{
+					"frame": 92,
+					"slot": 11
+				},
+				{
+					"frame": 134,
+					"slot": 15
+				}
+			],
+			"corner": false,
+			"damage": 279,
+			"duration": 134,
+			"hint": "Cancel the special into Drive, then 6Hs during the step. The second strike carries dash momentum.",
+			"hits": 4,
+			"id": "hammer-midscreen",
+			"initial": {
+				"baseHealth": 1000.0,
+				"characters": [
+					1.0,
+					4.0
+				],
+				"contactBase": 0.0,
+				"momentum": 0.0,
+				"positions": [
+					42000.0,
+					48500.0
+				]
+			},
+			"runs": [
+				[
+					1,
+					130
+				],
+				[
+					35,
+					0
+				],
+				[
+					1,
+					4
+				],
+				[
+					1,
+					6
+				],
+				[
+					1,
+					66
+				],
+				[
+					26,
+					0
+				],
+				[
+					1,
+					256
+				],
+				[
+					4,
+					0
+				],
+				[
+					1,
+					130
+				],
+				[
+					35,
+					0
+				],
+				[
+					1,
+					4
+				],
+				[
+					1,
+					5
+				],
+				[
+					1,
+					129
+				],
+				[
+					25,
+					0
+				]
+			],
+			"starts": [
+				{
+					"frame": 1,
+					"slot": 11,
+					"step": 0
+				},
+				{
+					"frame": 39,
+					"slot": 14,
+					"step": 1
+				},
+				{
+					"frame": 66,
+					"slot": 13,
+					"step": 2
+				},
+				{
+					"frame": 71,
+					"slot": 11,
+					"step": 3
+				},
+				{
+					"frame": 109,
+					"slot": 15,
+					"step": 4
+				}
+			],
+			"steps": [
+				{
+					"inputFrame": 1.0,
+					"notation": "6Hs",
+					"slot": 11.0,
+					"startFrame": 1.0
+				},
+				{
+					"inputFrame": 37.0,
+					"notation": "236S",
+					"slot": 14.0,
+					"startFrame": 39.0
+				},
+				{
+					"inputFrame": 66.0,
+					"notation": "5D",
+					"slot": 13.0,
+					"startFrame": 66.0
+				},
+				{
+					"inputFrame": 71.0,
+					"notation": "6Hs",
+					"slot": 11.0,
+					"startFrame": 71.0
+				},
+				{
+					"inputFrame": 107.0,
+					"notation": "214Hs",
+					"slot": 15.0,
+					"startFrame": 109.0
+				}
+			],
+			"title": "DRIVE DASH EXTENSION"
+		},
+		{
+			"character": 1.0,
+			"contacts": [
+				{
+					"frame": 22,
+					"slot": 11
+				},
+				{
+					"frame": 54,
+					"slot": 14
+				},
+				{
+					"frame": 92,
+					"slot": 11
+				},
+				{
+					"frame": 134,
+					"slot": 15
+				},
+				{
+					"frame": 203,
+					"slot": 11
+				}
+			],
+			"corner": true,
+			"damage": 394,
+			"duration": 203,
+			"hint": "Cancel the special into Drive, then 6Hs during the step. The second strike carries dash momentum.",
+			"hits": 5,
+			"id": "hammer-corner",
+			"initial": {
+				"baseHealth": 1000.0,
+				"characters": [
+					1.0,
+					4.0
+				],
+				"contactBase": 0.0,
+				"momentum": 0.0,
+				"positions": [
+					85000.0,
+					91500.0
+				]
+			},
+			"runs": [
+				[
+					1,
+					130
+				],
+				[
+					35,
+					0
+				],
+				[
+					1,
+					4
+				],
+				[
+					1,
+					6
+				],
+				[
+					1,
+					66
+				],
+				[
+					26,
+					0
+				],
+				[
+					1,
+					256
+				],
+				[
+					4,
+					0
+				],
+				[
+					1,
+					130
+				],
+				[
+					35,
+					0
+				],
+				[
+					1,
+					4
+				],
+				[
+					1,
+					5
+				],
+				[
+					1,
+					129
+				],
+				[
+					68,
+					0
+				],
+				[
+					1,
+					130
+				],
+				[
+					25,
+					0
+				]
+			],
+			"starts": [
+				{
+					"frame": 1,
+					"slot": 11,
+					"step": 0
+				},
+				{
+					"frame": 39,
+					"slot": 14,
+					"step": 1
+				},
+				{
+					"frame": 66,
+					"slot": 13,
+					"step": 2
+				},
+				{
+					"frame": 71,
+					"slot": 11,
+					"step": 3
+				},
+				{
+					"frame": 109,
+					"slot": 15,
+					"step": 4
+				},
+				{
+					"frame": 182,
+					"slot": 11,
+					"step": 5
+				}
+			],
+			"steps": [
+				{
+					"inputFrame": 1.0,
+					"notation": "6Hs",
+					"slot": 11.0,
+					"startFrame": 1.0
+				},
+				{
+					"inputFrame": 37.0,
+					"notation": "236S",
+					"slot": 14.0,
+					"startFrame": 39.0
+				},
+				{
+					"inputFrame": 66.0,
+					"notation": "5D",
+					"slot": 13.0,
+					"startFrame": 66.0
+				},
+				{
+					"inputFrame": 71.0,
+					"notation": "6Hs",
+					"slot": 11.0,
+					"startFrame": 71.0
+				},
+				{
+					"inputFrame": 107.0,
+					"notation": "214Hs",
+					"slot": 15.0,
+					"startFrame": 109.0
+				},
+				{
+					"inputFrame": 178.0,
+					"notation": "6Hs",
+					"slot": 11.0,
+					"startFrame": 182.0
+				}
+			],
+			"title": "CORNER BREAK"
+		},
+		{
+			"character": 0.0,
+			"contacts": [
+				{
+					"frame": 49,
+					"slot": 3
+				},
+				{
+					"frame": 85,
+					"slot": 28
+				}
+			],
+			"corner": false,
+			"damage": 153,
+			"duration": 85,
+			"hint": "Hold back through 5Hs, then forward + Hs to cancel into the armored charge.",
+			"hits": 2,
+			"id": "anvil-midscreen",
+			"initial": {
+				"baseHealth": 1000.0,
+				"characters": [
+					0.0,
+					4.0
+				],
+				"contactBase": 0.0,
+				"momentum": 0.0,
+				"positions": [
+					42000.0,
+					48500.0
+				]
+			},
+			"runs": [
+				[
+					30,
+					1
+				],
+				[
+					1,
+					129
+				],
+				[
+					31,
+					1
+				],
+				[
+					1,
+					130
+				],
+				[
+					22,
+					1
+				]
+			],
+			"starts": [
+				{
+					"frame": 31,
+					"slot": 3,
+					"step": 0
+				},
+				{
+					"frame": 63,
+					"slot": 28,
+					"step": 1
+				}
+			],
+			"steps": [
+				{
+					"inputFrame": 31.0,
+					"notation": "5Hs",
+					"slot": 3.0,
+					"startFrame": 31.0
+				},
+				{
+					"inputFrame": 62.0,
+					"notation": "[4]6Hs",
+					"slot": 28.0,
+					"startFrame": 63.0
+				}
+			],
+			"title": "CHARGE CONFIRM"
+		}
+	],
+	"version": 1
+}

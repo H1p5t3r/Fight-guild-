@@ -44,6 +44,7 @@ Download the Windows/Linux ZIP from this branch's successful GitHub Actions arti
 - **Local versus** first asks you to choose sides. Move your controller left/right or use the device cards. **Controls** saves remaps, controller assignments and deadzones, with a live input test; [control setup](docs/input-controls.md).
 - **Player 1:** WASD; J/K/L/I/O = P/K/S/Hs/D; Space = run/dash; back + Q = Faultless Defense.
 - **Player 2:** arrows; numpad 1/2/3/5/6 = attacks; numpad 0 = run/dash; back + numpad Enter = Faultless Defense.
+- **Combo Trials:** ten native rhythm-style routes across all six fighters. Follow scrolling button lanes and motion/hold cues, watch a demo, slow practice to 50%/75%, or switch sides. Clears require a real unbroken combo; [controls and trial guide](docs/combo-trials.md), [video](exports/FightGuild-Combo-Trials-2026-11-26.mp4).
 - Specials and supers use motion inputs. The simple-input modifier, shortcuts and character-select toggles are removed. Existing move files still import.
 - In **Training**, use **Record**, **Replay** and **Frame lab** to inspect both fighters, cancel windows, input age, spacing and damage scaling. P2-only replay lets you practice against a recorded exchange; [training lab](docs/training-lab.md) explains the controls.
 - **Super cut-in** in Training/Development previews a frozen-match face banner; **F8 / Shift+F8** select P1/P2. The preview spends no meter; real supers trigger the same cut-in and cost two Momentum segments. [Preview and face-art selection](docs/super-freeze-presentation.md).

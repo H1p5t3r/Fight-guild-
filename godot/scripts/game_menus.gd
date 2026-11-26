@@ -227,15 +227,15 @@ func build_home(page: VBoxContainer) -> void:
 	title.add_theme_font_override("font", DISPLAY_FONT)
 	title.add_theme_constant_override("line_spacing", -28)
 	title.rotation = -0.045
-	for entry in [["matches", "VERSUS", 72], ["training", "TRAINING", 64], ["development", "COMBAT LAB", 58]]:
+	for entry in [["matches", "VERSUS", 66], ["combo_trials", "COMBO TRIALS", 58], ["training", "TRAINING", 58], ["development", "COMBAT LAB", 54]]:
 		var button := action(choices, entry[0], entry[1], entry[2]) as InkMenuButton
-		button.serial = "0" + str(["matches", "training", "development"].find(entry[0]) + 1)
+		button.serial = "0" + str(["matches", "combo_trials", "training", "development"].find(entry[0]) + 1)
 		button.add_theme_font_size_override("font_size", 42 if entry[0] == "matches" else 34)
 	var description := text(choices, "Local and online matches.", 19, MUTED)
 	description.custom_minimum_size.y = 40
 	description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	for id in ["matches", "training", "development"]:
-		var explain := func(): description.text = {"matches":"Local and online matches.", "training":"Find the route. Practice combos and defense.", "development":"Tune moves, hitboxes and combat rules."}[id]
+	for id in ["matches", "combo_trials", "training", "development"]:
+		var explain := func(): description.text = {"matches":"Local and online matches.", "combo_trials":"Follow the rhythm. Land the whole combo.", "training":"Find the route. Practice combos and defense.", "development":"Tune moves, hitboxes and combat rules."}[id]
 		buttons[id].focus_entered.connect(explain)
 		buttons[id].mouse_entered.connect(explain)
 	spacer(choices)

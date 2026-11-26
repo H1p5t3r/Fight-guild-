@@ -75,6 +75,7 @@ var sprite_button: Button
 var fighter_button: Button
 var lab := TrainingLab.new()
 var lab_window: Window
+var combo_trials: ComboTrialsWindow
 var timeline: FrameTimeline
 var lab_status: Label
 var combat_audio := CombatAudio.new()
@@ -221,6 +222,7 @@ func build_interface() -> void:
 	button(practice, "Stop", func(): lab.stop(), true)
 	button(practice, "Replay", func(): replay_exchange(false), true)
 	button(practice, "Frame lab", open_frame_lab, true)
+	button(practice, "Combo trials", open_combo_trials, true)
 	var super_menu := MenuButton.new()
 	super_menu.text = "Super cut-in"
 	super_menu.tooltip_text = "Preview the freeze presentation only. F8: P1 · Shift+F8: P2. No attack or Momentum cost."
@@ -604,6 +606,7 @@ func build_dialogs() -> void:
 func menu_action(action: String) -> void:
 	match action:
 		"matches": show_screen("matches")
+		"combo_trials": open_combo_trials()
 		"local", "online", "training", "development": choose_activity(action)
 		"confirm_fighters": confirm_selection()
 		"confirm_sides": confirm_sides()
@@ -630,6 +633,21 @@ func menu_action(action: String) -> void:
 		"return_lobby":
 			cancel_connection()
 			show_screen("online")
+
+func open_combo_trials() -> void:
+	if connection.active or has_open_dialog(): return
+	held.clear()
+	release_focus_from_ui()
+	combo_trials = ComboTrialsWindow.new()
+	combo_trials.controls = fighter_inputs
+	combo_trials.reduced_motion = motion.reduced
+	combo_trials.initial_character = characters[0] if screen == "play" else menus.featured
+	add_child(combo_trials)
+	combo_trials.finished.connect(func():
+		held.clear()
+		input_release_required = true
+		if screen == "home": menus.buttons.combo_trials.grab_focus())
+	combo_trials.open()
 
 func show_screen(next: String) -> void:
 	if next != "play": cancel_super_freeze_preview()
@@ -1504,8 +1522,11 @@ func _process(_delta: float) -> void:
 	var state := model.state()
 	var confirmed := model.frame() - 1
 	var music_active := screen in ["entry", "play", "pause", "results"] or (screen == "fighters" and selection_return == "pause")
-	fighter_music.update_context(music_active, [state.players[0].character, state.players[1].character],
-		screen == "pause" or paused or has_open_dialog(), application_focused and get_window().has_focus())
+	var in_trials := is_instance_valid(combo_trials) and combo_trials.visible and not combo_trials.session.trial.is_empty()
+	var music_characters: Array = combo_trials.session.trial.initial.characters if in_trials else [state.players[0].character, state.players[1].character]
+	fighter_music.update_context(music_active or in_trials, music_characters,
+		true if in_trials else screen == "pause" or paused or has_open_dialog(),
+		application_focused and (combo_trials.focused if in_trials else get_window().has_focus()))
 	if connection.active and connection.session != null:
 		confirmed = mini(confirmed, mini(connection.session.confirmed[0], connection.session.confirmed[1]))
 	# Let the finishing impact ring out across the result/intermission transition.
