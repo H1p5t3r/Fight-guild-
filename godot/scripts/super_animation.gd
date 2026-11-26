@@ -237,6 +237,7 @@ static func draw_track(canvas: CanvasItem, sprites: Array[Sprite2D], cue: Dictio
 		if tick<int(item.start) or tick>=int(item.end): continue
 		var origin := sprites[int(cue.owner)].position
 		if item.get("anchor", "owner")=="receiver": origin=sprites[1-int(cue.owner)].position
+		elif item.get("anchor", "owner")=="grip": origin=grip(sprites[int(cue.owner)],int(cue.character))
 		var box: Array = item.box
 		if item.has("contact_box") and int(state.players[int(cue.owner)].contact)!=0:
 			origin=sprites[1-int(cue.owner)].position

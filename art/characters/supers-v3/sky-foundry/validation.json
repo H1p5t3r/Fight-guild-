@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-26",
+  "scope": "Sky Foundry v3 and eight super scale calibrations",
+  "suites": [
+    {
+      "log": "build/sky-foundry-v3-test.log",
+      "checks": 26895,
+      "failures": 0
+    },
+    {
+      "log": "build/iron-v3-regression.log",
+      "checks": 15976,
+      "failures": 0
+    },
+    {
+      "log": "build/freemason-scale-regression.log",
+      "checks": 17249,
+      "failures": 0
+    },
+    {
+      "log": "build/grand-design-scale-regression.log",
+      "checks": 5501,
+      "failures": 0
+    },
+    {
+      "log": "build/last-orders-scale-regression.log",
+      "checks": 17441,
+      "failures": 0
+    },
+    {
+      "log": "build/whiskey-chaser-scale-regression.log",
+      "checks": 17481,
+      "failures": 0
+    },
+    {
+      "log": "build/no-safe-harbour-scale-regression.log",
+      "checks": 17529,
+      "failures": 0
+    },
+    {
+      "log": "build/undertow-scale-regression.log",
+      "checks": 21245,
+      "failures": 0
+    },
+    {
+      "log": "build/bloodletting-scale-regression.log",
+      "checks": 17561,
+      "failures": 0
+    },
+    {
+      "log": "build/fillet-scale-regression.log",
+      "checks": 18575,
+      "failures": 0
+    }
+  ],
+  "totalChecks": 175453,
+  "feedback": "PASS",
+  "nativeReview": {
+    "cases": [
+      "catch",
+      "mirrored",
+      "grounded-miss"
+    ],
+    "failures": 0,
+    "frames": 965,
+    "fps": 60,
+    "video": "exports/FightGuild-Sky-Foundry-V3-2026-11-26.mp4",
+    "sha256": "96d8d14e6ea3e567446371a3a1319cc4a409bc2016171290f24f561f2455e3d8"
+  },
+  "gameplayChanged": false,
+  "websiteUpdated": false
+}

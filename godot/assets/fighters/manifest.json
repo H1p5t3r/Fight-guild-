@@ -10596,15 +10596,16 @@
         "iron_turn": 400,
         "supers-v1": 425,
         "sky-foundry-v2": 445,
-        "iron-dominion-v2": 445
+        "iron-dominion-v2": 445,
+        "sky-foundry-v3": 445
       },
       "super_sky_foundry": {
-        "file": "supers-v2/sky-foundry/entry.png",
+        "file": "supers-v3/sky-foundry/entry.png",
         "body_height": 445,
         "frames": [
           {
-            "file": "supers-v2/sky-foundry/entry.png",
-            "sha256": "83145e13f4ae26dead5a57df24b38496cf6ad97b5280a17a73fc868fcb98889f",
+            "file": "supers-v3/sky-foundry/entry.png",
+            "sha256": "00c3313861f8c505296a99e4e663a18a03cbd413954bf39b6131592081f7b950",
             "source_size": [
               1536,
               1024
@@ -10616,226 +10617,475 @@
               512
             ],
             "bounds": [
-              216,
-              75,
+              121,
+              100,
+              590,
+              481
+            ],
+            "pivot": [
+              340,
+              477
+            ],
+            "body_height": 445,
+            "source_pose": 0,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              188,
+              301
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/entry.png",
+            "sha256": "00c3313861f8c505296a99e4e663a18a03cbd413954bf39b6131592081f7b950",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              496
+            ],
+            "bounds": [
+              103,
+              12,
+              714,
+              481
+            ],
+            "pivot": [
+              327,
+              478
+            ],
+            "body_height": 445,
+            "source_pose": 1,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              642,
+              65
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/entry.png",
+            "sha256": "00c3313861f8c505296a99e4e663a18a03cbd413954bf39b6131592081f7b950",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              103,
+              48,
+              696,
+              487
+            ],
+            "pivot": [
+              350,
+              486
+            ],
+            "body_height": 445,
+            "source_pose": 2,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              631,
+              101
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/entry.png",
+            "sha256": "00c3313861f8c505296a99e4e663a18a03cbd413954bf39b6131592081f7b950",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              496,
+              768,
+              528
+            ],
+            "bounds": [
+              91,
+              1,
+              696,
+              501
+            ],
+            "pivot": [
+              347,
+              502
+            ],
+            "body_height": 445,
+            "source_pose": 3,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              614,
+              61
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/air.png",
+            "sha256": "5b4f851e44ffd77fe038b00d7c11b1aa3956d79553f2778f271c3c7fb82afb62",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              221,
+              5,
+              559,
+              471
+            ],
+            "pivot": [
+              350,
+              510
+            ],
+            "body_height": 445,
+            "source_pose": 0,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              320,
+              60
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/air.png",
+            "sha256": "5b4f851e44ffd77fe038b00d7c11b1aa3956d79553f2778f271c3c7fb82afb62",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              107,
+              10,
+              599,
+              504
+            ],
+            "pivot": [
+              367,
+              490
+            ],
+            "body_height": 445,
+            "source_pose": 1,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              178,
+              55
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/air.png",
+            "sha256": "5b4f851e44ffd77fe038b00d7c11b1aa3956d79553f2778f271c3c7fb82afb62",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              181,
+              3,
+              630,
+              458
+            ],
+            "pivot": [
+              350,
+              488
+            ],
+            "body_height": 445,
+            "source_pose": 2,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              263,
+              46
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/air.png",
+            "sha256": "5b4f851e44ffd77fe038b00d7c11b1aa3956d79553f2778f271c3c7fb82afb62",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              177,
+              9,
+              558,
+              461
+            ],
+            "pivot": [
+              352,
+              488
+            ],
+            "body_height": 445,
+            "source_pose": 3,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              283,
+              49
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/slam.png",
+            "sha256": "50791b5bdfcdaa4514d4f7fe131b60e71e689c8d154a62449d34aab0dbdaa509",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              179,
+              7,
+              579,
+              466
+            ],
+            "pivot": [
+              350,
+              485
+            ],
+            "body_height": 445,
+            "source_pose": 0,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              267,
+              53
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/slam.png",
+            "sha256": "50791b5bdfcdaa4514d4f7fe131b60e71e689c8d154a62449d34aab0dbdaa509",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              126,
+              2,
+              574,
+              507
+            ],
+            "pivot": [
+              352,
+              505
+            ],
+            "body_height": 445,
+            "source_pose": 1,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              205,
+              43
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/slam.png",
+            "sha256": "50791b5bdfcdaa4514d4f7fe131b60e71e689c8d154a62449d34aab0dbdaa509",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              152,
+              12,
+              645,
+              491
+            ],
+            "pivot": [
+              350,
+              485
+            ],
+            "body_height": 445,
+            "source_pose": 2,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              223,
+              48
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/slam.png",
+            "sha256": "50791b5bdfcdaa4514d4f7fe131b60e71e689c8d154a62449d34aab0dbdaa509",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              56,
+              13,
+              668,
+              493
+            ],
+            "pivot": [
+              312,
+              485
+            ],
+            "body_height": 445,
+            "source_pose": 3,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              592,
+              461
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/recovery.png",
+            "sha256": "c2732eb8797e68cbd96a549ee2787c31a728271c650737ce93ac097aefda2eda",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              116,
+              11,
+              726,
+              481
+            ],
+            "pivot": [
+              340,
+              475
+            ],
+            "body_height": 445,
+            "source_pose": 0,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              638,
+              448
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/recovery.png",
+            "sha256": "c2732eb8797e68cbd96a549ee2787c31a728271c650737ce93ac097aefda2eda",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              110,
+              52,
+              594,
+              471
+            ],
+            "pivot": [
+              342,
+              467
+            ],
+            "body_height": 445,
+            "source_pose": 1,
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
+            "grip": [
+              341,
+              337
+            ]
+          },
+          {
+            "file": "supers-v3/sky-foundry/recovery.png",
+            "sha256": "c2732eb8797e68cbd96a549ee2787c31a728271c650737ce93ac097aefda2eda",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              141,
+              31,
               625,
               492
             ],
             "pivot": [
-              355,
-              487
-            ],
-            "grip": [
-              359,
-              161
-            ],
-            "body_height": 445,
-            "source_pose": 0,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / entry / 1",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/entry.png",
-            "sha256": "83145e13f4ae26dead5a57df24b38496cf6ad97b5280a17a73fc868fcb98889f",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              507
-            ],
-            "bounds": [
-              150,
-              7,
-              586,
-              489
-            ],
-            "pivot": [
-              332,
-              485
-            ],
-            "grip": [
-              524,
-              60
-            ],
-            "body_height": 445,
-            "source_pose": 1,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / entry / 2",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/entry.png",
-            "sha256": "83145e13f4ae26dead5a57df24b38496cf6ad97b5280a17a73fc868fcb98889f",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              184,
-              14,
-              611,
-              496
-            ],
-            "pivot": [
-              355,
-              492
-            ],
-            "grip": [
-              518,
-              66
+              350,
+              486
             ],
             "body_height": 445,
             "source_pose": 2,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / entry / 3",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/entry.png",
-            "sha256": "83145e13f4ae26dead5a57df24b38496cf6ad97b5280a17a73fc868fcb98889f",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              507,
-              768,
-              517
-            ],
-            "bounds": [
-              183,
-              1,
-              562,
-              507
-            ],
-            "pivot": [
-              332,
-              441
-            ],
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
             "grip": [
-              494,
-              46
-            ],
-            "body_height": 445,
-            "source_pose": 3,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / entry / 4",
-            "render_only": true
+              363,
+              172
+            ]
           },
           {
-            "file": "supers-v2/sky-foundry/air.png",
-            "sha256": "bcb5e5868ebb3b9fe147c50aa83f3237900ae01f25666cca203f08a60e1e65bb",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              215,
-              11,
-              588,
-              496
-            ],
-            "pivot": [
-              367,
-              477
-            ],
-            "grip": [
-              506,
-              65
-            ],
-            "body_height": 445,
-            "source_pose": 0,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / air / 1",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/air.png",
-            "sha256": "bcb5e5868ebb3b9fe147c50aa83f3237900ae01f25666cca203f08a60e1e65bb",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              161,
-              6,
-              552,
-              508
-            ],
-            "pivot": [
-              362,
-              481
-            ],
-            "grip": [
-              288,
-              42
-            ],
-            "body_height": 445,
-            "source_pose": 1,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / air / 2",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/air.png",
-            "sha256": "bcb5e5868ebb3b9fe147c50aa83f3237900ae01f25666cca203f08a60e1e65bb",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              195,
-              6,
-              578,
-              494
-            ],
-            "pivot": [
-              380,
-              496
-            ],
-            "grip": [
-              328,
-              41
-            ],
-            "body_height": 445,
-            "source_pose": 2,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / air / 3",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/air.png",
-            "sha256": "bcb5e5868ebb3b9fe147c50aa83f3237900ae01f25666cca203f08a60e1e65bb",
+            "file": "supers-v3/sky-foundry/recovery.png",
+            "sha256": "c2732eb8797e68cbd96a549ee2787c31a728271c650737ce93ac097aefda2eda",
             "source_size": [
               1536,
               1024
@@ -10845,404 +11095,139 @@
               512,
               768,
               512
-            ],
-            "bounds": [
-              184,
-              28,
-              552,
-              436
-            ],
-            "pivot": [
-              352,
-              492
-            ],
-            "grip": [
-              294,
-              69
-            ],
-            "body_height": 445,
-            "source_pose": 3,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / air / 4",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/slam.png",
-            "sha256": "1bb65400fc6357f50c2ccfb1e50ce6ebd667d84a451562df37b4cf76dbb03520",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              208,
-              7,
-              605,
-              466
-            ],
-            "pivot": [
-              410,
-              478
-            ],
-            "grip": [
-              329,
-              55
-            ],
-            "body_height": 445,
-            "source_pose": 0,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / slam / 1",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/slam.png",
-            "sha256": "1bb65400fc6357f50c2ccfb1e50ce6ebd667d84a451562df37b4cf76dbb03520",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              521
             ],
             "bounds": [
               153,
-              4,
-              624,
-              521
+              20,
+              625,
+              495
             ],
             "pivot": [
-              386,
-              507
-            ],
-            "grip": [
-              258,
-              56
-            ],
-            "body_height": 445,
-            "source_pose": 1,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / slam / 2",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/slam.png",
-            "sha256": "1bb65400fc6357f50c2ccfb1e50ce6ebd667d84a451562df37b4cf76dbb03520",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              147,
-              4,
-              619,
-              482
-            ],
-            "pivot": [
-              380,
-              475
-            ],
-            "grip": [
-              322,
-              47
-            ],
-            "body_height": 445,
-            "source_pose": 2,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / slam / 3",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/slam.png",
-            "sha256": "1bb65400fc6357f50c2ccfb1e50ce6ebd667d84a451562df37b4cf76dbb03520",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              521,
-              768,
-              503
-            ],
-            "bounds": [
-              78,
-              94,
-              649,
-              482
-            ],
-            "pivot": [
-              360,
-              477
-            ],
-            "grip": [
-              375,
-              447
+              342,
+              486
             ],
             "body_height": 445,
             "source_pose": 3,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / slam / 4",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/recovery.png",
-            "sha256": "e4d845027671322457b6aa602a9dfcba98b30aea8c6e95d347990bf2897ece5f",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              136,
-              78,
-              672,
-              478
-            ],
-            "pivot": [
-              313,
-              474
-            ],
+            "scale_group": "sky-foundry-v3",
+            "render_only": true,
             "grip": [
-              328,
-              446
-            ],
-            "body_height": 445,
-            "source_pose": 0,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / recovery / 1",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/recovery.png",
-            "sha256": "e4d845027671322457b6aa602a9dfcba98b30aea8c6e95d347990bf2897ece5f",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              139,
-              47,
-              612,
-              474
-            ],
-            "pivot": [
-              260,
-              470
-            ],
-            "grip": [
-              275,
-              447
-            ],
-            "body_height": 445,
-            "source_pose": 1,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / recovery / 2",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/recovery.png",
-            "sha256": "e4d845027671322457b6aa602a9dfcba98b30aea8c6e95d347990bf2897ece5f",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              178,
-              57,
-              634,
-              479
-            ],
-            "pivot": [
-              380,
-              473
-            ],
-            "grip": [
-              379,
-              185
-            ],
-            "body_height": 445,
-            "source_pose": 2,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / recovery / 3",
-            "render_only": true
-          },
-          {
-            "file": "supers-v2/sky-foundry/recovery.png",
-            "sha256": "e4d845027671322457b6aa602a9dfcba98b30aea8c6e95d347990bf2897ece5f",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              154,
-              14,
-              622,
-              482
-            ],
-            "pivot": [
-              332,
-              478
-            ],
-            "grip": [
-              309,
-              103
-            ],
-            "body_height": 445,
-            "source_pose": 3,
-            "scale_group": "sky-foundry-v2",
-            "name": "Sky Foundry / recovery / 4",
-            "render_only": true
+              274,
+              133
+            ]
           }
         ],
         "render_only": true
       },
       "super_sky_foundry_fx": {
-        "file": "supers-v2/sky-foundry/effects.png",
+        "file": "supers-v3/sky-foundry/effects.png",
         "body_height": 512,
         "frames": [
           {
             "region": [
-              33,
+              29,
+              78,
+              477,
+              414
+            ],
+            "pivot": [
+              238.5,
+              414
+            ],
+            "bounds": [
+              0,
+              0,
+              477,
+              414
+            ]
+          },
+          {
+            "region": [
+              524,
+              16,
+              499,
+              489
+            ],
+            "pivot": [
+              249.5,
+              489
+            ],
+            "bounds": [
+              0,
+              0,
+              499,
+              489
+            ]
+          },
+          {
+            "region": [
+              1072,
               85,
-              451,
-              366
+              429,
+              369
             ],
             "pivot": [
-              225.5,
-              366
+              214.5,
+              369
             ],
             "bounds": [
               0,
               0,
-              451,
-              366
+              429,
+              369
             ]
           },
           {
             "region": [
-              552,
-              81,
-              436,
-              370
+              18,
+              712,
+              480,
+              190
             ],
             "pivot": [
-              218.0,
-              370
+              240.0,
+              190
             ],
             "bounds": [
               0,
               0,
-              436,
-              370
+              480,
+              190
             ]
           },
           {
             "region": [
-              1165,
-              141,
-              229,
-              229
+              522,
+              653,
+              491,
+              264
             ],
             "pivot": [
-              114.5,
-              229
+              245.5,
+              264
             ],
             "bounds": [
               0,
               0,
-              229,
-              229
+              491,
+              264
             ]
           },
           {
             "region": [
-              23,
-              694,
-              463,
-              250
+              1046,
+              653,
+              471,
+              263
             ],
             "pivot": [
-              231.5,
-              250
+              235.5,
+              263
             ],
             "bounds": [
               0,
               0,
-              463,
-              250
-            ]
-          },
-          {
-            "region": [
-              533,
-              724,
-              469,
-              220
-            ],
-            "pivot": [
-              234.5,
-              220
-            ],
-            "bounds": [
-              0,
-              0,
-              469,
-              220
-            ]
-          },
-          {
-            "region": [
-              1064,
-              706,
-              442,
-              232
-            ],
-            "pivot": [
-              221.0,
-              232
-            ],
-            "bounds": [
-              0,
-              0,
-              442,
-              232
+              471,
+              263
             ]
           }
         ],
@@ -11250,9 +11235,157 @@
       },
       "super_presentations": {
         "16": {
+          "source": "supers-v3/sky-foundry",
+          "description": "Deep coil; full-body upward scoop; airborne arch and curl; overhead crescent slam; long low overtravel and High Clamp return.",
+          "mode": "carry",
+          "whiff": [
+            [
+              0,
+              1
+            ],
+            [
+              22,
+              14
+            ],
+            [
+              75,
+              15
+            ]
+          ],
+          "effects": [
+            {
+              "stage": "active",
+              "start": 0,
+              "end": 6,
+              "key": 0,
+              "box": [
+                -70,
+                -225,
+                235,
+                235
+              ],
+              "opacity": 0.72,
+              "behind": true,
+              "fade": true
+            },
+            {
+              "stage": "paired",
+              "start": 0,
+              "end": 8,
+              "key": 0,
+              "box": [
+                -70,
+                -225,
+                235,
+                235
+              ],
+              "opacity": 0.72,
+              "behind": true,
+              "fade": true
+            },
+            {
+              "stage": "paired",
+              "start": 0,
+              "end": 6,
+              "key": 2,
+              "anchor": "grip",
+              "box": [
+                -16,
+                -16,
+                32,
+                32
+              ],
+              "opacity": 0.92
+            },
+            {
+              "stage": "paired",
+              "start": 12,
+              "end": 26,
+              "key": 0,
+              "box": [
+                -75,
+                -200,
+                185,
+                210
+              ],
+              "opacity": 0.48,
+              "behind": true,
+              "fade": true
+            },
+            {
+              "stage": "paired",
+              "start": 88,
+              "end": 100,
+              "key": 1,
+              "box": [
+                -100,
+                -230,
+                230,
+                240
+              ],
+              "opacity": 0.42,
+              "behind": true,
+              "fade": true
+            },
+            {
+              "stage": "connected",
+              "start": 0,
+              "end": 7,
+              "key": 1,
+              "box": [
+                -105,
+                -225,
+                270,
+                235
+              ],
+              "opacity": 0.93,
+              "behind": true,
+              "fade": true
+            },
+            {
+              "stage": "connected",
+              "start": 0,
+              "end": 5,
+              "key": 3,
+              "box": [
+                35,
+                -65,
+                200,
+                70
+              ],
+              "opacity": 1.0
+            },
+            {
+              "stage": "connected",
+              "start": 5,
+              "end": 20,
+              "key": 4,
+              "box": [
+                -35,
+                -60,
+                300,
+                70
+              ],
+              "opacity": 0.86,
+              "fade": true
+            },
+            {
+              "stage": "connected",
+              "start": 20,
+              "end": 42,
+              "key": 5,
+              "box": [
+                -45,
+                -65,
+                320,
+                75
+              ],
+              "opacity": 0.7,
+              "fade": true
+            }
+          ],
           "phase": "super_sky_foundry",
           "fx_phase": "super_sky_foundry_fx",
-          "source": "supers-v2/sky-foundry",
           "pair_ticks": 112,
           "release_freeze": 24,
           "owner_recovery": 24,
@@ -11270,7 +11403,7 @@
               3
             ],
             [
-              20,
+              18,
               4
             ],
             [
@@ -11282,7 +11415,7 @@
               6
             ],
             [
-              58,
+              56,
               7
             ],
             [
@@ -11304,23 +11437,22 @@
               11
             ],
             [
-              4,
+              7,
               12
             ],
             [
-              8,
+              14,
               13
             ],
             [
-              15,
+              19,
               14
             ],
             [
-              21,
+              23,
               15
             ]
-          ],
-          "description": "Held load, first-active catch, rising support, apex, downward load, damage-frame slam and grounded return."
+          ]
         },
         "31": {
           "phase": "super_iron_dominion",
@@ -19602,12 +19734,12 @@
       },
       "anatomical_scales": {
         "supers-v1": 425,
-        "freemason-v2": 425,
-        "grand-design-v2": 425
+        "freemason-v2": 460,
+        "grand-design-v2": 460
       },
       "super_freemason": {
         "file": "supers-v2/freemason/entry.png",
-        "body_height": 425,
+        "body_height": 460,
         "frames": [
           {
             "file": "supers-v2/freemason/entry.png",
@@ -19632,7 +19764,7 @@
               365,
               457
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 0,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -19664,7 +19796,7 @@
               312,
               458
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 1,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -19696,7 +19828,7 @@
               350,
               467
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 2,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -19728,7 +19860,7 @@
               362,
               469
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 3,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -19760,7 +19892,7 @@
               360,
               457
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 0,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -19792,7 +19924,7 @@
               342,
               459
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 1,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -19824,7 +19956,7 @@
               345,
               490
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 2,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -19856,7 +19988,7 @@
               337,
               491
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 3,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -19888,7 +20020,7 @@
               385,
               501
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 0,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -19920,7 +20052,7 @@
               350,
               501
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 1,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -19952,7 +20084,7 @@
               300,
               475
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 2,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -19984,7 +20116,7 @@
               310,
               477
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 3,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -20016,7 +20148,7 @@
               355,
               462
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 0,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -20048,7 +20180,7 @@
               312,
               464
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 1,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -20080,7 +20212,7 @@
               340,
               470
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 2,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -20112,7 +20244,7 @@
               352,
               472
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 3,
             "scale_group": "freemason-v2",
             "render_only": true,
@@ -20582,7 +20714,7 @@
       },
       "super_grand_design": {
         "file": "supers-v2/grand-design/load.png",
-        "body_height": 425,
+        "body_height": 460,
         "frames": [
           {
             "file": "supers-v2/grand-design/load.png",
@@ -20607,7 +20739,7 @@
               365,
               457
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 0,
             "scale_group": "grand-design-v2",
             "render_only": true,
@@ -20639,7 +20771,7 @@
               342,
               458
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 1,
             "scale_group": "grand-design-v2",
             "render_only": true,
@@ -20671,7 +20803,7 @@
               365,
               481
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 2,
             "scale_group": "grand-design-v2",
             "render_only": true,
@@ -20703,7 +20835,7 @@
               342,
               481
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 3,
             "scale_group": "grand-design-v2",
             "render_only": true,
@@ -20735,7 +20867,7 @@
               300,
               468
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 0,
             "scale_group": "grand-design-v2",
             "render_only": true,
@@ -20767,7 +20899,7 @@
               337,
               468
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 1,
             "scale_group": "grand-design-v2",
             "render_only": true,
@@ -20799,7 +20931,7 @@
               320,
               468
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 2,
             "scale_group": "grand-design-v2",
             "render_only": true,
@@ -20831,7 +20963,7 @@
               337,
               468
             ],
-            "body_height": 425,
+            "body_height": 460,
             "source_pose": 3,
             "scale_group": "grand-design-v2",
             "render_only": true,
@@ -32822,12 +32954,12 @@
       },
       "anatomical_scales": {
         "supers-v1": 470,
-        "last-orders-v2": 470,
-        "whiskey-chaser-v2": 470
+        "last-orders-v2": 510,
+        "whiskey-chaser-v2": 510
       },
       "super_last_orders": {
         "file": "supers-v2/last-orders/entry.png",
-        "body_height": 470,
+        "body_height": 510,
         "frames": [
           {
             "file": "supers-v2/last-orders/entry.png",
@@ -32852,7 +32984,7 @@
               385,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 0,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -32884,7 +33016,7 @@
               382,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 1,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -32916,7 +33048,7 @@
               400,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 2,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -32948,7 +33080,7 @@
               382,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 3,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -32980,7 +33112,7 @@
               385,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 0,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33012,7 +33144,7 @@
               347,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 1,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33044,7 +33176,7 @@
               385,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 2,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33076,7 +33208,7 @@
               347,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 3,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33108,7 +33240,7 @@
               385,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 0,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33140,7 +33272,7 @@
               347,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 1,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33172,7 +33304,7 @@
               370,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 2,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33204,7 +33336,7 @@
               347,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 3,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33236,7 +33368,7 @@
               385,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 0,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33268,7 +33400,7 @@
               342,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 1,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33300,7 +33432,7 @@
               370,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 2,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33332,7 +33464,7 @@
               347,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 3,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33364,7 +33496,7 @@
               405,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 0,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33396,7 +33528,7 @@
               377,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 1,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33428,7 +33560,7 @@
               385,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 2,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -33460,7 +33592,7 @@
               372,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 3,
             "scale_group": "last-orders-v2",
             "render_only": true,
@@ -34062,7 +34194,7 @@
       },
       "super_whiskey_chaser": {
         "file": "supers-v2/whiskey-chaser/entry.png",
-        "body_height": 470,
+        "body_height": 510,
         "frames": [
           {
             "file": "supers-v2/whiskey-chaser/entry.png",
@@ -34087,7 +34219,7 @@
               375,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 0,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34119,7 +34251,7 @@
               382,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 1,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34151,7 +34283,7 @@
               385,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 2,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34183,7 +34315,7 @@
               382,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 3,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34215,7 +34347,7 @@
               370,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 0,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34247,7 +34379,7 @@
               362,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 1,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34279,7 +34411,7 @@
               370,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 2,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34311,7 +34443,7 @@
               362,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 3,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34343,7 +34475,7 @@
               370,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 0,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34375,7 +34507,7 @@
               362,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 1,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34407,7 +34539,7 @@
               385,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 2,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34439,7 +34571,7 @@
               357,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 3,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34471,7 +34603,7 @@
               365,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 0,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34503,7 +34635,7 @@
               347,
               486
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 1,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34535,7 +34667,7 @@
               365,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 2,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -34567,7 +34699,7 @@
               347,
               488
             ],
-            "body_height": 470,
+            "body_height": 510,
             "source_pose": 3,
             "scale_group": "whiskey-chaser-v2",
             "render_only": true,
@@ -46268,12 +46400,12 @@
       },
       "anatomical_scales": {
         "supers-v1": 480,
-        "no-safe-harbour-v2": 480,
-        "undertow-v2": 480
+        "no-safe-harbour-v2": 540,
+        "undertow-v2": 540
       },
       "super_no_safe_harbour": {
         "file": "supers-v2/no-safe-harbour/entry.png",
-        "body_height": 480,
+        "body_height": 540,
         "frames": [
           {
             "file": "supers-v2/no-safe-harbour/entry.png",
@@ -46298,7 +46430,7 @@
               270,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 0,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46330,7 +46462,7 @@
               242,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 1,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46362,7 +46494,7 @@
               270,
               478
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 2,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46394,7 +46526,7 @@
               252,
               478
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 3,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46426,7 +46558,7 @@
               280,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 0,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46458,7 +46590,7 @@
               267,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 1,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46490,7 +46622,7 @@
               288,
               478
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 2,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46522,7 +46654,7 @@
               267,
               478
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 3,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46554,7 +46686,7 @@
               330,
               486
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 0,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46586,7 +46718,7 @@
               272,
               486
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 1,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46618,7 +46750,7 @@
               315,
               488
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 2,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46650,7 +46782,7 @@
               282,
               488
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 3,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46682,7 +46814,7 @@
               270,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 0,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46714,7 +46846,7 @@
               242,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 1,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46746,7 +46878,7 @@
               270,
               478
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 2,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46778,7 +46910,7 @@
               282,
               478
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 3,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46810,7 +46942,7 @@
               270,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 0,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46842,7 +46974,7 @@
               272,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 1,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46874,7 +47006,7 @@
               288,
               482
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 2,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -46906,7 +47038,7 @@
               282,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 3,
             "scale_group": "no-safe-harbour-v2",
             "render_only": true,
@@ -47490,7 +47622,7 @@
       },
       "super_undertow": {
         "file": "supers-v2/undertow/entry.png",
-        "body_height": 480,
+        "body_height": 540,
         "frames": [
           {
             "file": "supers-v2/undertow/entry.png",
@@ -47515,7 +47647,7 @@
               270,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 0,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47547,7 +47679,7 @@
               242,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 1,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47579,7 +47711,7 @@
               270,
               478
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 2,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47611,7 +47743,7 @@
               252,
               478
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 3,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47643,7 +47775,7 @@
               310,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 0,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47675,7 +47807,7 @@
               302,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 1,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47707,7 +47839,7 @@
               300,
               504
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 2,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47739,7 +47871,7 @@
               297,
               496
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 3,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47771,7 +47903,7 @@
               370,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 0,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47803,7 +47935,7 @@
               372,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 1,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47835,7 +47967,7 @@
               400,
               488
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 2,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47867,7 +47999,7 @@
               407,
               488
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 3,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47899,7 +48031,7 @@
               380,
               470
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 0,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47931,7 +48063,7 @@
               442,
               470
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 1,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47963,7 +48095,7 @@
               390,
               499
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 2,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -47995,7 +48127,7 @@
               332,
               514
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 3,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -48027,7 +48159,7 @@
               300,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 0,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -48059,7 +48191,7 @@
               287,
               480
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 1,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -48091,7 +48223,7 @@
               320,
               495
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 2,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -48123,7 +48255,7 @@
               322,
               496
             ],
-            "body_height": 480,
+            "body_height": 540,
             "source_pose": 3,
             "scale_group": "undertow-v2",
             "render_only": true,
@@ -62676,12 +62808,12 @@
       },
       "anatomical_scales": {
         "supers-v1": 480,
-        "bloodletting-v2": 480,
-        "exsanguinate-v2": 480
+        "bloodletting-v2": 600,
+        "exsanguinate-v2": 600
       },
       "super_bloodletting": {
         "file": "supers-v2/bloodletting/entry.png",
-        "body_height": 480,
+        "body_height": 600,
         "frames": [
           {
             "file": "supers-v2/bloodletting/entry.png",
@@ -62706,7 +62838,7 @@
               270,
               476
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 0,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -62738,7 +62870,7 @@
               252,
               484
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 1,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -62770,7 +62902,7 @@
               315,
               495
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 2,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -62802,7 +62934,7 @@
               332,
               495
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 3,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -62834,7 +62966,7 @@
               280,
               477
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 0,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -62866,7 +62998,7 @@
               272,
               484
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 1,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -62898,7 +63030,7 @@
               330,
               503
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 2,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -62930,7 +63062,7 @@
               342,
               496
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 3,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -62962,7 +63094,7 @@
               300,
               485
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 0,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -62994,7 +63126,7 @@
               312,
               485
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 1,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -63026,7 +63158,7 @@
               320,
               488
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 2,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -63058,7 +63190,7 @@
               322,
               488
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 3,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -63090,7 +63222,7 @@
               335,
               480
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 0,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -63122,7 +63254,7 @@
               252,
               486
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 1,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -63154,7 +63286,7 @@
               320,
               495
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 2,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -63186,7 +63318,7 @@
               312,
               495
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 3,
             "scale_group": "bloodletting-v2",
             "render_only": true,
@@ -63740,7 +63872,7 @@
       },
       "super_exsanguinate": {
         "file": "supers-v2/exsanguinate/entry.png",
-        "body_height": 480,
+        "body_height": 600,
         "frames": [
           {
             "file": "supers-v2/exsanguinate/entry.png",
@@ -63765,7 +63897,7 @@
               270,
               476
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 0,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -63797,7 +63929,7 @@
               296,
               486
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 1,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -63829,7 +63961,7 @@
               320,
               495
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 2,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -63861,7 +63993,7 @@
               312,
               495
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 3,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -63893,7 +64025,7 @@
               345,
               493
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 0,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -63925,7 +64057,7 @@
               312,
               493
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 1,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -63957,7 +64089,7 @@
               335,
               496
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 2,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -63989,7 +64121,7 @@
               332,
               496
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 3,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64021,7 +64153,7 @@
               345,
               493
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 0,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64053,7 +64185,7 @@
               332,
               493
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 1,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64085,7 +64217,7 @@
               335,
               496
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 2,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64117,7 +64249,7 @@
               342,
               496
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 3,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64149,7 +64281,7 @@
               350,
               493
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 0,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64181,7 +64313,7 @@
               332,
               493
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 1,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64213,7 +64345,7 @@
               350,
               496
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 2,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64245,7 +64377,7 @@
               337,
               496
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 3,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64277,7 +64409,7 @@
               345,
               493
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 0,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64309,7 +64441,7 @@
               312,
               493
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 1,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64341,7 +64473,7 @@
               335,
               496
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 2,
             "scale_group": "exsanguinate-v2",
             "render_only": true,
@@ -64373,7 +64505,7 @@
               332,
               496
             ],
-            "body_height": 480,
+            "body_height": 600,
             "source_pose": 3,
             "scale_group": "exsanguinate-v2",
             "render_only": true,

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v3/sky-foundry/entry.png",
+    "original": "/workspace/generated_images/exec-d4f72453-8f01-47fa-96e9-7869a3936d95.png",
+    "sha256": "00c3313861f8c505296a99e4e663a18a03cbd413954bf39b6131592081f7b950",
+    "prompt": "art/characters/supers-v3/sky-foundry/entry-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/base.png",
+      "godot/assets/fighters/anvil-bull-v2/heavy_sweep.png"
+    ]
+  },
+  {
+    "id": "air",
+    "file": "godot/assets/fighters/supers-v3/sky-foundry/air.png",
+    "original": "/workspace/generated_images/exec-b57dbd96-a1e0-488a-808f-938e72e6586a.png",
+    "sha256": "5b4f851e44ffd77fe038b00d7c11b1aa3956d79553f2778f271c3c7fb82afb62",
+    "prompt": "art/characters/supers-v3/sky-foundry/air-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/base.png",
+      "godot/assets/fighters/supers-v3/sky-foundry/entry.png",
+      "/workspace/generated_images/exec-2dc77ba4-e1e5-4482-809a-b25ff76c63ab.png"
+    ],
+    "generationSteps": [
+      {
+        "source": "/workspace/generated_images/exec-2dc77ba4-e1e5-4482-809a-b25ff76c63ab.png",
+        "prompt": "art/characters/supers-v3/sky-foundry/air-prompt.txt",
+        "result": "Rejected: opaque white background"
+      },
+      {
+        "source": "/workspace/generated_images/exec-b57dbd96-a1e0-488a-808f-938e72e6586a.png",
+        "prompt": "art/characters/supers-v3/sky-foundry/air-alpha-prompt.txt",
+        "result": "Selected: transparent atlas"
+      }
+    ]
+  },
+  {
+    "id": "slam",
+    "file": "godot/assets/fighters/supers-v3/sky-foundry/slam.png",
+    "original": "/workspace/generated_images/exec-71b4a335-b647-41c5-80e3-375b19dce0e7.png",
+    "sha256": "50791b5bdfcdaa4514d4f7fe131b60e71e689c8d154a62449d34aab0dbdaa509",
+    "prompt": "art/characters/supers-v3/sky-foundry/slam-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/base.png",
+      "godot/assets/fighters/supers-v3/sky-foundry/entry.png",
+      "godot/assets/fighters/supers-v3/sky-foundry/air.png"
+    ]
+  },
+  {
+    "id": "recovery",
+    "file": "godot/assets/fighters/supers-v3/sky-foundry/recovery.png",
+    "original": "/workspace/generated_images/exec-40a058ed-b26e-4387-ad08-f897c8c8fe19.png",
+    "sha256": "c2732eb8797e68cbd96a549ee2787c31a728271c650737ce93ac097aefda2eda",
+    "prompt": "art/characters/supers-v3/sky-foundry/recovery-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/base.png",
+      "godot/assets/fighters/supers-v3/sky-foundry/slam.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v3/sky-foundry/effects.png",
+    "original": "/workspace/generated_images/exec-cdb6343e-57c0-413c-b612-aec889538620.png",
+    "sha256": "654fb86c808298ba79d61c4fd794ee24580979ebc488080e7fd5207946832cb8",
+    "prompt": "art/characters/supers-v3/sky-foundry/effects-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/shield_effects.png"
+    ]
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/sky-foundry/portrait.png",
+    "source": "/workspace/generated_images/exec-9dd9c417-0703-4b88-977f-e66ae71c22d8.png",
+    "sha256": "804a7f9019da5fd37ac789104b95698a4772c31c1dba7481498c4ca1e68b3c09",
+    "prompt": "art/characters/supers-v2/sky-foundry/portrait-prompt.txt",
+    "references": [
+      "art/characters/anvil-grappler-v1/high-clamp-hand-corrected.png"
+    ],
+    "pixelEdits": false,
+    "reuseReason": "Existing dedicated face remains on the approved Bull model; only body animation and motion effects are revised."
+  }
+]

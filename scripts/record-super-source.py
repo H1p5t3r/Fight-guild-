@@ -5,10 +5,11 @@ from pathlib import Path
 from PIL import Image
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('super');p.add_argument('key');p.add_argument('source',type=Path)
+p.add_argument('--version',choices=['v2','v3'],default='v2')
 p.add_argument('--reference',action='append',default=[]);p.add_argument('--prompt')
 a=p.parse_args();root=Path(__file__).resolve().parents[1]
-production=root/'art/characters/supers-v2'/a.super
-out=root/'godot/assets/fighters/supers-v2'/a.super/(a.key+'.png');out.parent.mkdir(parents=True,exist_ok=True)
+production=root/'art/characters'/('supers-'+a.version)/a.super
+out=root/'godot/assets/fighters'/('supers-'+a.version)/a.super/(a.key+'.png');out.parent.mkdir(parents=True,exist_ok=True)
 im=Image.open(a.source)
 assert im.mode=='RGBA' and im.size==(1536,1024),(im.mode,im.size)
 assert im.getchannel('A').getextrema()[0]==0,'Background is not transparent; regenerate it.'

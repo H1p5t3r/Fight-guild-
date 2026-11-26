@@ -1,0 +1,122 @@
+{
+  "name": "Sky Foundry",
+  "character": 0,
+  "slot": 16,
+  "input": "63214Hs",
+  "status": "completed-native-review",
+  "approvedChoreography": "Airborne catch, rising lift, overhead apex, falling sit-out slam. Approved Bull / High Clamp with Shield 1.",
+  "gameplaySource": "godot/data/workshop/2026-11-25-supers/FightGuild-Supers.json",
+  "startup": 5,
+  "active": 6,
+  "recovery": 45,
+  "freeze": 54,
+  "pairTicks": 112,
+  "releaseFreeze": 24,
+  "ownerRecovery": 24,
+  "cost": 6667,
+  "damage": 333,
+  "pixelEdits": false,
+  "sheets": {
+    "entry": [
+      "loaded anticipation",
+      "first-active catch",
+      "take the weight",
+      "drive upward"
+    ],
+    "air": [
+      "ascending tuck",
+      "open apex",
+      "suspended hold",
+      "turn into descent"
+    ],
+    "slam": [
+      "pull downward",
+      "accelerated drop",
+      "floor compression",
+      "impact hold"
+    ],
+    "recovery": [
+      "recoil brace",
+      "push off floor",
+      "guard regather",
+      "return to High Clamp"
+    ]
+  },
+  "requirements": [
+    "Original in-game model and cel shading",
+    "Whole-body coil, rising crescent and overhead slam; shield counterbalance",
+    "Greatest initial hand reach on first active frame",
+    "Longer overtravel and regather exposures within existing saved clocks",
+    "Fixed anatomical scale; hand attachment and native damage-frame impact",
+    "Review 60 FPS catch, mirror, grounded miss and effects-hidden scale comparison"
+  ],
+  "impactAt": "Saved pair release tick 112; damage and 24-tick hitstop occur together",
+  "date": "2026-11-26",
+  "revision": "v3-full-body-crescent",
+  "bodyKeys": 16,
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      18,
+      4
+    ],
+    [
+      30,
+      5
+    ],
+    [
+      44,
+      6
+    ],
+    [
+      56,
+      7
+    ],
+    [
+      65,
+      8
+    ],
+    [
+      88,
+      9
+    ],
+    [
+      100,
+      10
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      11
+    ],
+    [
+      7,
+      12
+    ],
+    [
+      14,
+      13
+    ],
+    [
+      19,
+      14
+    ],
+    [
+      23,
+      15
+    ]
+  ],
+  "timingDecision": "Re-time body exposures: earlier rising tuck, longer compressed load and post-impact overtravel. Existing capture path, 112-tick release and 24-tick recovery provide enough room; no combat timing change needed for this revision."
+}

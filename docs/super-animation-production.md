@@ -1,5 +1,9 @@
 # Full super animation production
 
+The [v3 revision record](super-animation-v3.md) tracks the subsequent full-body
+crescent and model-consistency pass. This document preserves the original v2
+production and videos below.
+
 All twelve supers were finished **one at a time**, with a native review and branch
 push for each. The selected fighter designs, approved choreography and current
 combat rules are preserved. They follow the [attack animation standard](attack-animation-standard.md):

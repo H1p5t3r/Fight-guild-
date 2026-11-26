@@ -13,8 +13,9 @@ def read(p):return json.loads(p.read_text())
 def write(p,v):p.write_text(json.dumps(v,indent=2)+'\n')
 
 def main():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('super');args=parser.parse_args()
-    production=ROOT/'art/characters/supers-v2'/args.super
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('super')
+    parser.add_argument('--version',choices=['v2','v3'],default='v2');args=parser.parse_args()
+    production=ROOT/'art/characters'/('supers-'+args.version)/args.super
     plan=read(production/'exposure-plan.json');layout=read(production/'layout.json')
     sources={v['id']:v for v in read(production/'sources.json')}
     manifest=read(ART/'manifest.json');fighter=manifest['fighters'][plan['character']]
@@ -36,14 +37,14 @@ def main():
             root=key['root']
             frame=dict(file=str(path.relative_to(ART)),sha256=src['sha256'],source_size=list(im.size),region=region,
                 bounds=[int(xx.min()),int(yy.min()),int(xx.max()+1),int(yy.max()+1)],pivot=[root[0]-x,root[1]-y],
-                body_height=height,source_pose=index,scale_group=args.super+'-v2',render_only=True)
+                body_height=height,source_pose=index,scale_group=args.super+'-'+args.version,render_only=True)
             for field in ['tip','grip']:
                 if field in key:frame[field]=[key[field][0]-x,key[field][1]-y]
             frames.append(frame)
             if key.get('weapons'):
                 masks[frame['file']+':'+','.join(map(str,region))]=[[[a-x,b-y] for a,b in poly] for poly in key['weapons']]
     fighter[phase]=dict(file=frames[0]['file'],body_height=height,frames=frames,render_only=True)
-    fighter.setdefault('anatomical_scales',{})[args.super+'-v2']=height
+    fighter.setdefault('anatomical_scales',{})[args.super+'-'+args.version]=height
     source=sources['effects'];path=ROOT/source['file'];assert hashlib.sha256(path.read_bytes()).hexdigest()==source['sha256']
     im=Image.open(path);alpha=np.asarray(im.getchannel('A'));assert alpha.min()==0
     effects=[]
@@ -73,7 +74,7 @@ def main():
     portraits_path=ROOT/'godot/assets/ui/super-freeze/portraits.json';portraits=read(portraits_path)
     face=sources['portrait'];assert hashlib.sha256((ROOT/face['file']).read_bytes()).hexdigest()==face['sha256']
     portraits.setdefault('moves',{})[plan['name']]=dict(character=plan['character'],enabled=True,
-        file='../../fighters/supers-v2/'+args.super+'/portrait.png',region=[0,0,1536,1024],width=layout.get('faceWidth',.55),center_y=layout.get('faceY',.56),source=face['prompt'])
+        file='../../'+str(Path(face['file']).relative_to('godot/assets')),region=[0,0,1536,1024],width=layout.get('faceWidth',.55),center_y=layout.get('faceY',.56),source=face['prompt'])
     write(portraits_path,portraits)
     write(production/'registration.json',dict(bodyKeys=len(frames),effectKeys=len(effects),bodyHeight=height,
         gameplayChanged=False,pixelEdits=False,phase=phase,regions=[f['region'] for f in frames]))

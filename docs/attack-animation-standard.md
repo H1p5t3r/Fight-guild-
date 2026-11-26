@@ -1,5 +1,9 @@
 # Attack animation standard — approved Fillet timing process
 
+Supers additionally follow the [26 November super direction](super-animation-standard.md):
+full-body crescent motion, sudden impact, long follow-through and permission to
+adjust timing when needed. That exception applies only to supers.
+
 The user approved Fillet's held-pose sweep on 2026-11-19 and requested this
 process across the rest of her kit and future attacks. This supersedes automatic
 "new drawing every two frames" as the default. A drawing is a choice, not a timer.

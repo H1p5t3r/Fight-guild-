@@ -1,5 +1,5 @@
 {
-  "bodyHeight": 425,
+  "bodyHeight": 460,
   "body": {
     "entry": [
       {
@@ -909,5 +909,11 @@
     ]
   },
   "faceWidth": 0.55,
-  "faceY": 0.53
+  "faceY": 0.53,
+  "scaleAudit": {
+    "date": "2026-11-26",
+    "previousBodyHeight": 425,
+    "bodyHeight": 460,
+    "method": "Fixed-world-scale anatomy comparison with approved idle and locomotion. One scale for the entire action, including block/miss and return. No pose-bound fitting."
+  }
 }
