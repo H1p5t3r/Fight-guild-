@@ -1,0 +1,107 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v3/exsanguinate/entry.png",
+    "original": "/workspace/generated_images/exec-c42a1951-b2c9-4c95-9c54-95e45be82bd9.png",
+    "sha256": "c7d83dc2adcc00374452e962d1bd5610980f100e4019cb9df188b77441687542",
+    "prompt": "art/characters/supers-v3/exsanguinate/entry-prompt.txt",
+    "references": [
+      "godot/assets/fighters/appearance-v3/fillet-ready.png",
+      "godot/assets/fighters/supers-v3/bloodletting/down.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v3/exsanguinate/finish.png",
+    "original": "/workspace/generated_images/exec-4fc67d10-90f2-4891-89fc-3b47bd472ae0.png",
+    "sha256": "6c0d1b7d2673b4b05b0425c1d65661e0212659a37ffbb67b8552ac71f3541ad5",
+    "prompt": "art/characters/supers-v3/exsanguinate/finish-prompt.txt",
+    "references": [
+      "godot/assets/fighters/appearance-v3/fillet-ready.png",
+      "godot/assets/fighters/supers-v3/bloodletting/finish.png"
+    ]
+  },
+  {
+    "id": "return",
+    "file": "godot/assets/fighters/supers-v3/exsanguinate/return.png",
+    "original": "/workspace/generated_images/exec-ab0d5b96-898d-4b05-90cb-14aa0ccb2912.png",
+    "sha256": "2cb506204f5cd79c050423a2d804f2e76b87c9ecd93d747a7b2cd72d63de4116",
+    "prompt": "art/characters/supers-v3/exsanguinate/return-prompt.txt",
+    "references": [
+      "godot/assets/fighters/appearance-v3/fillet-ready.png",
+      "godot/assets/fighters/supers-v3/bloodletting/return.png"
+    ]
+  },
+  {
+    "id": "cross",
+    "file": "godot/assets/fighters/supers-v3/exsanguinate/cross.png",
+    "original": "/workspace/generated_images/exec-62503122-2cdc-4112-aa51-9fb1643e1440.png",
+    "sha256": "cc6c1daf5ad7d4de0ca542fc59f1c7a6c2afa237edd486faf44eea132c90db6c",
+    "prompt": "art/characters/supers-v3/exsanguinate/cross-correction-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v3/exsanguinate/cross.png"
+    ],
+    "referenceSnapshots": [
+      {
+        "referencedAs": "godot/assets/fighters/supers-v3/exsanguinate/cross.png",
+        "original": "/workspace/generated_images/exec-8f8da391-e1cb-43b3-9a56-554571ed3f10.png",
+        "sha256": "3a7f4ee7f39feee3c72859a615f44204f1b47d814d355ff620c9e187bcbf9f0b"
+      }
+    ]
+  },
+  {
+    "id": "close",
+    "file": "godot/assets/fighters/supers-v3/exsanguinate/close.png",
+    "original": "/workspace/generated_images/exec-93fe514b-1d4a-4e18-8b7a-228c98dbcd1e.png",
+    "sha256": "512e8333b47b9e5fc7065b553253b675159b3d522ffc9c9e9d4de521dfd30974",
+    "prompt": "art/characters/supers-v3/exsanguinate/close-correction-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v3/exsanguinate/close.png"
+    ],
+    "referenceSnapshots": [
+      {
+        "referencedAs": "godot/assets/fighters/supers-v3/exsanguinate/close.png",
+        "original": "/workspace/generated_images/exec-52f57153-2c8a-48f8-a1df-8cefe26d6e56.png",
+        "sha256": "a36fa28e419179a7d17b91b29518f4ec91a8874e1ea6af42c0e093275016e163"
+      }
+    ]
+  },
+  {
+    "id": "compression",
+    "file": "godot/assets/fighters/supers-v3/exsanguinate/compression.png",
+    "original": "/workspace/generated_images/exec-5eb88600-2c75-40e5-bf0e-f89fefc60c3d.png",
+    "sha256": "418d40173bf0899e9ed2bd10e1f251a8d28b71ed849f2267c3d57c5b1fd2bf40",
+    "prompt": "art/characters/supers-v3/exsanguinate/compression-correction-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v3/exsanguinate/compression.png",
+      "godot/assets/fighters/supers-v3/bloodletting/finish.png"
+    ],
+    "referenceSnapshots": [
+      {
+        "referencedAs": "godot/assets/fighters/supers-v3/exsanguinate/compression.png",
+        "original": "/workspace/generated_images/exec-066d7ebf-8b98-4cf0-8ec6-9b0f24e45ee0.png",
+        "sha256": "e1d7ad6eee8200b9d3f8b4ebcd088753c0e93fe064e32e91cc4817476be9a953"
+      }
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v3/exsanguinate/effects.png",
+    "original": "/workspace/generated_images/exec-51251142-d2b1-4038-b398-0ce782215d92.png",
+    "sha256": "ca6e00367e6c6a458ee1021f7a31c7d5bc00831ae2bf2ee7150f8bcabfd19ff5",
+    "prompt": "art/characters/supers-v3/exsanguinate/effects-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v3/bloodletting/effects.png"
+    ]
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/exsanguinate/portrait.png",
+    "original": "/workspace/generated_images/exec-00e385db-ba7a-41a3-a877-9d9c382c3d68.png",
+    "sha256": "c82b36c095e0523355ea20a3ff0f4d69776db69d8bfe15641724bb2f17ee2b03",
+    "prompt": "art/characters/supers-v2/exsanguinate/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/exsanguinate/finish.png"
+    ]
+  }
+]

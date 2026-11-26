@@ -279,6 +279,31 @@ The native suite passed 20,153 checks with no failures. See the
 [validation](../art/characters/supers-v3/bloodletting/validation.json) and
 [fixed-scale comparison](../art/characters/supers-v3/bloodletting/scale-review.png).
 
+## Exsanguinate — complete
+
+[Watch the native 60 FPS review](../exports/FightGuild-Exsanguinate-V3-2026-11-26.mp4)
+(hit, mirrored hit, block, miss and stored-bleed cash-out).
+
+Twenty-four replacement drawings take Fillet through a deep overhead coil,
+committed opening downcut, grounded tightening, rising scissors, a second
+downcut and an explosive crossed-knife finish. Four compression drawings sustain
+the longer buildup; four separate return drawings settle her into the original
+stalker guard. Her hips, shoulders, legs, hair and tabard follow the blade arcs.
+
+All drawings share the same 550-pixel anatomical scale as Bloodletting. The
+right hand owns the long knife and the left pauldron arm owns the short one,
+including crossed-arm and back-facing poses. Six crimson/wine/ivory effects
+extend the crescents while keeping the body silhouette visible. Corrections
+and their exact source references are retained in the production history.
+
+The 48/84/108 contact beats, damage, bleed ownership and one-time cash-out remain
+unchanged. Block and miss withdraw from the opening. The native suite passed
+21,935 checks with no failures, including both facings and editable capture
+timing. The five-case recording passed with 300 damage on ordinary connection,
+450 with 150 owned grey life, 8 on block and zero on miss. See the
+[validation](../art/characters/supers-v3/exsanguinate/validation.json)
+and [fixed-scale comparison](../art/characters/supers-v3/exsanguinate/scale-review.png).
+
 ## Size calibration
 
 The first visual comparison covered all 196 v2 super body drawings against their

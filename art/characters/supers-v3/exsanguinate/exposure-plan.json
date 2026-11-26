@@ -1,0 +1,160 @@
+{
+  "name": "Exsanguinate",
+  "character": 5,
+  "slot": 31,
+  "input": "214214Hs",
+  "status": "completed-native-review",
+  "date": "2026-11-26",
+  "startup": 8,
+  "active": 3,
+  "recovery": 32,
+  "freeze": 54,
+  "pairTicks": 108,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 300,
+  "bodyKeys": 24,
+  "choreography": "Deep overhead coil into a committed hip-led opening downcut. Grounded tightening, rising scissors and a second full-body downcut lead into a crossed-arm reload, explosive open X and a long controlled stalker return.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      14,
+      3
+    ],
+    [
+      24,
+      4
+    ],
+    [
+      33,
+      16
+    ],
+    [
+      40,
+      17
+    ],
+    [
+      47,
+      5
+    ],
+    [
+      48,
+      6
+    ],
+    [
+      57,
+      7
+    ],
+    [
+      65,
+      8
+    ],
+    [
+      73,
+      18
+    ],
+    [
+      79,
+      19
+    ],
+    [
+      83,
+      9
+    ],
+    [
+      84,
+      10
+    ],
+    [
+      93,
+      11
+    ],
+    [
+      101,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      5,
+      14
+    ],
+    [
+      11,
+      15
+    ],
+    [
+      15,
+      20
+    ],
+    [
+      18,
+      21
+    ],
+    [
+      21,
+      22
+    ],
+    [
+      23,
+      23
+    ]
+  ],
+  "requirements": [
+    "Black hair, lean arms and unchanged costume",
+    "Long knife in right near hand; short knife in left pauldron arm",
+    "Fixed 550-pixel anatomical reference matched to the approved original idle",
+    "Largest change from last startup to first active",
+    "Stored grey-life cash-out consumed once, unchanged",
+    "No body smears or interpolation"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveKnifeTravelWorldUnits": 143.67,
+  "largestOpeningMovementAtFirstActive": true,
+  "verification": {
+    "cases": [
+      {
+        "name": "hit",
+        "damage": 300,
+        "paired": true
+      },
+      {
+        "name": "mirrored",
+        "damage": 300,
+        "paired": true
+      },
+      {
+        "name": "block",
+        "damage": 8,
+        "paired": false
+      },
+      {
+        "name": "whiff",
+        "damage": 0,
+        "paired": false
+      },
+      {
+        "name": "bleed",
+        "damage": 450,
+        "paired": true
+      }
+    ],
+    "failures": 0,
+    "frames": 1577,
+    "fps": 60,
+    "video": "exports/FightGuild-Exsanguinate-V3-2026-11-26.mp4",
+    "sha256": "31d8ee0a1f623925257510f03eba0d60c32ff2b8b14ea04ad35ddff6f48290ee"
+  }
+}

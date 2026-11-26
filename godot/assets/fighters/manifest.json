@@ -63943,7 +63943,8 @@
         "supers-v1": 480,
         "bloodletting-v2": 600,
         "exsanguinate-v2": 600,
-        "bloodletting-v3": 550
+        "bloodletting-v3": 550,
+        "exsanguinate-v3": 550
       },
       "super_bloodletting": {
         "file": "supers-v3/bloodletting/entry.png",
@@ -64952,16 +64953,24 @@
               2
             ],
             [
-              18,
+              15,
               3
             ],
             [
-              50,
-              14
+              38,
+              20
             ],
             [
-              80,
-              15
+              57,
+              21
+            ],
+            [
+              76,
+              22
+            ],
+            [
+              93,
+              23
             ]
           ],
           "sounds": {
@@ -64977,106 +64986,112 @@
               "end": 4,
               "key": 0,
               "box": [
-                35,
-                -150,
-                120,
-                115
+                -35,
+                -180,
+                270,
+                195
               ],
+              "behind": true,
               "fade": true,
-              "opacity": 0.8,
+              "opacity": 0.9,
               "stop_at_guard": true
             },
             {
               "stage": "paired",
               "start": 0,
-              "end": 9,
+              "end": 13,
               "key": 0,
               "box": [
-                -50,
-                -155,
-                115,
-                120
+                -110,
+                -180,
+                270,
+                195
               ],
               "anchor": "receiver",
+              "behind": true,
               "fade": true,
-              "opacity": 0.8
+              "opacity": 0.9
             },
             {
               "stage": "paired",
               "start": 48,
-              "end": 58,
+              "end": 62,
               "key": 1,
               "box": [
-                -60,
-                -145,
-                125,
-                135
+                -105,
+                -230,
+                250,
+                235
               ],
               "anchor": "receiver",
-              "fade": true,
-              "opacity": 0.9
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "paired",
               "start": 84,
-              "end": 95,
+              "end": 98,
               "key": 2,
               "box": [
-                -65,
-                -155,
-                140,
-                150
+                -115,
+                -225,
+                270,
+                235
               ],
               "anchor": "receiver",
-              "fade": true,
-              "opacity": 0.9
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "connected",
               "start": 0,
-              "end": 5,
+              "end": 12,
               "key": 3,
               "box": [
-                -75,
-                -165,
-                155,
-                155
+                -110,
+                -225,
+                290,
+                250
               ],
               "anchor": "receiver",
-              "fade": false,
-              "opacity": 0.9
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "connected",
-              "start": 5,
-              "end": 13,
+              "start": 8,
+              "end": 30,
               "key": 4,
               "box": [
-                -90,
-                -180,
-                185,
-                180
+                -130,
+                -235,
+                310,
+                255
               ],
               "anchor": "receiver",
-              "fade": true,
-              "opacity": 0.85
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "connected",
-              "start": 13,
-              "end": 30,
+              "start": 22,
+              "end": 44,
               "key": 5,
               "box": [
-                -95,
-                -185,
-                195,
-                185
+                -145,
+                -240,
+                330,
+                260
               ],
               "anchor": "receiver",
+              "behind": true,
               "fade": true,
-              "opacity": 0.75
+              "opacity": 0.7
             }
           ],
+          "source": "supers-v3/exsanguinate",
+          "description": "Deep overhead coil into a committed hip-led opening downcut. Grounded tightening, rising scissors and a second full-body downcut lead into a crossed-arm reload, explosive open X and a long controlled stalker return.",
+          "receiver_reactions": true,
           "phase": "super_exsanguinate",
           "fx_phase": "super_exsanguinate_fx",
           "pair_ticks": 108,
@@ -65154,23 +65169,39 @@
               13
             ],
             [
-              8,
+              5,
               14
             ],
             [
-              18,
+              11,
               15
+            ],
+            [
+              15,
+              20
+            ],
+            [
+              18,
+              21
+            ],
+            [
+              21,
+              22
+            ],
+            [
+              23,
+              23
             ]
           ]
         }
       },
       "super_exsanguinate": {
-        "file": "supers-v2/exsanguinate/entry.png",
-        "body_height": 600,
+        "file": "supers-v3/exsanguinate/entry.png",
+        "body_height": 550,
         "frames": [
           {
-            "file": "supers-v2/exsanguinate/entry.png",
-            "sha256": "5ef9107ad39d660c08b93291b466869b749033ec00312c0d8ed2f13b2fa54f7a",
+            "file": "supers-v3/exsanguinate/entry.png",
+            "sha256": "c7d83dc2adcc00374452e962d1bd5610980f100e4019cb9df188b77441687542",
             "source_size": [
               1536,
               1024
@@ -65178,159 +65209,31 @@
             "region": [
               0,
               0,
-              704,
+              768,
               512
             ],
             "bounds": [
-              116,
-              32,
-              545,
-              479
+              152,
+              26,
+              604,
+              484
             ],
             "pivot": [
-              270,
-              476
+              380,
+              483
             ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 0,
-            "scale_group": "exsanguinate-v2",
+            "scale_group": "exsanguinate-v3",
             "render_only": true,
             "tip": [
-              303,
-              355
+              396,
+              37
             ]
           },
           {
-            "file": "supers-v2/exsanguinate/entry.png",
-            "sha256": "5ef9107ad39d660c08b93291b466869b749033ec00312c0d8ed2f13b2fa54f7a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              704,
-              0,
-              832,
-              512
-            ],
-            "bounds": [
-              29,
-              10,
-              752,
-              488
-            ],
-            "pivot": [
-              296,
-              486
-            ],
-            "body_height": 600,
-            "source_pose": 1,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              751,
-              73
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/entry.png",
-            "sha256": "5ef9107ad39d660c08b93291b466869b749033ec00312c0d8ed2f13b2fa54f7a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              75,
-              4,
-              710,
-              499
-            ],
-            "pivot": [
-              320,
-              495
-            ],
-            "body_height": 600,
-            "source_pose": 2,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              709,
-              98
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/entry.png",
-            "sha256": "5ef9107ad39d660c08b93291b466869b749033ec00312c0d8ed2f13b2fa54f7a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              43,
-              6,
-              564,
-              499
-            ],
-            "pivot": [
-              312,
-              495
-            ],
-            "body_height": 600,
-            "source_pose": 3,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              477,
-              182
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/draw.png",
-            "sha256": "f44723323983ed08a4bde29d792d2877fc87cecdbca82c2ec96e6323a90cf281",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              124,
-              5,
-              560,
-              494
-            ],
-            "pivot": [
-              345,
-              493
-            ],
-            "body_height": 600,
-            "source_pose": 0,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              531,
-              137
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/draw.png",
-            "sha256": "f44723323983ed08a4bde29d792d2877fc87cecdbca82c2ec96e6323a90cf281",
+            "file": "supers-v3/exsanguinate/entry.png",
+            "sha256": "c7d83dc2adcc00374452e962d1bd5610980f100e4019cb9df188b77441687542",
             "source_size": [
               1536,
               1024
@@ -65342,219 +65245,91 @@
               512
             ],
             "bounds": [
-              93,
-              9,
-              534,
-              495
-            ],
-            "pivot": [
-              312,
-              493
-            ],
-            "body_height": 600,
-            "source_pose": 1,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              464,
-              161
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/draw.png",
-            "sha256": "f44723323983ed08a4bde29d792d2877fc87cecdbca82c2ec96e6323a90cf281",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              99,
-              8,
-              613,
-              499
-            ],
-            "pivot": [
-              335,
-              496
-            ],
-            "body_height": 600,
-            "source_pose": 2,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              611,
-              299
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/draw.png",
-            "sha256": "f44723323983ed08a4bde29d792d2877fc87cecdbca82c2ec96e6323a90cf281",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              88,
-              10,
-              603,
-              499
+              49,
+              36,
+              726,
+              483
             ],
             "pivot": [
               332,
-              496
+              483
             ],
-            "body_height": 600,
-            "source_pose": 3,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              601,
-              326
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/slice.png",
-            "sha256": "f3b971d2ebb32bb2eebe68cfc074038f73e137ab6846b8b6c03d6e90f68c1118",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              119,
-              3,
-              560,
-              494
-            ],
-            "pivot": [
-              345,
-              493
-            ],
-            "body_height": 600,
-            "source_pose": 0,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              511,
-              176
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/slice.png",
-            "sha256": "f3b971d2ebb32bb2eebe68cfc074038f73e137ab6846b8b6c03d6e90f68c1118",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              119,
-              16,
-              559,
-              494
-            ],
-            "pivot": [
-              332,
-              493
-            ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 1,
-            "scale_group": "exsanguinate-v2",
+            "scale_group": "exsanguinate-v3",
             "render_only": true,
             "tip": [
-              472,
-              209
+              723,
+              407
             ]
           },
           {
-            "file": "supers-v2/exsanguinate/slice.png",
-            "sha256": "f3b971d2ebb32bb2eebe68cfc074038f73e137ab6846b8b6c03d6e90f68c1118",
+            "file": "supers-v3/exsanguinate/entry.png",
+            "sha256": "c7d83dc2adcc00374452e962d1bd5610980f100e4019cb9df188b77441687542",
             "source_size": [
               1536,
               1024
             ],
             "region": [
               0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              112,
+              12,
+              734,
+              484
+            ],
+            "pivot": [
+              365,
+              483
+            ],
+            "body_height": 550,
+            "source_pose": 2,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              730,
+              423
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/entry.png",
+            "sha256": "c7d83dc2adcc00374452e962d1bd5610980f100e4019cb9df188b77441687542",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
               512,
               768,
               512
             ],
             "bounds": [
               96,
-              8,
-              630,
-              499
+              31,
+              577,
+              484
             ],
             "pivot": [
-              335,
-              496
+              382,
+              485
             ],
-            "body_height": 600,
-            "source_pose": 2,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              629,
-              55
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/slice.png",
-            "sha256": "f3b971d2ebb32bb2eebe68cfc074038f73e137ab6846b8b6c03d6e90f68c1118",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              95,
-              7,
-              653,
-              499
-            ],
-            "pivot": [
-              342,
-              496
-            ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 3,
-            "scale_group": "exsanguinate-v2",
+            "scale_group": "exsanguinate-v3",
             "render_only": true,
             "tip": [
-              652,
-              69
+              534,
+              306
             ]
           },
           {
-            "file": "supers-v2/exsanguinate/finish.png",
-            "sha256": "7d47a85446ba3b99b2faa73a8d0677c148a0b232269fb9c091cfd45f2332bafd",
+            "file": "supers-v3/exsanguinate/cross.png",
+            "sha256": "cc6c1daf5ad7d4de0ca542fc59f1c7a6c2afa237edd486faf44eea132c90db6c",
             "source_size": [
               1536,
               1024
@@ -65566,155 +65341,27 @@
               512
             ],
             "bounds": [
-              124,
-              7,
-              579,
-              497
-            ],
-            "pivot": [
-              350,
-              493
-            ],
-            "body_height": 600,
-            "source_pose": 0,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              485,
-              181
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/finish.png",
-            "sha256": "7d47a85446ba3b99b2faa73a8d0677c148a0b232269fb9c091cfd45f2332bafd",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              64,
-              10,
-              663,
-              497
-            ],
-            "pivot": [
-              332,
-              493
-            ],
-            "body_height": 600,
-            "source_pose": 1,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              661,
-              50
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/finish.png",
-            "sha256": "7d47a85446ba3b99b2faa73a8d0677c148a0b232269fb9c091cfd45f2332bafd",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              117,
-              6,
-              591,
-              498
-            ],
-            "pivot": [
-              350,
-              496
-            ],
-            "body_height": 600,
-            "source_pose": 2,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              511,
-              278
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/finish.png",
-            "sha256": "7d47a85446ba3b99b2faa73a8d0677c148a0b232269fb9c091cfd45f2332bafd",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              63,
-              5,
-              616,
-              498
-            ],
-            "pivot": [
-              337,
-              496
-            ],
-            "body_height": 600,
-            "source_pose": 3,
-            "scale_group": "exsanguinate-v2",
-            "render_only": true,
-            "tip": [
-              453,
-              304
-            ]
-          },
-          {
-            "file": "supers-v2/exsanguinate/compress.png",
-            "sha256": "9218b5108c7d09e9f8bb536ae03412c6570e2856bd0df2a6caf1233a7ac9e817",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              122,
-              3,
-              560,
-              495
+              101,
+              15,
+              596,
+              501
             ],
             "pivot": [
               345,
-              493
+              500
             ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 0,
-            "scale_group": "exsanguinate-v2",
+            "scale_group": "exsanguinate-v3",
             "render_only": true,
             "tip": [
-              536,
-              136
+              434,
+              308
             ]
           },
           {
-            "file": "supers-v2/exsanguinate/compress.png",
-            "sha256": "9218b5108c7d09e9f8bb536ae03412c6570e2856bd0df2a6caf1233a7ac9e817",
+            "file": "supers-v3/exsanguinate/cross.png",
+            "sha256": "cc6c1daf5ad7d4de0ca542fc59f1c7a6c2afa237edd486faf44eea132c90db6c",
             "source_size": [
               1536,
               1024
@@ -65726,27 +65373,155 @@
               512
             ],
             "bounds": [
-              91,
-              11,
-              533,
-              495
+              109,
+              17,
+              542,
+              499
             ],
             "pivot": [
-              312,
-              493
+              382,
+              500
             ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 1,
-            "scale_group": "exsanguinate-v2",
+            "scale_group": "exsanguinate-v3",
             "render_only": true,
             "tip": [
-              454,
-              163
+              316,
+              320
             ]
           },
           {
-            "file": "supers-v2/exsanguinate/compress.png",
-            "sha256": "9218b5108c7d09e9f8bb536ae03412c6570e2856bd0df2a6caf1233a7ac9e817",
+            "file": "supers-v3/exsanguinate/cross.png",
+            "sha256": "cc6c1daf5ad7d4de0ca542fc59f1c7a6c2afa237edd486faf44eea132c90db6c",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              105,
+              13,
+              708,
+              493
+            ],
+            "pivot": [
+              335,
+              493
+            ],
+            "body_height": 550,
+            "source_pose": 2,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              705,
+              47
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/cross.png",
+            "sha256": "cc6c1daf5ad7d4de0ca542fc59f1c7a6c2afa237edd486faf44eea132c90db6c",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              62,
+              6,
+              639,
+              493
+            ],
+            "pivot": [
+              332,
+              492
+            ],
+            "body_height": 550,
+            "source_pose": 3,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              150,
+              114
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/close.png",
+            "sha256": "512e8333b47b9e5fc7065b553253b675159b3d522ffc9c9e9d4de521dfd30974",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              160,
+              9,
+              611,
+              499
+            ],
+            "pivot": [
+              385,
+              499
+            ],
+            "body_height": 550,
+            "source_pose": 0,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              402,
+              25
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/close.png",
+            "sha256": "512e8333b47b9e5fc7065b553253b675159b3d522ffc9c9e9d4de521dfd30974",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              152,
+              12,
+              616,
+              499
+            ],
+            "pivot": [
+              392,
+              499
+            ],
+            "body_height": 550,
+            "source_pose": 1,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              161,
+              22
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/close.png",
+            "sha256": "512e8333b47b9e5fc7065b553253b675159b3d522ffc9c9e9d4de521dfd30974",
             "source_size": [
               1536,
               1024
@@ -65759,26 +65534,26 @@
             ],
             "bounds": [
               98,
-              2,
-              566,
-              499
+              36,
+              703,
+              475
             ],
             "pivot": [
-              335,
-              496
+              340,
+              473
             ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 2,
-            "scale_group": "exsanguinate-v2",
+            "scale_group": "exsanguinate-v3",
             "render_only": true,
             "tip": [
-              552,
-              199
+              698,
+              383
             ]
           },
           {
-            "file": "supers-v2/exsanguinate/compress.png",
-            "sha256": "9218b5108c7d09e9f8bb536ae03412c6570e2856bd0df2a6caf1233a7ac9e817",
+            "file": "supers-v3/exsanguinate/close.png",
+            "sha256": "512e8333b47b9e5fc7065b553253b675159b3d522ffc9c9e9d4de521dfd30974",
             "source_size": [
               1536,
               1024
@@ -65790,137 +65565,521 @@
               512
             ],
             "bounds": [
-              87,
-              7,
-              560,
-              499
+              59,
+              80,
+              732,
+              476
             ],
             "pivot": [
-              332,
-              496
+              342,
+              474
             ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 3,
-            "scale_group": "exsanguinate-v2",
+            "scale_group": "exsanguinate-v3",
             "render_only": true,
             "tip": [
-              505,
-              213
+              730,
+              438
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/finish.png",
+            "sha256": "6c0d1b7d2673b4b05b0425c1d65661e0212659a37ffbb67b8552ac71f3541ad5",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              137,
+              71,
+              578,
+              490
+            ],
+            "pivot": [
+              365,
+              489
+            ],
+            "body_height": 550,
+            "source_pose": 0,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              212,
+              171
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/finish.png",
+            "sha256": "6c0d1b7d2673b4b05b0425c1d65661e0212659a37ffbb67b8552ac71f3541ad5",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              30,
+              14,
+              743,
+              491
+            ],
+            "pivot": [
+              362,
+              489
+            ],
+            "body_height": 550,
+            "source_pose": 1,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              742,
+              16
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/finish.png",
+            "sha256": "6c0d1b7d2673b4b05b0425c1d65661e0212659a37ffbb67b8552ac71f3541ad5",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              70,
+              2,
+              695,
+              491
+            ],
+            "pivot": [
+              385,
+              491
+            ],
+            "body_height": 550,
+            "source_pose": 2,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              74,
+              60
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/finish.png",
+            "sha256": "6c0d1b7d2673b4b05b0425c1d65661e0212659a37ffbb67b8552ac71f3541ad5",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              75,
+              19,
+              667,
+              490
+            ],
+            "pivot": [
+              362,
+              490
+            ],
+            "body_height": 550,
+            "source_pose": 3,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              430,
+              360
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/compression.png",
+            "sha256": "418d40173bf0899e9ed2bd10e1f251a8d28b71ed849f2267c3d57c5b1fd2bf40",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              68,
+              15,
+              607,
+              494
+            ],
+            "pivot": [
+              365,
+              492
+            ],
+            "body_height": 550,
+            "source_pose": 0,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              70,
+              288
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/compression.png",
+            "sha256": "418d40173bf0899e9ed2bd10e1f251a8d28b71ed849f2267c3d57c5b1fd2bf40",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              49,
+              18,
+              642,
+              491
+            ],
+            "pivot": [
+              382,
+              490
+            ],
+            "body_height": 550,
+            "source_pose": 1,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              52,
+              319
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/compression.png",
+            "sha256": "418d40173bf0899e9ed2bd10e1f251a8d28b71ed849f2267c3d57c5b1fd2bf40",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              93,
+              7,
+              680,
+              488
+            ],
+            "pivot": [
+              390,
+              487
+            ],
+            "body_height": 550,
+            "source_pose": 2,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              96,
+              128
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/compression.png",
+            "sha256": "418d40173bf0899e9ed2bd10e1f251a8d28b71ed849f2267c3d57c5b1fd2bf40",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              72,
+              20,
+              656,
+              487
+            ],
+            "pivot": [
+              382,
+              482
+            ],
+            "body_height": 550,
+            "source_pose": 3,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              226,
+              168
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/return.png",
+            "sha256": "2cb506204f5cd79c050423a2d804f2e76b87c9ecd93d747a7b2cd72d63de4116",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              134,
+              43,
+              665,
+              494
+            ],
+            "pivot": [
+              365,
+              493
+            ],
+            "body_height": 550,
+            "source_pose": 0,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              316,
+              461
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/return.png",
+            "sha256": "2cb506204f5cd79c050423a2d804f2e76b87c9ecd93d747a7b2cd72d63de4116",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              124,
+              17,
+              651,
+              494
+            ],
+            "pivot": [
+              392,
+              492
+            ],
+            "body_height": 550,
+            "source_pose": 1,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              496,
+              302
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/return.png",
+            "sha256": "2cb506204f5cd79c050423a2d804f2e76b87c9ecd93d747a7b2cd72d63de4116",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              138,
+              10,
+              639,
+              501
+            ],
+            "pivot": [
+              390,
+              501
+            ],
+            "body_height": 550,
+            "source_pose": 2,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              465,
+              299
+            ]
+          },
+          {
+            "file": "supers-v3/exsanguinate/return.png",
+            "sha256": "2cb506204f5cd79c050423a2d804f2e76b87c9ecd93d747a7b2cd72d63de4116",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              126,
+              12,
+              640,
+              501
+            ],
+            "pivot": [
+              387,
+              501
+            ],
+            "body_height": 550,
+            "source_pose": 3,
+            "scale_group": "exsanguinate-v3",
+            "render_only": true,
+            "tip": [
+              455,
+              306
             ]
           }
         ],
         "render_only": true
       },
       "super_exsanguinate_fx": {
-        "file": "supers-v2/exsanguinate/effects.png",
+        "file": "supers-v3/exsanguinate/effects.png",
         "body_height": 512,
         "frames": [
           {
             "region": [
-              28,
-              70,
-              454,
-              372
-            ],
-            "pivot": [
-              227.0,
-              372
-            ],
-            "bounds": [
-              0,
-              0,
-              454,
-              372
-            ]
-          },
-          {
-            "region": [
-              554,
-              45,
-              412,
-              415
-            ],
-            "pivot": [
-              206.0,
-              415
-            ],
-            "bounds": [
-              0,
-              0,
-              412,
-              415
-            ]
-          },
-          {
-            "region": [
-              1035,
-              51,
-              493,
-              425
-            ],
-            "pivot": [
-              246.5,
-              425
-            ],
-            "bounds": [
-              0,
-              0,
-              493,
-              425
-            ]
-          },
-          {
-            "region": [
-              15,
-              537,
-              482,
-              461
-            ],
-            "pivot": [
-              241.0,
-              461
-            ],
-            "bounds": [
-              0,
-              0,
-              482,
-              461
-            ]
-          },
-          {
-            "region": [
-              530,
-              531,
+              20,
+              82,
               477,
-              455
+              381
             ],
             "pivot": [
               238.5,
-              455
+              381
             ],
             "bounds": [
               0,
               0,
               477,
-              455
+              381
             ]
           },
           {
             "region": [
-              1071,
-              549,
-              398,
-              411
+              529,
+              10,
+              461,
+              488
             ],
             "pivot": [
-              199.0,
-              411
+              230.5,
+              488
             ],
             "bounds": [
               0,
               0,
-              398,
-              411
+              461,
+              488
+            ]
+          },
+          {
+            "region": [
+              1047,
+              33,
+              469,
+              471
+            ],
+            "pivot": [
+              234.5,
+              471
+            ],
+            "bounds": [
+              0,
+              0,
+              469,
+              471
+            ]
+          },
+          {
+            "region": [
+              18,
+              536,
+              478,
+              446
+            ],
+            "pivot": [
+              239.0,
+              446
+            ],
+            "bounds": [
+              0,
+              0,
+              478,
+              446
+            ]
+          },
+          {
+            "region": [
+              527,
+              529,
+              476,
+              467
+            ],
+            "pivot": [
+              238.0,
+              467
+            ],
+            "bounds": [
+              0,
+              0,
+              476,
+              467
+            ]
+          },
+          {
+            "region": [
+              1079,
+              546,
+              440,
+              439
+            ],
+            "pivot": [
+              220.0,
+              439
+            ],
+            "bounds": [
+              0,
+              0,
+              440,
+              439
             ]
           }
         ],

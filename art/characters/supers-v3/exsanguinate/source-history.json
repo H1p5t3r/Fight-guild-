@@ -1,0 +1,35 @@
+[
+  {
+    "id": "cross",
+    "file": "godot/assets/fighters/supers-v3/exsanguinate/cross.png",
+    "original": "/workspace/generated_images/exec-8f8da391-e1cb-43b3-9a56-554571ed3f10.png",
+    "sha256": "3a7f4ee7f39feee3c72859a615f44204f1b47d814d355ff620c9e187bcbf9f0b",
+    "prompt": "art/characters/supers-v3/exsanguinate/cross-prompt.txt",
+    "references": [
+      "godot/assets/fighters/appearance-v3/fillet-ready.png",
+      "godot/assets/fighters/supers-v3/bloodletting/down.png"
+    ]
+  },
+  {
+    "id": "close",
+    "file": "godot/assets/fighters/supers-v3/exsanguinate/close.png",
+    "original": "/workspace/generated_images/exec-52f57153-2c8a-48f8-a1df-8cefe26d6e56.png",
+    "sha256": "a36fa28e419179a7d17b91b29518f4ec91a8874e1ea6af42c0e093275016e163",
+    "prompt": "art/characters/supers-v3/exsanguinate/close-prompt.txt",
+    "references": [
+      "godot/assets/fighters/appearance-v3/fillet-ready.png",
+      "godot/assets/fighters/supers-v3/bloodletting/down.png"
+    ]
+  },
+  {
+    "id": "compression",
+    "file": "godot/assets/fighters/supers-v3/exsanguinate/compression.png",
+    "original": "/workspace/generated_images/exec-066d7ebf-8b98-4cf0-8ec6-9b0f24e45ee0.png",
+    "sha256": "e1d7ad6eee8200b9d3f8b4ebcd088753c0e93fe064e32e91cc4817476be9a953",
+    "prompt": "art/characters/supers-v3/exsanguinate/compression-prompt.txt",
+    "references": [
+      "godot/assets/fighters/appearance-v3/fillet-ready.png",
+      "godot/assets/fighters/supers-v3/bloodletting/finish.png"
+    ]
+  }
+]
