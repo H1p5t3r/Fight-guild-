@@ -62,6 +62,17 @@ func run() -> void:
 	shifted.append_array(session.inputs)
 	play(session, shifted)
 	check(session.state == "success" and session.total_error > 0, "Valid offset timing was rejected instead of graded")
+	var fillet: Dictionary = session.catalog.trials.filter(func(t): return t.id == "fillet-midscreen")[0]
+	session.select(fillet)
+	session.begin(false)
+	countdown(session)
+	var motion_buffered := session.inputs.duplicate()
+	# A human can begin a motion before the recorded direction ticks, with the
+	# button still landing at the line; the chart must not demand 1f directions.
+	for i in range(39, 43): motion_buffered[i] = 4
+	for i in range(43, 46): motion_buffered[i] = 6
+	play(session, motion_buffered)
+	check(session.state == "success", "An earlier, slower quarter-circle motion was rejected")
 	var smoke: Dictionary = session.catalog.trials.filter(func(t): return t.id == "smoke-midscreen")[0]
 	session.select(smoke)
 	check(int(session.notes[0].end) - int(session.notes[0].frame) >= 20, "Charged Drive lost its hold trail")
