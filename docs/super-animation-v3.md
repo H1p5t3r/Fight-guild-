@@ -175,6 +175,28 @@ placement, interruption and edited timing. See the
 [validation](../art/characters/supers-v3/the-air-is-mine/validation.json) and
 [fixed-scale comparison](../art/characters/supers-v3/the-air-is-mine/scale-review.png).
 
+## Last Orders — complete
+
+[Watch the native 60 FPS review](../exports/FightGuild-Last-Orders-V3-2026-11-26.mp4)
+(hit, mirrored hit, block and miss).
+
+Twenty-four body drawings give Tapper a low hip load, two rising uppercut
+crescents, a deep weave and two committed forehead strikes. His pelvis, spine,
+shoulders, feet, hair, cape and tankard all participate. The original costume,
+anatomy and single stowed staff remain consistent through the action.
+
+Connected hits settle through six follow-through and recovery drawings into
+Dempsey guard. Block and miss instead use four dedicated drawings to take the
+staff off his back and return to regular guard. Six separate amber/ivory ink
+effects accent the saved contact beats at 0, 43, 74 and release at 96. Gameplay
+timing, damage and cost remain unchanged.
+
+The native suite passed 20,513 checks with no failures. All 24 body keys were
+compared against the approved idle at fixed world scale; the review tool now
+expands to show more than twenty keys. See the
+[validation](../art/characters/supers-v3/last-orders/validation.json) and
+[scale sheet](../art/characters/supers-v3/last-orders/scale-review.png).
+
 ## Size calibration
 
 The first visual comparison covered all 196 v2 super body drawings against their

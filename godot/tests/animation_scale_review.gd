@@ -78,11 +78,14 @@ func run() -> void:
 			var phase:=str(spec.phase)
 			if not selected_phase.is_empty() and phase!=selected_phase:continue
 			var frames:Array=FighterArt.sheet(character,phase).frames
+			var rows:=maxi(5,ceili(frames.size()/4.0))
+			review_size=Vector2i(2500,48+rows*int(tile_size.y))
+			root.content_scale_size=review_size;root.size=review_size;bg.size=Vector2(review_size)
 			page=Control.new();root.add_child(page)
 			var heading:=Label.new();heading.position=Vector2(12,8)
 			heading.text="%s / %s / FIXED WORLD ZOOM / EFFECTS HIDDEN"%[fighter.name,phase]
 			heading.add_theme_font_size_override("font_size",24);page.add_child(heading)
-			for row in 5:
+			for row in rows:
 				tile(character,reference_phase(character),0,0,row,"APPROVED IDLE")
 			for index in frames.size():
 				tile(character,phase,index,index%4+1,index/4,"KEY %02d"%index)

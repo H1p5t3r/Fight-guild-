@@ -1,0 +1,11 @@
+{
+  "superseded": [
+    {
+      "original": "/workspace/generated_images/exec-c140c01a-8374-4b1a-8d3f-03113b77fcfc.png",
+      "sha256": "a46a73279263fb90d2bbc1bfb0e7da060fc873f273c954faa1e815d7af4fa526",
+      "prompt": "effects-prompt.txt",
+      "reason": "Opaque background removed with image generation; graphic shapes preserved."
+    }
+  ],
+  "selected": "sources.json"
+}

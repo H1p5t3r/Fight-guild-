@@ -33636,15 +33636,144 @@
       "anatomical_scales": {
         "supers-v1": 470,
         "last-orders-v2": 510,
-        "whiskey-chaser-v2": 510
+        "whiskey-chaser-v2": 510,
+        "last-orders-v3": 470
       },
       "super_last_orders": {
-        "file": "supers-v2/last-orders/entry.png",
-        "body_height": 510,
+        "file": "supers-v3/last-orders/entry.png",
+        "body_height": 470,
         "frames": [
           {
-            "file": "supers-v2/last-orders/entry.png",
-            "sha256": "3bd41d002057c3034416b38cdd43dd29bbfe78baf319dc41ae0e4cd69bd2752b",
+            "file": "supers-v3/last-orders/entry.png",
+            "sha256": "87da2c2be802e6a93e59cddf7b450a14afb757ccb8df3a2f93953ca97175447f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              496
+            ],
+            "bounds": [
+              202,
+              49,
+              573,
+              491
+            ],
+            "pivot": [
+              390,
+              490
+            ],
+            "body_height": 470,
+            "source_pose": 0,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              258,
+              297
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/entry.png",
+            "sha256": "87da2c2be802e6a93e59cddf7b450a14afb757ccb8df3a2f93953ca97175447f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              172,
+              12,
+              548,
+              491
+            ],
+            "pivot": [
+              362,
+              490
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              510,
+              33
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/entry.png",
+            "sha256": "87da2c2be802e6a93e59cddf7b450a14afb757ccb8df3a2f93953ca97175447f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              496,
+              768,
+              528
+            ],
+            "bounds": [
+              185,
+              1,
+              586,
+              514
+            ],
+            "pivot": [
+              410,
+              514
+            ],
+            "body_height": 470,
+            "source_pose": 2,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              465,
+              24
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/entry.png",
+            "sha256": "87da2c2be802e6a93e59cddf7b450a14afb757ccb8df3a2f93953ca97175447f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              160,
+              43,
+              544,
+              499
+            ],
+            "pivot": [
+              362,
+              498
+            ],
+            "body_height": 470,
+            "source_pose": 3,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              472,
+              181
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/rise.png",
+            "sha256": "b1dc964752c8ec56fdc5596533c57ccb8ef35d7703f70e09328ae3dddd35e09d",
             "source_size": [
               1536,
               1024
@@ -33656,27 +33785,27 @@
               512
             ],
             "bounds": [
-              200,
-              42,
+              208,
+              12,
               563,
-              491
+              485
             ],
             "pivot": [
-              385,
-              486
+              390,
+              483
             ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 0,
-            "scale_group": "last-orders-v2",
+            "scale_group": "last-orders-v3",
             "render_only": true,
             "tip": [
-              298,
-              325
+              501,
+              251
             ]
           },
           {
-            "file": "supers-v2/last-orders/entry.png",
-            "sha256": "3bd41d002057c3034416b38cdd43dd29bbfe78baf319dc41ae0e4cd69bd2752b",
+            "file": "supers-v3/last-orders/rise.png",
+            "sha256": "b1dc964752c8ec56fdc5596533c57ccb8ef35d7703f70e09328ae3dddd35e09d",
             "source_size": [
               1536,
               1024
@@ -33684,543 +33813,543 @@
             "region": [
               768,
               0,
+              768,
+              512
+            ],
+            "bounds": [
+              176,
+              57,
+              567,
+              481
+            ],
+            "pivot": [
+              372,
+              480
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              376,
+              318
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/rise.png",
+            "sha256": "b1dc964752c8ec56fdc5596533c57ccb8ef35d7703f70e09328ae3dddd35e09d",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              198,
+              12,
+              593,
+              500
+            ],
+            "pivot": [
+              385,
+              498
+            ],
+            "body_height": 470,
+            "source_pose": 2,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              557,
+              38
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/rise.png",
+            "sha256": "b1dc964752c8ec56fdc5596533c57ccb8ef35d7703f70e09328ae3dddd35e09d",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              182,
+              7,
+              577,
+              499
+            ],
+            "pivot": [
+              382,
+              498
+            ],
+            "body_height": 470,
+            "source_pose": 3,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              475,
+              38
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/headbutt.png",
+            "sha256": "06dc7a0770b6479e79604930f5cf4f4899e4b0cf5333297be160bba590ff765a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              210,
+              24,
+              596,
+              486
+            ],
+            "pivot": [
+              405,
+              484
+            ],
+            "body_height": 470,
+            "source_pose": 0,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              516,
+              147
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/headbutt.png",
+            "sha256": "06dc7a0770b6479e79604930f5cf4f4899e4b0cf5333297be160bba590ff765a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              150,
+              29,
+              574,
+              487
+            ],
+            "pivot": [
+              372,
+              484
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              484,
+              168
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/headbutt.png",
+            "sha256": "06dc7a0770b6479e79604930f5cf4f4899e4b0cf5333297be160bba590ff765a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              137,
+              51,
+              629,
+              486
+            ],
+            "pivot": [
+              365,
+              485
+            ],
+            "body_height": 470,
+            "source_pose": 2,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              610,
+              168
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/headbutt.png",
+            "sha256": "06dc7a0770b6479e79604930f5cf4f4899e4b0cf5333297be160bba590ff765a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              152,
+              72,
+              669,
+              485
+            ],
+            "pivot": [
+              382,
+              485
+            ],
+            "body_height": 470,
+            "source_pose": 3,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              643,
+              216
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/finish.png",
+            "sha256": "d719c22ec80c118ca22ffe53e3e231b581277c74c761e6152ea289c09be7de8f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              179,
+              12,
+              575,
+              484
+            ],
+            "pivot": [
+              390,
+              482
+            ],
+            "body_height": 470,
+            "source_pose": 0,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              302,
+              87
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/finish.png",
+            "sha256": "d719c22ec80c118ca22ffe53e3e231b581277c74c761e6152ea289c09be7de8f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              92,
+              35,
+              597,
+              484
+            ],
+            "pivot": [
+              337,
+              482
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              580,
+              172
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/finish.png",
+            "sha256": "d719c22ec80c118ca22ffe53e3e231b581277c74c761e6152ea289c09be7de8f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              135,
+              39,
+              675,
+              483
+            ],
+            "pivot": [
+              355,
+              483
+            ],
+            "body_height": 470,
+            "source_pose": 2,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              659,
+              178
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/finish.png",
+            "sha256": "d719c22ec80c118ca22ffe53e3e231b581277c74c761e6152ea289c09be7de8f",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              154,
+              19,
+              651,
+              484
+            ],
+            "pivot": [
+              377,
+              483
+            ],
+            "body_height": 470,
+            "source_pose": 3,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              580,
+              138
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/return.png",
+            "sha256": "e558c5f04d841a70328e729c36cff919b0248b36700eaacee84fc1ea76828d95",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              208,
+              16,
+              593,
+              478
+            ],
+            "pivot": [
+              405,
+              478
+            ],
+            "body_height": 470,
+            "source_pose": 0,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              537,
+              219
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/return.png",
+            "sha256": "e558c5f04d841a70328e729c36cff919b0248b36700eaacee84fc1ea76828d95",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              169,
+              14,
+              558,
+              480
+            ],
+            "pivot": [
+              367,
+              479
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              499,
+              190
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/return.png",
+            "sha256": "e558c5f04d841a70328e729c36cff919b0248b36700eaacee84fc1ea76828d95",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              201,
+              13,
+              599,
+              483
+            ],
+            "pivot": [
+              400,
+              484
+            ],
+            "body_height": 470,
+            "source_pose": 2,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              541,
+              174
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/return.png",
+            "sha256": "e558c5f04d841a70328e729c36cff919b0248b36700eaacee84fc1ea76828d95",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
               768,
               512
             ],
             "bounds": [
               175,
-              6,
-              576,
-              491
-            ],
-            "pivot": [
-              382,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 1,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              492,
-              25
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/entry.png",
-            "sha256": "3bd41d002057c3034416b38cdd43dd29bbfe78baf319dc41ae0e4cd69bd2752b",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              186,
-              5,
-              591,
-              491
-            ],
-            "pivot": [
-              400,
-              488
-            ],
-            "body_height": 510,
-            "source_pose": 2,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              510,
-              28
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/entry.png",
-            "sha256": "3bd41d002057c3034416b38cdd43dd29bbfe78baf319dc41ae0e4cd69bd2752b",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              181,
-              32,
-              568,
-              491
-            ],
-            "pivot": [
-              382,
-              488
-            ],
-            "body_height": 510,
-            "source_pose": 3,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              417,
-              189
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/rise.png",
-            "sha256": "6b0cac0e9e90ee138e1e46b10c848909d1dd68bcfc253a4e83304132582f42fd",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              197,
-              16,
-              565,
-              492
-            ],
-            "pivot": [
-              385,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 0,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              470,
-              184
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/rise.png",
-            "sha256": "6b0cac0e9e90ee138e1e46b10c848909d1dd68bcfc253a4e83304132582f42fd",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              156,
-              16,
-              527,
-              492
-            ],
-            "pivot": [
-              347,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 1,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              407,
-              225
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/rise.png",
-            "sha256": "6b0cac0e9e90ee138e1e46b10c848909d1dd68bcfc253a4e83304132582f42fd",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              187,
-              10,
-              586,
-              492
-            ],
-            "pivot": [
-              385,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 2,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              490,
-              43
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/rise.png",
-            "sha256": "6b0cac0e9e90ee138e1e46b10c848909d1dd68bcfc253a4e83304132582f42fd",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              159,
-              10,
-              554,
-              492
-            ],
-            "pivot": [
-              347,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 3,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              387,
-              99
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/headbutt.png",
-            "sha256": "996c3fa27979b04e056cd9f7917fb35f944c5575863780fa5a2f31c5b40f8397",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              189,
-              11,
-              565,
-              493
-            ],
-            "pivot": [
-              385,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 0,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              450,
-              205
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/headbutt.png",
-            "sha256": "996c3fa27979b04e056cd9f7917fb35f944c5575863780fa5a2f31c5b40f8397",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              159,
-              24,
-              529,
-              493
-            ],
-            "pivot": [
-              347,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 1,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              378,
-              277
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/headbutt.png",
-            "sha256": "996c3fa27979b04e056cd9f7917fb35f944c5575863780fa5a2f31c5b40f8397",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              174,
               12,
-              572,
-              493
-            ],
-            "pivot": [
-              370,
-              488
-            ],
-            "body_height": 510,
-            "source_pose": 2,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              440,
-              258
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/headbutt.png",
-            "sha256": "996c3fa27979b04e056cd9f7917fb35f944c5575863780fa5a2f31c5b40f8397",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              153,
-              12,
-              553,
-              493
-            ],
-            "pivot": [
-              347,
-              488
-            ],
-            "body_height": 510,
-            "source_pose": 3,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              385,
-              256
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/finish.png",
-            "sha256": "52f97b24cc0dc56688cc6b8ae14b174716ada395cb55ca558a8548a08a144023",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              189,
-              10,
-              567,
-              492
-            ],
-            "pivot": [
-              385,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 0,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              450,
-              210
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/finish.png",
-            "sha256": "52f97b24cc0dc56688cc6b8ae14b174716ada395cb55ca558a8548a08a144023",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              126,
-              22,
-              546,
-              492
-            ],
-            "pivot": [
-              342,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 1,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              360,
-              284
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/finish.png",
-            "sha256": "52f97b24cc0dc56688cc6b8ae14b174716ada395cb55ca558a8548a08a144023",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              173,
-              9,
-              567,
-              493
-            ],
-            "pivot": [
-              370,
-              488
-            ],
-            "body_height": 510,
-            "source_pose": 2,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              460,
-              197
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/finish.png",
-            "sha256": "52f97b24cc0dc56688cc6b8ae14b174716ada395cb55ca558a8548a08a144023",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              149,
-              14,
-              554,
-              493
-            ],
-            "pivot": [
-              347,
-              488
-            ],
-            "body_height": 510,
-            "source_pose": 3,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              455,
-              197
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/withdraw.png",
-            "sha256": "1de4fbe6ce5abea11cf010b13bcc170dba3141cfedc6ea16cf27cd5499d62c1f",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              194,
-              7,
-              594,
-              493
-            ],
-            "pivot": [
-              405,
-              488
-            ],
-            "body_height": 510,
-            "source_pose": 0,
-            "scale_group": "last-orders-v2",
-            "render_only": true,
-            "tip": [
-              296,
-              78
-            ]
-          },
-          {
-            "file": "supers-v2/last-orders/withdraw.png",
-            "sha256": "1de4fbe6ce5abea11cf010b13bcc170dba3141cfedc6ea16cf27cd5499d62c1f",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              183,
-              19,
-              579,
-              493
+              564,
+              483
             ],
             "pivot": [
               377,
-              488
+              484
             ],
-            "body_height": 510,
-            "source_pose": 1,
-            "scale_group": "last-orders-v2",
+            "body_height": 470,
+            "source_pose": 3,
+            "scale_group": "last-orders-v3",
             "render_only": true,
             "tip": [
-              352,
-              252
+              498,
+              173
             ]
           },
           {
-            "file": "supers-v2/last-orders/withdraw.png",
-            "sha256": "1de4fbe6ce5abea11cf010b13bcc170dba3141cfedc6ea16cf27cd5499d62c1f",
+            "file": "supers-v3/last-orders/withdraw.png",
+            "sha256": "f0b5fa3ed22c3b583ae7276c1004455a4ad66e3ad58fa1a009f6fe4552bda1c1",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              178,
+              9,
+              566,
+              486
+            ],
+            "pivot": [
+              390,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 0,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              370,
+              52
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/withdraw.png",
+            "sha256": "f0b5fa3ed22c3b583ae7276c1004455a4ad66e3ad58fa1a009f6fe4552bda1c1",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              169,
+              36,
+              599,
+              487
+            ],
+            "pivot": [
+              382,
+              486
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "last-orders-v3",
+            "render_only": true,
+            "tip": [
+              497,
+              140
+            ]
+          },
+          {
+            "file": "supers-v3/last-orders/withdraw.png",
+            "sha256": "f0b5fa3ed22c3b583ae7276c1004455a4ad66e3ad58fa1a009f6fe4552bda1c1",
             "source_size": [
               1536,
               1024
@@ -34232,27 +34361,27 @@
               512
             ],
             "bounds": [
-              190,
-              8,
-              587,
-              493
-            ],
-            "pivot": [
-              385,
+              177,
+              30,
+              569,
               488
             ],
-            "body_height": 510,
+            "pivot": [
+              390,
+              487
+            ],
+            "body_height": 470,
             "source_pose": 2,
-            "scale_group": "last-orders-v2",
+            "scale_group": "last-orders-v3",
             "render_only": true,
             "tip": [
-              354,
-              237
+              483,
+              163
             ]
           },
           {
-            "file": "supers-v2/last-orders/withdraw.png",
-            "sha256": "1de4fbe6ce5abea11cf010b13bcc170dba3141cfedc6ea16cf27cd5499d62c1f",
+            "file": "supers-v3/last-orders/withdraw.png",
+            "sha256": "f0b5fa3ed22c3b583ae7276c1004455a4ad66e3ad58fa1a009f6fe4552bda1c1",
             "source_size": [
               1536,
               1024
@@ -34264,137 +34393,137 @@
               512
             ],
             "bounds": [
-              181,
-              6,
-              572,
-              493
-            ],
-            "pivot": [
-              372,
+              171,
+              16,
+              566,
               488
             ],
-            "body_height": 510,
+            "pivot": [
+              377,
+              487
+            ],
+            "body_height": 470,
             "source_pose": 3,
-            "scale_group": "last-orders-v2",
+            "scale_group": "last-orders-v3",
             "render_only": true,
             "tip": [
-              337,
-              236
+              465,
+              161
             ]
           }
         ],
         "render_only": true
       },
       "super_last_orders_fx": {
-        "file": "supers-v2/last-orders/effects.png",
+        "file": "supers-v3/last-orders/effects.png",
         "body_height": 512,
         "frames": [
           {
             "region": [
-              50,
-              40,
-              427,
-              441
+              12,
+              45,
+              474,
+              452
             ],
             "pivot": [
-              213.5,
-              441
+              237.0,
+              452
             ],
             "bounds": [
               0,
               0,
-              427,
-              441
+              474,
+              452
             ]
           },
           {
             "region": [
-              558,
-              34,
-              411,
-              442
+              530,
+              13,
+              447,
+              484
             ],
             "pivot": [
-              205.5,
-              442
+              223.5,
+              484
             ],
             "bounds": [
               0,
               0,
-              411,
-              442
+              447,
+              484
             ]
           },
           {
             "region": [
-              1052,
-              83,
-              459,
-              353
+              1027,
+              133,
+              494,
+              270
             ],
             "pivot": [
-              229.5,
-              353
+              247.0,
+              270
             ],
             "bounds": [
               0,
               0,
-              459,
-              353
+              494,
+              270
             ]
           },
           {
             "region": [
-              33,
-              561,
-              461,
-              414
+              14,
+              536,
+              482,
+              465
             ],
             "pivot": [
-              230.5,
-              414
+              241.0,
+              465
             ],
             "bounds": [
               0,
               0,
-              461,
-              414
+              482,
+              465
             ]
           },
           {
             "region": [
-              561,
-              561,
-              416,
-              396
+              520,
+              698,
+              493,
+              210
             ],
             "pivot": [
-              208.0,
-              396
+              246.5,
+              210
             ],
             "bounds": [
               0,
               0,
-              416,
-              396
+              493,
+              210
             ]
           },
           {
             "region": [
-              1123,
-              571,
-              306,
-              397
+              1033,
+              747,
+              491,
+              172
             ],
             "pivot": [
-              153.0,
-              397
+              245.5,
+              172
             ],
             "bounds": [
               0,
               0,
-              306,
-              397
+              491,
+              172
             ]
           }
         ],
@@ -34412,19 +34541,19 @@
             ],
             [
               18,
-              16
+              20
             ],
             [
               40,
-              17
+              21
             ],
             [
               62,
-              18
+              22
             ],
             [
               82,
-              19
+              23
             ]
           ],
           "sounds": {
@@ -34440,102 +34569,111 @@
               "end": 4,
               "key": 0,
               "box": [
-                10,
-                -180,
-                115,
-                140
+                -65,
+                -220,
+                240,
+                225
               ],
+              "behind": true,
+              "fade": true,
               "contact_box": [
-                -45,
-                -150,
-                100,
-                145
-              ],
-              "fade": true
+                -65,
+                -165,
+                130,
+                170
+              ]
             },
             {
               "stage": "paired",
               "start": 0,
-              "end": 9,
+              "end": 12,
               "key": 0,
               "box": [
-                10,
-                -180,
-                115,
-                140
+                -65,
+                -220,
+                240,
+                225
               ],
+              "behind": true,
               "fade": true
             },
             {
               "stage": "paired",
               "start": 43,
-              "end": 53,
+              "end": 55,
               "key": 1,
               "box": [
-                25,
+                -60,
                 -290,
-                105,
-                160
+                245,
+                285
               ],
-              "fade": true,
-              "behind": true
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "paired",
               "start": 74,
-              "end": 83,
+              "end": 85,
               "key": 2,
               "box": [
-                -55,
-                -145,
-                120,
-                95
+                -60,
+                -165,
+                230,
+                115
               ],
               "anchor": "receiver",
+              "behind": true,
               "fade": true
             },
             {
               "stage": "connected",
               "start": 0,
-              "end": 5,
+              "end": 10,
               "key": 3,
               "box": [
-                -25,
-                -135,
-                120,
-                100
+                -95,
+                -220,
+                245,
+                235
               ],
-              "anchor": "receiver"
+              "anchor": "receiver",
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "connected",
-              "start": 5,
-              "end": 13,
+              "start": 7,
+              "end": 26,
               "key": 4,
               "box": [
-                -40,
-                -150,
-                150,
-                130
+                -80,
+                -125,
+                290,
+                135
               ],
-              "anchor": "receiver",
+              "behind": true,
               "fade": true
             },
             {
               "stage": "connected",
-              "start": 13,
-              "end": 30,
+              "start": 20,
+              "end": 44,
               "key": 5,
               "box": [
-                -45,
-                -180,
-                150,
-                170
+                -60,
+                -195,
+                300,
+                200
               ],
-              "anchor": "receiver",
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.75
             }
           ],
+          "source": "supers-v3/last-orders",
+          "description": "Full-body uppercut crescents, deep woven headbutts and six-step settling into Dempsey; separate staff return on block or miss.",
+          "receiver_reactions": true,
           "phase": "super_last_orders",
           "fx_phase": "super_last_orders_fx",
           "pair_ticks": 96,
@@ -34597,12 +34735,28 @@
               13
             ],
             [
-              7,
+              5,
               14
             ],
             [
-              17,
+              11,
               15
+            ],
+            [
+              15,
+              16
+            ],
+            [
+              18,
+              17
+            ],
+            [
+              21,
+              18
+            ],
+            [
+              23,
+              19
             ]
           ]
         },

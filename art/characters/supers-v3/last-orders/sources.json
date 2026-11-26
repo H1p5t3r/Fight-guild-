@@ -1,0 +1,85 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v3/last-orders/entry.png",
+    "original": "/workspace/generated_images/exec-db642a85-539d-499c-a119-af890f5436bb.png",
+    "sha256": "87da2c2be802e6a93e59cddf7b450a14afb757ccb8df3a2f93953ca97175447f",
+    "prompt": "art/characters/supers-v3/last-orders/entry-prompt.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png"
+    ]
+  },
+  {
+    "id": "rise",
+    "file": "godot/assets/fighters/supers-v3/last-orders/rise.png",
+    "original": "/workspace/generated_images/exec-ad4f0cc7-7fee-4552-907c-4ccd67a1c21d.png",
+    "sha256": "b1dc964752c8ec56fdc5596533c57ccb8ef35d7703f70e09328ae3dddd35e09d",
+    "prompt": "art/characters/supers-v3/last-orders/rise-prompt.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png"
+    ]
+  },
+  {
+    "id": "headbutt",
+    "file": "godot/assets/fighters/supers-v3/last-orders/headbutt.png",
+    "original": "/workspace/generated_images/exec-db33dd2b-4c9a-4a50-8a4e-79766cdd00ed.png",
+    "sha256": "06dc7a0770b6479e79604930f5cf4f4899e4b0cf5333297be160bba590ff765a",
+    "prompt": "art/characters/supers-v3/last-orders/headbutt-prompt.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v3/last-orders/finish.png",
+    "original": "/workspace/generated_images/exec-6ce9517d-6244-437f-bec1-085497d63a44.png",
+    "sha256": "d719c22ec80c118ca22ffe53e3e231b581277c74c761e6152ea289c09be7de8f",
+    "prompt": "art/characters/supers-v3/last-orders/finish-prompt.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png",
+      "godot/assets/fighters/supers-v3/last-orders/headbutt.png"
+    ]
+  },
+  {
+    "id": "return",
+    "file": "godot/assets/fighters/supers-v3/last-orders/return.png",
+    "original": "/workspace/generated_images/exec-bb49731b-7056-442d-b866-03392d878dda.png",
+    "sha256": "e558c5f04d841a70328e729c36cff919b0248b36700eaacee84fc1ea76828d95",
+    "prompt": "art/characters/supers-v3/last-orders/return-prompt.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png",
+      "godot/assets/fighters/supers-v3/last-orders/headbutt.png"
+    ]
+  },
+  {
+    "id": "withdraw",
+    "file": "godot/assets/fighters/supers-v3/last-orders/withdraw.png",
+    "original": "/workspace/generated_images/exec-6ecaa409-f319-4746-99a4-3d6f91526ef1.png",
+    "sha256": "f0b5fa3ed22c3b583ae7276c1004455a4ad66e3ad58fa1a009f6fe4552bda1c1",
+    "prompt": "art/characters/supers-v3/last-orders/withdraw-prompt.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png",
+      "godot/assets/fighters/supers-v3/last-orders/headbutt.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v3/last-orders/effects.png",
+    "original": "/workspace/generated_images/exec-3fdecebc-2f42-417d-948d-5d9099b3dc56.png",
+    "sha256": "b4bce0c94db0ae00c29a4a4d60796c26c6dc23ccc74fa455a92129b83e01e1d7",
+    "prompt": "art/characters/supers-v3/last-orders/effects-alpha-prompt.txt",
+    "references": [
+      "/workspace/generated_images/exec-c140c01a-8374-4b1a-8d3f-03113b77fcfc.png"
+    ]
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/last-orders/portrait.png",
+    "original": "/workspace/generated_images/exec-f35f2eb0-b27a-4e6c-bdac-7047fe6fb71e.png",
+    "sha256": "b5ecf8276994d24f969caca96b79908aea460671a0fdd424cbd2756cb914b831",
+    "prompt": "art/characters/supers-v2/last-orders/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/last-orders/entry.png"
+    ]
+  }
+]

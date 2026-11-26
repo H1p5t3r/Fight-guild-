@@ -1,0 +1,140 @@
+{
+  "name": "Last Orders",
+  "character": 3,
+  "slot": 12,
+  "input": "236236S",
+  "status": "completed-native-review",
+  "date": "2026-11-26",
+  "startup": 7,
+  "active": 4,
+  "recovery": 38,
+  "freeze": 54,
+  "pairTicks": 96,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 340,
+  "bodyKeys": 24,
+  "choreography": "Full-body uppercut crescents, deep woven headbutts and six-step settling into Dempsey; separate staff return on block or miss.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      14,
+      3
+    ],
+    [
+      26,
+      4
+    ],
+    [
+      42,
+      5
+    ],
+    [
+      43,
+      6
+    ],
+    [
+      52,
+      7
+    ],
+    [
+      62,
+      8
+    ],
+    [
+      73,
+      9
+    ],
+    [
+      74,
+      10
+    ],
+    [
+      82,
+      11
+    ],
+    [
+      89,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      5,
+      14
+    ],
+    [
+      11,
+      15
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      18,
+      17
+    ],
+    [
+      21,
+      18
+    ],
+    [
+      23,
+      19
+    ]
+  ],
+  "requirements": [
+    "Fixed muscular anatomy, staff secured behind his back",
+    "Largest limb travel between last startup and first active",
+    "Impact accents use saved43/74/96 beats",
+    "Headbutts use forehead, no extra limbs or floating weapon",
+    "Hit finishes in Dempsey; block/miss recover normally",
+    "Native hit, mirrored, block and whiff",
+    "Four separate staff-return recovery keys for block and whiff"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveHandTravelWorldUnits": 122.82,
+  "largestOpeningMovementAtFirstActive": true,
+  "verification": {
+    "cases": [
+      {
+        "name": "hit",
+        "damage": 340,
+        "paired": true
+      },
+      {
+        "name": "mirrored",
+        "damage": 340,
+        "paired": true
+      },
+      {
+        "name": "block",
+        "damage": 8,
+        "paired": false
+      },
+      {
+        "name": "whiff",
+        "damage": 0,
+        "paired": false
+      }
+    ],
+    "failures": 0,
+    "frames": 1262,
+    "fps": 60,
+    "video": "exports/FightGuild-Last-Orders-V3-2026-11-26.mp4",
+    "sha256": "06dd7779fa88807e2ea8310d9464a27f08fe5c3a39dcd90d6bd24a230da821cb"
+  }
+}
