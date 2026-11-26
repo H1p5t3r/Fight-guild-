@@ -71,6 +71,10 @@ func build_chart() -> void:
 				notes.append({"frame": start, "end": i + 1, "lane": lane, "judge": "", "delta": 0})
 				start = -1
 	notes.sort_custom(func(a, b): return int(a.frame) < int(b.frame))
+	for note in notes:
+		note.step = 0
+		for i in trial.steps.size():
+			if int(note.frame) >= int(trial.steps[i].inputFrame): note.step = i
 	var prior := 5
 	for i in inputs.size():
 		var value := direction(inputs[i])
@@ -99,10 +103,13 @@ func reset() -> void:
 	previous_raw = 0
 	blocked_buttons = 0
 	failure = ""
+	feedback_until = -10000
 	actual_notes.clear()
 	matched_notes = 0
 	total_error = 0
-	for note in notes: note.judge = ""; note.delta = 0
+	for note in notes:
+		note.judge = ""; note.delta = 0; note.event = -1
+		note.result = ""; note.release_reported = false
 
 func begin(demo: bool) -> void:
 	reset()
@@ -121,35 +128,127 @@ func fail_attempt(reason: String) -> void:
 	failure = reason
 	state = "failed"
 	feedback = "TRY AGAIN"
+	# Keep unresolved presses inspectable when the fight can no longer accept
+	# them. Do not relabel an exact button press as a confirmed correct move.
+	for event in actual_notes:
+		if event.kind == "press" and not event.accepted and event.judge == "ON TIME":
+			event.judge = "NOT ACCEPTED"
+			event.resolved = true
+			if int(event.note) >= 0: notes[int(event.note)].result = event.judge
+
+func add_indicator(lane: int, note_index: int, judgement: String, kind: String = "press") -> Dictionary:
+	var target := int(notes[note_index].frame) if note_index >= 0 else clock
+	var event := {"frame": clock, "lane": lane, "note": note_index, "target": target,
+		"delta": clock - target, "judge": judgement, "kind": kind, "accepted": false,
+		"resolved": kind != "press" or judgement == "WRONG INPUT", "direction_error": false,
+		"expected_lane": int(notes[note_index].lane) if note_index >= 0 else -1, "detail": ""}
+	actual_notes.append(event)
+	feedback_until = clock + 48
+	return event
+
+func available_note(index: int) -> bool:
+	var note := notes[index]
+	if int(note.event) < 0 or note.judge == "MISSED": return true
+	var event := actual_notes[int(note.event)]
+	return not event.accepted and not event.resolved
+
+func claim_note(event: Dictionary) -> void:
+	var index := int(event.note)
+	if index < 0: return
+	var note := notes[index]
+	if note.judge in ["ON TIME", "EARLY", "LATE"]: total_error -= absi(int(note.delta))
+	else: matched_notes += 1
+	note.judge = event.judge
+	note.delta = event.delta
+	note.event = actual_notes.find(event)
+	note.result = ""
+	total_error += absi(int(event.delta))
+
+func resolve_press(step: int, correct: bool, move_slot: int) -> void:
+	var expected_slot := int(trial.steps[step].slot)
+	var expected := model.move(int(trial.character), expected_slot)
+	var actual := model.move(int(trial.character), move_slot)
+	if correct:
+		for index in notes.size():
+			var note := notes[index]
+			if int(note.step) != step: continue
+			if int(note.event) >= 0 and actual_notes[int(note.event)].accepted: continue
+			for i in range(actual_notes.size() - 1, -1, -1):
+				var event := actual_notes[i]
+				if event.kind != "press" or event.accepted or int(event.lane) != int(note.lane): continue
+				# Repeated S notes can be close together. The move that actually
+				# starts decides which step this press belongs to, not proximity
+				# to a later same-button note on the chart.
+				var prior := int(event.note)
+				if prior >= 0 and prior != index and int(notes[prior].event) == i:
+					total_error -= absi(int(notes[prior].delta))
+					matched_notes -= 1
+					notes[prior].judge = ""; notes[prior].event = -1; notes[prior].delta = 0
+				event.note = index
+				event.target = int(note.frame)
+				event.delta = int(event.frame) - int(note.frame)
+				event.expected_lane = int(note.lane)
+				event.judge = "ON TIME" if event.delta == 0 else "EARLY" if event.delta < 0 else "LATE"
+				event.accepted = true
+				event.resolved = true
+				claim_note(event)
+				feedback = event.judge if event.delta == 0 else "%s %df" % [str(event.judge), absi(int(event.delta))]
+				feedback_until = clock + 48
+				break
+		return
+	for i in range(actual_notes.size() - 1, -1, -1):
+		var event := actual_notes[i]
+		if event.kind != "press": continue
+		var index := int(event.note)
+		var belongs := index >= 0 and int(notes[index].step) == step
+		if int(event.frame) != clock and (not belongs or event.resolved): continue
+		event.judge = "WRONG INPUT"
+		event.resolved = true
+		event.expected_lane = int(expected.button)
+		event.direction_error = int(event.lane) == int(expected.button) and (int(actual.motion) != int(expected.motion) or int(actual.direction) != int(expected.direction))
+		event.detail = "%s expected / %s received" % [str(trial.steps[step].notation), model.move_name(int(trial.character), move_slot)]
+		if index >= 0: notes[index].result = "WRONG INPUT"
 
 func judge_input(raw: int) -> void:
 	var pressed := raw & ~previous_raw
 	for lane in 5:
 		if not pressed & (16 << lane): continue
 		var best := -1
-		var nearest := NOTE_WINDOW + 1
+		var nearest := 100000
+		var nearby := -1
+		var nearby_distance := NOTE_WINDOW + 1
 		for i in notes.size():
 			var note := notes[i]
-			if int(note.lane) != lane or not str(note.judge).is_empty(): continue
+			if not available_note(i): continue
 			var distance := absi(clock - int(note.frame))
-			if distance < nearest: nearest = distance; best = i
-		var judgement := "EXTRA"
-		if best >= 0:
+			if distance < nearby_distance: nearby_distance = distance; nearby = i
+			if int(note.lane) == lane and distance < nearest: nearest = distance; best = i
+		if best >= 0 and (nearest <= NOTE_WINDOW or nearby < 0):
 			var delta := clock - int(notes[best].frame)
-			judgement = "ON TIME" if delta == 0 else "EARLY" if delta < 0 else "LATE"
-			notes[best].judge = judgement
-			notes[best].delta = delta
-			matched_notes += 1
-			total_error += absi(delta)
+			var judgement := "ON TIME" if delta == 0 else "EARLY" if delta < 0 else "LATE"
+			var event := add_indicator(lane, best, judgement)
+			# A very early stray press must not consume the upcoming note. A
+			# later accepted move can still confirm it through the real buffer.
+			if nearest <= NOTE_WINDOW: claim_note(event)
 			feedback = judgement if delta == 0 else "%s %df" % [judgement, absi(delta)]
-		else: feedback = "EXTRA " + CombatModel.BUTTONS[lane]
-		actual_notes.append({"frame": clock, "lane": lane, "judge": judgement})
-		feedback_until = clock + 28
-	for note in notes:
+		else:
+			add_indicator(lane, nearby, "WRONG INPUT")
+			feedback = "WRONG INPUT · " + CombatModel.BUTTONS[lane]
+	for i in notes.size():
+		var note := notes[i]
+		if int(note.end) - int(note.frame) >= 3 and int(note.event) >= 0 and not note.release_reported:
+			var released := bool(previous_raw & (16 << int(note.lane))) and not bool(raw & (16 << int(note.lane)))
+			if released and clock < int(note.end):
+				var event := add_indicator(int(note.lane), i, "RELEASED EARLY", "release")
+				event.target = int(note.end)
+				event.delta = clock - int(note.end)
+				note.result = event.judge
+				note.release_reported = true
+				feedback = "RELEASED EARLY · " + CombatModel.BUTTONS[int(note.lane)]
 		if str(note.judge).is_empty() and clock > int(note.frame) + NOTE_WINDOW:
 			note.judge = "MISSED"
+			add_indicator(int(note.lane), i, "MISSED", "miss")
 			feedback = "MISSED " + CombatModel.BUTTONS[int(note.lane)]
-			feedback_until = clock + 28
 	previous_raw = raw
 
 func advance(raw: int = 0) -> void:
@@ -177,9 +276,11 @@ func advance(raw: int = 0) -> void:
 		serial = int(after.players[0].attackSerial)
 		if int(after.players[0].move) >= 0:
 			if start_index >= trial.starts.size() or int(after.players[0].move) != int(trial.starts[start_index].slot):
+				resolve_press(expected_step(), false, int(after.players[0].move))
 				fail_attempt("Expected " + str(trial.steps[expected_step()].notation) + ", got " + model.move_name(int(trial.character), int(after.players[0].move)) + ". Check direction, spacing or cancel timing.")
 				return
 			completed_step = int(trial.starts[start_index].step)
+			resolve_press(completed_step, true, int(after.players[0].move))
 			start_index += 1
 	for cue in model.cues.events_at(model.frame() - 1):
 		if cue.actor != 0 or not cue.kind in [1, 2, 3, 4, 5, 6, 7]: continue

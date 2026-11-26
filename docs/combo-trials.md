@@ -12,7 +12,9 @@ The fight appears beside five scrolling **P / K / S / Hs / D** lanes. Press when
 - Your Player 1 keyboard/controller bindings apply. Default attacks are **J / K / L / I / O**. **Start** retries from a result, or pauses/resumes during a trial. Keyboard/controller navigation can select the other controls between attempts or while paused.
 - **F4** pauses/resumes; **Esc** returns to the previous screen. Focus loss and P1 controller disconnection pause the attempt. Held input must be released before resuming or starting again.
 - **100%, 75%, 50% speed** slow the fight and chart together, preserving simulation-frame spacing. The count-in and input guidance are visual, with no metronome clicks. Combat sounds, fighter music and reduced camera motion settings are respected.
-- Button presses show **On time**, **Early** or **Late** in 60 Hz input frames. Notes more than ten frames away from a press are marked missed/extra for coaching. This is not a new gameplay input window.
+- Feedback appears directly at the input line: a **green check** confirms a correctly timed, registered move; an **amber upward marker** means early; a **blue downward marker** means late; and a **red X** means wrong input or a missed note. Early/late marks include signed frame offsets and an outlined cue showing where the note was at the press. Timing is measured against the demonstration in 60 Hz input frames.
+- Wrong buttons highlight the expected lane; wrong directions highlight **DIR** and show the expected/received move. An on-time buffered press stays neutral until the native simulation starts the expected move, so a wrong motion never receives a green check. Timing feedback does not change which inputs the combat system accepts.
+- Unpressed notes become **Missed** after ten frames. A later legal press can still receive **Late** feedback and continue the route. Releasing a held button early turns its trail amber and shows how many hold frames remained. The latest feedback stays visible briefly during play and remains available to inspect when an attempt ends.
 - Begin motion inputs ahead of the button note. Direction markers show the demo's example; they do not require one-frame precision. The game's normal motion buffer accepts earlier/slower motions when they remain within its input window.
 - A clear requires the expected moves and contacts in order, with the live combo counter remaining unbroken. Matching note timing with a wrong motion does not pass. Legal earlier/later buffered inputs can still clear, even with a different timing grade.
 - The defender crouch-guards after the opening hit. Gaps that permit blocking, an overhead after a counter reset, wrong moves and incomplete routes fail. Damage is measured from the setup's remaining health; Tapper's stance-entry damage is excluded.
@@ -52,10 +54,14 @@ bash scripts/godot.sh --headless --script res://tests/build_combo_trials.gd -- -
 bash scripts/godot.sh --headless --script res://tests/combo_trials_test.gd -- --test
 python scripts/capture-combo-trials.py --quick
 python scripts/capture-combo-trials.py
+python scripts/capture-combo-trials.py --feedback --quick
+python scripts/capture-combo-trials.py --feedback
 ```
 
-The tests replay every trial on both sides, including charged moves and stance preludes; reject empty/wrong-direction/early-release/dropped attempts; accept a legal late trace; exercise live keyboard events; check slow/pause/focus behavior; and verify that the original match and tuning survive closing trials. Existing native menu/input smoke checks also pass. Physical controller and display-latency calibration remains a hardware playtest.
+The tests replay every trial on both sides, including charged moves and stance preludes; reject empty/wrong-direction/early-release/dropped attempts; accept a legal late trace; exercise live keyboard events; check slow/pause/focus behavior; and verify that the original match and tuning survive closing trials. Indicator checks cover native move acceptance, buffered early presses, late repeated-button notes, wrong buttons/directions, misses, held-button release and retry cleanup. The feedback review captures eight real-input cases, including mirrored guidance. Physical controller and display-latency calibration remains a hardware playtest.
 
 Review: [native rhythm-trial video](../exports/FightGuild-Combo-Trials-2026-11-26.mp4).
+
+Updated feedback: [on-track input indicators](../exports/FightGuild-Trial-Feedback-2026-11-26.mp4).
 
 Follow-ups: shorter beginner drills, per-step practice loops, authored/user-recorded trial import and latency calibration. The broader recording-slot/defensive-dummy training expansion remains deferred per the user's priority change.

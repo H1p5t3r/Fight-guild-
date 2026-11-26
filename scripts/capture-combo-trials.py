@@ -8,9 +8,10 @@ import time
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--quick', action='store_true')
+parser.add_argument('--feedback', action='store_true', help='Review correct, early, late, wrong and missed input indicators')
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
-out = root / 'build/combo-trials'
+out = root / ('build/combo-trials-feedback' if args.feedback else 'build/combo-trials')
 out.mkdir(parents=True, exist_ok=True)
 env = os.environ.copy()
 native = Path(env.get('FIGHT_TOOLS', '/workspace/.fight-guild-tools')) / 'native-tools/usr'
@@ -30,19 +31,20 @@ with (out / 'display.log').open('w') as log:
             cmd += ['--fixed-fps', '60', '--write-movie', str(out / 'review.avi')]
         else:
             cmd += ['--audio-driver', 'Dummy']
-        cmd += ['--script', 'res://tests/combo_trials_review.gd', '--', '--test', '--output', str(out)]
+        review = 'res://tests/combo_trials_feedback_review.gd' if args.feedback else 'res://tests/combo_trials_review.gd'
+        cmd += ['--script', review, '--', '--test', '--output', str(out)]
         if args.quick:
             cmd += ['--quick']
         with (out / 'godot.log').open('w') as game_log:
             subprocess.run(cmd, cwd=root, env=env, stdout=game_log, stderr=subprocess.STDOUT, check=True, timeout=420)
         report = (out / 'godot.log').read_text()
         if 'ERROR:' in report or 'Native rhythm review: 0 failures' not in report:
-            raise RuntimeError('Trial review failed; see build/combo-trials/godot.log')
+            raise RuntimeError(f'Trial review failed; see {out / "godot.log"}')
     finally:
         display.terminate()
         display.wait(timeout=10)
 if not args.quick:
-    target = root / 'exports/FightGuild-Combo-Trials-2026-11-26.mp4'
+    target = root / ('exports/FightGuild-Trial-Feedback-2026-11-26.mp4' if args.feedback else 'exports/FightGuild-Combo-Trials-2026-11-26.mp4')
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', str(out / 'review.avi'), '-c:v', 'libx264', '-crf', '18',
                     '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '160k', '-movflags', '+faststart', str(target)], check=True)
     print(target)
