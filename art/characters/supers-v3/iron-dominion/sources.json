@@ -1,0 +1,78 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v3/iron-dominion/entry.png",
+    "original": "/workspace/generated_images/exec-6d62a4f6-d011-4a75-8fbb-1c0fefb0376e.png",
+    "sha256": "1b79cc4f74464e36aa224b44684ccf2003cf2875e55ce635eb9f07671e73be8c",
+    "prompt": "art/characters/supers-v3/iron-dominion/entry-tattoo-prompt.txt",
+    "references": [
+      "/workspace/generated_images/exec-aa32f62c-2cf1-4cc8-bac1-7d871898ebe5.png"
+    ]
+  },
+  {
+    "id": "press",
+    "file": "godot/assets/fighters/supers-v3/iron-dominion/press.png",
+    "original": "/workspace/generated_images/exec-c4aa4443-ca3a-46f8-97c3-bbf26b66c592.png",
+    "sha256": "503fa0bf25fec21f95679533bb8870d4273c28bbe2056f0791943218fb9011b3",
+    "prompt": "art/characters/supers-v3/iron-dominion/press-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/base.png",
+      "godot/assets/fighters/supers-v3/iron-dominion/entry.png"
+    ]
+  },
+  {
+    "id": "crush",
+    "file": "godot/assets/fighters/supers-v3/iron-dominion/crush.png",
+    "original": "/workspace/generated_images/exec-0051ba6d-bf70-4503-83f5-ab9e18017236.png",
+    "sha256": "3713cd1a61c35f7684a82375da7e40a9cba734c92f3464f83092b22053ca20b0",
+    "prompt": "art/characters/supers-v3/iron-dominion/crush-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/base.png",
+      "godot/assets/fighters/supers-v3/iron-dominion/press.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v3/iron-dominion/finish.png",
+    "original": "/workspace/generated_images/exec-fe8bb51c-7be6-41e5-a265-86ed329cc76f.png",
+    "sha256": "fc227c989419cba6e7786c66fedb297a4eddd286f8172a55d695904ddeef626a",
+    "prompt": "art/characters/supers-v3/iron-dominion/finish-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/base.png",
+      "godot/assets/fighters/supers-v3/iron-dominion/crush.png"
+    ]
+  },
+  {
+    "id": "return",
+    "file": "godot/assets/fighters/supers-v3/iron-dominion/return.png",
+    "original": "/workspace/generated_images/exec-c2e14c51-9aee-4df2-9a62-ac165c5a3371.png",
+    "sha256": "803931662ef93077bbcde6f0b0050a06f981861bb4a312e65b2270fe9e3bcd81",
+    "prompt": "art/characters/supers-v3/iron-dominion/return-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/base.png",
+      "godot/assets/fighters/supers-v3/iron-dominion/finish.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v3/iron-dominion/effects.png",
+    "original": "/workspace/generated_images/exec-904be9e3-fd52-4809-9228-f890ac3f11fe.png",
+    "sha256": "9a1994686d98619bc91e803608adf6d2edf250cc177c990d4518c02cf4e68202",
+    "prompt": "art/characters/supers-v3/iron-dominion/effects-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/shield_effects.png",
+      "godot/assets/fighters/supers-v3/sky-foundry/effects.png"
+    ]
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/iron-dominion/portrait.png",
+    "original": "/workspace/generated_images/exec-47cdaaf1-9e36-4c6c-ba8d-bd171e44537a.png",
+    "sha256": "c36551ff3622744386e5cf529e6c54c2dda9f71efd06bfaaadf49a47c9e02d17",
+    "prompt": "art/characters/supers-v2/iron-dominion/portrait-prompt.txt",
+    "pixelEdits": false,
+    "references": [
+      "godot/assets/fighters/supers-v2/iron-dominion/entry.png"
+    ]
+  }
+]

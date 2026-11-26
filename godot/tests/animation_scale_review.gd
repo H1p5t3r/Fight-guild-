@@ -2,9 +2,10 @@ extends SceneTree
 
 # Render source drawings at one world zoom. Never fit a pose to its tile:
 # head/torso/limb proportions must be compared with the reference beside it.
-var tile_size := Vector2(360, 310)
+var tile_size := Vector2(500, 340)
 var zoom := 1.55
-var floor_y := 282.0
+var floor_y := 312.0
+var center_ratio := 0.4
 var page: Control
 
 func _initialize() -> void: call_deferred("run")
@@ -20,7 +21,7 @@ func tile(character: int, phase: String, pose: int, column: int, row: int, title
 	floor_line.position=Vector2(0,floor_y);floor_line.size=Vector2(tile_size.x,1);box.add_child(floor_line)
 	var label:=Label.new();label.position=Vector2(10,5);label.text=title
 	label.add_theme_font_size_override("font_size",18);box.add_child(label)
-	var sprite:=Sprite2D.new();sprite.position=Vector2(tile_size.x*0.48,floor_y);box.add_child(sprite)
+	var sprite:=Sprite2D.new();sprite.position=Vector2(tile_size.x*center_ratio,floor_y);box.add_child(sprite)
 	FighterArt.apply(sprite,character,phase,pose,zoom,1)
 	for child in sprite.get_children():
 		if child is Sprite2D:child.hide()
@@ -30,15 +31,18 @@ func tile(character: int, phase: String, pose: int, column: int, row: int, title
 	note.add_theme_font_size_override("font_size",14);box.add_child(note)
 
 func run() -> void:
-	root.content_scale_size=Vector2i(1800,1600);root.size=Vector2i(1800,1600)
 	var args:=OS.get_cmdline_user_args()
+	# Wide strike silhouettes need room around the same fixed-scale body.
+	# Widen the cells instead of fitting each pose to its bounds.
+	var review_size:=Vector2i(1800,1600) if args.has("--catalog") else Vector2i(2500,1750)
+	root.content_scale_size=review_size;root.size=review_size
 	var selected_character:=int(args[args.find("--character")+1]) if args.has("--character") else -1
 	var selected_phase:=str(args[args.find("--phase")+1]) if args.has("--phase") else ""
 	var output:=str(args[args.find("--output")+1])
 	DirAccess.make_dir_recursive_absolute(output)
-	var bg:=ColorRect.new();bg.color=Color("171c22");bg.size=Vector2(1800,1600);root.add_child(bg)
+	var bg:=ColorRect.new();bg.color=Color("171c22");bg.size=Vector2(review_size);root.add_child(bg)
 	if args.has("--catalog"):
-		tile_size=Vector2(225,240);zoom=1.1;floor_y=215
+		tile_size=Vector2(225,240);zoom=1.1;floor_y=215;center_ratio=0.48
 		for character in 6:
 			if selected_character>=0 and character!=selected_character:continue
 			var fighter:Dictionary=FighterArt.catalog().fighters[character]

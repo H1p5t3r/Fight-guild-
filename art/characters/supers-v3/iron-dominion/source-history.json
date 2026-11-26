@@ -1,0 +1,15 @@
+{
+  "entryCorrections": [
+    {
+      "original": "/workspace/generated_images/exec-a90ea2b7-6059-40a1-b7b8-d13f90011a02.png",
+      "prompt": "entry-prompt.txt",
+      "reason": "Initial load read as shield on wrong arm."
+    },
+    {
+      "original": "/workspace/generated_images/exec-aa32f62c-2cf1-4cc8-bac1-7d871898ebe5.png",
+      "prompt": "entry-ownership-prompt.txt",
+      "reason": "Ownership corrected; duplicate left shoulder tattoo removed in final entry."
+    }
+  ],
+  "selected": "sources.json"
+}

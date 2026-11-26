@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-26",
+  "scope": "Iron Dominion v3: full-body shield crescents and twenty poses",
+  "suites": [
+    {
+      "log": "build/iron-v3-test.log",
+      "checks": 15976,
+      "failures": 0
+    },
+    {
+      "log": "build/iron-v3-supers.log",
+      "checks": 8302,
+      "failures": 0
+    }
+  ],
+  "totalChecks": 24278,
+  "nativeReview": {
+    "cases": [
+      "hit",
+      "mirrored",
+      "block",
+      "whiff"
+    ],
+    "failures": 0,
+    "frames": 1262,
+    "fps": 60,
+    "video": "exports/FightGuild-Iron-Dominion-V3-2026-11-26.mp4",
+    "sha256": "70beaab08d61032ff179cd4573c37405dfe75d9ae95611b9f5cf2899a46fe112"
+  },
+  "visualReview": [
+    "all twenty bodies against approved idle at fixed zoom",
+    "two arms and left shield ownership",
+    "final contact against Shark",
+    "mirrored contact against Fillet",
+    "full weapon boundaries"
+  ],
+  "sourceBytesPreserved": true,
+  "gameplayChanged": false,
+  "websiteUpdated": false
+}

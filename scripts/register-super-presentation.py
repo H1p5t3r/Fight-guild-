@@ -30,7 +30,8 @@ def main():
             # boot/weapon without resizing or editing any source pixels.
             x,right=key.get('x_span',[col*768,(col+1)*768])
             assert 0<=x<right<=im.width
-            split=min(range(470,560),key=lambda y:(np.count_nonzero(alpha[y,x:right]>64),abs(y-512)))
+            gutter=range(384,640) if args.version=='v3' else range(470,560)
+            split=min(gutter,key=lambda y:(np.count_nonzero(alpha[y,x:right]>64),abs(y-512)))
             assert not np.count_nonzero(alpha[split,x:right]>64),(name,col,'No transparent gutter')
             y,bottom=(0,split) if row==0 else (split,1024)
             yy,xx=np.where(alpha[y:bottom,x:right]>64);region=[x,y,right-x,bottom-y]

@@ -15,7 +15,7 @@ func run()->void:
 	var arena=load("res://scripts/arena.gd").new();arena.size=Vector2(1280,720);root.add_child(arena)
 	await process_frame
 	var spec:=SuperAnimation.profile(0,31);var seen:={}
-	check(FighterArt.sheet(0,spec.phase).frames.size()==16,"Missing body keys")
+	check(FighterArt.sheet(0,spec.phase).frames.size()==20,"Missing body keys")
 	for owner in 2:
 		for facing in [-1,1]:
 			for receiver in 6:
@@ -43,7 +43,7 @@ func run()->void:
 						if event.has("sound"):sounds.append(event.sound)
 				check(pair_seen and int(model.state().players[1-owner].health)==720,"Confirmed damage changed")
 				check(sounds.size()==4,"Missing or repeated authored impact sounds")
-	check(seen.size()==16,"Not all 16 drawings exposed")
+	check(seen.size()==20,"Not all 20 drawings exposed")
 	for blocking in [false,true]:
 		model.reset([0,4]);model.core.preview_place(0,44000 if blocking else 26000,0,10000);model.core.preview_place(1,56000 if blocking else 90000,0,0)
 		model.core.preview_begin(0,31)

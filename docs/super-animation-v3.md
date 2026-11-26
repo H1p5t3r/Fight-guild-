@@ -45,6 +45,33 @@ bash scripts/godot.sh --headless --audio-driver Dummy --script res://tests/sky_f
 python scripts/capture-super-animation.py sky-foundry --version v3
 ```
 
+## Iron Dominion — complete
+
+[Watch the native 60 FPS review](../exports/FightGuild-Iron-Dominion-V3-2026-11-26.mp4)
+(21.03 seconds, sound; hit, mirrored hit, block and miss).
+
+Twenty replacement drawings move Anvil from a back-facing coil into a long
+horizontal shield sweep, a rising crescent, an overhead crush and a deep final
+plant. The free hand, shoulders, hips, knees, beard and apron follow the turn.
+Six magma-orange effects trace the shield path with open centers; the larger
+crescents sit behind the fighters so both silhouettes remain readable.
+
+The striking drawings land on the saved impacts at ticks 40 and 70. The final
+plant starts on the actual release at tick 90, holds through the 22-frame impact
+freeze, then passes through six recovery drawings over the existing 24 frames.
+Blocked and missed openings return directly to guard without playing a false
+finisher. Damage, armor, frame data and cost remain unchanged.
+
+All twenty drawings share one anatomical scale. The left arm owns the shield,
+the tattoo belongs only to the empty right arm, and pause masks exclude the
+visible gripping hand. Original generated PNGs remain unmodified.
+
+The dedicated animation and native super suites passed 24,278 checks with no
+failures. The [validation record](../art/characters/supers-v3/iron-dominion/validation.json)
+records the video hash and checks; the
+[fixed-scale sheet](../art/characters/supers-v3/iron-dominion/scale-review.png)
+shows every drawing beside the approved idle.
+
 ## Size calibration
 
 The first visual comparison covered all 196 v2 super body drawings against their
