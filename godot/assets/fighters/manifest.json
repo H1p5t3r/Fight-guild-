@@ -33637,7 +33637,8 @@
         "supers-v1": 470,
         "last-orders-v2": 510,
         "whiskey-chaser-v2": 510,
-        "last-orders-v3": 470
+        "last-orders-v3": 470,
+        "whiskey-chaser-v3": 470
       },
       "super_last_orders": {
         "file": "supers-v3/last-orders/entry.png",
@@ -34808,12 +34809,20 @@
               11
             ],
             [
-              25,
-              14
+              20,
+              16
+            ],
+            [
+              40,
+              17
             ],
             [
               65,
-              15
+              18
+            ],
+            [
+              85,
+              19
             ]
           ],
           "sounds": {
@@ -34829,13 +34838,14 @@
               "end": 3,
               "key": 0,
               "box": [
-                25,
-                -135,
-                140,
-                65
+                -70,
+                -180,
+                300,
+                155
               ],
               "fade": true,
-              "opacity": 0.8,
+              "behind": true,
+              "opacity": 0.9,
               "stop_at_guard": true
             },
             {
@@ -34844,118 +34854,122 @@
               "end": 7,
               "key": 1,
               "box": [
-                25,
-                -150,
-                145,
-                85
+                -60,
+                -205,
+                285,
+                195
               ],
               "fade": true,
-              "opacity": 0.8,
+              "behind": true,
+              "opacity": 0.9,
               "stop_at_guard": true
             },
             {
               "stage": "active",
               "start": 8,
-              "end": 10,
+              "end": 11,
               "key": 2,
               "box": [
-                25,
-                -115,
-                145,
-                95
+                -70,
+                -140,
+                300,
+                140
               ],
               "fade": true,
-              "opacity": 0.8,
+              "behind": true,
+              "opacity": 0.9,
               "stop_at_guard": true
             },
             {
               "stage": "paired",
               "start": 0,
-              "end": 9,
+              "end": 12,
               "key": 0,
               "box": [
-                -60,
-                -130,
-                110,
-                65
+                -70,
+                -180,
+                300,
+                155
               ],
-              "anchor": "receiver",
               "fade": true,
-              "opacity": 0.8
+              "behind": true
             },
             {
               "stage": "paired",
               "start": 43,
-              "end": 53,
+              "end": 55,
               "key": 1,
               "box": [
-                -45,
-                -150,
-                125,
-                90
+                -60,
+                -205,
+                285,
+                195
               ],
-              "anchor": "receiver",
               "fade": true,
-              "opacity": 0.8
+              "behind": true
             },
             {
               "stage": "paired",
               "start": 74,
-              "end": 83,
+              "end": 86,
               "key": 2,
               "box": [
-                -45,
-                -115,
-                120,
-                95
+                -70,
+                -140,
+                300,
+                140
               ],
-              "anchor": "receiver",
               "fade": true,
-              "opacity": 0.8
+              "behind": true
             },
             {
               "stage": "connected",
               "start": 0,
-              "end": 5,
+              "end": 11,
               "key": 3,
               "box": [
-                -25,
-                -135,
-                145,
-                95
+                -85,
+                -220,
+                280,
+                240
               ],
               "anchor": "receiver",
-              "fade": false
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "connected",
-              "start": 5,
-              "end": 13,
+              "start": 7,
+              "end": 27,
               "key": 4,
               "box": [
-                -45,
-                -155,
-                170,
-                135
+                -90,
+                -145,
+                310,
+                145
               ],
-              "anchor": "receiver",
+              "behind": true,
               "fade": true
             },
             {
               "stage": "connected",
-              "start": 13,
-              "end": 30,
+              "start": 21,
+              "end": 44,
               "key": 5,
               "box": [
-                -35,
-                -160,
-                150,
-                145
+                -60,
+                -185,
+                300,
+                190
               ],
-              "anchor": "receiver",
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.7
             }
           ],
+          "source": "supers-v3/whiskey-chaser",
+          "description": "Low Dempsey weave, alternating full-body hook crescents, low body shot, committed final rotation and long unwind into guard.",
+          "receiver_reactions": true,
           "phase": "super_whiskey_chaser",
           "fx_phase": "super_whiskey_chaser_fx",
           "pair_ticks": 96,
@@ -35017,23 +35031,39 @@
               13
             ],
             [
-              7,
+              5,
               14
             ],
             [
-              17,
+              11,
               15
+            ],
+            [
+              15,
+              16
+            ],
+            [
+              18,
+              17
+            ],
+            [
+              21,
+              18
+            ],
+            [
+              23,
+              19
             ]
           ]
         }
       },
       "super_whiskey_chaser": {
-        "file": "supers-v2/whiskey-chaser/entry.png",
-        "body_height": 510,
+        "file": "supers-v3/whiskey-chaser/entry.png",
+        "body_height": 470,
         "frames": [
           {
-            "file": "supers-v2/whiskey-chaser/entry.png",
-            "sha256": "b993862fcc112a12adc11ba9c23a12919a9a902125f4e856a7029c801b474936",
+            "file": "supers-v3/whiskey-chaser/entry.png",
+            "sha256": "1d051e0bd1522eb08bed8ef85ab40ac7a95fc8833abe902b6835d14af2e73d04",
             "source_size": [
               1536,
               1024
@@ -35045,27 +35075,27 @@
               512
             ],
             "bounds": [
-              144,
-              9,
-              572,
-              490
+              186,
+              43,
+              558,
+              485
             ],
             "pivot": [
               375,
-              486
+              485
             ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 0,
-            "scale_group": "whiskey-chaser-v2",
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
-              263,
-              314
+              231,
+              307
             ]
           },
           {
-            "file": "supers-v2/whiskey-chaser/entry.png",
-            "sha256": "b993862fcc112a12adc11ba9c23a12919a9a902125f4e856a7029c801b474936",
+            "file": "supers-v3/whiskey-chaser/entry.png",
+            "sha256": "1d051e0bd1522eb08bed8ef85ab40ac7a95fc8833abe902b6835d14af2e73d04",
             "source_size": [
               1536,
               1024
@@ -35077,27 +35107,27 @@
               512
             ],
             "bounds": [
-              131,
-              6,
-              592,
-              490
+              178,
+              15,
+              609,
+              487
             ],
             "pivot": [
-              382,
-              486
+              372,
+              485
             ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 1,
-            "scale_group": "whiskey-chaser-v2",
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
-              562,
-              140
+              593,
+              159
             ]
           },
           {
-            "file": "supers-v2/whiskey-chaser/entry.png",
-            "sha256": "b993862fcc112a12adc11ba9c23a12919a9a902125f4e856a7029c801b474936",
+            "file": "supers-v3/whiskey-chaser/entry.png",
+            "sha256": "1d051e0bd1522eb08bed8ef85ab40ac7a95fc8833abe902b6835d14af2e73d04",
             "source_size": [
               1536,
               1024
@@ -35109,27 +35139,27 @@
               512
             ],
             "bounds": [
-              153,
-              2,
-              602,
-              490
+              198,
+              7,
+              615,
+              496
             ],
             "pivot": [
-              385,
-              488
+              390,
+              497
             ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 2,
-            "scale_group": "whiskey-chaser-v2",
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
-              574,
-              133
+              596,
+              153
             ]
           },
           {
-            "file": "supers-v2/whiskey-chaser/entry.png",
-            "sha256": "b993862fcc112a12adc11ba9c23a12919a9a902125f4e856a7029c801b474936",
+            "file": "supers-v3/whiskey-chaser/entry.png",
+            "sha256": "1d051e0bd1522eb08bed8ef85ab40ac7a95fc8833abe902b6835d14af2e73d04",
             "source_size": [
               1536,
               1024
@@ -35141,27 +35171,27 @@
               512
             ],
             "bounds": [
-              121,
-              3,
-              600,
-              490
+              162,
+              32,
+              556,
+              496
             ],
             "pivot": [
-              382,
-              488
+              367,
+              497
             ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 3,
-            "scale_group": "whiskey-chaser-v2",
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
-              387,
+              411,
               233
             ]
           },
           {
-            "file": "supers-v2/whiskey-chaser/counter.png",
-            "sha256": "7746a7b3b12504ade37e15133b9b5e27781d52a0a4a252b209fa791b646b2af8",
+            "file": "supers-v3/whiskey-chaser/cross.png",
+            "sha256": "58a3bdc97759eeff0d1581058263d45590f3cba8c2d03a72cf56e18e3e4e1c50",
             "source_size": [
               1536,
               1024
@@ -35173,59 +35203,59 @@
               512
             ],
             "bounds": [
-              143,
-              6,
-              575,
-              492
+              187,
+              27,
+              562,
+              491
             ],
             "pivot": [
-              370,
-              486
+              380,
+              490
             ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 0,
-            "scale_group": "whiskey-chaser-v2",
-            "render_only": true,
-            "tip": [
-              467,
-              181
-            ]
-          },
-          {
-            "file": "supers-v2/whiskey-chaser/counter.png",
-            "sha256": "7746a7b3b12504ade37e15133b9b5e27781d52a0a4a252b209fa791b646b2af8",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              119,
-              6,
-              567,
-              493
-            ],
-            "pivot": [
-              362,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 1,
-            "scale_group": "whiskey-chaser-v2",
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
               437,
-              185
+              324
             ]
           },
           {
-            "file": "supers-v2/whiskey-chaser/counter.png",
-            "sha256": "7746a7b3b12504ade37e15133b9b5e27781d52a0a4a252b209fa791b646b2af8",
+            "file": "supers-v3/whiskey-chaser/cross.png",
+            "sha256": "58a3bdc97759eeff0d1581058263d45590f3cba8c2d03a72cf56e18e3e4e1c50",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              142,
+              12,
+              554,
+              491
+            ],
+            "pivot": [
+              360,
+              485
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "whiskey-chaser-v3",
+            "render_only": true,
+            "tip": [
+              497,
+              285
+            ]
+          },
+          {
+            "file": "supers-v3/whiskey-chaser/cross.png",
+            "sha256": "58a3bdc97759eeff0d1581058263d45590f3cba8c2d03a72cf56e18e3e4e1c50",
             "source_size": [
               1536,
               1024
@@ -35237,27 +35267,27 @@
               512
             ],
             "bounds": [
-              144,
-              4,
-              570,
+              179,
+              9,
+              647,
               493
             ],
             "pivot": [
-              370,
-              488
+              390,
+              493
             ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 2,
-            "scale_group": "whiskey-chaser-v2",
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
-              530,
-              183
+              627,
+              152
             ]
           },
           {
-            "file": "supers-v2/whiskey-chaser/counter.png",
-            "sha256": "7746a7b3b12504ade37e15133b9b5e27781d52a0a4a252b209fa791b646b2af8",
+            "file": "supers-v3/whiskey-chaser/cross.png",
+            "sha256": "58a3bdc97759eeff0d1581058263d45590f3cba8c2d03a72cf56e18e3e4e1c50",
             "source_size": [
               1536,
               1024
@@ -35269,27 +35299,27 @@
               512
             ],
             "bounds": [
-              116,
-              5,
-              567,
+              165,
+              12,
+              559,
               494
             ],
             "pivot": [
-              362,
-              488
+              380,
+              493
             ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 3,
-            "scale_group": "whiskey-chaser-v2",
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
-              452,
-              210
+              510,
+              150
             ]
           },
           {
-            "file": "supers-v2/whiskey-chaser/bodyhook.png",
-            "sha256": "f48257c7bcc3c0429a26fde3832fd387ea3bb752aca8d05ae069331e4a99baf9",
+            "file": "supers-v3/whiskey-chaser/body.png",
+            "sha256": "77e6fbf29c9dbc97baf5dba279f205f5d18debad4aca8642688816ad0cff48da",
             "source_size": [
               1536,
               1024
@@ -35301,27 +35331,27 @@
               512
             ],
             "bounds": [
-              149,
-              9,
-              577,
-              492
+              188,
+              28,
+              575,
+              487
             ],
             "pivot": [
-              370,
-              486
+              390,
+              485
             ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 0,
-            "scale_group": "whiskey-chaser-v2",
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
-              388,
-              302
+              389,
+              334
             ]
           },
           {
-            "file": "supers-v2/whiskey-chaser/bodyhook.png",
-            "sha256": "f48257c7bcc3c0429a26fde3832fd387ea3bb752aca8d05ae069331e4a99baf9",
+            "file": "supers-v3/whiskey-chaser/body.png",
+            "sha256": "77e6fbf29c9dbc97baf5dba279f205f5d18debad4aca8642688816ad0cff48da",
             "source_size": [
               1536,
               1024
@@ -35333,59 +35363,59 @@
               512
             ],
             "bounds": [
-              135,
-              8,
-              588,
+              167,
+              24,
+              577,
+              486
+            ],
+            "pivot": [
+              372,
+              485
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "whiskey-chaser-v3",
+            "render_only": true,
+            "tip": [
+              239,
+              331
+            ]
+          },
+          {
+            "file": "supers-v3/whiskey-chaser/body.png",
+            "sha256": "77e6fbf29c9dbc97baf5dba279f205f5d18debad4aca8642688816ad0cff48da",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              174,
+              20,
+              581,
+              489
+            ],
+            "pivot": [
+              390,
               491
             ],
-            "pivot": [
-              362,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 1,
-            "scale_group": "whiskey-chaser-v2",
-            "render_only": true,
-            "tip": [
-              327,
-              238
-            ]
-          },
-          {
-            "file": "supers-v2/whiskey-chaser/bodyhook.png",
-            "sha256": "f48257c7bcc3c0429a26fde3832fd387ea3bb752aca8d05ae069331e4a99baf9",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              149,
-              8,
-              599,
-              495
-            ],
-            "pivot": [
-              385,
-              488
-            ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 2,
-            "scale_group": "whiskey-chaser-v2",
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
-              515,
-              228
+              560,
+              216
             ]
           },
           {
-            "file": "supers-v2/whiskey-chaser/bodyhook.png",
-            "sha256": "f48257c7bcc3c0429a26fde3832fd387ea3bb752aca8d05ae069331e4a99baf9",
+            "file": "supers-v3/whiskey-chaser/body.png",
+            "sha256": "77e6fbf29c9dbc97baf5dba279f205f5d18debad4aca8642688816ad0cff48da",
             "source_size": [
               1536,
               1024
@@ -35397,91 +35427,91 @@
               512
             ],
             "bounds": [
-              133,
-              9,
-              598,
-              495
-            ],
-            "pivot": [
-              357,
-              488
-            ],
-            "body_height": 510,
-            "source_pose": 3,
-            "scale_group": "whiskey-chaser-v2",
-            "render_only": true,
-            "tip": [
-              515,
-              218
-            ]
-          },
-          {
-            "file": "supers-v2/whiskey-chaser/finish.png",
-            "sha256": "7c600663007cc17b8a561ab66be39a69d1b3daf1736a4324a6236c65c8ba79e2",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              147,
-              9,
-              577,
-              492
-            ],
-            "pivot": [
-              365,
-              486
-            ],
-            "body_height": 510,
-            "source_pose": 0,
-            "scale_group": "whiskey-chaser-v2",
-            "render_only": true,
-            "tip": [
-              370,
-              270
-            ]
-          },
-          {
-            "file": "supers-v2/whiskey-chaser/finish.png",
-            "sha256": "7c600663007cc17b8a561ab66be39a69d1b3daf1736a4324a6236c65c8ba79e2",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              130,
-              8,
+              187,
+              16,
               589,
-              491
+              488
             ],
             "pivot": [
-              347,
-              486
+              387,
+              491
             ],
-            "body_height": 510,
-            "source_pose": 1,
-            "scale_group": "whiskey-chaser-v2",
+            "body_height": 470,
+            "source_pose": 3,
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
-              512,
-              237
+              574,
+              217
             ]
           },
           {
-            "file": "supers-v2/whiskey-chaser/finish.png",
-            "sha256": "7c600663007cc17b8a561ab66be39a69d1b3daf1736a4324a6236c65c8ba79e2",
+            "file": "supers-v3/whiskey-chaser/finish.png",
+            "sha256": "de8acf15189933e85b6229d542421a957557964ce1affd934aa9d757e4376796",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              177,
+              49,
+              554,
+              485
+            ],
+            "pivot": [
+              375,
+              485
+            ],
+            "body_height": 470,
+            "source_pose": 0,
+            "scale_group": "whiskey-chaser-v3",
+            "render_only": true,
+            "tip": [
+              231,
+              310
+            ]
+          },
+          {
+            "file": "supers-v3/whiskey-chaser/finish.png",
+            "sha256": "de8acf15189933e85b6229d542421a957557964ce1affd934aa9d757e4376796",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              170,
+              14,
+              606,
+              485
+            ],
+            "pivot": [
+              367,
+              485
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "whiskey-chaser-v3",
+            "render_only": true,
+            "tip": [
+              588,
+              172
+            ]
+          },
+          {
+            "file": "supers-v3/whiskey-chaser/finish.png",
+            "sha256": "de8acf15189933e85b6229d542421a957557964ce1affd934aa9d757e4376796",
             "source_size": [
               1536,
               1024
@@ -35493,27 +35523,27 @@
               512
             ],
             "bounds": [
-              148,
+              173,
               8,
-              601,
-              495
+              629,
+              498
             ],
             "pivot": [
-              365,
-              488
+              390,
+              497
             ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 2,
-            "scale_group": "whiskey-chaser-v2",
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
-              415,
-              229
+              615,
+              133
             ]
           },
           {
-            "file": "supers-v2/whiskey-chaser/finish.png",
-            "sha256": "7c600663007cc17b8a561ab66be39a69d1b3daf1736a4324a6236c65c8ba79e2",
+            "file": "supers-v3/whiskey-chaser/finish.png",
+            "sha256": "de8acf15189933e85b6229d542421a957557964ce1affd934aa9d757e4376796",
             "source_size": [
               1536,
               1024
@@ -35525,137 +35555,265 @@
               512
             ],
             "bounds": [
-              130,
-              7,
-              596,
-              495
+              152,
+              29,
+              556,
+              498
             ],
             "pivot": [
-              347,
-              488
+              377,
+              497
             ],
-            "body_height": 510,
+            "body_height": 470,
             "source_pose": 3,
-            "scale_group": "whiskey-chaser-v2",
+            "scale_group": "whiskey-chaser-v3",
             "render_only": true,
             "tip": [
-              412,
-              188
+              392,
+              252
+            ]
+          },
+          {
+            "file": "supers-v3/whiskey-chaser/return.png",
+            "sha256": "6cc73e538f69993ab75b68f0ab0670845d59decd2fea089c49288689e387966d",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              187,
+              16,
+              562,
+              486
+            ],
+            "pivot": [
+              375,
+              485
+            ],
+            "body_height": 470,
+            "source_pose": 0,
+            "scale_group": "whiskey-chaser-v3",
+            "render_only": true,
+            "tip": [
+              477,
+              250
+            ]
+          },
+          {
+            "file": "supers-v3/whiskey-chaser/return.png",
+            "sha256": "6cc73e538f69993ab75b68f0ab0670845d59decd2fea089c49288689e387966d",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              173,
+              12,
+              561,
+              486
+            ],
+            "pivot": [
+              367,
+              485
+            ],
+            "body_height": 470,
+            "source_pose": 1,
+            "scale_group": "whiskey-chaser-v3",
+            "render_only": true,
+            "tip": [
+              445,
+              186
+            ]
+          },
+          {
+            "file": "supers-v3/whiskey-chaser/return.png",
+            "sha256": "6cc73e538f69993ab75b68f0ab0670845d59decd2fea089c49288689e387966d",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              189,
+              11,
+              570,
+              490
+            ],
+            "pivot": [
+              390,
+              490
+            ],
+            "body_height": 470,
+            "source_pose": 2,
+            "scale_group": "whiskey-chaser-v3",
+            "render_only": true,
+            "tip": [
+              447,
+              175
+            ]
+          },
+          {
+            "file": "supers-v3/whiskey-chaser/return.png",
+            "sha256": "6cc73e538f69993ab75b68f0ab0670845d59decd2fea089c49288689e387966d",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              189,
+              12,
+              558,
+              492
+            ],
+            "pivot": [
+              377,
+              490
+            ],
+            "body_height": 470,
+            "source_pose": 3,
+            "scale_group": "whiskey-chaser-v3",
+            "render_only": true,
+            "tip": [
+              417,
+              168
             ]
           }
         ],
         "render_only": true
       },
       "super_whiskey_chaser_fx": {
-        "file": "supers-v2/whiskey-chaser/effects.png",
+        "file": "supers-v3/whiskey-chaser/effects.png",
         "body_height": 512,
         "frames": [
           {
             "region": [
-              47,
-              157,
-              420,
-              227
+              9,
+              71,
+              492,
+              377
             ],
             "pivot": [
-              210.0,
-              227
+              246.0,
+              377
             ],
             "bounds": [
               0,
               0,
-              420,
-              227
+              492,
+              377
             ]
           },
           {
             "region": [
-              571,
-              120,
-              381,
-              267
+              576,
+              25,
+              385,
+              445
             ],
             "pivot": [
-              190.5,
-              267
+              192.5,
+              445
             ],
             "bounds": [
               0,
               0,
-              381,
-              267
+              385,
+              445
             ]
           },
           {
             "region": [
-              1102,
-              192,
-              343,
-              230
+              1033,
+              150,
+              483,
+              319
             ],
             "pivot": [
-              171.5,
-              230
+              241.5,
+              319
             ],
             "bounds": [
               0,
               0,
-              343,
-              230
+              483,
+              319
             ]
           },
           {
             "region": [
-              49,
-              597,
-              416,
-              309
+              20,
+              535,
+              458,
+              468
             ],
             "pivot": [
-              208.0,
-              309
+              229.0,
+              468
             ],
             "bounds": [
               0,
               0,
-              416,
-              309
+              458,
+              468
             ]
           },
           {
             "region": [
-              549,
-              593,
-              413,
-              299
-            ],
-            "pivot": [
-              206.5,
-              299
-            ],
-            "bounds": [
-              0,
-              0,
-              413,
-              299
-            ]
-          },
-          {
-            "region": [
-              1065,
-              650,
-              421,
+              517,
+              691,
+              496,
               217
             ],
             "pivot": [
-              210.5,
+              248.0,
               217
             ],
             "bounds": [
               0,
               0,
-              421,
+              496,
               217
+            ]
+          },
+          {
+            "region": [
+              1039,
+              743,
+              483,
+              176
+            ],
+            "pivot": [
+              241.5,
+              176
+            ],
+            "bounds": [
+              0,
+              0,
+              483,
+              176
             ]
           }
         ],

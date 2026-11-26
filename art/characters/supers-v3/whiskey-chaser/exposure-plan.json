@@ -1,0 +1,139 @@
+{
+  "name": "Whiskey Chaser",
+  "character": 3,
+  "slot": 31,
+  "input": "214214Hs",
+  "status": "completed-native-review",
+  "date": "2026-11-26",
+  "startup": 10,
+  "active": 9,
+  "recovery": 12,
+  "freeze": 54,
+  "pairTicks": 96,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 260,
+  "bodyKeys": 20,
+  "choreography": "Low Dempsey weave, alternating full-body hook crescents, low body shot, committed final rotation and long unwind into guard.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      14,
+      3
+    ],
+    [
+      26,
+      4
+    ],
+    [
+      42,
+      5
+    ],
+    [
+      43,
+      6
+    ],
+    [
+      52,
+      7
+    ],
+    [
+      62,
+      8
+    ],
+    [
+      73,
+      9
+    ],
+    [
+      74,
+      10
+    ],
+    [
+      82,
+      11
+    ],
+    [
+      89,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      5,
+      14
+    ],
+    [
+      11,
+      15
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      18,
+      17
+    ],
+    [
+      21,
+      18
+    ],
+    [
+      23,
+      19
+    ]
+  ],
+  "requirements": [
+    "First active has largest limb travel",
+    "Alternate near/far/near hook arms visibly",
+    "Three block pulses align with active frames1/5/9",
+    "Constant470pixel anatomy and stowed staff",
+    "Held contact poses and small follow-through",
+    "Dempsey stance on hit, block and miss"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveHandTravelWorldUnits": 125.7,
+  "largestOpeningMovementAtFirstActive": true,
+  "verification": {
+    "cases": [
+      {
+        "name": "hit",
+        "damage": 260,
+        "paired": true
+      },
+      {
+        "name": "mirrored",
+        "damage": 260,
+        "paired": true
+      },
+      {
+        "name": "block",
+        "damage": 15,
+        "paired": false
+      },
+      {
+        "name": "whiff",
+        "damage": 0,
+        "paired": false
+      }
+    ],
+    "failures": 0,
+    "frames": 1262,
+    "fps": 60,
+    "video": "exports/FightGuild-Whiskey-Chaser-V3-2026-11-26.mp4",
+    "sha256": "03b211af0ae7ab35553cc2e24121bcf4ee649c1efed321efeef53b5a7b9a1289"
+  }
+}

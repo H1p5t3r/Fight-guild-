@@ -197,6 +197,27 @@ expands to show more than twenty keys. See the
 [validation](../art/characters/supers-v3/last-orders/validation.json) and
 [scale sheet](../art/characters/supers-v3/last-orders/scale-review.png).
 
+## Whiskey Chaser — complete
+
+[Watch the native 60 FPS review](../exports/FightGuild-Whiskey-Chaser-V3-2026-11-26.mp4)
+(hit, mirrored hit, block and miss).
+
+Twenty replacement body drawings put each hook through Tapper's hips, spine,
+shoulders and pivoting feet. The near/far/near punches use distinct silhouettes,
+with a lower body hook and a larger final turn that exposes his back before
+unwinding into Dempsey guard. Hair, cape, tankard and tabard follow the rotation.
+Six amber/ivory ink crescents remain separate from the body art.
+
+The three blocked contacts retain poses 1, 6 and 10 on active frames 1, 5 and 9.
+The confirmed sequence retains impacts at 43 and 74, then release at 96, with
+six additional settling drawings spread through the existing recovery.
+Damage, stance behavior, timing and cost are unchanged.
+
+The suite passed 20,553 checks, including all twenty drawings, both players and
+facings, all receivers, blocked contact alignment, pause and replay. See the
+[validation](../art/characters/supers-v3/whiskey-chaser/validation.json) and
+[fixed-scale comparison](../art/characters/supers-v3/whiskey-chaser/scale-review.png).
+
 ## Size calibration
 
 The first visual comparison covered all 196 v2 super body drawings against their

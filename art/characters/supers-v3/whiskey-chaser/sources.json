@@ -1,0 +1,77 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v3/whiskey-chaser/entry.png",
+    "original": "/workspace/generated_images/exec-0b225574-4182-4986-97b6-14453b3f5158.png",
+    "sha256": "1d051e0bd1522eb08bed8ef85ab40ac7a95fc8833abe902b6835d14af2e73d04",
+    "prompt": "art/characters/supers-v3/whiskey-chaser/entry-prompt.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png",
+      "godot/assets/fighters/supers-v3/last-orders/entry.png"
+    ]
+  },
+  {
+    "id": "cross",
+    "file": "godot/assets/fighters/supers-v3/whiskey-chaser/cross.png",
+    "original": "/workspace/generated_images/exec-9d6d3102-84d1-4b97-8d92-d859be80b249.png",
+    "sha256": "58a3bdc97759eeff0d1581058263d45590f3cba8c2d03a72cf56e18e3e4e1c50",
+    "prompt": "art/characters/supers-v3/whiskey-chaser/cross-prompt.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png",
+      "godot/assets/fighters/supers-v3/last-orders/entry.png"
+    ]
+  },
+  {
+    "id": "body",
+    "file": "godot/assets/fighters/supers-v3/whiskey-chaser/body.png",
+    "original": "/workspace/generated_images/exec-ed23cf21-e693-48de-b370-d88416822f26.png",
+    "sha256": "77e6fbf29c9dbc97baf5dba279f205f5d18debad4aca8642688816ad0cff48da",
+    "prompt": "art/characters/supers-v3/whiskey-chaser/body-prompt.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png",
+      "godot/assets/fighters/supers-v3/last-orders/entry.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v3/whiskey-chaser/finish.png",
+    "original": "/workspace/generated_images/exec-407d413d-cc7e-469f-aa34-7c59076b7ca5.png",
+    "sha256": "de8acf15189933e85b6229d542421a957557964ce1affd934aa9d757e4376796",
+    "prompt": "art/characters/supers-v3/whiskey-chaser/finish-prompt.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png",
+      "godot/assets/fighters/supers-v3/whiskey-chaser/entry.png"
+    ]
+  },
+  {
+    "id": "return",
+    "file": "godot/assets/fighters/supers-v3/whiskey-chaser/return.png",
+    "original": "/workspace/generated_images/exec-4ed056a7-5e8b-481b-a137-09cdd7ca3847.png",
+    "sha256": "6cc73e538f69993ab75b68f0ab0670845d59decd2fea089c49288689e387966d",
+    "prompt": "art/characters/supers-v3/whiskey-chaser/return-prompt.txt",
+    "references": [
+      "godot/assets/fighters/tapper-v1/idle.png",
+      "godot/assets/fighters/supers-v3/whiskey-chaser/entry.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v3/whiskey-chaser/effects.png",
+    "original": "/workspace/generated_images/exec-171878a2-b620-404d-84c8-9979d33624c8.png",
+    "sha256": "1d669de38b98874fd0122e8d53c7cdc1a8e87338036156f8d50bf1c0e5a60a60",
+    "prompt": "art/characters/supers-v3/whiskey-chaser/effects-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v3/last-orders/effects.png"
+    ]
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/whiskey-chaser/portrait.png",
+    "original": "/workspace/generated_images/exec-1322ff2a-0356-451c-8a58-031dcac503f7.png",
+    "sha256": "fce1a6c359be6ff3bb2fd241ab33db57a1c7bf961ca1915a73f40e9f2f085fba",
+    "prompt": "art/characters/supers-v2/whiskey-chaser/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/whiskey-chaser/entry.png"
+    ]
+  }
+]
