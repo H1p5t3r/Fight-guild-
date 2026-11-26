@@ -1,0 +1,26 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-exsanguinate-audio.py",
+  "sounds": [
+    {
+      "file": "exsanguinate_open.wav",
+      "seconds": 0.36,
+      "sha256": "b397de2b1e4b6e158b60543e1218f136a6be5325030155772f78f2eabf952ae8"
+    },
+    {
+      "file": "exsanguinate_cross.wav",
+      "seconds": 0.39,
+      "sha256": "bb2c0fc55d3ab7231311915348cd9b3ad0572b2f68f6e2b36fae0696981e7a9e"
+    },
+    {
+      "file": "exsanguinate_close.wav",
+      "seconds": 0.45,
+      "sha256": "94dcbdc8de574a42ebdba6b04d69747b0236441987643f0de8b750537d36b2ac"
+    },
+    {
+      "file": "exsanguinate_finish.wav",
+      "seconds": 1.05,
+      "sha256": "71af1c44f843b65e630d556865721722fd40c95114270da795e435bfca7dc4a8"
+    }
+  ]
+}

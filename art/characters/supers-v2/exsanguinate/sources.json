@@ -1,0 +1,71 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v2/exsanguinate/entry.png",
+    "original": "/workspace/generated_images/exec-e77d4f10-f521-4a04-a369-504bc7fa2618.png",
+    "sha256": "5ef9107ad39d660c08b93291b466869b749033ec00312c0d8ed2f13b2fa54f7a",
+    "prompt": "art/characters/supers-v2/exsanguinate/entry-correction-prompt.txt",
+    "references": [
+      "/workspace/generated_images/exec-7623b5cd-4e4e-44e7-b134-7c5bc4c3deb7.png"
+    ]
+  },
+  {
+    "id": "draw",
+    "file": "godot/assets/fighters/supers-v2/exsanguinate/draw.png",
+    "original": "/workspace/generated_images/exec-d771d637-72c8-409d-8cd1-567b1f45712b.png",
+    "sha256": "f44723323983ed08a4bde29d792d2877fc87cecdbca82c2ec96e6323a90cf281",
+    "prompt": "art/characters/supers-v2/exsanguinate/draw-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/exsanguinate/entry.png"
+    ]
+  },
+  {
+    "id": "slice",
+    "file": "godot/assets/fighters/supers-v2/exsanguinate/slice.png",
+    "original": "/workspace/generated_images/exec-d9fdbede-48e3-4a1b-94eb-6da26235eddd.png",
+    "sha256": "f3b971d2ebb32bb2eebe68cfc074038f73e137ab6846b8b6c03d6e90f68c1118",
+    "prompt": "art/characters/supers-v2/exsanguinate/slice-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/exsanguinate/draw.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v2/exsanguinate/finish.png",
+    "original": "/workspace/generated_images/exec-dcb3a1f8-f415-4d44-94b4-87f1c3e3856c.png",
+    "sha256": "7d47a85446ba3b99b2faa73a8d0677c148a0b232269fb9c091cfd45f2332bafd",
+    "prompt": "art/characters/supers-v2/exsanguinate/finish-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/exsanguinate/slice.png",
+      "godot/assets/fighters/appearance-v3/fillet-ready.png"
+    ]
+  },
+  {
+    "id": "compress",
+    "file": "godot/assets/fighters/supers-v2/exsanguinate/compress.png",
+    "original": "/workspace/generated_images/exec-5cc5fc50-d9a3-4f9a-a2bb-586131a72f1e.png",
+    "sha256": "9218b5108c7d09e9f8bb536ae03412c6570e2856bd0df2a6caf1233a7ac9e817",
+    "prompt": "art/characters/supers-v2/exsanguinate/compress-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/exsanguinate/draw.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v2/exsanguinate/effects.png",
+    "original": "/workspace/generated_images/exec-5a6683a4-3a0e-4753-8581-8103d9ad5c01.png",
+    "sha256": "d3d78c6c7f639f40ea2c1a9a28f41d368b95aa2557866b8935e88069b49440e3",
+    "prompt": "art/characters/supers-v2/exsanguinate/effects-prompt.txt",
+    "references": []
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/exsanguinate/portrait.png",
+    "original": "/workspace/generated_images/exec-00e385db-ba7a-41a3-a877-9d9c382c3d68.png",
+    "sha256": "c82b36c095e0523355ea20a3ff0f4d69776db69d8bfe15641724bb2f17ee2b03",
+    "prompt": "art/characters/supers-v2/exsanguinate/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/exsanguinate/finish.png"
+    ]
+  }
+]

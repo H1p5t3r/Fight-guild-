@@ -24,11 +24,15 @@ def main():
         im=Image.open(path);assert im.mode=='RGBA' and im.size==(1536,1024)
         alpha=np.asarray(im.getchannel('A'));assert alpha.min()==0
         for index,key in enumerate(keys):
-            row,col=divmod(index,2);x=col*768
-            split=min(range(470,560),key=lambda y:(np.count_nonzero(alpha[y,x:x+768]>64),abs(y-512)))
-            assert not np.count_nonzero(alpha[split,x:x+768]>64),(name,col,'No transparent gutter')
+            row,col=divmod(index,2)
+            # A manually inspected column boundary can preserve an extended
+            # boot/weapon without resizing or editing any source pixels.
+            x,right=key.get('x_span',[col*768,(col+1)*768])
+            assert 0<=x<right<=im.width
+            split=min(range(470,560),key=lambda y:(np.count_nonzero(alpha[y,x:right]>64),abs(y-512)))
+            assert not np.count_nonzero(alpha[split,x:right]>64),(name,col,'No transparent gutter')
             y,bottom=(0,split) if row==0 else (split,1024)
-            yy,xx=np.where(alpha[y:bottom,x:x+768]>64);region=[x,y,768,bottom-y]
+            yy,xx=np.where(alpha[y:bottom,x:right]>64);region=[x,y,right-x,bottom-y]
             root=key['root']
             frame=dict(file=str(path.relative_to(ART)),sha256=src['sha256'],source_size=list(im.size),region=region,
                 bounds=[int(xx.min()),int(yy.min()),int(xx.max()+1),int(yy.max()+1)],pivot=[root[0]-x,root[1]-y],

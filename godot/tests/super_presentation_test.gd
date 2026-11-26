@@ -64,6 +64,25 @@ func run()->void:
 				check(model.core.restore(restored),"Snapshot restore")
 				for tick in 30:model.step(0,0)
 				check(model.state_hash()==replay_hash,"Presentation caused replay divergence")
+	if character==5 and slot==31:
+		for owner in 2:
+			for facing in [-1,1]:
+				model.reset([5,4] if owner==0 else [4,5])
+				model.core.preview_place(owner,50000-facing*6000,0,10000)
+				model.core.preview_place(1-owner,50000+facing*6000,0,0)
+				check(model.core.preview_status(1-owner,1,150),"Owned bleed setup")
+				check(model.core.preview_begin(owner,slot)==1,"Cash-out super rejected")
+				var finished:=false;var sounds:=0
+				for tick in 330:
+					var state:=model.state();var cue:=SuperAnimation.selection(model,state,owner)
+					if not cue.is_empty() and str(cue.stage)=="connected":finished=true
+					if finished:
+						var target:Dictionary=state.players[1-owner]
+						check(int(target.health)==550 and int(target.greyLife)==0 and int(target.bleedTime)==0,"Cash-out damage repeated or bleed survived")
+					model.step(0,0)
+					for event in model.cues.events_at(model.frame()-1):
+						if event.has("sound"):sounds+=1
+				check(finished and sounds==spec.sounds.size(),"Cash-out finish/audio missing or repeated")
 	for blocking in [false,true]:
 		model.reset([character,4]);model.core.preview_place(0,44000 if blocking else 15000,0,10000);model.core.preview_place(1,56000 if blocking else 90000,0,0)
 		model.core.preview_begin(0,slot)

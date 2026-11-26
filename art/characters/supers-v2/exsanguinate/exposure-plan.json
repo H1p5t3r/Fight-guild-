@@ -1,0 +1,108 @@
+{
+  "name": "Exsanguinate",
+  "character": 5,
+  "slot": 31,
+  "input": "214214Hs",
+  "status": "completed-native-review",
+  "date": "2026-11-26",
+  "startup": 8,
+  "active": 3,
+  "recovery": 32,
+  "freeze": 54,
+  "pairTicks": 108,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 300,
+  "bodyKeys": 20,
+  "choreography": "Low coiled load, opening scissor cut, controlled tightening and close knife crossings at 48/84, deliberate last reload and explosive X finish at 108. Four extra paired compression keys show the longer close-range buildup. Preserve unequal knives and slender arms.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      14,
+      3
+    ],
+    [
+      24,
+      4
+    ],
+    [
+      33,
+      16
+    ],
+    [
+      40,
+      17
+    ],
+    [
+      47,
+      5
+    ],
+    [
+      48,
+      6
+    ],
+    [
+      57,
+      7
+    ],
+    [
+      65,
+      8
+    ],
+    [
+      73,
+      18
+    ],
+    [
+      79,
+      19
+    ],
+    [
+      83,
+      9
+    ],
+    [
+      84,
+      10
+    ],
+    [
+      93,
+      11
+    ],
+    [
+      101,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      8,
+      14
+    ],
+    [
+      18,
+      15
+    ]
+  ],
+  "requirements": [
+    "Black hair, lean arms and unchanged costume",
+    "Long knife in right near hand; short knife in left pauldron arm",
+    "Fixed 480-pixel anatomical reference",
+    "Largest change from last startup to first active",
+    "Stored grey-life cash-out consumed once, unchanged",
+    "No body smears or interpolation"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false
+}

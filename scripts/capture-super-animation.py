@@ -9,7 +9,7 @@ from pathlib import Path
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('super', help='production folder, e.g. flashpoint')
-parser.add_argument('--case', choices=['hit','mirrored','block','whiff','followup','near','far','tip','airborne'])
+parser.add_argument('--case', choices=['hit','mirrored','block','whiff','followup','near','far','tip','airborne','bleed'])
 parser.add_argument('--stills', action='store_true')
 parser.add_argument('--baseline', action='store_true')
 args = parser.parse_args()

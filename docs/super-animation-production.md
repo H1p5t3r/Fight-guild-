@@ -467,6 +467,41 @@ bash scripts/godot.sh --headless --script res://tests/super_presentation_test.gd
 python scripts/capture-super-animation.py bloodletting
 ```
 
+## 12 — Fillet / Exsanguinate
+
+[Watch the native 60 FPS review with sound](../exports/FightGuild-Exsanguinate-2026-11-26.mp4).
+Twenty original body keys build from a compact knife coil through tightening
+crosscuts into a decisive X finish. Four additional compression drawings give
+the longer capture a deliberate buildup. Black hair, lean arms and the unequal
+right/left knives follow Bloodletting's design. Every drawing uses the same
+480-pixel anatomical reference; the largest adjacent long-knife movement is
+160.37 world units at first active.
+
+Six crimson/black/ivory effects, four original knife impacts and a dedicated
+portrait accompany native beats 0/48/84/release-108. The opening was regenerated
+to correct extra limbs. An optional per-frame atlas column boundary preserves
+the extended boot without resizing or altering source pixels. Block and miss
+recover from the opening cut without showing a successful finish.
+
+The 8/3/32 timing, 300 base damage, hard knockdown and cost are unchanged. The
+fifth review case starts with 150 owned grey life and shows the 450-damage
+cash-out. The animation suite passes 18,575 checks, including consumption of
+bleed and grey life exactly once, both owners/facings, all receivers, every body
+key, scale, pause, snapshot replay and edited duration. The full super suite
+passes 8,302 checks. The native review covers hit, mirrored hit, block, miss and
+the stored-bleed finish.
+
+Sources: [exposure plan](../art/characters/supers-v2/exsanguinate/exposure-plan.json),
+[originals and correction records](../art/characters/supers-v2/exsanguinate/sources.json),
+[landmarks and atlas boundaries](../art/characters/supers-v2/exsanguinate/layout.json).
+
+```bash
+python scripts/register-super-presentation.py exsanguinate
+python scripts/generate-exsanguinate-audio.py
+bash scripts/godot.sh --headless --script res://tests/super_presentation_test.gd -- --test --character 5 --slot 31
+python scripts/capture-super-animation.py exsanguinate
+```
+
 ## Production order
 
 1. Sky Foundry — full pass and native review.
@@ -480,6 +515,6 @@ python scripts/capture-super-animation.py bloodletting
 9. No Safe Harbour — full pass and native review.
 10. Undertow — full pass and native review.
 11. Bloodletting — full pass and native review.
-12. Exsanguinate.
+12. Exsanguinate — full pass and native review.
 
 The browser Move Workshop remains frozen throughout this native production pass.

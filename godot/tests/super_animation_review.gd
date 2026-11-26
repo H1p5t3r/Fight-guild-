@@ -51,6 +51,7 @@ func run() -> void:
 	await process_frame
 	var examples: Array=[[0,4,1,"hit"],[1,5,-1,"mirrored"],[0,4,1,"block"],[0,4,1,"whiff"]]
 	if character==4 and slot==12:examples.append_array([[0,5,1,"tip"],[0,1,1,"airborne"]])
+	if character==5 and slot==31:examples.append([0,4,1,"bleed"])
 	if args.has("--baseline"):examples=[examples[0]]
 	if args.has("--case"):
 		var chosen:=str(args[args.find("--case")+1])
@@ -74,6 +75,7 @@ func run() -> void:
 					break
 		model.core.preview_place(owner,50000-facing*(33000 if id=="whiff" else 19000 if id=="tip" else 6000),0,10000)
 		model.core.preview_place(1-owner,50000+facing*(33000 if id=="whiff" else 19000 if id=="tip" else 6000),26000 if id=="airborne" else 0,0)
+		if id=="bleed":model.core.preview_status(1-owner,1,150)
 		caption.text="%s  /  %s  /  %s" % [entry.name.to_upper(),entry.input,"BEFORE" if args.has("--baseline") else id.to_upper()+" / 60 FPS"]
 		await show_frame(id+"-idle")
 		if not quick:
@@ -97,8 +99,9 @@ func run() -> void:
 			var guard:=2 if facing>0 else 1
 			model.step(guard if id=="block" and owner==1 else 0,guard if id=="block" and owner==0 else 0)
 		var damage:=1000-int(model.state().players[1-owner].health)
-		var hit:=id in ["hit","mirrored","tip"]
-		if saw_pair!=hit or (hit and damage!=int(move.damage)) or (id in ["whiff","airborne"] and damage!=0):failures+=1
+		var hit:=id in ["hit","mirrored","tip","bleed"]
+		if saw_pair!=hit or (hit and damage!=int(move.damage)+(150 if id=="bleed" else 0)) or (id in ["whiff","airborne"] and damage!=0):failures+=1
+		if id=="bleed" and (int(model.state().players[1-owner].bleedTime)!=0 or int(model.state().players[1-owner].greyLife)!=0):failures+=1
 		print(entry.name," / ",id," / damage ",damage," / paired ",saw_pair)
 	print("Super animation review: %d failures"%failures)
 	quit(1 if failures else 0)
