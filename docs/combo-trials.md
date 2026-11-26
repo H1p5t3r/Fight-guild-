@@ -2,16 +2,16 @@
 
 Open **Combo Trials** from the main menu, or **Combo trials** in native Training / Combat Lab. The first set contains ten routes across all six fighters. This is a playable Godot feature; the browser Move Workshop remains unchanged and unpublished.
 
-The fight appears beside five scrolling **P / K / S / Hs / D** lanes. Press when a note reaches the white line. A long trail means hold the button until its end cap reaches that line. The separate direction track shows motion inputs and held directions, including Anvil's charge-back. Short direction sequences are grouped into readable ribbons such as `236`; their small timing markers retain the original input frames.
+The fight appears beside five scrolling **P / K / S / Hs / D** lanes. Press when a note reaches the white line. A long trail means hold the button until its end cap reaches that line. The separate direction track shows scrolling arrows and held-direction trails, including Anvil's charge-back. Rapid motions fan their arrows across the direction lane so they stay readable, while each arrow retains its original timing at the line.
 
-**DIR uses screen directions**: 4 is left, 6 is right. Route labels use normal facing-relative numpad notation. Switching to **Face left** mirrors the stage setup, input replay and direction cues, while `236S` still names the same move. The live arrow at the receptor follows your actual stick/keyboard input.
+**DIR uses screen directions**: a left arrow means left on your stick/keyboard. Route labels use normal facing-relative numpad notation. Switching to **Face left** mirrors the stage setup, input replay and direction arrows, while `236S` still names the same move. The live arrow at the receptor follows your actual stick/keyboard input; its small hollow circle means neutral.
 
 ## Practice
 
 - **Watch / F2** plays real recorded inputs through the current combat simulation. **Try / Retry / F3** resets the setup and gives a four-count lead-in.
 - Your Player 1 keyboard/controller bindings apply. Default attacks are **J / K / L / I / O**. **Start** retries from a result, or pauses/resumes during a trial. Keyboard/controller navigation can select the other controls between attempts or while paused.
 - **F4** pauses/resumes; **Esc** returns to the previous screen. Focus loss and P1 controller disconnection pause the attempt. Held input must be released before resuming or starting again.
-- **100%, 75%, 50% speed** slow the fight and chart together, preserving simulation-frame spacing. Optional timing clicks follow the actual notes; they are not quantized to the background music. Combat sound settings and reduced camera motion are respected.
+- **100%, 75%, 50% speed** slow the fight and chart together, preserving simulation-frame spacing. The count-in and input guidance are visual, with no metronome clicks. Combat sounds, fighter music and reduced camera motion settings are respected.
 - Button presses show **On time**, **Early** or **Late** in 60 Hz input frames. Notes more than ten frames away from a press are marked missed/extra for coaching. This is not a new gameplay input window.
 - Begin motion inputs ahead of the button note. Direction markers show the demo's example; they do not require one-frame precision. The game's normal motion buffer accepts earlier/slower motions when they remain within its input window.
 - A clear requires the expected moves and contacts in order, with the live combo counter remaining unbroken. Matching note timing with a wrong motion does not pass. Legal earlier/later buffered inputs can still clear, even with a different timing grade.

@@ -103,7 +103,6 @@ func run() -> void:
 	await process_frame
 	var window: ComboTrialsWindow = game.combo_trials
 	window.set_physics_process(false)
-	window.guide_toggle.button_pressed = false
 	window.combat_audio.enabled = false
 	check(window.visible and game.has_open_dialog(), "Main menu did not open modal trials")
 	check(window.controls == game.fighter_inputs, "Trials ignored player remaps/controller assignment")

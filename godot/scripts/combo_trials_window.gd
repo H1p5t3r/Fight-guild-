@@ -23,7 +23,6 @@ var result_label: Label
 var detail_label: Label
 var route_row: HBoxContainer
 var bindings_label: Label
-var guide_toggle: CheckButton
 var root_ui: Control
 var route_ids: Array[int] = []
 var step_labels: Array[Label] = []
@@ -36,8 +35,6 @@ var speed := 1.0
 var input_raw := 0
 var clear_saved := false
 var progress := ConfigFile.new()
-var blip := AudioStreamPlayer.new()
-var tick_sound: AudioStreamWAV
 var error := ""
 var reduced_motion := false
 var pause_reason := ""
@@ -57,10 +54,6 @@ func _ready() -> void:
 	focus_entered.connect(func(): focused = true; release_required = true)
 	if controls != null: controls.controller_lost.connect(controller_lost)
 	add_child(combat_audio)
-	add_child(blip)
-	blip.bus = "Combat"
-	tick_sound = make_tick()
-	blip.stream = tick_sound
 	if not OS.get_cmdline_user_args().has("--test"): progress.load(SAVE)
 	error = session.load_catalog()
 	build_interface()
@@ -79,7 +72,6 @@ func open() -> void:
 
 func close() -> void:
 	combat_audio.silence()
-	blip.stop()
 	held.clear()
 	hide()
 	finished.emit()
@@ -178,10 +170,6 @@ func build_interface() -> void:
 	watch_button = button(commands, "WATCH · F2", func(): begin(true))
 	try_button = button(commands, "TRY / RETRY · F3", func(): begin(false))
 	pause_button = button(commands, "PAUSE · F4", toggle_pause)
-	guide_toggle = CheckButton.new()
-	guide_toggle.text = "Timing sounds"
-	guide_toggle.button_pressed = true
-	commands.add_child(guide_toggle)
 	bindings_label = text(root_ui, "", 14, InkMenu.MUTED)
 	bindings_label.position = Vector2(26, 674)
 	bindings_label.size = Vector2(846, 35)
@@ -238,7 +226,6 @@ func begin(demo: bool) -> void:
 	input_raw = 0
 	var owner := gui_get_focus_owner()
 	if owner: owner.release_focus()
-	play_timing_sound()
 	refresh()
 
 func set_paused(value: bool) -> void:
@@ -247,7 +234,7 @@ func set_paused(value: bool) -> void:
 	release_required = true
 	accumulator = 0
 	if is_instance_valid(pause_button): pause_button.text = "RESUME · F4" if paused else "PAUSE · F4"
-	if paused: combat_audio.silence(); blip.stop()
+	if paused: combat_audio.silence()
 
 func toggle_pause() -> void:
 	set_paused(not paused)
@@ -301,23 +288,13 @@ func _physics_process(_delta: float) -> void:
 func tick(raw: int) -> void:
 	var was_running := session.running()
 	session.advance(raw)
-	if was_running:
-		var guide := session.clock < 0 and session.clock % 30 == 0
-		for note in session.notes:
-			if int(note.frame) == session.clock: guide = true
-		if guide: play_timing_sound()
-		if not session.running(): try_button.grab_focus()
+	if was_running and not session.running(): try_button.grab_focus()
 	combat_audio.consume(session.model, session.model.frame() - 1, not paused and focused)
 	if session.state == "success" and not session.demonstration and not clear_saved:
 		clear_saved = true
 		if speed == 1.0 and not OS.get_cmdline_user_args().has("--test"):
 			progress.set_value(str(session.catalog.fingerprint), progress_key(), true)
 			progress.save(SAVE)
-
-func play_timing_sound() -> void:
-	if guide_toggle.button_pressed and combat_audio.enabled and combat_audio.volume > 0 and focused:
-		blip.volume_db = linear_to_db(combat_audio.volume) - 15
-		blip.play()
 
 func progress_key() -> String:
 	return str(session.trial.id) + ("-left" if session.mirrored else "-right")
@@ -354,16 +331,3 @@ func refresh() -> void:
 	bindings_label.text = (controls.keyboard_hint(0) if controls != null else "") + "\nStart: pause / retry · Move labels are facing-relative. DIR shows screen directions."
 	for picker_control in [fighter_picker, route_picker, side_picker, speed_picker]:
 		picker_control.disabled = session.running() and not paused
-
-static func make_tick() -> AudioStreamWAV:
-	var stream := AudioStreamWAV.new()
-	stream.format = AudioStreamWAV.FORMAT_16_BITS
-	stream.mix_rate = 22050
-	var bytes := PackedByteArray()
-	bytes.resize(1324)
-	for i in 662:
-		var envelope := pow(1.0 - float(i) / 662.0, 3.0)
-		var sample := int(sin(TAU * 1100 * i / 22050.0) * envelope * 15000)
-		bytes.encode_s16(i * 2, sample)
-	stream.data = bytes
-	return stream
