@@ -1,0 +1,26 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-last-orders-audio.py",
+  "sounds": [
+    {
+      "file": "last_orders_uppercut.wav",
+      "seconds": 0.36,
+      "sha256": "074f034ff355c8a8d3f5f90297ac13c74c54805b9362adb4f6a45ae8239a23c3"
+    },
+    {
+      "file": "last_orders_lift.wav",
+      "seconds": 0.48,
+      "sha256": "745f61d8d881b6da7e36a524954059104d730c112f67cb0e335078055995d2ad"
+    },
+    {
+      "file": "last_orders_headbutt.wav",
+      "seconds": 0.34,
+      "sha256": "ef26dce7c49ae816f871f95209004da7e90ea7e1704d666688b7d25fdd78736c"
+    },
+    {
+      "file": "last_orders_finish.wav",
+      "seconds": 0.78,
+      "sha256": "80cc3f2fada488933c4815b446d44fa2ab941e70f6f640d472088cde71e865e1"
+    }
+  ]
+}

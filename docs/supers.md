@@ -12,7 +12,8 @@ The [full animation production pass](super-animation-production.md) begins with
 [Freemason](../exports/FightGuild-Freemason-2026-11-25.mp4) and
 [Grand Design](../exports/FightGuild-Grand-Design-2026-11-25.mp4), then
 [Flashpoint](../exports/FightGuild-Flashpoint-2026-11-25.mp4) and
-[The Air Is Mine](../exports/FightGuild-The-Air-Is-Mine-2026-11-26.mp4).
+[The Air Is Mine](../exports/FightGuild-The-Air-Is-Mine-2026-11-26.mp4), followed by
+[Last Orders](../exports/FightGuild-Last-Orders-2026-11-26.mp4).
 These are provisional balance values, captured from the current native build.
 Normal combo proration still applies; the video starts each demonstration fresh.
 Exsanguinate's demonstration begins with 150 stored grey life.

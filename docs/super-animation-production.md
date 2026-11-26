@@ -287,6 +287,44 @@ all placements and interruption by a real opponent attack. The six-case native
 review covers hit, mirrored hit, crouch block, miss, near and far placement.
 Grand Design, full-roster supers and combat feedback are also regression checked.
 
+## 07 — Tapper / Last Orders
+
+[Watch the native 60 FPS review with sound](../exports/FightGuild-Last-Orders-2026-11-26.mp4).
+Twenty original body keys give the normal-stance super a complete uppercut,
+second rising strike, close headbutt, final forehead impact and Dempsey finish.
+Four additional withdrawal keys within that total return the staff from his back
+to his normal grip on block or miss. The successful sequence keeps the staff
+secured behind his back and attacks only with fists and forehead. The same near
+arm performs both uppercuts; an image-generator correction fixed arm continuity.
+
+Every key uses Tapper's existing 470-pixel anatomical scale. The largest measured
+adjacent fist displacement, 114.54 world units, occurs between the held startup
+coil and first active uppercut. Later movements are smaller, with held impacts
+and diminishing recovery. Six separate ivory/amber/ink effects follow the actual
+0/43/74/release-96 beats. The rising effect begins at the fist, and the final burst
+leaves room to read the receiver's recoil. Four original synthesized physical
+impacts distinguish the rising punches, forehead crack and final heavy hit.
+His new cut-in portrait retains the ripped-screen reveal and reverse closure.
+
+The 7/4/38 timing, invulnerability, 340 damage, meter cost and Dempsey-on-hit rule
+are unchanged. Native tests explicitly verify that block/miss retain normal
+stance, while confirmed hits enter Dempsey. The common retiming test now stays
+inside the existing 120-frame capture limit and counts unsuccessful-branch art.
+All receivers, owners/facings, snapshot replay, pause, scale and key coverage pass.
+The full super roster, Tapper mechanics and feedback suites also pass.
+
+Sources: [exposure plan](../art/characters/supers-v2/last-orders/exposure-plan.json),
+[original image records](../art/characters/supers-v2/last-orders/sources.json),
+[layout and pause masks](../art/characters/supers-v2/last-orders/layout.json).
+
+```bash
+python scripts/register-super-presentation.py last-orders
+python scripts/generate-last-orders-audio.py
+bash scripts/godot.sh --headless --script res://tests/super_presentation_test.gd -- --test --character 3 --slot 12
+python scripts/capture-super-animation.py last-orders --stills
+python scripts/capture-super-animation.py last-orders
+```
+
 ## Production order
 
 1. Sky Foundry — full pass and native review.
@@ -295,7 +333,7 @@ Grand Design, full-roster supers and combat feedback are also regression checked
 4. Grand Design — full pass and native review.
 5. Flashpoint — full pass and native review.
 6. The Air Is Mine — full pass and native review.
-7. Last Orders.
+7. Last Orders — full pass and native review.
 8. Whiskey Chaser.
 9. No Safe Harbour.
 10. Undertow.

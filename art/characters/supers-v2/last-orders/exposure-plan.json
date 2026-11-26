@@ -1,0 +1,107 @@
+{
+  "name": "Last Orders",
+  "character": 3,
+  "slot": 12,
+  "input": "236236S",
+  "status": "completed-native-review",
+  "date": "2026-11-26",
+  "startup": 7,
+  "active": 4,
+  "recovery": 38,
+  "freeze": 54,
+  "pairTicks": 96,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 340,
+  "bodyKeys": 20,
+  "choreography": "Deep hip coil into the largest rising uppercut on first active; recoil into a second compact rising strike at43, weave beneath the descending target, headbutt at74 and a final committed forehead strike at96; settle into Dempsey guard.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      14,
+      3
+    ],
+    [
+      26,
+      4
+    ],
+    [
+      42,
+      5
+    ],
+    [
+      43,
+      6
+    ],
+    [
+      52,
+      7
+    ],
+    [
+      62,
+      8
+    ],
+    [
+      73,
+      9
+    ],
+    [
+      74,
+      10
+    ],
+    [
+      82,
+      11
+    ],
+    [
+      89,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      7,
+      14
+    ],
+    [
+      17,
+      15
+    ]
+  ],
+  "requirements": [
+    "Fixed muscular anatomy, staff secured behind his back",
+    "Largest limb travel between last startup and first active",
+    "Impact accents use saved43/74/96 beats",
+    "Headbutts use forehead, no extra limbs or floating weapon",
+    "Hit finishes in Dempsey; block/miss recover normally",
+    "Native hit, mirrored, block and whiff",
+    "Four separate staff-return recovery keys for block and whiff"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveHandTravelWorldUnits": 114.54,
+  "largestAdjacentTipChangeAtFirstActive": true,
+  "verification": {
+    "presentationChecks": 17441,
+    "presentationFailures": 0,
+    "rosterChecks": 8302,
+    "rosterFailures": 0,
+    "reviewDamage": {
+      "hit": 340,
+      "mirrored": 340,
+      "block": 8,
+      "whiff": 0
+    }
+  }
+}
