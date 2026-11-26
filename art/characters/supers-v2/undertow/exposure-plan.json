@@ -1,0 +1,92 @@
+{
+  "name": "Undertow",
+  "character": 4,
+  "slot": 14,
+  "input": "214214Hs",
+  "status": "production",
+  "date": "2026-11-26",
+  "startup": 7,
+  "active": 5,
+  "recovery": 32,
+  "freeze": 54,
+  "pairTicks": 80,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 220,
+  "bodyKeys": 20,
+  "choreography": "Low rightward hook sweep, overhead reel, hip-led turn as target crosses behind, left-facing downcut and finish. Separate right-facing miss/block recovery.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      5,
+      2
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      22,
+      4
+    ],
+    [
+      35,
+      5
+    ],
+    [
+      36,
+      6
+    ],
+    [
+      43,
+      7
+    ],
+    [
+      52,
+      8
+    ],
+    [
+      61,
+      9
+    ],
+    [
+      62,
+      10
+    ],
+    [
+      69,
+      11
+    ],
+    [
+      75,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      8,
+      14
+    ],
+    [
+      18,
+      15
+    ]
+  ],
+  "requirements": [
+    "Fixed480pixel anatomical scale",
+    "Largest hook displacement startup to first active",
+    "Single spear with both grips consistent",
+    "Body turns LEFT as opponent crosses behind",
+    "Connected art preserves original pair facing while gameplay faces left",
+    "Separate right-facing recovery on block/miss"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false
+}

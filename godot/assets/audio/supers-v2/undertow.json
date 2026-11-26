@@ -1,0 +1,26 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-undertow-audio.py",
+  "sounds": [
+    {
+      "file": "undertow_sweep.wav",
+      "seconds": 0.55,
+      "sha256": "9378bdc5e48f67723eaf66485299a90b4884e4bbc491630a6f72edb05b8f7386"
+    },
+    {
+      "file": "undertow_lift.wav",
+      "seconds": 0.48,
+      "sha256": "013f9e4e8f3746724fb6661a8eca089466470a047cb51ce61f0038f79f827663"
+    },
+    {
+      "file": "undertow_turn.wav",
+      "seconds": 0.52,
+      "sha256": "04985fb70ffb935929e134bcb11790d371dd87159cded12ded32b6bdf37d2082"
+    },
+    {
+      "file": "undertow_finish.wav",
+      "seconds": 0.95,
+      "sha256": "7a1a8bef45cc2b3dfb28df492a9903edf9227b5345ab6bad1138fa457dd5b588"
+    }
+  ]
+}

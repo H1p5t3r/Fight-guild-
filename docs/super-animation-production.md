@@ -401,6 +401,40 @@ bash scripts/godot.sh --headless --script res://tests/super_presentation_test.gd
 python scripts/capture-super-animation.py no-safe-harbour
 ```
 
+## 10 — Shark / Undertow
+
+[Watch the native 60 FPS review with sound](../exports/FightGuild-Undertow-2026-11-26.mp4).
+Twenty body keys give Undertow a low committed sweep, overhead reel, visible
+hip-led turn and left-facing finish after the opponent crosses behind Shark.
+Four separate right-facing recovery keys handle block and miss. The opening
+was regenerated to read as a low sweep rather than another chest thrust.
+Fixed 480-pixel anatomical registration preserves Shark's size. The largest
+adjacent hook displacement, 235.29 world units, occurs at first active.
+
+Six teal/ivory effects trace the low sweep, overhead crossing and reverse finish;
+four original synthesized impacts follow native beats 0/36/62/release-80.
+A dedicated portrait uses the existing rip-and-knit freeze. Optional
+`connected_flip` presentation metadata keeps the authored left-facing ending
+in the original pair orientation after gameplay turns toward the displaced
+opponent. It changes neither facing logic nor collision data.
+
+The 7/5/32 timing, invulnerability, side switch, 220 damage, 8 chip and cost are
+unchanged. The animation suite passes 21,245 checks, including all receivers,
+both sides, explicit side-switch/finish orientation, scale, pause, every drawing,
+snapshot replay and edited duration. The full super suite passes 8,302 checks.
+The complete native review confirms hit, mirrored hit, block and miss.
+
+Sources: [exposure plan](../art/characters/supers-v2/undertow/exposure-plan.json),
+[originals and correction records](../art/characters/supers-v2/undertow/sources.json),
+[landmarks and exposure metadata](../art/characters/supers-v2/undertow/layout.json).
+
+```bash
+python scripts/register-super-presentation.py undertow
+python scripts/generate-undertow-audio.py
+bash scripts/godot.sh --headless --script res://tests/super_presentation_test.gd -- --test --character 4 --slot 14
+python scripts/capture-super-animation.py undertow
+```
+
 ## Production order
 
 1. Sky Foundry — full pass and native review.
@@ -412,7 +446,7 @@ python scripts/capture-super-animation.py no-safe-harbour
 7. Last Orders — full pass and native review.
 8. Whiskey Chaser — full pass and native review.
 9. No Safe Harbour — full pass and native review.
-10. Undertow.
+10. Undertow — full pass and native review.
 11. Bloodletting.
 12. Exsanguinate.
 

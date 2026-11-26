@@ -36,6 +36,11 @@ func run()->void:
 					var cue:=SuperAnimation.selection(model,state,owner)
 					if not cue.is_empty():
 						seen[int(cue.pose)]=true
+						if character==4 and slot==14:
+							if str(cue.stage)=="paired" or str(cue.stage)=="connected":
+								check(int(cue.facing)==facing,"Side-switch art reversed twice")
+							if str(cue.stage)=="connected":
+								check((int(state.players[1-owner].x)-int(state.players[owner].x))*facing<0,"Undertow lost side switch")
 						check(is_equal_approx(arena.sprites[owner].scale.y,150.0/float(body.body_height)*arena.size.x/1000.0*arena.camera_zoom),"Anatomical scale changed")
 						if str(cue.stage)=="paired":
 							paired=true

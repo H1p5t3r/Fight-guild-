@@ -26,6 +26,9 @@ static func selection(model: CombatModel, state: Dictionary, owner: int) -> Dict
 		result.pose = exposure(spec.paired, int(result.tick))
 	elif int(fighter.pairRecovery) > 0:
 		result.stage = "connected"
+		# Side-switch supers can author their finish facing back across the
+		# original pair. Gameplay has already turned toward the displaced target.
+		if spec.get("connected_flip",false): result.facing=-int(fighter.facing)
 		result.tick = maxi(0, int(spec.owner_recovery)-int(fighter.pairRecovery))
 		result.pose = exposure(spec.connected, int(result.tick))
 	else:

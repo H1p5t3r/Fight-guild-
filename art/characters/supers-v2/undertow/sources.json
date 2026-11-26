@@ -1,0 +1,70 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v2/undertow/entry.png",
+    "original": "/workspace/generated_images/exec-f965602d-2e06-4854-a505-f0845efcaf0e.png",
+    "sha256": "e6d6a86570a0f55dee918ab8928f5f2aa63ba72926d3fe644116bb157fb8bb53",
+    "prompt": "art/characters/supers-v2/undertow/entry-correction-prompt.txt",
+    "references": [
+      "/workspace/generated_images/exec-c4133020-4960-4d30-bc45-27275fb7e531.png"
+    ]
+  },
+  {
+    "id": "lift",
+    "file": "godot/assets/fighters/supers-v2/undertow/lift.png",
+    "original": "/workspace/generated_images/exec-8698bf9a-2cc9-4e9d-b6b4-9ee4c2d2086b.png",
+    "sha256": "9f034cc124fe0e8248e625c76b6aed4d1f06950da80886e0b39d1fb84f4cbca7",
+    "prompt": "art/characters/supers-v2/undertow/lift-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/undertow/entry.png"
+    ]
+  },
+  {
+    "id": "cross",
+    "file": "godot/assets/fighters/supers-v2/undertow/cross.png",
+    "original": "/workspace/generated_images/exec-4fd3c048-63f3-41ce-a4fd-fac1ebb0a5db.png",
+    "sha256": "bb09e7979ce249a4baa2205e3b37d2fa5aed2cbd7564a3e008c9bc7f09c47f5a",
+    "prompt": "art/characters/supers-v2/undertow/cross-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/undertow/lift.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v2/undertow/finish.png",
+    "original": "/workspace/generated_images/exec-32b67722-c9ed-4275-a6aa-5576000bf590.png",
+    "sha256": "3a36755ca3ae23943e2278d472bf4e8bc132e719940503299a53bd000bc82fd6",
+    "prompt": "art/characters/supers-v2/undertow/finish-correction-prompt.txt",
+    "references": [
+      "/workspace/generated_images/exec-c1967d4c-1855-4679-9ac2-6333df0779eb.png"
+    ]
+  },
+  {
+    "id": "withdraw",
+    "file": "godot/assets/fighters/supers-v2/undertow/withdraw.png",
+    "original": "/workspace/generated_images/exec-d38d919b-d922-4d69-9eb1-39f8f9df133b.png",
+    "sha256": "c402afbbdf9c021bc864266f5bc530661fc207e82ca27a2bab9eb91d260e96a1",
+    "prompt": "art/characters/supers-v2/undertow/withdraw-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/undertow/entry.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v2/undertow/effects.png",
+    "original": "/workspace/generated_images/exec-efa16f48-efc3-485a-9469-b847349b4c92.png",
+    "sha256": "15a49b1eddbeedb2bfdbe2f48ff150e03166dbf96694a7d453d74f14ee1cca22",
+    "prompt": "art/characters/supers-v2/undertow/effects-prompt.txt",
+    "references": []
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/undertow/portrait.png",
+    "original": "/workspace/generated_images/exec-6a8a73c8-b22a-44e8-bd3f-12a98430f66a.png",
+    "sha256": "6b347ada2d58b36215e678a627f5ad5fa9e714197ea3ab90f45d76392eec584d",
+    "prompt": "art/characters/supers-v2/undertow/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/undertow/entry.png"
+    ]
+  }
+]
