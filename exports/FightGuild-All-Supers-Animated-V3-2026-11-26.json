@@ -1,0 +1,160 @@
+{
+  "title": "Fight Guild \u2014 Full Super Animation Showcase",
+  "version": "v3",
+  "resolution": [
+    1440,
+    810
+  ],
+  "fps": 60,
+  "frames": 3786,
+  "seconds": 63.1,
+  "retimed": false,
+  "segments": [
+    {
+      "name": "Sky Foundry",
+      "fighter": "Anvil",
+      "input": "63214Hs",
+      "source": "exports/FightGuild-Sky-Foundry-V3-2026-11-26.mp4",
+      "sha256": "c8bfa6ec1f7eb454fee868bf35195e3f4b47b1840503a7b376bdc237fe3af243",
+      "case": "hit",
+      "sourceStartFrame": 2,
+      "sourceEndFrameExclusive": 323,
+      "timelineStartFrame": 0,
+      "frames": 321
+    },
+    {
+      "name": "Iron Dominion",
+      "fighter": "Anvil",
+      "input": "63214S",
+      "source": "exports/FightGuild-Iron-Dominion-V3-2026-11-26.mp4",
+      "sha256": "ba2c0cecde41048ab8174069a3dd3460e32aea953fe43291b65c68eeafd921a6",
+      "case": "hit",
+      "sourceStartFrame": 2,
+      "sourceEndFrameExclusive": 317,
+      "timelineStartFrame": 321,
+      "frames": 315
+    },
+    {
+      "name": "Freemason",
+      "fighter": "Hammer",
+      "input": "236236S",
+      "source": "exports/FightGuild-Freemason-V3-2026-11-26.mp4",
+      "sha256": "df364db1929f56a35384804a50c0e2a241dfb0956da0de0afb66d5cc1c18c13a",
+      "case": "hit",
+      "sourceStartFrame": 2,
+      "sourceEndFrameExclusive": 317,
+      "timelineStartFrame": 636,
+      "frames": 315
+    },
+    {
+      "name": "Grand Design",
+      "fighter": "Hammer",
+      "input": "214214Hs",
+      "source": "exports/FightGuild-Grand-Design-V3-2026-11-26.mp4",
+      "sha256": "27b139713724f5645e9f91de94cf7b45c6a0ffd07f275c8cf367e3763cba8ee7",
+      "case": "hit",
+      "sourceStartFrame": 2,
+      "sourceEndFrameExclusive": 317,
+      "timelineStartFrame": 951,
+      "frames": 315
+    },
+    {
+      "name": "Flashpoint",
+      "fighter": "Smoke",
+      "input": "236236S",
+      "source": "exports/FightGuild-Flashpoint-V3-2026-11-26.mp4",
+      "sha256": "eb6143ac9799086cf0307f46888fad405709e994e54919103c15c73903fff80f",
+      "case": "hit",
+      "sourceStartFrame": 2,
+      "sourceEndFrameExclusive": 317,
+      "timelineStartFrame": 1266,
+      "frames": 315
+    },
+    {
+      "name": "The Air Is Mine",
+      "fighter": "Smoke",
+      "input": "214214Hs",
+      "source": "exports/FightGuild-The-Air-Is-Mine-V3-2026-11-26.mp4",
+      "sha256": "aef670f4a2fc2c12fa8f05845f99a8a3baa7f38d8548d193650550a7f50de18c",
+      "case": "hit",
+      "sourceStartFrame": 2,
+      "sourceEndFrameExclusive": 317,
+      "timelineStartFrame": 1581,
+      "frames": 315
+    },
+    {
+      "name": "Last Orders",
+      "fighter": "Tapper",
+      "input": "236236S",
+      "source": "exports/FightGuild-Last-Orders-V3-2026-11-26.mp4",
+      "sha256": "06dd7779fa88807e2ea8310d9464a27f08fe5c3a39dcd90d6bd24a230da821cb",
+      "case": "hit",
+      "sourceStartFrame": 2,
+      "sourceEndFrameExclusive": 317,
+      "timelineStartFrame": 1896,
+      "frames": 315
+    },
+    {
+      "name": "Whiskey Chaser",
+      "fighter": "Tapper",
+      "input": "214214Hs",
+      "source": "exports/FightGuild-Whiskey-Chaser-V3-2026-11-26.mp4",
+      "sha256": "03b211af0ae7ab35553cc2e24121bcf4ee649c1efed321efeef53b5a7b9a1289",
+      "case": "hit",
+      "sourceStartFrame": 2,
+      "sourceEndFrameExclusive": 317,
+      "timelineStartFrame": 2211,
+      "frames": 315
+    },
+    {
+      "name": "No Safe Harbour",
+      "fighter": "Shark",
+      "input": "236236S",
+      "source": "exports/FightGuild-No-Safe-Harbour-V3-2026-11-26.mp4",
+      "sha256": "4907355a219076a6e064d231c54ce63b8078b5c647fd2ff7e8dfe7df00ca63d1",
+      "case": "hit",
+      "sourceStartFrame": 2,
+      "sourceEndFrameExclusive": 317,
+      "timelineStartFrame": 2526,
+      "frames": 315
+    },
+    {
+      "name": "Undertow",
+      "fighter": "Shark",
+      "input": "214214Hs",
+      "source": "exports/FightGuild-Undertow-V3-2026-11-26.mp4",
+      "sha256": "7684a1fef48633d488a19a5ac38dcf2d268c85324a0511a0cda4abb8f5c35b09",
+      "case": "hit",
+      "sourceStartFrame": 2,
+      "sourceEndFrameExclusive": 317,
+      "timelineStartFrame": 2841,
+      "frames": 315
+    },
+    {
+      "name": "Bloodletting",
+      "fighter": "Fillet",
+      "input": "236236S",
+      "source": "exports/FightGuild-Bloodletting-V3-2026-11-26.mp4",
+      "sha256": "4be70077355d49f54e213393fd52155e17ba263ea4dc610e5e392d2fff22ff97",
+      "case": "hit",
+      "sourceStartFrame": 2,
+      "sourceEndFrameExclusive": 317,
+      "timelineStartFrame": 3156,
+      "frames": 315
+    },
+    {
+      "name": "Exsanguinate",
+      "fighter": "Fillet",
+      "input": "214214Hs",
+      "source": "exports/FightGuild-Exsanguinate-V3-2026-11-26.mp4",
+      "sha256": "31d8ee0a1f623925257510f03eba0d60c32ff2b8b14ea04ad35ddff6f48290ee",
+      "case": "bleed",
+      "sourceStartFrame": 1262,
+      "sourceEndFrameExclusive": 1577,
+      "timelineStartFrame": 3471,
+      "frames": 315
+    }
+  ],
+  "note": "Native Godot footage at full speed. Exsanguinate starts with 150 owned grey life.",
+  "sha256": "061c33f85c704e99385ff6fa2dc873c3f9f4aacdf44c56a670ebd766ff19f51a"
+}

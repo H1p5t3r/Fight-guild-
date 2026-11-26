@@ -1,10 +1,22 @@
 # Super animation revisions
 
-The [super-specific direction](super-animation-standard.md) replaces the evenly
-paced, smaller movements of the first full pass. Use the approved in-game model,
-full-body crescent motion, sudden impact and a longer finish. This pass proceeds
-one super at a time. The [v2 production record](super-animation-production.md)
-retains the previous drawings, references and reviews.
+All twelve supers have been revised and reviewed individually using the
+[super-specific direction](super-animation-standard.md): approved in-game models,
+full-body crescent motion, sudden impact and a longer finish. The pass includes
+232 body drawings, 72 effect drawings and twelve projectile drawings. The
+[v2 production record](super-animation-production.md) retains the previous art.
+
+[Watch all twelve supers](../exports/FightGuild-All-Supers-Animated-V3-2026-11-26.mp4)
+at native 60 FPS with sound (63.1 seconds). Chapters identify each fighter and
+super; Exsanguinate demonstrates the stored-bleed cash-out. The accompanying
+[manifest](../exports/FightGuild-All-Supers-Animated-V3-2026-11-26.json) records
+source hashes and exact frame ranges. No footage is retimed for the showcase.
+
+Each animation has a separate native hit/miss review, mirrored coverage,
+block coverage where applicable, source provenance and a fixed-world-scale
+comparison against the approved idle. The only combat timing change is Grand
+Design's recovery from 10 to 18 frames; all other changes in this pass are
+presentation changes. The Move Workshop remains paused.
 
 ## Sky Foundry — complete
 
