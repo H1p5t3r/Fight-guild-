@@ -9,6 +9,8 @@ from pathlib import Path
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output', default='build/animation-scale-before')
 parser.add_argument('--catalog', action='store_true', help='Review every unique body cell in the roster')
+parser.add_argument('--character',type=int,choices=range(6))
+parser.add_argument('--phase',help='Only render this super phase')
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 out = (root / args.output).resolve()
@@ -34,6 +36,10 @@ with (out/'display.log').open('w') as log:
                    'res://tests/animation_scale_review.gd', '--', '--test', '--output', str(out)]
         if args.catalog:
             command.append('--catalog')
+        if args.character is not None:
+            command += ['--character',str(args.character)]
+        if args.phase:
+            command += ['--phase',args.phase]
         with (out/'godot.log').open('w') as game_log:
             subprocess.run(command, cwd=root, env=env, stdout=game_log,
                            stderr=subprocess.STDOUT, check=True, timeout=180)

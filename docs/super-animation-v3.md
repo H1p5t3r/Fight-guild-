@@ -18,6 +18,12 @@ the left shield, spine, hips, legs, head, beard and apron counterbalance and
 follow the action. Six replacement magma effects outline that path with open
 centers so the body remains readable.
 
+The final slam and first overtravel were corrected after review: the far shield
+arm now sits low behind the rear hip. This separates its shoulder/forearm from
+the near striking arm and removes the extra-arm reading in the original finish.
+The [source history](../art/characters/supers-v3/sky-foundry/source-history.json)
+retains the superseded drawings and the correction prompts.
+
 The pose exposures changed: the airborne tuck arrives earlier, the compressed
 load holds before the final hit, and the low finish lasts longer before the
 regather. This fits the current 112-tick capture and 24-tick recovery. The final

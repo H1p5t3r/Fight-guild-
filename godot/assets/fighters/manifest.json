@@ -10861,7 +10861,7 @@
           },
           {
             "file": "supers-v3/sky-foundry/slam.png",
-            "sha256": "50791b5bdfcdaa4514d4f7fe131b60e71e689c8d154a62449d34aab0dbdaa509",
+            "sha256": "47f594920ed845025cef9cfec754e3099ce8d91411dd651c7004878fb68dd86f",
             "source_size": [
               1536,
               1024
@@ -10873,10 +10873,10 @@
               512
             ],
             "bounds": [
-              179,
+              178,
               7,
               579,
-              466
+              467
             ],
             "pivot": [
               350,
@@ -10893,7 +10893,7 @@
           },
           {
             "file": "supers-v3/sky-foundry/slam.png",
-            "sha256": "50791b5bdfcdaa4514d4f7fe131b60e71e689c8d154a62449d34aab0dbdaa509",
+            "sha256": "47f594920ed845025cef9cfec754e3099ce8d91411dd651c7004878fb68dd86f",
             "source_size": [
               1536,
               1024
@@ -10905,10 +10905,10 @@
               512
             ],
             "bounds": [
-              126,
-              2,
-              574,
-              507
+              94,
+              1,
+              542,
+              508
             ],
             "pivot": [
               352,
@@ -10925,7 +10925,7 @@
           },
           {
             "file": "supers-v3/sky-foundry/slam.png",
-            "sha256": "50791b5bdfcdaa4514d4f7fe131b60e71e689c8d154a62449d34aab0dbdaa509",
+            "sha256": "47f594920ed845025cef9cfec754e3099ce8d91411dd651c7004878fb68dd86f",
             "source_size": [
               1536,
               1024
@@ -10937,9 +10937,9 @@
               512
             ],
             "bounds": [
-              152,
-              12,
-              645,
+              151,
+              10,
+              647,
               491
             ],
             "pivot": [
@@ -10957,7 +10957,7 @@
           },
           {
             "file": "supers-v3/sky-foundry/slam.png",
-            "sha256": "50791b5bdfcdaa4514d4f7fe131b60e71e689c8d154a62449d34aab0dbdaa509",
+            "sha256": "47f594920ed845025cef9cfec754e3099ce8d91411dd651c7004878fb68dd86f",
             "source_size": [
               1536,
               1024
@@ -10969,10 +10969,10 @@
               512
             ],
             "bounds": [
-              56,
-              13,
+              40,
+              101,
               668,
-              493
+              494
             ],
             "pivot": [
               312,
@@ -10989,7 +10989,7 @@
           },
           {
             "file": "supers-v3/sky-foundry/recovery.png",
-            "sha256": "c2732eb8797e68cbd96a549ee2787c31a728271c650737ce93ac097aefda2eda",
+            "sha256": "4b0f5a45e58be2e149762bec2e18f6575d91449d9cbbf1de28c3e8b254e9f44e",
             "source_size": [
               1536,
               1024
@@ -11001,10 +11001,10 @@
               512
             ],
             "bounds": [
-              116,
-              11,
-              726,
-              481
+              114,
+              106,
+              727,
+              482
             ],
             "pivot": [
               340,
@@ -11021,7 +11021,7 @@
           },
           {
             "file": "supers-v3/sky-foundry/recovery.png",
-            "sha256": "c2732eb8797e68cbd96a549ee2787c31a728271c650737ce93ac097aefda2eda",
+            "sha256": "4b0f5a45e58be2e149762bec2e18f6575d91449d9cbbf1de28c3e8b254e9f44e",
             "source_size": [
               1536,
               1024
@@ -11033,10 +11033,10 @@
               512
             ],
             "bounds": [
-              110,
-              52,
-              594,
-              471
+              108,
+              47,
+              596,
+              472
             ],
             "pivot": [
               342,
@@ -11053,7 +11053,7 @@
           },
           {
             "file": "supers-v3/sky-foundry/recovery.png",
-            "sha256": "c2732eb8797e68cbd96a549ee2787c31a728271c650737ce93ac097aefda2eda",
+            "sha256": "4b0f5a45e58be2e149762bec2e18f6575d91449d9cbbf1de28c3e8b254e9f44e",
             "source_size": [
               1536,
               1024
@@ -11065,10 +11065,10 @@
               512
             ],
             "bounds": [
-              141,
-              31,
-              625,
-              492
+              140,
+              29,
+              626,
+              493
             ],
             "pivot": [
               350,
@@ -11085,7 +11085,7 @@
           },
           {
             "file": "supers-v3/sky-foundry/recovery.png",
-            "sha256": "c2732eb8797e68cbd96a549ee2787c31a728271c650737ce93ac097aefda2eda",
+            "sha256": "4b0f5a45e58be2e149762bec2e18f6575d91449d9cbbf1de28c3e8b254e9f44e",
             "source_size": [
               1536,
               1024
@@ -11097,9 +11097,9 @@
               512
             ],
             "bounds": [
-              153,
-              20,
-              625,
+              152,
+              18,
+              626,
               495
             ],
             "pivot": [

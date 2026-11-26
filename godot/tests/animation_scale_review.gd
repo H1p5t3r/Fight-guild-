@@ -32,12 +32,15 @@ func tile(character: int, phase: String, pose: int, column: int, row: int, title
 func run() -> void:
 	root.content_scale_size=Vector2i(1800,1600);root.size=Vector2i(1800,1600)
 	var args:=OS.get_cmdline_user_args()
+	var selected_character:=int(args[args.find("--character")+1]) if args.has("--character") else -1
+	var selected_phase:=str(args[args.find("--phase")+1]) if args.has("--phase") else ""
 	var output:=str(args[args.find("--output")+1])
 	DirAccess.make_dir_recursive_absolute(output)
 	var bg:=ColorRect.new();bg.color=Color("171c22");bg.size=Vector2(1800,1600);root.add_child(bg)
 	if args.has("--catalog"):
 		tile_size=Vector2(225,240);zoom=1.1;floor_y=215
 		for character in 6:
+			if selected_character>=0 and character!=selected_character:continue
 			var fighter:Dictionary=FighterArt.catalog().fighters[character]
 			var cells:=[];var seen:={}
 			for phase in fighter:
@@ -64,10 +67,12 @@ func run() -> void:
 				page.queue_free();await process_frame
 		print("Animation scale review complete");quit();return
 	for character in 6:
+		if selected_character>=0 and character!=selected_character:continue
 		var fighter:Dictionary=FighterArt.catalog().fighters[character]
 		for slot in fighter.get("super_presentations",{}):
 			var spec:Dictionary=fighter.super_presentations[slot]
 			var phase:=str(spec.phase)
+			if not selected_phase.is_empty() and phase!=selected_phase:continue
 			var frames:Array=FighterArt.sheet(character,phase).frames
 			page=Control.new();root.add_child(page)
 			var heading:=Label.new();heading.position=Vector2(12,8)

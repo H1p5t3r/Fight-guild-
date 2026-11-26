@@ -65,8 +65,21 @@
     "frames": 965,
     "fps": 60,
     "video": "exports/FightGuild-Sky-Foundry-V3-2026-11-26.mp4",
-    "sha256": "96d8d14e6ea3e567446371a3a1319cc4a409bc2016171290f24f561f2455e3d8"
+    "sha256": "c8bfa6ec1f7eb454fee868bf35195e3f4b47b1840503a7b376bdc237fe3af243"
   },
   "gameplayChanged": false,
-  "websiteUpdated": false
+  "websiteUpdated": false,
+  "anatomyCorrection": {
+    "scope": "Final slam and overtravel; far shield arm lowered behind rear hip",
+    "checks": 26895,
+    "failures": 0,
+    "log": "build/sky-foundry-v3-anatomy-test.log",
+    "visualReview": [
+      "body-only fixed-scale atlas",
+      "contact with Shark",
+      "mirrored contact with Fillet",
+      "grounded miss"
+    ],
+    "sourceBytesPreserved": true
+  }
 }

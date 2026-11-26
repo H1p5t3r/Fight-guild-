@@ -1,0 +1,29 @@
+[
+  {
+    "id": "slam",
+    "file": "godot/assets/fighters/supers-v3/sky-foundry/slam.png",
+    "original": "/workspace/generated_images/exec-71b4a335-b647-41c5-80e3-375b19dce0e7.png",
+    "sha256": "50791b5bdfcdaa4514d4f7fe131b60e71e689c8d154a62449d34aab0dbdaa509",
+    "prompt": "art/characters/supers-v3/sky-foundry/slam-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/base.png",
+      "godot/assets/fighters/supers-v3/sky-foundry/entry.png",
+      "godot/assets/fighters/supers-v3/sky-foundry/air.png"
+    ],
+    "revisionCommit": "059bdb2",
+    "supersededReason": "User flagged an extra-arm reading in the final slam and matching overtravel."
+  },
+  {
+    "id": "recovery",
+    "file": "godot/assets/fighters/supers-v3/sky-foundry/recovery.png",
+    "original": "/workspace/generated_images/exec-40a058ed-b26e-4387-ad08-f897c8c8fe19.png",
+    "sha256": "c2732eb8797e68cbd96a549ee2787c31a728271c650737ce93ac097aefda2eda",
+    "prompt": "art/characters/supers-v3/sky-foundry/recovery-prompt.txt",
+    "references": [
+      "godot/assets/fighters/anvil-bull-v2/base.png",
+      "godot/assets/fighters/supers-v3/sky-foundry/slam.png"
+    ],
+    "revisionCommit": "059bdb2",
+    "supersededReason": "User flagged an extra-arm reading in the final slam and matching overtravel."
+  }
+]

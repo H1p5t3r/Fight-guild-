@@ -22,6 +22,13 @@ contact holds and a longer deceleration through the finish. Avoid evenly spaced
 poses that make the attack float. Keep continuous anatomy through the smooth
 parts; do not stretch the sprite or resize each pose to its bounds.
 
+Inspect anatomy without effects at enlarged size before signing off a sheet.
+Trace each shoulder through one elbow and wrist to its hand. Shield/weapon arms
+must attach to the correct shoulder and read separately from the torso; overlapping
+muscle shapes can suggest an extra limb even when only two hands are drawn.
+Check the same pose with its receiver visible so their limbs do not merge into
+the attacker. Carry this correction through the adjacent follow-through keys.
+
 Timing is editable, not sacred. First adjust pose exposures within the saved
 simulation clocks. If startup, active windows, capture duration, hitstop or
 recovery need changing, update their authoritative combat data too and validate
