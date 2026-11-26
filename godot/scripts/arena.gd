@@ -14,6 +14,7 @@ var collision_layer: Control
 var impact_layer: Control
 var impact_cues: Array = []
 var release_cues: Array = []
+var status_cues: Array = []
 var hud_layer: Control
 var feedback := CombatFeedback.new()
 var camera_center := 0.5
@@ -61,7 +62,7 @@ func _ready() -> void:
 		if not view.is_empty():
 			draw_wall_break()
 			ArenaStage.draw_footer(hud_layer, int(view.stage), not diagnostics)
-			FightHud.draw(hud_layer, view, score, round_label, diagnostics))
+			FightHud.draw(hud_layer, view, score, round_label, diagnostics, status_cues))
 
 static func foreground_player(state: Dictionary) -> int:
 	var cinematic := SuperAnimation.foreground(state)
@@ -131,6 +132,7 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	if not travel: CombatGrabs.present(sprites, model, view, scale_x * camera_zoom)
 	if not travel: CombatSupers.present(sprites, view, scale_x * camera_zoom)
 	if not travel: SuperAnimation.present(sprites, model, view, scale_x * camera_zoom)
+	status_cues = CombatStatusEffects.place(CombatStatusEffects.describe(view, feedback.reduced_motion), model, view, sprites, scale_x * camera_zoom, screen_point(Vector2(0, floor_y)).y)
 	queue_redraw()
 	hud_layer.queue_redraw()
 	collision_layer.queue_redraw()
@@ -142,6 +144,7 @@ func draw_impacts() -> void:
 	var project := func(point: Vector2) -> Vector2:
 		return screen_point(Vector2(point.x / 100.0 * sx, ArenaStage.floor_line(size) - point.y / 100.0 * sx))
 	var ordinary := impact_cues.filter(func(cue: Dictionary) -> bool: return not SuperAnimation.replaces_impact(cue,sprites))
+	CombatStatusEffects.draw_front(impact_layer, status_cues, sx * camera_zoom)
 	CombatImpacts.draw(impact_layer, ordinary, project, sx * camera_zoom)
 	SuperAnimation.draw_projectile_contacts(impact_layer,impact_cues,project,sx*camera_zoom)
 	SuperAnimation.draw_front(impact_layer, sprites, view, sx * camera_zoom)
@@ -194,24 +197,7 @@ func _draw() -> void:
 	var project := func(point: Vector2) -> Vector2:
 		return screen_point(Vector2(point.x / 100.0 * sx, floor_y - point.y / 100.0 * sx))
 	CombatImpacts.draw_releases(self, release_cues, project, sx * camera_zoom)
-	for p in 2:
-		var target: Dictionary = view.players[p]
-		var owner: Dictionary = view.players[1-p]
-		if target.get("tetherSource", 0) > 0 or target.get("linePullTime", 0) > 0:
-			var start := screen_point(Vector2(owner.x / 100.0 * sx, floor_y - (owner.y / 100.0 + 85) * sx))
-			var end := screen_point(Vector2(target.x / 100.0 * sx, floor_y - (target.y / 100.0 + 70) * sx))
-			if FighterArt.catalog().fighters[owner.character].has("line_fx"):
-				var cord := FighterArt.texture(owner.character, "line_fx", 4)
-				draw_set_transform(start, (end - start).angle())
-				var thickness := 3.3 * sx * camera_zoom
-				draw_texture_rect(cord, Rect2(0, -thickness / 2, start.distance_to(end), thickness), false)
-				draw_set_transform(Vector2.ZERO)
-				if target.tetherSource > 0:
-					var seal := FighterArt.texture(owner.character, "line_fx", 3)
-					var diameter := 26 * sx * camera_zoom
-					draw_texture_rect(seal, Rect2(end - Vector2.ONE * diameter / 2, Vector2.ONE * diameter), false, Color(1, 1, 1, 0.86))
-			else:
-				draw_line(start, end, Color("57bcca", 0.8), 2.5, true)
+	CombatStatusEffects.draw_behind(self, status_cues, sx * camera_zoom)
 	# Draw in the stage background before the HUD and before child fighter sprites.
 	feedback.draw(self)
 	draw_walls()
@@ -220,10 +206,6 @@ func _draw() -> void:
 		var point := screen_point(Vector2(fighter.x / 100.0 * sx, floor_y - fighter.y / 100.0 * sx))
 		var px := point.x
 		var py := point.y
-		if fighter.get("bleedTime", 0) > 0:
-			label("BLEED · %d GREY" % fighter.greyLife, Vector2(px - 52, py - 185 * sx * camera_zoom), 13, Color("eba4b6"))
-		elif fighter.get("tetherSource", 0) > 0:
-			label("LINE · %.1fs" % (fighter.get("tetherTime", 0) / 60.0) if fighter.get("tetherTime", 0) > 0 else "TETHER · PULLED" if fighter.tetherUsed else "TETHER", Vector2(px - 40, py - 185 * sx * camera_zoom), 13, Color("79d3df"))
 		if fighter.move >= 0:
 			if diagnostics: label("%s · %df" % [model.move_name(fighter.character, fighter.move), fighter.age], Vector2(px + 28, py - 10), 12)
 		elif diagnostics:

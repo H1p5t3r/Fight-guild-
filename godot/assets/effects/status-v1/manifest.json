@@ -1,0 +1,55 @@
+{
+  "file": "status.png",
+  "sha256": "c7d3bc03adbf726b9c04ea3d9e7c8512bcc100378327cfb06a4d48759c19909c",
+  "frames": {
+    "wound": {
+      "region": [
+        91,
+        61,
+        381,
+        408
+      ]
+    },
+    "drop": {
+      "region": [
+        703,
+        77,
+        125,
+        381
+      ]
+    },
+    "bleed_icon": {
+      "region": [
+        1139,
+        95,
+        248,
+        305
+      ]
+    },
+    "hook": {
+      "region": [
+        56,
+        559,
+        396,
+        404
+      ]
+    },
+    "cord": {
+      "region": [
+        526,
+        741,
+        483,
+        41
+      ]
+    },
+    "reel": {
+      "region": [
+        1074,
+        648,
+        406,
+        234
+      ]
+    }
+  },
+  "pixelEdits": false
+}

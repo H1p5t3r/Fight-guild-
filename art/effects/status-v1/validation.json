@@ -1,0 +1,55 @@
+{
+  "date": "2026-11-26",
+  "engine": "Godot 4.6.3",
+  "presentationOnly": true,
+  "moveWorkshopUpdated": false,
+  "sourcePngPreserved": true,
+  "sourceSha256": "c7d3bc03adbf726b9c04ea3d9e7c8512bcc100378327cfb06a4d48759c19909c",
+  "tests": {
+    "statusChecks": 49,
+    "statusFailures": 0,
+    "impactRegressionFailures": 0,
+    "nativeScenarioFailures": 0
+  },
+  "nativeScenarios": [
+    "bleed with crouch, jump and cash-out",
+    "bleed through hard knockdown and get-up",
+    "tether attachment and expiry",
+    "mirrored pull with actionable defender",
+    "bleed and tether on opposing fighters"
+  ],
+  "visualReview": [
+    "standing and crouching wound placement",
+    "airborne wound tracks target and camera",
+    "prone wound and floor-faded droplets",
+    "get-up returns wound to standing torso",
+    "braided line behind fighters and target seal in front",
+    "mirrored reeling chevrons point toward owner",
+    "separate HUD tags remain readable",
+    "expired tether removes cord, seal and tag"
+  ],
+  "video": {
+    "path": "exports/FightGuild-Bleed-and-Tether-2026-11-26.mp4",
+    "sha256": "72b878fd7b94d60b6a3ab12067508bbabd95557227e01b14329e8a3491eadb47",
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1440,
+        "height": 810,
+        "r_frame_rate": "60/1",
+        "nb_frames": "1202"
+      },
+      {
+        "codec_name": "aac",
+        "r_frame_rate": "0/0",
+        "nb_frames": "941"
+      }
+    ],
+    "format": {
+      "duration": "20.033333",
+      "size": "7773795"
+    }
+  }
+}

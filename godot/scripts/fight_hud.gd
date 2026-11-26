@@ -113,7 +113,7 @@ static func fighter_name(canvas: CanvasItem, value: String, point: Vector2, righ
 	canvas.draw_string_outline(font, point + Vector2(1, 1), value, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, 3, INK)
 	canvas.draw_string(font, point, value, HORIZONTAL_ALIGNMENT_LEFT, -1, 26, IVORY)
 
-static func draw(canvas: Control, state: Dictionary, wins: Array, round_call: String, diagnostics: bool) -> void:
+static func draw(canvas: Control, state: Dictionary, wins: Array, round_call: String, diagnostics: bool, status_cues: Array = []) -> void:
 	var scale_factor := minf(canvas.size.x / 1280.0, 1.0)
 	var area := canvas.size / scale_factor
 	canvas.draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE * scale_factor)
@@ -147,6 +147,7 @@ static func draw(canvas: Control, state: Dictionary, wins: Array, round_call: St
 		if diagnostics: detail += " / %d HP" % fighter.health
 		text(canvas, "POSITIVE BONUS" if fighter.positiveTime > 0 else detail,
 			Vector2(name_x, 80), maxi(13, ceili(11.0 / scale_factor)), Color("a8e9b1") if fighter.positiveTime > 0 else Color(IVORY, 0.7), right, 2)
+		CombatStatusEffects.draw_hud(canvas, status_cues, p, Vector2(name_x, 91), right)
 		for mark in MatchScore.WINS_REQUIRED:
 			var marker_x := rail.position.x + 12 + mark * 23 if right else rail.end.x - 12 - mark * 23
 			var diamond := PackedVector2Array([Vector2(marker_x - 8, 77), Vector2(marker_x, 72), Vector2(marker_x + 8, 77), Vector2(marker_x, 82), Vector2(marker_x - 8, 77)])

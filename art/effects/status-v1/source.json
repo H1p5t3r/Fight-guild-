@@ -1,0 +1,11 @@
+{
+  "prompt": "production-prompt.txt",
+  "references": [
+    "godot/assets/effects/impact-v1/contacts.png",
+    "godot/assets/fighters/shark-kit-v2/line-effects.png"
+  ],
+  "asset": "godot/assets/effects/status-v1/status.png",
+  "source": "/workspace/generated_images/exec-43f9130f-e21d-47d6-a8a1-4511e2813ffb.png",
+  "sha256": "c7d3bc03adbf726b9c04ea3d9e7c8512bcc100378327cfb06a4d48759c19909c",
+  "pixelEdits": false
+}

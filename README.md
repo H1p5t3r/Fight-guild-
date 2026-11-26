@@ -57,6 +57,8 @@ Combos now appear as large background numerals on the attacker's current side. *
 
 Native combat uses **Ink Snap II**: sharp contact flashes, distinct block/FD/shattered-guard/armor effects, subtle attack-release accents and 60 original material-based sound samples. Heavy hits have a low accent; confirmed impacts cut their swing tails. Watch the [gameplay effects review with audio](exports/FightGuild-Combat-Effects-2026-11-25.mp4). Sound settings let you audition hits and defense. The move-editor website remains paused; this pass is for Godot.
 
+Persistent [status effects](docs/status-effects.md) make bleed readable with crimson wound marks and droplets, and tethering with a braided line, hook seal and directional pull pulses. HUD tags show stored bleed damage and distinguish attachment from reeling. Watch the [native status review](exports/FightGuild-Bleed-and-Tether-2026-11-26.mp4).
+
 The [combat tuning editor](docs/combat-tuning.md) now supports cancel windows, starter and progressive damage scaling, jump startup, landing recovery, attack/counter presets, block carryover, five-frame post-stun throw protection and grounded wall priming. Guard break retains its throw vulnerability and backdash restriction. Blocking has no Just Guard or Instant Block timing requirement.
 
 ## Develop on Linux
