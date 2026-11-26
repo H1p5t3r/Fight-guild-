@@ -1,7 +1,8 @@
 # Amber overhead tell
 
 Use Strive's Dust startup as the functional reference: a conspicuous amber
-signal before a strike that must be guarded high. Use original generated inked
+signal before an overhead that starts on the ground. Jump attacks stay unmarked.
+Use original generated inked
 artwork that belongs with Fight Guild's contact effects.
 
 - Shared amber, cream-white inner edges, burnt-orange facets and thin dark ink.
@@ -9,7 +10,8 @@ artwork that belongs with Fight Guild's contact effects.
 - One short ignition glint and thin rising sparks in front carry the warning
   across both bright costumes and dark backgrounds.
 - No contact burst, shake or false hit sound. No giant screen overlay or label.
-- Startup timing belongs to the real move, including held charges and jump-ins.
+- Startup timing belongs to the real move, including held charges and grounded
+  overheads that lift off after starting. Air-start attacks receive no cue.
 - Confirmed impact immediately gives way to the actual hit/block effects.
 - Reduced motion keeps the same information without a bright glint or particles
   moving across the fighter.

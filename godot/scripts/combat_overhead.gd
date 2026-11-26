@@ -19,7 +19,9 @@ static func describe(model: CombatModel, state: Dictionary, reduced: bool = fals
 		if move < 0 or int(fighter.reaction) != 0 or int(fighter.stun) > 0 or int(fighter.contact) > 0 or int(fighter.variant) != 0: continue
 		var character := int(fighter.character)
 		var base := (character * CombatModel.MOVE_IDS.size() + move) * CombatModel.FIELDS.size()
-		if value(model, base, "hitLevel") != 2 or value(model, base, "enabled") == 0: continue
+		# Classify the action's origin, not the fighter's current height: a
+		# grounded overhead can hop during startup, while jump-ins never warn.
+		if value(model, base, "hitLevel") != 2 or value(model, base, "air") != 0 or value(model, base, "enabled") == 0: continue
 		# Throws/captures and non-striking movement cannot be defended by high
 		# guard, even if their dormant guard-level field is edited to overhead.
 		var action := value(model, base, "actionType")

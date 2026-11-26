@@ -8,6 +8,8 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'build/overhead-v1'
 OUT.mkdir(parents=True, exist_ok=True)
+for previous_still in OUT.glob('*.png'):
+    previous_still.unlink()  # Prevent screenshots from an older review surviving.
 env = os.environ.copy()
 native = Path(env.get('FIGHT_TOOLS', '/workspace/.fight-guild-tools')) / 'native-tools/usr'
 env['LD_LIBRARY_PATH'] = str(native / 'lib/x86_64-linux-gnu') + ':' + env.get('LD_LIBRARY_PATH', '')

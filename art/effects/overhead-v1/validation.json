@@ -6,14 +6,15 @@
   "sourcePngPreserved": true,
   "sourceSha256": "79bcc8ea5ffc0ffd8ef2397e7b127df8dc86d9f73f5788fa313ebcafe7a67864",
   "tests": {
-    "overheadChecks": 108,
+    "overheadChecks": 110,
     "overheadFailures": 0,
-    "authoredOverheads": 32,
+    "authoredOverheads": 5,
     "statusRegressionChecks": 49,
     "statusRegressionFailures": 0,
     "impactRegressionFailures": 0,
     "nativeCases": 8,
-    "nativeFailures": 0
+    "nativeFailures": 0,
+    "excludedAirborneHighAttacks": 27
   },
   "nativeScenarios": [
     "Fillet Crown Cut defeats crouch guard",
@@ -21,21 +22,21 @@
     "Tapper stance overhead blocked",
     "Smoke uncharged overhead blocked",
     "Smoke held charge retains the tell and is blocked",
-    "Shark airborne heavy blocked, mirrored",
-    "Anvil airborne heavy blocked",
+    "Shark airborne heavy blocked, mirrored; no overhead cue",
+    "Anvil airborne heavy blocked; no overhead cue",
     "Low sweep has no amber warning and is blocked low"
   ],
   "visualReview": [
-    "reduced flare footprint at point-blank range",
-    "torso glint lowered away from airborne face",
-    "jumping flare follows fighter and camera",
-    "same amber color on all six guilds",
+    "compact amber flare on grounded overhead startup",
+    "held ground charge retains the cue",
+    "mirrored ground warning belongs to the attacker",
+    "air-start attacks remain unmarked during startup",
     "warning absent after contact and during recovery",
     "low sweep retains its normal weapon/contact effects"
   ],
   "video": {
     "path": "exports/FightGuild-Overhead-Warnings-2026-11-26.mp4",
-    "sha256": "7ca82dcbf5b5595071d3430858ec34f346ad439b3f56efc5d9e4fb04a94250e7",
+    "sha256": "c7ae0a366c3fc56951e92eaa484df691ce59a90eac67b5e245e815b9b33bfd0a",
     "reviewPlaybackRate": 0.5,
     "programs": [],
     "stream_groups": [],
@@ -55,7 +56,8 @@
     ],
     "format": {
       "duration": "26.700000",
-      "size": "9282971"
+      "size": "9287265"
     }
-  }
+  },
+  "groundStartOnly": true
 }

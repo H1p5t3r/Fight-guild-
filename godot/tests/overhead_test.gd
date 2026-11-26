@@ -21,17 +21,23 @@ func run() -> void:
 	for name in CombatOverhead.catalog.frames:
 		check(Rect2(Vector2.ZERO,atlas.get_size()).encloses(CombatOverhead.texture(name).region), "Overhead art leaves its atlas: " + str(name))
 	check(cues(model).is_empty(), "Neutral shows a warning")
-	# Every currently authored overhead, including all six fighters' jump-ins.
+	# Every authored high attack: ground starts warn; all jump-ins stay unmarked.
 	var total := 0
+	var airborne := 0
 	for c in CombatModel.CHARACTERS.size():
 		for m in CombatModel.MOVE_IDS.size():
 			var move := model.move(c,m)
 			if move.enabled == 0 or move.hitLevel != 2: continue
 			begin(model,c,m,move.air != 0)
 			model.step(256 if move.actionType == 5 else 0,0)
-			check(not cues(model).is_empty(), "Authored overhead missing its startup cue: %s/%s" % [CombatModel.CHARACTERS[c],CombatModel.MOVE_IDS[m]])
-			total += 1
-	check(total >= 30, "Overhead coverage unexpectedly shrank")
+			check(cues(model).is_empty() if move.air != 0 else not cues(model).is_empty(), "Ground-start warning classification failed: %s/%s" % [CombatModel.CHARACTERS[c],CombatModel.MOVE_IDS[m]])
+			if move.air != 0: airborne += 1
+			else: total += 1
+	check(total == 5 and airborne == 27, "Grounded/airborne high-attack coverage changed")
+	# A ground-start overhead may leave the floor without losing its cue.
+	begin(model,1,15)
+	var lifted := model.state(); lifted.players[0].y = 4000
+	check(not CombatOverhead.describe(model,lifted).is_empty(), "A grounded overhead lost its warning after lifting off")
 	for m in [0,6,23,24]:
 		begin(model,5,m)
 		check(cues(model).is_empty(), "Mid, low or throw mislabelled as overhead")
@@ -84,5 +90,5 @@ func run() -> void:
 	model.reset()
 	check(cues(model).is_empty(), "Round reset left a warning")
 	arena.queue_free(); await process_frame
-	print("Overhead warning: %d checks / %d failures; %d authored overheads covered" % [checks,failures,total])
+	print("Overhead warning: %d checks / %d failures; %d ground-start overheads and %d excluded jump attacks" % [checks,failures,total,airborne])
 	quit(1 if failures else 0)

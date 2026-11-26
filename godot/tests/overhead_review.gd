@@ -47,8 +47,8 @@ func run() -> void:
 		[3,38,"tapper","TAPPER / STANCE OVERHEAD",0,false,false,false],
 		[2,13,"smoke","SMOKE / UNCHARGED OVERHEAD",0,false,false,false],
 		[2,13,"charge","SMOKE / HELD OVERHEAD",0,false,false,true],
-		[4,20,"shark-air","SHARK / JUMPING HEAVY SLASH",11000,false,true,false],
-		[0,20,"anvil-air","ANVIL / JUMPING HEAVY SLASH",14000,false,false,false],
+		[4,20,"shark-air","SHARK / JUMP ATTACK - NO AMBER WARNING",11000,false,true,false],
+		[0,20,"anvil-air","ANVIL / JUMP ATTACK - NO AMBER WARNING",14000,false,false,false],
 		[5,6,"low-control","LOW SWEEP / NO AMBER WARNING",0,true,false,false]]
 	for example in examples:
 		model.reset([example[0],4 if example[0] != 4 else 5])
@@ -59,6 +59,7 @@ func run() -> void:
 		model.step(0,0)
 		caption.text = example[3]
 		detail.text = "HALF-SPEED REVIEW / LOW GUARD BLOCKS THE SWEEP" if example[2] == "low-control" else "HALF-SPEED REVIEW / CROUCH GUARD LOSES TO THE OVERHEAD" if example[5] else "HALF-SPEED REVIEW / STANDING GUARD BLOCKS THE OVERHEAD"
+		if example[4] > 0: detail.text = "HALF-SPEED REVIEW / AMBER IS RESERVED FOR OVERHEADS THAT START ON THE GROUND"
 		var seen := false
 		var contacts := 0
 		var saved := false
@@ -81,11 +82,12 @@ func run() -> void:
 			for event in model.cues.events_at(model.frame()-1):
 				if int(event.kind) == required_kind: contacts += 1
 			var mark := ""
+			if example[4] > 0 and tick == 20: mark = str(example[2])+"-startup"
 			if not cues.is_empty() and int(cues[0].age) >= 4 and not saved:
 				mark = str(example[2])+"-warning"; saved = true
 			if tick in [28,55,94]: mark = str(example[2])+"-"+str(tick)
 			await present(mark)
-		var expected_warning: bool = example[2] != "low-control"
+		var expected_warning: bool = example[2] != "low-control" and example[4] == 0
 		if seen != expected_warning or contacts == 0 or not CombatOverhead.describe(model,model.state()).is_empty(): failures += 1
 		print("Overhead review ",example[2],": cue=",seen," contact kind=",required_kind," count=",contacts)
 	print("Native overhead review: %d failures" % failures)
