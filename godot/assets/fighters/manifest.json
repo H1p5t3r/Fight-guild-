@@ -19832,54 +19832,54 @@
         "31": {
           "frame_ticks": 5,
           "loop_all": true,
-          "file": "supers-v2/grand-design/wave.png",
+          "file": "supers-v3/grand-design/wave.png",
           "frames": [
             {
               "region": [
-                15,
-                13,
-                473,
-                475
+                62,
+                23,
+                400,
+                456
               ]
             },
             {
               "region": [
-                527,
-                13,
-                473,
-                475
+                569,
+                24,
+                407,
+                454
               ]
             },
             {
               "region": [
-                1040,
-                13,
-                476,
-                475
+                1077,
+                21,
+                414,
+                457
               ]
             },
             {
               "region": [
-                16,
-                525,
-                478,
-                475
+                51,
+                537,
+                417,
+                452
               ]
             },
             {
               "region": [
-                528,
-                525,
-                473,
-                475
+                567,
+                537,
+                410,
+                453
               ]
             },
             {
               "region": [
-                1040,
-                525,
-                473,
-                475
+                1087,
+                537,
+                400,
+                454
               ]
             }
           ]
@@ -19903,7 +19903,8 @@
         "supers-v1": 425,
         "freemason-v2": 460,
         "grand-design-v2": 460,
-        "freemason-v3": 450
+        "freemason-v3": 450,
+        "grand-design-v3": 450
       },
       "super_freemason": {
         "file": "supers-v3/freemason/entry.png",
@@ -20931,7 +20932,7 @@
               2
             ],
             [
-              87,
+              81,
               3
             ]
           ],
@@ -20942,16 +20943,32 @@
               4
             ],
             [
-              30,
+              11,
               5
             ],
             [
-              50,
+              27,
               6
             ],
             [
-              80,
+              38,
               7
+            ],
+            [
+              50,
+              8
+            ],
+            [
+              61,
+              9
+            ],
+            [
+              72,
+              10
+            ],
+            [
+              83,
+              11
             ]
           ],
           "sounds": {
@@ -20962,79 +20979,85 @@
             {
               "stage": "cast",
               "start": 0,
-              "end": 3,
+              "end": 4,
               "key": 0,
               "box": [
-                20,
-                -180,
-                145,
-                180
+                -65,
+                -220,
+                260,
+                225
               ],
+              "behind": true,
               "fade": true
             },
             {
               "stage": "cast",
               "start": 0,
-              "end": 3,
+              "end": 4,
               "key": 1,
               "box": [
-                100,
-                -55,
-                90,
-                60
+                80,
+                -65,
+                130,
+                68
               ]
             },
             {
               "stage": "cast",
               "start": 3,
-              "end": 8,
+              "end": 10,
               "key": 2,
               "box": [
-                80,
-                -22,
-                140,
-                30
+                70,
+                -65,
+                185,
+                70
               ],
+              "behind": true,
               "fade": true
             },
             {
               "stage": "cast",
               "start": 3,
-              "end": 8,
+              "end": 12,
               "key": 3,
               "box": [
-                80,
-                -25,
-                135,
-                30
+                60,
+                -28,
+                210,
+                34
               ],
-              "behind": true
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "cast",
               "start": 6,
-              "end": 9,
+              "end": 13,
               "key": 4,
               "box": [
-                90,
-                -70,
-                130,
-                76
+                80,
+                -110,
+                160,
+                115
               ],
+              "behind": true,
               "fade": true
             },
             {
               "stage": "cast",
-              "start": 9,
-              "end": 12,
+              "start": 12,
+              "end": 19,
               "key": 5,
               "box": [
-                95,
-                -80,
-                130,
-                85
+                75,
+                -125,
+                175,
+                130
               ],
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.75
             }
           ],
           "projectile_contact": {
@@ -21049,6 +21072,8 @@
               140
             ]
           },
+          "source": "supers-v3/grand-design",
+          "description": "Full overhead coil, explosive hammer plant, compressed overtravel and deliberate whole-body regather.",
           "phase": "super_grand_design",
           "fx_phase": "super_grand_design_fx",
           "pair_ticks": 0,
@@ -21057,140 +21082,12 @@
         }
       },
       "super_grand_design": {
-        "file": "supers-v2/grand-design/load.png",
-        "body_height": 460,
+        "file": "supers-v3/grand-design/load.png",
+        "body_height": 450,
         "frames": [
           {
-            "file": "supers-v2/grand-design/load.png",
-            "sha256": "908508f8bff631dc74aec5171c6ee3c9b081ffb49f439e4760550b1893a1cddc",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              508
-            ],
-            "bounds": [
-              128,
-              54,
-              555,
-              459
-            ],
-            "pivot": [
-              365,
-              457
-            ],
-            "body_height": 460,
-            "source_pose": 0,
-            "scale_group": "grand-design-v2",
-            "render_only": true,
-            "tip": [
-              130,
-              290
-            ]
-          },
-          {
-            "file": "supers-v2/grand-design/load.png",
-            "sha256": "908508f8bff631dc74aec5171c6ee3c9b081ffb49f439e4760550b1893a1cddc",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              507
-            ],
-            "bounds": [
-              82,
-              15,
-              586,
-              459
-            ],
-            "pivot": [
-              342,
-              458
-            ],
-            "body_height": 460,
-            "source_pose": 1,
-            "scale_group": "grand-design-v2",
-            "render_only": true,
-            "tip": [
-              137,
-              80
-            ]
-          },
-          {
-            "file": "supers-v2/grand-design/load.png",
-            "sha256": "908508f8bff631dc74aec5171c6ee3c9b081ffb49f439e4760550b1893a1cddc",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              508,
-              768,
-              516
-            ],
-            "bounds": [
-              126,
-              1,
-              592,
-              482
-            ],
-            "pivot": [
-              365,
-              481
-            ],
-            "body_height": 460,
-            "source_pose": 2,
-            "scale_group": "grand-design-v2",
-            "render_only": true,
-            "tip": [
-              208,
-              44
-            ]
-          },
-          {
-            "file": "supers-v2/grand-design/load.png",
-            "sha256": "908508f8bff631dc74aec5171c6ee3c9b081ffb49f439e4760550b1893a1cddc",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              507,
-              768,
-              517
-            ],
-            "bounds": [
-              105,
-              1,
-              550,
-              483
-            ],
-            "pivot": [
-              342,
-              481
-            ],
-            "body_height": 460,
-            "source_pose": 3,
-            "scale_group": "grand-design-v2",
-            "render_only": true,
-            "tip": [
-              157,
-              47
-            ]
-          },
-          {
-            "file": "supers-v2/grand-design/release.png",
-            "sha256": "10ed73936451089ee8803b187e3f713bc9524cad3ad6c1ddba62b3579a490e2f",
+            "file": "supers-v3/grand-design/load.png",
+            "sha256": "66a0bfd8ccf7710e7093cef1f962b914344b265bfb5cd3a26f5ccff9fb95fbe8",
             "source_size": [
               1536,
               1024
@@ -21202,27 +21099,27 @@
               512
             ],
             "bounds": [
-              27,
-              51,
-              766,
+              122,
+              50,
+              597,
               471
             ],
             "pivot": [
-              300,
-              468
+              390,
+              470
             ],
-            "body_height": 460,
+            "body_height": 450,
             "source_pose": 0,
-            "scale_group": "grand-design-v2",
+            "scale_group": "grand-design-v3",
             "render_only": true,
             "tip": [
-              700,
-              468
+              135,
+              345
             ]
           },
           {
-            "file": "supers-v2/grand-design/release.png",
-            "sha256": "10ed73936451089ee8803b187e3f713bc9524cad3ad6c1ddba62b3579a490e2f",
+            "file": "supers-v3/grand-design/load.png",
+            "sha256": "66a0bfd8ccf7710e7093cef1f962b914344b265bfb5cd3a26f5ccff9fb95fbe8",
             "source_size": [
               1536,
               1024
@@ -21231,62 +21128,190 @@
               768,
               0,
               768,
-              512
+              510
             ],
             "bounds": [
-              66,
-              103,
-              704,
-              471
-            ],
-            "pivot": [
-              337,
-              468
-            ],
-            "body_height": 460,
-            "source_pose": 1,
-            "scale_group": "grand-design-v2",
-            "render_only": true,
-            "tip": [
-              638,
-              468
-            ]
-          },
-          {
-            "file": "supers-v2/grand-design/release.png",
-            "sha256": "10ed73936451089ee8803b187e3f713bc9524cad3ad6c1ddba62b3579a490e2f",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              67,
-              47,
-              706,
+              75,
+              31,
+              572,
               470
             ],
             "pivot": [
-              320,
-              468
+              352,
+              470
             ],
-            "body_height": 460,
-            "source_pose": 2,
-            "scale_group": "grand-design-v2",
+            "body_height": 450,
+            "source_pose": 1,
+            "scale_group": "grand-design-v3",
             "render_only": true,
             "tip": [
-              640,
-              466
+              92,
+              252
             ]
           },
           {
-            "file": "supers-v2/grand-design/release.png",
-            "sha256": "10ed73936451089ee8803b187e3f713bc9524cad3ad6c1ddba62b3579a490e2f",
+            "file": "supers-v3/grand-design/load.png",
+            "sha256": "66a0bfd8ccf7710e7093cef1f962b914344b265bfb5cd3a26f5ccff9fb95fbe8",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              118,
+              27,
+              583,
+              476
+            ],
+            "pivot": [
+              385,
+              478
+            ],
+            "body_height": 450,
+            "source_pose": 2,
+            "scale_group": "grand-design-v3",
+            "render_only": true,
+            "tip": [
+              130,
+              105
+            ]
+          },
+          {
+            "file": "supers-v3/grand-design/load.png",
+            "sha256": "66a0bfd8ccf7710e7093cef1f962b914344b265bfb5cd3a26f5ccff9fb95fbe8",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              510,
+              768,
+              514
+            ],
+            "bounds": [
+              97,
+              1,
+              607,
+              478
+            ],
+            "pivot": [
+              382,
+              480
+            ],
+            "body_height": 450,
+            "source_pose": 3,
+            "scale_group": "grand-design-v3",
+            "render_only": true,
+            "tip": [
+              111,
+              55
+            ]
+          },
+          {
+            "file": "supers-v3/grand-design/release.png",
+            "sha256": "fdff70c5c4d6dedc3b8873dcb126258897c9ae4d84b56d1e51097807b93748ed",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              40,
+              16,
+              744,
+              479
+            ],
+            "pivot": [
+              300,
+              478
+            ],
+            "body_height": 450,
+            "source_pose": 0,
+            "scale_group": "grand-design-v3",
+            "render_only": true,
+            "tip": [
+              705,
+              450
+            ]
+          },
+          {
+            "file": "supers-v3/grand-design/release.png",
+            "sha256": "fdff70c5c4d6dedc3b8873dcb126258897c9ae4d84b56d1e51097807b93748ed",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              96,
+              7,
+              744,
+              479
+            ],
+            "pivot": [
+              307,
+              478
+            ],
+            "body_height": 450,
+            "source_pose": 1,
+            "scale_group": "grand-design-v3",
+            "render_only": true,
+            "tip": [
+              702,
+              450
+            ]
+          },
+          {
+            "file": "supers-v3/grand-design/release.png",
+            "sha256": "fdff70c5c4d6dedc3b8873dcb126258897c9ae4d84b56d1e51097807b93748ed",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              97,
+              74,
+              745,
+              480
+            ],
+            "pivot": [
+              320,
+              478
+            ],
+            "body_height": 450,
+            "source_pose": 2,
+            "scale_group": "grand-design-v3",
+            "render_only": true,
+            "tip": [
+              697,
+              444
+            ]
+          },
+          {
+            "file": "supers-v3/grand-design/release.png",
+            "sha256": "fdff70c5c4d6dedc3b8873dcb126258897c9ae4d84b56d1e51097807b93748ed",
             "source_size": [
               1536,
               1024
@@ -21298,137 +21323,265 @@
               512
             ],
             "bounds": [
-              94,
-              55,
-              568,
-              464
+              99,
+              36,
+              744,
+              480
             ],
             "pivot": [
-              337,
-              468
+              342,
+              478
             ],
-            "body_height": 460,
+            "body_height": 450,
             "source_pose": 3,
-            "scale_group": "grand-design-v2",
+            "scale_group": "grand-design-v3",
             "render_only": true,
             "tip": [
-              96,
-              276
+              707,
+              439
+            ]
+          },
+          {
+            "file": "supers-v3/grand-design/return.png",
+            "sha256": "92a7cf276d7adc80ebd989122d3270d8e9e806881af25e21995fca4a9a0cc330",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              113,
+              94,
+              747,
+              473
+            ],
+            "pivot": [
+              330,
+              472
+            ],
+            "body_height": 450,
+            "source_pose": 0,
+            "scale_group": "grand-design-v3",
+            "render_only": true,
+            "tip": [
+              703,
+              432
+            ]
+          },
+          {
+            "file": "supers-v3/grand-design/return.png",
+            "sha256": "92a7cf276d7adc80ebd989122d3270d8e9e806881af25e21995fca4a9a0cc330",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              115,
+              44,
+              675,
+              473
+            ],
+            "pivot": [
+              332,
+              472
+            ],
+            "body_height": 450,
+            "source_pose": 1,
+            "scale_group": "grand-design-v3",
+            "render_only": true,
+            "tip": [
+              639,
+              329
+            ]
+          },
+          {
+            "file": "supers-v3/grand-design/return.png",
+            "sha256": "92a7cf276d7adc80ebd989122d3270d8e9e806881af25e21995fca4a9a0cc330",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              170,
+              40,
+              593,
+              475
+            ],
+            "pivot": [
+              380,
+              478
+            ],
+            "body_height": 450,
+            "source_pose": 2,
+            "scale_group": "grand-design-v3",
+            "render_only": true,
+            "tip": [
+              191,
+              289
+            ]
+          },
+          {
+            "file": "supers-v3/grand-design/return.png",
+            "sha256": "92a7cf276d7adc80ebd989122d3270d8e9e806881af25e21995fca4a9a0cc330",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              148,
+              40,
+              605,
+              475
+            ],
+            "pivot": [
+              382,
+              478
+            ],
+            "body_height": 450,
+            "source_pose": 3,
+            "scale_group": "grand-design-v3",
+            "render_only": true,
+            "tip": [
+              170,
+              300
             ]
           }
         ],
         "render_only": true
       },
       "super_grand_design_fx": {
-        "file": "supers-v2/grand-design/effects.png",
+        "file": "supers-v3/grand-design/effects.png",
         "body_height": 512,
         "frames": [
           {
             "region": [
-              39,
-              33,
-              452,
-              460
+              24,
+              23,
+              472,
+              477
             ],
             "pivot": [
-              226.0,
-              460
+              236.0,
+              477
             ],
             "bounds": [
               0,
               0,
-              452,
-              460
+              472,
+              477
             ]
           },
           {
             "region": [
-              545,
-              169,
-              479,
-              306
+              524,
+              257,
+              487,
+              208
             ],
             "pivot": [
-              239.5,
-              306
+              243.5,
+              208
             ],
             "bounds": [
               0,
               0,
-              479,
-              306
+              487,
+              208
             ]
           },
           {
             "region": [
-              1024,
-              320,
-              496,
-              168
+              1045,
+              236,
+              481,
+              236
             ],
             "pivot": [
-              248.0,
-              168
+              240.5,
+              236
             ],
             "bounds": [
               0,
               0,
-              496,
-              168
+              481,
+              236
             ]
           },
           {
             "region": [
-              18,
-              812,
-              464,
-              170
+              16,
+              804,
+              484,
+              141
             ],
             "pivot": [
-              232.0,
-              170
+              242.0,
+              141
             ],
             "bounds": [
               0,
               0,
-              464,
-              170
+              484,
+              141
             ]
           },
           {
             "region": [
-              536,
-              602,
-              439,
-              367
+              551,
+              543,
+              456,
+              406
             ],
             "pivot": [
-              219.5,
-              367
+              228.0,
+              406
             ],
             "bounds": [
               0,
               0,
-              439,
-              367
+              456,
+              406
             ]
           },
           {
             "region": [
-              1142,
-              584,
-              254,
-              381
+              1074,
+              675,
+              421,
+              260
             ],
             "pivot": [
-              127.0,
-              381
+              210.5,
+              260
             ],
             "bounds": [
               0,
               0,
-              254,
-              381
+              421,
+              260
             ]
           }
         ],

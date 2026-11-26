@@ -13896,7 +13896,7 @@
           "air": 0,
           "startup": 16,
           "active": 1,
-          "recovery": 10,
+          "recovery": 18,
           "damage": 120,
           "hitstun": 40,
           "blockstun": 36,

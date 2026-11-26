@@ -1,0 +1,115 @@
+{
+  "name": "Grand Design",
+  "character": 1,
+  "slot": 31,
+  "input": "214214Hs",
+  "status": "completed-native-review",
+  "startup": 16,
+  "active": 1,
+  "recovery": 18,
+  "freeze": 54,
+  "pairTicks": 0,
+  "releaseFreeze": 0,
+  "ownerRecovery": 0,
+  "damage": 120,
+  "bodyKeys": 12,
+  "choreography": "Full overhead coil, explosive hammer plant, compressed overtravel and deliberate whole-body regather.",
+  "startupKeys": [
+    [
+      0,
+      0
+    ],
+    [
+      25,
+      1
+    ],
+    [
+      50,
+      2
+    ],
+    [
+      81,
+      3
+    ]
+  ],
+  "activeKeys": [
+    [
+      0,
+      4
+    ]
+  ],
+  "recoveryKeys": [
+    [
+      0,
+      4
+    ],
+    [
+      11,
+      5
+    ],
+    [
+      27,
+      6
+    ],
+    [
+      38,
+      7
+    ],
+    [
+      50,
+      8
+    ],
+    [
+      61,
+      9
+    ],
+    [
+      72,
+      10
+    ],
+    [
+      83,
+      11
+    ]
+  ],
+  "projectile": {
+    "spawnFrame": 22,
+    "speedX": 250,
+    "life": 100,
+    "width": 9000,
+    "height": 16000,
+    "keys": 6
+  },
+  "requirements": [
+    "Largest weapon travel from last startup to first active",
+    "Fixed anatomical scale, no decorative movement of gameplay root",
+    "Caster and projectile clocks independent",
+    "No pair capture on hit",
+    "Readable full-sized wave during all collision frames",
+    "Native hit, block, whiff, mirrored and caster-follow-up review"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": true,
+  "firstActiveHammerTravelWorldUnits": 261.32,
+  "largestBodyKeyTravelAtFirstActive": true,
+  "date": "2026-11-26",
+  "timingChange": {
+    "recoveryFrom": 10,
+    "recoveryTo": 18,
+    "reason": "Weighted landing and a readable return to guard; utility wave remains independent."
+  },
+  "verification": {
+    "cases": {
+      "hit": "120",
+      "mirrored": "120",
+      "block": "12",
+      "whiff": "0",
+      "followup": "166"
+    },
+    "failures": 0,
+    "frames": 1577,
+    "fps": 60,
+    "video": "exports/FightGuild-Grand-Design-V3-2026-11-26.mp4",
+    "sha256": "27b139713724f5645e9f91de94cf7b45c6a0ffd07f275c8cf367e3763cba8ee7"
+  }
+}

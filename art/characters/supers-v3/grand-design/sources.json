@@ -1,0 +1,64 @@
+[
+  {
+    "id": "load",
+    "file": "godot/assets/fighters/supers-v3/grand-design/load.png",
+    "original": "/workspace/generated_images/exec-8a51e859-b2ee-49e4-b8cb-dcd2ccc44a10.png",
+    "sha256": "66a0bfd8ccf7710e7093cef1f962b914344b265bfb5cd3a26f5ccff9fb95fbe8",
+    "prompt": "art/characters/supers-v3/grand-design/load-prompt.txt",
+    "references": [
+      "godot/assets/fighters/hammer-kit-v1/drive_ready.png"
+    ]
+  },
+  {
+    "id": "release",
+    "file": "godot/assets/fighters/supers-v3/grand-design/release.png",
+    "original": "/workspace/generated_images/exec-dce83919-359d-433a-ae6e-4b98e70f05f3.png",
+    "sha256": "fdff70c5c4d6dedc3b8873dcb126258897c9ae4d84b56d1e51097807b93748ed",
+    "prompt": "art/characters/supers-v3/grand-design/release-prompt.txt",
+    "references": [
+      "godot/assets/fighters/hammer-kit-v1/drive_ready.png",
+      "godot/assets/fighters/supers-v3/grand-design/load.png"
+    ]
+  },
+  {
+    "id": "return",
+    "file": "godot/assets/fighters/supers-v3/grand-design/return.png",
+    "original": "/workspace/generated_images/exec-221b679c-a0b6-4772-9e1d-a326ef180a21.png",
+    "sha256": "92a7cf276d7adc80ebd989122d3270d8e9e806881af25e21995fca4a9a0cc330",
+    "prompt": "art/characters/supers-v3/grand-design/return-prompt.txt",
+    "references": [
+      "godot/assets/fighters/hammer-kit-v1/drive_ready.png",
+      "godot/assets/fighters/supers-v3/grand-design/load.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v3/grand-design/effects.png",
+    "original": "/workspace/generated_images/exec-15c3b28b-96ca-4d3e-9130-38ae4b9918f4.png",
+    "sha256": "76a8cbe410696b55acaa547eb14c82f754121e50fa5aff93dcc521391bb13857",
+    "prompt": "art/characters/supers-v3/grand-design/effects-prompt.txt",
+    "references": [
+      "godot/assets/fighters/hammer-kit-v1/effects.png"
+    ]
+  },
+  {
+    "id": "wave",
+    "file": "godot/assets/fighters/supers-v3/grand-design/wave.png",
+    "original": "/workspace/generated_images/exec-e48d475c-b0d5-4bfb-8875-0fa6df904082.png",
+    "sha256": "b04dc17c880a4f16080f96ad493979bebf0a16c6648ff85a90e232d9cfba1c0f",
+    "prompt": "art/characters/supers-v3/grand-design/wave-prompt.txt",
+    "references": [
+      "godot/assets/fighters/hammer-kit-v1/effects.png"
+    ]
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/grand-design/portrait.png",
+    "original": "/workspace/generated_images/exec-d32dd5fa-5c62-4833-a00c-a677888723c9.png",
+    "sha256": "597878947a8b65cf59567e525c4b5f5046888d5026eb0b0dbbe991f1389c0a8e",
+    "prompt": "art/characters/supers-v2/grand-design/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/grand-design/load.png"
+    ]
+  }
+]

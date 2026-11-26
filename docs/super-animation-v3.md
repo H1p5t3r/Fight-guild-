@@ -105,6 +105,30 @@ records the footage hash and checks; the
 [scale sheet](../art/characters/supers-v3/freemason/scale-review.png) compares all
 twenty poses against the original idle.
 
+## Grand Design — complete
+
+[Watch the native 60 FPS review](../exports/FightGuild-Grand-Design-V3-2026-11-26.mp4)
+(hit, mirrored hit, block, miss and an actionable follow-up).
+
+Twelve replacement drawings take Hammer from his original guard through a
+rear hip coil, overhead load, sudden ground plant, compressed overtravel and a
+measured return. The scarf and tabard follow the torso rotation. The large blue
+and ivory crescent stays behind his silhouette; a separate six-drawing stone
+wave keeps a consistent collision-readable size throughout its lifetime.
+
+Recovery increases from 10 to 18 frames to fit the weighted landing. Startup,
+projectile spawn, damage, cost and wave lifetime remain unchanged. Hammer still
+regains control while the wave is traveling and can follow its launch with a
+normal attack. All twelve drawings finish within his actual action clock.
+
+The fixed-world comparison checks every pose against the original idle at one
+anatomical scale. Cast tests cover both sides, pause, replay, edited timing,
+projectile animation and independent caster control. The native roster and C++
+super checks also pass; both Windows DLLs and the repair ZIP were rebuilt for
+the revised frame data. See the
+[validation record](../art/characters/supers-v3/grand-design/validation.json) and
+[scale sheet](../art/characters/supers-v3/grand-design/scale-review.png).
+
 ## Size calibration
 
 The first visual comparison covered all 196 v2 super body drawings against their

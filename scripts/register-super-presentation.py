@@ -78,7 +78,7 @@ def main():
         file='../../'+str(Path(face['file']).relative_to('godot/assets')),region=[0,0,1536,1024],width=layout.get('faceWidth',.55),center_y=layout.get('faceY',.56),source=face['prompt'])
     write(portraits_path,portraits)
     write(production/'registration.json',dict(bodyKeys=len(frames),effectKeys=len(effects),bodyHeight=height,
-        gameplayChanged=False,pixelEdits=False,phase=phase,regions=[f['region'] for f in frames]))
+        gameplayChanged=bool(plan.get('gameplayChanged',False)),pixelEdits=False,phase=phase,regions=[f['region'] for f in frames]))
     print(plan['name'],':',len(frames),'body keys, 6 effects, original PNG bytes preserved.')
 
 if __name__=='__main__':main()

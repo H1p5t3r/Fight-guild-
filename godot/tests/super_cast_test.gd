@@ -43,7 +43,8 @@ func run()->void:
 						for q in state.projectiles:
 							var art:=FighterArt.projectile_art(character,slot,q.life,q.age)
 							wave_seen[str(art.region)]=true
-							check(art.file.contains("supers-v2"),"Old projectile art")
+							var production:="supers-v3" if str(spec.get("source", "")).begins_with("supers-v3") else "supers-v2"
+							check(art.file.contains(production),"Projectile art does not match the registered super revision")
 					if tick==80:restored=saved
 					if tick==110:replay_hash=model.state_hash()
 					var guard:=(2 if facing>0 else 1)|4

@@ -104,6 +104,8 @@ static void utility(){
  setup(2,1);s.mobility[2].v[BackWalkSpeed]=0;b().x=a().x+25000;CHECK(s.preview_begin(owner,31));ticks(54);ticks(220,0,Right);
  CHECK(a().contact_count==3&&!s.world.pair.kind&&a().move<0&&b().health==1000-3*s.moves[2][31].v[ChipDamage]);
  setup(1,1);b().x=a().x+10000;CHECK(s.preview_begin(owner,31));ticks(54);ticks(22);CHECK(s.world.projectiles[0].life>0&&b().health==1000);
- ticks(8);CHECK(a().move<0&&b().health==1000);ticks(20);CHECK(a().contact_count==1&&b().health<1000&&!s.world.pair.kind);
+ const auto& wave=s.moves[1][31];
+ ticks(wave.v[Startup]+wave.v[Active]+wave.v[Recovery]-22);
+ CHECK(a().move<0&&b().health==1000);ticks(20);CHECK(a().contact_count==1&&b().health<1000&&!s.world.pair.kind);
 }
 int main(){inputs_and_cost();cinematics();defense();utility();std::printf("Supers: %d checks, %d failures\n",checks,failures);return failures?1:0;}

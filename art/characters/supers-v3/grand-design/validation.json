@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-26",
+  "scope": "Grand Design v3",
+  "suites": [
+    {
+      "log": "build/grand-v3-cast-test.log",
+      "checks": 5629,
+      "failures": 0
+    },
+    {
+      "log": "build/grand-v3-native-supers.log",
+      "checks": 8302,
+      "failures": 0
+    },
+    {
+      "log": "build/grand-v3-core-supers.log",
+      "checks": 2544,
+      "failures": 0
+    }
+  ],
+  "totalChecks": 16475,
+  "nativeReview": {
+    "cases": {
+      "hit": "120",
+      "mirrored": "120",
+      "block": "12",
+      "whiff": "0",
+      "followup": "166"
+    },
+    "failures": 0,
+    "frames": 1577,
+    "fps": 60,
+    "video": "exports/FightGuild-Grand-Design-V3-2026-11-26.mp4",
+    "sha256": "27b139713724f5645e9f91de94cf7b45c6a0ffd07f275c8cf367e3763cba8ee7"
+  },
+  "sourceBytesPreserved": true,
+  "gameplayChanged": true,
+  "timingChange": {
+    "recoveryFrom": 10,
+    "recoveryTo": 18
+  },
+  "windowsDebugReleaseAndRepairVerified": true,
+  "websiteUpdated": false,
+  "visualReview": [
+    "twelve bodies at fixed world scale against original idle",
+    "single continuous hammer shaft with two hands",
+    "native ground plant and independent wave",
+    "mirrored hit, block, miss and actionable follow-up"
+  ]
+}
