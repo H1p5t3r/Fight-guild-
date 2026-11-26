@@ -8,7 +8,9 @@ func run() -> void:
 	var model := CombatModel.new()
 	var data := model.data()
 	check(data.schema == 27, "Pull schema missing")
-	check(not data.characters[4].moves[12].enabled and data.characters[4].moves[12].mechanic == 0, "Chase still enabled")
+	# The retired Chase slot is now No Safe Harbour. It must remain a super,
+	# never regain Chase's pull mechanic; legacy migration below still retires it.
+	check(data.characters[4].moves[12].enabled and data.characters[4].moves[12].actionType == 13 and data.characters[4].moves[12].mechanic == 0, "Retired Chase replaced the current super")
 	var old := data.duplicate(true)
 	old.schema = 24; old.coreVersion = 24
 	old.characters[4].moves[12].enabled = 1; old.characters[4].moves[12].mechanic = 5

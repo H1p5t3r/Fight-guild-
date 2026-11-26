@@ -238,7 +238,7 @@ static func draw_track(canvas: CanvasItem, sprites: Array[Sprite2D], cue: Dictio
 		if item.has("contact_box") and int(state.players[int(cue.owner)].contact)!=0:
 			origin=sprites[1-int(cue.owner)].position
 			box=item.contact_box
-		if item.get("stop_at_guard",false) and int(state.players[int(cue.owner)].contact)!=0:
+		if item.get("stop_at_guard",false) and (int(state.players[int(cue.owner)].contact)!=0 or str(cue.stage)=="paired"):
 			# Keep the hook trail connected to its owner and end at the guard.
 			# This is a drawing rectangle only; collision and pushback stay native.
 			var distance:float=(sprites[1-int(cue.owner)].position.x-origin.x)*float(cue.facing)/scale

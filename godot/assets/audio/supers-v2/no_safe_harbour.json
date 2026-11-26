@@ -1,0 +1,26 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-no-safe-harbour-audio.py",
+  "sounds": [
+    {
+      "file": "no_safe_harbour_cast.wav",
+      "seconds": 0.48,
+      "sha256": "ef5125b2c48d91d346e8964f295170887658e051a06c0c081cc8a85646d2a731"
+    },
+    {
+      "file": "no_safe_harbour_reel.wav",
+      "seconds": 0.42,
+      "sha256": "7182b4dde61b91f4f5fc6c96b6d50e2d7d18ee6e35f744de4dcff500805b25fc"
+    },
+    {
+      "file": "no_safe_harbour_drive.wav",
+      "seconds": 0.48,
+      "sha256": "223a77c206e3d10302486151115fb40d5fa03f60cdc962fd264edca78fa7fc3d"
+    },
+    {
+      "file": "no_safe_harbour_finish.wav",
+      "seconds": 0.9,
+      "sha256": "f3538221906a749338fd04669618a8ad503c8cbd39c6bead400717cd60d42b90"
+    }
+  ]
+}

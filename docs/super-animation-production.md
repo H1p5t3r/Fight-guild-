@@ -366,6 +366,41 @@ python scripts/capture-super-animation.py whiskey-chaser --stills
 python scripts/capture-super-animation.py whiskey-chaser
 ```
 
+## 09 — Shark / No Safe Harbour
+
+[Watch the native 60 FPS review with sound](../exports/FightGuild-No-Safe-Harbour-2026-11-26.mp4).
+Twenty original body keys turn the long hook thrust into a reel, rising jerk,
+advancing drive and heavy finish. Four added overhead recovery poses bring the
+hook back to the approved shoulder rest without a snap. Anatomical scale stays
+at Shark's existing 480 pixels. The largest adjacent hook displacement is
+102.16 world units, at last startup → first active; recovery steps remain smaller.
+
+Six teal/ivory effect keys, a dedicated blue-glasses cut-in and four original
+synthesized hook/metal impacts follow native beats 0/43/74/release-96. The long
+opening wake reaches along the original narrow horizontal attack lane on a miss
+and ends at the actual defender on contact, including during capture. This is
+presentation metadata only. The 12/4/30 timing, 310 damage, 400-unit reach,
+8 chip and two-segment cost are unchanged.
+
+The common suite passes 17,529 checks across all receivers and both sides,
+including scale, all 20 exposures, pause, snapshot replay, block/miss branches
+and edited capture durations. The native review includes close hit, mirrored hit,
+block, distance miss, a 380-unit long-range hit and a jump above the attack lane.
+The full super and Shark Drive regression suites also pass. The older Drive test
+now recognizes the super occupying the retired Chase slot; its legacy migration
+and actionable-pull checks remain intact.
+
+Sources: [exposure plan](../art/characters/supers-v2/no-safe-harbour/exposure-plan.json),
+[original image records](../art/characters/supers-v2/no-safe-harbour/sources.json),
+[landmarks and effect placement](../art/characters/supers-v2/no-safe-harbour/layout.json).
+
+```bash
+python scripts/register-super-presentation.py no-safe-harbour
+python scripts/generate-no-safe-harbour-audio.py
+bash scripts/godot.sh --headless --script res://tests/super_presentation_test.gd -- --test --character 4 --slot 12
+python scripts/capture-super-animation.py no-safe-harbour
+```
+
 ## Production order
 
 1. Sky Foundry — full pass and native review.
@@ -376,7 +411,7 @@ python scripts/capture-super-animation.py whiskey-chaser
 6. The Air Is Mine — full pass and native review.
 7. Last Orders — full pass and native review.
 8. Whiskey Chaser — full pass and native review.
-9. No Safe Harbour.
+9. No Safe Harbour — full pass and native review.
 10. Undertow.
 11. Bloodletting.
 12. Exsanguinate.

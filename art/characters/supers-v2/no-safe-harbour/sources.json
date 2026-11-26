@@ -1,0 +1,71 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v2/no-safe-harbour/entry.png",
+    "original": "/workspace/generated_images/exec-b3e9e396-f17e-4bf1-91a8-ea61218e5737.png",
+    "sha256": "3323a533ca3257373ec4b1a08a7b6f890fd8efc58296ccc23ca1cf3ab53fdcef",
+    "prompt": "art/characters/supers-v2/no-safe-harbour/entry-prompt.txt",
+    "references": [
+      "godot/assets/fighters/shark-movement-v1/idle.png",
+      "godot/assets/fighters/supers-v1/shark.png"
+    ]
+  },
+  {
+    "id": "reel",
+    "file": "godot/assets/fighters/supers-v2/no-safe-harbour/reel.png",
+    "original": "/workspace/generated_images/exec-8045c2e9-3d9c-4b12-be5f-a0082fe95c7e.png",
+    "sha256": "5b87fea08b7ac27285568bedb79d1aeebf835a37ef18615fb56affa1db0aebbf",
+    "prompt": "art/characters/supers-v2/no-safe-harbour/reel-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/no-safe-harbour/entry.png"
+    ]
+  },
+  {
+    "id": "drive",
+    "file": "godot/assets/fighters/supers-v2/no-safe-harbour/drive.png",
+    "original": "/workspace/generated_images/exec-19dd6de9-dea7-4960-8ca9-b2b6bb259225.png",
+    "sha256": "5f12ea5e156321fa199d5ced67e68c9792fb06ba1bcaff3690f23d0e213ac1a2",
+    "prompt": "art/characters/supers-v2/no-safe-harbour/drive-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/no-safe-harbour/reel.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v2/no-safe-harbour/finish.png",
+    "original": "/workspace/generated_images/exec-63c3e916-def8-4d61-a49a-36980b6246c3.png",
+    "sha256": "123391332c09a35c74487176676f5609e99707980d8c375bb28b7583f1f30252",
+    "prompt": "art/characters/supers-v2/no-safe-harbour/finish-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/no-safe-harbour/entry.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v2/no-safe-harbour/effects.png",
+    "original": "/workspace/generated_images/exec-6b5984f5-017e-4944-92da-e00509cfaee7.png",
+    "sha256": "22c81a001a2c951ef9067d0d3be2122a038c0075a54cb8921dc19f234ae26d48",
+    "prompt": "art/characters/supers-v2/no-safe-harbour/effects-prompt.txt",
+    "references": []
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/no-safe-harbour/portrait.png",
+    "original": "/workspace/generated_images/exec-82156110-9395-4c33-9444-ae5f54ee63ea.png",
+    "sha256": "ef403ebf184988097e3d2b1477ae177f20b5deb8ea599ef3d2d06edcd2404ac4",
+    "prompt": "art/characters/supers-v2/no-safe-harbour/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/no-safe-harbour/entry.png"
+    ]
+  },
+  {
+    "id": "return",
+    "file": "godot/assets/fighters/supers-v2/no-safe-harbour/return.png",
+    "original": "/workspace/generated_images/exec-909398cf-8d86-45ef-95b4-54334676cab6.png",
+    "sha256": "10b83df4b4fd259335bbb88bd116d92b4d39c8bdc1005c3943250fe1e867de3b",
+    "prompt": "art/characters/supers-v2/no-safe-harbour/return-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/no-safe-harbour/finish.png"
+    ]
+  }
+]

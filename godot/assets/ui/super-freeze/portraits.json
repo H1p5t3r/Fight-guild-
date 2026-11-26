@@ -114,6 +114,20 @@
       "width": 0.58,
       "center_y": 0.59,
       "source": "art/characters/supers-v2/whiskey-chaser/portrait-prompt.txt"
+    },
+    "No Safe Harbour": {
+      "character": 4,
+      "enabled": true,
+      "file": "../../fighters/supers-v2/no-safe-harbour/portrait.png",
+      "region": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "width": 0.58,
+      "center_y": 0.59,
+      "source": "art/characters/supers-v2/no-safe-harbour/portrait-prompt.txt"
     }
   }
 }

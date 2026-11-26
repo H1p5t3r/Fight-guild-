@@ -1,0 +1,108 @@
+{
+  "name": "No Safe Harbour",
+  "character": 4,
+  "slot": 12,
+  "input": "236236S",
+  "status": "production",
+  "date": "2026-11-26",
+  "startup": 12,
+  "active": 4,
+  "recovery": 30,
+  "freeze": 54,
+  "pairTicks": 96,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 310,
+  "bodyKeys": 20,
+  "choreography": "Compact shoulder-loaded hook into a maximal two-handed horizontal spear thrust. Reel the target through a hip-led pull, rising hook jerk at43, advance into a second drive at74 and a short final thrust at96. Return spear to shoulder and recover offhand knife. Long teal hook wake reads the full narrow reach.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      14,
+      3
+    ],
+    [
+      26,
+      4
+    ],
+    [
+      42,
+      5
+    ],
+    [
+      43,
+      6
+    ],
+    [
+      52,
+      7
+    ],
+    [
+      62,
+      8
+    ],
+    [
+      73,
+      9
+    ],
+    [
+      74,
+      10
+    ],
+    [
+      82,
+      11
+    ],
+    [
+      89,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      5,
+      14
+    ],
+    [
+      10,
+      16
+    ],
+    [
+      14,
+      17
+    ],
+    [
+      18,
+      18
+    ],
+    [
+      21,
+      19
+    ],
+    [
+      23,
+      15
+    ]
+  ],
+  "requirements": [
+    "One spear, unchanged hook shape and hand grips",
+    "White controlled-volume hair and blue sports glasses",
+    "Largest hook displacement at first active",
+    "Fixed480pixel anatomical scale",
+    "Effects show400world-unit narrow horizontal reach",
+    "Native near and tip hit, mirrored, block, distance miss and airborne miss"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false
+}
