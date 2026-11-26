@@ -259,6 +259,26 @@ The native suite passed 23,933 checks with no failures. See the
 [validation](../art/characters/supers-v3/undertow/validation.json) and
 [fixed-scale comparison](../art/characters/supers-v3/undertow/scale-review.png).
 
+## Bloodletting — complete
+
+[Watch the native 60 FPS review](../exports/FightGuild-Bloodletting-V3-2026-11-26.mp4)
+(hit, mirrored hit, block and miss).
+
+Twenty new body drawings give Fillet a deep coiled opening, a hip-led forward
+crosscut, a rising crescent, a committed downcut and a crossed-forearm X finish.
+The long right-hand knife and short left-hand knife remain distinct, with the
+red pauldron on the short-knife arm. The final turn carries through her hips,
+shoulders, hair and tabard before settling back into the approved stalker guard.
+
+The twenty keys share one 550-pixel anatomical scale. Six crimson/ivory effects
+extend the blade paths without extending her hurtboxes. All contact beats
+(34/59/76), bleed application, hard knockdown, damage and cost are unchanged.
+Block and miss return from the opening without playing the captured sequence.
+
+The native suite passed 20,153 checks with no failures. See the
+[validation](../art/characters/supers-v3/bloodletting/validation.json) and
+[fixed-scale comparison](../art/characters/supers-v3/bloodletting/scale-review.png).
+
 ## Size calibration
 
 The first visual comparison covered all 196 v2 super body drawings against their

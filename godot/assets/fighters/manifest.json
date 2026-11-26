@@ -63942,335 +63942,336 @@
       "anatomical_scales": {
         "supers-v1": 480,
         "bloodletting-v2": 600,
-        "exsanguinate-v2": 600
+        "exsanguinate-v2": 600,
+        "bloodletting-v3": 550
       },
       "super_bloodletting": {
-        "file": "supers-v2/bloodletting/entry.png",
-        "body_height": 600,
+        "file": "supers-v3/bloodletting/entry.png",
+        "body_height": 550,
         "frames": [
           {
-            "file": "supers-v2/bloodletting/entry.png",
-            "sha256": "997de9eec1e107c66174a509a55d8efb994be560df1e689b1bf273b1e3d2f624",
+            "file": "supers-v3/bloodletting/entry.png",
+            "sha256": "929dcd485c93b366df7bf8dbd9bb4225deb336619ca4845042a30b09921505e1",
             "source_size": [
               1536,
               1024
             ],
             "region": [
               0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              41,
+              85,
+              600,
+              488
+            ],
+            "pivot": [
+              380,
+              487
+            ],
+            "body_height": 550,
+            "source_pose": 0,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              44,
+              288
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/entry.png",
+            "sha256": "929dcd485c93b366df7bf8dbd9bb4225deb336619ca4845042a30b09921505e1",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              66,
+              50,
+              727,
+              486
+            ],
+            "pivot": [
+              387,
+              486
+            ],
+            "body_height": 550,
+            "source_pose": 1,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              725,
+              156
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/entry.png",
+            "sha256": "929dcd485c93b366df7bf8dbd9bb4225deb336619ca4845042a30b09921505e1",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              95,
+              27,
+              734,
+              489
+            ],
+            "pivot": [
+              390,
+              487
+            ],
+            "body_height": 550,
+            "source_pose": 2,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              732,
+              103
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/entry.png",
+            "sha256": "929dcd485c93b366df7bf8dbd9bb4225deb336619ca4845042a30b09921505e1",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              122,
+              30,
+              660,
+              494
+            ],
+            "pivot": [
+              382,
+              493
+            ],
+            "body_height": 550,
+            "source_pose": 3,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              445,
+              330
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/rise.png",
+            "sha256": "b45f9e8bc927aa72313c2264511a09b482712300e1b9463bb486d22af5ed8c86",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              154,
+              32,
+              655,
+              497
+            ],
+            "pivot": [
+              400,
+              496
+            ],
+            "body_height": 550,
+            "source_pose": 0,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              505,
+              331
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/rise.png",
+            "sha256": "b45f9e8bc927aa72313c2264511a09b482712300e1b9463bb486d22af5ed8c86",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              63,
+              94,
+              628,
+              496
+            ],
+            "pivot": [
+              392,
+              495
+            ],
+            "body_height": 550,
+            "source_pose": 1,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              68,
+              348
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/rise.png",
+            "sha256": "b45f9e8bc927aa72313c2264511a09b482712300e1b9463bb486d22af5ed8c86",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              184,
+              26,
+              693,
+              499
+            ],
+            "pivot": [
+              400,
+              498
+            ],
+            "body_height": 550,
+            "source_pose": 2,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              692,
+              28
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/rise.png",
+            "sha256": "b45f9e8bc927aa72313c2264511a09b482712300e1b9463bb486d22af5ed8c86",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              139,
+              5,
+              623,
+              499
+            ],
+            "pivot": [
+              397,
+              498
+            ],
+            "body_height": 550,
+            "source_pose": 3,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              139,
+              59
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/down.png",
+            "sha256": "8c5c70f019dd891222d81f67aed177c419636992e2c50bf311dfd1814e704816",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              162,
+              9,
+              610,
+              498
+            ],
+            "pivot": [
+              385,
+              498
+            ],
+            "body_height": 550,
+            "source_pose": 0,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              398,
+              24
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/down.png",
+            "sha256": "8c5c70f019dd891222d81f67aed177c419636992e2c50bf311dfd1814e704816",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
               0,
               768,
               512
             ],
             "bounds": [
               123,
-              35,
-              547,
-              477
+              25,
+              592,
+              499
             ],
             "pivot": [
-              270,
-              476
-            ],
-            "body_height": 600,
-            "source_pose": 0,
-            "scale_group": "bloodletting-v2",
-            "render_only": true,
-            "tip": [
-              303,
-              355
-            ]
-          },
-          {
-            "file": "supers-v2/bloodletting/entry.png",
-            "sha256": "997de9eec1e107c66174a509a55d8efb994be560df1e689b1bf273b1e3d2f624",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              0,
-              14,
-              713,
-              486
-            ],
-            "pivot": [
-              252,
-              484
-            ],
-            "body_height": 600,
-            "source_pose": 1,
-            "scale_group": "bloodletting-v2",
-            "render_only": true,
-            "tip": [
-              709,
-              127
-            ]
-          },
-          {
-            "file": "supers-v2/bloodletting/entry.png",
-            "sha256": "997de9eec1e107c66174a509a55d8efb994be560df1e689b1bf273b1e3d2f624",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              77,
-              9,
-              724,
-              497
-            ],
-            "pivot": [
-              315,
-              495
-            ],
-            "body_height": 600,
-            "source_pose": 2,
-            "scale_group": "bloodletting-v2",
-            "render_only": true,
-            "tip": [
-              722,
-              110
-            ]
-          },
-          {
-            "file": "supers-v2/bloodletting/entry.png",
-            "sha256": "997de9eec1e107c66174a509a55d8efb994be560df1e689b1bf273b1e3d2f624",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              77,
-              13,
-              591,
-              497
-            ],
-            "pivot": [
-              332,
-              495
-            ],
-            "body_height": 600,
-            "source_pose": 3,
-            "scale_group": "bloodletting-v2",
-            "render_only": true,
-            "tip": [
-              515,
-              181
-            ]
-          },
-          {
-            "file": "supers-v2/bloodletting/rise.png",
-            "sha256": "1f1e3d22e24f4384c5416a11b240363448e0c5a984895cafaaeed7d9deb0ed4a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              505
-            ],
-            "bounds": [
-              117,
-              35,
-              530,
-              478
-            ],
-            "pivot": [
-              280,
-              477
-            ],
-            "body_height": 600,
-            "source_pose": 0,
-            "scale_group": "bloodletting-v2",
-            "render_only": true,
-            "tip": [
-              457,
-              199
-            ]
-          },
-          {
-            "file": "supers-v2/bloodletting/rise.png",
-            "sha256": "1f1e3d22e24f4384c5416a11b240363448e0c5a984895cafaaeed7d9deb0ed4a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              33,
-              11,
-              520,
-              485
-            ],
-            "pivot": [
-              272,
-              484
-            ],
-            "body_height": 600,
-            "source_pose": 1,
-            "scale_group": "bloodletting-v2",
-            "render_only": true,
-            "tip": [
-              435,
-              151
-            ]
-          },
-          {
-            "file": "supers-v2/bloodletting/rise.png",
-            "sha256": "1f1e3d22e24f4384c5416a11b240363448e0c5a984895cafaaeed7d9deb0ed4a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              505,
-              768,
-              519
-            ],
-            "bounds": [
-              89,
-              1,
-              725,
-              505
-            ],
-            "pivot": [
-              330,
-              503
-            ],
-            "body_height": 600,
-            "source_pose": 2,
-            "scale_group": "bloodletting-v2",
-            "render_only": true,
-            "tip": [
-              724,
-              22
-            ]
-          },
-          {
-            "file": "supers-v2/bloodletting/rise.png",
-            "sha256": "1f1e3d22e24f4384c5416a11b240363448e0c5a984895cafaaeed7d9deb0ed4a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              89,
-              3,
-              636,
+              382,
               498
             ],
-            "pivot": [
-              342,
-              496
-            ],
-            "body_height": 600,
-            "source_pose": 3,
-            "scale_group": "bloodletting-v2",
-            "render_only": true,
-            "tip": [
-              632,
-              51
-            ]
-          },
-          {
-            "file": "supers-v2/bloodletting/cross.png",
-            "sha256": "bc49c45792362b34ad6895f24bec4af2aa1da839d61bc5ca89988342403f48c6",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              86,
-              6,
-              573,
-              488
-            ],
-            "pivot": [
-              300,
-              485
-            ],
-            "body_height": 600,
-            "source_pose": 0,
-            "scale_group": "bloodletting-v2",
-            "render_only": true,
-            "tip": [
-              572,
-              80
-            ]
-          },
-          {
-            "file": "supers-v2/bloodletting/cross.png",
-            "sha256": "bc49c45792362b34ad6895f24bec4af2aa1da839d61bc5ca89988342403f48c6",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              86,
-              7,
-              562,
-              488
-            ],
-            "pivot": [
-              312,
-              485
-            ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 1,
-            "scale_group": "bloodletting-v2",
+            "scale_group": "bloodletting-v3",
             "render_only": true,
             "tip": [
-              530,
-              123
+              123,
+              136
             ]
           },
           {
-            "file": "supers-v2/bloodletting/cross.png",
-            "sha256": "bc49c45792362b34ad6895f24bec4af2aa1da839d61bc5ca89988342403f48c6",
+            "file": "supers-v3/bloodletting/down.png",
+            "sha256": "8c5c70f019dd891222d81f67aed177c419636992e2c50bf311dfd1814e704816",
             "source_size": [
               1536,
               1024
@@ -64282,27 +64283,27 @@
               512
             ],
             "bounds": [
-              86,
-              14,
+              102,
+              43,
+              689,
+              472
+            ],
+            "pivot": [
+              345,
+              472
+            ],
+            "body_height": 550,
+            "source_pose": 2,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
               686,
-              489
-            ],
-            "pivot": [
-              320,
-              488
-            ],
-            "body_height": 600,
-            "source_pose": 2,
-            "scale_group": "bloodletting-v2",
-            "render_only": true,
-            "tip": [
-              683,
-              285
+              380
             ]
           },
           {
-            "file": "supers-v2/bloodletting/cross.png",
-            "sha256": "bc49c45792362b34ad6895f24bec4af2aa1da839d61bc5ca89988342403f48c6",
+            "file": "supers-v3/bloodletting/down.png",
+            "sha256": "8c5c70f019dd891222d81f67aed177c419636992e2c50bf311dfd1814e704816",
             "source_size": [
               1536,
               1024
@@ -64314,27 +64315,27 @@
               512
             ],
             "bounds": [
-              86,
-              15,
-              696,
-              489
+              85,
+              82,
+              723,
+              473
             ],
             "pivot": [
-              322,
-              488
+              352,
+              472
             ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 3,
-            "scale_group": "bloodletting-v2",
+            "scale_group": "bloodletting-v3",
             "render_only": true,
             "tip": [
-              692,
-              306
+              721,
+              433
             ]
           },
           {
-            "file": "supers-v2/bloodletting/finish.png",
-            "sha256": "a8e74a77c7862b3515dd462a6c6bb6155fc9dcbb80bf0303140d6eb84f03805c",
+            "file": "supers-v3/bloodletting/finish.png",
+            "sha256": "2ff6eba839f4ba6e9673110f0a3879f809eec0e7b50bd43ca2fc1c8a057f8f6d",
             "source_size": [
               1536,
               1024
@@ -64346,27 +64347,27 @@
               512
             ],
             "bounds": [
-              69,
-              14,
-              768,
-              486
+              149,
+              75,
+              578,
+              490
             ],
             "pivot": [
-              335,
-              480
+              365,
+              488
             ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 0,
-            "scale_group": "bloodletting-v2",
+            "scale_group": "bloodletting-v3",
             "render_only": true,
             "tip": [
-              515,
-              203
+              222,
+              206
             ]
           },
           {
-            "file": "supers-v2/bloodletting/finish.png",
-            "sha256": "a8e74a77c7862b3515dd462a6c6bb6155fc9dcbb80bf0303140d6eb84f03805c",
+            "file": "supers-v3/bloodletting/finish.png",
+            "sha256": "2ff6eba839f4ba6e9673110f0a3879f809eec0e7b50bd43ca2fc1c8a057f8f6d",
             "source_size": [
               1536,
               1024
@@ -64378,27 +64379,27 @@
               512
             ],
             "bounds": [
-              0,
-              5,
-              660,
-              488
+              32,
+              15,
+              745,
+              491
             ],
             "pivot": [
-              252,
-              486
+              362,
+              490
             ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 1,
-            "scale_group": "bloodletting-v2",
+            "scale_group": "bloodletting-v3",
             "render_only": true,
             "tip": [
-              658,
-              65
+              742,
+              18
             ]
           },
           {
-            "file": "supers-v2/bloodletting/finish.png",
-            "sha256": "a8e74a77c7862b3515dd462a6c6bb6155fc9dcbb80bf0303140d6eb84f03805c",
+            "file": "supers-v3/bloodletting/finish.png",
+            "sha256": "2ff6eba839f4ba6e9673110f0a3879f809eec0e7b50bd43ca2fc1c8a057f8f6d",
             "source_size": [
               1536,
               1024
@@ -64410,27 +64411,27 @@
               512
             ],
             "bounds": [
-              69,
-              5,
-              652,
-              497
+              71,
+              3,
+              696,
+              492
             ],
             "pivot": [
-              320,
-              495
+              385,
+              493
             ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 2,
-            "scale_group": "bloodletting-v2",
+            "scale_group": "bloodletting-v3",
             "render_only": true,
             "tip": [
-              649,
-              267
+              76,
+              57
             ]
           },
           {
-            "file": "supers-v2/bloodletting/finish.png",
-            "sha256": "a8e74a77c7862b3515dd462a6c6bb6155fc9dcbb80bf0303140d6eb84f03805c",
+            "file": "supers-v3/bloodletting/finish.png",
+            "sha256": "2ff6eba839f4ba6e9673110f0a3879f809eec0e7b50bd43ca2fc1c8a057f8f6d",
             "source_size": [
               1536,
               1024
@@ -64442,137 +64443,265 @@
               512
             ],
             "bounds": [
-              38,
-              6,
-              581,
-              497
+              75,
+              26,
+              669,
+              491
             ],
             "pivot": [
-              312,
-              495
+              362,
+              492
             ],
-            "body_height": 600,
+            "body_height": 550,
             "source_pose": 3,
-            "scale_group": "bloodletting-v2",
+            "scale_group": "bloodletting-v3",
             "render_only": true,
             "tip": [
-              477,
-              243
+              402,
+              330
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/return.png",
+            "sha256": "e6b68dd5bcdffaa682e70716929b7955f037af9a89ba13eb517ece15adbe14d1",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              139,
+              46,
+              656,
+              493
+            ],
+            "pivot": [
+              365,
+              493
+            ],
+            "body_height": 550,
+            "source_pose": 0,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              321,
+              462
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/return.png",
+            "sha256": "e6b68dd5bcdffaa682e70716929b7955f037af9a89ba13eb517ece15adbe14d1",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              125,
+              16,
+              652,
+              493
+            ],
+            "pivot": [
+              392,
+              492
+            ],
+            "body_height": 550,
+            "source_pose": 1,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              524,
+              302
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/return.png",
+            "sha256": "e6b68dd5bcdffaa682e70716929b7955f037af9a89ba13eb517ece15adbe14d1",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              139,
+              13,
+              638,
+              501
+            ],
+            "pivot": [
+              390,
+              501
+            ],
+            "body_height": 550,
+            "source_pose": 2,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              475,
+              299
+            ]
+          },
+          {
+            "file": "supers-v3/bloodletting/return.png",
+            "sha256": "e6b68dd5bcdffaa682e70716929b7955f037af9a89ba13eb517ece15adbe14d1",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              128,
+              13,
+              640,
+              501
+            ],
+            "pivot": [
+              387,
+              501
+            ],
+            "body_height": 550,
+            "source_pose": 3,
+            "scale_group": "bloodletting-v3",
+            "render_only": true,
+            "tip": [
+              456,
+              306
             ]
           }
         ],
         "render_only": true
       },
       "super_bloodletting_fx": {
-        "file": "supers-v2/bloodletting/effects.png",
+        "file": "supers-v3/bloodletting/effects.png",
         "body_height": 512,
         "frames": [
           {
             "region": [
-              16,
-              119,
-              492,
-              312
-            ],
-            "pivot": [
-              246.0,
-              312
-            ],
-            "bounds": [
-              0,
-              0,
-              492,
-              312
-            ]
-          },
-          {
-            "region": [
-              532,
               19,
-              478,
-              476
+              108,
+              486,
+              347
             ],
             "pivot": [
-              239.0,
-              476
+              243.0,
+              347
             ],
             "bounds": [
               0,
               0,
-              478,
-              476
+              486,
+              347
             ]
           },
           {
             "region": [
-              1047,
-              38,
+              526,
+              10,
+              466,
+              495
+            ],
+            "pivot": [
+              233.0,
+              495
+            ],
+            "bounds": [
+              0,
+              0,
+              466,
+              495
+            ]
+          },
+          {
+            "region": [
+              1039,
+              37,
               464,
-              455
+              468
             ],
             "pivot": [
               232.0,
-              455
+              468
             ],
             "bounds": [
               0,
               0,
               464,
-              455
+              468
             ]
           },
           {
             "region": [
-              14,
-              592,
-              477,
-              342
+              15,
+              566,
+              480,
+              387
             ],
             "pivot": [
-              238.5,
-              342
+              240.0,
+              387
             ],
             "bounds": [
               0,
               0,
-              477,
-              342
+              480,
+              387
             ]
           },
           {
             "region": [
-              532,
-              541,
-              461,
-              439
+              526,
+              537,
+              471,
+              451
             ],
             "pivot": [
-              230.5,
-              439
+              235.5,
+              451
             ],
             "bounds": [
               0,
               0,
-              461,
-              439
+              471,
+              451
             ]
           },
           {
             "region": [
-              1075,
-              540,
-              445,
-              448
+              1076,
+              545,
+              451,
+              440
             ],
             "pivot": [
-              222.5,
-              448
+              225.5,
+              440
             ],
             "bounds": [
               0,
               0,
-              445,
-              448
+              451,
+              440
             ]
           }
         ],
@@ -64589,16 +64718,24 @@
               2
             ],
             [
-              20,
+              15,
               3
             ],
             [
-              50,
-              14
+              38,
+              16
             ],
             [
-              80,
-              15
+              57,
+              17
+            ],
+            [
+              76,
+              18
+            ],
+            [
+              93,
+              19
             ]
           ],
           "sounds": {
@@ -64614,103 +64751,111 @@
               "end": 5,
               "key": 0,
               "box": [
-                40,
-                -150,
-                140,
-                95
+                -45,
+                -170,
+                280,
+                160
               ],
+              "behind": true,
               "fade": true,
-              "opacity": 0.85,
+              "opacity": 0.9,
               "stop_at_guard": true
             },
             {
               "stage": "paired",
               "start": 0,
-              "end": 8,
+              "end": 12,
               "key": 0,
               "box": [
-                -55,
-                -155,
-                120,
-                100
+                -45,
+                -170,
+                280,
+                160
               ],
-              "anchor": "receiver",
+              "behind": true,
               "fade": true,
-              "opacity": 0.85
+              "opacity": 0.9
             },
             {
               "stage": "paired",
               "start": 34,
-              "end": 43,
+              "end": 47,
               "key": 1,
               "box": [
-                -60,
-                -175,
-                145,
-                145
+                -100,
+                -225,
+                245,
+                225
               ],
               "anchor": "receiver",
-              "fade": true,
-              "opacity": 0.85
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "paired",
               "start": 59,
-              "end": 68,
+              "end": 72,
               "key": 2,
               "box": [
-                -60,
-                -155,
-                145,
-                135
+                -110,
+                -220,
+                260,
+                220
               ],
               "anchor": "receiver",
-              "fade": true,
-              "opacity": 0.85
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "connected",
               "start": 0,
-              "end": 5,
+              "end": 12,
               "key": 3,
               "box": [
-                -45,
-                -145,
-                135,
-                125
+                -95,
+                -220,
+                290,
+                240
               ],
               "anchor": "receiver",
-              "fade": false
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "connected",
-              "start": 5,
-              "end": 13,
+              "start": 8,
+              "end": 29,
               "key": 4,
               "box": [
-                -60,
-                -165,
-                165,
-                155
+                -130,
+                -235,
+                310,
+                250
               ],
               "anchor": "receiver",
+              "behind": true,
               "fade": true
             },
             {
               "stage": "connected",
-              "start": 13,
-              "end": 30,
+              "start": 22,
+              "end": 44,
               "key": 5,
               "box": [
-                -70,
-                -175,
-                180,
-                170
+                -145,
+                -240,
+                330,
+                260
               ],
               "anchor": "receiver",
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.7
             }
           ],
+          "source": "supers-v3/bloodletting",
+          "description": "Hip-led horizontal knife entry, grounded rising crescent, committed downcut, crossed-forearm reload and explosive open X. Long overtravel and a controlled stalker return.",
+          "receiver_reactions": true,
           "phase": "super_bloodletting",
           "fx_phase": "super_bloodletting_fx",
           "pair_ticks": 76,
@@ -64772,12 +64917,28 @@
               13
             ],
             [
-              8,
+              5,
               14
             ],
             [
-              18,
+              11,
               15
+            ],
+            [
+              15,
+              16
+            ],
+            [
+              18,
+              17
+            ],
+            [
+              21,
+              18
+            ],
+            [
+              23,
+              19
             ]
           ]
         },
