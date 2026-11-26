@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-26",
+  "scope": "The Air Is Mine v3",
+  "suites": [
+    {
+      "log": "build/air-v3-test.log",
+      "checks": 6735,
+      "failures": 0
+    }
+  ],
+  "totalChecks": 6735,
+  "nativeReview": {
+    "cases": [
+      {
+        "name": "hit",
+        "damage": 150,
+        "paired": false
+      },
+      {
+        "name": "mirrored",
+        "damage": 150,
+        "paired": false
+      },
+      {
+        "name": "block",
+        "damage": 15,
+        "paired": false
+      },
+      {
+        "name": "whiff",
+        "damage": 0,
+        "paired": false
+      },
+      {
+        "name": "near",
+        "damage": 150,
+        "paired": false
+      },
+      {
+        "name": "far",
+        "damage": 150,
+        "paired": false
+      }
+    ],
+    "failures": 0,
+    "frames": 1892,
+    "fps": 60,
+    "video": "exports/FightGuild-The-Air-Is-Mine-V3-2026-11-26.mp4",
+    "sha256": "aef670f4a2fc2c12fa8f05845f99a8a3baa7f38d8548d193650550a7f50de18c"
+  },
+  "sourceBytesPreserved": true,
+  "gameplayChanged": false,
+  "websiteUpdated": false,
+  "visualReview": [
+    "all body drawings at fixed world scale against approved idle",
+    "native hit, mirrored, block and miss",
+    "clear anatomy and silhouettes through contact and recovery"
+  ]
+}

@@ -153,6 +153,28 @@ retains both decisions. Native checks passed 19,645 assertions with no failures.
 See the [validation](../art/characters/supers-v3/flashpoint/validation.json) and
 [fixed-scale comparison](../art/characters/supers-v3/flashpoint/scale-review.png).
 
+## The Air Is Mine — complete
+
+[Watch the native 60 FPS review](../exports/FightGuild-The-Air-Is-Mine-V3-2026-11-26.mp4)
+(hit, mirrored hit, block, miss, near placement and far placement).
+
+Twelve replacement body drawings wind through a bow, rising torso and crossed
+wrists, then open into a broad curtain gesture. The shoulders, pelvis, free
+leg, hair and coat continue the turn before settling back to Smoke's original
+toe-touch idle. All poses use the same anatomical scale.
+
+The field has six new looping smoke drawings with grey/olive ribbons, acid-lime
+edges and transparent gaps. Six separate release/contact effects make the
+opening larger and distinguish each real pulse. The stationary field still
+uses its own saved clock after Smoke recovers; near/middle/far placement and
+clearing on interruption are unchanged.
+
+The cast suite passed 6,735 checks with no failures, covering every body and
+field key, actual contact pulses, both sides, block, miss, pause, replay,
+placement, interruption and edited timing. See the
+[validation](../art/characters/supers-v3/the-air-is-mine/validation.json) and
+[fixed-scale comparison](../art/characters/supers-v3/the-air-is-mine/scale-review.png).
+
 ## Size calibration
 
 The first visual comparison covered all 196 v2 super body drawings against their

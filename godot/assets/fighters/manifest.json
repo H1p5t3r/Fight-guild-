@@ -28396,55 +28396,55 @@
         "31": {
           "frame_ticks": 8,
           "loop_all": true,
-          "opacity": 0.85,
-          "file": "supers-v2/the-air-is-mine/cloud.png",
+          "opacity": 0.8,
+          "file": "supers-v3/the-air-is-mine/cloud.png",
           "frames": [
             {
               "region": [
-                15,
-                73,
-                478,
-                364
-              ]
-            },
-            {
-              "region": [
-                531,
-                61,
-                470,
-                376
-              ]
-            },
-            {
-              "region": [
-                1040,
+                35,
                 54,
-                479,
-                383
+                434,
+                419
               ]
             },
             {
               "region": [
-                16,
-                567,
-                480,
-                382
+                543,
+                49,
+                448,
+                423
               ]
             },
             {
               "region": [
-                527,
-                572,
-                482,
-                377
+                1051,
+                36,
+                454,
+                436
               ]
             },
             {
               "region": [
-                1040,
-                583,
-                478,
-                366
+                22,
+                555,
+                453,
+                435
+              ]
+            },
+            {
+              "region": [
+                543,
+                562,
+                442,
+                427
+              ]
+            },
+            {
+              "region": [
+                1056,
+                564,
+                445,
+                425
               ]
             }
           ]
@@ -28515,7 +28515,8 @@
         "supers-v1": 480,
         "flashpoint-v2": 480,
         "the-air-is-mine-v2": 480,
-        "flashpoint-v3": 480
+        "flashpoint-v3": 480,
+        "the-air-is-mine-v3": 480
       },
       "super_flashpoint": {
         "file": "supers-v3/flashpoint/entry.png",
@@ -29576,57 +29577,76 @@
               "stage": "windup",
               "start": 18,
               "end": 24,
-              "key": 0,
+              "key": 2,
               "box": [
-                5,
-                -130,
-                60,
-                85
+                -12,
+                -125,
+                65,
+                70
               ],
-              "behind": false,
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.55
             },
             {
               "stage": "cast",
               "start": 0,
-              "end": 4,
-              "key": 1,
+              "end": 5,
+              "key": 0,
               "box": [
-                -45,
-                -160,
-                230,
-                150
+                -100,
+                -200,
+                330,
+                190
               ],
-              "behind": false,
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.95
             },
             {
               "stage": "cast",
               "start": 2,
-              "end": 8,
-              "key": 2,
+              "end": 9,
+              "key": 1,
               "box": [
-                -25,
-                -135,
-                220,
-                130
+                -60,
+                -190,
+                310,
+                180
               ],
               "behind": true,
-              "fade": true
+              "fade": true,
+              "opacity": 0.85
             },
             {
               "stage": "cast",
-              "start": 7,
+              "start": 6,
               "end": 14,
+              "key": 2,
+              "box": [
+                -25,
+                -170,
+                290,
+                155
+              ],
+              "behind": true,
+              "fade": true,
+              "opacity": 0.7
+            },
+            {
+              "stage": "cast",
+              "start": 12,
+              "end": 19,
               "key": 3,
               "box": [
-                -10,
-                -155,
-                180,
-                150
+                -25,
+                -170,
+                290,
+                160
               ],
-              "behind": false,
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.6
             }
           ],
           "projectile_contact": {
@@ -29641,6 +29661,8 @@
               110
             ]
           },
+          "source": "supers-v3/the-air-is-mine",
+          "description": "Bowed gather into a reverse body coil, wide curtain-opening sweep, rotating overtravel and a measured drifting return.",
           "phase": "super_the_air_is_mine",
           "fx_phase": "super_the_air_is_mine_fx",
           "pair_ticks": 0,
@@ -29649,12 +29671,12 @@
         }
       },
       "super_the_air_is_mine": {
-        "file": "supers-v2/the-air-is-mine/load.png",
+        "file": "supers-v3/the-air-is-mine/load.png",
         "body_height": 480,
         "frames": [
           {
-            "file": "supers-v2/the-air-is-mine/load.png",
-            "sha256": "02eba902c8d39b85e47eedb0abced47edc3e166ff141c6b15da5b44b498e5918",
+            "file": "supers-v3/the-air-is-mine/load.png",
+            "sha256": "a7780616ce33584fc466308fddd23ad817f6013062236b1b95836ebd04f80501",
             "source_size": [
               1536,
               1024
@@ -29666,219 +29688,91 @@
               512
             ],
             "bounds": [
-              245,
-              7,
-              530,
-              494
-            ],
-            "pivot": [
-              410,
-              493
-            ],
-            "body_height": 480,
-            "source_pose": 0,
-            "scale_group": "the-air-is-mine-v2",
-            "render_only": true,
-            "tip": [
-              530,
-              236
-            ]
-          },
-          {
-            "file": "supers-v2/the-air-is-mine/load.png",
-            "sha256": "02eba902c8d39b85e47eedb0abced47edc3e166ff141c6b15da5b44b498e5918",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              214,
-              9,
-              487,
-              494
-            ],
-            "pivot": [
-              397,
-              493
-            ],
-            "body_height": 480,
-            "source_pose": 1,
-            "scale_group": "the-air-is-mine-v2",
-            "render_only": true,
-            "tip": [
-              482,
-              194
-            ]
-          },
-          {
-            "file": "supers-v2/the-air-is-mine/load.png",
-            "sha256": "02eba902c8d39b85e47eedb0abced47edc3e166ff141c6b15da5b44b498e5918",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              234,
-              8,
-              490,
-              494
-            ],
-            "pivot": [
-              410,
-              494
-            ],
-            "body_height": 480,
-            "source_pose": 2,
-            "scale_group": "the-air-is-mine-v2",
-            "render_only": true,
-            "tip": [
-              490,
-              126
-            ]
-          },
-          {
-            "file": "supers-v2/the-air-is-mine/load.png",
-            "sha256": "02eba902c8d39b85e47eedb0abced47edc3e166ff141c6b15da5b44b498e5918",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              249,
-              11,
-              466,
-              494
-            ],
-            "pivot": [
-              397,
-              494
-            ],
-            "body_height": 480,
-            "source_pose": 3,
-            "scale_group": "the-air-is-mine-v2",
-            "render_only": true,
-            "tip": [
-              460,
-              110
-            ]
-          },
-          {
-            "file": "supers-v2/the-air-is-mine/release.png",
-            "sha256": "2a112da605041cfebcb72108fb67edf9a5c9159bebaef20c8a7769d96f90693c",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              177,
-              5,
-              618,
-              495
-            ],
-            "pivot": [
-              400,
-              494
-            ],
-            "body_height": 480,
-            "source_pose": 0,
-            "scale_group": "the-air-is-mine-v2",
-            "render_only": true,
-            "tip": [
-              617,
-              68
-            ]
-          },
-          {
-            "file": "supers-v2/the-air-is-mine/release.png",
-            "sha256": "2a112da605041cfebcb72108fb67edf9a5c9159bebaef20c8a7769d96f90693c",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              183,
-              5,
-              605,
-              495
-            ],
-            "pivot": [
-              402,
-              494
-            ],
-            "body_height": 480,
-            "source_pose": 1,
-            "scale_group": "the-air-is-mine-v2",
-            "render_only": true,
-            "tip": [
-              602,
-              48
-            ]
-          },
-          {
-            "file": "supers-v2/the-air-is-mine/release.png",
-            "sha256": "2a112da605041cfebcb72108fb67edf9a5c9159bebaef20c8a7769d96f90693c",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              183,
-              6,
-              550,
-              495
-            ],
-            "pivot": [
-              400,
-              495
-            ],
-            "body_height": 480,
-            "source_pose": 2,
-            "scale_group": "the-air-is-mine-v2",
-            "render_only": true,
-            "tip": [
+              225,
+              13,
               548,
-              28
+              497
+            ],
+            "pivot": [
+              400,
+              495
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "the-air-is-mine-v3",
+            "render_only": true,
+            "tip": [
+              292,
+              230
             ]
           },
           {
-            "file": "supers-v2/the-air-is-mine/release.png",
-            "sha256": "2a112da605041cfebcb72108fb67edf9a5c9159bebaef20c8a7769d96f90693c",
+            "file": "supers-v3/the-air-is-mine/load.png",
+            "sha256": "a7780616ce33584fc466308fddd23ad817f6013062236b1b95836ebd04f80501",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              203,
+              56,
+              532,
+              497
+            ],
+            "pivot": [
+              402,
+              496
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "the-air-is-mine-v3",
+            "render_only": true,
+            "tip": [
+              432,
+              299
+            ]
+          },
+          {
+            "file": "supers-v3/the-air-is-mine/load.png",
+            "sha256": "a7780616ce33584fc466308fddd23ad817f6013062236b1b95836ebd04f80501",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              253,
+              13,
+              515,
+              497
+            ],
+            "pivot": [
+              400,
+              496
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "the-air-is-mine-v3",
+            "render_only": true,
+            "tip": [
+              441,
+              148
+            ]
+          },
+          {
+            "file": "supers-v3/the-air-is-mine/load.png",
+            "sha256": "a7780616ce33584fc466308fddd23ad817f6013062236b1b95836ebd04f80501",
             "source_size": [
               1536,
               1024
@@ -29890,27 +29784,155 @@
               512
             ],
             "bounds": [
-              202,
-              6,
-              544,
+              283,
+              7,
+              614,
+              498
+            ],
+            "pivot": [
+              382,
+              496
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "the-air-is-mine-v3",
+            "render_only": true,
+            "tip": [
+              392,
+              84
+            ]
+          },
+          {
+            "file": "supers-v3/the-air-is-mine/release.png",
+            "sha256": "03468dba1d119f3be3e999be6a1311042cccf5442dad64ab393bc18a3576d75a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              211,
+              15,
+              640,
+              497
+            ],
+            "pivot": [
+              450,
+              495
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "the-air-is-mine-v3",
+            "render_only": true,
+            "tip": [
+              619,
+              47
+            ]
+          },
+          {
+            "file": "supers-v3/the-air-is-mine/release.png",
+            "sha256": "03468dba1d119f3be3e999be6a1311042cccf5442dad64ab393bc18a3576d75a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              179,
+              16,
+              629,
               495
             ],
             "pivot": [
               402,
-              495
+              494
             ],
             "body_height": 480,
-            "source_pose": 3,
-            "scale_group": "the-air-is-mine-v2",
+            "source_pose": 1,
+            "scale_group": "the-air-is-mine-v3",
             "render_only": true,
             "tip": [
-              542,
-              71
+              614,
+              230
             ]
           },
           {
-            "file": "supers-v2/the-air-is-mine/recovery.png",
-            "sha256": "f75b6d42cfd980830ffc6540979301a30f4bfecbf99ca906b3d8b39f29a35c97",
+            "file": "supers-v3/the-air-is-mine/release.png",
+            "sha256": "03468dba1d119f3be3e999be6a1311042cccf5442dad64ab393bc18a3576d75a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              179,
+              29,
+              632,
+              499
+            ],
+            "pivot": [
+              390,
+              501
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "the-air-is-mine-v3",
+            "render_only": true,
+            "tip": [
+              609,
+              42
+            ]
+          },
+          {
+            "file": "supers-v3/the-air-is-mine/release.png",
+            "sha256": "03468dba1d119f3be3e999be6a1311042cccf5442dad64ab393bc18a3576d75a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              185,
+              10,
+              582,
+              497
+            ],
+            "pivot": [
+              392,
+              497
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "the-air-is-mine-v3",
+            "render_only": true,
+            "tip": [
+              557,
+              221
+            ]
+          },
+          {
+            "file": "supers-v3/the-air-is-mine/recovery.png",
+            "sha256": "1ad425f51060e676c6ab2cc5ebbc8bfdc0962ff780aaae6b10597b7d0ffda7c2",
             "source_size": [
               1536,
               1024
@@ -29922,27 +29944,27 @@
               512
             ],
             "bounds": [
-              177,
-              8,
-              559,
-              496
+              147,
+              16,
+              602,
+              495
             ],
             "pivot": [
-              405,
+              385,
               496
             ],
             "body_height": 480,
             "source_pose": 0,
-            "scale_group": "the-air-is-mine-v2",
+            "scale_group": "the-air-is-mine-v3",
             "render_only": true,
             "tip": [
-              556,
-              83
+              582,
+              129
             ]
           },
           {
-            "file": "supers-v2/the-air-is-mine/recovery.png",
-            "sha256": "f75b6d42cfd980830ffc6540979301a30f4bfecbf99ca906b3d8b39f29a35c97",
+            "file": "supers-v3/the-air-is-mine/recovery.png",
+            "sha256": "1ad425f51060e676c6ab2cc5ebbc8bfdc0962ff780aaae6b10597b7d0ffda7c2",
             "source_size": [
               1536,
               1024
@@ -29954,201 +29976,201 @@
               512
             ],
             "bounds": [
-              191,
-              8,
+              164,
+              13,
+              490,
+              495
+            ],
+            "pivot": [
+              402,
+              496
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "the-air-is-mine-v3",
+            "render_only": true,
+            "tip": [
+              474,
+              108
+            ]
+          },
+          {
+            "file": "supers-v3/the-air-is-mine/recovery.png",
+            "sha256": "1ad425f51060e676c6ab2cc5ebbc8bfdc0962ff780aaae6b10597b7d0ffda7c2",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              203,
+              12,
+              552,
+              496
+            ],
+            "pivot": [
+              400,
+              497
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "the-air-is-mine-v3",
+            "render_only": true,
+            "tip": [
+              309,
+              212
+            ]
+          },
+          {
+            "file": "supers-v3/the-air-is-mine/recovery.png",
+            "sha256": "1ad425f51060e676c6ab2cc5ebbc8bfdc0962ff780aaae6b10597b7d0ffda7c2",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              218,
+              12,
               534,
               496
             ],
             "pivot": [
-              407,
-              496
-            ],
-            "body_height": 480,
-            "source_pose": 1,
-            "scale_group": "the-air-is-mine-v2",
-            "render_only": true,
-            "tip": [
-              532,
-              141
-            ]
-          },
-          {
-            "file": "supers-v2/the-air-is-mine/recovery.png",
-            "sha256": "f75b6d42cfd980830ffc6540979301a30f4bfecbf99ca906b3d8b39f29a35c97",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              197,
-              8,
-              530,
-              496
-            ],
-            "pivot": [
-              405,
-              496
-            ],
-            "body_height": 480,
-            "source_pose": 2,
-            "scale_group": "the-air-is-mine-v2",
-            "render_only": true,
-            "tip": [
-              530,
-              199
-            ]
-          },
-          {
-            "file": "supers-v2/the-air-is-mine/recovery.png",
-            "sha256": "f75b6d42cfd980830ffc6540979301a30f4bfecbf99ca906b3d8b39f29a35c97",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              212,
-              8,
-              523,
-              496
-            ],
-            "pivot": [
-              407,
-              496
+              402,
+              497
             ],
             "body_height": 480,
             "source_pose": 3,
-            "scale_group": "the-air-is-mine-v2",
+            "scale_group": "the-air-is-mine-v3",
             "render_only": true,
             "tip": [
-              522,
-              230
+              308,
+              220
             ]
           }
         ],
         "render_only": true
       },
       "super_the_air_is_mine_fx": {
-        "file": "supers-v2/the-air-is-mine/effects.png",
+        "file": "supers-v3/the-air-is-mine/effects.png",
         "body_height": 512,
         "frames": [
           {
             "region": [
-              162,
-              116,
-              202,
-              326
+              11,
+              92,
+              486,
+              309
             ],
             "pivot": [
-              101.0,
-              326
+              243.0,
+              309
             ],
             "bounds": [
               0,
               0,
-              202,
-              326
+              486,
+              309
             ]
           },
           {
             "region": [
-              572,
-              156,
-              377,
-              224
+              537,
+              125,
+              456,
+              238
             ],
             "pivot": [
-              188.5,
-              224
+              228.0,
+              238
             ],
             "bounds": [
               0,
               0,
-              377,
-              224
+              456,
+              238
             ]
           },
           {
             "region": [
-              1075,
-              85,
-              386,
-              358
+              1060,
+              96,
+              459,
+              290
             ],
             "pivot": [
-              193.0,
-              358
+              229.5,
+              290
             ],
             "bounds": [
               0,
               0,
-              386,
-              358
+              459,
+              290
             ]
           },
           {
             "region": [
-              100,
-              637,
-              309,
-              256
+              49,
+              630,
+              407,
+              290
             ],
             "pivot": [
-              154.5,
-              256
+              203.5,
+              290
             ],
             "bounds": [
               0,
               0,
-              309,
-              256
+              407,
+              290
             ]
           },
           {
             "region": [
-              602,
-              589,
-              329,
-              324
+              564,
+              587,
+              410,
+              353
             ],
             "pivot": [
-              164.5,
-              324
+              205.0,
+              353
             ],
             "bounds": [
               0,
               0,
-              329,
-              324
+              410,
+              353
             ]
           },
           {
             "region": [
-              1101,
-              613,
-              356,
-              297
+              1065,
+              567,
+              436,
+              391
             ],
             "pivot": [
-              178.0,
-              297
+              218.0,
+              391
             ],
             "bounds": [
               0,
               0,
-              356,
-              297
+              436,
+              391
             ]
           }
         ],

@@ -1,0 +1,63 @@
+[
+  {
+    "id": "load",
+    "file": "godot/assets/fighters/supers-v3/the-air-is-mine/load.png",
+    "original": "/workspace/generated_images/exec-382db178-b098-4d59-b369-b632ee8aaf50.png",
+    "sha256": "a7780616ce33584fc466308fddd23ad817f6013062236b1b95836ebd04f80501",
+    "prompt": "art/characters/supers-v3/the-air-is-mine/load-prompt.txt",
+    "references": [
+      "godot/assets/fighters/smoke-idle-v1/idle.png"
+    ]
+  },
+  {
+    "id": "release",
+    "file": "godot/assets/fighters/supers-v3/the-air-is-mine/release.png",
+    "original": "/workspace/generated_images/exec-45e9d2f6-7c76-4a11-9d64-64d08a0463f2.png",
+    "sha256": "03468dba1d119f3be3e999be6a1311042cccf5442dad64ab393bc18a3576d75a",
+    "prompt": "art/characters/supers-v3/the-air-is-mine/release-prompt.txt",
+    "references": [
+      "godot/assets/fighters/smoke-idle-v1/idle.png",
+      "godot/assets/fighters/supers-v3/the-air-is-mine/load.png"
+    ]
+  },
+  {
+    "id": "recovery",
+    "file": "godot/assets/fighters/supers-v3/the-air-is-mine/recovery.png",
+    "original": "/workspace/generated_images/exec-40f29ea3-0bff-44e9-b3b1-9ea585053cfc.png",
+    "sha256": "1ad425f51060e676c6ab2cc5ebbc8bfdc0962ff780aaae6b10597b7d0ffda7c2",
+    "prompt": "art/characters/supers-v3/the-air-is-mine/recovery-alpha-prompt.txt",
+    "references": [
+      "/workspace/generated_images/exec-d0158751-c09b-4a62-b8b0-7f88699927de.png"
+    ]
+  },
+  {
+    "id": "cloud",
+    "file": "godot/assets/fighters/supers-v3/the-air-is-mine/cloud.png",
+    "original": "/workspace/generated_images/exec-19205266-1ed4-40e6-9d1e-2391a6acb78e.png",
+    "sha256": "05ae54e8cc2b5b1593af0221eb111ce660e5b1a7477582349272db52724bebf1",
+    "prompt": "art/characters/supers-v3/the-air-is-mine/cloud-prompt.txt",
+    "references": [
+      "godot/assets/fighters/smoke-idle-v1/idle_smoke.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v3/the-air-is-mine/effects.png",
+    "original": "/workspace/generated_images/exec-fcea2e39-1c1d-49a6-b8a7-450551bff72c.png",
+    "sha256": "a6ec5e5f2246fcdb093a4ad1cd6374f0594dbb7d916e3e1d8c1fd5b43acf8298",
+    "prompt": "art/characters/supers-v3/the-air-is-mine/effects-prompt.txt",
+    "references": [
+      "godot/assets/fighters/smoke-idle-v1/idle_smoke.png"
+    ]
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/the-air-is-mine/portrait.png",
+    "original": "/workspace/generated_images/exec-8f8ed93d-db83-4454-a2a9-f67459ab6392.png",
+    "sha256": "860c815f23d7f663e2b7444c667459b677ac30b4d7bc3624d3e70cf72fc1598e",
+    "prompt": "art/characters/supers-v2/the-air-is-mine/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/the-air-is-mine/load.png"
+    ]
+  }
+]

@@ -1,0 +1,291 @@
+{
+  "bodyHeight": 480,
+  "body": {
+    "load": [
+      {
+        "root": [
+          400,
+          495
+        ],
+        "tip": [
+          292,
+          230
+        ]
+      },
+      {
+        "root": [
+          1170,
+          496
+        ],
+        "tip": [
+          1200,
+          299
+        ]
+      },
+      {
+        "root": [
+          400,
+          1008
+        ],
+        "tip": [
+          441,
+          660
+        ]
+      },
+      {
+        "root": [
+          1150,
+          1008
+        ],
+        "tip": [
+          1160,
+          596
+        ]
+      }
+    ],
+    "release": [
+      {
+        "root": [
+          450,
+          495
+        ],
+        "tip": [
+          619,
+          47
+        ]
+      },
+      {
+        "root": [
+          1170,
+          494
+        ],
+        "tip": [
+          1382,
+          230
+        ]
+      },
+      {
+        "root": [
+          390,
+          1013
+        ],
+        "tip": [
+          609,
+          554
+        ]
+      },
+      {
+        "root": [
+          1160,
+          1009
+        ],
+        "tip": [
+          1325,
+          733
+        ]
+      }
+    ],
+    "recovery": [
+      {
+        "root": [
+          385,
+          496
+        ],
+        "tip": [
+          582,
+          129
+        ]
+      },
+      {
+        "root": [
+          1170,
+          496
+        ],
+        "tip": [
+          1242,
+          108
+        ]
+      },
+      {
+        "root": [
+          400,
+          1009
+        ],
+        "tip": [
+          309,
+          724
+        ]
+      },
+      {
+        "root": [
+          1170,
+          1009
+        ],
+        "tip": [
+          1076,
+          732
+        ]
+      }
+    ]
+  },
+  "presentation": {
+    "mode": "cast",
+    "windup": [
+      [
+        0,
+        0
+      ],
+      [
+        20,
+        1
+      ],
+      [
+        45,
+        2
+      ],
+      [
+        79,
+        3
+      ]
+    ],
+    "active_pose": 4,
+    "recovery": [
+      [
+        0,
+        4
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        22,
+        6
+      ],
+      [
+        38,
+        7
+      ],
+      [
+        55,
+        8
+      ],
+      [
+        66,
+        9
+      ],
+      [
+        77,
+        10
+      ],
+      [
+        88,
+        11
+      ]
+    ],
+    "sounds": {
+      "cast": "air_is_mine_release",
+      "spawn": "air_is_mine_bloom",
+      "pulse": "air_is_mine_pulse"
+    },
+    "effects": [
+      {
+        "stage": "windup",
+        "start": 18,
+        "end": 24,
+        "key": 2,
+        "box": [
+          -12,
+          -125,
+          65,
+          70
+        ],
+        "behind": true,
+        "fade": true,
+        "opacity": 0.55
+      },
+      {
+        "stage": "cast",
+        "start": 0,
+        "end": 5,
+        "key": 0,
+        "box": [
+          -100,
+          -200,
+          330,
+          190
+        ],
+        "behind": true,
+        "fade": true,
+        "opacity": 0.95
+      },
+      {
+        "stage": "cast",
+        "start": 2,
+        "end": 9,
+        "key": 1,
+        "box": [
+          -60,
+          -190,
+          310,
+          180
+        ],
+        "behind": true,
+        "fade": true,
+        "opacity": 0.85
+      },
+      {
+        "stage": "cast",
+        "start": 6,
+        "end": 14,
+        "key": 2,
+        "box": [
+          -25,
+          -170,
+          290,
+          155
+        ],
+        "behind": true,
+        "fade": true,
+        "opacity": 0.7
+      },
+      {
+        "stage": "cast",
+        "start": 12,
+        "end": 19,
+        "key": 3,
+        "box": [
+          -25,
+          -170,
+          290,
+          160
+        ],
+        "behind": true,
+        "fade": true,
+        "opacity": 0.6
+      }
+    ],
+    "projectile_contact": {
+      "keys": [
+        4,
+        5
+      ],
+      "box": [
+        -50,
+        -55,
+        100,
+        110
+      ]
+    },
+    "source": "supers-v3/the-air-is-mine",
+    "description": "Bowed gather into a reverse body coil, wide curtain-opening sweep, rotating overtravel and a measured drifting return."
+  },
+  "projectile": {
+    "source": "cloud",
+    "frame_ticks": 8,
+    "loop_all": true,
+    "opacity": 0.8
+  },
+  "faceWidth": 0.59,
+  "faceY": 0.59
+}

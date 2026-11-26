@@ -1,0 +1,11 @@
+{
+  "superseded": [
+    {
+      "original": "/workspace/generated_images/exec-d0158751-c09b-4a62-b8b0-7f88699927de.png",
+      "sha256": "0dcc10481b2d01e7163e5f372e160f99b5a284b113b3598bbf3a2bc60d0656f9",
+      "prompt": "recovery-prompt.txt",
+      "reason": "Opaque white background removed with image generator before import."
+    }
+  ],
+  "selected": "sources.json"
+}
