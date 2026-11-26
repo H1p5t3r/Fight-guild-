@@ -15,6 +15,7 @@ var impact_layer: Control
 var impact_cues: Array = []
 var release_cues: Array = []
 var status_cues: Array = []
+var overhead_cues: Array = []
 var hud_layer: Control
 var feedback := CombatFeedback.new()
 var camera_center := 0.5
@@ -133,6 +134,7 @@ func refresh(simulation: CombatModel, state: Dictionary, boxes: bool, frozen: bo
 	if not travel: CombatSupers.present(sprites, view, scale_x * camera_zoom)
 	if not travel: SuperAnimation.present(sprites, model, view, scale_x * camera_zoom)
 	status_cues = CombatStatusEffects.place(CombatStatusEffects.describe(view, feedback.reduced_motion), model, view, sprites, scale_x * camera_zoom, screen_point(Vector2(0, floor_y)).y)
+	overhead_cues = CombatOverhead.place(CombatOverhead.describe(model, view, feedback.reduced_motion), model, view, sprites, scale_x * camera_zoom)
 	queue_redraw()
 	hud_layer.queue_redraw()
 	collision_layer.queue_redraw()
@@ -145,6 +147,7 @@ func draw_impacts() -> void:
 		return screen_point(Vector2(point.x / 100.0 * sx, ArenaStage.floor_line(size) - point.y / 100.0 * sx))
 	var ordinary := impact_cues.filter(func(cue: Dictionary) -> bool: return not SuperAnimation.replaces_impact(cue,sprites))
 	CombatStatusEffects.draw_front(impact_layer, status_cues, sx * camera_zoom)
+	CombatOverhead.draw_front(impact_layer, overhead_cues, sx * camera_zoom)
 	CombatImpacts.draw(impact_layer, ordinary, project, sx * camera_zoom)
 	SuperAnimation.draw_projectile_contacts(impact_layer,impact_cues,project,sx*camera_zoom)
 	SuperAnimation.draw_front(impact_layer, sprites, view, sx * camera_zoom)
@@ -198,6 +201,7 @@ func _draw() -> void:
 		return screen_point(Vector2(point.x / 100.0 * sx, floor_y - point.y / 100.0 * sx))
 	CombatImpacts.draw_releases(self, release_cues, project, sx * camera_zoom)
 	CombatStatusEffects.draw_behind(self, status_cues, sx * camera_zoom)
+	CombatOverhead.draw_behind(self, overhead_cues, sx * camera_zoom)
 	# Draw in the stage background before the HUD and before child fighter sprites.
 	feedback.draw(self)
 	draw_walls()

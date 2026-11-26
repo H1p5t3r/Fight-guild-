@@ -1,0 +1,79 @@
+{
+  "file": "overhead.png",
+  "sha256": "79bcc8ea5ffc0ffd8ef2397e7b127df8dc86d9f73f5788fa313ebcafe7a67864",
+  "frames": {
+    "gather": {
+      "region": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        256,
+        454
+      ]
+    },
+    "flare": {
+      "region": [
+        512,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        256,
+        454
+      ]
+    },
+    "dissipate": {
+      "region": [
+        1024,
+        0,
+        512,
+        512
+      ],
+      "pivot": [
+        256,
+        454
+      ]
+    },
+    "glint": {
+      "region": [
+        0,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        256,
+        256
+      ]
+    },
+    "spark": {
+      "region": [
+        512,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        256,
+        256
+      ]
+    },
+    "sparks": {
+      "region": [
+        1024,
+        512,
+        512,
+        512
+      ],
+      "pivot": [
+        256,
+        256
+      ]
+    }
+  },
+  "pixelEdits": false
+}

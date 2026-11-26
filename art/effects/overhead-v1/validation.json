@@ -1,0 +1,61 @@
+{
+  "date": "2026-11-26",
+  "engine": "Godot 4.6.3",
+  "presentationOnly": true,
+  "moveWorkshopUpdated": false,
+  "sourcePngPreserved": true,
+  "sourceSha256": "79bcc8ea5ffc0ffd8ef2397e7b127df8dc86d9f73f5788fa313ebcafe7a67864",
+  "tests": {
+    "overheadChecks": 108,
+    "overheadFailures": 0,
+    "authoredOverheads": 32,
+    "statusRegressionChecks": 49,
+    "statusRegressionFailures": 0,
+    "impactRegressionFailures": 0,
+    "nativeCases": 8,
+    "nativeFailures": 0
+  },
+  "nativeScenarios": [
+    "Fillet Crown Cut defeats crouch guard",
+    "Hammer overhead blocked, mirrored",
+    "Tapper stance overhead blocked",
+    "Smoke uncharged overhead blocked",
+    "Smoke held charge retains the tell and is blocked",
+    "Shark airborne heavy blocked, mirrored",
+    "Anvil airborne heavy blocked",
+    "Low sweep has no amber warning and is blocked low"
+  ],
+  "visualReview": [
+    "reduced flare footprint at point-blank range",
+    "torso glint lowered away from airborne face",
+    "jumping flare follows fighter and camera",
+    "same amber color on all six guilds",
+    "warning absent after contact and during recovery",
+    "low sweep retains its normal weapon/contact effects"
+  ],
+  "video": {
+    "path": "exports/FightGuild-Overhead-Warnings-2026-11-26.mp4",
+    "sha256": "7ca82dcbf5b5595071d3430858ec34f346ad439b3f56efc5d9e4fb04a94250e7",
+    "reviewPlaybackRate": 0.5,
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1440,
+        "height": 810,
+        "r_frame_rate": "60/1",
+        "nb_frames": "1602"
+      },
+      {
+        "codec_name": "aac",
+        "r_frame_rate": "0/0",
+        "nb_frames": "1253"
+      }
+    ],
+    "format": {
+      "duration": "26.700000",
+      "size": "9282971"
+    }
+  }
+}

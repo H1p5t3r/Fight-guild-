@@ -1,0 +1,10 @@
+{
+  "prompt": "production-prompt.txt",
+  "references": [
+    "godot/assets/effects/impact-v1/contacts.png"
+  ],
+  "asset": "godot/assets/effects/overhead-v1/overhead.png",
+  "source": "/workspace/generated_images/exec-f50b6d6a-fa67-405d-9e14-8c2d508e1416.png",
+  "sha256": "79bcc8ea5ffc0ffd8ef2397e7b127df8dc86d9f73f5788fa313ebcafe7a67864",
+  "pixelEdits": false
+}
