@@ -1,11 +1,33 @@
 # Full super animation production
 
-Work proceeds **one super at a time**, finishing and reviewing each before the
-next. Preserve the selected fighter designs, approved choreography and current
-combat rules. Follow the [attack animation standard](attack-animation-standard.md):
+All twelve supers were finished **one at a time**, with a native review and branch
+push for each. The selected fighter designs, approved choreography and current
+combat rules are preserved. They follow the [attack animation standard](attack-animation-standard.md):
 authored anticipation, decisive strike changes, deliberate contact holds,
 follow-through and recovery. More drawings must describe motion, not introduce
 frame-to-frame costume or size jitter.
+
+[Watch the complete 63.1-second showcase with sound](../exports/FightGuild-All-Supers-Animated-2026-11-26.mp4).
+It contains native Godot footage at 1440×810, 60 FPS, with no retiming and a chapter
+for each super. Exsanguinate uses the stored-bleed case, beginning with 150 grey
+life. The [cut manifest](../exports/FightGuild-All-Supers-Animated-2026-11-26.json)
+records exact source frames and hashes. Each section below links a longer review
+covering the relevant hit, block, miss and mirrored cases.
+
+The finished pass contains **196 body drawings, 72 effect drawings, twelve
+projectile drawings, twelve face cut-ins and 45 original synthesized sounds**.
+All 75 selected generated PNGs match their recorded source hashes. The final
+native run passed all fourteen suites and 207,351 counted assertions, plus the
+feedback/confirmation/audio suite's pass checks. See the
+[validation record](../art/characters/supers-v2/validation-2026-11-26.json).
+Move data, collision tables, native binaries and the paused website are unchanged
+by this animation pass.
+
+To rebuild the combined video from the committed individual reviews:
+
+```bash
+python scripts/assemble-super-animation-showcase.py
+```
 
 ## 01 — Anvil / Sky Foundry
 

@@ -1,0 +1,310 @@
+{
+  "date": "2026-11-26",
+  "presentationCommit": "0a5b53c865823cad53d81333361641bda1b0bd55",
+  "nativeSuites": 14,
+  "checks": 207351,
+  "failures": 0,
+  "originalPngHashesVerified": 75,
+  "gameplayAndWebsitePathsUnchanged": [
+    "core",
+    "godot/data",
+    "godot/bin",
+    "web",
+    "public",
+    ".github"
+  ],
+  "suites": [
+    {
+      "name": "sky-foundry",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/sky_foundry_test.gd",
+        "--",
+        "--test"
+      ],
+      "passed": true,
+      "seconds": 9.35,
+      "checks": 26895,
+      "result": "Sky Foundry animation: 26895 checks / 0 failures"
+    },
+    {
+      "name": "iron-dominion",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/iron_dominion_test.gd",
+        "--",
+        "--test"
+      ],
+      "passed": true,
+      "seconds": 9.09,
+      "checks": 15976,
+      "result": "Iron Dominion animation: 15976 checks / 0 failures"
+    },
+    {
+      "name": "freemason",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/super_presentation_test.gd",
+        "--",
+        "--test",
+        "--character",
+        "1",
+        "--slot",
+        "12"
+      ],
+      "passed": true,
+      "seconds": 6.54,
+      "checks": 17249,
+      "result": "Freemason animation: 17249 checks / 0 failures"
+    },
+    {
+      "name": "flashpoint",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/super_presentation_test.gd",
+        "--",
+        "--test",
+        "--character",
+        "2",
+        "--slot",
+        "12"
+      ],
+      "passed": true,
+      "seconds": 7.36,
+      "checks": 16861,
+      "result": "Flashpoint animation: 16861 checks / 0 failures"
+    },
+    {
+      "name": "last-orders",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/super_presentation_test.gd",
+        "--",
+        "--test",
+        "--character",
+        "3",
+        "--slot",
+        "12"
+      ],
+      "passed": true,
+      "seconds": 7.25,
+      "checks": 17441,
+      "result": "Last Orders animation: 17441 checks / 0 failures"
+    },
+    {
+      "name": "whiskey-chaser",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/super_presentation_test.gd",
+        "--",
+        "--test",
+        "--character",
+        "3",
+        "--slot",
+        "31"
+      ],
+      "passed": true,
+      "seconds": 7.01,
+      "checks": 17481,
+      "result": "Whiskey Chaser animation: 17481 checks / 0 failures"
+    },
+    {
+      "name": "no-safe-harbour",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/super_presentation_test.gd",
+        "--",
+        "--test",
+        "--character",
+        "4",
+        "--slot",
+        "12"
+      ],
+      "passed": true,
+      "seconds": 8.31,
+      "checks": 17529,
+      "result": "No Safe Harbour animation: 17529 checks / 0 failures"
+    },
+    {
+      "name": "undertow",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/super_presentation_test.gd",
+        "--",
+        "--test",
+        "--character",
+        "4",
+        "--slot",
+        "14"
+      ],
+      "passed": true,
+      "seconds": 6.37,
+      "checks": 21245,
+      "result": "Undertow animation: 21245 checks / 0 failures"
+    },
+    {
+      "name": "bloodletting",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/super_presentation_test.gd",
+        "--",
+        "--test",
+        "--character",
+        "5",
+        "--slot",
+        "12"
+      ],
+      "passed": true,
+      "seconds": 6.33,
+      "checks": 17561,
+      "result": "Bloodletting animation: 17561 checks / 0 failures"
+    },
+    {
+      "name": "exsanguinate",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/super_presentation_test.gd",
+        "--",
+        "--test",
+        "--character",
+        "5",
+        "--slot",
+        "31"
+      ],
+      "passed": true,
+      "seconds": 7.24,
+      "checks": 18575,
+      "result": "Exsanguinate animation: 18575 checks / 0 failures"
+    },
+    {
+      "name": "grand-design",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/super_cast_test.gd",
+        "--",
+        "--test",
+        "--character",
+        "1",
+        "--slot",
+        "31"
+      ],
+      "passed": true,
+      "seconds": 4.15,
+      "checks": 5501,
+      "result": "Grand Design cast animation: 5501 checks / 0 failures"
+    },
+    {
+      "name": "the-air-is-mine",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/super_cast_test.gd",
+        "--",
+        "--test",
+        "--character",
+        "2",
+        "--slot",
+        "31"
+      ],
+      "passed": true,
+      "seconds": 4.27,
+      "checks": 6735,
+      "result": "The Air Is Mine cast animation: 6735 checks / 0 failures"
+    },
+    {
+      "name": "supers",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/supers_test.gd",
+        "--",
+        "--test"
+      ],
+      "passed": true,
+      "seconds": 8.11,
+      "checks": 8302,
+      "result": "Native supers: 8302 checks, 0 failures"
+    },
+    {
+      "name": "feedback",
+      "command": [
+        "bash",
+        "scripts/godot.sh",
+        "--headless",
+        "--audio-driver",
+        "Dummy",
+        "--script",
+        "res://tests/feedback_test.gd",
+        "--",
+        "--test"
+      ],
+      "passed": true,
+      "seconds": 2.0,
+      "checks": null,
+      "result": "Feedback history, confirmation, hitstop, sound assets and menu: PASS"
+    }
+  ]
+}

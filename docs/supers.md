@@ -5,20 +5,8 @@ Every fighter has two grounded supers. Each costs **two Momentum segments**
 uses the saved **54-tick screen-rip freeze** and displays the move's name. Supers
 do not earn activation or contact meter for their owner.
 
-Watch the [native super showcase](../exports/FightGuild-Supers-2026-11-25.mp4).
-The [full animation production pass](super-animation-production.md) begins with
-[Sky Foundry](../exports/FightGuild-Sky-Foundry-2026-11-25.mp4) and
-[Iron Dominion](../exports/FightGuild-Iron-Dominion-2026-11-25.mp4), followed by
-[Freemason](../exports/FightGuild-Freemason-2026-11-25.mp4) and
-[Grand Design](../exports/FightGuild-Grand-Design-2026-11-25.mp4), then
-[Flashpoint](../exports/FightGuild-Flashpoint-2026-11-25.mp4) and
-[The Air Is Mine](../exports/FightGuild-The-Air-Is-Mine-2026-11-26.mp4), followed by
-[Last Orders](../exports/FightGuild-Last-Orders-2026-11-26.mp4) and
-[Whiskey Chaser](../exports/FightGuild-Whiskey-Chaser-2026-11-26.mp4), and
-[No Safe Harbour](../exports/FightGuild-No-Safe-Harbour-2026-11-26.mp4), and
-[Undertow](../exports/FightGuild-Undertow-2026-11-26.mp4), and
-[Bloodletting](../exports/FightGuild-Bloodletting-2026-11-26.mp4), and
-[Exsanguinate](../exports/FightGuild-Exsanguinate-2026-11-26.mp4).
+Watch the [completed twelve-super animation showcase](../exports/FightGuild-All-Supers-Animated-2026-11-26.mp4), recorded in native Godot at 60 FPS with sound. The [production guide](super-animation-production.md) links each full hit/block/miss review, source records and validation.
+
 These are provisional balance values, captured from the current native build.
 Normal combo proration still applies; the video starts each demonstration fresh.
 Exsanguinate's demonstration begins with 150 stored grey life.
@@ -73,25 +61,22 @@ Old binary snapshots are incompatible with the added cinematic state.
 
 ## Art and reproduction
 
-All twelve supers use original generated art. Sky Foundry, Iron Dominion, Freemason and Flashpoint
-now each have 16-key replacements. The Air Is Mine has twelve caster keys and six independently looping cloud keys. Grand Design has eight caster keys and an
-independent six-key stone wave. All five have dedicated faces, separate effects
-and original sound passes. Fixed source scale, held anticipation and a first-active snap
-follow the established animation process. The largest authored pose change is
-at the final-startup/first-active boundary. Saved capture clocks drive impact
-holds and recovery; no procedural smear or warped inbetweens are added.
-Utility clouds and stone waves use generated effect sheets. Anvil's shield arcs
-retain the magma-orange accent.
+All twelve supers use original generated art: 196 body drawings, 72 separate
+effect drawings, twelve dedicated portraits and 45 original synthesized sounds.
+Grand Design and The Air Is Mine also have independent six-key projectile loops.
+Fixed anatomical scale, held anticipation and a first-active snap follow the
+[animation standard](attack-animation-standard.md). Saved combat clocks drive
+contact holds and recovery; no procedural body smears or warped inbetweens are
+added. Anvil's shield effects retain magma orange.
 
-[Sources, prompts and hashes](../art/characters/supers-v1/sources.json) and the
-[timing plan](../art/characters/supers-v1/timing-plan.json) record provenance.
-Pixel data remains unchanged; registration uses atlas regions, pivots and
-body-only collision metadata, with no more than four hurtboxes per pose.
-Other face cut-ins use the existing portrait fallback described in the
-[presentation guide](super-freeze-presentation.md).
+Each folder under [supers-v2](../art/characters/supers-v2/) records its source
+hashes, prompts, references, atlas registration and exposure plan. Original PNG
+pixels are preserved. The full presentation pass leaves native move data and
+collision tables unchanged. All twelve cut-ins use the existing rip-and-knit
+[presentation system](super-freeze-presentation.md).
 
 The authoring batch is `godot/data/workshop/2026-11-25-supers/FightGuild-Supers.json`.
-The browser Move Workshop has not been rebuilt or published. Native reproduction:
+The browser Move Workshop has not been rebuilt or published. The [production guide](super-animation-production.md) gives per-super art registration and capture commands. The original gameplay build can be reproduced with:
 
 ```bash
 python scripts/author-supers.py

@@ -20,31 +20,18 @@ Menus share the supplied **Guild Ball** visual language: Barlow Condensed, charc
 
 Current combo physics uses **Strive-style decay, velocity knockback, weaker repeated bounces and tighter gatlings**. [Rules, editor controls and verified routes](docs/combo-decay.md) explain the provisional coefficients and character exceptions.
 
-All six fighters now have **two supers**. **Whiskey Chaser** is Tapper’s stance barrage and **Freemason** is Hammer’s heavy finisher. Confirmed cinematic supers lock both players until their finish; **The Air Is Mine** and **Grand Design** remain actionable after their utility casts recover. [Inputs, roles and rules](docs/supers.md) · [native super showcase](exports/FightGuild-Supers-2026-11-25.mp4).
+All six fighters now have **two supers**. **Whiskey Chaser** is Tapper’s stance barrage and **Freemason** is Hammer’s heavy finisher. Confirmed cinematic supers lock both players until their finish; **The Air Is Mine** and **Grand Design** remain actionable after their utility casts recover. [Inputs, roles and rules](docs/supers.md).
 
-The full super animation pass starts with **Sky Foundry**: 16 body drawings, a dedicated torn-screen face, magma launch/slam effects and four original sounds, all on its existing combat clocks. [Watch with sound](exports/FightGuild-Sky-Foundry-2026-11-25.mp4) · [production notes](docs/super-animation-production.md).
+All twelve supers have a complete native animation pass: **196 body drawings**, **72 effect drawings**, twelve dedicated face cut-ins and 45 original sounds, plus independent stone-wave and gas-field animation. Each move was finished, reviewed and pushed before the next. [Watch all twelve at 60 FPS with sound](exports/FightGuild-All-Supers-Animated-2026-11-26.mp4) · [production and validation notes](docs/super-animation-production.md).
 
-**Iron Dominion** follows with a complete 16-drawing shield assault, separate rising/downward impacts, a final shield plant, its own face and four shield sounds. [Watch hit, block and whiff](exports/FightGuild-Iron-Dominion-2026-11-25.mp4).
-
-**Freemason** adds Hammer's full 16-drawing horizontal/rising/downward sequence, blue hammer-force effects and a held finishing recoil before knockdown. [Watch the native review](exports/FightGuild-Freemason-2026-11-25.mp4).
-
-**Grand Design** completes Hammer's pair with an eight-key ground cast, independent six-key stone wave, matching contact debris and a real follow-up demonstration. [Watch the native review](exports/FightGuild-Grand-Design-2026-11-25.mp4).
-
-**Flashpoint** gives Smoke a full backhand, rising fire lift, compression and ignition, with 16 body keys, separate flames and four original sounds. [Watch the native review](exports/FightGuild-Flashpoint-2026-11-25.mp4).
-
-**The Air Is Mine** completes Smoke’s pair with twelve caster keys, an independent six-key gas loop and separate contact pulses. [Watch hit, block and all three placements](exports/FightGuild-The-Air-Is-Mine-2026-11-26.mp4).
-
-**Last Orders** gives Tapper twenty body keys: uppercut, headbutt, Dempsey finish and separate staff-return recovery on block or miss. [Watch the native review](exports/FightGuild-Last-Orders-2026-11-26.mp4).
-
-**Whiskey Chaser** completes Tapper’s pair with sixteen alternating-hook keys, three distinct blocked punches and a heavy stance finish. [Watch the native review](exports/FightGuild-Whiskey-Chaser-2026-11-26.mp4).
-
-**No Safe Harbour** gives Shark twenty hook-thrust, reel, drive and shoulder-return keys, with a long-range contact review. [Watch the native review](exports/FightGuild-No-Safe-Harbour-2026-11-26.mp4).
-
-**Undertow** completes Shark’s pair with twenty sweep, overhead-reel and side-switch keys, plus separate miss recovery. [Watch the native review](exports/FightGuild-Undertow-2026-11-26.mp4).
-
-**Bloodletting** gives Fillet sixteen advancing, rising and descending knife-cut keys with a crimson crossing finish. [Watch the native review](exports/FightGuild-Bloodletting-2026-11-26.mp4).
-
-**Exsanguinate** completes Fillet's pair with twenty tightening crosscut keys and a separate stored-bleed cash-out review. [Watch the native review](exports/FightGuild-Exsanguinate-2026-11-26.mp4).
+| Fighter | Individual native reviews |
+| --- | --- |
+| Anvil | [Sky Foundry](exports/FightGuild-Sky-Foundry-2026-11-25.mp4) · [Iron Dominion](exports/FightGuild-Iron-Dominion-2026-11-25.mp4) |
+| Hammer | [Freemason](exports/FightGuild-Freemason-2026-11-25.mp4) · [Grand Design](exports/FightGuild-Grand-Design-2026-11-25.mp4) |
+| Smoke | [Flashpoint](exports/FightGuild-Flashpoint-2026-11-25.mp4) · [The Air Is Mine](exports/FightGuild-The-Air-Is-Mine-2026-11-26.mp4) |
+| Tapper | [Last Orders](exports/FightGuild-Last-Orders-2026-11-26.mp4) · [Whiskey Chaser](exports/FightGuild-Whiskey-Chaser-2026-11-26.mp4) |
+| Shark | [No Safe Harbour](exports/FightGuild-No-Safe-Harbour-2026-11-26.mp4) · [Undertow](exports/FightGuild-Undertow-2026-11-26.mp4) |
+| Fillet | [Bloodletting](exports/FightGuild-Bloodletting-2026-11-26.mp4) · [Exsanguinate](exports/FightGuild-Exsanguinate-2026-11-26.mp4) |
 
 ## Play or edit
 
