@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-26",
+  "scope": "No Safe Harbour v3",
+  "suites": [
+    {
+      "log": "build/harbour-v3-test.log",
+      "checks": 20601,
+      "failures": 0
+    }
+  ],
+  "totalChecks": 20601,
+  "nativeReview": {
+    "cases": [
+      {
+        "name": "hit",
+        "damage": 310,
+        "paired": true
+      },
+      {
+        "name": "mirrored",
+        "damage": 310,
+        "paired": true
+      },
+      {
+        "name": "block",
+        "damage": 8,
+        "paired": false
+      },
+      {
+        "name": "whiff",
+        "damage": 0,
+        "paired": false
+      },
+      {
+        "name": "tip",
+        "damage": 310,
+        "paired": true
+      },
+      {
+        "name": "airborne",
+        "damage": 0,
+        "paired": false
+      }
+    ],
+    "failures": 0,
+    "frames": 1892,
+    "fps": 60,
+    "video": "exports/FightGuild-No-Safe-Harbour-V3-2026-11-26.mp4",
+    "sha256": "4907355a219076a6e064d231c54ce63b8078b5c647fd2ff7e8dfe7df00ca63d1"
+  },
+  "sourceBytesPreserved": true,
+  "gameplayChanged": false,
+  "websiteUpdated": false,
+  "visualReview": [
+    "all body drawings at fixed world scale against approved idle",
+    "native hit, mirrored, block and miss",
+    "clear anatomy and silhouettes through contact and recovery"
+  ]
+}

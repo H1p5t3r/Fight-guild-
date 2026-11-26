@@ -1,0 +1,77 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v3/no-safe-harbour/entry.png",
+    "original": "/workspace/generated_images/exec-eda8d1ed-4a3a-47ca-a8a0-e3f13698339c.png",
+    "sha256": "7431a21b4843cb8ccf39ccd3b239fc18dfff6de74d35a2a101bbb7b8144da4e7",
+    "prompt": "art/characters/supers-v3/no-safe-harbour/entry-prompt.txt",
+    "references": [
+      "godot/assets/fighters/shark-movement-v1/idle.png",
+      "godot/assets/fighters/shark-normals-v1/normals_0_fluid.png"
+    ]
+  },
+  {
+    "id": "reel",
+    "file": "godot/assets/fighters/supers-v3/no-safe-harbour/reel.png",
+    "original": "/workspace/generated_images/exec-90ef07b5-283a-4e01-b8f4-4e4812231eeb.png",
+    "sha256": "de57f2d7739ec89167e4ff58658b2892865210b91d503d7c1c2e3a266c97b4fb",
+    "prompt": "art/characters/supers-v3/no-safe-harbour/reel-prompt.txt",
+    "references": [
+      "godot/assets/fighters/shark-movement-v1/idle.png",
+      "godot/assets/fighters/shark-normals-v1/normals_0_fluid.png"
+    ]
+  },
+  {
+    "id": "drive",
+    "file": "godot/assets/fighters/supers-v3/no-safe-harbour/drive.png",
+    "original": "/workspace/generated_images/exec-f099dcb0-1f60-4d99-b36b-61ca80d1db16.png",
+    "sha256": "542de59bda4125881973ab5458eeb503dc302f8dd06abe11f361a970d87495dc",
+    "prompt": "art/characters/supers-v3/no-safe-harbour/drive-prompt.txt",
+    "references": [
+      "godot/assets/fighters/shark-movement-v1/idle.png",
+      "godot/assets/fighters/shark-normals-v1/normals_0_fluid.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v3/no-safe-harbour/finish.png",
+    "original": "/workspace/generated_images/exec-0a4907ed-140c-4f7e-8795-f18e5d90abd5.png",
+    "sha256": "2a038e6794a09186e7f61d1dd30f8676570a5de2b10bd9d8a4a0340984727e76",
+    "prompt": "art/characters/supers-v3/no-safe-harbour/finish-prompt.txt",
+    "references": [
+      "godot/assets/fighters/shark-movement-v1/idle.png",
+      "godot/assets/fighters/supers-v3/no-safe-harbour/entry.png"
+    ]
+  },
+  {
+    "id": "return",
+    "file": "godot/assets/fighters/supers-v3/no-safe-harbour/return.png",
+    "original": "/workspace/generated_images/exec-e59ea4ce-e8dd-4f96-9d7a-a4a0c6e285a4.png",
+    "sha256": "8991652d52884b804ae3afcde2774d0ea3f2f0a28882de952429a0b15e66e20d",
+    "prompt": "art/characters/supers-v3/no-safe-harbour/return-prompt.txt",
+    "references": [
+      "godot/assets/fighters/shark-movement-v1/idle.png",
+      "godot/assets/fighters/supers-v3/no-safe-harbour/entry.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v3/no-safe-harbour/effects.png",
+    "original": "/workspace/generated_images/exec-8935f1b7-6901-42ca-985b-8476be37ea0a.png",
+    "sha256": "ab90be1355d93133975c912a0c35e362ea75fa5e3755dd9de6fcb539b004e50a",
+    "prompt": "art/characters/supers-v3/no-safe-harbour/effects-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v3/whiskey-chaser/effects.png"
+    ]
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/no-safe-harbour/portrait.png",
+    "original": "/workspace/generated_images/exec-82156110-9395-4c33-9444-ae5f54ee63ea.png",
+    "sha256": "ef403ebf184988097e3d2b1477ae177f20b5deb8ea599ef3d2d06edcd2404ac4",
+    "prompt": "art/characters/supers-v2/no-safe-harbour/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/no-safe-harbour/entry.png"
+    ]
+  }
+]

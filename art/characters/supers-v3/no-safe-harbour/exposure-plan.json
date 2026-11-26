@@ -1,0 +1,149 @@
+{
+  "name": "No Safe Harbour",
+  "character": 4,
+  "slot": 12,
+  "input": "236236S",
+  "status": "completed-native-review",
+  "date": "2026-11-26",
+  "startup": 12,
+  "active": 4,
+  "recovery": 30,
+  "freeze": 54,
+  "pairTicks": 96,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 310,
+  "bodyKeys": 20,
+  "choreography": "Whole-body horizontal hook drive, backward hip reel, rising crescent, committed second drive and long shoulder-rest return.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      14,
+      3
+    ],
+    [
+      26,
+      4
+    ],
+    [
+      42,
+      5
+    ],
+    [
+      43,
+      6
+    ],
+    [
+      52,
+      7
+    ],
+    [
+      62,
+      8
+    ],
+    [
+      73,
+      9
+    ],
+    [
+      74,
+      10
+    ],
+    [
+      82,
+      11
+    ],
+    [
+      89,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      5,
+      14
+    ],
+    [
+      11,
+      15
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      18,
+      17
+    ],
+    [
+      21,
+      18
+    ],
+    [
+      23,
+      19
+    ]
+  ],
+  "requirements": [
+    "One spear, unchanged hook shape and hand grips",
+    "White controlled-volume hair and blue sports glasses",
+    "Largest hook displacement at first active",
+    "Fixed480pixel anatomical scale",
+    "Effects show400world-unit narrow horizontal reach",
+    "Native near and tip hit, mirrored, block, distance miss and airborne miss"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveHookTravelWorldUnits": 91.09,
+  "largestOpeningMovementAtFirstActive": true,
+  "verification": {
+    "cases": [
+      {
+        "name": "hit",
+        "damage": 310,
+        "paired": true
+      },
+      {
+        "name": "mirrored",
+        "damage": 310,
+        "paired": true
+      },
+      {
+        "name": "block",
+        "damage": 8,
+        "paired": false
+      },
+      {
+        "name": "whiff",
+        "damage": 0,
+        "paired": false
+      },
+      {
+        "name": "tip",
+        "damage": 310,
+        "paired": true
+      },
+      {
+        "name": "airborne",
+        "damage": 0,
+        "paired": false
+      }
+    ],
+    "failures": 0,
+    "frames": 1892,
+    "fps": 60,
+    "video": "exports/FightGuild-No-Safe-Harbour-V3-2026-11-26.mp4",
+    "sha256": "4907355a219076a6e064d231c54ce63b8078b5c647fd2ff7e8dfe7df00ca63d1"
+  }
+}

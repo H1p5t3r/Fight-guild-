@@ -218,6 +218,27 @@ facings, all receivers, blocked contact alignment, pause and replay. See the
 [validation](../art/characters/supers-v3/whiskey-chaser/validation.json) and
 [fixed-scale comparison](../art/characters/supers-v3/whiskey-chaser/scale-review.png).
 
+## No Safe Harbour — complete
+
+[Watch the native 60 FPS review](../exports/FightGuild-No-Safe-Harbour-V3-2026-11-26.mp4)
+(hit, mirrored hit, block, distance miss, tip-range hit and airborne miss).
+
+Twenty new drawings give Shark longer lunges, a backward hip reel, a rising
+hook crescent and a committed final drive. His legs, pelvis and shoulders carry
+the polearm; hair, tabard and netting follow the turn. Both hands share one
+continuous shaft until recovery returns it to his shoulder and draws the knife.
+The original white hair, blue sports glasses and lean proportions are retained.
+
+Six teal/navy/ivory effects give the reel and finish broad crescent silhouettes.
+The opening wake still follows the long horizontal reach and stops at the
+guard contact. Block and miss recover from the opening alone. The saved
+43/74/96 contact beats, damage and cost remain unchanged.
+
+The native suite passed 20,601 checks with no failures. All twenty poses were
+reviewed at fixed scale against the original idle, including the long return.
+See the [validation](../art/characters/supers-v3/no-safe-harbour/validation.json)
+and [scale sheet](../art/characters/supers-v3/no-safe-harbour/scale-review.png).
+
 ## Size calibration
 
 The first visual comparison covered all 196 v2 super body drawings against their

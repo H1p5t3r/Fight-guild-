@@ -47394,15 +47394,16 @@
       "anatomical_scales": {
         "supers-v1": 480,
         "no-safe-harbour-v2": 540,
-        "undertow-v2": 540
+        "undertow-v2": 540,
+        "no-safe-harbour-v3": 480
       },
       "super_no_safe_harbour": {
-        "file": "supers-v2/no-safe-harbour/entry.png",
-        "body_height": 540,
+        "file": "supers-v3/no-safe-harbour/entry.png",
+        "body_height": 480,
         "frames": [
           {
-            "file": "supers-v2/no-safe-harbour/entry.png",
-            "sha256": "3323a533ca3257373ec4b1a08a7b6f890fd8efc58296ccc23ca1cf3ab53fdcef",
+            "file": "supers-v3/no-safe-harbour/entry.png",
+            "sha256": "7431a21b4843cb8ccf39ccd3b239fc18dfff6de74d35a2a101bbb7b8144da4e7",
             "source_size": [
               1536,
               1024
@@ -47414,27 +47415,27 @@
               512
             ],
             "bounds": [
-              95,
-              32,
-              472,
-              481
+              111,
+              31,
+              555,
+              488
             ],
             "pivot": [
-              270,
-              480
+              330,
+              488
             ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 0,
-            "scale_group": "no-safe-harbour-v2",
+            "scale_group": "no-safe-harbour-v3",
             "render_only": true,
             "tip": [
-              469,
-              65
+              513,
+              127
             ]
           },
           {
-            "file": "supers-v2/no-safe-harbour/entry.png",
-            "sha256": "3323a533ca3257373ec4b1a08a7b6f890fd8efc58296ccc23ca1cf3ab53fdcef",
+            "file": "supers-v3/no-safe-harbour/entry.png",
+            "sha256": "7431a21b4843cb8ccf39ccd3b239fc18dfff6de74d35a2a101bbb7b8144da4e7",
             "source_size": [
               1536,
               1024
@@ -47446,27 +47447,27 @@
               512
             ],
             "bounds": [
-              0,
-              73,
-              747,
-              481
+              44,
+              35,
+              754,
+              488
             ],
             "pivot": [
-              242,
-              480
+              282,
+              487
             ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 1,
-            "scale_group": "no-safe-harbour-v2",
+            "scale_group": "no-safe-harbour-v3",
             "render_only": true,
             "tip": [
-              747,
-              180
+              754,
+              164
             ]
           },
           {
-            "file": "supers-v2/no-safe-harbour/entry.png",
-            "sha256": "3323a533ca3257373ec4b1a08a7b6f890fd8efc58296ccc23ca1cf3ab53fdcef",
+            "file": "supers-v3/no-safe-harbour/entry.png",
+            "sha256": "7431a21b4843cb8ccf39ccd3b239fc18dfff6de74d35a2a101bbb7b8144da4e7",
             "source_size": [
               1536,
               1024
@@ -47474,383 +47475,127 @@
             "region": [
               0,
               512,
-              768,
+              800,
               512
             ],
             "bounds": [
-              37,
-              72,
-              752,
-              482
-            ],
-            "pivot": [
-              270,
-              478
-            ],
-            "body_height": 540,
-            "source_pose": 2,
-            "scale_group": "no-safe-harbour-v2",
-            "render_only": true,
-            "tip": [
-              751,
-              188
-            ]
-          },
-          {
-            "file": "supers-v2/no-safe-harbour/entry.png",
-            "sha256": "3323a533ca3257373ec4b1a08a7b6f890fd8efc58296ccc23ca1cf3ab53fdcef",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              19,
-              73,
-              645,
-              482
-            ],
-            "pivot": [
-              252,
-              478
-            ],
-            "body_height": 540,
-            "source_pose": 3,
-            "scale_group": "no-safe-harbour-v2",
-            "render_only": true,
-            "tip": [
-              645,
-              188
-            ]
-          },
-          {
-            "file": "supers-v2/no-safe-harbour/reel.png",
-            "sha256": "5b87fea08b7ac27285568bedb79d1aeebf835a37ef18615fb56affa1db0aebbf",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              78,
-              49,
-              704,
-              481
-            ],
-            "pivot": [
-              280,
-              480
-            ],
-            "body_height": 540,
-            "source_pose": 0,
-            "scale_group": "no-safe-harbour-v2",
-            "render_only": true,
-            "tip": [
-              702,
-              179
-            ]
-          },
-          {
-            "file": "supers-v2/no-safe-harbour/reel.png",
-            "sha256": "5b87fea08b7ac27285568bedb79d1aeebf835a37ef18615fb56affa1db0aebbf",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              52,
-              43,
-              615,
-              481
-            ],
-            "pivot": [
-              267,
-              480
-            ],
-            "body_height": 540,
-            "source_pose": 1,
-            "scale_group": "no-safe-harbour-v2",
-            "render_only": true,
-            "tip": [
-              615,
-              166
-            ]
-          },
-          {
-            "file": "supers-v2/no-safe-harbour/reel.png",
-            "sha256": "5b87fea08b7ac27285568bedb79d1aeebf835a37ef18615fb56affa1db0aebbf",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              76,
-              28,
-              631,
-              482
-            ],
-            "pivot": [
-              288,
-              478
-            ],
-            "body_height": 540,
-            "source_pose": 2,
-            "scale_group": "no-safe-harbour-v2",
-            "render_only": true,
-            "tip": [
-              629,
-              80
-            ]
-          },
-          {
-            "file": "supers-v2/no-safe-harbour/reel.png",
-            "sha256": "5b87fea08b7ac27285568bedb79d1aeebf835a37ef18615fb56affa1db0aebbf",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              55,
-              46,
-              615,
-              482
-            ],
-            "pivot": [
-              267,
-              478
-            ],
-            "body_height": 540,
-            "source_pose": 3,
-            "scale_group": "no-safe-harbour-v2",
-            "render_only": true,
-            "tip": [
-              616,
-              130
-            ]
-          },
-          {
-            "file": "supers-v2/no-safe-harbour/drive.png",
-            "sha256": "5f12ea5e156321fa199d5ced67e68c9792fb06ba1bcaff3690f23d0e213ac1a2",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              80,
-              53,
-              704,
-              491
+              65,
+              29,
+              783,
+              487
             ],
             "pivot": [
               330,
               486
             ],
-            "body_height": 540,
-            "source_pose": 0,
-            "scale_group": "no-safe-harbour-v2",
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "no-safe-harbour-v3",
             "render_only": true,
             "tip": [
-              702,
-              150
+              783,
+              165
             ]
           },
           {
-            "file": "supers-v2/no-safe-harbour/drive.png",
-            "sha256": "5f12ea5e156321fa199d5ced67e68c9792fb06ba1bcaff3690f23d0e213ac1a2",
+            "file": "supers-v3/no-safe-harbour/entry.png",
+            "sha256": "7431a21b4843cb8ccf39ccd3b239fc18dfff6de74d35a2a101bbb7b8144da4e7",
             "source_size": [
               1536,
               1024
             ],
             "region": [
-              768,
-              0,
-              768,
+              800,
+              512,
+              736,
               512
             ],
             "bounds": [
-              42,
-              68,
-              595,
-              490
+              48,
+              29,
+              638,
+              489
             ],
             "pivot": [
-              272,
+              295,
               486
             ],
-            "body_height": 540,
-            "source_pose": 1,
-            "scale_group": "no-safe-harbour-v2",
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "no-safe-harbour-v3",
             "render_only": true,
             "tip": [
-              592,
-              160
+              638,
+              189
             ]
           },
           {
-            "file": "supers-v2/no-safe-harbour/drive.png",
-            "sha256": "5f12ea5e156321fa199d5ced67e68c9792fb06ba1bcaff3690f23d0e213ac1a2",
+            "file": "supers-v3/no-safe-harbour/reel.png",
+            "sha256": "de57f2d7739ec89167e4ff58658b2892865210b91d503d7c1c2e3a266c97b4fb",
             "source_size": [
               1536,
               1024
             ],
             "region": [
               0,
-              512,
+              0,
               768,
               512
             ],
             "bounds": [
-              58,
+              118,
               16,
-              733,
-              493
+              597,
+              469
             ],
             "pivot": [
-              315,
-              488
+              360,
+              469
             ],
-            "body_height": 540,
-            "source_pose": 2,
-            "scale_group": "no-safe-harbour-v2",
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "no-safe-harbour-v3",
             "render_only": true,
             "tip": [
-              729,
-              68
+              596,
+              176
             ]
           },
           {
-            "file": "supers-v2/no-safe-harbour/drive.png",
-            "sha256": "5f12ea5e156321fa199d5ced67e68c9792fb06ba1bcaff3690f23d0e213ac1a2",
+            "file": "supers-v3/no-safe-harbour/reel.png",
+            "sha256": "de57f2d7739ec89167e4ff58658b2892865210b91d503d7c1c2e3a266c97b4fb",
             "source_size": [
               1536,
               1024
             ],
             "region": [
               768,
-              512,
+              0,
               768,
-              512
+              487
             ],
             "bounds": [
-              53,
-              40,
-              669,
-              493
+              73,
+              71,
+              666,
+              469
             ],
             "pivot": [
-              282,
-              488
+              302,
+              469
             ],
-            "body_height": 540,
-            "source_pose": 3,
-            "scale_group": "no-safe-harbour-v2",
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "no-safe-harbour-v3",
             "render_only": true,
             "tip": [
               667,
-              89
+              350
             ]
           },
           {
-            "file": "supers-v2/no-safe-harbour/finish.png",
-            "sha256": "123391332c09a35c74487176676f5609e99707980d8c375bb28b7583f1f30252",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              76,
-              46,
-              768,
-              481
-            ],
-            "pivot": [
-              270,
-              480
-            ],
-            "body_height": 540,
-            "source_pose": 0,
-            "scale_group": "no-safe-harbour-v2",
-            "render_only": true,
-            "tip": [
-              493,
-              166
-            ]
-          },
-          {
-            "file": "supers-v2/no-safe-harbour/finish.png",
-            "sha256": "123391332c09a35c74487176676f5609e99707980d8c375bb28b7583f1f30252",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              0,
-              61,
-              743,
-              481
-            ],
-            "pivot": [
-              242,
-              480
-            ],
-            "body_height": 540,
-            "source_pose": 1,
-            "scale_group": "no-safe-harbour-v2",
-            "render_only": true,
-            "tip": [
-              740,
-              180
-            ]
-          },
-          {
-            "file": "supers-v2/no-safe-harbour/finish.png",
-            "sha256": "123391332c09a35c74487176676f5609e99707980d8c375bb28b7583f1f30252",
+            "file": "supers-v3/no-safe-harbour/reel.png",
+            "sha256": "de57f2d7739ec89167e4ff58658b2892865210b91d503d7c1c2e3a266c97b4fb",
             "source_size": [
               1536,
               1024
@@ -47862,27 +47607,155 @@
               512
             ],
             "bounds": [
-              58,
-              13,
-              511,
-              483
+              144,
+              9,
+              658,
+              498
             ],
             "pivot": [
-              270,
+              370,
+              496
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "no-safe-harbour-v3",
+            "render_only": true,
+            "tip": [
+              657,
+              41
+            ]
+          },
+          {
+            "file": "supers-v3/no-safe-harbour/reel.png",
+            "sha256": "de57f2d7739ec89167e4ff58658b2892865210b91d503d7c1c2e3a266c97b4fb",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              487,
+              768,
+              537
+            ],
+            "bounds": [
+              149,
+              1,
+              658,
+              523
+            ],
+            "pivot": [
+              357,
+              521
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "no-safe-harbour-v3",
+            "render_only": true,
+            "tip": [
+              658,
+              36
+            ]
+          },
+          {
+            "file": "supers-v3/no-safe-harbour/drive.png",
+            "sha256": "542de59bda4125881973ab5458eeb503dc302f8dd06abe11f361a970d87495dc",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              189,
+              26,
+              641,
+              495
+            ],
+            "pivot": [
+              375,
+              494
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "no-safe-harbour-v3",
+            "render_only": true,
+            "tip": [
+              641,
+              77
+            ]
+          },
+          {
+            "file": "supers-v3/no-safe-harbour/drive.png",
+            "sha256": "542de59bda4125881973ab5458eeb503dc302f8dd06abe11f361a970d87495dc",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              114,
+              65,
+              568,
+              493
+            ],
+            "pivot": [
+              337,
+              492
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "no-safe-harbour-v3",
+            "render_only": true,
+            "tip": [
+              567,
+              157
+            ]
+          },
+          {
+            "file": "supers-v3/no-safe-harbour/drive.png",
+            "sha256": "542de59bda4125881973ab5458eeb503dc302f8dd06abe11f361a970d87495dc",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              63,
+              77,
+              755,
+              479
+            ],
+            "pivot": [
+              320,
               478
             ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 2,
-            "scale_group": "no-safe-harbour-v2",
+            "scale_group": "no-safe-harbour-v3",
             "render_only": true,
             "tip": [
-              506,
-              42
+              754,
+              169
             ]
           },
           {
-            "file": "supers-v2/no-safe-harbour/finish.png",
-            "sha256": "123391332c09a35c74487176676f5609e99707980d8c375bb28b7583f1f30252",
+            "file": "supers-v3/no-safe-harbour/drive.png",
+            "sha256": "542de59bda4125881973ab5458eeb503dc302f8dd06abe11f361a970d87495dc",
             "source_size": [
               1536,
               1024
@@ -47894,91 +47767,219 @@
               512
             ],
             "bounds": [
+              52,
+              73,
+              755,
+              479
+            ],
+            "pivot": [
+              282,
+              478
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "no-safe-harbour-v3",
+            "render_only": true,
+            "tip": [
+              756,
+              161
+            ]
+          },
+          {
+            "file": "supers-v3/no-safe-harbour/finish.png",
+            "sha256": "2a038e6794a09186e7f61d1dd30f8676570a5de2b10bd9d8a4a0340984727e76",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              748,
+              512
+            ],
+            "bounds": [
+              114,
+              30,
+              578,
+              490
+            ],
+            "pivot": [
+              350,
+              488
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "no-safe-harbour-v3",
+            "render_only": true,
+            "tip": [
+              514,
+              168
+            ]
+          },
+          {
+            "file": "supers-v3/no-safe-harbour/finish.png",
+            "sha256": "2a038e6794a09186e7f61d1dd30f8676570a5de2b10bd9d8a4a0340984727e76",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              748,
+              0,
+              788,
+              512
+            ],
+            "bounds": [
+              14,
               49,
-              22,
-              518,
-              483
+              776,
+              489
             ],
             "pivot": [
-              282,
-              478
+              302,
+              488
             ],
-            "body_height": 540,
-            "source_pose": 3,
-            "scale_group": "no-safe-harbour-v2",
-            "render_only": true,
-            "tip": [
-              50,
-              83
-            ]
-          },
-          {
-            "file": "supers-v2/no-safe-harbour/return.png",
-            "sha256": "10b83df4b4fd259335bbb88bd116d92b4d39c8bdc1005c3943250fe1e867de3b",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              76,
-              10,
-              546,
-              481
-            ],
-            "pivot": [
-              270,
-              480
-            ],
-            "body_height": 540,
-            "source_pose": 0,
-            "scale_group": "no-safe-harbour-v2",
-            "render_only": true,
-            "tip": [
-              543,
-              44
-            ]
-          },
-          {
-            "file": "supers-v2/no-safe-harbour/return.png",
-            "sha256": "10b83df4b4fd259335bbb88bd116d92b4d39c8bdc1005c3943250fe1e867de3b",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              76,
-              6,
-              481,
-              482
-            ],
-            "pivot": [
-              272,
-              480
-            ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 1,
-            "scale_group": "no-safe-harbour-v2",
+            "scale_group": "no-safe-harbour-v3",
             "render_only": true,
             "tip": [
-              366,
-              44
+              777,
+              174
             ]
           },
           {
-            "file": "supers-v2/no-safe-harbour/return.png",
-            "sha256": "10b83df4b4fd259335bbb88bd116d92b4d39c8bdc1005c3943250fe1e867de3b",
+            "file": "supers-v3/no-safe-harbour/finish.png",
+            "sha256": "2a038e6794a09186e7f61d1dd30f8676570a5de2b10bd9d8a4a0340984727e76",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              800,
+              512
+            ],
+            "bounds": [
+              59,
+              32,
+              787,
+              488
+            ],
+            "pivot": [
+              330,
+              486
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "no-safe-harbour-v3",
+            "render_only": true,
+            "tip": [
+              788,
+              176
+            ]
+          },
+          {
+            "file": "supers-v3/no-safe-harbour/finish.png",
+            "sha256": "2a038e6794a09186e7f61d1dd30f8676570a5de2b10bd9d8a4a0340984727e76",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              800,
+              512,
+              736,
+              512
+            ],
+            "bounds": [
+              48,
+              16,
+              621,
+              489
+            ],
+            "pivot": [
+              290,
+              486
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "no-safe-harbour-v3",
+            "render_only": true,
+            "tip": [
+              620,
+              113
+            ]
+          },
+          {
+            "file": "supers-v3/no-safe-harbour/return.png",
+            "sha256": "8991652d52884b804ae3afcde2774d0ea3f2f0a28882de952429a0b15e66e20d",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              135,
+              3,
+              585,
+              493
+            ],
+            "pivot": [
+              420,
+              491
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "no-safe-harbour-v3",
+            "render_only": true,
+            "tip": [
+              137,
+              101
+            ]
+          },
+          {
+            "file": "supers-v3/no-safe-harbour/return.png",
+            "sha256": "8991652d52884b804ae3afcde2774d0ea3f2f0a28882de952429a0b15e66e20d",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              174,
+              15,
+              530,
+              493
+            ],
+            "pivot": [
+              372,
+              491
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "no-safe-harbour-v3",
+            "render_only": true,
+            "tip": [
+              176,
+              103
+            ]
+          },
+          {
+            "file": "supers-v3/no-safe-harbour/return.png",
+            "sha256": "8991652d52884b804ae3afcde2774d0ea3f2f0a28882de952429a0b15e66e20d",
             "source_size": [
               1536,
               1024
@@ -47990,27 +47991,27 @@
               512
             ],
             "bounds": [
-              107,
-              5,
-              482,
-              485
+              177,
+              11,
+              541,
+              491
             ],
             "pivot": [
-              288,
-              482
+              395,
+              491
             ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 2,
-            "scale_group": "no-safe-harbour-v2",
+            "scale_group": "no-safe-harbour-v3",
             "render_only": true,
             "tip": [
-              115,
-              31
+              180,
+              94
             ]
           },
           {
-            "file": "supers-v2/no-safe-harbour/return.png",
-            "sha256": "10b83df4b4fd259335bbb88bd116d92b4d39c8bdc1005c3943250fe1e867de3b",
+            "file": "supers-v3/no-safe-harbour/return.png",
+            "sha256": "8991652d52884b804ae3afcde2774d0ea3f2f0a28882de952429a0b15e66e20d",
             "source_size": [
               1536,
               1024
@@ -48022,137 +48023,137 @@
               512
             ],
             "bounds": [
-              51,
-              17,
-              519,
-              484
+              176,
+              11,
+              531,
+              491
             ],
             "pivot": [
-              282,
-              480
+              377,
+              491
             ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 3,
-            "scale_group": "no-safe-harbour-v2",
+            "scale_group": "no-safe-harbour-v3",
             "render_only": true,
             "tip": [
-              51,
-              83
+              179,
+              98
             ]
           }
         ],
         "render_only": true
       },
       "super_no_safe_harbour_fx": {
-        "file": "supers-v2/no-safe-harbour/effects.png",
+        "file": "supers-v3/no-safe-harbour/effects.png",
         "body_height": 512,
         "frames": [
           {
             "region": [
-              16,
-              192,
-              491,
-              121
+              8,
+              105,
+              496,
+              345
             ],
             "pivot": [
-              245.5,
-              121
+              248.0,
+              345
             ],
             "bounds": [
               0,
               0,
-              491,
-              121
+              496,
+              345
             ]
           },
           {
             "region": [
-              568,
-              137,
-              424,
-              266
-            ],
-            "pivot": [
-              212.0,
-              266
-            ],
-            "bounds": [
-              0,
-              0,
-              424,
-              266
-            ]
-          },
-          {
-            "region": [
-              1035,
-              88,
-              478,
-              361
-            ],
-            "pivot": [
-              239.0,
-              361
-            ],
-            "bounds": [
-              0,
-              0,
-              478,
-              361
-            ]
-          },
-          {
-            "region": [
+              565,
               26,
-              592,
-              474,
-              351
+              401,
+              444
             ],
             "pivot": [
-              237.0,
-              351
+              200.5,
+              444
             ],
             "bounds": [
               0,
               0,
-              474,
-              351
+              401,
+              444
             ]
           },
           {
             "region": [
-              564,
-              626,
-              408,
-              311
+              1028,
+              144,
+              487,
+              326
             ],
             "pivot": [
-              204.0,
-              311
+              243.5,
+              326
             ],
             "bounds": [
               0,
               0,
-              408,
-              311
+              487,
+              326
             ]
           },
           {
             "region": [
-              1086,
-              642,
-              366,
-              264
+              31,
+              533,
+              451,
+              471
             ],
             "pivot": [
-              183.0,
-              264
+              225.5,
+              471
             ],
             "bounds": [
               0,
               0,
-              366,
-              264
+              451,
+              471
+            ]
+          },
+          {
+            "region": [
+              512,
+              689,
+              500,
+              220
+            ],
+            "pivot": [
+              250.0,
+              220
+            ],
+            "bounds": [
+              0,
+              0,
+              500,
+              220
+            ]
+          },
+          {
+            "region": [
+              1039,
+              736,
+              483,
+              183
+            ],
+            "pivot": [
+              241.5,
+              183
+            ],
+            "bounds": [
+              0,
+              0,
+              483,
+              183
             ]
           }
         ],
@@ -48169,40 +48170,24 @@
               2
             ],
             [
-              12,
+              15,
               3
             ],
             [
-              24,
-              4
-            ],
-            [
               38,
-              12
-            ],
-            [
-              50,
-              14
-            ],
-            [
-              60,
               16
             ],
             [
-              70,
+              57,
               17
             ],
             [
-              80,
+              76,
               18
             ],
             [
-              90,
+              93,
               19
-            ],
-            [
-              97,
-              15
             ]
           ],
           "sounds": {
@@ -48218,11 +48203,12 @@
               "end": 5,
               "key": 0,
               "box": [
-                70,
-                -115,
-                330,
-                40
+                25,
+                -155,
+                375,
+                105
               ],
+              "behind": true,
               "fade": true,
               "opacity": 0.9,
               "stop_at_guard": true
@@ -48230,14 +48216,15 @@
             {
               "stage": "paired",
               "start": 0,
-              "end": 9,
+              "end": 12,
               "key": 0,
               "box": [
-                40,
-                -115,
-                360,
-                40
+                25,
+                -155,
+                375,
+                105
               ],
+              "behind": true,
               "fade": true,
               "opacity": 0.9,
               "stop_at_guard": true
@@ -48245,76 +48232,79 @@
             {
               "stage": "paired",
               "start": 43,
-              "end": 54,
+              "end": 55,
               "key": 1,
               "box": [
-                -60,
-                -155,
-                130,
-                135
+                -45,
+                -245,
+                275,
+                245
               ],
-              "anchor": "receiver",
-              "fade": true,
-              "opacity": 0.85
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "paired",
               "start": 74,
-              "end": 84,
+              "end": 86,
               "key": 2,
               "box": [
-                -60,
-                -150,
-                170,
-                120
+                -55,
+                -175,
+                325,
+                175
               ],
-              "anchor": "receiver",
-              "fade": true,
-              "opacity": 0.9
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "connected",
               "start": 0,
-              "end": 5,
+              "end": 11,
               "key": 3,
               "box": [
-                -25,
-                -140,
-                150,
-                110
+                -75,
+                -215,
+                280,
+                230
               ],
               "anchor": "receiver",
-              "fade": false
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "connected",
-              "start": 5,
-              "end": 13,
+              "start": 7,
+              "end": 27,
               "key": 4,
               "box": [
-                -35,
-                -160,
-                170,
-                150
+                -75,
+                -140,
+                330,
+                145
               ],
-              "anchor": "receiver",
+              "behind": true,
               "fade": true
             },
             {
               "stage": "connected",
-              "start": 13,
-              "end": 30,
+              "start": 21,
+              "end": 44,
               "key": 5,
               "box": [
-                -45,
-                -175,
-                190,
-                170
+                -60,
+                -195,
+                330,
+                200
               ],
-              "anchor": "receiver",
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.7
             }
           ],
+          "source": "supers-v3/no-safe-harbour",
+          "description": "Whole-body horizontal hook drive, backward hip reel, rising crescent, committed second drive and long shoulder-rest return.",
+          "receiver_reactions": true,
           "phase": "super_no_safe_harbour",
           "fx_phase": "super_no_safe_harbour_fx",
           "pair_ticks": 96,
@@ -48380,24 +48370,24 @@
               14
             ],
             [
-              10,
+              11,
+              15
+            ],
+            [
+              15,
               16
             ],
             [
-              14,
+              18,
               17
             ],
             [
-              18,
+              21,
               18
             ],
             [
-              21,
-              19
-            ],
-            [
               23,
-              15
+              19
             ]
           ]
         },
