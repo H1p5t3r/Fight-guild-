@@ -150,6 +150,21 @@ static func present(sprites: Array[Sprite2D], model: CombatModel, state: Diction
 		var sprite := sprites[owner]
 		FighterArt.apply(sprite,int(fighter.character),str(cue.spec.phase),int(cue.pose),world_scale,int(cue.facing))
 		sprite.set_meta("super_animation",cue)
+		if str(cue.stage)=="paired" and str(cue.spec.get("mode",""))=="strike" and cue.spec.get("receiver_reactions",false):
+			# Captures use reaction 6, which ordinary hit presentation deliberately
+			# leaves alone. Derive the cinematic recoil from the saved impact clock
+			# without changing the receiver's native root, stun or collision pose.
+			var receiver_state:Dictionary=state.players[1-owner].duplicate()
+			receiver_state.reaction=0;receiver_state.stun=1;receiver_state.guarding=0
+			var impact_tick:=0
+			for mark in [int(cue.spec.pair_ticks)*45/100,int(cue.spec.pair_ticks)*78/100]:
+				if int(cue.tick)>=mark:impact_tick=mark
+			var receiver_sprite:=sprites[1-owner]
+			# Supers land directly on the strong recoil key, then settle into stun.
+			CombatReactions.apply(receiver_sprite,receiver_state,{"flags":4,"age":2+int(cue.tick)-impact_tick},world_scale)
+			receiver_sprite.set_meta("super_role","receiver")
+			for child in receiver_sprite.get_children():
+				if child is Sprite2D:child.hide()
 		if str(cue.stage)=="connected" and int(cue.tick)==0 and int(state.hitstop)>0 and cue.spec.get("finish_receiver","") in ["chest","head"]:
 			var reaction: Dictionary = state.players[1-owner].duplicate()
 			reaction.reaction=0;reaction.stun=1;reaction.guarding=0

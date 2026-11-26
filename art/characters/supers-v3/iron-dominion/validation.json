@@ -3,8 +3,8 @@
   "scope": "Iron Dominion v3: full-body shield crescents and twenty poses",
   "suites": [
     {
-      "log": "build/iron-v3-test.log",
-      "checks": 15976,
+      "log": "build/iron-v3-receiver-test.log",
+      "checks": 18904,
       "failures": 0
     },
     {
@@ -13,7 +13,7 @@
       "failures": 0
     }
   ],
-  "totalChecks": 24278,
+  "totalChecks": 27206,
   "nativeReview": {
     "cases": [
       "hit",
@@ -25,7 +25,7 @@
     "frames": 1262,
     "fps": 60,
     "video": "exports/FightGuild-Iron-Dominion-V3-2026-11-26.mp4",
-    "sha256": "70beaab08d61032ff179cd4573c37405dfe75d9ae95611b9f5cf2899a46fe112"
+    "sha256": "ba2c0cecde41048ab8174069a3dd3460e32aea953fe43291b65c68eeafd921a6"
   },
   "visualReview": [
     "all twenty bodies against approved idle at fixed zoom",
@@ -36,5 +36,6 @@
   ],
   "sourceBytesPreserved": true,
   "gameplayChanged": false,
-  "websiteUpdated": false
+  "websiteUpdated": false,
+  "receiverCorrection": "Saved impact clocks restart strong recoil, followed by sustained stun; native root and gameplay unchanged."
 }

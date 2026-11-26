@@ -66,11 +66,44 @@ All twenty drawings share one anatomical scale. The left arm owns the shield,
 the tattoo belongs only to the empty right arm, and pause masks exclude the
 visible gripping hand. Original generated PNGs remain unmodified.
 
-The dedicated animation and native super suites passed 24,278 checks with no
+The dedicated animation and native super suites passed 27,206 checks with no
 failures. The [validation record](../art/characters/supers-v3/iron-dominion/validation.json)
 records the video hash and checks; the
 [fixed-scale sheet](../art/characters/supers-v3/iron-dominion/scale-review.png)
 shows every drawing beside the approved idle.
+
+## Freemason — complete
+
+[Watch the native 60 FPS review](../exports/FightGuild-Freemason-V3-2026-11-26.mp4)
+(21.03 seconds, sound; hit, mirrored hit, block and miss).
+
+Twenty new drawings restore Hammer's original armor, anatomy, palette and cel
+shading. His hips and shoulders lead a horizontal hammer sweep, rising arc,
+overhead descent and final horizontal crescent. Scarf and tabard lag behind each
+turn, then settle during the six-drawing return to his original guard.
+
+Contact poses stay on ticks 40 and 70, with the final sweep on release at tick
+90. The final pose holds through hitstop before the longer overtravel and
+regather. Block and miss tracks withdraw the opening swing directly. The move
+retains its 360 damage and existing gameplay timings.
+
+All twenty keys use one anatomical scale, checked beside the original idle.
+Two handle corrections remove a hand-like detail and a split shaft; the final
+art has exactly two hands gripping one continuous hammer handle. Six separate
+blue and ivory crescents follow the weapon path behind the body.
+
+The revised strike supers also use the existing receiver reaction drawings
+through their captured sequences. Each saved impact starts on strong recoil,
+then settles into a sustained stun drawing; airborne receivers use the air
+family. This fixes neutral poses between cinematic hits without altering the
+receiver's position, stun, collision or capture rules. Iron Dominion uses the
+same correction; Sky Foundry retains its authored carry animation.
+
+The targeted Freemason, Iron Dominion and Sky Foundry checks passed 65,976
+assertions with no failures. The [validation record](../art/characters/supers-v3/freemason/validation.json)
+records the footage hash and checks; the
+[scale sheet](../art/characters/supers-v3/freemason/scale-review.png) compares all
+twenty poses against the original idle.
 
 ## Size calibration
 

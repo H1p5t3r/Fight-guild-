@@ -1,0 +1,110 @@
+{
+  "name": "Freemason",
+  "character": 1,
+  "slot": 12,
+  "input": "236236S",
+  "status": "completed-native-review",
+  "startup": 12,
+  "active": 4,
+  "recovery": 34,
+  "freeze": 54,
+  "pairTicks": 90,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 360,
+  "choreography": "Hip-led horizontal sweep, rising crescent, overhead hammer arc, full-body final turn and six-drawing weighted return.",
+  "bodyKeys": 20,
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      8,
+      2
+    ],
+    [
+      20,
+      3
+    ],
+    [
+      28,
+      4
+    ],
+    [
+      39,
+      5
+    ],
+    [
+      40,
+      6
+    ],
+    [
+      53,
+      7
+    ],
+    [
+      58,
+      8
+    ],
+    [
+      69,
+      9
+    ],
+    [
+      70,
+      10
+    ],
+    [
+      80,
+      11
+    ],
+    [
+      84,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      5,
+      14
+    ],
+    [
+      11,
+      15
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      18,
+      17
+    ],
+    [
+      21,
+      18
+    ],
+    [
+      23,
+      19
+    ]
+  ],
+  "requirements": [
+    "Hold compact load until first active",
+    "Distinct strikes at saved intermediate impact ticks 40 and 70",
+    "Final strike begins at actual release tick 90",
+    "Constant anatomical scale; both hands grip the same hammer",
+    "Separate original white/blue/ink hammer arcs",
+    "Block and whiff use the opening strike's withdrawal",
+    "Native hit, block, whiff and mirrored review"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveHammerTravelWorldUnits": 238.1,
+  "date": "2026-11-26"
+}

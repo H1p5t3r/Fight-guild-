@@ -25,12 +25,14 @@ def probe(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output', type=Path, default=ROOT / 'exports' /
-                        'FightGuild-All-Supers-Animated-2026-11-26.mp4')
+    parser.add_argument('--version', choices=['v2', 'v3'], default='v2')
+    parser.add_argument('--output', type=Path)
     args = parser.parse_args()
-    output = args.output.resolve()
+    suffix = '-V3' if args.version == 'v3' else ''
+    output = (args.output or ROOT / 'exports' /
+              ('FightGuild-All-Supers-Animated' + suffix + '-2026-11-26.mp4')).resolve()
     output.parent.mkdir(parents=True, exist_ok=True)
-    work = ROOT / 'build/super-animation-showcase'
+    work = ROOT / 'build' / ('super-animation-showcase' + suffix.lower())
     work.mkdir(parents=True, exist_ok=True)
 
     command = ['ffmpeg', '-y', '-loglevel', 'warning', '-filter_complex_threads', '2']
@@ -38,10 +40,10 @@ def main():
     chapters = [';FFMETADATA1', 'title=Fight Guild — Full Super Animation Showcase']
     total = 0
     for index, slug in enumerate(ORDER):
-        plan = json.loads((ROOT / 'art/characters/supers-v2' / slug /
+        plan = json.loads((ROOT / 'art/characters' / ('supers-' + args.version) / slug /
                            'exposure-plan.json').read_text())
         name = plan['name']
-        file = ROOT / 'exports' / ('FightGuild-' + name.replace(' ', '-') + '-' +
+        file = ROOT / 'exports' / ('FightGuild-' + name.replace(' ', '-') + suffix + '-' +
                                   plan.get('date', '2026-11-25') + '.mp4')
         info = probe(file)
         video = next(s for s in info['streams'] if s['codec_type'] == 'video')
@@ -92,6 +94,7 @@ def main():
     assert video['r_frame_rate'] == '60/1'
     manifest = {
         'title': 'Fight Guild — Full Super Animation Showcase',
+        'version': args.version,
         'resolution': [1440, 810], 'fps': 60, 'frames': total,
         'seconds': total / 60, 'retimed': False, 'segments': segments,
         'note': 'Native Godot footage at full speed. Exsanguinate starts with 150 owned grey life.',

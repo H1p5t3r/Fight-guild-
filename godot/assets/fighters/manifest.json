@@ -11604,6 +11604,7 @@
           ],
           "source": "supers-v3/iron-dominion",
           "description": "Back-to-front full-body shield sweep, rising crescent, overhead crush, low extended finish and measured High Clamp return.",
+          "receiver_reactions": true,
           "phase": "super_iron_dominion",
           "fx_phase": "super_iron_dominion_fx",
           "pair_ticks": 90,
@@ -19901,15 +19902,16 @@
       "anatomical_scales": {
         "supers-v1": 425,
         "freemason-v2": 460,
-        "grand-design-v2": 460
+        "grand-design-v2": 460,
+        "freemason-v3": 450
       },
       "super_freemason": {
-        "file": "supers-v2/freemason/entry.png",
-        "body_height": 460,
+        "file": "supers-v3/freemason/entry.png",
+        "body_height": 450,
         "frames": [
           {
-            "file": "supers-v2/freemason/entry.png",
-            "sha256": "c6f3e7e3f99b831e5eba0245567cd66b6bb03c73b976fb05f49f8ddbb864e722",
+            "file": "supers-v3/freemason/entry.png",
+            "sha256": "4d8bdc87cb61cc7206f14e00ce16d6982dbd4605dc8b60f819997cb8a3859f6d",
             "source_size": [
               1536,
               1024
@@ -19921,27 +19923,27 @@
               512
             ],
             "bounds": [
-              122,
-              55,
-              542,
-              458
+              67,
+              41,
+              564,
+              473
             ],
             "pivot": [
-              365,
-              457
+              370,
+              470
             ],
-            "body_height": 460,
+            "body_height": 450,
             "source_pose": 0,
-            "scale_group": "freemason-v2",
+            "scale_group": "freemason-v3",
             "render_only": true,
             "tip": [
-              122,
-              300
+              75,
+              325
             ]
           },
           {
-            "file": "supers-v2/freemason/entry.png",
-            "sha256": "c6f3e7e3f99b831e5eba0245567cd66b6bb03c73b976fb05f49f8ddbb864e722",
+            "file": "supers-v3/freemason/entry.png",
+            "sha256": "4d8bdc87cb61cc7206f14e00ce16d6982dbd4605dc8b60f819997cb8a3859f6d",
             "source_size": [
               1536,
               1024
@@ -19953,27 +19955,27 @@
               512
             ],
             "bounds": [
-              35,
+              46,
               57,
-              718,
-              457
+              734,
+              472
             ],
             "pivot": [
-              312,
-              458
+              322,
+              470
             ],
-            "body_height": 460,
+            "body_height": 450,
             "source_pose": 1,
-            "scale_group": "freemason-v2",
+            "scale_group": "freemason-v3",
             "render_only": true,
             "tip": [
-              727,
-              171
+              726,
+              178
             ]
           },
           {
-            "file": "supers-v2/freemason/entry.png",
-            "sha256": "c6f3e7e3f99b831e5eba0245567cd66b6bb03c73b976fb05f49f8ddbb864e722",
+            "file": "supers-v3/freemason/entry.png",
+            "sha256": "4d8bdc87cb61cc7206f14e00ce16d6982dbd4605dc8b60f819997cb8a3859f6d",
             "source_size": [
               1536,
               1024
@@ -19985,315 +19987,59 @@
               512
             ],
             "bounds": [
-              103,
-              49,
-              740,
-              465
-            ],
-            "pivot": [
-              350,
-              467
-            ],
-            "body_height": 460,
-            "source_pose": 2,
-            "scale_group": "freemason-v2",
-            "render_only": true,
-            "tip": [
-              741,
-              240
-            ]
-          },
-          {
-            "file": "supers-v2/freemason/entry.png",
-            "sha256": "c6f3e7e3f99b831e5eba0245567cd66b6bb03c73b976fb05f49f8ddbb864e722",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              141,
-              49,
-              575,
-              464
-            ],
-            "pivot": [
-              362,
-              469
-            ],
-            "body_height": 460,
-            "source_pose": 3,
-            "scale_group": "freemason-v2",
-            "render_only": true,
-            "tip": [
-              152,
-              248
-            ]
-          },
-          {
-            "file": "supers-v2/freemason/rise.png",
-            "sha256": "4344fad44ed3ddaee231e49f7dc7ba173c227bf5c44a950963c971cac5b0f9bc",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              498
-            ],
-            "bounds": [
-              98,
-              55,
-              545,
-              458
+              116,
+              28,
+              684,
+              472
             ],
             "pivot": [
               360,
-              457
+              470
             ],
-            "body_height": 460,
-            "source_pose": 0,
-            "scale_group": "freemason-v2",
+            "body_height": 450,
+            "source_pose": 2,
+            "scale_group": "freemason-v3",
             "render_only": true,
             "tip": [
-              100,
-              360
+              678,
+              303
             ]
           },
           {
-            "file": "supers-v2/freemason/rise.png",
-            "sha256": "4344fad44ed3ddaee231e49f7dc7ba173c227bf5c44a950963c971cac5b0f9bc",
+            "file": "supers-v3/freemason/entry.png",
+            "sha256": "4d8bdc87cb61cc7206f14e00ce16d6982dbd4605dc8b60f819997cb8a3859f6d",
             "source_size": [
               1536,
               1024
             ],
             "region": [
               768,
-              0,
+              512,
               768,
-              500
+              512
             ],
             "bounds": [
-              58,
-              56,
-              546,
-              458
+              119,
+              48,
+              639,
+              473
             ],
             "pivot": [
               342,
-              459
+              471
             ],
-            "body_height": 460,
-            "source_pose": 1,
-            "scale_group": "freemason-v2",
-            "render_only": true,
-            "tip": [
-              60,
-              352
-            ]
-          },
-          {
-            "file": "supers-v2/freemason/rise.png",
-            "sha256": "4344fad44ed3ddaee231e49f7dc7ba173c227bf5c44a950963c971cac5b0f9bc",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              498,
-              768,
-              526
-            ],
-            "bounds": [
-              96,
-              1,
-              699,
-              485
-            ],
-            "pivot": [
-              345,
-              490
-            ],
-            "body_height": 460,
-            "source_pose": 2,
-            "scale_group": "freemason-v2",
-            "render_only": true,
-            "tip": [
-              698,
-              54
-            ]
-          },
-          {
-            "file": "supers-v2/freemason/rise.png",
-            "sha256": "4344fad44ed3ddaee231e49f7dc7ba173c227bf5c44a950963c971cac5b0f9bc",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              500,
-              768,
-              524
-            ],
-            "bounds": [
-              98,
-              1,
-              698,
-              483
-            ],
-            "pivot": [
-              337,
-              491
-            ],
-            "body_height": 460,
+            "body_height": 450,
             "source_pose": 3,
-            "scale_group": "freemason-v2",
+            "scale_group": "freemason-v3",
             "render_only": true,
             "tip": [
-              697,
-              52
+              632,
+              288
             ]
           },
           {
-            "file": "supers-v2/freemason/crush.png",
-            "sha256": "4eda8075a53fffca500cb0bff303c69d8266e4e21adc661bc98713f7325b444a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              132,
-              12,
-              608,
-              499
-            ],
-            "pivot": [
-              385,
-              501
-            ],
-            "body_height": 460,
-            "source_pose": 0,
-            "scale_group": "freemason-v2",
-            "render_only": true,
-            "tip": [
-              133,
-              78
-            ]
-          },
-          {
-            "file": "supers-v2/freemason/crush.png",
-            "sha256": "4eda8075a53fffca500cb0bff303c69d8266e4e21adc661bc98713f7325b444a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              99,
-              16,
-              542,
-              498
-            ],
-            "pivot": [
-              350,
-              501
-            ],
-            "body_height": 460,
-            "source_pose": 1,
-            "scale_group": "freemason-v2",
-            "render_only": true,
-            "tip": [
-              153,
-              80
-            ]
-          },
-          {
-            "file": "supers-v2/freemason/crush.png",
-            "sha256": "4eda8075a53fffca500cb0bff303c69d8266e4e21adc661bc98713f7325b444a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              47,
-              54,
-              724,
-              470
-            ],
-            "pivot": [
-              300,
-              475
-            ],
-            "body_height": 460,
-            "source_pose": 2,
-            "scale_group": "freemason-v2",
-            "render_only": true,
-            "tip": [
-              728,
-              400
-            ]
-          },
-          {
-            "file": "supers-v2/freemason/crush.png",
-            "sha256": "4eda8075a53fffca500cb0bff303c69d8266e4e21adc661bc98713f7325b444a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              45,
-              79,
-              715,
-              484
-            ],
-            "pivot": [
-              310,
-              477
-            ],
-            "body_height": 460,
-            "source_pose": 3,
-            "scale_group": "freemason-v2",
-            "render_only": true,
-            "tip": [
-              722,
-              411
-            ]
-          },
-          {
-            "file": "supers-v2/freemason/finish.png",
-            "sha256": "5520f9f8c93fbf893e7481990eacd4350fb7634a70ebd0e8f1f4bb4ca099f14a",
+            "file": "supers-v3/freemason/press.png",
+            "sha256": "6cc4697f51d8c7d14d021a2c42e690d95eaef7f45dc2ef732c4be00516144626",
             "source_size": [
               1536,
               1024
@@ -20306,26 +20052,26 @@
             ],
             "bounds": [
               68,
-              30,
-              558,
-              461
+              51,
+              597,
+              465
             ],
             "pivot": [
-              355,
+              380,
               462
             ],
-            "body_height": 460,
+            "body_height": 450,
             "source_pose": 0,
-            "scale_group": "freemason-v2",
+            "scale_group": "freemason-v3",
             "render_only": true,
             "tip": [
-              70,
-              287
+              79,
+              351
             ]
           },
           {
-            "file": "supers-v2/freemason/finish.png",
-            "sha256": "5520f9f8c93fbf893e7481990eacd4350fb7634a70ebd0e8f1f4bb4ca099f14a",
+            "file": "supers-v3/freemason/press.png",
+            "sha256": "6cc4697f51d8c7d14d021a2c42e690d95eaef7f45dc2ef732c4be00516144626",
             "source_size": [
               1536,
               1024
@@ -20334,30 +20080,30 @@
               768,
               0,
               768,
-              512
+              503
             ],
             "bounds": [
-              18,
-              44,
-              748,
-              461
+              66,
+              102,
+              592,
+              466
             ],
             "pivot": [
-              312,
-              464
+              362,
+              462
             ],
-            "body_height": 460,
+            "body_height": 450,
             "source_pose": 1,
-            "scale_group": "freemason-v2",
+            "scale_group": "freemason-v3",
             "render_only": true,
             "tip": [
-              748,
-              169
+              79,
+              391
             ]
           },
           {
-            "file": "supers-v2/freemason/finish.png",
-            "sha256": "5520f9f8c93fbf893e7481990eacd4350fb7634a70ebd0e8f1f4bb4ca099f14a",
+            "file": "supers-v3/freemason/press.png",
+            "sha256": "6cc4697f51d8c7d14d021a2c42e690d95eaef7f45dc2ef732c4be00516144626",
             "source_size": [
               1536,
               1024
@@ -20369,169 +20115,553 @@
               512
             ],
             "bounds": [
-              90,
-              48,
-              723,
-              467
+              155,
+              64,
+              695,
+              492
             ],
             "pivot": [
-              340,
-              470
+              395,
+              488
             ],
-            "body_height": 460,
+            "body_height": 450,
             "source_pose": 2,
-            "scale_group": "freemason-v2",
+            "scale_group": "freemason-v3",
             "render_only": true,
             "tip": [
-              720,
-              275
+              681,
+              129
             ]
           },
           {
-            "file": "supers-v2/freemason/finish.png",
-            "sha256": "5520f9f8c93fbf893e7481990eacd4350fb7634a70ebd0e8f1f4bb4ca099f14a",
+            "file": "supers-v3/freemason/press.png",
+            "sha256": "6cc4697f51d8c7d14d021a2c42e690d95eaef7f45dc2ef732c4be00516144626",
             "source_size": [
               1536,
               1024
             ],
             "region": [
               768,
+              503,
+              768,
+              521
+            ],
+            "bounds": [
+              132,
+              1,
+              640,
+              500
+            ],
+            "pivot": [
+              377,
+              497
+            ],
+            "body_height": 450,
+            "source_pose": 3,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              633,
+              65
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/crush.png",
+            "sha256": "4398c0d8e92990a76dc26725a6c99fb30091bc5125d5fc66171c44ea6d03c5bc",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              161,
+              12,
+              613,
+              476
+            ],
+            "pivot": [
+              420,
+              474
+            ],
+            "body_height": 450,
+            "source_pose": 0,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              177,
+              78
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/crush.png",
+            "sha256": "4398c0d8e92990a76dc26725a6c99fb30091bc5125d5fc66171c44ea6d03c5bc",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              118,
+              43,
+              534,
+              474
+            ],
+            "pivot": [
+              352,
+              473
+            ],
+            "body_height": 450,
+            "source_pose": 1,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              160,
+              101
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/crush.png",
+            "sha256": "4398c0d8e92990a76dc26725a6c99fb30091bc5125d5fc66171c44ea6d03c5bc",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
               512,
               768,
               512
             ],
             "bounds": [
               83,
-              41,
-              587,
-              468
+              66,
+              718,
+              477
             ],
             "pivot": [
-              352,
-              472
+              325,
+              475
             ],
-            "body_height": 460,
-            "source_pose": 3,
-            "scale_group": "freemason-v2",
+            "body_height": 450,
+            "source_pose": 2,
+            "scale_group": "freemason-v3",
             "render_only": true,
             "tip": [
-              116,
-              270
+              707,
+              390
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/crush.png",
+            "sha256": "4398c0d8e92990a76dc26725a6c99fb30091bc5125d5fc66171c44ea6d03c5bc",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              89,
+              105,
+              712,
+              477
+            ],
+            "pivot": [
+              307,
+              477
+            ],
+            "body_height": 450,
+            "source_pose": 3,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              701,
+              415
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/finish.png",
+            "sha256": "d11ea1f4bb11d29c77193fb7861aee15f7bb4a3d200d14d7ad9842f6e097e55a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              54,
+              22,
+              596,
+              469
+            ],
+            "pivot": [
+              360,
+              467
+            ],
+            "body_height": 450,
+            "source_pose": 0,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              66,
+              326
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/finish.png",
+            "sha256": "d11ea1f4bb11d29c77193fb7861aee15f7bb4a3d200d14d7ad9842f6e097e55a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              46,
+              15,
+              759,
+              469
+            ],
+            "pivot": [
+              322,
+              469
+            ],
+            "body_height": 450,
+            "source_pose": 1,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              747,
+              165
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/finish.png",
+            "sha256": "d11ea1f4bb11d29c77193fb7861aee15f7bb4a3d200d14d7ad9842f6e097e55a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              87,
+              2,
+              711,
+              473
+            ],
+            "pivot": [
+              340,
+              470
+            ],
+            "body_height": 450,
+            "source_pose": 2,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              702,
+              343
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/finish.png",
+            "sha256": "d11ea1f4bb11d29c77193fb7861aee15f7bb4a3d200d14d7ad9842f6e097e55a",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              87,
+              44,
+              646,
+              473
+            ],
+            "pivot": [
+              322,
+              471
+            ],
+            "body_height": 450,
+            "source_pose": 3,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              639,
+              296
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/return.png",
+            "sha256": "42c3698f6678e1f5dfe6476c6caee38141532a776732ee13f8d233ffecbcb248",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              128,
+              10,
+              654,
+              486
+            ],
+            "pivot": [
+              350,
+              482
+            ],
+            "body_height": 450,
+            "source_pose": 0,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              642,
+              365
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/return.png",
+            "sha256": "42c3698f6678e1f5dfe6476c6caee38141532a776732ee13f8d233ffecbcb248",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              133,
+              88,
+              613,
+              496
+            ],
+            "pivot": [
+              370,
+              482
+            ],
+            "body_height": 450,
+            "source_pose": 1,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              222,
+              450
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/return.png",
+            "sha256": "42c3698f6678e1f5dfe6476c6caee38141532a776732ee13f8d233ffecbcb248",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              144,
+              38,
+              607,
+              486
+            ],
+            "pivot": [
+              392,
+              483
+            ],
+            "body_height": 450,
+            "source_pose": 2,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              164,
+              314
+            ]
+          },
+          {
+            "file": "supers-v3/freemason/return.png",
+            "sha256": "42c3698f6678e1f5dfe6476c6caee38141532a776732ee13f8d233ffecbcb248",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              131,
+              36,
+              605,
+              486
+            ],
+            "pivot": [
+              397,
+              484
+            ],
+            "body_height": 450,
+            "source_pose": 3,
+            "scale_group": "freemason-v3",
+            "render_only": true,
+            "tip": [
+              142,
+              309
             ]
           }
         ],
         "render_only": true
       },
       "super_freemason_fx": {
-        "file": "supers-v2/freemason/effects.png",
+        "file": "supers-v3/freemason/effects.png",
         "body_height": 512,
         "frames": [
           {
             "region": [
-              42,
-              152,
-              459,
-              279
+              18,
+              250,
+              494,
+              190
             ],
             "pivot": [
-              229.5,
-              279
+              247.0,
+              190
             ],
             "bounds": [
               0,
               0,
-              459,
-              279
+              494,
+              190
             ]
           },
           {
             "region": [
-              543,
-              34,
-              466,
-              452
+              538,
+              33,
+              470,
+              464
             ],
             "pivot": [
-              233.0,
-              452
+              235.0,
+              464
             ],
             "bounds": [
               0,
               0,
-              466,
-              452
+              470,
+              464
             ]
           },
           {
             "region": [
-              1057,
-              75,
-              450,
-              413
+              1043,
+              38,
+              482,
+              461
             ],
             "pivot": [
-              225.0,
-              413
+              241.0,
+              461
             ],
             "bounds": [
               0,
               0,
-              450,
-              413
+              482,
+              461
             ]
           },
           {
             "region": [
-              30,
-              587,
-              473,
-              380
+              17,
+              650,
+              478,
+              265
             ],
             "pivot": [
-              236.5,
-              380
+              239.0,
+              265
             ],
             "bounds": [
               0,
               0,
-              473,
-              380
+              478,
+              265
             ]
           },
           {
             "region": [
-              539,
-              540,
-              456,
-              424
+              525,
+              749,
+              488,
+              168
             ],
             "pivot": [
-              228.0,
-              424
+              244.0,
+              168
             ],
             "bounds": [
               0,
               0,
-              456,
-              424
+              488,
+              168
             ]
           },
           {
             "region": [
-              1040,
-              589,
-              477,
-              351
+              1054,
+              727,
+              467,
+              189
             ],
             "pivot": [
-              238.5,
-              351
+              233.5,
+              189
             ],
             "bounds": [
               0,
               0,
-              477,
-              351
+              467,
+              189
             ]
           }
         ],
@@ -20547,12 +20677,20 @@
               2
             ],
             [
-              30,
-              14
+              28,
+              16
             ],
             [
-              70,
-              15
+              50,
+              17
+            ],
+            [
+              74,
+              18
+            ],
+            [
+              90,
+              19
             ]
           ],
           "sounds": {
@@ -20568,105 +20706,129 @@
               "end": 4,
               "key": 0,
               "box": [
-                120,
-                -140,
-                170,
-                130
+                -90,
+                -160,
+                350,
+                160
               ],
-              "anchor": "owner",
+              "behind": true,
               "fade": true,
+              "opacity": 0.9,
               "contact_box": [
-                -35,
-                -135,
-                90,
-                100
+                -100,
+                -140,
+                140,
+                130
               ]
             },
             {
               "stage": "paired",
               "start": 0,
-              "end": 8,
+              "end": 12,
               "key": 0,
               "box": [
-                -65,
-                -130,
-                145,
-                115
+                -90,
+                -160,
+                350,
+                160
               ],
-              "anchor": "receiver",
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.93
             },
             {
               "stage": "paired",
               "start": 40,
-              "end": 49,
+              "end": 54,
               "key": 1,
               "box": [
                 -70,
-                -160,
-                150,
-                170
+                -230,
+                300,
+                235
               ],
-              "anchor": "receiver",
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.93
             },
             {
               "stage": "paired",
               "start": 70,
-              "end": 80,
+              "end": 83,
               "key": 2,
               "box": [
-                -70,
-                -165,
-                155,
-                170
+                -85,
+                -240,
+                325,
+                250
               ],
-              "anchor": "receiver",
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.94
             },
             {
               "stage": "connected",
               "start": 0,
-              "end": 5,
+              "end": 12,
+              "key": 0,
+              "box": [
+                -115,
+                -180,
+                400,
+                185
+              ],
+              "behind": true,
+              "fade": true,
+              "opacity": 0.97
+            },
+            {
+              "stage": "connected",
+              "start": 0,
+              "end": 6,
               "key": 3,
               "box": [
-                -90,
-                -145,
-                180,
-                150
+                -45,
+                -120,
+                125,
+                120
               ],
               "anchor": "receiver",
-              "fade": false
+              "opacity": 0.95
             },
             {
               "stage": "connected",
-              "start": 5,
-              "end": 13,
+              "start": 6,
+              "end": 24,
               "key": 4,
               "box": [
-                -80,
-                -150,
-                170,
-                160
+                -70,
+                -100,
+                345,
+                110
               ],
-              "anchor": "receiver",
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.88
             },
             {
               "stage": "connected",
-              "start": 13,
-              "end": 30,
+              "start": 24,
+              "end": 44,
               "key": 5,
               "box": [
-                -70,
-                -140,
-                170,
-                150
+                -80,
+                -160,
+                360,
+                170
               ],
-              "anchor": "receiver",
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.68
             }
           ],
+          "source": "supers-v3/freemason",
+          "description": "Hip-led horizontal sweep, rising crescent, overhead hammer arc, full-body final turn and six-drawing weighted return.",
+          "receiver_reactions": true,
           "phase": "super_freemason",
           "fx_phase": "super_freemason_fx",
           "pair_ticks": 90,
@@ -20678,15 +20840,15 @@
               1
             ],
             [
-              7,
+              8,
               2
             ],
             [
-              16,
+              20,
               3
             ],
             [
-              27,
+              28,
               4
             ],
             [
@@ -20698,7 +20860,7 @@
               6
             ],
             [
-              48,
+              53,
               7
             ],
             [
@@ -20714,7 +20876,7 @@
               10
             ],
             [
-              78,
+              80,
               11
             ],
             [
@@ -20728,12 +20890,28 @@
               13
             ],
             [
-              7,
+              5,
               14
             ],
             [
-              17,
+              11,
               15
+            ],
+            [
+              15,
+              16
+            ],
+            [
+              18,
+              17
+            ],
+            [
+              21,
+              18
+            ],
+            [
+              23,
+              19
             ]
           ]
         },

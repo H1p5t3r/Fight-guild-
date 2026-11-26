@@ -1362,7 +1362,8 @@
       }
     ],
     "source": "supers-v3/iron-dominion",
-    "description": "Back-to-front full-body shield sweep, rising crescent, overhead crush, low extended finish and measured High Clamp return."
+    "description": "Back-to-front full-body shield sweep, rising crescent, overhead crush, low extended finish and measured High Clamp return.",
+    "receiver_reactions": true
   },
   "faceWidth": 0.55,
   "faceY": 0.58,

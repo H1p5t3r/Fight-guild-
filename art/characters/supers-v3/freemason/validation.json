@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-26",
+  "scope": "Freemason v3 and receiver reactions for revised strike supers",
+  "suites": [
+    {
+      "log": "build/freemason-v3-test.log",
+      "checks": 20177,
+      "failures": 0
+    },
+    {
+      "log": "build/iron-v3-receiver-test.log",
+      "checks": 18904,
+      "failures": 0
+    },
+    {
+      "log": "build/sky-v3-receiver-regression.log",
+      "checks": 26895,
+      "failures": 0
+    }
+  ],
+  "totalChecks": 65976,
+  "nativeReview": {
+    "cases": [
+      "hit",
+      "mirrored",
+      "block",
+      "whiff"
+    ],
+    "failures": 0,
+    "frames": 1262,
+    "fps": 60,
+    "video": "exports/FightGuild-Freemason-V3-2026-11-26.mp4",
+    "sha256": "df364db1929f56a35384804a50c0e2a241dfb0956da0de0afb66d5cc1c18c13a"
+  },
+  "visualReview": [
+    "twenty bodies at fixed world scale against original idle",
+    "two hands on one continuous hammer shaft",
+    "contact and sustained defender reactions",
+    "hit and mirrored full-body crescents",
+    "block and miss return to guard"
+  ],
+  "sourceBytesPreserved": true,
+  "gameplayChanged": false,
+  "websiteUpdated": false
+}

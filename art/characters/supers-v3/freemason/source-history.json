@@ -1,0 +1,23 @@
+{
+  "corrected": [
+    {
+      "original": "/workspace/generated_images/exec-5f546161-b35a-4ce0-b4e2-87dea14e876e.png",
+      "prompt": "press-prompt.txt",
+      "reason": "Removed ambiguous hand-like shape at hammer butt.",
+      "references": [
+        "godot/assets/fighters/hammer-kit-v1/drive_ready.png",
+        "godot/assets/fighters/supers-v3/freemason/entry.png"
+      ]
+    },
+    {
+      "original": "/workspace/generated_images/exec-56b70e36-408a-49c1-b902-b145cfbc398f.png",
+      "prompt": "return-prompt.txt",
+      "reason": "Replaced split handle with one continuous straight shaft held by both hands.",
+      "references": [
+        "godot/assets/fighters/hammer-kit-v1/drive_ready.png",
+        "godot/assets/fighters/supers-v3/freemason/finish.png"
+      ]
+    }
+  ],
+  "selected": "sources.json"
+}

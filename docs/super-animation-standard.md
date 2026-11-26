@@ -28,6 +28,8 @@ must attach to the correct shoulder and read separately from the torso; overlapp
 muscle shapes can suggest an extra limb even when only two hands are drawn.
 Check the same pose with its receiver visible so their limbs do not merge into
 the attacker. Carry this correction through the adjacent follow-through keys.
+For two-handed weapons, trace one continuous shaft through both grips. Reject
+split handles and decorative handle ends that read as an extra hand.
 
 Timing is editable, not sacred. First adjust pose exposures within the saved
 simulation clocks. If startup, active windows, capture duration, hitstop or

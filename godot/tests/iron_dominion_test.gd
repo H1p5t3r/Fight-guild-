@@ -34,7 +34,13 @@ func run()->void:
 						check(is_equal_approx(arena.sprites[owner].scale.y,150.0/445.0*arena.size.x/1000.0*arena.camera_zoom),"Anatomical scale changed")
 						if str(cue.stage)=="paired":
 							pair_seen=true
-							if int(state.pairClock) in [40,70]:check(int(cue.pose)==(6 if int(state.pairClock)==40 else 10),"Shield strike missed saved impact beat")
+							check(arena.sprites[1-owner].get_meta("reaction_family")==("air" if int(state.players[1-owner].y)>0 else "chest"),"Captured receiver returned to neutral")
+							if int(state.pairClock) in [40,70]:
+								check(int(cue.pose)==(6 if int(state.pairClock)==40 else 10),"Shield strike missed saved impact beat")
+								var family:="air" if int(state.players[1-owner].y)>0 else "chest"
+								var recoil:=CombatReactions.frame_for(receiver,family,2)
+								var rect:Array=recoil.region
+								check(arena.sprites[1-owner].texture.region==Rect2(rect[0],rect[1],rect[2],rect[3]),"Receiver recoil missed native contact")
 							var pose:=int(cue.pose)
 							arena.refresh(model,state,false,true)
 							check(int(arena.sprites[owner].get_meta("pose"))==pose,"Pause changed exposure")
