@@ -1,0 +1,61 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v2/bloodletting/entry.png",
+    "original": "/workspace/generated_images/exec-17afb06e-c8ad-4fb5-94b6-c8a0eeaa3687.png",
+    "sha256": "997de9eec1e107c66174a509a55d8efb994be560df1e689b1bf273b1e3d2f624",
+    "prompt": "art/characters/supers-v2/bloodletting/entry-prompt.txt",
+    "references": [
+      "godot/assets/fighters/appearance-v3/fillet-ready.png",
+      "godot/assets/fighters/supers-v1/fillet.png"
+    ]
+  },
+  {
+    "id": "rise",
+    "file": "godot/assets/fighters/supers-v2/bloodletting/rise.png",
+    "original": "/workspace/generated_images/exec-939488d1-25a2-47c2-9e4a-5b921b1d6211.png",
+    "sha256": "1f1e3d22e24f4384c5416a11b240363448e0c5a984895cafaaeed7d9deb0ed4a",
+    "prompt": "art/characters/supers-v2/bloodletting/rise-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/bloodletting/entry.png"
+    ]
+  },
+  {
+    "id": "cross",
+    "file": "godot/assets/fighters/supers-v2/bloodletting/cross.png",
+    "original": "/workspace/generated_images/exec-6d849a88-0cb0-432f-a0a7-4941f18ef857.png",
+    "sha256": "bc49c45792362b34ad6895f24bec4af2aa1da839d61bc5ca89988342403f48c6",
+    "prompt": "art/characters/supers-v2/bloodletting/cross-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/bloodletting/entry.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v2/bloodletting/finish.png",
+    "original": "/workspace/generated_images/exec-efe21d3e-acf6-4d0e-871a-035b7893d5a2.png",
+    "sha256": "a8e74a77c7862b3515dd462a6c6bb6155fc9dcbb80bf0303140d6eb84f03805c",
+    "prompt": "art/characters/supers-v2/bloodletting/finish-correction-prompt.txt",
+    "references": [
+      "/workspace/generated_images/exec-7b974757-fe99-4113-bff4-72e627f09cf5.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v2/bloodletting/effects.png",
+    "original": "/workspace/generated_images/exec-71b09117-f766-4bd7-93eb-5d67b4d3c2c3.png",
+    "sha256": "575d7ad29911ab7e79e3c078e3be1cbdf4c0f50c7bc1d648066d913a482684b6",
+    "prompt": "art/characters/supers-v2/bloodletting/effects-prompt.txt",
+    "references": []
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/bloodletting/portrait.png",
+    "original": "/workspace/generated_images/exec-158f9e7e-6a52-441c-bd3f-0604efdee426.png",
+    "sha256": "88dfc5445393d5ee5c3f64c52023e9f87c3fc72ea4b467852f5c42321c4a1f96",
+    "prompt": "art/characters/supers-v2/bloodletting/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/bloodletting/entry.png"
+    ]
+  }
+]

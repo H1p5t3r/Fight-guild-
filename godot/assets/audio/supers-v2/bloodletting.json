@@ -1,0 +1,26 @@
+{
+  "source": "Original synthesis; no external recordings",
+  "generator": "scripts/generate-bloodletting-audio.py",
+  "sounds": [
+    {
+      "file": "bloodletting_cross.wav",
+      "seconds": 0.32,
+      "sha256": "f436766d1859fab6d7e6738796580724369cd8e4b30fe29c52bf297dac922447"
+    },
+    {
+      "file": "bloodletting_rise.wav",
+      "seconds": 0.35,
+      "sha256": "939c6e7983ed44decc8572988df23bfeadf06cea933ecd929ee25ba114cc9edb"
+    },
+    {
+      "file": "bloodletting_down.wav",
+      "seconds": 0.38,
+      "sha256": "8e93d55172837336554a3ac04c5c5e050aa71532df8b9671fffda309f2cb1875"
+    },
+    {
+      "file": "bloodletting_finish.wav",
+      "seconds": 0.72,
+      "sha256": "4ec3a198981b214442aae71c7fc2ef3dd8e4924ebca69b0111e41380c44e6d7d"
+    }
+  ]
+}

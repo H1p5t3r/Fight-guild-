@@ -1,0 +1,92 @@
+{
+  "name": "Bloodletting",
+  "character": 5,
+  "slot": 12,
+  "input": "236236S",
+  "status": "production",
+  "date": "2026-11-26",
+  "startup": 10,
+  "active": 4,
+  "recovery": 24,
+  "freeze": 54,
+  "pairTicks": 76,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 250,
+  "bodyKeys": 16,
+  "choreography": "Compact stalking load, advancing long-knife crosscut, rising cut at34, opposite descending cut at59, decisive crossing finish at76, controlled return to stalking stance. Preserve long right/near knife and short left/far knife.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      5,
+      2
+    ],
+    [
+      11,
+      3
+    ],
+    [
+      21,
+      4
+    ],
+    [
+      33,
+      5
+    ],
+    [
+      34,
+      6
+    ],
+    [
+      41,
+      7
+    ],
+    [
+      49,
+      8
+    ],
+    [
+      58,
+      9
+    ],
+    [
+      59,
+      10
+    ],
+    [
+      65,
+      11
+    ],
+    [
+      71,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      8,
+      14
+    ],
+    [
+      18,
+      15
+    ]
+  ],
+  "requirements": [
+    "Blackhair and lean arms",
+    "Long knife in right near hand; short knife in left pauldron arm",
+    "Fixed480pixel standing anatomical scale",
+    "Largest change laststartup tofirstactive",
+    "Bleed is applied once by unchanged native mechanics",
+    "No body smears or interpolation"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false
+}

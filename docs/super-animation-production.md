@@ -435,6 +435,38 @@ bash scripts/godot.sh --headless --script res://tests/super_presentation_test.gd
 python scripts/capture-super-animation.py undertow
 ```
 
+## 11 — Fillet / Bloodletting
+
+[Watch the native 60 FPS review with sound](../exports/FightGuild-Bloodletting-2026-11-26.mp4).
+Sixteen original body keys give Fillet a compact stalking load, advancing cut,
+rising cut, descending cut and decisive crossing finish. Her black hair, lean
+arms, long right-hand knife and short left-hand knife remain consistent. The
+final reload was regenerated to avoid another exaggerated full-body reset.
+Every frame uses one 480-pixel standing anatomical reference; the largest
+adjacent long-knife movement is 151.64 world units at first active.
+
+Six black/crimson/ivory effect keys track the blade paths. Four original sharp
+knife sounds and a dedicated forward-coiled portrait accompany the native
+0/34/59/release-76 beats. Block and miss recover through the extended blade into
+the stalking stance rather than playing a successful cinematic.
+
+The 10/4/24 timing, 250 damage, owned bleed, hard knockdown and cost are unchanged.
+The animation suite passes 17,561 checks, including explicit bleed and hard-
+knockdown checks at release, all receivers/sides, every pose, scale, pause,
+snapshot replay and edited duration. The full super suite passes 8,302 checks.
+The native review includes hit, mirrored hit, block and miss.
+
+Sources: [exposure plan](../art/characters/supers-v2/bloodletting/exposure-plan.json),
+[original source records](../art/characters/supers-v2/bloodletting/sources.json),
+[blade landmarks and timing](../art/characters/supers-v2/bloodletting/layout.json).
+
+```bash
+python scripts/register-super-presentation.py bloodletting
+python scripts/generate-bloodletting-audio.py
+bash scripts/godot.sh --headless --script res://tests/super_presentation_test.gd -- --test --character 5 --slot 12
+python scripts/capture-super-animation.py bloodletting
+```
+
 ## Production order
 
 1. Sky Foundry — full pass and native review.
@@ -447,7 +479,7 @@ python scripts/capture-super-animation.py undertow
 8. Whiskey Chaser — full pass and native review.
 9. No Safe Harbour — full pass and native review.
 10. Undertow — full pass and native review.
-11. Bloodletting.
+11. Bloodletting — full pass and native review.
 12. Exsanguinate.
 
 The browser Move Workshop remains frozen throughout this native production pass.

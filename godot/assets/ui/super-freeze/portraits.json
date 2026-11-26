@@ -142,6 +142,20 @@
       "width": 0.58,
       "center_y": 0.59,
       "source": "art/characters/supers-v2/undertow/portrait-prompt.txt"
+    },
+    "Bloodletting": {
+      "character": 5,
+      "enabled": true,
+      "file": "../../fighters/supers-v2/bloodletting/portrait.png",
+      "region": [
+        0,
+        0,
+        1536,
+        1024
+      ],
+      "width": 0.58,
+      "center_y": 0.59,
+      "source": "art/characters/supers-v2/bloodletting/portrait-prompt.txt"
     }
   }
 }

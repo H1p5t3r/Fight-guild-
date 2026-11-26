@@ -16,7 +16,8 @@ The [full animation production pass](super-animation-production.md) begins with
 [Last Orders](../exports/FightGuild-Last-Orders-2026-11-26.mp4) and
 [Whiskey Chaser](../exports/FightGuild-Whiskey-Chaser-2026-11-26.mp4), and
 [No Safe Harbour](../exports/FightGuild-No-Safe-Harbour-2026-11-26.mp4), and
-[Undertow](../exports/FightGuild-Undertow-2026-11-26.mp4).
+[Undertow](../exports/FightGuild-Undertow-2026-11-26.mp4), and
+[Bloodletting](../exports/FightGuild-Bloodletting-2026-11-26.mp4).
 These are provisional balance values, captured from the current native build.
 Normal combo proration still applies; the video starts each demonstration fresh.
 Exsanguinate's demonstration begins with 150 stored grey life.

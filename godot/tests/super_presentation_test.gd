@@ -50,6 +50,9 @@ func run()->void:
 							check(int(arena.sprites[owner].get_meta("pose"))==int(cue.pose),"Pause changed exposure")
 						if str(cue.stage)=="connected" and int(cue.tick)==0 and int(state.hitstop)>0 and spec.has("finish_receiver"):
 							check(arena.sprites[1-owner].get_meta("reaction_family")==spec.finish_receiver,"Final contact lost receiver reaction")
+							if character==5 and slot==12:
+								check(int(state.players[1-owner].bleedTime)>0 and int(state.players[1-owner].bleedSource)>0,"Bloodletting finish lost owned bleed")
+								check(int(state.players[1-owner].knockdown)==2,"Bloodletting finish lost hard knockdown")
 					if tick==80:restored=saved
 					if tick==110:replay_hash=model.state_hash()
 					model.step(0,0)
