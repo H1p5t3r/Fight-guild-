@@ -1,0 +1,17 @@
+{
+  "superseded": [
+    {
+      "original": "/workspace/generated_images/exec-3da1f2b1-c350-44dc-87b9-993840814978.png",
+      "sha256": "c8203a4ce59afb4a5dc053d51cf12e824cf55585407eb9315844c17e69d8a21a",
+      "prompt": "entry-prompt.txt",
+      "reason": "Rejected: too close to normal attack pose; not enough whole-body motion."
+    },
+    {
+      "original": "/workspace/generated_images/exec-806dafba-f417-4b0e-a7c9-7c5012a25958.png",
+      "sha256": "12ba5cdc4089842c96262ff7941c0e02289a1af9e980b0302e938381e5b7009f",
+      "prompt": "entry-motion-prompt.txt",
+      "reason": "Corrected: first active pose omitted its striking arm."
+    }
+  ],
+  "selected": "sources.json"
+}

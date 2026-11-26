@@ -129,6 +129,30 @@ the revised frame data. See the
 [validation record](../art/characters/supers-v3/grand-design/validation.json) and
 [scale sheet](../art/characters/supers-v3/grand-design/scale-review.png).
 
+## Flashpoint — complete
+
+[Watch the native 60 FPS review](../exports/FightGuild-Flashpoint-V3-2026-11-26.mp4)
+(hit, mirrored hit, block and miss).
+
+Twenty new body drawings replace the upright arm-led motion with a reversed
+hip-and-spine coil, forward backhand, low gather, rising reach, descending
+compression and a wide two-palm ignition. Hair, coat tails, knees and the free
+arm counterbalance each turn. Six separate flame crescents and ember drawings
+leave the body readable. The model, costume and one anatomical scale follow
+Smoke's original almost-weightless idle.
+
+The opening snaps into contact, then the later contact drawings land at ticks
+37 and 65, with the final ignition on release at 84. A longer series of recoil
+and settling drawings uses the existing recovery clock. Block and miss tracks
+withdraw from the opening only. Gameplay timing, damage and cost are unchanged.
+
+The first atlas was rejected for repeating the ordinary attack's motion. The
+replacement's missing striking arm was corrected before registration; the
+[source history](../art/characters/supers-v3/flashpoint/source-history.json)
+retains both decisions. Native checks passed 19,645 assertions with no failures.
+See the [validation](../art/characters/supers-v3/flashpoint/validation.json) and
+[fixed-scale comparison](../art/characters/supers-v3/flashpoint/scale-review.png).
+
 ## Size calibration
 
 The first visual comparison covered all 196 v2 super body drawings against their

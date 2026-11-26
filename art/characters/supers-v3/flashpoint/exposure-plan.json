@@ -1,0 +1,140 @@
+{
+  "name": "Flashpoint",
+  "character": 2,
+  "slot": 12,
+  "input": "236236S",
+  "status": "completed-native-review",
+  "startup": 8,
+  "active": 5,
+  "recovery": 35,
+  "freeze": 54,
+  "pairTicks": 84,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 300,
+  "bodyKeys": 20,
+  "choreography": "Full-body reversed coil into horizontal backhand, rising fire crescent, descending compression, wide final ignition and weightless settling.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      14,
+      3
+    ],
+    [
+      24,
+      4
+    ],
+    [
+      36,
+      5
+    ],
+    [
+      37,
+      6
+    ],
+    [
+      45,
+      7
+    ],
+    [
+      54,
+      8
+    ],
+    [
+      64,
+      9
+    ],
+    [
+      65,
+      10
+    ],
+    [
+      72,
+      11
+    ],
+    [
+      78,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      5,
+      14
+    ],
+    [
+      11,
+      15
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      18,
+      17
+    ],
+    [
+      21,
+      18
+    ],
+    [
+      23,
+      19
+    ]
+  ],
+  "requirements": [
+    "Largest wrist travel from last startup to first active",
+    "Right hand performs horizontal backhand parallel with the ground",
+    "No sword, beam or invented flight of the caster",
+    "Nearly weightless toe-touch stance, fixed anatomical scale",
+    "Native fire impacts at37,65,84",
+    "Block and miss use opening withdrawal only",
+    "Native hit, mirrored, crouch block and whiff review"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveHandTravelWorldUnits": 124.23,
+  "date": "2026-11-26",
+  "largestOpeningMovementAtFirstActive": true,
+  "verification": {
+    "cases": [
+      {
+        "name": "hit",
+        "damage": 300,
+        "paired": true
+      },
+      {
+        "name": "mirrored",
+        "damage": 300,
+        "paired": true
+      },
+      {
+        "name": "block",
+        "damage": 8,
+        "paired": false
+      },
+      {
+        "name": "whiff",
+        "damage": 0,
+        "paired": false
+      }
+    ],
+    "failures": 0,
+    "frames": 1262,
+    "fps": 60,
+    "video": "exports/FightGuild-Flashpoint-V3-2026-11-26.mp4",
+    "sha256": "eb6143ac9799086cf0307f46888fad405709e994e54919103c15c73903fff80f"
+  }
+}

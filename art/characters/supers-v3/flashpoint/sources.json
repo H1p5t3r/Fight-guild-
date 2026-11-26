@@ -1,0 +1,76 @@
+[
+  {
+    "id": "entry",
+    "file": "godot/assets/fighters/supers-v3/flashpoint/entry.png",
+    "original": "/workspace/generated_images/exec-4e6509cf-2339-42d4-8552-4d9e6814866d.png",
+    "sha256": "10c4608bc56675357a6ed79551f661d0a2f36b8c43bb8f9841766de949ab06aa",
+    "prompt": "art/characters/supers-v3/flashpoint/entry-arm-prompt.txt",
+    "references": [
+      "godot/assets/fighters/smoke-idle-v1/idle.png",
+      "/workspace/generated_images/exec-806dafba-f417-4b0e-a7c9-7c5012a25958.png"
+    ]
+  },
+  {
+    "id": "rise",
+    "file": "godot/assets/fighters/supers-v3/flashpoint/rise.png",
+    "original": "/workspace/generated_images/exec-2c02eb86-3890-4250-9ad2-e58235a645c0.png",
+    "sha256": "c87c98f0e68e4c8b1d9bd26f030ce8238adf731f6d8b96119c3976aa4548b37e",
+    "prompt": "art/characters/supers-v3/flashpoint/rise-prompt.txt",
+    "references": [
+      "godot/assets/fighters/smoke-idle-v1/idle.png"
+    ]
+  },
+  {
+    "id": "compress",
+    "file": "godot/assets/fighters/supers-v3/flashpoint/compress.png",
+    "original": "/workspace/generated_images/exec-5a1063df-e446-4110-9807-15ec4d679e0d.png",
+    "sha256": "89fd6784b9a51fadf2e2235386f479d34612a35e3a0c4491f1415787d8e58f96",
+    "prompt": "art/characters/supers-v3/flashpoint/compress-prompt.txt",
+    "references": [
+      "godot/assets/fighters/smoke-idle-v1/idle.png",
+      "godot/assets/fighters/supers-v3/flashpoint/entry.png"
+    ]
+  },
+  {
+    "id": "finish",
+    "file": "godot/assets/fighters/supers-v3/flashpoint/finish.png",
+    "original": "/workspace/generated_images/exec-23debcc9-2af0-4d84-a0d4-df0d0e9dd791.png",
+    "sha256": "9626ea1824a5fb393ba490b672a64b957d903ebc86e8ae3ac3cc647469b4ee8a",
+    "prompt": "art/characters/supers-v3/flashpoint/finish-prompt.txt",
+    "references": [
+      "godot/assets/fighters/smoke-idle-v1/idle.png",
+      "godot/assets/fighters/supers-v3/flashpoint/entry.png"
+    ]
+  },
+  {
+    "id": "return",
+    "file": "godot/assets/fighters/supers-v3/flashpoint/return.png",
+    "original": "/workspace/generated_images/exec-48cea37f-818c-4293-9b3d-7c752f996e37.png",
+    "sha256": "ed9374945f7273e12df31f21d5ffd5de27a8021e40d41f268935aff1f668f3f7",
+    "prompt": "art/characters/supers-v3/flashpoint/return-prompt.txt",
+    "references": [
+      "godot/assets/fighters/smoke-idle-v1/idle.png",
+      "godot/assets/fighters/supers-v3/flashpoint/finish.png"
+    ]
+  },
+  {
+    "id": "effects",
+    "file": "godot/assets/fighters/supers-v3/flashpoint/effects.png",
+    "original": "/workspace/generated_images/exec-95cac15a-5473-4ba4-aef8-6dc90ca41441.png",
+    "sha256": "8a39d9336d487658a8d5c030edce1b3bbb374f3e6b5174df14114cd5f105f5f7",
+    "prompt": "art/characters/supers-v3/flashpoint/effects-prompt.txt",
+    "references": [
+      "godot/assets/fighters/smoke-attacks-v2/sword_effects.png"
+    ]
+  },
+  {
+    "id": "portrait",
+    "file": "godot/assets/fighters/supers-v2/flashpoint/portrait.png",
+    "original": "/workspace/generated_images/exec-9bb7bec1-b37e-4600-a15d-567d143f9ba5.png",
+    "sha256": "0d6b5acf366c2efd2991d34019aaae956c95a2934bd94d9a0ccf3b5fc351ce9b",
+    "prompt": "art/characters/supers-v2/flashpoint/portrait-prompt.txt",
+    "references": [
+      "godot/assets/fighters/supers-v2/flashpoint/entry.png"
+    ]
+  }
+]

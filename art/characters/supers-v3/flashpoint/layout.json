@@ -1,0 +1,363 @@
+{
+  "bodyHeight": 480,
+  "body": {
+    "entry": [
+      {
+        "root": [
+          345,
+          500
+        ],
+        "tip": [
+          231,
+          120
+        ]
+      },
+      {
+        "root": [
+          1185,
+          500
+        ],
+        "tip": [
+          1465,
+          173
+        ]
+      },
+      {
+        "root": [
+          400,
+          1008
+        ],
+        "tip": [
+          659,
+          805
+        ]
+      },
+      {
+        "root": [
+          1145,
+          1013
+        ],
+        "tip": [
+          1066,
+          790
+        ]
+      }
+    ],
+    "rise": [
+      {
+        "root": [
+          410,
+          480
+        ],
+        "tip": [
+          373,
+          387
+        ]
+      },
+      {
+        "root": [
+          1185,
+          480
+        ],
+        "tip": [
+          1032,
+          300
+        ]
+      },
+      {
+        "root": [
+          415,
+          1018
+        ],
+        "tip": [
+          560,
+          532
+        ]
+      },
+      {
+        "root": [
+          1165,
+          1018
+        ],
+        "tip": [
+          1236,
+          535
+        ]
+      }
+    ],
+    "compress": [
+      {
+        "root": [
+          350,
+          505
+        ],
+        "tip": [
+          307,
+          22
+        ]
+      },
+      {
+        "root": [
+          1150,
+          505
+        ],
+        "tip": [
+          1004,
+          40
+        ]
+      },
+      {
+        "root": [
+          365,
+          1014
+        ],
+        "tip": [
+          585,
+          724
+        ]
+      },
+      {
+        "root": [
+          1125,
+          1016
+        ],
+        "tip": [
+          1351,
+          804
+        ]
+      }
+    ],
+    "finish": [
+      {
+        "root": [
+          350,
+          500
+        ],
+        "tip": [
+          355,
+          174
+        ]
+      },
+      {
+        "root": [
+          1160,
+          500
+        ],
+        "tip": [
+          1456,
+          158
+        ]
+      },
+      {
+        "root": [
+          350,
+          1011
+        ],
+        "tip": [
+          685,
+          762
+        ]
+      },
+      {
+        "root": [
+          1135,
+          1015
+        ],
+        "tip": [
+          1050,
+          800
+        ]
+      }
+    ],
+    "return": [
+      {
+        "root": [
+          430,
+          477
+        ],
+        "tip": [
+          398,
+          243
+        ]
+      },
+      {
+        "root": [
+          1155,
+          484
+        ],
+        "tip": [
+          1004,
+          249
+        ]
+      },
+      {
+        "root": [
+          405,
+          1010
+        ],
+        "tip": [
+          288,
+          746
+        ]
+      },
+      {
+        "root": [
+          1175,
+          1012
+        ],
+        "tip": [
+          1050,
+          746
+        ]
+      }
+    ]
+  },
+  "presentation": {
+    "mode": "strike",
+    "finish_receiver": "chest",
+    "whiff": [
+      [
+        0,
+        2
+      ],
+      [
+        28,
+        16
+      ],
+      [
+        50,
+        17
+      ],
+      [
+        72,
+        18
+      ],
+      [
+        88,
+        19
+      ]
+    ],
+    "sounds": {
+      "0": "flashpoint_backhand",
+      "37": "flashpoint_lift",
+      "65": "flashpoint_compress",
+      "finish": "flashpoint_ignite"
+    },
+    "effects": [
+      {
+        "stage": "active",
+        "start": 0,
+        "end": 5,
+        "key": 0,
+        "box": [
+          -105,
+          -155,
+          340,
+          125
+        ],
+        "behind": true,
+        "fade": true,
+        "opacity": 0.95,
+        "contact_box": [
+          -90,
+          -130,
+          130,
+          110
+        ]
+      },
+      {
+        "stage": "paired",
+        "start": 0,
+        "end": 12,
+        "key": 0,
+        "box": [
+          -105,
+          -155,
+          340,
+          125
+        ],
+        "behind": true,
+        "fade": true,
+        "opacity": 0.95
+      },
+      {
+        "stage": "paired",
+        "start": 37,
+        "end": 49,
+        "key": 1,
+        "box": [
+          -65,
+          -235,
+          285,
+          240
+        ],
+        "behind": true,
+        "fade": true
+      },
+      {
+        "stage": "paired",
+        "start": 65,
+        "end": 77,
+        "key": 2,
+        "box": [
+          -65,
+          -235,
+          285,
+          240
+        ],
+        "behind": true,
+        "fade": true
+      },
+      {
+        "stage": "connected",
+        "start": 0,
+        "end": 12,
+        "key": 3,
+        "box": [
+          -30,
+          -215,
+          310,
+          240
+        ],
+        "behind": true,
+        "fade": true
+      },
+      {
+        "stage": "connected",
+        "start": 7,
+        "end": 25,
+        "key": 4,
+        "box": [
+          -50,
+          -100,
+          340,
+          110
+        ],
+        "behind": true,
+        "fade": true,
+        "opacity": 0.9
+      },
+      {
+        "stage": "connected",
+        "start": 23,
+        "end": 44,
+        "key": 5,
+        "box": [
+          -60,
+          -190,
+          350,
+          195
+        ],
+        "behind": true,
+        "fade": true,
+        "opacity": 0.7
+      }
+    ],
+    "paired_recoil_age": 2,
+    "source": "supers-v3/flashpoint",
+    "description": "Full-body reversed coil into horizontal backhand, rising fire crescent, descending compression, wide final ignition and weightless settling.",
+    "receiver_reactions": true
+  },
+  "faceWidth": 0.55,
+  "faceY": 0.57
+}
