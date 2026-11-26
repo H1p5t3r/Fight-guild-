@@ -1,0 +1,139 @@
+{
+  "name": "Undertow",
+  "character": 4,
+  "slot": 14,
+  "input": "214214Hs",
+  "status": "completed-native-review",
+  "date": "2026-11-26",
+  "startup": 7,
+  "active": 5,
+  "recovery": 32,
+  "freeze": 54,
+  "pairTicks": 80,
+  "releaseFreeze": 22,
+  "ownerRecovery": 24,
+  "damage": 220,
+  "bodyKeys": 24,
+  "choreography": "Low whole-body hook sweep, rising overhead reel, planted side-switch and leftward downcut. Extended left-facing shoulder return on hit; separate right-facing return on block/miss.",
+  "paired": [
+    [
+      0,
+      1
+    ],
+    [
+      5,
+      2
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      22,
+      4
+    ],
+    [
+      35,
+      5
+    ],
+    [
+      36,
+      6
+    ],
+    [
+      43,
+      7
+    ],
+    [
+      52,
+      8
+    ],
+    [
+      61,
+      9
+    ],
+    [
+      62,
+      10
+    ],
+    [
+      69,
+      11
+    ],
+    [
+      75,
+      12
+    ]
+  ],
+  "connected": [
+    [
+      0,
+      13
+    ],
+    [
+      5,
+      14
+    ],
+    [
+      11,
+      15
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      18,
+      17
+    ],
+    [
+      21,
+      18
+    ],
+    [
+      23,
+      19
+    ]
+  ],
+  "requirements": [
+    "Fixed480pixel anatomical scale",
+    "Largest hook displacement startup to first active",
+    "Single spear with both grips consistent",
+    "Body turns LEFT as opponent crosses behind",
+    "Connected art preserves original pair facing while gameplay faces left",
+    "Separate right-facing recovery on block/miss"
+  ],
+  "pixelEdits": false,
+  "gameplayChanged": false,
+  "firstActiveHookTravelWorldUnits": 235.59,
+  "largestOpeningMovementAtFirstActive": true,
+  "verification": {
+    "cases": [
+      {
+        "name": "hit",
+        "damage": 220,
+        "paired": true
+      },
+      {
+        "name": "mirrored",
+        "damage": 220,
+        "paired": true
+      },
+      {
+        "name": "block",
+        "damage": 8,
+        "paired": false
+      },
+      {
+        "name": "whiff",
+        "damage": 0,
+        "paired": false
+      }
+    ],
+    "failures": 0,
+    "frames": 1262,
+    "fps": 60,
+    "video": "exports/FightGuild-Undertow-V3-2026-11-26.mp4",
+    "sha256": "7684a1fef48633d488a19a5ac38dcf2d268c85324a0511a0cda4abb8f5c35b09"
+  }
+}

@@ -239,6 +239,26 @@ reviewed at fixed scale against the original idle, including the long return.
 See the [validation](../art/characters/supers-v3/no-safe-harbour/validation.json)
 and [scale sheet](../art/characters/supers-v3/no-safe-harbour/scale-review.png).
 
+## Undertow — complete
+
+[Watch the native 60 FPS review](../exports/FightGuild-Undertow-V3-2026-11-26.mp4)
+(hit, mirrored hit, block and miss).
+
+Twenty-four new drawings take the hook from a deep low sweep through an overhead
+reel, a planted turn and a left-facing downcut. The follow-through returns Shark
+to his shoulder-rest stance facing his new opponent position. Four separate
+right-facing recovery drawings handle blocks and misses without playing the
+side-switch. Hair, torso, hips, netting and feet participate in the turn.
+
+Six teal/navy/ivory crescents follow the hook path, with the final impact aligned
+to the receiver. The 36/62/80 contact beats, damage, cost and gameplay remain
+unchanged. All poses retain one anatomical scale and the paired direction is
+preserved to avoid mirroring the turn twice.
+
+The native suite passed 23,933 checks with no failures. See the
+[validation](../art/characters/supers-v3/undertow/validation.json) and
+[fixed-scale comparison](../art/characters/supers-v3/undertow/scale-review.png).
+
 ## Size calibration
 
 The first visual comparison covered all 196 v2 super body drawings against their
@@ -253,3 +273,8 @@ The broader source inventory contains 1,110 unique main-manifest body cells,
 including legacy drawings; it is not a claim that every cell is used in play.
 The motion/style revisions here are restricted to supers. Ordinary attacks,
 locomotion and the Move Workshop are unchanged.
+
+The additional reaction, grab and movement catalogs were reviewed separately:
+168 drawings across twenty native contact sheets. No additional blanket scale
+correction was justified. The [external audit](../art/animation-size-audit/2026-11-26/external/README.md)
+records its scope, limitations and reproducible capture command.

@@ -47395,7 +47395,8 @@
         "supers-v1": 480,
         "no-safe-harbour-v2": 540,
         "undertow-v2": 540,
-        "no-safe-harbour-v3": 480
+        "no-safe-harbour-v3": 480,
+        "undertow-v3": 480
       },
       "super_no_safe_harbour": {
         "file": "supers-v3/no-safe-harbour/entry.png",
@@ -48407,19 +48408,19 @@
             ],
             [
               35,
-              16
+              20
             ],
             [
               55,
-              17
+              21
             ],
             [
               75,
-              18
+              22
             ],
             [
               90,
-              19
+              23
             ]
           ],
           "sounds": {
@@ -48435,103 +48436,108 @@
               "end": 6,
               "key": 0,
               "box": [
-                20,
-                -80,
-                125,
-                80
+                -65,
+                -115,
+                290,
+                115
               ],
+              "behind": true,
               "fade": true,
-              "opacity": 0.85,
+              "opacity": 0.9,
               "stop_at_guard": true
             },
             {
               "stage": "paired",
               "start": 0,
-              "end": 9,
+              "end": 12,
               "key": 0,
               "box": [
-                -55,
-                -75,
-                100,
-                75
+                -65,
+                -115,
+                290,
+                115
               ],
-              "anchor": "receiver",
+              "behind": true,
               "fade": true,
-              "opacity": 0.85
+              "opacity": 0.9
             },
             {
               "stage": "paired",
               "start": 36,
-              "end": 47,
+              "end": 49,
               "key": 1,
               "box": [
-                -110,
-                -225,
-                180,
-                180
+                -170,
+                -265,
+                360,
+                265
               ],
-              "fade": true,
-              "opacity": 0.8,
-              "behind": true
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "paired",
               "start": 62,
-              "end": 71,
+              "end": 76,
               "key": 2,
               "box": [
-                -85,
-                -110,
-                150,
-                125
+                -160,
+                -245,
+                270,
+                245
               ],
               "anchor": "receiver",
-              "fade": true,
-              "opacity": 0.85
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "connected",
               "start": 0,
-              "end": 5,
+              "end": 12,
               "key": 3,
               "box": [
-                -125,
-                -135,
-                150,
-                115
+                -25,
+                -145,
+                240,
+                170
               ],
               "anchor": "receiver",
-              "fade": false
+              "behind": true,
+              "fade": true
             },
             {
               "stage": "connected",
-              "start": 5,
-              "end": 13,
+              "start": 8,
+              "end": 28,
               "key": 4,
               "box": [
-                -140,
-                -155,
-                175,
-                150
+                -220,
+                -125,
+                320,
+                135
               ],
-              "anchor": "receiver",
+              "behind": true,
               "fade": true
             },
             {
               "stage": "connected",
-              "start": 13,
-              "end": 30,
+              "start": 22,
+              "end": 44,
               "key": 5,
               "box": [
-                -150,
-                -165,
-                180,
-                165
+                -200,
+                -195,
+                350,
+                200
               ],
-              "anchor": "receiver",
-              "fade": true
+              "behind": true,
+              "fade": true,
+              "opacity": 0.7
             }
           ],
+          "source": "supers-v3/undertow",
+          "description": "Low whole-body hook sweep, rising overhead reel, planted side-switch and leftward downcut. Extended left-facing shoulder return on hit; separate right-facing return on block/miss.",
+          "receiver_reactions": true,
           "phase": "super_undertow",
           "fx_phase": "super_undertow_fx",
           "pair_ticks": 80,
@@ -48593,23 +48599,39 @@
               13
             ],
             [
-              8,
+              5,
               14
             ],
             [
-              18,
+              11,
               15
+            ],
+            [
+              15,
+              16
+            ],
+            [
+              18,
+              17
+            ],
+            [
+              21,
+              18
+            ],
+            [
+              23,
+              19
             ]
           ]
         }
       },
       "super_undertow": {
-        "file": "supers-v2/undertow/entry.png",
-        "body_height": 540,
+        "file": "supers-v3/undertow/entry.png",
+        "body_height": 480,
         "frames": [
           {
-            "file": "supers-v2/undertow/entry.png",
-            "sha256": "e6d6a86570a0f55dee918ab8928f5f2aa63ba72926d3fe644116bb157fb8bb53",
+            "file": "supers-v3/undertow/entry.png",
+            "sha256": "ca56bc652c5f17d4de95597754274e87ff256dfd3359a8fa53bf3a9363bb3784",
             "source_size": [
               1536,
               1024
@@ -48621,27 +48643,27 @@
               512
             ],
             "bounds": [
-              13,
-              56,
-              768,
-              482
+              39,
+              67,
+              535,
+              472
             ],
             "pivot": [
-              270,
-              480
+              340,
+              470
             ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 0,
-            "scale_group": "undertow-v2",
+            "scale_group": "undertow-v3",
             "render_only": true,
             "tip": [
-              16,
-              148
+              43,
+              209
             ]
           },
           {
-            "file": "supers-v2/undertow/entry.png",
-            "sha256": "e6d6a86570a0f55dee918ab8928f5f2aa63ba72926d3fe644116bb157fb8bb53",
+            "file": "supers-v3/undertow/entry.png",
+            "sha256": "ca56bc652c5f17d4de95597754274e87ff256dfd3359a8fa53bf3a9363bb3784",
             "source_size": [
               1536,
               1024
@@ -48653,27 +48675,27 @@
               512
             ],
             "bounds": [
-              0,
-              116,
-              683,
-              482
+              42,
+              96,
+              751,
+              471
             ],
             "pivot": [
-              242,
-              480
+              312,
+              470
             ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 1,
-            "scale_group": "undertow-v2",
+            "scale_group": "undertow-v3",
             "render_only": true,
             "tip": [
-              682,
-              440
+              749,
+              381
             ]
           },
           {
-            "file": "supers-v2/undertow/entry.png",
-            "sha256": "e6d6a86570a0f55dee918ab8928f5f2aa63ba72926d3fe644116bb157fb8bb53",
+            "file": "supers-v3/undertow/entry.png",
+            "sha256": "ca56bc652c5f17d4de95597754274e87ff256dfd3359a8fa53bf3a9363bb3784",
             "source_size": [
               1536,
               1024
@@ -48681,223 +48703,351 @@
             "region": [
               0,
               512,
-              768,
+              800,
               512
             ],
             "bounds": [
-              33,
-              103,
-              734,
-              481
+              79,
+              74,
+              778,
+              483
             ],
             "pivot": [
-              270,
-              478
+              335,
+              483
             ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 2,
-            "scale_group": "undertow-v2",
+            "scale_group": "undertow-v3",
             "render_only": true,
             "tip": [
-              733,
-              432
+              775,
+              320
             ]
           },
           {
-            "file": "supers-v2/undertow/entry.png",
-            "sha256": "e6d6a86570a0f55dee918ab8928f5f2aa63ba72926d3fe644116bb157fb8bb53",
+            "file": "supers-v3/undertow/entry.png",
+            "sha256": "ca56bc652c5f17d4de95597754274e87ff256dfd3359a8fa53bf3a9363bb3784",
             "source_size": [
               1536,
               1024
             ],
             "region": [
-              768,
+              800,
               512,
-              768,
+              736,
               512
             ],
             "bounds": [
-              18,
-              86,
-              583,
-              482
-            ],
-            "pivot": [
-              252,
-              478
-            ],
-            "body_height": 540,
-            "source_pose": 3,
-            "scale_group": "undertow-v2",
-            "render_only": true,
-            "tip": [
-              582,
-              246
-            ]
-          },
-          {
-            "file": "supers-v2/undertow/lift.png",
-            "sha256": "9f034cc124fe0e8248e625c76b6aed4d1f06950da80886e0b39d1fb84f4cbca7",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              504
-            ],
-            "bounds": [
-              75,
-              10,
-              622,
+              94,
+              57,
+              653,
               484
-            ],
-            "pivot": [
-              310,
-              480
-            ],
-            "body_height": 540,
-            "source_pose": 0,
-            "scale_group": "undertow-v2",
-            "render_only": true,
-            "tip": [
-              620,
-              70
-            ]
-          },
-          {
-            "file": "supers-v2/undertow/lift.png",
-            "sha256": "9f034cc124fe0e8248e625c76b6aed4d1f06950da80886e0b39d1fb84f4cbca7",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              73,
-              18,
-              572,
-              484
-            ],
-            "pivot": [
-              302,
-              480
-            ],
-            "body_height": 540,
-            "source_pose": 1,
-            "scale_group": "undertow-v2",
-            "render_only": true,
-            "tip": [
-              567,
-              100
-            ]
-          },
-          {
-            "file": "supers-v2/undertow/lift.png",
-            "sha256": "9f034cc124fe0e8248e625c76b6aed4d1f06950da80886e0b39d1fb84f4cbca7",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              504,
-              768,
-              520
-            ],
-            "bounds": [
-              58,
-              1,
-              544,
-              511
             ],
             "pivot": [
               300,
-              504
+              483
             ],
-            "body_height": 540,
-            "source_pose": 2,
-            "scale_group": "undertow-v2",
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "undertow-v3",
             "render_only": true,
             "tip": [
-              463,
+              652,
+              297
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/lift.png",
+            "sha256": "e1f37543add42b32225247cc1cf02bb90bd09bc11b37c08414fa84ca46b796b4",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              496
+            ],
+            "bounds": [
+              124,
+              34,
+              666,
+              464
+            ],
+            "pivot": [
+              355,
+              460
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              661,
+              299
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/lift.png",
+            "sha256": "e1f37543add42b32225247cc1cf02bb90bd09bc11b37c08414fa84ca46b796b4",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              501
+            ],
+            "bounds": [
+              48,
+              43,
+              665,
+              464
+            ],
+            "pivot": [
+              322,
+              460
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              663,
+              380
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/lift.png",
+            "sha256": "e1f37543add42b32225247cc1cf02bb90bd09bc11b37c08414fa84ca46b796b4",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              496,
+              768,
+              528
+            ],
+            "bounds": [
+              117,
+              1,
+              668,
+              503
+            ],
+            "pivot": [
+              355,
+              501
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              666,
+              20
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/lift.png",
+            "sha256": "e1f37543add42b32225247cc1cf02bb90bd09bc11b37c08414fa84ca46b796b4",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              501,
+              768,
+              523
+            ],
+            "bounds": [
+              140,
+              1,
+              626,
+              500
+            ],
+            "pivot": [
+              382,
+              498
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              143,
+              18
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/cross.png",
+            "sha256": "bdd7f7af8e126f8a0f287766d55eb1071ff5d73cb7fb87047b541b8384eb2a86",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              185,
+              13,
+              588,
+              501
+            ],
+            "pivot": [
+              390,
+              500
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              186,
+              42
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/cross.png",
+            "sha256": "bdd7f7af8e126f8a0f287766d55eb1071ff5d73cb7fb87047b541b8384eb2a86",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              122,
+              15,
+              578,
+              501
+            ],
+            "pivot": [
+              322,
+              500
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              576,
+              43
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/cross.png",
+            "sha256": "bdd7f7af8e126f8a0f287766d55eb1071ff5d73cb7fb87047b541b8384eb2a86",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              720,
+              512
+            ],
+            "bounds": [
+              45,
+              41,
+              650,
+              493
+            ],
+            "pivot": [
+              405,
+              491
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              49,
+              367
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/cross.png",
+            "sha256": "bdd7f7af8e126f8a0f287766d55eb1071ff5d73cb7fb87047b541b8384eb2a86",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              720,
+              512,
+              816,
+              512
+            ],
+            "bounds": [
+              26,
+              59,
+              722,
+              494
+            ],
+            "pivot": [
+              480,
+              491
+            ],
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              28,
+              393
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/finish.png",
+            "sha256": "2ee27ca1e3d5f3b48f2c419ce92c7fd6f03ef30aac38c92d5eb1eeb506fa1873",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              206,
+              10,
+              679,
+              499
+            ],
+            "pivot": [
+              400,
+              498
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              676,
               36
             ]
           },
           {
-            "file": "supers-v2/undertow/lift.png",
-            "sha256": "9f034cc124fe0e8248e625c76b6aed4d1f06950da80886e0b39d1fb84f4cbca7",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              55,
-              9,
-              544,
-              503
-            ],
-            "pivot": [
-              297,
-              496
-            ],
-            "body_height": 540,
-            "source_pose": 3,
-            "scale_group": "undertow-v2",
-            "render_only": true,
-            "tip": [
-              269,
-              38
-            ]
-          },
-          {
-            "file": "supers-v2/undertow/cross.png",
-            "sha256": "bb09e7979ce249a4baa2205e3b37d2fa5aed2cbd7564a3e008c9bc7f09c47f5a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              73,
-              13,
-              616,
-              485
-            ],
-            "pivot": [
-              370,
-              480
-            ],
-            "body_height": 540,
-            "source_pose": 0,
-            "scale_group": "undertow-v2",
-            "render_only": true,
-            "tip": [
-              75,
-              60
-            ]
-          },
-          {
-            "file": "supers-v2/undertow/cross.png",
-            "sha256": "bb09e7979ce249a4baa2205e3b37d2fa5aed2cbd7564a3e008c9bc7f09c47f5a",
+            "file": "supers-v3/undertow/finish.png",
+            "sha256": "2ee27ca1e3d5f3b48f2c419ce92c7fd6f03ef30aac38c92d5eb1eeb506fa1873",
             "source_size": [
               1536,
               1024
@@ -48909,219 +49059,219 @@
               512
             ],
             "bounds": [
-              62,
-              29,
-              622,
-              485
+              14,
+              67,
+              724,
+              499
             ],
             "pivot": [
-              372,
-              480
+              447,
+              498
             ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 1,
-            "scale_group": "undertow-v2",
+            "scale_group": "undertow-v3",
             "render_only": true,
             "tip": [
-              64,
-              106
+              17,
+              420
             ]
           },
           {
-            "file": "supers-v2/undertow/cross.png",
-            "sha256": "bb09e7979ce249a4baa2205e3b37d2fa5aed2cbd7564a3e008c9bc7f09c47f5a",
+            "file": "supers-v3/undertow/finish.png",
+            "sha256": "2ee27ca1e3d5f3b48f2c419ce92c7fd6f03ef30aac38c92d5eb1eeb506fa1873",
             "source_size": [
               1536,
               1024
             ],
             "region": [
               0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              21,
-              33,
-              691,
-              492
-            ],
-            "pivot": [
-              400,
-              488
-            ],
-            "body_height": 540,
-            "source_pose": 2,
-            "scale_group": "undertow-v2",
-            "render_only": true,
-            "tip": [
-              22,
-              317
-            ]
-          },
-          {
-            "file": "supers-v2/undertow/cross.png",
-            "sha256": "bb09e7979ce249a4baa2205e3b37d2fa5aed2cbd7564a3e008c9bc7f09c47f5a",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
               512,
               768,
               512
             ],
             "bounds": [
               15,
-              39,
-              693,
-              493
+              72,
+              734,
+              502
             ],
             "pivot": [
-              407,
-              488
+              425,
+              501
             ],
-            "body_height": 540,
-            "source_pose": 3,
-            "scale_group": "undertow-v2",
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "undertow-v3",
             "render_only": true,
             "tip": [
-              18,
-              353
-            ]
-          },
-          {
-            "file": "supers-v2/undertow/finish.png",
-            "sha256": "3a36755ca3ae23943e2278d472bf4e8bc132e719940503299a53bd000bc82fd6",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              0,
-              768,
-              508
-            ],
-            "bounds": [
-              97,
-              18,
-              639,
-              473
-            ],
-            "pivot": [
-              380,
-              470
-            ],
-            "body_height": 540,
-            "source_pose": 0,
-            "scale_group": "undertow-v2",
-            "render_only": true,
-            "tip": [
-              98,
-              217
-            ]
-          },
-          {
-            "file": "supers-v2/undertow/finish.png",
-            "sha256": "3a36755ca3ae23943e2278d472bf4e8bc132e719940503299a53bd000bc82fd6",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              493
-            ],
-            "bounds": [
-              21,
               17,
-              753,
-              473
+              378
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/finish.png",
+            "sha256": "2ee27ca1e3d5f3b48f2c419ce92c7fd6f03ef30aac38c92d5eb1eeb506fa1873",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              39,
+              55,
+              694,
+              501
             ],
             "pivot": [
               442,
-              470
+              501
             ],
-            "body_height": 540,
-            "source_pose": 1,
-            "scale_group": "undertow-v2",
+            "body_height": 480,
+            "source_pose": 3,
+            "scale_group": "undertow-v3",
             "render_only": true,
             "tip": [
-              23,
-              245
+              40,
+              369
             ]
           },
           {
-            "file": "supers-v2/undertow/finish.png",
-            "sha256": "3a36755ca3ae23943e2278d472bf4e8bc132e719940503299a53bd000bc82fd6",
+            "file": "supers-v3/undertow/return.png",
+            "sha256": "90cb296ae0aba617d8f71669bacc08d869c715cb3c8e3c6210f83283af6a76ce",
             "source_size": [
               1536,
               1024
             ],
             "region": [
               0,
-              508,
+              0,
               768,
-              516
+              512
             ],
             "bounds": [
-              144,
-              1,
-              639,
+              200,
+              6,
+              597,
+              505
+            ],
+            "pivot": [
+              375,
+              503
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              596,
+              33
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/return.png",
+            "sha256": "90cb296ae0aba617d8f71669bacc08d869c715cb3c8e3c6210f83283af6a76ce",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              200,
+              14,
+              596,
               504
             ],
             "pivot": [
-              390,
-              499
+              352,
+              504
             ],
-            "body_height": 540,
-            "source_pose": 2,
-            "scale_group": "undertow-v2",
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "undertow-v3",
             "render_only": true,
             "tip": [
-              155,
-              32
+              592,
+              74
             ]
           },
           {
-            "file": "supers-v2/undertow/finish.png",
-            "sha256": "3a36755ca3ae23943e2278d472bf4e8bc132e719940503299a53bd000bc82fd6",
+            "file": "supers-v3/undertow/return.png",
+            "sha256": "90cb296ae0aba617d8f71669bacc08d869c715cb3c8e3c6210f83283af6a76ce",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              199,
+              9,
+              595,
+              504
+            ],
+            "pivot": [
+              355,
+              501
+            ],
+            "body_height": 480,
+            "source_pose": 2,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              592,
+              78
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/return.png",
+            "sha256": "90cb296ae0aba617d8f71669bacc08d869c715cb3c8e3c6210f83283af6a76ce",
             "source_size": [
               1536,
               1024
             ],
             "region": [
               768,
-              493,
+              512,
               768,
-              531
+              512
             ],
             "bounds": [
-              117,
-              1,
-              639,
-              516
+              203,
+              10,
+              595,
+              504
             ],
             "pivot": [
-              332,
-              514
+              352,
+              501
             ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 3,
-            "scale_group": "undertow-v2",
+            "scale_group": "undertow-v3",
             "render_only": true,
             "tip": [
-              636,
-              72
+              586,
+              78
             ]
           },
           {
-            "file": "supers-v2/undertow/withdraw.png",
-            "sha256": "c402afbbdf9c021bc864266f5bc530661fc207e82ca27a2bab9eb91d260e96a1",
+            "file": "supers-v3/undertow/withdraw.png",
+            "sha256": "bea5d7c3a890cb9e466e1db7f1ebe12355491a593ac78e19a9ec4b2099d5d0bf",
             "source_size": [
               1536,
               1024
@@ -49133,91 +49283,91 @@
               512
             ],
             "bounds": [
-              93,
-              94,
-              574,
+              141,
+              67,
+              705,
+              474
+            ],
+            "pivot": [
+              350,
+              474
+            ],
+            "body_height": 480,
+            "source_pose": 0,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              704,
+              286
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/withdraw.png",
+            "sha256": "bea5d7c3a890cb9e466e1db7f1ebe12355491a593ac78e19a9ec4b2099d5d0bf",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              768,
+              0,
+              768,
+              512
+            ],
+            "bounds": [
+              109,
+              9,
+              596,
+              474
+            ],
+            "pivot": [
+              402,
+              474
+            ],
+            "body_height": 480,
+            "source_pose": 1,
+            "scale_group": "undertow-v3",
+            "render_only": true,
+            "tip": [
+              111,
+              63
+            ]
+          },
+          {
+            "file": "supers-v3/undertow/withdraw.png",
+            "sha256": "bea5d7c3a890cb9e466e1db7f1ebe12355491a593ac78e19a9ec4b2099d5d0bf",
+            "source_size": [
+              1536,
+              1024
+            ],
+            "region": [
+              0,
+              512,
+              768,
+              512
+            ],
+            "bounds": [
+              180,
+              3,
+              568,
               482
             ],
             "pivot": [
-              300,
-              480
+              400,
+              482
             ],
-            "body_height": 540,
-            "source_pose": 0,
-            "scale_group": "undertow-v2",
-            "render_only": true,
-            "tip": [
-              570,
-              185
-            ]
-          },
-          {
-            "file": "supers-v2/undertow/withdraw.png",
-            "sha256": "c402afbbdf9c021bc864266f5bc530661fc207e82ca27a2bab9eb91d260e96a1",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              768,
-              0,
-              768,
-              512
-            ],
-            "bounds": [
-              74,
-              10,
-              523,
-              483
-            ],
-            "pivot": [
-              287,
-              480
-            ],
-            "body_height": 540,
-            "source_pose": 1,
-            "scale_group": "undertow-v2",
-            "render_only": true,
-            "tip": [
-              522,
-              35
-            ]
-          },
-          {
-            "file": "supers-v2/undertow/withdraw.png",
-            "sha256": "c402afbbdf9c021bc864266f5bc530661fc207e82ca27a2bab9eb91d260e96a1",
-            "source_size": [
-              1536,
-              1024
-            ],
-            "region": [
-              0,
-              512,
-              768,
-              512
-            ],
-            "bounds": [
-              106,
-              3,
-              533,
-              497
-            ],
-            "pivot": [
-              320,
-              495
-            ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 2,
-            "scale_group": "undertow-v2",
+            "scale_group": "undertow-v3",
             "render_only": true,
             "tip": [
-              124,
-              40
+              182,
+              73
             ]
           },
           {
-            "file": "supers-v2/undertow/withdraw.png",
-            "sha256": "c402afbbdf9c021bc864266f5bc530661fc207e82ca27a2bab9eb91d260e96a1",
+            "file": "supers-v3/undertow/withdraw.png",
+            "sha256": "bea5d7c3a890cb9e466e1db7f1ebe12355491a593ac78e19a9ec4b2099d5d0bf",
             "source_size": [
               1536,
               1024
@@ -49229,137 +49379,137 @@
               512
             ],
             "bounds": [
-              38,
-              12,
-              512,
-              497
+              164,
+              2,
+              531,
+              482
             ],
             "pivot": [
-              322,
-              496
+              382,
+              482
             ],
-            "body_height": 540,
+            "body_height": 480,
             "source_pose": 3,
-            "scale_group": "undertow-v2",
+            "scale_group": "undertow-v3",
             "render_only": true,
             "tip": [
-              39,
-              94
+              166,
+              72
             ]
           }
         ],
         "render_only": true
       },
       "super_undertow_fx": {
-        "file": "supers-v2/undertow/effects.png",
+        "file": "supers-v3/undertow/effects.png",
         "body_height": 512,
         "frames": [
           {
             "region": [
+              21,
+              166,
+              480,
+              303
+            ],
+            "pivot": [
+              240.0,
+              303
+            ],
+            "bounds": [
+              0,
+              0,
+              480,
+              303
+            ]
+          },
+          {
+            "region": [
+              576,
               15,
-              174,
+              409,
+              491
+            ],
+            "pivot": [
+              204.5,
+              491
+            ],
+            "bounds": [
+              0,
+              0,
+              409,
+              491
+            ]
+          },
+          {
+            "region": [
+              1028,
+              73,
+              498,
+              413
+            ],
+            "pivot": [
+              249.0,
+              413
+            ],
+            "bounds": [
+              0,
+              0,
+              498,
+              413
+            ]
+          },
+          {
+            "region": [
+              19,
+              532,
+              475,
+              455
+            ],
+            "pivot": [
+              237.5,
+              455
+            ],
+            "bounds": [
+              0,
+              0,
+              475,
+              455
+            ]
+          },
+          {
+            "region": [
+              528,
+              653,
+              475,
+              241
+            ],
+            "pivot": [
+              237.5,
+              241
+            ],
+            "bounds": [
+              0,
+              0,
+              475,
+              241
+            ]
+          },
+          {
+            "region": [
+              1029,
+              700,
               490,
-              301
+              185
             ],
             "pivot": [
               245.0,
-              301
+              185
             ],
             "bounds": [
               0,
               0,
               490,
-              301
-            ]
-          },
-          {
-            "region": [
-              525,
-              21,
-              488,
-              469
-            ],
-            "pivot": [
-              244.0,
-              469
-            ],
-            "bounds": [
-              0,
-              0,
-              488,
-              469
-            ]
-          },
-          {
-            "region": [
-              1062,
-              27,
-              465,
-              467
-            ],
-            "pivot": [
-              232.5,
-              467
-            ],
-            "bounds": [
-              0,
-              0,
-              465,
-              467
-            ]
-          },
-          {
-            "region": [
-              9,
-              559,
-              494,
-              408
-            ],
-            "pivot": [
-              247.0,
-              408
-            ],
-            "bounds": [
-              0,
-              0,
-              494,
-              408
-            ]
-          },
-          {
-            "region": [
-              560,
-              546,
-              371,
-              412
-            ],
-            "pivot": [
-              185.5,
-              412
-            ],
-            "bounds": [
-              0,
-              0,
-              371,
-              412
-            ]
-          },
-          {
-            "region": [
-              1158,
-              545,
-              264,
-              425
-            ],
-            "pivot": [
-              132.0,
-              425
-            ],
-            "bounds": [
-              0,
-              0,
-              264,
-              425
+              185
             ]
           }
         ],
